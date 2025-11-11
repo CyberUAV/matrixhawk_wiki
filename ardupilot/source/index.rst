@@ -11,7 +11,7 @@
 
     <p style="text-align:left; color:black;">
 
-    ArduPilot enables the creation and use of trusted, autonomous,
+     MATRIXHAWK enables the creation and use of trusted, autonomous,
     unmanned vehicle systems for the peaceful benefit of
     all. ArduPilot provides a comprehensive suite of tools suitable
     for almost any vehicle and application. As an open source project,
