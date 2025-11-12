@@ -47,7 +47,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'APM Planner 2'
-copyright = u'2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV DevTeam.'
+copyright = u'2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam'
 author = u'BZUAV Dev Team'
 
 # The version info for the project you're documenting, acts as replacement for
