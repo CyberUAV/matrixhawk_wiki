@@ -14,8 +14,10 @@
 # serve to show the default.
 
 import sys
-# Ensure project root is on path so we can import common_conf
-sys.path.insert(0, '../..')  # noqa: E402
+import sphinx_rtd_theme
+
+# Import common configuration information as "common_conf"
+sys.path.insert(0, '../..')
 import common_conf  # noqa: E402
 
 
@@ -110,24 +112,19 @@ todo_include_todos = True
 # a list of builtin themes.
 # html_theme = 'alabaster'
 
-# 使用 Material 主题
-html_theme = 'sphinx_material'
+html_theme = "sphinx_rtd_theme"
+# Add any paths that contain custom themes here, relative to this directory.
+html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
+# Theme options are theme-specific and customize the look and feel of a theme
+# further.  For a list of options available for each theme, see the
+# documentation.
+# html_theme_options = {}
 
-# sphinx_material 可选配置（按需调整）
-html_theme_options = {
-    'nav_title': 'ArduPilot',
-    'color_primary': 'blue',
-    'color_accent': 'light-blue',
-    'repo_url': 'https://github.com/CyberUAV/matrixhawk_wiki',  # 替换为你的仓库 URL
-    'repo_name': 'matrixhawk_wiki',
-    'globaltoc_depth': 2,
-    'globaltoc_collapse': True,
-    'globaltoc_includehidden': True,
-    'heroes': {
-        'index': 'ArduPilot — Autopilot Software'
-    },
-}
+# Theme options are theme-specific and customize the look and feel of a theme
+# further.  For a list of options available for each theme, see the
+# documentation.
+# html_theme_options = {}
 
 
 # The name for this set of Sphinx documents.  If None, it defaults to
@@ -384,6 +381,3 @@ intersphinx_mapping = common_conf.intersphinx_mapping
 
 def setup(app):
     common_conf.setup(app)
-
-
-
