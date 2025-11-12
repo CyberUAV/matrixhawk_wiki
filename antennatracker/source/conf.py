@@ -51,7 +51,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'AntennaTracker'
-copyright = u'BZUAV DevTeam (Derivative Work from ArduPilot Dev Team)'
+copyright = u'2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV DevTeam.'
 author = u'ArduPilot Dev Team'
 
 # The version info for the project you're documenting, acts as replacement for
