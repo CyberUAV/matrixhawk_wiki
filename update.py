@@ -844,8 +844,11 @@ def copy_static_html_sites(site, destdir, languages=None):
         lang_root = os.path.join(destdir, prefix)
         try:
             os.makedirs(lang_root, exist_ok=True)
-            # Copy each file/subdir from frontend/ into <destdir>/<prefix>/
+            # Copy each file/subdir from frontend/ into <destdir>/<prefix>/.
+            # Skip per-language index variants — they're applied below as overrides.
             for entry in os.listdir(site_folder):
+                if entry.startswith('index.') and entry != 'index.html' and entry.endswith('.html'):
+                    continue
                 src = os.path.join(site_folder, entry)
                 dst = os.path.join(lang_root, entry)
                 if os.path.exists(dst):
@@ -857,6 +860,12 @@ def copy_static_html_sites(site, destdir, languages=None):
                     shutil.copytree(src, dst)
                 else:
                     shutil.copy2(src, dst)
+            # If a per-language frontend variant exists, use it as index.html.
+            # Convention: frontend/index.<sphinx_code>.html (e.g. index.zh_CN.html)
+            variant = os.path.join(site_folder, f'index.{lang}.html')
+            if os.path.exists(variant):
+                shutil.copy2(variant, os.path.join(lang_root, 'index.html'))
+                debug(f'frontend: using {variant} as {lang_root}/index.html')
             debug(f'frontend copied into {lang_root}')
         except Exception as e:
             error(e)
