@@ -229,11 +229,14 @@ htmlhelp_basename = 'ArduPilotdoc'
 
 # Where to point the base of the build for the main site menu
 html_context = dict(common_conf.html_context)
+import os as _os
 html_context.update({
     'languages': common_conf.LANGUAGES,
     'url_prefix': common_conf.URL_PREFIX,
     'wiki_name': html_short_title,
-    # 'current_language' is injected by update.py at build time.
+    # update.py sets MWIKI_CURRENT_LANGUAGE per build_one() process so the
+    # theme template can render the language switcher / hreflang tags.
+    'current_language': _os.environ.get('MWIKI_CURRENT_LANGUAGE', 'en'),
 })
 
 # --- i18n: per-vehicle locale dir + shared 'common' locale fallback ---
