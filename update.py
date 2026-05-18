@@ -788,7 +788,7 @@ def check_imports():
     '''check key imports work'''
     import importlib.metadata
     # package names to check the versions of. Note that these can be different than the string used to import the package
-    required_packages = ["sphinx_rtd_theme>=1.3.0", "sphinxcontrib.youtube>=1.2.0", "sphinx>=7.1.2", "docutils<0.19"]
+    required_packages = ["matrixhawk_sphinx_rtd_theme>=0.1.0", "sphinxcontrib.youtube>=1.2.0", "sphinx>=7.1.2", "docutils<0.19"]
     for package in required_packages:
         debug("Checking for %s" % package)
         try:

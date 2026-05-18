@@ -13,7 +13,7 @@
 # serve to show the default.
 
 import sys
-import sphinx_rtd_theme
+import matrixhawk_sphinx_rtd_theme as sphinx_rtd_theme
 
 # Import common configuration information as "common_conf"
 sys.path.insert(0, '../..')
@@ -68,7 +68,8 @@ author = u'BZUAV Dev Team'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = 'en'
+# Sphinx default is 'en'. Override per build with `sphinx-build -D language=zh_CN ...`
+# (update.py injects via confoverrides for multi-language builds).
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
@@ -114,7 +115,7 @@ todo_include_todos = True
 # a list of builtin themes.
 # html_theme = 'alabaster'
 
-html_theme = "sphinx_rtd_theme"
+html_theme = "matrixhawk_sphinx_rtd_theme"
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -224,7 +225,21 @@ htmlhelp_basename = 'ArduPilotdoc'
 
 
 # Where to point the base of the build for the main site menu
-html_context = common_conf.html_context
+html_context = dict(common_conf.html_context)
+html_context.update({
+    'languages': common_conf.LANGUAGES,
+    'url_prefix': common_conf.URL_PREFIX,
+    'wiki_name': html_short_title,
+    # 'current_language' is injected by update.py at build time.
+})
+
+# --- i18n: per-vehicle locale dir + shared 'common' locale fallback ---
+locale_dirs = [
+    f'../../locale/{html_short_title}/',
+    '../../locale/common/',
+]
+gettext_compact = common_conf.gettext_compact
+gettext_uuid = common_conf.gettext_uuid
 
 
 # -- Options for LaTeX output ---------------------------------------------
