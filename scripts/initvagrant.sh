@@ -33,7 +33,7 @@ pushd build_wiki
 mkdir -p logs
 
 # trees to partially clone
-for i in ardupilot_wiki sphinx_rtd_theme; do
+for i in ardupilot_wiki matrixhawk_sphinx_rtd_theme; do
   if [ -e $i ]; then
     pushd $i
     git pull

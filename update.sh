@@ -46,8 +46,8 @@ progress "update.sh starting (see $LOGFILE)"
 test -n "$FORCEBUILD" || {
     progress "Fetching ardupilot_wiki"
     (cd ardupilot_wiki && git fetch)
-    progress "Fetching sphinx_rtd_theme"
-    (cd sphinx_rtd_theme && git fetch)
+    progress "Fetching matrixhawk_sphinx_rtd_theme"
+    (cd matrixhawk_sphinx_rtd_theme && git fetch)
 
     changed=0
     progress "Getting oldhash for ardupilot_wiki"
@@ -59,12 +59,12 @@ test -n "$FORCEBUILD" || {
         changed=1
     }
     
-    progress "Getting oldhash for sphinx_rtd_theme"
-    oldhash=$(cd sphinx_rtd_theme && git rev-parse origin/master)
-    progress "Getting newhash for sphinx_rtd_theme"
-    newhash=$(cd sphinx_rtd_theme && git rev-parse HEAD)
+    progress "Getting oldhash for matrixhawk_sphinx_rtd_theme"
+    oldhash=$(cd matrixhawk_sphinx_rtd_theme && git rev-parse origin/master)
+    progress "Getting newhash for matrixhawk_sphinx_rtd_theme"
+    newhash=$(cd matrixhawk_sphinx_rtd_theme && git rev-parse HEAD)
     [ "$oldhash" = "$newhash" ] || {
-        progress "sphinx_rtd_theme has changed $newhash $oldhash"
+        progress "matrixhawk_sphinx_rtd_theme has changed $newhash $oldhash"
         changed=1
     }
 
@@ -118,8 +118,8 @@ git reset --hard origin/master
 git clean -f -f -x -d -d
 popd
 
-progress "Updating sphinx_rtd_theme"
-pushd sphinx_rtd_theme
+progress "Updating matrixhawk_sphinx_rtd_theme"
+pushd matrixhawk_sphinx_rtd_theme
 git checkout -f master
 git fetch origin
 git submodule update
