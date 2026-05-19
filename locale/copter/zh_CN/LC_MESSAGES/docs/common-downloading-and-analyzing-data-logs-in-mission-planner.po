@@ -1,0 +1,2353 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 03:48+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:5
+#: 9f165f7baf47496e92d0911ddf9fb630
+msgid "Downloading and Analyzing Data Logs in Mission Planner"
+msgstr "在Mission Planner中下载和分析数据日志"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:7
+#: edee88ee285a40479f5f05858e8a1938
+msgid ""
+"Dataflash logs are stored on the autopilot and can be downloaded after a "
+"flight. By default, they are created after you first arm the vehicle. This "
+"topic explains how to configure and access Dataflash logs."
+msgstr "Dataflash日志存储在飞控上，可在飞行后下载。默认情况下，日志在首次解锁后开始记录。本文介绍如何配置和访问Dataflash日志。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:12
+#: e94ff74d075a4d599ad8555f709261fc
+msgid ""
+"Depending on the autopilot type and configuration, the dataflash logs may be"
+" saved on a SD card, dataflash chip or streamed over MAVLink telemetry "
+"ports. The MAVLink option does require a high-speed telemetry port, "
+"typically 921600 baud."
+msgstr ""
+"根据飞控类型和配置，dataflash日志可保存在SD卡、dataflash芯片上，或通过MAVLink数传端口流式传输。MAVLink选项需要高速数传端口，通常为921600波特率。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:14
+#: 4854c370b36945918247bd79eca5e996
+msgid ""
+"In addition to using Mission Planner, many other tools are avaialble to "
+"users for log analysis: :ref:`MAVExplorer(part of MAVProxy installation) "
+"<using-mavexplorer-for-log-analysis>` and :ref:`Web-based tools <common-"
+"webtools>`."
+msgstr ""
+"除使用Mission "
+"Planner外，还有许多其他工具可供用户进行日志分析：:ref:`MAVExplorer（MAVProxy安装的一部分）<using-"
+"mavexplorer-for-log-analysis>` 和 :ref:`基于网页的工具 <common-webtools>`。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:18
+#: 7a4ff222782b42d3bfb2b4a509ced67b
+msgid ""
+":ref:`Telemetry logs <planner:mission-planner-telemetry-logs>` (also known "
+"as \"tlogs\") collect similar information to dataflash logs (see "
+":ref:`Diagnosing problems using Logs <common-diagnosing-problems-using-"
+"logs>` for more information)."
+msgstr ""
+":ref:`遥测日志 <planner:mission-planner-telemetry-"
+"logs>`（也称为「tlog」）收集与dataflash日志类似的信息（详见 :ref:`使用日志诊断问题 <common-diagnosing-"
+"problems-using-logs>`）。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:20
+#: f92a6e18277146c1aaf74312a9ad7ab3
+msgid ""
+"If your vehicle is having trouble producing dataflash logs - including the "
+"infamous \"No IO heartbeat\" diagnostic message - try a different SD card.  "
+"You may also choose to test the card using a dedicated tool, such as "
+"``H2testw``.  Low board voltages are also known to cause logging issues."
+msgstr ""
+"如果您的飞行器在生成dataflash日志时出现问题——包括臭名昭著的「No IO "
+"heartbeat」诊断信息——请尝试使用不同的SD卡。您也可以选择使用专用工具（如 "
+"``H2testw``）测试SD卡。低板载电压也是已知的导致日志问题的原因。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:23
+#: 08716dbb600f4023831b8d8992407537
+msgid "Logging Parameters"
+msgstr "日志记录参数"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:25
+#: ea2dcda356384458b272cb2f690f35e0
+msgid "Some commonly used parameters are:"
+msgstr "一些常用参数："
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:27
+#: ca01481c911e4753b06c4f688841d7da
+msgid ""
+":ref:`LOG_BACKEND_TYPE<LOG_BACKEND_TYPE>`: Bitmask for where to save logs "
+"to. Common values are \"0\" to disable logging, \"1\" (bit 0 set) to log to "
+"SD card file, \"2\"(bit 1 set) to stream over MAVLink and \"4\"(bit 2 set) "
+"to log to board dataflash memory, if equipped."
+msgstr ""
+":ref:`LOG_BACKEND_TYPE<LOG_BACKEND_TYPE>`：日志保存位置的位掩码。常见值为「0」禁用日志，「1」（bit "
+"0置位）记录到SD卡文件，「2」（bit 1置位）通过MAVLink流式传输，「4」（bit 2置位）记录到板载dataflash内存（若有）。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:28
+#: 54b371659b2945829a62ac044bf0a881
+msgid ""
+":ref:`LOG_BITMASK<LOG_BITMASK>`: Bitmask for what items are logged. "
+"Normally, use default value, or \"0\" to disable logging."
+msgstr ":ref:`LOG_BITMASK<LOG_BITMASK>`：记录内容的位掩码。通常使用默认值，或设为「0」禁用日志记录。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:29
+#: f8267e6a853b49d29a6f3a316bad3283
+msgid ""
+":ref:`LOG_DISARMED<LOG_DISARMED>`: Setting to 1 will start logging when "
+"power is applied, rather than at the first arming of the vehicle. Useful "
+"when debugging pre-arm failures. Setting to 2 will only log on power "
+"application other than USB power to prevent logging while setting up on the "
+"bench. Setting to 3 will also erase any log in which the vehicle does not "
+"proceed to the armed stated. This prevents accumulating numerous logs while "
+"configuring on the bench or at the field. See "
+":ref:`LOG_DARM_RATEMAX<LOG_DARM_RATEMAX>` also for managing log file sizes "
+"while logging disarmed."
+msgstr ""
+":ref:`LOG_DISARMED<LOG_DISARMED>`：设为1时将在上电时即开始记录日志，而非在首次解锁时。适用于调试解锁前失败。设为2则仅在非USB供电上电时记录日志，以防止在台架调试时记录。设为3还会删除飞行器未进入解锁状态的日志，避免在台架或现场配置时积累大量日志。另见"
+" :ref:`LOG_DARM_RATEMAX<LOG_DARM_RATEMAX>` 以管理上锁状态下记录时的日志文件大小。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:30
+#: 8fe607d574ba4ec5a59ce2eea8da917a
+msgid ""
+":ref:`LOG_FILE_DSRMROT<LOG_FILE_DSRMROT>`: Setting this bit will force the "
+"creation of a new log file after disarming, waiting 15 seconds, and then re-"
+"arming. Normally, a log will be one file for every power cycle of the "
+"autopilot, beginning upon first arm."
+msgstr ""
+":ref:`LOG_FILE_DSRMROT<LOG_FILE_DSRMROT>`：设置此位将在上锁后等待15秒、再次解锁时强制创建新日志文件。通常情况下，每次飞控上电对应一个日志文件，从首次解锁开始。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:31
+#: b5be9dbb31a44ffcb50af9bed1a9525b
+msgid ""
+":ref:`LOG_FILE_MB_FREE<LOG_FILE_MB_FREE>`: This parameter sets the minimum "
+"free space on the logging media before logging begins. If this is not "
+"available, then older logs will be deleted to provide it during "
+"initialization. Default is 500MB."
+msgstr ""
+":ref:`LOG_FILE_MB_FREE<LOG_FILE_MB_FREE>`：该参数设置日志开始前存储介质所需的最小可用空间。若空间不足，初始化时将删除较旧的日志来提供所需空间。默认值为500MB。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:32
+#: a3d9cd62493b4f7a8e1771739f863c6a
+msgid ""
+":ref:`LOG_FILE_RATEMAX<LOG_FILE_RATEMAX>`: This sets the maximum rate that "
+"streaming log messages will be logged to the file backend to limit file "
+"sizes. A value of zero(default) means no limit is applied to normal logging,"
+" which depends on the :ref:`SCHED_LOOP_RATE<SCHED_LOOP_RATE>` value ( 50Hz: "
+"Plane, 300Hz: QuadPlane/Rover, 400Hz: Copter, normally). Note that "
+"similarly, :ref:`LOG_BLK_RATEMAX<LOG_BLK_RATEMAX>` and "
+":ref:`LOG_MAV_RATEMAX<LOG_MAV_RATEMAX>` perform the same optional limiting "
+"for the BLOCK logging and MAVLink logging streams, respectively."
+msgstr ""
+":ref:`LOG_FILE_RATEMAX<LOG_FILE_RATEMAX>`：设置流式日志消息写入文件后端的最大速率，以限制文件大小。默认值为零（不限制），即正常记录速率取决于"
+" :ref:`SCHED_LOOP_RATE<SCHED_LOOP_RATE>` 值（Plane通常50Hz，QuadPlane/Rover "
+"300Hz，Copter 400Hz）。类似地，:ref:`LOG_BLK_RATEMAX<LOG_BLK_RATEMAX>` 和 "
+":ref:`LOG_MAV_RATEMAX<LOG_MAV_RATEMAX>` 分别对BLOCK日志和MAVLink日志流执行相同的可选限制。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:33
+#: 55e7d0ade7344f6180c718150a22f408
+msgid ""
+":ref:`LOG_MAX_FILES<LOG_MAX_FILES>`: The maximum number of log file that "
+"will be written on dataflash or SD card before starting to rotate log "
+"number. Limit is a maximum of 500 logs."
+msgstr ""
+":ref:`LOG_MAX_FILES<LOG_MAX_FILES>`：在dataflash或SD卡上开始轮转日志编号前可写入的最大日志文件数。上限为500个日志。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:35
+#: 2294fb9988b0403494e7295d5482c20e
+msgid ""
+"If you suspect that you are missing logging entries due to excessive logging"
+" speed, you can check the DSF.Dp log message for the amount of missed "
+"entries."
+msgstr "如果您怀疑因日志记录速度过快而丢失日志条目，可检查DSF.Dp日志消息了解丢失条目的数量。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:37
+#: c39eacedebe34c50a0a8ee2ac61a5326
+msgid ""
+"Logging of the continuously streaming log messages, such as attitude, "
+"sensors, etc. can be paused by using the ``RCx_OPTION`` auxiliary function "
+"\"164\" on a transmitter channel. Switching this channel high will pause "
+"these messages, but not events, mode changes, warnings, etc. This allows "
+"autopilots with limited logging capabilites (ie using Block logging to chip "
+"memory and no SD card) to log only when desired during the flight, as during"
+" tuning phases or determination of TECs parameters, etc. You can also "
+"eliminate unneeded log messages using :ref:`LOG_BITMASK<LOG_BITMASK>` to "
+"reduce log size"
+msgstr ""
+"连续流式日志消息（如姿态、传感器等）的记录可通过遥控器通道上的 ``RCx_OPTION`` "
+"辅助功能「164」暂停。将该通道拨高将暂停这些消息，但不影响事件、模式变化、警告等。这使得日志记录能力有限的飞控（如使用Block日志写入芯片内存且无SD卡）仅在飞行中需要时记录，如调参阶段或确定TECS参数等。您也可以使用"
+" :ref:`LOG_BITMASK<LOG_BITMASK>` 去除不需要的日志消息以减小日志大小"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:40
+#: 43808ae7a104451db421b01a4417bbe6
+msgid "Replay Logging"
+msgstr "回放日志记录"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:42
+#: f6f7efa641f9425a9f5c53eef9390a1d
+msgid ""
+"ArduPilot has the ability to log in a fashion that solutions to EKF/AHRS "
+"issues can be more easily verified by actually re-playing a log against code"
+" changes to see if the solution results in the desired, corrected behavior. "
+"This requires that the logs showing the issue to be worked on be made with "
+"logging active during disarmed periods (with "
+":ref:`LOG_DISARMED<LOG_DISARMED>` set to a non-zero value, preferably 3) and"
+" :ref:`LOG_REPLAY<LOG_REPLAY>` =1 , thereby logging more sensor data than "
+"normal."
+msgstr ""
+"ArduPilot具备以特定方式记录日志的能力，从而可以通过将日志回放到代码变更来更方便地验证EKF/AHRS问题的解决方案，以查看方案是否产生了期望的纠正行为。这需要在上锁状态下（将"
+" :ref:`LOG_DISARMED<LOG_DISARMED>` 设为非零值，最好为3）且 "
+":ref:`LOG_REPLAY<LOG_REPLAY>` =1 的条件下记录展示问题的日志，从而记录比正常更多的传感器数据。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:45
+#: 173871c9d6384ec4af6b367e8f561b37
+msgid "SD Card Logging Issues"
+msgstr "SD卡日志问题"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:47
+#: adfe449099ca4aba8ef72451022267e5
+msgid ""
+"If you are running into problems with bad logging errors on SD cards, here "
+"are some things you can try."
+msgstr "如果您遇到SD卡日志错误问题，以下是一些可以尝试的方法。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:49
+#: d9b93064ca964cbcaacfb7dd28159574
+msgid ""
+"Format the card to FAT32 or vFAT (newer formats can work with new versions "
+"of Ardupilot and better hardware)."
+msgstr "将SD卡格式化为FAT32或vFAT（新版格式在新版ArduPilot和更好的硬件上也可正常工作）。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:50
+#: 4cabdf8378ea448c8400216a0c65b3ce
+msgid "Perform a full format to check for bad sectors."
+msgstr "执行完整格式化以检查坏扇区。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:51
+#: 1f0a12795aa1425086816f5d15ed6d5f
+msgid "Check that the card is not write protected."
+msgstr "检查SD卡是否未写保护。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:52
+#: c578352b9db54c3f9025794affe8ab31
+msgid "Check card contacts."
+msgstr "检查SD卡触点。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:53
+#: 85cea171cdd2428f9cf28491853f2484
+msgid "Some cards are problematic, try using a different one."
+msgstr "某些SD卡存在问题，请尝试更换。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:54
+#: a0eca81a18ac40f08ed1497a280d1eb9
+msgid ""
+"Ensure that the card is fast enough to keep up with logging demands (Class "
+"10 works for many, but lower speeds can work too)."
+msgstr "确保SD卡速度足以满足日志记录需求（Class 10适用于大多数情况，但较低速度也可能有效）。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:55
+#: 43b0f4edf4964af19b79fe5203738de0
+msgid "Reduce the amount of data included with the logs in LOG_BITMASK."
+msgstr "通过LOG_BITMASK减少日志中包含的数据量。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:56
+#: 2e3e66d3808c4040ba85320aed00f471
+msgid ""
+"Incrementally increase BRD_SD_SLOWDOWN up to a maximum of 32 (default is 0)."
+msgstr "逐步增大BRD_SD_SLOWDOWN，最大值为32（默认值为0）。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:59
+#: d07abba61cdb4051853dd56bcfc81720
+msgid "On-Board DataFlash Logging"
+msgstr "机载DataFlash日志记录"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:61
+#: 47f2c010c3cf4db1a605cb3bcd36bbb1
+msgid ""
+"Some boards do not have SD card interfaces for logging, but rather a limited"
+" amount of dataflash, typically 16MB. This saves log files in a manner like "
+"a circular buffer. Once the flash is filled, the oldest log file is "
+"overwritten with the current logging data. If there is only one file on the "
+"flash when space runs out, logging is stopped instead."
+msgstr ""
+"某些控制板没有SD卡接口用于日志记录，而是具有有限的dataflash存储，通常为16MB。该存储以循环缓冲方式保存日志文件。一旦闪存存满，最旧的日志文件将被当前日志数据覆盖。若闪存空间耗尽时只有一个文件，则停止日志记录。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:63
+#: 2abbee8ad33b4defa2be5db8d4b75984
+msgid ""
+"A new log file will be started after boot, upon arming, or, immediately if "
+":ref:`LOG_DISARMED<LOG_DISARMED>` is 1."
+msgstr "新日志文件将在启动后、解锁后，或在 :ref:`LOG_DISARMED<LOG_DISARMED>` 为1时立即启动。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:65
+#: 3749c992a0d1418aab3e80736585f917
+msgid ""
+"If :ref:`LOG_FILE_DSRMROT<LOG_FILE_DSRMROT>` is enabled, any disarm will "
+"stop logging and a new file started upon the next arm or immediately if "
+":ref:`LOG_DISARMED<LOG_DISARMED>` is 1. Otherwise, logging to the current "
+"file will resume on a re-arm. Any reboot stops logging to the current file."
+msgstr ""
+"若启用了 :ref:`LOG_FILE_DSRMROT<LOG_FILE_DSRMROT>`，任何上锁动作都会停止日志记录，并在下次解锁时或在 "
+":ref:`LOG_DISARMED<LOG_DISARMED>` "
+"为1时立即启动新文件。否则，重新解锁后将继续记录到当前文件。任何重启都会停止记录当前文件。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:67
+#: 438da8a52105466aa19db2662557a464
+msgid ""
+"In order to maximize the utility of the limited flash space several things "
+"can be done:"
+msgstr "为最大化利用有限闪存空间，可采取以下措施："
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:69
+#: 90da425473db416e96d9f0604c364e9f
+msgid "Reduce the things logged using :ref:`LOG_BITMASK<LOG_BITMASK>`."
+msgstr "使用 :ref:`LOG_BITMASK<LOG_BITMASK>` 减少记录内容。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:70
+#: 00fdc09a17794fdb99be786e0c12afb6
+msgid ""
+"Eliminate logging the EKF3 messages which are voluminous and usually needed "
+"only for problem diagnosis using the :ref:`EK3_LOG_LEVEL<EK3_LOG_LEVEL>` "
+"parameter."
+msgstr ""
+"使用 :ref:`EK3_LOG_LEVEL<EK3_LOG_LEVEL>` "
+"参数消除EKF3消息的记录——EKF3消息数量庞大，通常仅在问题诊断时才需要。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:71
+#: 1ec83ab6363a42789f02bd6b567ec65e
+msgid ""
+"Only log when needed during the flight, ie tuning, gathering data for TECS "
+"tuning, etc. using an RC Aux switch set to \"164\" to start and stop log "
+"writes."
+msgstr "仅在飞行中需要时记录，如调参、收集TECS调参数据等，使用设为「164」的RC辅助开关控制日志写入的开始和停止。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:72
+#: 4b3f121c0b164240a3a03cae1871b797
+msgid ""
+"Reduce the logging rate to a slower rate (below 10Hz) by setting "
+":ref:`LOG_BLK_RATEMAX<LOG_BLK_RATEMAX>` which is by default unrestricted."
+msgstr ""
+"通过设置 :ref:`LOG_BLK_RATEMAX<LOG_BLK_RATEMAX>`（默认不受限）将日志记录速率降低到较慢的速率（低于10Hz）。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:73
+#: 892da193171b486db55f49d0b1fe6df7
+msgid ""
+"Download and erase the logs each flight and only log one file for a flight"
+msgstr "每次飞行后下载并清除日志，且每次飞行只记录一个文件"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:75
+#: adb989a6159b470c90fc3d270ee22d04
+msgid ""
+"some dataflash chips are particularly slow, leading to gaps in the logs. "
+"Setting :ref:`LOG_BLK_RATEMAX<LOG_BLK_RATEMAX>` to a lower value can help "
+"eliminate these gaps."
+msgstr ""
+"某些dataflash芯片速度较慢，导致日志出现空白。将 :ref:`LOG_BLK_RATEMAX<LOG_BLK_RATEMAX>` "
+"设为较低值有助于消除这些空白。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:80
+#: 2a646eaa5c4f4bd48278f9acafcc423a
+msgid "Downloading logs via MAVLink"
+msgstr "通过MAVLink下载日志"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:82
+#: c0be69070f9548a197125b8e89d068bb
+msgid "Connect your vehicle to the ground station using the micro USB cable"
+msgstr "使用micro USB线将飞行器连接到地面站"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:83
+#: 464441a171724fa59cf5e8299c916b74
+msgid "Open the Mission Planner's Flight Data screen"
+msgstr "打开Mission Planner的飞行数据界面"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:84
+#: 5f8542071d2c4edeab1e3049c74f74f2
+msgid ""
+"On the bottom left, select the \"DataFlash Logs\" tab and push the "
+"\"Download DataFlash Log Via Mavlink\" button"
+msgstr "在左下角选择「DataFlash Logs」标签，点击「Download DataFlash Log Via Mavlink」按钮"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:90
+#: ff82785c40fe4b0a8cd31c5feb586ac4
+msgid ""
+"Then, select the log you want to download. This will save that log to your "
+"MissionPlanner/logs directory, in a folder named after the vehicle type, "
+"such as QUADCOPTER."
+msgstr ""
+"然后选择您要下载的日志。该日志将保存到您的MissionPlanner/logs目录，位于以飞行器类型命名的文件夹中，如QUADCOPTER。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:95
+#: d999511dcd5d4cd4b111494f24046a86
+msgid "Review a log"
+msgstr "查看日志"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:97
+#: 95c845410f6a433fb815440fdd6d3b96
+msgid ""
+"For more detailed analysis, click on \"Review a Log\" and select a log that "
+"you've already saved to the MissionPlanner/logs directory.  Once again, they"
+" will be in folders named after the vehicle type, such as QUADCOPTER or "
+"ROVER."
+msgstr ""
+"如需更详细的分析，点击「Review a "
+"Log」并选择已保存到MissionPlanner/logs目录的日志。同样，日志位于以飞行器类型命名的文件夹中，如QUADCOPTER或ROVER。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:103
+#: 68264f0334554812a3d0c3fdf837fd87
+msgid "Steps to review a log downloaded from the internet, or your vehicle"
+msgstr "查看从互联网或飞行器下载的日志的步骤"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:104
+#: a94830550a5d48d3bfcce9dca3a993b9
+msgid "For DataFlash logs, with a .bin or .log extension:"
+msgstr "对于DataFlash日志，扩展名为.bin或.log："
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:106
+#: 1396f48499f645e388ae1e480129f5df
+msgid ""
+"Download the log file. Note the place on your computer to which it is "
+"downloaded. (For example, it might be C:\\\\Downloads)"
+msgstr "下载日志文件。记录其在计算机上的下载位置。（例如，可能是C:\\\\Downloads）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:107
+#: 63858e5d0b8f4bf9b1483c31f11de077
+msgid "Open Mission Planner"
+msgstr "打开Mission Planner"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:108
+#: b8bebc5fa7f34687bd9843bb22a83816
+msgid "Navigate to the “Flight Data” page (top left)"
+msgstr "导航到「Flight Data」页面（左上角）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:109
+#: c5ff56882108419fb8d4a00b85a90c92
+msgid "Select the “Dataflash Logs” tab (mid-screen, left side)"
+msgstr "选择「Dataflash Logs」标签（屏幕中部左侧）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:110
+#: 9811d42900d54b9db53fa3dee59066f3
+msgid "Select the “Review a Log” button."
+msgstr "选择「Review a Log」按钮。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:111
+#: c464519d799a4a73b98ccf40c608c039
+msgid ""
+"A standard Windows “select a file” box will let you go find the .bin file "
+"that you downloaded, at the place that you downloaded it. (Per the example "
+"above, it is in C:\\\\Downloads) Choose that file."
+msgstr "标准Windows「选择文件」对话框将让您找到已下载的.bin文件所在位置。（根据上例，位于C:\\\\Downloads）选择该文件。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:112
+#: 1a981323c7c740e986698d9b818a1d77
+msgid ""
+"After reading the log, a Manual Log Review window will be open, which allows"
+" you to plot data from the log for inspection. (see below)"
+msgstr "读取日志后，将打开手动日志查看窗口，可绘制日志中的数据进行检查。（见下图）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:115
+#: baeaf2a754dc4c3599e327f48ebd5ac7
+msgid "Reviewing the log data"
+msgstr "查看日志数据"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:116
+#: 1e07f438eecb4b5a947142c5f488db61
+msgid ""
+"Once you pick the log you want, you will get charts such as the below. The "
+"basic format of the dataflash is:"
+msgstr "选择日志后，您将看到类似下方的图表。dataflash的基本格式为："
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:119
+#: 71aa9ed6c7944bcc840fb87019eb145b
+msgid "Line numbers appear on the very left side of the viewer"
+msgstr "行号显示在查看器最左侧"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:120
+#: 4b9e1d6b81254cbf9905fd04c3579208
+msgid "Software version and board type appear at the top"
+msgstr "软件版本和控制板类型显示在顶部"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:121
+#: 7f04b47e7c174b82baca66f852bca1be
+msgid ""
+"FMT messages are next which tell the mission planner the column headers for "
+"each message type"
+msgstr "FMT消息紧随其后，告知Mission Planner每种消息类型的列标题"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:123
+#: 916b9f09b43d44d995a11b68fddbd5aa
+msgid ""
+"PARM rows which show each parameter (in the order in which they appear in "
+"the eeprom) along with their value at the beginning of the flight"
+msgstr "PARM行显示每个参数（按其在eeprom中出现的顺序）及其飞行开始时的值"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:126
+#: bd6cb239592a4a198558039e7959786d
+msgid "Flight data messages including GPS, IMU, etc."
+msgstr "飞行数据消息，包括GPS、IMU等"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:131
+#: a64bd6e54ad443aea0cd7ca31aa107d4
+msgid ""
+"Graph any flight data by first clicking on the appropriate row, you should "
+"see the column headers update appropriately. Next find the column you wish "
+"to graph, click on it and then push the \"Graph this data\" button. In the "
+"example above the ATT's Roll-In and Roll data have been graphed. The mouse's"
+" scroll wheel can be used to zoom in or out. You may also select an area of "
+"the graph to zoom in on it. Zoom out by right-mouse-button clicking and "
+"selecting \"Set Scale to Default\". `Here's "
+"<https://www.diydrones.com/profiles/blog/show?id=705844%3ABlogPost%3A801607>`__"
+" a mini tutorial on using this feature. You may also filter on just the "
+"first column (the flight data message type) by clicking on the first column "
+"and selecting the message type from the drop-down. This is very useful "
+"especially for viewing the different flight modes (called \"MODE\" messages)"
+" used during the mission. Click the first column again but press \"Cancel\" "
+"to clear the filter."
+msgstr ""
+"首先单击相应行以绘制任意飞行数据图表，列标题应相应更新。然后找到要绘制的列，单击它并按「Graph this "
+"data」按钮。上例中绘制了ATT的Roll-In和Roll数据。可使用鼠标滚轮缩放。您也可以选择图表的某个区域进行放大。右键单击并选择「Set "
+"Scale to Default」可缩小。`这里 "
+"<https://www.diydrones.com/profiles/blog/show?id=705844%3ABlogPost%3A801607>`__"
+" "
+"有一个使用此功能的迷你教程。您也可以通过单击第一列并从下拉菜单中选择消息类型来仅按第一列（飞行数据消息类型）筛选。这对于查看任务中使用的不同飞行模式（称为「MODE」消息）特别有用。再次单击第一列并按「Cancel」可清除筛选。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:150
+#: 83bec1a729a84249869104318e38910e
+msgid "Setting what data you want recorded"
+msgstr "设置要记录的数据"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:152
+#: 5b3cdc3101bd49a387e2e9187d8cace4
+msgid ""
+"The :ref:`LOG_BITMASK <LOG_BITMASK>` parameter controls what messages are "
+"recorded in the logs. The bits differ between vehicles. The image above is "
+"for Copter."
+msgstr ""
+":ref:`LOG_BITMASK <LOG_BITMASK>` 参数控制日志中记录的消息内容。各飞行器的位含义有所不同。上图为Copter的情况。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:161
+#: 6c47503a19b042fdb0e8e059bb372adf
+msgid "Bitmask Table (Copter)"
+msgstr "位掩码表（Copter）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:164
+#: 78d27df1676b443a8c35dec946c14fd5
+msgid "Bit"
+msgstr "位"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:164
+#: 2040836ded5b4dca8d8d064e0ce6ae70
+msgid "BitMask Name"
+msgstr "位掩码名称"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:164
+#: 90fa7c276e034d26ad7721a8d9d9ab48
+msgid "What is logged if bit is set"
+msgstr "位置位时记录的内容"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:166
+#: f6062e9eca0d4f8db41c787f61393689
+msgid "0"
+msgstr "0"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:166
+#: 5af13b5ac4a14a2ca8d0111660113158
+msgid "Fast Attitude"
+msgstr "快速姿态"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:166
+#: c3dd32d12e4a40f88fb2413a3469c639
+msgid "Attitude @ :ref:`SCHED_LOOP_RATE<SCHED_LOOP_RATE>`"
+msgstr "以 :ref:`SCHED_LOOP_RATE<SCHED_LOOP_RATE>` 频率记录姿态"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:167
+#: 9f4152480db44c6d8b1c625c157ed512
+msgid "1"
+msgstr "1"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:167
+#: 78190209899f493eb4d187c3c0c6d031
+msgid "Medium Attitude"
+msgstr "中速姿态"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:167
+#: 6415f8ce98b643db96cde8bef473731c
+msgid "Attitude @ 10Hz"
+msgstr "以10Hz记录姿态"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:168
+#: ecb28335aeb04a238460fae9cb350f5c
+msgid "2"
+msgstr "2"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:168
+#: 24e9722dea9d4498a43161c79646caf4 f44a481555d04fd29b798dcf324c3396
+msgid "GPS"
+msgstr "GPS"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:169
+#: 8744707224944b24923e987c94172741
+msgid "3"
+msgstr "3"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:169
+#: 91b986efdf334674b8e07f363e020058
+msgid "System Performance"
+msgstr "系统性能"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:169
+#: 7f0345d8d5154e46a20575444e849f36
+msgid "CPU,etc. Performance monitoring"
+msgstr "CPU等性能监控"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:170
+#: 73eb9b4034d3442d8d7e0bc7bb89169d
+msgid "4"
+msgstr "4"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:170
+#: b36c20e478fb45ec8a63674a47704ec9
+msgid "Control Tuning"
+msgstr "控制调参"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:170
+#: 6c6008ac96984542a4faa25ff17f3285
+msgid "Control Data"
+msgstr "控制数据"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:171
+#: 5f8836c7e92347ebb437f8f6a72d6738
+msgid "5"
+msgstr "5"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:171
+#: 89581c1f594c4353b76292bec8a08308
+msgid "Navigation Tuning"
+msgstr "导航调参"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:171
+#: a636e8df02f94e8db0649eebf57bbc6e
+msgid "Navigation Data"
+msgstr "导航数据"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:172
+#: fdb3bfd16130424b85341fc6b5248d73
+msgid "6"
+msgstr "6"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:172
+#: 14a1aec436384608b7bbecc37af0664c
+msgid "RC Input"
+msgstr "RC输入"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:172
+#: 27918548cad74366b578b68090e10579
+msgid "RC Input data"
+msgstr "RC输入数据"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:173
+#: 70d832a989e4425e83edfadfaf5bcdd9
+msgid "7"
+msgstr "7"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:173
+#: 4bd99157feb44c70b0479ed817f9df37
+msgid "IMU"
+msgstr "IMU"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:173
+#: 409ffc7d64af4cd4ad9bf0c4d8efd04a
+msgid "IMU (ACC/Gyro) Data"
+msgstr "IMU（加速度计/陀螺仪）数据"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:174
+#: 32b033870f524b17bc8df70bbcab6b45
+msgid "8"
+msgstr "8"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:174
+#: 2249c70f308b4d44a6bac82652ee247c
+msgid "Mission Commands"
+msgstr "任务命令"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:174
+#: 848f9e446c9b440b8753805cd9666837
+msgid "Mission/GCS Commands"
+msgstr "任务/GCS命令"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:175
+#: 7f572c7f10dd4e43a7ed1d357987eb44
+msgid "9"
+msgstr "9"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:175
+#: c64081b2dede495c927a5c74129155f9
+msgid "Battery Monitor"
+msgstr "电池监测"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:175
+#: e670c7f7e18e4fb9b83f3e3dcaaf4105
+msgid "Battery Monitors Data"
+msgstr "电池监测数据"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:176
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:702
+#: 473d77cf10f14c2ba88b45e99025df6a 90350a56ec204cedacca75279b159d69
+msgid "10"
+msgstr "10"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:176
+#: ac057f698a2c49278cd06b771364f74a
+msgid "RC Output"
+msgstr "RC输出"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:176
+#: bb95297cb2ba4a6a96a6520150f06b78
+msgid "Servo Output"
+msgstr "舵机输出"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:177
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:704
+#: 1a63351c533e44f086eda21a44ce27e9 37056c797e4941c290d3702b17b5344a
+msgid "11"
+msgstr "11"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:177
+#: a4ab18914c454230b8d9b70789ed42c0
+msgid "Optical Flow"
+msgstr "光流"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:177
+#: a5b8a48441a4436f9012ba2e2b7aa5de
+msgid "Optical Flow Data"
+msgstr "光流数据"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:178
+#: 2cf65b10bfd048aab6d0d6bab820c419
+msgid "12"
+msgstr "12"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:178
+#: 787cd0eed81d4ca7b1ff438b29019959
+msgid "PID"
+msgstr "PID"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:178
+#: 72010e5162794d5fadbf700f7351d4f4
+msgid "PID controllers Data"
+msgstr "PID控制器数据"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:179
+#: 8f4e4e6b8e604c5785fdb4ec6b6c15a0
+msgid "13"
+msgstr "13"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:179
+#: b46f8ac3090d45acb0b32492035161ad
+msgid "Compass"
+msgstr "罗盘"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:179
+#: 0a59c8c31de34aea96261ee362cb5adc
+msgid "Compass Data"
+msgstr "罗盘数据"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:180
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:706
+#: 5b71d3fcae4d41248312a70d61bc9882 9eecd7475d35450b8e5b94b3fba2c643
+msgid "15"
+msgstr "15"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:180
+#: e6b841f89b95499da3561f856610de60
+msgid "Camera"
+msgstr "相机"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:180
+#: 83e7d068388047798512268a517f3aa8
+msgid "Camera Data"
+msgstr "相机数据"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:181
+#: 9dca6cfa94bb47bc90c7ff4adfe8373b
+msgid "17"
+msgstr "17"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:181
+#: 0c64c90ae8594c3a9ec4b994f4169507
+msgid "Motors"
+msgstr "电机"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:181
+#: c9a93da518f741d1a8cd929830cd85eb
+msgid "Motor Data"
+msgstr "电机数据"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:182
+#: 7423624249e147bfbb4c7c1adf61efe3
+msgid "19"
+msgstr "19"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:182
+#: d22cc37803524e079ec6d3d4a23d1e48
+msgid "Raw IMU"
+msgstr "原始IMU"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:182
+#: 922b41dead954904ba691c3ca42243db
+msgid "Raw IMU data, unprocessed"
+msgstr "原始IMU数据，未经处理"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:183
+#: 87d654660d3f4fb28a0e31db45a2a7c3
+msgid "20"
+msgstr "20"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:183
+#: 5c256109fcb644cd9e73ef13203db680
+msgid "Video Stabilization"
+msgstr "视频稳定"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:183
+#: 04aebc96337a4027b5d77bfa2d92d16f
+msgid "Attitude at :ref:`SCHED_LOOP_RATE<SCHED_LOOP_RATE>`"
+msgstr "以 :ref:`SCHED_LOOP_RATE<SCHED_LOOP_RATE>` 频率记录姿态"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:184
+#: 5bc48e276afc47ada85d2387f6ebfa7c
+msgid "21"
+msgstr "21"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:184
+#: 4bb03e1c39a24ef592c0f8ef63d9777e f0f4cd41b7584f38b38ebb6e0e7c7051
+msgid "Fast harmonic notch"
+msgstr "快速谐波陷波"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:187
+#: 81983abb84194e76aafc1733709ad427
+msgid "ATTITUDE logging will occur at highest rate of the selections."
+msgstr "姿态记录将以所选选项中最高速率进行。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:189
+#: f6d828b108bf4b149f5fff58c396d639
+msgid ""
+"the logging of EKF3 data is controlled by the "
+":ref:`EK3_LOG_LEVEL<EK3_LOG_LEVEL>` parameter."
+msgstr "EKF3数据的记录由 :ref:`EK3_LOG_LEVEL<EK3_LOG_LEVEL>` 参数控制。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:198
+#: 9be25832a20e4f949f6717c994d6844d
+msgid "Message Details (Copter specific)"
+msgstr "消息详情（Copter专用）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:200
+#: 6fbd12ab830d4e479324953f000c676c
+msgid ""
+"Many messages are detailed in the :ref:`logmessages` page in each vehicle's "
+"wiki section."
+msgstr "许多消息在各飞行器wiki部分的 :ref:`logmessages` 页面中有详细说明。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:203
+#: 91e352c5f9a744158fa0c5923892a646
+msgid "**ATT (attitude information):**"
+msgstr "**ATT（姿态信息）：**"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:206
+#: c19d11a1af5d407a8573661319d4ee7f
+msgid "DesRoll"
+msgstr "DesRoll"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:206
+#: 8d34b90097b54da183dd0ffb7207e969
+msgid ""
+"The pilot's desired roll angle in degrees (roll left is negative, right is "
+"positive)"
+msgstr "飞手期望的横滚角（度），向左为负，向右为正"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:208
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:267
+#: 26c1d332767949bcab56a4f27441b306 f56e7a65475a49698f7334f25ce8f5bc
+msgid "Roll"
+msgstr "Roll"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:208
+#: c2f8671c68414621982f16733e2b8cd6
+msgid ""
+"The vehicle's actual roll in degrees (roll left is negative, right is "
+"positive)"
+msgstr "飞行器实际横滚角（度），向左为负，向右为正"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:210
+#: 30fcb930bd374dd7a8fe61a305be3a03
+msgid "DesPitch"
+msgstr "DesPitch"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:210
+#: 78892c6fe5444828b5f770096b077c46
+msgid ""
+"The pilot's desired pitch angle in degrees (pitch forward is negative, pitch"
+" back is positive)"
+msgstr "飞手期望的俯仰角（度），向前为负，向后为正"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:212
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:269
+#: 265a5fc786544ec082e5aa2649b2d505 d8f2c405c8ef4696b91a6d536f60d76b
+msgid "Pitch"
+msgstr "Pitch"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:212
+#: ec66debb16474f3eae1ba2776f64669f
+msgid ""
+"The vehicle's actual pitch angle in degrees (pitch forward is negative, "
+"pitch back is positive)"
+msgstr "飞行器实际俯仰角（度），向前为负，向后为正"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:214
+#: 9f2ba39c7a244bcdae07fe02c7a8a92a
+msgid "DesYaw"
+msgstr "DesYaw"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:214
+#: 8875d07969a546e0880f3379ee41754c
+msgid "The pilot's desired heading in degrees with 0 = north"
+msgstr "飞手期望的航向角（度），0=正北"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:216
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:271
+#: 46065d998d6f4ac5b5c84f66da10ed75 47c4899d46b648e7aaf702e90f7b1df1
+msgid "Yaw"
+msgstr "Yaw"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:216
+#: 50f4db1ba84c449ca188c8303a4aba9e
+msgid "The vehicle's actual heading in degrees with 0 = north"
+msgstr "飞行器实际航向角（度），0=正北"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:218
+#: 87f469bb5881416cbf96e6de9fd6458c
+msgid "ErrRP"
+msgstr "ErrRP"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:218
+#: 25a7a965e5a5477c99b4d3ef11ff786b
+msgid ""
+"The average size of the roll/pitch error estimate (values between 0 and 1)"
+msgstr "横滚/俯仰误差估计的平均大小（值在0到1之间）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:220
+#: 45db56fc6f5648e89ae6fa9c87cedee9
+msgid "ErrYaw"
+msgstr "ErrYaw"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:220
+#: 37e18ddec9b043b79cb36a20b687e4c6
+msgid "The average size of the yaw error estimate (values between 0 and 1)"
+msgstr "偏航误差估计的平均大小（值在0到1之间）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:223
+#: 7857f52c133e4565948f7609f0bbece7
+msgid "**ATUN (auto tune overview):**"
+msgstr "**ATUN（AutoTune概览）：**"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:226
+#: 6df893a0e72942c688ba0aa119ddbbf7
+msgid "Axis: 0 = Roll, 1 = Pitch"
+msgstr "轴：0 = 横滚，1 = 俯仰"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:228
+#: 794dbfcf1d5d4c878cbf9312a23ae781
+msgid "TuneStep"
+msgstr "TuneStep"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:228
+#: 35249466930e440898db91f4a6e454a0
+msgid ""
+"0 = Returning towards Level (before or after a test), 1 = Testing (i.e. "
+"performing a twitch to test response), 2 = Updating gains (twitch completed "
+"and gains adjusted)"
+msgstr "0 = 返回水平（测试前后），1 = 测试中（执行抖动以测试响应），2 = 更新增益（抖动完成并已调整增益）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:235
+#: e9e36d2502f7492e9a7e22658e28bc9b
+msgid "RateMin"
+msgstr "RateMin"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:235
+#: 05594333d71a42c79f9d00c3d364d2a4
+msgid "Minimum recorded rate during this test"
+msgstr "本次测试中记录的最小速率"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:238
+#: 22ee21b2e4aa496fbcfaa396ec53327c
+msgid "RateMax"
+msgstr "RateMax"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:238
+#: 3a05c11672a24b97aab45814b8f548ca
+msgid "Maximum recorded rate during this test"
+msgstr "本次测试中记录的最大速率"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:241
+#: e4154abbb7804b4dbfc1c6dd086720b6
+msgid "RPGain"
+msgstr "RPGain"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:241
+#: 3c6ecf45877d41cb8a649e4e4ede35de
+msgid "Rate P gain value being tested"
+msgstr "正在测试的速率P增益值"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:243
+#: 01166b247b6c4697aa196807e6048b8f
+msgid "RDGain"
+msgstr "RDGain"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:243
+#: ad5ac5a8770145e4ad4e3a14cd20f102
+msgid "Rate D gain value being tested"
+msgstr "正在测试的速率D增益值"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:245
+#: 6786fe1953534a7e8552123d9422b27f
+msgid "SPGain"
+msgstr "SPGain"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:245
+#: c7b31289cc2644adb808f33fee51542a
+msgid "Stabilize P gain being tested"
+msgstr "正在测试的Stabilize P增益"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:248
+#: 332f2df4435c44e1a8dca4a89913ca8c
+msgid "**ATDE (auto tune step details):**"
+msgstr "**ATDE（AutoTune步骤详情）：**"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:251
+#: dfa2fd65e16043f2ae3db2577e9ff32c
+msgid "Angle"
+msgstr "Angle"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:251
+#: 4b21f8d822994f568cee1c86a850bfe7
+msgid "Angle of the copter in centi-degrees for the axis being testedx"
+msgstr "飞行器在被测轴上的角度（厘度）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:253
+#: 7ad3693a785e481c8ad440591c027e37
+msgid "Rate"
+msgstr "Rate"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:253
+#: 233b8e5eb7ea4cd99060a62b44a6bb95
+msgid "Rate of rotation of the copter for the axis being tested"
+msgstr "飞行器在被测轴上的旋转速率"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:256
+#: 8ee4e15126b943b8aa52b53f61ed0f50
+msgid "**CAM (time and position when camera shutter was activated):**"
+msgstr "**CAM（相机快门激活时的时间和位置）：**"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:259
+#: 5251229410d04661932e700493c162b3
+msgid "GPSTime"
+msgstr "GPSTime"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:259
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:749
+#: 4dc0614f3fc743698a5a973f12c46a0c 8014a4bb565c44b4a59d90c9a3be7d58
+msgid "The GPS reported time since epoch in milliseconds"
+msgstr "GPS报告的自纪元以来的时间（毫秒）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:261
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:290
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:756
+#: 0a2ac971864b4ddfb93c8d3cb5de594d 7ecf54443627444f9c86ce3086398c69
+#: dc31ed2c2d4d4fdc9583912bd0b52f91
+msgid "Lat"
+msgstr "Lat"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:261
+#: d9e1dae9025f4fe78293701ee83068cf
+msgid "The accelerometer + GPS latitude estimate"
+msgstr "加速度计+GPS纬度估计"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:263
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:292
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:758
+#: 26161d0de9c8439aaa7969e641518eaf 7f72200fc1bd4a2d90f0b604b3b3cf69
+#: 9c6d2af95c4b4a59bf6d1ae4541eb854
+msgid "Lng"
+msgstr "Lng"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:263
+#: 6f0071bc974b497cb2de2e4513230c11
+msgid "The accelerometer + GPS longitude estimate"
+msgstr "加速度计+GPS经度估计"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:265
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:288
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:348
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:762
+#: 86ca7b61eab947beb763dc5ac6183d35 945e068a101f4b4c8e97b3ff853778da
+#: d1b6a46d75ca430091181e5b5023e1c4 e1f1a6553c63455e8b2a8244ba5960af
+msgid "Alt"
+msgstr "Alt"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:265
+#: 8e3a78f9ce6546099365d2943db39f6b
+msgid "The accelerometer + barometer estimated altitude in cm above ground"
+msgstr "加速度计+气压计估计的地面以上高度（厘米）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:267
+#: 948aaf20cbf64229baa6c0dd9ab96e49
+msgid "The vehicle roll angle in centi-degrees"
+msgstr "飞行器横滚角（厘度）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:269
+#: 153bc43c5a104c91ae9fdffbd8882a03
+msgid "The vehicle pitch angle in centi-degrees"
+msgstr "飞行器俯仰角（厘度）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:271
+#: 737613d71487430ea76fd2347c018a50
+msgid "The vehicle's heading in centi-degrees"
+msgstr "飞行器航向角（厘度）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:274
+#: 00fa11df9c3142c48ee3026c5e00fe79
+msgid ""
+"**CMD (commands received from the ground station or executed as part of a "
+"mission):**"
+msgstr "**CMD（从地面站接收或作为任务一部分执行的命令）：**"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:278
+#: d28106295f3941eaacc523dd74ffd1ec
+msgid "CTot"
+msgstr "CTot"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:278
+#: 1179e23fc283466b9ac3d4b9493422d5
+msgid "The total number of commands in the mission"
+msgstr "任务中命令的总数"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:280
+#: 6daaad3602b441e88c690b11a9948c45
+msgid "CNum"
+msgstr "CNum"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:280
+#: 35e6708c89734607bb367b98dc324ed3
+msgid ""
+"This command's number in the mission (0 is always home, 1 is the first "
+"command, etc)"
+msgstr "该命令在任务中的编号（0始终为Home，1为第一条命令，依此类推）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:282
+#: 0021ed14863b465687852902bcb8f5f8
+msgid "CId"
+msgstr "CId"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:282
+#: c3852a6522e84e32b734c46cd0e1a2a8
+msgid ""
+"The `MAVLink message id <https://mavlink.io/en/messages/common.html>`__"
+msgstr "`MAVLink消息ID <https://mavlink.io/en/messages/common.html>`__"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:284
+#: 421a9df2495a43719cdce3d1633d9a46
+msgid "Copt"
+msgstr "Copt"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:284
+#: 41568a9423104e9890712e6a91aba205
+msgid "The option parameter (used for many different purposes)"
+msgstr "选项参数（用于多种不同目的）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:286
+#: 9323ed7e0a2a46f2a85898fb5cde1d69
+msgid "Prm1"
+msgstr "Prm1"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:286
+#: 174756cbd0ea494397845c391e0dfabe
+msgid "The command's parameter (used for many different purposes)"
+msgstr "命令的参数（用于多种不同目的）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:288
+#: 77a7ea57f05b4e64a39e9d116778cbe3
+msgid "The command's altitude in meters"
+msgstr "命令的高度（米）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:290
+#: 25c8eb802a8c4e70b3d4e3158674664e
+msgid "The command's latitude position"
+msgstr "命令的纬度位置"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:292
+#: 7fc76ee784f94851bd1f891e39efbe97
+msgid "The command's longitude position"
+msgstr "命令的经度位置"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:295
+#: e5b7fdcff35d46589d95c4cb7820d0d0
+msgid "**COMPASS (raw compass, offset and compassmot compensation values):**"
+msgstr "**COMPASS（原始罗盘、偏移和compassmot补偿值）：**"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:298
+#: cfebe06bc18e4f1681e335c84aebf1db
+msgid "Field"
+msgstr "字段"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:298
+#: fa3a7a858cfe4f71869d334c42d10e80
+msgid "Description"
+msgstr "说明"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:300
+#: c6b78dd7c09642338cec9c522e816c1d
+msgid "MagX, MagY, MagZ"
+msgstr "MagX, MagY, MagZ"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:300
+#: f3e558d1554346378788aa0317ae7c5b
+msgid ""
+"Raw magnetic field values for x, y, and z axis. These are magnetometer "
+"readings with calibration applied, not raw magnetometer readings."
+msgstr "x、y、z轴的原始磁场值。这些是已应用校准的磁力计读数，而非原始磁力计读数。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:303
+#: 3ab5f8ba8f9342bf9dfb374a7130e37e
+msgid "OfsX, OfsY, OfsZ"
+msgstr "OfsX, OfsY, OfsZ"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:303
+#: 6e2954778a6a4fd393afa1f5cd420644
+msgid ""
+"Raw magnetic offsets (will only change if COMPASS_LEARN parameter is 1)"
+msgstr "原始磁场偏移（仅在COMPASS_LEARN参数为1时才会变化）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:305
+#: 3794703830094922b49d14557c2b0340
+msgid "MOfsX, MOfsY, MOfsZ"
+msgstr "MOfsX, MOfsY, MOfsZ"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:305
+#: f8d4d95c0be5415dbeec98b08084c736
+msgid "Compassmot compensation for throttle or current"
+msgstr "针对油门或电流的compassmot补偿"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:308
+#: 7e443904d25b426daeacec8666ae6d5b
+msgid "**CURRENT (battery voltage, current and board voltage information):**"
+msgstr "**CURRENT（电池电压、电流和板载电压信息）：**"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:311
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:330
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:370
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:719
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:745
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:772
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:782
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:796
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:826
+#: 0851ac878be446409ce32fe5120c8f8c 167e38aa891f4fdfb10c27c73b018210
+#: 2320e367f87346f0b2fdcf07ba2fb2f7 36ce43cf45734ecf813fe27e28f6cd91
+#: 71413756dfc14dac87b59b241f597887 a48ede24d061427296ecfc6a10ca9ebd
+#: b5c50798061443559060273407b11128 c48e7fd4c5344f0ab380d2b5908b3a4d
+#: f3313eebc02a418192b7615fcdc83274
+msgid "FIELD"
+msgstr "字段"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:311
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:330
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:370
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:700
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:719
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:745
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:772
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:782
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:796
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:826
+#: 2ed76567e87b44058c27fbed32124ad0 8f965b5db37543e88537969a19402121
+#: 958136e2bb9043fc82ae9ed6537d9a36 a34ee8a725ba47c59d88db5365d8239d
+#: a950115438be4d2faffc3eb4009a3b93 b77113f381f144f8bbdd5658c34e2db6
+#: c213549ca6a24d67a061cc03648e6c51 c56cc692cb1448b2958b2629eb6c1705
+#: caae96a07a3348c388282b78b01d9745 cc63590598f04ecdaa759b04d7f503a6
+msgid "DESCRIPTION"
+msgstr "说明"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:313
+#: aac75d37273c4b6d9971283b19004783
+msgid "Thr"
+msgstr "Thr"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:313
+#: 0dedd12822d242be9d67ad9f8cdd111e
+msgid "Pilot input throttle from 0 ~ 1000"
+msgstr "飞手输入油门，范围0~1000"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:315
+#: e55a17755d5847a0baabe6b9477ef246
+msgid "ThrInt"
+msgstr "ThrInt"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:315
+#: 22c8ade1909f4c0abf4b10f584a0493d
+msgid ""
+"Integrated throttle (i.e. sum of total throttle output for this flight)"
+msgstr "积分油门（即本次飞行总油门输出之和）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:317
+#: 5a44acf4834e4bbcb6a546c0b1edceed
+msgid "Volt"
+msgstr "Volt"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:317
+#: bf1ac43cd836452daab8ad02f756682a
+msgid "Battery voltage in volts \\* 100"
+msgstr "电池电压（伏特 \\* 100）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:319
+#: ed67a8486ca34ecbb28cbd296ab905ae
+msgid "Curr"
+msgstr "Curr"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:319
+#: e58e54e0adc44db99f608bc12511c278
+msgid "Current drawn from the battery in amps \\* 100"
+msgstr "电池放电电流（安培 \\* 100）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:321
+#: 1432ab19e678422da1cb12b72e3ff1e0
+msgid "Vcc"
+msgstr "Vcc"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:321
+#: 3ec2841d662b4134a469cf1b5bfb2a21
+msgid "Board voltage"
+msgstr "板载电压"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:323
+#: 80eee3e5e995457a84dd3cd177787019
+msgid "CurrTot"
+msgstr "CurrTot"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:323
+#: 9b7840b3d8a24e01bcb1fb06a91185fc
+msgid "Total current drawn from battery"
+msgstr "电池总放电电量"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:327
+#: aa582ca978e1438abab364ffd4348040
+msgid "**CTUN (Control, Throttle and altitude information):**"
+msgstr "**CTUN（控制、油门和高度信息）：**"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:332
+#: 3ff3ba67559e4fd2af28e51fe1f7255f
+msgid "TimeUS"
+msgstr "TimeUS"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:332
+#: 416b42b123fc4694b864bd907de79a67
+msgid "Time stamp for messages in microseconds (can be ignored)"
+msgstr "消息时间戳（微秒，可忽略）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:334
+#: d1b5e0f89b804231a1ba5ae84fe9bd2f
+msgid "ThI"
+msgstr "ThI"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:334
+#: 37a0b11fb8194577b9f1f03c5b11895e
+msgid "The pilot's throttle in as a number from 0 to 1000"
+msgstr "飞手油门输入，范围0到1000"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:336
+#: 5f1ccd6611e2495eb836f97224bd04d1
+msgid "ABst"
+msgstr "ABst"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:336
+#: bfa7a9f4d437406999c5ce6a652a83e1
+msgid ""
+"Angle Boost: throttle increase (from 0 ~ 1000) as a result of the copter "
+"leaning over (automatically added to all pilot and autopilot throttle to "
+"reduce altitude loss while leaning)"
+msgstr "角度增益：因飞行器倾斜而增加的油门量（0~1000），自动叠加到所有飞手和飞控的油门上，以减少倾斜时的高度损失"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:339
+#: 129f604776b8474eb142491e27fca723
+msgid "ThO"
+msgstr "ThO"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:339
+#: 6b6c8980905b48e580ef0bb8ed1fee02
+msgid ""
+"Final throttle output sent to the motors (from 0 ~ 1000). Normally equal to "
+"ThrI+ABst while in stabilize mode."
+msgstr "最终输出到电机的油门值（0~1000）。在Stabilize模式下通常等于ThrI+ABst。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:342
+#: 1d030393d4564a988cd737e88744559a
+msgid "ThH"
+msgstr "ThH"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:342
+#: 6caf2c6482cb48fcba987ff425fdd447
+msgid "Estimated throttle required to hover throttle in the range 0 ~ 1"
+msgstr "维持悬停所需的估计油门，范围0~1"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:344
+#: 8d22023e446e4d278540115dbbc12bf6
+msgid "DAlt"
+msgstr "DAlt"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:344
+#: 59985c45f72e4d5b89a04c3a3e1f3ab2
+msgid ""
+"The Desired Altitude while in AltHold, Loiter, RTL or Auto flight modes. It "
+"is influenced by EKF origin, which in 3.5.X is corrected by GPS altitude. "
+"This behaviour is turned off in 3.6.X and can be turned on with "
+"EKF_OGN_HGT_MASK."
+msgstr ""
+"在AltHold、Loiter、RTL或Auto飞行模式下的期望高度。受EKF原点影响，在3.5.X中由GPS高度修正。该行为在3.6.X中已关闭，可通过EKF_OGN_HGT_MASK开启。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:348
+#: 7be1af37a38b4f7798fc6599ac6f6ace
+msgid "The current EKF Altitude"
+msgstr "当前EKF高度"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:350
+#: f89abe288bc4469abe1cf96b783f6917
+msgid "BAlt"
+msgstr "BAlt"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:350
+#: c4a2a91bdb1a434fa02c56a4bf942e15
+msgid ""
+"Barometer Altitude: The altitude above ground according to the barometer"
+msgstr "气压计高度：气压计报告的地面以上高度"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:352
+#: acff4225e976454780a64d294bceb2f1
+msgid "DSAlt"
+msgstr "DSAlt"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:352
+#: 88b5099c13c64f33ad77850a291f7ae8
+msgid ""
+"Desired distance in cm from ground or ceiling (only visible if Sonar is "
+"available)"
+msgstr "距地面或顶部的期望距离（厘米），仅在声呐可用时可见"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:354
+#: 61595742270a4f38818394d3d92909fd
+msgid "SAlt"
+msgstr "SAlt"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:354
+#: 5a32f663cc7343f9be8c198cc451e3e1
+msgid ""
+"Sonar Altitude: the altitude above ground according to the sonar (Only "
+"visible of Sonar is available)"
+msgstr "声呐高度：声呐报告的地面以上高度（仅在声呐可用时可见）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:357
+#: 139a9ea2159443d2821ecbdb05630db9
+msgid "TAlt"
+msgstr "TAlt"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:357
+#: 4a7281affff44056992c4b9e130668f1
+msgid "Terrain altitude (not used by default)"
+msgstr "地形高度（默认不使用）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:359
+#: 7860dae482a7489ab2aa662d3d947c8f
+msgid "DCRt"
+msgstr "DCRt"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:359
+#: 80f1660d20574df6b9a1db46e2dfbf16
+msgid "Desired Climb Rate in cm/s"
+msgstr "期望爬升率（厘米/秒）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:361
+#: c6194b594f454206a4c2a44352e0a51a
+msgid "CRt"
+msgstr "CRt"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:361
+#: 3f48300f976f44a7a11f38e63329565f
+msgid "Climb Rate in cm/s"
+msgstr "爬升率（厘米/秒）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:363
+#: 5241ea93393f45b8abed5c00cf259a69
+msgid "N"
+msgstr "N"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:363
+#: 29534df9a48745aab06ceb51b186495b
+msgid "Harmonic notch current center frequency for gyro in Hz"
+msgstr "陀螺仪谐波陷波当前中心频率（Hz）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:366
+#: 14d5444e4ebe40eb852aaef076ad6faf
+msgid ""
+"**D32, DU32 (single data values which are either signed 32bit integers or "
+"unsigned 32bit integers):**"
+msgstr "**D32, DU32（单一数据值，为有符号32位整数或无符号32位整数）：**"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:372
+#: 02169d0cccd8430798fe26d2a78978ef
+msgid "id"
+msgstr "id"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:372
+#: ad8f88c155214f3193db122754a44de8
+msgid ""
+"Identification number for the variable. There are only two possible values:"
+msgstr "变量的标识号，只有两个可能的值："
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:374
+#: 9615e569cf324b8c8aa12d82a810a124
+msgid ""
+"7 = bit mask of internal state (The meaning of individual bits can be found "
+"in the def'n of the `ap structure "
+"<https://github.com/ardupilot/ardupilot/blob/master/ArduCopter/Copter.h#L296>`__"
+msgstr ""
+"7 = 内部状态位掩码（各位的含义可在 `ap结构体 "
+"<https://github.com/ardupilot/ardupilot/blob/master/ArduCopter/Copter.h#L296>`__"
+" 定义中找到）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:377
+#: c8fbf6ccdbe44f02b3cc63ccb73c17d0
+msgid "9 = simple mode's initial heading in centi-degrees"
+msgstr "9 = Simple模式的初始航向角（厘度）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:380
+#: 0d9b47b5affa459ca381a29aa64c3450
+msgid "**EKF (Extended Kalman Filter**):"
+msgstr "**EKF（扩展卡尔曼滤波器）：**"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:382
+#: 4f68c5f2ffb145539aa84a0c1546bfc1
+msgid ""
+":ref:`Log information here <dev:extended-kalman-"
+"filter_interpreting_log_data>` (Dev Wiki). Overview :ref:`here <common-apm-"
+"navigation-extended-kalman-filter-overview>`."
+msgstr ""
+":ref:`日志信息见此 <dev:extended-kalman-"
+"filter_interpreting_log_data>`（开发者Wiki）。概述见 :ref:`此处 <common-apm-navigation-"
+"extended-kalman-filter-overview>`。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:385
+#: 401f90e7f1b747109203db179e69546f
+msgid "**ERR (an error message):**"
+msgstr "**ERR（错误消息）：**"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:387
+#: e07c39f1487049e3b26e7b3407cf3971
+msgid "SubSystem and Error codes listed below"
+msgstr "子系统和错误代码如下"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:401
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:412
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:553
+#: 5737c99849e54d51b512b2e48504420a 85b80c7cfcdd4a5b814e79720840b909
+#: dccb27dd11974ec28032935424146e8e
+msgid "0 = Errors Resolved"
+msgstr "0 = 错误已解除"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:402
+#: dcda92decd694fcfb6f53e6cbc098d0a
+msgid "2 = Late Frame : no updates received from receiver for two seconds"
+msgstr "2 = 帧延迟：两秒内未收到接收机更新"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:413
+#: 1d8e687ac3304b4cab77d476f189fc37
+msgid "1 = Failed to initialise (probably a hardware issue)"
+msgstr "1 = 初始化失败（可能是硬件问题）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:414
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:554
+#: 1ab2fc56bd5342e387d425fc7e50210d 89666a2dc61f46e295e1df8d58c0b4de
+msgid "4 = Unhealthy : failed to read from the sensor"
+msgstr "4 = 不健康：传感器读取失败"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:425
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:437
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:449
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:461
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:541
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:565
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:577
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:612
+#: 179b972ddcbd4b639519b3dd16abf87d 1f370da362c840099e513c59848e975c
+#: 2e265b56f2894f89a17a312e9f0a6d75 33bf63b9e1634893980e475f76ffcfbd
+#: 6a9b03a7e48046f99e3c58adf2bbd949 80a5e9b4b4924410860f87d0109282b3
+#: b379627bd8be4c798c577215b7dd6c2d c26fe1cc18a64f5797e7e6ad037834f2
+msgid "0 = Failsafe Resolved"
+msgstr "0 = 失控保护已解除"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:426
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:438
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:450
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:542
+#: 1427413fec0543c4b2442fcd35f3abeb 1afbef5d5c274d79b6f589855c6a62a3
+#: 230bc513597d4f4098d3f2f1e6e3944f ade51c73a0ec48e78e397861e2e6e7a5
+msgid "1 = Failsafe Triggered"
+msgstr "1 = 失控保护已触发"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:462
+#: 3f96563e4a8b4d45a68d2ea2b94575f0
+msgid "1 = Altitude fence breach, Failsafe Triggered"
+msgstr "1 = 高度围栏突破，失控保护已触发"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:463
+#: f64774cf5bf44a56b5eda78b9f132496
+msgid "2 = Circular fence breach, Failsafe Triggered"
+msgstr "2 = 圆形围栏突破，失控保护已触发"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:464
+#: 887cedb507a84bb98973bf240bb119f1
+msgid "3 = Both Alt and Circular fence breached, Failsafe Triggered"
+msgstr "3 = 高度围栏和圆形围栏同时突破，失控保护已触发"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:465
+#: 2336b80d3c9240f2b9264da79024cdb1
+msgid "4 = Polygon fence breached, Failsafe Triggered"
+msgstr "4 = 多边形围栏突破，失控保护已触发"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:476
+#: 197c9eac50e34af1b885eb259adabcde
+msgid ""
+"Vehicle was unable to enter the desired flight mode normally because of a "
+"bad position estimate"
+msgstr "由于位置估计不良，飞行器无法正常进入期望飞行模式"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:478
+#: 6f854247f3174fd5a82886835185fd9d
+msgid ""
+"See `flight mode numbers here "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/defines.h#L34>`__"
+msgstr ""
+"飞行模式编号见 `此处 "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/defines.h#L34>`__"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:489
+#: 2451c66623f7448eb3cf399d1b52dc4d
+msgid "0 = Glitch cleared"
+msgstr "0 = 异常已清除"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:490
+#: 2340fe6a958a484488b0796da6389b50
+msgid "2 = GPS Glitch occurred"
+msgstr "2 = 发生GPS信号异常"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:501
+#: da2172d802ab4dad891ed74ee8f60a46
+msgid ""
+"1 = Crash into ground detected.  Normally vehicle is disarmed soon after"
+msgstr "1 = 检测到撞地。通常飞行器随后很快上锁"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:502
+#: e77e4b71112e4c5099c024fb9e3b9ebb
+msgid ""
+"2 = Loss of control detected.  Normally parachute is released soon after"
+msgstr "2 = 检测到失控。通常随后很快释放降落伞"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:517
+#: 7dc9c8af52cb4720b25baeaea6589be2
+msgid "2 = Not Deployed, vehicle too low"
+msgstr "2 = 未展开，飞行器高度过低"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:518
+#: 934e6718057d4ee18fbcee19271a3e0f
+msgid "3 = Not Deployed, vehicle landed"
+msgstr "3 = 未展开，飞行器已降落"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:529
+#: cf591b8dbb814f04a22205db33f167b3
+msgid "0 = Variance cleared (position estimate OK)"
+msgstr "0 = 方差已清除（位置估计正常）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:530
+#: 5ddd6817518e43d98143ccd6adcf8255
+msgid "2 = Bad Variance (position estimate bad)"
+msgstr "2 = 方差异常（位置估计不良）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:566
+#: 3d875839258a4722b4604afcfdbaba98
+msgid "1 = Failsafe Triggered (normally vehicle disarms)"
+msgstr "1 = 失控保护已触发（通常飞行器上锁）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:578
+#: d1cabe401e2d4d4093d07bed588ab784
+msgid "1 = No action just report to Pilot"
+msgstr "1 = 仅上报给飞手，不采取动作"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:579
+#: a05f488eef6843a48990aab95150a72f
+msgid "2 = Vehicle avoids by climbing or descending"
+msgstr "2 = 飞行器通过爬升或下降来避障"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:580
+#: 5f4e974ec30249cead30eaf45ccda655
+msgid "3 = Vehicle avoids by moving horizontally"
+msgstr "3 = 飞行器通过水平移动来避障"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:581
+#: c52c8782198f424196b550b61409f5e5
+msgid "4 = Vehicle avoids by moving perpendicular to other vehicle"
+msgstr "4 = 飞行器通过垂直于其他飞行器方向移动来避障"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:582
+#: 473910c87f1a4a5cb5e9b8332bd1e454
+msgid "5 = RTL invoked"
+msgstr "5 = RTL已启动"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:598
+#: e14898004472492ca1707d1eae399c3c
+msgid "2 = Failed to set destination"
+msgstr "2 = 设置目的地失败"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:599
+#: b421e199c3094e99b007219414821cae
+msgid "3 = RTL restarted"
+msgstr "3 = RTL已重新启动"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:600
+#: c9aae9a5e0ca4cad9f5be8a5cdc355f7
+msgid "4 = Circle initialisation failed"
+msgstr "4 = Circle初始化失败"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:601
+#: 19a096f8701a4d63bf3ba864e8e83737
+msgid "5 = Destination outside fence"
+msgstr "5 = 目的地在围栏外"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:613
+#: 0daa370c8ed94b148bf3498c7bae8a78
+msgid "1 = Failsafe Triggered (normally vehicle RTLs)"
+msgstr "1 = 失控保护已触发（通常飞行器执行RTL）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:624
+#: 3b283f6781f941c7b4e1242e432f916b
+msgid "0 = 1st EKF has become primary"
+msgstr "0 = 第1个EKF已成为主EKF"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:625
+#: ee09ee7793f742b3a4e7b6565c3d52d7
+msgid "1 = 2nd EKF has become primary"
+msgstr "1 = 第2个EKF已成为主EKF"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:636
+#: e8334492261a4ed79e1ab12c88dd09d3
+msgid "0 = Thrust Restored"
+msgstr "0 = 推力已恢复"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:637
+#: 774a01ceb48f46e39d3fbb949a24914e
+msgid ""
+"1 = Thrust Loss Detected (altitude may be prioritised over yaw control)"
+msgstr "1 = 检测到推力损失（高度控制可能优先于偏航控制）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:648
+#: 445867cbf5b84b74beee25a585460946
+msgid "0 = Sensor Failsafe Cleared"
+msgstr "0 = 传感器失控保护已清除"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:649
+#: f123df8f14b745388bd5a63b09cb2e0e
+msgid "1 = Sensor Failsafe Triggered"
+msgstr "1 = 传感器失控保护已触发"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:660
+#: 3ed0022368d84b518d18654b16f791a2
+msgid "0 = Leak Failsafe Cleared"
+msgstr "0 = 漏水失控保护已清除"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:661
+#: 98fc577086ae4d56a48ec5001f018312
+msgid "1 = Leak Detector Failsafe Triggered"
+msgstr "1 = 漏水检测器失控保护已触发"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:672
+#: edbe34a3d1d74081af1d6611e17726ac
+msgid "0 = Pilot Input Failsafe Cleared"
+msgstr "0 = 飞手输入失控保护已清除"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:673
+#: ea847eed3c084d21bb3a40395dd4b548
+msgid "1 = Pilot Input Failsafe Triggered"
+msgstr "1 = 飞手输入失控保护已触发"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:684
+#: 20161b5540d74e5196b02360d3b9a600
+msgid "0 = Excessive Vibration Compensation De-activated"
+msgstr "0 = 过度震动补偿已停用"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:685
+#: 4f965b51a8914c18875747d514b20e39
+msgid "1 = Excessive Vibration Compenstaion Activated"
+msgstr "1 = 过度震动补偿已激活"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:695
+#: 848058003a474cb8b6baff2f4a2127fb
+msgid ""
+"**EV: (an event number)**. The full list of possible events can be found in "
+"`AP_Logger.h "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Logger/AP_Logger.h#L94>`__"
+" but the most common are:"
+msgstr ""
+"**EV：（事件编号）**。所有可能事件的完整列表可在 `AP_Logger.h "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Logger/AP_Logger.h#L94>`__"
+" 中找到，最常见的有："
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:700
+#: deedd825694249948ad45160a5f7df62
+msgid "Event No"
+msgstr "事件编号"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:702
+#: 20653af744c14488b8b2dcd9428497d5
+msgid "Armed"
+msgstr "已解锁"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:704
+#: 704ad57e2bf042048c9973e51ccfec3f
+msgid "Disarmed"
+msgstr "已上锁"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:706
+#: 967ce4cfc7bf4b6da2f84165abeaf2b0
+msgid ""
+"Auto Armed (pilot has raised throttle above zero and autopilot is free to "
+"take control of throttle)"
+msgstr "自动解锁（飞手已将油门抬高至零以上，飞控可自由接管油门控制）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:708
+#: 013ca0e7b29c48448419af98ac3c4c50
+msgid "18"
+msgstr "18"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:708
+#: 237d065ba9434cca89d38ace818579df
+msgid "Land Complete"
+msgstr "降落完成"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:710
+#: 2816d27a6f0f4169a74967cb543fa152
+msgid "25"
+msgstr "25"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:710
+#: 0cd862693aa142c59df9831d1ad6a905
+msgid "Set Home (home location coordinates have been capture)"
+msgstr "设置Home（Home位置坐标已捕获）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:712
+#: 480c7746f68e4b988ab073e8c44b1272
+msgid "28"
+msgstr "28"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:712
+#: a6bea7137f7c4e71ab6b5b2f8cc83d58
+msgid "Not Landed (aka Takeoff complete)"
+msgstr "未降落（即起飞完成）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:716
+#: f34353de1a8e479ebbad8cacd10773b9
+msgid "**GPA: (Global Position Accuracy)**"
+msgstr "**GPA：（全球位置精度）**"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:721
+#: 2e352fc881ac4ebfb5351d4ebfba66ae
+msgid "VDop"
+msgstr "VDop"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:721
+#: 40dbbfc35cd64781bd8dc424de2f37a9
+msgid ""
+"Vertical dilution of precision, a unitless measure of precision "
+"https://en.wikipedia.org/wiki/Dilution_of_precision"
+msgstr "垂直精度稀释，精度的无量纲度量 https://en.wikipedia.org/wiki/Dilution_of_precision"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:724
+#: 199727dd39134ae3b7348af4094cc2e8
+msgid "HAcc"
+msgstr "HAcc"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:724
+#: e9584efabb4d4f68a40625f3ca227d12
+msgid "Horizontal Accuracy as reported by the GPS module, in meters"
+msgstr "GPS模块报告的水平精度（米）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:726
+#: 94a1a31d49b541f999c9190407b8e75f
+msgid "VAcc"
+msgstr "VAcc"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:726
+#: ee2f26e92f8b4d72b0e01063b91a24f0
+msgid "Vertical Accuracy as reported by the GPS module, in meters"
+msgstr "GPS模块报告的垂直精度（米）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:728
+#: b27d51f1ee384456b489719250aee54c
+msgid "SAcc"
+msgstr "SAcc"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:728
+#: 0da08f86e26f40d99bf30a1063f61607
+msgid "Speed accuracy as reported by the GPS, in m/s/s"
+msgstr "GPS报告的速度精度（m/s/s）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:730
+#: e2d783fe9b8b495e92ee0fd88fcf9cec
+msgid "VV"
+msgstr "VV"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:731
+#: 01567a18b99449be9471e9c7b0da9f12
+msgid "Flag to indicate if the GPS is reporting vertical velocity"
+msgstr "表示GPS是否报告垂直速度的标志"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:731
+#: f73103e4ac4b4c6482b7b5a214301a45
+msgid "0 No vertical velocity data 1 GPS has vertical velocity data"
+msgstr "0 无垂直速度数据 1 GPS有垂直速度数据"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:734
+#: e9b93c4c139f4eeebf66de9099d26d2c
+msgid "SMS"
+msgstr "SMS"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:734
+#: 309cd3c99aa54d5c8583f0a645979982
+msgid ""
+"The autopilot time in milliseconds that the accuracy/GPS position data is "
+"associated with."
+msgstr "与精度/GPS位置数据关联的飞控时间（毫秒）。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:736
+#: 4c7f7f5ed36f497f9c50a05f8b21e232
+msgid "Delta"
+msgstr "Delta"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:736
+#: 3c63d6c85e70415c893696fa157c5640
+msgid ""
+"The time between when the previous GPS message and the current GPS message "
+"was parsed by the autopilot, in milliseconds"
+msgstr "飞控解析上一条GPS消息与当前GPS消息之间的时间间隔（毫秒）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:742
+#: 321b8c7290af4e7e9bb6b199ef79f6e0
+msgid "**GPS:**"
+msgstr "**GPS：**"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:747
+#: 0931c74e3c9345a197fceb7ecfdf69fb
+msgid "Status"
+msgstr "Status"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:747
+#: f615d717ae8f4aee84b50bfc5bd8e7ff
+msgid ""
+"0 = no GPS, 1 = GPS but no fix, 2 = GPS with 2D fix, 3 = GPS with 3D fix"
+msgstr "0 = 无GPS，1 = GPS但无定位，2 = GPS 2D定位，3 = GPS 3D定位"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:749
+#: 20366bbccdcd472d9164338e6b7ae69b
+msgid "Time"
+msgstr "Time"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:751
+#: 3e0c0892f48c4dc8b150b5b0db8ff79a
+msgid "NSats"
+msgstr "NSats"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:751
+#: 5a94eb3df20342b1b4e8431afad16a4f
+msgid "The number of satellites current being used"
+msgstr "当前使用的卫星数量"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:753
+#: 057d3ff4a4e2443d80c49c5ee49987e9
+msgid "HDop"
+msgstr "HDop"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:753
+#: 3c0b1677cbdd448281231e3a8b9ce616
+msgid ""
+"A measure of gps precision (1.5 is good, >2.0 is not so good) "
+"https://en.wikipedia.org/wiki/Dilution_of_precision"
+msgstr ""
+"GPS精度度量（1.5为良好，>2.0不太好）https://en.wikipedia.org/wiki/Dilution_of_precision"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:756
+#: 49cc6ee0c255466f8a3ad5e26c327920
+msgid "Latitude according to the GPS"
+msgstr "GPS报告的纬度"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:758
+#: f31a90069b534f81835fa207bb8e6161
+msgid "Longitude according to the GPS"
+msgstr "GPS报告的经度"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:760
+#: a75b443b77a8423cb83d11468bfd4bfd
+msgid "RelAlt"
+msgstr "RelAlt"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:760
+#: 7b0a45ee14fc4b2f9305ffa198a411f3
+msgid "Accelerometer + Baro altitude in meters"
+msgstr "加速度计+气压计高度（米）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:762
+#: b686d5de9b334ae480ea447e0fd3870d
+msgid "GPS reported altitude (not used by the autopilot)"
+msgstr "GPS报告的高度（飞控不使用）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:764
+#: 9457124f806b4512bae31706f16c709b
+msgid "SPD"
+msgstr "SPD"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:764
+#: 44185048bafd435d80094e3528742c72
+msgid "Horizontal ground speed in m/s"
+msgstr "水平地速（m/s）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:766
+#: 28e05c7c0242435399300e62ea510c85
+msgid "GCrs"
+msgstr "GCrs"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:766
+#: e33027345d0649b9866a9e581868305c
+msgid "Ground course in degrees (0 = north)"
+msgstr "地面航迹角（度，0=正北）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:769
+#: a6256b35f50841e69121eff57e0090f2
+msgid "**IMU (accelerometer and gyro information):**"
+msgstr "**IMU（加速度计和陀螺仪信息）：**"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:774
+#: cb56d8278696479f903f234ca9a3589c
+msgid "GyrX, GyrY, GyrZ"
+msgstr "GyrX, GyrY, GyrZ"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:774
+#: a14f94277fb944b1a9a4e4dd3ef9d140
+msgid "The raw gyro rotation rates in radians/second"
+msgstr "原始陀螺仪旋转速率（弧度/秒）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:776
+#: 76356f15ab724680a12f4d996e35c507
+msgid "AccX, AccY, AccZ"
+msgstr "AccX, AccY, AccZ"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:776
+#: 4a7c49599f084d65b35ac98ede9b7b1e
+msgid "The raw accelerometer values in m/s/s"
+msgstr "原始加速度计值（m/s/s）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:779
+#: 75afe267d9bc4466ab231e9fe28eeedd
+msgid "**Mode (flight mode):**"
+msgstr "**Mode（飞行模式）：**"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:784
+#: 415a9b7d2c914158947c64b036b7f8db
+msgid "Mode"
+msgstr "Mode"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:784
+#: 6a6bf55156f44f1d8eca9f7e17d5cd4d
+msgid "The flight mode displayed as a string (i.e. STABILIZE, LOITER, etc)"
+msgstr "以字符串形式显示的飞行模式（如STABILIZE、LOITER等）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:786
+#: 7eb36b043fd649ff8693b6b41b955dbc
+msgid "ThrCrs"
+msgstr "ThrCrs"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:786
+#: 551ce556ba1d446da57987d64eccccd1
+msgid ""
+"Throttle cruise (from 0 ~ 1000) which is the autopilot's best guess as to "
+"what throttle is required to maintain a stable hover"
+msgstr "巡航油门（0~1000），是飞控对维持稳定悬停所需油门的最佳估计"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:789
+#: 8852f6e2dd064efa90cbd207f6230c67
+msgid "Rsn"
+msgstr "Rsn"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:789
+#: e8a5e36b3cec4e878f706c74ec0f1b57
+msgid ""
+"Reason for mode change (TX command, failsafe, etc) . The meaning of code "
+"values can be found in `ModeReason "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Vehicle/ModeReason.h>`__"
+msgstr ""
+"模式切换原因（遥控器指令、失控保护等）。代码值含义可在 `ModeReason "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Vehicle/ModeReason.h>`__"
+" 中找到"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:793
+#: cf9debb5676e45e69054f32f6d283ca4
+msgid "**NTUN (navigation information):**"
+msgstr "**NTUN（导航信息）：**"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:798
+#: e4e674a5767843afb3028dd5fa1516a6
+msgid "WPDst"
+msgstr "WPDst"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:798
+#: 85020c591e2c41318003eefeb26b1393
+msgid ""
+"Distance to the next waypoint (or loiter target) in cm. Only updated while "
+"in Loiter, RTL, Auto."
+msgstr "到下一个航点（或Loiter目标）的距离（厘米）。仅在Loiter、RTL、Auto模式下更新。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:800
+#: 222aa20048504c9586ca3dab5bc98523
+msgid "WPBrg"
+msgstr "WPBrg"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:800
+#: 1727876a50484caeacb77e2dd8ba83a6
+msgid "Bearing to the next waypoint in degrees"
+msgstr "到下一个航点的方位角（度）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:802
+#: 6ebfffdb74a94a96ab89b55bb2a0ee8d
+msgid "PErX"
+msgstr "PErX"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:802
+#: 33f69b91b21f4869b90dc60acce99fc3
+msgid ""
+"Distance to intermediate target between copter and the next waypoint in the "
+"latitude direction"
+msgstr "飞行器到下一个航点之间的中间目标在纬度方向上的距离"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:804
+#: 5d04d92895854a20a2784ddd55d4cef1
+msgid "PErY"
+msgstr "PErY"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:804
+#: 6d9da24069d144e182f784a91fefd381
+msgid ""
+"Distance to intermediate target between copter and the next waypoint in the "
+"longitude direction"
+msgstr "飞行器到下一个航点之间的中间目标在经度方向上的距离"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:806
+#: 920d797933b843e686e43ddfc0283242
+msgid "DVelX"
+msgstr "DVelX"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:806
+#: 66ec9b9806374199900f1f01402126bb
+msgid "Desired velocity in cm/s in the latitude direction"
+msgstr "纬度方向的期望速度（厘米/秒）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:808
+#: 89439164d8f64081827785a5dab1682d
+msgid "DVelY"
+msgstr "DVelY"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:808
+#: e035cc7aa38345a2b46e8e58fb5e1109
+msgid "Desired velocity in cm/s in the longitude direction"
+msgstr "经度方向的期望速度（厘米/秒）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:810
+#: 79fc76c9fdb8493f80ac74666f937d1c
+msgid "VelX"
+msgstr "VelX"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:810
+#: 2304880a1db641678ca1953dc2d85863
+msgid "Actual accelerometer + gps velocity estimate in the latitude direction"
+msgstr "纬度方向的加速度计+GPS实际速度估计"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:812
+#: 3299684900c0414ab17e0616b9927670
+msgid "VelY"
+msgstr "VelY"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:812
+#: 62ff97f1530d49789548e716aed0127b
+msgid ""
+"Actual accelerometer + gps velocity estimate in the longitude direction"
+msgstr "经度方向的加速度计+GPS实际速度估计"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:814
+#: da059c4d86a647c8aa8d0a5151b07d4b
+msgid "DAcX"
+msgstr "DAcX"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:814
+#: 1b192f0f12c74e0f84b3222767eff721
+msgid "Desired acceleration in cm/s/s in the latitude direction"
+msgstr "纬度方向的期望加速度（厘米/秒/秒）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:816
+#: bb0ea992209f407d92ecdde61b37077b
+msgid "DAcY"
+msgstr "DAcY"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:816
+#: 62999269ed1f4badbeed919501a43de9
+msgid "Desired acceleration in cm/s/s in the longitude direction"
+msgstr "经度方向的期望加速度（厘米/秒/秒）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:818
+#: 78a68e80cef14bb98d785414c0644c85
+msgid "DRol"
+msgstr "DRol"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:818
+#: c1e1a626ba254357b6aa877cf083a5d4
+msgid "Desired roll angle in centi-degrees"
+msgstr "期望横滚角（厘度）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:820
+#: 0ce5f75be9ac4486b0f6b0edf47467b8
+msgid "DPit"
+msgstr "DPit"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:820
+#: 617e262a5e194b9199f25698679a06c4
+msgid "Desired pitch angle in centi-degrees"
+msgstr "期望俯仰角（厘度）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:823
+#: 51e6296694bb40068108ef4fee3e4706
+msgid "**PM (performance monitoring):**"
+msgstr "**PM（性能监控）：**"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:828
+#: 6b72b3546d0c44a1ab03863f25a64f5b
+msgid "NLon"
+msgstr "NLon"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:828
+#: ade2bfd0dc124124b7f6d6cbe5d18908
+#, python-format
+msgid ""
+"Number of long running main loops (i.e. loops that take more than 20% longer"
+" than they should according to :ref:`SCHED_LOOP_RATE<SCHED_LOOP_RATE>` - ex."
+" 3ms for 400Hz rate)"
+msgstr ""
+"长运行主循环的数量（即根据 :ref:`SCHED_LOOP_RATE<SCHED_LOOP_RATE>` "
+"耗时超过应有时间20%以上的循环——如400Hz速率下超过3ms）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:831
+#: d73d60208df7445bad14602526cbdc5c
+msgid "NLoop"
+msgstr "NLoop"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:831
+#: 61f29982d7024ad49c84dbded9c4541b
+msgid ""
+"The total number of loops since the last PM message was displayed. This "
+"allows you to calculate the percentage of slow running loops (which should "
+"never be higher than 15%). Note that the value will depend on the autopilot "
+"clock speed"
+msgstr "自上次PM消息显示以来的总循环次数。由此可计算慢速循环的百分比（不应高于15%）。注意该值取决于飞控时钟速度"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:835
+#: 5bd9eef2552a491dbdc7df77e7e1c951
+msgid "MaxT"
+msgstr "MaxT"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:835
+#: d384a8d43e0d42609e1774474954802d
+#, python-format
+msgid ""
+"The maximum time that any loop took since the last PM message. This "
+"shouldn't exceed 120% of scheduler loop period, but will be much higher "
+"during the interval where the motors are armed"
+msgstr "自上次PM消息以来任意循环的最大耗时。不应超过调度循环周期的120%，但在电机解锁的时间段内会远高于此值"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:838
+#: 03b6c19af0194556aabc05f1f31882b8
+msgid "Mem"
+msgstr "Mem"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:838
+#: 32bb326002944d80b1fe88077d32679e
+msgid "Available memory, in bytes"
+msgstr "可用内存（字节）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:840
+#: 8e6dab2c0e974f848f7c0963638e3362
+msgid "Load"
+msgstr "Load"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:840
+#: adb29aaf84374448af4aa2cd6f579a8d
+msgid "Percentage (times 10) of the scheduler loop period when CPU is used"
+msgstr "CPU占用的调度循环周期百分比（乘以10）"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:844
+#: 6f4a3f9334454879a77411a2621e718b
+msgid "**RCOUT (pwm output to individual RC outputs):**"
+msgstr "**RCOUT（各RC输出的PWM输出）：**"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:846
+#: 29c60c0ed8494186a904529623e780e1
+msgid ""
+"RC1, RC2, etc : pwm command sent from autopilot to the esc/motor/RC output"
+msgstr "RC1、RC2等：飞控发送到ESC/电机/RC输出的PWM指令"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:850
+#: 662f1bbd4f8f46cdbce39c877c721f98
+msgid "Viewing KMZ FILES"
+msgstr "查看KMZ文件"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:852
+#: 2ba5f2a8d4e646d1b4864c0ff9e78fc9
+msgid ""
+"When you download the dataflash log files from the autopilot it will "
+"automatically create a KMZ file (file with extension .kmz). This file can be"
+" opened with Google Earth (just double click the file) to view your flight "
+"in Google Earth. Please see the instructions on the :ref:`Telemetry Logs "
+"Page <planner:mission-planner-telemetry-logs-creating-3d-images-of-the-"
+"flight-path>` for additional details."
+msgstr ""
+"从飞控下载dataflash日志文件时，会自动创建KMZ文件（扩展名为.kmz）。该文件可用Google Earth打开（直接双击文件），在Google"
+" Earth中查看飞行轨迹。详细说明请参见 :ref:`遥测日志页面 <planner:mission-planner-telemetry-logs-"
+"creating-3d-images-of-the-flight-path>` 的相关说明。"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:860
+#: 9666f0c716cb4d8d92d326b2b5419185
+msgid "Video tutorials"
+msgstr "视频教程"

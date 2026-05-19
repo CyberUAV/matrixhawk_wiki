@@ -1,0 +1,331 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 03:48+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/common-pozyx.rst:5 28eff8d15a014f51858d6202eb3a882c
+msgid "Pozyx for Non-GPS Navigation"
+msgstr "Pozyx 无 GPS 导航"
+
+#: ../../source/docs/common-pozyx.rst:9 4a8abb4dcfda420fb7f789e7eb39ea40
+msgid ""
+"This article explains how a `Pozyx <https://www.pozyx.io/>`__ system based "
+"on the `DWM1000 <http://www.decawave.com/products/dwm1000-module>`__ can be "
+"used as a short-range substitute for a GPS allowing position control modes "
+"like Loiter, PosHold, RTL, Auto indoors."
+msgstr ""
+"本文介绍如何将基于 `DWM1000 <http://www.decawave.com/products/dwm1000-module>`__ 的 "
+"`Pozyx <https://www.pozyx.io/>`__ 系统用作 GPS 的短距替代方案，从而在室内实现 "
+"Loiter、PosHold、RTL、Auto 等位置控制模式。"
+
+#: ../../source/docs/common-pozyx.rst:15 2bfb0e6438fe41a39c3b32a3bbe55fe0
+msgid "Required Hardware"
+msgstr "所需硬件"
+
+#: ../../source/docs/common-pozyx.rst:17 34294aaf42744907b834080e1357ba23
+msgid ""
+"4 `Pozyx anchors <https://www.pozyx.io/store/detail/5>`__ and 1 `Pozyx tag "
+"<https://www.pozyx.io/store/detail/4>`__.  Note the `Ready to Localize "
+"<https://www.pozyx.io/store/detail/2>`__ or `Developer Kits "
+"<https://www.pozyx.io/store/detail/3>`__ are more economical than buying "
+"individual tags and anchors."
+msgstr ""
+"4 个 `Pozyx 锚节点 <https://www.pozyx.io/store/detail/5>`__ 和 1 个 `Pozyx 标签 "
+"<https://www.pozyx.io/store/detail/4>`__。注意，`Ready to Localize "
+"<https://www.pozyx.io/store/detail/2>`__ 或 `开发套件 "
+"<https://www.pozyx.io/store/detail/3>`__ 比单独购买标签和锚节点更经济。"
+
+#: ../../source/docs/common-pozyx.rst:18 a8ccfc5c5dca4f39bfce61b8d25396b7
+msgid ""
+"one `Arduino Uno R2 or R3 "
+"<https://www.arduino.cc/en/Main/ArduinoBoardUno>`__"
+msgstr ""
+"一块 `Arduino Uno R2 或 R3 <https://www.arduino.cc/en/Main/ArduinoBoardUno>`__"
+
+#: ../../source/docs/common-pozyx.rst:19 f09c0becb54446c1b4e93d54117d0d9c
+msgid ""
+"4 `portable chargers <https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-"
+"alias%3Daps&field-"
+"keywords=portable+charger&rh=i%3Aaps%2Ck%3Aportable+charger>`__ with type A "
+"USB ports to power the anchors (optional)"
+msgstr ""
+"4 个 `便携式充电器 <https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-"
+"alias%3Daps&field-"
+"keywords=portable+charger&rh=i%3Aaps%2Ck%3Aportable+charger>`__（带 A 型 USB "
+"端口，用于为锚节点供电，可选）"
+
+#: ../../source/docs/common-pozyx.rst:20 4118eacb1edf490c8f524994d5bb3a4f
+msgid ""
+"4 `tripods <https://www.amazon.com/s/ref=nb_sb_noss_1?url=search-"
+"alias%3Daps&field-keywords=tripod&rh=i%3Aaps%2Ck%3Atripod>`__ to mount the "
+"anchors (optional)"
+msgstr ""
+"4 个 `三脚架 <https://www.amazon.com/s/ref=nb_sb_noss_1?url=search-"
+"alias%3Daps&field-keywords=tripod&rh=i%3Aaps%2Ck%3Atripod>`__（用于安装锚节点，可选）"
+
+#: ../../source/docs/common-pozyx.rst:23 94e88d4c09154f508bb72fa0887cfe2b
+msgid "Placing the anchors"
+msgstr "放置锚节点"
+
+#: ../../source/docs/common-pozyx.rst:25 e911027a47cf4d879e125a43d31a5c9f
+msgid ""
+"The anchors should be placed in a rectangular shape.  The anchor with the "
+"lowest ID (IDs are printed in hexidecimal on each device) will act as the "
+"\"origin\" and should be placed at the lower-left corner of the rectangle.  "
+"Each of the remaining three anchors should be placed in a corner so that the"
+" anchor IDs increase as you travel an \"N\" pattern within the rectangle.  "
+"The configuration is slightly simpler if the line from the origin anchor to "
+"the 2nd anchor is due North but it is not required as the "
+":ref:`BCN_ORIENT_YAW <BCN_ORIENT_YAW>` parameter can be used to account this"
+" difference."
+msgstr ""
+"锚节点应呈矩形排列。ID 最低的锚节点（ID 以十六进制打印在每个设备上）将作为「原点」，应放置在矩形的左下角。其余三个锚节点应分别放置在各角，使锚节点"
+" ID 在矩形内按「N」形路径递增。若从原点锚节点到第二个锚节点的连线正好指向正北，配置会略微简单，但这不是必须的，因为可以使用 "
+":ref:`BCN_ORIENT_YAW <BCN_ORIENT_YAW>` 参数来补偿偏差。"
+
+#: ../../source/docs/common-pozyx.rst:31 fd274d30b5384e57a6ead4ea8f20002f
+msgid "Preparing the tag"
+msgstr "准备标签"
+
+#: ../../source/docs/common-pozyx.rst:36 1f00401bd79e4d4cb62ceaacae245de6
+msgid ""
+"connect one of the autopilot's telemetry connections to the UNO.  Telem1 is "
+"shown above but any SERIAL port will work equally well."
+msgstr "将飞控的一个数传端口连接到 UNO。上图显示的是 Telem1，但任意 SERIAL 端口均可。"
+
+#: ../../source/docs/common-pozyx.rst:37 b46b912812ff44d0a22a372a89d040c1
+msgid ""
+"autopilot's UART port GND should be connected to one of the UNO's GND pins."
+msgstr "飞控的 UART 端口 GND 应连接到 UNO 的某个 GND 引脚。"
+
+#: ../../source/docs/common-pozyx.rst:38 d8822dd0e9574d83a0219d51da24e335
+msgid "autopilot's UART port TX should be connected to the UNO's pin 10."
+msgstr "飞控的 UART 端口 TX 应连接到 UNO 的第 10 引脚。"
+
+#: ../../source/docs/common-pozyx.rst:39 9bc1fd4ef4f844a1b74bfc85301a00d5
+msgid "autopilot's UART port RX should be connected to the UNO's pin 11."
+msgstr "飞控的 UART 端口 RX 应连接到 UNO 的第 11 引脚。"
+
+#: ../../source/docs/common-pozyx.rst:40 77b2c775815746348d109dd168dcca1c
+msgid ""
+"autopilot's UART port VCC may be connected to the UNO's 5V connector to "
+"provide power to the Uno/Pozyx from the autopilot."
+msgstr "飞控的 UART 端口 VCC 可连接到 UNO 的 5V 接口，从飞控为 Uno/Pozyx 供电。"
+
+#: ../../source/docs/common-pozyx.rst:42 2ed8887f7a8a4ebb96a146964ee01340
+msgid ""
+"The Arduino IDE should be used to load `IndoorLoiter sketch "
+"<https://github.com/ArduPilot/ardupilot/blob/master/Tools/Pozyx/IndoorLoiter/IndoorLoiter.ino>`__"
+" onto the Uno after first changing the anchor tags `found here "
+"<https://github.com/ArduPilot/ardupilot/blob/master/Tools/Pozyx/IndoorLoiter/IndoorLoiter.ino#L12>`__"
+" to match the IDs of the tags in your setup."
+msgstr ""
+"应使用 Arduino IDE 将 `IndoorLoiter 程序 "
+"<https://github.com/ArduPilot/ardupilot/blob/master/Tools/Pozyx/IndoorLoiter/IndoorLoiter.ino>`__"
+" 上传到 Uno，上传前需先将 `此处 "
+"<https://github.com/ArduPilot/ardupilot/blob/master/Tools/Pozyx/IndoorLoiter/IndoorLoiter.ino#L12>`__"
+" 的锚节点标签修改为与您设置中的标签 ID 一致。"
+
+#: ../../source/docs/common-pozyx.rst:44 875dcc4584d54a8591ce090960ac423e
+msgid ""
+"At this point you may wish to test the tag's ability to communicate with the"
+" tags by:"
+msgstr "此时您可以测试标签与锚节点的通信能力，方法如下："
+
+#: ../../source/docs/common-pozyx.rst:46 acc8681b6ca343278dbe417c46dc748d
+msgid "powering on all the anchors."
+msgstr "为所有锚节点上电。"
+
+#: ../../source/docs/common-pozyx.rst:47 3fab8d40800a4f8196e469b87de45bdd
+msgid "connect the UNO's Type B USB to your PC."
+msgstr "将 UNO 的 Type B USB 连接到您的电脑。"
+
+#: ../../source/docs/common-pozyx.rst:48 08c4941e4c63479d8e2b181f9ed589b6
+msgid ""
+"connect with the Arduino IDE's serial monitor (set to baud 115200) and check"
+" no \"Beacon Configuration failed\" messages appear.  If they do, check that"
+" the IDs have been set correctly in the IndoorLoiter2.ino sketch (above)."
+msgstr ""
+"使用 Arduino IDE 的串行监视器连接（波特率设为 115200），检查是否出现「Beacon Configuration "
+"failed」消息。若有，请检查 IndoorLoiter2.ino 程序（见上文）中的 ID 是否已正确设置。"
+
+#: ../../source/docs/common-pozyx.rst:50 4255f161deda4f6f86c93f6ae9acff70
+msgid ""
+"Mount the Pozyx tag on the top of the Arduino Uno and then mount on the "
+"vehicle."
+msgstr "将 Pozyx 标签安装在 Arduino Uno 顶部，然后安装到飞行器上。"
+
+#: ../../source/docs/common-pozyx.rst:53 923ee1fbda5e49d882457b45dd46d0e9
+msgid "Configuration through the Ground Station"
+msgstr "通过地面站配置"
+
+#: ../../source/docs/common-pozyx.rst:55 cbbd6c1df74d4f6ea18919b031b22316
+msgid "Connect with a Ground Station and set the following parameters:"
+msgstr "连接地面站并设置以下参数："
+
+#: ../../source/docs/common-pozyx.rst:57 a49a032e763a4f98bfc9606501c7b98b
+msgid "set :ref:`BCN_TYPE <BCN_TYPE>` to 1 (means using Pozyx system)"
+msgstr "将 :ref:`BCN_TYPE <BCN_TYPE>` 设为 1（表示使用 Pozyx 系统）"
+
+#: ../../source/docs/common-pozyx.rst:58 173875c8cc28436ca6a8d53fda6ed4b4
+msgid ""
+"set :ref:`BCN_LATITUDE <BCN_LATITUDE>`, :ref:`BCN_LONGITUDE <BCN_LONGITUDE>`"
+" and :ref:`BCN_ALT <BCN_ALT>` to match your actual location.  Getting these "
+"values exactly correct is not particularly important although getting it "
+"close is required in order for the compass's declination to be correctly "
+"looked up from the small database held within ArduPilot."
+msgstr ""
+"将 :ref:`BCN_LATITUDE <BCN_LATITUDE>`、:ref:`BCN_LONGITUDE <BCN_LONGITUDE>` 和 "
+":ref:`BCN_ALT <BCN_ALT>` 设为您的实际位置。精确匹配并非特别重要，但应大致接近，以便罗盘磁偏角能从 ArduPilot "
+"内置的小型数据库中正确查询。"
+
+#: ../../source/docs/common-pozyx.rst:59 27d4d643ba9d4e80972634d4d372c09e
+msgid ""
+"set :ref:`BCN_ORIENT_YAW <BCN_ORIENT_YAW>` to the heading from the origin "
+"anchor to the 2nd anchor.  One way to capture this value is to stand at the "
+"origin holding the vehicle so that its nose points towards the second "
+"beacon.  Read the vehicle's heading from the HUD and enter this value into "
+":ref:`BCN_ORIENT_YAW <BCN_ORIENT_YAW>`"
+msgstr ""
+"将 :ref:`BCN_ORIENT_YAW <BCN_ORIENT_YAW>` "
+"设为从原点锚节点指向第二个锚节点的航向角。获取此值的一种方法是站在原点处，手持飞行器使机头朝向第二个信标，然后从 HUD 读取飞行器航向并填入 "
+":ref:`BCN_ORIENT_YAW <BCN_ORIENT_YAW>`。"
+
+#: ../../source/docs/common-pozyx.rst:60 bd8d3a6d17e14ab1936b004d54610c15
+msgid "set :ref:`EK3_SRC1_POSXY <EK3_SRC1_POSXY>` to 4 (Beacon)"
+msgstr "将 :ref:`EK3_SRC1_POSXY <EK3_SRC1_POSXY>` 设为 4（Beacon）"
+
+#: ../../source/docs/common-pozyx.rst:61 746de4ee50f94042b58e67c78a7dee05
+msgid "set :ref:`EK3_SRC1_VELXY <EK3_SRC1_VELXY>` to 0 (None)"
+msgstr "将 :ref:`EK3_SRC1_VELXY <EK3_SRC1_VELXY>` 设为 0（None）"
+
+#: ../../source/docs/common-pozyx.rst:62 7500ed91124445709c8f27ec2d61e56d
+msgid "set :ref:`EK3_SRC1_VELZ <EK3_SRC1_VELZ>` to 0 (None)"
+msgstr "将 :ref:`EK3_SRC1_VELZ <EK3_SRC1_VELZ>` 设为 0（None）"
+
+#: ../../source/docs/common-pozyx.rst:63 3914e395b63f4b9988741d682940f4d6
+msgid "set :ref:`EK3_SRC1_POSZ<EK3_SRC1_POSZ>` to  4 (Beacon)"
+msgstr "将 :ref:`EK3_SRC1_POSZ<EK3_SRC1_POSZ>` 设为 4（Beacon）"
+
+#: ../../source/docs/common-pozyx.rst:64 5fb4e3d8585143b3a332e7f2f1301442
+msgid ""
+"set :ref:`EK3_SRC1_YAW<EK3_SRC1_YAW>` to 1 (Compass) since a compass is "
+"required for use with this device."
+msgstr "将 :ref:`EK3_SRC1_YAW<EK3_SRC1_YAW>` 设为 1（Compass），因为使用此设备需要罗盘。"
+
+#: ../../source/docs/common-pozyx.rst:65 4787d602f11f47d59acce92c345ebe2a
+msgid ""
+"set :ref:`ARMING_CHECK <ARMING_CHECK>` to -9 to disable the GPS arming check"
+msgstr "将 :ref:`ARMING_CHECK <ARMING_CHECK>` 设为 -9 以禁用 GPS 解锁检查"
+
+#: ../../source/docs/common-pozyx.rst:66 fe862112b68e44619ce4b7e59b6c8ea0
+msgid ""
+"set :ref:`SERIAL1_BAUD <SERIAL1_BAUD>` to 115 to set SERIAL1 port's baud "
+"rate to 115200 (if using a different SERIAL port set its baud rate to 115, "
+"instead)"
+msgstr ""
+"将 :ref:`SERIAL1_BAUD <SERIAL1_BAUD>` 设为 115，以将 SERIAL1 端口波特率设为 115200（如使用其他 "
+"SERIAL 端口，请将该端口波特率同样设为 115）"
+
+#: ../../source/docs/common-pozyx.rst:67 fb1eb3205743485d8878bf48e2ba88f8
+msgid ""
+"set :ref:`SERIAL1_PROTOCOL <SERIAL1_PROTOCOL>` to 13 (Beacon) to enable "
+"reading the IndoorLoiter2 protocol (If using a different port, set its "
+"protocol to 13 instead)"
+msgstr ""
+"将 :ref:`SERIAL1_PROTOCOL <SERIAL1_PROTOCOL>` 设为 13（Beacon），以启用读取 "
+"IndoorLoiter2 协议（如使用其他端口，请将该端口协议设为 13）"
+
+#: ../../source/docs/common-pozyx.rst:68 2a7da88ebbd94fdca90a40f7637604f6
+msgid ""
+"set :ref:`BRD_SER1_RTSCTS <BRD_SER1_RTSCTS>` to 0 to ensure telem1 does not "
+"use flow control (If using Telem2 set :ref:`BRD_SER2_RTSCTS "
+"<BRD_SER2_RTSCTS>` instead, not required if using a SERIAL port without flow"
+" control)"
+msgstr ""
+"将 :ref:`BRD_SER1_RTSCTS <BRD_SER1_RTSCTS>` 设为 0，确保 telem1 不使用流控（如使用 "
+"Telem2，请设置 :ref:`BRD_SER2_RTSCTS <BRD_SER2_RTSCTS>`；如使用无流控的 SERIAL 端口则无需设置）"
+
+#: ../../source/docs/common-pozyx.rst:71 227f3262f57f44dabe76e50dff988666
+msgid "Ground Testing"
+msgstr "地面测试"
+
+#: ../../source/docs/common-pozyx.rst:73 7934f1faa0a448ff96f1176167fee20c
+msgid ""
+"Connect the Autopilot to a ground station.  You may need to connect the Lipo"
+" battery as well because some computers are unable to provide enough power "
+"through their USB port for the combined autopilot+Pozyx+Uno."
+msgstr "将飞控连接到地面站。您可能还需要连接 LiPo 电池，因为某些电脑无法通过 USB 端口为飞控+Pozyx+Uno 的组合提供足够电源。"
+
+#: ../../source/docs/common-pozyx.rst:74 72bf513052e9419e8f1731eebd23d3d3
+msgid ""
+"Press the UNO's white or red reset button which can be found next to the USB"
+" port (see image above)"
+msgstr "按下 UNO 的白色或红色复位按钮，该按钮位于 USB 端口旁边（见上图）"
+
+#: ../../source/docs/common-pozyx.rst:75 bb73d0fa5b224f73a27f78142840e4ae
+msgid ""
+"After about 1 minute the vehicle's position should jump to the lattitude, "
+"longitude you input during the configuration step (above).  If it does not, "
+"connect a USB cable to the UNO's USB port and open the Arduino IDE's serial "
+"monitor and look for errors."
+msgstr ""
+"约 1 分钟后，飞行器位置应跳转到您在配置步骤中输入的纬度和经度。若未跳转，请将 USB 线连接到 UNO 的 USB 端口，打开 Arduino "
+"IDE 的串行监视器查找错误信息。"
+
+#: ../../source/docs/common-pozyx.rst:76 83e3f89587ca4726964c587f8df07237
+msgid ""
+"Check that the vehicle's position is relatively stable (i.e. moving around "
+"less than one meter)"
+msgstr "检查飞行器位置是否相对稳定（即移动范围小于 1 米）"
+
+#: ../../source/docs/common-pozyx.rst:77 60757cefb6544edb960f90e916095bbd
+msgid ""
+"Walk the vehicle around between the anchors and ensure that its position on "
+"the map updates correctly"
+msgstr "在锚节点之间移动飞行器，确认地图上的位置能正确更新"
+
+#: ../../source/docs/common-pozyx.rst:80 97419ce21cb84204827ddc610eb5622c
+msgid "Flight testing"
+msgstr "飞行测试"
+
+#: ../../source/docs/common-pozyx.rst:82 a9c398e0c8bf4fe8bd948b0c987acf4d
+msgid ""
+"Setup the transmitter with Stabilize, AltHold and Loiter flight modes. Take "
+"off in AltHold mode and maintain a stable hover. Switch to Loiter but be "
+"ready to switch back to AltHold or Stabilize if the vehicle's position or "
+"altitude becomes unstable."
+msgstr ""
+"在遥控器上设置 Stabilize、AltHold 和 Loiter 飞行模式。以 AltHold 模式起飞，保持稳定悬停后切换到 "
+"Loiter，但随时准备切回 AltHold 或 Stabilize，以防飞行器位置或高度不稳定。"
+
+#: ../../source/docs/common-pozyx.rst:87 62d9471fec1249d9b31ee2e72e52692c
+msgid "DataFlash logging"
+msgstr "DataFlash 日志"
+
+#: ../../source/docs/common-pozyx.rst:89 88743d7cf80a4f9395db6028f1f97f33
+msgid ""
+"The distance to the beacons can be found in the dataflash log's BCN "
+"message's D0, D1, D2, D3 fields."
+msgstr "到信标的距离可在 DataFlash 日志的 BCN 消息的 D0、D1、D2、D3 字段中找到。"
+
+#: ../../source/docs/common-pozyx.rst:92 2171bc164c554f3baaf3d234263211e6
+msgid "User videos"
+msgstr "用户视频"
