@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../../source/docs/auto-mode.rst:5 9ed1c7cabe6448d798a27b11a4cda87c
 msgid "Auto Mode"
-msgstr ""
+msgstr "Auto模式"
 
 #: ../../source/docs/auto-mode.rst:7 304badaf5e394400bcf59a5293ecd2cd
 msgid ""
@@ -32,6 +32,7 @@ msgid ""
 "copter including triggering a camera shutter). This page provides an "
 "overview of  Auto mode."
 msgstr ""
+"在Auto模式下，飞行器将遵循存储在飞控中的预编程任务脚本，该脚本由导航命令（如航点）和\"执行\"命令（即不影响飞行器位置的命令，包括触发相机快门）组成。本页提供Auto模式的概述。"
 
 #: ../../source/docs/auto-mode.rst:13 3623e9c70b7344abaf958723723dfcc9
 msgid ""
@@ -40,6 +41,9 @@ msgid ""
 "waypoints-and-events>` page. A full list of supported commands can be found "
 "on the :ref:`Mission Command List <mission-command-list>` page."
 msgstr ""
+"有关创建任务脚本的信息，请参见 :ref:`规划带有航点和事件的任务 <common-planning-a-mission-with-"
+"waypoints-and-events>` 页面。支持命令的完整列表请参见 :ref:`任务命令列表 <mission-command-list>` "
+"页面。"
 
 #: ../../source/docs/auto-mode.rst:17 509e103b7aac4306a07566f4186d5783
 msgid ""
@@ -51,10 +55,13 @@ msgid ""
 " and that the GPS is functioning well including returning an HDOP of under "
 "2.0."
 msgstr ""
+"Auto模式融合了 :ref:`AltHold模式 <altholdmode>` 的高度控制和 :ref:`Loiter模式 <loiter-"
+"mode>` 的位置控制，应在这些模式飞行良好后再尝试。所有相同要求均适用，包括确保 :ref:`震动水平 <common-measuring-"
+"vibration>` 和罗盘干扰水平可接受，以及GPS工作良好（HDOP低于2.0）。"
 
 #: ../../source/docs/auto-mode.rst:25 e937868935844a48ac3c741d221ac851
 msgid "Overview"
-msgstr ""
+msgstr "概述"
 
 #: ../../source/docs/auto-mode.rst:30 76104527539e4744941d6c160e0d7c07
 msgid ""
@@ -66,6 +73,10 @@ msgid ""
 "vehicle within the configured acceleration limits (:ref:`WPNAV_ACCEL "
 "<WPNAV_ACCEL>` and :ref:`WPNAV_ACCEL_C <WPNAV_ACCEL_C>`)."
 msgstr ""
+"Auto模式在各航点之间直线导航，在接近每个航点时沿平滑曲线路径朝下一个航点飞行（S曲线）。它在接近航点时将路径控制在每个航点 "
+":ref:`WPNAV_RADIUS <WPNAV_RADIUS>` 范围内。速度根据需要降低到 "
+":ref:`WPNAV_SPEED<WPNAV_SPEED>` 以下，以使飞行器保持在配置的加速度限制（:ref:`WPNAV_ACCEL "
+"<WPNAV_ACCEL>` 和 :ref:`WPNAV_ACCEL_C <WPNAV_ACCEL_C>`）内。"
 
 #: ../../source/docs/auto-mode.rst:32 3329e24114714b07b0e60c041036015b
 msgid ""
@@ -76,17 +87,18 @@ msgid ""
 "navigation waypoint instead of smoothly curving in front of it and "
 "proceeding to that next navigation waypoint."
 msgstr ""
+"如果航点后的下一个任务命令不是普通航点（如LAND、LOITER_TURNS、RTL等），则在改变方向飞向下一个航点时不会出现平滑曲线路径。在这些情况下，飞行器将接近航点、停止，然后继续到下一个导航航点，而不是在其前方平滑转向并继续到下一个导航航点。"
 
 #: ../../source/docs/auto-mode.rst:34 7caa4c3b31ef4158b8786eca82d372a8
 msgid ""
 "Also, small :ref:`WPNAV_RADIUS<WPNAV_RADIUS>` values will require that the "
 "curve be very small, effectively appearing like the non-S-Curve behavior "
 "explained above."
-msgstr ""
+msgstr "此外，较小的 :ref:`WPNAV_RADIUS<WPNAV_RADIUS>` 值将要求曲线非常小，实际上看起来像上述的非S曲线行为。"
 
 #: ../../source/docs/auto-mode.rst:37 613858d7866441769ae57b96d3efd212
 msgid "Starting a Mission"
-msgstr ""
+msgstr "开始任务"
 
 #: ../../source/docs/auto-mode.rst:39 87319b2283444fd1a3a9d24c44f26115
 msgid ""
@@ -96,12 +108,14 @@ msgid ""
 " the :ref:`Mission Command List wiki page <mission-command-list>` for a list"
 " of supported commands along with a short description of each."
 msgstr ""
+"任务可以通过Mission Planner的Plan界面输入和修改。一般来说，大多数任务以起飞命令开始，包含一系列航点，最后以返航命令结束。请参考 "
+":ref:`任务命令列表wiki页面 <mission-command-list>` 以获取支持的命令列表及简短说明。"
 
 #: ../../source/docs/auto-mode.rst:41 8eb2b3bf9bae4d1fa200b7cae7996f4a
 msgid ""
 "AUTO should be set-up as one of the :ref:`Flight Modes <flight-modes>` on "
 "the flight mode switch."
-msgstr ""
+msgstr "Auto应设置为飞行模式开关上的 :ref:`飞行模式 <flight-modes>` 之一。"
 
 #: ../../source/docs/auto-mode.rst:43 84732021af3d442cabe31dc1706e5591
 msgid ""
@@ -112,6 +126,9 @@ msgid ""
 "and/or, allowing a mission takeoff command to start as soon as the vehicle "
 "enters AUTO mode, even if the throttle has not been raised."
 msgstr ""
+"默认情况下，飞行器不能在Auto模式下解锁，这意味着飞手必须先在另一种模式下 :ref:`解锁电机 "
+"<arming_the_motors>`，然后再切换到Auto模式。:ref:`AUTO_OPTIONS <AUTO_OPTIONS>` "
+"参数可用于更改此行为，允许在Auto模式下解锁，以及/或者允许在飞行器进入Auto模式后立即启动任务起飞命令，即使油门尚未推起。"
 
 #: ../../source/docs/auto-mode.rst:45 a611585e39dc4b1b9ea56ce395fc838d
 msgid ""
@@ -119,7 +136,7 @@ msgid ""
 "ensure the throttle is down, then switch to the Auto flight mode, then raise"
 " the throttle.  The moment that the throttle is raised above zero, the "
 "copter will begin the mission."
-msgstr ""
+msgstr "如果在飞行器停在地面时启动任务，飞手应确保油门在低位，然后切换到Auto飞行模式，再推高油门。油门一推高于零，飞行器将立即开始执行任务。"
 
 #: ../../source/docs/auto-mode.rst:50 2bbb818ad59144379c615b1a5a768541
 msgid ""
@@ -130,6 +147,7 @@ msgid ""
 "command will be considered completed and the vehicle will move onto the next"
 " waypoint."
 msgstr ""
+"如果在飞行器已处于飞行状态时启动任务，飞行器切换到Auto模式后将立即从第一条命令开始执行任务。如果任务中的第一条命令是起飞命令但飞行器已经高于起飞命令的高度，起飞命令将被视为已完成，飞行器将移动到下一个航点。"
 
 #: ../../source/docs/auto-mode.rst:57 d847771a49f84d8b8635ee62cc03264f
 msgid ""
@@ -139,6 +157,8 @@ msgid ""
 "from the last command unless :ref:`MIS_RESTART <MIS_RESTART>` has been set "
 "to \"1\" in which case the mission will restart from the first command."
 msgstr ""
+"飞手可随时通过将飞行模式开关切换到其他飞行模式（如Stabilize或Loiter）来从飞控接管控制。如果飞手再次切换到Auto模式，默认情况下任务将从上次命令处继续，除非"
+" :ref:`MIS_RESTART <MIS_RESTART>` 设置为\"1\"，届时任务将从第一条命令重新开始。"
 
 #: ../../source/docs/auto-mode.rst:62 4383b801e9f04703abd957eb4ab354b6
 msgid ""
@@ -150,10 +170,12 @@ msgid ""
 ":ref:`AUTO_OPTIONS <AUTO_OPTIONS>` param can be set to always ignore pilot "
 "yaw input."
 msgstr ""
+"在任务期间，飞手的横滚、俯仰和油门输入将被忽略，但偏航可以用偏航摇杆覆盖。这允许飞手在飞行器执行任务时，例如控制飞行器机头（可能安装了固定相机）的朝向。飞控将在飞行器经过下一个航点时尝试重新接管偏航控制。:ref:`AUTO_OPTIONS"
+" <AUTO_OPTIONS>` 参数可设置为始终忽略飞手偏航输入。"
 
 #: ../../source/docs/auto-mode.rst:70 24a3c674a9c44e28ab213a81943ce82d
 msgid "Ending a Mission"
-msgstr ""
+msgstr "结束任务"
 
 #: ../../source/docs/auto-mode.rst:72 7693281bde474a5c828d4e72d31bcc8a
 msgid ""
@@ -163,12 +185,13 @@ msgid ""
 "LAND command the copter will simply stop at the final waypoint and the pilot"
 " will need to retake control with the transmitter."
 msgstr ""
+"任务通常应以RTL作为最终命令，确保飞行器在任务完成后返航。或者最终命令可以是LAND（不同位置）。没有最终的RTL或LAND命令时，飞行器将在最终航点处停止，飞手需要用遥控器重新接管控制。"
 
 #: ../../source/docs/auto-mode.rst:78 aa942ef5de8848d49185c0fe9e031468
 msgid ""
 "Remember that when using RTL, the copter will return to the \"home\" "
 "position which is the location where the copter was armed."
-msgstr ""
+msgstr "请记住，使用RTL时，飞行器将返回\"Home\"位置，即飞行器解锁时的位置。"
 
 #: ../../source/docs/auto-mode.rst:81 4960bbc8558f4b01ae8ad35e4cf902f3
 msgid ""
@@ -177,6 +200,7 @@ msgid ""
 "and the pilot may need to hold the throttle down and takeoff in another mode"
 " like Stabilize or Loiter and then manually disarm the vehicle."
 msgstr ""
+"飞行器在任务结束时触地后应自动上锁，但偶尔飞行器可能无法感知着陆，飞手可能需要将油门保持在低位，然后在Stabilize或Loiter等其他模式下起飞，再手动将飞行器上锁。"
 
 #: ../../source/docs/auto-mode.rst:83 eb7c88f089ae4f22b91b351f6274d695
 msgid ""
@@ -189,6 +213,10 @@ msgid ""
 "pilot can re-position the vehicle using the pitch and roll sticks to avoid "
 "obstacles."
 msgstr ""
+"对于NAV_LAND，:ref:`LAND_SPEED<LAND_SPEED>` 和 "
+":ref:`LAND_SPEED_HIGH<LAND_SPEED_HIGH>` 参数影响下降速度，与 :ref:`land-mode` "
+"中相同。:ref:`PILOT_THR_BHV<PILOT_THR_BHV>` "
+"选项第1位置1时，允许通过高油门摇杆位置取消降落，任务将移至下一个任务项，或原地悬停直到模式更改或任务重启。降落期间，飞手可以使用俯仰和横滚摇杆重新定位飞行器以避开障碍物。"
 
 #: ../../source/docs/auto-mode.rst:86 30843ef0180a47dea0d260110e2ab9ff
 msgid "Tuning"
@@ -199,12 +227,14 @@ msgid ""
 "AUTO mode incorporates the altitude control from :ref:`AltHold mode "
 "<altholdmode>` and position control from :ref:`Loiter mode <loiter-mode>`."
 msgstr ""
+"Auto模式融合了 :ref:`AltHold模式 <altholdmode>` 的高度控制和 :ref:`Loiter模式 <loiter-"
+"mode>` 的位置控制。"
 
 #: ../../source/docs/auto-mode.rst:93 e8295211802e476d9c603faa44dbb2f9
 msgid ""
 "Commonly adjusted settings are listed below.  Most of these can be adjusted "
 "from the Mission Planner's Config, Extended Tuning screen (see above)."
-msgstr ""
+msgstr "常用的调整设置如下所列。大多数可以从Mission Planner的Config、Extended Tuning界面调整（见上图）。"
 
 #: ../../source/docs/auto-mode.rst:95 2ff9166c913b49d7bbcba519a7c3e13f
 msgid ""
@@ -213,6 +243,8 @@ msgid ""
 "reach top speeds of 10m/s ~ 20m/s (e.g. 1000 ~ 2000) before it becomes "
 "unable to maintain both altitude and horizontal speed"
 msgstr ""
+":ref:`WPNAV_SPEED <WPNAV_SPEED>` "
+"是任务期间的最大水平速度（单位：cm/s）。默认值为1000，即10m/s。典型飞行器在达到10m/s~20m/s（即1000~2000）之前，能够同时保持高度和水平速度。"
 
 #: ../../source/docs/auto-mode.rst:96 0c5696c8bce94d65a50052a517e51e74
 msgid ""
@@ -221,6 +253,8 @@ msgid ""
 "deceleration and may also cause the vehicle to cut the corners more.  Higher"
 " values will lead to more aggressive movements and tighter cornering"
 msgstr ""
+":ref:`WPNAV_ACCEL <WPNAV_ACCEL>` "
+"决定水平速度变化的快慢（单位：cm/s/s）。较低的值会产生更平稳的加减速，也可能导致飞行器更多地切角。较高的值会导致更激进的运动和更紧凑的转弯。"
 
 #: ../../source/docs/auto-mode.rst:97 9e73338acfb84c11a72d0fab415bba6f
 msgid ""
@@ -228,6 +262,8 @@ msgid ""
 "  Low values may lead to the vehicle's horizontal speed slowing during "
 "diagonal climbing waypoint segments"
 msgstr ""
+":ref:`WPNAV_SPEED_UP <WPNAV_SPEED_UP>` "
+"决定最大爬升速度（cm/s）。较低的值可能导致飞行器在斜向爬升航点段的水平速度降低。"
 
 #: ../../source/docs/auto-mode.rst:98 8802d63b7ba940f7bafd49c6f20cc041
 msgid ""
@@ -236,6 +272,8 @@ msgid ""
 "diagonal descending waypoint segments.  High values (above 150) may lead to "
 "unstable vertical descents as the vehicle passes through its own prop wash"
 msgstr ""
+":ref:`WPNAV_SPEED_DN <WPNAV_SPEED_DN>` "
+"决定最大下降速度（cm/s）。较低的值可能导致飞行器在斜向下降航点段的水平速度降低。较高的值（超过150）可能导致飞行器穿越自身桨洗时出现不稳定的垂直下降。"
 
 #: ../../source/docs/auto-mode.rst:99 0c94752efddd4dacb272fa4fe2ac09dd
 msgid ""
@@ -244,10 +282,12 @@ msgid ""
 "the copter moves onto the next waypoint.  Setting this to a larger value may"
 " cause the vehicle to cut the corners more leading to a smoother path"
 msgstr ""
+":ref:`WPNAV_RADIUS <WPNAV_RADIUS>` "
+"允许您控制飞行器在认为\"完成\"该航点并移向下一个航点之前，需要距航点多近。将此值设置得更大可能使飞行器更多地切角，从而产生更平滑的路径。"
 
 #: ../../source/docs/auto-mode.rst:101 7bdadfb694344a35b15ef581aff2d424
 msgid "Less commonly adjusted parameters include:"
-msgstr ""
+msgstr "不常调整的参数包括："
 
 #: ../../source/docs/auto-mode.rst:103 78f788c0ccbd4bc794c2330d54b652b7
 msgid ""
@@ -255,12 +295,13 @@ msgid ""
 "acceleration in cm/s/s.  Higher values will cause the vehicle to make "
 "sharper corners meaning it will cut the corners less"
 msgstr ""
+":ref:`WPNAV_ACCEL_C <WPNAV_ACCEL_C>` 决定最大转弯加速度（cm/s/s）。较高的值会使飞行器转弯更急，即减少切角。"
 
 #: ../../source/docs/auto-mode.rst:104 cc00aa28c03049fba752361b255c1f0b
 msgid ""
 ":ref:`WPNAV_ACCEL_Z <WPNAV_ACCEL_Z>` determines how quickly the vertical "
 "speed can change"
-msgstr ""
+msgstr ":ref:`WPNAV_ACCEL_Z <WPNAV_ACCEL_Z>` 决定垂直速度变化的快慢。"
 
 #: ../../source/docs/auto-mode.rst:105 b13b42cea3c247398772558f61939d05
 msgid ""
@@ -269,50 +310,52 @@ msgid ""
 "acceleration and deceleration but will also lead to the mission taking "
 "slightly longer to complete"
 msgstr ""
+":ref:`WPNAV_JERK <WPNAV_JERK>` "
+"决定水平加速度变化的快慢（单位：m/s/s/s）。较低的值会产生更平稳的加减速，但也会导致任务完成时间略长。"
 
 #: ../../source/docs/auto-mode.rst:108 f63bb640fba94b8dae125246977f2f96
 msgid "Common Problems"
-msgstr ""
+msgstr "常见问题"
 
 #: ../../source/docs/auto-mode.rst:110 3381944028874ae4bc069c7fdb3d2dbb
 msgid "Below are a list of commonly reported problems and recommendations"
-msgstr ""
+msgstr "以下是常见问题及建议列表。"
 
 #: ../../source/docs/auto-mode.rst:112 ea79b9733ba74eafaaa02c2029ea8185
 msgid ""
 "The vehicle does not cut the corners as much as I would like and/or stops at"
 " each waypoint"
-msgstr ""
+msgstr "飞行器切角不够/或在每个航点处停止"
 
 #: ../../source/docs/auto-mode.rst:114 511f53d51c1b41f39f009be6643d7b45
 msgid ""
 "Increase :ref:`WPNAV_RADIUS <WPNAV_RADIUS>` to allow the vehicle to pass "
 "further from each waypoint"
-msgstr ""
+msgstr "增大 :ref:`WPNAV_RADIUS <WPNAV_RADIUS>`，允许飞行器在距航点更远处通过。"
 
 #: ../../source/docs/auto-mode.rst:115 352a8343182b4f489fee07f7bef48c65
 msgid ""
 "Increase :ref:`WPNAV_SPEED <WPNAV_SPEED>` to cause the vehicle to start "
 "turning earlier in order that it not surpass the max acceleration"
-msgstr ""
+msgstr "增大 :ref:`WPNAV_SPEED <WPNAV_SPEED>`，使飞行器更早开始转弯，以免超过最大加速度。"
 
 #: ../../source/docs/auto-mode.rst:116 d81197c561a746929ee60c81b70d3f38
 msgid ""
 "Decrease :ref:`WPNAV_ACCEL <WPNAV_ACCEL>` to cause the vehicle to start "
 "turning earlier and more gradually"
-msgstr ""
+msgstr "减小 :ref:`WPNAV_ACCEL <WPNAV_ACCEL>`，使飞行器更早且更平缓地开始转弯。"
 
 #: ../../source/docs/auto-mode.rst:117 2ea21a14e98c4e2ba395d8f919625c9c
 msgid ""
 "Decrease :ref:`WPNAV_ACCEL_C <WPNAV_ACCEL_C>` or reset to the default of "
 "zero"
-msgstr ""
+msgstr "减小 :ref:`WPNAV_ACCEL_C <WPNAV_ACCEL_C>` 或重置为默认值零。"
 
 #: ../../source/docs/auto-mode.rst:118 95b8c37e398b4a61a4d5bbd4bcf5ec73
 msgid ""
 "Ensure the waypoint command's Delay field is 0.  A delay of even 1 second "
 "will cause the vehicle to stop at the waypoint"
-msgstr ""
+msgstr "确保航点命令的延时字段为0。即使延时1秒也会导致飞行器在航点处停止。"
 
 #: ../../source/docs/auto-mode.rst:119 d0751bf71bbe4934b63b5733eb9e62b9
 msgid ""
@@ -320,24 +363,26 @@ msgid ""
 "default the vehicle will stop at each waypoint.  This can be avoided by "
 "setting the :ref:`OA_OPTIONS <OA_OPTIONS>` parameter"
 msgstr ""
+"如果启用了 :ref:`Dijkstra避障 <common-oa-dijkstras>`，默认情况下飞行器将在每个航点处停止。可以通过设置 "
+":ref:`OA_OPTIONS <OA_OPTIONS>` 参数来避免这种情况。"
 
 #: ../../source/docs/auto-mode.rst:121 1dd952056b4643cd81eeaf51d3a34d25
 msgid ""
 "The vehicle does not reach the configured maximum horizontal speed (e.g. "
 ":ref:`WPNAV_SPEED <WPNAV_SPEED>`)"
-msgstr ""
+msgstr "飞行器未达到配置的最大水平速度（如 :ref:`WPNAV_SPEED <WPNAV_SPEED>`）"
 
 #: ../../source/docs/auto-mode.rst:123 fb12cb718b9b4d8bbfc0a675b9bf4ae2
 msgid ""
 "Increase :ref:`WPNAV_ACCEL <WPNAV_ACCEL>` to allow the vehicle to accelerate"
 " to its maximum speed more quickly"
-msgstr ""
+msgstr "增大 :ref:`WPNAV_ACCEL <WPNAV_ACCEL>`，使飞行器更快加速到最大速度。"
 
 #: ../../source/docs/auto-mode.rst:124 9bcfc8edcbfe44da9aa2292dbc58b231
 msgid ""
 "Increase :ref:`WPNAV_JERK <WPNAV_JERK>` to allow the vehicle to get to its "
 "maximum acceleration more quickly"
-msgstr ""
+msgstr "增大 :ref:`WPNAV_JERK <WPNAV_JERK>`，使飞行器更快达到最大加速度。"
 
 #: ../../source/docs/auto-mode.rst:125 60f6bb9953c5404e89894a548ae67f7a
 msgid ""
@@ -345,25 +390,27 @@ msgid ""
 "may be limited by :ref:`WPNAV_SPEED_UP <WPNAV_SPEED_UP>` or "
 ":ref:`WPNAV_SPEED_DN <WPNAV_SPEED_DN>`"
 msgstr ""
+"如果航点包括爬升或下降，飞行器的水平速度可能受到 :ref:`WPNAV_SPEED_UP <WPNAV_SPEED_UP>` 或 "
+":ref:`WPNAV_SPEED_DN <WPNAV_SPEED_DN>` 的限制。"
 
 #: ../../source/docs/auto-mode.rst:126 a0010b2f864d4f4797e1e61aed8df536
 msgid ""
 "Ensure the vehicle's maximum lean angle (e.g. :ref:`ANGLE_MAX <ANGLE_MAX>`) "
 "is sufficient to reach the desired speed"
-msgstr ""
+msgstr "确保飞行器的最大倾斜角（如 :ref:`ANGLE_MAX <ANGLE_MAX>`）足以达到所需速度。"
 
 #: ../../source/docs/auto-mode.rst:127 1c7059d6f93c49338e719436ae65d4b9
 msgid ""
 "Ensure the vehicle has enough power to maintain both altitude and the "
 "desired speed"
-msgstr ""
+msgstr "确保飞行器有足够动力同时保持高度和所需速度。"
 
 #: ../../source/docs/auto-mode.rst:128 8a8bad90fef746af806d84448ad2a7f6
 msgid ""
 "If the mission command uses :ref:`terrain following <terrain-following>` the"
 " vehicle may need to slow horizontally to maintain the desired altitude "
 "above terrain"
-msgstr ""
+msgstr "如果任务命令使用 :ref:`地形跟随 <terrain-following>`，飞行器可能需要降低水平速度以保持所需的地形相对高度。"
 
 #: ../../source/docs/auto-mode.rst:129 4cd0ea8abce941fcba6133581bc1e1e0
 msgid ""
@@ -372,3 +419,5 @@ msgid ""
 " reaches the 2nd waypoints (`see this issue for more details "
 "<https://github.com/ArduPilot/ardupilot/issues/28953>`__)"
 msgstr ""
+"将航点间距设置得更大。S曲线导航只向前预看两个航点，并规划一条能在到达第2个航点时停下的路径（`详情见此issue "
+"<https://github.com/ArduPilot/ardupilot/issues/28953>`__）。"

@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../../source/docs/quiktune.rst:5 798ed90e40d34bbcb3f1fa5e64924be7
 msgid "QuikTune"
-msgstr ""
+msgstr "QuikTune"
 
 #: ../../source/docs/quiktune.rst:10 bfd26fe653ef47739300592d0fc5be20
 msgid ""
@@ -31,6 +31,9 @@ msgid ""
 "quicktune.md>`__ Lua script simplifies the process of finding a good tune "
 "for a multicopter's attitude control parameters."
 msgstr ""
+"`VTOL QuikTune "
+"<https://github.com/ArduPilot/ardupilot/blob/Copter-4.5/libraries/AP_Scripting/applets/VTOL-"
+"quicktune.md>`__ Lua脚本简化了为多旋翼飞行器姿态控制参数寻找良好调参结果的过程。"
 
 #: ../../source/docs/quiktune.rst:12 7f27a975f6d94ee6a9c6188d5e413694
 msgid ""
@@ -39,6 +42,7 @@ msgid ""
 " Once all the gains have been tuned the tune completes and the user can "
 "decide to save or discard the new gains."
 msgstr ""
+"脚本会缓慢增大相关增益，直到检测到振荡。随后将增益降低60%，然后继续调整下一个增益。所有增益调参完成后，调参结束，用户可选择保存或放弃新的增益值。"
 
 #: ../../source/docs/quiktune.rst:15 94939a228afe4e94830f92efe5861ba9
 msgid ""
@@ -49,40 +53,50 @@ msgid ""
 "tune, see :ref:`ac_rollpitchtuning` if the vehicle cant do an initial hover "
 "stably. Then setup the filters and retune for best results."
 msgstr ""
+"请确保已按此处讨论的参数设置做好飞行器调参准备：:ref:`setting-up-for-"
+"tuning`。为确保最佳调参效果，还需设置噪声陷波滤波器，请参阅 :ref:`common-imu-notch-"
+"filtering`。如果飞行器无法稳定悬停，可先不设置此步骤直接运行QuickTune进行初步调参，参见 "
+":ref:`ac_rollpitchtuning`。然后再设置滤波器并重新调参以获得最佳效果。"
 
 #: ../../source/docs/quiktune.rst:17 1325d8592e9a432c9c41f7082e9aaf93
 msgid "The script attempts to tune all these parameters (in the given order)"
-msgstr ""
+msgstr "脚本将尝试调整所有这些参数（按给定顺序）"
 
 #: ../../source/docs/quiktune.rst:19 51f32807f484449e8f4d8c04efb9676b
 msgid ":ref:`ATC_RAT_RLL_D<ATC_RAT_RLL_D__AC_AttitudeControl_Multi>`"
-msgstr ""
+msgstr ":ref:`ATC_RAT_RLL_D<ATC_RAT_RLL_D__AC_AttitudeControl_Multi>`"
 
 #: ../../source/docs/quiktune.rst:20 6dfe291bb75241c38378cb9c13879095
 msgid ""
 ":ref:`ATC_RAT_RLL_P<ATC_RAT_RLL_P__AC_AttitudeControl_Multi>` and "
 ":ref:`ATC_RAT_RLL_I<ATC_RAT_RLL_I__AC_AttitudeControl_Multi>`"
 msgstr ""
+":ref:`ATC_RAT_RLL_P<ATC_RAT_RLL_P__AC_AttitudeControl_Multi>` 和 "
+":ref:`ATC_RAT_RLL_I<ATC_RAT_RLL_I__AC_AttitudeControl_Multi>`"
 
 #: ../../source/docs/quiktune.rst:21 ffc330e1ffe548f7b541a38ed8ef8cee
 msgid ":ref:`ATC_RAT_PIT_D<ATC_RAT_PIT_D__AC_AttitudeControl_Multi>`"
-msgstr ""
+msgstr ":ref:`ATC_RAT_PIT_D<ATC_RAT_PIT_D__AC_AttitudeControl_Multi>`"
 
 #: ../../source/docs/quiktune.rst:22 e5c003e66ab24d908bc939a089e69a57
 msgid ""
 ":ref:`ATC_RAT_PIT_P<ATC_RAT_PIT_P__AC_AttitudeControl_Multi>` and "
 ":ref:`ATC_RAT_PIT_I<ATC_RAT_PIT_I__AC_AttitudeControl_Multi>`"
 msgstr ""
+":ref:`ATC_RAT_PIT_P<ATC_RAT_PIT_P__AC_AttitudeControl_Multi>` 和 "
+":ref:`ATC_RAT_PIT_I<ATC_RAT_PIT_I__AC_AttitudeControl_Multi>`"
 
 #: ../../source/docs/quiktune.rst:23 c63d74e5ecd841ffa5b6c6db4c1d15b7
 msgid ":ref:`ATC_RAT_YAW_D<ATC_RAT_YAW_D__AC_AttitudeControl_Multi>`"
-msgstr ""
+msgstr ":ref:`ATC_RAT_YAW_D<ATC_RAT_YAW_D__AC_AttitudeControl_Multi>`"
 
 #: ../../source/docs/quiktune.rst:24 5906f5b10c2140a4bbea07413ee4b7c8
 msgid ""
 ":ref:`ATC_RAT_YAW_P<ATC_RAT_YAW_P__AC_AttitudeControl_Multi>` and "
 ":ref:`ATC_RAT_YAW_I<ATC_RAT_YAW_I__AC_AttitudeControl_Multi>`"
 msgstr ""
+":ref:`ATC_RAT_YAW_P<ATC_RAT_YAW_P__AC_AttitudeControl_Multi>` 和 "
+":ref:`ATC_RAT_YAW_I<ATC_RAT_YAW_I__AC_AttitudeControl_Multi>`"
 
 #: ../../source/docs/quiktune.rst:26 e739fdc6a49945899391deed216728da
 msgid ""
@@ -92,16 +106,20 @@ msgid ""
 "(e.g. :ref:`ATC_ACCEL_R_MAX <ATC_ACCEL_R_MAX>`, :ref:`ATC_ACCEL_P_MAX "
 "<ATC_ACCEL_P_MAX>`, :ref:`ATC_ACCEL_Y_MAX <ATC_ACCEL_Y_MAX>`)"
 msgstr ""
+"相比 :ref:`AutoTune "
+"<autotune>`，QuikTune的优势在于更安全，因为飞行器无需移动或抖动。其缺点是QuikTune无法找到飞行器的最大旋转加速度（例如 "
+":ref:`ATC_ACCEL_R_MAX <ATC_ACCEL_R_MAX>`、:ref:`ATC_ACCEL_P_MAX "
+"<ATC_ACCEL_P_MAX>`、:ref:`ATC_ACCEL_Y_MAX <ATC_ACCEL_Y_MAX>`）。"
 
 #: ../../source/docs/quiktune.rst:30 4c3d3e4879424c6aa76bab328a7fb22e
 msgid "Installing the Script"
-msgstr ""
+msgstr "安装脚本"
 
 #: ../../source/docs/quiktune.rst:32 6cd02c672cf2494eaf926189384d4d8d
 msgid ""
 "Set :ref:`SCR_ENABLE <SCR_ENABLE>` = 1 to enable scripting and then reboot "
 "the autopilot"
-msgstr ""
+msgstr "将 :ref:`SCR_ENABLE <SCR_ENABLE>` 设置为1以启用脚本功能，然后重启飞控"
 
 #: ../../source/docs/quiktune.rst:33 cdf087341f484527975d41587d1f6c38
 msgid ""
@@ -109,16 +127,19 @@ msgid ""
 "<https://raw.githubusercontent.com/ArduPilot/ardupilot/Copter-4.5/libraries/AP_Scripting/applets/VTOL-"
 "quicktune.lua>`__ to your PC"
 msgstr ""
+"将 `VTOL-quicktune.lua "
+"<https://raw.githubusercontent.com/ArduPilot/ardupilot/Copter-4.5/libraries/AP_Scripting/applets/VTOL-"
+"quicktune.lua>`__ 下载到您的电脑"
 
 #: ../../source/docs/quiktune.rst:34 3051400d665246ae82e7d0e996d2128a
 msgid ""
 "Copy the script to your autopilot's SD card's APM/scripts directory.  If "
 "using MP it may be easiest to use the Config, MAVFtp screen"
-msgstr ""
+msgstr "将脚本复制到飞控SD卡的APM/scripts目录。如使用MP，可通过Config、MAVFtp界面操作最为方便"
 
 #: ../../source/docs/quiktune.rst:40 d66c1b33e0064f3e952a8e4a5d2167fb
 msgid "Reboot the autopilot and set QUIK_ENABLE = 1"
-msgstr ""
+msgstr "重启飞控并设置QUIK_ENABLE = 1"
 
 #: ../../source/docs/quiktune.rst:41 d565d6c931784b11a5a6f49cff6efe80
 msgid ""
@@ -126,14 +147,16 @@ msgid ""
 "where \"x\" is the RC input channel number.  Alternatively set one of "
 "Mission Planner's Aux Function tab's rows to \"Scripting1\""
 msgstr ""
+"如果使用RC拨杆开始/停止调参，请将RCx_OPTION设置为300，其中\"x\"为RC输入通道编号。或者，在 Mission Planner "
+"的Aux Function选项卡中将某行设置为\"Scripting1\""
 
 #: ../../source/docs/quiktune.rst:48 2b48baaf54304cc484bfc9ff94f70639
 msgid "Running QuikTune"
-msgstr ""
+msgstr "运行QuikTune"
 
 #: ../../source/docs/quiktune.rst:50 9155cff0556b4fada82d368152bdfc0f
 msgid "Wait for a calm day and go to an open area with good GPS reception"
-msgstr ""
+msgstr "选择风平浪静的天气，前往GPS信号良好的空旷区域"
 
 #: ../../source/docs/quiktune.rst:51 2fda5d3919954786b4a82a633717d54d
 msgid ""
@@ -141,49 +164,50 @@ msgid ""
 "the Messages tab can be seen.  This is where output from the tune will "
 "appear"
 msgstr ""
+"使用地面站（如 Mission Planner 或QGroundControl）连接飞行器，并确保能看到消息标签页。调参过程中的输出信息将显示在此处"
 
 #: ../../source/docs/quiktune.rst:52 c69a738919174bb984f2aa3eb1aff539
 msgid ""
 "Move the RC switch to the low position OR push MP's Aux Function's \"Low\" "
 "button"
-msgstr ""
+msgstr "将RC拨杆拨到低位，或按下MP辅助功能的\"Low\"按钮"
 
 #: ../../source/docs/quiktune.rst:53 b6a8fe09da104d2ab58730c54e80fbe1
 msgid "Arm and takeoff in Loiter mode and climb to a height of about 3m"
-msgstr ""
+msgstr "在Loiter模式下解锁并起飞，爬升至约3米高度"
 
 #: ../../source/docs/quiktune.rst:54 a488c6ac6f03477d9e3f89a0e6f58ee0
 msgid ""
 "Begin the tune by moving the RC switch to the middle position OR push MP's "
 "Aux Function's \"Mid\" button"
-msgstr ""
+msgstr "将RC拨杆拨到中位，或按下MP辅助功能的\"Mid\"按钮以开始调参"
 
 #: ../../source/docs/quiktune.rst:55 4273af7e0b494f0e9280e9175ce6599f
 msgid "Monitor the progress of the tune using the GCS's Messages tab"
-msgstr ""
+msgstr "通过地面站的消息标签页监控调参进度"
 
 #: ../../source/docs/quiktune.rst:56 9624265bd0c74684bd63510591bdeafe
 msgid ""
 "If necessary reposition the vehicle using the RC transmitter.  This will "
 "temporarily pause tuning and restore the original gains.  Tuning will resume"
 " a few seconds after the RC sticks are returned to their center position"
-msgstr ""
+msgstr "如有必要，可使用RC遥控器重新调整飞行器位置。这将暂时暂停调参并恢复原始增益值。摇杆回中几秒后调参将自动恢复"
 
 #: ../../source/docs/quiktune.rst:57 1acf026c03fa4135b44cbc3bf7b2e40c
 msgid ""
 "If the vehicle begins oscillating violently cancel the tune by moving the RC"
 " switch to the low position OR push MP's Aux Function's \"Low\" button"
-msgstr ""
+msgstr "如果飞行器开始剧烈振荡，请将RC拨杆拨回低位或按下MP辅助功能的\"Low\"按钮以取消调参"
 
 #: ../../source/docs/quiktune.rst:58 74bfa6a86663439baf8bff43a97d863d
 msgid ""
 "Once the tune has completed accept the new gains by moving the RC aux switch"
 " to the high position OR push MP's Aux Function's \"High\" button"
-msgstr ""
+msgstr "调参完成后，将RC辅助拨杆拨到高位或按下MP辅助功能的\"High\"按钮以接受新增益值"
 
 #: ../../source/docs/quiktune.rst:59 f38652409b3446afa3a3dbc6d05af535
 msgid "Land and disarm the vehicle"
-msgstr ""
+msgstr "降落并上锁飞行器"
 
 #: ../../source/docs/quiktune.rst:62 c6bbda859c664d73acafb7a4f1fc8005
 msgid "Advanced Configuration"
@@ -195,3 +219,6 @@ msgid ""
 "<https://github.com/ArduPilot/ardupilot/blob/Copter-4.5/libraries/AP_Scripting/applets/VTOL-"
 "quicktune.md>`__"
 msgstr ""
+"完整的可用 `参数设置列表在此 "
+"<https://github.com/ArduPilot/ardupilot/blob/Copter-4.5/libraries/AP_Scripting/applets/VTOL-"
+"quicktune.md>`__"
