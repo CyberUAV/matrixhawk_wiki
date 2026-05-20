@@ -1,0 +1,261 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 03:48+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/common-imu-fft.rst:67
+msgid "Initial Analysis Flight"
+msgstr "基于飞行中 FFT 的谐波陷波设置"
+
+#: ../../source/docs/common-imu-fft.rst:67
+msgid "In-Flight FFT Advanced Setup"
+msgstr "完成初始 FFT 测试飞行并确认 FFT 正常工作后，可启用基于 FFT 的动态谐波陷波滤波器。"
+
+#: ../../source/docs/common-imu-fft.rst:67
+msgid "In-Flight FFT: How it Works"
+msgstr "将 :ref:`INS_HNTCH_ENABLE<INS_HNTCH_ENABLE>` 设置为 1 以启用谐波陷波滤波器。"
+
+#: ../../source/docs/common-imu-fft.rst:7 33ffb61fe148431499cd8bfb1b96fa6c
+msgid "In-Flight FFT-Based Harmonic Notch Setup"
+msgstr "将 :ref:`INS_HNTCH_MODE<INS_HNTCH_MODE>` 设置为 4 以使用飞行中 FFT 作为中心频率来源。"
+
+#: ../../source/docs/common-imu-fft.rst:9 9579301445074b6cae626c51eb086ea2
+msgid ""
+"This feature is included in autopilots with 2MB of memory. Check your "
+"autopilot's :ref:`binary-features` to determine if your autopilot has this "
+"feature (GyroFFT). Also, only 1 FFT-based Notch can be set up."
+msgstr "重启飞控后，其余谐波陷波参数将显示出来。"
+
+#: ../../source/docs/common-imu-fft.rst:13 a4ce778abf164aeab7a34f611a9d990d
+msgid ""
+"ArduPilot comes pre-configured with appropriate defaults for all FFT "
+"settings. The only initial setup required is:"
+msgstr ""
+"将 :ref:`INS_HNTCH_FREQ<INS_HNTCH_FREQ>` 设置为比预期最低电机噪声频率低约 20% 的值，作为初始中心频率。"
+
+#: ../../source/docs/common-imu-fft.rst:15 7b1af9fcf9ca46dbb8800033a91d0672
+msgid ""
+"Set :ref:`FFT_ENABLE <FFT_ENABLE>` = 1 to enable the FFT engine. This then "
+"requires that you reboot your autopilot after which FFT support will be "
+"enabled and other FFT parameters should be visible in your GCS. With default"
+" parameter settings the FFT engine will run a self-check for frequency "
+"matching on your hardware. If you do not see any FFT errors then things are "
+"working properly."
+msgstr "将 :ref:`INS_HNTCH_BW<INS_HNTCH_BW>` 设置为中心频率的约一半，作为带宽。"
+
+#: ../../source/docs/common-imu-fft.rst:17 50f31bb404104964822d7994d0aff8f3
+msgid ""
+"With FFT enabled it is best to first perform a test flight to check that "
+"your aircraft's particular noise frequencies are being captured and to "
+"monitor CPU load. See :ref:`Initial Analysis Flight <common-imu-fft-test-"
+"flight>`. Normally, results from this will show clear noise recognition and "
+"acceptable cpu loading, and  then you can use the FFT to drive the "
+":ref:`harmonic notch<common-imu-notch-filtering>` by setting these "
+"parameters:"
+msgstr ""
+"进行一次带滤波的测试飞行，然后使用网页版 `滤波器审查工具 "
+"<https://firmware.ardupilot.org/Tools/WebTools/FilterReview/>`__ "
+"分析日志，评估滤波效果。"
+
+#: ../../source/docs/common-imu-fft.rst:19 792eaed3c9b242929057477182decabc
+msgid ""
+"Set :ref:`INS_HNTCH_ENABLE <INS_HNTCH_ENABLE>` and/or :ref:`INS_HNTC2_ENABLE"
+" <INS_HNTC2_ENABLE>` = 1 to enable the harmonic notch = 1 to enable the "
+"harmonic notch"
+msgstr "根据分析结果，调整 :ref:`INS_HNTCH_HMNCS<INS_HNTCH_HMNCS>`（谐波次数）以覆盖额外的噪声谐波。"
+
+#: ../../source/docs/common-imu-fft.rst:20 d7847d7e3f444cb899cc092e5579dd07
+msgid ""
+"Set :ref:`INS_HNTCH_MODE <INS_HNTCH_MODE>` and/or :ref:`INS_HNTC2_MODE "
+"<INS_HNTC2_MODE>` = 4 to use the FFT detected frequency for controlling the "
+"harmonic notch frequency."
+msgstr "如果噪声在低油门时显著不同，可考虑设置 ``INS_HNTCH_REF`` 和相应的参考油门值，以实现基于油门的频率缩放。"
+
+#: ../../source/docs/common-imu-fft.rst:21 6bb87be6577e43ee844dc0456843419d
+msgid ""
+"Set :ref:`INS_HNTCH_REF <INS_HNTCH_REF>` and/or :ref:`INS_HNTC2_REF "
+"<INS_HNTC2_REF>` = 1 to set the harmonic notch reference value, which for "
+"FFT analysis generally means no scaling"
+msgstr ""
+"对于六旋翼或八旋翼等具有多个噪声峰值的机架，可考虑启用多陷波选项（设置 :ref:`INS_HNTCH_OPTS<INS_HNTCH_OPTS>` 的第"
+" 0 位）。"
+
+#: ../../source/docs/common-imu-fft.rst:22 dc5ffe6b99c24751aa7323886f168e32
+msgid ""
+"The harmonic notch reference frequency parameter, :ref:`INS_HNTCH_FREQ "
+"<INS_HNTCH_FREQ>` and/or :ref:`INS_HNTC2_FREQ <INS_HNTC2_FREQ>`, is used to "
+"indicate the lowest motor speed for which the ESC telemetry should be used "
+"to dynamically set the harmonic notch reference frequency."
+msgstr "传统直升机的陷波滤波器设置"
+
+#: ../../source/docs/common-imu-fft.rst:24 505ed6bde4934cb9819ea98fa4299fcb
+msgid ""
+"For most uses with other FFT-related advanced parameters at their default, "
+"this is all that is required. The user can do optimization of the filtering "
+"setup by analyzing the test flight logs and adjusting notch bandwidth, if "
+"desired, by following the :ref:`In-flight FFT Advanced Setup <common-imu-"
+"fft-advanced-setup>` instructions."
+msgstr "传统直升机通常使用静态陷波或基于 RPM 传感器的动态陷波来滤除主旋翼和尾桨产生的振动。"
+
+#: ../../source/docs/common-imu-fft.rst:26 06bca2fd960841719d7f40ef77062993
+msgid ""
+"Setting up the FFT parameters can be done automatically using the "
+"``RCx_OPTION`` auxiliary function \"162\" on a transmitter switch. Set the "
+"function to a switch on the transmitter. Hover the vehicle, switch it on "
+"(high) for 30 seconds, and switch back low and land. The parameters will "
+"have been set up and the switch function removed. NOTE: do not use this "
+"feature in firmware version 4.3!"
+msgstr ""
+"主旋翼转速通常较稳定（使用调速器时），因此静态陷波（:ref:`INS_HNTCH_MODE<INS_HNTCH_MODE>` = 0）通常足够有效。"
+
+#: ../../source/docs/common-imu-fft.rst:28 2d0788e44ef9422397a9fd9f16b549a8
+msgid ""
+"Using In-Flight FFT can result in poorer performance than a properly set up "
+":ref:`Throttle-Based <common-throttle-based-notch>` notch filter since the "
+"FFT computations take time and can lag the actual required center frequency."
+" In-Flight FFT is useful when the rotor frequencies of the vehicle vary "
+"widely as in heavy lift vehicles operating with high and low loads. It can "
+"be useful in setting up :ref:`Throttle-Based <common-throttle-based-notch>` "
+"notch filters, however, see :ref:`In-flight FFT Advanced Setup <common-imu-"
+"fft-advanced-setup>` instructions for more information."
+msgstr ""
+"如果使用 ArduPilot 的头部转速调速器功能，建议使用 RPM "
+"传感器模式（:ref:`INS_HNTCH_MODE<INS_HNTCH_MODE>` = 2 或 5），以实现更精准的频率跟踪。"
+
+#: ../../source/docs/common-imu-fft.rst:31 7e08b925dee94e92842c24b7fc9bb1f6
+msgid "FFT Dynamic Harmonic Notch Frequency Tracking"
+msgstr "设置 :ref:`INS_HNTCH_FREQ<INS_HNTCH_FREQ>` 为主旋翼在悬停转速下产生的振动基频（以 Hz 为单位）。"
+
+#: ../../source/docs/common-imu-fft.rst:33 9362312236dc4b64b9c6902d7fc6b4d7
+msgid ""
+"FFT mode tracking sets the base frequency to the largest noise peak. "
+"Normally, when multiple harmonic notch filters are then enabled, the center "
+"frequency of each harmonic is locked to the base frequency of the first "
+"filter as an integer multiple, as determined by :ref:`INS_HNTCH_HMNCS "
+"<INS_HNTCH_HMNCS>`. The bandwidth of the notch (and any enabled harmonic "
+"notches) will maintain a ratio set by the _FREQ/_BW params as the center "
+"frequency moves. Setting bit 1 of :ref:`INS_HNTCH_OPTS<INS_HNTCH_OPTS>`, or "
+":ref:`INS_HNTC2_OPTS<INS_HNTC2_OPTS>`, will enable each harmonic filter to "
+"track the three largest noise peaks, individually."
+msgstr "对于有明显高次谐波的直升机，可适当调整 :ref:`INS_HNTCH_HMNCS<INS_HNTCH_HMNCS>` 以覆盖谐波频率。"
+
+#: ../../source/docs/common-imu-fft.rst:35 189f6d3a74794da7bedbe64c348196c2
+msgid ""
+"setting bit 1 of the notch options will also change the default value of "
+":ref:`INS_HNTCH_HMNCS <INS_HNTCH_HMNCS>` to 1 instead of its normal 3. This "
+"is to maintain backwards compatibility with previous firmware versions. You "
+"can set :ref:`INS_HNTCH_HMNCS <INS_HNTCH_HMNCS>` back to 3, or whatever is "
+"desired, after setting bit 1 of :ref:`INS_HNTCH_HMNCS <INS_HNTCH_HMNCS>`"
+msgstr ""
+"尾桨通常运行在比主旋翼高得多的频率，可能需要单独设置第二组陷波滤波器（:ref:`INS_HNTC2_ENABLE<INS_HNTC2_ENABLE>`"
+" = 1）。"
+
+#: ../../source/docs/common-imu-fft.rst:37 835aa547523a4f40bc8e8df9c9693702
+msgid ""
+"If you set bit 1 of :ref:`INS_HNTCH_OPTS<INS_HNTCH_OPTS>`, or "
+":ref:`INS_HNTC2_OPTS<INS_HNTC2_OPTS>`, the bandwidth should not be half the "
+"frequency(default). It should be greatly reduced as more notches (3x more "
+"since now tracking three noise peaks) cause more phase lag (i.e. latency), "
+"thus the bandwidth needs to be reduced to maintain a reasonable phase lag, "
+"else oscillation and a poorer tune will result despite the more accurate "
+"filtering compared to throttle-based filtering. The suggested starting point"
+" is setting the _FREQ/_BW params to 4/1 ratio instead of the default 2/1. "
+"This is because for notch filters, a wider bandwidth causes a greater phase "
+"lag per notch. You can also use the `Filter Tool "
+"<https://firmware.ardupilot.org/Tools/FilterTool/>`__ to check the phase lag"
+" for your chosen filtering settings. If your phase lag is higher than it was"
+" with the single peak filtering, then you can try reducing the bandwidth "
+"even further, balancing the phase lag and the amount of noise in the system."
+msgstr "对于 ICE（内燃机）驱动的直升机，发动机转速可能波动，此时建议使用 RPM 传感器模式。"
+
+#: ../../source/docs/common-imu-fft.rst:43 13cdc9d329e645dd846593a2f6db1e26
+msgid "FFT Options"
+msgstr "如果使用外部调速器控制旋翼转速，可使用静态陷波，但需要在不同转速下测试效果。"
+
+#: ../../source/docs/common-imu-fft.rst:45 21fc89d4b9d94847a82609c5ad2cf8cb
+msgid ""
+"There are two options that can be selected by setting the appropriate bit in"
+" the :ref:`FFT_OPTIONS<FFT_OPTIONS>` parameter that affect FFT operation:"
+msgstr "传统直升机陷波滤波器设置"
+
+#: ../../source/docs/common-imu-fft.rst:48 310b8a5273c94676a68b33e420bc3ddd
+msgid "Post Filter Chain FFT Analysis Window"
+msgstr ""
+"对于使用外部 RPM 传感器的直升机，将 :ref:`INS_HNTCH_MODE<INS_HNTCH_MODE>` 设置为 2（RPM 传感器 1）或"
+" 5（RPM 传感器 2），并正确配置 RPM 传感器参数。"
+
+#: ../../source/docs/common-imu-fft.rst:50 4e0762d3d12640a084492a1b1faac45c
+msgid ""
+"Normally, the FFT analysis for adjusting the center frequency is done by "
+"measuring the noise directly at the output of the unfiltered gyro data. "
+"However, if bit 0 of :ref:`FFT_OPTIONS<FFT_OPTIONS>` is set, then the "
+"measurement window takes into account the effects of the low pass filter and"
+" any configured notch filter(s). This is useful if there is high-frequency "
+"noise, which impacts the control response less than lower-frequency noise "
+"due to the low pass at the end of the filter chain but may be targeted by "
+"the FFT measurement. Setting this bit will only track those lower frequency,"
+" and more critical, noise peaks."
+msgstr "参考 :ref:`common-rpm` 页面了解 RPM 传感器的配置方法。"
+
+#: ../../source/docs/common-imu-fft.rst:53 b20aeb7e80c6459892f2c0fba513de5a
+msgid "Motor Noise Check"
+msgstr "参考 :ref:`common-rpm-based-notch` 了解基于 RPM 传感器的陷波设置详情。"
+
+#: ../../source/docs/common-imu-fft.rst:55 74319b422b4845cab5759ed9dbe6cdc2
+msgid ""
+"If bit 1 of :ref:`FFT_OPTIONS<FFT_OPTIONS>` is set and ESC motor rpm "
+"telemetry is available, then the measurement window for the FFT is centered "
+"about the motor(s) frequency as reported by ESC telemetry. This will "
+"generate a GCS warning message if noise from any motor greater than 40db is "
+"passing through the filter chain, and identify its level, motor number, and "
+"frequency. This bit must be used with bit 0 also set."
+msgstr ""
+"RPM 比例因子（``INS_HNTCH_REF``）需要根据 RPM 传感器读数与旋翼振动频率的对应关系进行标定。对于直接传感器，此值通常为 "
+"1；但若传感器测量的是发动机转速而非旋翼转速，则需根据齿轮比进行调整。"
+
+#: ../../source/docs/common-imu-fft.rst:58 9092a5b0d239486da0dee65bd7f6cf4c
+msgid "Typical Use"
+msgstr "完成设置后进行测试飞行，然后查看日志中的 ``HNTCH`` 消息验证陷波频率是否正确跟踪了旋翼转速。"
+
+#: ../../source/docs/common-imu-fft.rst:60 7396f2291cdb4da19cd1388ccb58aa85
+msgid ""
+"A typical use of the FFT notch filter is in addition to other dynamic "
+"harmonic notch filters (Throttle, ESC, or RPM-based). In these "
+"configurations, using the post-LPF FFT Window "
+":ref:`FFT_OPTIONS<FFT_OPTIONS>` bit will yield the best overall filtering "
+"results by positioning the FFT filter to target noise not filtered by the "
+"other notch filter and gyro LPF (:ref:`INS_GYRO_FILTER<INS_GYRO_FILTER>`."
+msgstr "如果陷波频率跟踪不准，检查 RPM 传感器的参数设置和比例因子。"
+
+#: ../../source/docs/common-imu-fft.rst:63 2819357e464d4d2f84fb9bf035fa1e1b
+msgid "Additional Information"
+msgstr ""
+"如需对高次谐波进行滤波，调整 :ref:`INS_HNTCH_HMNCS<INS_HNTCH_HMNCS>` 参数。对于典型直升机，通常需要覆盖 1 "
+"倍和 2 倍旋翼频率。"
+
+#: ../../source/docs/common-imu-fft.rst:65 bc5bb56c75174f31ab6af43b8c30e653
+msgid ""
+"For those interested in the details of how this feature works and tradeoffs "
+"in some of the advanced parameters, not normally adjusted by users, the "
+":ref:`In-Flight FFT: How it Works <common-imu-fft-how-it-works>` document "
+"describes the operation and these advanced parameters."
+msgstr ""
+"如果需要同时对尾桨噪声进行滤波，启用第二组陷波滤波器（:ref:`INS_HNTC2_ENABLE<INS_HNTC2_ENABLE>` = "
+"1），并将其模式设置为静态或 RPM 传感器模式（尾桨转速通常为主旋翼的固定倍数）。"

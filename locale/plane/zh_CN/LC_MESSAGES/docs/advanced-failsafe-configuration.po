@@ -1,0 +1,808 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 14:59+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:5
+#: 79932f7a2d204ce882cf53ce63823f1a
+msgid "Advanced Failsafe Configuration"
+msgstr "高级失控保护配置"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:7
+#: 6973e855b90b4ccd81da9a2819bf2137
+msgid ""
+"The core failsafe functionality of Plane is based on RTL (Return to Launch)."
+" It is able to initiate a RTL if the aircraft loses contact with the ground "
+"station or loses RC control. That is fine for most users, but in some "
+"situations more advanced failsafe capabilities are needed. That is what the "
+"Advanced Failsafe options are for."
+msgstr ""
+"Plane 的核心失控保护功能基于 RTL（返航）。当飞机与地面站失去联系或失去 RC 控制时，它能够启动 "
+"RTL。这对大多数用户来说已经足够，但某些情况下需要更高级的失控保护能力，高级失控保护选项正是为此而生。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:14
+#: ca388a3c629f4d99923d82292e9ea3fb
+msgid "Background"
+msgstr "背景"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:16
+#: 1dcd39050f4d40248a1765eaaac2cdba
+msgid ""
+"The advanced failsafe options for Plane were added for the `Outback "
+"Challenge <http://www.uavoutbackchallenge.com.au/>`__ competition, and the "
+"features are designed to fit the rules of that competition. Whereas normal "
+"failsafe is oriented around saving the aircraft in case control is lost by "
+"the pilot, the OBC rules are oriented around ensuring safe operation in a "
+"defined region of airspace. This means that the advanced failsafe options "
+"are designed to deliberately crash the aircraft if there is any risk that it"
+" may fly outside of the region of airspace defined by a geographic boundary "
+"and a maximum altitude."
+msgstr ""
+"Plane 的高级失控保护选项最初是为 `Outback Challenge "
+"<http://www.uavoutbackchallenge.com.au/>`__ "
+"比赛而添加的，其功能设计符合该比赛规则。普通失控保护的重心在于在飞手失去控制时保护飞机，而 OBC "
+"规则则侧重于确保在划定空域内的安全运行。这意味着高级失控保护选项的设计是在飞机有超出地理围栏和最大高度限定区域风险时故意使其坠毁。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:25
+#: ccb9bc3e6b484215ae7952db702edb8b
+msgid ""
+"While the advanced failsafe features of Plane were designed for the OBC "
+"competition, they can be useful in other situations, and are very flexible. "
+"They are also harder to configure, so please read this page carefully "
+"several times before deciding whether to enable these features on your "
+"aircraft."
+msgstr ""
+"尽管 Plane 的高级失控保护功能是为 OBC "
+"比赛而设计的，但它也可用于其他场景，且非常灵活。不过其配置难度也较高，请在决定是否在您的飞机上启用这些功能之前，仔细阅读本页内容数遍。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:32
+#: 38003c90dcb6400bb6bc211c0b48a31c
+msgid "Mission based"
+msgstr "基于任务"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:34
+#: 41b5a6a0c1ef4107b6a42b3a5ef905c5
+msgid ""
+"The key difference between normal failsafe and the advanced failsafe (AFS) "
+"options is that the AFS options are mission based. When a failsafe option "
+"(such as loss of GPS lock or loss of ground station communications link) "
+"happens, the AFS options specify a waypoint number in the mission that the "
+"aircraft will switch to. This allows the pilot to configure a complex series"
+" of actions to take when a failsafe event occurs - anything that can be "
+"scripted as an Plane mission can be made to happen on failsafe events."
+msgstr ""
+"普通失控保护与高级失控保护（AFS）选项的关键区别在于：AFS 选项基于任务。当某个失控保护事件（例如 GPS 丢失或与地面站通信中断）发生时，AFS "
+"选项会指定任务中的一个航点编号，飞机将切换至该航点。这允许飞手配置一系列复杂的失控保护动作——任何可在 Plane "
+"任务中编程的行为都可以在失控保护事件时触发。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:43
+#: aac5c35409d44e1784e97958399adc09
+msgid ""
+"Typically the pilot will setup the AFS options for failsafe conditions so "
+"that the aircraft will loiter at its current location for some period of "
+"time (say one minute) and then proceed back towards home via a pre-"
+"determined flight path. It may also include changes in airspeed, changes in "
+"altitude, automatic landing or anything else that can be programmed in a "
+"mission. If the failsafe event stops (for example GPS lock is regained) then"
+" the aircraft will switch back to the mission item it was previously flying "
+"towards and continue the mission."
+msgstr ""
+"通常，飞手会将 AFS "
+"失控保护条件设置为：飞机先在当前位置盘旋一段时间（比如一分钟），然后沿预定航线返回起飞点。这也可以包括改变空速、改变高度、自动降落或任何任务中可编程的其他行为。如果失控保护事件解除（例如"
+" GPS 重新锁定），飞机将自动切回之前飞向的任务项并继续执行任务。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:52
+#: c215dcbbadd64361aec5e058e01c1f7c
+msgid ""
+"This makes the AFS options only really appropriate for AUTO missions. If you"
+" are primarily flying Plane in CRUISE mode or other modes then you should "
+"use the standard failsafe options."
+msgstr "这使得 AFS 选项仅真正适用于 AUTO 任务。如果您主要以 CRUISE 模式或其他模式飞行 Plane，应使用标准失控保护选项。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:57
+#: d1bfba1c3ac441aba2345aef8f655fed
+msgid "Enabling the AFS failsafe system"
+msgstr "启用 AFS 失控保护系统"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:59
+#: e96fa6ded77b402f8e9e2e17f9ff0bd8
+msgid ""
+"To enable the AFS failsafe system you need to set the "
+":ref:`AFS_ENABLE<AFS_ENABLE>` parameter to 1. The default is zero, which "
+"means all the other options are disabled."
+msgstr ""
+"要启用 AFS 失控保护系统，需将 :ref:`AFS_ENABLE<AFS_ENABLE>` 参数设置为 1。默认值为 0，即所有其他选项均被禁用。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:61
+#: 21348afd7d144b3baccaf62ca7932f0a
+msgid ""
+"Note that the AFS system is only built into Plane by default only on higher "
+"memory autopilot boards like the CubeOrange and Pixhawk6X. Check the "
+":ref:`Firmware Limitations page <binary-features>` for your autopilot."
+msgstr ""
+"请注意，AFS 系统默认仅内置于 Plane 中针对高内存飞控板（如 CubeOrange 和 Pixhawk6X）的版本。请查阅您飞控的 "
+":ref:`固件限制页面 <binary-features>`。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:65
+#: 7e322c3b219a431292d3f96476a48a58
+msgid "AFS Termination"
+msgstr "AFS 终止"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:67
+#: 213226727f4c42d69434e26632daa0cb
+msgid ""
+"The concept of \"flight termination\" is key to understanding the AFS "
+"failsafe system. Termination is where the aircraft deliberately dives into "
+"the ground by setting all control surfaces to maximum and throttle is "
+"disarmed so as to enter a spin, or in the case of QuadPlane, there is also "
+"the option to immediately QLAND instead."
+msgstr ""
+"「飞行终止」的概念是理解 AFS 失控保护系统的关键。终止是指飞机通过将所有控制面偏转至最大并切断油门来故意俯冲入地以进入螺旋下坠状态；对于 "
+"QuadPlane，还有立即执行 QLAND 的选项。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:72
+#: c2f8b857e75d4b98b93090d3e6f77e79
+msgid ""
+"The AFS system will only start a termination if the "
+":ref:`AFS_TERM_ACTION<AFS_TERM_ACTION>` is set to the magic value 42 or 43. "
+"For any other value the AFS system will print a message on the GCS console "
+"saying that it wants to terminate, but won't actually change the control "
+"surfaces at all. Using a value other than 42 or 43 is useful for test "
+"flights where you don't want the aircraft to terminate on a failsafe event. "
+"A value of 42 immediately crashed the plane, while, if a QuadPlane, a value "
+"of 43 will immediately execute a QLAND."
+msgstr ""
+"只有当 :ref:`AFS_TERM_ACTION<AFS_TERM_ACTION>` 设置为特殊值 42 或 43 时，AFS "
+"系统才会开始执行终止。对于其他任何值，AFS "
+"系统会在地面站控制台打印一条希望终止的消息，但实际上不会改变任何控制面。在不希望飞机因失控保护事件终止的测试飞行中，使用非 42 或 43 "
+"的值非常有用。值为 42 时立即使飞机坠毁；若为 QuadPlane，值为 43 时将立即执行 QLAND。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:79
+#: 326803eb256748569e8a7e4eed7c866c
+msgid ""
+"Note that if :ref:`AFS_TERM_ACTION<AFS_TERM_ACTION>` is not set to 42 then "
+"other normal failsafe code is still active, for example if you have a "
+"geofence enabled then the aircraft will fly back to the geofence return "
+"point."
+msgstr ""
+"请注意，如果 :ref:`AFS_TERM_ACTION<AFS_TERM_ACTION>` 未设置为 "
+"42，其他正常的失控保护代码仍然有效，例如，如果启用了电子围栏，飞机将飞回围栏返航点。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:83
+#: 7ff5586fbb88479a9bff856956a866bd
+msgid ""
+"When enabled, the AFS termination system also sets up the secondary IO "
+"micro-controller on the autopilot to terminate the aircraft if communication"
+" is interrupted between the main FMU micro-controller and the IO micro-"
+"controller, for example if the flight firmware crashes."
+msgstr ""
+"启用后，AFS 终止系统还会在飞控上设置辅助 IO 微控制器，当主 FMU 微控制器与 IO "
+"微控制器之间的通信中断时（例如飞行固件崩溃），也会触发飞机终止。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:88
+#: 1f620fe947434f969fdfeb9cb54f134e
+msgid ""
+"An AFS flight termination is not recoverable. Once your aircraft starts a "
+"termination, there is no way to recover."
+msgstr "AFS 飞行终止不可恢复。一旦飞机开始终止，将无法挽救。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:92
+#: e5306e4c4c964d68a5b0d3ba7c24aeaa
+msgid "Types of Failsafe Events"
+msgstr "失控保护事件类型"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:94
+#: 2b6e4e89643c4a89b51e7aab97f0ccfa
+msgid "The AFS failsafe system supports five of types of failsafe events:"
+msgstr "AFS 失控保护系统支持五种失控保护事件类型："
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:96
+#: 3bc1ab2bd720417e9cdc3cf7a278f73c
+msgid "geofence breach"
+msgstr "电子围栏突破"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:97
+#: 1f4edfe4fe2f475e854ad21a97385483
+msgid "maximum pressure altitude breach"
+msgstr "超过最大气压高度限制"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:98
+#: f2e52ad2dd3c46a1b5e3cfaff41d2f89
+msgid "GPS loss"
+msgstr "GPS 丢失"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:99
+#: ../../source/docs/advanced-failsafe-configuration.rst:193
+#: 32270d6423cf45648d1057f4f5a8ecc8 fd5d87a786f149e3a1571bb16d3b1d02
+msgid "Ground station communications loss"
+msgstr "地面站通信中断"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:100
+#: 6f70193713c040b5926e6971c70e2c7e
+msgid "barometer failure"
+msgstr "气压计故障"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:102
+#: 870d9f4c28bc4422ac99ad6fd2781314
+msgid ""
+"Each of these types of failures has its own specific handling, which is "
+"described below."
+msgstr "以下分别介绍每种故障类型的具体处理方式。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:106
+#: 49bda52dafa0480491d6e7bdb5cfe483
+msgid "Geofence Breach"
+msgstr "电子围栏突破"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:108
+#: 7bd6c30b640048ba8f3ad3d07bf0d59b
+msgid ""
+"If a :ref:`geofence <geofencing>` is enabled then the AFS failsafe module "
+"will monitor the aircraft for a breach of the boundaries of the geofence "
+"(and lower and upper geofence altitudes if set). If a breach happens then "
+"the AFS system will immediately terminate the flight (see termination "
+"above)."
+msgstr ""
+"如果启用了 :ref:`电子围栏 <geofencing>`，AFS "
+"失控保护模块将监测飞机是否突破围栏边界（以及设置了上下限高度时的围栏高度限制）。一旦发生突破，AFS 系统将立即终止飞行（参见上方终止说明）。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:114
+#: 6825bb5fcf9e4a0fa5ffde7a93134122
+msgid ""
+"In addition, if the total straight-line distance from arming point exceeds "
+"the :ref:`AFS_MAX_RANGE<AFS_MAX_RANGE>` distance, then termination will "
+"occur."
+msgstr "此外，如果从解锁点起的直线距离超过 :ref:`AFS_MAX_RANGE<AFS_MAX_RANGE>` 设定的距离，也将触发终止。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:117
+#: 58cedfbc1169414c86af39d9367e8f8a
+msgid "Maximum pressure altitude breach"
+msgstr "超过最大气压高度限制"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:119
+#: d193214e0bc0493793a4481c82b0f7e7
+msgid ""
+"When sharing airspace with other aircraft it is usual practice to define the"
+" available flight altitudes in terms of a common reference pressure, "
+"typically QNH (a reference to \"nautical height\"). The QNH reference "
+"pressure, measured in millibar, is distributed to all aircraft either via a "
+"radio message or through aviation internet and weather sites."
+msgstr ""
+"在与其他飞行器共享空域时，通常以公共参考气压来定义可用飞行高度，这个参考气压通常是 QNH（「海拔高度」的参考值）。QNH "
+"参考气压以毫巴为单位，通过无线电消息或航空互联网及气象网站分发给所有飞行器。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:125
+#: 29b1feef11464f898d429d1a7a6a8868
+msgid ""
+"Aircraft then use their barometer to measure the pressure relative to that "
+"QNH pressure, which gives them an altitude reference which all aircraft in "
+"the area should be using."
+msgstr "飞行器随后使用气压计测量相对于 QNH 气压的气压值，从而获得该区域内所有飞行器应使用的统一高度基准。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:129
+#: 3221bc0c4a284dc0bfed366d1600b943
+msgid ""
+"The AFS system is able to enforce a pressure altitude limit by setting the "
+"QNH pressure in the :ref:`AFS_QNH_PRESSURE<AFS_QNH_PRESSURE>` parameter, as "
+"a value in millibars. The pilot should then also set a pressure altitude "
+"limit using the :ref:`AFS_AMSL_LIMIT<AFS_AMSL_LIMIT>` parameter (in meters)."
+" Note that this pressure altitude limit is relative to sea level (AMSL "
+"stands for \"above mean sea level\")."
+msgstr ""
+"AFS 系统可通过在 :ref:`AFS_QNH_PRESSURE<AFS_QNH_PRESSURE>` 参数中设置 QNH "
+"气压值（毫巴）来强制执行气压高度限制。飞手还需使用 :ref:`AFS_AMSL_LIMIT<AFS_AMSL_LIMIT>` "
+"参数（单位：米）设置气压高度限制。请注意，该气压高度限制以海平面（AMSL，即「平均海平面以上」）为基准。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:136
+#: dfc3a1ca9ed04da4b684e1dbce8382f5
+msgid ""
+"If both of these parameters are set then the AFS system fill monitor "
+"pressure altitude and will initiate a termination if the pressure altitude "
+"rises above the :ref:`AFS_AMSL_LIMIT<AFS_AMSL_LIMIT>`."
+msgstr ""
+"如果两个参数均已设置，AFS 系统将监测气压高度，并在气压高度超过 :ref:`AFS_AMSL_LIMIT<AFS_AMSL_LIMIT>` "
+"时启动终止。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:140
+#: ba2af0e319864976a6955fffa144bda1
+msgid ""
+"You need to be very careful to set the right "
+":ref:`AFS_QNH_PRESSURE<AFS_QNH_PRESSURE>` for your local conditions on the "
+"day of your flight, as the QNH pressure can be very different on different "
+"days."
+msgstr ""
+"您需要非常谨慎地为您飞行当天的本地条件设置正确的 :ref:`AFS_QNH_PRESSURE<AFS_QNH_PRESSURE>`，因为 QNH "
+"气压值每天差异可能很大。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:144
+#: fbebbcc8560048dbb901464d96f3c596
+msgid ""
+"In addition to the QNH pressure limit, the AFS system also monitors the "
+"health of your barometer. If the barometer is unhealthy for 5 seconds then "
+"the AFS system will check the :ref:`AFS_AMSL_ERR_GPS<AFS_AMSL_ERR_GPS>` "
+"parameter. If it is -1 (the default) then the aircraft will terminate "
+"immediately. If it is not -1 then the AFS system will use the "
+":ref:`AFS_AMSL_ERR_GPS<AFS_AMSL_ERR_GPS>` value as a margin to add to the "
+"GPS height, and will allow the flight to continue if the GPS altitude plus "
+"the :ref:`AFS_AMSL_ERR_GPS<AFS_AMSL_ERR_GPS>` value (in meters) is below the"
+" :ref:`AFS_AMSL_LIMIT<AFS_AMSL_LIMIT>` value. The purpose of this margin is "
+"to account for the inaccuracy of GPS altitudes. A value of 200 is reasonable"
+" for safety to ensure the :ref:`AFS_AMSL_LIMIT<AFS_AMSL_LIMIT>` pressure "
+"altitude is not breached."
+msgstr ""
+"除 QNH 气压限制外，AFS 系统还会监测气压计的健康状态。如果气压计异常超过 5 秒，AFS 系统将检查 "
+":ref:`AFS_AMSL_ERR_GPS<AFS_AMSL_ERR_GPS>` 参数。如果该参数为 -1（默认值），飞机将立即终止。如果不为 "
+"-1，AFS 系统将使用 :ref:`AFS_AMSL_ERR_GPS<AFS_AMSL_ERR_GPS>` 值作为加到 GPS "
+"高度上的余量，并在「GPS 高度 + :ref:`AFS_AMSL_ERR_GPS<AFS_AMSL_ERR_GPS>` 值（米）」低于 "
+":ref:`AFS_AMSL_LIMIT<AFS_AMSL_LIMIT>` 值时允许飞行继续。该余量的目的是弥补 GPS 高度的不精确性。建议使用 "
+"200 以确保不突破 :ref:`AFS_AMSL_LIMIT<AFS_AMSL_LIMIT>` 气压高度限制。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:157
+#: 2fe9a5d25a284aff92dab847dabe7896
+msgid "GPS Loss"
+msgstr "GPS 丢失"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:159
+#: 93cb3487281d40f6b6db3b7ed7ab5ca9
+msgid ""
+"The AFS system monitors the health of your GPS receivers throughout the "
+"flight. If all of your available GPS receivers lose position lock then this "
+"initiates a GPS failure failsafe."
+msgstr "AFS 系统在整个飞行过程中监测 GPS 接收机的健康状态。如果所有可用 GPS 接收机均丢失位置锁定，则触发 GPS 故障失控保护。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:163
+#: 912dc27abf3d47f591fcf1dbaec27d42
+msgid ""
+"When a GPS failure occurs (which is defined as loss of GPS lock for 3 "
+"seconds) the AFS system will look at the "
+":ref:`AFS_WP_GPS_LOSS<AFS_WP_GPS_LOSS>` parameter. This parameter species a "
+"waypoint number in your mission to use when a GPS failure occurs. If "
+":ref:`AFS_WP_GPS_LOSS<AFS_WP_GPS_LOSS>` is non-zero the aircraft will change"
+" current waypoint to the waypoint number specified in "
+":ref:`AFS_WP_GPS_LOSS<AFS_WP_GPS_LOSS>`. You should setup your mission so "
+"that the aircraft will perform whatever actions you want on GPS loss. For "
+"example, you could have a set of waypoints starting at number 10 which first"
+" loiter on the spot for 30 seconds, and then proceed back to the airfield. "
+"You would then set :ref:`AFS_WP_GPS_LOSS<AFS_WP_GPS_LOSS>` to 10 to enable "
+"that part of the mission on loss of GPS lock."
+msgstr ""
+"当 GPS 故障发生时（定义为 GPS 丢锁超过 3 秒），AFS 系统将检查 "
+":ref:`AFS_WP_GPS_LOSS<AFS_WP_GPS_LOSS>` 参数。该参数指定 GPS 故障发生时要跳转的任务航点编号。如果 "
+":ref:`AFS_WP_GPS_LOSS<AFS_WP_GPS_LOSS>` 非零，飞机将把当前航点切换为 "
+":ref:`AFS_WP_GPS_LOSS<AFS_WP_GPS_LOSS>` 中指定的航点编号。您应在任务中规划好 GPS "
+"丢失时希望执行的操作。例如，可以从编号 10 起设置一组航点，先在原地盘旋 30 秒，然后返回机场。此时将 "
+":ref:`AFS_WP_GPS_LOSS<AFS_WP_GPS_LOSS>` 设置为 10，即可在 GPS 丢锁时执行该任务段。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:174
+#: fa3b38886cc94beea11d122f5f16bfa2
+msgid ""
+"When setting up mission items for GPS lock it is sometimes useful to include"
+" \"loiter at the current location\" waypoints. That is achieved by setting "
+"both the latitude and longitude of LOITER mission commands to zero."
+msgstr "为 GPS 丢锁设置任务项时，有时使用「在当前位置盘旋」航点会很有用。通过将 LOITER 任务指令的经纬度均设为零即可实现。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:179
+#: 454d6c3dd7e04d248880cd09568b1653
+msgid ""
+"If the GPS recovers after a GPS failsafe has started, then the aircraft will"
+" automatically resume its mission where it left off."
+msgstr "如果 GPS 失控保护启动后 GPS 重新锁定，飞机将自动从中断处继续执行任务。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:182
+#: 40ed3d273cb04876b6ee01aedc06f9b0
+msgid ""
+"If :ref:`AFS_MAX_GPS_LOSS<AFS_MAX_GPS_LOSS>` is set to a non-zero number, "
+"then it is used as a maximum count of the number of GPS failures that will "
+"be allowed while returning to the mission after GPS lock is re-established. "
+"This counter is only incremented if the 2nd GPS failure happens at least 30 "
+"seconds after the previous one (to account for a short period of GPS "
+"failure)."
+msgstr ""
+"如果 :ref:`AFS_MAX_GPS_LOSS<AFS_MAX_GPS_LOSS>` 设置为非零数值，则该值用作在 GPS "
+"重新锁定并返回任务后，允许再次 GPS 故障的最大次数。该计数器仅在第二次 GPS 故障发生在前一次故障至少 30 秒之后时才递增（以排除短暂的 GPS"
+" 故障）。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:188
+#: 75c527f6cb714a1c898518de45f823d8
+msgid ""
+"If during a period of GPS loss the aircraft also loses communications with "
+"the ground station then this is termed a \"dual loss\", and the aircraft "
+"will terminate if :ref:`AFS_DUAL_LOSS<AFS_DUAL_LOSS>` is 1."
+msgstr ""
+"如果在 GPS 丢失期间飞机同时也失去与地面站的通信，则称为「双重丢失」，若 :ref:`AFS_DUAL_LOSS<AFS_DUAL_LOSS>` 为"
+" 1，飞机将终止。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:195
+#: 84584eb59b7b431682b7fbb1297cfc4a
+msgid ""
+"The AFS system monitors the health of the link between your ground station "
+"and your aircraft. It does this by looking for HEARTBEAT MAVLink messages "
+"coming from the ground station."
+msgstr "AFS 系统通过监听来自地面站的 HEARTBEAT MAVLink 消息来监测地面站与飞机之间的链路健康状态。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:199
+#: 457d3f827b68407399a5338fb7fdc97c
+msgid ""
+"If the aircraft does not receive a HEARTBEAT message for a period of "
+"AFS_GCS_TIMEOUT seconds then it enters a GCS failsafe state. (The default is"
+" 10 seconds.) It then looks for a :ref:`AFS_WP_COMMS<AFS_WP_COMMS>` "
+"parameter, and if that is non-zero it will change the current target "
+"waypoint to the one given in :ref:`AFS_WP_COMMS<AFS_WP_COMMS>`. You should "
+"set up a section of your mission with whatever actions you want to take on "
+"loss of communications. This jump to a designated mission item normally only"
+" occur if the failsafe happens while in AUTO mode. To make it occur in any "
+"autothrottle controlled mode ( like CRUISE or GUIDED), you will need to set "
+"the :ref:`AFS_OPTIONS<AFS_OPTIONS>` bit 1 (+2 to value of param)."
+msgstr ""
+"如果飞机在 AFS_GCS_TIMEOUT 秒内未收到 HEARTBEAT 消息（默认 10 秒），则进入 GCS 失控保护状态。此时系统将检查 "
+":ref:`AFS_WP_COMMS<AFS_WP_COMMS>` "
+"参数，若非零，则将当前目标航点切换为该参数指定的航点。您应在任务中规划好通信中断时希望执行的操作。此跳转至指定任务项通常仅在 AUTO "
+"模式下发生失控保护时生效。若要在任何自动油门控制模式（如 CRUISE 或 GUIDED）下也触发，需将 "
+":ref:`AFS_OPTIONS<AFS_OPTIONS>` 的第 1 位（参数值 +2）置位。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:206
+#: 1606f2be79f340bab9cb699b47df290c
+msgid ""
+"If GPS lock is lost at the same time as GCS communications is lost then that"
+" is considered a \"dual loss\", and the aircraft will immediately terminate "
+"if the :ref:`AFS_DUAL_LOSS<AFS_DUAL_LOSS>` is enabled (\"1\")."
+msgstr ""
+"如果 GPS 丢锁与 GCS 通信中断同时发生，则视为「双重丢失」，若 :ref:`AFS_DUAL_LOSS<AFS_DUAL_LOSS>` "
+"已启用（「1」），飞机将立即终止。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:210
+#: b3691de1aa7e46e0802c11ad3896efd2
+msgid ""
+"Note that the monitoring of HEARTBEAT messages only tells the autopilot that"
+" it can see messages from the ground station. It does not mean the ground "
+"station can see messages from the aircraft. So it is quite possible for your"
+" ground station to be reporting loss of communication while the aircraft is "
+"still receiving HEARTBEAT messages."
+msgstr ""
+"请注意，监测 HEARTBEAT "
+"消息仅表明飞控能够接收到来自地面站的消息，并不意味着地面站能够接收飞机的消息。因此，完全可能出现地面站报告通信中断、而飞机仍在接收 HEARTBEAT "
+"消息的情况。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:216
+#: aa78c61c7b2d4304b4f0cd6f0556c8c5
+msgid ""
+"If :ref:`AFS_MAX_COM_LOSS<AFS_MAX_COM_LOSS>` is set to a non-zero number, "
+"then it is used as a maximum count of the number of communication failures "
+"that will be allowed while returning to the mission after communications is "
+"re-established. This counter is only incremented if the 2nd communication "
+"failure happens at least 30 seconds after the previous one (to account for a"
+" short period of communications failure)."
+msgstr ""
+"如果 :ref:`AFS_MAX_COM_LOSS<AFS_MAX_COM_LOSS>` "
+"设置为非零数值，则该值用作在通信恢复并返回任务后，允许再次通信故障的最大次数。该计数器仅在第二次通信故障发生在前一次故障至少 30 "
+"秒之后时才递增（以排除短暂的通信故障）。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:223
+#: d44f8baf697a464491a8822f6a8bcbd2
+msgid ""
+"IF the GSC loss is recovered while in this failsafe state, then, normally, "
+"the mission item pointer is returned to whatever mission item was active "
+"when the failsafe occurred. To prevent this, and continue on with whatever "
+"missions sequence is executing due to the failsafe, you will need to set the"
+" :ref:`AFS_OPTIONS<AFS_OPTIONS>` bit 0 (+1 to the value)."
+msgstr ""
+"如果在此失控保护状态下 GCS "
+"通信恢复，通常情况下任务项指针将返回到失控保护发生时正在执行的任务项。若要阻止此行为并继续执行因失控保护而正在执行的任务序列，需将 "
+":ref:`AFS_OPTIONS<AFS_OPTIONS>` 的第 0 位（参数值 +1）置位。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:225
+#: 796fd26cb2b2467d8f057e5875ddba0b
+msgid ""
+"even if the GSC AFS failsafe was entered from a mode other than AUTO, and "
+"the :ref:`AFS_OPTIONS<AFS_OPTIONS>` bit 0 is set, the vehicle will start "
+"executing the current item pointed to when the failsafe was entered, even "
+"though it was not in AUTO mode."
+msgstr ""
+"即使 GCS AFS 失控保护是从非 AUTO 模式下触发的，只要 :ref:`AFS_OPTIONS<AFS_OPTIONS>` 第 0 "
+"位已置位，飞机也会开始执行失控保护触发时所指向的当前任务项，即使当时并非 AUTO 模式。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:228
+#: ced9c75dd95b49058bf624b84c2dcd11
+msgid "RC Loss"
+msgstr "RC 信号丢失"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:230
+#: fe96587204e044aaa930d9c6efb8ffc8
+msgid ""
+"If RC control is lost in for more than "
+":ref:`AFS_RC_FAIL_TIME<AFS_RC_FAIL_TIME>` milliseconds, flight termination "
+"is activated. This termination mode is only enabled if "
+":ref:`AFS_RC_FAIL_TIME<AFS_RC_FAIL_TIME>` is non-zero and "
+":ref:`AFS_ENABLE<AFS_ENABLE>` is 1. For the OBC rules it should be set to "
+"1500 (giving 1.5 seconds)."
+msgstr ""
+"如果 RC 控制丢失超过 :ref:`AFS_RC_FAIL_TIME<AFS_RC_FAIL_TIME>` 毫秒，将激活飞行终止。此终止模式仅在 "
+":ref:`AFS_RC_FAIL_TIME<AFS_RC_FAIL_TIME>` 非零且 :ref:`AFS_ENABLE<AFS_ENABLE>` "
+"为 1 时启用。对于 OBC 规则，应将其设置为 1500（即 1.5 秒）。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:233
+#: db81bcd2934e49b18aebc6ee882e9412
+msgid ""
+"If :ref:`AFS_RC_MAN_ONLY<AFS_RC_MAN_ONLY>` is set to 1 then this will only "
+"occur if in a manual mode. Otherwise, it will occur in any flight mode."
+msgstr ""
+"如果 :ref:`AFS_RC_MAN_ONLY<AFS_RC_MAN_ONLY>` 设置为 "
+"1，则仅在手动模式下才会触发此终止。否则，在任何飞行模式下均会触发。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:236
+#: 1db05e0d7e354349a975c516b27d1e58
+msgid "Monitoring the AFS system"
+msgstr "监测 AFS 系统"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:238
+#: 38697264b365414eade3d4981de758cd
+msgid ""
+"The AFS system provides some additional parameters to make it easier to "
+"monitor the health of the failsafe system using external electronics (such "
+"as an external failsafe board)."
+msgstr "AFS 系统提供了一些附加参数，方便使用外部电子设备（如外置失控保护板）来监测失控保护系统的健康状态。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:242
+#: c19924da13cc4019a77114c6b7eae4bc
+msgid "The key parameters are:"
+msgstr "关键参数如下："
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:244
+#: 2d6835a152c44f69b5f002b85b64dfda
+msgid ""
+":ref:`AFS_TERM_PIN<AFS_TERM_PIN>`: This is a digital pin which is set to a "
+"high voltage if termination is started. Note that this pin will go high on "
+"termination even if the :ref:`AFS_TERM_ACTION<AFS_TERM_ACTION>` parameter is"
+" not set to 42."
+msgstr ""
+":ref:`AFS_TERM_PIN<AFS_TERM_PIN>`：这是一个数字引脚，终止启动时该引脚输出高电平。请注意，即使 "
+":ref:`AFS_TERM_ACTION<AFS_TERM_ACTION>` 参数未设置为 42，终止时该引脚也会变为高电平。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:247
+#: b06f83cfc16448f1b87cb2f2341a0e6a
+msgid ""
+":ref:`AFS_HB_PIN<AFS_HB_PIN>`: This is a digital pin number for a pin which "
+"is toggled at a rate of 10Hz by the failsafe system. If termination occurs "
+"and a :ref:`AFS_TERM_PIN<AFS_TERM_PIN>` value is not set then the heartbeat "
+"pin will stop toggling."
+msgstr ""
+":ref:`AFS_HB_PIN<AFS_HB_PIN>`：这是一个数字引脚编号，失控保护系统以 10Hz 频率切换该引脚电平。如果终止发生且未设置 "
+":ref:`AFS_TERM_PIN<AFS_TERM_PIN>` 值，则心跳引脚将停止切换。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:251
+#: 1d62d031c7054841abe1bf96f587ca6e
+msgid ""
+":ref:`AFS_MAN_PIN<AFS_MAN_PIN>`: This is a digital pin number for a pin "
+"which goes high when the aircraft is in MANUAL mode. It may be useful with "
+"some external failsafe boards to detect manual mode and behave differently."
+msgstr ""
+":ref:`AFS_MAN_PIN<AFS_MAN_PIN>`：这是一个数字引脚编号，飞机处于 MANUAL "
+"模式时该引脚输出高电平。对于某些外置失控保护板，可用于检测手动模式并采取不同响应。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:257
+#: 052db13ea7e64284b104a7c8adaecdab
+msgid "Manual Termination"
+msgstr "手动终止"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:259
+#: 0954ae83b3c04b319523fdc57ee8bc64
+msgid ""
+"Apart from automatic termination it is also important for the aircraft's "
+"operator to be able to terminate the aircraft immediately if they think the "
+"aircraft is a danger to people or other aircraft. To force an immediate "
+"termination you should use the :ref:`AFS_TERMINATE<AFS_TERMINATE>` "
+"parameter. By setting that parameter to 1 the aircraft will immediately "
+"terminate."
+msgstr ""
+"除自动终止外，飞机操作员也需要能够在认为飞机对人员或其他飞行器构成危险时立即终止飞机。要强制立即终止，应使用 "
+":ref:`AFS_TERMINATE<AFS_TERMINATE>` 参数。将该参数设置为 1，飞机将立即终止。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:266
+#: 1d8382f8e2014254a93dedd9dd600ccc
+msgid "AFS_OPTIONS"
+msgstr "AFS_OPTIONS"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:267
+#: 72caf953e01147d4bce84247fcc0cbda
+msgid ""
+"The behavior of AFS due to GSC loss can be modified by the setting of the "
+":ref:`AFS_OPTIONS<AFS_OPTIONS>` bitmask parameter (no bits are set by "
+"default):"
+msgstr ""
+"AFS 因 GCS 通信丢失而产生的行为可通过 :ref:`AFS_OPTIONS<AFS_OPTIONS>` "
+"位掩码参数进行修改（默认所有位均未置位）："
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:269
+#: ff94064dcf4444c498761ae03ed0fd82
+msgid ""
+"bit 0 (+1), if set, the aircraft will continue with the current mission item"
+" even after GCS connection is recovered. If not set, the aircraft will jump "
+"back to the mission item right before GCS failsafe occurs"
+msgstr "第 0 位（+1），若置位，飞机将在 GCS 连接恢复后继续执行当前任务项。若未置位，飞机将跳回 GCS 失控保护发生前的任务项。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:270
+#: 9dd27778921546c1b8eefdbe50b13021
+msgid ""
+"bit 1 (+2), if set, will also force entering AUTO when GCS failsafe occurs "
+"while in any throtlled controlled modes other than AUTO (ie CRUISE, GUIDED, "
+"etc.)."
+msgstr ""
+"第 1 位（+2），若置位，当 GCS 失控保护在 AUTO 以外的自动油门控制模式（如 CRUISE、GUIDED 等）下触发时，也会强制进入 "
+"AUTO 模式。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:273
+#: 09306472ce134d0493d172aec4649a96
+msgid "Example AFS failsafe mission"
+msgstr "AFS 失控保护任务示例"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:275
+#: 88c47bbeecd748aea73f1d33b8d2816d
+msgid ""
+"Setting up a AFS failsafe mission takes time, and needs to be done very "
+"carefully. To help you understand what is possible you may find the "
+"following example files useful"
+msgstr "设置 AFS 失控保护任务需要时间，且必须非常仔细。为帮助您理解可实现的功能，以下示例文件可供参考："
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:279
+#: fb1510d97a8c498c83d2abf05b2c84c4
+msgid ""
+"A `waypoint mission "
+"<https://github.com/tridge/cuav/blob/master/cuav/data/way.txt>`__ for the "
+"2014 Outback Challenge with waypoints for different AFS failures commented "
+"in the file"
+msgstr ""
+"2014 年 Outback Challenge 的 `航点任务 "
+"<https://github.com/tridge/cuav/blob/master/cuav/data/way.txt>`__，文件中注释了不同 "
+"AFS 故障对应的航点。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:282
+#: 3190a371c2b64120850d36f8d4c48494
+msgid ""
+"A `geofence file "
+"<https://github.com/tridge/cuav/blob/master/cuav/data/fence.txt>`__ for the "
+"2014 Outback Challenge"
+msgstr ""
+"2014 年 Outback Challenge 的 `围栏文件 "
+"<https://github.com/tridge/cuav/blob/master/cuav/data/fence.txt>`__。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:286
+#: f16d3fe0db2b42aaac7aea614e282b20
+msgid "Testing the AFS system in SITL"
+msgstr "在 SITL 中测试 AFS 系统"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:288
+#: efabf671ac684ca69135576acc30c231
+msgid ""
+"It is highly recommended that you extensively test the AFS system using the "
+":ref:`SITL simulation system <dev:simulation-2>` before using it on a real "
+"aircraft. You can simulate all types of in-flight failures using the SIM\\_ "
+"parameters. To start SITL in Kingaroy ready for OBC testing you would use:"
+msgstr ""
+"强烈建议在将 AFS 系统用于真实飞机之前，使用 :ref:`SITL 仿真系统 <dev:simulation-2>` 对其进行充分测试。您可以使用 "
+"SIM\\_ 参数模拟各种飞行中故障。要在 Kingaroy 启动 SITL 以进行 OBC 测试，请使用以下命令："
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:298
+#: b7d735312d4f49f88837c5e221d88454
+msgid "The key parameters for failsafe testing in SITL are:"
+msgstr "SITL 中失控保护测试的关键参数如下："
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:300
+#: e793c99e912e4d9383ee4a48c7abcb76
+msgid "Test GPS failure: param set SIM_GPS_DISABLE 1"
+msgstr "测试 GPS 故障：param set SIM_GPS_DISABLE 1"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:301
+#: dc23f1d4fe044553b500895f6cbc3c8c
+msgid "Test RC failure: param set SIM_RC_FAIL 1"
+msgstr "测试 RC 故障：param set SIM_RC_FAIL 1"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:302
+#: f7f2988c6e684b1d8b15e00417fef612
+msgid "Test comms failure: set heartbeat 0"
+msgstr "测试通信故障：set heartbeat 0"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:303
+#: 5f7f6d12233f4ffe8777e26de563704a
+msgid "Test fence failure: switch to CRUISE mode and fly across boundary"
+msgstr "测试围栏故障：切换至 CRUISE 模式并飞越边界"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:304
+#: ff0f83eaaa40454999da9879a2cece2b
+msgid ""
+"Test QNH failure: param set :ref:`AFS_AMSL_LIMIT<AFS_AMSL_LIMIT>` = 100"
+msgstr "测试 QNH 故障：param set :ref:`AFS_AMSL_LIMIT<AFS_AMSL_LIMIT>` = 100"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:307
+#: e285600ae5e74dc0a13f6f653444f3e3
+msgid "Additional tips for AFS failsafe users"
+msgstr "AFS 失控保护用户的额外建议"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:309
+#: 6eff5460c4e54a4ea06bec7901831ee8
+msgid ""
+"You need to ensure that your geofence is enabled before takeoff. This can "
+"either be done as part of your preflight checklist, or you could set a "
+"`FENCE_CHANNEL`` and enable it from within your transmitter.  This ensures "
+"that if your transmitter is out of range that the fence remains enabled."
+msgstr ""
+"您需要确保在起飞前已启用电子围栏。可以将其纳入起飞前检查清单，或设置 `FENCE_CHANNEL`` "
+"并通过遥控器启用，以确保遥控器超出范围时围栏仍保持启用状态。"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:315
+#: bf83e49d69a64a399679ca19e8371d27
+msgid "Settings for Outback Challenge 2014"
+msgstr "Outback Challenge 2014 的设置"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:317
+#: 233c6d7ab77d4eb789d29b44673baa9f
+msgid ""
+"To be compliant with the OBC 2014 rules you should have the following "
+"settings:"
+msgstr "要符合 OBC 2014 规则，应进行以下设置："
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:320
+#: c47aab76e89e46c48fcedb6b98c130cd
+msgid ":ref:`AFS_ENABLE<AFS_ENABLE>`: 1"
+msgstr ":ref:`AFS_ENABLE<AFS_ENABLE>`：1"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:321
+#: 031145b5b4644c36a52e5afdfc55f29e
+msgid ""
+":ref:`AFS_WP_COMMS<AFS_WP_COMMS>`: waypoint number for OBC comms hold "
+"followed by two minute loiter, then return to airfield home"
+msgstr ":ref:`AFS_WP_COMMS<AFS_WP_COMMS>`：OBC 通信中断时保持盘旋两分钟，然后返回机场 Home 点的航点编号"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:323
+#: 5e1690ecd8334078bfb1a126195b181d
+msgid ""
+":ref:`AFS_WP_GPS_LOSS<AFS_WP_GPS_LOSS>`: waypoint number to loiter in place "
+"for 30 seconds, followed by return to airfield home"
+msgstr ":ref:`AFS_WP_GPS_LOSS<AFS_WP_GPS_LOSS>`：原地盘旋 30 秒后返回机场 Home 点的航点编号"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:325
+#: c1206e4c22e84ba1bb616063dab00f54
+msgid ":ref:`AFS_TERM_ACTION<AFS_TERM_ACTION>`: 42"
+msgstr ":ref:`AFS_TERM_ACTION<AFS_TERM_ACTION>`：42"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:326
+#: 6f1ee538c5904d69b200977371041ccc
+msgid ":ref:`AFS_AMSL_LIMIT<AFS_AMSL_LIMIT>`: 914"
+msgstr ":ref:`AFS_AMSL_LIMIT<AFS_AMSL_LIMIT>`：914"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:327
+#: 44f44c79aafe4409bfbc1261cca7482b
+msgid ""
+":ref:`AFS_QNH_PRESSURE<AFS_QNH_PRESSURE>`: correct QNH pressure for the day"
+msgstr ":ref:`AFS_QNH_PRESSURE<AFS_QNH_PRESSURE>`：飞行当天正确的 QNH 气压值"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:328
+#: 604d0c6b1f874de8a06965c49ad3adc5
+msgid ":ref:`AFS_RC_FAIL_TIME<AFS_RC_FAIL_TIME>`: 1500"
+msgstr ":ref:`AFS_RC_FAIL_TIME<AFS_RC_FAIL_TIME>`：1500"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:329
+#: 135aeb102c0f45ceb8ce9f4772570795
+msgid ":ref:`AFS_MAX_GPS_LOSS<AFS_MAX_GPS_LOSS>`: 2"
+msgstr ":ref:`AFS_MAX_GPS_LOSS<AFS_MAX_GPS_LOSS>`：2"
+
+#: ../../source/docs/advanced-failsafe-configuration.rst:330
+#: f740bcfa9d3f42f5a6cae4698a85fceb
+msgid ":ref:`AFS_MAX_COM_LOSS<AFS_MAX_COM_LOSS>`: 2"
+msgstr ":ref:`AFS_MAX_COM_LOSS<AFS_MAX_COM_LOSS>`：2"

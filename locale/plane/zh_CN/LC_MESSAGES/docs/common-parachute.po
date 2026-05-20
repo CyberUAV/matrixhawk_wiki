@@ -1,0 +1,457 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 14:59+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/common-parachute.rst:5 1499cfe1a65d40e1a23e6b73149114e3
+msgid "Parachute"
+msgstr "降落伞"
+
+#: ../../source/docs/common-parachute.rst:11 93ce321f2dcd4b59b2c9da4e93dfe047
+msgid ""
+"This topic describes how to set up manual and automatic parachute release."
+msgstr "本主题介绍如何设置手动和自动降落伞释放。"
+
+#: ../../source/docs/common-parachute.rst:16 43d2bf8f3ecd42d89e239bc207c020a6
+msgid ""
+"A parachute ejection can be dangerous.  This feature should be used with "
+"caution"
+msgstr "降落伞弹射可能很危险。使用此功能时请谨慎"
+
+#: ../../source/docs/common-parachute.rst:21 3e95278d20e847d3be763178498ee8df
+msgid ""
+"Video above is from Henri's `DIYDrones discussion that led to this feature "
+"being added to Copter <https://diydrones.com/forum/topics/diy-parachute-"
+"deployment-mechanism-for-multicopter>`__."
+msgstr ""
+"上方视频来自 Henri 的 `DIYDrones 讨论，该讨论促成了此功能被添加到 Copter "
+"<https://diydrones.com/forum/topics/diy-parachute-deployment-mechanism-for-"
+"multicopter>`__。"
+
+#: ../../source/docs/common-parachute.rst:24 799992d572d94d2da096812cd468fdb5
+msgid "What you will need"
+msgstr "所需物品"
+
+#: ../../source/docs/common-parachute.rst:26 247117c4b6c5461d8efab030994e58d5
+msgid "A complete parachute mechanism like one of these:"
+msgstr "完整的降落伞机构，如以下之一："
+
+#: ../../source/docs/common-parachute.rst:28 51fb6221213346d081d4f2bbf792b10d
+msgid "`SkyCat <https://www.skycat.pro/shop/>`__"
+msgstr "`SkyCat <https://www.skycat.pro/shop/>`__"
+
+#: ../../source/docs/common-parachute.rst:29 21ddfc7a225d4de8b7795b7457154bb2
+msgid "`CAD Drones <http://store.caddrones.com/products>`__"
+msgstr "`CAD Drones <http://store.caddrones.com/products>`__"
+
+#: ../../source/docs/common-parachute.rst:31 89a7da0e3b5340299ba3681ab3263c86
+msgid ""
+"OR if you prefer a DIY solution, parachute release mechanism that can be "
+"triggered by a PWM signal (i.e. a Servo) and a parachute large enough to "
+"slow your multicopter's decent to less than 5m/s. Some recommended parachute"
+" vendors:"
+msgstr ""
+"或者，如果您更喜欢自制方案：可由 PWM 信号（即舵机）触发的降落伞释放机构，以及足够大的降落伞以将多旋翼的下降速度减慢至 5m/s "
+"以下。部分推荐的降落伞供应商："
+
+#: ../../source/docs/common-parachute.rst:36 66df57adceac4f2e90000838f5af69cd
+msgid ""
+"`Fruity Chutes "
+"<https://fruitychutes.com/uav_rpv_drone_recovery_parachutes.htm>`__"
+msgstr ""
+"`Fruity Chutes "
+"<https://fruitychutes.com/uav_rpv_drone_recovery_parachutes.htm>`__"
+
+#: ../../source/docs/common-parachute.rst:37 1202932a173d432896e5d090597319e0
+msgid ""
+"`Opale Paramodels <https://www.opale-paramodels.com/fr/57-parachutiste-"
+"rc>`__"
+msgstr ""
+"`Opale Paramodels <https://www.opale-paramodels.com/fr/57-parachutiste-"
+"rc>`__"
+
+#: ../../source/docs/common-parachute.rst:38 b418d55f0982421d8d79dfb931d09075
+msgid ""
+"`Mars Mini <http://1uas.com/Gears/Parachutes-Protection-System/Mars-Mini>`__"
+msgstr ""
+"`Mars Mini <http://1uas.com/Gears/Parachutes-Protection-System/Mars-Mini>`__"
+
+#: ../../source/docs/common-parachute.rst:41 db0ca21da2b24019823855b79b893b3e
+msgid "Connecting to the Autopilot"
+msgstr "连接到飞控"
+
+#: ../../source/docs/common-parachute.rst:43 bcbc537e5f8e4025a1afc60faae3c466
+msgid ""
+"The parachute release mechanism can be triggered from either a Relay or a "
+"PWM (i.e. Servo). Be sure that if a Relay pin is used, that the parachute "
+"release is active on a high level and that the Relay pin default, "
+"``RELAY_DEFAULT`` is OFF or No Change, to avoid triggering the release "
+"during initialization, since all GPIOs are forced low during the bootloader "
+"period."
+msgstr ""
+"降落伞释放机构可通过继电器或 PWM（即舵机）触发。如果使用继电器引脚，请确保降落伞释放在高电平时激活，且继电器引脚默认值 "
+"``RELAY_DEFAULT`` 为 OFF 或 No Change，以避免在初始化时意外触发释放，因为在引导程序期间所有 GPIO 均被强制拉低。"
+
+#: ../../source/docs/common-parachute.rst:50 b429b9f3af2947b797491861531e860e
+msgid "Setup through the Mission Planner"
+msgstr "通过 Mission Planner 设置"
+
+#: ../../source/docs/common-parachute.rst:52 3c2f83b28f714e499950539348ae1da9
+msgid ""
+"To configure the parachute release, first connect to the autopilot with "
+"Mission Planner, and then open the CONFIG->Full Parameter List tab and set "
+"the following parameters."
+msgstr ""
+"要配置降落伞释放，首先使用 Mission Planner 连接到飞控，然后打开 CONFIG->Full Parameter List "
+"选项卡并设置以下参数。"
+
+#: ../../source/docs/common-parachute.rst:56 78dfc86b64244cb9a16779efb582ad94
+msgid ""
+":ref:`CHUTE_ENABLED <CHUTE_ENABLED>` = \"1\". Then refresh parameters, or "
+"reboot, to see the Chute parameters."
+msgstr ":ref:`CHUTE_ENABLED <CHUTE_ENABLED>` = 「1」。然后刷新参数或重启，以查看 Chute 参数。"
+
+#: ../../source/docs/common-parachute.rst:57 c44d1e2a6fc142fdabc7df27be9aed49
+msgid ""
+":ref:`CHUTE_CRT_SINK<CHUTE_CRT_SINK>` should be set to the sink rate in m/s "
+"that will trigger the chute release."
+msgstr ":ref:`CHUTE_CRT_SINK<CHUTE_CRT_SINK>` 应设置为触发降落伞释放的下沉速率（m/s）。"
+
+#: ../../source/docs/common-parachute.rst:58 1bc1bca7196d485a9730ae3821aeee16
+msgid ""
+":ref:`CHUTE_ALT_MIN<CHUTE_ALT_MIN>` determines the minimum altitude above "
+"HOME that allows parachute release to occur."
+msgstr ":ref:`CHUTE_ALT_MIN<CHUTE_ALT_MIN>` 确定允许降落伞释放的最小 Home 上方高度。"
+
+#: ../../source/docs/common-parachute.rst:61 2a0462f1e0f243f5b78771f48f701139
+msgid "Servo Release"
+msgstr "舵机释放"
+
+#: ../../source/docs/common-parachute.rst:63 faa56862df5d450aa411639c5f7632bb
+msgid ":ref:`CHUTE_TYPE <CHUTE_TYPE>` = \"10\" to release with a servo"
+msgstr ":ref:`CHUTE_TYPE <CHUTE_TYPE>` = 「10」以使用舵机释放"
+
+#: ../../source/docs/common-parachute.rst:64 d25f24bb55c64c929464d5c53c74b434
+msgid ""
+":ref:`CHUTE_SERVO_ON <CHUTE_SERVO_ON>` should be set to the servo position "
+"required to release the parachute"
+msgstr ":ref:`CHUTE_SERVO_ON <CHUTE_SERVO_ON>` 应设置为释放降落伞所需的舵机位置"
+
+#: ../../source/docs/common-parachute.rst:65 2b61ec58249e4156b93d1c4639042b92
+msgid ""
+":ref:`CHUTE_SERVO_OFF <CHUTE_SERVO_OFF>` should be the \"resting\" servo "
+"position.  I.e. the position the servo is in before the parachute is "
+"released"
+msgstr ":ref:`CHUTE_SERVO_OFF <CHUTE_SERVO_OFF>` 应为舵机的「静止」位置，即降落伞释放前舵机所在的位置"
+
+#: ../../source/docs/common-parachute.rst:66 6bec98359dc34d51806c687a9c2d8ecc
+msgid ""
+"set :ref:`SERVO9_FUNCTION <SERVO9_FUNCTION>` = \"27\". On autopilots with an"
+" IOMCU (Outputs labeled MAIN and AUX), ``SERVO9`` refers to the Pixhawk's "
+"AUX OUT 1. To use AUX OUT2 instead set :ref:`SERVO10_FUNCTION "
+"<SERVO10_FUNCTION>` to 27, etc."
+msgstr ""
+"将 :ref:`SERVO9_FUNCTION <SERVO9_FUNCTION>` 设置为 「27」。在有 IOMCU 的飞控上（输出标记为 MAIN"
+" 和 AUX），``SERVO9`` 对应 Pixhawk 的 AUX OUT 1。要使用 AUX OUT2，改将 "
+":ref:`SERVO10_FUNCTION <SERVO10_FUNCTION>` 设置为 27，依此类推。"
+
+#: ../../source/docs/common-parachute.rst:69 ada4691ab93a466f8e2d7e9e04e6a727
+msgid "Relay Release"
+msgstr "继电器释放"
+
+#: ../../source/docs/common-parachute.rst:72 934c9734fde148f59de9750f9344a5c2
+msgid ""
+":ref:`This function is a GPIO and has limited current capabilities.<gpio-"
+"warning>`"
+msgstr ":ref:`此功能为 GPIO，电流能力有限。<gpio-warning>`"
+
+#: ../../source/docs/common-parachute.rst:74 ccff7585e2ed4064b33ca2db36c7e554
+msgid "Determine/Configure a pin to be a GPIO (see :ref:`common-gpios`)."
+msgstr "确定/配置一个引脚为 GPIO（参见 :ref:`common-gpios`）。"
+
+#: ../../source/docs/common-parachute.rst:75 8b1c175f74ca4947b9ed86fdd6156344
+msgid ""
+"Set that pin number as one of the RELAY functions. ie For GPIO pin 51 using "
+"the first RELAY function, set :ref:`RELAY1_PIN<RELAY1_PIN>` = 51."
+msgstr ""
+"将该引脚编号设置为 RELAY 功能之一。例如，对于 GPIO 引脚 51 使用第一个 RELAY 功能，将 "
+":ref:`RELAY1_PIN<RELAY1_PIN>` = 51。"
+
+#: ../../source/docs/common-parachute.rst:76 d1ab30df102a4ee1a14b99dfc1b6fa12
+msgid ""
+"Since GPIOs are always set low initially during the bootloader period, to "
+"avoid accidental release, always use a release mechanism that needs a high "
+"output level to trigger and set:"
+msgstr "由于 GPIO 在引导程序期间始终初始设置为低电平，为避免意外释放，请始终使用需要高电平输出才能触发的释放机构，并设置："
+
+#: ../../source/docs/common-parachute.rst:77 02425cef835140999d6b9cf70a8e3690
+msgid ""
+":ref:`RELAY1_DEFAULT<RELAY1_DEFAULT>` = 1 or 2 (low or no change), which "
+"determines how RELAY1 pins is set during the post-bootloader, autopilot "
+"initialization period."
+msgstr ""
+":ref:`RELAY1_DEFAULT<RELAY1_DEFAULT>` = 1 或 2（低电平或不变），这决定了在引导程序后飞控初始化期间 "
+"RELAY1 引脚的设置状态。"
+
+#: ../../source/docs/common-parachute.rst:78 94ef33ed722642f9ac9f06307aef95c4
+msgid ""
+":ref:`CHUTE_TYPE <CHUTE_TYPE>` = 0,1,2,or 3 to release with RELAY, RELAY2, "
+"RELAY3, or RELAY4 functions."
+msgstr ""
+":ref:`CHUTE_TYPE <CHUTE_TYPE>` = 0、1、2 或 3，分别使用 RELAY、RELAY2、RELAY3 或 RELAY4"
+" 功能释放。"
+
+#: ../../source/docs/common-parachute.rst:87 0fdcbc26b48641fa8d41943e3bb617a9
+msgid "Manual Release"
+msgstr "手动释放"
+
+#: ../../source/docs/common-parachute.rst:89 2edca13470d54a8794d83b3c0bc0548d
+msgid ""
+"The pilot can manually release the parachute using an RC channel/switch: set"
+" an ``RCx_OPTION`` to either 22 (Parachute Release) or 23 (Parachute 3Pos). "
+"Either function, when the RC channel is high, above "
+":ref:`CHUTE_ALT_MIN<CHUTE_ALT_MIN>`, and is armed (Copter) or flying "
+"(Plane). See following section for requirements."
+msgstr ""
+"飞手可使用 RC 通道/开关手动释放降落伞：将 ``RCx_OPTION`` 设置为 22（Parachute Release）或 "
+"23（Parachute 3Pos）。在 RC 通道处于高位、高于 :ref:`CHUTE_ALT_MIN<CHUTE_ALT_MIN>` "
+"且已解锁（Copter）或飞行中（Plane）时，任一功能均可触发。请参阅下节了解要求。"
+
+#: ../../source/docs/common-parachute.rst:92 a37fa01b93224c2ea142921a05765b1c
+msgid "MAVLink Command Release"
+msgstr "MAVLink 命令释放"
+
+#: ../../source/docs/common-parachute.rst:94 da92a065b4f64b35a7a6786107163b7d
+msgid ""
+"The parachute may also be released/enabled/disabled via Ground Control "
+"Station command: MAV_CMD_DO_PARACHUTE (cmd id #208). This command has a "
+"parameter1 field that determines the action:"
+msgstr ""
+"降落伞也可通过地面控制站命令释放/启用/禁用：MAV_CMD_DO_PARACHUTE（命令 ID #208）。此命令有一个 parameter1 "
+"字段用于确定动作："
+
+#: ../../source/docs/common-parachute.rst:97 63724ba4e8d14a56b1240019559fb4f0
+msgid "param1"
+msgstr "param1"
+
+#: ../../source/docs/common-parachute.rst:97 eadb5f2de55a4fdd864cac3a646fb6d4
+msgid "Action"
+msgstr "动作"
+
+#: ../../source/docs/common-parachute.rst:99 a893179acdbe4e8aabcd62e88f9810e7
+msgid "0"
+msgstr "0"
+
+#: ../../source/docs/common-parachute.rst:99 0f42eedb3a6f466ba51ced4999fa1f12
+msgid "Disable Parachute release"
+msgstr "禁用降落伞释放"
+
+#: ../../source/docs/common-parachute.rst:101 548480dffc9948b2980258b41d47b5e6
+msgid "1"
+msgstr "1"
+
+#: ../../source/docs/common-parachute.rst:101 cf5544f452f44c638b469a1ffada9c6d
+msgid "Enable Parachute release"
+msgstr "启用降落伞释放"
+
+#: ../../source/docs/common-parachute.rst:103 29f9ede2c5d14190bff671356b8122b5
+msgid "2"
+msgstr "2"
+
+#: ../../source/docs/common-parachute.rst:103 8e0271dc8c874d849a27294fdcd99191
+msgid "Release Parachute"
+msgstr "释放降落伞"
+
+#: ../../source/docs/common-parachute.rst:106 430603066fa44a0ca5d52dde386e0354
+msgid ""
+"This command can be part of an AUTO mission as a DO_PARACHUTE waypoint."
+msgstr "此命令可作为 Auto 任务中的 DO_PARACHUTE 航点使用。"
+
+#: ../../source/docs/common-parachute.rst:110 13635527f3764674b6ed3262aba20bca
+msgid "Failsafe Action"
+msgstr "失控保护动作"
+
+#: ../../source/docs/common-parachute.rst:112 97b5fc83bb5843a0bdecb01f7105059d
+msgid ""
+"Plane also provides for a parachute release failsafe action for "
+":ref:`FS_LONG_ACTN<FS_LONG_ACTN>` and ``BATTx_FS_CRT_ACT``."
+msgstr ""
+"Plane 还为 :ref:`FS_LONG_ACTN<FS_LONG_ACTN>` 和 ``BATTx_FS_CRT_ACT`` "
+"提供了降落伞释放失控保护动作。"
+
+#: ../../source/docs/common-parachute.rst:116 815f4f0e1b5046689c9e5ed145ba72ce
+msgid "Parachute Options"
+msgstr "降落伞选项"
+
+#: ../../source/docs/common-parachute.rst:118 de677ba8389d4cfb89e73fb460a7cc62
+msgid ""
+"An option to force the release servo or relay to remain active forever "
+"(until reboot) once triggered. This used in high altitude situations where "
+"the servo or relay may be frozen due to extremely low temperatures, until "
+"lower altitude, and warmer temperatures allow operation. This can be enabled"
+" by setting the :ref:`CHUTE_OPTIONS<CHUTE_OPTIONS>` bit 0 high."
+msgstr ""
+"有一个选项可强制释放舵机或继电器在触发后保持永久激活（直到重启）。这用于高空场景，在极低温度下舵机或继电器可能冻结，待降低高度温度升高后才能正常操作。可通过将"
+" :ref:`CHUTE_OPTIONS<CHUTE_OPTIONS>` 的第 0 位设置为高来启用此功能。"
+
+#: ../../source/docs/common-parachute.rst:120 fffb3374909b4918914a025514d9c087
+msgid ""
+"Setting bit 1 high of :ref:`CHUTE_OPTIONS<CHUTE_OPTIONS>` will not disarm "
+"the vehicle before releasing the chute."
+msgstr "将 :ref:`CHUTE_OPTIONS<CHUTE_OPTIONS>` 的第 1 位设置为高，将在释放降落伞前不上锁飞行器。"
+
+#: ../../source/docs/common-parachute.rst:123 e4d37d9a158e4f6e966361b6c5d79df2
+msgid "RC Disable/Enable of Parachute"
+msgstr "通过 RC 禁用/启用降落伞"
+
+#: ../../source/docs/common-parachute.rst:125 a6cd92ce19b04a358aec78469baf652c
+msgid ""
+"You can disable or enable the parachute automatic release using an RC "
+"channel/switch: set an ``RCx_OPTION`` to 21. A high enables the automatic "
+"release function, low disables it. Manual release is unaffected. If set to "
+"23 (Parachute 3Pos), the low position disables, middle position enables auto"
+" operation, a high will attempt to force release, as explained above, "
+"assuming the enabling conditions described below."
+msgstr ""
+"您可以使用 RC 通道/开关禁用或启用降落伞自动释放：将 ``RCx_OPTION`` 设置为 "
+"21。高电平启用自动释放功能，低电平禁用。手动释放不受影响。如果设置为 23（Parachute "
+"3Pos），低位禁用，中位启用自动操作，高位将在满足下述启用条件的情况下尝试强制释放。"
+
+#: ../../source/docs/common-parachute.rst:128 59496b3e112a4226b7b05db7d891a45f
+msgid "When will the parachute deploy?"
+msgstr "降落伞何时展开？"
+
+#: ../../source/docs/common-parachute.rst:130 66948ec0516b44b196cf2ac3e8b5bce8
+msgid ""
+"When the \"Crash Check\" feature determines that the vehicle has lost "
+"attitude control and has begun falling, the motors will be stopped and the "
+"parachute will deploy automatically.  The following must all be true for a "
+"full 1 seconds for the crash checker to trigger the parachute release:"
+msgstr ""
+"当「坠机检测」功能判断飞行器已失去姿态控制并开始坠落时，电机将停止，降落伞将自动展开。以下所有条件必须连续满足 1 秒钟，坠机检测器才会触发降落伞释放："
+
+#: ../../source/docs/common-parachute.rst:136 6aa1d8ffb98c4ecbad759d230c0f6c52
+msgid "The motors are armed (Copter) or flying (Plane)"
+msgstr "电机已解锁（Copter）或正在飞行（Plane）"
+
+#: ../../source/docs/common-parachute.rst:137 17caace13b9648978a2da727c5b545bf
+msgid "The vehicle is not landed (Copter only)"
+msgstr "飞行器未降落（仅 Copter）"
+
+#: ../../source/docs/common-parachute.rst:138 f0bef6985acc44e39a64bb092403e0bb
+msgid "The vehicle is not in FLIP or ACRO flight mode (Copter only)"
+msgstr "飞行器不在 Flip 或 Acro 飞行模式（仅 Copter）"
+
+#: ../../source/docs/common-parachute.rst:139 d479678d2da74842a237163434c9b01d
+msgid ""
+"the roll and/or pitch angle of the vehicle is 30 degrees off from the target"
+" lean angle (Copter only)"
+msgstr "飞行器的横滚和/或俯仰角偏离目标倾斜角 30 度以上（仅 Copter）"
+
+#: ../../source/docs/common-parachute.rst:141 c3a97d3cd60b4831918e5b8b22c10936
+msgid ""
+"the barometer shows the vehicle is not climbing (excessive baro noise CAN "
+"prevent release in some cases) (Copter & Plane)"
+msgstr "气压计显示飞行器未在上升（过度气压计噪声在某些情况下可能阻止释放）（Copter 和 Plane）"
+
+#: ../../source/docs/common-parachute.rst:142 d335417bcaf64255a555cb645c12bd47
+msgid ""
+"the vehicle is above the :ref:`CHUTE_ALT_MIN <CHUTE_ALT_MIN>` altitude "
+"(Copter & Plane). A value of \"0\" disables this check."
+msgstr ""
+"飞行器高于 :ref:`CHUTE_ALT_MIN <CHUTE_ALT_MIN>` 高度（Copter 和 Plane）。设置为「0」可禁用此检查。"
+
+#: ../../source/docs/common-parachute.rst:148 3d694548db21439b97d9585890639b91
+msgid "Testing the chute"
+msgstr "测试降落伞"
+
+#: ../../source/docs/common-parachute.rst:150 b52321ff28e74b26bb9757c0981dec26
+msgid ""
+"Depending upon the release mechanism a parachute deployment can be dangerous"
+" so please take care when performing these tests, removing the parachute and"
+" vehicle propellers as is appropriate."
+msgstr "根据释放机构的不同，降落伞展开可能很危险，请在执行这些测试时多加小心，酌情取下降落伞和螺旋桨。"
+
+#: ../../source/docs/common-parachute.rst:154 07c80fabcceb4831a6d9144ef2ce42f2
+msgid "To test manual deployment:"
+msgstr "测试手动展开："
+
+#: ../../source/docs/common-parachute.rst:156 ea543518f63f43bd867bd06d98d9cf85
+msgid "Enable parachute release, if using a switch to disable release"
+msgstr "如果使用开关禁用释放，请启用降落伞释放"
+
+#: ../../source/docs/common-parachute.rst:157
+#: ../../source/docs/common-parachute.rst:169 246ab86508d14c5a88407054493513b3
+#: 624d354c9a2a4af5b8c2d18d90a5bef8
+msgid ""
+"Set the :ref:`CHUTE_ALT_MIN <CHUTE_ALT_MIN>` parameter to zero to disable "
+"the minimum altitude check"
+msgstr "将 :ref:`CHUTE_ALT_MIN <CHUTE_ALT_MIN>` 参数设置为零以禁用最低高度检查"
+
+#: ../../source/docs/common-parachute.rst:159 36a5b2a50c364fc084105ed013b25914
+msgid ""
+"Arm the vehicle in stabilize mode and raise the throttle above minimum "
+"(disconnect motors or remove props) (not required for Plane)"
+msgstr "在 Stabilize 模式下解锁飞行器并将油门升至最低以上（断开电机或取下螺旋桨）（Plane 不需要）"
+
+#: ../../source/docs/common-parachute.rst:161 446d84092f414844aea3a1599b6e48d5
+msgid ""
+"Use one of the above manual RC channel switch activation methods or use "
+"Mission Planner SERVO/RELAY tab to switch the release Relay, MAVLink "
+"command, or set the PWM of the release servo."
+msgstr ""
+"使用上述手动 RC 通道开关激活方法之一，或使用 Mission Planner 的 SERVO/RELAY 选项卡切换释放继电器、MAVLink "
+"命令，或设置释放舵机的 PWM。"
+
+#: ../../source/docs/common-parachute.rst:163 197b26152bd7427081d554883a14ba93
+msgid ""
+"You should see the motors stop, the parachute release mechanism activate, "
+"and if telemetry is attached, \"Parachute: Released!\" should appear on the "
+"Flight Data screen's HUD."
+msgstr "您应看到电机停止，降落伞释放机构激活，如果连接了数传，飞行数据界面的 HUD 上应显示「Parachute: Released!」。"
+
+#: ../../source/docs/common-parachute.rst:167 3250bc9d2a834cde80b3d421bdbd6148
+msgid "To test the automatic deployment:"
+msgstr "测试自动展开："
+
+#: ../../source/docs/common-parachute.rst:171 c4de9d75a64e4b0e9ed282ca9fdd36b2
+msgid "Arm the vehicle in stabilize mode and raise the throttle above minimum"
+msgstr "在 Stabilize 模式下解锁飞行器并将油门升至最低以上"
+
+#: ../../source/docs/common-parachute.rst:173 665d8f05eb5c42849dbff6ac5181f0b7
+msgid ""
+"somehow tilt the vehicle over by at least 30 degrees while lowering it (the "
+"barometer shows the vehicle is descending)"
+msgstr "以某种方式使飞行器倾斜至少 30 度，同时向下降低（气压计显示飞行器正在下降）"
+
+#: ../../source/docs/common-parachute.rst:175 150a4397fb544a3c8f4d3ced721f2a0f
+msgid ""
+"After 1 seconds, the motors should stop, the parachute servo will move and "
+"if Mission Planner is attached, \"Parachute: Released\" should appear on the"
+" Flight Data screen's HUD."
+msgstr ""
+"1 秒后，电机应停止，降落伞舵机将动作，如果连接了 Mission Planner，飞行数据界面的 HUD 上应显示「Parachute: "
+"Released」。"
+
+#: ../../source/docs/common-parachute.rst:179 95614663e9ee4b40bcb6809191e39c2d
+msgid ""
+"After the test is complete, return the :ref:`CHUTE_ALT_MIN <CHUTE_ALT_MIN>` "
+"to the desired altitude (default is 10m)"
+msgstr "测试完成后，将 :ref:`CHUTE_ALT_MIN <CHUTE_ALT_MIN>` 恢复至所需高度（默认为 10m）"

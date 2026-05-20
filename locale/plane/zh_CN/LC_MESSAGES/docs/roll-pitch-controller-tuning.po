@@ -1,0 +1,804 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 14:59+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:3
+#: eab70fc14e4d4719890ba080d5b97d61
+msgid "**ARCHIVED** (applied to 4.1 firmware and earlier)"
+msgstr "**已归档**（适用于 4.1 及更早版本固件）"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:7
+#: 3145ecc749f1466aabb697f144d735fe
+msgid "Roll, Pitch and Yaw Controller Tuning"
+msgstr "横滚、俯仰和偏航控制器调参"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:9
+#: 288256ac52fc48288ae69d9c572f05ba
+msgid ""
+"These instructions will teach you how to tune the roll, pitch and yaw "
+"response of your aircraft. This is the first tuning you should do with a new"
+" aircraft, as everything else relies on getting this right."
+msgstr "这些说明将教您如何调参飞机的横滚、俯仰和偏航响应。这是新飞机应首先进行的调参，因为其他所有调参都依赖于此步骤的正确完成。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:15
+#: 6cfd34cdc0604b85bf399c6a7e3d6fa0
+msgid ""
+"We **strongly** recommend that :ref:`you use AUTOTUNE to perform "
+"roll/pitch/yaw tuning <automatic-tuning-with-autotune>`. The instructions in"
+" this article should be used if you are unable to fly."
+msgstr ""
+"我们**强烈**建议 :ref:`使用 AUTOTUNE 进行横滚/俯仰/偏航调参 <automatic-tuning-with-"
+"autotune>`。本文中的说明适用于无法飞行时的情况。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:21
+#: e5941203526c4e4381219b681f90a4eb
+msgid ""
+"The default values for the roll and pitch controllers in Plane are quite "
+"deliberately too small for most aircraft. This is because small values will "
+"cause ArduPilot to not navigate well and be sluggish, but are less likely to"
+" cause the aircraft to crash. The pitch defaults also have a large 'I' gain,"
+" to try to compensate for poor initial CG location. Once trimmed via "
+":ref:`SERVO_AUTO_TRIM<SERVO_AUTO_TRIM>`, this value should be set to 1/5th "
+"of the 'P' gain and full tuning done, as instructed below."
+msgstr ""
+"Plane 中横滚和俯仰控制器的默认值有意设置得对大多数飞机来说偏小。这是因为较小的值会导致 ArduPilot "
+"导航不佳且响应迟缓，但不太可能导致飞机坠毁。俯仰默认值还有较大的「I」增益，以尝试补偿初始重心位置不理想的情况。通过 "
+":ref:`SERVO_AUTO_TRIM<SERVO_AUTO_TRIM>` 微调后，应将此值设为「P」增益的 1/5，然后按下文说明进行完整调参。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:29
+#: 18d74b5030ef4e62b3976b0646492644
+msgid "Preconditions"
+msgstr "前提条件"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:31
+#: 171cc94340704bf4bde41ddb34e4c786
+msgid "The following instruction assume that:"
+msgstr "以下说明假设："
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:33
+#: 802c4b2a733249f2ae18cac4b674a5d9
+msgid "Your model is trimmed"
+msgstr "您的模型已经过微调"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:34
+#: 42495410aa4c4ae1a0f4a9615581f03b
+msgid "You have done your radio calibration"
+msgstr "您已完成无线电校准"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:35
+#: f26b22eff17640099b1847b075413e95
+msgid "You have calibrated your airspeed sensor"
+msgstr "您已校准空速传感器"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:36
+#: d5024217cc744643a6c1ae4a9ce1005b
+msgid "You have leveled the autopilot"
+msgstr "您已水平调整飞控"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:37
+#: a1885ddbaa8f4794978b8847c7840d40
+msgid ""
+"You have set your autopilot and transmitter to be able to select :ref:`FBW-A"
+" mode <fbwa-mode>`"
+msgstr "您已设置飞控和遥控器以能够选择 :ref:`FBW-A 模式 <fbwa-mode>`"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:38
+#: f097a2e9322644ae888ed4a5386dc467
+msgid ""
+"You have checked your pitch roll and yaw angle on the HUD and verified that "
+"they match the rotation of the model"
+msgstr "您已检查 HUD 上的俯仰、横滚和偏航角，并验证它们与模型的旋转方向一致"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:42
+#: 8fcf339d406f4be6bd9f86e0c7de6887
+msgid "Ground Checks"
+msgstr "地面检查"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:44
+#: 9ada3236c5d2452d9eb9803d481044ee
+msgid "On the ground select FBW-A mode"
+msgstr "在地面选择 FBW-A 模式"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:45
+#: 1a71d4d34f7f4b61b728ae9452d5be03
+msgid ""
+"Rotate your model nose up - you should see the elevators/elevons deflect "
+"down"
+msgstr "将模型机头向上旋转——您应看到升降舵/升降副翼向下偏转"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:47
+#: 2cdf08ab3b7f4abb9dbc8113fb6d3ed8
+msgid ""
+"Rotate your model nose down - you should see the elevators/elevons deflect "
+"up"
+msgstr "将模型机头向下旋转——您应看到升降舵/升降副翼向上偏转"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:49
+#: d60f6ed9c4474a34bd91236d4334ae42
+msgid ""
+"Roll the model to the right - you should see the left aileron/elevon go up "
+"and the right aileron/elevon go down."
+msgstr "将模型向右倾斜——您应看到左副翼/升降副翼向上，右副翼/升降副翼向下偏转。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:51
+#: a46fbf4686fe40c5b29ec07c31832e01
+msgid ""
+"Roll the model to the left - you should see the left aileron/elevon go down "
+"and the right aileron/elevon go up."
+msgstr "将模型向左倾斜——您应看到左副翼/升降副翼向下，右副翼/升降副翼向上偏转。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:53
+#: 16b3e43bb4bd4d8d80e13590202b1fe7
+#, python-format
+msgid ""
+"Level the model - the control surfaces should be close to neutral. There "
+"will be a little bit of displacement, but any more than 10% of your maximum "
+"throw indicates that the autopilot has not been leveled or the radio "
+"calibration needs to be repeated."
+msgstr "将模型调平——控制面应接近中立位置。会有轻微偏移，但若超过最大行程的 10%，则表明飞控未水平调整或需要重新进行无线电校准。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:57
+#: c53fbeee951b4358861472ff30c19b9f
+msgid ""
+"With the model level apply left and right roll stick inputs on your "
+"transmitter - the controls should deflect in the same direction that they "
+"would in manual mode."
+msgstr "在模型水平的情况下，对遥控器施加左右横滚杆输入——控制面应向手动模式下相同的方向偏转。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:60
+#: 054967c701ea4576917974a41eb8f75c
+msgid ""
+"With the model level apply up and down pitch stick inputs on your "
+"transmitter the controls should deflect in the same direction that they "
+"would in manual mode."
+msgstr "在模型水平的情况下，对遥控器施加上下俯仰杆输入——控制面应向手动模式下相同的方向偏转。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:63
+#: a962c57a831d4db6801f5059f3883557
+msgid ""
+"If you have an airspeed sensor enabled then blow air towards the front of "
+"the pitot tube and watch the HUD. You should see the airspeed reading "
+"increase"
+msgstr "若启用了空速传感器，对着空速管前端吹气并观察 HUD。您应看到空速读数增加"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:68
+#: 66147545cb5b4312a3f6b3e6c550aa0b
+msgid "Flight testing"
+msgstr "飞行测试"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:70
+#: 7990d2ce9d4544319e671d9255fa0a2b
+msgid ""
+"Ideally you will need a second person to do this - one person to fly the "
+"plane and one person to adjust the parameters. To follow the manual parts of"
+" this procedure you need to be a proficient RC pilot or have someone who is "
+"available to help you. Otherwise you will need to start at step 2 on the "
+"Initial Assessment and be more cautious with control gain adjustment, "
+"increasing them in small steps."
+msgstr ""
+"理想情况下需要两个人完成此操作——一人飞行，一人调整参数。要按照本程序的手动部分操作，您需要是熟练的 RC 飞手，或有人协助。否则需要从初始评估的第 2"
+" 步开始，在调整控制增益时更加谨慎，分小步逐渐增加。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:78
+#: 550d6acebc7b4503bf6945b633c7ed3f
+msgid "Initial Assessment"
+msgstr "初始评估"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:80
+#: aa1321369d394beb99bb7b9f7357e0f4
+msgid ""
+"Take-off in manual and adjust the trims and throttle to a cruise position so"
+" that the plane flies straight and level at a speed that you are comfortable"
+" with. This will normally be somewhere between 30 and 60% throttle depending"
+" on how overpowered your model is."
+msgstr "在手动模式下起飞并调整微调和油门至巡航位置，使飞机以您满意的速度平直飞行。通常根据模型动力大小，油门在 30% 至 60% 之间。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:85
+#: d9e5af7e438248c0b7ac34b7c85ba074
+msgid ""
+"With the plane flying away from you switch to FBW-A. It should continue to "
+"fly wings level and at a fairly constant height (it may climb or descend "
+"slowly). If it wants to roll or pitch more than a small amount then there is"
+" a problem with the model's trim, autopilot level or radio calibration and "
+"you need to solve that first before proceeding further."
+msgstr ""
+"在飞机飞离您时切换至 "
+"FBW-A。飞机应继续保持翼平飞行，高度基本稳定（可能缓慢爬升或下降）。若出现超过轻微横滚或俯仰，则模型微调、飞控水平调整或无线电校准存在问题，需先解决这些问题再继续。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:91
+#: c7d7dfab3a4241a4948418f538528859
+msgid ""
+"If the model starts to wag its wings, then the default ``RLL2SRV_P`` value "
+"is too high for your model (this is unlikely but could happen) and you need "
+"to switch back to manual immediately and ask your assistant to halve the "
+"``RLL2SRV_P`` parameter before switching back into FBW-A"
+msgstr ""
+"若模型开始摇摆机翼，则默认 ``RLL2SRV_P`` 值对您的模型来说太高（这不太可能但可能发生），需立即切换回手动模式并请助手将 "
+"``RLL2SRV_P`` 参数减半，然后再切换回 FBW-A"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:96
+#: d73df1bf8d884273888fbcd65b6b679a
+msgid ""
+"If the model starts to porpoise, the default ``PTCH2SRV_P`` value is too "
+"high (this is unlikely but could happen) and you need to switch back to "
+"manual immediately and ask your assistant to halve the ``PTCH2SRV_P`` "
+"parameter before switching back into FBW-A"
+msgstr ""
+"若模型开始海豚式振荡，则默认 ``PTCH2SRV_P`` 值太高（这不太可能但可能发生），需立即切换回手动模式并请助手将 ``PTCH2SRV_P``"
+" 参数减半，然后再切换回 FBW-A"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:102
+#: cc009551df9243dda38aeb830db3b7f8
+msgid "Roll Control Tuning"
+msgstr "横滚控制调参"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:105
+#: ../../source/docs/roll-pitch-controller-tuning.rst:206
+#: 68505511d81746508979b4edf4d43f5e ec461ff904b14e51bebe61d111fb443b
+msgid "Method 1"
+msgstr "方法 1"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:107
+#: 66541f8bc4c4498d8b327a9bfb525149
+msgid ""
+"This method is the simplest, but won't give the best result. For those users"
+" familiar with tuning the old PID controllers, the ``RLL2SRV_P``, "
+"``RLL2SRV_I`` and ``RLL2SRV_D`` gains have the same effect, but there are "
+"some additional values that can be set by more advanced users."
+msgstr ""
+"此方法最简单，但效果不是最好。对于熟悉旧 PID 控制器调参的用户，``RLL2SRV_P``、``RLL2SRV_I`` 和 "
+"``RLL2SRV_D`` 增益具有相同的效果，但高级用户还可以设置一些额外的值。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:113
+#: 6d6ce3960882443db86a411b96ff6207
+msgid ""
+"With the model in FBW-A mode, put in a rapid bank angle demand by pushing "
+"the aileron stick all the way over, hold it for a couple of seconds and then"
+" release. Do the same in the other direction. You want the model to roll "
+"quickly and smoothly to the new bank angle and back again without overshoot "
+"or any wing 'rocking'. If the roll response is too slow, then progressively "
+"increase ``RLL2SRV_P`` in increments of 0.1 until you are happy with the "
+"response."
+msgstr ""
+"在 FBW-A "
+"模式下，快速施加坡度角指令，将副翼杆推到底，保持几秒钟后松开。在另一方向重复相同操作。您希望模型快速平稳地滚转到新坡度角并返回，无超调或机翼「摇晃」。若横滚响应太慢，以"
+" 0.1 为步长逐渐增大 ``RLL2SRV_P``，直到对响应满意为止。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:120
+#: 4d0727a7976b4227a1a37cb1103402ee
+msgid ""
+"If you get bank angle oscillation or overshoot, then you need to reduce "
+"``RLL2SRV_P``. If at this point you still don't have sufficient response "
+"then you need to follow Method 2."
+msgstr "若出现坡度角振荡或超调，则需减小 ``RLL2SRV_P``。若此时仍无足够响应，则需采用方法 2。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:123
+#: 8c99c8e601ef4186987cc23181b64fd1
+msgid ""
+"Once you are happy with the roll response you should now slowly increase the"
+" ``RLL2SRV_I`` to give the controller some \"I gain\" to allow it to cope "
+"better with wind. A value of 0.05 will work for most models. If you see "
+"overshoot or oscillation when raising the I value then halve it."
+msgstr ""
+"对横滚响应满意后，应缓慢增大 ``RLL2SRV_I`` 以给控制器一些「I 增益」，使其更好地应对风扰。大多数模型 0.05 的值都适用。若提高 I "
+"值时出现超调或振荡，则将其减半。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:130
+#: ../../source/docs/roll-pitch-controller-tuning.rst:240
+#: a9a0df08b4b942a4a8821838a6e6b04a af87004303784a1784bac334de6dae27
+msgid "Method 2"
+msgstr "方法 2"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:132
+#: 32ca409db2554643a19d7d9a76535213
+msgid ""
+"This method will give a better result, but requires more caution because "
+"step 2 can produce a high frequency instability that can overheat the "
+"aileron servo(s) if allowed to continue."
+msgstr "此方法效果更好，但需要更加谨慎，因为第 2 步可能产生高频不稳定性，若持续下去可能使副翼舵机过热。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:136
+#: 394f18887eb84d1d830f07167305dcbf
+msgid ""
+"With the model in FBW-A mode, put in a rapid bank angle demand, hold it and "
+"release. Do the same in the other direction. You want the model to roll "
+"quickly and smoothly to the new bank angle and back again without overshoot "
+"or any wing 'waggle'. If the roll response is too slow, then progressively "
+"increase the ``RLL2SRV_P`` gain in increments of 0.1 until you are happy "
+"with the response or you start to get oscillation in bank angle or overshoot"
+msgstr ""
+"在 FBW-A "
+"模式下，快速施加坡度角指令，保持后松开。在另一方向重复。您希望模型快速平稳地滚转到新坡度角并返回，无超调或机翼「摆动」。若横滚响应太慢，以 0.1 "
+"为步长逐渐增大 ``RLL2SRV_P`` 增益，直到满意或出现坡度角振荡/超调为止"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:143
+#: 5f8e6b2d32494e8f842b5a1ac3df7d89
+msgid ""
+"Increase ``RLL2SRV_D`` in increments of 0.01 until it it starts to "
+"oscillate, then halve it. Do not go above 0.1 for ``RLL2SRV_D`` without "
+"checking the temperature of your servos when you land as in extreme cases "
+"turning up this gain can cause rapid servo movement and overheat the servos "
+"leading to premature failure."
+msgstr ""
+"以 0.01 为步长增大 ``RLL2SRV_D``，直到开始振荡后将其减半。``RLL2SRV_D`` 不要超过 "
+"0.1，否则在降落时请检查舵机温度，极端情况下提高此增益可能导致舵机快速运动过热，导致过早失效。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:148
+#: 3ed8de14993846b199799f6e7040bdbf
+msgid ""
+"Now start to increase the integrator gain ``RLL2SRV_I`` in steps of 0.05 "
+"from its default value of zero until the bank angle starts to overshoot or "
+"oscillate, then halve it."
+msgstr "然后从默认值零开始，以 0.05 为步长增大积分增益 ``RLL2SRV_I``，直到坡度角开始超调或振荡后将其减半。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:153
+#: ../../source/docs/roll-pitch-controller-tuning.rst:257
+#: 5ed98af5f88649b3a139b8160f50cbb4 a67554af8cea4e5ca22f72a208249e25
+msgid "Tuning tips"
+msgstr "调参技巧"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:155
+#: 5e3abbd71998443a894b6805a9beddf7
+msgid ""
+"Select the tuning box on the bottom of the Mission Planners Flight Data "
+"page. You should get a scrolling black window above the map. Double click in"
+" the black window and you should get a list of parameters to plot. Change "
+"the selection until you have the roll and nav_roll plotted. Nav_roll is the "
+"demand and roll is the response. You can use this to look for overshoot and "
+"other behaviour that isn't so obvious from the ground looking at the model."
+msgstr ""
+"在 Mission Planner "
+"飞行数据页底部选择调参框。您应在地图上方看到一个黑色滚动窗口。双击黑色窗口，应出现可绘制的参数列表。更改选择直到同时绘制 roll 和 "
+"nav_roll。nav_roll 为指令值，roll 为响应值。可用此方法查看超调和其他从地面看模型时不明显的行为。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:162
+#: 6119460a3f4a42668c5b8727af6889ba
+msgid ""
+"Check for any steady offset between nav_roll and roll. If you have followed "
+"the basic method you may see an offset which can be removed by setting "
+"``RLL2SRV_I`` to a small value (say 0.01) which will allow the control loop "
+"to slowly trim the aileron demand to remove the steady error."
+msgstr ""
+"检查 nav_roll 和 roll 之间是否存在稳定偏差。若使用基本方法，可能会看到可通过将 ``RLL2SRV_I`` 设为小值（如 "
+"0.01）来消除的偏差，这将允许控制环缓慢微调副翼指令以消除稳态误差。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:167
+#: 06b9e25a5b7147e687fb59bd4aaee6c9
+msgid ""
+"Although the autopilot will prevent the integrator from increasing if the "
+"maximum aileron is exceeded, there is additional protection provided by the "
+"``RLL2SRV_IMAX`` parameter. This parameter sets the maximum amount of "
+"aileron (in centi-degrees) that the integrator can control. The default "
+"value of 1500 allows the integrator to trim up to 1/3 of the total aileron "
+"travel. This parameter should not need to be changed unless you are trying "
+"to tune the controller to be able to compensate for large roll offsets due "
+"to system failures."
+msgstr ""
+"尽管飞控会在达到最大副翼时阻止积分器继续增加，但 ``RLL2SRV_IMAX`` "
+"参数提供了额外保护。此参数设置积分器可控制的最大副翼量（单位：厘度）。默认值 1500 允许积分器微调最多 1/3 "
+"的总副翼行程。除非需要调参控制器以补偿系统故障导致的大横滚偏差，否则无需更改此参数。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:175
+#: fca22146117c4f4db8c9afb548bd7dfe
+msgid ""
+"The maximum roll rate can be constrained to make the model bank more "
+"smoothly by setting the roll rate limit :ref:`RLL2SRV_RMAX<RLL2SRV_RMAX>` "
+"parameter to a non-zero value. The default value of 60 deg/sec works well "
+"for most models. Setting this parameter to 0 turns the rate limiter off and "
+"can make the effect of tuning changes easier to see. If this value is "
+"reduced too far, then the roll controller is unable to keep up with demands "
+"from the navigation controller which leads to overshoot and weaving in the "
+"aircraft's trajectory."
+msgstr ""
+"可通过将横滚速率限制 :ref:`RLL2SRV_RMAX<RLL2SRV_RMAX>` "
+"参数设为非零值来约束最大横滚速率，使模型更平稳地坡度飞行。默认值 60 度/秒对大多数模型效果良好。将此参数设为 0 "
+"可关闭速率限制器，使调参变化效果更易观察。若此值减小过多，横滚控制器将无法跟上导航控制器的指令，导致航迹超调和蛇行。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:183
+#: 48d0d61d718a41a9ad62601e95f3f3b1
+msgid ""
+"The time constant parameter :ref:`RLL2SRV_TCONST<RLL2SRV_TCONST>` can also "
+"be used to adjust how rapidly the bank angle reaches the demanded value. The"
+" effect of this parameter will be seen mostly in the response to small step "
+"changes in demanded roll. For larger roll demands, the roll rate limit "
+":ref:`RLL2SRV_RMAX<RLL2SRV_RMAX>` tends to mask its effect. Making this "
+"parameter smaller will cause the aircraft to reach its demanded roll angle "
+"in less time, but only if the aircraft is capable. A very slow responding "
+"airframe may require a slightly larger setting for this parameter."
+msgstr ""
+"时间常数参数 :ref:`RLL2SRV_TCONST<RLL2SRV_TCONST>` "
+"也可用于调整坡度角达到指令值的速度。此参数的效果主要体现在对指令横滚的小阶跃变化响应上。对于较大的横滚指令，横滚速率限制 "
+":ref:`RLL2SRV_RMAX<RLL2SRV_RMAX>` "
+"往往会掩盖其效果。减小此参数将使飞机在更短时间内达到指令横滚角，但前提是飞机有能力实现。响应非常缓慢的机架可能需要稍大的设置。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:192
+#: 4ba9ca781c794e8eb394ee0864bade2e
+msgid ""
+"Plot the roll_speed in the tuning window. This shows the rate of roll in "
+"radians/second. A value of 1 radian/second is approximately equal to 60 "
+"degrees/second (57 to be more precise), so if you have "
+":ref:`RLL2SRV_RMAX<RLL2SRV_RMAX>` set to 60, the maximum roll_speed when "
+"responding to a large bank angle demand (eg full bank one way to full bank "
+"the other) should be just above 1.0. A value of greater than 1.1 indicates "
+"that ``RLL2SRV_P`` is too high and should be reduced, whereas a value of "
+"less than 1 indicates that ``RLL2SRV_P`` should be increased."
+msgstr ""
+"在调参窗口绘制 roll_speed。这显示的是以弧度/秒为单位的横滚速率。1 弧度/秒约等于 60 度/秒（精确值为 57），因此若 "
+":ref:`RLL2SRV_RMAX<RLL2SRV_RMAX>` 设为 60，响应大坡度指令（如全横滚一侧到另一侧）时的最大 roll_speed "
+"应略高于 1.0。值大于 1.1 表明 ``RLL2SRV_P`` 过高应减小，值小于 1 表明 ``RLL2SRV_P`` 应增大。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:203
+#: 224bfe10c02c4497a48ce383d1f32851
+msgid "Pitch Control Tuning"
+msgstr "俯仰控制调参"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:208
+#: 281156f196a14245a4ceaea87e0f040f
+msgid ""
+"This method is the simplest and but won't give the best result. For those "
+"users familiar with tuning the old PID controller gains, the K_P, K_I and "
+"K_D gains in this controller have the same effect, but there are some "
+"additional values that can be set by more advanced users."
+msgstr ""
+"此方法最简单，但效果不是最好。对于熟悉旧 PID 控制器增益调参的用户，此控制器中的 K_P、K_I 和 K_D "
+"增益具有相同的效果，但高级用户还可以设置一些额外的值。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:213
+#: f260434c7f594d9698d5613e5ff073e2
+msgid ""
+"With the model in FBW-A mode, put in a rapid pitch angle demand, hold it and"
+" release. Do the same in the other direction. You want the model to pitch "
+"quickly and smoothly to the new pitch angle and back again without overshoot"
+" or any porpoising. If the pitch response is too slow, then progressively "
+"increase ``PTCH2SRV_P`` in increments of 0.1 until you are happy with the "
+"response."
+msgstr ""
+"在 FBW-A 模式下，快速施加俯仰角指令，保持后松开。在另一方向重复。您希望模型快速平稳地俯仰到新角度并返回，无超调或海豚式振荡。若俯仰响应太慢，以 "
+"0.1 为步长逐渐增大 ``PTCH2SRV_P``，直到对响应满意为止。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:219
+#: 8fb6568b95de4547b2886f5469b6f03b
+msgid ""
+"If you get pitch angle oscillation or overshoot, then you need to reduce "
+"``PTCH2SRV_P``. If at this point you still don't have sufficient response "
+"then you need to check your radio calibration, the minimum and maximum pitch"
+" angles and potentially follow Method 2."
+msgstr ""
+"若出现俯仰角振荡或超调，则需减小 ``PTCH2SRV_P``。若此时仍无足够响应，则需检查无线电校准、最小和最大俯仰角，并可能需要采用方法 2。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:223
+#: 3730867cb5a54309941b6d7584a84515
+msgid ""
+"Now roll the model to maximum bank in each direction. The nose should stay "
+"fairly level during the turns without significant gain or loss of altitude. "
+"Some loss of altitude during sustained turns at constant throttle is "
+"expected, because the extra drag of turning slows the model down which will "
+"cause a mild descent. If the model gains height during the turns then you "
+"need to reduce the :ref:`PTCH2SRV_RLL<PTCH2SRV_RLL>` by small increments of "
+"0.05 from the default value of 1.0. If the model descends immediately when "
+"the model banks (a mild descent later in the turn when the model slows down "
+"is normal as explained earlier) then increase the "
+":ref:`PTCH2SRV_RLL<PTCH2SRV_RLL>` by small increments of 0.01 from the "
+"default value of 1.0. If you need to change the "
+":ref:`PTCH2SRV_RLL<PTCH2SRV_RLL>` parameter outside the range from 0.7 to "
+"1.4 then something is likely wrong with either the earlier tuning of your "
+"pitch loop, your airspeed calibration or your autopilot's bank angle "
+"estimate."
+msgstr ""
+"现在将模型向两个方向滚转至最大坡度。在转弯过程中机头应保持基本水平，不应有明显的高度增益或损失。在恒定油门持续转弯时出现轻微高度损失是预期的，因为转弯的额外阻力会使模型减速从而轻微下降。若模型在转弯时高度增加，则需以"
+" 0.05 为步长从默认值 1.0 减小 "
+":ref:`PTCH2SRV_RLL<PTCH2SRV_RLL>`。若模型在坡度时立即下降（后来模型减速时出现轻微下降是正常的，如前所述），则以 "
+"0.01 为步长从默认值 1.0 增大 :ref:`PTCH2SRV_RLL<PTCH2SRV_RLL>`。若需要将 "
+":ref:`PTCH2SRV_RLL<PTCH2SRV_RLL>` 调整到 0.7 到 1.4 "
+"范围之外，则可能存在其他问题，应检查俯仰环的早期调参、空速校准或飞控的坡度角估计。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:242
+#: a5dfb7bdfd1a4f62ab21433248c51bdb
+msgid ""
+"This method can give a better result, but requires more caution because step"
+" 2) can produce a high frequency instability that unless reversion back to "
+"manual is done quickly, could overstress the plane."
+msgstr "此方法可以获得更好的结果，但需要更加谨慎，因为第 2）步可能产生高频不稳定性，若不迅速恢复手动模式，可能对飞机造成过大应力。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:246
+#: 327b5889440c4ed8a77fad4d780b9a9e
+msgid "Perform the tuning steps from Method 1"
+msgstr "执行方法 1 的调参步骤"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:247
+#: 9e9a716b1042441d97f03f4b7743d8ca
+msgid ""
+"Increase ``PTCH2SRV_D`` in increments of 0.01 until it it starts to "
+"oscillate, then halve it. Do not go above 0.1 for ``PTCH2SRV_D`` without "
+"checking the temperature of your servos when you land as in extreme cases "
+"turning up this gain can cause rapid servo movement and overheat the servos "
+"leading to premature failure."
+msgstr ""
+"以 0.01 为步长增大 ``PTCH2SRV_D``，直到开始振荡后将其减半。``PTCH2SRV_D`` 不要超过 "
+"0.1，否则在降落时请检查舵机温度，极端情况下提高此增益可能导致舵机快速运动过热，导致过早失效。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:252
+#: 1128e75645d24cc9aa6f9dbe6baff6cd
+msgid ""
+"Now start to increase the integrator gain ``PTCH2SRV_I`` in steps of 0.05 "
+"from its default value of zero until the pitch angle starts to overshoot or "
+"oscillate, then halve it."
+msgstr "然后从默认值零开始，以 0.05 为步长增大积分增益 ``PTCH2SRV_I``，直到俯仰角开始超调或振荡后将其减半。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:259
+#: 35ea89d3821c40bc9a4659459dea2718
+msgid ""
+"Select the tuning box on the bottom of the Mission Planners Flight Data "
+"page. You should get a scrolling black window above the map. Double click in"
+" the black window and you should get a list of parameters to plot. Change "
+"the selection until you have the pitch and nav_pitch plotted. Nav_pitch is "
+"the demand and pitch is the response. You can use this to look for overshoot"
+" and other behaviour that isn't so obvious from the ground looking at the "
+"model."
+msgstr ""
+"在 Mission Planner "
+"飞行数据页底部选择调参框。您应在地图上方看到一个黑色滚动窗口。双击黑色窗口，应出现可绘制的参数列表。更改选择直到同时绘制 pitch 和 "
+"nav_pitch。nav_pitch 为指令值，pitch 为响应值。可用此方法查看超调和其他从地面看模型时不明显的行为。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:266
+#: c0a979ffc5744172b4dba46d5f63c6af
+msgid ""
+"Check for any steady offset between nav_pitch-roll and pitch. If you have "
+"followed the basic method you may see an offset which can be removed by "
+"setting ``PTCH2SRV_I`` to a small value (say 0.05) which will allow the "
+"control loop to slowly trim the elevator demand to remove the steady error. "
+"The value of ``PTCH2SRV_I`` can be increased in small increments of 0.05 "
+"until you are satisfied with the speed at which the control loop 're-trims'."
+msgstr ""
+"检查 nav_pitch-roll 和 pitch 之间是否存在稳定偏差。若使用基本方法，可能会看到可通过将 ``PTCH2SRV_I`` 设为小值（如"
+" 0.05）来消除的偏差，这将允许控制环缓慢微调升降舵指令以消除稳态误差。``PTCH2SRV_I`` 的值可以以 0.05 "
+"为步长增大，直到对控制环「重新微调」的速度满意为止。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:273
+#: a2c35fe8c7e942dcb1088279fabb33a1
+msgid ""
+"Although the autopilot will prevent the integrator from increasing if the "
+"maximum elevator is exceeded, there is additional protection provided by the"
+" ``PTCH2SRV_IMAX`` parameter. This parameter sets the maximum amount of "
+"elevator(in centi-degrees) that the integrator can control. The default "
+"value of 1500 allows the integrator to trim up to 1/3 of the total elevator "
+"travel. This should be enough to allow for the trim offset and variation in "
+"trim with speed for most models."
+msgstr ""
+"尽管飞控会在达到最大升降舵时阻止积分器继续增加，但 ``PTCH2SRV_IMAX`` "
+"参数提供了额外保护。此参数设置积分器可控制的最大升降舵量（单位：厘度）。默认值 1500 允许积分器微调最多 1/3 "
+"的总升降舵行程。这对于大多数模型的微调偏差和速度变化引起的微调变化应该足够。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:280
+#: ec5f060367014412a35f0c3e9056229c
+msgid ""
+"WARNING : If ``PTCH2SRV_IMAX`` is set too high, then there is a danger that "
+"in FBW-A, if the model has been leveled so that zero pitch is too nose-up to"
+" glide at a safe speed, that the integrator will continue to keep increasing"
+" the elevator to maintain the demanded pitch angle until the model stalls. "
+"``PTCH2SRV_IMAX`` should be set to a value that is big enough to allow from "
+"trim changes, but small enough so that it cannot stall the plane. The "
+"default for Plane is 2/3 of total throw, which could produce this problem. "
+"Be sure that :ref:`STAB_PITCH_DOWN<STAB_PITCH_DOWN>` is setup to add "
+"negative pitch at low throttle in stablized modes."
+msgstr ""
+"警告：若 ``PTCH2SRV_IMAX`` 设置过高，则在 FBW-A "
+"模式下，若模型水平调整使零俯仰角的机头角度太高无法以安全速度滑翔，则积分器可能持续增加升降舵以维持指令俯仰角直到模型失速。``PTCH2SRV_IMAX``"
+" 应设置为足够大以允许微调变化，但足够小以不会导致飞机失速。Plane 的默认值为总行程的 2/3，可能产生此问题。请确保设置了 "
+":ref:`STAB_PITCH_DOWN<STAB_PITCH_DOWN>` 以在稳定模式低油门时添加负俯仰。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:289
+#: 0237b0665e484ad9990a63f708d8cc71
+msgid ""
+"The rate of pitch (and therefore the reduce the number of g's) used to "
+"correct pitch angle errors can be limited setting the pitch rate limit "
+":ref:`PTCH2SRV_RMAX_DN<PTCH2SRV_RMAX_DN>` and "
+":ref:`PTCH2SRV_RMAX_UP<PTCH2SRV_RMAX_UP>` parameters to non-zero values. "
+"Setting these values to 560 divided by the airspeed (in metres/second) gives"
+" a limit equivalent to approximately +- 1g."
+msgstr ""
+"可通过将俯仰速率限制 :ref:`PTCH2SRV_RMAX_DN<PTCH2SRV_RMAX_DN>` 和 "
+":ref:`PTCH2SRV_RMAX_UP<PTCH2SRV_RMAX_UP>` 参数设为非零值来限制用于修正俯仰角误差的俯仰速率（从而减少 g "
+"值）。将这些值设为 560 除以空速（米/秒）可将限制等效为约 ±1g。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:294
+#: 9f3fe9f2f06c43abbb38667514dc4561
+msgid ""
+"The time constant parameter :ref:`PTCH2SRV_TCONST<PTCH2SRV_TCONST>` can also"
+" be used to adjust how rapidly the pitch angle reaches the demanded value. "
+"The effect of this parameter will be seen mostly in the response to small "
+"step changes in demanded pitch. For larger pitch demands, the pitch rate "
+"limits :ref:`PTCH2SRV_RMAX_DN<PTCH2SRV_RMAX_DN>` and "
+":ref:`PTCH2SRV_RMAX_UP<PTCH2SRV_RMAX_UP>` tend to mask its effect. Making "
+"this parameter smaller will cause the aircraft to reach its demanded pitch "
+"angle in less time, but only if the aircraft is capable. A very slow "
+"responding airframe may require a slightly larger setting for this "
+"parameter."
+msgstr ""
+"时间常数参数 :ref:`PTCH2SRV_TCONST<PTCH2SRV_TCONST>` "
+"也可用于调整俯仰角达到指令值的速度。此参数的效果主要体现在对指令俯仰的小阶跃变化响应上。对于较大的俯仰指令，俯仰速率限制 "
+":ref:`PTCH2SRV_RMAX_DN<PTCH2SRV_RMAX_DN>` 和 "
+":ref:`PTCH2SRV_RMAX_UP<PTCH2SRV_RMAX_UP>` "
+"往往会掩盖其效果。减小此参数将使飞机在更短时间内达到指令俯仰角，但前提是飞机有能力实现。响应非常缓慢的机架可能需要稍大的设置。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:303
+#: 72f38e2afa724fa7a79ad1a833b43c9f
+msgid ""
+"Plot the pitch_speed in the tuning window. This shows the rate of pitch in "
+"radians/second. A value of 1 radian/second is approximately equal to 60 "
+"degrees/second (57 to be more precise), so if for example you had \\ "
+":ref:`PTCH2SRV_RMAX_DN<PTCH2SRV_RMAX_DN>`/UP set to 30, the maximum "
+"pitch_speed when responding to a large pitch angle demand (eg full pitch one"
+" way to full pitch the other way) should be just above 0.5. A value of "
+"greater than 0.6 would indicate that ``PTCH2SRV_P`` is too high and should "
+"be reduced, whereas a value of less than 0.5 would indicate that "
+"``RLL2SRV_P`` should be increased."
+msgstr ""
+"在调参窗口绘制 pitch_speed。这显示的是以弧度/秒为单位的俯仰速率。1 弧度/秒约等于 60 度/秒（精确值为 57），因此若例如 "
+":ref:`PTCH2SRV_RMAX_DN<PTCH2SRV_RMAX_DN>`/UP 设为 30，响应大俯仰角指令（如全俯仰一侧到另一侧）时的最大 "
+"pitch_speed 应略高于 0.5。值大于 0.6 表明 ``PTCH2SRV_P`` 过高应减小，值小于 0.5 表明 "
+"``RLL2SRV_P`` 应增大。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:315
+#: 37d4b62e14974623aa80ea95616c4873
+msgid "Yaw Controller Tuning"
+msgstr "偏航控制器调参"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:317
+#: 97a73d271adb4175ad52724c1540a7de
+msgid ""
+"The yaw control loop can be configured either as a simple yaw damper (good "
+"for models with inadequate fin area) or as a combined yaw damper and side-"
+"slip controller. Because control of side-slip uses measured lateral "
+"acceleration, it will only work for those models that have enough fuselage "
+"side area to produce a measurable lateral acceleration when they side-slip "
+"(an extreme example of this is an aerobatic model flying a knife-edge "
+"maneuver where all of the lift is produced by the fuselage). Gliders with "
+"slender fuselages and flying wings cannot use this feature, but can still "
+"benefit from the yaw damper provided they have a yaw control (rudder, "
+"differential airbrakes, etc)"
+msgstr ""
+"偏航控制环可配置为简单的偏航阻尼器（适用于垂尾面积不足的模型）或组合偏航阻尼器与侧滑控制器。由于侧滑控制使用测量的侧向加速度，它仅适用于机身侧面面积足够大、在侧滑时能产生可测量侧向加速度的模型（极端例子是做刀锋机动的特技模型，所有升力由机身产生）。细长机身的滑翔机和飞翼无法使用此功能，但只要有偏航控制（方向舵、差动气动刹车等），仍可从偏航阻尼器中受益"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:329
+#: a927b13e35344268aa4397b45b2be97f
+msgid "Tuning the yaw damper"
+msgstr "调参偏航阻尼器"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:331
+#: c05b3a9cc9af49eaaa4cdf276b4d59c2
+msgid ""
+"Verify that the :ref:`YAW2SRV_SLIP<YAW2SRV_SLIP>` and "
+":ref:`YAW2SRV_INT<YAW2SRV_INT>` gain terms are set to zero, the "
+"``YAW2SRV_RLL`` gain term is set to 1.0 and the "
+":ref:`YAW2SRV_DAMP<YAW2SRV_DAMP>` gain term is set to zero"
+msgstr ""
+"验证 :ref:`YAW2SRV_SLIP<YAW2SRV_SLIP>` 和 :ref:`YAW2SRV_INT<YAW2SRV_INT>` "
+"增益项设为零，``YAW2SRV_RLL`` 增益项设为 1.0，:ref:`YAW2SRV_DAMP<YAW2SRV_DAMP>` 增益项设为零"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:334
+#: ecdae50b2532434aaf8bfcea25b260dd
+msgid ""
+"Now rapidly roll the model from maximum bank angle in one direction to "
+"maximum bank angle in the opposite direction. Do this several times going in"
+" each direction and observe the yawing motion of the model. If as the wings "
+"pass through level the nose is yawed in the opposite direction to the roll "
+"(for example when rolling from left to right bank, the nose points left) "
+"then increase the value of :ref:`KFF_RDDRMIX<KFF_RDDRMIX>` gain until the "
+"yaw goes away. Do not use a value larger than 1."
+msgstr ""
+"现在快速将模型从一侧最大坡度角横滚到另一侧最大坡度角。两个方向各操作几次并观察模型的偏航运动。若翼过水平时机头偏向与横滚方向相反（例如从左坡度到右坡度时机头向左偏），则增大"
+" :ref:`KFF_RDDRMIX<KFF_RDDRMIX>` 增益值直到偏航消失。不要使用大于 1 的值。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:342
+#: 3a7cd3b8eacd4098a32089de19f609fc
+msgid ""
+"Increase :ref:`YAW2SRV_DAMP<YAW2SRV_DAMP>` in small increments of 0.05 until"
+" the yaw angle starts to oscillate. When this happens, the tail will appear "
+"to 'wag'. Halve the gain from the value that caused the oscillation."
+msgstr ""
+"以 0.05 为步长增大 "
+":ref:`YAW2SRV_DAMP<YAW2SRV_DAMP>`，直到偏航角开始振荡。发生这种情况时，尾部会出现「摇摆」现象。将导致振荡的值减半作为最终值。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:345
+#: ea59f7edbf0749cdad5a95162f158921
+msgid ""
+"Now roll the model into and out of turns in both directions. If the model "
+"has a tendency to yaw the nose to the outside of the turn, then increase the"
+" :ref:`YAW2SRV_RLL<YAW2SRV_RLL>` gain term in increments of 0.05 from its "
+"default value of 1.0. Conversely if the model has a tendency to yaw the nose"
+" to the inside of the turn on turn entry, then reduce the "
+":ref:`YAW2SRV_RLL<YAW2SRV_RLL>` gain term in increments of 0.01 from its "
+"default value of 1.0. If you have to go outside the range from 0.7 to 1.4, "
+"then there is something else that needs to be sorted and you should check "
+"that you have performed step 2) correctly and check your airspeed "
+"calibration if airspeed is being used."
+msgstr ""
+"现在将模型向两个方向进出转弯。若模型有向转弯外侧偏航的趋势，则以 0.05 为步长从默认值 1.0 增大 "
+":ref:`YAW2SRV_RLL<YAW2SRV_RLL>` 增益项。反之，若模型在进弯时有向内侧偏航的趋势，则以 0.01 为步长从默认值 1.0 "
+"减小 :ref:`YAW2SRV_RLL<YAW2SRV_RLL>` 增益项。若需要将值调整到 0.7 到 1.4 "
+"范围之外，则可能存在其他问题，应检查步骤 2）是否正确执行，以及使用空速时的空速校准。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:357
+#: 20435eec1ec74cd5afade52e6af48c64
+msgid "Tuning the sideslip controller"
+msgstr "调参侧滑控制器"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:359
+#: be3747bc11414ff6b6d80b4989135983
+msgid "Tune the yaw damper first"
+msgstr "先调参偏航阻尼器"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:360
+#: 899ae9e003a94a1bbc110c146b97b638
+msgid ""
+"Bring up the tuning graph window in the mission planner and plot the lateral"
+" acceleration ay."
+msgstr "在 Mission Planner 调参图形窗口中绘制侧向加速度 ay。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:362
+#: 7c40c0977b7a4a219c3d5c758b743ace
+msgid ""
+"Roll the model rapidly from full bank in each direction and observe the "
+"lateral acceleration ay. If the lateral acceleration sits around zero and "
+"doesn't change when you roll into or out of turns then no side-slip control "
+"is necessary. You can finish at this point."
+msgstr "快速将模型向各方向横滚到最大坡度并观察侧向加速度 ay。若侧向加速度保持在零附近且在进出转弯时不变化，则无需侧滑控制，可在此结束。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:366
+#: 596d8bc4514b42809cfee09a75e100e4
+msgid ""
+"Set the :ref:`YAW2SRV_INT<YAW2SRV_INT>` gain term to 1.0. If this causes the"
+" yaw angle to oscillate then halve the gain from the smallest value that "
+"causes oscillation."
+msgstr "将 :ref:`YAW2SRV_INT<YAW2SRV_INT>` 增益项设为 1.0。若导致偏航角振荡，则将导致振荡的最小值减半。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:369
+#: 3a60624845b14fa5b39ee4cf94b019a1
+msgid ""
+"If you see that the y acceleration is offset or spikes up during turns, then"
+" progressively increase the :ref:`YAW2SRV_SLIP<YAW2SRV_SLIP>` gain in steps "
+"of 0.5 until the error goes away or the yaw angle starts to oscillate. If "
+"yaw oscillation occurs, then halve the gain from the value at which caused "
+"the oscillation."
+msgstr ""
+"若 y 加速度存在偏差或在转弯时出现峰值，则以 0.5 为步长增大 :ref:`YAW2SRV_SLIP<YAW2SRV_SLIP>` "
+"增益，直到误差消失或偏航角开始振荡。若出现偏航振荡，则将导致振荡的值减半。"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:376
+#: d72be2c56e814b429e2ab06728d54f61
+msgid "Controller Overview"
+msgstr "控制器概览"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:379
+#: 75849beca4014f66b71bfb484342de13
+msgid "Roll Controller"
+msgstr "横滚控制器"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:385
+#: 90f78c9be6584ad5bffea5086dff3306
+msgid "Pitch Controller"
+msgstr "俯仰控制器"
+
+#: ../../source/docs/roll-pitch-controller-tuning.rst:391
+#: 53e2d4785d884a2a97034069bcea4bfc
+msgid "Yaw Controller"
+msgstr "偏航控制器"

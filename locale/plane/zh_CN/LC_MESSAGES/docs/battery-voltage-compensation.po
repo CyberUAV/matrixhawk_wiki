@@ -1,0 +1,176 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 14:59+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/battery-voltage-compensation.rst:6
+#: eeda3a35eaa5441ebee0498d4ec25679
+msgid "Battery Voltage Compensation"
+msgstr "电池电压补偿"
+
+#: ../../source/docs/battery-voltage-compensation.rst:8
+#: 99c1a7c48a434c15ba94418c6505fc75
+msgid ""
+"As a flight progresses the battery voltage will gradually lower as power is "
+"consumed. This affects the maximum climb rate, and the cruising speed in "
+"systems with no airpeed sensor. Plane provides two mechanisms to cope with "
+"this, one for forward motor(s) and another for VTOL motors."
+msgstr ""
+"随着飞行进行，电池随能量消耗电压逐渐降低。这影响最大爬升率以及无空速传感器系统中的巡航速度。Plane "
+"提供两种机制来应对这种情况，一种用于前向电机，另一种用于 VTOL 电机。"
+
+#: ../../source/docs/battery-voltage-compensation.rst:11
+#: 867a3e1c33a64b5287e2db8eb2d71be4
+msgid "Forward Motor Compensation"
+msgstr "前向电机补偿"
+
+#: ../../source/docs/battery-voltage-compensation.rst:13
+#: 2457ba97a6b84d59ba833fb9cce605fb
+msgid "This is provided using:"
+msgstr "提供方式如下："
+
+#: ../../source/docs/battery-voltage-compensation.rst:15
+#: 21149c51084c43d6b7001f9f81211ae9
+msgid ""
+":ref:`FWD_BAT_VOLT_MAX<FWD_BAT_VOLT_MAX>`: This sets the voltage from which "
+"lower voltages will result in compensating the actual applied forward "
+"throttle upwards. A value of \"0\", disables this function. Setting this to "
+"4.2V * number of cells is a good value."
+msgstr ""
+":ref:`FWD_BAT_VOLT_MAX<FWD_BAT_VOLT_MAX>`：设置低于该电压时将向上补偿实际施加的前向油门的电压。值为「0」禁用此功能。将其设置为4.2V×电池节数是一个好值。"
+
+#: ../../source/docs/battery-voltage-compensation.rst:16
+#: 8b626a8edca44c7aac8ad4a6eee8d1e2
+msgid ""
+":ref:`FWD_BAT_VOLT_MIN<FWD_BAT_VOLT_MIN>`: Sets the lower limit at which "
+"throttle compensation will be done to prevent dragging the battery down "
+"excessively due to increased throttle scaling. Setting this to 3.3V * number"
+" of cells is a good value."
+msgstr ""
+":ref:`FWD_BAT_VOLT_MIN<FWD_BAT_VOLT_MIN>`：设置进行油门补偿的下限，以防止因油门缩放增加而过度消耗电池。将其设置为3.3V×电池节数是一个好值。"
+
+#: ../../source/docs/battery-voltage-compensation.rst:17
+#: c01b49d83de247129076d8887e54b8f0
+msgid ""
+":ref:`FWD_BAT_IDX<FWD_BAT_IDX>`: Determines which battery monitor voltage is"
+" used (index 0-9). Index \"3\" corresponds to Battery Monitor 4, etc."
+msgstr ""
+":ref:`FWD_BAT_IDX<FWD_BAT_IDX>`：确定使用哪个电池监控器电压（索引0-9）。索引「3」对应电池监控器4，以此类推。"
+
+#: ../../source/docs/battery-voltage-compensation.rst:19
+#: cb0063810ea44ceb88ab8ba5b0b0be28
+msgid ""
+"For battery voltages below :ref:`FWD_BAT_VOLT_MAX<FWD_BAT_VOLT_MAX>`, before"
+" the throttle value that the autopilot determines should be output is "
+"applied, it is scaled by a ratio of the this parameter versus the measured "
+"voltage. This allows all modes (except MANUAL, which never has this applied)"
+" to maintain roughly constant cruise speeds at a given throttle stick "
+"position."
+msgstr ""
+"对于低于 :ref:`FWD_BAT_VOLT_MAX<FWD_BAT_VOLT_MAX>` "
+"的电池电压，在飞控确定应输出的油门值被应用之前，该值按此参数与测量电压的比率进行缩放。这允许所有模式（MANUAL "
+"除外，从不应用此补偿）在给定油门摇杆位置下保持大致恒定的巡航速度。"
+
+#: ../../source/docs/battery-voltage-compensation.rst:21
+#: 1c2fb3e56c1944e38d6150db70baef2e
+msgid ""
+"If an airspeed sensor is used and healthy, then for speed controlled modes, "
+"such as CRUISE and AUTO, it will determine the throttle required instead. "
+"However, the :ref:`THR_MAX<THR_MAX>` and :ref:`THR_MIN<THR_MIN>` are "
+"compensated in all modes except MANUAL, allowing speed controlled modes "
+"greater range of actual throttle control."
+msgstr ""
+"如果使用空速传感器且工作正常，对于速度控制模式（如 CRUISE 和 AUTO），它将确定所需油门。然而，所有模式（MANUAL 除外）中的 "
+":ref:`THR_MAX<THR_MAX>` 和 :ref:`THR_MIN<THR_MIN>` "
+"都会得到补偿，为速度控制模式提供更大范围的实际油门控制。"
+
+#: ../../source/docs/battery-voltage-compensation.rst:23
+#: 02d94639424c442b985cad146f76f309
+msgid ""
+":ref:`FWD_BAT_VOLT_MIN<FWD_BAT_VOLT_MIN>` sets a lower limit on compensation"
+" to prevent excessive sag."
+msgstr ":ref:`FWD_BAT_VOLT_MIN<FWD_BAT_VOLT_MIN>` 设置补偿下限以防止过度下垂。"
+
+#: ../../source/docs/battery-voltage-compensation.rst:26
+#: 57e7f4d172ab49839e23dbb639540cf6
+msgid "QuadPlane VTOL Motor Compensation"
+msgstr "QuadPlane VTOL 电机补偿"
+
+#: ../../source/docs/battery-voltage-compensation.rst:28
+#: 3459481489b94d2f89ff8583c19ccee1
+msgid "This is provided using in a similar manner:"
+msgstr "以类似方式提供："
+
+#: ../../source/docs/battery-voltage-compensation.rst:30
+#: c0e07e03afb1495eba6d25e90bbb2b25
+msgid ""
+":ref:`Q_M_BAT_VOLT_MAX<Q_M_BAT_VOLT_MAX>`: This sets the voltage from which "
+"lower voltages will result in compensating the actual applied VTOL motors "
+"throttle upwards. A value of \"0\", disables this function. Setting this to "
+"4.2V * number of cells is a good value."
+msgstr ""
+":ref:`Q_M_BAT_VOLT_MAX<Q_M_BAT_VOLT_MAX>`：设置低于该电压时将向上补偿实际施加的 VTOL "
+"电机油门的电压。值为「0」禁用此功能。将其设置为4.2V×电池节数是一个好值。"
+
+#: ../../source/docs/battery-voltage-compensation.rst:31
+#: ac5da411006445e0ab4b989a40ea48c7
+msgid ""
+":ref:`Q_M_BAT_VOLT_MIN<Q_M_BAT_VOLT_MIN>`: Sets the lower limit at which "
+"throttle compensation will be done to prevent dragging the battery down "
+"excessively due to increased throttle scaling. Setting this to 3.3V * number"
+" of cells is a good value."
+msgstr ""
+":ref:`Q_M_BAT_VOLT_MIN<Q_M_BAT_VOLT_MIN>`：设置进行油门补偿的下限，以防止因油门缩放增加而过度消耗电池。将其设置为3.3V×电池节数是一个好值。"
+
+#: ../../source/docs/battery-voltage-compensation.rst:32
+#: c4258314e5284d4d8407e62328e54b36
+msgid ""
+":ref:`Q_M_BAT_IDX<Q_M_BAT_IDX>`: Determines which battery monitor voltage is"
+" used (index 0-9). Index \"3\" corresponds to Battery Monitor 4, etc."
+msgstr ""
+":ref:`Q_M_BAT_IDX<Q_M_BAT_IDX>`：确定使用哪个电池监控器电压（索引0-9）。索引「3」对应电池监控器4，以此类推。"
+
+#: ../../source/docs/battery-voltage-compensation.rst:34
+#: 361e2170da134613bf8f13033d2f0827
+msgid ""
+"If :ref:`Q_M_BAT_VOLT_MAX<Q_M_BAT_VOLT_MAX>` is non-zero, then voltage "
+"compensation is applied to throttle to offset battery voltage variations on "
+"thrust as above for the forward motor(s)"
+msgstr ""
+"如果 :ref:`Q_M_BAT_VOLT_MAX<Q_M_BAT_VOLT_MAX>` "
+"非零，则与上述前向电机相同，对油门应用电压补偿以抵消电池电压变化对推力的影响"
+
+#: ../../source/docs/battery-voltage-compensation.rst:36
+#: f1af39a523894aa7a44b5c62bd021d13
+msgid ""
+":ref:`Q_M_BAT_VOLT_MIN<Q_M_BAT_VOLT_MIN>` sets a lower limit on battery "
+"voltage sag by predicting the throttle value that would cause this, using an"
+" estimate of battery internal resistance calculated during flight. It will "
+"limit current applied to the VTOL motors to prevent this from occurring. If "
+":ref:`Q_M_BAT_CURR_MAX<Q_M_BAT_CURR_MAX>` is also non-zero, then it will use"
+" the lower of the two limits, the one set by "
+":ref:`Q_M_BAT_CURR_MAX<Q_M_BAT_CURR_MAX>` or predicted internally using "
+":ref:`Q_M_BAT_VOLT_MIN<Q_M_BAT_VOLT_MIN>` as the minimum voltage sag target."
+msgstr ""
+":ref:`Q_M_BAT_VOLT_MIN<Q_M_BAT_VOLT_MIN>` "
+"通过预测会导致电压下垂的油门值，使用飞行期间计算的电池内阻估算，设置电池电压下垂的下限。它将限制施加到 VTOL 电机的电流以防止这种情况发生。如果 "
+":ref:`Q_M_BAT_CURR_MAX<Q_M_BAT_CURR_MAX>` 也非零，则将使用 "
+":ref:`Q_M_BAT_CURR_MAX<Q_M_BAT_CURR_MAX>` 设定的限制与使用 "
+":ref:`Q_M_BAT_VOLT_MIN<Q_M_BAT_VOLT_MIN>` 作为最小电压下垂目标内部预测的限制中较低的那个。"

@@ -1,0 +1,737 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 14:59+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/automatic-landing.rst:22
+msgid " Aborting an Autolanding"
+msgstr " 中止自动降落"
+
+#: ../../source/docs/automatic-landing.rst:22
+msgid " Precision Autolanding"
+msgstr " 精准自动降落"
+
+#: ../../source/docs/automatic-landing.rst:22
+msgid " RangeFinder Autolanding"
+msgstr " 测距仪自动降落"
+
+#: ../../source/docs/automatic-landing.rst:22
+msgid " Using Reverse Thrust in Autolanding"
+msgstr " 在自动降落中使用反推力"
+
+#: ../../source/docs/automatic-landing.rst:22
+msgid " Using DO_LAND_START"
+msgstr " 使用 DO_LAND_START"
+
+#: ../../source/docs/automatic-landing.rst:5 d099277ef3e0427b822fcdf9833501f2
+msgid "Automatic Landing"
+msgstr "自动降落"
+
+#: ../../source/docs/automatic-landing.rst:7 78cb7c878efd429392062cde328b8aea
+msgid ""
+"This article explains how to autonomously land Plane as part of a mission "
+"plan or the new AUTOLAND mode (available in ver 4.7(dev/latest) and later, "
+"see :ref:`mode_autoland`), and includes information about how a landing can "
+"be safely aborted. Switching to AUTO mode and executing an autolanding can "
+"also be done as an RTL action using the ``DO_LAND_START`` mission command."
+msgstr ""
+"本文介绍如何在任务计划中自主降落 Plane，或使用新的 AUTOLAND 模式（4.7(dev/latest) 及更高版本可用，参见 "
+":ref:`mode_autoland`），并包含如何安全中止降落的信息。切换至 AUTO 模式并执行自动降落，也可以通过 "
+"``DO_LAND_START`` 任务命令作为 RTL 动作来完成。"
+
+#: ../../source/docs/automatic-landing.rst:10 04387c648f774f40afe0ecbc3d4ce872
+msgid "Configuring for Automatic Landing"
+msgstr "配置自动降落"
+
+#: ../../source/docs/automatic-landing.rst:12 2cf3abecee114e17b51e4e5e6e937b0d
+msgid ""
+"To autoland the plane you need to add a :ref:`NAV_LAND <mav_cmd_nav_land>` "
+"command to the end of your mission indicating the latitude, longitude and "
+"altitude of your desired touchdown point and if aborting the autoland is "
+"allowed. When the preceeding waypoint is reached, it will descend and "
+"navigate to the touchdown point."
+msgstr ""
+"要自动降落飞机，您需要在任务末尾添加一个 :ref:`NAV_LAND <mav_cmd_nav_land>` "
+"命令，指定期望接地点的纬度、经度和高度，以及是否允许中止自动降落。到达前一个航点后，飞机将下降并导航至接地点。"
+
+#: ../../source/docs/automatic-landing.rst:14 79e38dd5f6354f5a86263eb5929cc31a
+msgid ""
+"In most cases, the altitude should be set to 0. During the final flare "
+"portion of the landing, the autopilot will shut down the throttle and hold "
+"the current heading, controlled by the parameters described below."
+msgstr "在大多数情况下，高度应设置为0。在降落最终拉平阶段，飞控将关闭油门并保持当前航向，由以下描述的参数控制。"
+
+#: ../../source/docs/automatic-landing.rst:16 412c23caa5854a8ebf626723fc08cc38
+msgid ""
+"the altitude is relative to home, which is set at arming. If you arm while "
+"holding for a hand launch, this means home altitude will be several meters "
+"above the ground!"
+msgstr "高度是相对于 Home 点的，Home 点在解锁时设置。如果您在手持待投中解锁，这意味着 Home 高度将比地面高出数米！"
+
+#: ../../source/docs/automatic-landing.rst:18 834484eea65e434bbac89aa2cd5c7be4
+msgid ""
+"often the internal temperature of the vehicle, and hence that of the baro, "
+"will change significantly during the flight. While most baros are "
+"temperature compensated, this is not usually extremely accurate, leading to "
+"the home alt potentially drifting a few meters. This can cause inaccurate "
+"flare height to occur. This often occurs when quickly arming the vehicle "
+"after riding to the flying site in a car on cold or hot days, or when heat "
+"from a component like a video transmitter raises the cabin temperature "
+"during a flight after arming."
+msgstr ""
+"通常，飞行器内部温度，进而气压计温度，在飞行过程中会发生显著变化。虽然大多数气压计都经过温度补偿，但通常精度不高，导致 Home "
+"高度可能漂移数米。这在寒冷或炎热天气乘车前往飞行场地后迅速解锁飞行器时，或在飞行中视频发射器等组件散热导致机舱温度升高时，尤为常见。"
+
+#: ../../source/docs/automatic-landing.rst:20 2e1c776622b94e6ca8b1b9ed4111d267
+msgid ""
+"For many vehicles, most of the parameters associated with autolanding can be"
+" left at their defaults. The basic parameters are covered below in the Basic"
+" Autolanding Section for vehicles not using an airspeed sensor and/or "
+"rangefinder. For more advanced configuration, see the sections listed below:"
+msgstr ""
+"对于许多飞行器，与自动降落相关的大部分参数可以保持默认值。以下基本参数部分涵盖了不使用空速传感器和/或测距仪的飞行器的基本参数。有关更高级的配置，请参阅以下列出的章节："
+
+#: ../../source/docs/automatic-landing.rst:32 1d315928b72c4d85bf68fa1b2cf2ee79
+msgid "Basic Autolanding"
+msgstr "基本自动降落"
+
+#: ../../source/docs/automatic-landing.rst:34 e907951800b244b292ee78958d55e6a3
+msgid "The phases of an autolanding are:"
+msgstr "自动降落的阶段包括："
+
+#: ../../source/docs/automatic-landing.rst:36 ec840ae855b44b58b4a4dbc9299cf0dd
+msgid "Passing final approach waypoint"
+msgstr "通过最终进近航点"
+
+#: ../../source/docs/automatic-landing.rst:37 5210c2ee3eeb48d5a7c0162ab2f932e4
+msgid "Navigating to the flare point on a \"glide-slope\" (ie controlled descent)"
+msgstr "沿「滑翔坡道」（即受控下降）导航至拉平点"
+
+#: ../../source/docs/automatic-landing.rst:38 483ba1dacdc94683bd5359f278e6ebaf
+msgid "Flare and touchdown"
+msgstr "拉平与接地"
+
+#: ../../source/docs/automatic-landing.rst:44 19478b52f71c4ab194fcaea54875204b
+msgid "Setting Up the Approach Waypoint"
+msgstr "设置进近航点"
+
+#: ../../source/docs/automatic-landing.rst:46 33e814239bda4350b6fd2aa234a1c05d
+msgid ""
+"The autolanding begins after reaching the last navigation waypoint before "
+"the NAV_LAND waypoint (where you want to touchdown and land). This waypoint "
+"must be far enough from the touchdown point and at an altitude that a "
+"reasonable glide slope can be obtained. Without an airspeed sensor, the "
+"speed will be that of normal waypoint navigation, which without an airspeed "
+"sensor is primarily controlled by :ref:`TRIM_THROTTLE<TRIM_THROTTLE>`. It is"
+" important to have a glide slope that is obtainable with the "
+":ref:`TECS_SINK_MAX<TECS_SINK_MAX>` rate of the vehicle and preferably, well"
+" below that rate. You can lower the approach airspeed in order to reduce the"
+" time in the flare, and possible overshoot of landing point, by adjusting "
+"the :ref:`TECS_LAND_THR<TECS_LAND_THR>` to a lower value than "
+":ref:`TRIM_THROTTLE<TRIM_THROTTLE>`. Be careful, not to lower it so much as "
+"to cause a stall on approach."
+msgstr ""
+"自动降落在到达 NAV_LAND "
+"航点（您希望接地降落的地点）之前的最后一个导航航点后开始。该航点必须距接地点足够远，且高度适当，以获得合理的滑翔坡道。不使用空速传感器时，速度将与正常航点导航速度相同，在没有空速传感器的情况下，主要由"
+" :ref:`TRIM_THROTTLE<TRIM_THROTTLE>` 控制。重要的是，滑翔坡道的下沉率应在飞行器 "
+":ref:`TECS_SINK_MAX<TECS_SINK_MAX>` 速率范围内，最好远低于该速率。您可以通过将 "
+":ref:`TECS_LAND_THR<TECS_LAND_THR>` 调低至低于 "
+":ref:`TRIM_THROTTLE<TRIM_THROTTLE>` "
+"的值来降低进近空速，以减少拉平时间及可能的降落点超出。但请注意，不要调得过低以致进近时失速。"
+
+#: ../../source/docs/automatic-landing.rst:48 d06710992aef42b8a2e842e98e95c387
+msgid ""
+"In addition, the last navigation waypoint before NAV_LAND must be far enough"
+" away that any turns made by the mission to that waypoint will have already "
+"be completed and the vehicle back on track in a line to the landing point. "
+"Usually, two waypoints are used. The first to allow any mission item "
+"(including aborted go-arounds for an autoland reattempt) to get aligned to "
+"another waypoint setup closer to the touchdown point but still providing a "
+"nice glide slope. We will designate the last waypoint before the NAV_LAND as"
+" the \"final approach\" waypoint and the one before it the \"pre-approach\" "
+"waypoint, as shown above. The next figure shows these waypoints "
+"**incorrectly** placed, without sufficient spacing:"
+msgstr ""
+"此外，NAV_LAND "
+"之前的最后一个导航航点必须足够远，以确保任务转向该航点时已完成，飞行器已恢复至朝向降落点的直线轨迹。通常使用两个航点。第一个用于使任何任务项（包括自动降落重试的复飞）对准另一个更靠近接地点但仍提供良好滑翔坡道的航点。我们将"
+" NAV_LAND "
+"之前的最后一个航点称为「最终进近」航点，其前一个称为「预进近」航点，如上图所示。下图展示了这些航点**错误地**放置、间距不足的情况："
+
+#: ../../source/docs/automatic-landing.rst:53 eaaa7344b41c451d8eba15728151f95c
+msgid ""
+"The above shows a planned approach with the pre-approach waypoint 440m away "
+"from touchdown at 50m altitude, the final approach waypoint at 220m away and"
+" 25m altitude, giving a supposedly gentle glide slope of 6 degrees (which is"
+" a 1.7m/s descent at 15m/s airspeed). However, the actual result is 9 deg "
+"glide path since the switch to AUTO mode and the landing sequence was begun "
+"at the point shown at beginning of the yellow path, and the resulting "
+"overshoots at the two waypoints result in a steeper glide slope (9 degrees) "
+"between the final approach waypoint and the touchdown point. Spacing the "
+"waypoints a little further away would have allowed the approach to have "
+"settled by the final approach waypoint, and with the desired final glide "
+"slope. The faster the vehicle is flying, the wider the turn radii are, and "
+"the wider the waypoints should be spaced."
+msgstr ""
+"上图显示了一个规划进近：预进近航点距接地点440米、高度50米，最终进近航点距接地点220米、高度25米，理论上形成6度的平缓滑翔坡道（15m/s空速下下降率为1.7m/s）。然而，实际结果是9度滑翔路径，因为切换到"
+" AUTO "
+"模式并从黄色路径起始点开始降落序列，两个航点处的超调导致最终进近航点与接地点之间的滑翔坡道更陡（9度）。将航点间距稍微拉大，就能使进近在最终进近航点前稳定下来，并获得理想的最终滑翔坡道。飞行器飞行越快，转弯半径越大，航点间距也应越大。"
+
+#: ../../source/docs/automatic-landing.rst:55 371a2da7f9a34f29a4d3673c38a26a7a
+msgid ""
+"You can use QGroundControl to automatically setup your approach and landing "
+"waypoints, but it will use a slightly different approach. Using the \"LAND\""
+" button on the Plan screen, QGroundControl will add a \"LOITER_TO_ALT\" "
+"waypoint (NAV_LOITER_TO_ALT) at a distance determined by its wizard's glide "
+"slope parameter to bring the vehicle down (or up) to approach altitude, add "
+"a DO_LAND_START (See :ref:`aborting-autolanding`) marker, and a NAV_LAND."
+msgstr ""
+"您可以使用 QGroundControl "
+"自动设置进近和降落航点，但它会使用略有不同的方法。使用计划界面上的「LAND」按钮，QGroundControl "
+"将添加一个「LOITER_TO_ALT」航点（NAV_LOITER_TO_ALT），距离由其向导的滑翔坡道参数决定，将飞行器降低（或升高）至进近高度，添加"
+" DO_LAND_START（参见 :ref:`aborting-autolanding`）标记，以及 NAV_LAND。"
+
+#: ../../source/docs/automatic-landing.rst:57 fca5337a2f0f4ab59c4040db949fb410
+msgid ""
+"Very low drag vehicles will normally require a much shallower approach angle"
+" (glide slope) since they cannot lose altitude quickly while maintaining "
+":ref:`AIRSPEED_CRUISE<AIRSPEED_CRUISE>` (for vehicles with airspeed sensors)"
+" during the glide slope. Often a much steeper approach is required to clear "
+"obstacles. In those cases, there is an option "
+"(:ref:`TECS_OPTIONS<TECS_OPTIONS>` bit 1) that when set allows the speed in "
+"descents to exceed :ref:`AIRSPEED_CRUISE<AIRSPEED_CRUISE>` up to "
+":ref:`AIRSPEED_MAX<AIRSPEED_MAX>` in order to get up the the "
+":ref:`TECS_SINK_MAX<TECS_SINK_MAX>` descent rate,if required. This would "
+"apply not only to autolandings but any TECS speed controlled flight stage."
+msgstr ""
+"阻力极低的飞行器通常需要更浅的进近角（滑翔坡道），因为在滑翔坡道中保持 "
+":ref:`AIRSPEED_CRUISE<AIRSPEED_CRUISE>`（对于有空速传感器的飞行器）的同时无法快速失去高度。为避开障碍物，往往需要更陡峭的进近。在这些情况下，有一个选项（:ref:`TECS_OPTIONS<TECS_OPTIONS>`"
+" 第1位），设置后允许下降时速度超过 :ref:`AIRSPEED_CRUISE<AIRSPEED_CRUISE>`，最高至 "
+":ref:`AIRSPEED_MAX<AIRSPEED_MAX>`，以便在需要时达到 "
+":ref:`TECS_SINK_MAX<TECS_SINK_MAX>` 下沉率。这不仅适用于自动降落，也适用于任何 TECS 速度控制的飞行阶段。"
+
+#: ../../source/docs/automatic-landing.rst:61 557220467c0b47a29651d0bec6c63400
+msgid "The key parameters that control automatic landing are:"
+msgstr "控制自动降落的关键参数为："
+
+#: ../../source/docs/automatic-landing.rst:63 55671f57547a4f1c9e2d9a4351ab1742
+msgid ":ref:`LAND_FLARE_ALT <LAND_FLARE_ALT>`"
+msgstr ":ref:`LAND_FLARE_ALT <LAND_FLARE_ALT>`"
+
+#: ../../source/docs/automatic-landing.rst:64 2e5341de80804952b642d60e6388b62f
+msgid ":ref:`LAND_FLARE_SEC <LAND_FLARE_SEC>`"
+msgstr ":ref:`LAND_FLARE_SEC <LAND_FLARE_SEC>`"
+
+#: ../../source/docs/automatic-landing.rst:65 5732dba9883f47ff901adc13254fae73
+msgid ":ref:`LAND_PITCH_DEG <LAND_PITCH_DEG>`"
+msgstr ":ref:`LAND_PITCH_DEG <LAND_PITCH_DEG>`"
+
+#: ../../source/docs/automatic-landing.rst:66 b9a7b674f0604f749b7aeec0dd8a990a
+msgid ":ref:`TECS_LAND_SINK <TECS_LAND_SINK>`"
+msgstr ":ref:`TECS_LAND_SINK <TECS_LAND_SINK>`"
+
+#: ../../source/docs/automatic-landing.rst:67 c07ceec31fe0425581ba56ea20d7911e
+msgid ":ref:`TECS_SINK_MAX<TECS_SINK_MAX>`"
+msgstr ":ref:`TECS_SINK_MAX<TECS_SINK_MAX>`"
+
+#: ../../source/docs/automatic-landing.rst:68 da5110c4ec784d06ac3e45d30c14f92c
+msgid ":ref:`TECS_SINK_MIN<TECS_SINK_MIN>`"
+msgstr ":ref:`TECS_SINK_MIN<TECS_SINK_MIN>`"
+
+#: ../../source/docs/automatic-landing.rst:69 6ec9d184119e4754bb03f0db9498e10f
+msgid ":ref:`TECS_LAND_THR<TECS_LAND_THR>`"
+msgstr ":ref:`TECS_LAND_THR<TECS_LAND_THR>`"
+
+#: ../../source/docs/automatic-landing.rst:71 91cd01de05d24981b11eb49714e4d98f
+msgid ""
+"The TECS parameters are related to the glide slope and final flare sink "
+"control. As such, the :ref:`TECS speed/height controller<tecs-total-energy-"
+"control-system-for-speed-height-tuning-guide>` must be tuned correctly, and "
+"the vehicle must have good pitch tuning for TECS to operate properly (see "
+":ref:`common-tuning`)"
+msgstr ""
+"TECS 参数与滑翔坡道和最终拉平下沉控制相关。因此，:ref:`TECS 速度/高度控制器<tecs-total-energy-control-"
+"system-for-speed-height-tuning-guide>` 必须经过正确调参，且飞行器必须具备良好的俯仰调参，TECS "
+"才能正常工作（参见 :ref:`common-tuning`）。"
+
+#: ../../source/docs/automatic-landing.rst:73 6890b7e4301d459487315cc9091aa570
+msgid ""
+"The meaning and recommended value of each of these parameters is described "
+"below."
+msgstr "以下将说明每个参数的含义和推荐值。"
+
+#: ../../source/docs/automatic-landing.rst:79 2d7e8e195d9d4a4bb443b4d4076eefd9
+msgid "Setting the Flare Point"
+msgstr "设置拉平点"
+
+#: ../../source/docs/automatic-landing.rst:81 7903c69e2b0c4f17bbe0e9aeb91c5002
+msgid ""
+"The \"flare\" is the final stage of the landing when the autopilot cuts the "
+"throttle and raises the pitch, increasing drag and slowing the aircraft to "
+"sink onto the ground. The appropriate time to flare depends on the type of "
+"aircraft, and is controlled by the :ref:`LAND_FLARE_ALT <LAND_FLARE_ALT>` "
+"and :ref:`LAND_FLARE_SEC <LAND_FLARE_SEC>` parameters."
+msgstr ""
+"「拉平」是降落的最后阶段，此时飞控切断油门并抬高俯仰，增大阻力并减速，使飞机沉降至地面。拉平的适当时机取决于飞机类型，由 "
+":ref:`LAND_FLARE_ALT <LAND_FLARE_ALT>` 和 :ref:`LAND_FLARE_SEC "
+"<LAND_FLARE_SEC>` 参数控制。"
+
+#: ../../source/docs/automatic-landing.rst:83 dc62a46fdf6344f48b685c885a3166dc
+msgid ""
+"The first control of the flare is the :ref:`LAND_FLARE_SEC <LAND_FLARE_SEC>`"
+" parameter. This is the time in seconds before the aircraft would hit the "
+"ground if it continued with its current descent rate."
+msgstr ""
+"拉平的第一个控制因素是 :ref:`LAND_FLARE_SEC <LAND_FLARE_SEC>` "
+"参数。这是飞机以当前下沉率继续飞行将撞地所需的时间（秒）。"
+
+#: ../../source/docs/automatic-landing.rst:86 427a4ee0020c4c249ffa53c3d86b99e0
+msgid ""
+"So if the plane is descending at 2 meters/second and you set the "
+":ref:`LAND_FLARE_SEC <LAND_FLARE_SEC>` to 3 then the aircraft would flare at"
+" an altitude of 6 meters above the ground. By using a time to impact to "
+"control the flare the aircraft is able to flare at a higher altitude if it "
+"is descending quickly, and at a lower altitude if it is descending slowly. "
+"That helps ensure the flare is able to produce a smooth touchdown."
+msgstr ""
+"例如，如果飞机以2米/秒下降，且您将 :ref:`LAND_FLARE_SEC <LAND_FLARE_SEC>` "
+"设置为3，则飞机将在距地面6米高度处拉平。通过使用撞击时间来控制拉平，飞机在快速下降时能够在较高高度拉平，在缓慢下降时则在较低高度拉平。这有助于确保拉平能实现平稳接地。"
+
+#: ../../source/docs/automatic-landing.rst:89 1a8e11bec34b44189ad4ea3cb7ba9a00
+msgid ""
+"The second control is :ref:`LAND_FLARE_ALT <LAND_FLARE_ALT>`. That is an "
+"altitude above the ground in meters at which the aircraft will flare, "
+"regardless of its descent rate. It is important that this value be close to "
+"the altitude that will usually result from the :ref:`LAND_FLARE_SEC "
+"<LAND_FLARE_SEC>`, since it is used in later calculations. Changing the "
+"descent rate required from the last waypoint before the landing will impact "
+"the height at which :ref:`LAND_FLARE_SEC <LAND_FLARE_SEC>` would become "
+"active and should be adjusted accordingly."
+msgstr ""
+"第二个控制因素是 :ref:`LAND_FLARE_ALT "
+"<LAND_FLARE_ALT>`。这是飞机拉平时距地面的高度（米），无论其下沉率如何。重要的是，该值应接近 :ref:`LAND_FLARE_SEC "
+"<LAND_FLARE_SEC>` 通常产生的高度，因为它将用于后续计算。更改最后一个降落前航点所需下沉率会影响 "
+":ref:`LAND_FLARE_SEC <LAND_FLARE_SEC>` 生效的高度，应相应调整。"
+
+#: ../../source/docs/automatic-landing.rst:91 bfd81581edab4ff2a70490aff99f6127
+msgid ""
+"Whichever is reached first will force the beginning of the flare.The "
+"appropriate values for these two parameters depends on how the autopilot is "
+"estimating its altitude above the ground."
+msgstr "先达到哪个条件，拉平即开始。这两个参数的适当值取决于飞控估算距地高度的方式。"
+
+#: ../../source/docs/automatic-landing.rst:93 2a3d2e9e57e14e58974fdaac2b1c5e44
+msgid ""
+"If you are relying solely on a barometer for landing altitude then you will "
+"probably need higher values, to account for barometric errors (see "
+":ref:`improving-autolanding` below). The defaults are usually appropriate as"
+" a starting point for 1-1.5 meter wingspan vehicles."
+msgstr ""
+"如果仅依靠气压计来确定降落高度，则可能需要较高的值，以应对气压误差（参见下文 :ref:`improving-"
+"autolanding`）。默认值通常适合1-1.5米翼展飞行器作为起始点。"
+
+#: ../../source/docs/automatic-landing.rst:95 a224c4d067ea461eb1bf4b729390defe
+msgid ""
+"With a very well tuned vehicle (both Attitude and TECS) and using a "
+"rangefinder, lower altitudes can be attempted to start the flare."
+msgstr "对于调参良好（姿态和 TECS 均良好）且使用测距仪的飞行器，可以尝试在较低高度开始拉平。"
+
+#: ../../source/docs/automatic-landing.rst:98 e6331af02d6446d992eb4ffc2d3a1295
+msgid "Controlling the glide slope"
+msgstr "控制滑翔坡道"
+
+#: ../../source/docs/automatic-landing.rst:100
+#: f799599f4cd743408298b0ff52a2a865
+msgid ""
+"Another important factor in setting up the flare point is the glide slope. "
+"The glide slope is the ratio of the distance from the last waypoint to the "
+"landing point, and the height difference between the last waypoint and the "
+"landing point. For example, if the landing point is 300 meters from the last"
+" waypoint, and the last waypoint is 30 meters above the ground then the "
+"glide slope is 10%."
+msgstr ""
+"设置拉平点的另一个重要因素是滑翔坡道。滑翔坡道是最后一个航点到降落点距离与最后一个航点和降落点高度差之比。例如，如果降落点距最后一个航点300米，且最后一个航点距地面30米，则滑翔坡道为10%。"
+
+#: ../../source/docs/automatic-landing.rst:102
+#: 6f06c26ea4bd4e5dae331b290624dabf
+msgid ""
+"If the glide slope is too steep then the aircraft will not be able to flare "
+"in time to avoid crashing, plus the autopilot may not be able to keep the "
+"plane on the approach slope accurately. It is recommended that you start "
+"with a glide slope of at most 10%. What glide slope your plane can handle "
+"will depend on how good your pitch controller tuning is, how good your TECS "
+"tuning is, and the landing speed you ask for."
+msgstr ""
+"如果滑翔坡道过陡，飞机将无法及时拉平以避免坠毁，且飞控可能无法准确保持飞机在进近坡道上。建议从最多10%的滑翔坡道开始。您的飞机能够处理的滑翔坡道取决于俯仰控制器调参质量、TECS"
+" 调参质量以及所要求的降落速度。"
+
+#: ../../source/docs/automatic-landing.rst:104
+#: 9235e2eb1f7846678da9fe7550c98a14
+msgid ""
+"If you find your aircraft is not following the desired glide slope "
+"accurately then you should first check your pitch tuning in your logs, and "
+"ensure that the demanded and achieved pitch match within a couple of degrees"
+" during landing. If they don't then look at the documentation on pitch "
+"tuning (or possibly re-run AUTOTUNE). If the demanded and achieved pitch do "
+"match then you should check your TECS logs to ensure that the demanded and "
+"achieved airspeed are matching during landing. Have a look at the :ref:`TECS"
+" tuning page <tecs-total-energy-control-system-for-speed-height-tuning-"
+"guide>` for more information."
+msgstr ""
+"如果您发现飞机未能准确跟随预期滑翔坡道，应首先在日志中检查俯仰调参，确保降落时要求和实际俯仰在数度以内吻合。如果不吻合，请查阅俯仰调参文档（或考虑重新运行"
+" AUTOTUNE）。如果要求和实际俯仰吻合，则应检查 TECS 日志，确保降落时要求和实际空速吻合。更多信息请参阅 :ref:`TECS 调参页面 "
+"<tecs-total-energy-control-system-for-speed-height-tuning-guide>`。"
+
+#: ../../source/docs/automatic-landing.rst:113
+#: bae7cbad21b2420eabc77137b2687957
+msgid ""
+"You should also be aware that many model aircraft can glide for long "
+"distances, and it may be that your requested glide slope and airspeed "
+"combination just isn't achievable."
+msgstr "您还应注意，许多模型飞机可以长距离滑翔，您所要求的滑翔坡道和空速组合可能根本无法实现。"
+
+#: ../../source/docs/automatic-landing.rst:120
+#: 1c34004898ff4481b9ca09bdfd5db27b
+msgid "Controlling the flare"
+msgstr "控制拉平"
+
+#: ../../source/docs/automatic-landing.rst:122
+#: 6406da3d7f2645b4bc4bbebd76a0b627
+msgid ""
+"The final stage of the landing is called the \"flare\". During the flare the"
+" aircraft tries to retain a course along the line between the last waypoint "
+"and the landing waypoint, and it controls its height solely using a target "
+"descent rate. Once the flare is started the throttle is \"disabled\" - set "
+"to some value between :ref:`THR_MIN <THR_MIN>` and zero."
+msgstr ""
+"降落的最后阶段称为「拉平」。在拉平过程中，飞机试图沿最后一个航点与降落航点之间的连线保持航向，并仅通过目标下沉率控制高度。一旦拉平开始，油门将被「禁用」——设置为"
+" :ref:`THR_MIN <THR_MIN>` 与零之间的某个值。"
+
+#: ../../source/docs/automatic-landing.rst:129
+#: f71e2e98feb14901b40bff3d2c363f30
+msgid ""
+"The main job of the autopilot in the flare is to try to achieve the descent "
+"rate specified in the :ref:`TECS_LAND_SINK <TECS_LAND_SINK>` parameter. That"
+" defaults to 0.25 meters/second, which is a reasonable touchdown vertical "
+"speed for most models. To achieve that speed the TECS controller uses pitch "
+"control only as the motor has been forced to zero."
+msgstr ""
+"飞控在拉平中的主要任务是尽量达到 :ref:`TECS_LAND_SINK <TECS_LAND_SINK>` "
+"参数规定的下沉率。默认值为0.25米/秒，对大多数模型而言是合理的接地垂直速度。为实现该速度，TECS 控制器在电机被强制归零的情况下仅使用俯仰控制。"
+
+#: ../../source/docs/automatic-landing.rst:133
+#: acc1053b62284b08b59b6eb5d25876ad
+msgid ""
+"The primary parameters which affect the ability of the aircraft to achieve "
+"the desired descent rate are :ref:`LAND_PITCH_DEG <LAND_PITCH_DEG>`, "
+":ref:`TECS_LAND_DAMP <TECS_LAND_DAMP>` and the main pitch tuning parameters."
+msgstr ""
+"影响飞机实现期望下沉率能力的主要参数为 :ref:`LAND_PITCH_DEG "
+"<LAND_PITCH_DEG>`、:ref:`TECS_LAND_DAMP <TECS_LAND_DAMP>` 以及主要俯仰调参参数。"
+
+#: ../../source/docs/automatic-landing.rst:139
+#: 2a867655d0134a27a075491a8a85e80b
+msgid ""
+"If the vehicle does not have good pitch tuning, the vehicle's CG is "
+"significantly \"nose heavy\", or the elevator is being increased by "
+"propeller slip-stream, then the ability of the vehicle to actually attain "
+"the desired sink rates and attitudes can be severely impacted. Symptoms are "
+"landing short, and/or with the nose/nose wheel touching down first."
+msgstr ""
+"如果飞行器俯仰调参不良、飞行器重心明显「头重」，或升降舵受螺旋桨滑流增强，则飞行器实际达到期望下沉率和姿态的能力将受到严重影响。症状为落点偏短，和/或机头/前轮先触地。"
+
+#: ../../source/docs/automatic-landing.rst:141
+#: a983f5e98d334062ac7c6395f9120620
+msgid ""
+"The landing controller sets a point before the touchdown as the expected "
+"flare start point. This \"flare_aim\" point is calculated from the "
+":ref:`LAND_FLARE_ALT<LAND_FLARE_ALT>` and "
+":ref:`TECS_LAND_SINK<TECS_LAND_SINK>` for the expected duration of the flare"
+" before the actual touchdown. If consistently landing long or short, this "
+"point can be adjusted using the :ref:`LAND_FLARE_AIM<LAND_FLARE_AIM>` "
+"parameter. If landing too short, decrease the percentage from its default of"
+" 50%, conversely, increasing it if landing too long."
+msgstr ""
+"降落控制器在接地前设定一个预期拉平开始点。该「flare_aim」点由 :ref:`LAND_FLARE_ALT<LAND_FLARE_ALT>` 和 "
+":ref:`TECS_LAND_SINK<TECS_LAND_SINK>` 计算，对应实际接地前拉平预期持续时间。如果落点持续偏长或偏短，可使用 "
+":ref:`LAND_FLARE_AIM<LAND_FLARE_AIM>` "
+"参数进行调整。若落点偏短，将百分比从默认值50%降低；若落点偏长，则增大该值。"
+
+#: ../../source/docs/automatic-landing.rst:143
+#: 55eb8956bf6b421a83e863184fffc98e
+msgid ""
+"The transition from the glide-slope sink rate to the flare sink rate is "
+"controlled by the :ref:`TECS_FLARE_HGT<TECS_FLARE_HGT>` parameter and should"
+" normally be set below :ref:`LAND_FLARE_ALT<LAND_FLARE_ALT>`. The start of "
+"the flare will occur at :ref:`LAND_FLARE_ALT<LAND_FLARE_ALT>` and the sink "
+"rate will be gradually adjusted to :ref:`TECS_LAND_SINK<TECS_LAND_SINK>` at "
+"the :ref:`TECS_FLARE_HGT<TECS_FLARE_HGT>` to avoid a rapid pitch change at "
+"the beginning of the flare, which would tend to create a \"ballooning\" "
+"effect at the start of the flare. See note at the end of this section for a "
+"possible exception to having :ref:`TECS_FLARE_HGT<TECS_FLARE_HGT>` set lower"
+" than :ref:`LAND_FLARE_ALT<LAND_FLARE_ALT>`."
+msgstr ""
+"从滑翔坡道下沉率到拉平下沉率的过渡由 :ref:`TECS_FLARE_HGT<TECS_FLARE_HGT>` 参数控制，通常应设置低于 "
+":ref:`LAND_FLARE_ALT<LAND_FLARE_ALT>`。拉平将在 "
+":ref:`LAND_FLARE_ALT<LAND_FLARE_ALT>` 处开始，下沉率将逐渐调整至在 "
+":ref:`TECS_FLARE_HGT<TECS_FLARE_HGT>` 高度达到 "
+":ref:`TECS_LAND_SINK<TECS_LAND_SINK>`，以避免拉平开始时俯仰剧变，从而产生「气球效应」。关于 "
+":ref:`TECS_FLARE_HGT<TECS_FLARE_HGT>` 设置高于 "
+":ref:`LAND_FLARE_ALT<LAND_FLARE_ALT>` 的可能例外，请参阅本节末尾的说明。"
+
+#: ../../source/docs/automatic-landing.rst:145
+#: 4b6af5f1d49f4c1ea0dac13cfdd511e8
+msgid ""
+"The :ref:`LAND_PITCH_DEG <LAND_PITCH_DEG>` parameter sets the minimum pitch "
+"target at the very end of the flare (in centi-degrees). This parameter is "
+"very airframe specific and is designed to prevent the nose of the aircraft "
+"being too far down on touchdown causing issues with damaging the landing "
+"gear or breaking a propeller.  For most aircraft this should be a small "
+"positive number (such as 300, meaning 3 degrees), but for some belly landing"
+" aircraft a small negative number can be good, to allow the nose to be kept "
+"down a small amount to reduce the chance of stall if the flare happens too "
+"far off the ground."
+msgstr ""
+":ref:`LAND_PITCH_DEG <LAND_PITCH_DEG>` "
+"参数设置拉平最末段的最小俯仰目标（以厘度为单位）。该参数非常依赖于机架，旨在防止飞机机头在接地时过度低头，导致起落架损坏或螺旋桨折断。对大多数飞机，该值应为较小的正数（例如300，即3度），但对某些机腹降落飞机，较小的负数可能更好，以便在机头稍微低头的情况下减少拉平过高时的失速风险。"
+
+#: ../../source/docs/automatic-landing.rst:155
+#: a89e1f32c0074adf9df63394be4b83e0
+msgid ""
+"Note that the actual pitch of the aircraft can be quite a bit above "
+":ref:`LAND_PITCH_DEG <LAND_PITCH_DEG>` as the TECS controller tries to "
+"control the descent rate. The maximum pitch is controlled by the "
+":ref:`TECS_PITCH_MAX <TECS_PITCH_MAX>` parameter if it is non-zero, "
+"otherwise by the :ref:`PTCH_LIM_MAX_DEG <PTCH_LIM_MAX_DEG>` parameter."
+msgstr ""
+"请注意，飞机的实际俯仰可能远高于 :ref:`LAND_PITCH_DEG <LAND_PITCH_DEG>`，因为 TECS "
+"控制器试图控制下沉率。最大俯仰由 :ref:`TECS_PITCH_MAX <TECS_PITCH_MAX>` 参数控制（若非零），否则由 "
+":ref:`PTCH_LIM_MAX_DEG <PTCH_LIM_MAX_DEG>` 参数控制。"
+
+#: ../../source/docs/automatic-landing.rst:158
+#: 8d80f010e8ca4fa0a9420b76372ea2d1
+msgid ""
+"However, if the vehicle cannot maintain the demanded pitch attitude in the "
+"later stages of the flare due to CG, tuning, etc. :ref:`LAND_PITCH_DEG "
+"<LAND_PITCH_DEG>` may never be reached resulting in nose/nose wheel first "
+"touchdowns. In that case, set the :ref:`TECS_FLARE_HGT<TECS_FLARE_HGT>` "
+"ABOVE the :ref:`LAND_FLARE_ALT<LAND_FLARE_ALT>` parameter, effectively "
+"allowing the :ref:`LAND_PITCH_DEG <LAND_PITCH_DEG>` limit to take effect "
+"immediately, increasing the rate at which its demanded (i.e. at the "
+"beginning of the flare as opposed to the end)"
+msgstr ""
+"但是，如果飞行器因重心、调参等原因在拉平后期无法维持要求的俯仰姿态，:ref:`LAND_PITCH_DEG <LAND_PITCH_DEG>` "
+"可能永远无法达到，导致机头/前轮先触地。在这种情况下，将 :ref:`TECS_FLARE_HGT<TECS_FLARE_HGT>` 设置为**高于**"
+" :ref:`LAND_FLARE_ALT<LAND_FLARE_ALT>` 参数，可使 :ref:`LAND_PITCH_DEG "
+"<LAND_PITCH_DEG>` 限制立即生效，从而提高其要求速率（即在拉平开始时而非结束时）。"
+
+#: ../../source/docs/automatic-landing.rst:160
+#: 00ebe49399f34e5aa0f6d16e55a57415
+msgid ""
+"The :ref:`TECS_LAND_DAMP<TECS_LAND_DAMP>` parameter is a damping constant "
+"for the pitch control during flare. A larger number will cause the pitch "
+"demand to change more slowly. This parameter can be used to reduce issues "
+"with sudden pitch changes when the flare happens."
+msgstr ""
+":ref:`TECS_LAND_DAMP<TECS_LAND_DAMP>` "
+"参数是拉平期间俯仰控制的阻尼常数。数值越大，俯仰需求变化越慢。该参数可用于减少拉平时突然俯仰变化带来的问题。"
+
+#: ../../source/docs/automatic-landing.rst:165
+#: a521e02261424ab4a53f1e95eda8f60d
+msgid ""
+"you can use :ref:`STICK_MIXING<STICK_MIXING>` to allow manual adjustments "
+"during the flare, if needed, while tuning the above parameters."
+msgstr "如果需要，在调整上述参数时，您可以使用 :ref:`STICK_MIXING<STICK_MIXING>` 允许在拉平期间进行手动调整。"
+
+#: ../../source/docs/automatic-landing.rst:167
+#: a82ed78ae4ac48be95a37edd584b77dc
+msgid ""
+"For most well tuned vehicles the default values for all the landing "
+"parameters should result in safe landings. Iteratively adjusting the "
+"altitude limits and the aim point parameter will usually lead to almost "
+"perfect, repeatable landings. Analyzing the logs for TECS.dh vs TECS.dhdem "
+"and ATT.Pitch vs ATT.DesPitch will show how well the vehicle is attaining "
+"the desired attitude and sink rates in the flare."
+msgstr ""
+"对于大多数调参良好的飞行器，所有降落参数的默认值都应能实现安全降落。逐步调整高度限制和瞄准点参数，通常可以实现近乎完美、可重复的降落。分析日志中的 "
+"TECS.dh 与 TECS.dhdem 以及 ATT.Pitch 与 ATT.DesPitch，将显示飞行器在拉平期间实现期望姿态和下沉率的效果。"
+
+#: ../../source/docs/automatic-landing.rst:170
+#: 38115d52b61c4a67aa583adbadf83ffd
+msgid "After the Flare"
+msgstr "拉平后"
+
+#: ../../source/docs/automatic-landing.rst:172
+#: 881e1acd9c514ee29633a301535ca2bb
+msgid ""
+"After the plane flares it continues to navigate, but with zero throttle. The"
+" navigation direction is a line extrapolated forward through the landing "
+"point from the last waypoint. Note that the navigation roll will be limited "
+"to :ref:`LEVEL_ROLL_LIMIT <LEVEL_ROLL_LIMIT>` (which defaults to 5 degrees) "
+"to prevent wing strike, so if there is a significant cross-wind then it is "
+"likely that the aircraft will not be able to maintain the exact path."
+msgstr ""
+"飞机拉平后，以零油门继续导航。导航方向为从最后一个航点经降落点向前延伸的直线。请注意，导航横滚将限制在 :ref:`LEVEL_ROLL_LIMIT "
+"<LEVEL_ROLL_LIMIT>`（默认为5度）以防翼尖触地，因此如果存在明显侧风，飞机可能无法保持精确路径。"
+
+#: ../../source/docs/automatic-landing.rst:180
+#: 3715e317ab5e4049b2d8dd9ed2d17ff7
+msgid ""
+"If your aircraft is consistently landing long (which can happen for a "
+"variety of reasons) then you can adjust :ref:`TECS_LAND_SRC <TECS_LAND_SRC>`"
+" to either force a stall (negative) or bring it down (positive). This value "
+"will adjust your :ref:`TECS_LAND_SRC <TECS_LAND_SRC>` proportional to the "
+"distance from the LAND point. This helps ensure you land in a reasonable "
+"distance from the LAND point."
+msgstr ""
+"如果飞机持续落点偏长（可能由多种原因导致），可以调整 :ref:`TECS_LAND_SRC <TECS_LAND_SRC>` "
+"以强制失速（负值）或加速下沉（正值）。该值将按与 LAND 点距离的比例调整 :ref:`TECS_LAND_SRC "
+"<TECS_LAND_SRC>`，有助于确保在距 LAND 点合理距离内降落。"
+
+#: ../../source/docs/automatic-landing.rst:190
+#: d5f8b8a3e105423295bcae52b022b0b8
+msgid ""
+"Possible causes of landing long include ground effect giving the aircraft "
+"more lift as it is close to the ground or simply the aircraft traveling very"
+" fast."
+msgstr "落点偏长的可能原因包括：飞机接近地面时地效提供额外升力，或飞机飞行速度过快。"
+
+#: ../../source/docs/automatic-landing.rst:194
+#: b055d78de7e140cc9058c5d2d128c2bc
+msgid ""
+"When the plane has stopped moving for :ref:`LAND_DISARMDELAY "
+"<LAND_DISARMDELAY>` seconds (default 20 seconds) it will disarm the motor. "
+"Optionally, you can disable servo movement once LAND_DISARMDELAY has "
+"triggered by setting :ref:`LAND_THEN_NEUTRL <LAND_THEN_NEUTRL>`."
+msgstr ""
+"当飞机停止移动 :ref:`LAND_DISARMDELAY <LAND_DISARMDELAY>` 秒（默认20秒）后，将上锁电机。您也可以在 "
+"LAND_DISARMDELAY 触发后通过设置 :ref:`LAND_THEN_NEUTRL <LAND_THEN_NEUTRL>` 来禁用舵机运动。"
+
+#: ../../source/docs/automatic-landing.rst:200
+#: 9327659caaa4431583dbb713d30306c8
+msgid "Rudder Control during Flare and Rollout"
+msgstr "拉平和滑行阶段的方向舵控制"
+
+#: ../../source/docs/automatic-landing.rst:202
+#: 03de559ca42a49abb501f4109d7c784a
+msgid ""
+"If enabled, the ground steering controller will take over below "
+":ref:`GROUND_STEER_ALT<GROUND_STEER_ALT>` to maintain vehicle compass "
+"heading below this altitude and during roll out. See :ref:`tuning-ground-"
+"steering-for-a-plane` for details."
+msgstr ""
+"如果启用，地面转向控制器将在 :ref:`GROUND_STEER_ALT<GROUND_STEER_ALT>` "
+"以下接管，以在该高度以下及滑行阶段维持飞行器罗盘航向。详情参见 :ref:`tuning-ground-steering-for-a-plane`。"
+
+#: ../../source/docs/automatic-landing.rst:208
+#: 8e987533f3734aef9fa9e46e14c21e3e
+msgid "Improving the landing"
+msgstr "改善降落"
+
+#: ../../source/docs/automatic-landing.rst:210
+#: 97c49f8f585446f58928a52a7086465e
+msgid ""
+"The key to a good landing is the autopilot knowing how far off the ground it"
+" is. With the default setup the only sensor available to detect altitude is "
+"the barometer. Unfortunately barometers suffer from three main types of "
+"error:"
+msgstr "良好降落的关键在于飞控准确知道距地面的高度。默认设置下，唯一可用于检测高度的传感器是气压计。不幸的是，气压计有三种主要误差类型："
+
+#: ../../source/docs/automatic-landing.rst:215
+#: a797400a3ee24ab0a400ef02c3c6b47d
+msgid "barometric drift due to changes in atmospheric pressure"
+msgstr "大气压变化引起的气压漂移"
+
+#: ../../source/docs/automatic-landing.rst:216
+#: f3ad4ac9deab448da9b99516da93201c
+msgid ""
+"barometric drift due to changes in the temperature of the autopilot "
+"electronics"
+msgstr "飞控电子元件温度变化引起的气压漂移"
+
+#: ../../source/docs/automatic-landing.rst:218
+#: 37a94a4debe84d19ade88f3b19abc3b1
+msgid ""
+"barometric error due to local pressure changes from airflow around the "
+"barometer"
+msgstr "气流绕气压计流动引起的局部气压变化导致的气压误差"
+
+#: ../../source/docs/automatic-landing.rst:221
+#: ef8f15fb1d3a4e5ca8a230fff6c63593
+msgid ""
+"The ideal setup for good automatic landing is to have a :ref:`Lidar <common-"
+"rangefinder-landingpage>`. A Lidar can measure the distance to the ground "
+"very accurately, and doesn't suffer from drift. If you have a Lidar "
+"installed you can enable its use for landing with "
+":ref:`RNGFND_LANDING<RNGFND_LANDING>` bit 0 or 1 is set."
+msgstr ""
+"理想的自动降落设置是配备 :ref:`激光雷达 <common-rangefinder-"
+"landingpage>`。激光雷达可以非常精确地测量到地面的距离，且不受漂移影响。如果安装了激光雷达，可通过将 "
+":ref:`RNGFND_LANDING<RNGFND_LANDING>` 第0位或第1位设为1来启用其用于降落。"
+
+#: ../../source/docs/automatic-landing.rst:227
+#: bb97d64bb6b644c289f5eee9a157c91b
+msgid ""
+"If a Lidar isn't fitted then there are a few things you can do to minimize "
+"barometric error problems with auto-land"
+msgstr "如果没有安装激光雷达，有几种方法可以最大程度减少自动降落时的气压误差问题："
+
+#: ../../source/docs/automatic-landing.rst:229
+#: f760c35317d64defa1f213b9c554c99c
+msgid ""
+"perform a barometer calibration after the electronics have warmed up. The "
+"easiest way to do this is to disarm the plane with rudder-disarming, "
+"arm/disarm switch, or the safety switch. When the plane is disarmed it "
+"assumes it is on the ground and will zero the barometer to the current "
+"pressure. It will also reset the HOME position and altitude."
+msgstr ""
+"在电子设备预热后进行气压计校准。最简单的方法是通过方向舵上锁、解锁/上锁开关或安全开关使飞机上锁。飞机上锁时，系统认为其在地面，将把气压计归零至当前气压，并重置"
+" Home 位置和高度。"
+
+#: ../../source/docs/automatic-landing.rst:233
+#: 6e477cc10a534b1ca219815c9deece96
+msgid ""
+"try to prevent direct airflow over the autopilot that could cause speed "
+"related pressure changes"
+msgstr "尽量防止气流直接流过飞控，以避免速度相关的气压变化"
+
+#: ../../source/docs/automatic-landing.rst:235
+#: ea2e73a8682b4973935e421218864b3f
+msgid ""
+"fly shorter flights, allowing for less time for air pressure changes. Check "
+"your logs and see if the landing is happening at zero altitude consistently"
+msgstr "缩短飞行时间，减少气压变化的时间。检查日志，看降落是否始终在零高度处发生"
+
+#: ../../source/docs/automatic-landing.rst:239
+#: bfe5b84c780347f9a0658e9487680bdf
+msgid ""
+"Alternatively, you can use a high precision GPS as the altitude source "
+"instead of the barometer. See"
+msgstr "或者，您可以使用高精度 GPS 作为高度来源，而不是气压计。参见"
+
+#: ../../source/docs/automatic-landing.rst:241
+#: 481580b8c15743f4867a52d5b0ff4dfc
+msgid ""
+"With planes that belly land it can also work well to setup the landing with "
+"a shallow pitch (in :ref:`LAND_PITCH_DEG<LAND_PITCH_DEG>`) and set a "
+"slightly higher altitude to flare at. That will only work if your stall "
+"speed is low enough that gliding for a while will work reliably."
+msgstr ""
+"对于机腹降落的飞机，也可以通过设置较浅的俯仰（在 :ref:`LAND_PITCH_DEG<LAND_PITCH_DEG>` "
+"中）并设置稍高的拉平高度来实现较好效果。这只有在失速速度足够低、长时间滑翔能可靠进行时才有效。"

@@ -1,0 +1,607 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 03:48+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:5
+#: 6cc64a929d0e40bb9d6b0ec2eeecc611
+msgid "Geotagging Images with Mission Planner"
+msgstr "使用 Mission Planner 进行图像地理标记"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:7
+#: 0c238a5718a549cb9f332ce6cf113152
+msgid ""
+"This article shows how to Geo-tag images, using *Mission Planner* to inject "
+"data from telemetry logs into their EXIF tags."
+msgstr "本文介绍如何使用 *Mission Planner* 将数传日志数据注入图像 EXIF 标签以进行地理标记。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:11
+#: 8a8d84e8d21d403d97d06db212f1ce31
+msgid "Overview"
+msgstr "概述"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:13
+#: ebbdb2afaa4944548f856f1e50a71d22
+msgid ""
+"Geo-tagging images makes it easier to photo-merge the many pictures taken "
+"during a :ref:`camera mission <common-camera-control-and-auto-missions-in-"
+"mission-planner>`, and is important for applications including "
+"photogrammetry, orthophoto generation, 3D terrain modeling etc."
+msgstr ""
+"图像地理标记使在 :ref:`camera mission <common-camera-control-and-auto-missions-in-"
+"mission-planner>` 期间拍摄的大量照片更易于拼接，对于摄影测量、正射影像生成、3D 地形建模等应用非常重要。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:18
+#: 85226237caf74422aaea6c193d9c988d
+msgid ""
+"*Mission Planner* provides two methods for geotagging your photos from a "
+"mission log:"
+msgstr "*Mission Planner* 提供两种从任务日志对照片进行地理标记的方法："
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:21
+#: 0565c2bd1f6d4e04bec03cc1b1bc78d3
+msgid "**CAM messages from dataflash log**"
+msgstr "**来自数据闪存日志的 CAM 消息**"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:23
+#: 692367497e3146d1ba09302d4c3cf192
+msgid ""
+"ArduPilot can trigger a camera during pre-programmed missions or by RC "
+"activation using the ``DO_DIGICAM_CONTROL`` or ``DO_SET_CAM_TRIGG_DIST`` "
+"commands. Corresponding CAM messages are stored in the dataflash log, and "
+"can be used by Mission Planner to add accurate geotag information to images."
+msgstr ""
+"ArduPilot 可以在预编程任务期间或通过遥控激活使用 ``DO_DIGICAM_CONTROL`` 或 "
+"``DO_SET_CAM_TRIGG_DIST`` 命令触发相机。相应的 CAM 消息存储在数据闪存日志中，可供 Mission Planner "
+"用于向图像添加准确的地理标记信息。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:28
+#: d59cc7e58ba54bdeb54c931b42b5b177
+msgid "**Time offset (image timestamp to log timestamp)**"
+msgstr "**时间偏移（图像时间戳与日志时间戳）**"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:30
+#: e6edc9552a4345a9a01d0c1ebef35f45
+msgid ""
+"This method uses the time difference between the camera internal clock and "
+"system clock to determine where in the log each image was taken and get the "
+"GPS information. Typically users must tune the offset value in order to find"
+" a sensible result."
+msgstr "此方法使用相机内部时钟与系统时钟的时间差来确定日志中每张图像的拍摄位置并获取 GPS 信息。通常用户需要调整偏移值以找到合理结果。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:37
+#: e420b151e133403298688f27f4a2e3f2
+msgid "This method is less accurate. It is used when there is no"
+msgstr "此方法精度较低。在没有以下情况时使用"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:38
+#: 3977c2e2ad7b4d23827140883cf87f47
+msgid "connection between camera and autopilot."
+msgstr "相机与飞控之间的连接。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:42
+#: 8fada513f8ca4142ab856f916ea7daa3
+msgid ""
+"Even if your camera has a built-in GPS you *may* find this approach provide "
+"more accurate information than the built-in GPS."
+msgstr "即使您的相机有内置 GPS，您也*可能*发现此方法比内置 GPS 提供更准确的信息。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:46
+#: 1387d7d70cf749c191f5ac8e4a6510d8
+msgid "Geotagging images"
+msgstr "图像地理标记"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:49
+#: 71fbcbd9efd24539b4f44375ae217a42
+msgid "Common pre-steps"
+msgstr "通用前置步骤"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:51
+#: f93c856a2ecc4f7cb0ba4c1ecfa914c4
+msgid ""
+"Open Mission Planner and press **Ctrl+F**. This will open a hidden screen "
+"like the one shown below."
+msgstr "打开 Mission Planner 并按 **Ctrl+F**。这将打开如下所示的隐藏界面。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:57
+#: 88df8b4c7d854827bc31be06e256b381
+msgid "Mission Planner: Temp Screen (Ctrl +F)"
+msgstr "Mission Planner：临时界面（Ctrl+F）"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:59
+#: ffad2261b5d742158b553652acf56159
+msgid ""
+"Click the button **Geo ref images**. It will give you access to the *Geo "
+"Tagging* tool"
+msgstr "点击 **Geo ref images** 按钮。将进入*地理标记*工具"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:65
+#: 06f96292332f4806b00efa8db2af61c1
+msgid "Mission Planner: Geo Ref Images Screen"
+msgstr "Mission Planner：地理参考图像界面"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:67
+#: 245cbb14cdd74582ab27e56c2b0fd9fa
+msgid ""
+"Click the button **Browse Log** and select the log (**.tlog** or **.log)** "
+"of the flight related to the shooting session."
+msgstr "点击 **Browse Log** 按钮，选择与拍摄会话相关的飞行日志（**.tlog** 或 **.log**）。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:69
+#: 80ae1eea72974629bd085c0e0262b16b
+msgid ""
+"Click the button **Browse Directory** and select the folder where your "
+"aerial pictures were downloaded from your camera."
+msgstr "点击 **Browse Directory** 按钮，选择从相机下载航拍照片的文件夹。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:72
+#: 9dee542c8dee4896b0fc4e37a58e8f5b
+msgid ""
+"Notice that the camera picture folder can contain other files apart from the"
+" pictures. However in terms of pictures, it must contain just the ones "
+"belonging to the flight."
+msgstr "注意相机图片文件夹除图片外还可以包含其他文件。但就图片而言，必须只包含本次飞行的照片。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:76
+#: b6ce077df55b40c8a33af49c9fd31184
+msgid ""
+"The next steps depend on whether you're using CAM Messages or a time offset."
+msgstr "后续步骤取决于您使用的是 CAM 消息还是时间偏移。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:80
+#: 3c781dc9f20942c3b49fe0e6a15d1ea0
+msgid "CAM messages"
+msgstr "CAM 消息"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:82
+#: 27e8e79a332743af95282486860327e0
+msgid ""
+"In order to process CAM messages, the mission file had to be defined to use "
+"remote camera trigger by means of any of the available mission commands "
+"(CAM_TRIGG_DISTANCE, DO_DIGICAM_CONTROL, etc)."
+msgstr ""
+"为了处理 CAM 消息，任务文件必须定义为使用任何可用任务命令（CAM_TRIGG_DISTANCE、DO_DIGICAM_CONTROL "
+"等）通过遥控相机触发。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:86
+#: 2137373ddf1140e7bf6a3588a1c66efe
+msgid ""
+"Select the **CAM Message** method if it is not selected in the *Geotag Mode*"
+" section."
+msgstr "如果*地理标记模式*部分中未选择，请选择 **CAM Message** 方法。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:88
+#: 941336eed5db4242b8e29d546805d412
+msgid ""
+"Enter Shutter Lag value (in milliseconds) if you know it. If not leave it "
+"with 0"
+msgstr "如果知道快门延迟值（以毫秒为单位），请输入；否则保持为 0"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:90
+#: 956ba65a40884a0792a2d95249e89cca
+msgid ""
+"Check that Log offsets are correct according to your log version (usually "
+"these are OK)"
+msgstr "根据您的日志版本检查日志偏移量是否正确（通常这些都是正确的）"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:92
+#: b0c483e10f0b46c4bbb1c4f687aa0eb6
+msgid "Enter FOV information if needed"
+msgstr "如需要，输入 FOV 信息"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:93
+#: 2ab6adc76767495d944dcca58b7b26e4
+msgid ""
+"Select **Use AMSL Alt** checkbox if you want absolute altitude. Otherwise, "
+"uncheck"
+msgstr "如果需要绝对高度，勾选 **Use AMSL Alt** 复选框；否则取消勾选"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:95
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:137
+#: 1c36697be3e1452e9629261c254b0d6b 71804e4906574a8b8f3b65637a189eae
+msgid "Click **Pre-process**"
+msgstr "点击 **Pre-process**"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:97
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:139
+#: d57ba25241bb483587569a9a0b6f9a58 fb592468244341d89eaa62f7301c687a
+msgid ""
+"If pre-processing works correctly, you will see ``Done`` displayed at the "
+"end of the *Process Messages Area*."
+msgstr "如果预处理正确完成，您将在*过程消息区域*末尾看到 ``Done``。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:105
+#: a1b08c53a6c44e9b941f2154ce048c45
+msgid ""
+"The most common problem in this processing mode is having a discrepancy "
+"between the number of CAM messages in log and the number of pictures in the "
+"folder. If the tool finds that they are different, it will output an error "
+"message and abort."
+msgstr "此处理模式中最常见的问题是日志中的 CAM 消息数量与文件夹中的图片数量不一致。如果工具发现不同，将输出错误消息并中止。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:110
+#: 3e42292e19bc44a1b1a9188a56d7a7ba
+msgid ""
+"The final step is to \"sanity check\" the proposed picture location using "
+"the **Location Kml** button (See :ref:`Common Post-steps <common-geotagging-"
+"images-with-mission-planner_common_post-steps>` below)."
+msgstr ""
+"最后一步是使用 **Location Kml** 按钮对建议的图片位置进行「合理性检查」（见下方 :ref:`Common Post-steps "
+"<common-geotagging-images-with-mission-planner_common_post-steps>`）。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:114
+#: 9bd6b6bc65404a9da794ebf2d8d0c2bd
+msgid "Time offset"
+msgstr "时间偏移"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:118
+#: dc453e7e6c954e9e8ae3d29d341d0081
+msgid ""
+"If you haven't flown yet, one useful trick is to synchronize camera and "
+"system time."
+msgstr "如果尚未飞行，一个有用的技巧是同步相机和系统时间。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:121
+#: dec73cac62264383bc423fefc53474ba
+msgid ""
+"Select the **Time Offset** method if it is not selected in the *Geotag Mode*"
+" section."
+msgstr "如果*地理标记模式*部分中未选择，请选择 **Time Offset** 方法。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:123
+#: fb2bab7432664be5afff0ec481684554
+msgid "Click on **Estimate Offset** button"
+msgstr "点击 **Estimate Offset** 按钮"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:125
+#: 02b0ab9ed2da4c3a9cb5e8585dd66b11
+msgid ""
+"The tool will calculate (as explained in previous section) the time "
+"difference between the first picture and the first GPS time in the log."
+msgstr "工具将计算（如上一节所述）第一张图片与日志中第一个 GPS 时间的时间差。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:128
+#: d56e9f9595954760b0ff37a5ea716496
+msgid ""
+"Copy the calculated offset printed in the *Process Messages Area* and paste "
+"it into the field *Seconds offset*"
+msgstr "复制打印在*过程消息区域*中的计算偏移量，并粘贴到 *Seconds offset* 字段中"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:131
+#: a0a6eb490fbd4081aa70335864bd29c3
+msgid "Take a look at the following picture:"
+msgstr "参考以下图片："
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:144
+#: 5097683c645e46c081b81610bff9fe6b
+msgid ""
+"The most common problem when using this method is the use of an inaccurate "
+"time offset. Remember that the estimated time offset is just a starting "
+"point!"
+msgstr "使用此方法时最常见的问题是使用了不准确的时间偏移。请记住，估算的时间偏移只是一个起点！"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:148
+#: a0dc5a36a8b141939b5155ea4784820f
+msgid ""
+"The Geotag tool will output a warning if pictures are discovered that are "
+"not found in the autopilot log - see picture below:"
+msgstr "如果发现在飞控日志中找不到的图片，地理标记工具将输出警告——见下图："
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:154
+#: 4520addead4f40f38317fa2617edb1a4
+msgid "Mission Planner: Images not found in log at specified offset"
+msgstr "Mission Planner：在指定偏移处未在日志中找到图像"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:156
+#: d49c9ff6a7f5418d93e88b291efc659d
+msgid ""
+"The final step is to \"sanity check\" the proposed picture location using "
+"the **Location Kml** button (See :ref:`Common Post-steps <common-geotagging-"
+"images-with-mission-planner_common_post-steps>` below). If the proposed "
+"locations are not correct, add or subtract some seconds to the *Offset Time*"
+" and repeat."
+msgstr ""
+"最后一步是使用 **Location Kml** 按钮对建议的图片位置进行「合理性检查」（见下方 :ref:`Common Post-steps "
+"<common-geotagging-images-with-mission-planner_common_post-"
+"steps>`）。如果建议的位置不正确，在*偏移时间*中加减若干秒并重试。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:165
+#: bac3614fdf8a4805a7f3437782efa3c0
+msgid "Common post-steps"
+msgstr "通用后置步骤"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:167
+#: 3c9274ba443c434e87f39a6f93aa083f
+msgid ""
+"The remaining steps are to check that proposed picture locations are "
+"acceptable and write location information to the picture's EXIF data:"
+msgstr "剩余步骤是检查建议的图片位置是否可接受并将位置信息写入图片的 EXIF 数据："
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:170
+#: 9e5609b59e1c47fbbdd2988fd386f11c
+msgid ""
+"Click on the **Location Kml** button. Google Earth will open and show the "
+"proposed picture locations (as shown below):"
+msgstr "点击 **Location Kml** 按钮。Google Earth 将打开并显示建议的图片位置（如下所示）："
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:176
+#: fd199915fb2247788fd13360d716c553
+msgid ""
+"Check that they are OK. If you used *CAM Message* mode, there shouldn't be "
+"any problem (iIf there is, just order pictures alphabetically and check that"
+" the first picture in the list is also the oldest one). If you used *Time "
+"Offset*, just try adding or subtracting seconds to time offset."
+msgstr ""
+"检查是否正确。如果使用了 *CAM Message* "
+"模式，应该没有问题（如果有，按字母顺序排列图片并检查列表中第一张图片是否也是最旧的）。如果使用了*时间偏移*，尝试在时间偏移中加减若干秒。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:181
+#: e28205b94657459ca34622ef1cd5e421
+msgid ""
+"If everything is OK, click on **GeoTag Images** button and wait to see the "
+"processing message ``Geo tagging FINISHED``."
+msgstr "如果一切正常，点击 **GeoTag Images** 按钮并等待处理消息 ``Geo tagging FINISHED``。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:184
+#: dcb04bb7ce2d40b3ba78c6ddad916226
+msgid ""
+"Geotagged files can be found in *geotagged* folder inside the original "
+"pictures folder"
+msgstr "地理标记文件可在原始图片文件夹内的 *geotagged* 文件夹中找到"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:188
+#: 3179ca6fb7a44536b7922dac6ef60a1f
+msgid "Interface overview"
+msgstr "界面概览"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:190
+#: 209d0523082a407984c6a992fc8a9665
+msgid "The *Mission Planner Geo Ref Images* screen is shown below:"
+msgstr "*Mission Planner Geo Ref Images* 界面如下所示："
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:196
+#: 8e3ddb8b35f84f6e94c378b471a21cb4
+msgid "Files selection"
+msgstr "文件选择"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:198
+#: d0fb3d188b774306a03a23f089df3bfe
+msgid ""
+"This is where the user has to select the log location and camera pictures "
+"folder"
+msgstr "用户在此选择日志位置和相机图片文件夹"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:202
+#: f9e97fe535194090bfae9672f1f60b4f
+msgid "Geotag mode"
+msgstr "地理标记模式"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:204
+#: 866bc41b4e22405ea51d3eb5a1ed3a56
+msgid ""
+"As explained above, there are two options. CAM Messages and Time offset."
+msgstr "如上所述，有两种选项：CAM 消息和时间偏移。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:207
+#: 3a7511c02cdf4bd7a0b3d93f2cf37bc9
+msgid "Time offset estimation and shutter lag"
+msgstr "时间偏移估算和快门延迟"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:209
+#: 8fb4fbb8cfc94515a8cb3011e78d9ff9
+msgid "This section is only relevant if *Time Offset* mode has been selected."
+msgstr "本节仅在选择了*时间偏移*模式时相关。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:211
+#: 4a2ebf2347c84ea29e7b90140ac76354
+msgid ""
+"The time offset needs to be estimated by comparing the first picture time "
+"and the first GPS time in the log. Once the user clicks the **Estimate "
+"Offset** button, the tool will calculate time offset and print the result in"
+" the *Process Messages* section at the bottom of the window:"
+msgstr ""
+"需要通过比较第一张图片时间和日志中第一个 GPS 时间来估算时间偏移。用户点击 **Estimate Offset** "
+"按钮后，工具将计算时间偏移并在窗口底部的*过程消息*部分打印结果："
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:221
+#: a908e7eac2ff42f5ab9810487aba667c
+msgid "Notes:"
+msgstr "注意："
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:223
+#: baa2005c4066466eaa78e5c9c9802615
+msgid ""
+"If CAM Message is selected, the Shutter Lag option is available. Note that "
+"GPS positions are stored at 5Hz by default (if using 3DR GPS) so they are "
+"recorded every 200ms."
+msgstr ""
+"如果选择了 CAM Message，快门延迟选项可用。请注意，GPS 位置默认以 5Hz 存储（使用 3DR GPS 时），即每 200ms 记录一次。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:226
+#: 3d9e18a2201f4e4a905bcc4aff80791c
+msgid ""
+"If Shutter Lag is less than 100ms, then GPS position is taken from current "
+"CAM Message."
+msgstr "如果快门延迟小于 100ms，则 GPS 位置取自当前 CAM 消息。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:228
+#: ea89376271684d469f2932031d3b5109
+msgid ""
+"If Shutter Lag is bigger than 100ms, the GPS position is taken from 200ms "
+"ahead in log."
+msgstr "如果快门延迟大于 100ms，则 GPS 位置取自日志中提前 200ms 的位置。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:232
+#: 6afd165226a344d8a28687b80d9bedbc
+msgid "Item offsets in log"
+msgstr "日志中的项目偏移"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:234
+#: 70c098ed6ed546a2a40fd94b889e87cd
+msgid ""
+"This section allows the user to tell the tool where specific information can"
+" be found in the log. There are three messages whose offsets need to be "
+"defined"
+msgstr "本节允许用户告知工具在日志中何处可找到特定信息。需要定义三个消息的偏移量"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:238
+#: 5d78164e1d9a496e9826331d0143088d
+msgid "CAM"
+msgstr "CAM"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:239
+#: f0bae35898b646caa37b00e4c8bc2cd5
+msgid "GPS"
+msgstr "GPS"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:240
+#: 121e2958fdfc4f3ca1e346f9c98f6fa7
+msgid "ATT"
+msgstr "ATT"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:244
+#: 22edac24abc24af683942aa1dbb3ef1a
+msgid "Item offsets are preset to the values for the last stable APM release."
+msgstr "项目偏移量预设为最新稳定 APM 版本的值。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:247
+#: 6c6d528b306a479bac0fa36b1b6495da
+msgid ""
+"**Example of how to find out item offset in a message line within a log**"
+msgstr "**如何找出日志中消息行内的项目偏移量示例**"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:250
+#: 98b1cae81fc24885be594a06134f45be
+msgid ""
+"Lets take a look at the GPS Line Format definition at the beginning of a "
+"log:"
+msgstr "让我们看看日志开头的 GPS 行格式定义："
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:257
+#: d142424ebada42d79de741e63973fc04
+msgid ""
+"The field with the number **1** is the one after the ``Units-definition-"
+"word``."
+msgstr "编号为 **1** 的字段是 ``单位定义词`` 之后的字段。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:260
+#: 0365b0f63cca422881ccdb2b94b78d67
+msgid ""
+"In our case, the ``Units-definition-word`` is ``BIHBcLLeeEefI``. So the "
+"field with number **1** is **Status**"
+msgstr "在我们的例子中，``单位定义词`` 是 ``BIHBcLLeeEefI``。因此编号为 **1** 的字段是 **Status**"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:263
+#: 340ff888321d4c2c990d223c9a5a452d
+msgid "From this we should have:"
+msgstr "由此可得："
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:273
+#: 48c32e711e1b453f96af61eef6150be6
+msgid "FOV and altitude reference"
+msgstr "FOV 和高度参考"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:275
+#: 556a7fd01e1c4059834564a9ef2398bf
+msgid ""
+"This is where the user can define the Field of View (FOV) and orientation "
+"information. This information is incorporated into the result files but it "
+"is not used or stored in the picture EXIF data."
+msgstr "用户在此定义视场角（FOV）和方向信息。此信息包含在结果文件中，但不用于或存储在图片 EXIF 数据中。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:279
+#: 500d9cd21c4b48b9b6f070a726f98a4c
+msgid ""
+"The **AMSL Alt** checkbox allows to select either AGL Altitude (Above Ground"
+" Level) or AMSL Altitude (Above Mean Sea Level)."
+msgstr "**AMSL Alt** 复选框允许选择 AGL 高度（地面以上）或 AMSL 高度（平均海平面以上）。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:283
+#: 5f72092a10dd4f12a5c1a1e6b63023ac
+msgid "Action buttons"
+msgstr "操作按钮"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:285
+#: f027d4deda064df5b53555f79838ff8a
+msgid ""
+"**Pre-process** - When this button is clicked, Geotag tool will try to "
+"extract and calculate pictures positions"
+msgstr "**Pre-process** - 点击此按钮时，地理标记工具将尝试提取并计算图片位置"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:287
+#: 19c306496a92462995873a0a6833d678
+msgid ""
+"**Location Kml** - When this button is clicked, Geotag tool will open Google"
+" Earth and show pictures position on a map so the user can check their "
+"correct positioning."
+msgstr ""
+"**Location Kml** - 点击此按钮时，地理标记工具将打开 Google Earth 并在地图上显示图片位置，供用户检查定位是否正确。"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:290
+#: e6c1af7d5fe84d82bbef7ca1a4604b00
+msgid ""
+"**GeoTag Images** - If everything was correct in previous steps and pictures"
+" are well positioned in the map, this button will write the position "
+"information in the EXIF data of every picture"
+msgstr "**GeoTag Images** - 如果前面步骤一切正确且图片在地图上定位良好，此按钮将把位置信息写入每张图片的 EXIF 数据"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:295
+#: 2add0c6e7e174afa9f33f60382353855
+msgid "Process messages"
+msgstr "过程消息"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:297
+#: c4ba65648af84490afa540d91dc5aceb
+msgid "This is the place where the tool will output information"
+msgstr "工具将在此输出信息"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:300
+#: d22a5a9ca98d4dfe98ffd0ee4abe4f95
+msgid "Additional information"
+msgstr "附加信息"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:302
+#: 7ce07fbca7c44df182188a6e4672d59b
+msgid ""
+"This section contains links to additional information/information for "
+"working with specific cameras:"
+msgstr "本节包含使用特定相机的附加信息/资料链接："
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:305
+#: 14bf87123da242b88effbdf9f59116c7
+msgid ""
+"`Geotag GoPro Images with a Pixhawk Log File "
+"<http://tuffwing.com/support/geotag_gopro_images_with_pixhawk_log.html>`__ "
+"(tuffwing.com)"
+msgstr ""
+"`使用 Pixhawk 日志文件对 GoPro 图像进行地理标记 "
+"<http://tuffwing.com/support/geotag_gopro_images_with_pixhawk_log.html>`__（tuffwing.com）"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:308
+#: 2517e935883946788a8b8ee7a02a00b9
+msgid "Acknowledgements"
+msgstr "致谢"
+
+#: ../../source/docs/common-geotagging-images-with-mission-planner.rst:310
+#: 029ad5efd2a94cd99d5748246b7c2165
+msgid ""
+"This tutorial was created to show you how does it work. Original work from "
+"Sandro Benigno and Guto Santaella updated by Jesus Alvarez."
+msgstr "本教程由 Sandro Benigno 和 Guto Santaella 的原始工作演变而来，由 Jesus Alvarez 更新。"

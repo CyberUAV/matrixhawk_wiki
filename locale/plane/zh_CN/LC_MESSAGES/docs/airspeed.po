@@ -1,0 +1,537 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 14:59+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/airspeed.rst:199
+msgid "Calibrating an Airspeed Sensor"
+msgstr "空速传感器校准"
+
+#: ../../source/docs/airspeed.rst:199
+msgid "Pitot Tube Considerations"
+msgstr "皮托管注意事项"
+
+#: ../../source/docs/airspeed.rst:199
+msgid "Mocking an Airspeed Sensor for Bench Testing"
+msgstr "用于台架测试的空速传感器模拟"
+
+#: ../../source/docs/airspeed.rst:199
+msgid "Analog Airspeed Sensors"
+msgstr "模拟空速传感器"
+
+#: ../../source/docs/airspeed.rst:5 3e2ce22318a543a3844963ef3e0f7dcb
+msgid "Using an Airspeed Sensor"
+msgstr "使用空速传感器"
+
+#: ../../source/docs/airspeed.rst:7 92a6373437c0436a9c639e5fb7aa0d50
+msgid ""
+"Plane supports the use of an airspeed sensor, which can help in windy "
+"conditions, slow flight and autonomous landings. It is not recommended for "
+"most new users, however, as it does require additional tuning and adds one "
+"more layer of control to set up."
+msgstr ""
+"Plane "
+"支持使用空速传感器，这在有风条件下、慢速飞行和自主降落时很有帮助。但对于大多数新用户来说不建议使用，因为它需要额外的调参，并增加了一层设置复杂性。"
+
+#: ../../source/docs/airspeed.rst:12 1b8835eabcaf4b4cb4e4a27a8b9a2ee3
+msgid ""
+"The following sections explain how to wire sensors to the autopilot and set "
+"them up. After you install an airspeed sensor don't forget to "
+":ref:`calibrate it <calibrating-an-airspeed-sensor>`!"
+msgstr ""
+"以下章节说明如何将传感器连接到飞控并进行设置。安装空速传感器后，请不要忘记 :ref:`对其进行校准 <calibrating-an-airspeed-"
+"sensor>`！"
+
+#: ../../source/docs/airspeed.rst:20 4b3af1c01e90405aafaf0cded8260009
+msgid "ARSPD_USE"
+msgstr "ARSPD_USE"
+
+#: ../../source/docs/airspeed.rst:22 db9dce541bb74133a8c102091015c450
+msgid ""
+":ref:`ARSPD_USE<ARSPD_USE>` enables airspeed use for automatic throttle "
+"modes instead of :ref:`TRIM_THROTTLE<TRIM_THROTTLE>` as the target throttle "
+"setting (altered by :ref:`tecs-total-energy-control-system-for-speed-height-"
+"tuning-guide` as needed during altitude control) . The autopilot continues "
+"to display and log airspeed if set to 0, but only airspeed sensor readings "
+"are used for control if set to 1. It will only use airspeed sensor readings "
+"for control when throttle is idle, if set to 2 (useful for gliders with "
+"airspeed sensors behind propellers)."
+msgstr ""
+":ref:`ARSPD_USE<ARSPD_USE>` 用于启用空速在自动油门模式中的使用，以代替 "
+":ref:`TRIM_THROTTLE<TRIM_THROTTLE>` 作为目标油门设定值（在高度控制期间由 :ref:`tecs-total-"
+"energy-control-system-for-speed-height-tuning-guide` 按需调整）。设为 0 "
+"时，飞控仍会显示和记录空速，但只有设为 1 时才会将空速传感器读数用于控制。设为 2 "
+"时，仅在油门怠速时才使用空速传感器读数进行控制（适用于螺旋桨后方安装空速传感器的滑翔机）。"
+
+#: ../../source/docs/airspeed.rst:24 1133d61b6e7f49a6a3f9d92a422f64d5
+msgid ""
+"If an airspeed sensor is used, the throttle stick will set the target "
+"airspeed in CRUISE and FBWB, while maintaining altitude target. In AUTO and "
+"GUIDED, it will use the :ref:`AIRSPEED_CRUISE<AIRSPEED_CRUISE>` value unless"
+" :ref:`THROTTLE_NUDGE<THROTTLE_NUDGE>` is enabled and throttle stick is used"
+" to alter it, or a MAVLink command to change speed is sent to the vehicle."
+msgstr ""
+"如果使用了空速传感器，在 CRUISE 和 FBWB 模式下油门摇杆将设置目标空速并维持高度目标。在 AUTO 和 Guided 模式下，将使用 "
+":ref:`AIRSPEED_CRUISE<AIRSPEED_CRUISE>` 值，除非启用了 "
+":ref:`THROTTLE_NUDGE<THROTTLE_NUDGE>` 并通过油门摇杆调整，或通过 MAVLink 命令向飞行器发送速度变更指令。"
+
+#: ../../source/docs/airspeed.rst:27 a9829fcc447f47ac821154492d0a10ec
+msgid "Airspeed Sensor Type"
+msgstr "空速传感器类型"
+
+#: ../../source/docs/airspeed.rst:29 914b77e39a164a78b43a0d2fe0a3b42b
+msgid ""
+"Airspeed sensors can be either analog or digital. The analog sensors connect"
+" to an A/D converter input pin on the autopilot, while digital sensors "
+"connect to the autopilot's external I2C bus using the SDA and SCL external "
+"digital I/O pins or via DroneCAN. The type is set by the "
+":ref:`ARSPD_TYPE<ARSPD_TYPE>` parameter. Analog sensors are type 2, DroneCAN"
+" sensors as type 8, and supported I2C bus digital sensors by other numbers."
+msgstr ""
+"空速传感器可以是模拟式或数字式。模拟传感器连接到飞控的 A/D 转换器输入引脚，数字传感器则通过 SDA 和 SCL 外部数字 I/O "
+"引脚连接到飞控的外部 I2C 总线，或通过 DroneCAN 连接。传感器类型由 :ref:`ARSPD_TYPE<ARSPD_TYPE>` "
+"参数设置。模拟传感器类型为 2，DroneCAN 传感器类型为 8，其他受支持的 I2C 总线数字传感器使用其他数字。"
+
+#: ../../source/docs/airspeed.rst:31 bc3a643d1c10493dac8ba376edc53080
+msgid ""
+"If there is no sensor, be sure to set the :ref:`ARSPD_TYPE<ARSPD_TYPE>` to "
+"0. ArduPilot calculates an sensor-less airspeed estimate that is used if no "
+"sensor is present or fails. :ref:`ARSPD_TYPE<ARSPD_TYPE>` must be set to "
+"zero in order to display this value if no sensor is present."
+msgstr ""
+"如果没有传感器，请确保将 :ref:`ARSPD_TYPE<ARSPD_TYPE>` 设为 0。ArduPilot "
+"会计算一个无传感器空速估算值，在没有传感器或传感器故障时使用。若无传感器，必须将 :ref:`ARSPD_TYPE<ARSPD_TYPE>` "
+"设为零才能显示此估算值。"
+
+#: ../../source/docs/airspeed.rst:33 3ef6d3cf4b344f54ad16af50e241993d
+msgid ""
+"Many airspeed sensors are sensitive to light. Unless you are certain that "
+"the particular sensor used is not light sensitive, in order to avoid "
+"measurement errors, the sensor should be shielded from light."
+msgstr "许多空速传感器对光线敏感。除非您确定所用的特定传感器不感光，否则应将传感器遮光，以避免测量误差。"
+
+#: ../../source/docs/airspeed.rst:36 968d79ea668f476684078d202aba3613
+msgid "Autopilot Airspeed Connection"
+msgstr "飞控空速接口"
+
+#: ../../source/docs/airspeed.rst:38 72fb22c90f184ff2bbd115572f7d553b
+msgid ""
+"A list of digital and DroneCAN airspeed sensors are listed "
+":ref:`below<arspd-sensor-list>`."
+msgstr "数字和 DroneCAN 空速传感器列表见 :ref:`下方<arspd-sensor-list>`。"
+
+#: ../../source/docs/airspeed.rst:42 ../../source/docs/airspeed.rst:158
+#: 6bc15162b84e453394f5252fd4ea9e94 ebf495147aaa45a99c7abb03e67551f9
+msgid "I2C"
+msgstr "I2C"
+
+#: ../../source/docs/airspeed.rst:43 f7acc04712e54e828b627f41019f1dd4
+msgid ""
+"Connect the airspeed sensor to autopilots's I2C port (or I2C splitter "
+"module). The :ref:`ARSPD_BUS<ARSPD_BUS>` parameter must be set for the bus "
+"used to connect the sensor. Normally this defaults to \"1\" , and "
+"corresponds to the I2C bus normally designated for connecting the sensor. "
+"But if it is attached to another I2C bus (eg. compass, or on some autopilots"
+" its been mistakenly assigned) it will need to be changed to \"0\". If the "
+"sensor fails to initialize (a GCS message will be sent if this is the case),"
+" then try changing the bus number and rebooting."
+msgstr ""
+"将空速传感器连接到飞控的 I2C 端口（或 I2C 分线模块）。必须设置 :ref:`ARSPD_BUS<ARSPD_BUS>` "
+"参数以指定传感器所连接的总线。通常默认值为 「1」，对应通常指定用于连接传感器的 I2C 总线。但如果其连接到另一个 I2C "
+"总线（例如罗盘总线，或某些飞控上误分配的总线），则需要将其更改为 「0」。如果传感器初始化失败（地面站将发送消息提示），请尝试更改总线编号并重启。"
+
+#: ../../source/docs/airspeed.rst:49 e333675142b94894960750782b4540a9
+msgid ""
+"To enable the digital airspeed sensor, connect the autopilot to Mission "
+"Planner (or APM Planner for OS X), and select the Optional Hardware/Airspeed"
+" tab under the CONFIG menu. Using the drop-down box for Type, select your "
+"sensor's type. The Pin dropdown is not used and can be ignored. Check the "
+"\"Use Airpeed\" box to use it in control, or leave it unchecked during in-"
+"flight calibration discussed below to check its operation before use."
+msgstr ""
+"要启用数字空速传感器，请将飞控连接到 Mission Planner（或 OS X 下的 APM Planner），在 CONFIG 菜单下选择 "
+"Optional Hardware/Airspeed 选项卡。使用 Type 下拉框选择传感器类型。Pin 下拉框不使用，可忽略。勾选 「Use "
+"Airspeed」 框以在控制中使用，或在下文讨论的飞行中校准期间取消勾选以先检查其工作情况。"
+
+#: ../../source/docs/airspeed.rst:54 ../../source/docs/airspeed.rst:174
+#: 94a53b252dee4592a4aa7dbcfc6be10b a5ec02398d954cfaa8c44eae5ac8b1ca
+msgid "DroneCAN"
+msgstr "DroneCAN"
+
+#: ../../source/docs/airspeed.rst:56 c0002fb3a2aa448f94c287bb0293d306
+msgid ""
+"Attach the sensor to the AutoPilot's DroneCAN port and select DroneCAN in "
+"the above mentioned Type dropdown box and check the \"Use Airspeed\" box as "
+"appropriate."
+msgstr ""
+"将传感器连接到飞控的 DroneCAN 端口，在上述 Type 下拉框中选择 DroneCAN，并根据需要勾选 「Use Airspeed」 框。"
+
+#: ../../source/docs/airspeed.rst:59 bb266f45be0c4425975b77dbe316b8cc
+msgid "Analog Airspeed sensor"
+msgstr "模拟空速传感器"
+
+#: ../../source/docs/airspeed.rst:61 fea5d21a538c44e8acb214cb555da888
+msgid ""
+"Analog sensors are now largely discontinued. Digital sensors are much more "
+"accurate and consistent over temperature. ArduPilot still supports these "
+"analog sensors, but they are not preferred. See :ref:`Analog Airspeed "
+"Sensors<analog-airspeed-sensors>`."
+msgstr ""
+"模拟传感器现在已基本停产，数字传感器同样廉价，但在精度和温度稳定性方面更优。ArduPilot 仍支持这些模拟传感器，但不推荐使用。参见 "
+":ref:`Analog Airspeed Sensors<analog-airspeed-sensors>`。"
+
+#: ../../source/docs/airspeed.rst:66 76eba2b24a60442d8c4820cc4126937c
+msgid "Installing the Pitot Tubes"
+msgstr "安装皮托管"
+
+#: ../../source/docs/airspeed.rst:68 5574ef539f5a4fbeb96f5dc17e4b2e8c
+msgid ""
+"When you place the airspeed sensor in your aircraft, use the pitot tube set "
+"in the kit (the kit comes with a single tube to measure both static and "
+"total pressure). In the case of the *EasyStar*, you'll need to push it "
+"through the foam in the cockpit so it points straight into the airstream "
+"(drill or cut a small hole in the foam first). Make sure the holes in the "
+"side of the tube are not covered. They should be at least 1 centimeter out "
+"past the nose. First connect the two tubes coming out the back to the "
+"airspeed sensor. The tube coming straight out the back should go into the "
+"top port and the tube exiting at an angle should connect to the bottom port "
+"on the airspeed sensor."
+msgstr ""
+"将空速传感器安装到飞机上时，请使用套件中的皮托管（套件配有一根同时测量静压和全压的单管）。对于 "
+"*EasyStar*，您需要将其穿过座舱内的泡沫，使其直接对准气流（先在泡沫上钻孔或切一个小口）。确保管侧面的小孔未被遮挡，小孔应超出机头至少 1 "
+"厘米。首先将管后端引出的两根管连接到空速传感器。从后端直出的管应连接到顶部端口，斜出的管应连接到空速传感器的底部端口。"
+
+#: ../../source/docs/airspeed.rst:83 6025912184284ea9ba26bd70fac8aac3
+msgid ""
+"If you are using Plane in an aircraft with the propeller in the nose, the "
+"pitot tube must be mounted out on one wing, at least a foot from the "
+"fuselage to be outside the prop flow."
+msgstr "如果您在机头安装了螺旋桨的飞机上使用 Plane，皮托管必须安装在机翼外侧，距机身至少 30 厘米，以避开螺旋桨气流。"
+
+#: ../../source/docs/airspeed.rst:87 3a4be44524b54978b870b296c4f01bcf
+msgid ""
+"See :ref:`common-pitot-considerations` for more infomation on pitot tubes "
+"and placement considerations."
+msgstr "有关皮托管和安装注意事项的更多信息，请参阅 :ref:`common-pitot-considerations`。"
+
+#: ../../source/docs/airspeed.rst:90 46914a5a942641de8de43897db69ecd5
+msgid "Checking operation"
+msgstr "检查工作状态"
+
+#: ../../source/docs/airspeed.rst:92 bf538f0aef1842e3b1c8bb1c5a98010a
+msgid ""
+"You can check the airspeed reading with Mission Planner or another ground "
+"station. Just blow on the pitot tube or press your finger over it and "
+"observe the response. In still air oscillation between zero and small values"
+" (2-3) is normal. The airspeed varies with the square root of the pressure, "
+"so for differential pressures near zero it varies quite a bit with very "
+"small pressure changes, while at flying speeds it takes much greater "
+"pressure changes to produce a similar change in speed. If you see mostly 0, "
+"1, 2, with an occasional bounce to 3 or 4, consider it normal. You will not "
+"see that sort of variability at flying speeds."
+msgstr ""
+"您可以通过 Mission Planner "
+"或其他地面站检查空速读数。只需向皮托管吹气或用手指按压，观察响应即可。在静止空气中，读数在零与小值（2-3）之间振荡属于正常现象。由于空速与压差的平方根成正比，在压差接近零时，极小的压力变化就会引起较大的速度变化，而在飞行速度下，需要更大的压力变化才能产生类似的速度变化。如果您看到大多数读数为"
+" 0、1、2，偶尔跳到 3 或 4，可视为正常。在飞行速度下不会出现此类波动。"
+
+#: ../../source/docs/airspeed.rst:103 001e51d8adf841e79e71f0020ccd8a6d
+msgid "Calibration"
+msgstr "校准"
+
+#: ../../source/docs/airspeed.rst:105 453b45476172407a90143b701e1d98bc
+msgid ""
+"The airspeed sensor reading is automatically zeroed by the autopilot during "
+"initialization and value set in the :ref:`ARSPD_OFFSET<ARSPD_OFFSET>` "
+"automatically, so it is good practice during windy conditions to placea "
+"loose fitting cover over the pitot tube that shields the front hole and the "
+"four small side holes from the wind. This cover should be fitted prior to "
+"power on and removed before flight. If you forget to do this, you can always"
+" place the cover and repeat the airspeed auto-zero using the Mission "
+"Planner's PREFLIGHT CALIBRATE => Do Action."
+msgstr ""
+"飞控在初始化时会自动将空速传感器读数清零，并自动设置 :ref:`ARSPD_OFFSET<ARSPD_OFFSET>` "
+"的值，因此在有风的情况下，最好在皮托管上套一个宽松的保护罩，遮住前部孔和四个侧面小孔，以防风吹影响校准。保护罩应在上电前套好，并在起飞前取下。如果忘记了，可以套上保护罩，然后通过"
+" Mission Planner 的 PREFLIGHT CALIBRATE => Do Action 重复空速自动清零操作。"
+
+#: ../../source/docs/airspeed.rst:112 18ba2aff2dd34514b2266356d1aa518c
+msgid ""
+"the ``DLVR`` type airspeed sensors do not require calibration at "
+"initialization and allow :ref:`ARSPD_SKIP_CAL<ARSPD_SKIP_CAL>` to be set to "
+"\"1\", avoiding the need to cover the pitot during initialization."
+msgstr ""
+"``DLVR`` 类型的空速传感器在初始化时无需校准，允许将 :ref:`ARSPD_SKIP_CAL<ARSPD_SKIP_CAL>` 设为 "
+"「1」，从而无需在初始化时遮住皮托管。"
+
+#: ../../source/docs/airspeed.rst:114 92b33eb1168145d4b76fdcc9f83cd0d1
+msgid ""
+"The airspeed reading scale factor is adjusted using the "
+":ref:`ARSPD_RATIO<ARSPD_RATIO>` parameter. Plane has an automatic "
+"calibration function that will adjust the value of "
+":ref:`ARSPD_RATIO<ARSPD_RATIO>` automatically provided the plane is flown "
+"with frequent direction changes. A normal model flying field circuit pattern"
+" or loiter will achieve the required direction changes, cross-country flying"
+" will not. To enable automatic airspeed sensor calibration, set the value of"
+" :ref:`ARSPD_AUTOCAL<ARSPD_AUTOCAL>` to 1. See :ref:`calibrating-an-"
+"airspeed-sensor` for more details."
+msgstr ""
+"空速读数的缩放系数通过 :ref:`ARSPD_RATIO<ARSPD_RATIO>` 参数调整。Plane "
+"具有自动校准功能，只要飞机频繁改变方向飞行，就会自动调整 :ref:`ARSPD_RATIO<ARSPD_RATIO>` "
+"的值。正常模型航空场地的绕圈飞行或 Loiter 可实现所需的方向变化，而单纯的直线飞行则无法实现。要启用空速传感器自动校准，请将 "
+":ref:`ARSPD_AUTOCAL<ARSPD_AUTOCAL>` 设为 1。详情请参阅 :ref:`calibrating-an-"
+"airspeed-sensor`。"
+
+#: ../../source/docs/airspeed.rst:123 f6543435ff054579813e8e8c242e79a9
+msgid "Miscalibration Safeguards"
+msgstr "误校准保护措施"
+
+#: ../../source/docs/airspeed.rst:125 0cf5641c18be4a1ea4a05f0c6484e781
+msgid ""
+"In order to help prevent Airspeed sensor use when its been miss-calibrated "
+"either during ground static calibration during the power up sequence, or by "
+"accidental parameter changes to offset or ratio, three parameters are "
+"available. If the ground speed is consistently lower than the reported "
+"airspeed for a few seconds by :ref:`ARSPD_WIND_MAX<ARSPD_WIND_MAX>`, i.e. "
+"the apparent wind speed is greater than that amount, the sensor can be "
+"disabled to avoid erroneous reporting. It can be allowed to re-enable if the"
+" apparent wind falls back below that value. These actions are controlled by "
+":ref:`ARSPD_OPTIONS<ARSPD_OPTIONS>`."
+msgstr ""
+"为帮助防止在地面静态校准（上电序列期间）或因偏移量或比率参数被意外更改而导致误校准的空速传感器被使用，提供了三个参数。如果地面速度持续比报告的空速低 "
+":ref:`ARSPD_WIND_MAX<ARSPD_WIND_MAX>` "
+"达数秒以上，即表观风速超过该值，则可以禁用传感器以避免错误报告。若表观风速回落至该值以下，可允许重新启用。这些操作由 "
+":ref:`ARSPD_OPTIONS<ARSPD_OPTIONS>` 控制。"
+
+#: ../../source/docs/airspeed.rst:127 0e47ebffeecf4e1690e63146b30ca909
+msgid ""
+"You can also elect to have a GCS text message sent after the ground static "
+"calibration which reports the value of the calibration "
+"(:ref:`ARSPD_OFFSET<ARSPD_OFFSET>`). This value should not change "
+"significantly (10-20 points) from power-up to power-up significantly. If it "
+"does, then you may have forgotten to cover the pitot during power up and "
+"need to recalibrate. This option can be selected in the "
+":ref:`ARSPD_OPTIONS<ARSPD_OPTIONS>` bitmask parameter."
+msgstr ""
+"您还可以选择在地面静态校准完成后，通过地面站发送文本消息，报告校准值（:ref:`ARSPD_OFFSET<ARSPD_OFFSET>`）。该值在每次上电时不应有显著变化（10-20"
+" 点以内）。如果变化较大，可能是忘记在上电时遮住皮托管，需要重新校准。此选项可在 :ref:`ARSPD_OPTIONS<ARSPD_OPTIONS>`"
+" 位掩码参数中选择。"
+
+#: ../../source/docs/airspeed.rst:129 699ce32e666c464aa0eff3479c45161f
+msgid ""
+"You can also send a warning to the Ground Control Station if the apparent "
+"wind exceeds :ref:`ARSPD_WIND_WARN<ARSPD_WIND_WARN>`. This can be used "
+"instead of, or together with the above"
+msgstr ""
+"您还可以在表观风速超过 :ref:`ARSPD_WIND_WARN<ARSPD_WIND_WARN>` "
+"时向地面站发送警告。可单独使用，也可与上述功能配合使用。"
+
+#: ../../source/docs/airspeed.rst:132 8b9211ec4fc34f8d8978ffaa329bdf66
+msgid "Failure"
+msgstr "故障"
+
+#: ../../source/docs/airspeed.rst:134 33a13a28c0d6482cbc7898909e817e6a
+msgid ""
+"A failing airspeed sensor can lead to the aircraft stalling or over-"
+"speeding, this is something that is hard for ArduPilot to detect. Likewise, "
+"accidentally miscalibrating the offset during ground initialization can "
+"occur if the pitot tube is not covered to prevent wind upsetting the "
+"calibration, and can result in wildly inaccurate readings. The parameters "
+"below can be used to help detect these conditions and warn of, and/or "
+"disable, a failed sensor."
+msgstr ""
+"空速传感器故障可能导致飞机失速或超速，而这是 ArduPilot "
+"难以检测的。同样，如果在地面初始化时未遮住皮托管导致风吹影响校准，也可能发生意外的偏移量误校准，从而导致读数严重失准。以下参数可用于帮助检测这些情况，并发出警告和/或禁用故障传感器。"
+
+#: ../../source/docs/airspeed.rst:136 de4345f66c844b2baae827a302e97e8d
+msgid ""
+":ref:`ARSPD_WIND_MAX<ARSPD_WIND_MAX>` can be used to set the maximum "
+"expected wind speed the vehicle should ever see. This is then be used in "
+"combination with the GPS ground speed to detect a airspeed sensor error. "
+":ref:`ARSPD_WIND_WARN<ARSPD_WIND_WARN>` can be set to a lower speed to give "
+"some warning to the operator before the airspeed sensor is disabled. "
+":ref:`ARSPD_OPTIONS<ARSPD_OPTIONS>` can be set to allow sensors to be "
+"disabled based on this wind speed metric, a second option bit allows then to"
+" be re-enabled if the speed error is resolved."
+msgstr ""
+":ref:`ARSPD_WIND_MAX<ARSPD_WIND_MAX>` 可设置飞行器预期遇到的最大风速。该值随后与 GPS "
+"地面速度结合，用于检测空速传感器错误。:ref:`ARSPD_WIND_WARN<ARSPD_WIND_WARN>` "
+"可设置为较低速度，以便在空速传感器被禁用前提前向操作员发出警告。:ref:`ARSPD_OPTIONS<ARSPD_OPTIONS>` "
+"可设置为根据此风速指标禁用传感器，另一个选项位允许在速度误差消除后重新启用传感器。"
+
+#: ../../source/docs/airspeed.rst:141 a626b9d6af734981b48f3afbf9ae9281
+msgid ""
+":ref:`AHRS_WIND_MAX<AHRS_WIND_MAX>` sets the maximum allowable airspeed and "
+"ground speed difference that will ever be used for navigation."
+msgstr ":ref:`AHRS_WIND_MAX<AHRS_WIND_MAX>` 设置导航中允许使用的空速与地面速度之间的最大差值。"
+
+#: ../../source/docs/airspeed.rst:143 c375dbcbb49148a8997651701fde5034
+msgid "By default, these functions are disabled."
+msgstr "默认情况下，这些功能处于禁用状态。"
+
+#: ../../source/docs/airspeed.rst:145 2e60c72b2fa34351bcc864f6b0f25738
+msgid ""
+":ref:`EKF3 affinity and lane switching <common-ek3-affinity-lane-switching>`"
+" is another option for dealing with airspeed sensor failure."
+msgstr ""
+":ref:`EKF3 亲和性与通道切换 <common-ek3-affinity-lane-switching>` 是处理空速传感器故障的另一种方案。"
+
+#: ../../source/docs/airspeed.rst:148 f28875a3555e466cace1246412b0e34f
+msgid "Balloon Drop"
+msgstr "气球投放"
+
+#: ../../source/docs/airspeed.rst:150 a2bdb8cea25946f2a8274dfaae6a1b3b
+msgid ""
+"In the special case of a high altitude balloon drop, the EKF will declare "
+"the airspeed sensor faulty since there is gps speed but no airspeed due to "
+"air density. This can result in TECS miss-applying pitch. In this special "
+"case , the :ref:`AHRS_OPTIONS<AHRS_OPTIONS>` bit 2 can be set to prevent EKF"
+" from declaring the airspeed sensor as faulty and continue to use it."
+msgstr ""
+"在高空气球投放的特殊情况下，由于空气密度低导致有 GPS 速度但无空速，EKF 会将空速传感器判定为故障。这可能导致 TECS "
+"错误施加俯仰控制。在此特殊情况下，可将 :ref:`AHRS_OPTIONS<AHRS_OPTIONS>` 的第 2 位设置为 1，以防止 EKF "
+"将空速传感器判定为故障并继续使用。"
+
+#: ../../source/docs/airspeed.rst:155 74ec1ebd54414b62b771be57061c6be2
+msgid "Airspeed sensors available from ArduPilot Partners:"
+msgstr "ArduPilot 合作伙伴提供的空速传感器："
+
+#: ../../source/docs/airspeed.rst:164 d002588b0a6649f08a47057f2c938d77
+msgid "4525DO"
+msgstr "4525DO"
+
+#: ../../source/docs/airspeed.rst:161 0229a13cd2b54cfeb9d6dc713a1ad467
+msgid "`CUAV <https://store.cuav.net/shop/airspeed-sensor/>`_"
+msgstr "`CUAV <https://store.cuav.net/shop/airspeed-sensor/>`_"
+
+#: ../../source/docs/airspeed.rst:162 be2ac754dada4da0a43dedf56a971372
+msgid ""
+"`Holybro <https://shop.holybro.com/digital-air-speed-sensor_p1029.html>`_"
+msgstr ""
+"`Holybro <https://shop.holybro.com/digital-air-speed-sensor_p1029.html>`_"
+
+#: ../../source/docs/airspeed.rst:163 99805d5c02bd44da817b554c088516b1
+msgid "`Matek 4525DO <http://www.mateksys.com/?portfolio=aspd-4525>`_"
+msgstr "`Matek 4525DO <http://www.mateksys.com/?portfolio=aspd-4525>`_"
+
+#: ../../source/docs/airspeed.rst:164 6cae174adf4444dd916d274a752276d0
+msgid ""
+"`mRobotics <https://store.mrobotics.io/mRo-I2C-Airspeed-Sensor-JST-"
+"GH-p/m10030a.htm>`_"
+msgstr ""
+"`mRobotics <https://store.mrobotics.io/mRo-I2C-Airspeed-Sensor-JST-"
+"GH-p/m10030a.htm>`_"
+
+#: ../../source/docs/airspeed.rst:167 ../../source/docs/airspeed.rst:186
+#: 620b24748cce4b1b943afb220665b057 ff8c83e152c347a29b426b78482501d4
+msgid "ASP5033"
+msgstr "ASP5033"
+
+#: ../../source/docs/airspeed.rst:167 9cf5fefb9c364ce4ace171553ffec130
+msgid ""
+"`Qiotek ASP5033 <https://www.qio-tek.com/index.php/product/qiotek-"
+"asp5033-airspeed-sensor-and-pitot-tube>`_"
+msgstr ""
+"`Qiotek ASP5033 <https://www.qio-tek.com/index.php/product/qiotek-"
+"asp5033-airspeed-sensor-and-pitot-tube>`_"
+
+#: ../../source/docs/airspeed.rst:171 ../../source/docs/airspeed.rst:183
+#: 722b6118db804f97a9f8a3c66601360c a25047339e6c41b18f2c1942ac1b8725
+msgid "DLVR"
+msgstr "DLVR"
+
+#: ../../source/docs/airspeed.rst:170 14696693c88441a49d553b729d71e6b5
+msgid "`Matek DLVR <http://www.mateksys.com/?portfolio=aspd-dlvr>`_"
+msgstr "`Matek DLVR <http://www.mateksys.com/?portfolio=aspd-dlvr>`_"
+
+#: ../../source/docs/airspeed.rst:178 bc1cc0778c9141978d25f657bff9b073
+msgid "Amphenol AUAV (static and dynamic pressure)"
+msgstr "Amphenol AUAV（静压和动压）"
+
+#: ../../source/docs/airspeed.rst:177 0a7a0b7efa9f4773a29327e1bc79155c
+msgid ""
+"`Beyond Robotix Air Data Module <https://www.beyondrobotix.com/products/air-"
+"data-module>`_"
+msgstr ""
+"`Beyond Robotix Air Data Module <https://www.beyondrobotix.com/products/air-"
+"data-module>`_"
+
+#: ../../source/docs/airspeed.rst:178 b93e62bd1371478b84d8b603408e5ea1
+msgid ""
+"`Matek DroneCAN AUAV Airspeed/Baro "
+"<https://www.mateksys.com/?portfolio=aspd-auav>`__"
+msgstr ""
+"`Matek DroneCAN AUAV Airspeed/Baro "
+"<https://www.mateksys.com/?portfolio=aspd-auav>`__"
+
+#: ../../source/docs/airspeed.rst:181 ../../source/docs/airspeed.rst:189
+#: a6692db5f4bf446d93c3209a396e3937 b3ea678f9f0b42cebbbdebe559c4d42e
+msgid ""
+"`Foxtech AEROFOX Airspeed/Compass <https://www.foxtechfpv.com/foxtech-"
+"aerofox-can-airspeed-compass.html>`__"
+msgstr ""
+"`Foxtech AEROFOX Airspeed/Compass <https://www.foxtechfpv.com/foxtech-"
+"aerofox-can-airspeed-compass.html>`__"
+
+#: ../../source/docs/airspeed.rst:182 b9067b860d26430f96f13e130eba1264
+msgid ""
+"`Holybro DroneCAN DLVR <https://holybro.com/products/high-precision-"
+"dronecan-airspeed-sensor-dlvr>`__"
+msgstr ""
+"`Holybro DroneCAN DLVR <https://holybro.com/products/high-precision-"
+"dronecan-airspeed-sensor-dlvr>`__"
+
+#: ../../source/docs/airspeed.rst:183 b8daeb9baf374e5d9642ff010526a6cb
+msgid ":ref:`Matek DroneCAN DLVR <common-matek-uavcan-dlvr>`"
+msgstr ":ref:`Matek DroneCAN DLVR <common-matek-uavcan-dlvr>`"
+
+#: ../../source/docs/airspeed.rst:186 237932eade2d42e482c506106fa314b0
+msgid ""
+"`Qiotek DroneCAN 5033 <https://www.qio-tek.com/index.php/product/qiotek-"
+"asp5033-dronecan-airspeed-and-compass-module>`_"
+msgstr ""
+"`Qiotek DroneCAN 5033 <https://www.qio-tek.com/index.php/product/qiotek-"
+"asp5033-dronecan-airspeed-and-compass-module>`_"
+
+#: ../../source/docs/airspeed.rst:189 787818f6f6f0435f87ed02519b8adf8a
+msgid "6897"
+msgstr "6897"
+
+#: ../../source/docs/airspeed.rst:192 cd0641fcadd6443686ba9bb26f7e299e
+msgid "MS5611"
+msgstr "MS5611"
+
+#: ../../source/docs/airspeed.rst:192 cb5d2ee0093a4bf39d892149e977cddc
+msgid ":ref:`Avionics Anonymous Airspeed + Temp <common-avanon-adc>`"
+msgstr ":ref:`Avionics Anonymous Airspeed + Temp <common-avanon-adc>`"
+
+#: ../../source/docs/airspeed.rst:195 05db99577dfd4a17b589daebb80a9eed
+msgid "MS4525"
+msgstr "MS4525"
+
+#: ../../source/docs/airspeed.rst:195 8c690e7b2af54fb1bd8af99d4527d56d
+msgid ""
+"`MakeFlyEasy DroneCAN Airspeed <https://en.makeflyeasy.com/index.php/mfe-"
+"can-airspeed-meter/>`__"
+msgstr ""
+"`MakeFlyEasy DroneCAN Airspeed <https://en.makeflyeasy.com/index.php/mfe-"
+"can-airspeed-meter/>`__"
+
+#: ../../source/docs/airspeed.rst:198 d20dae852a5745848f0fd0389fa5ded6
+msgid "Other Topics"
+msgstr "其他主题"

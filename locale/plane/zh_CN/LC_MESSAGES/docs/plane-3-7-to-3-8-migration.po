@@ -1,0 +1,410 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 14:59+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:5
+#: 475bbe9fb97049de91fbce9078d6065f
+msgid "Archived: Migration from Plane 3.7 to 3.8"
+msgstr "已归档：从 Plane 3.7 迁移到 3.8"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:7
+#: 67873f2de2c04615a5fbe91d023b32ac
+msgid ""
+"This is a guide to migrating from plane 3.7 to plane 3.8. There have been a "
+"large number of configuration changes, so please read the guide carefully, "
+"and make sure you do careful ground tests before your first flight."
+msgstr "本文是从 Plane 3.7 迁移到 3.8 的指南。已有大量配置更改，请仔细阅读本指南，并确保在首次飞行前进行仔细的地面测试。"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:12
+#: d20abf0baa854cdc96cf5b3670674f6a
+msgid ""
+"The firmware will try to auto-migrate your parameters where possible, but it"
+" is a complex migration and there is the possibility of errors, so careful "
+"testing is critical."
+msgstr "固件将尽可能尝试自动迁移您的参数，但这是一次复杂的迁移，可能存在错误，因此仔细测试至关重要。"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:18
+#: 66419585b6b64b8090ed675554fe4f2d
+msgid ""
+"If you later downgrade from Plane 3.8 to an earlier version, then any "
+"changes that were made to the RC_* and SERVOn_* parameters will be lost. "
+"Upgrading back to 3.8 (or higher) will not copy over any new param changes. "
+"This is only an issue if the user decides to downgrade. **Please note that "
+"downgrading from 3.8 to 3.7 (or earlier) is very likely to cause a crash if "
+"you do not manually restore channel reversals.**"
+msgstr ""
+"如果您之后从 Plane 3.8 降级到早期版本，对 RC_* 和 SERVOn_* 参数所做的任何更改都将丢失。重新升级到 "
+"3.8（或更高版本）不会复制任何新的参数更改。只有在用户决定降级时才会出现此问题。**请注意，从 3.8 降级到 "
+"3.7（或更早版本）如果不手动恢复通道反向设置，很可能导致坠毁。**"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:26
+#: 21d8e943c1ab439b908a5aa5f5db547e
+msgid "Change to Servo Range Parameters"
+msgstr "舵机范围参数更改"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:28
+#: d403a14e7ad44f70b6edfc82a8d658e1
+msgid ""
+"One of the biggest changes between plane 3.7 and 3.8 is the change from "
+"RCn_* parameters to SERVOn_* parameters."
+msgstr "Plane 3.7 和 3.8 之间最大的变化之一是从 RCn_* 参数更改为 SERVOn_* 参数。"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:31
+#: db106f0d552b4e149717a69a8b2ccb9c
+msgid ""
+"In plane 3.7 and before, the range, trim and function of all input and "
+"output channels was controlled by a single set of parameters starting with "
+"RC. For example, the handling of input channel 1 was defined by 4 "
+"parameters:"
+msgstr ""
+"在 Plane 3.7 及之前，所有输入和输出通道的范围、配平和功能由一组以 RC 开头的参数控制。例如，输入通道 1 的处理由 4 个参数定义："
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:36
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:48
+#: d003f483e7c141d1bb824e3679b25809 de6d4f4dee254420b8bd3c955c99e190
+msgid "RC1_MIN"
+msgstr "RC1_MIN"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:37
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:49
+#: 352ce857b17a452cadcdeb6434f2b607 5be11c3828464d7fb8e1b266df6c9820
+msgid "RC1_MAX"
+msgstr "RC1_MAX"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:38
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:50
+#: 0983a3ae128e45138eaa8130740c6edb 6ae87b25d01845ca9f9862154e4f10b5
+msgid "RC1_TRIM"
+msgstr "RC1_TRIM"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:39
+#: 27245c2fea204535a5f708305edf79b1
+msgid "RC1_REV"
+msgstr "RC1_REV"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:42
+#: 5bc892cc8d5940c2acc934a257d18d0a
+msgid ""
+"these same parameters also controlled the range of output values for the "
+"first output channel. That means you could not have a different range for "
+"your RC inputs and your servo outputs."
+msgstr "这些相同的参数也控制第一个输出通道的输出值范围。这意味着 RC 输入和舵机输出不能有不同的范围。"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:46
+#: 80b20368f20547d3a53c902b56e24be2
+msgid "In plane 3.8 the above 4 parameters are replaced with 8 parameters:"
+msgstr "在 Plane 3.8 中，上述 4 个参数被 8 个参数取代："
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:51
+#: 9052851b91b841f2898c93ba7565a668
+msgid "RC1_REVERSED"
+msgstr "RC1_REVERSED"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:52
+#: cf2055d291e34af2917c49935a8c3f75
+msgid "SERVO1_MIN"
+msgstr "SERVO1_MIN"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:53
+#: e46d7a4e093c43eaa7e7abb7c87d189a
+msgid "SERVO1_MAX"
+msgstr "SERVO1_MAX"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:54
+#: a9429780919943aaa211ebbfcb0c05e4
+msgid "SERVO1_TRIM"
+msgstr "SERVO1_TRIM"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:55
+#: fae39bb273f949d89a13434c69c02f9f
+msgid "SERVO1_REVERSED"
+msgstr "SERVO1_REVERSED"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:57
+#: 4df253a525854fe9a311bb1549695be5
+msgid ""
+"the RC parameters control an input channel, the SERVO parameters control an "
+"output channel. This gives much more flexibility, and means that when you "
+"re-calibrate your RC inputs it doesn't affect the tuning of your aircraft."
+msgstr "RC 参数控制输入通道，SERVO 参数控制输出通道。这提供了更大的灵活性，意味着重新校准 RC 输入不会影响飞机调参。"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:62
+#: c6317abec39c4c08930814c4fed2a712
+msgid ""
+"You may also notice that the \"REV\" parameters have been renamed to "
+"\"REVERSED\". This is because the old parameters had a convention so that "
+"\"reversed\" was chosen by setting RC1_REV to -1, and \"not reversed\" was "
+"chosen by setting RC1_REV to 1. This caused quite a lot of confusion, so for"
+" 3.8 we now use the convention that RC1_REVERSED=0 means not reversed and "
+"RC1_REVERSED=1 means reversed."
+msgstr ""
+"您可能还会注意到「REV」参数已重命名为「REVERSED」。这是因为旧参数有一个约定，通过将 RC1_REV 设为 -1 来选择「反向」，设为 1 "
+"来选择「不反向」。这造成了很多混乱，因此在 3.8 中我们现在使用约定：RC1_REVERSED=0 表示不反向，RC1_REVERSED=1 "
+"表示反向。"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:70
+#: c2ca173d572b479c9e1139027dd2ac0e
+msgid "Change to Servo Functions"
+msgstr "舵机功能更改"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:72
+#: 5ab2647e29894c778f0c7e591c987d8f
+msgid ""
+"The second big change is to the parameters that defines what each output is "
+"used for. In plane 3.7 the output function of the first 4 channels was hard "
+"coded, following the AETR \"aileron, elevator, throttle, rudder\" "
+"convention. Channels 5 and above had FUNCTION parameters, allowing their "
+"function to be set."
+msgstr ""
+"第二个重大变化是定义每个输出用途的参数。在 Plane 3.7 中，前 4 个通道的输出功能是硬编码的，遵循 "
+"AETR「副翼、升降舵、油门、方向舵」约定。通道 5 及以上有 FUNCTION 参数，允许设置其功能。"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:78
+#: 0be2065bdd5c4749b5ba3b32aa40e34e
+msgid ""
+"For example, in plane 3.7 you could set RC5_FUNCTION to 4 to make output "
+"channel 5 an additional aileron."
+msgstr "例如，在 Plane 3.7 中，可以将 RC5_FUNCTION 设为 4，使输出通道 5 成为额外的副翼。"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:81
+#: 15bf36118522455baac34f9d8faafac6
+msgid ""
+"In plane 3.8 the functions are chosen using the SERVOn_FUNCTION parameters. "
+"You can set these on any output channel. The default for the first 4 "
+"channels is the same, but you can change it to any output type you like. "
+"This gives a lot more flexibility, and is especially useful for flight "
+"boards with a smaller number of output channels."
+msgstr ""
+"在 Plane 3.8 中，功能使用 SERVOn_FUNCTION 参数选择。可以在任何输出通道上设置这些参数。前 4 "
+"个通道的默认设置相同，但可以更改为任何所需的输出类型。这提供了更大的灵活性，对于输出通道数量较少的飞控板尤其有用。"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:87
+#: 2a8e5197c8a84bfa9bf3af88ec515e8a
+msgid ""
+"So if you wanted the 5th output channel to be an aileron you could set "
+"SERVO5_FUNCTION=4."
+msgstr "因此，如果要将第 5 个输出通道设为副翼，可以设置 SERVO5_FUNCTION=4。"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:90
+#: bb3f528992fa4fd6a6b6477990d949e2
+msgid ""
+"You can see more details on output functions in the :ref:`Output Functions "
+"<channel-output-functions>` documentation."
+msgstr ""
+"您可以在 :ref:`Output Functions <channel-output-functions>` 文档中查看更多关于输出功能的详情。"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:93
+#: 0ebde5720a6d4aef8a506b955cd6179e
+msgid "Change to Elevon, Vtail and Flaperon Configuration"
+msgstr "升降副翼、V 形尾翼和襟副翼配置更改"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:95
+#: 2f397cabf80f4b8dbaddc45e211b0d10
+msgid ""
+"The method of setting up elevon, vtail and flaperon planes has completely "
+"changed in plane 3.8."
+msgstr "设置升降副翼、V 形尾翼和襟副翼飞机的方法在 Plane 3.8 中已完全改变。"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:98
+#: 16ce4d91cc524353ab6509a27d6f2e89
+msgid ""
+"In the 3.7 release if you wanted to setup an elevon plane you would set the "
+"variable ELEVON_OUTPUT to an integer from 1 to 8. This then changed the "
+"behaviour of the first aileron and elevator channel to do elevon mixing. The"
+" value of ELEVON_OUTPUT controlled the possible channel order and reversal "
+"options (8 combinations are possible)."
+msgstr ""
+"在 3.7 版本中，如果要设置升降副翼飞机，需要将 ELEVON_OUTPUT 变量设为 1 到 8 "
+"的整数。这会改变第一个副翼和升降舵通道的行为以进行升降副翼混控。ELEVON_OUTPUT 的值控制可能的通道顺序和反向选项（8 种组合可能）。"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:104
+#: 46afbb105e2f4fe8b67a59f3f85f9992
+msgid ""
+"In plane 3.8 a much simpler and more flexible system is used. If you want "
+"channel 1 to be a left elevon and channel 2 to be a right elevon then you "
+"use:"
+msgstr "在 Plane 3.8 中，使用了一个更简单且更灵活的系统。如果要将通道 1 设为左升降副翼，通道 2 设为右升降副翼，则使用："
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:108
+#: e07d120d5eb045da93d251c06fa3f468
+msgid "SERVO1_FUNCTION=77"
+msgstr "SERVO1_FUNCTION=77"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:109
+#: 990791fb85c640bb868cf3c8eed20671
+msgid "SERVO2_FUNCTION=78"
+msgstr "SERVO2_FUNCTION=78"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:111
+#: 3da8f3dbbacb49daa25f37c96ad73ae1
+msgid ""
+"the value 77 means \"left elevon\". The value 78 means \"right elevon\". You"
+" can then set the reversals as needed, using SERVO1_REVERSED and "
+"SERVO2_REVERSED."
+msgstr ""
+"值 77 表示「左升降副翼」，值 78 表示「右升降副翼」。然后可以根据需要使用 SERVO1_REVERSED 和 SERVO2_REVERSED "
+"设置反向。"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:115
+#: 733124715b57441bbc89a704f7d9c179
+msgid ""
+"Changing to this system means you can have elevons on any channel (and "
+"multiple elevons if needed), plus you can directly control the trim and "
+"range of each elevon,"
+msgstr "切换到此系统意味着可以在任何通道上使用升降副翼（如需要还可使用多个升降副翼），另外还可以直接控制每个升降副翼的配平和范围。"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:119
+#: 8e4340b597cd43318f62c1f35e9ba00b
+msgid ""
+"The same system is used for vtail, flaperon and differential spoiler setups."
+" Please see the following guides for more details:"
+msgstr "V 形尾翼、襟副翼和差动扰流板设置使用相同的系统。更多详情请参见以下指南："
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:122
+#: 7c301b1554de4ab9bab5d4c5e8455e26
+msgid ":ref:`Elevon Planes <guide-elevon-plane>`"
+msgstr ":ref:`Elevon Planes <guide-elevon-plane>`"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:123
+#: 054a8e3fc9b74b538b254abb679b373b
+msgid ":ref:`VTail Planes <guide-vtail-plane>`"
+msgstr ":ref:`VTail Planes <guide-vtail-plane>`"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:124
+#: 3a9a23b44a124389a9e1a01910686423
+msgid ":ref:`Differential Spoilers <differential-spoilers>`"
+msgstr ":ref:`Differential Spoilers <differential-spoilers>`"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:125
+#: d9d93eca90de4b4ab768c91f8d6a936c
+msgid ":ref:`Flaperons <flaperons-on-plane>`"
+msgstr ":ref:`Flaperons <flaperons-on-plane>`"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:129
+#: 98db754dae954563bd82f4d1ece0329b
+msgid "Tuning Changes"
+msgstr "调参更改"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:131
+#: bef78b0ed3eb40f285570b3dc1fc71ed
+msgid ""
+"Some users may notice the tuning of their aircraft changes a bit between 3.7"
+" and 3.8. The likely cause of this is the change in the RC and SERVO "
+"parameters. With the separation of the RCn_MIN/MAX parameters from the "
+"SERVOn_MIN/MAX parameters you may find that the \"throw\" of your servos "
+"changes a bit, which can affect tuning."
+msgstr ""
+"部分用户可能注意到飞机调参在 3.7 和 3.8 之间略有变化。可能的原因是 RC 和 SERVO 参数的变化。将 RCn_MIN/MAX 参数与 "
+"SERVOn_MIN/MAX 参数分离后，舵机的「行程」可能会有所变化，这可能影响调参。"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:137
+#: fca4222905c94ca7aa226980c8c7f0b2
+msgid ""
+"While the automatic upgrade when you install plane 3.8 onto a plane running "
+"3.7 should produce a very similar servo range, please do check it carefully."
+msgstr "虽然在将 Plane 3.8 安装到运行 3.7 的飞机上时，自动升级应能产生非常相似的舵机范围，但请仔细检查。"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:142
+#: 118e2eb3f685448bb5253bbeaf48a491
+msgid "Reversal Checking"
+msgstr "反向检查"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:144
+#: c26557578c7d4d3bb108a84c02f08a41
+msgid ""
+"Please do very careful checking for servo reversal before your first flight "
+"with plane 3.8. The automatic parameter upgrade when you install plane 3.8 "
+"should get this right, but it is very complex and there may be some "
+"situations that aren't covered. Please make sure that both of the following "
+"are checked carefully after you update:"
+msgstr ""
+"请在首次使用 Plane 3.8 飞行前仔细检查舵机反向设置。安装 Plane 3.8 "
+"时的自动参数升级应该能正确处理，但它非常复杂，可能有些情况未涵盖。请确保在更新后仔细检查以下两项："
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:150
+#: d533b365c7c44a1997ad851ab0cdb8cb
+msgid ""
+"that RC inputs give the correct movements of your control surfaces in MANUAL"
+" mode"
+msgstr "RC 输入在 MANUAL 模式下控制舵面运动正确"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:152
+#: d5ad38801b164b09b7759fa7e29c73c2
+msgid ""
+"that the control surfaces move in the right direction in FBWA mode when you "
+"roll and pitch the aircraft with no RC input"
+msgstr "在 FBWA 模式下无 RC 输入时横滚和俯仰飞机，控制舵面向正确方向运动"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:155
+#: aa1308b9249749639252900fe16f4d01
+msgid ""
+"There is a detailed guide to checking for reversals in the :ref:`four "
+"channel plane <guide-four-channel-plane>` document."
+msgstr ":ref:`四通道飞机 <guide-four-channel-plane>` 文档中有检查反向设置的详细指南。"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:158
+#: 35798652233a4201b0fc35fa8df3e3ad
+msgid "Airspeed Setup Changes"
+msgstr "空速设置更改"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:160
+#: 156dc5ce75274e25a0dab05178930db9
+msgid ""
+"The parameter for enabling an airspeed sensor has changed from ARSPD_ENABLE "
+"in plane 3.7 to ARSPD_TYPE in plane 3.8. This change was made to provide a "
+"more flexible way of supporting multiple airspeed sensor types."
+msgstr ""
+"启用空速传感器的参数已从 Plane 3.7 的 ARSPD_ENABLE 更改为 Plane 3.8 的 "
+"ARSPD_TYPE。此更改是为了提供更灵活的方式支持多种空速传感器类型。"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:165
+#: 1685cf275bcc470487055b88146431c6
+msgid ""
+"If you have a MS4525 digital airspeed sensor then the parameter upgrade "
+"should happen automatically and you should find that ARSPD_TYPE will be "
+"automatically set to 1. However if you have an analog airspeed sensor then "
+"you will need to set ARSPD_TYPE=2 after updating to plane 3.8."
+msgstr ""
+"如果您有 MS4525 数字空速传感器，参数升级应自动进行，您应该发现 ARSPD_TYPE 将自动设为 1。但如果您有模拟空速传感器，更新到 "
+"Plane 3.8 后需要手动将 ARSPD_TYPE 设为 2。"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:171
+#: 5694bffb15d941f181f6686363be6d1e
+msgid ""
+"Plane 3.8 also supports the new MS5525 airspeed sensor. That is selected by "
+"setting ARSPD_TYPE=3."
+msgstr "Plane 3.8 还支持新的 MS5525 空速传感器，通过设置 ARSPD_TYPE=3 来选择。"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:175
+#: 2b2b30be9645414ab12cfd599c22b94a
+msgid "Change to THR_MAX"
+msgstr "THR_MAX 更改"
+
+#: ../../source/docs/plane-3-7-to-3-8-migration.rst:177
+#: 4df142dfe00a4f13b85c049e6fe81eaf
+msgid ""
+"The THR_MAX parameter, which controls maximum throttle, defaulted to 75 "
+"percent for versions 3.7.1 and earlier. In plane 3.8.0 it defaults to 100 "
+"percent. If you had not previously changed this parameter and your plane is "
+"overpowered at 100 percent throttle you may wish to change it back to 75."
+msgstr ""
+"控制最大油门的 THR_MAX 参数在 3.7.1 及更早版本中默认为 75%。在 Plane 3.8.0 中默认为 "
+"100%。如果您之前未更改此参数且飞机在 100% 油门下动力过剩，您可能希望将其改回 75%。"

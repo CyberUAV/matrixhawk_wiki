@@ -1,0 +1,871 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 14:59+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:5
+#: c7b0a342d71140a9b4ea24a57c6785bf
+msgid "Automatic Tuning with AUTOTUNE"
+msgstr "使用 AUTOTUNE 自动调参"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:7
+#: 325d81b55992452dab2f54ff10d8fd02
+msgid ""
+"Getting a good set of roll/pitch tuning parameters for your aircraft is "
+"essential for stable, accurate flight. To help with this it is highly "
+"recommended that you use the AUTOTUNE system described below."
+msgstr "为您的飞机获得一组良好的横滚/俯仰调参参数对于稳定、精准的飞行至关重要。为此，强烈建议使用下文描述的 AUTOTUNE 系统。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:12
+#: fdb981a9501f4f5bb965ad44f0fa0fe9
+msgid "What AUTOTUNE does"
+msgstr "AUTOTUNE 的作用"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:14
+#: a604e61df4cd4b93afe97f392ab7c0ca
+msgid ""
+"The AUTOTUNE mode is a flight mode that flies in the same way as FBWA, but "
+"uses changes in flight attitude input by the pilot to learn the key values "
+"for roll and pitch tuning. So the pilot uses their transmitter mode switch "
+"to switch to AUTOTUNE mode and then flies the plane for a few minutes. While"
+" flying the pilot needs to input as many sharp attitude changes as possible "
+"so that the autotune code can learn how the aircraft responds."
+msgstr ""
+"AUTOTUNE 模式是一种与 FBWA "
+"飞行方式相同的飞行模式，但它利用飞行员输入的飞行姿态变化来学习横滚和俯仰调参的关键值。因此，飞行员使用遥控器模式开关切换到 AUTOTUNE "
+"模式，然后飞行几分钟。飞行期间，飞行员需要输入尽可能多的急剧姿态变化，以便自动调参代码能够学习飞机的响应特性。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:23
+#: cdeca3f2730c4b569de867031af7c6d5
+msgid "Setting up for AUTOTUNE"
+msgstr "AUTOTUNE 设置"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:25
+#: 93bff33091214e5589e6ec799b41a98a
+msgid ""
+"To setup your aircraft for AUTOTUNE you need to select AUTOTUNE mode as one "
+"of the flight modes selectable with the flight mode switch on your "
+"transmitter."
+msgstr "要为 AUTOTUNE 设置飞机，您需要在遥控器的飞行模式开关可选飞行模式中选择 AUTOTUNE 模式。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:29
+#: 4ac03fba17d6448a9419be08a9b099e8
+msgid ""
+"You can also autotune the yaw axis during AUTOTUNE for yaw rate control in "
+":ref:`ACRO mode <acro-mode>` by setting "
+":ref:`YAW_RATE_ENABLE<YAW_RATE_ENABLE>` = 1 and "
+":ref:`ACRO_YAW_RATE<ACRO_YAW_RATE>` to a value equal or less than the yaw "
+"rate capability of the vehicle(90 deg/s is a typical value). This of course "
+"assumes that the vehicle has yaw control surfaces(an elevon only flying wing"
+" does not, for example)."
+msgstr ""
+"您还可以在 AUTOTUNE 期间对偏航轴进行自动调参，用于 :ref:`ACRO 模式 <acro-mode>` 下的偏航速率控制，方法是将 "
+":ref:`YAW_RATE_ENABLE<YAW_RATE_ENABLE>` 设置为1，并将 "
+":ref:`ACRO_YAW_RATE<ACRO_YAW_RATE>` "
+"设置为小于或等于飞行器偏航速率能力的值（90度/秒是典型值）。当然，这假设飞行器有偏航控制面（例如，仅有升降副翼的飞翼就没有）。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:31
+#: 32c5c6be75ce4bcfb8f53a9b43298d33
+msgid ""
+"you can AutoTune in most stabilized flight modes, such as CRUISE or FBWA/B, "
+"LOITER, or even during an AUTO mission segment (if "
+":ref:`STICK_MIXING<STICK_MIXING>` is enabled), via an ``RCx_OPTION`` switch "
+"set to 107."
+msgstr ""
+"您可以通过设置为107的 ``RCx_OPTION`` 开关，在大多数稳定飞行模式（例如 CRUISE 或 FBWA/B、LOITER，甚至在 AUTO"
+" 任务段中（如果启用了 :ref:`STICK_MIXING<STICK_MIXING>`）中进行 AutoTune。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:33
+#: 891c31a8408d46d19e47f356a86bfbc4
+msgid ""
+"Large QuadPlanes can be difficult to fly manually while monitoring the GCS "
+"for tune progress messages or if you are not experienced in flying in pilot "
+"guided modes. In these cases, it is safer to do the tuning while in a "
+"repeating fixed course mission (ie. a rectangular loop for example) in AUTO "
+"or while LOITERing, using the the above RC Aux Switch to enable autotuning "
+"while not having to constantly guide the vehicle on course."
+msgstr ""
+"大型 QuadPlane 在手动飞行时可能难以同时监控 GCS "
+"的调参进度消息，或者您没有以飞行员引导模式飞行的经验。在这些情况下，在重复固定航线任务（例如矩形循环）的 AUTO 模式下或 LOITERing "
+"时进行调参更为安全，使用上述 RC 辅助开关启用自动调参，无需不断引导飞行器。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:35
+#: ff201bb31b13414487df86beabc225f5
+msgid ""
+"The :ref:`AUTOTUNE_AXES<AUTOTUNE_AXES>` bitmask selects which axes will be "
+"tuned while in Autotune. Default is roll, pitch and yaw."
+msgstr ""
+":ref:`AUTOTUNE_AXES<AUTOTUNE_AXES>` 位掩码选择在 Autotune 期间将调参的轴。默认为横滚、俯仰和偏航。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:37
+#: d8a6e2bd49d8485eab11eba69940ea62
+msgid ""
+"AUTOTUNE is not designed to work well with :ref:`RUDDER_ONLY<RUDDER_ONLY>` "
+"vehicles for tuning roll. :ref:`Manually tune the roll <new-roll-and-pitch-"
+"tuning>` axis instead."
+msgstr ""
+"AUTOTUNE 不适合用于调参 :ref:`RUDDER_ONLY<RUDDER_ONLY>` 飞行器的横滚轴。请 :ref:`手动调参横滚 "
+"<new-roll-and-pitch-tuning>` 轴。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:39
+#: 6dd81b94c3d143c7b207edbf7f6f13a4
+msgid ""
+"You also should choose a tuning level by setting the "
+":ref:`AUTOTUNE_LEVEL<AUTOTUNE_LEVEL>` parameter in the advanced parameter "
+"screen of your ground station. The :ref:`AUTOTUNE_LEVEL<AUTOTUNE_LEVEL>` "
+"parameter controls how aggressive you want the tune to be. The default is "
+"level 6, which produces a medium tune, suitable for beginner to intermediate"
+" pilots. If you are a more experienced pilot then you could choose level 7, "
+"which will result in a bit sharper tune (faster attitude changes). Levels "
+"above 7 are not recommended until you have done an initial tune with a lower"
+" level. Levels above 8 should only be used by very experienced pilots."
+msgstr ""
+"您还应通过在地面站的高级参数界面设置 :ref:`AUTOTUNE_LEVEL<AUTOTUNE_LEVEL>` "
+"参数来选择调参级别。:ref:`AUTOTUNE_LEVEL<AUTOTUNE_LEVEL>` "
+"参数控制调参的积极程度。默认为级别6，产生适合初级到中级飞行员的中等调参。如果您是更有经验的飞行员，可以选择级别7，将产生略微更锐利的调参（更快的姿态变化）。在使用较低级别进行初始调参之前，不建议使用7以上的级别。8以上的级别仅应由非常有经验的飞行员使用。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:49
+#: 40efa2d7145748788b71dd5519d36eef
+msgid ""
+"with Yaw rate controller active, turning in AUTOTUNE mode will require the "
+"use of rudder, not just aileron input. Do not enable "
+":ref:`YAW_RATE_ENABLE<YAW_RATE_ENABLE>` if you do not have a rudder."
+msgstr ""
+"激活偏航速率控制器后，在 AUTOTUNE 模式中转弯将需要使用方向舵，而不仅仅是副翼输入。如果没有方向舵，请勿启用 "
+":ref:`YAW_RATE_ENABLE<YAW_RATE_ENABLE>`。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:51
+#: ca5c0898cd304fb696cbe4dbd8f3d78f
+msgid ""
+"Autotune tunes the FF (feedforward), P, I, and D terms at each "
+":ref:`AUTOTUNE_LEVEL<AUTOTUNE_LEVEL>`, which determines the maximum/target "
+"slew rates used for the tuning process and the gain from desired attitude "
+"angle to demanded angular rate ( :ref:`PTCH2SRV_TCONST<PTCH2SRV_TCONST>` and"
+" :ref:`RLL2SRV_TCONST<RLL2SRV_TCONST>`)."
+msgstr ""
+"Autotune 在每个 :ref:`AUTOTUNE_LEVEL<AUTOTUNE_LEVEL>` 下调参 FF（前馈）、P、I 和 D "
+"项，该级别决定用于调参过程的最大/目标斜率速率以及从期望姿态角到要求角速率的增益（:ref:`PTCH2SRV_TCONST<PTCH2SRV_TCONST>`"
+" 和 :ref:`RLL2SRV_TCONST<RLL2SRV_TCONST>`）。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:53
+#: b623c4f16a5b46a595625751ed815bcc
+msgid ""
+"It is important to set a level appropriate for the rates that the aircraft "
+"can physically achieve. In particular, the level 6 roll rates can be too "
+"large for slow aircraft with large wing spans, like gliders. These often "
+"have a maximum roll rate of 30 - 40 degrees per second and should use level "
+"2 or 3. See :ref:`automatic-tuning-with-autotune_level-settings` for the "
+"rates. But level 8 may be appropriate for light foam planes in the under 2kg"
+" class."
+msgstr ""
+"重要的是设置适合飞机实际物理能够达到的速率的级别。特别是，级别6的横滚速率对于翼展较大的慢速飞机（如滑翔机）可能过大。这些飞机通常最大横滚速率为30-40度/秒，应使用级别2或3。请参阅"
+" :ref:`automatic-tuning-with-autotune_level-settings` "
+"了解速率。但对于2公斤以下级别的轻型泡沫飞机，级别8可能是合适的。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:58
+#: 5abb7676f1c549f5a3f6665455a84b49
+msgid ""
+"the :ref:`PTCH2SRV_RMAX_UP<PTCH2SRV_RMAX_UP>`, "
+":ref:`PTCH2SRV_RMAX_DN<PTCH2SRV_RMAX_DN>`, and "
+":ref:`RLL2SRV_RMAX<RLL2SRV_RMAX>` rates should be set appropriately for "
+"normal flight also according to the vehicle's capabilities."
+msgstr ""
+":ref:`PTCH2SRV_RMAX_UP<PTCH2SRV_RMAX_UP>`、:ref:`PTCH2SRV_RMAX_DN<PTCH2SRV_RMAX_DN>`"
+" 和 :ref:`RLL2SRV_RMAX<RLL2SRV_RMAX>` 速率也应根据飞行器能力为正常飞行设置适当值。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:60
+#: 496e034a9d4243f2950180e30fdc1e30
+msgid ""
+"You also need to make sure that all of the basic settings for your airframe "
+"are correct. In particular, ensure that all surface reversals are correct "
+"and that you have a reasonable value set for the minimum airspeed. Autotune "
+"won't do anything until you are above the minimum airspeed you have set in "
+"the :ref:`AIRSPEED_MIN<AIRSPEED_MIN>` parameter. If you don't have an "
+"airspeed sensor then that value is still used, along with an airspeed "
+"estimate from other sensors. Also make sure you have done RC calibration, as"
+" AUTOTUNE will only work if you have full control movements with your "
+"transmitter sticks."
+msgstr ""
+"您还需要确保机架的所有基本设置正确。特别是，确保所有控制面反向正确，并且已为最低空速设置了合理值。Autotune 在达到 "
+":ref:`AIRSPEED_MIN<AIRSPEED_MIN>` "
+"参数中设置的最低空速之前不会执行任何操作。如果没有空速传感器，该值仍然被使用，并与来自其他传感器的空速估算结合使用。还要确保已完成 RC 校准，因为 "
+"AUTOTUNE 仅在您的遥控器摇杆有完整控制行程时才有效。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:70
+#: 5e2d132afbc648faae576038f62018e5
+msgid ""
+"In addition, ArduPilot will automatically scale the tuning gains versus "
+"airspeed, either measured or estimated (if no airspeed sensor is used), to "
+"compensate for the control surface effectiveness vs speed. The nominal "
+"center speed for this is :ref:`SCALING_SPEED<SCALING_SPEED>` and should be "
+"set to the approximate speed that will be used for tuning, ie the typical "
+"cruising speed. Once tuning is done with this speed set, do not change it "
+"since it directly scales the gains and will corrupt the tune."
+msgstr ""
+"此外，ArduPilot 将自动按空速（测量值或估算值（如无空速传感器））缩放调参增益，以补偿控制面效率随速度的变化。其名义中心速度为 "
+":ref:`SCALING_SPEED<SCALING_SPEED>`，应设置为调参时使用的大致速度，即典型巡航速度。以此速度完成调参后，请勿更改，因为它直接缩放增益，更改会破坏调参结果。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:72
+#: a7086eb32d5b476db67e24a313abe229
+msgid "Other things to check:"
+msgstr "其他需要检查的事项："
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:74
+#: 6d19bdc6460d46778f15690c01273cff
+msgid ""
+"if you have an airspeed sensor fitted then make sure it is working and you "
+"have calibrated it. See the section on :ref:`airspeed calibration "
+"<calibrating-an-airspeed-sensor>`."
+msgstr ""
+"如果安装了空速传感器，请确保其工作正常且已校准。参见 :ref:`空速校准 <calibrating-an-airspeed-sensor>` 部分。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:75
+#: c20d15948b5d453a92925dbf004b9d85
+msgid ""
+"check your center of gravity, making sure it is correct according to the "
+"manual for your aircraft. In general it is safer to be a bit more nose heavy"
+" than tail heavy."
+msgstr "检查重心，确保其符合飞机手册的要求。一般来说，稍微头重比尾重更安全。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:76
+#: a5a502feebed48519dde732ac97127d2
+msgid ""
+"check your surface trims. It is recommended to use the "
+":ref:`SERVO_AUTO_TRIM<SERVO_AUTO_TRIM>` option after reading the "
+"documentation for that option."
+msgstr "检查控制面微调。建议在阅读相关文档后使用 :ref:`SERVO_AUTO_TRIM<SERVO_AUTO_TRIM>` 选项。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:77
+#: bf364c9c90a0479aa05afbdc02d73f5d
+msgid ""
+"make sure your failsafe settings are setup correctly. Try turning off your "
+"transmitter with your plane on the ground (and propeller removed or made "
+"safe) and check how the plane reacts"
+msgstr "确保失控保护设置正确。在地面（并取下或固定好螺旋桨）时关闭遥控器，检查飞机的反应"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:78
+#: 568c8c5c5ceb461cb6f3055576c1e6c4
+msgid "setup a rally point for a safe place to RTL if needed other than home"
+msgstr "如果需要 RTL 到 Home 以外的安全位置，请设置集结点"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:79
+#: c9fbb3ef54c54294906115631239d006
+msgid ""
+"make sure that the :ref:`PTCH_RATE_SMAX<PTCH_RATE_SMAX>` and "
+":ref:`RLL_RATE_SMAX<RLL_RATE_SMAX>` parameters are appropriately set for "
+"your servos speeds. See :ref:`common-servo-limit-cycle-detection`. If these "
+"are set too low, then the tune will be impacted."
+msgstr ""
+"确保 :ref:`PTCH_RATE_SMAX<PTCH_RATE_SMAX>` 和 "
+":ref:`RLL_RATE_SMAX<RLL_RATE_SMAX>` 参数根据舵机速度进行适当设置。参见 :ref:`common-servo-"
+"limit-cycle-detection`。如果设置过低，调参效果将受影响。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:80
+#: 1467a92a7da54598a41670b210efb65f
+msgid ""
+"if this is a **QuadPlane**, and the :ref:`INS_GYRO_FILTER<INS_GYRO_FILTER>` "
+"has been raised significantly from 20Hz to facilitate better VTOL tuning and"
+" notch filter use, then AUTOTUNE may set its fixed wing control loop filters"
+" too high resulting in a poorer Fixed Wing tune. In this case, "
+":ref:`AUTOTUNE_OPTIONS<AUTOTUNE_OPTIONS>` can be used to prevent AUTOTUNE "
+"from changing them as part of the tune."
+msgstr ""
+"如果这是一架 **QuadPlane**，且 :ref:`INS_GYRO_FILTER<INS_GYRO_FILTER>` "
+"已从20Hz大幅提高以促进更好的 VTOL 调参和陷波滤波器使用，则 AUTOTUNE "
+"可能将固定翼控制回路滤波器设置过高，导致固定翼调参效果更差。在这种情况下，可以使用 "
+":ref:`AUTOTUNE_OPTIONS<AUTOTUNE_OPTIONS>` 防止 AUTOTUNE 在调参过程中更改这些滤波器。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:83
+#: ea83c515e5c541bdabf89899ae7a6e6f
+msgid "Flying in AUTOTUNE"
+msgstr "在 AUTOTUNE 中飞行"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:85
+#: c64db50e1d06401a93c9c241452ddcfc
+msgid ""
+"Once you are all setup you can start flying in AUTOTUNE mode. You can either"
+" takeoff in AUTOTUNE mode, or takeoff in another mode and switch to AUTOTUNE"
+" once you have gained altitude."
+msgstr ""
+"完成所有设置后，可以开始在 AUTOTUNE 模式下飞行。您可以在 AUTOTUNE 模式下起飞，也可以在其他模式下起飞，爬升到一定高度后再切换到 "
+"AUTOTUNE。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:89
+#: ba5c917af4ec43c49fc26f603f11e7cf
+msgid "When you engage AUTOTUNE mode a few things will happen:"
+msgstr "进入 AUTOTUNE 模式时，会发生以下几件事："
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:91
+#: 74c3d45e04c741148ed32b38d92557b3
+msgid ""
+"the autotune system will immediately setup some values for your roll and "
+"pitch maximum rates and angle error to demanded rate gain. These values "
+"depend on the :ref:`AUTOTUNE_LEVEL<AUTOTUNE_LEVEL>`"
+msgstr ""
+"自动调参系统将立即为您的横滚和俯仰最大速率及角度误差到要求速率增益设置一些值。这些值取决于 "
+":ref:`AUTOTUNE_LEVEL<AUTOTUNE_LEVEL>`"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:94
+#: 4f24b81422c144618f35e7cbe67ed73d
+#, python-format
+msgid ""
+"the autotune system will monitor your demanded roll and pitch rates (as "
+"determined by your transmitter stick movements). When the demanded roll or "
+"pitch rate (or yaw rate if :ref:`YAW_RATE_ENABLE<YAW_RATE_ENABLE>` = 1) "
+"exceeds 40% of the maximum tuning target axis rate set by the "
+":ref:`AUTOTUNE_LEVEL<AUTOTUNE_LEVEL>`,(not stick deflection) the autotune "
+"system will use the response of the aircraft to learn the tuning values. So "
+"sharp stick movements are required with a slight pause at moderate to "
+"maximum stick deflections in each direction."
+msgstr ""
+"自动调参系统将监测您要求的横滚和俯仰速率（由遥控器摇杆运动决定）。当要求的横滚或俯仰速率（或如果 "
+":ref:`YAW_RATE_ENABLE<YAW_RATE_ENABLE>` = 1 时的偏航速率）超过 "
+":ref:`AUTOTUNE_LEVEL<AUTOTUNE_LEVEL>` "
+"设定的最大调参目标轴速率的40%时（而非摇杆偏转量），自动调参系统将利用飞机响应来学习调参值。因此，需要急剧的摇杆运动，并在每个方向的中到最大摇杆偏转处短暂停顿。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:97
+#: 21339cad618049b595ee2305f5f825ac
+msgid ""
+"the autotune system will save the P and D parameters once the tune has been "
+"completed for an axis.  When you switch out of AUTOTUNE mode the FF and I "
+"values will be saved. Switching out of AUTOTUNE in the midst of tuning an "
+"axis will revert the PID values to their original values."
+msgstr ""
+"自动调参系统将在完成某轴调参后保存 P 和 D 参数。切出 AUTOTUNE 模式时，FF 和 I 值将被保存。在调参某轴过程中切出 AUTOTUNE "
+"将使 PID 值恢复至原始值。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:98
+#: 2e97d9e654f247278084b46b7ab7621f
+msgid ""
+"If you are starting with the default parameters for roll and pitch you may "
+"find the plane is quite sluggish when you first enter AUTOTUNE. You will "
+"find that as the tune progresses this will get better. Make sure your flight"
+" area has plenty of room for long slow turns."
+msgstr ""
+"如果您从横滚和俯仰的默认参数开始，进入 AUTOTUNE "
+"时可能会发现飞机相当迟钝。随着调参进行，情况会有所改善。确保飞行区域有足够的空间进行长而缓的转弯。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:104
+#: 848d5265778742a1aefb9bdafb45c1d2
+msgid ""
+"The key to a successful Autotune is to input rapid roll or pitch movements "
+"with the transmitter sticks. It is best only do one axis at a time, although"
+" tuning is occurring simultaneously on all axes being tuned, so tuning "
+"messages may be interleaved occasionally."
+msgstr ""
+"成功 Autotune "
+"的关键是用遥控器摇杆输入快速的横滚或俯仰运动。最好每次只做一个轴，尽管所有被调参的轴同时在进行调参，所以调参消息可能偶尔交错出现。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:107
+#: 69b567197ec24e1fb6731552930df962
+msgid ""
+"So rapid stick movements with short pauses at each deflection is used for "
+"each axis in turn until the tuning finished message is reported on GCS or "
+"OSD."
+msgstr "因此，对每个轴依次进行快速摇杆运动并在每次偏转时短暂停顿，直到 GCS 或 OSD 上报告调参完成消息。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:109
+#: ce3655d76ad34ace8ca45d451c9f75fc
+msgid ""
+"If your initial tuning values were too low then you should notice the "
+"aircraft becomes progressively more responsive as you fly in AUTOTUNE mode."
+msgstr "如果您的初始调参值过低，您应该会注意到飞机在 AUTOTUNE 模式下飞行时逐渐变得更灵敏。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:113
+#: b719a151cf5046f7995c0b0c501785f2
+msgid ""
+"Stop increasing the :ref:`AUTOTUNE_LEVEL<AUTOTUNE_LEVEL>` on successive "
+"autotune sessions when the desired feel and responsiveness is obtained, "
+"oscillations occur, or it becomes \"twitchy\" in an axis."
+msgstr ""
+"在连续 autotune 飞行中，当获得期望的感觉和响应性、出现振荡或某轴变得「抖动」时，停止增加 "
+":ref:`AUTOTUNE_LEVEL<AUTOTUNE_LEVEL>`。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:117
+#: 255583a3b1cf41a29e6a9cdd771495e7
+msgid "Don't stop too early"
+msgstr "不要过早停止"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:119
+#: 3e8d005568bb4ab986df468841455e6b
+msgid ""
+"If you cannot monitor the tune progress with a GCS or OSD, it is recommended"
+" that you do at least 20 rapid movements in each axis, preferably  more. "
+"Stopping before all axes are finished tuning will result in a poorly flying "
+"aircraft. Keep flying and exercising the sticks in AUTOTUNE mode well past "
+"the point where you think the plane is flying well."
+msgstr ""
+"如果无法通过 GCS 或 OSD "
+"监控调参进度，建议每个轴至少进行20次快速运动，最好更多。在所有轴完成调参之前停止，将导致飞机飞行效果不佳。继续飞行并在 AUTOTUNE "
+"模式下充分练习摇杆，远超您认为飞机飞行良好的时间点。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:123
+#: 3c2abf3e44834468ae029099f373b34d
+msgid "Tuning light, agile aircraft"
+msgstr "调参轻型敏捷飞机"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:125
+#: 674411ca01a6407eb6ae727961b7312c
+msgid ""
+"Very light, agile aircraft may fail to complete the tune, or result in a "
+"tune that has small oscillations, often in the pitch axis since it has low "
+"inertia. In these cases, it may be beneficial to do the following and re-"
+"attempt the Autotune:"
+msgstr ""
+"非常轻巧、敏捷的飞机可能无法完成调参，或导致调参后出现小幅振荡，通常在俯仰轴上，因为其惯性较低。在这些情况下，以下操作可能有益，并重新尝试 "
+"Autotune："
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:127
+#: d38877e8721f4ddf86e5d51ab1a7d39f
+msgid ""
+"Increase the main loop rate, :ref:`SCHED_LOOP_RATE<SCHED_LOOP_RATE>` to "
+"\"200\" (Hz) and set the :ref:`ONESHOT_MASK<ONESHOT_MASK>` to those outputs "
+"controlling flight surface control servos (if they are capable of doing "
+"200Hz updates...most digital servos are capable of this...check to see that "
+"they are not overheating as you move them). This increases the control "
+"update rate and decreases delay, increasing phase margin to attempt to "
+"eliminate small oscillations and increase accuracy."
+msgstr ""
+"将主循环速率 :ref:`SCHED_LOOP_RATE<SCHED_LOOP_RATE>` 提高到「200」（Hz），并将 "
+":ref:`ONESHOT_MASK<ONESHOT_MASK>` "
+"设置为控制飞行控制面舵机的输出（如果它们能够进行200Hz更新……大多数数字舵机能够……请检查它们在移动时是否过热）。这提高了控制更新速率并减少延迟，增加相位裕度，以尝试消除小幅振荡并提高精度。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:129
+#: 18825369eb2b47b59a3b83ae07de4c3e
+msgid ""
+"Set the :ref:`INS_GYRO_FILTER<INS_GYRO_FILTER>` to \"40\" (Hz) cutoff and "
+"increase the :ref:`PTCH_RATE_FLTT<PTCH_RATE_FLTT>` and "
+":ref:`RLL_RATE_FLTT<RLL_RATE_FLTT>` to \"20\" (Hz) to reduce delay and "
+"increase phase margin."
+msgstr ""
+"将 :ref:`INS_GYRO_FILTER<INS_GYRO_FILTER>` 设置为「40」（Hz）截止频率，并将 "
+":ref:`PTCH_RATE_FLTT<PTCH_RATE_FLTT>` 和 :ref:`RLL_RATE_FLTT<RLL_RATE_FLTT>` "
+"提高到「20」（Hz），以减少延迟并增加相位裕度。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:131
+#: 3039093d643845e9893773df50adc7df
+msgid ""
+"increasing the gyro filter cutof may allow more system noise into the "
+"control loops and setting up a :ref:`dynamic throttle notch filter<common-"
+"throttle-based-notch>` or :ref:`in-flight FFT<common-imu-fft>` is "
+"recommended (if your autopilot firmware includes this feature.. see: "
+":ref:`Firmware Limitations<common-limited_firmware>` )."
+msgstr ""
+"提高陀螺仪滤波截止频率可能允许更多系统噪声进入控制回路，建议设置 :ref:`动态油门陷波滤波器<common-throttle-based-"
+"notch>` 或 :ref:`飞行中 FFT<common-imu-"
+"fft>`（如果您的飞控固件包含此功能……参见：:ref:`固件限制<common-limited_firmware>`）。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:134
+#: 62f12d47d7e646398981b1135e0a789b
+msgid "Testing Tune in Other Modes"
+msgstr "在其他模式下测试调参结果"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:136
+#: 580e5bd8f76e446fb43371e9d7d45329
+msgid ""
+"The completed suceesfull tune obtained can be tested in any mode, not just "
+"the one (QHOVER or QLOITER) used for entry. A switch can be "
+"setup,``RCx_OPTION`` = 180 (AUTOTUNE_TEST_GAINS) that will allow switching "
+"between original and autotuned gains in any mode, after autotune has "
+"completed. If this switch is setup, but not changed after the auotune has "
+"completed, it has no effect. Otherwise if switched high the tuned gains are "
+"in effect, if low the original gains. Then they apply to any flight mode and"
+" will be made permanent upon the next disarm, based on  switch position."
+msgstr ""
+"完成的成功调参结果可以在任何模式下测试，而不仅仅是进入时使用的模式（QHOVER 或 QLOITER）。可以设置一个开关，``RCx_OPTION`` "
+"= 180（AUTOTUNE_TEST_GAINS），允许在 autotune 完成后在任何模式下切换原始增益和自动调参增益。如果设置了此开关但 "
+"autotune 完成后未切换，则无效。否则，开关拨高时使用调参增益，拨低时使用原始增益。它们适用于任何飞行模式，并将在下次上锁时根据开关位置永久保存。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:139
+#: 861284699198424888e66e88376a3a76
+msgid "ACRO Mode YAW Rate Controller"
+msgstr "ACRO 模式偏航速率控制器"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:141
+#: 8460233c211447be9f58f0441ad15f13
+msgid ""
+"As of version 4.2, ArduPilot provides the option for utilization of a rate "
+"controller for YAW, which behaves in the same manner as the pitch and roll "
+"controllers, but for the YAW axis controlled by the Rudder stick, assuming "
+"the vehicle has a rudder control surface."
+msgstr ""
+"自4.2版本起，ArduPilot "
+"提供了偏航速率控制器的选项，其行为方式与俯仰和横滚控制器相同，但用于由方向舵摇杆控制的偏航轴，前提是飞行器有方向舵控制面。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:143
+#: d0137b77df284dd8826fd9814bd85202
+msgid ""
+"To enable this functionality, set :ref:`YAW_RATE_ENABLE<YAW_RATE_ENABLE>` to"
+" 1. When enabled, the :ref:`ACRO_YAW_RATE<ACRO_YAW_RATE>` parameter can be "
+"used to adjust maximum yaw rate demanded at rudder stick full deflections in"
+" ACRO mode."
+msgstr ""
+"要启用此功能，将 :ref:`YAW_RATE_ENABLE<YAW_RATE_ENABLE>` "
+"设置为1。启用后，:ref:`ACRO_YAW_RATE<ACRO_YAW_RATE>` 参数可用于调整在 ACRO "
+"模式下方向舵摇杆完全偏转时要求的最大偏航速率。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:145
+#: d009ccdb4d4b4b40bf10704e45972a1d
+msgid ""
+"This controller can be AutoTuned in the same manner as the pitch and roll "
+"axes, and in the same session using the Rudder control stick to produce the "
+"rapid yaw demands used by AUTOTUNE."
+msgstr "该控制器可以与俯仰和横滚轴以相同方式进行 AutoTune，并在同一飞行中使用方向舵摇杆产生 AUTOTUNE 使用的快速偏航需求。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:147
+#: 63d293221dfc4f7ba1107e8bfdd5830d
+msgid ""
+"while AutoTuning with this controller enabled, roll inputs will result in "
+"yaw outputs also, allowing more coordinated turns with the yaw controller "
+"active. This will normally result in simultaneously tuning the yaw "
+"controller with the roll controller, but not necessarily completing the yaw "
+"tune when the roll tune finishes. Also, there may be seemingly excessive "
+"rudder applied initially in the roll tune on vehicles with large yaw "
+"authority, until the tune progresses."
+msgstr ""
+"在启用此控制器的情况下进行 AutoTune "
+"时，横滚输入也会产生偏航输出，允许在偏航控制器激活时进行更协调的转弯。这通常会导致偏航控制器与横滚控制器同时调参，但不一定在横滚调参完成时完成偏航调参。此外，在具有大偏航权限的飞行器上，横滚调参初期可能会施加看似过多的方向舵，直到调参进行到一定程度。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:150
+#: 6d7506f2d6e94a49963d605cbe6d6dee
+msgid "Autotune Level 0"
+msgstr "Autotune 级别0"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:152
+#: bf44a5c07af448beb3df33d72c32c144
+msgid ""
+"This is a special level that does not change the rates or time constant (ie "
+"like :ref:`RLL2SRV_RMAX<RLL2SRV_RMAX>` or "
+":ref:`PTCH2SRV_TCONST<PTCH2SRV_TCONST>`) but tunes FF/P/I/D for the current "
+"values of those parameters. This may be useful when pitch is unstable at a "
+"lower :ref:`AUTOTUNE_LEVEL<AUTOTUNE_LEVEL>` level than roll, for example. "
+"You can set the ROLL axis values at more agressive values than the pitch "
+"axis and proceed with a tune to re-optimize the FF/P/I/D values for that "
+"configuration."
+msgstr ""
+"这是一个特殊级别，不更改速率或时间常数（如 :ref:`RLL2SRV_RMAX<RLL2SRV_RMAX>` 或 "
+":ref:`PTCH2SRV_TCONST<PTCH2SRV_TCONST>`），但为这些参数的当前值调参 FF/P/I/D。当例如俯仰在比横滚更低的 "
+":ref:`AUTOTUNE_LEVEL<AUTOTUNE_LEVEL>` 级别不稳定时，这可能很有用。您可以将 ROLL "
+"轴值设置为比俯仰轴更积极的值，然后进行调参以重新优化该配置的 FF/P/I/D 值。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:156
+#: 86c3477db4b944b394bc89f7016b5985
+msgid "Completing the tune"
+msgstr "完成调参"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:158
+#: 77099ee8814a4c519b501560a5ee6c2b
+msgid ""
+"Once you have learned reasonable tuning parameters with autotune you should "
+"complete the tune by manually tuning some other key parameters."
+msgstr "使用 autotune 学习到合理的调参参数后，应通过手动调参其他关键参数来完成调参。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:162
+#: ff94a9f361584478a1d99f85b5be03b2
+msgid "The parameters that are needed for most airframes are:"
+msgstr "大多数机架需要的参数为："
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:164
+#: 47c67e0436b74741a28bdc714eb237ab
+msgid ""
+":ref:`NAVL1_PERIOD<NAVL1_PERIOD>`: This default is a very conservative value"
+" designed to cope with badly tuned airframes. It controls how sharply the "
+"aircraft will turn in automatic modes (such as AUTO, RTL and LOITER). Most "
+"aircraft should use a significantly lower value. To tune it, you should fly "
+"a rectangular mission in AUTO mode and adjust "
+":ref:`NAVL1_PERIOD<NAVL1_PERIOD>` down by 1 at a time until the aircraft "
+"turns at a rate you are happy with, and does not \"wag its tail\" in flight."
+msgstr ""
+":ref:`NAVL1_PERIOD<NAVL1_PERIOD>`：该默认值是为应对调参不良机架而设计的非常保守的值。它控制飞机在自动模式（如 "
+"AUTO、RTL 和 LOITER）中的转弯锐利度。大多数飞机应使用明显较低的值。调参方法是在 AUTO 模式下飞一个矩形任务，每次将 "
+":ref:`NAVL1_PERIOD<NAVL1_PERIOD>` 降低1，直到飞机以您满意的速率转弯且飞行中不「摆尾」。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:172
+#: 79e69d56701a4be797d893328664282e
+msgid ""
+":ref:`PTCH2SRV_RLL<PTCH2SRV_RLL>`: This parameter controls how much elevator"
+" to add in turns to keep the nose level. Many aircraft require a small "
+"change to this parameter from the default of 1.0. To see if you need to tune"
+" this value you should hold a tight circle in FBWA mode by holding the "
+"aileron stick hard over while not giving any elevator input. If the plane "
+"gains altitude then you should lower :ref:`PTCH2SRV_RLL<PTCH2SRV_RLL>` by a "
+"small amount (try lowering to 0.95 initially). If the plane loses altitude "
+"while circling then try raising :ref:`PTCH2SRV_RLL<PTCH2SRV_RLL>` by a small"
+" amount (try 1.05 initially). If you need to go above 1.3 or below 0.8 then "
+"there is probably a problem with your setup (such as incorrect center of "
+"gravity, poor thrust line, poor airspeed calibration, too soft a tune on the"
+" pitch loop, or bad compass errors). You should try and fix the setup."
+msgstr ""
+":ref:`PTCH2SRV_RLL<PTCH2SRV_RLL>`：该参数控制在转弯中需要增加多少升降舵以保持机头水平。许多飞机需要从默认值1.0对此参数进行微调。要检查是否需要调整此值，应在"
+" FBWA 模式下，将副翼摇杆完全压住进行紧圆转弯，同时不给任何升降舵输入。如果飞机高度增加，应将 "
+":ref:`PTCH2SRV_RLL<PTCH2SRV_RLL>` 适当降低（初始尝试降低到0.95）。如果飞机在绕圈时高度下降，则尝试适当提高 "
+":ref:`PTCH2SRV_RLL<PTCH2SRV_RLL>`（初始尝试1.05）。如果需要超过1.3或低于0.8，则设置可能存在问题（如重心不正确、推力线不正、空速校准不当、俯仰环调参过软或罗盘误差较大）。应尝试修复设置。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:185
+#: e6b987a3d19c495bb0d0b0bcbf44fa19
+msgid ""
+"There are many other parameters which can improve the performance of your "
+"aircraft, but these are the ones that most people need. Please read the "
+"normal manual tuning documentation for more information."
+msgstr "还有许多其他参数可以改善飞机性能，但这些是大多数人需要的参数。请阅读正常的手动调参文档以获取更多信息。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:190
+#: 4aabe4b5c9d04684aa66b3759dd92f52
+msgid "AUTOTUNE Logging"
+msgstr "AUTOTUNE 日志记录"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:192
+#: 75b3edeb5a2241109f6953c204c32053
+msgid ""
+"The progress of the autotune is recorded in the dataflash log. If you are "
+"trying to debug autotune or are posting about autotune on the forums then "
+"please include the dataflash log."
+msgstr ""
+"autotune 的进度记录在数据闪存日志中。如果您正在尝试调试 autotune 或在论坛上发帖询问 autotune，请附上数据闪存日志。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:196
+#: ae85f5c877764c298084e971c7122332
+msgid "Here is a typical log file from an autotune session:"
+msgstr "以下是一个 autotune 飞行的典型日志文件："
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:201
+#: af78b1ea91624fbdacb44f5c39b6ae5a
+msgid ""
+"The ATRP message has a \"Type\" field that shows what type of autotune is "
+"being recorded. A Type value of 0 is for roll tuning, and a value of 1 is "
+"for pitch tuning. When graphing ATRP results you should choose data with a "
+"Type of either 0 or 1 (not both)."
+msgstr ""
+"ATRP 消息有一个「Type」字段，显示正在记录的 autotune 类型。Type 值为0表示横滚调参，值为1表示俯仰调参。绘制 ATRP "
+"结果图表时，应选择 Type 为0或1（不能同时选择）的数据。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:206
+#: 8d34cc1c785849e09d89a51b475bf3b3
+msgid ""
+"The ATRP.Demanded field is the demanded rate of attitude change (roll rate "
+"or pitch rate) in degrees per second. The ATRP.Achieved field is what the "
+"aircraft actually achieved in attitude change rate. As you can see in the "
+"above graph, at the start of the autotune the demanded values were much "
+"higher than the achieved, because the tuning gains were too low. As the tune"
+" progressed the demanded and achieved started to converge. The blue line in "
+"the above graph is the ATRP.P value, which is the P gain for the controller."
+" You can see it rose from 0.8 up to a high of 2.2, then dropped back "
+"slightly to around 1.85."
+msgstr ""
+"ATRP.Demanded 字段是要求的姿态变化速率（横滚速率或俯仰速率），单位为度/秒。ATRP.Achieved "
+"字段是飞机实际实现的姿态变化速率。从上图可以看出，autotune "
+"开始时，要求值远高于实现值，因为调参增益过低。随着调参进行，要求值和实现值开始趋于一致。上图中的蓝线是 ATRP.P 值，即控制器的 P "
+"增益。可以看到它从0.8上升到最高2.2，然后回落至约1.85。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:216
+#: 007df5d5c569401ca57ad6eb4765c4f2
+#, python-format
+msgid ""
+"You will also notice that the graph has gaps in it. This is for periods "
+"where the pilot was not demanding a high rate of attitude change. The "
+"autotune system only works while the pilot is demanding a rapid attitude "
+"change (above 80% of the maximum rate)."
+msgstr ""
+"您还会注意到图表中有间隔。这是飞行员未要求高速率姿态变化的时间段。autotune 系统仅在飞行员要求快速姿态变化（超过最大速率的80%）时才起作用。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:222
+#: f24a5a7a411f41269ec7cb2294ae1634
+msgid "Manual tuning versus AUTOTUNE"
+msgstr "手动调参与 AUTOTUNE 对比"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:224
+#: 9ff5731448404ac094d8e4c6cac8cb50
+msgid ""
+"For the very best performance with Plane you can perform a manual tune, "
+"perhaps starting with the values from Autotune. The Autotune system is "
+"designed as a conservative system to get reasonable values for most "
+"aircraft, it is not a \"perfect tuner\", and manual tuning can result in "
+"better performance if you put the time and effort in. But it requires using "
+"and analyzing log file results."
+msgstr ""
+"为了获得最佳的 Plane 性能，您可以进行手动调参，或许从 Autotune 的值开始。Autotune "
+"系统被设计为一个保守的系统，以为大多数飞机获得合理的值，它不是「完美的调参器」，如果您投入时间和精力，手动调参可以产生更好的性能。但这需要使用和分析日志文件结果。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:231
+#: 06f98293dcbf49fca2912e8564afcdae
+msgid ""
+"It is still recommended that everyone start out with AUTOTUNE however. "
+"Correctly tuning an aircraft is not easy, and AUTOTUNE does better than the "
+"vast majority of users can do. So start with an AUTOTUNE and then explore "
+"the manual tuning guide starting from what AUTOTUNE produces if you want to "
+"push things further."
+msgstr ""
+"尽管如此，仍建议所有人从 AUTOTUNE 开始。正确调参飞机并不容易，AUTOTUNE 的效果优于绝大多数用户自行调参的结果。因此，从 "
+"AUTOTUNE 开始，如果想进一步优化，再从 AUTOTUNE 产生的结果出发探索手动调参指南。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:237
+#: be98b0c7a0e749229a14ac21ea2f2561
+msgid ""
+"Manually increasing the D gain can improve the accuracy of the roll and "
+"pitch response and make the plane less affected by gusts and turbulence. The"
+" optimum value for D gain for a high performance tune can be found by "
+"increasing the gain in small increments until the aircraft starts to "
+"oscillate. The gain should then be halved from the value that caused it to "
+"oscillate. The oscillations that are generated using this method can be "
+"large, so do not perform this step unless you are prepared to take manual "
+"control. It is recommended that D gain tuning is performed at lower throttle"
+" settings and airspeeds."
+msgstr ""
+"手动增大 D 增益可以提高横滚和俯仰响应的精度，并使飞机受阵风和湍流的影响更小。高性能调参的 D "
+"增益最优值可通过小幅递增增益直至飞机开始振荡来找到。然后应将导致振荡的值减半。使用此方法产生的振荡可能较大，因此除非您准备好手动接管控制，否则不要执行此步骤。建议在较低油门设置和较低空速下进行"
+" D 增益调参。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:247
+#: 930bb573843d4279983a2e9863468c7a
+msgid ""
+"If you adjust the I gain manually, then this also changes the value for P "
+"that is required to maintain the correct response, so adjusting the I gain "
+"is only recommended for advanced users."
+msgstr "如果您手动调整 I 增益，这也会改变维持正确响应所需的 P 值，因此调整 I 增益仅推荐给高级用户。"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:254
+#: 41203a4e1cb24625b2e773b29fbc2c1a
+msgid "AUTOTUNE_LEVEL settings"
+msgstr "AUTOTUNE_LEVEL 设置"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:257
+#: d6e327e63fbd48c49d20220161a92d32
+msgid "Level"
+msgstr "级别"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:257
+#: 9d60effe09264522b379b0088f66c56e
+msgid "Rate [deg/s]"
+msgstr "速率 [度/秒]"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:260
+#: 78a865c0902247e483ff4c4133614628
+msgid "1"
+msgstr "1"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:260
+#: b21483477960421ab0d31cbba58b1d20
+msgid "20"
+msgstr "20"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:262
+#: dff7f318dcf649b4a55912c795ffd38f
+msgid "2"
+msgstr "2"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:262
+#: 9c6e67b4e0c246d6a445d21e6f53abbf
+msgid "30"
+msgstr "30"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:264
+#: 96a209b27ed44e479cf2fa2d729c2786
+msgid "3"
+msgstr "3"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:264
+#: c74ce91f01df43cb99ff305607e2eba3
+msgid "40"
+msgstr "40"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:266
+#: c102ebd768bd4de986c601f02b184244
+msgid "4"
+msgstr "4"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:266
+#: 0bd3255a58b4482d811f5eba2cccd352
+msgid "50"
+msgstr "50"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:268
+#: 687e2c450f5342dcb01138bcced3a275
+msgid "5"
+msgstr "5"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:268
+#: 9a754cd63d484d97a5f2d9f547e1d59f
+msgid "60"
+msgstr "60"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:270
+#: 64a8b1a4e9db450c9e54e24b73f2a517
+msgid "6 (default)"
+msgstr "6（默认）"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:270
+#: 2b3bbf9c346745868df15a336e24cb0c
+msgid "75"
+msgstr "75"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:272
+#: 95292783e77e4f52892c221f6de43bbd
+msgid "7"
+msgstr "7"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:272
+#: 947258fb0cfc47ccab50fee18470fb39
+msgid "90"
+msgstr "90"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:274
+#: 423bef04dc064b52885f07664fd1188e
+msgid "8"
+msgstr "8"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:274
+#: cb6412a514984e26af18c589e63b17e7
+msgid "120"
+msgstr "120"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:276
+#: d2a70a39adcc41c9b10037790e6e2e32
+msgid "9"
+msgstr "9"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:276
+#: df9a9bc18bdc4e50a1a1aea7c119e9db
+msgid "160"
+msgstr "160"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:278
+#: cf5ce8fb3e054858923b572a4f00518d
+msgid "10"
+msgstr "10"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:278
+#: 8a9440f474eb4036aa8c1eefdf11c361
+msgid "210"
+msgstr "210"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:280
+#: 81d833cf1c594cae86351908aa1bbf67
+msgid "11"
+msgstr "11"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:280
+#: a0f91fdd20ee4ca6b97b2f26d3bc0f60
+msgid "300"
+msgstr "300"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:283
+#: 21aa8a72c5264c1db59687d16aaa997d
+msgid "Yaw rate target, if being tuned, is always 90 deg/sec"
+msgstr "如果进行调参，偏航速率目标始终为90度/秒"

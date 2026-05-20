@@ -1,0 +1,441 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 14:59+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:5
+#: 7937eafea20a45e5b3d0577c432a2fcf
+msgid "Calibrating an Airspeed Sensor"
+msgstr "校准空速传感器"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:7
+#: ccf9e7be627a43d89745ca14e42281ee
+msgid ""
+"A properly configured :ref:`airspeed sensor <airspeed>` can greatly improve "
+"the ability of Plane to maintain altitude in :ref:`auto-throttle modes "
+"<flight-modes>` (such as AUTO, CRUISE and FBWB), as well as greatly improve "
+"automatic landing. It can also reduce the chance of a stall."
+msgstr ""
+"正确配置的 :ref:`空速传感器 <airspeed>` 可以极大地提高 Plane 在 :ref:`自动油门模式 <flight-modes>`（如"
+" AUTO、CRUISE 和 FBWB）中保持高度的能力，以及极大地改善自动降落。它还可以降低失速的可能性。"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:12
+#: b7a873228d6543639c2aff93329fe23e
+msgid ""
+"At the same time, an incorrectly configured airspeed sensor can cause your "
+"aircraft to crash, so correctly configuring it is critical!"
+msgstr "同时，错误配置的空速传感器可能导致您的飞机坠毁，因此正确配置至关重要！"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:16
+#: 95de314bec3741bfb9d5b7222d13949e
+msgid "Pre-flight checks"
+msgstr "飞行前检查"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:18
+#: acc88b2366cc40d9a7fd2879e8379551
+msgid ""
+"If you have an airspeed sensor installed then it is critical that you do "
+"pre-flight checks to ensure that it is working correctly, and ensure that it"
+" is correctly zeroed."
+msgstr "如果安装了空速传感器，飞行前必须检查其工作正常且正确归零。"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:22
+#: ed65990fa3744a07b65f8918202b3118
+msgid ""
+"During initialization, the firmware checks if you have enabled an airspeed "
+"sensor and that it is healthy, otherwise a warning will be given, but arming"
+" will still be allowed, so checking the ground station messages is "
+"important."
+msgstr "初始化期间，固件检查您是否启用了空速传感器且其工作正常，否则将发出警告，但仍允许解锁，因此检查地面站消息非常重要。"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:24
+#: e90beb9881f74563878e78990b3c6740
+msgid ""
+"The :ref:`ARSPD_OFFSET<ARSPD_OFFSET>` (and ``ARSPD2_OFFSET`` if a second "
+"sensor is enabled)  offset is measured and set at bootup or if manually "
+"commanded from the ground station."
+msgstr ""
+":ref:`ARSPD_OFFSET<ARSPD_OFFSET>`（以及如果启用了第二个传感器则还有 "
+"``ARSPD2_OFFSET``）偏移量在启动时或从地面站手动命令时测量并设置。"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:26
+#: c85256b139ea4537935b65ce880f8702
+msgid ""
+"It is very important to cover the pitot tube during power up, or when you "
+"wait and then re-calibrate. An inaccurate static calibration can result in "
+"the airspeed being reported too high, causing auto-throttle controlled modes"
+" to use very low throttle and potentially cause a crash."
+msgstr "在开机时或等待后重新校准时，遮盖皮托管非常重要。不准确的静压校准可能导致空速读数过高，使自动油门控制模式使用非常低的油门，可能导致坠机。"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:28
+#: 2d18a67cf3b44dd0bed2e79ec0f98061
+msgid ""
+"If the offset has changed a lot since the last bootup, a warning will be "
+"issued. This is often an indication that you forget to cover the pitot "
+"during boot or manual calibration. The sensitivity of this warning is set by"
+" :ref:`ARSPD_OFF_PCNT<ARSPD_OFF_PCNT>` which applies to both sensors."
+msgstr ""
+"如果自上次启动以来偏移量变化很大，将发出警告。这通常表明您忘记在启动或手动校准时遮盖皮托管。此警告的灵敏度由 "
+":ref:`ARSPD_OFF_PCNT<ARSPD_OFF_PCNT>` 设置，适用于两个传感器。"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:30
+#: d3611758efba474a92eb73da5321a6f0
+msgid ""
+":ref:`ARSPD_SKIP_CAL<ARSPD_SKIP_CAL>` and "
+":ref:`ARSPD2_SKIP_CAL<ARSPD2_SKIP_CAL>` allows you to skip airspeed offset "
+"calibration on startup, instead using the offset from the last calibration "
+"or requiring a manual calibration. This may be desirable if the offset "
+"variance between flights for your sensor is low and you want to avoid having"
+" to cover the pitot tube on each boot."
+msgstr ""
+":ref:`ARSPD_SKIP_CAL<ARSPD_SKIP_CAL>` 和 "
+":ref:`ARSPD2_SKIP_CAL<ARSPD2_SKIP_CAL>` "
+"允许您跳过启动时的空速偏移校准，而使用上次校准的偏移量或要求手动校准。如果您的传感器在飞行间的偏移量方差较小，且希望避免每次启动时遮盖皮托管，这可能是可取的。"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:32
+#: 59bd386383e74b6892ca379022c75c0e
+msgid ""
+"After you start up the autopilot on your aircraft its recommended that you "
+"wait at least 1 minute for your electronics to warm up, preferably longer, "
+"and then do a pre-flight manual calibration of your airspeed sensor. This is"
+" important if your sensor temperature does not match the ambient, but may be"
+" skipped if its close to ambient temperature."
+msgstr ""
+"在飞机上启动飞控后，建议至少等待1分钟让电子设备预热，最好更长，然后手动校准空速传感器。如果传感器温度与环境温度不匹配，这一步非常重要，但如果接近环境温度则可以跳过。"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:37
+#: 7d388d24ed18473f9d88c689ee73b526
+msgid "Manual Offset Calibration"
+msgstr "手动偏移校准"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:38
+#: 7283e8aa1284447aaad23438b8897932
+msgid ""
+"Your ground station software should have a menu for doing this, usually "
+"called \"Preflight Calibration\". You need to loosely cover your airspeed "
+"sensor to stop wind from affecting the result, then press the button. The "
+"calibration will take a couple of seconds."
+msgstr "您的地面站软件应有一个菜单用于执行此操作，通常称为「飞行前校准」。您需要轻轻遮住空速传感器以防风影响结果，然后按下按钮。校准将持续几秒钟。"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:46
+#: 4787d8595bbb4c62af04b5c9a92d9a66
+msgid ""
+"Choosing that action will re-calibrate both your ground barometric pressure "
+"and your airspeed sensor."
+msgstr "选择该操作将重新校准地面气压和空速传感器。"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:49
+#: 6ebc5415e6874878a5117326eb0490a3
+msgid ""
+"Next you should check that your airspeed sensor is working correctly before "
+"takeoff. To do that you should blow into the airspeed sensor and make sure "
+"that the \"AS\" airspeed sensor value in your HUD rises as you blow into it."
+msgstr "接下来应在起飞前检查空速传感器工作正常。方法是向空速传感器吹气，确保 HUD 中的「AS」空速传感器值随吹气而上升。"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:55
+#: 31478a360721434991c78b5eb6b5cf1b
+msgid "Calibrating the airspeed sensor gain"
+msgstr "校准空速传感器增益"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:57
+#: 77da8d65d6b74c78bd7798f10d197634
+msgid ""
+"The :ref:`ARSPD_RATIO <ARSPD_RATIO>` parameter determines how ArduPilot maps"
+" the differential pressure from your airspeed sensor into an airspeed value."
+" The default value is around 2.0, and should give good results for most "
+"people using analog sensors. The correct value does depend on you having "
+"your airspeed sensor well placed on your aircraft, and some users may find "
+"they need to calibrate their airspeed sensor by changing :ref:`ARSPD_RATIO "
+"<ARSPD_RATIO>`. You will find an \"Airspeed ratio\" setting in the "
+"configuration page of the autopilot in your ground station."
+msgstr ""
+":ref:`ARSPD_RATIO <ARSPD_RATIO>` 参数决定 ArduPilot "
+"如何将空速传感器的差压映射为空速值。默认值约为2.0，对使用模拟传感器的大多数人应有良好效果。正确值取决于空速传感器在飞机上的安装位置，部分用户可能需要通过更改"
+" :ref:`ARSPD_RATIO <ARSPD_RATIO>` 来校准其空速传感器。在地面站的飞控配置页面中可以找到「空速比」设置。"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:67
+#: 7042dbef7bc148f1a894ede3d62282ad
+msgid ""
+"Adjusting :ref:`ARSPD_RATIO <ARSPD_RATIO>` can be done automatically using "
+"the automatic calibration feature, or manually. The procedures for both "
+"methods are presented below."
+msgstr "调整 :ref:`ARSPD_RATIO <ARSPD_RATIO>` 可以使用自动校准功能或手动完成。以下介绍两种方法的步骤。"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:72
+#: 147ee304685a4454be8a93959f3f2f7f
+msgid "Automatic calibration"
+msgstr "自动校准"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:74
+#: 56b4cde93665471a8b2a272d23927a60
+msgid ""
+"Go to Mission Planner => CONFIG/TUNING => Full Parameter List, change "
+":ref:`ARSPD_AUTOCAL<ARSPD_AUTOCAL>` to 1 and click 'Write Params' to send "
+"the value to the autopilot."
+msgstr ""
+"进入 Mission Planner => CONFIG/TUNING => Full Parameter List，将 "
+":ref:`ARSPD_AUTOCAL<ARSPD_AUTOCAL>` 更改为1并点击「Write Params」将值发送到飞控。"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:75
+#: 85a1848de4da4cc0a2048519119b445c
+#, python-format
+msgid ""
+"Take-off and fly a repeated circuit or circular loiter for 5 minutes. This "
+"can be done in any mode, but if the autopilot is already tuned sufficiently "
+"well, this can be achieved by leaving it in loiter or RTL for 5 minutes. The"
+" change in :ref:`ARSPD_RATIO <ARSPD_RATIO>` value can be checked in-flight "
+"by going to Mission Planner => CONFIG/TUNING => Full Parameter List, and "
+"clicking 'Refresh Params'. Note that when the calibration is active, an "
+"updated :ref:`ARSPD_RATIO <ARSPD_RATIO>` value is only saved in the "
+"autopilot's non-volatile memory every two minutes, and only if the value has"
+" changed by more than 5% from the last saved value."
+msgstr ""
+"起飞并飞行重复绕圈或圆形悬停5分钟。可以在任何模式下完成，但如果飞控调参已足够好，可以让其在 loiter 或 RTL 模式下飞行5分钟。可通过进入 "
+"Mission Planner => CONFIG/TUNING => Full Parameter List 并点击「Refresh "
+"Params」在飞行中检查 :ref:`ARSPD_RATIO <ARSPD_RATIO>` 值的变化。请注意，当校准激活时，更新的 "
+":ref:`ARSPD_RATIO <ARSPD_RATIO>` 值每两分钟才保存一次到飞控非易失性存储器，且仅当值与上次保存值相差超过5%时才保存。"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:83
+#: bc979133b1934703a14d98e32a03f067
+msgid ""
+"Land,  go to Mission Planner => CONFIG/TUNING => Full Parameter List and "
+"change :ref:`ARSPD_AUTOCAL<ARSPD_AUTOCAL>` back to 0 to prevent further "
+"changes."
+msgstr ""
+"降落，进入 Mission Planner => CONFIG/TUNING => Full Parameter List，将 "
+":ref:`ARSPD_AUTOCAL<ARSPD_AUTOCAL>` 改回0以防止进一步更改。"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:85
+#: 935902ade6444c729b83d4fbc3f9ffbf
+msgid ""
+"In Mission Planner => CONFIG/TUNING => Full Parameter List, click 'Refresh "
+"Params' and check the value of :ref:`ARSPD_RATIO <ARSPD_RATIO>`. Normally it"
+" will be in the range between 1.5 and 3.0. If it is outside this range and "
+"you have checked for leaks, then if practical, you should consider "
+"relocating the pitot tube to reduce the aerodynamic interference from "
+"adjacent fuselage, wings, etc."
+msgstr ""
+"在 Mission Planner => CONFIG/TUNING => Full Parameter List 中，点击「Refresh "
+"Params」并检查 :ref:`ARSPD_RATIO <ARSPD_RATIO>` "
+"的值。通常应在1.5至3.0之间。如果超出此范围且已检查无泄漏，在条件允许时应考虑重新放置皮托管，以减少来自相邻机身、机翼等的气动干扰。"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:92
+#: e360f4b65d4b4976b930b9aaf33f0133
+msgid ""
+"The calculation automatically compensates for the effects of altitude on air"
+" density."
+msgstr "该计算自动补偿高度对空气密度的影响。"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:94
+#: febc3684d4924d29aa5a69d9f1282d7e
+msgid ""
+"If you do not anticipate that the wind speed will vary rapidly or "
+"dramatically during flights, and you are not flying over terrain that would "
+"cause bad wind speed estimates (ie alongside steep hills or canyons), you "
+"may leave :ref:`ARSPD_AUTOCAL<ARSPD_AUTOCAL>` enabled. But since the ratio "
+"should not vary once calibrated, doing a calibration flight and then "
+"disabling is highly recommended."
+msgstr ""
+"如果您预计飞行期间风速不会快速或剧烈变化，且不在会导致风速估算不准确的地形上飞行（如陡峭山坡或峡谷旁），可以保持 "
+":ref:`ARSPD_AUTOCAL<ARSPD_AUTOCAL>` 启用。但由于比率一旦校准就不应变化，强烈建议进行校准飞行后禁用。"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:96
+#: f299c284b6584c9e847e9845fd50b938
+msgid ""
+"Do not leave :ref:`ARSPD_AUTOCAL<ARSPD_AUTOCAL>` enabled for long stretches "
+"of level flight. The calibration requires regular turns to get a good "
+"estimate. If flown for long distances without a turn then a very poor "
+"airspeed ratio can develop, resulting in very incorrect airspeed reporting, "
+"even to the point of causing a crash in some extreme cases."
+msgstr ""
+"不要在长距离平飞中保持 :ref:`ARSPD_AUTOCAL<ARSPD_AUTOCAL>` "
+"启用。校准需要定期转弯才能得到良好估算。如果长距离不转弯飞行，可能产生很差的空速比，导致空速读数非常不准确，在某些极端情况下甚至可能导致坠机。"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:98
+#: a50dc52b19f24aa29c38e45cc0c41e77
+msgid ""
+"If you change or replace the pitot tube, reset :ref:`ARSPD_RATIO "
+"<ARSPD_RATIO>` (Default = 2.0) and recalibrate the sensor."
+msgstr "如果您更换或替换了皮托管，请重置 :ref:`ARSPD_RATIO <ARSPD_RATIO>`（默认值=2.0）并重新校准传感器。"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:100
+#: 9928a62fcc304bb0b11974daee27bd09
+msgid ""
+"For those users chasing increased accuracy, between steps 2) and 3), the "
+"value of :ref:`BARO_GND_TEMP<BARO_GND_TEMP>`  can be set to the current air "
+"temperature at the take-off location. By default the calibration algorithm "
+"uses the board temperature at power on as an approximation to the ambient "
+"air temperature, but due to solar and electrical heating, this nearly always"
+" reads high. This step may be worthwhile if operating in extreme temperature"
+" conditions."
+msgstr ""
+"对于追求更高精度的用户，在步骤2）和3）之间，可以将 :ref:`BARO_GND_TEMP<BARO_GND_TEMP>` "
+"设置为起飞地点的当前气温。默认情况下，校准算法使用开机时的电路板温度作为环境气温的近似值，但由于太阳辐射和电气加热，这几乎总是偏高。如果在极端温度条件下飞行，此步骤可能很有价值。"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:102
+#: d45f492aff2b40ba8f1a8092863d1b08
+msgid ""
+"You do not have to have :ref:`ARSPD_USE<ARSPD_USE>` enabled to do automatic "
+"airspeed calibration. You can set :ref:`ARSPD_USE<ARSPD_USE>` = 0 if you "
+"would prefer not to use the sensor until it is calibrated."
+msgstr ""
+"进行自动空速校准不必启用 :ref:`ARSPD_USE<ARSPD_USE>`。如果您不希望在校准完成前使用传感器，可以将 "
+":ref:`ARSPD_USE<ARSPD_USE>` = 0。"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:105
+#: e080dff10419411c89cf5234afce328c
+msgid "Manual calibration"
+msgstr "手动校准"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:107
+#: 716e2d716bc4413491df02c25af257cb
+msgid ""
+"To determine the right airspeed ratio manually you should do a test flight "
+"in FBWA mode, with the following procedure:"
+msgstr "要手动确定正确的空速比，应在 FBWA 模式下按以下步骤进行测试飞行："
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:110
+#: 1b4debb9047145e6867ffc89722b7c94
+msgid ""
+"takeoff and get to a safe altitude. Around 100 meters is good for most "
+"models"
+msgstr "起飞并爬升至安全高度。对大多数模型约100米为宜"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:112
+#: 5c31f2fb70414f04a76d0bd7423a5d18
+msgid "start a steady turn by holding your aileron stick over to one side"
+msgstr "将副翼摇杆压向一侧，开始稳定转弯"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:113
+#: 7919e672d7764d5c9ce9dec9511283d5
+msgid "let your aircraft do 2 or 3 full turns"
+msgstr "让飞机完成2到3圈完整转弯"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:114
+#: 2cb5d343f999424c9a1add0487368250
+msgid "land and look at your telemetry logs"
+msgstr "降落并查看数传日志"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:116
+#: aaa71cba108648539a208efec5665413
+msgid ""
+"Ask your ground station software to graph the airspeed and ground speed "
+"values for your flight, zooming in on the part of your flight where you were"
+" circling. You will get a graph like this:"
+msgstr "请地面站软件绘制您飞行的空速和地速值图表，放大在绕圈飞行部分。您将得到如下图表："
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:123
+#: 88a13c98117a419484ca0c7f9f086196
+msgid ""
+"In this case you can see that while circling the ground speed varied quite a"
+" lot. That is because in this flight there was quite a strong constant wind "
+"(in this case about 7 meters/second)."
+msgstr "在这种情况下，可以看到绕圈时地速变化很大。这是因为此次飞行中有相当强的恒定风（在本例中约为7米/秒）。"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:127
+#: bf29df42e8084f209d7eefee4881da96
+msgid ""
+"Now look at where the average of the airspeed value lies in relation to the "
+"average of the ground speed. In the above graph you can see that the average"
+" airspeed is below the average ground speed by a small amount - in the above"
+" graph the difference between the two averages is about 2 meters/second."
+msgstr "现在查看空速值平均值与地速平均值的关系。在上图中，可以看到平均空速略低于平均地速——上图中两者平均值之差约为2米/秒。"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:134
+#: d7770820057f483da9585bab7d1bac99
+msgid "Calculating a new airspeed ratio"
+msgstr "计算新的空速比"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:136
+#: 132233487376418e9fd6a57b20e89e03
+msgid ""
+"Given the above graph you can calculate a new airspeed ratio using this "
+"formula:"
+msgstr "根据上图，可以使用以下公式计算新的空速比："
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:143
+#: b18046b9263543678cad431fdaa0045c
+msgid "where:"
+msgstr "其中："
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:145
+#: bf64f02831534eef954413659c619621
+msgid "OLD_RATIO = the old value of :ref:`ARSPD_RATIO <ARSPD_RATIO>`"
+msgstr "OLD_RATIO = :ref:`ARSPD_RATIO <ARSPD_RATIO>` 的旧值"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:146
+#: 18934fbf5a86405b87f50a68377b148e
+msgid "NEW_RATIO = the new value of :ref:`ARSPD_RATIO <ARSPD_RATIO>`"
+msgstr "NEW_RATIO = :ref:`ARSPD_RATIO <ARSPD_RATIO>` 的新值"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:147
+#: a43cc5fccb884f1095ea81606cfaae6d
+msgid "AVERAGE_AIRSPEED = the average airspeed you got during the test"
+msgstr "AVERAGE_AIRSPEED = 测试中获得的平均空速"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:148
+#: 8000c185affc4349994ca15a32062d82
+msgid ""
+"AIRSPEED_INCREASE = the amount you want to increase the average airspeed by"
+msgstr "AIRSPEED_INCREASE = 您希望平均空速增加的量"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:151
+#: 0dcf1c0cf4e64b4ab1c61e9324672afc
+msgid ""
+"For example, in the above graph we see an average airspeed of 36.5, and we "
+"would like to increase that by 2 to 38.5. The old ratio was 2.0. So we can "
+"calculate the new ratio as:"
+msgstr "例如，在上图中，平均空速为36.5，我们希望将其增加2到38.5。旧比率为2.0。因此新比率计算如下："
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:159
+#: 6f5a200664984f19910a4ec64a94e255
+msgid ""
+"After adjusting the :ref:`ARSPD_RATIO <ARSPD_RATIO>` do another flight and "
+"check that the airspeed is now well calibrated. Don't forget the pre-flight "
+"checks!"
+msgstr "调整 :ref:`ARSPD_RATIO <ARSPD_RATIO>` 后，再次飞行并检查空速是否已校准良好。别忘记飞行前检查！"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:163
+#: 5babafcd502f469d930e8b3558025e3b
+msgid "Note about higher altitudes"
+msgstr "关于高海拔的注意事项"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:165
+#: bec43e0f83294ce793ad11fe8ab0feec
+msgid ""
+"At higher altitudes you expect the true airspeed and apparent airspeed to "
+"start to diverge. The above calibration procedure assumes true and apparent "
+"airspeed are the same. If you are flying at altitudes of 2000 meters or more"
+" above sea level then you should take account of the difference, and aim for"
+" your apparent airspeed to be below the average ground speed by the ratio of"
+" true airspeed to apparent airspeed."
+msgstr ""
+"在较高海拔，真实空速和表显空速开始出现分歧是预期之事。上述校准步骤假设真实空速和表显空速相同。如果您在海拔2000米或以上飞行，则应考虑这种差异，并以表显空速低于平均地速的量等于真实空速与表显空速之比为目标。"
+
+#: ../../source/docs/calibrating-an-airspeed-sensor.rst:172
+#: 82fefe473a3c4b9896b386481f222d68
+msgid ""
+"At an altitude of 2000 meters above sea level the difference between "
+"apparent and true airspeed is around 10%, so you would expect your average "
+"airspeed to be below the average ground speed by about 10%. At 4000 meters "
+"above sea level this rises to around 20%. At 5000 meters it is around 30%. "
+"Beyond that please consult an aircraft navigation table."
+msgstr ""
+"在海拔2000米时，表显空速与真实空速之差约为10%，因此预计平均空速应比平均地速低约10%。在海拔4000米时，差值约为20%。在5000米时约为30%。更高海拔请参阅航空导航表。"
