@@ -1,0 +1,435 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Rover package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rover\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-22 11:39+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:5
+#: cdeec330ee364bf0a1ded13589b51217
+msgid "Tuning Steering and navigation for a Rover (ver 3.1 and older)"
+msgstr "Rover 转向与导航调试（3.1及更早版本）"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:7
+#: 1e7b4bc876764d2d83f92fada7b2bdab
+msgid "**ARCHIVED**"
+msgstr "**已归档**"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:11
+#: 1b5f70bbd4cd48e48e754facd79e710a
+msgid ""
+"These instructions are relevant for Rover-3.1 and older. For newer versions "
+"of the Rover firmware please refer to these :ref:`steering <rover-tuning-"
+"steering-rate>` and :ref:`navigation tuning guides <rover-tuning-"
+"navigation>`."
+msgstr ""
+"本说明适用于 Rover-3.1 及更早版本。对于更新版本的 Rover 固件，请参考 :ref:`转向 <rover-tuning-steering-"
+"rate>` 和 :ref:`导航调试指南 <rover-tuning-navigation>`。"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:15
+#: 971c15e554e34cff857d334730774b3c
+msgid ""
+"When setting up a Rover there are 6 key parameters you need to get right. "
+"This guide provides a set of steps to get those parameters right, so that "
+"your rover will accurately navigate in AUTO mode."
+msgstr "设置 Rover 时，有6个关键参数需要正确设置。本指南提供了一套步骤来正确配置这些参数，使 Rover 能在 Auto 模式下精确导航。"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:20
+#: d9cdc00b3553479581abb811e3d21bdc
+msgid "The key parameters"
+msgstr "关键参数"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:22
+#: 7f796795d60d4ddf85dcfa034413a247
+msgid ""
+"``STEER2SRV_P``: This tells the rover code what the turning circle (as a "
+"diameter in meters) is for your rover. It is critical that you get this "
+"parameter right, as it tells the code what steering angle to choose to "
+"achieve a desired turn rate."
+msgstr ""
+"``STEER2SRV_P``：告知 Rover 代码您的 Rover "
+"转弯圆的直径（单位：米）。正确设置此参数至关重要，因为它告知代码应选择什么转向角来实现期望的转向速率。"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:26
+#: e25af31466a74923af8ab705a831c0b0
+msgid ""
+"``TURN_MAX_G``: This tells the rover the maximum G force (in multiples of "
+"one gravity) that your rover can handle while remaining stable. If you set "
+"this too high then your rover may flip over in turns, or skid. If you set it"
+" too low then your rover will not be able to turn sharply enough."
+msgstr ""
+"``TURN_MAX_G``：告知 Rover 在保持稳定的情况下能承受的最大 G 力（以重力倍数计）。设置过高可能导致 Rover "
+"在转弯时翻转或侧滑；设置过低则 Rover 无法进行足够急促的转弯。"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:31
+#: 8b950d2fa8b24affa707c971a29aef83
+msgid ""
+"``NAVL1_PERIOD``: This controls the aggressiveness of the navigation "
+"algorithm. A smaller number means more aggressive turning in AUTO mode, a "
+"large number means larger, smoother turns."
+msgstr "``NAVL1_PERIOD``：控制导航算法的激进程度。数值越小，Auto 模式下转弯越激进；数值越大，转弯越宽、越平滑。"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:34
+#: e2732041939e401abf5940b8cb1b2054
+msgid ""
+"``SPEED_TURN_GAIN``: This controls how much the rover should slow down while"
+" turning, as a percentage of current target speed. To not slow down at all "
+"in turns set this to 100. When doing initial tuning it is recommended you "
+"use 100, and lower this later to improve handling of tight courses."
+msgstr ""
+"``SPEED_TURN_GAIN``：控制 Rover "
+"转弯时应减速多少，以当前目标速度的百分比表示。设为100表示转弯时完全不减速。初始调试时建议使用100，之后再降低以改善急弯路段的操控。"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:39
+#: 75eca47d3c354df69aecee1cf4659209
+msgid ""
+"``CRUISE_SPEED``: This controls the target speed in meters/second in AUTO."
+msgstr "``CRUISE_SPEED``：控制 Auto 模式下的目标速度（单位：米/秒）。"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:41
+#: c81e7bd436f2471da4c2787c2d540af5
+msgid ""
+"``CRUISE_THROTTLE``: This sets the initial guess at what throttle is needed "
+"to achieve CRUISE_SPEED when driving straight ahead. This needs to be "
+"**RIGHT** for the rover to achieve good speed control."
+msgstr ""
+"``CRUISE_THROTTLE``：设置直线行驶时达到 CRUISE_SPEED 所需油门的初始估算值。此参数必须**准确**，才能让 Rover "
+"实现良好的速度控制。"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:46
+#: e2ce4bf7e5144ed9a339efbd8292f605
+msgid "Step 1: Setting initial parameters"
+msgstr "第一步：设置初始参数"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:48
+#: b6d794454e39477d8617603667413522
+msgid "To start the tuning process set the following values:"
+msgstr "调试过程开始时，设置以下值："
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:50
+#: 34e902a0771d47c39905f90374bccbea
+msgid "STEER2SRV_P = 2"
+msgstr "STEER2SRV_P = 2"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:51
+#: b325ddbf82a74744857f393ce71846e4
+msgid "TURN_MAX_G = 1"
+msgstr "TURN_MAX_G = 1"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:52
+#: c5ad88b494bf4f5a9bbbbde84f1efbe5
+msgid "NAVL1_PERIOD = 6"
+msgstr "NAVL1_PERIOD = 6"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:53
+#: 1e8d1e5bed9744598a70f1b1b96f4919
+msgid "SPEED_TURN_GAIN = 100"
+msgstr "SPEED_TURN_GAIN = 100"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:54
+#: 571fe50f5c204504873044c7373c6d86
+msgid "CRUISE_SPEED = 2"
+msgstr "CRUISE_SPEED = 2"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:55
+#: 8019348586db418c85298c811218d046
+msgid "CRUISE_THROTTLE = 20"
+msgstr "CRUISE_THROTTLE = 20"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:57
+#: 68927b08900641ae97f69b827b559745
+msgid ""
+"These are conservative values that should give you slow, gentle behaviour "
+"for most rovers."
+msgstr "这些是保守值，适合大多数 Rover 实现缓慢、温和的行为。"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:61
+#: b3d659aa58ed431bb0d2fb557b73b1f0
+msgid "Step 2: Setting CRUISE_THROTTLE"
+msgstr "第二步：设置 CRUISE_THROTTLE"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:63
+#: a2bf0275ff8d41fdbe24650363ab53fe
+msgid ""
+"We need to get ``CRUISE_THROTTLE`` right so we know what throttle level will"
+" give us a speed of 2 meters/second."
+msgstr "我们需要正确设置 ``CRUISE_THROTTLE``，以便知道哪个油门量对应2米/秒的速度。"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:66
+#: 30f77c5cc0714a26bd0a524fdd4fe4d7
+msgid "Switch to MANUAL mode"
+msgstr "切换到 MANUAL 模式"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:67
+#: a2f54da624ce4394b311c9ae70e85455
+msgid ""
+"Slowly advance the throttle until the ground station shows a speed of 2 "
+"meters/second"
+msgstr "缓慢增大油门，直到地面站显示速度为2米/秒"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:69
+#: 1160a78aa598460fb57a04a7a013e463
+msgid "note the throttle percentage shown in the HUD"
+msgstr "记录 HUD 中显示的油门百分比"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:70
+#: 03499eb8e25b49009f538eea4369927d
+msgid ""
+"set CRUISE_THROTTLE to the percentage needed for straight driving at 2 "
+"meters/second"
+msgstr "将 CRUISE_THROTTLE 设置为直线行驶2米/秒所需的百分比"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:74
+#: b49eecc10564443483726a96014e18eb
+msgid "Step 3: Setting the STEER2SRV_P"
+msgstr "第三步：设置 STEER2SRV_P"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:76
+#: 7be54bfaa5ef48d4a60b99ca9af557dd
+msgid ""
+"To set your STEER2SRV_P parameter you need to measure the diameter of the "
+"turning circle of your rover."
+msgstr "设置 STEER2SRV_P 参数需要测量 Rover 转弯圆的直径。"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:79
+#: dd9954f8ec88498b956e0de8860b034b
+msgid ""
+"Put your rover into MANUAL mode, and put the steering hard over to one side."
+" Then very slowly drive your rover in a circle. Use a tape measure to "
+"measure the diameter of that circle and set STEER2SRV_P to that value in "
+"meters."
+msgstr ""
+"将 Rover 切换到 MANUAL 模式，将转向打到一侧极限，然后以非常缓慢的速度绕圈行驶。用卷尺测量该圆的直径，并将 STEER2SRV_P "
+"设置为该值（单位：米）。"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:85
+#: 6597505dd0644c4997e895d913eeec33
+msgid "Step 4: tuning TURN_MAX_G"
+msgstr "第四步：调试 TURN_MAX_G"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:87
+#: 9d01eea1d64a4524803a23236969d106
+msgid ""
+"The ``TURN_MAX_G`` parameter can now be tuned so that your rover can drive "
+"more aggressively, without turning over."
+msgstr "``TURN_MAX_G`` 参数现在可以调整，使 Rover 能更激进地驾驶，而不会翻转。"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:90
+#: 84305565655e4095a35c6a5a9bfee343
+msgid "put into STEERING mode"
+msgstr "切换到 STEERING 模式"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:91
+#: 32eff2057b8f4b5da22c7ba6ec4d5564
+msgid "turn at maximum turn rate and maximum throttle"
+msgstr "以最大转向速率和最大油门转弯"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:92
+#: b4fbbc2a64fd4e118362069648edac49
+msgid ""
+"adjust TURN_MAX_G to highest level that rover remains stable, doesn't start "
+"to roll over and doesn't skid"
+msgstr "将 TURN_MAX_G 调整到 Rover 保持稳定、不开始侧翻且不侧滑的最高水平"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:96
+#: 653bd0982a7449de8d09c932050c6d3c
+msgid "Step 5: tuning NAVL1_PERIOD"
+msgstr "第五步：调试 NAVL1_PERIOD"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:98
+#: a80fa0684f4647a2aa486c8da86be0c9
+msgid ""
+"Now you can finally start tuning your steering in AUTO mode. To tune in AUTO"
+" you will need to create a mission for your rover to navigate. A simple "
+"rectangular mission is the best to start with."
+msgstr "现在可以开始在 Auto 模式下调试转向了。需要为 Rover 创建一个导航任务。简单的矩形任务是最佳起点。"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:102
+#: 0433245616324c18b8eaacae79f23d2c
+msgid "create a rectangular course for the rover"
+msgstr "为 Rover 创建矩形航线"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:103
+#: 2cdc3d5ab6584f278934bdb17a86b2ac
+msgid "run the course in AUTO mode"
+msgstr "在 Auto 模式下运行该航线"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:104
+#: b43d9a246ec44fa8accd619a7c1c39c6
+msgid ""
+"if the rover weaves along the straights, then raise NAVL1_PERIOD in "
+"increments of 0.5"
+msgstr "如果 Rover 在直线路段蛇形行驶，则以0.5为增量提高 NAVL1_PERIOD"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:106
+#: f1a4d54c05e3465b9b4b88e9a6009168
+msgid ""
+"if the rover doesn't turn sharply enough then lower NAVL1_PERIOD in "
+"increments of 0.5"
+msgstr "如果 Rover 转弯不够急促，则以0.5为增量降低 NAVL1_PERIOD"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:108
+#: ab9ad29a227e46ed80efeaf222a942f7
+msgid ""
+"if the rover is turning too late in corners then raise WP_RADIUS in "
+"increments of 1.0"
+msgstr "如果 Rover 转弯过晚，则以1.0为增量提高 WP_RADIUS"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:111
+#: 7fc88c2ee63f48c09a062f2d4ca3b641
+msgid ""
+"You may also find that you may need to raise NAVL1_DAMPING slightly to "
+"improve navigation in tight courses."
+msgstr "您可能还需要适当提高 NAVL1_DAMPING 以改善急弯路段的导航性能。"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:115
+#: 1607f2022a0643dcb9e73befef75790d
+msgid "Final Setup"
+msgstr "最终设置"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:117
+#: 7b2af28b13194eecabefa504a26e57aa
+msgid ""
+"Now that you have the basic parameters tuned you may find you can go back "
+"and raise CRUISE_SPEED for faster driving. If you do, then make sure you "
+"adjust CRUISE_THROTTLE to suit."
+msgstr ""
+"完成基本参数调试后，您可能会发现可以提高 CRUISE_SPEED 以实现更快的驾驶。如果这样做，请确保同步调整 CRUISE_THROTTLE。"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:121
+#: 5abd2fc546724db5ae7102267a6f1b95
+msgid ""
+"You may also like to lower SPEED_TURN_GAIN to ask the rover to slow down a "
+"bit when turning. That would allow for higher speeds when driving straight "
+"ahead."
+msgstr "您也可以适当降低 SPEED_TURN_GAIN，使 Rover 转弯时稍微减速。这将允许直线行驶时达到更高速度。"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:125
+#: ca8c9ccb44cf4675a6c8335dab04c5b0
+msgid ""
+"There are a number of other parameters that can be used to fine tune your "
+"steering once you have completed the basic ones above. Please see the "
+":doc:`full parameter list <parameters>` for details."
+msgstr "完成上述基本调试后，还有许多其他参数可用于进一步微调转向。详情请参阅 :doc:`完整参数列表 <parameters>`。"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:129
+#: ceabe2526f774e5d927e9574a3833015
+msgid ""
+"Some parameters to pay particular attention to are STEER2SRV_TCONST, "
+"STEER2SRV_I, STEER2SRV_D and STEER2SRV_IMAX."
+msgstr ""
+"需要特别关注的参数包括 STEER2SRV_TCONST、STEER2SRV_I、STEER2SRV_D 和 STEER2SRV_IMAX。"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:133
+#: d61ca82f749f4e64b4279cc250c0aec2
+msgid "Fixing problems with weaving"
+msgstr "解决蛇形行驶问题"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:135
+#: cf978d4871ed465a892d4af538126262
+msgid ""
+"A common issue with rovers is that the steering 'weaves', turning from side "
+"to side rather than turning smoothly. There can be several possible reasons "
+"for this happening."
+msgstr "Rover 的常见问题是转向「蛇形行驶」，即来回摆动而不是平滑转向。这可能有以下几种原因。"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:139
+#: fccd54090b2540b58bbc302a98f3e243
+msgid ""
+"The first thing you need to work out is if the problem is confined to low "
+"speed driving or also affects higher speed driving. If the problem only "
+"happens at very low speed (such as when first entering auto on a mission) "
+"then the most likely problem is that STEER2SRV_MINSPD is too low. The "
+"default is 1.0 m/s, which is quite low, and if your GPS heading isn't very "
+"reliable at low speed then you may need to raise that number. Try 2.0 and "
+"see if that helps with low speed weaving."
+msgstr ""
+"首先需要判断问题是仅在低速行驶时出现，还是高速时也存在。如果问题仅在非常低速时出现（例如在任务中首次进入 Auto 时），最可能的原因是 "
+"STEER2SRV_MINSPD 设置过低。默认值为1.0米/秒，这相当低；如果低速时 GPS "
+"航向不够可靠，可能需要提高该数值。尝试将其设为2.0，看是否能改善低速蛇形问题。"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:147
+#: 59430d4f4486438d8a7ed6c61eb9d17c
+msgid ""
+"If the problem also happens at higher speeds then it is likely to either be "
+"the L1 navigation tuning or the steering controller tuning. To fix it you "
+"will need to understand how these parameters work."
+msgstr "如果问题在高速时也存在，则可能是 L1 导航调试或转向控制器调试的问题。要解决此问题，需要了解这些参数的工作原理。"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:151
+#: d79366f7450a4a0b92020b6320b1fb4f
+msgid ""
+"The NAVL1_PERIOD controls how rapidly the L1 navigation controller changes "
+"the demanded steering direction. Making this number larger will reduce "
+"weaving in AUTO, but it will also mean that you can't steer as accurately "
+"around tight corners. Try raising NAVL1_PERIOD in steps of 0.5 until the "
+"weaving stops. For most rovers a value between 6.0 and 8.0 is good, but some"
+" rovers may need higher values."
+msgstr ""
+"NAVL1_PERIOD 控制 L1 导航控制器改变期望转向方向的速率。增大此数值将减少 Auto "
+"模式下的蛇形，但也意味着无法在急弯处精确转向。以0.5为增量提高 NAVL1_PERIOD，直到蛇形消失。大多数 Rover "
+"适合6.0到8.0之间的值，但部分 Rover 可能需要更高的值。"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:158
+#: 0bd18d35457b4b87bd01fcf7840ae081
+msgid ""
+"If raising the NAVL1_PERIOD fixes the weaving but leaves you unable to "
+"handle sharp turns in missions then you will instead need to tune the "
+"steering controller."
+msgstr "如果提高 NAVL1_PERIOD 消除了蛇形，但导致无法处理任务中的急弯，则需要改为调试转向控制器。"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:162
+#: b8f49915b49744d48af127e7375ab3f9
+msgid ""
+"In the steering controller there are 3 key parameters that will control "
+"weaving:"
+msgstr "转向控制器中有3个关键参数会影响蛇形行驶："
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:165
+#: 99613d275bbd4cdaa7a7a32706aba9e8
+msgid ""
+"A smaller STEER2SRV_P will reduce weaving, try reducing it by 0.1 at a time"
+msgstr "较小的 STEER2SRV_P 将减少蛇形，每次减少0.1进行尝试"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:167
+#: 2a333663410f4194a7c50c6be347d013
+msgid ""
+"A larger STEER2SRV_D will \"damp\" the weaving, but if you make it too large"
+" then you will get high speed oscillation. For example you may find that a "
+"value of 0.1 reduces the damping, but a value of 0.2 could cause a high "
+"speed oscillation in the steering servo. If you get fast oscillation then "
+"reduce the STEER2SRV_D value by 50%."
+msgstr ""
+"较大的 STEER2SRV_D "
+"将「阻尼」蛇形，但设置过大会引起高速振荡。例如，0.1的值可能减少振荡，但0.2可能导致转向舵机高速振荡。如果出现快速振荡，请将 STEER2SRV_D"
+" 降低50%。"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:172
+#: 1a424b0011db4db58065488c2c22003a
+msgid ""
+"A larger STEER2SRV_TCONST will slow down the steering controller, which will"
+" reduce weaving. Try raising it in steps of 0.1."
+msgstr "较大的 STEER2SRV_TCONST 将减慢转向控制器响应速度，从而减少蛇形。以0.1为增量尝试提高。"
+
+#: ../../source/docs/tuning-steering-and-navigation-for-a-rover.rst:175
+#: ffb02eb8879842b2bf2bb176c56d11eb
+msgid ""
+"With the current controller system you do need to experiment a bit with "
+"these values to get the behaviour you want. We hope to introduce an "
+"automatic tuning system in future, but for now manual tuning is needed."
+msgstr "在当前控制器系统中，确实需要对这些值进行一些实验以获得期望的行为。我们希望将来引入自动调试系统，但目前仍需手动调试。"

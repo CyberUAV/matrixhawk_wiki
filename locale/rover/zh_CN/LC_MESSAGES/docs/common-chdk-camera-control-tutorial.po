@@ -1,0 +1,1315 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 03:48+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:3
+#: dffe9ffd475a41eab20c6eb4784e57a1
+msgid "**ARCHIVED: page considered obsolete**"
+msgstr "**已归档：此页面视为过时**"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:7
+#: f60580e9b5a54ee39e8384d73239e255
+msgid "CHDK Camera Control Tutorial"
+msgstr "CHDK 相机控制教程"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:10
+#: 8e84199855964411a7d23cd92189c0b5
+msgid ""
+"Taking Pictures Automatically during Missions with the Canon Hacker "
+"Development Kit"
+msgstr "使用 Canon Hacker Development Kit 在任务期间自动拍照"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:12
+#: 21393e4c2bd346f7b8cb4064693a8c76
+msgid ""
+"Looking for an easy and inexpensive way to take high quality pictures during"
+" your missions? The Canon Hacker Development Kit (CHDK) allows you to turn a"
+" Canon point-and-shoot camera into a dynamic payload through some simple "
+"scripting. This tutorial will guide you through the process of implementing "
+"this solution for automatic camera control."
+msgstr ""
+"寻找在任务期间拍摄高质量照片的简便低成本方法？Canon Hacker Development Kit（CHDK）允许您通过简单脚本将 Canon "
+"便携相机变成智能载荷。本教程将引导您完成实现此解决方案以进行自动相机控制的过程。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:18
+#: 5dab83d95d2b425e980226e48df6437d
+msgid ""
+"First we'll introduce CHDK: what you'll need to get started and tips for "
+"installing it. The first section will cover adding scripts, running scripts,"
+" and securing the camera to your fixed-wing plane. This straightforward "
+"method is great for basic automatic camera control."
+msgstr ""
+"首先，我们将介绍 CHDK：入门所需的内容和安装提示。第一节将介绍添加脚本、运行脚本以及将相机固定到固定翼飞机上。这种简单方法非常适合基本自动相机控制。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:23
+#: 013733923f2c4253b41f3b11d5440886
+msgid ""
+"Next we'll describe how to coordinate camera controls with autonomous "
+"missions by integrating CHDK with ArduPilot. Although more complex, this "
+"implementation provides excellent functionality for taking pictures "
+"automatically at waypoints. Finally, we'll show a fun application where you "
+"can map an area by creating a composite image of still photos."
+msgstr ""
+"接下来，我们将介绍如何通过将 CHDK 与 ArduPilot "
+"集成来协调相机控制与自主任务。尽管更加复杂，但此实现为在航点自动拍照提供了出色功能。最后，我们将展示一个有趣的应用，通过创建静态照片的合成图像来绘制某个区域的地图。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:30
+#: 0f6754af61fb4cbaa13e5bc9fef6e276
+msgid "Taking pictures automatically: What is CHDK?"
+msgstr "自动拍照：什么是 CHDK？"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:32
+#: 0039967ed337450c8d8841da3d78fd83
+msgid ""
+"`Canon Hacker Development Kit (CHDK) <http://chdk.wikia.com/wiki/CHDK>`__ is"
+" a free, experimental development tool that allows you to temporarily hack a"
+" Canon camera. With all the features of a DSLR unlocked to your control, a "
+"hacked camera is a smart payload that can read scripted functions such as "
+"shoot, zoom, and (importantly for later on) read the power applied to its "
+"USB port."
+msgstr ""
+"`Canon Hacker Development Kit (CHDK) <http://chdk.wikia.com/wiki/CHDK>`__ "
+"是一款免费的实验性开发工具，允许您临时破解 Canon "
+"相机。解锁单反相机的所有功能后，破解的相机成为可读取脚本功能（如拍照、变焦，以及（对后续内容重要的）读取其 USB 端口所施加的电源）的智能载荷。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:39
+#: fb6191b030d64ad0b6edc4839233946d
+msgid "To use CHDK, you will need:"
+msgstr "使用 CHDK，您需要："
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:41
+#: 92f892087e46479eb53f4aecdec60675
+msgid "**A supported Canon camera**"
+msgstr "**一台支持的 Canon 相机**"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:43
+#: e4c85c24cd9e4be79dad9cf5bdb15cb9
+msgid ""
+"CHDK is made possible by the ability of Canon point-and-shoot cameras to "
+"read software off an SD flash memory card. A team of developers has created "
+"Canon Hacker Development Kit to take advantage of this capability on *only "
+"certain Canon cameras*. For this tutorial, you will need one of the Canon "
+"point-and-shoot cameras listed on the `CHDK wiki "
+"<http://chdk.wikia.com/wiki/Template:Supported_Cameras>`__ as officially "
+"supported by CHDK."
+msgstr ""
+"CHDK 的实现得益于 Canon 便携相机从 SD 闪存卡读取软件的能力。一组开发人员创建了 Canon Hacker Development Kit"
+" 以利用*仅某些 Canon 相机*上的此功能。对于本教程，您需要 `CHDK wiki "
+"<http://chdk.wikia.com/wiki/Template:Supported_Cameras>`__ 上列为 CHDK 官方支持的 "
+"Canon 便携相机之一。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:53
+#: 99e99a35a24646918baf7fb384eff68c
+msgid "**An SD card**"
+msgstr "**一张 SD 卡**"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:55
+#: b9e00c0c9ed44581909077f746c97902
+msgid ""
+"We recommend an SD card that can be written to every two seconds and can "
+"store the amount of pictures you plan to take during your mission. You'll "
+"also need an SD card reader for your computer."
+msgstr "建议使用每两秒可写入一次且能存储任务期间计划拍摄数量照片的 SD 卡。您还需要一个用于电脑的 SD 读卡器。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:62
+#: c25f4b7bf904498790bf26399f6dd763
+msgid "**A CHDK USB cable**"
+msgstr "**一根 CHDK USB 数据线**"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:64
+#: 6769b4dd65b34bc9ab35a989dfb9c55e
+msgid ""
+"We use the gentWIRE USB with two channels, available `here "
+"<http://www.brooxes.com/newsite/BBKK/BBKK-PARTS.html>`__ (half way down "
+"page). This cable is necessary for integrating CHDK with ArduPilot and is "
+"not required to use the intervalometer script function."
+msgstr ""
+"我们使用带两个通道的 gentWIRE USB，`可在此处购买 <http://www.brooxes.com/newsite/BBKK/BBKK-"
+"PARTS.html>`__（页面中部）。此数据线是将 CHDK 与 ArduPilot 集成所必需的，使用定时拍摄脚本功能时不需要。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:73
+#: 66ec21209b054069809b3e4142129641
+msgid "Hacking your camera"
+msgstr "破解您的相机"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:75
+#: 3cbfb4ffae7d413abccb0311ab22cef3
+msgid ""
+"First you'll need to install CHDK onto your camera, so naturally, you'll "
+"need `STICK: Simple Tool for Installing CHDK "
+"<http://zenoshrdlu.com/stick/stick.html>`__ (available for Windows, Mac, and"
+" Linux). (You'll also need to have `Java "
+"<http://www.java.com/en/download/manual.jsp>`__ installed on your computer.)"
+msgstr ""
+"首先，您需要将 CHDK 安装到相机上，因此自然需要 `STICK：Simple Tool for Installing CHDK "
+"<http://zenoshrdlu.com/stick/stick.html>`__（适用于 Windows、Mac 和 "
+"Linux）。（您还需要在电脑上安装 `Java <http://www.java.com/en/download/manual.jsp>`__。）"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:81
+#: a63b48c8ac6644228de89e350ef659e5
+msgid ""
+"Follow this link to the `STICK instructions page "
+"<http://zenoshrdlu.com/stick/stick.html>`__, click on “STICK zip file” under"
+" the **Downloading and Installing** section to download STICK. Once "
+"installed onto your computer, STICK is easy to use: take a picture with your"
+" camera, connect the SD card to your computer, and drag the picture into the"
+" STICK window. This nifty tool will download the appropriate CHDK build and "
+"prepare your SD card automatically. The `STICK instructions page "
+"<http://zenoshrdlu.com/stick/stick.html>`__ has some helpful tips for issues"
+" caused by certain operating systems."
+msgstr ""
+"请访问 `STICK 说明页面 <http://zenoshrdlu.com/stick/stick.html>`__，点击 **Downloading"
+" and Installing** 部分下的「STICK zip file」下载 STICK。安装到电脑后，STICK 易于使用：用相机拍一张照片，将 "
+"SD 卡连接到电脑，然后将照片拖入 STICK 窗口。这个便捷工具将自动下载合适的 CHDK 版本并准备好 SD 卡。`STICK 说明页面 "
+"<http://zenoshrdlu.com/stick/stick.html>`__ 提供了一些针对特定操作系统问题的有用提示。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:91
+#: ecedcbae487849bfb9361d5d4d2f7607
+msgid "Adding a script to the SD card"
+msgstr "向 SD 卡添加脚本"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:93
+#: 11087db0256a47bb9f002eec754fd1d8
+msgid ""
+"CHDK allows you to automate your camera's functionality by running scripts "
+"off an SD card. CHDK scripts can be written in both \\ `UBASIC "
+"<https://en.wikipedia.org/wiki/UBASIC>`__\\ and \\ `Lua "
+"<https://en.wikipedia.org/wiki/Lua_(programming_language)>`__: simple, easy-"
+"to-use programming languages. For this tutorial, we'll use UBASIC scripts "
+"with file extension **.bas**."
+msgstr ""
+"CHDK 允许您通过运行 SD 卡上的脚本来自动化相机功能。CHDK 脚本可使用 \\ `UBASIC "
+"<https://en.wikipedia.org/wiki/UBASIC>`__\\ 和 \\ `Lua "
+"<https://en.wikipedia.org/wiki/Lua_(programming_language)>`__\\ "
+"编写：简单易用的编程语言。本教程将使用扩展名为 **.bas** 的 UBASIC 脚本。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:101
+#: dc0bcaebf3a94249925ddf042d9ca684
+msgid "UBASIC script files must carry the extension **.bas** to function."
+msgstr "UBASIC 脚本文件必须带有扩展名 **.bas** 才能运行。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:103
+#: 3a1e696c471d46a08760f1eac3bec77f
+msgid ""
+"One of the easiest and most useful ways to apply CHDK to your mission is to "
+"take pictures automatically at intervals during flight. We'll do this by "
+"adding an `intervalometer <https://en.wikipedia.org/wiki/Intervalometer>`__ "
+"script to the SD card. Our friends at `Drone Mapper "
+"<https://dronemapper.com/>`__ have created a great CHDK intervalometer "
+"script that can be found in Drone Mapper's \\ `CHDK documentation "
+"<https://s3.amazonaws.com/DroneMapper_US/documentation/DroneMapper_CHDK.pdf>`__"
+" or `viewed by clicking here "
+"<https://download.ardupilot.org/downloads/wiki/other_files/DM-"
+"Intervalometer.txt>`__. Copy the intervalometer script into a text editor "
+"and save the file as **DM_interval.bas**."
+msgstr ""
+"将 CHDK 应用于任务最简便且最有用的方式之一是在飞行期间按间隔自动拍照。我们将通过向 SD 卡添加`定时拍摄 "
+"<https://en.wikipedia.org/wiki/Intervalometer>`__脚本来实现。`Drone Mapper "
+"<https://dronemapper.com/>`__ 的朋友创建了一个很棒的 CHDK 定时拍摄脚本，可在 Drone Mapper 的 \\ "
+"`CHDK 文档 "
+"<https://s3.amazonaws.com/DroneMapper_US/documentation/DroneMapper_CHDK.pdf>`__"
+" 中找到，或`点击此处查看 <https://download.ardupilot.org/downloads/wiki/other_files/DM-"
+"Intervalometer.txt>`__。将定时拍摄脚本复制到文本编辑器中，并将文件保存为 **DM_interval.bas**。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:111
+#: 822e673494de4d7fb84cfdd1d51aa148
+msgid ""
+"This script will measure time intervals for five minutes and trigger the "
+"camera shutter every two seconds. These default parameters work well for us "
+"(results in about 150 pictures), but if you would like to modify them (for "
+"example, to take a pictures every five seconds), see \\ `CHDK Wiki's page "
+"<http://chdk.wikia.com/wiki/CHDK_scripting>`__ regarding scripting "
+"parameters for UBASIC."
+msgstr ""
+"此脚本将测量五分钟的时间间隔，并每两秒触发一次相机快门。这些默认参数对我们来说效果很好（大约拍 150 "
+"张），但如果您想修改它们（例如，每五秒拍一张），请参阅 \\ `CHDK Wiki 页面 "
+"<http://chdk.wikia.com/wiki/CHDK_scripting>`__\\ 中关于 UBASIC 脚本参数的说明。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:117
+#: a8cc26e9d851404caeed0b4bf7cbb00d
+msgid ""
+"To load the script onto the camera, unlock your SD card (by sliding the "
+"switch on the slide of the SD card to the unlock position), connect it to "
+"your computer, and open the SD card's file structure. Select the **CHDK** "
+"folder followed by the **Scripts** folder. Copy the script file "
+"(**DM_interval.bas**) into the **Scripts** folder."
+msgstr ""
+"要将脚本加载到相机，请解锁 SD 卡（将 SD 卡侧面的开关滑到解锁位置），将其连接到电脑，并打开 SD 卡的文件结构。选择 **CHDK** "
+"文件夹，然后选择 **Scripts** 文件夹。将脚本文件（**DM_interval.bas**）复制到 **Scripts** 文件夹中。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:124
+#: e2a7558ee0a443a1a634b56b44782def
+msgid "3. Flying with your camera"
+msgstr "3. 带相机飞行"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:126
+#: 336849e86d074bf5a3cdabe37ede2f5e
+msgid ""
+"Before you're ready for takeoff, you'll need to pack the camera into your "
+"vehicle. For best results using plane, position the camera with the lens "
+"pointing down in the center of the plane. You may need to modify your "
+"plane's body to create a space for the camera. Be sure to set the plane's "
+"center of gravity with the camera in place, and keep in mind the safety of "
+"the camera in case of failure. Check out our setup for inspiration; we used "
+"velcro strips to secure the camera in place."
+msgstr ""
+"在起飞准备好之前，您需要将相机装入飞行器。为了在使用飞机时获得最佳效果，将相机镜头朝下放置在飞机中央。您可能需要改装飞机机身为相机留出空间。请确保以装有相机的状态设定飞机的重心，并考虑故障情况下相机的安全性。参考我们的设置获取灵感；我们使用魔术贴条将相机固定到位。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:138
+#: bad0b26bf6ee411e9ca9976b787de52d
+msgid "Activating scripts before flight"
+msgstr "飞行前激活脚本"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:140
+#: 06e0305be4784ec288ac2246785fdd3c
+msgid ""
+"Prior to launching your plane, it is necessary to activate the "
+"intervalometer script on the camera. Make sure the SD card is locked and "
+"loaded into the camera and the camera is turned on. When you're ready to "
+"launch your plane, enter ALT mode by pressing the **Print** or **Play** "
+"button on the camera (for more information consult the `CHDK wiki "
+"<http://chdk.wikia.com/wiki/CHDK>`__). Press the **Menu** button to access "
+"the main CHDK menu. Select **Load Script from File**; select \\ "
+"**DM_interval.bas**. Press the **shutter** button to run the script. (You "
+"can also use the shutter button to stop the script.) Once you start the "
+"script, the camera will automatically begin taking pictures after a delay of"
+" five seconds, so be sure to take that into account when launching your "
+"plane."
+msgstr ""
+"在起飞前，必须在相机上激活定时拍摄脚本。确保 SD 卡已锁定并插入相机，相机已开机。准备好起飞时，按相机上的 **Print** 或 **Play** "
+"按钮进入 ALT 模式（更多信息请参阅 `CHDK wiki <http://chdk.wikia.com/wiki/CHDK>`__）。按 "
+"**Menu** 按钮进入主 CHDK 菜单。选择 **Load Script from File**；选择 \\ "
+"**DM_interval.bas**。按 "
+"**shutter**（快门）按钮运行脚本。（也可用快门按钮停止脚本。）启动脚本后，相机将在延迟五秒后自动开始拍照，因此在起飞时请将此延迟考虑在内。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:153
+#: ca22f0bc6b9e48ec917e40fc2361c276
+msgid "Integrating CHDK with ArduPilot"
+msgstr "将 CHDK 与 ArduPilot 集成"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:158
+#: 5220b0eacc55494096aef81dc7400ffb
+msgid ""
+"To integrate your CHDK setup with ArduPilot, you will need a CHDK cable "
+"(pictured across) that connects the autopilot's output signal pins with the "
+"camera's USB port. We used \\ `Gentles' gentWIRE-USB2 cable "
+"<http://gentles.ltd.uk/gentwire/usb.htm>`__. (Stay tuned for a 3DR CHDK "
+"cable.)"
+msgstr ""
+"要将您的 CHDK 设置与 ArduPilot 集成，您需要一根 CHDK 数据线（如对图所示），将飞控输出信号引脚与相机 USB 端口连接。我们使用了"
+" \\ `Gentles 的 gentWIRE-USB2 数据线 "
+"<http://gentles.ltd.uk/gentwire/usb.htm>`__。（敬请期待 3DR CHDK 数据线。）"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:163
+#: 8e51b17ebee248c58e6aeb1dd82ebb42
+msgid ""
+"CHDK cables work by translating pulse width modulation (PWM) output by the "
+"autopilot into USB power pulses that can be read by the camera. It does this"
+" by establishing a range of how long power is applied to the USB port (ex: "
+"40-80 ms) and assigning that range to a PWM value corresponding to a channel"
+" switch position (ex: channel 1 middle). The table below shows the "
+"corresponding values between the switch position on the RC transmitter, the "
+"autopilot's PWM output, and the camera's USB power."
+msgstr ""
+"CHDK 数据线的工作原理是将飞控输出的脉冲宽度调制（PWM）转换为相机可读取的 USB 电源脉冲。它通过建立电源施加到 USB "
+"端口的时长范围（例如：40-80ms）并将该范围分配给对应通道开关位置的 PWM 值（例如：通道 1 中位）来实现。下表显示了遥控器开关位置、飞控 "
+"PWM 输出和相机 USB 电源之间的对应值。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:172
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:566
+#: 41a0f9ef50f344b2a7ac5571da80315a db17b6a826dc4efa918f05ba36532d4f
+msgid "Switch position"
+msgstr "开关位置"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:172
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:566
+#: 5402d67c5ae24859aa7cf85bab862903 753e427edb2a4f5db28f6ddaec33e256
+msgid "PWM (µs)"
+msgstr "PWM（µs）"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:172
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:566
+#: 0751b24f23384fb3b42f00eb780e1f27 9edf124289694dcab688bcc1b0b18618
+msgid "USB power (ms)"
+msgstr "USB 电源（ms）"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:174
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:568
+#: 1d35a4d0a8cd4885af11d68d19e54292 68361fc8e228479ca8a3a232f487bcf8
+msgid "Channel 1 up"
+msgstr "通道 1 向上"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:174
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:180
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:572
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:578
+#: 22cb13f28310405ea5d4ae353466d7bc 317a2258ae7d4e87a08bd385bdadba80
+#: 5021aa2d99514980a93ded06107ea2c2 d169b3eea9e54f419c5f38e66917c8d3
+msgid "1,900"
+msgstr "1,900"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:174
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:568
+#: 04ac84f8cdf14f6c8de119160ca233ea 46138de5e5694065a36215f7c2d918d4
+msgid "<50"
+msgstr "<50"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:176
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:570
+#: 2313d08e255e486f86ddf6f190fbb0e2 c90c6fa8d76c47d687403320c4286054
+msgid "Channel 1 mid"
+msgstr "通道 1 中位"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:176
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:182
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:570
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:576
+#: 50d8d75e31574d14a0e58330a23887cf a8406a6eda3f4c84a064984c0518bf08
+#: adad1a54239d43919175149d7c59cbae e49f87bcfae142b9ace60047325cf6c9
+msgid "1,500"
+msgstr "1,500"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:176
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:570
+#: 7625a4b7da3d4184af3f00235c6d4e59 88cac3a1d31c481a949264173fd9232a
+msgid ">40 and <80"
+msgstr ">40 且 <80"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:178
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:572
+#: 389e797431b44c6ebb7c9d47bcedc94e 58eb5e3a80a7438c9551b1bae586a5d5
+msgid "Channel 1 down"
+msgstr "通道 1 向下"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:178
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:184
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:568
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:574
+#: 3d7cc9876cc34641a76d8ddfc2fc4c12 4f08646854db46cc8dbf9b1ea40623e5
+#: de4c767adc4444faba1cad4d51fe70be fcd891c5e981429fa56cdf8d9f58923e
+msgid "1,100"
+msgstr "1,100"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:178
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:572
+#: 29d2759e312f421caf0967d1cdd202f8 70354494d36b415781bbee214a0d798f
+msgid ">70 and <110"
+msgstr ">70 且 <110"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:180
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:574
+#: c3221166ef7c4489bd2499288935e01c fe990c935db64a08a833d82e48396810
+msgid "Channel 2 up"
+msgstr "通道 2 向上"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:180
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:574
+#: 1c393053f55947c0b057aea634813b59 b83fe5871b7f422d9975dbb0e4c59e89
+msgid ">100 and <140"
+msgstr ">100 且 <140"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:182
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:576
+#: a26f214abf6f4c5599e433aff89f5a17 d9532bc9bc2d438a84c1252d08bb48f1
+msgid "Channel 2 mid"
+msgstr "通道 2 中位"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:182
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:576
+#: 4b11072a454a4311a7dd03a852e8d43b a41b1d6e8d5841ff9a31dfbbdb27445b
+msgid ">130 and <170"
+msgstr ">130 且 <170"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:184
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:578
+#: 936081b8a731439a87ef2bd962fb70d1 fa09a0bdef2948f494ea4c78665e5c67
+msgid "Channel 2 down"
+msgstr "通道 2 向下"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:184
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:578
+#: 3bb02e410bb14ba1abd4dabd189a9d55 bcc5ec43f8724c5283e4698bc60d8528
+msgid ">160 and <120"
+msgstr ">160 且 <120"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:187
+#: fbc123e8338742fca16ac3cc2bcd7f9d
+msgid ""
+"Each switch position can be assigned to a script function. This means that "
+"you can script up to six different camera controls such as triggering the "
+"shutter and setting different levels of zoom. For this tutorial, we'll show "
+"you how to set up three functions using only the first channel, but this "
+"process can be followed to utilize the full six options if you choose to."
+msgstr ""
+"每个开关位置可分配给一个脚本功能。这意味着您可以为多达六种不同的相机控制（如触发快门和设置不同变焦级别）编写脚本。本教程将展示如何仅使用第一个通道设置三个功能，但如果您选择，可以按照此过程使用全部六个选项。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:195
+#: 847d64fc2e034c06b177e9660fdcbb02
+msgid "Configuring the CHDK cable for use with ArduPilot"
+msgstr "配置 CHDK 数据线以与 ArduPilot 配合使用"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:197
+#: d07ed09850af4c97be4ea10c07c92501
+msgid ""
+"First we need to select an RC channel to assign to CHDK's channel 1. Connect"
+" your plane's autopilot to Mission Planner. Go to **Configuration \\| Radio "
+"Calibration** to locate an available channel and its corresponding three-"
+"position switch on your RC transmitter. For this tutorial, we'll use channel"
+" 7. (If you decide to use a different channel, substitute your channel "
+"wherever we input channel 7.) Don't disconnect your autopilot yet."
+msgstr ""
+"首先，我们需要选择一个 RC 通道分配给 CHDK 的通道 1。将飞机飞控连接到 Mission Planner。转到 **Configuration "
+"\\| Radio Calibration** 以找到可用通道及遥控器上对应的三档拨杆。本教程将使用通道 "
+"7。（如果您决定使用不同的通道，请在我们输入通道 7 的地方替换您的通道。）暂不要断开飞控连接。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:205
+#: b5caced8dec046c68671df9a5900c0f6
+msgid ""
+"Before we fly, we'll need to test the integration between this channel and "
+"the CHDK cable by manually changing the switch position and observing the "
+"result. In order to allow manual control of this channel, we need to change "
+"an important parameter in Mission Planner. Under **Configuration \\| "
+"Standard Parameters**, scroll about 4/5 of the way down to find the **Servo "
+"out function** parameters for each channel. Find the parameter that "
+"corresponds to your camera control channel. For us, it's **Servo out "
+"function (SERVO7_FUNCTION or RC7_FUNCTION)**."
+msgstr ""
+"飞行前，我们需要通过手动更改开关位置并观察结果来测试此通道与 CHDK 数据线的集成。为了允许手动控制此通道，我们需要在 Mission Planner"
+" 中更改一个重要参数。在 **Configuration \\| Standard Parameters** 下，向下滚动约 4/5 处找到每个通道的 "
+"**Servo out function** 参数。找到与相机控制通道对应的参数。对我们来说，是 **Servo out "
+"function（SERVO7_FUNCTION 或 RC7_FUNCTION）**。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:216
+#: f5bedf24fa574740b59299c162000d60
+msgid ""
+"Set this parameter to **Manual** whenever you want to control your camera "
+"using your RC transmitter; set to **Disabled** when you want the autopilot "
+"to control the camera automatically."
+msgstr "当您想使用遥控器控制相机时，将此参数设置为 **Manual**；当您希望飞控自动控制相机时，设置为 **Disabled**。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:220
+#: 81556492ef4741d4b86241ebcedb58d4
+msgid ""
+"Since we're using the RC transmitter to test the CHDK cable, set **Servo out"
+" function** to **Manual**. Select **Write Params** before disconnecting your"
+" autopilot."
+msgstr ""
+"由于我们使用遥控器测试 CHDK 数据线，将 **Servo out function** 设为 **Manual**。断开飞控连接前选择 "
+"**Write Params**。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:224
+#: b1548d3cf91243a98d865b2d3cc46ceb
+msgid ""
+"Once you've chosen your camera control channel, you'll need to connect your "
+"CHDK cable to the autopilot's output pins. Connect either of the pin "
+"connectors on the CHDK cable to the autopilot output pins corresponding to "
+"your camera control channel (black cable on the outside). For example, we "
+"connected our CHDK cable to the channel 7 output pins on the autopilot. Make"
+" sure no input pins are connected to the autopilot for that channel."
+msgstr ""
+"选定相机控制通道后，您需要将 CHDK 数据线连接到飞控的输出引脚。将 CHDK "
+"数据线上的任意引脚连接器连接到与相机控制通道对应的飞控输出引脚（黑色线缆在外侧）。例如，我们将 CHDK 数据线连接到飞控的通道 7 "
+"输出引脚。确保该通道没有输入引脚连接到飞控。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:231
+#: c0a1b55bf6a54d3f9049431c22a6befc
+msgid ""
+"For **Pixhawk**, connect the CHDK cable to aux out pin 5. However, this pin "
+"outputs only 3.3V, and 5V are required to trigger CHDK. To convert to 5V, "
+"you'll need to integrate a step-up converter (`like the one here from "
+"Sparkfun <https://www.sparkfun.com/products/10968>`__) in-line with the "
+"cable to trigger CHDK."
+msgstr ""
+"对于 **Pixhawk**，将 CHDK 线缆连接到辅助输出引脚 5。但此引脚仅输出 3.3V，而触发 CHDK 需要 5V。要转换为 "
+"5V，需在线缆中串联一个升压转换器（`如 Sparkfun 提供的此款 "
+"<https://www.sparkfun.com/products/10968>`__）来触发 CHDK。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:237
+#: 409c82ed33914e978b8e019bca8f21f0
+msgid "Adding a script"
+msgstr "添加脚本"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:239
+#: 99f6e64cd7f147cd98cd71f6b1e1fae2
+msgid ""
+"Now that you've configured your CHDK cable, we'll add a script to control "
+"the camera when commanded by the autopilot. Let's break down a CHDK cable "
+"UBASIC script into its main parts."
+msgstr "配置好 CHDK 线缆后，我们将添加一个脚本，以便在飞控发出指令时控制相机。下面来分析 CHDK 线缆 UBASIC 脚本的主要部分。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:252
+#: 67554f1440304c0098650a7e0f204e0b
+msgid ""
+"This section defines the parameters that will be used later by the "
+"functions. **@param** names the parameter with a variable and a phrase; "
+"**@default** specifies its value. These three parameters specify zoom "
+"levels, so if you wanted to change a zoom level, you could easily do so by "
+"entering a new value after the variable following **@default**."
+msgstr ""
+"此部分定义了后续函数将使用的参数。**@param** 使用变量和短语命名参数；**@default** "
+"指定其默认值。这三个参数用于指定变焦级别，如需修改某个变焦级别，只需在 **@default** 后面对应变量处输入新值即可。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:274
+#: 030df0408f23430fa9f94c1fdc60fb5f
+msgid ""
+"This is the main body of the script. It tells CHDK to read the power pulse "
+"from the USB port (**get_usb_power**) and, according to what range it falls "
+"under, execute a specific function. The values here are listed in "
+"centiseconds, which is why they differ from the table shown above (5 "
+"centiseconds = 50 milliseconds)."
+msgstr ""
+"这是脚本的主体部分。它指示 CHDK 读取 USB "
+"接口的电源脉冲（**get_usb_power**），并根据其所属范围执行相应函数。此处数值以厘秒为单位，因此与上表所示不同（5 厘秒 = 50 "
+"毫秒）。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:310
+#: 758d2615bdb14ef09b6065962ab82624
+msgid ""
+"This is where the script defines what each function will do. Since we aren't"
+" utilizing the channel 2 options, **ch2up**, **ch2mid**, and **ch2down** "
+"functions are empty. The **ch1up** function will set the zoom to the value "
+"specified by the variable **s** using the **set_zoom** command and take a "
+"picture using the **shoot** command. The **ch1mid** function uses "
+"**set_zoom** to set the lens to its stowed position, and the **ch1down** "
+"function fully extends the lens. The **print** command will output the "
+"specified text to the camera's display along with the actual output value of"
+" the USB power pulse (**k**)."
+msgstr ""
+"此部分定义了每个函数的具体操作。由于未使用通道 2 选项，**ch2up**、**ch2mid** 和 **ch2down** "
+"函数为空。**ch1up** 函数将使用 **set_zoom** 命令将变焦设为变量 **s** 指定的值，并使用 **shoot** "
+"命令拍照。**ch1mid** 函数使用 **set_zoom** 将镜头收回原位，**ch1down** 函数则完全伸出镜头。**print** "
+"命令将把指定文字及 USB 电源脉冲的实际输出值（**k**）显示在相机屏幕上。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:320
+#: 1e52427f77264ce2acc010956f4f401b
+msgid "In short, the above script will cause the following behaviors:"
+msgstr "简而言之，上述脚本将产生以下行为："
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:322
+#: 002cdae00688416ba2b453a9fe11ebb7
+msgid ""
+"When channel 7 is set to the up position, CHDK will set zoom to 10 and take "
+"a picture."
+msgstr "当通道 7 处于高位时，CHDK 将变焦设为 10 并拍照。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:325
+#: 3c537d8ab5a149c298e047cb2a373389
+msgid ""
+"When channel 7 is set to the mid position, CHDK will set zoom to 30 (stowed "
+"position)."
+msgstr "当通道 7 处于中位时，CHDK 将变焦设为 30（收回位置）。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:328
+#: dee053ddfe054ebea02272332b640f20
+msgid ""
+"When channel 7 is set to the down position, CHDK will set zoom to 100 "
+"(extended position)."
+msgstr "当通道 7 处于低位时，CHDK 将变焦设为 100（伸出位置）。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:331
+#: a3dad3380ac6406f890d3856ee15b1c3
+msgid ""
+"`Click here to view the above script "
+"<https://download.ardupilot.org/downloads/wiki/other_files/3DR_Shoot.txt>`__,"
+" copy into a text editor, and save as \\ **3DR_Shoot.bas**. Now that you're "
+"familiar with how the script works, you can easily change the commands of "
+"each function. For example, you can add a **shoot** command to **ch1down** "
+"or change one of the zoom level parameters. If you're utilizing the channel "
+"two functions, you can easily add commands to those functions in the same "
+"format shown above."
+msgstr ""
+"`点击此处查看上述脚本 "
+"<https://download.ardupilot.org/downloads/wiki/other_files/3DR_Shoot.txt>`__，复制到文本编辑器中，保存为"
+" \\ **3DR_Shoot.bas**。了解脚本的工作原理后，可轻松修改每个函数的命令。例如，可以在 **ch1down** 中添加 "
+"**shoot** 命令，或更改变焦级别参数。如果使用通道 2 函数，同样可以按照上述格式添加命令。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:339
+#: 916530faa3704af2ae269b5d8604285e
+msgid ""
+"Add the script file to the SD card as described in the previous section."
+msgstr "按上一节的说明将脚本文件添加到 SD 卡中。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:342
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:622
+#: 35cd6a24024b4c468eaea4295e877240 5a93882ae56f4342ae30a4b29612c36e
+msgid "Testing the CHDK cable"
+msgstr "测试 CHDK 线缆"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:344
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:624
+#: 45f56e8c50b344628f91665bcb8e9ce4 d84316539e3c4a01be32844cb2af9790
+msgid ""
+"Testing the CHDK cable will ensure that our camera controls execute as "
+"expected and is a great opportunity to test for potential noise created by "
+"your equipment setup."
+msgstr "测试 CHDK 线缆将确保相机控制按预期执行，也是检测设备配置可能产生的噪声干扰的好机会。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:351
+#: ae6a0f9f8d6e4dd0aa908fe70444fb4f
+msgid ""
+"To tell CHDK to listen to the cable, we need to set the Enable Remote "
+"parameter. On the camera, access the CHDK menu, select **Remote "
+"Parameters,** and select **Enable Remote** as shown. This setting must be "
+"enabled to allow communication with the CHDK cable."
+msgstr ""
+"要让 CHDK 监听线缆信号，需要设置「启用遥控」参数。在相机上进入 CHDK 菜单，选择 **Remote "
+"Parameters（遥控参数）**，然后如图所示选择 **Enable Remote（启用遥控）**。必须启用此设置才能与 CHDK 线缆通信。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:356
+#: a11dff6e391d4f15a89153c78cd83b3f
+msgid ""
+"Connect the CHDK cable to the camera's USB port, and run \\ "
+"**3DR_Shoot.bas**. Test the result of each switch position. The resulting "
+"behaviors should reflect those listed in the previous step. Observe the USB "
+"pulse values output to the camera display, and compare them with the ranges "
+"show in the code. If you encounter problems, see the **Advanced Topics**\\ "
+"section below for additional testing and troubleshooting information."
+msgstr ""
+"将 CHDK 线缆连接到相机的 USB 接口，运行 \\ "
+"**3DR_Shoot.bas**。测试每个开关位置的结果，结果应与上一步列出的行为一致。观察输出到相机显示屏的 USB "
+"脉冲值，并与代码中的范围进行比较。如遇问题，请参阅下方的 **Advanced Topics（高级主题）**\\ 部分获取更多测试和故障排除信息。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:365
+#: 815062af79844818806550bdc64e1a45
+msgid "Programming camera controls in Mission Planner"
+msgstr "在 Mission Planner 中设置相机控制"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:367
+#: 14c3b4d5904945fa836012f27b291d11
+msgid ""
+"Mission Planner allows you to program servo outputs as events at waypoints. "
+"By using this feature, we can add a command to output a PWM value "
+"(corresponding to a switch position and function) after the plane achieves "
+"each waypoint."
+msgstr ""
+"Mission Planner 允许将舵机输出设置为航点事件。利用此功能，可在飞机到达每个航点后添加输出 PWM 值的命令（对应开关位置和功能）。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:372
+#: d4ba99f8b3e04a15b7a45c72bf8d3b6b
+msgid ""
+"Once you have your waypoints configured in Mission Planner as shown below, "
+"select your first waypoint and click “Add Below”."
+msgstr "在 Mission Planner 中配置好如下所示的航点后，选择第一个航点并点击「Add Below（在下方添加）」。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:378
+#: a8d9a74939cb42afa5419a02d7a48f48
+msgid ""
+"For your new command, set **Command** type to **DO_SET_SERVO**. (This tells "
+"the autopilot that this command means output to a servo.) Set **Ser No**\\ "
+"(servo number) to the number of your camera control channel (ex:**7**). "
+"(This tells the autopilot where to output: for us, servo channel 7 is the "
+"CHDK cable.) And set **PWM** to **1900**. (This value tells the autopilot "
+"what to output: 1,900 microseconds of pulse width modulation corresponds to "
+"the high position under which the shoot command is located). Repeat this "
+"process for each waypoint at which you would like to take a picture. The "
+"screen below shows a shutter command correctly applied at each of three "
+"waypoints."
+msgstr ""
+"对于新命令，将 **Command（命令）** 类型设为 **DO_SET_SERVO**（告知飞控此命令用于输出舵机信号）。将 **Ser "
+"No**\\ （舵机编号）设为相机控制通道号（例如：**7**）（告知飞控输出位置：对我们而言，舵机通道 7 即 CHDK 线缆）。将 **PWM** "
+"设为 **1900**（此值告知飞控输出内容：1900 "
+"微秒脉冲宽度对应高位，拍照命令位于此位置）。对每个需要拍照的航点重复此操作。下图展示了在三个航点处正确设置快门命令的示例。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:394
+#: 8d47d038a7bf4682817d7aa140bdf92e
+msgid ""
+"Columns in the Waypoints table accrue different meanings based on the type "
+"of command currently selected. These column definitions only become visible "
+"when the command is selected as different parameters apply to different "
+"types of commands.*"
+msgstr "航点表中的列根据当前选定的命令类型具有不同含义。这些列定义仅在选择命令后才可见，因为不同类型的命令适用不同的参数。*"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:399
+#: 596f99f2d4bd4df7ba10e00f92b4ae80
+msgid ""
+"Since we're using the autopilot to control the camera, we need to set the \\"
+" **Servo out function (RC7_FUNCTION or SERVO7_FUNCTION)** parameter to "
+"**Disabled** (under **Standard Parameters**). Write waypoints and parameters"
+" to the autopilot."
+msgstr ""
+"由于使用飞控控制相机，需要将 \\ **舵机输出功能（RC7_FUNCTION 或 SERVO7_FUNCTION）** 参数设为 "
+"**Disabled（禁用）**（在 **Standard Parameters（标准参数）** 下）。将航点和参数写入飞控。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:404
+#: 8ab4fea9f2d8462ab1a2c300c3b2239f
+msgid ""
+"Ensure that your camera and autopilot are connected correctly. Run \\ "
+"**3DR_Shoot.bas** prior to launch. Fly your mission according to standard "
+"practices and safety procedures."
+msgstr "确保相机和飞控连接正确。起飞前运行 \\ **3DR_Shoot.bas**。按照标准操作规范和安全程序执行飞行任务。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:409
+#: 3e934620ab5947a782e75bd4701c71d1
+msgid "Creating a composite image"
+msgstr "创建合成图像"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:411
+#: 5af1171003234b63b42c0d47be46396d
+msgid ""
+"One of our favorite applications of CHDK is creating a map of an area by "
+"stitching automatically-captured pictures into a composite image. We'll use "
+"the same `3DR_Shoot.bas "
+"<https://download.ardupilot.org/downloads/wiki/other_files/3DR_Shoot.txt>`__\\"
+" script that we used in the previous section. The process is similar to "
+"setting shutter triggers at waypoints, only to make sure we capture the "
+"entire area we need more frequent, more regular waypoints. We’ll do this "
+"automatically using Mission Planner’s **Grid V2** automatic waypoint "
+"function."
+msgstr ""
+"CHDK 的一项常用应用是通过拼接自动拍摄的照片来生成区域地图。我们将使用上一节中用过的 `3DR_Shoot.bas "
+"<https://download.ardupilot.org/downloads/wiki/other_files/3DR_Shoot.txt>`__\\"
+" 脚本。该流程与在航点处设置快门触发类似，只是为确保覆盖整个区域，需要更密集、更规律的航点。我们将利用 Mission Planner 的 **Grid"
+" V2** 自动航点功能来实现这一点。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:422
+#: 59a1cd2ad212487fb1a6b92a044781e2
+msgid "Setting waypoints with GridV2"
+msgstr "使用 GridV2 设置航点"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:424
+#: 4714bf1147be4956a788ce354584b2a2
+msgid ""
+"First locate the area you wish to map in Mission Planner. Right-click and "
+"select \\ **Draw Polygon\\| Add Polygon Point**. Add polygon points until "
+"you have created a polygon around the area you wish to map. Once you are "
+"satisfied with your polygon, right-click and select **Auto WP \\| GridV2** "
+"as shown below."
+msgstr ""
+"首先在 Mission Planner 中找到要测绘的区域。右键单击并选择 \\ **Draw Polygon（绘制多边形）\\| Add "
+"Polygon Point（添加多边形顶点）**。持续添加顶点直至围住目标区域。满意后，右键单击并选择 **Auto WP（自动航点）\\| "
+"GridV2**，如下所示。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:433
+#: f5a66b09d2f244eeb619f53bf551cfa4
+msgid ""
+"Input a relative altitude (100 feet is fine if you are unsure). Input a "
+"distance between lines; the larger the number, the fewer waypoints you’ll "
+"end up with. When prompted, enter a distance between each waypoint; the same"
+" rationale applies here. Enter line direction; the waypoints below show a "
+"line direction of 70. When prompted to add camera triggers, input “Yes”; "
+"*this will create a command after each waypoint, it will not automatically "
+"set up your CHDK commands*. We recommend experimenting with these settings "
+"until you find the waypoint configuration that is right for your mission. "
+"You should now have a grid of waypoints mapped onto your polygon as shown "
+"below."
+msgstr ""
+"输入相对高度（如不确定，100 "
+"英尺即可）。输入航线间距，数值越大，最终航点越少。出现提示时，输入每个航点之间的距离，同样的原则适用。输入航线方向；下图航点显示的航线方向为 "
+"70。当提示是否添加相机触发时，输入「Yes（是）」；*此操作将在每个航点后创建一条命令，不会自动设置 CHDK "
+"命令*。建议反复调整这些设置，直至找到适合任务的航点配置。如下图所示，现在应得到一个映射在多边形上的航点网格。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:447
+#: 88ea4540a47540f7a1d153a5f34fba31
+msgid ""
+"Here is where we have to switch our automatic functionality for some manual "
+"labor. GridV2 has created a command after each waypoint with command type "
+"DO_DIGICAM_CONTROL. However, for our CHDK setup, we need command type "
+"**DO_SET_SERVO**. For each DO_DIGICAM_CONTROL command, change command type "
+"to \\ **DO_SET_SERVO**, set **Ser No** to **7** (or whichever channel you're"
+" using), and set **PWM** to **1,100** (to call the 3DR_Shoot.bas function "
+"that takes a picture)."
+msgstr ""
+"接下来需要将自动功能替换为手动操作。GridV2 在每个航点后创建了命令类型为 DO_DIGICAM_CONTROL 的命令。但在 CHDK "
+"配置中，需要使用 **DO_SET_SERVO** 命令类型。对每个 DO_DIGICAM_CONTROL 命令，将命令类型改为 \\ "
+"**DO_SET_SERVO**，将 **Ser No** 设为 **7**（或所用通道），将 **PWM** 设为 **1,100**（调用 "
+"3DR_Shoot.bas 中的拍照函数）。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:455
+#: 3e016942769440a1af86f0dd258183b5
+msgid ""
+"When run, this mission returns a set of images that can be stitched together"
+" to create a map of the selected polygon."
+msgstr "执行此任务后，将返回一组图片，可拼接成所选多边形区域的地图。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:459
+#: b794f109587c48529a86edbb9d71fc85
+msgid "Stitching images"
+msgstr "拼接图像"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:461
+#: cd8bcc5172d04dd59e3ec516cbd50289
+msgid ""
+"`Microsoft Image Composite Editor (ICE) <http://research.microsoft.com/en-"
+"us/um/redmond/projects/ice/>`__ is a great, free tool for automatically "
+"stitching images together into a composite. Just upload your images, and ICE"
+" will stitch them together. Here's an example of one of our composites:"
+msgstr ""
+"`Microsoft Image Composite Editor (ICE) <http://research.microsoft.com/en-"
+"us/um/redmond/projects/ice/>`__ 是一款免费的优秀工具，可自动将图像拼接成合成图像。只需上传图片，ICE "
+"即可完成拼接。以下是我们合成图像的示例："
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:469
+#: 31921a775b234d2fb0554ca98c5985e6
+msgid ""
+"We hope this solution provides some enhanced functionality to your missions "
+"and expands your autonomous imaging capabilities. For more information, "
+"check out the Advanced Topics section below."
+msgstr "希望本方案能为您的任务提供更多功能，并扩展自主拍摄能力。更多信息请参阅下方的高级主题部分。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:474
+#: d2faaceb80314c75af1652c10375d696
+msgid "Appendix"
+msgstr "附录"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:477
+#: a039f8aadbf94a04a15990508f70ef5a
+msgid "Camera Settings"
+msgstr "相机设置"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:479
+#: 607e51ae10e24cdd884b18b49b02ff39
+msgid ""
+"The following settings will help ensure that you get the best results from "
+"your aerial imagery.  The picture settings should can be adjusted based on "
+"your environment, but the listed values are a good place to start. Both the "
+"Canon settings and CHDK settings will vary from camera to camera."
+msgstr ""
+"以下设置有助于确保获得最佳航拍效果。图像设置可根据环境进行调整，但所列数值是一个不错的起点。Canon 设置和 CHDK 设置因相机型号不同而有所差异。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:485
+#: 4c0216b453954dc09ffd63ba29a912d7
+msgid ""
+"CHDK settings have a tendency to be unintuitive and to reset themselves at "
+"random, so be sure to understand what each setting does and check to make "
+"sure they have not changed before you fly!"
+msgstr "CHDK 设置可能不够直观，且可能随机重置，请务必了解每项设置的功能，并在每次飞行前确认设置未发生变化！"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:490
+#: 431e92ab7d894f19bca999c1a7a43c31
+msgid "Canon Settings"
+msgstr "Canon 设置"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:492
+#: 58abe142ead646d886dfd2a74f931d9e
+msgid "Flash: Off"
+msgstr "闪光灯：关闭"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:493
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:528
+#: 89edcd7e44844b6bb7e9e3195d43dd4c f6dc331491e84862840d18cbf51149d5
+msgid "Function"
+msgstr "功能"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:495
+#: d6dd909e24da4a96b7d3767b2740948c
+msgid "ISO: **Auto**"
+msgstr "ISO：**自动**"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:496
+#: 374af3df7ffa4dd1bf93248de7ccc03d
+msgid "AWB: **Daylight**"
+msgstr "白平衡：**日光**"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:497
+#: 9d64473d42db4ad9bec57561b85034aa
+msgid "Image Size: **L**"
+msgstr "图像尺寸：**L**"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:498
+#: 7981d574fbdf41d89c6b27a2534a4c5e
+msgid "Image Quality: **Fine/Superfine**"
+msgstr "图像质量：**精细/超精细**"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:500
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:534
+#: a4374cd2e4b04624aa223b5b5d686951 d212c772b95e43a4966b865392fef0b3
+msgid "Menu"
+msgstr "菜单"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:502
+#: acddae3372d746e383e278625315fb6d
+msgid "AF Frame: **Center**"
+msgstr "自动对焦框：**居中**"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:503
+#: 5cfc3b9cc6a5463abde80d0b8371bbe4
+msgid "Digital Zoom: **Off**"
+msgstr "数字变焦：**关闭**"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:504
+#: 00292335d5144ddea274646a44b7650a
+msgid "AF-Point Zoom: **Off**"
+msgstr "自动对焦点缩放：**关闭**"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:505
+#: fd6718eb191547ce930fe12ef507e76d
+msgid "Servo AF: **Off**"
+msgstr "伺服自动对焦：**关闭**"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:506
+#: 34850e5bbe2b498aaaf405d61150bc4f
+msgid "AF assist beam: **Off**"
+msgstr "自动对焦辅助光：**关闭**"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:507
+#: 4e053b251bbe4882ad73538f19832ded
+msgid "Flash Settings"
+msgstr "闪光灯设置"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:509
+#: 327208c17e484af389e54f9c411df43e
+msgid "Red Eye correction: **Off**"
+msgstr "红眼校正：**关闭**"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:510
+#: 3754e33f54174dee8e0518148428bcb5
+msgid "Red-Eye Lamp: **Off**"
+msgstr "防红眼灯：**关闭**"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:512
+#: 20e9c70b14f34d37bcb7dbfebad8189b
+msgid "Date Stamp: **Date & Time**"
+msgstr "日期戳：**日期和时间**"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:513
+#: 541b3593ca92416da8693ff04094789b
+msgid "Power Saving..."
+msgstr "省电..."
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:515
+#: 236ed4b819054a05bc1992e81860e4d1
+msgid "Auto Power Down: **Off**"
+msgstr "自动关机：**关闭**"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:516
+#: e7ad699bb4444d77989f662f0bca1b60
+msgid "Display Off: **1 min**"
+msgstr "显示关闭：**1 分钟**"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:518
+#: 48c6b46b0a294d42ba737ee58cf53bec
+msgid "IS Settings..."
+msgstr "IS 设置..."
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:520
+#: 2a4f60a86a59482d9010686fbb6a242c
+msgid "IS Mode: **Shoot Only**"
+msgstr "IS 模式：**仅拍摄**"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:521
+#: 6c9e73c13c5849aaafde9afba544cdab
+msgid "Powered IS: **Off**"
+msgstr "动力 IS：**关闭**"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:523
+#: aebbeaa008e246dcb31a1fd8c86b62c2
+msgid "GPS: **On**"
+msgstr "GPS：**开启**"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:526
+#: 812ec1ded2ef4f0cac27731f0d5843bc
+msgid "CHDK Settings"
+msgstr "CHDK 设置"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:530
+#: 01eb5cec138949fca950d217a1293ef4
+msgid "Autostart: On"
+msgstr "自动启动：开启"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:531
+#: 02155c2175ee4e768f904211173b9418
+msgid "Save Params: ON"
+msgstr "保存参数：开启"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:532
+#: 8823341190114ab9807c5f18c5384798
+msgid "Remote Parameters: Enable Remote"
+msgstr "遥控参数：启用遥控"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:536
+#: 02745a459bba4189824897cd1c131fde
+msgid "Extra Photo Operations..."
+msgstr "额外拍照操作..."
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:538
+#: 84016529626740989158df7189377e87
+msgid "Disable Overrides: **Disable**"
+msgstr "禁用覆盖：**禁用**"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:539
+#: a70395afb8284549bb403188eba08a0e
+msgid "Override Shutter Speed: **1/1600**"
+msgstr "覆盖快门速度：**1/1600**"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:540
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:542
+#: 1a8c6152b761472dac154391e0e75949 71fbd6aa02304de5883be713268b6c6d
+msgid "Value Factor: **1**"
+msgstr "数值系数：**1**"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:541
+#: 2e17817c6324495ab0abdd351966020b
+msgid "Override Subj. Dist V: **65535**"
+msgstr "覆盖被摄体距离：**65535**"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:543
+#: 8d274743670b4cf586e750358a949906
+msgid "Custom Auto ISO..."
+msgstr "自定义自动 ISO..."
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:545
+#: 7ac1385ca4ad4a7aa4ce212c0f47fc1c
+msgid "Enable custom auto ISO"
+msgstr "启用自定义自动 ISO"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:546
+#: fbd239fa46c44c339267ef7554658495
+msgid "Minimal: **1/1000**"
+msgstr "最小值：**1/1000**"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:547
+#: 2a6f4f0dc2624bd7bc724629a021c2d6
+msgid "Clear override values @start: Disable"
+msgstr "启动时清除覆盖值：禁用"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:550
+#: 82270e3d54bf450b8b5fadb711b84ddb
+msgid "Advanced Topics"
+msgstr "高级主题"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:553
+#: be18805f6e014d7d91e65260321dab96
+msgid "CHDK Cable Troubleshooting and Testing"
+msgstr "CHDK 线缆故障排除与测试"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:555
+#: 30338422affc43ec981ba51e2459ecbb
+msgid ""
+"CHDK cables work by translating pulse width modulation (PWM) output by the "
+"autopilot into USB power pulses that can be read by the camera. It does this"
+" by establishing a range of how long power is applied to the USB port (ex: "
+"40-80 ms) and assigning that range to a PWM value corresponding to a channel"
+" switch position (ex: Channel middle).The table below shows the "
+"corresponding output values between the switch position on the RC "
+"transmitter, the autopilot's PWM output, and the camera's USB power. In "
+"practice, our Spektrum DX 8 outputs the values shown in the rightmost "
+"column."
+msgstr ""
+"CHDK 线缆的工作原理是将飞控输出的脉冲宽度调制（PWM）信号转换为相机可读取的 USB 电源脉冲。其方法是建立 USB 接口供电时长的范围（例如 "
+"40-80 毫秒），并将该范围对应到通道开关位置的 PWM 值（例如通道中位）。下表显示了遥控发射机开关位置、飞控 PWM 输出值与相机 USB "
+"供电时长之间的对应关系。在实际使用中，我们的 Spektrum DX 8 输出了最右列所示的数值。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:566
+#: ece57041b61b4695a08a357ab0b6f8e6
+msgid "Spektrum DX8 USB power readings (ms)"
+msgstr "Spektrum DX8 USB 供电读数（毫秒）"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:568
+#: 5866a2712f1e43deb27fd73b2d0b0030
+msgid "30"
+msgstr "30"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:570
+#: 16b7e5a81a744c91b6b36da6889959ce
+msgid "50 or 60"
+msgstr "50 或 60"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:572
+#: 6aa70ef3505f45bbabc201639da83bb0
+msgid "90"
+msgstr "90"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:574
+#: 3a4a63831d374b32ae5e2a3b7c0ffad9
+msgid "130"
+msgstr "130"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:576
+#: e3bb7e5df27648f98236b77e395d3998
+msgid "150 or 160"
+msgstr "150 或 160"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:578
+#: 775334de2b5a493cae26b7b25c8ad194
+msgid "190"
+msgstr "190"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:581
+#: f12879ba2b8d45e6935ebdd000cb004b
+msgid ""
+"To verify that your transmitter behaves similarly, you may want to perform a"
+" test to ensure that a valid USB power value is returned for each switch "
+"position. View the `3DR CHDK Tester script here "
+"<https://download.ardupilot.org/downloads/wiki/other_files/3DRCHDKTester.txt>`__."
+" Copy the contents into a text editor and save as **3DRCHDKTester.bas**. "
+"Load into your (unlocked) SD card by copying the file into the **Scripts** "
+"folder (in the **CHDK** folder)."
+msgstr ""
+"为验证您的发射机行为是否类似，可进行测试以确保每个开关位置都返回有效的 USB 供电值。`查看 3DR CHDK 测试脚本 "
+"<https://download.ardupilot.org/downloads/wiki/other_files/3DRCHDKTester.txt>`__，将内容复制到文本编辑器中保存为"
+" **3DRCHDKTester.bas**。将文件复制到 **Scripts** 文件夹（位于 **CHDK** 文件夹中），加载到已解锁的 SD "
+"卡上。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:589
+#: 5f0cf8c46c7248a5a801c470ffb1589b
+msgid "Configuring CHDK cable for Testing"
+msgstr "配置 CHDK 线缆以进行测试"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:591
+#: 9d779148ce6a45b4b20daa00962c0f41
+msgid ""
+"Before we can test the CHDK cable, we'll need to choose a channel for camera"
+" control and configure the corresponding inputs. Connect your plane's "
+"autopilot to Mission Planner. Go to **Configuration \\| Radio Calibration** "
+"to locate an available channel and its corresponding switch on your RC "
+"transmitter. (We'll use channel 7.) Check the PWM outputs for the up, mid, "
+"and down positions of the channel. Compare them with the table shown above."
+msgstr ""
+"测试 CHDK 线缆前，需要选择一个相机控制通道并配置相应输入。将飞控连接到 Mission Planner，前往 "
+"**Configuration（配置）\\| Radio Calibration（遥控校准）**，找到可用通道及其在遥控发射机上对应的开关（此处使用通道"
+" 7）。检查该通道高位、中位和低位的 PWM 输出值，并与上表进行比较。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:599
+#: c3a500f2a2e1434bb79ad775bd892e5b
+msgid ""
+"Before we disconnect the autopilot, we need to change an important parameter"
+" that you'll be using often. Under **Configuration** -> **Standard "
+"Parameters**, scroll about 4/5 of the way down to find the **Servo out "
+"function** parameters for each channel. Find the parameter that corresponds "
+"to your camera control channel. For us, it's **Servo out function "
+"(SERVO7_FUNCTION or RC7_FUNCTION)**."
+msgstr ""
+"断开飞控连接前，需要修改一个重要参数。在 **Configuration（配置）** -> **Standard Parameters（标准参数）** "
+"下，向下滚动约 4/5 处，找到每个通道的 **Servo out function（舵机输出功能）** "
+"参数，找到与相机控制通道对应的参数，对我们而言是 **Servo out function (SERVO7_FUNCTION or "
+"RC7_FUNCTION)**。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:606
+#: 55fe45e4b953411ab96238eec05b1e46
+msgid ""
+"***Set this parameter to Manual whenever you want to control your camera "
+"using your RC transmitter; set to Disabled when you want the autopilot to "
+"control the camera automatically.***"
+msgstr "***使用遥控发射机控制相机时，将此参数设为 Manual（手动）；希望飞控自动控制相机时，设为 Disabled（禁用）。***"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:610
+#: 76548ecc4ea34a88864eb2ec7aa2f024
+msgid ""
+"Since we're using the RC transmitter to test the CHDK cable, set **Servo out"
+" function** to **Manual**. Select Write Params before disconnecting your "
+"autopilot."
+msgstr ""
+"由于使用遥控发射机测试 CHDK 线缆，将 **Servo out function（舵机输出功能）** 设为 "
+"**Manual（手动）**。断开飞控连接前选择 Write Params（写入参数）。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:614
+#: f8e649e046e549d99b12548419786fc9
+msgid ""
+"Once you've chosen your camera control channel, you'll need to connect your "
+"CHDK cable to the autopilot's output pins. Connect either of the pin "
+"connectors on the CHDK cable to the autopilot output pins corresponding to "
+"your camera control channel (black cable on the outside). For example, we "
+"connected our CHDK cable to the channel 7 output pins on the autopilot. Make"
+" sure no input pins are connected for that channel."
+msgstr ""
+"选定相机控制通道后，需将 CHDK 线缆连接到飞控的输出引脚。将 CHDK "
+"线缆的任一引脚连接器连接到对应相机控制通道的飞控输出引脚（黑色线缆朝外）。例如，我们将 CHDK 线缆连接到飞控的通道 7 "
+"输出引脚。确保该通道没有连接任何输入引脚。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:628
+#: be98fe8ff89c41479bbff330502e848c
+msgid ""
+"Connect the CHDK cable to the camera's USB port. Turn the camera on, load "
+"the \\ **3DRCHDKTester.bas** script (by selecting **Load Script from File** "
+"from the main CHDK menu), and press the shutter button to run the test "
+"script."
+msgstr ""
+"将 CHDK 线缆连接到相机的 USB 接口，开机后加载 \\ **3DRCHDKTester.bas** 脚本（从 CHDK 主菜单选择 **Load"
+" Script from File（从文件加载脚本）**），按下快门按钮运行测试脚本。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:633
+#: c233ecdf52994f558483d4942cf37afd
+msgid ""
+"To perform the test, set each camera control channel position on your RC "
+"transmitter and observe the outputs on the display. Verify that these "
+"outputs are within the acceptable USB power ranges in the table above. If "
+"you encounter problems, you may need to shield your cable to prevent noise."
+msgstr ""
+"进行测试时，在遥控发射机上拨动每个相机控制通道位置，观察显示屏上的输出值，验证这些输出值是否在上表所示的有效 USB "
+"供电范围内。如遇问题，可能需要对线缆进行屏蔽以防止噪声干扰。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:640
+#: b0c05a2772e04e7085673688c7c9f287
+msgid "Shielding the cable"
+msgstr "线缆屏蔽"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:642
+#: c45854ed3b9a423692e70713a44aba36
+msgid "Coming soon."
+msgstr "即将更新。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:645
+#: 759b6d16f9da4ac0b8f9bbc848668866
+msgid "GeoTagging Images"
+msgstr "图像地理标记"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:647
+#: aa5f3e8682ab40d18bff518890131b70
+msgid ""
+"For information regarding geotagging images, more information can be found "
+"on `Sandro Beningo's step-by-step guide. "
+"<https://www.diydrones.com/profiles/blogs/geotagging-images-with-mission-"
+"planner>`__"
+msgstr ""
+"关于图像地理标记的更多信息，请参阅 `Sandro Beningo "
+"的分步指南。<https://www.diydrones.com/profiles/blogs/geotagging-images-with-"
+"mission-planner>`__"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:651
+#: 340474fafb91431991282720d0877acb
+msgid "Troubleshooting"
+msgstr "故障排除"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:653
+#: 5d66821c850746d986464efc9d203a65
+msgid ""
+"**Problem**: The tester script runs but does not display any output on the "
+"camera screen."
+msgstr "**问题**：测试脚本运行但相机屏幕上未显示任何输出。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:656
+#: 657fd61382b546419cb7d4bf8f9ad1de
+msgid ""
+"Cause 1: Do you have the parameter SERVOx_FUNCTION=1 ir RCx_FUNCTION=1 for "
+"manual override of the RC channel you are using? You can see both the PWM "
+"input and output on the **Configuration \\| Failsafes** screen in the "
+"Mission Planner."
+msgstr ""
+"原因 1：是否为所用 RC 通道设置了参数 SERVOx_FUNCTION=1 或 RCx_FUNCTION=1 以手动覆盖？可在 Mission "
+"Planner 的 **Configuration（配置）\\| Failsafes（失控保护）** 界面查看 PWM 输入和输出值。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:661
+#: 4d200417487c4d0f8a98b13da79123d0
+msgid ""
+"Cause 2: Is your output rail powered? Even if you are getting the correct "
+"PWM signal out on your camera control channel, the output needs 5V DC. You "
+"can power the output rail with a jumper on JP1 as shown, which bridges the "
+"input power to the output, or by directly running power to the output."
+msgstr ""
+"原因 2：输出轨道是否供电？即使相机控制通道输出了正确的 PWM 信号，输出端仍需要 5V 直流电。可在 JP1 "
+"上添加跳线（如图所示）将输入电源连接到输出端，或直接向输出端供电。"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:667
+#: ca512ffc4273410aa50a45676601939e
+msgid ""
+"Cause 3: Do you have the remote enabled in CHDK? In the CHDK menus: Remote "
+"parameters > enable remote. Leave the other remote settings as is."
+msgstr "原因 3：CHDK 中是否启用了遥控？在 CHDK 菜单中：遥控参数 > 启用遥控。其他遥控设置保持不变。"

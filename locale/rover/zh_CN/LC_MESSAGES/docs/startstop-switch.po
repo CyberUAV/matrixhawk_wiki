@@ -1,0 +1,121 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Rover package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rover\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-22 11:39+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/startstop-switch.rst:5 a938928fa1dc4148af5ba1db7e765944
+msgid "Start/Stop Switch"
+msgstr "启动/停止开关"
+
+#: ../../source/docs/startstop-switch.rst:7 7e99e985d06b435fbc7fbc65161798fa
+msgid ""
+"For some robotics competitions, RC control is not allowed and the rover must"
+" be started in :ref:`Auto <auto-mode>` mode with an onboard switch. This "
+"article explains how to set up such a switch."
+msgstr ""
+"在某些机器人竞赛中，不允许使用 RC 控制，Rover 必须通过机载开关以 :ref:`Auto <auto-mode>` "
+"模式启动。本文介绍如何设置此类开关。"
+
+#: ../../source/docs/startstop-switch.rst:16 89dbd5a5da944481958774e08e82f46d
+msgid ""
+"You don't necessarily need to use a switch for this. If you enable the "
+":ref:`AUTO_KICKSTART <AUTO_KICKSTART>` function you can just kick your rover"
+" [not too hard!] and the sensed acceleration will start the vehicle "
+"automatically. But if you don't want to kick your car, a switch is the way "
+"to go)"
+msgstr ""
+"不一定需要使用开关。如果启用 :ref:`AUTO_KICKSTART <AUTO_KICKSTART>` 功能，只需轻推 "
+"Rover（不要太用力！），感应到的加速度将自动启动车辆。但如果不想踢车，开关是更好的选择。"
+
+#: ../../source/docs/startstop-switch.rst:22 8eb499b6d2cf4b7193ba209964da2c28
+msgid "Physical wiring"
+msgstr "物理接线"
+
+#: ../../source/docs/startstop-switch.rst:24 24ee58486c3d4d7493f78bc1a5c2ad36
+msgid ""
+"The way this function works is that an APM port is assigned to the "
+"Start/Stop switch and APM will wait for that pin to be brought low "
+"(connected to ground). When this function is enabled, the Rover code will "
+"not send power to the rover's motor in Auto mode until that pin state is "
+"detected. So the rover will just stay stationary, waiting for you to flick "
+"the switch. Once you do so, it will perform its Auto mission as usual. You "
+"can stop the motion at any time by turning the switch back to the off "
+"position"
+msgstr ""
+"此功能的工作方式是将 APM 的某个端口分配给启动/停止开关，APM 将等待该引脚被拉低（接地）。启用此功能后，Rover 代码在 Auto "
+"模式下不会向电机输送电力，直到检测到该引脚状态。因此 Rover 将保持静止，等待您拨动开关。一旦拨动，它将正常执行 Auto "
+"任务。您可随时将开关拨回关闭位置来停止运动。"
+
+#: ../../source/docs/startstop-switch.rst:33 4a8d17e68f1f40099bcefbb8f9f1119f
+msgid ""
+"Any two-position switch will work, from a toggle (like `this one "
+"<https://www.sparkfun.com/products/9276>`__) to a slider as shown. There "
+"should only be two terminals. Wire one to the white wire of a RC servo cable"
+" and the other to the black wire as shown below. This way, when the switch "
+"is in the \"on\" position it connects the ground and signal pins."
+msgstr ""
+"任何两档开关均可使用，从拨动开关（`如此款 "
+"<https://www.sparkfun.com/products/9276>`__）到如图所示的滑动开关。应只有两个端子。将一端连接到 RC "
+"舵机线的白线，另一端连接到黑线，如下图所示。这样，当开关处于「开」位置时，接地和信号引脚连通。"
+
+#: ../../source/docs/startstop-switch.rst:42 03a490553edc478480e48cdafc0ed0f9
+msgid ""
+"Plug that connector into any spare APM port, from A0-A8 (the ports above 8 "
+"are not digital pins and cannot be used). We typically use A4, since A0-A3 "
+"are used by the sonar sensors."
+msgstr ""
+"将该接头插入任意空余的 APM 端口，A0-A8 均可（8以上的端口不是数字引脚，无法使用）。我们通常使用 A4，因为 A0-A3 被声纳传感器占用。"
+
+#: ../../source/docs/startstop-switch.rst:47 0a85d3f0ae6349a4ba1b1e906563f477
+msgid "Software setup"
+msgstr "软件设置"
+
+#: ../../source/docs/startstop-switch.rst:49 583620c5ad654e3d95b023f54646d811
+msgid ""
+"You can enable this switch in the Advanced Parameters List by entering the "
+"number of the APM port you've connected the switch to in the "
+":ref:`AUTO_TRIGGER_PIN <AUTO_TRIGGER_PIN>` parameter. In the example below, "
+"we've entered 4 because the switch is plugged into port A4."
+msgstr ""
+"您可以在高级参数列表中，通过将连接开关的 APM 端口号填入 :ref:`AUTO_TRIGGER_PIN <AUTO_TRIGGER_PIN>` "
+"参数来启用此开关。下例中填入4，因为开关插入了 A4 端口。"
+
+#: ../../source/docs/startstop-switch.rst:58 ae3967ef7ff14c28a9e98fc5bfe008c5
+msgid ""
+"If you're not using RC at all and can't switch modes manually, you may want "
+"to set your APM so that it boots into Auto mode at power-up (the auto-start "
+"function only works in Auto mode). You can do that by setting "
+":ref:`INITIAL_MODE <INITIAL_MODE>` to 10 (see parameter for other options)."
+msgstr ""
+"如果完全不使用 RC 且无法手动切换模式，您可能需要设置 APM 在上电时启动至 Auto 模式（自动启动功能仅在 Auto 模式下有效）。可通过将 "
+":ref:`INITIAL_MODE <INITIAL_MODE>` 设为10来实现（其他选项参见参数说明）。"
+
+#: ../../source/docs/startstop-switch.rst:67 7041e9b710f246cfad629a32a48f5ca0
+msgid ""
+"Once this is set up, all you need to do at robotics competitions is power on"
+" your rover, wait for GPS lock and when you get the green light, flick the "
+"switch. The rover should take it from there!"
+msgstr "设置完成后，在机器人竞赛中只需给 Rover 上电，等待 GPS 定位锁定，获得绿灯信号后拨动开关即可。Rover 将自主完成后续任务！"
+
+#: ../../source/docs/startstop-switch.rst:73 d2006fe7c40b450597e8fd3e65c6750e
+msgid ""
+"Depending on your failsafe settings, the rover may not move if you don't "
+"have GPS lock. Check for that before flicking the Auto Start switch)"
+msgstr "根据您的失控保护设置，如果没有 GPS 定位锁定，Rover 可能不会移动。在拨动 Auto 启动开关之前，请先确认这一点。"

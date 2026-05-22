@@ -1,0 +1,595 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 03:48+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/common-gps-for-yaw.rst:5 4fe0bea590254e7a87b8e1405dddfb31
+msgid "GPS for Yaw (aka Moving Baseline)"
+msgstr "GPS 偏航（又称动态基线）"
+
+#: ../../source/docs/common-gps-for-yaw.rst:7 b02d7d8a345b42059ae08dd20881528f
+msgid ""
+"New RTK GPS modules, such as a pair of Ublox F9's, devices based on the "
+"Unicore UM-982 or some dual-antenna devices can be used to estimate yaw, in "
+"addition to providing position information. This removes the need for a "
+"compass which may suffer from magnetic interference from the ground or the "
+"vehicle's motors and ESCs. This works even if the GPSs do not have an RTK "
+"fix (RTCM data from a fixed RTK station or NTRIP server)."
+msgstr ""
+"新型 RTK GPS 模块，如一对 Ublox F9 或基于 Unicore UM-982 "
+"的设备或某些双天线设备，除提供位置信息外，还可用于估计偏航角。这消除了对罗盘的需求，而罗盘可能受到地面或飞行器电机和 ESC 的磁干扰。即使 GPS "
+"没有 RTK 定位（来自固定 RTK 站或 NTRIP 服务器的 RTCM 数据），这也能正常工作。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:12
+#: 00ef24c78918433c88d7856a56ae79fe
+msgid ""
+"GPSes from ArduPilot Partners that are known to work are shown on the "
+":ref:`common-positioning-landing-page`"
+msgstr "已知可用的 ArduPilot 合作伙伴 GPS 显示在 :ref:`common-positioning-landing-page`"
+
+#: ../../source/docs/common-gps-for-yaw.rst:16
+#: b65f1d57371b4868b1064ae56f213577
+msgid ""
+"**Ublox F9P modules must run firmware version 1.3.2 or higher and "
+"constellations configured**. See :ref:`common-gps-ublox-firmware-update`."
+msgstr ""
+"**Ublox F9P 模块必须运行固件版本 1.3.2 或更高版本并配置星座**。见 :ref:`common-gps-ublox-firmware-"
+"update`。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:20
+#: 603d908703164f30b5a3de3072aa55ef
+msgid "Hardware Setup"
+msgstr "硬件设置"
+
+#: ../../source/docs/common-gps-for-yaw.rst:22
+#: 01459ea6801b432a9bf881758ca697d3
+msgid ""
+"GPS Yaw estimation relies on the detection of signal delays from each "
+"satellite as they reach two separated antennas. The GPS system may consist "
+"of dual or a single module, but two antennas are required in each case."
+msgstr "GPS 偏航估计依赖于检测每颗卫星信号到达两个分离天线的延迟。GPS 系统可以由双模块或单模块组成，但每种情况下都需要两根天线。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:24
+#: e98695209a164d8cb8cfb6a6f345fcc5
+msgid "The antennas must be separated by at least 30cm on the vehicle."
+msgstr "天线在飞行器上的间距必须至少为 30cm。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:25
+#: 9e502294b89f4c48956b48d5e487d2cb
+msgid ""
+"For dual unit systems, the 1st GPS and 2nd GPS should be connected to the "
+"serial/telem ports on the autopilot or via DroneCAN.  The following "
+"parameter instructions assume Serial3 and Serial4 are used for serial "
+"connecting GPSes but any serial port(s) should work as long as the first "
+"port using protocol 5 is connected to one of the GPS."
+msgstr ""
+"对于双单元系统，第 1 个 GPS 和第 2 个 GPS 应通过飞控上的串口/数传端口或 DroneCAN 连接。以下参数说明假设 Serial3 和 "
+"Serial4 用于串行连接 GPS，但只要第一个使用协议 5 的端口连接到一个 GPS，任何串口均应可用。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:27
+#: dff34ae74bb843b89222c3fd589c800a
+msgid ""
+"Dual unit Serial GPS modules must be connected to ArduPilot via their (not "
+"the autopilots's) UART1 connectors, DroneCAN modules via CAN , or "
+"interconnected per their manufacturer instructions."
+msgstr ""
+"双单元串行 GPS 模块必须通过其（而非飞控的）UART1 连接器连接到 ArduPilot，DroneCAN 模块通过 CAN "
+"连接，或按照制造商说明互连。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:30
+#: 6bb84aa455e840b39e26ce883578733a
+msgid "Configuration"
+msgstr "配置"
+
+#: ../../source/docs/common-gps-for-yaw.rst:32
+#: a69865174ce94c26b5000886a0daf4dd
+msgid ""
+"should be possible to mix and match a Serial GPS and a DroneCAN GPS, but "
+"this configuration has not been tested as yet."
+msgstr "应该可以混用串行 GPS 和 DroneCAN GPS，但此配置尚未测试。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:35
+#: 1556f6cc21a34a34b06ea269117a36ee
+msgid "Common Parameter Setup"
+msgstr "通用参数设置"
+
+#: ../../source/docs/common-gps-for-yaw.rst:37
+#: be037ec410584a0486f67a7410eb418e
+msgid ":ref:`AHRS_EKF_TYPE <AHRS_EKF_TYPE>` = 3 (to use EKF3)"
+msgstr ":ref:`AHRS_EKF_TYPE <AHRS_EKF_TYPE>` = 3（使用 EKF3）"
+
+#: ../../source/docs/common-gps-for-yaw.rst:38
+#: 06515cbc4a44411eb4e58635d3884849
+msgid ":ref:`EK2_ENABLE <EK2_ENABLE>` = 0 (to disable EKF2)"
+msgstr ":ref:`EK2_ENABLE <EK2_ENABLE>` = 0（禁用 EKF2）"
+
+#: ../../source/docs/common-gps-for-yaw.rst:39
+#: 2c117c5b2e95422cbac21dd77d8cc9da
+msgid ":ref:`EK3_ENABLE <EK3_ENABLE>` = 1 (to enable EKF3)"
+msgstr ":ref:`EK3_ENABLE <EK3_ENABLE>` = 1（启用 EKF3）"
+
+#: ../../source/docs/common-gps-for-yaw.rst:40
+#: 912834998b8646aa8629774d0ae9c9c6
+msgid ""
+":ref:`EK3_MAG_CAL <EK3_MAG_CAL>` is not used for this feature so it can be "
+"left at its default value (\"0\" for Plane, \"3\" for Copter, \"2\" for "
+"Rover)"
+msgstr ""
+":ref:`EK3_MAG_CAL <EK3_MAG_CAL>` 不用于此功能，可保持默认值（固定翼为「0」，Copter 为「3」，Rover "
+"为「2」）"
+
+#: ../../source/docs/common-gps-for-yaw.rst:41
+#: 7224c5bbc6cf4fe680ebf485b968303f
+msgid ""
+":ref:`EK3_SRC1_YAW <EK3_SRC1_YAW>` = 2 (\"GPS\") or 3 (\"GPS with Compass "
+"Fallback\") if a compass(es) is also in the system"
+msgstr ""
+":ref:`EK3_SRC1_YAW <EK3_SRC1_YAW>` = 2（「GPS」）或 3（「GPS 带罗盘备用」）如果系统中也有罗盘"
+
+#: ../../source/docs/common-gps-for-yaw.rst:43
+#: b068ba1592f1401cb55de7a7d830897a
+msgid ""
+"Do not use :ref:`GPS_AUTO_SWITCH<GPS_AUTO_SWITCH>` = 2 (Blend) when using "
+"Moving Baseline configurations."
+msgstr "使用动态基线配置时，不要使用 :ref:`GPS_AUTO_SWITCH<GPS_AUTO_SWITCH>` = 2（融合）。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:46
+#: b9c2737a50b04f3f96e68d26a5b677fb
+msgid "Dual Serial F9P GPS"
+msgstr "双串行 F9P GPS"
+
+#: ../../source/docs/common-gps-for-yaw.rst:48
+#: d0bf0c8712524f789e47bbfa188b06f1
+msgid ""
+":ref:`SERIAL3_PROTOCOL<SERIAL3_PROTOCOL>` = 5 (\"GPS\") assuming the 1st GPS"
+" is connected to SERIAL3."
+msgstr ""
+":ref:`SERIAL3_PROTOCOL<SERIAL3_PROTOCOL>` = 5（「GPS」），假设第 1 个 GPS 连接到 "
+"SERIAL3。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:49
+#: 21208f8fc47f4d1d9ed74fea336baa06
+msgid ""
+":ref:`SERIAL4_PROTOCOL <SERIAL4_PROTOCOL>` = 5 (\"GPS\") assuming the 2nd "
+"GPS is connected to serial port 4"
+msgstr ""
+":ref:`SERIAL4_PROTOCOL <SERIAL4_PROTOCOL>` = 5（「GPS」），假设第 2 个 GPS 连接到串口 4"
+
+#: ../../source/docs/common-gps-for-yaw.rst:50
+#: a5adca90e7d04e0885d3ddce517ce625
+msgid ":ref:`GPS1_TYPE <GPS1_TYPE>` = 17 (\"UBlox moving baseline base\")"
+msgstr ":ref:`GPS1_TYPE <GPS1_TYPE>` = 17（「UBlox 动态基线基站」）"
+
+#: ../../source/docs/common-gps-for-yaw.rst:51
+#: d0180892de794ce3bacc622072a927ef
+msgid ":ref:`GPS2_TYPE <GPS2_TYPE>` = 18 (\"UBlox moving baseline rover\")"
+msgstr ":ref:`GPS2_TYPE <GPS2_TYPE>` = 18（「UBlox 动态基线流动站」）"
+
+#: ../../source/docs/common-gps-for-yaw.rst:52
+#: 8579fd36e8c1424bbe07ec9ce5ecbc7f
+msgid ":ref:`GPS_AUTO_CONFIG<GPS_AUTO_CONFIG>` = 1 (AutoConfig Serial)"
+msgstr ":ref:`GPS_AUTO_CONFIG<GPS_AUTO_CONFIG>` = 1（自动配置串行）"
+
+#: ../../source/docs/common-gps-for-yaw.rst:53
+#: ../../source/docs/common-gps-for-yaw.rst:65
+#: 718660de8f1c4b8ba4c036d1a1836a04 fc2959b61bee442a8c7d40c63ba89558
+msgid ":ref:`GPS_AUTO_SWITCH <GPS_AUTO_SWITCH>` = 1"
+msgstr ":ref:`GPS_AUTO_SWITCH <GPS_AUTO_SWITCH>` = 1"
+
+#: ../../source/docs/common-gps-for-yaw.rst:54
+#: d9ceccd9523042ae906ab8115cc72b39
+msgid ""
+"Set the :ref:`GPS1_POS_X <GPS1_POS_X>`/Y/Z and :ref:`GPS2_POS_X "
+"<GPS2_POS_X>`/Y/Z parameters for the GPSs (see :ref:`Sensor Position Offset "
+"are here <common-sensor-offset-compensation>`). You must establish the "
+"relative positions of each GPS location on the vehicle with respect the "
+"vehicle's motion."
+msgstr ""
+"设置 GPS 的 :ref:`GPS1_POS_X <GPS1_POS_X>`/Y/Z 和 :ref:`GPS2_POS_X "
+"<GPS2_POS_X>`/Y/Z 参数（见 :ref:`Sensor Position Offset are here <common-sensor-"
+"offset-compensation>`）。必须确定飞行器上每个 GPS 位置相对于飞行器运动的相对位置。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:58
+#: 9d9b264e776448eaa4ef87482b5f2549
+msgid "Dual DroneCAN F9P GPS"
+msgstr "双 DroneCAN F9P GPS"
+
+#: ../../source/docs/common-gps-for-yaw.rst:60
+#: c5949b0c8fbe4159b24c6967b96f2396
+msgid ""
+"If DroneCAN GPS are used, then configure the CAN/DroneCAN ports as explained"
+" in :ref:`common-uavcan-setup-advanced` and instead of setting up the SERIAL"
+" port protocols above, make sure that no SERIAL ports are setup with GPS "
+"protocol (\"5\"). Also be sure that the two DroneCAN GPS are on the same "
+"physical CAN bus from the autopilot. This usually requires that a CAN bus "
+"splitter be used. Then set these parameters:"
+msgstr ""
+"如果使用 DroneCAN GPS，则按 :ref:`common-uavcan-setup-advanced` 中说明配置 CAN/DroneCAN "
+"端口，而不是设置上述串口协议，确保没有串口设置为 GPS 协议（「5」）。还要确保两个 DroneCAN GPS 在飞控的同一物理 CAN "
+"总线上，这通常需要使用 CAN 总线分路器。然后设置以下参数："
+
+#: ../../source/docs/common-gps-for-yaw.rst:62
+#: dd5a2bbeb37c4740b673227f06e56f02
+msgid ":ref:`GPS1_TYPE <GPS1_TYPE>` = 22 (\"DroneCAN moving baseline base\")"
+msgstr ":ref:`GPS1_TYPE <GPS1_TYPE>` = 22（「DroneCAN 动态基线基站」）"
+
+#: ../../source/docs/common-gps-for-yaw.rst:63
+#: ef24d48da1ef4e2cbb842d0b59f75d44
+msgid ":ref:`GPS2_TYPE <GPS2_TYPE>` = 23 (\"DroneCAN moving baseline rover\")"
+msgstr ":ref:`GPS2_TYPE <GPS2_TYPE>` = 23（「DroneCAN 动态基线流动站」）"
+
+#: ../../source/docs/common-gps-for-yaw.rst:64
+#: 89451c44f2b44fbf8bc5cb7f9b6318a4
+msgid ":ref:`GPS_AUTO_CONFIG<GPS_AUTO_CONFIG>` = 2 (AutoConfig DroneCAN)"
+msgstr ":ref:`GPS_AUTO_CONFIG<GPS_AUTO_CONFIG>` = 2（自动配置 DroneCAN）"
+
+#: ../../source/docs/common-gps-for-yaw.rst:66
+#: 6fac9e3327a64cd3b2c7e2e993fe15e5
+msgid ""
+"Set the :ref:`GPS1_POS_X <GPS1_POS_X>`/Y/Z and :ref:`GPS2_POS_X "
+"<GPS2_POS_X>`/Y/Z parameters for the GPS antennas (see :ref:`Sensor Position"
+" Offset are here <common-sensor-offset-compensation>`). You must establish "
+"the relative positions of each GPS location on the vehicle with respect the "
+"vehicle's motion."
+msgstr ""
+"设置 GPS 天线的 :ref:`GPS1_POS_X <GPS1_POS_X>`/Y/Z 和 :ref:`GPS2_POS_X "
+"<GPS2_POS_X>`/Y/Z 参数（见 :ref:`Sensor Position Offset are here <common-sensor-"
+"offset-compensation>`）。必须确定飞行器上每个 GPS 位置相对于飞行器运动的相对位置。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:67
+#: 23449157eb024d50b36fa2f05acc3ecb
+msgid ""
+":ref:`GPS1_CAN_OVRIDE<GPS1_CAN_OVRIDE>` (Base NODEID) and "
+":ref:`GPS2_CAN_OVRIDE<GPS2_CAN_OVRIDE>` (Rover NODEID) determine which "
+"physical DroneCAN GPS is used for GPS1 and GPS2. These are automatically "
+"populated at boot from the detected addresses, which are also shown in "
+":ref:`GPS1_CAN_NODEID<GPS1_CAN_NODEID>` and "
+":ref:`GPS2_CAN_NODEID<GPS2_CAN_NODEID>`, but can be overriden, if needed. "
+"You will need to determine which physical CAN GPS is assigned as GPS1 and "
+"GPS2 in order to setup the position offsets (see :ref:`Sensor Position "
+"Offset are here <common-sensor-offset-compensation>`)"
+msgstr ""
+":ref:`GPS1_CAN_OVRIDE<GPS1_CAN_OVRIDE>`（基站节点ID）和 "
+":ref:`GPS2_CAN_OVRIDE<GPS2_CAN_OVRIDE>`（漫游节点ID）决定哪个物理 DroneCAN GPS 用于 GPS1 和"
+" GPS2。这些在启动时会从检测到的地址自动填充，地址也显示在 :ref:`GPS1_CAN_NODEID<GPS1_CAN_NODEID>` 和 "
+":ref:`GPS2_CAN_NODEID<GPS2_CAN_NODEID>` 中，但如有需要可以覆盖。您需要确定哪个物理 CAN GPS 被分配为 "
+"GPS1 和 GPS2，以便设置位置偏移量（参见 :ref:`传感器位置偏移在此 <common-sensor-offset-"
+"compensation>`）"
+
+#: ../../source/docs/common-gps-for-yaw.rst:69
+#: 86e0e988b250451395997d0af84ee847
+msgid ""
+"The above dual unit configurations assumes that you want the RTCMv3 data "
+"between the two GPS modules to go via the autopilot board."
+msgstr "上述双单元配置假设您希望两个 GPS 模块之间的 RTCMv3 数据通过飞控板传输。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:72
+#: e79bc63736ab47df908923f48af91444
+msgid ""
+"You may instead install a cross-over UART cable between the two UART2 "
+"connectors on the two GPS modules (Assuming they are serial rather than "
+"DroneCAN). If you do that then you can set :ref:`GPS_DRV_OPTIONS "
+"<GPS_DRV_OPTIONS>` = 1 which tells the u-blox GPS driver to configure the "
+"two GPS modules to send RTCMv2 data over UART2. On DroneCAN modules, a "
+"second CAN port is provided to allow this direct connection for RTCMv2 data."
+" In that case, set :ref:`GPS_DRV_OPTIONS <GPS_DRV_OPTIONS>` = 8."
+msgstr ""
+"您也可以在两个 GPS 模块的 UART2 连接器之间安装交叉 UART 线缆（假设它们是串口而非 DroneCAN）。如果这样做，可以将 "
+":ref:`GPS_DRV_OPTIONS <GPS_DRV_OPTIONS>` 设置为 1，告知 u-blox GPS 驱动配置两个 GPS 模块通过"
+" UART2 发送 RTCMv2 数据。对于 DroneCAN 模块，提供了第二个 CAN 口以允许 RTCMv2 数据的直连。此时，将 "
+":ref:`GPS_DRV_OPTIONS <GPS_DRV_OPTIONS>` 设置为 8。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:76
+#: 41225effceab468ab1a3008bbc8bb056
+msgid "Single Unit Systems"
+msgstr "单单元系统"
+
+#: ../../source/docs/common-gps-for-yaw.rst:78
+#: b631dcd0ee744625b868a3b9d88a0bba
+msgid "These have a single module with dual antennas."
+msgstr "这些设备具有单个模块配双天线。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:80
+#: 5d1d4dabb4594c95b8788778060894a5
+msgid ""
+"ArduPilot allows for up to two GPSes. The following parameter examples are "
+"for setting up the first GPS instance."
+msgstr "ArduPilot 最多支持两个 GPS。以下参数示例用于设置第一个 GPS 实例。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:83
+#: efa3ef5edd884d67afddcb2adeb7ed57
+msgid "NMEA"
+msgstr "NMEA"
+
+#: ../../source/docs/common-gps-for-yaw.rst:85
+#: ../../source/docs/common-gps-for-yaw.rst:95
+#: 2213b887565c46e6bfa4c500887e877a 52ac85ab1a9a4a26bff0d0cd2bb1bb1a
+msgid ""
+":ref:`SERIAL3_PROTOCOL<SERIAL3_PROTOCOL>` = 5 (\"GPS\") assuming the GPS is "
+"connected to SERIAL3 (be sure any lower numbered port does not use this "
+"protocol unless a GPS is attached)."
+msgstr ""
+":ref:`SERIAL3_PROTOCOL<SERIAL3_PROTOCOL>` = 5（「GPS」），假设 GPS 连接到 "
+"SERIAL3（确保编号较小的端口不使用此协议，除非连接了 GPS）。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:86
+#: b9d780e0a367401284b3b0dd09f896fe
+msgid ":ref:`GPS1_TYPE<GPS1_TYPE>` = 5 (NMEA)"
+msgstr ":ref:`GPS1_TYPE<GPS1_TYPE>` = 5（NMEA）"
+
+#: ../../source/docs/common-gps-for-yaw.rst:88
+#: 474ef102e5a94004a20c6369d0295dbf
+msgid ""
+"Some of these systems require that the \"Master\" antenna and \"Slave\" "
+"antenna (see manufacturer's documentation for which is antenna is designated"
+" the \"Master\") be mounted on the vehicle front to back in line with the 0 "
+"degree yaw of the vehicle and at the same vertical level and be at least "
+"30cm apart. Otherwise , the antenna offset distances in the x/y/z directions"
+" must be entered detailed in the :ref:`Master-Slave Antenna Offsets<antenna-"
+"offsets>` section below."
+msgstr ""
+"部分此类系统要求「主」天线和「从」天线（参阅制造商文档以确定哪个天线被指定为「主」）沿机体 0 度偏航方向前后排列、处于同一垂直高度，且间距至少 30 "
+"cm。否则，必须在下方 :ref:`主从天线偏移<antenna-offsets>` 章节中输入 x/y/z 方向的天线偏移距离。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:90
+#: 2a9744b23a484e7282a0ca77ef266846
+msgid ""
+"these units can be used with only its \"Master\" antenna connected, if "
+"desired, but no yaw information should be used."
+msgstr "如有需要，这些设备也可以只连接「主」天线使用，但不应使用偏航信息。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:93
+#: e0bd16f0811d414d8781bc2b6b01bf98
+msgid "Unicore UM982"
+msgstr "Unicore UM982"
+
+#: ../../source/docs/common-gps-for-yaw.rst:96
+#: 26d48be54c324a8aa613538cecaccd44
+msgid ":ref:`GPS1_TYPE<GPS1_TYPE>` = 25 (UnicoreMovingBaseline)"
+msgstr ":ref:`GPS1_TYPE<GPS1_TYPE>` = 25（UnicoreMovingBaseline）"
+
+#: ../../source/docs/common-gps-for-yaw.rst:98
+#: b86adf7862f7402a8a2743330f5c4039
+msgid ""
+"thes units can be used with only its \"Master\" antenna connected, if "
+"desired, but no yaw information should be used. In this case set "
+":ref:`GPS1_TYPE<GPS1_TYPE>` = 24 (UnicoreMaster)"
+msgstr ""
+"如有需要，这些设备也可以只连接「主」天线使用，但不应使用偏航信息。此时请将 :ref:`GPS1_TYPE<GPS1_TYPE>` 设置为 "
+"24（UnicoreMaster）"
+
+#: ../../source/docs/common-gps-for-yaw.rst:100
+#: 6a51b5140c354f678e4a6037aa090f22
+msgid ""
+"For Unicore UM982 based GPSes, the \"Master\" and \"Slave\" antennas must be"
+" mounted at least 30cm apart on the vehicle. The offset distances in the "
+"x/y/z directions must be entered detailed in the :ref:`Master-Slave Antenna "
+"Offsets<antenna-offsets>` section below."
+msgstr ""
+"对于基于 Unicore UM982 的 GPS，「主」和「从」天线在机体上的间距必须至少 30 cm。必须在下方 "
+":ref:`主从天线偏移<antenna-offsets>` 章节中输入 x/y/z 方向的偏移距离。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:103
+#: f02f19e160394c41b81da0fd3800672c
+msgid "DroneCAN"
+msgstr "DroneCAN"
+
+#: ../../source/docs/common-gps-for-yaw.rst:105
+#: 7baf988917144655b7aafbcc40269c19
+msgid ""
+"setup the autopilot's CAN port parameters for DroneCAN: :ref:`common-uavcan-"
+"setup-advanced`"
+msgstr "设置飞控的 CAN 口参数以使用 DroneCAN：:ref:`common-uavcan-setup-advanced`"
+
+#: ../../source/docs/common-gps-for-yaw.rst:106
+#: 6ab1805f5abc447faf6af151cb1b5c72
+msgid ":ref:`GPS1_TYPE<GPS1_TYPE>` = 9 (DroneCAN GPS)"
+msgstr ":ref:`GPS1_TYPE<GPS1_TYPE>` = 9（DroneCAN GPS）"
+
+#: ../../source/docs/common-gps-for-yaw.rst:108
+#: 47493d8719164f4b9420a0b3801af022
+msgid ""
+"The antenna offset distances in the x/y/z directions must be entered "
+"detailed in the :ref:`Master-Slave Antenna Offsets<antenna-offsets>` section"
+" below."
+msgstr "必须在下方 :ref:`主从天线偏移<antenna-offsets>` 章节中输入 x/y/z 方向的天线偏移距离。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:113
+#: 7171efe6d2f5410dbf2afcc28bc71968
+msgid "Master-Slave Antenna Offsets"
+msgstr "主从天线偏移"
+
+#: ../../source/docs/common-gps-for-yaw.rst:115
+#: 30050a1d33f148bfadd90b5d74a41dc7
+msgid ""
+"Dual unit or single unit/dual antenna systems (except Blicube NEMA GRTK) "
+"need the relative positions for the \"Master\" and \"Slave\" antennas "
+"specified:"
+msgstr "双单元或单单元/双天线系统（Blicube NEMA GRTK 除外）需要指定「主」天线和「从」天线的相对位置："
+
+#: ../../source/docs/common-gps-for-yaw.rst:117
+#: fa34872f95bf493f9c35f6d50026de87
+msgid ""
+":ref:`GPS1_MB_TYPE<GPS1_MB_TYPE>` = 1 (GPS1 Moving Baseline master antenna "
+"offsets relative to slave antenna, also enables the next parameters to be "
+"shown)"
+msgstr ""
+":ref:`GPS1_MB_TYPE<GPS1_MB_TYPE>` = 1（GPS1 移动基准主天线相对于从天线的偏移，同时启用后续参数的显示）"
+
+#: ../../source/docs/common-gps-for-yaw.rst:118
+#: b83baa2cb6dc491db4dcf90861fb6641
+msgid ""
+":ref:`GPS1_MB_OFS_X<GPS1_MB_OFS_X>`: offset in meters from the \"Slave\" to "
+"\"Master\" antenna in the X axis (in direction of 0 deg yaw, positive "
+"offsets are if \"Master\" is in front of the \"Slave\"."
+msgstr ""
+":ref:`GPS1_MB_OFS_X<GPS1_MB_OFS_X>`：从「从」天线到「主」天线在 X 轴（0 "
+"度偏航方向）上的偏移量（米），正值表示「主」天线在「从」天线前方。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:119
+#: 04aaa82366f34410bd2b4b3c6052e6ec
+msgid ""
+":ref:`GPS1_MB_OFS_Y<GPS1_MB_OFS_Y>`: offset in meters from the \"Slave\" to "
+"\"Master\" antenna in the Y axis (in direction 90 deg (right) of 0 deg yaw, "
+"positive offsets are if \"Master\" to the right of the \"Slave\"."
+msgstr ""
+":ref:`GPS1_MB_OFS_Y<GPS1_MB_OFS_Y>`：从「从」天线到「主」天线在 Y 轴（0 度偏航右方 90 "
+"度方向）上的偏移量（米），正值表示「主」天线在「从」天线右侧。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:120
+#: ff7ec9ba65ab4b4f88bbac17f8c0bc00
+msgid ""
+":ref:`GPS1_MB_OFS_Z<GPS1_MB_OFS_Z>`: offset in meters from the \"Slave\" to "
+"\"Master\" antenna in the Z axis (in direction up and down, positive offsets"
+" are if \"Master\" below the \"Slave\"."
+msgstr ""
+":ref:`GPS1_MB_OFS_Z<GPS1_MB_OFS_Z>`：从「从」天线到「主」天线在 Z "
+"轴（上下方向）上的偏移量（米），正值表示「主」天线在「从」天线下方。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:122
+#: ../../source/docs/common-gps-for-yaw.rst:147
+#: 861fbc6d051a409eb4486dda4a9a96b6 d303168c80d94a4893c206152d54b6ca
+msgid "This figure and photo illustrates these parameters and their settings:"
+msgstr "下图和照片说明了这些参数及其设置："
+
+#: ../../source/docs/common-gps-for-yaw.rst:131
+#: e157037a7937458f83afbffbf14008f0
+msgid "Holybro X500V2 Mounting Example"
+msgstr "Holybro X500V2 安装示例"
+
+#: ../../source/docs/common-gps-for-yaw.rst:134
+#: c2b89acc21184c2793518b6d2faa1761
+msgid "RTK Correction"
+msgstr "RTK 校正"
+
+#: ../../source/docs/common-gps-for-yaw.rst:136
+#: 95dc0faad5cb42a293f48a8afad8e9a9
+msgid ""
+"ArduPilot will automatically foward RTCM correction data it receives over "
+"MAVLink from a GCS or telemetry radio (from a fixed baseline RTK base "
+"station) to these GPSes. See :ref:`common-rtk-correction`."
+msgstr ""
+"ArduPilot 会自动将通过 MAVLink 从地面站或数传（固定基线 RTK 基站）收到的 RTCM 校正数据转发给这些 GPS。参见 "
+":ref:`common-rtk-correction`。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:139
+#: cf9da8280a194a7a94f978897c4294ca
+msgid "Master Antenna Offset from Vehicle CG"
+msgstr "主天线相对于机体重心的偏移"
+
+#: ../../source/docs/common-gps-for-yaw.rst:141
+#: 6749570159ac44418f07a55cd45d6fd6
+msgid ""
+"For ultimate positioning precision in the centimeter ranges, the offset of "
+"the \"Master\" antenna from the vehicle's CG can optionally be entered to "
+"compensate for attitude effects on GPS accuracy. The offsets from the CG are"
+" entered into:"
+msgstr "为实现厘米级的极致定位精度，可以选填「主」天线相对于机体重心的偏移量，以补偿姿态对 GPS 精度的影响。重心偏移量填写到："
+
+#: ../../source/docs/common-gps-for-yaw.rst:143
+#: 9cd11da7bce74245a294ec27d230d9d6
+msgid ""
+":ref:`GPS1_POS_X<GPS1_POS_X>`: offset in meters from the Center of Gravity "
+"to \"Master\" antenna in the X axis (in direction of 0 deg yaw, positive "
+"offsets are if \"Master\" is in front of the Center of Gravity."
+msgstr ""
+":ref:`GPS1_POS_X<GPS1_POS_X>`：从重心到「主」天线在 X 轴（0 "
+"度偏航方向）上的偏移量（米），正值表示「主」天线在重心前方。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:144
+#: a391036213e644c98231d29dc37c86b4
+msgid ""
+":ref:`GPS1_POS_Y<GPS1_POS_Y>`: offset in meters from the Center of Gravity "
+"to \"Master\" antenna in the Y axis (in direction 90 deg (right) of 0 deg "
+"yaw, positive offsets are if \"Master\" to the right of the Center of "
+"Gravity."
+msgstr ""
+":ref:`GPS1_POS_Y<GPS1_POS_Y>`：从重心到「主」天线在 Y 轴（0 度偏航右方 90 "
+"度方向）上的偏移量（米），正值表示「主」天线在重心右侧。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:145
+#: c1c26daf1a1e4d09aee149da50f2ada8
+msgid ""
+":ref:`GPS2_POS_Z<GPS1_POS_Z>`: offset in meters from the Center of Gravity "
+"to \"Master\" antenna in the Z axis (in direction up and down, positive "
+"offsets are if \"Master\" below the Center of Gravity."
+msgstr ""
+":ref:`GPS2_POS_Z<GPS1_POS_Z>`：从重心到「主」天线在 Z 轴（上下方向）上的偏移量（米），正值表示「主」天线在重心下方。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:154
+#: f777c36682804512bf1106a02462af55
+msgid "Testing"
+msgstr "测试"
+
+#: ../../source/docs/common-gps-for-yaw.rst:156
+#: 66e9a98b56544c7bb585fc9ef3ddd334
+msgid ""
+"In a location with good GPS reception point the vehicle at a landmark some "
+"distance away and then check the heading on the ground station matches.  "
+"Rotate the vehicle and ensure the heading on the ground station updates "
+"correctly."
+msgstr "在 GPS 信号良好的地点，将机体对准远处的地标，然后检查地面站上显示的航向是否一致。旋转机体，确认地面站上的航向也随之正确更新。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:161
+#: 0422c5d1a7514c338661cf64bc465cc8
+msgid ""
+"If the heading is reversed, then the GPS_POS_xxx parameters have probably "
+"been set incorrectly."
+msgstr "如果航向相反，则 GPS_POS_xxx 参数设置可能有误。"
+
+#: ../../source/docs/common-gps-for-yaw.rst:163
+#: 112b2b454f8d4c00b5291d17c0126ba7
+msgid ""
+"Note that it can take some time for the two GPS modules to get a "
+"sufficiently good fix for yaw to work. The ArduPilot GPS driver validates "
+"that the fix is good enough in several ways:"
+msgstr ""
+"请注意，两个 GPS 模块需要一定时间才能获得足够好的定位结果以使偏航功能生效。ArduPilot GPS "
+"驱动会通过以下几种方式验证定位结果是否足够好："
+
+#: ../../source/docs/common-gps-for-yaw.rst:167
+#: 921f1b64b0d24125bef7a882f9cb6a85
+msgid "that the rover GPS module is in fix type 6 (fixed RTK)"
+msgstr "漫游 GPS 模块处于定位类型 6（固定 RTK）"
+
+#: ../../source/docs/common-gps-for-yaw.rst:168
+#: ed9caacbe7c54b3ba70334e8c8edbbba
+msgid ""
+"that the reported distance between the two modules matches the distance "
+"given by the GPS position parameters within 20%"
+msgstr "上报的两模块间距离与 GPS 位置参数给出的距离偏差不超过 20%"
+
+#: ../../source/docs/common-gps-for-yaw.rst:170
+#: e2cb420f28e244899dcc656a7ef5040c
+#, python-format
+msgid ""
+"that the reported heights of the two GPS modules match the attitude of the "
+"vehicles is within 20% of the distance between the two GPS modules"
+msgstr "上报的两个 GPS 模块高度差与机体姿态的关系在两模块间距离的 20% 以内"
+
+#: ../../source/docs/common-gps-for-yaw.rst:175
+#: 67bc18576b8c461682f4351678eeec14
+msgid "Video Demo"
+msgstr "视频演示"
+
+#: ../../source/docs/common-gps-for-yaw.rst:181
+#: c5897f8d5c6048b392a69d9b1b5b0792
+msgid "Using Moving Baseline Yaw to Reject Magnetic Disturbances"
+msgstr "使用移动基准偏航来抑制磁场干扰"

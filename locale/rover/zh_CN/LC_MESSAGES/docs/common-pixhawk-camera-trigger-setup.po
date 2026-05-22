@@ -1,0 +1,379 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 03:48+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:5
+#: 77494f39fb13464bb04de867ab6452e5
+msgid "DIY Camera Trigger using Relay"
+msgstr "使用继电器的 DIY 相机触发"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:10
+#: 97030f0ab63b43629c7ce3772c72e17e
+msgid ""
+"This guide is intended to help you modify a remote shutter release cable for"
+" use with ArduPilot autopilots and setup the flight controller for "
+"triggering the camera. This method eliminates the need (and costs) for 3\\ "
+":sup:`rd` party triggering devices. In this specific example, we will use a "
+"Sony Alpha 6000 (A6000) camera. This procedure may work with other cameras "
+"however for this specific example, we will use a Sony Alpha A6000 (A6000)."
+msgstr ""
+"本指南旨在帮助您改装遥控快门释放线，以便与 ArduPilot "
+"飞控配合使用，并设置飞控以触发相机。此方法消除了对第三方触发设备的需求（及费用）。在本示例中，我们将使用 Sony Alpha "
+"6000（A6000）相机。此程序可能适用于其他相机，但在本示例中，我们将使用 Sony Alpha A6000（A6000）。"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:19
+#: 8086c23da88f49189688427e2402414e
+msgid "Items Required"
+msgstr "所需物品"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:21
+#: 849aae65799e4200a7ff61da81b82d23
+msgid "Sony A6000 (or other camera with wire shutter release)"
+msgstr "Sony A6000（或其他带有线控快门的相机）"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:22
+#: e86f71d824164c1a8503df72979dd5c2
+msgid ""
+"ArduPilot compatible autopilot with a free GPIO pin to be used as a relay "
+"pin. See :ref:`common-gpios` for more information"
+msgstr "兼容 ArduPilot 的飞控，带有一个空闲的 GPIO 引脚用作继电器引脚。更多信息请参阅 :ref:`common-gpios`"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:23
+#: 8cc7cd9ae6e24506935bf35cd96d50d4
+msgid ""
+"Remote Shutter Release Cable (`see here for an affordable solution "
+"<https://www.amazon.com/SHOOT-DSC-RX100M3-DSC-RX100M20-DSC-RX100II-DSC-"
+"RX100III/dp/B00ME7N6P8/ref=sr_1_1?ie=UTF8&qid=1496578319&sr=8-1&keywords=Sony+A6000+Shutter+Release+Cable>`__)"
+msgstr ""
+"遥控快门释放线（`请见此处获取经济实惠的方案 <https://www.amazon.com/SHOOT-DSC-RX100M3-DSC-"
+"RX100M20-DSC-RX100II-DSC-"
+"RX100III/dp/B00ME7N6P8/ref=sr_1_1?ie=UTF8&qid=1496578319&sr=8-1&keywords=Sony+A6000+Shutter+Release+Cable>`__）"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:24
+#: 9ddcaff5009d4022ab2a4e4d59ae7a53
+msgid ""
+"Servo Pins (`link "
+"<https://www.digikey.com/products/en?keywords=952-2157-1-ND>`__)"
+msgstr ""
+"舵机插针（`链接 <https://www.digikey.com/products/en?keywords=952-2157-1-ND>`__）"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:25
+#: 1e48e892628046d4b91586c0ab6fe3d9
+msgid "Servo Pin Crimper (`link <https://www.servocity.com/pin-crimpers>`__)"
+msgstr "舵机插针压线钳（`链接 <https://www.servocity.com/pin-crimpers>`__）"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:26
+#: d57a715a98d2408e80afb27358ce1dfa
+msgid "Wire Stripper or Razor Blade"
+msgstr "剥线钳或剃刀刀片"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:27
+#: af7bb00c3f6f4a45b0bea29110aa4ce8
+msgid "Laptop with Mission Planner Installed"
+msgstr "已安装 Mission Planner 的笔记本电脑"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:29
+#: f657922d9b8245eb97c2daa774f751fb
+msgid "**Step 1:** Preparing the Remote Shutter Release Cable"
+msgstr "**步骤 1：** 准备遥控快门释放线"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:31
+#: 9b3779bd328b45e29b421a00ff74eed5
+msgid "Trim the Remote Shutter Release Cable to the desired cable length"
+msgstr "将遥控快门释放线剪至所需长度"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:36
+#: 1f31f7990ad8499cb1e99881bd8280b4
+msgid ""
+"Strip off approximately 2-3cm of the black sleeve making sure not to damage "
+"the 3 wires contained within the sleeve."
+msgstr "剥去约 2-3cm 的黑色外皮，注意不要损坏外皮内的 3 根导线。"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:41
+#: afdf295f97b64764901ae6afeb599f9f
+msgid ""
+"Remove approximately 3mm of the sleeves off of each of the three wires. You "
+"will need to make sure that there is enough of the sleeve removed that when "
+"the servo pin is crimped to the wire that there is contact between the pin "
+"and the exposed wire."
+msgstr "剥去每根导线约 3mm 的绝缘层。需要确保剥去足够的绝缘层，使舵机插针压接到导线时，插针与裸露导线之间有良好接触。"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:46
+#: 99378b4ba2d149a6bc19dff7a1ba1c15
+msgid "The three wires have the following functions:"
+msgstr "三根导线具有以下功能："
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:48
+#: ed46496246f14883bea5a1083eb45d08
+msgid "RED: SHUTTER"
+msgstr "红色：快门"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:49
+#: 3d156a7588aa4a7d8e8f6b07054a3b40
+msgid "YELLOW: GROUND"
+msgstr "黄色：地线"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:50
+#: b78c28ddfeb44148a8c7465e941289d5
+msgid "WHITE: FOCUS"
+msgstr "白色：对焦"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:52
+#: 14a78b888e814c1687ab18f0223ebca2
+msgid ""
+"**NOTE:** Your wire coloring may differ from this example. You can identify "
+"which functions are controlled by each cable by connecting the cable to your"
+" camera, powering it on and then shorting the cables in pairs to identify "
+"which pair does what. For example, if you have a GREEN, BLUE and BLACK set "
+"of wires and shorting BLUE and BLACK results in the camera focusing, and "
+"then you short the GREEN AND BLUE wires and nothing happens but shorting the"
+" GREEN AND BLACK results in the camera exposing, then you know that the "
+"BLACK wire is ground, GREEN is shutter and BLUE is focus."
+msgstr ""
+"**注意：** "
+"您的导线颜色可能与本示例不同。您可以通过将线缆连接到相机、开机，然后将线缆两两短接来确认哪根线控制哪个功能。例如，如果您有绿色、蓝色和黑色三根导线，将蓝色和黑色短接后相机对焦，然后将绿色和蓝色短接无任何反应，但将绿色和黑色短接后相机曝光，则可以知道黑色是地线、绿色是快门、蓝色是对焦。"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:62
+#: b1afc22afbc44c47b280b61686be935a
+msgid ""
+"Twist the exposed ends of the FOCUS and GROUND wires together then crimp a "
+"servo connector to the pair as well as to the exposed end of the SHUTTER "
+"wire"
+msgstr "将对焦和地线的裸露端拧在一起，然后将舵机连接器压接到这对导线以及快门导线的裸露端"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:70
+#: 2c51d2f2f75b4043b81010af935b60ef
+msgid ""
+"TIP: The Servo Pin has two sets of tabs which after crimping will fold on "
+"each other and secure the wire. To make life a little easier, use a small "
+"pair of needle nose pliers to press the pair of tabs on the end of the servo"
+" pin tightly against the wires. This will prevent the wires from coming out "
+"of the servo pin while trying to crimp them."
+msgstr ""
+"提示：舵机插针有两组卡扣，压接后会折叠在一起固定导线。为了方便操作，使用小型尖嘴钳将舵机插针末端的一对卡扣紧压在导线上。这将防止导线在压接过程中从舵机插针中滑出。"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:82
+#: 6e756dc4297d4b6fa2c66d459fdc9a73
+msgid ""
+"Insert the Servo Pins into a Servo connector, one pin on each side of the "
+"middle slot of the servo connector."
+msgstr "将舵机插针插入舵机连接器，每个插针分别位于舵机连接器中间槽的两侧。"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:87
+#: 75381c17df0b4511805b76754a632cbc
+msgid ""
+"The cable is now ready for connection to your Pixhawk Controller. Note that "
+"the Shutter Pin (in this case the RED wire) will be on the SIGNAL side of "
+"the Auxiliary port while the WHITE/YELLOW wire will be on the GROUND side of"
+" the Auxiliary port."
+msgstr ""
+"线缆现在已准备好连接到您的 Pixhawk 飞控。请注意，快门插针（本例中为红色导线）将位于辅助端口的信号侧，而白色/黄色导线将位于辅助端口的地线侧。"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:95
+#: 8778eeede39849598d1a30921bc56881
+msgid ""
+"**Step 2:** Setting up your  autopilot to trigger your camera via the "
+"Shutter Release Cable"
+msgstr "**步骤 2：** 设置飞控通过快门释放线触发相机"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:98
+#: e850bc37fe9f48b0893872a1f1a7c96e
+msgid ""
+"Connect to your Autopilot via Mission Planner either through direct USB "
+"connection or wireless telemetry link."
+msgstr "通过 Mission Planner 连接到飞控，可通过直接 USB 连接或无线数传链路。"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:100
+#: 063dedcd3e4b42368d77166c735b2a9a
+msgid ""
+"Connect your modified shutter release cable to a free GPIO capable pin on "
+"the autopilot making sure to maintain the correct orientation for polarity. "
+"For example, by default on the Pixhawk, AUX5 or AUX6 is configured to be a "
+"GPIO and can be used as a Relay output."
+msgstr ""
+"将改装后的快门释放线连接到飞控上的空闲 GPIO 引脚，注意保持正确的极性方向。例如，在 Pixhawk 上默认情况下，AUX5 或 AUX6 配置为 "
+"GPIO，可用作继电器输出。"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:102
+#: 6160ae4e609a4ad6bac77cfbb2027349
+msgid ""
+"Connect the shutter release cable to your camera and power the camera on"
+msgstr "将快门释放线连接到相机并开机"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:107
+#: d535d49b667e4c7fb925245424c3c305
+msgid ""
+"Since we have shorted the FOCUS and GROUND wires, the camera should "
+"automatically pull focus. As of now, I have not found a way to connect the "
+"SHUTTER, FOCUS and GROUND wires individually to the autopilot and have the "
+"autopilot pull the camera focus and trigger the camera in sequence. To get "
+"around this, the camera settings are set so that the camera has the "
+"following features activated:"
+msgstr ""
+"由于我们已将对焦和地线短接，相机应会自动进行对焦。到目前为止，我还没有找到将快门、对焦和地线分别连接到飞控并让飞控依次控制相机对焦和触发的方法。为了解决这个问题，相机设置中需激活以下功能："
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:114
+#: 4664846832794a14a093a062ba224fa8
+msgid "Pre-Shutter Focus"
+msgstr "快门前对焦"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:116
+#: bf3b5659e1cc41ba991357f4230fe3a1
+msgid "Continuous Auto-Focus"
+msgstr "连续自动对焦"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:118
+#: 3a5d68e61b214477884a54889360ea0f
+msgid ""
+"In Mission Planner, navigate to INITIAL SETUP -> CAMERA GIMBAL and change "
+"the SHUTTER drop-down menu to “RELAY”"
+msgstr ""
+"在 Mission Planner 中，导航至 INITIAL SETUP -> CAMERA GIMBAL，将 SHUTTER "
+"下拉菜单更改为「RELAY」"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:123
+#: 3bb5eb9a06d442d6b6d1466449d2b38b
+msgid ""
+"NOTE: You can play around with the “Duration” values to increase or decrease"
+" the responsiveness of the shutter command. With the Sony A6000, a duration "
+"of 1/10\\ :sup:`th` of a Second functions perfectly."
+msgstr "注意：您可以调整「Duration」值以增加或减少快门命令的响应速度。对于 Sony A6000，持续时间设为 1/10 秒可完美运行。"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:127
+#: 9c0e5df298a146678fd84fbf9fa016cd
+msgid ""
+"Proceed to the CONFIG/TUNING -> EXTENDED TUNING screen in Mission Planner "
+"and change the CH7 OPT to “Camera Trigger”. This will be necessary if you "
+"intend to use your remote controls CH7 to trigger the camera in addition to "
+"having the autopilot trigger the camera."
+msgstr ""
+"在 Mission Planner 中进入 CONFIG/TUNING -> EXTENDED TUNING 界面，将 CH7 OPT "
+"更改为「Camera Trigger」。如果您打算使用遥控器的 CH7 来触发相机（除了飞控触发之外），这是必要的。"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:132
+#: d4bc268689824a6485cdb6b8fc63ee47
+msgid ""
+"As of 4.0 firmware versions, any GPIO can be assigned as the Camera Trigger "
+"pin via its ``SERVOx_FUNCTION`` parameter, and any RC channel can be "
+"assigned to control that trigger via its ``RCx_OPTION`` parameter."
+msgstr ""
+"从 4.0 固件版本起，任何 GPIO 都可以通过其 ``SERVOx_FUNCTION`` 参数分配为相机触发引脚，任何 RC 通道都可以通过其 "
+"``RCx_OPTION`` 参数分配来控制该触发器。"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:135
+#: 413509166b5b439994067114b38f0fb1
+msgid ""
+"Navigate to the FULL PARAMETER LIST under the main CONFIG/TUNING tab and "
+"locate the ``CAMx_TRIGG_TYPE`` parameter. This parameter must show as 1 for "
+"“RELAY”. If it is not set to 1, change this parameter to 1 before proceeding"
+" to the next step."
+msgstr ""
+"在主 CONFIG/TUNING 选项卡下的 FULL PARAMETER LIST 中找到 ``CAMx_TRIGG_TYPE`` "
+"参数。此参数必须显示为 1，表示「RELAY」。如果未设置为 1，请在进行下一步之前将此参数更改为 1。"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:140
+#: 9789328fc4424eaa801ceeee12d93eb7
+msgid ""
+"Scroll down through the parameters until you get to ``RELAYx_PIN`` (for the "
+"first relay pin...there can be up to 6) . Here you will want to set the "
+"``RELAY_PIN``  parameter to match the GPIO pin you have connected the "
+"shutter release cable to. Since we have connected the cable to AUX6 on a "
+"Pixhawk, we need to change the ``RELAYx_PIN``  parameter to “55” (55:Pixhawk"
+" AUXOUT6)."
+msgstr ""
+"向下滚动参数，直到找到 ``RELAYx_PIN``（用于第一个继电器引脚……最多可有 6 个）。在这里，您需要将 ``RELAY_PIN`` "
+"参数设置为与快门释放线连接的 GPIO 引脚匹配。由于我们将线缆连接到 Pixhawk 的 AUX6，需要将 ``RELAYx_PIN`` "
+"参数更改为「55」（55：Pixhawk AUXOUT6）。"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:145
+#: ffd06b718648491cb7ecfb2f9d489d67
+msgid ""
+"Now that the required parameters have been changed, click on “WRITE PARAMS”"
+msgstr "更改所需参数后，点击「WRITE PARAMS」"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:150
+#: 198711c9d7de4fe1b96e65e58d177c47
+msgid "**Step 3:** Testing the Remote Shutter Cable and Autopilot"
+msgstr "**步骤 3：** 测试遥控快门线缆和飞控"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:152
+#: 4350fb2486b4432e9d549af36ebdbce0
+msgid ""
+"Now that the cable has been modified and connected to the autopilot which "
+"has been setup to trigger the camera via relay, let’s test it."
+msgstr "线缆已改装并连接到设置为通过继电器触发相机的飞控，现在让我们进行测试。"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:155
+#: 037fa9a060b2405387a85c129122feb4
+msgid ""
+"Navigate back to the FLIGHT DATA Screen and right click on the map to select"
+" “TRIGGER CAMERA NOW”"
+msgstr "返回 FLIGHT DATA 界面，右键点击地图选择「TRIGGER CAMERA NOW」"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:160
+#: b017f8c435444be19ecb17e40af7ae6b
+msgid ""
+"Once clicked, you should hear or see the camera expose. If the camera does "
+"not expose, check the following:"
+msgstr "点击后，您应该听到或看到相机曝光。如果相机没有曝光，请检查以下内容："
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:163
+#: 737742fc8a3840cba207a3216e6cf801
+msgid ""
+"Correct Orientation of cables (ie, Shutter Wire is connected to the SIGNAL "
+"pin on the correct port of the autopilot and Ground is connected to Ground)"
+msgstr "线缆方向是否正确（即快门线连接到飞控正确端口的信号引脚，地线连接到地线）"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:164
+#: 9a2e8d72485246bd90966ac00737aa65
+msgid "Camera is On and not in an Error State"
+msgstr "相机是否已开机且未处于错误状态"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:165
+#: 786cccf9fa0943b9ae1571774f0a86ee
+msgid ""
+"Camera lens is not too close to an object which may cause it to be unable to"
+" autofocus and expose"
+msgstr "相机镜头是否离物体太近，可能导致无法自动对焦和曝光"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:167
+#: 50f8f74eb9024c08bd5fed8b10a01a02
+msgid ""
+"If you still are not getting the camera to expose and all of the above-"
+"mentioned check points are not a problem, then you may want to adjust the "
+"Shutter Duration mentioned in Step 2 Part D."
+msgstr "如果相机仍无法曝光且上述检查点均无问题，您可能需要调整步骤 2 第 D 部分中提到的快门持续时间。"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:171
+#: 5177beb6782e4db898e449ff7cba2756
+msgid ""
+"If your camera took a picture, congratulations! You are all set to take "
+"pictures using the autopilot without needing third party hardware!"
+msgstr "如果您的相机成功拍摄了照片，恭喜您！您现在可以使用飞控拍照，无需第三方硬件！"
+
+#: ../../source/docs/common-pixhawk-camera-trigger-setup.rst:175
+#: a02bdcb4a64e4a21a33cb58e24687172
+msgid ""
+"Many thanks to Oliver Volkmann and `*www.microaerialprojects.com* "
+"<http://www.microaerialprojects.com/>`__ for contributing this page."
+msgstr ""
+"非常感谢 Oliver Volkmann 和 `*www.microaerialprojects.com* "
+"<http://www.microaerialprojects.com/>`__ 对本页的贡献。"
