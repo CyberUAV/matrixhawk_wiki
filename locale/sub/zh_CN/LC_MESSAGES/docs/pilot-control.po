@@ -1,0 +1,504 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Sub package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Sub\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-22 15:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/pilot-control.rst:5 0183671762004223b5ecd9a4565d0ed7
+msgid "Pilot Control"
+msgstr "飞手控制"
+
+#: ../../source/docs/pilot-control.rst:7 56a8ee31de624e77b5285f489d2f8600
+msgid "Control of the vehicle can be accomplished in three ways:"
+msgstr "飞行器的控制可通过以下三种方式实现："
+
+#: ../../source/docs/pilot-control.rst:9 7ab6fc78a6f249c996c7ac9a6aa32391
+msgid "Via Ground Control Stations using:"
+msgstr "通过地面控制站使用："
+
+#: ../../source/docs/pilot-control.rst:11 38ff2e5124ab4b0bb6e26d6734134e42
+msgid ""
+"GCS attached Joysticks, or command lines, to send `MAVLink RC overrides "
+"<https://mavlink.io/en/services/manual_control.html#alternatives>`__ that "
+"act as RC inputs (even if no RC receiver is attached)"
+msgstr ""
+"连接到地面站的摇杆或命令行，发送 `MAVLink 遥控覆盖 "
+"<https://mavlink.io/en/services/manual_control.html#alternatives>`__ "
+"作为遥控输入（即使未连接遥控接收机）"
+
+#: ../../source/docs/pilot-control.rst:12 6024c3f9526c460eb1271734df3f7d89
+msgid ""
+"The `MAVLink Manual Control protocol "
+"<https://mavlink.io/en/services/manual_control.html>`__, which includes axis"
+" commands and button states."
+msgstr ""
+"`MAVLink 手动控制协议 "
+"<https://mavlink.io/en/services/manual_control.html>`__，包含轴控制命令和按钮状态。"
+
+#: ../../source/docs/pilot-control.rst:14 c99107be91b04ff7888a1317984977e0
+msgid ""
+"For `legacy reasons <https://github.com/ardupilot/ardupilot/issues/8818>`__,"
+" ArduSub's `MANUAL_CONTROL "
+"<https://mavlink.io/en/messages/common.html#MANUAL_CONTROL>`__ support "
+"expects Z-axis values in range [0,1000], instead of the specification range "
+"[-1000,1000]."
+msgstr ""
+"出于 `历史原因 <https://github.com/ardupilot/ardupilot/issues/8818>`__，ArduSub 的 "
+"`MANUAL_CONTROL "
+"<https://mavlink.io/en/messages/common.html#MANUAL_CONTROL>`__ 支持期望 Z 轴值范围为 "
+"[0,1000]，而非规范范围 [-1000,1000]。"
+
+#: ../../source/docs/pilot-control.rst:16 b95ca1cff3454f058618f3f9d872b518
+msgid "RC control (not enabled by default)"
+msgstr "遥控控制（默认未启用）"
+
+#: ../../source/docs/pilot-control.rst:19 4bb4967d1e994f93ad7c29005ab67478
+msgid "Pilot Control Inputs"
+msgstr "飞手控制输入"
+
+#: ../../source/docs/pilot-control.rst:20 9ea2c4a9306344abb3330680171e0e80
+msgid ""
+"If RC is not enabled, pilot inputs are via the GCS joystick, controlling the"
+" vehicle's available motion axes, including yaw and attitude rotations, "
+"along with body-frame translations laterally, forward/back, and up/down in "
+"depth. Additionally, lights and camera can be controlled from the GCS, as "
+"well as some generic servo and/or relay outputs."
+msgstr ""
+"若未启用遥控，飞手输入通过地面站摇杆进行，控制飞行器的可用运动轴，包括偏航和姿态旋转，以及机体坐标系下的横向、前后和深度上下平移。此外，还可通过地面站控制灯光和摄像头，以及部分通用舵机和/或继电器输出。"
+
+#: ../../source/docs/pilot-control.rst:22 e6692d271bce4c8abdcadbff9674b04e
+msgid ""
+"If RC is enabled, then the pitch/roll/yaw/throttle/lateral/forward inputs "
+"are sent from the RC transmitter and mapped from RC channels to these inputs"
+" via the ``RCMAP_`` parameters."
+msgstr "若启用了遥控，则俯仰/横滚/偏航/油门/横向/前向输入由遥控发射机发送，并通过 ``RCMAP_`` 参数将遥控通道映射至相应输入。"
+
+#: ../../source/docs/pilot-control.rst:25 ba195b45c64544898a78157b284a1d73
+msgid "Pilot Control Freedoms by Mode"
+msgstr "各模式下的飞手控制自由度"
+
+#: ../../source/docs/pilot-control.rst:26 1c44b999ce7b48c3adb883f93efa2125
+msgid ""
+"The following assumes the axis is controllable. Some frame configurations do"
+" not provide all axes. For example the SimpleROV-3 frame has three thrusters"
+" providing only yaw, forwad, and depth control. The pitch and roll attitude "
+"is uncontrolled and relies on CG/ballast trimming and has no lateral "
+"movement capability."
+msgstr ""
+"以下内容假设该轴可控。某些机架配置并不提供所有轴的控制能力。例如，SimpleROV-3 "
+"机架具有三个推进器，仅提供偏航、前向和深度控制。俯仰和横滚姿态不受控，依赖重心/压载配平，且无横向运动能力。"
+
+#: ../../source/docs/pilot-control.rst:28 de1c0d1c81524e4d98bea60e82ccc489
+msgid "ANG = Angle target. Stick deflection indicates desired axis angle."
+msgstr "ANG = 角度目标。摇杆偏转表示期望的轴角度。"
+
+#: ../../source/docs/pilot-control.rst:30 90a192edf0c049c288fcad3b92db7dd1
+msgid ""
+"RAT = Rate target. Stick deflection indicates desired axis movement/rotation"
+" rate."
+msgstr "RAT = 角速率目标。摇杆偏转表示期望的轴运动/旋转速率。"
+
+#: ../../source/docs/pilot-control.rst:32 59f885eec6a94684b4a4df65a82ab7ca
+msgid "D = Direct motor output based on stick deflection."
+msgstr "D = 基于摇杆偏转的直接电机输出。"
+
+#: ../../source/docs/pilot-control.rst:35 272003efb11c44cca6c3f704ab768c5a
+msgid "Mode"
+msgstr "模式"
+
+#: ../../source/docs/pilot-control.rst:35 819ef060ebf44d5a8c09d4c31c8a4fe9
+msgid "Roll"
+msgstr "横滚"
+
+#: ../../source/docs/pilot-control.rst:35 957c1b427dc64bc9966b6e1ba099ef81
+msgid "Pitch"
+msgstr "俯仰"
+
+#: ../../source/docs/pilot-control.rst:35 4db605f5785b468c9d375898f369fd58
+msgid "Yaw"
+msgstr "偏航"
+
+#: ../../source/docs/pilot-control.rst:35 bed500930a85409f834e0937805af423
+msgid "Depth"
+msgstr "深度"
+
+#: ../../source/docs/pilot-control.rst:35 bfd3fe7d39fd4ad2bfcfd46710ee4f8d
+msgid "Forward"
+msgstr "前向"
+
+#: ../../source/docs/pilot-control.rst:35 3df0a05bf1d042daa5646d61c7fad088
+msgid "Lateral"
+msgstr "横向"
+
+#: ../../source/docs/pilot-control.rst:35 5f91c67fe37c4ca69b8573505c9af6db
+msgid "PosHold"
+msgstr "位置保持"
+
+#: ../../source/docs/pilot-control.rst:35 15f74bc08c024703844b3f019127384b
+msgid "DepthHold"
+msgstr "定深"
+
+#: ../../source/docs/pilot-control.rst:37 09542b872f744e12b2871cc334dc1150
+msgid "MANUAL"
+msgstr "MANUAL"
+
+#: ../../source/docs/pilot-control.rst:37 7605b42fb9c4447f84b662091759759a
+#: 7dba2b293a084a3d8e3213638e65cfa7 b05cbb20d7f9400eb6321ca7d21c10d7
+#: d19092d01f0c483fa08dd3bcf9fa0b83 d8839cd457de4635a3b24943547ea0b8
+#: e25bdb0e211f46b0b7acec578b7e2a0f
+msgid "D"
+msgstr "D"
+
+#: ../../source/docs/pilot-control.rst:37
+#: ../../source/docs/pilot-control.rst:38
+#: ../../source/docs/pilot-control.rst:39
+#: ../../source/docs/pilot-control.rst:40
+#: ../../source/docs/pilot-control.rst:41
+#: ../../source/docs/pilot-control.rst:43 2f41ca12383c47818521b4b431d684b3
+#: 4b1e5979d5c34d099f3f72452c3f4f05 726b69bdc0fe4583918023cd017600f2
+#: 7650a067618642dfaf58fdecb19e1a7e af4a44b2c8e3415480a6480797730d49
+#: b1ff20bb068f42ae91f0d26dab25c822 ba63c102332e43c584e394153b61acca
+#: c3309ee4d16747d3a0248136686a0987 de465da83b8a4ecda2a93a0cde11d2f1
+#: fe444280aee54fde890c714fae3a78bf
+msgid "No"
+msgstr "否"
+
+#: ../../source/docs/pilot-control.rst:38 82ef40b2bc3f4b75ac25848e7701b0da
+msgid "ACRO"
+msgstr "ACRO"
+
+#: ../../source/docs/pilot-control.rst:38
+#: ../../source/docs/pilot-control.rst:39
+#: ../../source/docs/pilot-control.rst:40
+#: ../../source/docs/pilot-control.rst:41
+#: ../../source/docs/pilot-control.rst:42
+#: ../../source/docs/pilot-control.rst:43
+#: ../../source/docs/pilot-control.rst:44 0835b6fe68384e4797a615cbbd21e4bf
+#: 09c8b959ca0145ec9f7427587be3914a 13b9305bcb8b4b2c8899f28053dbe476
+#: 3691957c4ac645438c040fb343b2b318 3bc359624a8c4fa5bd2ed2a13d397071
+#: 3c3ae706f572421d97d6c7a8b8c6a298 445dc227da184c448023938361f0182a
+#: 514861e1417241b99cc07bdeb7409125 620af32f892d4459b5dd4328020dff2d
+#: 67ffff8abcd743ce98c292e81551fdfc 70f4eea1a358405890ff9ee5db8144ba
+#: 718e51fe474f4da7bc914c6dbf02fedc 77a35f2ec5114d2bafad9f399400c93c
+#: 7afa756a90c141a7a2af8eb239a2c780 930a1add0ad34fca8af5374bc58bde14
+#: 97c2687507804e6dac886caa6e3b8ed2 a165a5e5dd8849c7a87440eefd79a508
+#: bedeba70df084061a6b8cf30c798953a c2a7a2126fdc421ab3619a9842781f7b
+#: d0bafd5c12c441c58100c7e1e7f61200 d4d56a3e92954d4fa7bb3ba6994dc1a0
+#: de34179de4e64c5498d3b75acf1dee7b e5159b5514fe47b19775ab97ca85a3da
+#: e5f102a9984c4d1f80d41577cd51d7fa ebefefefbb5f4d54a7d8b4a5a772fb4b
+#: fc0f92a1f8614e90bbebc5b81892d8a4
+msgid "RAT"
+msgstr "RAT"
+
+#: ../../source/docs/pilot-control.rst:39 cde2568c59914cd98484216ee844a04a
+msgid "STABILIZE"
+msgstr "STABILIZE"
+
+#: ../../source/docs/pilot-control.rst:39
+#: ../../source/docs/pilot-control.rst:40
+#: ../../source/docs/pilot-control.rst:41
+#: ../../source/docs/pilot-control.rst:42
+#: ../../source/docs/pilot-control.rst:43
+#: ../../source/docs/pilot-control.rst:44 12d167837d9b4bc0a610675b055a7ee4
+#: 14d54fe7575846049cac5e4f30ba5da0 2153716c657c4b66b2eeed92fc1ebe4e
+#: 2e8c0fa2c17946d7a245d4a32198baae 82159fbf059f46c89a55ca82554bcbfe
+#: 903e1c7418004e5f832584f573aa3d87 99a6bc9a2cf647bb9507ea9a7cc8a063
+#: bd26901084b0462cbb4827c08715ccdd c96154b154d94895a0486d5e82214a8e
+#: cbe3754bc5dd48ea851b85ea53a19ceb e200ed98c9ff40f18125e85905248245
+#: e46f47c2d2294aff969bf85943883719
+msgid "ANG"
+msgstr "ANG"
+
+#: ../../source/docs/pilot-control.rst:40 2aad5e0a91b64c0abf4c94c6f0221544
+msgid "ALT_HOLD"
+msgstr "ALT_HOLD"
+
+#: ../../source/docs/pilot-control.rst:40 2ff8bb8153d24ddba5172e7738d2f544
+msgid "RA"
+msgstr "RA"
+
+#: ../../source/docs/pilot-control.rst:40
+#: ../../source/docs/pilot-control.rst:42
+#: ../../source/docs/pilot-control.rst:44 412d0abf696b468cad0d74ae1ba948c9
+#: 49e76696f6a54374baf893d58ce46fd4 724b754eb3784a83a10c7a35d979cc2c
+#: 958867f4c4584ffdbe17666ef30ca617 ba1b30f708544a7c8c2be23c5b384fa4
+msgid "Yes"
+msgstr "是"
+
+#: ../../source/docs/pilot-control.rst:41 eec2f18b347e45148c4be8d167629f4e
+msgid "SURFTRAK"
+msgstr "SURFTRAK"
+
+#: ../../source/docs/pilot-control.rst:41 c8a99b1067384143b639c2ebd8868d6f
+msgid "Yes*"
+msgstr "是*"
+
+#: ../../source/docs/pilot-control.rst:42 f3c5c34781f849039f674b06487907f1
+msgid "POSHOLD"
+msgstr "POSHOLD"
+
+#: ../../source/docs/pilot-control.rst:43 0b675d11291c42249b27aab4032b4fb1
+msgid "SURFACE"
+msgstr "SURFACE"
+
+#: ../../source/docs/pilot-control.rst:43
+#: ../../source/docs/pilot-control.rst:44
+#: ../../source/docs/pilot-control.rst:45 0735aea175f24448bfd7286d950fa4db
+#: 181f59adc5584b0e9dc7b76dd57e6576 1d580cbc40734f67829d1112fad50cee
+#: 3e7a2315de8f4fc6aa48c2d703704692 4ffa851aaa0b43bf9012eb4326e3337f
+#: 5ca80ca1c46347d59176a0fc77da141d 893b2654acd94a09805c636636a605a7
+#: a5be2952a0224815b753cac44a20a0db b4663bc9994f4fb7adae939e354f121f
+#: be838846cbfe4c78bc089a4f83ed43e6 ea27173bf1dc4062ac708fa0d1b65c18
+msgid "\\-"
+msgstr "\\-"
+
+#: ../../source/docs/pilot-control.rst:44 e97a37a52dbb44d28a733b9595ea399d
+msgid "CIRCLE"
+msgstr "CIRCLE"
+
+#: ../../source/docs/pilot-control.rst:45 5798374bddc248e491eb5bed2120dfba
+msgid "MOTORDETECT"
+msgstr "MOTORDETECT"
+
+#: ../../source/docs/pilot-control.rst:48 8d3e332aacf84c5589b626a1a54739b7
+msgid ""
+"\\*SURFTRAK maintains depth as a relative position above the sea floor using"
+" a rangefinder when there in no depth input change requested by the pilot."
+msgstr "\\*当飞手未请求深度输入变化时，SURFTRAK 使用测距仪将深度保持为相对于海底的固定距离。"
+
+#: ../../source/docs/pilot-control.rst:50 a597cf37baa84f05831381801ceb3463
+msgid ""
+"MODE AUTO: Autopilot commands necessary controls to navigate the mission."
+msgstr "AUTO 模式：自动驾驶仪发出必要的控制指令以执行任务导航。"
+
+#: ../../source/docs/pilot-control.rst:51 adc586e3b9404140af17e1529d9e75c8
+msgid ""
+"MODE GUIDED: Pilot can control Roll and Pitch if in velocity control mode "
+"with stick input signifying angle targets if in HEADING HOLD, or rate "
+"targets, otherwise. Yaw input is rate demand. LATERAL and FORWARD inputs "
+"ignored."
+msgstr ""
+"GUIDED 模式：若处于速度控制模式，飞手可控制横滚和俯仰；在 HEADING HOLD "
+"时摇杆输入表示角度目标，其他情况下表示速率目标。偏航输入为速率需求，横向和前向输入被忽略。"
+
+#: ../../source/docs/pilot-control.rst:54 46918d95cf404dd5b5a1a602856b242e
+msgid "Failsafes"
+msgstr "失效保护"
+
+#: ../../source/docs/pilot-control.rst:56 adaebaff2d05499694b2a89cbec025b3
+msgid ""
+"Several failsafes are provided for pilot control methods, if they fail, any "
+"or all of which may be configured and enabled:"
+msgstr "针对飞手控制方式提供了多种失效保护，当控制失效时，可配置并启用其中任意一种或全部："
+
+#: ../../source/docs/pilot-control.rst:58 5e2c8fb459b24efea181d8e8fd9c4bf8
+msgid ":ref:`Pilot Control failsafe <pilot-control-failsafe>`"
+msgstr ":ref:`飞手控制失效保护 <pilot-control-failsafe>`"
+
+#: ../../source/docs/pilot-control.rst:59 317f536c01bc4ef4af7568cae2a6eff4
+msgid ":ref:`RC Failsafe <radio-failsafe>` (if RC is enabled)"
+msgstr ":ref:`遥控失效保护 <radio-failsafe>`（若已启用遥控）"
+
+#: ../../source/docs/pilot-control.rst:60 0b2995ca326a42629f62e84d08f072b2
+msgid ":ref:`GCS (Heartbeat) Failsafe <gcs-failsafe>`"
+msgstr ":ref:`地面站（心跳）失效保护 <gcs-failsafe>`"
+
+#: ../../source/docs/pilot-control.rst:63 7d1dedd6d1c248e6a0be17bc1d6ca86a
+msgid "Responsiveness"
+msgstr "响应灵敏度"
+
+#: ../../source/docs/pilot-control.rst:64 cc43d41f9958464f95cfed0a444f68ba
+msgid ""
+"Depending on vehicle design and pilot experience, it can be desirable to "
+"limit how quickly and/or strongly the vehicle responds to control inputs. "
+"There are a few different approaches to doing this, which affect different "
+"parts of the control pipeline:"
+msgstr "根据飞行器设计和飞手经验，有时需要限制飞行器响应控制输入的速度和/或力度。有几种不同的方法可以实现这一目的，它们作用于控制管线的不同部分："
+
+#: ../../source/docs/pilot-control.rst:66 6248f36ebe0646aaa179f206e7c3c48b
+msgid ""
+"If a GCS joystick is used, the ``JS_GAIN_*`` parameters scale the pilot "
+"input range, which determines  how much pilot joystick inputs can affect "
+"motor outputs"
+msgstr "若使用地面站摇杆，``JS_GAIN_*`` 参数缩放飞手输入范围，决定飞手摇杆输入对推进器输出的影响程度"
+
+#: ../../source/docs/pilot-control.rst:68 7da8dbfbbb4c4d9481f5b169ec152438
+msgid ""
+"In MANUAL mode there are only pilot inputs, so the total output range (and "
+"hence power usage) of the vehicle is determined by the pilot's input control"
+" range, whether GCS joystick based or RC based"
+msgstr "在 MANUAL 模式下，仅有飞手输入，因此飞行器的总输出范围（进而决定功耗）由飞手输入控制范围决定，无论是基于地面站摇杆还是遥控"
+
+#: ../../source/docs/pilot-control.rst:69 a1f37c5233374611b1a4478466e8b93b
+msgid ""
+"In modes with autopilot stabilisation, stabilisation can still cause the "
+"vehicle to use its full power capacity (e.g. when operating in strong "
+"currents)"
+msgstr "在具有自动驾驶仪稳定功能的模式下，稳定化仍可能导致飞行器使用全部功率（例如在强水流中作业时）"
+
+#: ../../source/docs/pilot-control.rst:70 4c859cd08af2420da1666ed68426b9b2
+msgid ""
+"Joystick gain can be controlled by the pilot using ``gain_*`` "
+":ref:`buttons`, and/or can be configured with the parameters"
+msgstr "摇杆增益可由飞手通过 ``gain_*`` :ref:`按钮` 进行控制，也可通过以下参数配置"
+
+#: ../../source/docs/pilot-control.rst:72 e67b3c783e324de1bfae36a2894e246c
+msgid ""
+":ref:`JS_GAIN_MIN<JS_GAIN_MIN>`, :ref:`JS_GAIN_MAX<JS_GAIN_MAX>`, and "
+":ref:`JS_GAIN_DEFAULT<JS_GAIN_DEFAULT>` for its limits and starting value"
+msgstr ""
+":ref:`JS_GAIN_MIN<JS_GAIN_MIN>`、:ref:`JS_GAIN_MAX<JS_GAIN_MAX>` 和 "
+":ref:`JS_GAIN_DEFAULT<JS_GAIN_DEFAULT>` 用于设置其限制和初始值"
+
+#: ../../source/docs/pilot-control.rst:73 87cb5a984c7a401a8f31218cf2e35f79
+msgid ""
+":ref:`JS_THR_GAIN<JS_THR_GAIN>` for an additional scaling applied to "
+"vertical inputs, to either reduce them further or boost them relative to "
+"horizontal/turning inputs"
+msgstr ":ref:`JS_THR_GAIN<JS_THR_GAIN>` 用于对垂直输入附加缩放，以相对于水平/转向输入进一步降低或提升垂直输入"
+
+#: ../../source/docs/pilot-control.rst:74 2eede841d2e14fed9d7be79809bc90c7
+msgid ""
+":ref:`JS_GAIN_STEPS<JS_GAIN_STEPS>` to determine how much the gain changes "
+"with each increment/decrement button press"
+msgstr ":ref:`JS_GAIN_STEPS<JS_GAIN_STEPS>` 用于确定每次按下增加/减少按钮时增益的变化量"
+
+#: ../../source/docs/pilot-control.rst:75 5a136333da5241a29c376e7290b4fba4
+msgid ""
+"When using radio channels for RC control of the vehicle, it is possible to "
+"ignore small RC stick adjustments and timing inconsistencies using "
+":ref:`RCn_DZ<RC1_DZ>` to specify the deadzone for each RC channel"
+msgstr ""
+"使用无线电通道对飞行器进行遥控时，可通过 :ref:`RCn_DZ<RC1_DZ>` 为每个遥控通道指定死区，从而忽略微小的遥控摇杆调整和时序不一致"
+
+#: ../../source/docs/pilot-control.rst:76 298618bab56b46d590f80c168ef74983
+msgid ""
+"Attitude stabilisation limits the vehicle's maximum lean angle (roll/pitch "
+"away from level) to :ref:`ANGLE_MAX<ANGLE_MAX>`"
+msgstr "姿态稳定化将飞行器的最大倾斜角（横滚/俯仰偏离水平）限制为 :ref:`ANGLE_MAX<ANGLE_MAX>`"
+
+#: ../../source/docs/pilot-control.rst:77 ab458287dd374cfd9e7e4496a2205508
+msgid ""
+"Automatic depth control (in modes like ALT_HOLD, SURFTRAK, POSHOLD, and "
+"CIRCLE) can be configured with the parameters"
+msgstr "自动深度控制（在 ALT_HOLD、SURFTRAK、POSHOLD 和 CIRCLE 等模式下）可通过以下参数配置"
+
+#: ../../source/docs/pilot-control.rst:79 92a73176eb38433da3beed3a5e4b1e1c
+msgid ""
+":ref:`THR_DZ<THR_DZ>` for the throttle deadzone, to avoid small joystick "
+"movements adjusting the current depth target"
+msgstr ":ref:`THR_DZ<THR_DZ>` 用于设置油门死区，避免微小的摇杆移动调整当前深度目标"
+
+#: ../../source/docs/pilot-control.rst:80 345217af709b450bb3de90addefd75aa
+msgid ""
+":ref:`PILOT_SPEED_UP<PILOT_SPEED_UP>` and "
+":ref:`PILOT_ACCEL_Z<PILOT_ACCEL_Z>`, for limiting maximum vertical speeds, "
+"and setting the vertical acceleration to reach those speeds"
+msgstr ""
+":ref:`PILOT_SPEED_UP<PILOT_SPEED_UP>` 和 "
+":ref:`PILOT_ACCEL_Z<PILOT_ACCEL_Z>`，用于限制最大垂直速度以及设置达到该速度的垂直加速度"
+
+#: ../../source/docs/pilot-control.rst:82 b09388a48df741768710cadac71c57ac
+msgid ""
+":ref:`PILOT_SPEED_DN<PILOT_SPEED_DN>` can be optionally used to set the "
+"maximum descent rate independently, instead of defaulting to "
+":ref:`PILOT_SPEED_UP<PILOT_SPEED_UP>`"
+msgstr ""
+":ref:`PILOT_SPEED_DN<PILOT_SPEED_DN>` 可选用于独立设置最大下潜速率，而不是默认使用 "
+":ref:`PILOT_SPEED_UP<PILOT_SPEED_UP>`"
+
+#: ../../source/docs/pilot-control.rst:83 87a8351684624650a1c4a5d04dad4822
+msgid ""
+":ref:`SURFACE_MAX_THR<SURFACE_MAX_THR>` scales down upwards thrust when near"
+" the surface, to avoid pushing through the water surface and sucking air"
+msgstr ":ref:`SURFACE_MAX_THR<SURFACE_MAX_THR>` 在接近水面时降低向上推力，以避免冲出水面并吸入空气"
+
+#: ../../source/docs/pilot-control.rst:84 4994908c6b044253822bde725f37490f
+msgid ""
+"Automatic horizontal velocity control in POSHOLD mode can be limited by "
+":ref:`PILOT_SPEED<PILOT_SPEED>`"
+msgstr "POSHOLD 模式下的自动水平速度控制可通过 :ref:`PILOT_SPEED<PILOT_SPEED>` 加以限制"
+
+#: ../../source/docs/pilot-control.rst:85 a4f1185802b945d2916d7d21c28c671b
+msgid "It is also possible to configure the outputs directly, using"
+msgstr "也可以直接配置输出，使用"
+
+#: ../../source/docs/pilot-control.rst:87 a7812eb263384d4e886bb7154cd79974
+msgid ""
+":ref:`MOT_SLEW_UP_TIME<MOT_SLEW_UP_TIME>` and "
+":ref:`MOT_SLEW_DN_TIME<MOT_SLEW_DN_TIME>`, to limit the rate the motors can "
+"increase or decrease thrust levels when a change is commanded"
+msgstr ""
+":ref:`MOT_SLEW_UP_TIME<MOT_SLEW_UP_TIME>` 和 "
+":ref:`MOT_SLEW_DN_TIME<MOT_SLEW_DN_TIME>`，用于限制在收到变更指令时推进器增加或减小推力的速率"
+
+#: ../../source/docs/pilot-control.rst:88 e5902049a4de40488a8bb9d36d2c77ee
+msgid ""
+":ref:`MOT_PWM_MIN<MOT_PWM_MIN>` and :ref:`MOT_PWM_MAX<MOT_PWM_MAX>` define "
+"the available PWM range of all motor outputs"
+msgstr ""
+":ref:`MOT_PWM_MIN<MOT_PWM_MIN>` 和 :ref:`MOT_PWM_MAX<MOT_PWM_MAX>` "
+"定义所有推进器输出的可用 PWM 范围"
+
+#: ../../source/docs/pilot-control.rst:90 c70f1d49ae0c479f941048c3f67a5089
+msgid ""
+"This is typically used to ensure the motor output commands match the "
+"expected input range of the ESCs, but can also be used to intentionally set "
+"a reduced range, to reduce performance and/or power usage"
+msgstr "这通常用于确保推进器输出指令与电调的预期输入范围相匹配，但也可用于有意设置较小范围，以降低性能和/或功耗"
+
+#: ../../source/docs/pilot-control.rst:92 39349d8fc0154612aa160e9edba40edf
+msgid "Dshot ESCs ignore these values. Range is fixed at 1000µs to 2000µs."
+msgstr "Dshot 电调忽略这些值，范围固定为 1000µs 至 2000µs。"
+
+#: ../../source/docs/pilot-control.rst:94 824cfa9f5b77460dbe02b19688876b3d
+msgid ""
+"If one or more PWM ESC controlled motors are moving while disarmed, it may "
+"be necessary to adjust the relevant :ref:`SERVOn_TRIM<SERVO1_TRIM>` "
+"parameter(s) to correct the neutral points"
+msgstr ""
+"若解除解锁状态下有一个或多个 PWM 电调控制的推进器在运转，可能需要调整相应的 :ref:`SERVOn_TRIM<SERVO1_TRIM>` "
+"参数以修正中立点"
+
+#: ../../source/docs/pilot-control.rst:95 1d07f267257b46abbc484775c6dac21d
+msgid ""
+"Motor output scaling can also be adjusted automatically, :ref:`in response "
+"to feedback from the power/battery monitoring system <current-limiting-and-"
+"voltage-scaling>`, using"
+msgstr ""
+"推进器输出缩放也可根据 :ref:`电源/电池监控系统的反馈 <current-limiting-and-voltage-scaling>` "
+"自动调整，使用"
+
+#: ../../source/docs/pilot-control.rst:97 f54fdc488d0546bb83ba9eaaceb9eb30
+msgid ""
+":ref:`MOT_BAT_CURR_MAX<MOT_BAT_CURR_MAX>` to reduce the power output after "
+"excessive current draw occurs for more than "
+":ref:`MOT_BAT_CURR_TC<MOT_BAT_CURR_TC>`, and/or"
+msgstr ""
+":ref:`MOT_BAT_CURR_MAX<MOT_BAT_CURR_MAX>` 用于在过大电流持续超过 "
+":ref:`MOT_BAT_CURR_TC<MOT_BAT_CURR_TC>` 后降低功率输出，以及/或者"
+
+#: ../../source/docs/pilot-control.rst:98 425c6bdfff3942b6bd3a7e19b963305e
+msgid ""
+":ref:`MOT_BAT_VOLT_MIN<MOT_BAT_VOLT_MIN>` and "
+":ref:`MOT_BAT_VOLT_MAX<MOT_BAT_VOLT_MAX>` to scale up motor outputs to "
+"compensate for sagging voltage over time"
+msgstr ""
+":ref:`MOT_BAT_VOLT_MIN<MOT_BAT_VOLT_MIN>` 和 "
+":ref:`MOT_BAT_VOLT_MAX<MOT_BAT_VOLT_MAX>` 用于提升推进器输出以补偿随时间下降的电压"
