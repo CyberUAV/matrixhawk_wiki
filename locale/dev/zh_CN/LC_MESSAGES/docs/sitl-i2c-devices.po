@@ -1,0 +1,182 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/sitl-i2c-devices.rst:5 5a4232c962c84ade82e4e801b8c6756a
+msgid "SITL I2C Devices"
+msgstr "SITL I2C 设备"
+
+#: ../../source/docs/sitl-i2c-devices.rst:7 b45e82239aaf4707b8e93e302705e9b5
+msgid ""
+"The SITL (software in the loop) simulates many different i2c devices, "
+"including:"
+msgstr "SITL（软件在环）仿真了许多不同的 I2C 设备，包括："
+
+#: ../../source/docs/sitl-i2c-devices.rst:9 c1ba56b1f3f5472eaf083da5f122dbc9
+msgid "MaxSonar i2c-connected sonar"
+msgstr "MaxSonar I2C 接口声纳"
+
+#: ../../source/docs/sitl-i2c-devices.rst:10 69acd0714c7848e180d9506401c88392
+msgid "various SMBus battery monitors"
+msgstr "各种 SMBus 电池监控器"
+
+#: ../../source/docs/sitl-i2c-devices.rst:11 7f946d03ae9543a3a8bc874c563f3940
+msgid "LED devices"
+msgstr "LED 设备"
+
+#: ../../source/docs/sitl-i2c-devices.rst:12 3f052686c62f4187a9026b7be174de4a
+msgid "temperature sensors"
+msgstr "温度传感器"
+
+#: ../../source/docs/sitl-i2c-devices.rst:13 54ccfaed72b04308afe307be4aaecac5
+msgid "airspeed sensors"
+msgstr "空速传感器"
+
+#: ../../source/docs/sitl-i2c-devices.rst:14 2574bdd1484c47b98caccd353ee1343b
+msgid "IMU drivers"
+msgstr "IMU 驱动"
+
+#: ../../source/docs/sitl-i2c-devices.rst:17 2aa96ca5cc474f4191199ea752a81611
+msgid "Overview"
+msgstr "概述"
+
+#: ../../source/docs/sitl-i2c-devices.rst:19 c46f7932c78f4c109c0fb50a7b8dfa54
+msgid ""
+"``SITL/SIM_I2C.cpp`` contains the instantitions and initialisation of the "
+"buses and drivers.  It also contains the hook used by the SITL HAL to make "
+"simulated i2c bus transactions with the device, ``I2C::ioctl``"
+msgstr ""
+"``SITL/SIM_I2C.cpp`` 包含总线和驱动的实例化及初始化代码，同时包含 SITL HAL 使用的钩子，用于与设备进行仿真 I2C "
+"总线事务：``I2C::ioctl``。"
+
+#: ../../source/docs/sitl-i2c-devices.rst:21 0f599fb231474309ace028347930d3da
+msgid ""
+"``SITL/SIM/I2CDevice.h`` declares the I2CDevice class from which all "
+"simulated I2C drivers inherit from.  The general structure of an I2CDevice "
+"is:"
+msgstr ""
+"``SITL/SIM/I2CDevice.h`` 声明了所有仿真 I2C 驱动继承自的 I2CDevice 类。I2CDevice 的一般结构为："
+
+#: ../../source/docs/sitl-i2c-devices.rst:23 9e824a01123b4fa1b099cb10ed5049a2
+msgid "an init() method"
+msgstr "一个 init() 方法"
+
+#: ../../source/docs/sitl-i2c-devices.rst:24 1f5b520adc20446ea7fb7990e15c54e7
+msgid ""
+"an ``update`` method called periodically to simulate whatever the device "
+"accomplishes on its own internal clock"
+msgstr "一个周期性调用的 ``update`` 方法，用于仿真设备在其内部时钟上完成的操作"
+
+#: ../../source/docs/sitl-i2c-devices.rst:25 20be272e8a71448ebaf4aa54e3b6e2c9
+msgid ""
+"a ``rdwr`` call which is called when ArduPilot attempts an i2c transaction"
+msgstr "一个 ``rdwr`` 调用，在 ArduPilot 尝试 I2C 事务时被调用"
+
+#: ../../source/docs/sitl-i2c-devices.rst:27 ff6977bd5a8a46f2af80dd7e223e350b
+msgid ""
+"i2c devices vary in the structure of the on-wire protocol.  Some examples of"
+" protocol shapes include:"
+msgstr "I2C 设备的线上协议结构各不相同。协议形式的一些示例包括："
+
+#: ../../source/docs/sitl-i2c-devices.rst:29 d3239b7316ea45959f00cc139805b4e0
+msgid ""
+"simply stream bytes onto the i2c bus; when a read is attempted from one of "
+"these devices a response is received with bytes filled in, regardless of "
+"what transfer is made to the device.  SIM_Airspeed_DLVR is an example of an "
+"implementation of this sort of device, never allowing i2c writes to the "
+"device and always returning 4 bytes of data."
+msgstr ""
+"直接向 I2C 总线流式传输字节；从这类设备读取时，无论向设备发送什么数据，都会收到带有填充字节的响应。SIM_Airspeed_DLVR "
+"是此类设备实现的示例，它不允许 I2C 写入，并始终返回 4 字节数据。"
+
+#: ../../source/docs/sitl-i2c-devices.rst:31 faa77eea0d8f45d09a5c51ff86d1bb85
+msgid ""
+"respond to a simple i2c \"take reading command\" by making available a "
+"reading on a subsequent i2c read transaction.  The SIM_MaxSonarI2CXL is an "
+"example of this sort of device, responding to a command of 0x51 by taking a "
+"measurement and allowing a subsequent read of 2 bytes to return that "
+"measurement."
+msgstr ""
+"响应简单的 I2C「开始测量命令」，在后续的 I2C 读事务中提供测量结果。SIM_MaxSonarI2CXL 是此类设备的示例，它响应 0x51 "
+"命令进行测量，并允许后续读取 2 字节以返回该测量值。"
+
+#: ../../source/docs/sitl-i2c-devices.rst:33 a5834b5fe8f24437b5417e3997e1b405
+msgid ""
+"a register-based interface where the ArduPilot driver writes to registers at"
+" specific offsets to configure the device and reads data back via the same "
+"interface.  i2c transactions are usually a pair of couple transactions, one "
+"to specify the registers to read and the other for the simulated device to "
+"return the data.  The simulated IS31FL3195 LED driver is an example of this,"
+" presenting a number of control registers used for setting the LED patterns "
+"and device behaviour.  These i2c devices often have a \"WHOAMI\" register to"
+" determine the device type.  SMBus devices also often speak this protocol, "
+"but using 16-bit registers rather than the usual 8-bit."
+msgstr ""
+"基于寄存器的接口，ArduPilot 驱动通过写入特定偏移处的寄存器来配置设备，并通过同一接口读取数据。I2C "
+"事务通常是一对操作，一个用于指定要读取的寄存器，另一个用于仿真设备返回数据。仿真的 IS31FL3195 LED "
+"驱动器就是这种设备的示例，它提供了一些用于设置 LED 模式和设备行为的控制寄存器。这类 I2C "
+"设备通常有一个「WHOAMI」寄存器用于确定设备类型。SMBus 设备也通常使用此协议，但使用 16 位寄存器而非通常的 8 位。"
+
+#: ../../source/docs/sitl-i2c-devices.rst:36 2181ff33dfd744eb9d9036ba75a5693e
+msgid "Choosing a Device Style"
+msgstr "选择设备类型"
+
+#: ../../source/docs/sitl-i2c-devices.rst:38 577a7a4dbc9e4fef8a85e533edb003a2
+msgid ""
+"When implementing a new simulator, care must be taken to choose the correct "
+"\"style\" of simulator to implement.  Several base classes can be inheritted"
+" from to prevent warrantless duplication.  As always, find a good example of"
+" something similar to the device you wish to simulate and \"do what that "
+"thing does\".  Working out what the protocol is requires study of the "
+"datasheet for the device."
+msgstr ""
+"在实现新仿真器时，必须谨慎选择正确的仿真器「类型」来实现。可以继承几个基类以避免无意义的重复。与往常一样，找到与您想仿真的设备相似的好示例，「照着做」。弄清楚协议需要研究设备的数据手册。"
+
+#: ../../source/docs/sitl-i2c-devices.rst:40 4635781b8a5e417680fe82e8789eaacf
+msgid ""
+"For devices which are strictly register-based, the ``I2CRegisters_8Bit`` (or"
+" ``I2CRegisters_16Bit``) base class should be inheritted from.  This allows "
+"your new simulator to describe the registers present on the device, and "
+"simply fill the register values in based on how ArduPilot manipulates other "
+"registers.  It is also possible to create simulates devices with both 8 and "
+"16 bit registers - see ``I2CRegisters_ConfigurableLength``"
+msgstr ""
+"对于严格基于寄存器的设备，应继承 ``I2CRegisters_8Bit``（或 "
+"``I2CRegisters_16Bit``）基类。这允许您的新仿真器描述设备上存在的寄存器，并根据 ArduPilot "
+"操作其他寄存器的方式简单地填充寄存器值。也可以创建同时具有 8 位和 16 位寄存器的仿真设备——参见 "
+"``I2CRegisters_ConfigurableLength``。"
+
+#: ../../source/docs/sitl-i2c-devices.rst:42 abca029cbed841869e8e6f0f8c75a181
+msgid ""
+"For devices which are polled to start some sort of measurement and "
+"subsequently make available a 16-bit quantity for reading "
+"``I2CCommandResponseDevice`` may be used to write a simple driver."
+msgstr "对于通过轮询触发某种测量并随后提供 16 位读取量的设备，可使用 ``I2CCommandResponseDevice`` 编写简单驱动。"
+
+#: ../../source/docs/sitl-i2c-devices.rst:44 b1cbdff6a398421b9e271c4ac33ab442
+msgid ""
+"For devices which simply return fixed-length readings when an i2c \"read\" "
+"is made - and for any other protocol which doesn't yet have an abstraction -"
+" your simulation will need to implement the virtual method "
+"``rdwr(I2C::i2c_rdwr_ioctl_data *&data)`` inheritted from SITL::I2CDevice."
+msgstr ""
+"对于在 I2C「读」时简单返回固定长度读数的设备，以及任何尚无抽象的其他协议，您的仿真需要实现从 SITL::I2CDevice 继承的虚方法 "
+"``rdwr(I2C::i2c_rdwr_ioctl_data *&data)``。"

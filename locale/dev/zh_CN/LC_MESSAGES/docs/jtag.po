@@ -1,0 +1,532 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/jtag.rst:5 fca2bbf232664d06b90df1309bff61cb
+msgid "Archived: Debugging using JTAG"
+msgstr "存档：使用 JTAG 调试"
+
+#: ../../source/docs/jtag.rst:8 2eae13636ab7480fb1d7cbc9f9946c1c
+msgid "Overview"
+msgstr "概述"
+
+#: ../../source/docs/jtag.rst:10 c3a127f0305e460690e540832421f695
+msgid ""
+"The JTAG interface on APM provides additional debugging features that can be"
+" useful when working on certain kinds of problems. This page describes how "
+"to configure your APM setup so that you can use JTAG to debug it."
+msgstr ""
+"APM 上的 JTAG 接口提供了额外的调试功能，在处理某些类型的问题时非常有用。本页面介绍如何配置您的 APM 以便使用 JTAG 进行调试。"
+
+#: ../../source/docs/jtag.rst:15 60f63b65abe74be9ab6ad96da16a2377
+msgid ""
+"Note that enabling JTAG disables the ADC4, ADC5, ADC6 and ADC7 pins. These "
+"aren't normally used by APM, but if your application requires more than the "
+"low four ADC inputs, you won't be able to use JTAG."
+msgstr ""
+"请注意，启用 JTAG 会禁用 ADC4、ADC5、ADC6 和 ADC7 引脚。APM 通常不使用这些引脚，但如果您的应用需要超过低四路的 ADC "
+"输入，则无法使用 JTAG。"
+
+#: ../../source/docs/jtag.rst:20 cfcda6c329684c6a957f1cdb38ba2d46
+msgid "Hardware Required"
+msgstr "所需硬件"
+
+#: ../../source/docs/jtag.rst:22 42a9a27592f14d6ca728843ef34c646d
+msgid ""
+"Obviously you will need an APM board. The JTAG signals are available on the "
+"oilpan, so we will assume you are using one as well. For other boards (e.g. "
+"Arduino Mega) see your board's documentation for the location of the "
+"relevant pins."
+msgstr ""
+"显然，您需要一块 APM 主板。JTAG 信号可在 oilpan 上获取，因此我们假设您也在使用 oilpan。对于其他主板（如 Arduino "
+"Mega），请参阅您的主板文档以了解相关引脚位置。"
+
+#: ../../source/docs/jtag.rst:27 33cda5e51f7349259ce94c1cc39fe7be
+msgid ""
+"To program the JTAG and OCD fuses in the ATMega1280 an ISP programmer of "
+"some sort is required. This article describes using the cheap and effective "
+"!BusPirate, but another programmer (e.g. STK500, GoodFET, etc.) could also "
+"be used."
+msgstr ""
+"要烧写 ATMega1280 中的 JTAG 和 OCD 熔丝，需要某种 ISP 编程器。本文介绍使用经济实惠且有效的 "
+"!BusPirate，但也可以使用其他编程器（如 STK500、GoodFET 等）。"
+
+#: ../../source/docs/jtag.rst:32 e494ac954a4e4eee80e6b50fd2d1ce61
+msgid ""
+"Last but not least, you will need an AVR JTAG unit. The Atmel JTAGICE mkii "
+"works well, but is expensive. This article was developed using the much "
+"cheaper JTAGICE mkii-CN from"
+msgstr ""
+"最后但同样重要的是，您需要一个 AVR JTAG 设备。Atmel JTAGICE mkii 效果很好，但价格昂贵。本文是使用来自以下来源的更便宜的 "
+"JTAGICE mkii-CN 开发的"
+
+#: ../../source/docs/jtag.rst:36 c7f9eae658cd4a84b0f19ab21a71a7c1
+msgid "`http://www.mcuzone.com <http://www.mcuzone.com/>`__"
+msgstr "`http://www.mcuzone.com <http://www.mcuzone.com/>`__"
+
+#: ../../source/docs/jtag.rst:38 ca8e023f6ad848e9b8f7a3fd8cb18397
+msgid ""
+"obtained via eBay for about 1/3 the price of the Atmel unit. The JTAGICE can"
+" be used as a programmer as well."
+msgstr "通过 eBay 购得，价格约为 Atmel 原装单元的 1/3。JTAGICE 也可用作编程器。"
+
+#: ../../source/docs/jtag.rst:41 588c4eb7da994dedae0f5bf22efc7d91
+msgid ""
+"Note that the mkii-CN unit seems very sensitive to USB setup. If it "
+"misbehaves when connected to a hub, try connecting it directly to a port on "
+"your system."
+msgstr "请注意，mkii-CN 设备对 USB 连接方式似乎非常敏感。如果连接到集线器时出现异常，请尝试直接连接到系统的 USB 端口。"
+
+#: ../../source/docs/jtag.rst:46 95fb0f2bc945450faacf723b9e30a1b5
+msgid "Software Required"
+msgstr "所需软件"
+
+#: ../../source/docs/jtag.rst:48 d116003812d5411db7e8765fee342719
+msgid "The AVRDUDE and AVaRICE tools are required, as well as avr-gdb."
+msgstr "需要 AVRDUDE 和 AVaRICE 工具，以及 avr-gdb。"
+
+#: ../../source/docs/jtag.rst:50 21f7887c9a094d1cad840ce68432a3a6
+msgid ""
+"On Windows, all of the required tools should be installed by WinAVR. (TBD: "
+"verify whether AVaRICE comes with WinAVR)"
+msgstr "在 Windows 上，所有必需工具应通过 WinAVR 安装。（待确认：AVaRICE 是否随 WinAVR 一起提供）"
+
+#: ../../source/docs/jtag.rst:53 6aa38dd6ea7f4751838957aeadb67cb7
+msgid ""
+"On Mac OS the use the MacPorts tool to install the tools. Fetch and install "
+"the MacPorts package, then use the following commands:"
+msgstr "在 Mac OS 上，使用 MacPorts 工具安装所需工具。获取并安装 MacPorts 软件包，然后使用以下命令："
+
+#: ../../source/docs/jtag.rst:63 64009d8f11b6440784cdb9820d94190f
+msgid "You can omit avr-gdb if you already have the AVR CrossPack installed."
+msgstr "如果您已安装 AVR CrossPack，可以省略 avr-gdb。"
+
+#: ../../source/docs/jtag.rst:65 9cfc6a7672d8467aafeb27129762a1af
+msgid ""
+"Most Linux systems have packages available for avrdude, avarice and avr-gdb."
+" See your system management documentation for details on installing these, "
+"or ask a friend."
+msgstr ""
+"大多数 Linux 系统都提供 avrdude、avarice 和 avr-gdb 的软件包。有关安装详情，请参阅您的系统管理文档，或向朋友请教。"
+
+#: ../../source/docs/jtag.rst:70 d2de0ed8a8ec49a5ae23f468b1212ad0
+msgid "Initial Setup"
+msgstr "初始设置"
+
+#: ../../source/docs/jtag.rst:72 3efaf92a067c494bb19f0d59c6b623c4
+msgid ""
+"Before debugging, the JTAG Enable and On Chip Debug Enable fuses must be "
+"programmed in the ATMega1280. By default both are disabled, and despite "
+"offering a tempting option in the boards.txt file, Arduino does not seem to "
+"provide a way to change them."
+msgstr ""
+"在调试之前，必须在 ATMega1280 中烧写 JTAG 使能和片上调试使能熔丝。默认情况下两者都被禁用，尽管 boards.txt "
+"文件中提供了诱人的选项，但 Arduino 似乎没有提供更改这些熔丝的方法。"
+
+#: ../../source/docs/jtag.rst:77 845cad36beeb481682f4d6e1883b1490
+msgid ""
+"Separate the APM and oilpan boards, and connect your ISP programmer to the "
+"AT1280 SPI header on the APM board. In the illustration here, the BusPirate "
+"breakout cable is being used. Note that the wire colours shown are for the "
+"cable supplied by !SparkFun; other vendors may use different colour-coding. "
+"Use the following table as a guide:"
+msgstr ""
+"将 APM 和 oilpan 主板分开，并将 ISP 编程器连接到 APM 主板上的 AT1280 SPI 接头。此处示例使用 BusPirate "
+"转接线缆。请注意，所示线缆颜色适用于 !SparkFun 提供的线缆；其他厂商可能使用不同的颜色编码。请参考下表进行连接："
+
+#: ../../source/docs/jtag.rst:84 8617d83dfae94af2b963610b02fa9091
+msgid "!BusPirate Pin"
+msgstr "!BusPirate 引脚"
+
+#: ../../source/docs/jtag.rst:84 ../../source/docs/jtag.rst:105
+#: 8082504c6335444da8dd609bf56e0178 9dd4e694df0748e6b910e784d4816545
+msgid "ISP Pin"
+msgstr "ISP 引脚"
+
+#: ../../source/docs/jtag.rst:84 ../../source/docs/jtag.rst:174
+#: 32e70a5a325641079b3e6ca6aca99bda 71b9255e61a7429da6bec87511c4a8c5
+msgid "Wire Colour"
+msgstr "线缆颜色"
+
+#: ../../source/docs/jtag.rst:86 83e36e5f802d460d9b4b1dfde086f557
+msgid "1 (GND)"
+msgstr "1（GND）"
+
+#: ../../source/docs/jtag.rst:86 ../../source/docs/jtag.rst:117
+#: 1b013d3161a44c48bd5ec50cd0b36b1b 39bc7c1080af4c2c86e54341f4971dbf
+msgid "6"
+msgstr "6"
+
+#: ../../source/docs/jtag.rst:86 c395168db09b4944a893336fa83ccda7
+msgid "black"
+msgstr "黑色"
+
+#: ../../source/docs/jtag.rst:88 2d44ca9fedf94e508777a0b2d8d68c0f
+msgid "3 (+5)"
+msgstr "3（+5V）"
+
+#: ../../source/docs/jtag.rst:88 ../../source/docs/jtag.rst:109
+#: 0bc6314ee15a4adb9eb8af0a57166dcb 7059f71fce1d40f5be5098edfaf3206b
+msgid "2"
+msgstr "2"
+
+#: ../../source/docs/jtag.rst:88 575438c25bd0441bb26acfdce841090d
+msgid "grey"
+msgstr "灰色"
+
+#: ../../source/docs/jtag.rst:90 b53b2dcb01da41e0af22abe09191317d
+msgid "7 (CLK)"
+msgstr "7（CLK）"
+
+#: ../../source/docs/jtag.rst:90 ../../source/docs/jtag.rst:111
+#: 3b3a1310d5c34ed986e73bca8f74f3c6 dae36597e7d04bf0944444df61179e26
+msgid "3"
+msgstr "3"
+
+#: ../../source/docs/jtag.rst:90 ../../source/docs/jtag.rst:186
+#: 63008b7e94914d51b044c8867d65e89f 951af7618d494c05b99bbfdf45e25427
+msgid "yellow"
+msgstr "黄色"
+
+#: ../../source/docs/jtag.rst:92 03a55c3d63e74a728e8a30a0cf431571
+msgid "8 (MOSI)"
+msgstr "8（MOSI）"
+
+#: ../../source/docs/jtag.rst:92 ../../source/docs/jtag.rst:113
+#: 1c3e3ed8fdbc4acdb59223fa6e43989a e968e790b0f4443497f6d63ecf9c60ef
+msgid "4"
+msgstr "4"
+
+#: ../../source/docs/jtag.rst:92 ../../source/docs/jtag.rst:180
+#: a5df0e313ef74748a1f1218cd89ffb88 f522695c8b6e44d49ee4ff559d34af76
+msgid "orange"
+msgstr "橙色"
+
+#: ../../source/docs/jtag.rst:94 b1feb018ed6c4ccbaf33255248a43452
+msgid "9 (CS)"
+msgstr "9（CS）"
+
+#: ../../source/docs/jtag.rst:94 ../../source/docs/jtag.rst:115
+#: cd4a75bf51964bc49211e1fb37128d25 e3e67b5b7ad342de858085f69c42a835
+msgid "5"
+msgstr "5"
+
+#: ../../source/docs/jtag.rst:94 99ead60b65ce478697a7040cb280435a
+msgid "red"
+msgstr "红色"
+
+#: ../../source/docs/jtag.rst:96 702d3570a5ae48bdb000022eb5579d63
+msgid "10 (MISO)"
+msgstr "10（MISO）"
+
+#: ../../source/docs/jtag.rst:96 ../../source/docs/jtag.rst:107
+#: 18addca60d514fc7ad067faef5eca682 4ab45189e5a44c56b15de2435bc5d1d5
+msgid "1"
+msgstr "1"
+
+#: ../../source/docs/jtag.rst:96 ../../source/docs/jtag.rst:176
+#: 5fe43ef9671942aa954185bc4f5166bf a2a3d302c304484d8edfe646378edb71
+msgid "brown"
+msgstr "棕色"
+
+#: ../../source/docs/jtag.rst:99 392fe7a614e6442092854c200efde2bb
+msgid "Programmer type should be BusPirate."
+msgstr "编程器类型应为 BusPirate。"
+
+#: ../../source/docs/jtag.rst:101 ad7a8ee216a2493586d4749f70949f1c
+msgid ""
+"Here is a table of connections if you are using the JTAGICE mkII-CN debugger"
+" as an ISP programmer:"
+msgstr "如果您使用 JTAGICE mkII-CN 调试器作为 ISP 编程器，以下是连接对照表："
+
+#: ../../source/docs/jtag.rst:105 9204dbabe976402f9032485dc869f0ab
+msgid "JTAGICE Pin"
+msgstr "JTAGICE 引脚"
+
+#: ../../source/docs/jtag.rst:107 ../../source/docs/jtag.rst:180
+#: 775be277554a4ce5a46898d229e16c3d babe5be2cd4344308aed3b63247732c5
+msgid "TDO"
+msgstr "TDO"
+
+#: ../../source/docs/jtag.rst:109 ../../source/docs/jtag.rst:186
+#: 1e081f9d155a4d6492bbf3f0977d58db 32c5f9d770034087bf98cb91c848df09
+msgid "Vref"
+msgstr "Vref"
+
+#: ../../source/docs/jtag.rst:111 ../../source/docs/jtag.rst:176
+#: 04e0d6db94d348f5847691af16cf493b 7debe8a0ba4342d8a36427a58dcb57e2
+msgid "TCK"
+msgstr "TCK"
+
+#: ../../source/docs/jtag.rst:113 ../../source/docs/jtag.rst:182
+#: 08ca3aaf7d834956b75482aeaedb1178 74f4664d47184052adcdb49fd3156008
+msgid "TDI"
+msgstr "TDI"
+
+#: ../../source/docs/jtag.rst:115 ../../source/docs/jtag.rst:188
+#: 3e94eaedb75c4ae4aecf05ee1736dd7e a3d784c723f445868ab78ae66bad0423
+msgid "SRST"
+msgstr "SRST"
+
+#: ../../source/docs/jtag.rst:117 ../../source/docs/jtag.rst:184
+#: 60faad3fc10042608849f0fd0d736ac3 714d3d47c46c453587bbc1ad4fd2b76d
+#: 930c82c0569d46aba51b9e52404cf1e1
+msgid "GND"
+msgstr "GND"
+
+#: ../../source/docs/jtag.rst:120 f7b62fc7a3ed48dc88ba967669826528
+msgid ""
+"Programmer type should be jtagmkii. NOTE: this configuration has not been "
+"verified to work."
+msgstr "编程器类型应为 jtagmkii。注意：此配置尚未经过验证。"
+
+#: ../../source/docs/jtag.rst:123 c13f2c1946564545ab8259187dd051e7
+msgid ""
+"Use this AVRDUDE command to program the fuses on the ATMega1280 to enable "
+"OCD and JTAG:"
+msgstr "使用以下 AVRDUDE 命令烧写 ATMega1280 的熔丝以启用 OCD 和 JTAG："
+
+#: ../../source/docs/jtag.rst:134 6dda0d9e628049609e48d78ee3a57f97
+msgid "Replace"
+msgstr "将"
+
+#: ../../source/docs/jtag.rst:136 76ca85c4ca064208b3a7fe211fdece59
+msgid "with the port to which your programmer is connected, and"
+msgstr "替换为您的编程器所连接的端口，并将"
+
+#: ../../source/docs/jtag.rst:138 e4525bc6817e434ba75de2147bad3d0d
+msgid "with the programmer type."
+msgstr "替换为编程器类型。"
+
+#: ../../source/docs/jtag.rst:140 c985f1269a334bd4a6df7188d5c2b644
+msgid ""
+"This should only take a few seconds, and you should see towards the end the "
+"following lines output:"
+msgstr "这应该只需要几秒钟，您应该在末尾看到以下输出内容："
+
+#: ../../source/docs/jtag.rst:150 667588ebdc7747d9b449fa4a935f9e52
+msgid ""
+"These settings are persistent; unless you reflash the bootloader on your APM"
+" JTAG will remain permanently enabled."
+msgstr "这些设置是持久的；除非您重新刷写 APM 的引导加载程序，否则 JTAG 将保持永久启用。"
+
+#: ../../source/docs/jtag.rst:153 8cf8c27299d44a75902c65d02e1214c4
+msgid "To revert to the default fuse settings, use:"
+msgstr "要恢复默认熔丝设置，请使用："
+
+#: ../../source/docs/jtag.rst:164 6dffbdeb26d64374a986cc43c24608e4
+msgid "JTAG Hardware Setup"
+msgstr "JTAG 硬件设置"
+
+#: ../../source/docs/jtag.rst:166 442b38e4c9c74a7e880bc6057bb10164
+msgid ""
+"On the oilpan, add a 2x3 header to the Expansion Ports pads, and a 1x7 "
+"header to the analog pads (GND-AN5)."
+msgstr "在 oilpan 上，将一个 2x3 排针焊接到扩展端口焊盘，并将一个 1x7 排针焊接到模拟焊盘（GND-AN5）。"
+
+#: ../../source/docs/jtag.rst:169 9bae75eb5f374a649588d3a619839d54
+msgid ""
+"Connect your JTAG debugger as follows. Note that in the example here a "
+"SparkFun !BusPirate breakout cable is being connected to a JTAGICE mkii-CN. "
+"Your wire colours may vary; use the following table as a guide:"
+msgstr ""
+"按如下方式连接您的 JTAG 调试器。请注意，本例中 SparkFun !BusPirate 转接线缆正在连接到 JTAGICE mkii-"
+"CN。您的线缆颜色可能有所不同；请参考下表进行连接："
+
+#: ../../source/docs/jtag.rst:174 119872dc2f6341cc8b36a2d45c337452
+msgid "JTAG Pin"
+msgstr "JTAG 引脚"
+
+#: ../../source/docs/jtag.rst:174 42e0cdba8dd1458fbc64039e5a42c00a
+msgid "Oilpan Pin"
+msgstr "Oilpan 引脚"
+
+#: ../../source/docs/jtag.rst:176 d49e9c54e8bd401898200705f6af914a
+msgid "ADC4"
+msgstr "ADC4"
+
+#: ../../source/docs/jtag.rst:178 61e372221897471c8be61152ed319568
+msgid "TMS"
+msgstr "TMS"
+
+#: ../../source/docs/jtag.rst:178 b7ceac205a9c4438ba40f421df4ab841
+msgid "ADC5"
+msgstr "ADC5"
+
+#: ../../source/docs/jtag.rst:178 d99c2e32721a46a9a83e0a2cbb1e780e
+msgid "green"
+msgstr "绿色"
+
+#: ../../source/docs/jtag.rst:180 a87f67c63de843579cc6e3f27278498d
+msgid "ADC6"
+msgstr "ADC6"
+
+#: ../../source/docs/jtag.rst:182 054816c36902414abbcf619d9c1e7cc7
+msgid "ADC7"
+msgstr "ADC7"
+
+#: ../../source/docs/jtag.rst:182 e1df1b14d8dd44cb97cd1bd0f352beda
+msgid "white"
+msgstr "白色"
+
+#: ../../source/docs/jtag.rst:184 e02c8e9db23a4d09959b620f9ca2099b
+msgid "black, red"
+msgstr "黑色、红色"
+
+#: ../../source/docs/jtag.rst:186 b661e7e5e7714e428da6996bd4685ccb
+msgid "+5"
+msgstr "+5V"
+
+#: ../../source/docs/jtag.rst:188 baafa8ae528143faa46a9f2f3168bfc4
+msgid "Reset"
+msgstr "复位"
+
+#: ../../source/docs/jtag.rst:188 a3848785ea5a4599a881a0fb5161d4cc
+msgid "blue"
+msgstr "蓝色"
+
+#: ../../source/docs/jtag.rst:192 77ef3201dc194f7492f40fc96bae2837
+msgid "Software Setup"
+msgstr "软件设置"
+
+#: ../../source/docs/jtag.rst:194 ab504ca632e342e6b9a55798712d2d3c
+msgid ""
+"Once the hardware setup is done, there are a variety of ways to debug using "
+"JTAG. The following steps cover just the basics."
+msgstr "硬件设置完成后，可以通过多种方式使用 JTAG 进行调试。以下步骤仅涵盖基本内容。"
+
+#: ../../source/docs/jtag.rst:197 821469fcaadc453086c2818e55dfa762
+msgid ""
+"The bridge between the JTAG unit and your debugger is AVaRICE. Some setups "
+"will automatically launch the tool when the debugger starts, others require "
+"that you launch it manually. It is critical for successful APM debugging "
+"that the --capture argument is passed to AVaRICE, rather than attempting to "
+"download a new program."
+msgstr ""
+"JTAG 设备与调试器之间的桥梁是 AVaRICE。某些配置会在调试器启动时自动启动该工具，其他配置则需要手动启动。成功调试 APM 的关键是向 "
+"AVaRICE 传递 --capture 参数，而不是尝试下载新程序。"
+
+#: ../../source/docs/jtag.rst:203 7ded5636b82e472aa5c425c8a97cd562
+msgid ""
+"To start AVaRICE manually, assuming a JTAGICE mkii (or clone) connected via "
+"USB, use:"
+msgstr "要手动启动 AVaRICE（假设通过 USB 连接了 JTAGICE mkii 或其克隆版本），请使用："
+
+#: ../../source/docs/jtag.rst:210 d707e0bca665490ca31e1fd2dddc5e63
+msgid "You should see output like:"
+msgstr "您应该看到如下输出："
+
+#: ../../source/docs/jtag.rst:216 5dc8a559c5804934b997d125a8a39533
+msgid "Defaulting JTAG bitrate to 250 kHz."
+msgstr "JTAG 比特率默认为 250 kHz。"
+
+#: ../../source/docs/jtag.rst:218 064b848263f44dbdb50b3aa17cc502ed
+msgid ""
+"JTAG config starting. Found a device: JTAGICEmkII Serial number: "
+"00:a0:00:40:26:63 Reported JTAG device ID: 0x9703 Configured for device ID: "
+"0x9703 atmega1280 JTAG config complete. Waiting for connection on port 4242."
+msgstr ""
+"JTAG 配置启动中。找到设备：JTAGICEmkII 序列号：00:a0:00:40:26:63 上报的 JTAG 设备 ID：0x9703 "
+"已配置设备 ID：0x9703 atmega1280 JTAG 配置完成。正在端口 4242 上等待连接。"
+
+#: ../../source/docs/jtag.rst:223 a74caa903a5f4987a8f4c785d9eaa393
+msgid ""
+"Note that AVaRICE will exit every time the debugger disconnects, so be "
+"prepared to restart it regularly if your debugger doesn't manage it already."
+" Once the \"Waiting for connection\" message is displayed, you are ready to "
+"connect with your debugger."
+msgstr ""
+"请注意，每次调试器断开连接时 AVaRICE 都会退出，因此如果您的调试器没有自动管理，请做好定期重启的准备。一旦显示「Waiting for "
+"connection」消息，您就可以连接调试器了。"
+
+#: ../../source/docs/jtag.rst:229 131550eabc7b4a19b11ad8a2443ba069
+msgid "Debugging Code Built by Arduino"
+msgstr "调试由 Arduino 构建的代码"
+
+#: ../../source/docs/jtag.rst:231 37241c957c3d403c9653737d0d36b46f
+msgid ""
+"Arduino does its best to hide the dirty parts of the build process from the "
+"user. This can make it slightly difficult to find the files that you need "
+"for debugging. Hold down the SHIFT key while clicking the Verify button in "
+"the Arduino IDE, and you will see the commands executed by Arduino as it "
+"builds your sketch. Assuming that the build is successful, the last command "
+"listed (before the \"Binary sketch…\" line) will look something like this "
+"example taken from a Mac OS system:"
+msgstr ""
+"Arduino 尽力对用户隐藏构建过程中的繁琐细节，这可能使得查找调试所需文件略显困难。在 Arduino IDE 中按住 SHIFT "
+"键并点击「验证」按钮，您将看到 Arduino 构建草图时执行的命令。假设构建成功，最后列出的命令（位于「Binary "
+"sketch...」行之前）将类似于以下取自 Mac OS 系统的示例："
+
+#: ../../source/docs/jtag.rst:245 49297033ad664b92a3a243168fac431f
+msgid ""
+"The file that your debugger will want to load is the .elf file, in this case"
+msgstr "调试器需要加载的文件是 .elf 文件，在本例中为"
+
+#: ../../source/docs/jtag.rst:248 1be1aeee8b774c1bae0136db801c0dc5
+msgid ""
+"/var/folders/Bu/Burcn-0aFa4N+++0Me1I2U++1dw/-Tmp-/build159308262941509457.tmp/GPS_AUTO_test.cpp.elf"
+msgstr ""
+"/var/folders/Bu/Burcn-0aFa4N+++0Me1I2U++1dw/-Tmp-/build159308262941509457.tmp/GPS_AUTO_test.cpp.elf"
+
+#: ../../source/docs/jtag.rst:250 02062477d08241baaaad24454342ab82
+msgid ""
+"The name of the file will depend on your sketch name, and the location will "
+"vary depending on your system, but it will remain the same for a given "
+"sketch until you quit and restart Arduino. Note that the directory "
+"containing the file is deleted and re-created every time you compile the "
+"sketch."
+msgstr ""
+"文件名取决于您的草图名称，位置因系统而异，但对于给定草图，在您退出并重新启动 Arduino "
+"之前，路径保持不变。请注意，包含该文件的目录在每次编译草图时都会被删除并重新创建。"
+
+#: ../../source/docs/jtag.rst:256 0de7892699c745dd9a36cc4c0e57734a
+msgid ""
+"To debug this file with avr-gdb, use Arduino to compile and upload the "
+"sketch to APM. Start AVaRICE as described above, then start GDB:"
+msgstr "要使用 avr-gdb 调试此文件，请使用 Arduino 将草图编译并上传到 APM。按上述方法启动 AVaRICE，然后启动 GDB："
+
+#: ../../source/docs/jtag.rst:263 45800a26bf1448f8b2ef96d85c0813b5
+msgid "You should see GDB start up:"
+msgstr "您应该看到 GDB 启动："
+
+#: ../../source/docs/jtag.rst:277 a8d020a79777401291f2944183a3aef7
+msgid "At the (gdb) prompt, tell GDB to connect to AVaRICE:"
+msgstr "在（gdb）提示符处，告知 GDB 连接到 AVaRICE："
+
+#: ../../source/docs/jtag.rst:283 1ccb90a56001416a93f0807a216272e8
+msgid ""
+"This will stop the program running on the APM and tell you where it stopped:"
+msgstr "这将停止 APM 上正在运行的程序，并告知您程序停止的位置："
+
+#: ../../source/docs/jtag.rst:295 ef24c73e8c6d4bcaa5392c9f05a566d2
+msgid ""
+"Use the 'continue' command to start the program running again, and hit "
+"control-C to stop it once more."
+msgstr "使用「continue」命令让程序重新运行，按 Ctrl-C 再次停止。"
+
+#: ../../source/docs/jtag.rst:298 436f9c7b9d6b4363b7245ba50fd2d04b
+msgid ""
+"At this point, GDB can be used normally. Other debuggers that are compatible"
+" with or build on GDB such as DDD or Insight can be used instead, as can "
+"plugins for various IDEs like Eclipse."
+msgstr ""
+"此时，GDB 可以正常使用。也可以使用其他兼容 GDB 或基于 GDB 构建的调试器，如 DDD 或 Insight，以及各种 IDE（如 "
+"Eclipse）的插件。"

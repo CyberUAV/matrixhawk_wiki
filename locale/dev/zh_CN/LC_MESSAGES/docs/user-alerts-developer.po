@@ -1,0 +1,605 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/user-alerts-developer.rst:5
+#: defdb7f7039a4caea9a08f967dcb7fe2
+msgid "User Alerts for Developers"
+msgstr "面向开发者的用户警报"
+
+#: ../../source/docs/user-alerts-developer.rst:7
+#: 20cb5a63ab364a528772c466b96e8180
+msgid ""
+"A User Alert is a formal report of an ArduPilot issue that may affect the "
+"safe operation of a vehicle. An \"issue\" is typically a bug report or "
+"GitHub Issue. \"Safe Operation\" is the ability of a vehicle to reliably "
+"respond to user commands in a timely manner AND the ability of the vehicle "
+"to reliably follow commanded actions in automated flight modes."
+msgstr ""
+"用户警报是对可能影响飞行器安全运行的 ArduPilot 问题的正式报告。「问题」通常指漏洞报告或 GitHub "
+"Issue。「安全运行」是指飞行器能够及时可靠地响应用户指令，以及在自动飞行模式下能够可靠地执行指定动作的能力。"
+
+#: ../../source/docs/user-alerts-developer.rst:9
+#: ef154388829a4c2f9102605c1bf481d4
+msgid "Examples of Safe Operation issues include:"
+msgstr "安全运行问题的示例包括："
+
+#: ../../source/docs/user-alerts-developer.rst:11
+#: 217a1d59dd874199bb887cd9d08d3a63
+msgid "Corrupted packets in I2C bus locking up the flight controller"
+msgstr "I2C 总线上的损坏数据包导致飞控锁死"
+
+#: ../../source/docs/user-alerts-developer.rst:12
+#: 2a533e62a53a466db1456dd6b2b4d54b
+msgid "Non-commanded disarming whilst in-flight"
+msgstr "飞行途中未经指令自动上锁"
+
+#: ../../source/docs/user-alerts-developer.rst:13
+#: 4098b17ad56947a18815ba66d93a3376
+msgid ""
+"Malformed stored waypoint causes vehicle to fly away whilst in AUTO mode"
+msgstr "存储的航点格式错误导致飞行器在 AUTO 模式下飞走"
+
+#: ../../source/docs/user-alerts-developer.rst:14
+#: e340f8c5ae1b4aee8eb5f02c12150ad5
+msgid "Triggering of the watchdog reset whilst in-flight"
+msgstr "飞行途中触发看门狗复位"
+
+#: ../../source/docs/user-alerts-developer.rst:16
+#: 11a7b660f1c14fbbaad4eef2ba87eb3a
+msgid "Examples of issues which are NOT Safe Operation issues include:"
+msgstr "不属于安全运行问题的示例包括："
+
+#: ../../source/docs/user-alerts-developer.rst:18
+#: f8e2b609bb6c4a10ad536b362e01ad7c
+msgid "Sub-optimal parameter values that lead to poor navigation performance"
+msgstr "参数值欠优导致导航性能不佳"
+
+#: ../../source/docs/user-alerts-developer.rst:19
+#: 2a8f621880f74719bd0bc095012d420d
+msgid "User error or misunderstanding of parameter configuration"
+msgstr "用户操作失误或对参数配置理解有误"
+
+#: ../../source/docs/user-alerts-developer.rst:20
+#: 0dd16d15d7ac4edc9bd33b48bfaf5c3d
+msgid ""
+"Issues that, if experienced, an average user would be likely to safely "
+"recover from"
+msgstr "发生时普通用户通常能够安全恢复的问题"
+
+#: ../../source/docs/user-alerts-developer.rst:22
+#: 1c52c568ae9244d0bd738c134155b945
+msgid ""
+"User Alerts will only be for ArduPilot software issues. Manufacturer "
+"hardware will not be included at this stage, although this may be reviewed "
+"at a later date."
+msgstr "用户警报仅针对 ArduPilot 软件问题。制造商硬件问题目前不在此范围内，但未来可能会重新评估。"
+
+#: ../../source/docs/user-alerts-developer.rst:24
+#: fddeb2ee1e9740f284952d55cd4e0ad0
+msgid ""
+"As per the open nature of ArduPilot, all User Alerts will be published "
+"publicly on `Github <https://github.com/ardupilot/useralerts>`__."
+msgstr ""
+"秉承 ArduPilot 开放的特性，所有用户警报将公开发布于 `Github "
+"<https://github.com/ardupilot/useralerts>`__。"
+
+#: ../../source/docs/user-alerts-developer.rst:26
+#: 88abcc2e36184c3f80bc0bbc430c7516
+msgid "The User Alerts system consists of 3 parts:"
+msgstr "用户警报系统由三部分组成："
+
+#: ../../source/docs/user-alerts-developer.rst:28
+#: 9707a4262eae43f89f243a20d5a3e52e
+msgid "A process to raise, authorise and manage User Alerts"
+msgstr "提交、审批和管理用户警报的流程"
+
+#: ../../source/docs/user-alerts-developer.rst:29
+#: 9e62b2cdda0847909b1b29488f7a88ab
+msgid "A method of storing and handling the User Alert data"
+msgstr "用户警报数据的存储和处理方式"
+
+#: ../../source/docs/user-alerts-developer.rst:30
+#: abdb7f13f0664febae12951e21c5bec2
+msgid ""
+"The ability of applications (GCS software, websites) to ingest and use the "
+"User Alert data."
+msgstr "应用程序（地面控制站软件、网站）获取并使用用户警报数据的能力。"
+
+#: ../../source/docs/user-alerts-developer.rst:35
+#: 653894c618864433a922bd6197bf0589
+msgid ""
+"All User Alerts reported from 16/09/2020 (or later) are in the User Alert "
+"database. There is no guarantee that the database holds all User Alerts "
+"reported before this date."
+msgstr "2020年9月16日（含）之后提交的所有用户警报均已录入用户警报数据库。无法保证数据库包含此日期之前提交的所有用户警报。"
+
+#: ../../source/docs/user-alerts-developer.rst:39
+#: 92d690ed240044949c94b3feb4bc26c4
+msgid "Processes"
+msgstr "流程"
+
+#: ../../source/docs/user-alerts-developer.rst:41
+#: c8c76c66df9e46999518aa375b22587b
+msgid "The process for entering a new User Alert is:"
+msgstr "提交新用户警报的流程如下："
+
+#: ../../source/docs/user-alerts-developer.rst:43
+#: 0c0e85305287481d87d36ad2a0686dea
+msgid "Bug reported or suspected"
+msgstr "报告或怀疑存在漏洞"
+
+#: ../../source/docs/user-alerts-developer.rst:44
+#: 99826f28d1014f79845a16498396bd16
+msgid "Issue raised on ArduPilot GitHub"
+msgstr "在 ArduPilot GitHub 上提交 Issue"
+
+#: ../../source/docs/user-alerts-developer.rst:45
+#: 7c378f4c4e584e09a02ea9aa2968f48b
+msgid "Developer decides if safety issue"
+msgstr "开发者判断是否属于安全问题"
+
+#: ../../source/docs/user-alerts-developer.rst:46
+#: 74a043f97c454baa8b1cf6e86e5d232f
+msgid "Developer raises PR on User Alert GitHub repo"
+msgstr "开发者在用户警报 GitHub 仓库提交 PR"
+
+#: ../../source/docs/user-alerts-developer.rst:47
+#: 48839979ae2e48eaa5ec89a4cd1873d6
+msgid ""
+"2nd Developer reviews and confirms that it's a real ArduPilot software bug"
+msgstr "第二位开发者审查并确认这是真实的 ArduPilot 软件漏洞"
+
+#: ../../source/docs/user-alerts-developer.rst:48
+#: ../../source/docs/user-alerts-developer.rst:59
+#: 0251186881fc447097fd97180a94cf0b 22077261a0df42bb890aef0553333197
+msgid ""
+"3rd person confirms PR is filled out correctly and process has been followed"
+msgstr "第三人确认 PR 填写正确且流程已被遵循"
+
+#: ../../source/docs/user-alerts-developer.rst:49
+#: ../../source/docs/user-alerts-developer.rst:60
+#: 4326da8295284a8c8cbbdfda748d94db 6ea028d06bcc44dc8500ca77683a6f3e
+msgid "PR in User Alert repo merged by authorised team member"
+msgstr "用户警报仓库中的 PR 由授权团队成员合并"
+
+#: ../../source/docs/user-alerts-developer.rst:51
+#: 2eaa1ae8932b4329992b403d7ccdf4ad
+msgid "The process for resolving an active User Alert is:"
+msgstr "解决活跃用户警报的流程如下："
+
+#: ../../source/docs/user-alerts-developer.rst:53
+#: c8149ba203224dfeb1a08b33bc65f501
+msgid "Patch created for ArduPilot"
+msgstr "为 ArduPilot 创建补丁"
+
+#: ../../source/docs/user-alerts-developer.rst:54
+#: 64271aead2d6480981db4f8eaec770eb
+msgid "Patch tested"
+msgstr "测试补丁"
+
+#: ../../source/docs/user-alerts-developer.rst:55
+#: a3be3e7ba24b4effbd97f8250820b9c3
+msgid "Patch merged into ArduPilot master"
+msgstr "补丁合并到 ArduPilot master 分支"
+
+#: ../../source/docs/user-alerts-developer.rst:56
+#: 2fee5723c86641ba8b4efbc7c90b2e34
+msgid "Patch in stable ArduPilot release X.Y.Z"
+msgstr "补丁包含于 ArduPilot 稳定版 X.Y.Z"
+
+#: ../../source/docs/user-alerts-developer.rst:57
+#: af74bc31228e4792921a1de18fcdb7f7
+msgid ""
+"Developer Raises PR on User Alert Github repo to update User Alert fields"
+msgstr "开发者在用户警报 GitHub 仓库提交 PR 以更新用户警报字段"
+
+#: ../../source/docs/user-alerts-developer.rst:58
+#: 26e8cb410aa846bcb53df21ff28b44a0
+msgid "2nd Developer reviews and confirms"
+msgstr "第二位开发者审查并确认"
+
+#: ../../source/docs/user-alerts-developer.rst:63
+#: fac1546942584f69adac5cd6bd470ec4
+msgid "Data Structure"
+msgstr "数据结构"
+
+#: ../../source/docs/user-alerts-developer.rst:66
+#: d84d366bd66849e1bc951cd7cc3bb750
+msgid ""
+"The User Alert data will be hosted on a `Github repository "
+"<https://github.com/ardupilot/useralerts>`__ under the ArduPilot "
+"organisation."
+msgstr ""
+"用户警报数据将托管在 ArduPilot 组织下的 `Github 仓库 "
+"<https://github.com/ardupilot/useralerts>`__ 中。"
+
+#: ../../source/docs/user-alerts-developer.rst:68
+#: eca6a1fcd4aa44d7b6c446639530b61a
+msgid "The repository will contain the following file/folder structure:"
+msgstr "该仓库将包含以下文件/文件夹结构："
+
+#: ../../source/docs/user-alerts-developer.rst:70
+#: 0fa8e82de7a8491a939e968ec383b10d
+msgid "README.md"
+msgstr "README.md"
+
+#: ../../source/docs/user-alerts-developer.rst:71
+#: be2b73fa5bb04599bc65cc25c6794d71
+msgid "examples"
+msgstr "examples（示例目录）"
+
+#: ../../source/docs/user-alerts-developer.rst:73
+#: 5eaa0ad4de7d4814abd4247e8e91bc41
+msgid "EX00001.json"
+msgstr "EX00001.json"
+
+#: ../../source/docs/user-alerts-developer.rst:74
+#: ../../source/docs/user-alerts-developer.rst:79
+#: ae09d6f88bfa4689981ed6219b833f21 d4ab05c85ef940be9b0ff3688fe77432
+msgid "..."
+msgstr "..."
+
+#: ../../source/docs/user-alerts-developer.rst:76
+#: ec5f4f5e6df74f3d92345610c47dc84f
+msgid "alerts"
+msgstr "alerts（警报目录）"
+
+#: ../../source/docs/user-alerts-developer.rst:78
+#: 08844e58f072422fb59db3774b776513
+msgid "UA00001.json"
+msgstr "UA00001.json"
+
+#: ../../source/docs/user-alerts-developer.rst:81
+#: 8810527b4925481e94c3e488087fd67b
+msgid ""
+"Each User Alert will be a json file. There will be 1 User Alert per json "
+"file. An applicable User Alert will be stored in the ``alerts`` folder."
+msgstr "每条用户警报均为一个 JSON 文件，每个文件对应一条用户警报。有效的用户警报存储在 ``alerts`` 文件夹中。"
+
+#: ../../source/docs/user-alerts-developer.rst:83
+#: 88ab6ba9c37f4a49a1fd0d12d24aea08
+msgid ""
+"The repository will have a small CI routine to confirm the validity of the "
+"json files with each PR."
+msgstr "仓库将配置一个小型 CI 流程，以在每次 PR 时验证 JSON 文件的有效性。"
+
+#: ../../source/docs/user-alerts-developer.rst:85
+#: 1f8d85ae99c1430e8aab1d7568b3db2b
+msgid ""
+"The json files themselves will each have the below fields. There are "
+"examples in the `Github repository "
+"<https://github.com/ArduPilot/useralerts/tree/master/examples>`__ (the "
+"``EX0000x.json`` files)."
+msgstr ""
+"每个 JSON 文件包含以下字段。`Github 仓库 "
+"<https://github.com/ArduPilot/useralerts/tree/master/examples>`__ 中有示例文件（即 "
+"``EX0000x.json`` 文件）。"
+
+#: ../../source/docs/user-alerts-developer.rst:92
+#: 54eaa722af484f1ba35134d16a264650
+msgid "Field Name"
+msgstr "字段名称"
+
+#: ../../source/docs/user-alerts-developer.rst:93
+#: 1e69fef2431641e1a3f0b67ad949fd87
+msgid "Type"
+msgstr "类型"
+
+#: ../../source/docs/user-alerts-developer.rst:94
+#: dae43ba9bdf7454aa6f38a302ce0a576
+msgid "Description"
+msgstr "说明"
+
+#: ../../source/docs/user-alerts-developer.rst:96
+#: 9661fde030ed466a97896ac8daaab320
+msgid "dateRaised"
+msgstr "dateRaised"
+
+#: ../../source/docs/user-alerts-developer.rst:97
+#: ../../source/docs/user-alerts-developer.rst:126
+#: 52841a22af344b24a1f73a780bfd98b0 627efe16688c464a9ce54685f9619f18
+msgid "``YYYYMMDD``"
+msgstr "``YYYYMMDD``"
+
+#: ../../source/docs/user-alerts-developer.rst:98
+#: 124b92a5a787472b955ec1c29097fbe5
+msgid "Date that this User Alert was raised."
+msgstr "该用户警报的提交日期。"
+
+#: ../../source/docs/user-alerts-developer.rst:100
+#: 3a997af936be4cfcb5dbeb5a3af5c991
+msgid "affectedFirmware"
+msgstr "affectedFirmware"
+
+#: ../../source/docs/user-alerts-developer.rst:101
+#: 604bf29d18ef40eb8f2cdce6acabeb26
+msgid ""
+"String array containing ``[\"all\"]`` OR individual firmwares: "
+"``[\"copter\", \"sub\", \"antenna\", \"plane\", \"rover\", \"AP_Periph\"]``"
+msgstr ""
+"字符串数组，包含 ``[\"all\"]`` 或各固件名称：``[\"copter\", \"sub\", \"antenna\", "
+"\"plane\", \"rover\", \"AP_Periph\"]``"
+
+#: ../../source/docs/user-alerts-developer.rst:102
+#: 29f258c73b274577b4fbad8301e18a8b
+msgid ""
+"Which ArduPilot firmware is affected. Use comma separated value to specify "
+"multiple vehicles if \"all\" does not work."
+msgstr "受影响的 ArduPilot 固件。如 「all」 不适用，请使用逗号分隔的值指定多个飞行器类型。"
+
+#: ../../source/docs/user-alerts-developer.rst:104
+#: 10b34e6aa1894b3d960f98a2996ad8d3
+msgid "hardwareLimited"
+msgstr "hardwareLimited"
+
+#: ../../source/docs/user-alerts-developer.rst:105
+#: 24765045cf8240e2b687378ddf35d3e9
+msgid ""
+"String array of board names, using the names as per the build system. For "
+"example: ``[\"CubeBlack\", \"Pixhawk1-1M\", \"KakuteF4\"]``"
+msgstr "飞控板名称的字符串数组，名称与构建系统一致。例如：``[\"CubeBlack\", \"Pixhawk1-1M\", \"KakuteF4\"]``"
+
+#: ../../source/docs/user-alerts-developer.rst:106
+#: 6e3220a01aac46df8cdde04e8b5eb009
+msgid ""
+"If the User Alert is only applicable to certain boards, list the board "
+"names. An empty array indicates that all boards are affected."
+msgstr "如果用户警报仅适用于特定飞控板，请列出飞控板名称。空数组表示所有飞控板均受影响。"
+
+#: ../../source/docs/user-alerts-developer.rst:108
+#: f5e82dd4393c4ab8b3dee780be40a2c1
+msgid "description"
+msgstr "description"
+
+#: ../../source/docs/user-alerts-developer.rst:109
+#: ../../source/docs/user-alerts-developer.rst:118
+#: ../../source/docs/user-alerts-developer.rst:130
+#: ../../source/docs/user-alerts-developer.rst:138
+#: ../../source/docs/user-alerts-developer.rst:150
+#: 2778a7a91d48426fbb73bbd887e9fecc 762bc9746f9a4856a8d9be7a8fc0072f
+#: 8323ec484fca48788c8275a36561204c bbd2bc44345f470d922516027d75e0aa
+#: eb8b7b464ddd49a8a19c4fa0ffe6b003
+msgid "``string``"
+msgstr "``string``"
+
+#: ../../source/docs/user-alerts-developer.rst:110
+#: af7620cdb41b4eaeac3d4696274c4875
+msgid ""
+"Textual description of the User Alert. Should be understandable by an "
+"average user."
+msgstr "用户警报的文字说明，应让普通用户易于理解。"
+
+#: ../../source/docs/user-alerts-developer.rst:112
+#: dada816c05cc4453bb0ddf8080ef8050
+msgid "criticality"
+msgstr "criticality"
+
+#: ../../source/docs/user-alerts-developer.rst:113
+#: 2a7255c7541d48cc9393a0127e696d05
+msgid "``int`` of value 1,2,3 or 4."
+msgstr "取值为 1、2、3 或 4 的 ``int`` 整数。"
+
+#: ../../source/docs/user-alerts-developer.rst:114
+#: 91aad750c2384ff984f16d4a47a462c0
+msgid ""
+"An assessment of the likelihood of the issue occurring. 1 = CRITICAL - "
+"Likely to be encountered by all vehicle configurations. 2 = CRITICAL - "
+"Likely to be encountered by specific vehicle configurations, 3 = MAJOR - "
+"possible to be encountered. 4 = MINOR - unlikely to be encountered."
+msgstr ""
+"对问题发生可能性的评估。1 = 严重——所有飞行器配置均可能遇到。2 = 严重——特定飞行器配置可能遇到。3 = 重大——有可能遇到。4 = "
+"轻微——不太可能遇到。"
+
+#: ../../source/docs/user-alerts-developer.rst:117
+#: f114f65371574221a7c7c3758c5acc30
+msgid "mitigation"
+msgstr "mitigation"
+
+#: ../../source/docs/user-alerts-developer.rst:119
+#: 8f94a390a2d44e19801a5be069d4611d
+msgid ""
+"Textual description of any mitigations that a user can take to prevent the "
+"issue from occurring BEFORE a patched ArduPilot is released. Should be "
+"understandable by an average user."
+msgstr "在补丁版 ArduPilot 发布之前，用户可采取的任何缓解措施的文字说明，应让普通用户易于理解。"
+
+#: ../../source/docs/user-alerts-developer.rst:121
+#: 695b8dd5137c48f7bdd99802f5dcddc9
+msgid "fixCommit"
+msgstr "fixCommit"
+
+#: ../../source/docs/user-alerts-developer.rst:122
+#: bed76b5acfea45e3ad72b41f625135cc
+msgid ""
+"String array of commit ID’s. For example: ``[\"23874b32c9281dja\", "
+"\"w9085bqwfskjdtnu243\"]``"
+msgstr "commit ID 的字符串数组。例如：``[\"23874b32c9281dja\", \"w9085bqwfskjdtnu243\"]``"
+
+#: ../../source/docs/user-alerts-developer.rst:123
+#: 4bf33aaa31aa467999ec22172debfa33
+msgid ""
+"Commit ID of the fix (on master branch) for this Issue. Can be multiple "
+"commits if the fix commits are spread among different libraries. Empty array"
+" if no fix yet. If this field is not ``[]``, it is considered that the issue"
+" has been fixed in master."
+msgstr ""
+"针对此问题的修复 commit ID（位于 master 分支）。如果修复 commit 分散在不同库中，可以有多个。尚无修复时为空数组。若此字段不为 "
+"``[]``，则认为问题已在 master 中修复。"
+
+#: ../../source/docs/user-alerts-developer.rst:125
+#: 0842d58d32ce4649bb3469fa5b388b72
+msgid "dateResolved"
+msgstr "dateResolved"
+
+#: ../../source/docs/user-alerts-developer.rst:127
+#: 5e74a030a5a44fbf8b599fd3c5bacbe6
+msgid ""
+"Date that this User Alert was resolved. \"Resolved\" in this case means a "
+"patched ArduPilot version has been released for ALL affected vehicle and "
+"board types, and no further edits to this User Alert are expected."
+msgstr ""
+"该用户警报的解决日期。此处「已解决」是指针对所有受影响飞行器和飞控板类型的 ArduPilot 补丁版本均已发布，且预计不再对该用户警报进行进一步修改。"
+
+#: ../../source/docs/user-alerts-developer.rst:129
+#: e6a6122d88814aa4a1d992c3273718cb
+msgid "linkedIssue"
+msgstr "linkedIssue"
+
+#: ../../source/docs/user-alerts-developer.rst:131
+#: 5d945be6d7df4a60a819c27c3119f86f
+msgid "URL to Issue in ArduPilot GitHub repository. Optional."
+msgstr "ArduPilot GitHub 仓库中相关 Issue 的 URL。可选字段。"
+
+#: ../../source/docs/user-alerts-developer.rst:133
+#: 40e3b062a8a4469b88087d04ec7232a5
+msgid "linkedInfo"
+msgstr "linkedInfo"
+
+#: ../../source/docs/user-alerts-developer.rst:134
+#: ae113c03d23e4b70b9ce9625c4c56a55
+msgid "String array of URLs"
+msgstr "URL 字符串数组"
+
+#: ../../source/docs/user-alerts-developer.rst:135
+#: da2173cc1ecb41d7abc01507407f96b0
+msgid ""
+"URLs to any supporting information about the issue, such as forum posts. "
+"Optional."
+msgstr "与该问题相关的任何支持信息的 URL，例如论坛帖子。可选字段。"
+
+#: ../../source/docs/user-alerts-developer.rst:137
+#: 85601b0b270040ddb12cbf24dc8eb00b
+msgid "linkedPR"
+msgstr "linkedPR"
+
+#: ../../source/docs/user-alerts-developer.rst:139
+#: 7f4927101e474d58814294cfa0db8aa0
+msgid ""
+"URL to the fix PR in ArduPilot GitHub repo. Blank if there is not PR yet."
+msgstr "ArduPilot GitHub 仓库中修复 PR 的 URL。如尚无 PR 则留空。"
+
+#: ../../source/docs/user-alerts-developer.rst:141
+#: c1b3de97d7c74e88b035133a3265f7b2
+msgid "versionFrom"
+msgstr "versionFrom"
+
+#: ../../source/docs/user-alerts-developer.rst:142
+#: 1401a671c0464952b866b3d78cc38d10
+#, python-brace-format
+msgid ""
+"Dict of firmware versions. For example: ``{\"copter\": \"4.0.1\", \"plane\":"
+" \"4.0.5\"}``"
+msgstr "固件版本字典。例如：``{\"copter\": \"4.0.1\", \"plane\": \"4.0.5\"}``"
+
+#: ../../source/docs/user-alerts-developer.rst:143
+#: 2385bcb748b546b4b1462bdeacd6a386
+msgid ""
+"ArduPilot release which introduced the issue, if known.  Empty assumes all "
+"previous versions. The dict must cover all firmwares listed in \"Affected "
+"firmware\"."
+msgstr "引入该问题的 ArduPilot 版本（如已知）。为空则假定所有之前的版本均受影响。字典必须涵盖「受影响固件」中列出的所有固件。"
+
+#: ../../source/docs/user-alerts-developer.rst:145
+#: c82fabebb8bc414ab18e88bcec1ad4a0
+msgid "versionFixed"
+msgstr "versionFixed"
+
+#: ../../source/docs/user-alerts-developer.rst:146
+#: 6c165ce335e445ab93c5219448fc366e
+#, python-brace-format
+msgid ""
+"Dict of firmware=version. For example: ``{\"copter\": \"4.0.1\", \"plane\": "
+"\"4.0.5\"}``"
+msgstr "固件=版本的字典。例如：``{\"copter\": \"4.0.1\", \"plane\": \"4.0.5\"}``"
+
+#: ../../source/docs/user-alerts-developer.rst:147
+#: 81fbdc05aeda44f4b7e5ef9e712111c5
+msgid ""
+"ArduPilot release which contains fix. List must cover all firmwares listed "
+"in \"Affected firmware\". It is assumed that all versions between "
+"VersionFrom and this are affected by the User Alert. This field is an empty "
+"if there is no fixed version yet."
+msgstr ""
+"包含修复的 ArduPilot 版本。列表必须涵盖「受影响固件」中的所有固件。假定从 versionFrom "
+"到此版本之间的所有版本均受该用户警报影响。如尚无修复版本，此字段为空。"
+
+#: ../../source/docs/user-alerts-developer.rst:149
+#: d41dd6678f9b410ab7fa652c2b50b85c
+msgid "lastmodified"
+msgstr "lastmodified"
+
+#: ../../source/docs/user-alerts-developer.rst:151
+#: 15eca55d4fd346c3848603c3af679f21
+msgid ""
+"Date and time that this User Alert was modified, in ISO8601 format. This "
+"field is automatically added by the CI and does not need to be manually "
+"added."
+msgstr "该用户警报的最后修改日期和时间，采用 ISO8601 格式。此字段由 CI 自动添加，无需手动填写。"
+
+#: ../../source/docs/user-alerts-developer.rst:154
+#: 9f30711302ea4be68dd2c99a991104a1
+msgid "Application Ingestion"
+msgstr "应用程序数据获取"
+
+#: ../../source/docs/user-alerts-developer.rst:156
+#: be9bef2d2168474b991706c09087c8c5
+msgid ""
+"To make application ingestion easier, there will be a generated manifest "
+"file listing all user alerts. These can then be filtered by the "
+"``versionFrom``, ``versionFixed``, ``affectedFirmware`` and "
+"``hardwareLimited`` fields to match with the user's autopilot and display "
+"any relevant user alerts."
+msgstr ""
+"为简化应用程序的数据获取，系统将生成一个列出所有用户警报的清单文件。可通过 "
+"``versionFrom``、``versionFixed``、``affectedFirmware`` 和 ``hardwareLimited`` "
+"字段进行过滤，以匹配用户的飞控并显示相关用户警报。"
+
+#: ../../source/docs/user-alerts-developer.rst:158
+#: 2674bdd5734b46fb93c6dc170abac3c3
+msgid ""
+"There are URL's for both an example manifest (for testing purposes) and the "
+"actual user alerts manifest:"
+msgstr "以下是示例清单（用于测试）和实际用户警报清单的 URL："
+
+#: ../../source/docs/user-alerts-developer.rst:160
+#: f12cdc693c294176bf23b03c366d59ee
+msgid ""
+"URL for example User Alerts: "
+"https://firmware.ardupilot.org/useralerts/examplemanifest.json"
+msgstr ""
+"示例用户警报 URL：https://firmware.ardupilot.org/useralerts/examplemanifest.json"
+
+#: ../../source/docs/user-alerts-developer.rst:161
+#: b3eebe29b3f043f8aaf1ecb62d334a8d
+msgid ""
+"URL for User Alerts: https://firmware.ardupilot.org/useralerts/manifest.json"
+msgstr "用户警报 URL：https://firmware.ardupilot.org/useralerts/manifest.json"
+
+#: ../../source/docs/user-alerts-developer.rst:163
+#: 0f2cc9f49ad5427e92cab27dded21021
+msgid ""
+"There is also a timestamp of the last date and time that the manifests were "
+"uploaded in https://firmware.ardupilot.org/useralerts/lastmodified.txt, in "
+"ISO8601 format."
+msgstr ""
+"此外，https://firmware.ardupilot.org/useralerts/lastmodified.txt "
+"还记录了清单最后上传的日期和时间戳，采用 ISO8601 格式。"

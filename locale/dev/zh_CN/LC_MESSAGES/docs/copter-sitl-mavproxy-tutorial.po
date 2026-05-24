@@ -1,0 +1,510 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:5
+#: cc5e52de42064433b09d06b4189f501d
+msgid "Copter SITL/MAVProxy Tutorial"
+msgstr "Copter SITL（软件在环仿真）/MAVProxy 教程"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:7
+#: e22a2a8e27de431b8ffd150f4768a87f
+msgid ""
+"This tutorial provides a basic walk-through of how to use :ref:`SITL <sitl-"
+"simulator-software-in-the-loop>` and :ref:`MAVProxy documentation "
+"<mavproxy:home>` for *Copter* testing."
+msgstr ""
+"本教程提供了如何将 :ref:`SITL（软件在环仿真） <sitl-simulator-software-in-the-loop>` 和 "
+":ref:`MAVProxy 文档 <mavproxy:home>` 用于 *Copter* 测试的基本操作说明。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:12
+#: 3ea91e4726a944c6a4764028e9b8591b
+msgid "Overview"
+msgstr "概述"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:14
+#: f4eec0a078264232a0f74ee1552d0a6e
+msgid ""
+"The article is intended primarily for developers who want to test new Copter"
+" builds and bug fixes using SITL and *MAVProxy*. It shows how to take off, "
+"fly in ``GUIDED`` mode, run missions, set a geofence, and perform a number "
+"of other basic testing tasks."
+msgstr ""
+"本文主要面向希望使用 SITL（软件在环仿真）和 *MAVProxy* 测试新 Copter 构建和修复 bug 的开发者。它展示了如何起飞、在 "
+"``GUIDED`` 模式下飞行、运行任务、设置地理围栏以及执行其他多项基本测试任务。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:19
+#: 70b1548fc7804bf29500021901d79ffd
+msgid ""
+"The tutorial is complementary to the topic :ref:`Using SITL for ArduPilot "
+"Testing <using-sitl-for-ardupilot-testing>`."
+msgstr ""
+"本教程是对 :ref:`使用 SITL（软件在环仿真）进行 ArduPilot 测试 <using-sitl-for-ardupilot-"
+"testing>` 主题的补充。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:23
+#: 055d164fb4ba4dbcb47fc2de04541a32
+msgid ""
+"We use *MAVProxy* here, but you can :ref:`attach another ground station to "
+"SITL <using-sitl-for-ardupilot-"
+"testing_connecting_otheradditional_ground_stations>` if you prefer (similar "
+"instructions can be used in any GCS)."
+msgstr ""
+"我们在此使用 *MAVProxy*，但如果您更喜欢，也可以 :ref:`将其他地面站连接到 SITL（软件在环仿真） <using-sitl-for-"
+"ardupilot-"
+"testing_connecting_otheradditional_ground_stations>`（类似的说明适用于任何地面站）。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:25
+#: b4dcfb4372014ac98a001a9849ae2a1d
+msgid ""
+"This tutorial is for Copter - see :ref:`Plane <plane-sitlmavproxy-tutorial>`"
+" and :ref:`Rover <rover-sitlmavproxy-tutorial>` for similar tutorials on the"
+" other vehicles."
+msgstr ""
+"本教程适用于 Copter——请参阅 :ref:`Plane <plane-sitlmavproxy-tutorial>` 和 :ref:`Rover "
+"<rover-sitlmavproxy-tutorial>` 获取其他飞行器的类似教程。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:30
+#: 33171589f6ac44e588b29a5469b6858e
+msgid "Preconditions"
+msgstr "前提条件"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:32
+#: dd99fdf8634841268bd6b60d77695358
+msgid ""
+"The tutorial assumes you have already set up :ref:`SITL on Windows <sitl-"
+"native-on-windows>` or :ref:`Linux <setting-up-sitl-on-linux>` and that you "
+"have started SITL using the ``--map`` and ``--console`` options:"
+msgstr ""
+"本教程假设您已经在 :ref:`Windows <sitl-native-on-windows>` 或 :ref:`Linux <setting-up-"
+"sitl-on-linux>` 上设置好 SITL（软件在环仿真），并且已使用 ``--map`` 和 ``--console`` 选项启动 "
+"SITL（软件在环仿真）："
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:43
+#: 42abb3c2bf994192a3caeed3fcdfc4bf
+msgid ""
+"If you wish to start the simulation at a different map location or use a "
+"different frame type (-f option for hexa,tri,octa,heli,etc.) than a standard"
+" + layout quadcopter, see :ref:`SITL Advance Testing <using-sitl-for-"
+"ardupilot-testing>`. A complete list of startup options for the simulator "
+"can be found using the --help option:"
+msgstr ""
+"如果希望在不同的地图位置启动仿真，或使用与标准 + 布局四旋翼不同的机架类型（hexa、tri、octa、heli 等使用 -f 选项），请参阅 "
+":ref:`SITL 高级测试 <using-sitl-for-ardupilot-testing>`。仿真器的完整启动选项列表可通过 --help "
+"选项获取："
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:53
+#: d07b3810aa6f40f386d542dd1fd7de85
+msgid ""
+"The *MAVProxy Command Prompt*, *Console* and *Map* should be arranged "
+"conveniently so you can observe the status and send commands at the same "
+"time."
+msgstr "*MAVProxy 命令提示符*、*控制台*和*地图*应合理排布，以便同时观察状态并发送命令。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:61
+#: a6ebe71a1a804cff937391f8f6354760
+msgid "Taking off"
+msgstr "起飞"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:63
+#: dadaea4318dc4fd2a09667118e8cc977
+msgid ""
+"This section explains how to take off in ``GUIDED`` mode. The main steps are"
+" to change to ``GUIDED`` mode, arm the throttle, and then call the "
+"``takeoff`` command. Takeoff must start within 15 seconds of arming, or the "
+"motors will disarm!"
+msgstr ""
+"本节介绍如何在 ``GUIDED`` 模式下起飞。主要步骤是切换到 ``GUIDED`` 模式，解锁油门，然后调用 ``takeoff`` "
+"命令。必须在解锁后 15 秒内开始起飞，否则电机将重新加锁！"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:70
+#: ef8d0ca5d8fd4c03b99d1328eacc94da
+msgid ""
+"At time of writing, Copter only supports takeoff in guided mode; if you want"
+" to fly a mission you first have to take off and then switch to ``AUTO`` "
+"mode. From AC3.3 it will be possible to take off in AUTO mode too."
+msgstr ""
+"截至撰写时，Copter 仅支持在引导模式下起飞；若要执行任务飞行，需先起飞再切换到 ``AUTO`` 模式。从 AC3.3 起，将支持在 AUTO "
+"模式下直接起飞。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:75
+#: 9ae28a047b80409db613af898815b5ec
+msgid "Enter the following commands in the *MAVProxy Command Prompt*."
+msgstr "在 *MAVProxy 命令提示符*中输入以下命令。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:83
+#: 0fec60cb91ea403cbadaf78ccfffd123
+msgid ""
+"Copter should take off to an altitude of 40 metres and then hover (while it "
+"waits for the next command)."
+msgstr "Copter 应爬升至 40 米高度后悬停（等待下一条命令）。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:87
+#: ebdc95d2b3d64a289566777608c49fa9
+msgid "Monitoring"
+msgstr "监控"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:89
+#: 42b46131017c48808c13ffeb65fc2047
+msgid ""
+"During takeoff you can watch the altitude increase on the console in the "
+"*Alt* field."
+msgstr "起飞过程中，可在控制台的 *Alt* 字段中观察高度的增加。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:92
+#: f9e3e3a57d194fa1b17298f3c1e3ee8b
+msgid ""
+"Developers may find it useful to **graph** the takeoff by first entering the"
+" ``gtakeoff`` command."
+msgstr "开发者可先输入 ``gtakeoff`` 命令，以**图形化**方式查看起飞过程。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:98
+#: 23dec1a91a8e443cbb368eecacfdb6aa
+msgid "MAVProxy:Copter Takeoff Graph (gtakeoff)"
+msgstr "MAVProxy：Copter 起飞图形（gtakeoff）"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:101
+#: 709035d188154d55b5cc3713a74db783
+msgid "Troubleshooting"
+msgstr "故障排查"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:103
+#: 8ba178b76b1943e9920c655ec71adeb7
+msgid "The most common sources of difficulty taking off are:"
+msgstr "起飞困难最常见的原因包括："
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:105
+#: 703896a9c2cf4c8ea3feabaa889f519e
+msgid "Starting in any mode other than ``GUIDED``."
+msgstr "起始模式不是 ``GUIDED``。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:106
+#: 345a70ca9d02412588ac435100ff9469
+msgid ""
+"Attempting to takeoff when the vehicle is not armed. This can happen if you "
+"call ``takeoff`` too slowly after ``arm throttle``, or if the vehicle fails "
+"pre-arm checks."
+msgstr "飞行器未解锁时尝试起飞。这可能发生在 ``arm throttle`` 后调用 ``takeoff`` 过慢，或飞行器未通过预解锁检查时。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:110
+#: 146c5073d7f343cda4f71b9ca2d3d983
+msgid "You can list all *enabled* checks using the command ``arm list``:"
+msgstr "可使用 ``arm list`` 命令列出所有*已启用*的检查项："
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:125
+#: 9b7aefd809004170b287bd7a59f237b7
+msgid ""
+"You can enable and disable checks using ``arm check n`` and ``arm uncheck "
+"n`` respectively, where n is the name of the check. Use ``n`` value of "
+"``all`` to enables/disable all checks."
+msgstr ""
+"可分别使用 ``arm check n`` 和 ``arm uncheck n`` 启用或禁用检查项，其中 n 为检查项名称。将 ``n`` 设为 "
+"``all`` 可启用/禁用所有检查项。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:130
+#: 7721de10442c45dd9fd7cc10540404d0
+msgid "Changing flight mode - circle and land"
+msgstr "切换飞行模式——绕圈与降落"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:132
+#: da2f89a7b87344998dc6b133abd3420e
+msgid ""
+"The command below shows how to put Copter into :ref:`CIRCLE <copter:circle-"
+"mode>` mode with a :ref:`CIRCLE_RADIUS <copter:CIRCLE_RADIUS>` of 2000cm. "
+"This will fly the Copter in a circle at a constant altitude, with the front "
+"pointed towards the centre of the circle."
+msgstr ""
+"以下命令演示如何将 Copter 切换至 :ref:`CIRCLE <copter:circle-mode>` 模式并设置 "
+":ref:`CIRCLE_RADIUS <copter:CIRCLE_RADIUS>` 为 2000cm。这将使 Copter "
+"以恒定高度绕圈飞行，机头始终指向圆心。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:146
+#: 9a0666a8a5254f909affbe64f31a7a24
+msgid ""
+"If you set the ``CIRCLE_RADIUS`` to zero the vehicle will rotate in place."
+msgstr "若将 ``CIRCLE_RADIUS`` 设为零，飞行器将原地旋转。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:149
+#: 586cf6895bb646bc986ab106d0834685
+msgid ""
+"Copter supports a :ref:`number of other flight modes <copter:flight-modes>`,"
+" which you can list in MAVProxy using the ``mode`` command:"
+msgstr ""
+"Copter 支持多种 :ref:`其他飞行模式 <copter:flight-modes>`，可在 MAVProxy 中使用 ``mode`` "
+"命令列出："
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:157
+#: 3315ad0c92654cae8096dfccdeaddf2e
+msgid ""
+"As shown above, you can change the mode by specifying ``mode modename``. "
+"Many of the modes can be set by just entering the mode name, e.g. ``rtl``, "
+"``auto``, ``stabilize`` etc."
+msgstr ""
+"如上所示，可通过指定 ``mode 模式名称`` 来切换飞行模式。许多模式可直接输入模式名称来设置，例如 "
+"``rtl``、``auto``、``stabilize`` 等。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:161
+#: 4fa5c48fce6744bea803a39cd4a7a64c
+msgid ""
+"For example, to land right where you are you would use the command: ``mode "
+"land``. To return to the launch point and then land you would use the "
+"command: ``rtl``."
+msgstr "例如，就地降落使用命令：``mode land``；返回起飞点后降落使用命令：``rtl``。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:166
+#: 0086206b11174069abd511c64d22f4e9
+msgid "Guiding the vehicle"
+msgstr "引导飞行器"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:168
+#: 31414bd66fd34a92989b11a4d766b29e
+msgid ""
+"Once you've taken off you can move the vehicle around the map in ``GUIDED`` "
+"mode. The easiest way to do this is to right-click on the map where you want"
+" to go, select **Fly to**, and then enter the target altitude."
+msgstr ""
+"起飞后，可在 ``GUIDED`` 模式下在地图上移动飞行器。最简便的方法是在地图目标位置右键单击，选择**飞往此处**，然后输入目标高度。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:176
+#: 2f337e0f5adb4ac9b12e02d252c96718
+msgid "MAVProxy: Fly toLocation"
+msgstr "MAVProxy：飞往位置"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:178
+#: eec040df34824b5fa622cca63adce0ac
+msgid ""
+"You can also enter the target position manually on the command line using "
+"the two formats below. If only the altitude is specified, the last specified"
+" LAT/LON will be used."
+msgstr "也可以在命令行中使用以下两种格式手动输入目标位置。若仅指定高度，将使用上次指定的经纬度。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:187
+#: e6797c357f144f82bdfe0a10aebc763b
+msgid ""
+"In addition to ``takeoff``, you can send the following commands in "
+"``GUIDED`` mode:"
+msgstr "除 ``takeoff`` 外，在 ``GUIDED`` 模式下还可发送以下命令："
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:198
+#: f14166f5067a4e1bad8df308e7e6a768
+msgid ""
+"These commands correspond to :ref:`MAV_CMD_NAV_TAKEOFF "
+"<copter:mav_cmd_nav_takeoff>`, :ref:`MAV_CMD_DO_CHANGE_SPEED "
+"<copter:mav_cmd_do_change_speed>`, :ref:`MAV_CMD_CONDITION_YAW "
+"<copter:mav_cmd_condition_yaw>`, `SET_POSITION_TARGET_LOCAL_NED "
+"<https://mavlink.io/en/messages/common.html#SET_POSITION_TARGET_LOCAL_NED>`__."
+msgstr ""
+"这些命令分别对应 :ref:`MAV_CMD_NAV_TAKEOFF "
+"<copter:mav_cmd_nav_takeoff>`、:ref:`MAV_CMD_DO_CHANGE_SPEED "
+"<copter:mav_cmd_do_change_speed>`、:ref:`MAV_CMD_CONDITION_YAW "
+"<copter:mav_cmd_condition_yaw>`、`SET_POSITION_TARGET_LOCAL_NED "
+"<https://mavlink.io/en/messages/common.html#SET_POSITION_TARGET_LOCAL_NED>`__。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:204
+#: eb1729dcc3284030952c4adddc242341
+msgid ""
+"At time of writing, the other :ref:`Copter Commands <copter-commands-in-"
+"guided-mode>` are not supported (`MAVProxy #150 "
+"<https://github.com/ArduPilot/MAVProxy/issues/150>`__)"
+msgstr ""
+"截至撰写时，其他 :ref:`Copter 命令 <copter-commands-in-guided-mode>` 尚未得到支持（`MAVProxy "
+"#150 <https://github.com/ArduPilot/MAVProxy/issues/150>`__）"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:208
+#: e2619eb425934beebafa37a67c2a714e
+msgid "Flying a mission"
+msgstr "执行任务飞行"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:210
+#: f08ed2bb9b2048adbe72a72587c0821a
+msgid ""
+"You can load a mission at any time using the ``wp load`` command. After "
+"you've taken off the current mission will start as soon as you change to "
+"``AUTO`` mode."
+msgstr "可随时使用 ``wp load`` 命令加载任务。起飞后，切换到 ``AUTO`` 模式后当前任务将立即开始执行。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:214
+#: 7462e9761b4f4c11a0848574a948c2c0
+msgid ""
+"The example below shows how to load and start one of the test missions, skip"
+" to the second waypoint, and *loop* the mission:"
+msgstr "以下示例演示如何加载并启动一个测试任务、跳转到第二个航点，以及*循环*执行任务："
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:224
+#: 45258cad78d843f99b1336e5a4c6f1be
+msgid ""
+"The :ref:`MAVProxy Waypoints documentation <mavproxy:mavproxy-waypoints>` "
+"lists the full set of available commands (or you can get them using auto-"
+"completion by typing \"wp\" on the command line)."
+msgstr ""
+":ref:`MAVProxy 航点文档 <mavproxy:mavproxy-waypoints>` "
+"列出了全部可用命令（也可以在命令行输入「wp」后使用自动补全获取）。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:228
+#: 5198c89d497a4162b391f6fafe57be4d
+msgid ""
+"If you want to create a waypoint mission, this is most easily done on the "
+"map:"
+msgstr "若要创建航点任务，在地图上操作最为简便："
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:231
+#: 06b9c44a2c94428487673a8c19e693e6
+msgid "Right-click on the map and then select **Mission \\| Draw**."
+msgstr "在地图上右键单击，然后选择**任务 \\| 绘制**。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:236
+#: 9a6d547c67dd428684c27e5c7c5414ce
+msgid "MAVProxy: Draw Mission Menu"
+msgstr "MAVProxy：绘制任务菜单"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:238
+#: 5dd92b07939e46b3811ab6096b4acc68
+msgid "Left-click on the map where you want the points to appear."
+msgstr "在地图上希望放置航点的位置左键单击。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:242
+#: 2f79482a21444c41a7825a5fa1995ba1
+msgid ""
+"Nothing visible will happen when you make the first click. After the second "
+"click, lines will join your points to show the path."
+msgstr "第一次单击时不会有任何可见变化。第二次单击后，各航点之间将以连线显示路径。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:246
+#: 8ca3a9e98e3241a58750734d9682651d
+msgid ""
+"When you're done, you can loop the mission by right-clicking on the map and "
+"selecting **Mission \\| Loop**."
+msgstr "完成后，可在地图上右键单击并选择**任务 \\| 循环**来设置任务循环执行。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:249
+#: 326499d859b94db4aa99c22c9626a7cb
+msgid ""
+"This approach only allows you to create :ref:`MAV_CMD_NAV_WAYPOINT "
+"<copter:mav_cmd_nav_waypoint>` commands. You can edit missions and use other"
+" commands on Linux using the *misseditor* module (``module load "
+"misseditor``). This is currently broken on Windows. It is also possible to "
+"load other types of commands from files."
+msgstr ""
+"此方法仅支持创建 :ref:`MAV_CMD_NAV_WAYPOINT <copter:mav_cmd_nav_waypoint>` 命令。在 "
+"Linux 上可使用 *misseditor* 模块（``module load misseditor``）编辑任务并使用其他命令，该功能目前在 "
+"Windows 上无法正常使用。也可以从文件中加载其他类型的命令。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:257
+#: 10c554eab602478e9e1c9c58a1d9b04e
+msgid "Setting a GeoFence"
+msgstr "设置地理围栏"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:259
+#: 46166821878f462e9fcbf794aa329a6c
+msgid ""
+"A GeoFence is is a virtual barrier that Copter uses to constrain the "
+"movement of the vehicle. Copter uses a simple \"tin can border\" as "
+"described in :ref:`Simple GeoFence <common-ac2_simple_geofence>`. When the "
+"radius or maximum altitude is breached, Copter returns to the launch point "
+"and/or lands."
+msgstr ""
+"地理围栏是 Copter 用于限制飞行器活动范围的虚拟边界。Copter 使用如 :ref:`简单地理围栏 <common-"
+"ac2_simple_geofence>` 中所述的简单「圆柱形」围栏。当超出半径或最大高度时，Copter 将返回起飞点并/或降落。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:265
+#: 7720eb1ba8b043a093bffb8b3f06a406
+msgid ""
+"The fence is enabled (and its type selected) using the :ref:`Copter Fence "
+"Parameters <copter:parameters_FENCE_>`. You can list the fence parameters "
+"with ``param show``:"
+msgstr ""
+"通过 :ref:`Copter 围栏参数 <copter:parameters_FENCE_>` 启用围栏并选择其类型。可使用 ``param "
+"show`` 列出围栏参数："
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:278
+#: c29bb16600f94b6fa1ac8f9f3aea7c30
+msgid ""
+"The fence has an altitude boundary of 100 metres (``FENCE_ALT_MAX``) and is "
+"bound by a circle of radius ``FENCE_RADIUS`` around the home location. The "
+"``FENCE_TYPE=3`` means that both the radius and altitude are used (you can "
+"change the type to other numbers have an altitude-only or circle only fence "
+"- or none at all)."
+msgstr ""
+"围栏的高度上限为 100 米（``FENCE_ALT_MAX``），以 home 位置为圆心、半径为 ``FENCE_RADIUS`` "
+"的圆形为边界。``FENCE_TYPE=3`` 表示同时启用半径和高度约束（可将类型更改为其他数值以仅使用高度围栏、仅使用圆形围栏或完全禁用）。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:284
+#: c4d644cbfa8a4740b0acfa32f8cc3d5f
+msgid ""
+"The fence is initially disabled (``FENCE_ENABLE=0``). To turn it on we set "
+"the value to one:"
+msgstr "围栏初始状态为禁用（``FENCE_ENABLE=0``）。将其设为 1 可开启："
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:291
+#: 944ff960ec2c4038ab5e0531e43b7b65
+msgid ""
+"When we fly outside the radius the mode changes to RTL (return to land). If "
+"for some reason we travel further out by the value of ``FENCE_MARGIN``, then"
+" the vehicle will simply land."
+msgstr "当飞出半径范围时，模式将切换为 RTL（返航降落）。若因某种原因飞出距离超出 ``FENCE_MARGIN`` 的值，飞行器将直接降落。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:296
+#: be8cc7d6401541e9b67dfed0c822849f
+msgid "Testing the vehicle"
+msgstr "测试飞行器"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:298
+#: 4b6d7dfd2adf4fc7b23494838ab14af6
+msgid ""
+"*MAVProxy* allows you to list all the parameters affecting the vehicle and "
+"simulation using ``param show *``, and to set any parameter using: ``param "
+"set PARAM_NAME VALUE``. In addition to affecting the vehicle itself some "
+"parameters simulate the performance/failure of specific hardware components "
+"and the environment (for example, the wind). These can be listed using: "
+"``param show sim*``. The topic :ref:`Using SITL for ArduPilot Testing "
+"<using-sitl-for-ardupilot-testing>` explains more about how you can test "
+"using SITL."
+msgstr ""
+"*MAVProxy* 允许使用 ``param show *`` 列出所有影响飞行器和仿真的参数，并使用 ``param set PARAM_NAME "
+"VALUE`` 设置任意参数。除影响飞行器本身外，某些参数还可模拟特定硬件组件的性能/故障及环境条件（例如风）。可使用 ``param show "
+"sim*`` 列出这些参数。主题 :ref:`使用 SITL 进行 ArduPilot 测试 <using-sitl-for-ardupilot-"
+"testing>` 详细介绍了如何使用 SITL 进行测试。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:307
+#: ddb31286e9dc40b28e17b77346154d71
+msgid "Customizing Launch Location and Parameters in SITL"
+msgstr "在 SITL 中自定义起飞位置与参数"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:308
+#: b3033eef3ec24732bf1b88e2174694ce
+msgid ""
+"You can start SITL at a specific GPS location using the ``-l`` option during"
+" launch. See \"Setting vehicle start location\" in :ref:`using-sitl-for-"
+"ardupilot-testing`."
+msgstr ""
+"启动时可使用 ``-l`` 选项将 SITL 启动在指定的 GPS 位置。参见 :ref:`using-sitl-for-ardupilot-"
+"testing` 中的「设置飞行器起始位置」。"
+
+#: ../../source/docs/copter-sitl-mavproxy-tutorial.rst:311
+#: 78fe98a5b9234cee91ea533c1c66eafb
+msgid ""
+"If you wish to use a specific set of default parameters, rather than "
+"manually changing them in the simulation with ``param set`` commands, you "
+"can load them at simulation startup from a file. See "
+":ref:`SITL_simulation_parameters` section \"Loading a parameter set\"."
+msgstr ""
+"若希望使用一组特定的默认参数，而非在仿真中通过 ``param set`` 命令手动更改，可以在仿真启动时从文件中加载。参见 "
+":ref:`SITL_simulation_parameters` 中的「加载参数集」章节。"

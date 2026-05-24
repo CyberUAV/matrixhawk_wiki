@@ -1,0 +1,476 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:5
+#: d9f5e6fe8dec473a8d1d0b8a47bf50ea
+msgid "Porting to a new flight controller board"
+msgstr "移植到新飞控板"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:7
+#: a112e78047b14ac193427fefaa516474
+msgid ""
+"This section is for topics related to running ArduPilot directly on Linux "
+"boards. See this :ref:`page for porting to boards running ChibiOS "
+"<porting>`."
+msgstr ""
+"本节介绍直接在 Linux 飞控板上运行 ArduPilot 的相关主题。有关移植到运行 ChibiOS 的飞控板，请参见 :ref:`此页面 "
+"<porting>`。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:10
+#: 0a92d942305748fba7dfaa34f7de20bd
+msgid ""
+"Any firmware customization of ArduPilot code must abide by the terms of the "
+"GPL3.0+ open source code license. ArduPilot also reminds developers and "
+"manufacturers to adhere to the appropriate trademark and copyright laws when"
+" developing new autopilots"
+msgstr ""
+"对 ArduPilot 代码的任何固件定制都必须遵守 GPL3.0+ 开源代码许可证条款。ArduPilot "
+"也提醒开发者和制造商在开发新自动驾驶仪时遵守相关商标和版权法律。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:15
+#: fa28bb8074ea424cb9b0cdf11b7a90b7
+msgid ""
+"Consider joining the `ArduPilot Discord Chat "
+"<https://ardupilot.org/discord>`__, to speak with other developers about "
+"this topic under the HAL-DEV, #Linux channel."
+msgstr ""
+"欢迎加入 `ArduPilot Discord 聊天 <https://ardupilot.org/discord>`__，在 HAL-DEV 的 "
+"#Linux 频道与其他开发者就此主题交流。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:18
+#: 65efb6e0b03543c382efedff5bc26c6b
+msgid "Step 1 - getting started"
+msgstr "第 1 步 - 入门准备"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:20
+#: 4cc8ff4368c74b82bc620409f292a3b9
+msgid ""
+"Determine which microprocessor the new flight controllers uses. If it is "
+"used in a board we already support, for example BCM283x used in Raspberry Pi"
+" or TI Sitara/OMAP used in BeagleBones, then the port should be relatively "
+"straight forward."
+msgstr ""
+"确定新飞控所使用的微处理器。如果该处理器已用于我们支持的飞控板（例如 Raspberry Pi 使用的 BCM283x 或 BeagleBone 使用的"
+" TI Sitara/OMAP），则移植工作应相对简单。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:21
+#: 7fc616ffde9b45f69910180cd056c9a2
+msgid "Choose a new board name."
+msgstr "选择新飞控板的名称。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:22
+#: da40213646a144faa8a8331739759f46
+msgid ""
+"Reserve a new HAL_BOARD_SUBTYPE_LINUX_$(NEW_BOARD_NAME) in "
+"libraries/AP_HAL/AP_HAL_Boards.h"
+msgstr ""
+"在 libraries/AP_HAL/AP_HAL_Boards.h 中保留新的 "
+"HAL_BOARD_SUBTYPE_LINUX_$(NEW_BOARD_NAME)"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:23
+#: a9d1279e55ff430a842d4477a6c2d133
+msgid ""
+"Ensure the spidev and i2cdev kernel modules are built if ArduPilot will be "
+"using them."
+msgstr "如果 ArduPilot 将使用 spidev 和 i2cdev 内核模块，请确保它们已构建。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:25
+#: cf77fca190314b0e852c30e79638d838
+msgid ""
+"Choose your board name carefully! Use 13 characters or less for your board "
+"name, otherwise it may be truncated when the board name is sent from the "
+"flight controller to a ground station such as Mission Planner."
+msgstr "请谨慎选择飞控板名称！飞控板名称请使用 13 个字符以内，否则飞控向 Mission Planner 等地面站发送飞控板名称时可能被截断。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:28
+#: ec2f308287f44498bab98d3a6622fd56
+msgid "Step 2 - Toolchain Configuration"
+msgstr "第 2 步 - 工具链配置"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:30
+#: 810f684c8c5b4bb686f81282ca9d7e72
+msgid "In Tools/ardupilotwaf/boards.py:"
+msgstr "在 Tools/ardupilotwaf/boards.py 中："
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:32
+#: bf9d8056b16c4c1f945aa2b42695ee49
+msgid ""
+"Create a new class and select the appropriate toolchain, usually arm-linux-"
+"gnueabihf. For an example see \"class pxfmini(linux) as an example\""
+msgstr ""
+"创建新类并选择合适的工具链，通常为 arm-linux-gnueabihf。参见 「class pxfmini(linux) as an "
+"example」 示例"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:33
+#: a0dd80dee59c4082b89513c93badb610
+msgid "Update CONFIG_HAL_BOARD_SUBTYPE with the newly reserved board subtype."
+msgstr "将 CONFIG_HAL_BOARD_SUBTYPE 更新为新保留的飞控板子类型。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:35
+#: bc97a594f0c34923a36bdf9fa75e3730
+msgid "In Tools/scripts/board_list.py:"
+msgstr "在 Tools/scripts/board_list.py 中："
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:37
+#: 282839f29fa5424f9920604cb1f2f3cc
+msgid "Add new board name to self.boards[] list."
+msgstr "将新飞控板名称添加到 self.boards[] 列表。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:40
+#: 0948de9ce347436b9ab8af85a7d56a0a
+msgid "Step 3 - configure and build examples and firmware for the board"
+msgstr "第 3 步 - 配置并构建飞控板的示例和固件"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:42
+#: 7693fced8763414fb3d77766b163c828
+msgid ""
+"Follow the :ref:`Building the code <building-the-code>` instructions or take"
+" a shortcut and read the `BUILD.md "
+"<https://github.com/ArduPilot/ardupilot/blob/master/BUILD.md>`__ file which "
+"includes doing the following:"
+msgstr ""
+"按照 :ref:`构建代码 <building-the-code>` 说明操作，或快捷地阅读 `BUILD.md "
+"<https://github.com/ArduPilot/ardupilot/blob/master/BUILD.md>`__ "
+"文件，其中包括以下步骤："
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:44
+#: 0ccb169c1cbb44ff8184a52674b4b181
+msgid ""
+"``cd ardupilot`` (or wherever you have :ref:`cloned <git-clone>` ArduPilot "
+"to)"
+msgstr "``cd ardupilot``（或您 :ref:`克隆 <git-clone>` ArduPilot 的目录）"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:45
+#: 8cae54364d474216ae6ab20c8d3ff008
+msgid "``./waf configure --board new-board``"
+msgstr "``./waf configure --board new-board``"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:46
+#: 19968a73875a4ea18d328e88efe9df4e
+msgid "``./waf copter``"
+msgstr "``./waf copter``"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:48
+#: 5850207dccaa4b92a3ed375694399ee9
+msgid ""
+"Work through any issues highlighted by '#error' messages in the codebase, "
+"which will require per-board configuration."
+msgstr "处理代码库中 '#error' 消息突出显示的任何问题，这些问题需要进行飞控板专属配置。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:50
+#: 10d0653c081e4549b2ac36792ef98dd2
+msgid ""
+"This is also a good time to build any relevant :ref:`Library Example "
+"Sketches <learning-ardupilot-the-example-sketches>`."
+msgstr ""
+"这也是构建相关 :ref:`库示例 Sketch <learning-ardupilot-the-example-sketches>` 的好时机。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:53
+#: 27f7c5d0f80548b5b9c0d6b3d6840bfa
+msgid "Step 4 - upload and run the examples and firmware"
+msgstr "第 4 步 - 上传并运行示例和固件"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:55
+#: 53a63c2922fd454197ddd46e93cdfa77
+msgid ""
+"If building natively, executables are already loaded on the target system, "
+"and can be executed directly."
+msgstr "如果是本地构建，可执行文件已在目标系统上加载，可直接执行。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:57
+#: dabd7bc12b024c02b2c9bbbe6cac1c5c
+msgid ""
+"If using waf to upload (Linux, MacOSX only), see configuration commands in "
+"`BUILD.md <https://github.com/ArduPilot/ardupilot/blob/master/BUILD.md>`__ "
+"to set up waf's --upload flag. Other options for cross-compiled builds "
+"include SCP or NFS."
+msgstr ""
+"如果使用 waf 上传（仅限 Linux、MacOSX），请参见 `BUILD.md "
+"<https://github.com/ArduPilot/ardupilot/blob/master/BUILD.md>`__ 中的配置命令以设置 "
+"waf 的 --upload 标志。交叉编译构建的其他选项包括 SCP 或 NFS。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:60
+#: 266fd1adbdbe434aac0b3357cbed4d05
+msgid ""
+"See :ref:`Startup options <ardupilot-on-linux-starting>` for command-line "
+"options, configuring at least one port for MavLink, and launching ArduPilot."
+msgstr ""
+"请参见 :ref:`启动选项 <ardupilot-on-linux-starting>`，了解命令行选项、为 MAVLink 配置至少一个端口以及启动"
+" ArduPilot 的方法。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:63
+#: c7a56b1bb5ec4595a377b8edcb637e40
+msgid "Step 5 - peripheral functions and drivers"
+msgstr "第 5 步 - 外设功能与驱动"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:65
+#: bbd9ca7aebe248e696e41f021c871c93
+msgid ""
+"Many boards will use the Linux userspace APIs for I2C, UART, and SPI and "
+"only need configuration and associated kernel modules. See your CPU, BSP, "
+"and board's documentation for pin muxing and device tree configuration. The "
+"following peripherals tend to be more complicated."
+msgstr ""
+"许多飞控板将使用 Linux 用户空间 API 进行 I2C、UART 和 SPI 通信，只需配置和相关内核模块。有关引脚复用和设备树配置，请参阅 "
+"CPU、BSP 和飞控板文档。以下外设通常较为复杂。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:69
+#: 167ea6328a49486089da4329108817b2
+msgid "SPI Support"
+msgstr "SPI 支持"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:70
+#: 0c39e4fd066841ceb6397a49d57cf5a0
+msgid ""
+"To configure SPI-based devices, the Linux userspace SPI APIs are used, "
+"needing only the per-board configuration(bus ID, chip select ID, mode, "
+"rates) in SPIDeviceManager::_device[] in "
+"libraries/AP_HAL_Linux/SPIDevice.cpp."
+msgstr ""
+"配置基于 SPI 的设备时，使用 Linux 用户空间 SPI API，只需在 libraries/AP_HAL_Linux/SPIDevice.cpp"
+" 的 SPIDeviceManager::_device[] 中进行飞控板专属配置（总线 ID、片选 ID、模式、速率）。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:73
+#: 62851a07391e46f291b2608e3ebd3a80
+msgid "GPIO Support"
+msgstr "GPIO 支持"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:74
+#: 998b541080b24e56be3a58bc90555ecc
+msgid ""
+"Most ArduPilot Linux boards use one of two methods for GPIO access: sysfs or"
+" mmap."
+msgstr "大多数 ArduPilot Linux 飞控板使用两种 GPIO 访问方式之一：sysfs 或 mmap。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:76
+#: a8b1fe639ece4d0983d4a8ad0224e1bf
+msgid "For sysfs:"
+msgstr "对于 sysfs："
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:78
+#: 09a06315fe88482993ec29c7f1d05312
+msgid "GPIO access through sysfs is deprecated."
+msgstr "通过 sysfs 进行 GPIO 访问已弃用。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:79
+#: 6b7c3a419b4c4aafb5361cd3ea2cd83f
+msgid ""
+"Create new libraries/AP_HAL_Linux/GPIO_$(NEW_BOARD_NAME).cpp and .h, filled "
+"out with the needed _$(NEW_BOARD_NAME)_GPIO_MAX and pin_table."
+msgstr ""
+"创建新的 libraries/AP_HAL_Linux/GPIO_$(NEW_BOARD_NAME).cpp 和 .h，填写所需的 "
+"_$(NEW_BOARD_NAME)_GPIO_MAX 和 pin_table。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:81
+#: 4bc82e84c4b84974a3835fc825af95e8
+msgid "For libgpiod(Todo):"
+msgstr "对于 libgpiod（待办）："
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:83
+#: 5fcc14eb41d24bafb8202ee006b7b05a
+msgid ""
+"port ardupilot to support a libgpiod backend of pinMode(), read(), write()."
+msgstr "移植 ArduPilot 以支持 libgpiod 作为 pinMode()、read()、write() 的后端。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:84
+#: 77051dad6c7b4b8e98087848b898a5c0
+msgid "Implement the per-board configuration"
+msgstr "实现飞控板专属配置"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:86
+#: f4da239c88344c95b6b9503497793b9b
+msgid "For mmap():"
+msgstr "对于 mmap()："
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:88
+#: 26edbd90850945eeb7b50060897ca431
+msgid "See GPIO_BBB.cpp and GPIO_RPI.cpp as examples"
+msgstr "参见 GPIO_BBB.cpp 和 GPIO_RPI.cpp 作为示例"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:89
+#: 9fdc2d9b3f864158acfa7a31abf9ccf7
+msgid "Create new libraries/AP_HAL_Linux/GPIO_$(NEW_BOARD_NAME).cpp and .h"
+msgstr "创建新的 libraries/AP_HAL_Linux/GPIO_$(NEW_BOARD_NAME).cpp 和 .h"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:90
+#: 686696888e964a73b7e871f810ae2457
+msgid ""
+"Locate the memory file, either /dev/mem or /dev/gpiomem, and open() it."
+msgstr "找到内存文件（/dev/mem 或 /dev/gpiomem）并执行 open()。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:91
+#: e193515f3bb34063b4ada2b5a598e929
+msgid ""
+"Locate the offset of the GPIO memory region in the file. If using /dev/mem, "
+"check the processor reference manual or Linux device-tree files. For "
+"/dev/gpiomem, use zero."
+msgstr ""
+"找到文件中 GPIO 内存区域的偏移量。若使用 /dev/mem，请查阅处理器参考手册或 Linux 设备树文件。对于 "
+"/dev/gpiomem，使用零。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:92
+#: f2c811b7b4834870b5e39b40c13ad553
+msgid "mmap() the GPIO registers into ArduPilot using the above offset."
+msgstr "使用上述偏移量通过 mmap() 将 GPIO 寄存器映射到 ArduPilot 中。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:93
+#: 2503b750c55c4f69951034b94f471dbf
+msgid ""
+"Implement pinMode(), read(), write() functions using the memory mapped GPIO "
+"registers."
+msgstr "使用内存映射的 GPIO 寄存器实现 pinMode()、read()、write() 函数。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:95
+#: 8e9ad54146f045eb94d5a6287c6053ea
+msgid ""
+"CPUs with multiple GPIOs per bank with only a DATA or OUT register without "
+"SET and CLEAR registers may need to avoid the mmap backend, as read-modify-"
+"write accesses to a GPIO DATA register may not be threadsafe when the kernel"
+" or other userspace programs use GPIOs in the same bank."
+msgstr ""
+"每个 bank 有多个 GPIO、只有 DATA 或 OUT 寄存器而没有 SET 和 CLEAR 寄存器的 CPU，可能需要避免使用 mmap "
+"后端，因为当内核或其他用户空间程序使用同一 bank 中的 GPIO 时，对 GPIO DATA 寄存器的读-改-写访问可能不是线程安全的。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:97
+#: 25cdff580bbc4daba32dce50fa4623e3
+msgid ""
+"For either approach, edit libraries/AP_HAL_Linux/GPIO.h to include the "
+"appropriate GPIO_$(NEW_BOARD_NAME) header for the board."
+msgstr ""
+"无论采用哪种方式，都需编辑 libraries/AP_HAL_Linux/GPIO.h，为该开发板包含相应的 "
+"GPIO_$(NEW_BOARD_NAME) 头文件。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:100
+#: b1d1b996c7524f2e8fde3be51ef9d611
+msgid "RCInput"
+msgstr "RCInput"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:101
+#: f053769b61f749fba39391cfb24ac154
+msgid ""
+"Several different RCInput mechanisms are supported by different boards, "
+"including PPM, SBUS, UART, and UDP."
+msgstr "不同开发板支持多种 RCInput 机制，包括 PPM、SBUS、UART 和 UDP。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:103
+#: 774dfac2eaa8473e87e1dcac2f2f4088
+msgid ""
+"PPM input is handled per-CPU, usually with either a DMA or utility "
+"microcontroller like the PRU on TI chips."
+msgstr "PPM 输入按 CPU 处理，通常使用 DMA 或辅助微控制器（如 TI 芯片上的 PRU）。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:105
+#: 068803e8d5034b9382c1fffb53b40bfc
+msgid ""
+"Examine the libraries/AP_HAL_Linux/RCInput_* files to see if a suitable one "
+"exists, or create one."
+msgstr "查看 libraries/AP_HAL_Linux/RCInput_* 文件，确认是否存在合适的实现，或自行创建。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:107
+#: ec28949641574caea9fc7cf3a3ce7ea3
+msgid ""
+"Configure rcinDriver in libraries/AP_HAL_Linux/HAL_Linux_Class.cpp using "
+"CONFIG_HAL_BOARD_SUBTYPE."
+msgstr ""
+"使用 CONFIG_HAL_BOARD_SUBTYPE 在 libraries/AP_HAL_Linux/HAL_Linux_Class.cpp 中配置"
+" rcinDriver。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:110
+#: 625a8d7c0c4d43e8952ca76880c98170
+msgid "RCOutput"
+msgstr "RCOutput"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:111
+#: 23eb43623a844add8a694d360b0ee4ab
+msgid ""
+"Similar to RCInput, examine the libraries/AP_HAL_Linux/RCOutput_* files to "
+"see if a suitable one exists, or create one."
+msgstr ""
+"与 RCInput 类似，查看 libraries/AP_HAL_Linux/RCOutput_* 文件，确认是否存在合适的实现，或自行创建。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:113
+#: 70944f67f15c4162a1b7686190826362
+msgid ""
+"For CPUs without corresponding hardware to generate RCOutput signals, "
+"additional hardware may be used, like NXP's PCA9685 for PWM generation."
+msgstr "对于没有对应硬件来生成 RCOutput 信号的 CPU，可使用额外硬件，例如 NXP 的 PCA9685 来生成 PWM 信号。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:115
+#: 1d987eb96c5a4ad2ac4c9b77d30c9ff8
+msgid ""
+"Configure the rcoutDriver in libraries/AP_HAL_Linux/HAL_Linux_Class.cpp "
+"using CONFIG_HAL_BOARD_SUBTYPE."
+msgstr ""
+"使用 CONFIG_HAL_BOARD_SUBTYPE 在 libraries/AP_HAL_Linux/HAL_Linux_Class.cpp 中配置"
+" rcoutDriver。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:118
+#: e52db517e92e41d481408c65f88d855e
+msgid "Step 7 - bring up the sensors"
+msgstr "第 7 步——启动传感器"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:120
+#: aa9fb4edea814e7cb3093ab180d99274
+msgid "Add sensor related configuration to libraries/AP_HAL/board/linux.h."
+msgstr "将传感器相关配置添加到 libraries/AP_HAL/board/linux.h。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:122
+#: bf3d902236234bdfa08ae13da46c099b
+msgid ""
+"Start with the baro first, then IMU, then compass and finally any other "
+"sensors the default sensor orientation should also be filled in along with "
+"other things."
+msgstr "先从气压计开始，然后是 IMU，接着是罗盘，最后是其他任何传感器，同时应填写默认传感器方向等信息。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:125
+#: f2ecf4ecefbe4513b16a6bf16681c9cd
+msgid "Upload the examples and firmware and test the sensors are working."
+msgstr "上传示例程序和固件，测试传感器是否正常工作。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:128
+#: ec4e2ffa328743febcaff9e633de3d82
+msgid "Step 8 - configure parameter, log, and terrain storage"
+msgstr "第 8 步——配置参数、日志和地形存储"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:130
+#: 26065b190dfd40dd8c1a3c0eda516bbd
+msgid ""
+"Configure HAL_BOARD_LOG_DIRECTORY, HAL_BOARD_TERRAIN_DIRECTORY, "
+"HAL_BOARD_STORAGE_DIRECTORY in libraries/AP_HAL/board/linux.h."
+msgstr ""
+"在 libraries/AP_HAL/board/linux.h 中配置 "
+"HAL_BOARD_LOG_DIRECTORY、HAL_BOARD_TERRAIN_DIRECTORY、HAL_BOARD_STORAGE_DIRECTORY。"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:133
+#: 99f96ead653944369acbc12cc6b1c728
+msgid "Next Steps"
+msgstr "后续步骤"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:135
+#: 4cd0bda741164749840a157317229e4e
+msgid ""
+"If you have gotten this far, congratulations you have ported ArduPilot to a "
+"new board!  Please reach out to the other developers on the `ArduPilot "
+"Discord Chat <https://ardupilot.org/discord>`__ to announce your success."
+msgstr ""
+"如果您已完成到这一步，恭喜您已将 ArduPilot 移植到新开发板！请在 `ArduPilot Discord Chat "
+"<https://ardupilot.org/discord>`__ 上联系其他开发者，宣布您的成功。"

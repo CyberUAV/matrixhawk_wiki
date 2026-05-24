@@ -1,0 +1,257 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/code-overview-adding-support-for-a-new-mavlink-gimbal.rst:5
+#: 4671c2a914414b579de7c99193e1a786
+msgid "Adding Support for a new MAVLink Gimbal"
+msgstr "为新的 MAVLink 云台添加支持"
+
+#: ../../source/docs/code-overview-adding-support-for-a-new-mavlink-gimbal.rst:7
+#: 1311fab6929646ceb3d18335ecbdba14
+msgid ""
+"This page covers how ArduPilot interacts with a MAVLink enabled gimbal. It "
+"is meant more as a guide on how gimbal manufacturers can make their gimbals "
+"work with ArduPilot with minimum code changes to ArduPilot ."
+msgstr ""
+"本页介绍 ArduPilot 如何与支持 MAVLink 的云台进行交互。本文主要作为云台制造商的参考指南，说明如何以最少的 ArduPilot "
+"代码改动，使其云台与 ArduPilot 兼容。"
+
+#: ../../source/docs/code-overview-adding-support-for-a-new-mavlink-gimbal.rst:11
+#: d7096ed2c16146c199c03a2748a0ee10
+msgid ""
+"The :ref:`SToRM32 gimbal <copter:common-storm32-gimbal>` is a good reference"
+" as it supports MAVLink."
+msgstr ""
+":ref:`SToRM32 云台 <copter:common-storm32-gimbal>` 是一个很好的参考，因为它支持 MAVLink。"
+
+#: ../../source/docs/code-overview-adding-support-for-a-new-mavlink-gimbal.rst:15
+#: 692c935419fb4ca8a6b06d2e1dcf4680
+msgid "Messages the gimbal should support"
+msgstr "云台应支持的消息"
+
+#: ../../source/docs/code-overview-adding-support-for-a-new-mavlink-gimbal.rst:17
+#: aa1f81957e7644fd9d1b0a456278ccaa
+msgid ""
+"The gimbal should listen on the serial port for a `HEARTBEAT "
+"<https://mavlink.io/en/messages/common.html#HEARTBEAT>`__ message from the "
+"vehicle. It can generally assume that the first heart beat it receives will "
+"be from the vehicle but to be certain you can check the \"type\" field to be"
+" sure it's something sensible (i.e. MAV_TYPE = 1 for fixed wing, 2 for "
+"quadcopters but 6 for GCSs should be ignored)."
+msgstr ""
+"云台应在串口上监听来自飞行器的 `HEARTBEAT "
+"<https://mavlink.io/en/messages/common.html#HEARTBEAT>`__ "
+"消息。通常可以假定收到的第一个心跳包来自飞行器，但为确保无误，可检查 「type」 字段以确认其类型合理（即 MAV_TYPE = 1 表示固定翼，2 "
+"表示四旋翼，而 6 表示地面站应予以忽略）。"
+
+#: ../../source/docs/code-overview-adding-support-for-a-new-mavlink-gimbal.rst:25
+#: f11c02725a834273ae6741b30e0817cf
+msgid ""
+"This heart beat will contain the vehicle's system-id and component-id.  The "
+"gimbal should adopt the same system-id but should use a component-id of "
+"MAV_COMP_ID_GIMBAL (i.e. 154) for all its future messages.  In fact, any "
+"unique component-id can be used as long as it's not zero nor the component "
+"id of the vehicle or any other device on the vehicle."
+msgstr ""
+"该心跳包将包含飞行器的系统 ID 和组件 ID。云台应采用相同的系统 ID，但在所有后续消息中应使用 MAV_COMP_ID_GIMBAL（即 "
+"154）作为组件 ID。实际上，只要不为零，也不与飞行器或其他设备的组件 ID 相同，任意唯一的组件 ID 均可使用。"
+
+#: ../../source/docs/code-overview-adding-support-for-a-new-mavlink-gimbal.rst:31
+#: e342ff2459da4860b741007d7c83c1e4
+msgid ""
+"The gimbal should send a `HEARTBEAT "
+"<https://mavlink.io/en/messages/common.html#HEARTBEAT>`__ message out the "
+"serial port at approximately 1hz"
+msgstr ""
+"云台应以大约 1Hz 的频率通过串口发送 `HEARTBEAT "
+"<https://mavlink.io/en/messages/common.html#HEARTBEAT>`__ 消息"
+
+#: ../../source/docs/code-overview-adding-support-for-a-new-mavlink-gimbal.rst:35
+#: 1c98a5df981f45889f3a07703ccc7bc8
+msgid "the system-id and component-id should be as mentioned above."
+msgstr "系统 ID 和组件 ID 应如上所述。"
+
+#: ../../source/docs/code-overview-adding-support-for-a-new-mavlink-gimbal.rst:36
+#: 86e5e7e40b124d2b93de0265ce6f47c9
+msgid "\"type\" should be MAV_TYPE_GIMBAL (i.e. 26)."
+msgstr "「type」 应为 MAV_TYPE_GIMBAL（即 26）。"
+
+#: ../../source/docs/code-overview-adding-support-for-a-new-mavlink-gimbal.rst:37
+#: 012e1b07284d4cc88f526f57f675c6b4
+msgid ""
+"\"autopilot\" is not used so can be set to anything including "
+"MAV_AUTOPILOT_GENERIC (i.e. 0)"
+msgstr "「autopilot」 字段未使用，可设为任意值，包括 MAV_AUTOPILOT_GENERIC（即 0）"
+
+#: ../../source/docs/code-overview-adding-support-for-a-new-mavlink-gimbal.rst:39
+#: 19ba521237634f7080128c4510862864
+msgid ""
+"\"base_mode\" and \"custom_mode\" are not used so can be set to anything "
+"(perhaps 0 is best)"
+msgstr "「base_mode」 和 「custom_mode」 字段未使用，可设为任意值（建议设为 0）"
+
+#: ../../source/docs/code-overview-adding-support-for-a-new-mavlink-gimbal.rst:41
+#: ae3ca794ad874937bfbc1ef6a8e85a36
+msgid ""
+"\"system_status\" should be set to \"MAV_STATE_ACTIVE\" once the gimbal is "
+"ready to accept attitude targets"
+msgstr "「system_status」 应在云台准备好接受姿态目标后设为 「MAV_STATE_ACTIVE」"
+
+#: ../../source/docs/code-overview-adding-support-for-a-new-mavlink-gimbal.rst:44
+#: f3ad2d65eaa94b7886293d53d60c8e54
+msgid ""
+"To support reading/writing parameter values from the ground station the "
+"gimbal should implement these message:"
+msgstr "为支持从地面站读取/写入参数值，云台应实现以下消息："
+
+#: ../../source/docs/code-overview-adding-support-for-a-new-mavlink-gimbal.rst:47
+#: d919cb26d2b0408f8370449cbd00cb85
+msgid ""
+"`PARAM_REQUEST_READ "
+"<https://mavlink.io/en/messages/common.html#PARAM_REQUEST_READ>`__ - if the "
+"gimbal receives this message and \"target_system\" and \"target_component\" "
+"values match the gimbal's system-id and component-id, it should respond with"
+" a `PARAM_VALUE <https://mavlink.io/en/messages/common.html#PARAM_VALUE>`__ "
+"message which contains the value of the parameter specified by the "
+"\"param_id\" field (simply an enum, the gimbal can assign whatever enum it "
+"wishes to each of its internal parameters)"
+msgstr ""
+"`PARAM_REQUEST_READ "
+"<https://mavlink.io/en/messages/common.html#PARAM_REQUEST_READ>`__ —— "
+"若云台收到此消息且 「target_system」 和 「target_component」 值与云台的系统 ID 和组件 ID 匹配，则应回复一条 "
+"`PARAM_VALUE <https://mavlink.io/en/messages/common.html#PARAM_VALUE>`__ "
+"消息，其中包含由 「param_id」 字段指定的参数值（param_id 仅为枚举值，云台可自行为其内部参数分配任意枚举值）"
+
+#: ../../source/docs/code-overview-adding-support-for-a-new-mavlink-gimbal.rst:55
+#: 5a555f47b12e49549da7e01df6420e0b
+msgid ""
+"`PARAM_REQUEST_LIST "
+"<https://mavlink.io/en/messages/common.html#PARAM_REQUEST_LIST>`__ - respond"
+" to this message by sending a `PARAM_VALUE "
+"<https://mavlink.io/en/messages/common.html#PARAM_VALUE>`__ message for "
+"every parameter within the gimbal."
+msgstr ""
+"`PARAM_REQUEST_LIST "
+"<https://mavlink.io/en/messages/common.html#PARAM_REQUEST_LIST>`__ —— "
+"收到此消息后，应为云台内每个参数分别发送一条 `PARAM_VALUE "
+"<https://mavlink.io/en/messages/common.html#PARAM_VALUE>`__ 消息进行响应。"
+
+#: ../../source/docs/code-overview-adding-support-for-a-new-mavlink-gimbal.rst:59
+#: 4b92bf9c3f5143ef9d7facc79f826d89
+msgid ""
+"`PARAM_SET <https://mavlink.io/en/messages/common.html#PARAM_SET>`__ - "
+"respond to this by setting the internal variable to the value in the "
+"\"param_value\" field."
+msgstr ""
+"`PARAM_SET <https://mavlink.io/en/messages/common.html#PARAM_SET>`__ —— "
+"收到此消息后，将内部变量设为 「param_value」 字段中的值。"
+
+#: ../../source/docs/code-overview-adding-support-for-a-new-mavlink-gimbal.rst:63
+#: b0a16e7248ac4e1c82fba096da90daf2
+msgid ""
+"ArduPilot will send angle requests to the gimbal via MAVLink which will "
+"arrive as `COMMAND_LONG "
+"<https://mavlink.io/en/messages/common.html#COMMAND_LONG>`__ messages with "
+"the \"command\" field set to MAV_CMD_DO_MOUNT_CONTROL (i.e 205)."
+msgstr ""
+"ArduPilot 将通过 MAVLink 向云台发送角度请求，以 `COMMAND_LONG "
+"<https://mavlink.io/en/messages/common.html#COMMAND_LONG>`__ 消息的形式到达，其 "
+"「command」 字段设为 MAV_CMD_DO_MOUNT_CONTROL（即 205）。"
+
+#: ../../source/docs/code-overview-adding-support-for-a-new-mavlink-gimbal.rst:69
+#: a264c074e0db4b7cbd7c775248882b37
+msgid "Param #1 contains desired pitch in degrees"
+msgstr "Param #1 包含期望的俯仰角（度）"
+
+#: ../../source/docs/code-overview-adding-support-for-a-new-mavlink-gimbal.rst:70
+#: 08c2c5c3dddc467a872f0fbcc32b4d4c
+msgid "Param #2 contains desired roll in degrees"
+msgstr "Param #2 包含期望的横滚角（度）"
+
+#: ../../source/docs/code-overview-adding-support-for-a-new-mavlink-gimbal.rst:71
+#: b972d1599a534d049a9ef195c3c11f45
+msgid ""
+"Param #3 contains desired yaw in degrees but note that the yaw is in "
+"relation to the front of the vehicle so \"0\" is straight ahead, \"90\" is "
+"to the right, \"-90\" is to the left."
+msgstr "Param #3 包含期望的偏航角（度），注意偏航角相对于飞行器正前方，「0」 为正前方，「90」 为右侧，「-90」 为左侧。"
+
+#: ../../source/docs/code-overview-adding-support-for-a-new-mavlink-gimbal.rst:75
+#: 0da38cbc642844ceb458f04cd24a8644
+msgid ""
+"If the gimbal needs extra data from the vehicle it can request it using the "
+"`REQUEST_DATA_STREAM "
+"<https://mavlink.io/en/messages/common.html#REQUEST_DATA_STREAM>`__ message."
+msgstr ""
+"如果云台需要从飞行器获取额外数据，可使用 `REQUEST_DATA_STREAM "
+"<https://mavlink.io/en/messages/common.html#REQUEST_DATA_STREAM>`__ 消息进行请求。"
+
+#: ../../source/docs/code-overview-adding-support-for-a-new-mavlink-gimbal.rst:80
+#: 12301bb78a9a4489acdf145aac2840d5
+msgid "the target system and component id should be for the vehicle."
+msgstr "目标系统和组件 ID 应为飞行器的对应值。"
+
+#: ../../source/docs/code-overview-adding-support-for-a-new-mavlink-gimbal.rst:81
+#: 9f009d0311b34f73a92a8926e0a0344f
+msgid ""
+"\"req_stream_id\" can be any values in the MAV_DATA_STREAM enum. Some useful"
+" values are:"
+msgstr "「req_stream_id」 可为 MAV_DATA_STREAM 枚举中的任意值。一些常用值包括："
+
+#: ../../source/docs/code-overview-adding-support-for-a-new-mavlink-gimbal.rst:84
+#: 55026b300db84255a54f8fb41f3afc66
+msgid ""
+"MAV_DATA_STREAM_POSITION will cause the vehicle to send `GLOBAL_POSITION_INT"
+" <https://mavlink.io/en/messages/common.html#GLOBAL_POSITION_INT>`__ "
+"messages which includes lat, lon, alt, velocity (3d) and heading)"
+msgstr ""
+"MAV_DATA_STREAM_POSITION 将使飞行器发送 `GLOBAL_POSITION_INT "
+"<https://mavlink.io/en/messages/common.html#GLOBAL_POSITION_INT>`__ "
+"消息，其中包含纬度、经度、高度、速度（三维）和航向)"
+
+#: ../../source/docs/code-overview-adding-support-for-a-new-mavlink-gimbal.rst:88
+#: 0ad0886d159a4a80b169081f19202da0
+msgid ""
+"MAV_DATA_STREAM_EXTRA1 will send the `MSG_ATTITUDE "
+"<https://mavlink.io/en/messages/common.html#ATTITUDE>`__ which includes "
+"euler angles for roll, pitch, yaw"
+msgstr ""
+"MAV_DATA_STREAM_EXTRA1 将发送 `MSG_ATTITUDE "
+"<https://mavlink.io/en/messages/common.html#ATTITUDE>`__ 消息，其中包含横滚、俯仰、偏航的欧拉角"
+
+#: ../../source/docs/code-overview-adding-support-for-a-new-mavlink-gimbal.rst:93
+#: 79f8a0dbd71b4397865823f145f9fefb
+msgid "Testing"
+msgstr "测试"
+
+#: ../../source/docs/code-overview-adding-support-for-a-new-mavlink-gimbal.rst:95
+#: 3e0aa5aa27504cf393cd39f43a9623a4
+msgid ""
+"To test the system, you should be able to connect the gimbal to a Pixhawk as"
+" if it's a SToRM32 gimbal. In particular check the `\"Set-up through the "
+"Mission Planner (MALVink protocol)\" "
+"<http://copter.ardupilot.com/wiki/common-storm32-gimbal/#set-"
+"up_through_the_mission_planner_mavlink_protocol>`__ section."
+msgstr ""
+"要测试该系统，可以将云台连接到 Pixhawk，就像连接 SToRM32 云台一样。请特别参考 `「通过 Mission Planner "
+"进行设置（MAVLink 协议）」 <http://copter.ardupilot.com/wiki/common-"
+"storm32-gimbal/#set-up_through_the_mission_planner_mavlink_protocol>`__ 章节。"

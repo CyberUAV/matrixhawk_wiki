@@ -1,0 +1,318 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/ros2-over-ethernet.rst:5 2a5cbaac42dd44cb8fa54b6c3371d373
+msgid "ROS 2 over Ethernet"
+msgstr "通过以太网使用 ROS 2"
+
+#: ../../source/docs/ros2-over-ethernet.rst:7 a12124caeae94f1aa52e291dde89c384
+msgid ""
+"The following tutorial explains how to connect a flight controller to a "
+"companion computer using ethernet for DDS communication."
+msgstr "以下教程介绍如何通过以太网将飞控连接到伴飞计算机以进行 DDS 通信。"
+
+#: ../../source/docs/ros2-over-ethernet.rst:9 dc5d913c8278431f8f65cfd3c230a6f3
+msgid ""
+"Ensure you have ROS 2 :ref:`installed <ros2>` and have run :ref:`SITL "
+"<ros2-sitl>` successfully before attempting this page."
+msgstr "在尝试本页内容之前，请确保已 :ref:`安装 <ros2>` ROS 2 并成功运行过 :ref:`SITL <ros2-sitl>`。"
+
+#: ../../source/docs/ros2-over-ethernet.rst:11
+#: 06415444cfb240d7947c98b0952355bc
+msgid ""
+"Additionally, make sure you understand the :ref:`basics of networking in "
+"ArduPilot. <common-network>`"
+msgstr "此外，请确保您了解 :ref:`ArduPilot 网络基础知识。<common-network>`"
+
+#: ../../source/docs/ros2-over-ethernet.rst:13
+#: 4fe182f5b4204dd98033e196e0b9b687
+msgid ""
+"ROS2 (via DDS) is not part of the standard ArduPilot build. Use the `Custom "
+"Build Server <https://custom.ardupilot.org/add_build>`__ and ensure "
+"\"MicroXRCE DDS support for ROS 2\" is checked."
+msgstr ""
+"ROS 2（通过 DDS）不属于 ArduPilot 标准构建的一部分。请使用 `自定义构建服务器 "
+"<https://custom.ardupilot.org/add_build>`__ 并确保勾选「MicroXRCE DDS support for "
+"ROS 2」。"
+
+#: ../../source/docs/ros2-over-ethernet.rst:16
+#: 015e31252b7c41b79a9133226b11cb32
+msgid "Motivation"
+msgstr "背景动机"
+
+#: ../../source/docs/ros2-over-ethernet.rst:18
+#: fd6918e45ff94d07863489787b69d609
+msgid ""
+"Starting in ArduPilot 4.5, ethernet is now supported as a new communication "
+"interface. Compared to connecting an autopilot over serial, ethernet has the"
+" following advantages:"
+msgstr "从 ArduPilot 4.5 开始，以太网作为一种新的通信接口得到支持。与串口连接相比，以太网具有以下优势："
+
+#: ../../source/docs/ros2-over-ethernet.rst:21
+#: 6e53d48366cf4d599eafb8ada6d05426
+msgid "Ethernet is more immune to noise because it uses twisted pair wiring"
+msgstr "以太网使用双绞线，抗干扰能力更强"
+
+#: ../../source/docs/ros2-over-ethernet.rst:22
+#: 8f0c903152014263a738bf86d7ded100
+msgid ""
+"Ethernet can run multiple protocols over the same protocol (unless you use "
+"PPP)"
+msgstr "以太网可以在同一链路上运行多种协议（PPP 除外）"
+
+#: ../../source/docs/ros2-over-ethernet.rst:23
+#: 06ea36fbfd0049eebe2edaa33ae724a3
+msgid ""
+"Ethernet is easier to debug with tools such as ``tcpdump`` or ``Wireshark``"
+msgstr "以太网可以使用 ``tcpdump`` 或 ``Wireshark`` 等工具更方便地调试"
+
+#: ../../source/docs/ros2-over-ethernet.rst:24
+#: a92b401fcb3f4c628ac299d3bb50ecf4
+msgid ""
+"Ethernet uses standard cabling, so it's more difficult to mix up TX and RX"
+msgstr "以太网使用标准线缆，不易混淆发送端与接收端"
+
+#: ../../source/docs/ros2-over-ethernet.rst:27
+#: 29b792f1a9814476aba05d143a5284cf
+msgid "Physical Equipment"
+msgstr "物理设备"
+
+#: ../../source/docs/ros2-over-ethernet.rst:29
+#: 9f3565f0bc664e0f93a20bfad3045cd1
+msgid "The following equipment is required to complete this tutorial:"
+msgstr "完成本教程需要以下设备："
+
+#: ../../source/docs/ros2-over-ethernet.rst:31
+#: e3871ea9eb6d40a68e490bc72f3b70b6
+msgid "A computer that can run the MicroROS Agent and the ROS 2 CLI"
+msgstr "一台可以运行 MicroROS Agent 和 ROS 2 CLI 的计算机"
+
+#: ../../source/docs/ros2-over-ethernet.rst:32
+#: 65257fe2f66e4f2695167756353fe0e2
+msgid "An autopilot with ethernet support"
+msgstr "一个支持以太网的自动驾驶仪"
+
+#: ../../source/docs/ros2-over-ethernet.rst:35
+#: 3d6f130d3e974dabb9dfe22d3f06067c
+msgid "Necessary parameters for static configuration"
+msgstr "静态配置所需参数"
+
+#: ../../source/docs/ros2-over-ethernet.rst:37
+#: d504df9305fd4fb8b3dcb916b049011f
+msgid ""
+"This list of parameters is given as an example. If you had the following "
+"static IP addresses:"
+msgstr "以下参数列表仅作示例。假设您使用以下静态 IP 地址："
+
+#: ../../source/docs/ros2-over-ethernet.rst:40
+#: 16d552292f084eee9b5084da959d12a5
+msgid "An autopilot has the IP address ``192.168.144.14``"
+msgstr "自动驾驶仪的 IP 地址为 ``192.168.144.14``"
+
+#: ../../source/docs/ros2-over-ethernet.rst:41
+#: 5a26b196f471404595fa935debd2b78b
+msgid ""
+"A Computer running the MicroROS agent has the IP address ``192.168.144.6``"
+msgstr "运行 MicroROS Agent 的计算机 IP 地址为 ``192.168.144.6``"
+
+#: ../../source/docs/ros2-over-ethernet.rst:42
+#: 450f5b6fbf4a4b1e9a8b01458e301a8a
+msgid "The MicroROS agent is running on port ``2019``"
+msgstr "MicroROS Agent 运行在端口 ``2019``"
+
+#: ../../source/docs/ros2-over-ethernet.rst:44
+#: 09ddf5eaec91460ca3a456d165ad2c99
+msgid "Then, you would configure all of the below parameters."
+msgstr "则需要配置以下所有参数。"
+
+#: ../../source/docs/ros2-over-ethernet.rst:51
+#: 557b6482d8fd4c03a179a0a216ff4abe
+msgid "Parameter Name"
+msgstr "参数名称"
+
+#: ../../source/docs/ros2-over-ethernet.rst:52
+#: 2bb271b6db86427ea7782be4397b22e9
+msgid "Value"
+msgstr "值"
+
+#: ../../source/docs/ros2-over-ethernet.rst:53
+#: d4a36b1655124e9686cb6de845689715
+msgid ":ref:`DDS_ENABLE<DDS_ENABLE>`"
+msgstr ":ref:`DDS_ENABLE<DDS_ENABLE>`"
+
+#: ../../source/docs/ros2-over-ethernet.rst:54
+#: ../../source/docs/ros2-over-ethernet.rst:68
+#: 01d0e768eef04bda9fd1463fa632ad24 3fec91e6376a41819ef2a0639920a678
+msgid "1"
+msgstr "1"
+
+#: ../../source/docs/ros2-over-ethernet.rst:55
+#: 0bf1a2a683b44c91b183cf076acd6f3e
+msgid ":ref:`DDS_IP0<DDS_IP0>`"
+msgstr ":ref:`DDS_IP0<DDS_IP0>`"
+
+#: ../../source/docs/ros2-over-ethernet.rst:56
+#: ../../source/docs/ros2-over-ethernet.rst:70
+#: e9bb4164d7964f548ee7d44985504cb1 eb394411446a400b8f3396c8a036758c
+msgid "192"
+msgstr "192"
+
+#: ../../source/docs/ros2-over-ethernet.rst:57
+#: 5829207ef7ef4b5f86d15c074039542f
+msgid ":ref:`DDS_IP1<DDS_IP1>`"
+msgstr ":ref:`DDS_IP1<DDS_IP1>`"
+
+#: ../../source/docs/ros2-over-ethernet.rst:58
+#: ../../source/docs/ros2-over-ethernet.rst:72
+#: 331a5b233e2443e6b183a83fd6e88ca2 d31ad88d25d24aab939712002e5662cf
+msgid "168"
+msgstr "168"
+
+#: ../../source/docs/ros2-over-ethernet.rst:59
+#: 3f68e9d50e8240f8aeefc9f393def225
+msgid ":ref:`DDS_IP2<DDS_IP2>`"
+msgstr ":ref:`DDS_IP2<DDS_IP2>`"
+
+#: ../../source/docs/ros2-over-ethernet.rst:60
+#: ../../source/docs/ros2-over-ethernet.rst:74
+#: 9aed5e4eb45541d1a64a55535d5c34fb cbb42a85d3d949398fcd4a1d7dbb228a
+msgid "144"
+msgstr "144"
+
+#: ../../source/docs/ros2-over-ethernet.rst:61
+#: 012240d3605f4b158e1b02c20cd8bf46
+msgid ":ref:`DDS_IP3<DDS_IP3>`"
+msgstr ":ref:`DDS_IP3<DDS_IP3>`"
+
+#: ../../source/docs/ros2-over-ethernet.rst:62
+#: 3e9fcbc8f6cf4fb7bc44090bdf62a443
+msgid "6"
+msgstr "6"
+
+#: ../../source/docs/ros2-over-ethernet.rst:63
+#: 44938e7ce6e949e099b798187ac5de9a
+msgid ":ref:`DDS_UDP_PORT<DDS_UDP_PORT>`"
+msgstr ":ref:`DDS_UDP_PORT<DDS_UDP_PORT>`"
+
+#: ../../source/docs/ros2-over-ethernet.rst:64
+#: bdb7d5f58a9c413a8c48c41937769704
+msgid "2019"
+msgstr "2019"
+
+#: ../../source/docs/ros2-over-ethernet.rst:65
+#: 6f2871e36cdf491fbf682d81619a5010
+msgid ":ref:`NET_DHCP<NET_DHCP>`"
+msgstr ":ref:`NET_DHCP<NET_DHCP>`"
+
+#: ../../source/docs/ros2-over-ethernet.rst:66
+#: 031a44b6966a4b86bd62370c43b2488f
+msgid "0"
+msgstr "0"
+
+#: ../../source/docs/ros2-over-ethernet.rst:67
+#: 23c47d1ace1d403192e16baa205697a0
+msgid ":ref:`NET_ENABLE<NET_ENABLE>`"
+msgstr ":ref:`NET_ENABLE<NET_ENABLE>`"
+
+#: ../../source/docs/ros2-over-ethernet.rst:69
+#: 0dcc1607b37049f88a5e87983a4c0d01
+msgid ":ref:`NET_IPADDR0<NET_IPADDR0>`"
+msgstr ":ref:`NET_IPADDR0<NET_IPADDR0>`"
+
+#: ../../source/docs/ros2-over-ethernet.rst:71
+#: c5386995f1c64c29bac7a796879b4bc2
+msgid ":ref:`NET_IPADDR1<NET_IPADDR1>`"
+msgstr ":ref:`NET_IPADDR1<NET_IPADDR1>`"
+
+#: ../../source/docs/ros2-over-ethernet.rst:73
+#: f90ef14f12c64a6eb3d8f79d0a5061ed
+msgid ":ref:`NET_IPADDR2<NET_IPADDR2>`"
+msgstr ":ref:`NET_IPADDR2<NET_IPADDR2>`"
+
+#: ../../source/docs/ros2-over-ethernet.rst:75
+#: df0e516f4c0e4122bbd98689bed508d7
+msgid ":ref:`NET_IPADDR3<NET_IPADDR3>`"
+msgstr ":ref:`NET_IPADDR3<NET_IPADDR3>`"
+
+#: ../../source/docs/ros2-over-ethernet.rst:76
+#: f9803c5ccfc24c8fa6a1ddcf66ad65ad
+msgid "14"
+msgstr "14"
+
+#: ../../source/docs/ros2-over-ethernet.rst:79
+#: 7838022f81a64b43ac717cae0717ac54
+msgid "Modify the addresses to suit your needs; the rest can remain the same."
+msgstr "根据您的实际需求修改地址，其余参数可保持不变。"
+
+#: ../../source/docs/ros2-over-ethernet.rst:82
+#: f394353b19c245cd93bc5cdfa5e56471
+msgid "Steps"
+msgstr "步骤"
+
+#: ../../source/docs/ros2-over-ethernet.rst:84
+#: 1401379b910c46bbb7fe793b68a76460
+msgid "Flash the autopilot with software compiled with ``--enable-dds``"
+msgstr "使用带 ``--enable-dds`` 选项编译的固件刷写自动驾驶仪"
+
+#: ../../source/docs/ros2-over-ethernet.rst:85
+#: 55f9a38c6dfc431885c58cff2c255f26
+msgid "Connect the autopilot via ethernet to the computer"
+msgstr "通过以太网将自动驾驶仪连接到计算机"
+
+#: ../../source/docs/ros2-over-ethernet.rst:86
+#: 93473b9795d94d67bca86920af6531d3
+msgid "Open a MavProxy session"
+msgstr "打开一个 MAVProxy 会话"
+
+#: ../../source/docs/ros2-over-ethernet.rst:87
+#: 17ab7bac2e2c430a852a9c5bdc3d9b2d
+msgid ""
+"Configure the parameters described above, starting with the ``ENABLE`` "
+"parameters first."
+msgstr "配置上述参数，首先从 ``ENABLE`` 类参数开始。"
+
+#: ../../source/docs/ros2-over-ethernet.rst:88
+#: 8747fc2e59de4aec98084d31b1fb2e11
+msgid "Reboot the flight controller"
+msgstr "重启飞控"
+
+#: ../../source/docs/ros2-over-ethernet.rst:89
+#: fd5b5ef1e60e4df89261f74e6a1265a8
+msgid ""
+"Start the MicroROS Agent with the same port as the parameter for "
+"``DDS_UDP_PORT``"
+msgstr "以与 ``DDS_UDP_PORT`` 参数相同的端口启动 MicroROS Agent"
+
+#: ../../source/docs/ros2-over-ethernet.rst:93
+#: 7f6f23be0cce4727ac8c83c2e808055f
+msgid "ArduPilot 4.5"
+msgstr "ArduPilot 4.5"
+
+#: ../../source/docs/ros2-over-ethernet.rst:99
+#: db7fb350bc384724988ffbbd4760ec5c
+msgid "ArduPilot 4.6 and later"
+msgstr "ArduPilot 4.6 及更新版本"
+
+#: ../../source/docs/ros2-over-ethernet.rst:105
+#: 19730cbd85f34d3fbf9372735f60609f
+msgid "Use the ROS 2 CLI to interact with the autopilot"
+msgstr "使用 ROS 2 CLI 与自动驾驶仪交互"

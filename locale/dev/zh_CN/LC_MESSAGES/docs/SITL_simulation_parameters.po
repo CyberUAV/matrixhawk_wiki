@@ -1,0 +1,327 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/SITL_simulation_parameters.rst:4
+#: 6188a0f51167429ba5fdc77fe17cefaa
+msgid "Using Simulation Parameters to Control the Simulation"
+msgstr "使用仿真参数控制仿真"
+
+#: ../../source/docs/SITL_simulation_parameters.rst:6
+#: b4f24e1bd041457ca689ddc11de16736
+msgid ""
+"SITL has a large set of parameters to control the simulation. Wind "
+"speed/direction, Sensor malfunctions and parameters, RC failures, etc. can "
+"be emulated and controlled. They are visible and present when a simulation "
+"is running and prefixed by ``SIM_``. A few are detailed below."
+msgstr ""
+"SITL (软件在环仿真) 拥有大量用于控制仿真的参数。风速/风向、传感器故障和参数、遥控失效等均可模拟和控制。仿真运行时这些参数可见，以 "
+"``SIM_`` 为前缀。下面详述其中几个。"
+
+#: ../../source/docs/SITL_simulation_parameters.rst:9
+#: ce6303e930a44a12a8b57fffa427a239
+msgid "Setting parameters"
+msgstr "设置参数"
+
+#: ../../source/docs/SITL_simulation_parameters.rst:11
+#: d1951f8edc4a4d3fa237b7ba3ca6c4d2
+msgid ""
+"If the attached GCS is Mission Planner, you would use the CONFIG/Full "
+"Parameter List or Tree to change the parameters. The following gives "
+"examples using MAVProxy commands to change the parameter values."
+msgstr ""
+"如果连接的地面站是 Mission Planner，您可以使用 CONFIG/完整参数列表或参数树来更改参数。以下给出使用 MAVProxy "
+"命令更改参数值的示例。"
+
+#: ../../source/docs/SITL_simulation_parameters.rst:13
+#: c8b8467708af46c6b3e9ef995f80dbbd
+msgid ""
+"Many of the following tasks involve setting parameter values over MAVLink, "
+"which you do using the ``param set`` command as shown:"
+msgstr "以下许多任务涉及通过 MAVLink 设置参数值，使用如下所示的 ``param set`` 命令："
+
+#: ../../source/docs/SITL_simulation_parameters.rst:20
+#: d22a337b3df0465490c3ad3284819fb5
+msgid ""
+"All available parameters can be listed using ``param show``. The SITL-"
+"specific parameters start with ``SIM_``, and can be obtained using:"
+msgstr "所有可用参数可通过 ``param show`` 列出。SITL 专用参数以 ``SIM_`` 开头，可通过以下方式获取："
+
+#: ../../source/docs/SITL_simulation_parameters.rst:29
+#: 1ffc664ee3c64aaeb74b264ec4e039bc
+msgid ""
+"A table of user settable SITL-specific parameters can be found in `SITL.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/SITL/SITL.cpp>`__"
+" When you change a parameter the value remains in the virtual EEPROM after "
+"you restart SITL. Remember to change it back if you don't want it any more "
+"(or :ref:`reload/reset the parameters <using-sitl-for-ardupilot-"
+"testing_loading_a_parameter_set>`)."
+msgstr ""
+"用户可设置的 SITL 专用参数列表可在 `SITL.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/SITL/SITL.cpp>`__"
+" 中找到。更改参数后，该值在重启 SITL 后仍保留在虚拟 EEPROM 中。如不再需要，请记得将其改回（或 :ref:`重新加载/重置参数 "
+"<using-sitl-for-ardupilot-testing_loading_a_parameter_set>`）。"
+
+#: ../../source/docs/SITL_simulation_parameters.rst:36
+#: f2eaf03714064c97b455e1319d51ee8e
+msgid "Changing the speed of the simulation"
+msgstr "更改仿真速度"
+
+#: ../../source/docs/SITL_simulation_parameters.rst:38
+#: 10d3eb3c6af2437d949d952bd1278b2b
+msgid ""
+"Most of the simulator backends (native, X-plane, etc.) support changing the "
+"speed while running (NOT Realflight). Just set the ``SIM_SPEEDUP`` parameter"
+" as needed. A value of 1 means normal wall-clock time. A value of 5 means 5x"
+" realtime. A value of 0.1 means 1/10th of real time."
+msgstr ""
+"大多数仿真器后端（原生、X-plane 等）支持运行时更改速度（Realflight 除外）。只需按需设置 ``SIM_SPEEDUP`` 参数。值为 "
+"1 表示正常实时速度，值为 5 表示 5 倍实时，值为 0.1 表示实时速度的 1/10。"
+
+#: ../../source/docs/SITL_simulation_parameters.rst:43
+#: f34f570a08504be68ed72b75ee709abc
+msgid ""
+"Running with high-levels of speedup can result in enough network traffic "
+"that MAVProxy can’t keep up. An error such as “Set RC override timeout” or "
+"the vehicle entering GCS failsafe are typical of these failures. Reducing "
+"the ``SIM_SPEEDUP`` factor is typically sufficient to avoid this problem. "
+"Also, using the ``--udp`` options will use UDP instead of the slower TCP "
+"communication protocol and can help avoid this issue at higher speedups."
+msgstr ""
+"以较高倍速运行可能产生大量网络流量，导致 MAVProxy 跟不上。「Set RC override "
+"timeout」等错误或飞行器进入地面站失控保护是此类故障的典型表现。降低 ``SIM_SPEEDUP`` 因子通常足以避免此问题。此外，使用 "
+"``--udp`` 选项将用 UDP 替代较慢的 TCP 通信协议，在较高倍速时有助于避免此问题。"
+
+#: ../../source/docs/SITL_simulation_parameters.rst:46
+#: 7419ee2e6a3c4eb7a4de7bfdab436362
+msgid "Loading a parameter set"
+msgstr "加载参数集"
+
+#: ../../source/docs/SITL_simulation_parameters.rst:48
+#: b77ed9a1b68a4e18b796da20f3a5e5e8
+msgid ""
+"When starting SITL the first time, the device will be configured with "
+"default parameters for the vehicle/frame type. Typically, you will want to "
+"replace these with values that simulate the desired vehicle and environment "
+"conditions."
+msgstr "首次启动 SITL 时，设备将使用飞行器/机架类型的默认参数进行配置。通常您会希望将其替换为模拟所需飞行器和环境条件的值。"
+
+#: ../../source/docs/SITL_simulation_parameters.rst:56
+#: c991739919dc41da9a2d3fc2579332af
+msgid ""
+"the working directory is the directory in which MAVProxy starts, not the "
+"simulation"
+msgstr "工作目录是 MAVProxy 启动时所在的目录，而非仿真目录"
+
+#: ../../source/docs/SITL_simulation_parameters.rst:58
+#: 774240bdc83640e09725ec006d13d465
+msgid ""
+"You can re-load the parameters later if you choose, or revert to the default"
+" parameters by starting SITL (**sim_vehicle.py**) with the ``-w`` flag."
+msgstr "您可以选择稍后重新加载参数，或通过以 ``-w`` 标志启动 SITL（**sim_vehicle.py**）来恢复默认参数。"
+
+#: ../../source/docs/SITL_simulation_parameters.rst:62
+#: d68a7d2d5dbb40faa57c11d35a7452df
+msgid ""
+"You may have to load them again, after typing ``param fetch``, in order to "
+"load parameters that require enabling before presenting their parameter set."
+"  And, in some cases, you may even need to restart SITL in order for some "
+"new parameters, such as output function changes, to take effect. This can be"
+" avoided if you add the parameter file during the start of SITL with the \""
+"--add-param-file=*pathtofile* \"....ie: sim_vehicle.py -f "
+"flightaxis:192.168.x.x - -map - -console --add-param-file=*pathtofile* -w. "
+"This adds the param file as a default and then wipes any previous param "
+"changes that may exist back to the defaults."
+msgstr ""
+"您可能需要在输入 ``param fetch`` 后再次加载参数，以便加载需要先启用才能显示其参数集的参数。在某些情况下，您甚至可能需要重启 "
+"SITL，才能使某些新参数（例如输出功能更改）生效。如果在 SITL 启动时通过 「--add-param-file=*pathtofile*」 "
+"添加参数文件，则可以避免这种情况……即：sim_vehicle.py -f flightaxis:192.168.x.x - -map - "
+"-console --add-param-file=*pathtofile* "
+"-w。这会将参数文件作为默认值添加，然后将之前可能存在的任何参数更改恢复为默认值。"
+
+#: ../../source/docs/SITL_simulation_parameters.rst:64
+#: f8497239791d4905b4d0b1bb924b0074
+msgid ""
+"Parameters can also be saved. For example, to save the parameters in a file "
+"in the present working directory:"
+msgstr "参数也可以保存。例如，将参数保存到当前工作目录中的文件："
+
+#: ../../source/docs/SITL_simulation_parameters.rst:70
+#: 43f3239c3b914f67b7d7b841214df67d
+msgid ""
+"the \"default\" parameter set emulates the parameter default values "
+"contained in the firmware. These are used at startup for parameters, UNLESS "
+"the user has previously changed a parameter(s) which are stored in the "
+"autopilot's flash, in which case those changed values are used for those "
+"changed parameters. In SITL, these changes are stored in a file in the "
+"simulation startup directory named ``eeprom.bin``. The above param load and "
+"save commands deal with these user set values for the parameters, not the "
+"firmware default values created at simulation start, which can be changed "
+"using the ``--add-param-file`` startup option."
+msgstr ""
+"「默认」参数集模拟固件中包含的参数默认值。这些值在启动时用于参数，除非用户之前已更改了存储在自动驾驶仪 flash "
+"中的参数，在这种情况下，对于那些已更改的参数将使用更改后的值。在 SITL 中，这些更改存储在仿真启动目录中名为 ``eeprom.bin`` "
+"的文件里。上述 param load 和 save 命令处理的是这些用户设置的参数值，而非仿真启动时创建的固件默认值，固件默认值可使用 ``--add-"
+"param-file`` 启动选项更改。"
+
+#: ../../source/docs/SITL_simulation_parameters.rst:72
+#: 50d45fda887949838847b479763e9148
+msgid "Other options can be listed using:"
+msgstr "其他选项可通过以下方式列出："
+
+#: ../../source/docs/SITL_simulation_parameters.rst:80
+#: 29e985e315eb43329492202cd3f1d2e2
+msgid "Testing RC failsafe"
+msgstr "测试遥控失控保护"
+
+#: ../../source/docs/SITL_simulation_parameters.rst:82
+#: 48924ab132f9422bbebff72527305dde
+msgid ""
+"To test the behaviour of ArduPilot when you lose remote control (RC), set "
+"the parameter ``SIM_RC_FAIL=1``, as shown:"
+msgstr "要测试遥控（RC）丢失时 ArduPilot 的行为，请设置参数 ``SIM_RC_FAIL=1``，如下所示："
+
+#: ../../source/docs/SITL_simulation_parameters.rst:89
+#: 28dfbbf870564de886121852d18a4a75
+msgid ""
+"This simulates the complete loss of RC input. If you just want to simulate "
+"low throttle (below throttle failsafe level) then you can do that with the "
+"RC command:"
+msgstr "这将模拟遥控输入完全丢失。如果只想模拟低油门（低于油门失控保护阈值），可使用 RC 命令："
+
+#: ../../source/docs/SITL_simulation_parameters.rst:97
+#: f6f0f57b0fdf4bf7b5445268a03b0a1f
+msgid ""
+"or use ``SIM_RC_FAIL=2`` which sets all channels at neutral  (1500us) and "
+"the throttle channel at 950us."
+msgstr "或使用 ``SIM_RC_FAIL=2``，将所有通道设为中位（1500us），油门通道设为 950us。"
+
+#: ../../source/docs/SITL_simulation_parameters.rst:100
+#: 9a853891eb624c9a9bedfaa7c2fb68d2
+msgid "Testing the effects of vibration"
+msgstr "测试振动的影响"
+
+#: ../../source/docs/SITL_simulation_parameters.rst:102
+#: 2b1ebff3042248bda62a7264c0ee5bb1
+msgid ""
+"To test the vehicle's reaction to vibration, use ``SIM_ACC_RND``. The "
+"example below adds 3 m/s/s acceleration noise:"
+msgstr "要测试飞行器对振动的响应，使用 ``SIM_ACC_RND``。以下示例添加 3 m/s/s 的加速度噪声："
+
+#: ../../source/docs/SITL_simulation_parameters.rst:110
+#: 9ef2e31d63f84b89a9d3ca1b2ab3cce3
+msgid "Testing the effects of wind"
+msgstr "测试风的影响"
+
+#: ../../source/docs/SITL_simulation_parameters.rst:112
+#: 3341a94e44a747eab08249dc73128e02
+msgid ""
+"The wind direction, speed and turbulence can be changed to test their effect"
+" on flight behaviour. The following settings changes the wind so that it "
+"blows from the South at a speed of 10 m/s."
+msgstr "可以更改风向、风速和湍流以测试它们对飞行行为的影响。以下设置将风更改为以 10 m/s 的速度从南方吹来。"
+
+#: ../../source/docs/SITL_simulation_parameters.rst:121
+#: f369b7ecc5874f77b53fe761f0cc51ce
+msgid "To see other wind parameters do:"
+msgstr "要查看其他风参数，请执行："
+
+#: ../../source/docs/SITL_simulation_parameters.rst:128
+#: a283dd53d39b45a88928b4516e10ab13
+msgid "Testing GPS failure"
+msgstr "测试 GPS 故障"
+
+#: ../../source/docs/SITL_simulation_parameters.rst:130
+#: d417164300c5417487d57df760a3e25b
+msgid "To test losing GPS lock, use ``SIM_GPS_DISABLE``:"
+msgstr "要测试 GPS 锁定丢失，使用 ``SIM_GPS_DISABLE``："
+
+#: ../../source/docs/SITL_simulation_parameters.rst:136
+#: 81ce5cf4a9594b328e92b8b965e60fff
+msgid "You can also enable/disable a 2nd GPS using ``SIM_GPS2_DISABLE``."
+msgstr "您也可以使用 ``SIM_GPS2_DISABLE`` 启用/禁用第二个 GPS。"
+
+#: ../../source/docs/SITL_simulation_parameters.rst:139
+#: 3b361c271f8a43169aac1f4a55ac3d04
+msgid "Testing GPS-for-Yaw"
+msgstr "测试 GPS 偏航功能"
+
+#: ../../source/docs/SITL_simulation_parameters.rst:141
+#: 82ef965bb9304f96a52f77e221e2b45d
+msgid "To test GPS-for-Yaw using two simulated UBlox GPSs:"
+msgstr "要使用两个仿真 UBlox GPS 测试 GPS 偏航功能："
+
+#: ../../source/docs/SITL_simulation_parameters.rst:156
+#: b7b0b70dcdf1464e87b24fa47d781d4a
+msgid ""
+"Reboot SITL and the heading should be visible in the GPS2_RAW message's yaw "
+"field:"
+msgstr "重启 SITL，航向应在 GPS2_RAW 消息的 yaw 字段中可见："
+
+#: ../../source/docs/SITL_simulation_parameters.rst:162
+#: 5fa5f89f631244df9b001dbf3ae0db3f
+msgid "To test using a single NMEA GPS:"
+msgstr "要使用单个 NMEA GPS 测试："
+
+#: ../../source/docs/SITL_simulation_parameters.rst:171
+#: 469d9b8a8ed64858bfc8bd7e4b8ee6a8
+msgid ""
+"Reboot SITL and the heading should be visible in the GPS_RAW_INT message's "
+"yaw field:"
+msgstr "重启 SITL，航向应在 GPS_RAW_INT 消息的 yaw 字段中可见："
+
+#: ../../source/docs/SITL_simulation_parameters.rst:178
+#: 5f9f35ca5be242a4aed4ffd6d8a82dda
+msgid "Testing Compass Calibration"
+msgstr "测试罗盘校准"
+
+#: ../../source/docs/SITL_simulation_parameters.rst:180
+#: 8d1c80d92a2843bfa23ec536db13e33c
+msgid ""
+"A quick way to test compass calibration in SITL is with the \"calibration\" "
+"vehicle model. To use this with plane do this:"
+msgstr "在 SITL 中快速测试罗盘校准的方法是使用「calibration」飞行器模型。要与固定翼一起使用，请执行："
+
+#: ../../source/docs/SITL_simulation_parameters.rst:187
+#: 68afb058830f415eaf570507868c8ca8
+msgid "then do:"
+msgstr "然后执行："
+
+#: ../../source/docs/SITL_simulation_parameters.rst:193
+#: 2c18c63fdacf4d318078661ccee42b36
+msgid ""
+"This will start the vehicle moving through a \"compass dance\". You can "
+"start a compass calibration to test changes to the calibrator code. Using "
+"this in combination with the SIM_SPEEDUP parameter can be useful."
+msgstr "这将使飞行器开始执行「罗盘舞动」运动。您可以启动罗盘校准以测试校准代码的更改。与 SIM_SPEEDUP 参数结合使用会很有帮助。"
+
+#: ../../source/docs/SITL_simulation_parameters.rst:197
+#: c9306ca43db14b81a7b224d135d77e82
+msgid ""
+"The calibration vehicle module has a lot of other features too. See "
+"`http://guludo.me/posts/2016/05/27/compass-calibration-progress-with-"
+"geodesic-sections-in-ardupilot/ <http://guludo.me/posts/2016/05/27/compass-"
+"calibration-progress-with-geodesic-sections-in-ardupilot/>`__ for details."
+msgstr ""
+"校准飞行器模块还有许多其他功能。详情请参阅 `http://guludo.me/posts/2016/05/27/compass-"
+"calibration-progress-with-geodesic-sections-in-ardupilot/ "
+"<http://guludo.me/posts/2016/05/27/compass-calibration-progress-with-"
+"geodesic-sections-in-ardupilot/>`__。"

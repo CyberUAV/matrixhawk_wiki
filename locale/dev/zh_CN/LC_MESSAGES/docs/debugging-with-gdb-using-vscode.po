@@ -1,0 +1,202 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/debugging-with-gdb-using-vscode.rst:5
+#: acf9ac5966e34786b52be9815014ce29
+msgid "Debugging with GDB using VSCode"
+msgstr "使用 VSCode 结合 GDB 进行调试"
+
+#: ../../source/docs/debugging-with-gdb-using-vscode.rst:7
+#: bcd779ec911d439e9b621fbe50eab4bd
+msgid ""
+"This page describes how to setup and use GDB with the VSCode IDE to debug "
+"issues with SITL, autotests, and unit tests."
+msgstr "本页介绍如何配置并使用 GDB 结合 VSCode IDE 来调试 SITL、自动化测试和单元测试中的问题。"
+
+#: ../../source/docs/debugging-with-gdb-using-vscode.rst:10
+#: 6f37e4b083384f02b1a41ce7dfaf4ccb
+msgid "Introduction"
+msgstr "简介"
+
+#: ../../source/docs/debugging-with-gdb-using-vscode.rst:12
+#: be488b9db9f4457895498bae4833b5b6
+msgid ""
+"This guide assumes that you have already successfully use SITL on your "
+"machine following the instructions :ref:`to setup SITL <setting-up-sitl-on-"
+"linux>`."
+msgstr ""
+"本指南假设您已按照 :ref:`配置 SITL <setting-up-sitl-on-linux>` 的说明在计算机上成功运行过 SITL。"
+
+#: ../../source/docs/debugging-with-gdb-using-vscode.rst:16
+#: 0b8ec635aa49435a97995101ba8d295d
+msgid "Installing GDB"
+msgstr "安装 GDB"
+
+#: ../../source/docs/debugging-with-gdb-using-vscode.rst:18
+#: f55550f4e00a4fc8ad2cb3ac00629838
+msgid ""
+"To install GDB on Linux, please use package installer. If you are on a "
+"debian based system (such as Ubuntu or Mint), simply use the ``apt install``"
+" command :"
+msgstr ""
+"在 Linux 上安装 GDB，请使用包管理器。若使用基于 Debian 的系统（如 Ubuntu 或 Mint），直接使用 ``apt "
+"install`` 命令即可："
+
+#: ../../source/docs/debugging-with-gdb-using-vscode.rst:26
+#: e76ba442c7de4dc58f7c238d2cb7b3be
+msgid "Setting up SITL"
+msgstr "配置 SITL"
+
+#: ../../source/docs/debugging-with-gdb-using-vscode.rst:28
+#: 6903e3b8f444482a9ea04168ed3d3eed
+msgid ""
+"In order to use GDB, you need to configure your SITL build with debug "
+"symbols. Use :"
+msgstr "要使用 GDB，需要在构建 SITL 时包含调试符号。使用："
+
+#: ../../source/docs/debugging-with-gdb-using-vscode.rst:35
+#: cf571526be6e432cb220b8a2ef50d058
+msgid "Generate launch.json Variables"
+msgstr "生成 launch.json 变量"
+
+#: ../../source/docs/debugging-with-gdb-using-vscode.rst:37
+#: 340a23ef1f224b3dab1b46056b178699
+#, python-brace-format
+msgid ""
+"Add ``--vs-launch`` to the configure command after ``--debug`` will auto "
+"copy ``.vscode/launch.default.json`` to ``.vscode/launch.json``, if there is"
+" no launch.json existing. When you build the target, it will generate the "
+"build info to ``.vscode/setting.json``. This will allow you to use them in "
+"the launch.json file. Example variables: ``${config:wscript.elf_file_path}``"
+" for .elf file path, ``${config:wscript.board}`` for board name, for STM32 "
+"target it will also generate a openocd.cfg under the build board folder "
+"based on board MCU model. Example command:"
+msgstr ""
+"在 configure 命令的 ``--debug`` 之后添加 ``--vs-launch``，若不存在 launch.json，将自动复制 "
+"``.vscode/launch.default.json`` 至 ``.vscode/launch.json``。构建目标时，将在 "
+"``.vscode/setting.json`` 中生成构建信息，可在 launch.json "
+"文件中使用这些信息。示例变量：``${config:wscript.elf_file_path}`` 表示 .elf "
+"文件路径，``${config:wscript.board}`` 表示板卡名称；对于 STM32 目标，还将根据板卡 MCU 型号在构建板卡目录下生成 "
+"openocd.cfg。示例命令："
+
+#: ../../source/docs/debugging-with-gdb-using-vscode.rst:44
+#: 115f2d4a0a7d42748303f1a684a139e8
+msgid "Setting up VSCode Debugger"
+msgstr "配置 VSCode 调试器"
+
+#: ../../source/docs/debugging-with-gdb-using-vscode.rst:45
+#: d7857996fdd14f5bbd2a8d7f1dee34d6
+msgid ""
+"With VSCode open to the ArduPilot directory. Open the `Run and Debug` menu "
+"(Ctrl+Shift+D). Within the `Run and Debug` menu, select `create a "
+"launch.json file`. Then select `Add Configuration`, it should open a "
+"launch.json file for setting up debugging configurations.  An example "
+"launch.json file can be found below.  Copy-paste the example into the newly "
+"created launch.json file in VSCode, overwitting anything that has was pre-"
+"defined in the file, and save the file.  This example file is a good place "
+"to start but can be modified to your liking.  Should you need to access or "
+"edit the file in the future, you can find it in the .vscode directory, or "
+"you can simply click on the cog icon in the `Run and Debug` menu."
+msgstr ""
+"在 VSCode 中打开 ArduPilot 目录。打开「运行和调试」菜单（Ctrl+Shift+D）。在「运行和调试」菜单中，选择「创建 "
+"launch.json 文件」，然后选择「添加配置」，将打开用于设置调试配置的 launch.json 文件。下方提供了一个示例 launch.json"
+" 文件。将示例内容复制粘贴到 VSCode 中新创建的 launch.json "
+"文件中，覆盖文件中预定义的内容，然后保存。此示例文件是很好的起点，可根据需要修改。之后如需访问或编辑该文件，可在 .vscode "
+"目录中找到，也可以直接点击「运行和调试」菜单中的齿轮图标。"
+
+#: ../../source/docs/debugging-with-gdb-using-vscode.rst:51
+#: 13d0f14980454d529ace1dd63db522cc
+msgid "Example launch.json File"
+msgstr "launch.json 示例文件"
+
+#: ../../source/docs/debugging-with-gdb-using-vscode.rst:220
+#: a5c840d5d6974e8aa67f2d05e2c4e9bf
+msgid ""
+"Launch SITL with using ``sim_vehicle.py`` : be sure to add ``-D`` to build "
+"and launch SITL with debug symbols:"
+msgstr "使用 ``sim_vehicle.py`` 启动 SITL：请确保添加 ``-D`` 以构建并以包含调试符号的方式启动 SITL："
+
+#: ../../source/docs/debugging-with-gdb-using-vscode.rst:226
+#: 12c9ad26b1e54cdaaec2adcb8b9c30b9
+msgid ""
+"From the Run and Debug menu select ``(gdb) Attach``, push the green arrow "
+"and select the process name for your vehicle's binary (e.g. ``arducopter``)"
+msgstr ""
+"在「运行和调试」菜单中选择 ``(gdb) Attach``，点击绿色箭头，然后选择飞行器二进制文件的进程名（例如 ``arducopter``）"
+
+#: ../../source/docs/debugging-with-gdb-using-vscode.rst:231
+#: 6316bf72c770464193a53792e6aca155
+msgid ""
+"Note that you can switch between the Debug and SITL terminals by clicking in"
+" the areas shown in yellow above."
+msgstr "注意可以通过点击上方黄色区域在调试终端和 SITL 终端之间切换。"
+
+#: ../../source/docs/debugging-with-gdb-using-vscode.rst:233
+#: 4f5e4ad56cf040d39b000c7b72fd32f1
+msgid ""
+"Before or after attaching you may put breakpoints in the code to start "
+"debugging."
+msgstr "附加之前或之后，可以在代码中设置断点以开始调试。"
+
+#: ../../source/docs/debugging-with-gdb-using-vscode.rst:239
+#: 900a19d7d44b48efa7651142eb812bfe
+msgid "Debugging Initialization Tasks and Constructors Using Launch Profiles"
+msgstr "使用启动配置文件调试初始化任务和构造函数"
+
+#: ../../source/docs/debugging-with-gdb-using-vscode.rst:241
+#: da2b516ca921432dbd0c59fe92a82d6e
+msgid ""
+"The easiest method to debug initialization and constructors is to select the"
+" debug points, attach to the executable, and then command \"reboot\" in "
+"MAVProxy."
+msgstr "调试初始化和构造函数最简便的方法是选择调试断点，附加到可执行文件，然后在 MAVProxy 中执行 「reboot」命令。"
+
+#: ../../source/docs/debugging-with-gdb-using-vscode.rst:243
+#: e8d075d4d10a4daa8b41eb0bf127bd02
+msgid ""
+"The ``Launch`` profiles allow debugging of the binaries directly for "
+"initialization tasks and constructors, etc. without using MAVProxy. Launch "
+"tasks require that the binary to be debugged has already been built. Be sure"
+" to run ``./waf copter`` beforehand or the old binary will be debugged "
+"instead."
+msgstr ""
+"``Launch`` 配置文件允许直接对二进制文件进行初始化任务、构造函数等的调试，无需使用 "
+"MAVProxy。启动任务要求待调试的二进制文件已提前构建完成。请确保事先运行 ``./waf copter``，否则将调试旧版二进制文件。"
+
+#: ../../source/docs/debugging-with-gdb-using-vscode.rst:246
+#: aaebf51985de46cb86367e1fccdab63e
+msgid "Autotest Debugging Profile"
+msgstr "自动化测试调试配置文件"
+
+#: ../../source/docs/debugging-with-gdb-using-vscode.rst:247
+#: a06a38bc4561430d992782e3813c0183
+msgid ""
+"This profile does not auto-attach to the correct vehicle binary as the "
+"autotest automatically opens & closes new instances of SITL. In order to "
+"debug the C++ code at the same time as the Python autotest code create a "
+"debug point in the Python code before the relevant C++ will be called. Then "
+"attach to the vehicle binary using the \"Attach\" profile. Now that the C++ "
+"executable has been attached to GDB you may continue in the Python debugger."
+msgstr ""
+"由于自动化测试会自动打开和关闭新的 SITL 实例，此配置文件不会自动附加到正确的飞行器二进制文件。若要在调试 Python 自动化测试代码的同时调试 "
+"C++ 代码，请在相关 C++ 代码被调用之前在 Python 代码中设置调试断点，然后使用「Attach」配置文件附加到飞行器二进制文件。C++ "
+"可执行文件附加到 GDB 后，即可继续在 Python 调试器中进行操作。"

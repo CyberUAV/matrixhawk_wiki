@@ -1,0 +1,414 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/mavlink-rcinput.rst:5 3b6be3976a2841fca8b0173473811d25
+msgid "RC Input (aka Pilot Input)"
+msgstr "RC 输入（即飞手输入）"
+
+#: ../../source/docs/mavlink-rcinput.rst:7 dd9ba7f45420499b8ad1b7e05574520b
+msgid ""
+"Traditionally the pilot's manual input via an RC transmitter is sent to the "
+"autopilot via a separate wireless link but it can alternatively be sent via "
+"MAVLink.  This page describes the messages that can be used and gives advice"
+" on some potential issues"
+msgstr ""
+"传统上，飞手通过遥控发射机的手动输入经由独立无线链路发送至自动驾驶仪，但也可以通过 MAVLink "
+"发送。本页描述了可使用的消息，并就一些潜在问题提供建议。"
+
+#: ../../source/docs/mavlink-rcinput.rst:9 e3ae2cba278d4b1486018ecd2a298dc4
+msgid "For reference here are some user focused RC related wiki pages:"
+msgstr "以下是一些面向用户的 RC 相关 wiki 页面，供参考："
+
+#: ../../source/docs/mavlink-rcinput.rst:11 4a770299a244482fa307b8dc1819a846
+msgid ":ref:`Joystick/Gamepad setup <copter:common-joystick>`"
+msgstr ":ref:`摇杆/游戏手柄设置 <copter:common-joystick>`"
+
+#: ../../source/docs/mavlink-rcinput.rst:12 6332a4a56003404daca7e0f6ca3dc881
+msgid ":ref:`RC Input Channel Mapping (aka RCMAP) <copter:common-rcmap>`"
+msgstr ":ref:`RC 输入通道映射（即 RCMAP）<copter:common-rcmap>`"
+
+#: ../../source/docs/mavlink-rcinput.rst:13 e4a180a5ea7d4d9580042f70e8baa6d5
+msgid ":ref:`Auxiliary Functions <copter:common-auxiliary-functions>`"
+msgstr ":ref:`辅助功能 <copter:common-auxiliary-functions>`"
+
+#: ../../source/docs/mavlink-rcinput.rst:15 159cfe92706e4641b4e2be77dcd256d7
+msgid ""
+"The autopilot will ignore the RC input messages if the sender's system id "
+"does not match the autopilot's :ref:`MAV_GCS_SYSID <MAV_GCS_SYSID>` and "
+":ref:`MAV_OPTIONS <MAV_OPTIONS>` = 1"
+msgstr ""
+"若发送方的系统 ID 与自动驾驶仪的 :ref:`MAV_GCS_SYSID <MAV_GCS_SYSID>` 不匹配且 "
+":ref:`MAV_OPTIONS <MAV_OPTIONS>` = 1，自动驾驶仪将忽略 RC 输入消息。"
+
+#: ../../source/docs/mavlink-rcinput.rst:17 14ef8d69c32346678f8a6df3e3222b28
+msgid ""
+"RC input via MAVlink typically results in a laggy response caused by "
+"telemetry system lag and/or bandwidth limitations (these messages normally "
+"share bandwidth with other MAVLink messages passed between GCS and the "
+"vehicle)"
+msgstr ""
+"通过 MAVLink 输入 RC 信号通常会因遥测系统延迟和/或带宽限制而导致响应迟滞（这些消息通常与地面站和飞行器之间传递的其他 MAVLink "
+"消息共享带宽）。"
+
+#: ../../source/docs/mavlink-rcinput.rst:19 cbb6dbfd0267497ab014b3fec8e8be57
+msgid ""
+"The Pilot's RC inputs can be monitored by the GCS or companion computer via "
+"the `RC_CHANNELS <https://mavlink.io/en/messages/common.html#RC_CHANNELS>`__"
+" message"
+msgstr ""
+"地面站或伴随计算机可通过 `RC_CHANNELS "
+"<https://mavlink.io/en/messages/common.html#RC_CHANNELS>`__ 消息监控飞手的 RC 输入。"
+
+#: ../../source/docs/mavlink-rcinput.rst:22 3da5e401de674335a6235f7f949eb77b
+msgid "RC_CHANNELS_OVERRIDE"
+msgstr "RC_CHANNELS_OVERRIDE"
+
+#: ../../source/docs/mavlink-rcinput.rst:24 98f1f820d84e41fba21ebd84cbf56e03
+msgid ""
+"The `RC_CHANNELS_OVERRIDE "
+"<https://mavlink.io/en/messages/common.html#RC_CHANNELS_OVERRIDE>`__ message"
+" allows setting the PWM equivalent value for each channel. This is normally "
+"a value between 1000 and 2000 but ArduPilot's RC input library uses the "
+"RCx_MIN, RCx_MAX and RCx_TRIM parameters to scale the input.  Note though "
+"that these parameters are normally set by the user during the RC Calibration"
+" stage."
+msgstr ""
+"`RC_CHANNELS_OVERRIDE "
+"<https://mavlink.io/en/messages/common.html#RC_CHANNELS_OVERRIDE>`__ "
+"消息允许为每个通道设置等效 PWM 值。通常该值在 1000 到 2000 之间，但 ArduPilot 的 RC 输入库使用 "
+"RCx_MIN、RCx_MAX 和 RCx_TRIM 参数对输入进行缩放。注意，这些参数通常由用户在 RC 校准阶段设置。"
+
+#: ../../source/docs/mavlink-rcinput.rst:27 5986a8eb207e401285d0294f15071e22
+msgid ""
+"If both a regular transmitter (e.g. Futaba, Spektrum, etc) which sends "
+"actualy PWM values and a MAVLink enabled RC input system (sending messages "
+"via one of the message listed on this page) then care should be taken to "
+"ensure the RCx_MIN/MAX ranges are consistent between the two systems. If the"
+" MAVLink RC input stops, ArduPilot falls back to regular RC input within a "
+"few seconds.  This timeout is configurable using the :ref:`RC_OVERRIDE_TIME "
+"<copter:RC_OVERRIDE_TIME>` parameter."
+msgstr ""
+"若同时使用发送实际 PWM 值的普通遥控发射机（如 Futaba、Spektrum 等）和基于 MAVLink 的 RC "
+"输入系统（通过本页所列消息之一发送消息），则应确保两套系统之间 RCx_MIN/MAX 范围一致。若 MAVLink RC 输入停止，ArduPilot"
+" 将在数秒内回退到普通 RC 输入。该超时时间可通过 :ref:`RC_OVERRIDE_TIME <copter:RC_OVERRIDE_TIME>`"
+" 参数进行配置。"
+
+#: ../../source/docs/mavlink-rcinput.rst:30 f299538b86ae47d1a1a70cc6b7a4549a
+msgid ""
+"Be careful not to change the flight mode inadvertently.  By default either "
+"channel 5 or channel 8 (depending upon the vehicle type) is used to set the "
+"flight mode but this can be disabled by setting :ref:`FLTMODE_CH "
+"<copter:FLTMODE_CH>` or :ref:`MODE_CH <rover:MODE_CH>` to 0"
+msgstr ""
+"注意不要无意中更改飞行模式。默认情况下，通道 5 或通道 8（取决于飞行器类型）用于设置飞行模式，但可以通过将 :ref:`FLTMODE_CH "
+"<copter:FLTMODE_CH>` 或 :ref:`MODE_CH <rover:MODE_CH>` 设置为 0 来禁用此功能。"
+
+#: ../../source/docs/mavlink-rcinput.rst:144
+#: ../../source/docs/mavlink-rcinput.rst:270 7f0979e98d9047c9a4619108023610f6
+#: d9ef847ac36449d889900a5aa53edfa6
+msgid "**Example**"
+msgstr "**示例**"
+
+#: ../../source/docs/mavlink-rcinput.rst:146
+#: ../../source/docs/mavlink-rcinput.rst:272
+#: ../../source/docs/mavlink-rcinput.rst:298 0ed20b4a96304c71949b7bfd2c7fc688
+#: 8ea6c5bb23a34b259db5bc57a1df8057 9c195e3a0a7a4e90923bcbf544bb6b8c
+msgid ""
+"The example commands below can be copy-pasted into MAVProxy (aka SITL) to "
+"test the message.  Before running these commands enter:"
+msgstr "以下示例命令可直接复制粘贴到 MAVProxy（即 SITL）中测试消息。运行这些命令前，请先输入："
+
+#: ../../source/docs/mavlink-rcinput.rst:148
+#: ../../source/docs/mavlink-rcinput.rst:274
+#: ../../source/docs/mavlink-rcinput.rst:300 02ef06285127485a85adc96b7e760196
+#: 940371b89fbd495ba2db24d2b4a045f9 a4e6fb2ba89047d7841ceafd11d21513
+msgid "module load message"
+msgstr "module load message"
+
+#: ../../source/docs/mavlink-rcinput.rst:149 7f0e4a2d9b9e4d5d9da1bb9150a53ace
+msgid ""
+"graph RC_CHANNELS.chan1_raw RC_CHANNELS.chan2_raw RC_CHANNELS.chan3_raw "
+"RC_CHANNELS.chan4_raw RC_CHANNELS.chan7_raw"
+msgstr ""
+"graph RC_CHANNELS.chan1_raw RC_CHANNELS.chan2_raw RC_CHANNELS.chan3_raw "
+"RC_CHANNELS.chan4_raw RC_CHANNELS.chan7_raw"
+
+#: ../../source/docs/mavlink-rcinput.rst:151 0f09eb08334b49a2b9774a3d15fcf4ad
+msgid ""
+"During simulator testing it may be useful to enable/disable the RC failsafe "
+"by setting :ref:`FS_THR_ENABLE <copter:FS_THR_ENABLE>` = 0 and/or simulate "
+"an RC failure by setting :ref:`SIM_RC_FAIL <copter:SIM_RC_FAIL>` = 1"
+msgstr ""
+"在仿真器测试期间，通过将 :ref:`FS_THR_ENABLE <copter:FS_THR_ENABLE>` 设置为 0 来启用/禁用 RC "
+"失控保护，以及/或通过将 :ref:`SIM_RC_FAIL <copter:SIM_RC_FAIL>` 设置为 1 来模拟 RC "
+"故障，可能会有所帮助。"
+
+#: ../../source/docs/mavlink-rcinput.rst:154
+#: ../../source/docs/mavlink-rcinput.rst:277
+#: ../../source/docs/mavlink-rcinput.rst:303 5b17d65153084c139d6044b4452f3036
+#: 68fc85542f86469a94ddc015bd171414 d11c3fafefdf409d92072fbd4aacbbff
+msgid "Example MAVProxy/SITL Command"
+msgstr "MAVProxy/SITL 示例命令"
+
+#: ../../source/docs/mavlink-rcinput.rst:154
+#: ../../source/docs/mavlink-rcinput.rst:277
+#: ../../source/docs/mavlink-rcinput.rst:303 1bc1685a6bfb4a9fa84c9a44ebad4359
+#: 602387efd30b47fa8981c310d2c7e3c1 98fa5606561241689331add2601675ab
+msgid "Description"
+msgstr "描述"
+
+#: ../../source/docs/mavlink-rcinput.rst:156 b5a0d7e1f75b46edbd0cf533cc953fbf
+msgid "``message RC_CHANNELS_OVERRIDE 0 0 1500 1500 1500 1500 0 0 0 0``"
+msgstr "``message RC_CHANNELS_OVERRIDE 0 0 1500 1500 1500 1500 0 0 0 0``"
+
+#: ../../source/docs/mavlink-rcinput.rst:156 30d1aefb716c49279ef22e4cf260e989
+msgid "Set channels 1 ~ 4 to 1500"
+msgstr "将通道 1~4 设置为 1500"
+
+#: ../../source/docs/mavlink-rcinput.rst:158 80673f5291664febb7a5fcec7828e1c2
+msgid "``message RC_CHANNELS_OVERRIDE 0 0 1800 1500 1500 1500 0 0 0 0``"
+msgstr "``message RC_CHANNELS_OVERRIDE 0 0 1800 1500 1500 1500 0 0 0 0``"
+
+#: ../../source/docs/mavlink-rcinput.rst:158 992ef701189948f0ad029a455b138da8
+msgid "Set ch1 (roll) to 1800 (e.g. roll right)"
+msgstr "将通道 1（横滚）设置为 1800（如右滚）"
+
+#: ../../source/docs/mavlink-rcinput.rst:160 90852f722770498a9dab8a2b52be4182
+msgid "``message RC_CHANNELS_OVERRIDE 0 0 1500 1200 1500 1500 0 0 0 0``"
+msgstr "``message RC_CHANNELS_OVERRIDE 0 0 1500 1200 1500 1500 0 0 0 0``"
+
+#: ../../source/docs/mavlink-rcinput.rst:160 2bcc3822a53448299b87177ca03366af
+msgid "Set ch2 (pitch) to 1200 (e.g. pitch forward)"
+msgstr "将通道 2（俯仰）设置为 1200（如前俯）"
+
+#: ../../source/docs/mavlink-rcinput.rst:162 36039c7d52044e018ad73292636c1d8d
+msgid "``message RC_CHANNELS_OVERRIDE 0 0 1500 1500 1800 1500 0 0 0 0``"
+msgstr "``message RC_CHANNELS_OVERRIDE 0 0 1500 1500 1800 1500 0 0 0 0``"
+
+#: ../../source/docs/mavlink-rcinput.rst:162 1a36259e7ac04e7f935026168f86b4c9
+msgid "Set ch3 (throttle) to 1800 (e.g. climb)"
+msgstr "将通道 3（油门）设置为 1800（如爬升）"
+
+#: ../../source/docs/mavlink-rcinput.rst:164 52c0b7cc809949c68c16e1aff072a463
+msgid "``message RC_CHANNELS_OVERRIDE 0 0 1500 1500 1500 1800 0 0 0 0``"
+msgstr "``message RC_CHANNELS_OVERRIDE 0 0 1500 1500 1500 1800 0 0 0 0``"
+
+#: ../../source/docs/mavlink-rcinput.rst:164 4f6dfc19f23e4508a83811a1a049718a
+msgid "Set ch4 (yaw) to 1800 (e.g. rotate clockwise)"
+msgstr "将通道 4（偏航）设置为 1800（如顺时针旋转）"
+
+#: ../../source/docs/mavlink-rcinput.rst:166 2fef354d25624a56bf8f8b34fd9c7684
+msgid "``message RC_CHANNELS_OVERRIDE 0 0 0 0 0 1800 0 0 0 0``"
+msgstr "``message RC_CHANNELS_OVERRIDE 0 0 0 0 0 1800 0 0 0 0``"
+
+#: ../../source/docs/mavlink-rcinput.rst:166 3210b98de65a45b7b3eff6df090e3f58
+msgid "Set ch4 (yaw) to 1800, all other channels from normal RC"
+msgstr "将通道 4（偏航）设置为 1800，其他通道来自普通 RC"
+
+#: ../../source/docs/mavlink-rcinput.rst:168 3c0b6305cefd4e3ba0c63602dfddc18f
+msgid "``message RC_CHANNELS_OVERRIDE 0 0 0 0 0 0 0 0 1800 0``"
+msgstr "``message RC_CHANNELS_OVERRIDE 0 0 0 0 0 0 0 0 1800 0``"
+
+#: ../../source/docs/mavlink-rcinput.rst:168 0f5dd491a84c4a28828220b69ab917ed
+msgid "Set ch7 to 1800, all other channels from normal RC"
+msgstr "将通道 7 设置为 1800，其他通道来自普通 RC"
+
+#: ../../source/docs/mavlink-rcinput.rst:170 14f3d972db234b048f0396ef8542a310
+msgid ""
+"``message RC_CHANNELS_OVERRIDE 0 0 65535 65535 65535 65535 65535 65535 1800 "
+"65535``"
+msgstr ""
+"``message RC_CHANNELS_OVERRIDE 0 0 65535 65535 65535 65535 65535 65535 1800 "
+"65535``"
+
+#: ../../source/docs/mavlink-rcinput.rst:170 cdd962d684374ce48660e168818784f3
+msgid "Set ch7 to 1800, all other channels unchanged"
+msgstr "将通道 7 设置为 1800，其他通道保持不变"
+
+#: ../../source/docs/mavlink-rcinput.rst:174 4dda1ed132e0479f991f9d5354b25845
+msgid "MANUAL_CONTROL"
+msgstr "MANUAL_CONTROL"
+
+#: ../../source/docs/mavlink-rcinput.rst:176 b5d4782448394c6098092cce52297a5d
+msgid ""
+"The `MANUAL_CONTROL "
+"<https://mavlink.io/en/messages/common.html#MANUAL_CONTROL>`__ message "
+"allows sending roll, pitch, throttle and yaw values as normalised values "
+"between -1000 and +1000 and avoids any potential issues with channel mapping"
+" or PWM input ranges"
+msgstr ""
+"`MANUAL_CONTROL "
+"<https://mavlink.io/en/messages/common.html#MANUAL_CONTROL>`__ 消息允许以 -1000 到"
+" +1000 之间的归一化值发送横滚、俯仰、油门和偏航数值，从而避免通道映射或 PWM 输入范围带来的潜在问题。"
+
+#: ../../source/docs/mavlink-rcinput.rst:279 ae223cc63e2d4191863cfb5ad4040338
+msgid "``message MANUAL_CONTROL 1 300 0 500 0 0``"
+msgstr "``message MANUAL_CONTROL 1 300 0 500 0 0``"
+
+#: ../../source/docs/mavlink-rcinput.rst:279 55876c0f694044659b3a0c32757d083a
+msgid "Pitch forward 30%, Throttle 50%"
+msgstr "前俯 30%，油门 50%"
+
+#: ../../source/docs/mavlink-rcinput.rst:281 fad0311da3374fb1884325a3aa61790c
+msgid "``message MANUAL_CONTROL 1 0 300 500 0 0``"
+msgstr "``message MANUAL_CONTROL 1 0 300 500 0 0``"
+
+#: ../../source/docs/mavlink-rcinput.rst:281 f1ff5cd63dd249b79ee01da9d89635a7
+msgid "Roll right 30%, Throttle 50%"
+msgstr "右滚 30%，油门 50%"
+
+#: ../../source/docs/mavlink-rcinput.rst:283 74802136aa7749fea570bb4a01678705
+msgid "``message MANUAL_CONTROL 1 0 0 1000 0 0``"
+msgstr "``message MANUAL_CONTROL 1 0 0 1000 0 0``"
+
+#: ../../source/docs/mavlink-rcinput.rst:283 45918ea96f6040c2a156c119e73548cf
+msgid "Throttle 100%"
+msgstr "油门 100%"
+
+#: ../../source/docs/mavlink-rcinput.rst:285 5f3d1fb974d84894a6728c5c44877b02
+msgid "``message MANUAL_CONTROL 1 0 0 500 100 0``"
+msgstr "``message MANUAL_CONTROL 1 0 0 500 100 0``"
+
+#: ../../source/docs/mavlink-rcinput.rst:285 358d1415dfa54318adc61fafb6d0ce7b
+msgid "Yaw right 10%, Throttle 50%"
+msgstr "右偏航 10%，油门 50%"
+
+#: ../../source/docs/mavlink-rcinput.rst:287 0868a56ff7fc45028d4771618ffcd62c
+msgid "``message MANUAL_CONTROL 1 32767 32767 32767 100 32767``"
+msgstr "``message MANUAL_CONTROL 1 32767 32767 32767 100 32767``"
+
+#: ../../source/docs/mavlink-rcinput.rst:287 6926689c612f4e6e946d1115763948f6
+msgid "Yaw right 10%, all others unchanged"
+msgstr "右偏航 10%，其他保持不变"
+
+#: ../../source/docs/mavlink-rcinput.rst:291 e6d43369966d4943a27bda955f986354
+msgid "Auxiliary Functions"
+msgstr "辅助功能"
+
+#: ../../source/docs/mavlink-rcinput.rst:293 7a9b872c280444d6ac6967428416ec76
+msgid ""
+"Auxiliary functions can be executed by sending a `COMMAND_LONG "
+"<https://mavlink.io/en/messages/common.html#COMMAND_LONG>`__ or `COMMAND_INT"
+" <https://mavlink.io/en/messages/common.html#COMMAND_INT>`__ message with "
+"the \"command\" field set to `MAV_CMD_DO_AUX_FUNCTION "
+"<https://mavlink.io/en/messages/ardupilotmega.html#MAV_CMD_DO_AUX_FUNCTION>`__"
+" (e.g. 218)"
+msgstr ""
+"辅助功能可通过发送 `COMMAND_LONG "
+"<https://mavlink.io/en/messages/common.html#COMMAND_LONG>`__ 或 `COMMAND_INT "
+"<https://mavlink.io/en/messages/common.html#COMMAND_INT>`__ 消息，并将 「command」 "
+"字段设置为 `MAV_CMD_DO_AUX_FUNCTION "
+"<https://mavlink.io/en/messages/ardupilotmega.html#MAV_CMD_DO_AUX_FUNCTION>`__（如"
+" 218）来执行。"
+
+#: ../../source/docs/mavlink-rcinput.rst:295 0e936f78772d408a89858419130e65f1
+msgid ""
+"\"param1\" should be set to the auxiliary function.  The full list of "
+"available functions can be found here on the user focused :ref:`Auxiliary "
+"Functions page <copter:common-auxiliary-functions>`"
+msgstr ""
+"「param1」 应设置为辅助功能编号。可用功能的完整列表可在面向用户的 :ref:`辅助功能页面 <copter:common-auxiliary-"
+"functions>` 上找到。"
+
+#: ../../source/docs/mavlink-rcinput.rst:296 fe0471810d004649b41415e98e494351
+msgid ""
+"\"param2\" should be set to 0:Switch Low (e.g deactivate function), 1:Switch"
+" Middle or 2:Switch Highs (e.g. activate function)"
+msgstr "「param2」 应设置为 0：开关低位（如停用功能），1：开关中位，或 2：开关高位（如激活功能）。"
+
+#: ../../source/docs/mavlink-rcinput.rst:305 bb1d8660d4414775af1e325cfb068b2b
+msgid "``message COMMAND_LONG 0 0 218 0 46 2 0 0 0 0 0``"
+msgstr "``message COMMAND_LONG 0 0 218 0 46 2 0 0 0 0 0``"
+
+#: ../../source/docs/mavlink-rcinput.rst:305 73fa33330fd647f98b1ecd7239b5eb1f
+msgid "RC Overrides Enable"
+msgstr "启用 RC 覆盖"
+
+#: ../../source/docs/mavlink-rcinput.rst:307 74f1277b314645eb8079aa3823229330
+msgid "``message COMMAND_LONG 0 0 218 0 46 0 0 0 0 0 0``"
+msgstr "``message COMMAND_LONG 0 0 218 0 46 0 0 0 0 0 0``"
+
+#: ../../source/docs/mavlink-rcinput.rst:307 52a37cdb967e4f17ab859f03f3c301c3
+msgid "RC Overrides Disable"
+msgstr "禁用 RC 覆盖"
+
+#: ../../source/docs/mavlink-rcinput.rst:309 eaeb87ff1bed4399a379c917bb0349fa
+msgid "``message COMMAND_LONG 0 0 218 0 65 2 0 0 0 0 0``"
+msgstr "``message COMMAND_LONG 0 0 218 0 65 2 0 0 0 0 0``"
+
+#: ../../source/docs/mavlink-rcinput.rst:309 9c77eea0ae4e4b3ab1c08028707140c7
+msgid "GPS Disable"
+msgstr "禁用 GPS"
+
+#: ../../source/docs/mavlink-rcinput.rst:311 972032b679ca4cad863d0db63a9b14c1
+msgid "``message COMMAND_LONG 0 0 218 0 65 0 0 0 0 0 0``"
+msgstr "``message COMMAND_LONG 0 0 218 0 65 0 0 0 0 0 0``"
+
+#: ../../source/docs/mavlink-rcinput.rst:311 e657349948fa477c9b8b6d452b183743
+msgid "GPS Enable"
+msgstr "启用 GPS"
+
+#: ../../source/docs/mavlink-rcinput.rst:315 efb89a0d8e9d47e1abf1e1f6d16e762f
+msgid "Effect on Failsafes"
+msgstr "对失控保护的影响"
+
+#: ../../source/docs/mavlink-rcinput.rst:317 dccd494be5b64a9ab57caf7d5e504963
+msgid ""
+"It may be necessary to extend the RC failsafe timeout due to lag and loss of"
+" messages on the telemetry link.  This can be done by increasing the "
+":ref:`RC_FS_TIMEOUT <copter:RC_FS_TIMEOUT>` parameter"
+msgstr ""
+"由于遥测链路的延迟和消息丢失，可能需要延长 RC 失控保护超时时间。可通过增大 :ref:`RC_FS_TIMEOUT "
+"<copter:RC_FS_TIMEOUT>` 参数来实现。"
+
+#: ../../source/docs/mavlink-rcinput.rst:320 f7fb8b3297ab4ed19fddc3beddce363c
+msgid "Handling both Regular RC and MAVLink RC input"
+msgstr "同时处理普通 RC 与 MAVLink RC 输入"
+
+#: ../../source/docs/mavlink-rcinput.rst:322 4a8846c1dca44e6cb350ac82a80f20ae
+msgid ""
+"If MAVLink based RC input is sent from the GCS this will generally override "
+"the regular RC input.  If the MAVLink RC input stops, ArduPilot falls back "
+"to regular RC input within a few seconds.  This timeout is configurable "
+"using the :ref:`RC_OVERRIDE_TIME <copter:RC_OVERRIDE_TIME>` parameter."
+msgstr ""
+"若地面站发送了基于 MAVLink 的 RC 输入，通常会覆盖普通 RC 输入。若 MAVLink RC 输入停止，ArduPilot "
+"将在数秒内回退到普通 RC 输入。该超时时间可通过 :ref:`RC_OVERRIDE_TIME <copter:RC_OVERRIDE_TIME>` "
+"参数进行配置。"
+
+#: ../../source/docs/mavlink-rcinput.rst:324 232156bc11394d79860275364b7dda6f
+msgid ""
+"The \"RC Override Enable\" :ref:`auxiliary switch <copter:common-auxiliary-"
+"functions>` can be used to allow a pilot with a regular RC to forcibly "
+"disable any MAVLink RC input"
+msgstr ""
+"「RC 覆盖启用」:ref:`辅助开关 <copter:common-auxiliary-functions>` "
+"可用于允许使用普通遥控的飞手强制禁用任何 MAVLink RC 输入。"
+
+#: ../../source/docs/mavlink-rcinput.rst:326 da4934e35e3e4ca481bc7c69add0373a
+msgid ""
+"The :ref:`RC_OPTIONS <copter:RC_OPTIONS>` parameter includes an \"Ignore "
+"MAVLink Overrides\" option that can be used to more permanently disable "
+"MAVLink RC input"
+msgstr ""
+":ref:`RC_OPTIONS <copter:RC_OPTIONS>` 参数包含 「忽略 MAVLink 覆盖」 选项，可用于更持久地禁用 "
+"MAVLink RC 输入。"

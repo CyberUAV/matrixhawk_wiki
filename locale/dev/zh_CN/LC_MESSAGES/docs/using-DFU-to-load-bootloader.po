@@ -1,0 +1,218 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/using-DFU-to-load-bootloader.rst:5
+#: fad9ad24ca0f4c739c2a84fbad53cc97
+msgid "Loading a bootloader with DFU"
+msgstr "通过 DFU 加载引导加载程序"
+
+#: ../../source/docs/using-DFU-to-load-bootloader.rst:7
+#: 373e435ed1c4488e8872475e80da982a
+msgid ""
+"This page describes how to load a new bootloader onto a STM32 based board "
+"(such as a Pixhawk1) via DFU. This is useful if you are either trying to "
+"bring up a new board or if you have a corrupted bootloader on an existing "
+"board."
+msgstr ""
+"本页面介绍如何通过 DFU 向基于 STM32 的飞控板（如 "
+"Pixhawk1）加载新的引导加载程序。如果您正在调试新板或现有板的引导加载程序已损坏，此方法非常有用。"
+
+#: ../../source/docs/using-DFU-to-load-bootloader.rst:13
+#: a65826c22e9a4561affb8a06e6526149
+msgid "What is DFU"
+msgstr "什么是 DFU"
+
+#: ../../source/docs/using-DFU-to-load-bootloader.rst:15
+#: 7b94c78744ac4f47afb199ba32582fad
+msgid ""
+"DFU is the \"Direct Firmware Update\" mode for some microcontrollers, most "
+"notably the STM32Fx series. It allows you to load a firmware (including a "
+"bootloader) over USB using widely available DFU utilities."
+msgstr ""
+"DFU 是某些微控制器（尤其是 STM32Fx 系列）的「直接固件更新」模式。它允许您使用广泛可用的 DFU 工具通过 USB "
+"加载固件（包括引导加载程序）。"
+
+#: ../../source/docs/using-DFU-to-load-bootloader.rst:21
+#: 94be3e3828c1426f8ec354aded5d04bf
+msgid "Accessing DFU Mode"
+msgstr "进入 DFU 模式"
+
+#: ../../source/docs/using-DFU-to-load-bootloader.rst:23
+#: 8031c6bc41ad41d3a5c12389c33984d5
+msgid ""
+"On many autopilots there is a separate \"boot\" button provided which will "
+"place the autopilot into DFU mode if powered while it is pressed."
+msgstr "许多飞控上设有独立的「boot」按钮，在按住该按钮的同时上电，飞控将进入 DFU 模式。"
+
+#: ../../source/docs/using-DFU-to-load-bootloader.rst:26
+#: 236bef425f0e4dab846476602a03b7d0
+msgid ""
+"On many higher end autopilots no readily accessible button is provided and "
+"the autopilot must opened and a pad or cpu pin accessed."
+msgstr "许多高端飞控没有易于访问的按钮，需要拆开飞控并接触焊盘或 CPU 引脚。"
+
+#: ../../source/docs/using-DFU-to-load-bootloader.rst:29
+#: 7c9311f11f874331a016ed861d2f86de
+msgid ""
+"On these autopilots DFU mode is entered by pulling the \"boot0\" pin high on"
+" the processor when it is powered on. On a Pixhawk1 this is done by pulling "
+"the \"FMU-BOOT\" pad on the top surface of the Pixhawk1 high. The FMU-BOOT "
+"pad is located between the buzzer and DSM/Spkt connectors on the Pixhawk1. "
+"On a 3DR Pixhawk FMU-BOOT is located between the switch and Telem2. You "
+"should pull it up to 3.3V, but in a pinch it does work to pull it up to 5V "
+"if you don't have 3.3V handy. The 3.3V supply on the switch is suitable for "
+"this."
+msgstr ""
+"在这些自动驾驶仪上，DFU 模式通过在处理器上电时将「boot0」引脚拉高来进入。在 Pixhawk1 上，这通过将 Pixhawk1 顶面的「FMU-"
+"BOOT」焊盘拉高来实现。FMU-BOOT 焊盘位于 Pixhawk1 上蜂鸣器和 DSM/Spkt 接口之间。在 3DR Pixhawk 上，FMU-"
+"BOOT 位于开关和 Telem2 之间。应将其拉高至 3.3V，但在紧急情况下，若没有 3.3V，拉高至 5V 也可以工作。开关上的 3.3V "
+"电源适合用于此目的。"
+
+#: ../../source/docs/using-DFU-to-load-bootloader.rst:37
+#: 33ec80a3aa8a401fbe379b17df418bb8
+msgid ""
+"When the pin is pulled up apply power to the board (eg. plug in the USB "
+"connector) and the board should boot into DFU mode."
+msgstr "当引脚被拉高后，为板子供电（例如插入 USB 接口），板子应进入 DFU 模式。"
+
+#: ../../source/docs/using-DFU-to-load-bootloader.rst:41
+#: 2a66054b59b047f68d2861aea816465c
+msgid "STM32Cube Programmer"
+msgstr "STM32Cube Programmer"
+
+#: ../../source/docs/using-DFU-to-load-bootloader.rst:43
+#: e24d0406daea443bac24afcb5123c5a6
+msgid ""
+"This utility is available for Windows, MACOS, and Linux and provides a "
+"simple GUI programmer. It is available at https://www.st.com/en/development-"
+"tools/stm32cubeprog.html ."
+msgstr ""
+"此工具适用于 Windows、MACOS 和 Linux，提供简单的图形界面编程器。可从 "
+"https://www.st.com/en/development-tools/stm32cubeprog.html 获取。"
+
+#: ../../source/docs/using-DFU-to-load-bootloader.rst:45
+#: 53cf59cba21d4ba185ab163ba8b9ff56
+msgid ""
+"You can download the appropriate bootloader from `here "
+"<https://firmware.ardupilot.org/Tools/Bootloaders>`__ and install it "
+"beginning at address 0x08000000."
+msgstr ""
+"您可以从 `这里 <https://firmware.ardupilot.org/Tools/Bootloaders>`__ "
+"下载相应的引导程序，并从地址 0x08000000 开始安装。"
+
+#: ../../source/docs/using-DFU-to-load-bootloader.rst:48
+#: 51cba61349d440539ef142ac64cf3aed
+msgid "dfu-util tool"
+msgstr "dfu-util 工具"
+
+#: ../../source/docs/using-DFU-to-load-bootloader.rst:50
+#: bf988ef27ccd44f0af7621c38d825f14
+msgid ""
+"This is a command line DFU programming tool. On Linux machines with apt you "
+"can install it using:"
+msgstr "这是一个命令行 DFU 编程工具。在带有 apt 的 Linux 系统上，可使用以下命令安装："
+
+#: ../../source/docs/using-DFU-to-load-bootloader.rst:53
+#: fdc624a2409d43419bac412bce89f6ae
+msgid "sudo apt-get install dfu-util"
+msgstr "sudo apt-get install dfu-util"
+
+#: ../../source/docs/using-DFU-to-load-bootloader.rst:55
+#: 8dcfb547df0c43a289341b961fe2eeb6
+msgid ""
+"On other systems please see `http://dfu-util.sourceforge.net/ <http://dfu-"
+"util.sourceforge.net/>`__."
+msgstr ""
+"在其他系统上，请参阅 `http://dfu-util.sourceforge.net/ <http://dfu-"
+"util.sourceforge.net/>`__。"
+
+#: ../../source/docs/using-DFU-to-load-bootloader.rst:58
+#: eb752b378aee4d06ace7eb2b466087ae
+msgid "Listing DFU Devices"
+msgstr "列出 DFU 设备"
+
+#: ../../source/docs/using-DFU-to-load-bootloader.rst:60
+#: e3d28af110714caf80b026e72f2dac57
+msgid "Run the following:"
+msgstr "运行以下命令："
+
+#: ../../source/docs/using-DFU-to-load-bootloader.rst:66
+#: fa574e1940b645e1928e84dba78edce3
+msgid "You should get a result like this:"
+msgstr "您应该得到如下结果："
+
+#: ../../source/docs/using-DFU-to-load-bootloader.rst:83
+#: 961d61b6e5e44dbfa314f314cd0e3137
+msgid ""
+"If you don't get that then do some googling on how to debug USB connection "
+"issues with DFU."
+msgstr "如果没有得到该结果，请通过搜索引擎查找如何调试 DFU 的 USB 连接问题。"
+
+#: ../../source/docs/using-DFU-to-load-bootloader.rst:86
+#: 668fae491a3c41d7a3cbf02b833ce131
+msgid "Loading a bootloader"
+msgstr "加载引导程序"
+
+#: ../../source/docs/using-DFU-to-load-bootloader.rst:88
+#: 177bcb5a8043472e8eb1c0d8ee46caa9
+msgid "The current bootloaders suitable for ArduPilot on STM32 are here:"
+msgstr "适用于 STM32 上 ArduPilot 的当前引导程序位于此处："
+
+#: ../../source/docs/using-DFU-to-load-bootloader.rst:90
+#: abeee78e6d994c3e8c60e4130fc38019
+msgid ""
+"`https://firmware.ardupilot.org/Tools/Bootloaders "
+"<https://firmware.ardupilot.org/Tools/Bootloaders>`__"
+msgstr ""
+"`https://firmware.ardupilot.org/Tools/Bootloaders "
+"<https://firmware.ardupilot.org/Tools/Bootloaders>`__"
+
+#: ../../source/docs/using-DFU-to-load-bootloader.rst:92
+#: 5a212c002a4f42b0a0200535735d65a1
+msgid "download the px4fmuv2_bl.bin and run this:"
+msgstr "下载 px4fmuv2_bl.bin 并运行以下命令："
+
+#: ../../source/docs/using-DFU-to-load-bootloader.rst:98
+#: aca4cb34f9a44f7ea9dfe99b9b2e601b
+msgid ""
+"it should say \"Downloading\" and show a progress bar. On completion the "
+"board is ready to test the bootloader."
+msgstr "应显示「Downloading」并显示进度条。完成后，板子即可测试引导程序。"
+
+#: ../../source/docs/using-DFU-to-load-bootloader.rst:100
+#: 06968798ea4648e69bb0e67e171887aa
+msgid ""
+"After you have the bootloader loaded power cycle with the boot0 pin pulled "
+"down (note that it is already pulled down by a resistor on a Pixhawk1, so "
+"just power cycle)."
+msgstr ""
+"加载完引导程序后，在 boot0 引脚被拉低的情况下重新上电（注意，在 Pixhawk1 上，该引脚已通过电阻被拉低，因此只需重新上电即可）。"
+
+#: ../../source/docs/using-DFU-to-load-bootloader.rst:104
+#: 43f872a668b4433d9f44008d56c06772
+msgid ""
+"Then check your USB bus and you should see a device \"PX4 BL FMU v2.x\" with"
+" vendorID 0x26ac and productID 0x0011. You can now use the normal firmware "
+"load tools from ArduPilot to load a flight firmware."
+msgstr ""
+"然后检查您的 USB 总线，应看到一个名为「PX4 BL FMU v2.x」的设备，厂商 ID 为 0x26ac，产品 ID 为 "
+"0x0011。现在您可以使用 ArduPilot 的正常固件加载工具来加载飞行固件。"

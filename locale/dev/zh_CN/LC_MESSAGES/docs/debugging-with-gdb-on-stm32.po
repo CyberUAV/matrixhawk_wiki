@@ -1,0 +1,353 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:5
+#: c2a85729fa97444890b813ce8ba1b3f8
+msgid "Debugging with GDB on STM32"
+msgstr "在 STM32 上使用 GDB 进行调试"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:7
+#: 6e77405a23834a58999c315c5a2dec11
+msgid ""
+"This page describes how to setup GDB on Linux to debug issues on STM32. The "
+"specific commands were tested on Ubuntu 18.10."
+msgstr "本页介绍如何在 Linux 上配置 GDB 以调试 STM32 上的问题。相关命令已在 Ubuntu 18.10 上经过测试。"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:10
+#: 2869fda13c244261bf38d6b82f621e6e
+msgid "Introduction"
+msgstr "简介"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:12
+#: 2e20314400094de9919a11d36158d847
+msgid ""
+"GDB (the GNU Debugger) allows you to see what is going on inside another "
+"program while it executes or what another program was doing at the moment it"
+" crashed which can be useful when investigating very low-level failures with"
+" the STM32"
+msgstr "GDB（GNU 调试器）让您能够查看另一个程序在执行过程中的内部状态，或程序崩溃时的运行情况，这在排查 STM32 底层故障时非常有用"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:17
+#: 720c3c23b9304842a3acc23d12540cde
+msgid ""
+"This guide assumes that you have already successfully built the firmware on "
+"your machine following the instructions for :ref:`Windows <building-setup-"
+"windows>`, :ref:`Mac <building-setup-mac>` or :ref:`Linux <building-setup-"
+"linux>`."
+msgstr ""
+"本指南假设您已按照 :ref:`Windows <building-setup-windows>`、:ref:`Mac <building-setup-"
+"mac>` 或 :ref:`Linux <building-setup-linux>` 的说明在计算机上成功构建过固件。"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:20
+#: 83c22854989045f98539b6c259b2460e
+msgid "One the the following debuggers is required:"
+msgstr "需要以下调试器之一："
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:22
+#: a090e274880b4a798c825c101a86e8a4
+msgid ""
+"`BlackMagic probe "
+"<http://www.blacksphere.co.nz/main/index.php/blackmagic>`__ (available from "
+"`1 Bit Squared <http://1bitsquared.com/collections/frontpage/products/black-"
+"magic-probe>`__)"
+msgstr ""
+"`BlackMagic 探针 "
+"<http://www.blacksphere.co.nz/main/index.php/blackmagic>`__（可从 `1 Bit "
+"Squared <http://1bitsquared.com/collections/frontpage/products/black-magic-"
+"probe>`__ 购买）"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:23
+#: 17bfacf8da2848a6a254e0b711dc5450
+msgid ""
+"`ST-Link V2 JST debugger <https://www.ebay.com/sch/i.html?_nkw=ST-"
+"Link-V2-Stlink-Emulator-Downloader-Programming-Mini-Unit-STM8-STM32>`__"
+msgstr ""
+"`ST-Link V2 JST 调试器 <https://www.ebay.com/sch/i.html?_nkw=ST-Link-V2-Stlink-"
+"Emulator-Downloader-Programming-Mini-Unit-STM8-STM32>`__"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:24
+#: 271c173e9101443fbcf380a283244f39
+msgid ""
+"`VM Probe <https://dev.vimdrones.com/products/vimdrones_stlinkv3_probe/>`__"
+msgstr ""
+"`VM Probe <https://dev.vimdrones.com/products/vimdrones_stlinkv3_probe/>`__"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:26
+#: d35ce6b4d6274e8892e39ab6a8df2b96
+#, python-format
+msgid ""
+"A small plug (`FTSH-105-04-L-DV "
+"<https://au.element14.com/samtec/ftsh-105-04-l-dv/connector-header-1-27mm-"
+"smt-10way/dp/2308438?scope=partnumberlookahead&ost=FTSH-105-04-L-DV&searchref=searchlookahead&exaMfpn=true&ddkey=https%3Aen-"
+"AU%2FElement14_Australia%2Fw%2Fsearch>`__) may be required to solder on to "
+"the JTAG port of the flight controller."
+msgstr ""
+"可能需要一个小型插头（`FTSH-105-04-L-DV "
+"<https://au.element14.com/samtec/ftsh-105-04-l-dv/connector-header-1-27mm-"
+"smt-10way/dp/2308438?scope=partnumberlookahead&ost=FTSH-105-04-L-DV&searchref=searchlookahead&exaMfpn=true&ddkey=https%3Aen-"
+"AU%2FElement14_Australia%2Fw%2Fsearch>`__）焊接到飞控的 JTAG 接口上。"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:30
+#: 23106d2a972747be82de0788fe4130ad
+msgid "Compiling the Firmware"
+msgstr "编译固件"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:32
+#: 90cf59cbcc684ec7852d32ce631cd4b0
+msgid "Build and upload the debug variant of the firmware:"
+msgstr "构建并上传调试版本的固件："
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:34
+#: 004f48d48d174a01afa4efaee1609ceb
+msgid ""
+"``` ./waf configure --board=Pixhawk1-1M --debug --enable-asserts ./waf "
+"--target=examples/UART_test --upload ```"
+msgstr ""
+"``` ./waf configure --board=Pixhawk1-1M --debug --enable-asserts ./waf "
+"--target=examples/UART_test --upload ```"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:40
+#: d5500b299b53408e88a2cfc60f920842
+msgid "Connecting the BlackMagic probe to the Pixhawk"
+msgstr "将 BlackMagic 探针连接到 Pixhawk"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:45
+#: 9d0b82b987824f998d705a5245a4e863
+msgid ""
+"The BlackMagic probe should be connected to the Pixhawk's JTAG connector "
+"using the grey 10wire cable that came with the probe. Note that most Pixhawk"
+" come with no headers soldered onto the JTAG connector because it interferes"
+" with the case."
+msgstr ""
+"BlackMagic 探针应使用随附的灰色 10 芯线缆连接到 Pixhawk 的 JTAG 接口。注意大多数 Pixhawk 的 JTAG "
+"接口未焊接排针，因为这会影响外壳安装。"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:51
+#: 007b2cc7812643f7b2d232aedae22ea2
+msgid "Connecting the ST-Link V2 JTAG debugger to the STM32"
+msgstr "将 ST-Link V2 JTAG 调试器连接到 STM32"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:56
+#: 131341e81330421b846a315bef1a0375
+msgid ""
+"The ST-Link debugger should be connected to the STM32's JTAG connector using"
+" the JTAG breakout cable. Connect the SWDIO and SWCLK (see `Debug port "
+"pinout <https://ardupilot.org/copter/docs/common-pixracer-"
+"overview.html#debug-port-jst-sm06b-connector>`__ for reference) to the "
+"corresponding SWDIO and SWCLK pins on the ST-Link debugger."
+msgstr ""
+"ST-Link 调试器应通过 JTAG 转接线缆连接到 STM32 的 JTAG 接口。将 SWDIO 和 SWCLK（参见`调试接口引脚定义 "
+"<https://ardupilot.org/copter/docs/common-pixracer-overview.html#debug-port-"
+"jst-sm06b-connector>`__）连接到 ST-Link 调试器上对应的 SWDIO 和 SWCLK 引脚。"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:61
+#: a613e135a01a4cb1b13603d9620d90ed
+msgid ""
+"Ensure :ref:`BRD_OPTIONS<BRD_OPTIONS>` sets the \"Enable Debug Pins\" bit if"
+" bit 3 is present in the vehicle software being used. It is also advised to "
+"disable the watchdog by ensuring bit 0 is not set."
+msgstr ""
+"如果所用飞行器软件中存在 bit 3，请确保 :ref:`BRD_OPTIONS<BRD_OPTIONS>` 设置了「启用调试引脚」位。同时建议确保 "
+"bit 0 未置位以禁用看门狗。"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:66
+#: 728fdca477594d2da2ca64519e6904a7
+msgid "Installing GDB"
+msgstr "安装 GDB"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:68
+#: 6682b392f63f4b19b99a126a01fa4378
+msgid ""
+"If using Ubuntu, GDB is likely already installed on your machine and it will"
+" likely work although we recommend using the version available for download "
+"here `https://firmware.ardupilot.org/Tools/STM32-tools "
+"<https://firmware.ardupilot.org/Tools/STM32-tools>`__"
+msgstr ""
+"如使用 Ubuntu，GDB "
+"可能已预装并可正常使用，但我们推荐使用此处可下载的版本：`https://firmware.ardupilot.org/Tools/STM32-tools"
+" <https://firmware.ardupilot.org/Tools/STM32-tools>`__"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:72
+#: 914c594aef684637b1ce7fea759eaf5b
+msgid ""
+"The gcc-arm-none-eabi*-linux.tar.bz2 file contains both the recommended "
+"compiler and the recommended version of gdb."
+msgstr "gcc-arm-none-eabi*-linux.tar.bz2 文件同时包含推荐的编译器和推荐版本的 gdb。"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:75
+#: 01e2eee1b7d841d599395516e02e04b6
+msgid ""
+"If you will be using the ST-Link debugger, please install the gdb version "
+"found in the gcc-arm-none-eabi-6-2017-q2-update-linux.tar.bz2 file."
+msgstr ""
+"如使用 ST-Link 调试器，请安装 gcc-arm-none-eabi-6-2017-q2-update-linux.tar.bz2 文件中的 "
+"gdb 版本。"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:78
+#: 53d03e1d1cda4f86a10925f540f87e88
+msgid ""
+"After installation you should find you have a tool called arm-none-eabi-gdb."
+msgstr "安装完成后，您将获得名为 arm-none-eabi-gdb 的工具。"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:82
+#: 7f8df3625fee41a99dd0487280353207
+msgid "Installing OpenOCD"
+msgstr "安装 OpenOCD"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:84
+#: 4cc31b45b7bb440aa8c0f2b4f7b819c5
+msgid ""
+"You will need to install OpenOCD if you are using the ST-Link debugger:"
+msgstr "如使用 ST-Link 调试器，需要安装 OpenOCD："
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:86
+#: 06901ddfc43e4d17afa2a4c2b104ee6b
+msgid "``sudo apt-get install openocd``."
+msgstr "``sudo apt-get install openocd``。"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:88
+#: 58bb442529ad454888f4cb9dc3f14bb7
+msgid ""
+"Before OpenOCD and GDB are run, their configuration files need to be copied "
+"to the build folder. Note that the build folder name is the same at the "
+"board name."
+msgstr "运行 OpenOCD 和 GDB 之前，需要将其配置文件复制到构建目录。注意构建目录名称与板卡名称相同。"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:90
+#: 08c05572e64e444288a26a89ada9c927
+msgid ""
+"Go to the ``./Tools/debug`` folder and copy ``openocd.cfg`` to "
+"``./build/<boardname>/bin``, if not done so previously"
+msgstr ""
+"进入 ``./Tools/debug`` 目录，将 ``openocd.cfg`` 复制到 "
+"``./build/<boardname>/bin``（如尚未操作）"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:93
+#: d15b792dbce44f1a9b750973b85609d5
+msgid "Type ``openocd`` in your terminal in the ``bin`` directory above."
+msgstr "在上述 ``bin`` 目录下的终端中输入 ``openocd``。"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:98
+#: 4c246a725d7c4fd4bbf42893253bfd5d
+msgid ""
+"Note: there are 2 versions of the ST-link debugger on eBay, so if the "
+"command does not work, change the first line to ``source [find "
+"interface/stlink-v2-1.cfg]``."
+msgstr ""
+"注意：eBay 上有两个版本的 ST-link 调试器，若命令无效，请将第一行改为 ``source [find "
+"interface/stlink-v2-1.cfg]``。"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:103
+#: e25d99ecf6fb4f8e9cb221a410710bed
+msgid "Starting GDB and running some commands"
+msgstr "启动 GDB 并运行一些命令"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:105
+#: 4882bfb1e5424d7c8a273e761932a0f9
+msgid ""
+"Copy ``.gdbinit`` to ``./build/<boardname>/bin`` and edit ``~/.gdbinit`` to "
+"have the following text: ``set auto-load safe-path /``, if not done so "
+"previously."
+msgstr ""
+"将 ``.gdbinit`` 复制到 ``./build/<boardname>/bin``，并编辑 "
+"``~/.gdbinit``，添加以下内容：``set auto-load safe-path /``（如尚未操作）。"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:109
+#: e7fe44d0b89d486e9069614371bb644d
+msgid ""
+"In another window, type ``arm-none-eabi-gdb arducopter`` in the "
+"``./build/<boardname>/bin`` folder. Now you have connected to the gdb "
+"debugging session and can use the commands from the next section."
+msgstr ""
+"在另一个终端窗口中，在 ``./build/<boardname>/bin`` 目录下输入 ``arm-none-eabi-gdb "
+"arducopter``。此时已连接到 gdb 调试会话，可使用下一节中的命令。"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:117
+#: 408e30c101814eeca4f8ed0c0d6f54c7
+msgid "Some useful commands:"
+msgstr "一些常用命令："
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:119
+#: 1b5fa88dbc084374a5daa1006cdab513
+msgid "``r`` -- restarts the process"
+msgstr "``r`` —— 重启进程"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:121
+#: c2f17ce8e1fe4d189695f8c47db63f45
+msgid ""
+"``b function-name`` -- i.e. b setup -- sets a breakpoint at the start of the"
+" \"setup\" function. Note a class name can be prepended such as ``b "
+"AC_AttitudeControl::init``"
+msgstr ""
+"``b 函数名`` —— 例如 b setup —— 在 「setup」函数开始处设置断点。注意可以在前面加类名，例如 ``b "
+"AC_AttitudeControl::init``"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:126
+#: a60977faef204d4892c93b2b7f89cc4b
+msgid ""
+"If you are debugging a board using external flash and you receive \"Failed "
+"to read memory at 0x.....\", try \"set mem inaccessible-by-default off\""
+msgstr ""
+"如果正在调试使用外部 flash 的板卡并收到 「Failed to read memory at 0x.....」，请尝试 「set mem "
+"inaccessible-by-default off」"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:128
+#: 832849adca7848cca18bfeb3d1197aac
+msgid ""
+"``Ctrl-C`` -- stops the code from executing so you can set breakpoints, etc"
+msgstr "``Ctrl-C`` —— 停止代码执行，以便设置断点等"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:131
+#: f7514eee79e04f06937646769f98f583
+msgid "``continue`` -- continues the code from wherever it was stopped"
+msgstr "``continue`` —— 从停止处继续执行代码"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:133
+#: 3c5b95d17a6f48a18a9019efd6617c88
+msgid ""
+"``show interrupted-thread`` -- shows address where execution has stopped "
+"(see below)"
+msgstr "``show interrupted-thread`` —— 显示执行停止处的地址（见下文）"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:136
+#: dfa372699f134234b315c1fbd214f991
+msgid ""
+"``info line * <address>`` -- shows c++ line for a given address (i.e. from "
+"show interrupted-thread)"
+msgstr ""
+"``info line * <地址>`` —— 显示给定地址对应的 C++ 代码行（例如来自 show interrupted-thread）"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:139
+#: a6bb93143f27409bb243c833939494c9
+msgid "``info threads`` -- show status of all threads"
+msgstr "``info threads`` —— 显示所有线程的状态"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:141
+#: fa9523cccf214efe98ce5d3c367055ef
+msgid ""
+"``disassemble <address>`` -- converts given address into assembler code"
+msgstr "``disassemble <地址>`` —— 将给定地址转换为汇编代码"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:143
+#: 7107e94317e14c8396c3bf03e5b39a36
+msgid "``exit`` -- exits from the GDB"
+msgstr "``exit`` —— 退出 GDB"

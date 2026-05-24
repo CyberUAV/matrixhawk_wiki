@@ -1,0 +1,1560 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/ekf2-estimation-system.rst:5
+#: fbc51e6571414144a0f115d39307e061
+msgid "EKF2 Estimation System"
+msgstr "EKF2 估计系统"
+
+#: ../../source/docs/ekf2-estimation-system.rst:8
+#: 66e2dcebe81b4477bd27b48410d7bda1
+msgid "**What is the EKF2 Estimation System?**"
+msgstr "**什么是 EKF2 估计系统？**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:10
+#: f838d7790edc4e03b7568043640e5dd3
+msgid ""
+"It is a 24 state extended Kalman filter in the AP_NavEKF2 library that "
+"estimates the following states"
+msgstr "这是 AP_NavEKF2 库中的一个 24 状态扩展卡尔曼滤波器，用于估计以下状态"
+
+#: ../../source/docs/ekf2-estimation-system.rst:13
+#: aaf78fc917fe4fd78818ad8a74e7029b
+msgid "Attitude (Quaternions)"
+msgstr "姿态（四元数）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:14
+#: 8f0365b815564decb4a73cf271052fdc
+msgid "Velocity (North,East,Down)"
+msgstr "速度（北、东、下）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:15
+#: cfe20ef1cc0844e78d8561c18a7c0918
+msgid "Position (North,East,Down)"
+msgstr "位置（北、东、下）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:16
+#: 6c60804437de4941953af1967fc63314
+msgid "Gyro bias offsets (X,Y,Z)"
+msgstr "陀螺仪偏置（X、Y、Z）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:17
+#: cf69d7b017344db986faea15f82abbd4
+msgid "Gyro scale factors (X,Y,Z)"
+msgstr "陀螺仪比例因子（X、Y、Z）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:18
+#: e158c11c23c84038889e1c5398bbffa0
+msgid "Z accel bias"
+msgstr "Z 轴加速度计偏置"
+
+#: ../../source/docs/ekf2-estimation-system.rst:19
+#: e8ad486a6ed140d09e9f15d856d5692d
+msgid "Earth magnetic field (North,East,Down)"
+msgstr "地球磁场（北、东、下）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:20
+#: b662dd3b19af4f94aecd983d7613b01a
+msgid "Body magnetic field (X,Y,Z)"
+msgstr "机体磁场（X、Y、Z）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:21
+#: 2d4c35eb7d6845d798f485f3505a9b45
+msgid "Wind Velocity (North,East)"
+msgstr "风速（北、东）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:23
+#: c8625f283e314fc5b2dc1864bdc42955
+msgid ""
+"It is based on the filter equations derived `here "
+"<https://github.com/priseborough/InertialNav/blob/master/derivations/RotationVectorAttitudeParameterisation/GenerateNavFilterEquations.m>`__."
+msgstr ""
+"该滤波器基于 `此处 "
+"<https://github.com/priseborough/InertialNav/blob/master/derivations/RotationVectorAttitudeParameterisation/GenerateNavFilterEquations.m>`__"
+" 推导的滤波器方程。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:26
+#: 582192f7dfb94824af2203b094326cb5
+msgid "EKF2 Advantages"
+msgstr "EKF2 的优势"
+
+#: ../../source/docs/ekf2-estimation-system.rst:28
+#: 77e4e7119ca94afebc8be13f098c2974
+msgid ""
+"It can run a separate EKF2 for each IMU making recovery from an IMU fault "
+"much more likely"
+msgstr "可为每个 IMU 单独运行一个 EKF2，大大提高了从 IMU 故障中恢复的可能性"
+
+#: ../../source/docs/ekf2-estimation-system.rst:29
+#: ef76a03045e54af5b13b822907ef4522
+msgid "It can switch between magnetometers if there is fault"
+msgstr "可在磁力计发生故障时进行切换"
+
+#: ../../source/docs/ekf2-estimation-system.rst:30
+#: 867cf191f7b045469cbebfb6db8f48ab
+msgid ""
+"It can estimate gyro scale factors which can improve accuracy during high "
+"rate manoeuvres."
+msgstr "可估计陀螺仪比例因子，从而提高高速率机动时的精度。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:31
+#: 27c5a0a78ad54f8689650fa3ee4acf47
+msgid ""
+"It can simultaneously estimate both gyro offsets and orientation on startup "
+"whilst moving and doesn't rely on the DCM algorithm for its initial "
+"orientation. This makes it ideal for flying from moving platforms when the "
+"gyro has not been calibrated."
+msgstr "可在运动过程中同时估计陀螺仪偏置和初始方向，不依赖 DCM 算法的初始定向。这使其非常适合在陀螺仪未经校准的运动平台上起飞。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:32
+#: d4fe4f5568da4f6cbe91f6b4fb49512b
+msgid "It can handle larger gyro bias changes in flight"
+msgstr "可处理飞行中更大的陀螺仪偏置变化"
+
+#: ../../source/docs/ekf2-estimation-system.rst:33
+#: 8683072c7096424ba8fac329f3ff0c37
+msgid "It is able to recover faster from bad sensor data"
+msgstr "能够更快地从异常传感器数据中恢复"
+
+#: ../../source/docs/ekf2-estimation-system.rst:34
+#: 38738d3db6874e95987e847a6a3a5cc8
+msgid "It provides a slightly smoother output."
+msgstr "输出更加平滑。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:35
+#: ff6d16a61a25475ab1c2022354b81c79
+msgid "It is slightly more accurate"
+msgstr "精度略有提升"
+
+#: ../../source/docs/ekf2-estimation-system.rst:36
+#: 5be2057f9a5847de8a815493d47551e3
+msgid "It uses slightly less computing power"
+msgstr "计算资源消耗略少"
+
+#: ../../source/docs/ekf2-estimation-system.rst:37
+#: ab350d8ceee542aa87de2eb6338c634a
+msgid ""
+"It starts using GPS when checks pass rather than waiting for the vehicle "
+"motors to arm."
+msgstr "在 GPS 检查通过后立即开始使用 GPS，而不必等待载具电机解锁。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:41
+#: 047434ca5fd54124ab5c86497e040ab0
+msgid "How does it achieve this?"
+msgstr "它是如何实现的？"
+
+#: ../../source/docs/ekf2-estimation-system.rst:43
+#: 15b1e59b4f0b45e0afe23f3263193a5a
+msgid ""
+"Instead of trying to estimate the quaternion orientation directly, it "
+"estimates an error rotation vector and applies the correction to the "
+"quaternion from the inertial navigation equations. This is better when there"
+" are large angle errors as it avoids errors associated with linearising "
+"quaternions across large angle changes."
+msgstr ""
+"它不直接估计四元数姿态，而是估计误差旋转向量，并将修正量应用到惯性导航方程的四元数上。当存在大角度误差时，这种方法更优，因为它避免了在大角度变化时对四元数线性化所带来的误差。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:49
+#: a18046e77b6a4f4f9a3c8362153b14b1
+msgid ""
+"See \"Rotation Vector in Attitude Estimation\", Mark E. Pittelkau, Journal "
+"of Guidance, Control, and Dynamics, 2003” for details on this approach."
+msgstr ""
+"详见 Mark E. Pittelkau 于 2003 年在《Journal of Guidance, Control, and "
+"Dynamics》发表的「Rotation Vector in Attitude Estimation」一文。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:53
+#: ab6d50890a4e44aaadf32ca3fa21efda
+msgid ""
+"The new EKF runs on a delayed time horizon so that when measurements are "
+"fused, they are done so using the measurement, filter states and covariance "
+"matrix from the same point in time. The legacy EKF uses a simpler method "
+"where delayed measurements are fused using delayed states but the covariance"
+" matrix is from the current time which reduces accuracy."
+msgstr ""
+"新 EKF 在延迟的时间范围内运行，因此融合测量时使用的是同一时间点的测量值、滤波器状态和协方差矩阵。传统 EKF "
+"采用较简单的方式，使用延迟状态融合延迟测量，但协方差矩阵来自当前时刻，这会降低精度。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:60
+#: 01168c263c624011ba3670870ecabdfb
+msgid ""
+"The delayed filter states are then predicted forward into the current time "
+"horizon using a complementary filter that removes the time delay and also "
+"filters out the sudden changes in the states that occur when measurements "
+"are fused."
+msgstr "随后，延迟的滤波器状态通过互补滤波器向前预测至当前时刻，消除时间延迟，并滤除融合测量时状态的突变。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:64
+#: cf786056b86b4061a4a5c8888d4d82da
+msgid ""
+"This approach was inspired by the output predictor work done by Ali "
+"Khosravian from ANU. \"Recursive Attitude Estimation in the Presence of "
+"Multi-rate and Multi-delay Vector Measurements,” A Khosravian, J Trumpf, R "
+"Mahony, T Hamel - American Control Conference, vol.-, 2015."
+msgstr ""
+"该方法受到澳大利亚国立大学 Ali Khosravian 输出预测器工作的启发。「Recursive Attitude Estimation in "
+"the Presence of Multi-rate and Multi-delay Vector Measurements」，A "
+"Khosravian、J Trumpf、R Mahony、T Hamel，美国控制会议，第 - 卷，2015 年。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:69
+#: a0b446e407654bdca43033ba3e98d1a4
+msgid ""
+"This is computationally much cheaper than winding the states forward using "
+"buffered IMU data at each update, but slightly less accurate. The legacy EKF"
+" smooths the state corrections by applying them incrementally across the "
+"time to the next measurement which reduces stability of the filter."
+msgstr ""
+"与在每次更新时使用缓冲的 IMU 数据向前推进状态相比，这种方法计算量少得多，但精度略低。传统 EKF "
+"通过在到下一次测量的时间内逐步应用状态修正来平滑修正，这会降低滤波器的稳定性。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:75
+#: 1889527e309c4c309b03ede80f9e9002
+msgid ""
+"Further optimisation of mathematics and code to improve speed have been "
+"introduced."
+msgstr "已引入数学和代码的进一步优化以提升速度。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:77
+#: fd30853e6070496c8fbb7dba20cccdfe
+msgid ""
+"A simple compass yaw angle fusion method with fixed declination has been "
+"added which is used on the ground or when magnetic interference prevents use"
+" of the more accurate 3-axis 6-state magnetometer fusion technique."
+msgstr "增加了一种固定磁偏角的简单罗盘偏航角融合方法，用于地面阶段或磁干扰导致无法使用更精确的三轴六状态磁力计融合技术时。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:83
+#: 51d30e45d91c4dfa851fd89318af19de
+msgid "Using EKF2"
+msgstr "使用 EKF2"
+
+#: ../../source/docs/ekf2-estimation-system.rst:85
+#: 8c0aa7835b2c41d3a5a789d040c4ed75
+msgid ""
+"Enable the new EKF by setting EK2_ENABLE = 1.  EKF2 will now be running in "
+"parallel and logging, etc but it will not be used by the control loops."
+msgstr "通过设置 EK2_ENABLE = 1 启用新 EKF。EKF2 此时将并行运行并记录日志，但不会用于飞行控制回路。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:88
+#: 9f72a172258d41bfa057d551bb6d7bbd
+msgid "To use it in the control loops, set AHRS_EKF_TYPE = 2"
+msgstr "要在飞行控制回路中使用它，设置 AHRS_EKF_TYPE = 2"
+
+#: ../../source/docs/ekf2-estimation-system.rst:89
+#: 37de01c6dcf74074b0474bd4bf86efbb
+msgid ""
+"The use of multiple IMU's, is controlled by the EK2_IMU_MASK parameter:"
+msgstr "多 IMU 的使用由 EK2_IMU_MASK 参数控制："
+
+#: ../../source/docs/ekf2-estimation-system.rst:92
+#: fc29e6610cb346a8b75a2a13f796f843
+msgid "To use only IMU1, set EK2_IMU_MASK = 1 (this is the default)"
+msgstr "仅使用 IMU1，设置 EK2_IMU_MASK = 1（默认值）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:93
+#: d2e63c45d3104d319085bfdde6a17949
+msgid "To use only IMU2, set EK2_IMU_MASK = 2"
+msgstr "仅使用 IMU2，设置 EK2_IMU_MASK = 2"
+
+#: ../../source/docs/ekf2-estimation-system.rst:94
+#: 02a4e8c7ae964b7f8f05f91025bdee68
+msgid ""
+"To run dual EKF2 using IMU1 and IMU2,  set :ref:`EK2_IMU_MASK<EK2_IMU_MASK>`"
+" = 3"
+msgstr "使用 IMU1 和 IMU2 同时运行双 EKF2，设置 :ref:`EK2_IMU_MASK<EK2_IMU_MASK>` = 3"
+
+#: ../../source/docs/ekf2-estimation-system.rst:96
+#: 8136321c6ff9433b83506f7554f94d9b
+msgid "After setting the parameters you will need to reboot."
+msgstr "更改参数后需要重新启动。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:99
+#: 3ac9020ce9854fd5813627b6c8e3cba5
+msgid "EKF2 Log Data"
+msgstr "EKF2 日志数据"
+
+#: ../../source/docs/ekf2-estimation-system.rst:101
+#: 14537db56f9c45bba25348b828b493b7
+msgid "The data for EKF2 can be found in the NKF1 to NKF5 log packets."
+msgstr "EKF2 的数据可在 NKF1 至 NKF5 日志数据包中找到。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:103
+#: 2ca9633641194cbc80883d2ca29f623b
+msgid ""
+"Packets NKF1 to NKF4 contain information for each EKF instance with the "
+"instance number given by the value of field PI. The number of instances "
+"enabled is set by the EK2_IMU_MASK parameter. Packet NKF5 contains optical "
+"flow information for the EKF instance that is the primary for flight "
+"control."
+msgstr ""
+"NKF1 至 NKF4 数据包包含每个 EKF 实例的信息，实例编号由字段 PI 的值给出。启用的实例数量由 EK2_IMU_MASK "
+"参数设定。NKF5 数据包包含主飞行控制 EKF 实例的光流信息。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:109
+#: 1bd2d81c0c104111924c40814a152253
+msgid ""
+"The available EKF2 log data is listed below.  Some plots showing example "
+"flight data have been included. This data was logged using a Pixhawk on a "
+"3DR Iris+ quadcopter with the following parameter changes followed by a "
+"reboot:"
+msgstr ""
+"以下列出了可用的 EKF2 日志数据，并附有部分飞行数据示例图表。这些数据使用 Pixhawk 在 3DR Iris+ "
+"四旋翼飞行器上记录，更改以下参数后重启："
+
+#: ../../source/docs/ekf2-estimation-system.rst:114
+#: 28e7f209638b4f9aa5c206100e129d95
+msgid "EK2_ENABLE = 1 (turns on EKF2)"
+msgstr "EK2_ENABLE = 1（开启 EKF2）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:115
+#: 41485162ec944ab4b5f2dd0b08cb1868
+msgid ""
+"EK2_IMU_MASK = 3 (Instructs EKF2 to run two instances, one for IMU1 "
+"(MPU6000) and one for IMU2 (LDG20H + LSM303D)"
+msgstr ""
+"EK2_IMU_MASK = 3（指示 EKF2 运行两个实例，一个用于 IMU1（MPU6000），一个用于 IMU2（LDG20H + "
+"LSM303D））"
+
+#: ../../source/docs/ekf2-estimation-system.rst:117
+#: 273b4150ee914471b652af89cd38c81a
+msgid "AHRS_EKF_TYPE = 2 (tells the flight control system to use EKF2"
+msgstr "AHRS_EKF_TYPE = 2（告知飞控系统使用 EKF2）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:118
+#: 0e916d7afeb64c4cbc120a91f987d3b1
+msgid "LOG_BITMASK = 131071 (logs 50Hz data from startup)"
+msgstr "LOG_BITMASK = 131071（从启动开始以 50Hz 记录数据）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:120
+#: 99938bd503954b76a7a525c7ca70fdd3
+msgid "***Note: Plots can be viewed in full size by left clicking them***"
+msgstr "***注意：点击图表可以全尺寸查看***"
+
+#: ../../source/docs/ekf2-estimation-system.rst:123
+#: e1e1da1303854f5c961c510cddb3f23c
+msgid "Filter State Estimates"
+msgstr "滤波器状态估计"
+
+#: ../../source/docs/ekf2-estimation-system.rst:125
+#: dc6b0c87f28a4ec0bc134580933ceb9a
+msgid ""
+"**NKF1[0]** (and **NKF1[1]** if a second IMU is being used) contain the "
+"outputs used by the flight control system"
+msgstr "**NKF1[0]**（如果使用第二个 IMU，则还有 **NKF1[1]**）包含飞行控制系统使用的输出"
+
+#: ../../source/docs/ekf2-estimation-system.rst:128
+#: ../../source/docs/ekf2-estimation-system.rst:157
+#: ../../source/docs/ekf2-estimation-system.rst:191
+#: ../../source/docs/ekf2-estimation-system.rst:232
+#: ../../source/docs/ekf2-estimation-system.rst:262
+#: 11cad9497744470692bd4d700f1d11b2 703d8153773e4ff48cfc4ef2c3b0e4b8
+#: 714998b480b840c885d5d1486fe9041a d0ec228818ae4bbf87a1f25fad854b66
+#: e2f1c948574f446eac708d0b02bc7c97
+msgid "TimeUS - time stamp (uSec)"
+msgstr "TimeUS - 时间戳（微秒）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:130
+#: 63ef4d6d5222450eb0f86484680e9921
+msgid "Roll,Pitch - Euler roll and pitch angle (deg)"
+msgstr "Roll、Pitch - 欧拉横滚角和俯仰角（度）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:132
+#: dea62a6e894142caada5d9be4a312856
+msgid "|EKF2 - roll pitch|"
+msgstr "|EKF2 - 横滚俯仰|"
+
+#: ../../source/docs/ekf2-estimation-system.rst
+#: 51828295295a40a99c687badf16c6a0e
+msgid "EKF2 - roll pitch"
+msgstr "EKF2 - 横滚俯仰"
+
+#: ../../source/docs/ekf2-estimation-system.rst:134
+#: 6f69cc0102f34f5981f5659caf7f6564
+msgid "Yaw - Euler yaw angle (deg)"
+msgstr "Yaw - 欧拉偏航角（度）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:136
+#: 99f246c50bf14d84bc909171a7da9923
+msgid "|EKF2 - yaw|"
+msgstr "|EKF2 - 偏航|"
+
+#: ../../source/docs/ekf2-estimation-system.rst
+#: 0503259a3e07465c8d1ebe9a22e3a584
+msgid "EKF2 - yaw"
+msgstr "EKF2 - 偏航"
+
+#: ../../source/docs/ekf2-estimation-system.rst:138
+#: d4364a9f9d5049569211f50342b783e9
+msgid "VN,VE - Velocity North,East direction (m/s)"
+msgstr "VN、VE - 北向、东向速度（m/s）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:140
+#: 2b814d12910147eab0285b5e11c3203c
+msgid "|EKF2 - velocity NE|"
+msgstr "|EKF2 - 北东速度|"
+
+#: ../../source/docs/ekf2-estimation-system.rst
+#: ac2d85af73fc4ff8bd9b66cda1eaf2a3
+msgid "EKF2 - velocity NE"
+msgstr "EKF2 - 北东速度"
+
+#: ../../source/docs/ekf2-estimation-system.rst:142
+#: 63bc840df13b4ddf8a2fd10cc0857ad2
+msgid "VD, dPD - Velocity and Position Derivative Down (m/s)"
+msgstr "VD、dPD - 下向速度和位置导数（m/s）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:144
+#: 59e8e00be7764c5a86583c662435e2f1
+msgid "|EKF2 - velocity D|"
+msgstr "|EKF2 - 下向速度|"
+
+#: ../../source/docs/ekf2-estimation-system.rst
+#: f8d4234433ee4c2eb50e5ed2b1de26bd
+msgid "EKF2 - velocity D"
+msgstr "EKF2 - 下向速度"
+
+#: ../../source/docs/ekf2-estimation-system.rst:146
+#: fec4b677f0964d4f933cf17ce7a31053
+msgid "PN,PE,PD - Position North,East,Down (m)"
+msgstr "PN、PE、PD - 北、东、下向位置（m）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:148
+#: 6fdd4477afe54fadb0ff06659ae6e96f
+msgid "|EKF2 - position NED|"
+msgstr "|EKF2 - NED 位置|"
+
+#: ../../source/docs/ekf2-estimation-system.rst
+#: 5d5bc615fc3d4160acec2e07c09d4eb1
+msgid "EKF2 - position NED"
+msgstr "EKF2 - NED 位置"
+
+#: ../../source/docs/ekf2-estimation-system.rst:150
+#: 998cd458bbf44484832d5737f2baa277
+msgid "GX,GY,GZ - X,Y,Z rate gyro bias (deg/sec)"
+msgstr "GX、GY、GZ - X、Y、Z 轴角速率陀螺仪偏置（度/秒）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:152
+#: d8ef858aac454a85bed3aa0a0d31b3ad
+msgid "|EKF2 - gyro rate bias|"
+msgstr "|EKF2 - 陀螺仪速率偏置|"
+
+#: ../../source/docs/ekf2-estimation-system.rst
+#: 8e77115ae6e84bfba76c7882cd4ce098
+msgid "EKF2 - gyro rate bias"
+msgstr "EKF2 - 陀螺仪速率偏置"
+
+#: ../../source/docs/ekf2-estimation-system.rst:154
+#: 6ffefe36ff2c4c37967858b70186087a
+msgid ""
+"**NKF2[0]** (and **NKF2[1]** if a second IMU is being used) contains "
+"additional state information"
+msgstr "**NKF2[0]**（如果使用第二个 IMU，则还有 **NKF2[1]**）包含附加状态信息"
+
+#: ../../source/docs/ekf2-estimation-system.rst:159
+#: e04c460c55d6446eaab39133e5c269ea
+msgid "AZbias - Z accelerometer bias (cm/s/s)"
+msgstr "AZbias - Z 轴加速度计偏置（cm/s/s）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:161
+#: 7f8a2fcf7d204a4ca9cb055c16fce34f
+msgid "|EKF2 - accel Z bias|"
+msgstr "|EKF2 - 加速度计 Z 轴偏置|"
+
+#: ../../source/docs/ekf2-estimation-system.rst
+#: d6a56c34548846928a4bc99c34a24476
+msgid "EKF2 - accel Z bias"
+msgstr "EKF2 - 加速度计 Z 轴偏置"
+
+#: ../../source/docs/ekf2-estimation-system.rst:163
+#: 4ac0fbef3ea448468ff116eb984efcaa
+msgid "GSX,GSY,GSZ - X,Y,Z rate gyro scale factor (%)"
+msgstr "GSX、GSY、GSZ - X、Y、Z 轴角速率陀螺仪比例因子（%）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:165
+#: 484a7bac427a46f180ab692f5f66f2fe
+msgid ""
+"Eg, a log value of 0.5 would be equivalent to a scale factor of 1.005 for "
+"that sensor"
+msgstr "例如，日志值 0.5 相当于该传感器比例因子为 1.005"
+
+#: ../../source/docs/ekf2-estimation-system.rst:167
+#: c3f581d388da4bf6a34862ad3b9610e7
+msgid "|EKF2 - gyro rate scale factor|"
+msgstr "|EKF2 - 陀螺仪速率比例因子|"
+
+#: ../../source/docs/ekf2-estimation-system.rst
+#: 08d4cc6d80a945b99d4ae75fc0c0e416
+msgid "EKF2 - gyro rate scale factor"
+msgstr "EKF2 - 陀螺仪速率比例因子"
+
+#: ../../source/docs/ekf2-estimation-system.rst:169
+#: 9fc9741a0f0d4be2974f983e63ed6a62
+msgid "VWN,VWE - Wind velocity North,East (m/s)"
+msgstr "VWN、VWE - 北向、东向风速（m/s）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:171
+#: fcd2ea50338c4f13801ecdc44b667df0
+msgid "MN,ME,MD - Earth magnetic field North,East,Down (mGauss)"
+msgstr "MN、ME、MD - 地球磁场北、东、下分量（毫高斯）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:173
+#: b26d7a4eb3054ed093e72490917c50f9
+msgid "|EKF2 - earth magnetic field NED|"
+msgstr "|EKF2 - 地球磁场 NED|"
+
+#: ../../source/docs/ekf2-estimation-system.rst
+#: 8f5ccf919cff41f1b8813b9e60b25666
+msgid "EKF2 - earth magnetic field NED"
+msgstr "EKF2 - 地球磁场 NED"
+
+#: ../../source/docs/ekf2-estimation-system.rst:175
+#: 6688c86647fc4fca9d60f9f8af782d0c
+msgid "MX,MY,MZ - Body fixed magnetic field X,Y,Z (mGauss)"
+msgstr "MX、MY、MZ - 机体固定磁场 X、Y、Z 分量（毫高斯）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:177
+#: ef7130942e36407abcdcf48a94652422
+msgid "|EKF2 - body magnetic field XYZ|"
+msgstr "|EKF2 - 机体磁场 XYZ|"
+
+#: ../../source/docs/ekf2-estimation-system.rst
+#: 479ea0adf943437a81a453778d0ebd79
+msgid "EKF2 - body magnetic field XYZ"
+msgstr "EKF2 - 机体磁场 XYZ"
+
+#: ../../source/docs/ekf2-estimation-system.rst:179
+#: 8263df623b8840c39a081a754cf52c57
+msgid "MI - Index of the magnetometer being used by EKF2"
+msgstr "MI - EKF2 当前使用的磁力计索引"
+
+#: ../../source/docs/ekf2-estimation-system.rst:182
+#: 8760b15d3bb340c5ae1a7208ee6e996a
+msgid "Filter Innovations"
+msgstr "滤波器新息"
+
+#: ../../source/docs/ekf2-estimation-system.rst:184
+#: 34769dbb3b514ee784667a8cce5fff3d
+msgid ""
+"**NKF3[0]** (and **NKF3[1]** if a second IMU is being used) contain "
+"information on the filter innovations. An innovation is the difference "
+"between the measurement value predicted byEKF2 and the value returned by the"
+" sensor. Smaller innovations indicate smaller sensor errors. Because the IMU"
+" data is used to do the prediction, bad IMU data can result in large "
+"innovations for all measurements."
+msgstr ""
+"**NKF3[0]**（如果使用第二个 IMU，则还有 **NKF3[1]**）包含滤波器新息信息。新息是 EKF2 "
+"预测的测量值与传感器返回的实际值之差。新息越小，传感器误差越小。由于 IMU 数据用于预测，异常的 IMU 数据可能导致所有测量的新息都偏大。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:193
+#: c27d1672a4fb403e89b7405a0f9a9cef
+msgid "IVN,IVE - GPS velocity innovations North, East (m/s)"
+msgstr "IVN、IVE - GPS 速度新息北向、东向（m/s）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:195
+#: fe0434b2d7194938b4aff7ebfb3fdca5
+msgid "|EKF2 - velocity innovation NE|"
+msgstr "|EKF2 - 北东速度新息|"
+
+#: ../../source/docs/ekf2-estimation-system.rst
+#: 5ea6cfb5ce5f4e9faa0da4c648c9e58c
+msgid "EKF2 - velocity innovation NE"
+msgstr "EKF2 - 北东速度新息"
+
+#: ../../source/docs/ekf2-estimation-system.rst:197
+#: 22d0314fc40d4d098e7709df154652b2
+msgid "IVD - GPS velocity innovation Down (m/s)"
+msgstr "IVD - GPS 下向速度新息（m/s）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:199
+#: 74475b62d64c444e999c82c28b573117
+msgid "|EKF2 - velocity innovation D|"
+msgstr "|EKF2 - 下向速度新息|"
+
+#: ../../source/docs/ekf2-estimation-system.rst
+#: 6aee285aada945b48d402a54a960e482
+msgid "EKF2 - velocity innovation D"
+msgstr "EKF2 - 下向速度新息"
+
+#: ../../source/docs/ekf2-estimation-system.rst:201
+#: f799491908114073a3f101d3e787fe39
+msgid "IPN,IPE - GPS position innovations North,East (m)"
+msgstr "IPN、IPE - GPS 位置新息北向、东向（m）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:203
+#: 9f349ca026dd40b4910d0b6613ac5117
+msgid "|EKF2 - position innovation NE|"
+msgstr "|EKF2 - 北东位置新息|"
+
+#: ../../source/docs/ekf2-estimation-system.rst
+#: 918589e729b14acfa82db28e23b7c8d6
+msgid "EKF2 - position innovation NE"
+msgstr "EKF2 - 北东位置新息"
+
+#: ../../source/docs/ekf2-estimation-system.rst:205
+#: f229cb0f23ac49d987480656d98a3556
+msgid "IPD - Barometer position innovation Down (m)"
+msgstr "IPD - 气压计位置新息下向（m）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:207
+#: 10a01778c6bd4a14a9859beb693aa02e
+msgid "|EKF2 - position innovation D|"
+msgstr "|EKF2 - 下向位置新息|"
+
+#: ../../source/docs/ekf2-estimation-system.rst
+#: 901ee4127f714e40bbdc12259f80e0be
+msgid "EKF2 - position innovation D"
+msgstr "EKF2 - 下向位置新息"
+
+#: ../../source/docs/ekf2-estimation-system.rst:209
+#: 08a76b81f7f444deb781e740f7826eaa
+msgid "IMX,IMY,IMZ - Magnetometer innovations X,Y,Z (mGauss)"
+msgstr "IMX、IMY、IMZ - 磁力计新息 X、Y、Z 分量（毫高斯）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:211
+#: caa99f086f0548f78601959a274dd3dc
+msgid "|EKF2 - magnetometer innovation XYZ|"
+msgstr "|EKF2 - 磁力计新息 XYZ|"
+
+#: ../../source/docs/ekf2-estimation-system.rst
+#: 5c704885bb454b259f7880e203b4ccf1
+msgid "EKF2 - magnetometer innovation XYZ"
+msgstr "EKF2 - 磁力计新息 XYZ"
+
+#: ../../source/docs/ekf2-estimation-system.rst:213
+#: cf2ab1b94e1b4098941aeb3869a7d9ef
+msgid "IYAW - Compass yaw innovation (deg)"
+msgstr "IYAW - 罗盘偏航角新息（度）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:215
+#: 3375e102f4264ba9b3abc1bc694fd2ff
+msgid "|EKF2 - compass yaw innovation|"
+msgstr "|EKF2 - 罗盘偏航新息|"
+
+#: ../../source/docs/ekf2-estimation-system.rst
+#: d40cda63b9374406887c90f508978f7c
+msgid "EKF2 - compass yaw innovation"
+msgstr "EKF2 - 罗盘偏航新息"
+
+#: ../../source/docs/ekf2-estimation-system.rst:217
+#: 2be01ccb50a7420095c13368c51db2ae
+msgid "IVT - True airspeed innovation (m/s)"
+msgstr "IVT - 真空速新息（m/s）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:220
+#: a48ed875d61d412ba9111ef95ddc34f7
+msgid "Filter Health and Status"
+msgstr "滤波器健康状态"
+
+#: ../../source/docs/ekf2-estimation-system.rst:222
+#: 3f1f40a2aeb044e1b87180155ea5d4dd
+msgid ""
+"**NKF4[0]** (and **NKF4[1]** if a second IMU is being used) contain "
+"information on the innovation variance test ratios. A value of less than 1 "
+"indicates that that measurement has passed its checks and is being used by "
+"the EKF2. A value of more than 1 indicates that the innovations for that "
+"measurement are so high that the EKF2 will be rejecting the data from that "
+"sensor. Values of less than 0.3 in flight are typical for a setup with good "
+"quality sensor data."
+msgstr ""
+"**NKF4[0]**（如果使用第二个 IMU，则还有 **NKF4[1]**）包含新息方差测试比率信息。值小于 1 表示该测量通过检查，EKF2 "
+"正在使用该测量。值大于 1 表示该测量的新息过大，EKF2 将拒绝来自该传感器的数据。飞行中低于 0.3 的值对于高质量传感器数据的设置而言是典型值。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:230
+#: c62a1aabeddd4abaa6db1c4f5f3686cb
+msgid "They also contain other information relevant to filter health"
+msgstr "还包含其他与滤波器健康状态相关的信息"
+
+#: ../../source/docs/ekf2-estimation-system.rst:233
+#: 227a43bf85c348fdafbb8f3575c23137
+msgid "SV - GPS velocity test ratio"
+msgstr "SV - GPS 速度测试比率"
+
+#: ../../source/docs/ekf2-estimation-system.rst:234
+#: 7650be3dd9ff48e2b2c08f080230d22c
+msgid "SP - GPS position test ratio"
+msgstr "SP - GPS 位置测试比率"
+
+#: ../../source/docs/ekf2-estimation-system.rst:235
+#: c7ca933d16894b8fa638127ee8c68cbb
+msgid "SH - Barometer test ratio"
+msgstr "SH - 气压计测试比率"
+
+#: ../../source/docs/ekf2-estimation-system.rst:236
+#: 7a87554ff0c241f4882efb1f3ee9edb5
+msgid "SM - Magnetometer test ratio"
+msgstr "SM - 磁力计测试比率"
+
+#: ../../source/docs/ekf2-estimation-system.rst:237
+#: 21746aca539e49cbaff548f8408f3f48
+msgid "SVT - Airspeed sensor Test ratio"
+msgstr "SVT - 空速传感器测试比率"
+
+#: ../../source/docs/ekf2-estimation-system.rst:239
+#: 1c5f0dc1afdd4d1988342aabc6d23255
+msgid "|EKF2 - variance test ratios|"
+msgstr "|EKF2 - 方差测试比率|"
+
+#: ../../source/docs/ekf2-estimation-system.rst
+#: d6cc65c6bfd54b7f8675d1f47d3f23e6
+msgid "EKF2 - variance test ratios"
+msgstr "EKF2 - 方差测试比率"
+
+#: ../../source/docs/ekf2-estimation-system.rst:241
+#: 585b2f75581a40ca839a0f9c594caeda
+msgid "errRP - Estimated attitude roll/pitch error (rad)"
+msgstr "errRP - 估计的姿态横滚/俯仰误差（弧度）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:243
+#: 0fc0ec64fc9f4f15a4c35befb92101cd
+msgid "|EKF2 - error roll pitch|"
+msgstr "|EKF2 - 横滚俯仰误差|"
+
+#: ../../source/docs/ekf2-estimation-system.rst
+#: 3ef42baaea9b4ac79650002ffb8abc2f
+msgid "EKF2 - error roll pitch"
+msgstr "EKF2 - 横滚俯仰误差"
+
+#: ../../source/docs/ekf2-estimation-system.rst:245
+#: c635b025464f4914a9111a5e6dd0fa71
+msgid ""
+"OFN - Position jump North due to the last reset of the filter states (m)"
+msgstr "OFN - 上次滤波器状态重置导致的北向位置跳变量（m）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:247
+#: c379446027e94d7b883369748e22fb22
+msgid ""
+"OFE - Position jump East due to the last reset of the filter states (m)"
+msgstr "OFE - 上次滤波器状态重置导致的东向位置跳变量（m）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:249
+#: e1143a6af11f4741b33b686737f04efc
+msgid "FS - Integer bitmask of filter numerical faults"
+msgstr "FS - 滤波器数值故障整数位掩码"
+
+#: ../../source/docs/ekf2-estimation-system.rst:250
+#: 4f3564f058764c58b06fc64244bb36be
+msgid "TS - Integer bitmask of filter measurement timeout"
+msgstr "TS - 滤波器测量超时整数位掩码"
+
+#: ../../source/docs/ekf2-estimation-system.rst:251
+#: 7dda252267844030ad406648557aae23
+msgid "SS - Integer bitmask of filer solution status"
+msgstr "SS - 滤波器求解状态整数位掩码"
+
+#: ../../source/docs/ekf2-estimation-system.rst:252
+#: f4258f504cd64b1d9784e40f153aaae2
+msgid "GPS - Integer bitmask of filter GPS quality checks"
+msgstr "GPS - 滤波器 GPS 质量检查整数位掩码"
+
+#: ../../source/docs/ekf2-estimation-system.rst:253
+#: b7e64205614d4d02924fe125a945abec
+msgid ""
+"PI - Index showing which instance of EKF2 has been selected for flight "
+"control"
+msgstr "PI - 显示已为飞行控制选定的 EKF2 实例索引"
+
+#: ../../source/docs/ekf2-estimation-system.rst:257
+#: d12daf3c6c9749c0977692cc0104fedd
+msgid "Optical Flow and Range Finder Fusion"
+msgstr "光流与测距仪融合"
+
+#: ../../source/docs/ekf2-estimation-system.rst:259
+#: 1b52dc2d28394d5ab55d5bef8bcd7e46
+msgid ""
+"**NKF5** contains information on the optical flow fusion for the EK2 "
+"instance bing used for flight control"
+msgstr "**NKF5** 包含用于飞行控制的 EKF2 实例的光流融合信息"
+
+#: ../../source/docs/ekf2-estimation-system.rst:264
+#: 59e46042bdcb453c891268b653aa729d
+msgid "normInnov - optical flow innovation variance test ratio"
+msgstr "normInnov - 光流新息方差测试比率"
+
+#: ../../source/docs/ekf2-estimation-system.rst:266
+#: ce6b50a0d9194bf89304d0e84c1c1fd7
+msgid "FIX,FIY - optical flow X and Y axis innovations (mrad/s)"
+msgstr "FIX、FIY - 光流 X 和 Y 轴新息（毫弧度/秒）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:268
+#: a5bf3773f85141bda20dddaac95eb49e
+msgid "|EKF2 - optical flow rate innovations|"
+msgstr "|EKF2 - 光流速率新息|"
+
+#: ../../source/docs/ekf2-estimation-system.rst
+#: cb11b705bb964ff2b6fc217ffaece966
+msgid "EKF2 - optical flow rate innovations"
+msgstr "EKF2 - 光流速率新息"
+
+#: ../../source/docs/ekf2-estimation-system.rst:270
+#: 33ceddab60c143f18d02f7ff029b9ce3
+msgid "AFI - optical flow terrain height estimator innovation (mrad/s)"
+msgstr "AFI - 光流地形高度估计器新息（毫弧度/秒）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:272
+#: 13130e2f532b4a3f803496d8305277df
+msgid "HAGL - estimated height above ground level (m)"
+msgstr "HAGL - 估计的离地高度（m）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:273
+#: 65f3571fe1124b5b9a29cda89591578b
+msgid "meaRng - Range measured by the range finder (m)"
+msgstr "meaRng - 测距仪测量的距离（m）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:275
+#: 497afa7a37d54b5ca598bb4b6a726532
+msgid "|EKF2 - hagl and range|"
+msgstr "|EKF2 - 离地高度与测距|"
+
+#: ../../source/docs/ekf2-estimation-system.rst
+#: eb489cc76b074d8b9749790d5af0ca66
+msgid "EKF2 - hagl and range"
+msgstr "EKF2 - 离地高度与测距"
+
+#: ../../source/docs/ekf2-estimation-system.rst:277
+#: 03b9a1e078884f5e89f122b41147a72f
+msgid ""
+"offset - estimated terrain offset relative to the pressure height origin"
+msgstr "offset - 估计的地形高度偏移（相对于气压高度原点）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:280
+#: ed3b732c47a848968011b2e25fc2639a
+msgid "|EKF2 - offset|"
+msgstr "|EKF2 - 偏移量|"
+
+#: ../../source/docs/ekf2-estimation-system.rst
+#: 518e2efc24ce4fb293e97e77ee7445e2
+msgid "EKF2 - offset"
+msgstr "EKF2 - 偏移量"
+
+#: ../../source/docs/ekf2-estimation-system.rst:282
+#: 23061457f11748bf9158849f89f6fce7
+msgid "RI - Range finder innovation (m)"
+msgstr "RI - 测距仪新息（m）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:284
+#: d395848e3c1544ed898dadd35a9ba7dc
+msgid "|EKF2 - range finder innovations|"
+msgstr "|EKF2 - 测距仪新息|"
+
+#: ../../source/docs/ekf2-estimation-system.rst
+#: 088aa1d576f7461b88a609223a030318
+msgid "EKF2 - range finder innovations"
+msgstr "EKF2 - 测距仪新息"
+
+#: ../../source/docs/ekf2-estimation-system.rst:286
+#: 923dd226840240ef91c46a0b46c5c283
+msgid ""
+"errHAGL - 1-Sigma uncertainty in the terrain height offset estimate (m)"
+msgstr "errHAGL - 地形高度偏移估计的 1σ 不确定度（m）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:289
+#: 646f42b8b9814dc8bfce2b0eb97d9fcd
+msgid "|EKF2 - offset uncertainty|"
+msgstr "|EKF2 - 偏移不确定度|"
+
+#: ../../source/docs/ekf2-estimation-system.rst
+#: 7b4260a16d5d4c00af55c7b4fb9e57e3
+msgid "EKF2 - offset uncertainty"
+msgstr "EKF2 - 偏移不确定度"
+
+#: ../../source/docs/ekf2-estimation-system.rst:292
+#: 2f83823a5f2240c7b02e567ddff7dca2
+msgid "Tuning Parameters"
+msgstr "调参参数"
+
+#: ../../source/docs/ekf2-estimation-system.rst:294
+#: e26299c40ea844c99071e6163b80e198
+msgid ""
+"The EKF2 parameters have been tuned to provide a compromise between accuracy"
+" and robustness to sensor errors. it is likely that further improvements in "
+"performance are available with further tuning."
+msgstr "EKF2 参数已经过调整，以在精度与传感器误差鲁棒性之间取得平衡。通过进一步调整，性能可能还有提升空间。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:298
+#: 0247693bb72e4f3699116e5c1c23d761
+msgid ""
+"If you have a question regarding tuning of the filer, please post `on the "
+"forums <https://discuss.ardupilot.org/>`__ along with your log file and "
+"mention the term EKF2 in your post title."
+msgstr ""
+"如果您有关于滤波器调参的问题，请在 `论坛 <https://discuss.ardupilot.org/>`__ 发帖，附上日志文件，并在标题中提及 "
+"EKF2。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:301
+#: 93eec4f4b602469d8e13f1279817b0a2
+msgid ""
+"The parameters for the new EKF start with the prefix EK2\\_ and are listed "
+"below"
+msgstr "新 EKF 的参数以前缀 EK2\\_ 开头，列举如下"
+
+#: ../../source/docs/ekf2-estimation-system.rst:304
+#: b6d420f4625941d78fb17f0a413a5194
+msgid "**EK2_ENABLE**"
+msgstr "**EK2_ENABLE**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:306
+#: cfa3f404bbba41a3bd1d987fe55b0ccc
+msgid ""
+"This turns the EKF 2 on and off. Set to 1 to turn on and 0 to turn off. "
+"Turning EKF2 on only makes the calculations run, it does not mean it will be"
+" used for flight control. To use it for flight control set AHRS_EKF_TYPE=2. "
+"A reboot or restart will need to be performed after changing the value of "
+"EK2_ENABLE for it to take effect."
+msgstr ""
+"此参数用于打开或关闭 EKF2。设为 1 打开，设为 0 关闭。打开 EKF2 仅使其运算，并不意味着它会被用于飞行控制。若要在飞行控制中使用，需设置 "
+"AHRS_EKF_TYPE=2。更改 EK2_ENABLE 值后需重启方可生效。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:312
+#: 13502e4278014211bf4055dddb0070d3
+msgid "**EK2_GPS_TYPE**"
+msgstr "**EK2_GPS_TYPE**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:314
+#: 326613939ae844e5914463c3323d61d0
+msgid "This controls the use of GPS measurements :"
+msgstr "此参数控制 GPS 测量的使用方式："
+
+#: ../../source/docs/ekf2-estimation-system.rst:316
+#: aa4f28e9c4dc4512900f2848d87e2d13
+msgid "0 = use 3D velocity & 2D position"
+msgstr "0 = 使用 3D 速度和 2D 位置"
+
+#: ../../source/docs/ekf2-estimation-system.rst:317
+#: 4f1543fe064e4ec48e56f7ae9bd38c08
+msgid "1 = use 2D velocity and 2D position"
+msgstr "1 = 使用 2D 速度和 2D 位置"
+
+#: ../../source/docs/ekf2-estimation-system.rst:318
+#: 6f8b414a56dc4e6284dd2fb83eca7963
+msgid "2 = use 2D position"
+msgstr "2 = 仅使用 2D 位置"
+
+#: ../../source/docs/ekf2-estimation-system.rst:319
+#: df74f300ac544a5392d466e5e042dab9
+msgid "3 = use no GPS (optical flow will be used if available)"
+msgstr "3 = 不使用 GPS（如有光流则使用）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:321
+#: 82c3d500c06a4665ba9ad85866ebcc38
+msgid "**EK2_VELNE_NOISE**"
+msgstr "**EK2_VELNE_NOISE**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:323
+#: dc12d40b3c384e56b9491272c66ac179
+msgid ""
+"This sets a lower limit on the speed accuracy reported by the GPS receiver "
+"that is used to set horizontal velocity observation noise. If the model of "
+"receiver used does not provide a speed accuracy estimate, then the parameter"
+" value will be used. Increasing it reduces the weighting of the GPS "
+"horizontal velocity measurements. It has units of metres/sec"
+msgstr ""
+"此参数设置 GPS 接收机报告的速度精度下限，用于设定水平速度观测噪声。若所用接收机型号不提供速度精度估计，则使用该参数值。增大此值会降低 GPS "
+"水平速度测量的权重。单位为米/秒。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:330
+#: 4200d71c06af451b9d5015cc4ea932e5
+msgid "**EK2_VELD_NOISE**"
+msgstr "**EK2_VELD_NOISE**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:332
+#: bbe8f449e01447f29398b369791525ca
+msgid ""
+"This sets a lower limit on the speed accuracy reported by the GPS receiver "
+"that is used to set verical velocity observation noise in. If the model of "
+"receiver used does not provide a speed accuracy estimate, then the parameter"
+" value will be used. Increasing it reduces the weighting of the GPS vertical"
+" velocity measurements. It has units of metres/sec."
+msgstr ""
+"此参数设置 GPS 接收机报告的速度精度下限，用于设定垂直速度观测噪声。若所用接收机型号不提供速度精度估计，则使用该参数值。增大此值会降低 GPS "
+"垂直速度测量的权重。单位为米/秒。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:339
+#: bd808a9f2c534771a39da8b9d52898d5
+msgid "**EK2_VEL_GATE**"
+msgstr "**EK2_VEL_GATE**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:341
+#: a729e33409ce4985b9a55bdfb8d4fb65
+msgid ""
+"This sets the number of standard deviations applied to the GPS velocity "
+"measurement innovation consistency check. Decreasing it makes it more likely"
+" that good measurements will be rejected. Increasing it makes it more likely"
+" that bad measurements will be accepted."
+msgstr "此参数设置应用于 GPS 速度测量新息一致性检查的标准差数量。减小此值会使正确测量更容易被拒绝。增大此值会使错误测量更容易被接受。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:346
+#: 75dcac5e25f746d19f48fd85ee3c4ec0
+msgid "**EK2_POSNE_NOISE**"
+msgstr "**EK2_POSNE_NOISE**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:348
+#: bdb43c79e7454d689f59830074c4a9ed
+msgid ""
+"This sets the GPS horizontal position observation noise. Increasing it "
+"reduces the weighting of GPS horizontal position measurements. It has units "
+"of metres"
+msgstr "此参数设置 GPS 水平位置观测噪声。增大此值会降低 GPS 水平位置测量的权重。单位为米。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:352
+#: 153a862c017546a1a0371f90286e238c
+msgid "**EK2_POS_GATE**"
+msgstr "**EK2_POS_GATE**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:354
+#: 74d123b54c8d4708a2d43c7ef866cd38
+msgid ""
+"This sets the number of standard deviations applied to the GPS position "
+"measurement innovation consistency check. Decreasing it makes it more likely"
+" that good measurements will be rejected. Increasing it makes it more likely"
+" that bad measurements will be accepted."
+msgstr "此参数设置应用于 GPS 位置测量新息一致性检查的标准差数量。减小此值会使正确测量更容易被拒绝。增大此值会使错误测量更容易被接受。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:359
+#: 5c59aedfd6b6447fa795429a8201df7f
+msgid "**EK2_GLITCH_RAD**"
+msgstr "**EK2_GLITCH_RAD**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:361
+#: 114405d26a8243adad1e16de024a2496
+msgid ""
+"This controls the maximum radial uncertainty in position between the value "
+"predicted by the filter and the value measured by the GPS before the filter "
+"position and velocity states are reset to the GPS. Making this value larger "
+"allows the filter to ignore larger GPS glitches but also means that non-GPS "
+"errors such as IMU and compass can create a larger error in position before "
+"the filter is forced back to the GPS position. It has units of metres."
+msgstr ""
+"此参数控制滤波器预测位置与 GPS 测量位置之间的最大径向不确定度，超出此值时滤波器的位置和速度状态将重置为 GPS 值。增大此值可使滤波器忽略更大的 "
+"GPS 突变，但也意味着 IMU 和罗盘等非 GPS 误差可能在滤波器被迫回归 GPS 位置前产生更大的位置误差。单位为米。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:369
+#: 101ef3e3b2604901b191a1aed2c9dfe4
+msgid "**EK2_GPS_DELAY**"
+msgstr "**EK2_GPS_DELAY**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:371
+#: 91d1575ec46c4ba6b8df1394bcb39ad2
+msgid ""
+"This is the number of msec that the GPS measurements lag behind the inertial"
+" measurements. The maximum delay that can be compensated by the filter is "
+"250 msec."
+msgstr "此参数为 GPS 测量相对于惯性测量的滞后毫秒数。滤波器可补偿的最大延迟为 250 毫秒。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:375
+#: 3871f57ac7e54569bf94d2b88fcb0d17
+msgid "**EK2_ALT_SOURCE**"
+msgstr "**EK2_ALT_SOURCE**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:377
+#: 5f5b622347c64c64bcc1f20b46e31a23
+msgid ""
+"This parameter controls which height sensor is used by the EKF. If the "
+"selected option cannot be used, it will default to Baro as the primary "
+"height source. Setting 0 will use the baro altitude at all times. Setting 1 "
+"uses the range finder and is only available in combination with optical flow"
+" navigation (EK2_GPS_TYPE = 3). Setting 2 uses GPS. When height sources "
+"other than Baro are in use, the offset between the Baro height and EKF "
+"height estimate is continually updated. If a switch to Baro height needs to "
+"be made when the filter is operating, then the  Baro height is corrected for"
+" the learned offset to prevent a sudden step in height estimate."
+msgstr ""
+"此参数控制 EKF 使用的高度传感器。若所选选项不可用，则默认使用气压计作为主高度源。设为 0 始终使用气压计高度。设为 1 "
+"使用测距仪，仅可与光流导航结合使用（EK2_GPS_TYPE = 3）。设为 2 使用 GPS。使用非气压计高度源时，气压计高度与 EKF "
+"高度估计之间的偏差会持续更新。若在滤波器运行时需要切换回气压计高度，则气压计高度将根据已学偏差进行修正，以防高度估计出现突变。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:388
+#: 35d111ea52484b4abc5f6dc8445a6b7d
+msgid "**EK2_ALT_NOISE**"
+msgstr "**EK2_ALT_NOISE**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:390
+#: 0e3db8272eea4983a06d57db4c6dcb13
+msgid ""
+"This is the RMS value of noise in the altitude measurement. Increasing it "
+"reduces the weighting of the baro measurement and will make the filter "
+"respond more slowly to baro measurement errors, but will make it more "
+"sensitive to GPS and accelerometer errors.  It has units of metres."
+msgstr ""
+"此参数为高度测量噪声的均方根值。增大此值会降低气压计测量的权重，使滤波器对气压计误差的响应更慢，但对 GPS 和加速度计误差更敏感。单位为米。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:395
+#: 271ca8f9a8f24f34b4b0b70f6e84b032
+msgid "**EK2_HGT_I_GATE**"
+msgstr "**EK2_HGT_I_GATE**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:397
+#: d23440c73d6f492bbf5023f65e701e60
+msgid ""
+"This sets the number of standard deviations applied to the height "
+"measurement innovation consistency check. Decreasing it makes it more likely"
+" that good measurements will be rejected. Increasing it makes it more likely"
+" that bad measurements will be accepted."
+msgstr "此参数设置应用于高度测量新息一致性检查的标准差数量。减小此值会使正确测量更容易被拒绝。增大此值会使错误测量更容易被接受。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:402
+#: 7934693996fb4b87bf931ae59d1e3576
+msgid "**EK2_HGT_DELAY**"
+msgstr "**EK2_HGT_DELAY**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:404
+#: 7fe89c6d0da44f408a6d627ca3c8fd91
+msgid ""
+"This is the number of msec that the height measurements lag behind the "
+"inertial measurements. The maximum delay that can be compensated by the "
+"filter is 250 msec."
+msgstr "此参数为高度测量相对于惯性测量的滞后毫秒数。滤波器可补偿的最大延迟为 250 毫秒。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:408
+#: c7aea264e31e40b4b12f29ec3343a3a0
+msgid "**EK2_MAG_NOISE**"
+msgstr "**EK2_MAG_NOISE**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:410
+#: 2da8875ec2bb49069b3176b1f556dd49
+msgid ""
+"This is the RMS value of noise in magnetometer measurements. Increasing it "
+"reduces the weighting on these measurements. It has units of mGauss."
+msgstr "此参数为磁力计测量噪声的均方根值。增大此值会降低这些测量的权重。单位为毫高斯。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:413
+#: 707bbf3e458b46f38a7b201da6153d1f
+msgid "**EK2_MAG_CAL**"
+msgstr "**EK2_MAG_CAL**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:415
+#: 031ab0a176ba4d2c9b1567f8b81aa7be
+msgid ""
+"This determines when the filter will use the 3-axis magnetometer fusion "
+"model that estimates both earth and body fixed magnetic field states. This "
+"model is only suitable for use when the external magnetic field environment "
+"is stable."
+msgstr "此参数决定滤波器何时使用三轴磁力计融合模型来估计地球磁场状态和机体固定磁场状态。该模型仅适用于外部磁场环境稳定的情况。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:420
+#: c097ffd36b3f417cb3db457888c8c80a
+msgid ""
+"EKF_MAG_CAL = 0 enables calibration when airborne and is the default setting"
+" for Plane users."
+msgstr "EKF_MAG_CAL = 0 在空中时启用校准，是 Plane 用户的默认设置。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:422
+#: 94dd73353f084316a73e333693eaff9d
+msgid "EKF_MAG_CAL = 1 enables calibration when manoeuvreing."
+msgstr "EKF_MAG_CAL = 1 在机动时启用校准。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:423
+#: 794a9872da9b4bc08e065f762b67bf16
+msgid ""
+"EKF_MAG_CAL = 2 prevents magnetometer calibration regardless of flight "
+"condition, is recommended if the external magnetic field is varying and is "
+"the default for rovers."
+msgstr "EKF_MAG_CAL = 2 无论飞行条件如何，禁止磁力计校准，当外部磁场变化时推荐使用，是 Rover 的默认设置。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:426
+#: 38939b9072e0447fb84832e70955896c
+msgid ""
+"EKF_MAG_CAL = 3 enables calibration when the first in-air field and yaw "
+"reset has completed and is the default for copters."
+msgstr "EKF_MAG_CAL = 3 在首次飞行磁场和偏航重置完成后启用校准，是 Copter 的默认设置。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:428
+#: 4f363c766c5742d1b429d73e40ffc99e
+msgid "EKF_MAG_CAL = 4 enables calibration all the time."
+msgstr "EKF_MAG_CAL = 4 始终启用校准。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:430
+#: d99b2cbc776d4cb4bab0b433786fbaed
+msgid "**EK2_MAG_GATE**"
+msgstr "**EK2_MAG_GATE**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:432
+#: 7ea9a34bf2244d8b981811c104b45a5a
+msgid ""
+"This parameter sets the number of standard deviations applied to the "
+"magnetometer measurement innovation consistency check. Decreasing it makes "
+"it more likely that good measurements will be rejected. Increasing it makes "
+"it more likely that bad measurements will be accepted."
+msgstr "此参数设置应用于磁力计测量新息一致性检查的标准差数量。减小此值会使正确测量更容易被拒绝。增大此值会使错误测量更容易被接受。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:437
+#: 9a8ded16afdd4eb3967e04b9552d1365
+msgid "**EK2_EAS_NOISE**"
+msgstr "**EK2_EAS_NOISE**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:439
+#: 584160e7492647ee9ffde46004be8fdf
+msgid ""
+"This is the RMS value of noise in equivalent airspeed measurements used by "
+"planes. Increasing it reduces the weighting of airspeed measurements and "
+"will make wind speed estimates less noisy and slower to converge. Increasing"
+" also increases navigation errors when dead-reckoning without GPS "
+"measurements. It has units of metres/sec."
+msgstr ""
+"此参数为飞机使用的等效空速测量噪声的均方根值。增大此值会降低空速测量的权重，使风速估计噪声更小、收敛更慢。增大此值还会在没有 GPS "
+"测量时增加航位推算导航误差。单位为米/秒。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:445
+#: 19268e8d01954ea98a1fb494c970dcd6
+msgid "**EK2_EAS_GATE**"
+msgstr "**EK2_EAS_GATE**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:447
+#: 2553c88d48ae4cbaa77cc2c6640b7fe8
+msgid ""
+"This sets the number of standard deviations applied to the airspeed "
+"measurement innovation consistency check. Decreasing it makes it more likely"
+" that good measurements will be rejected. Increasing it makes it more likely"
+" that bad measurements will be accepted."
+msgstr "此参数设置应用于空速测量新息一致性检查的标准差数量。减小此值会使正确测量更容易被拒绝。增大此值会使错误测量更容易被接受。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:452
+#: e61adee027e041639bd191934d388b8e
+msgid "**EK2_RNG_NOISE**"
+msgstr "**EK2_RNG_NOISE**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:454
+#: d0f0ed515746477eb96776449728b385
+msgid ""
+"This is the RMS value of noise in the range finder measurement. Increasing "
+"it reduces the weighting on this measurement. It has units of metres."
+msgstr "此参数为测距仪测量噪声的均方根值。增大此值会降低该测量的权重。单位为米。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:458
+#: 070820ca59b145b3a745c285b2129db1
+msgid "**EK2_RNG_GATE**"
+msgstr "**EK2_RNG_GATE**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:460
+#: 41cd6c3eadbe434dbebe5f66e5116e8f
+msgid ""
+"This sets the number of standard deviations applied to the range finder "
+"innovation consistency check. Decreasing it makes it more likely that good "
+"measurements will be rejected. Increasing it makes it more likely that bad "
+"measurements will be accepted."
+msgstr "此参数设置应用于测距仪新息一致性检查的标准差数量。减小此值会使正确测量更容易被拒绝。增大此值会使错误测量更容易被接受。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:465
+#: 4a281e317a5546c8bdc03e87608f942c
+msgid "**EK2_MAX_FLOW**"
+msgstr "**EK2_MAX_FLOW**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:467
+#: fac23e68b76244fa9ec6bacf72339b59
+msgid ""
+"This parameter sets the magnitude maximum optical flow rate in that will be "
+"accepted by the filter. It has units of rad/sec."
+msgstr "此参数设置滤波器可接受的最大光流速率幅值。单位为弧度/秒。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:470
+#: 430a10d9a3f741669de60927865ae970
+msgid "**EK2_FLOW_NOISE**"
+msgstr "**EK2_FLOW_NOISE**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:472
+#: 2cc707c0af3949ab88872f9098392684
+msgid ""
+"This is the RMS value of noise and errors in optical flow measurements. "
+"Increasing it reduces the weighting on these measurements. It has units of "
+"rad/sec."
+msgstr "此参数为光流测量噪声与误差的均方根值。增大此值会降低这些测量的权重。单位为弧度/秒。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:476
+#: 4d1aa62a4d6c4528b5ced9cf61dc194a
+msgid "**EK2_FLOW_GATE**"
+msgstr "**EK2_FLOW_GATE**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:478
+#: 1f8edee98ef743cab7bd6806dc8e4e5c
+msgid ""
+"This sets the number of standard deviations applied to the optical flow "
+"innovation consistency check. Decreasing it makes it more likely that good "
+"measurements will be rejected. Increasing it makes it more likely that bad "
+"measurements will be accepted."
+msgstr "此参数设置应用于光流新息一致性检查的标准差数量。减小此值会使正确测量更容易被拒绝。增大此值会使错误测量更容易被接受。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:483
+#: 2e05129f69ee4c7496e4235a7aa538cd
+msgid "**EK2_FLOW_DELAY**"
+msgstr "**EK2_FLOW_DELAY**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:485
+#: b8e2181add4a4950928ede7190ee2e8b
+msgid ""
+"This is the number of msec that the optical flow measurements lag behind the"
+" inertial measurements. It is the time from the end of the optical flow "
+"averaging period and does not include the time delay due to the 100msec of "
+"averaging within the flow sensor."
+msgstr "此参数为光流测量相对于惯性测量的滞后毫秒数。计时从光流平均周期结束时开始，不包含光流传感器内部 100 毫秒平均时延。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:490
+#: 142d51202d8845cf97743d8a0bc1fead
+msgid "**EK2_GYRO_PNOISE**"
+msgstr "**EK2_GYRO_PNOISE**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:492
+#: 3f0b0e40c3d04afab6ac33091a75f3c8
+msgid ""
+"This control disturbance noise controls the growth of estimated error due to"
+" gyro measurement errors excluding bias. Increasing it makes the filter "
+"trust the gyro measurements less and other measurements more. It has units "
+"of rad/sec."
+msgstr ""
+"该扰动噪声控制由陀螺仪测量误差（不含偏置）引起的估计误差增长速度。增大此值会使滤波器对陀螺仪测量的信任度降低，对其他测量的信任度提高。单位为弧度/秒。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:497
+#: ae5fc741b9fc4d82a7d8f71a159ea9f4
+msgid "**EK2_ACC_PNOISE**"
+msgstr "**EK2_ACC_PNOISE**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:499
+#: 8d7aaab23836448b97fd0044d42fb2fd
+msgid ""
+"This control disturbance noise controls the growth of estimated error due to"
+" accelerometer measurement errors excluding bias. Increasing it makes the "
+"filter trust the accelerometer measurements less and other measurements "
+"more. It has units of metres/sec/sec."
+msgstr ""
+"该扰动噪声控制由加速度计测量误差（不含偏置）引起的估计误差增长速度。增大此值会使滤波器对加速度计测量的信任度降低，对其他测量的信任度提高。单位为米/秒²。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:504
+#: da1613f6e332418a9cbbd47e28aee70d
+msgid "**EK2_GBIAS_PNOISE**"
+msgstr "**EK2_GBIAS_PNOISE**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:506
+#: 011402f77de64183b4b4d80ddc04cff3
+msgid ""
+"This state process noise controls the growth of the gyro delta angle bias "
+"state error estimates. Increasing it makes rate gyro bias estimation faster "
+"and noisier. It has units of rad/sec."
+msgstr "该状态过程噪声控制陀螺仪增量角偏置状态误差估计的增长速度。增大此值会使角速率陀螺仪偏置估计更快但噪声更大。单位为弧度/秒。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:510
+#: d8d0792ed0814f51b6dd76b64c35d354
+msgid "**EKF2_GSCL_PNOISE**"
+msgstr "**EKF2_GSCL_PNOISE**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:512
+#: 48ab612f694349bea92e18399001f0e0
+msgid ""
+"This state process noise controls the rate of gyro scale factor learning. "
+"Increasing it makes rate gyro scale factor estimation faster and noisier."
+msgstr "该状态过程噪声控制陀螺仪比例因子的学习速率。增大此值会使角速率陀螺仪比例因子估计更快但噪声更大。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:516
+#: 472ebe036cb24642920a3ee16f996a93
+msgid "**EK2_ABIAS_PNOISE**"
+msgstr "**EK2_ABIAS_PNOISE**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:518
+#: 92c41f182017466d9ae3b438fa399fe5
+msgid ""
+"This state process noise controls the growth of the vertical accelerometer "
+"delta velocity bias state error estimate. Increasing it makes accelerometer "
+"bias estimation faster and noisier. It has units of metres/sec/sec."
+msgstr "该状态过程噪声控制垂直加速度计增量速度偏置状态误差估计的增长速度。增大此值会使加速度计偏置估计更快但噪声更大。单位为米/秒²。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:523
+#: be6eb6cda59b46c1aee686918e30bddf
+msgid "**EK2_MAG_PNOISE**"
+msgstr "**EK2_MAG_PNOISE**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:525
+#: 2b4c17bbe5d349c6bd0b35c93aeb10f5
+msgid ""
+"This state process noise controls the growth of magnetic field state error "
+"estimates. Increasing it makes magnetic field bias estimation faster and "
+"noisier. It has units of Gauss/sec."
+msgstr "该状态过程噪声控制磁场状态误差估计的增长速度。增大此值会使磁场偏置估计更快但噪声更大。单位为高斯/秒。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:529
+#: 77c59a5bfd2545179b67724f7e715855
+msgid "**EK2_WIND_PNOISE**"
+msgstr "**EK2_WIND_PNOISE**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:531
+#: f453def534e34ee294eea155b0100c2f
+msgid ""
+"This state process noise controls the growth of wind state error estimates. "
+"Increasing it makes wind estimation faster and noisier. It has units of "
+"metres/sec/sec"
+msgstr "该状态过程噪声控制风速状态误差估计的增长速度。增大此值会使风速估计更快但噪声更大。单位为米/秒²。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:535
+#: 3b1909058af04653b2631fd012f623d6
+msgid "**EK2_WIND_PSCALE**"
+msgstr "**EK2_WIND_PSCALE**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:537
+#: aa315761f6a541e5a723a2723d9e5b19
+msgid ""
+"This controls how much the process noise on the wind states is increased "
+"when gaining or losing altitude to take into account changes in wind speed "
+"and direction with altitude. Increasing this parameter increases how rapidly"
+" the wind states adapt when changing altitude, but does make wind velocity "
+"estimates noisier."
+msgstr ""
+"此参数控制在高度变化时风速状态过程噪声的增量幅度，以反映不同高度的风速和风向变化。增大此参数会使风速状态在高度变化时适应更快，但也会使风速估计噪声更大。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:543
+#: af60e5e114f545ed86e3bf923a334730
+msgid "**EK2_GPS_CHECK**"
+msgstr "**EK2_GPS_CHECK**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:545
+#: 9189aff65dc24f63be2099741340767c
+msgid ""
+"This is a 1 byte bitmap controlling which GPS preflight checks are "
+"performed. Set to 0 to bypass all checks. Set to 255 perform all checks. Set"
+" to 3 to check just the number of satellites and HDoP. Set to 31 for the "
+"most rigorous checks that will still allow checks to pass when the copter is"
+" moving, eg launch from a boat. Setting a 1 in the following bit locations "
+"causes the corresponding checks to be performed."
+msgstr ""
+"这是一个 1 字节的位掩码，控制执行哪些 GPS 预飞行检查。设为 0 跳过所有检查，设为 255 执行所有检查，设为 3 仅检查卫星数量和 "
+"HDoP，设为 31 进行最严格的检查（仍允许在飞行器移动时通过，例如从船上起飞）。在以下位位置设置 1 将执行对应检查。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:552
+#: 9f8f2c0f32064c9f8d74a34ac487504f
+msgid "0: The receivers reported number of satellites must be >= 6"
+msgstr "0：接收机报告的卫星数量必须 >= 6"
+
+#: ../../source/docs/ekf2-estimation-system.rst:554
+#: dfbb8538cf624c5aa57f9b2c5aec5475
+msgid "1: The receivers reported HDoP must be >=2.5"
+msgstr "1：接收机报告的 HDoP 必须 >= 2.5"
+
+#: ../../source/docs/ekf2-estimation-system.rst:556
+#: 0e3a7b5f6202447eac29aafbff6c0f95
+msgid ""
+"2: The receivers reported speed accuracy must be less than1.0 metres/sec (if"
+" available)"
+msgstr "2：接收机报告的速度精度必须小于 1.0 米/秒（如可用）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:559
+#: c2b3c8da9ee4400c933af98534f4b9bf
+msgid ""
+"3: The receivers reported horizontal position accuracy must be less than 5.0"
+" metres (if available)"
+msgstr "3：接收机报告的水平位置精度必须小于 5.0 米（如可用）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:562
+#: b5cbaf80014445daae29bf7b431606d4
+msgid ""
+"4: The EKF2 magnetometer or compass innovation consistency checks must be "
+"passing. If these checks are failing, then the yaw estimate is unreliable"
+msgstr "4：EKF2 磁力计或罗盘新息一致性检查必须通过。若这些检查失败，则偏航估计不可靠"
+
+#: ../../source/docs/ekf2-estimation-system.rst:566
+#: 00e9c4fbe36144b78e9722bf78bd6180
+msgid ""
+"5: The rate of drift in the receivers reported horizontal position must be "
+"less than 0.3 metres/sec"
+msgstr "5：接收机报告的水平位置漂移速率必须小于 0.3 米/秒"
+
+#: ../../source/docs/ekf2-estimation-system.rst:569
+#: cd4d8b2ebe1343538d2eead7cfccd986
+msgid ""
+"6: The receivers reported vertical speed after filtering must be less than "
+"0.3 metres/sec"
+msgstr "6：接收机报告的垂直速度（经滤波）必须小于 0.3 米/秒"
+
+#: ../../source/docs/ekf2-estimation-system.rst:572
+#: 3cc7820b956a4e8cb2ad213b764744b1
+msgid ""
+"7: The receivers reported horizontal speed after filtering must be less than"
+" 0.3 metres/sec."
+msgstr "7：接收机报告的水平速度（经滤波）必须小于 0.3 米/秒。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:575
+#: c3d1c86509984303a9c22c1a56e11020
+msgid ""
+"Note: An unbroken pass on all selected checks for 10 seconds is required for"
+" the EKF2 to set its origin and start using GPS."
+msgstr "注意：所有选定检查需连续通过 10 秒，EKF2 才会设定原点并开始使用 GPS。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:578
+#: fea37d15aa984081ac7921b734be3a18
+msgid ""
+"Note: The accuracy required for checks 2, 3, 5, 6 and 7 can be adjusted "
+"using the EK2_CHECK_SCALE parameter."
+msgstr "注意：检查 2、3、5、6 和 7 所需的精度可通过 EK2_CHECK_SCALE 参数调整。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:581
+#: b06ea3a73acc4a1e98c8c999de0fd0e6
+msgid "**EK2_CHECK_SCALE**"
+msgstr "**EK2_CHECK_SCALE**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:583
+#: f1875c34aab74f498b0b9ae435cbc866
+msgid ""
+"This is a percentage scaler applied to the thresholds that are used to check"
+" GPS accuracy before it is used by the EKF. Values greater than 100 increase"
+" and values less than 100 reduce the maximum GPS error the EKF will accept. "
+"This modifies the checks enabled by bits 2, 3, 5, 6 and 7 in the "
+"EK2_GPS_CHECK parameter."
+msgstr ""
+"这是一个百分比缩放系数，应用于 EKF 使用 GPS 之前检查 GPS 精度所用的阈值。大于 100 的值会增大 EKF 可接受的最大 GPS "
+"误差，小于 100 的值则减小。此参数修改 EK2_GPS_CHECK 参数中位 2、3、5、6 和 7 所启用的检查。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:589
+#: 9627028d07a04d848fafdd197e18f873
+msgid "**EK2_IMU_MASK**"
+msgstr "**EK2_IMU_MASK**"
+
+#: ../../source/docs/ekf2-estimation-system.rst:591
+#: edcc11db0edc462b856aed9959152485
+msgid ""
+"This is a 1 byte bitmap controlling which IMUs will be used by EKF2. A "
+"separate instance of EKF2 will be started for each IMU selected."
+msgstr "这是一个 1 字节的位掩码，控制 EKF2 将使用哪些 IMU。每个选定的 IMU 都会单独启动一个 EKF2 实例。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:594
+#: dab954e3d4a34147be1a1ed79607aa41
+msgid "Set to 1 to use the first IMU only (default)"
+msgstr "设为 1 仅使用第一个 IMU（默认）"
+
+#: ../../source/docs/ekf2-estimation-system.rst:595
+#: 6680e7f7c457412ca27677ddf71468eb
+msgid "Set to 2 to use the second IMU only"
+msgstr "设为 2 仅使用第二个 IMU"
+
+#: ../../source/docs/ekf2-estimation-system.rst:596
+#: ba18aea9e75e42cc83cb56eb61a35b97
+msgid "Set to 3 to use the first and second IMU."
+msgstr "设为 3 同时使用第一和第二个 IMU。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:598
+#: 7d1214e85b664e1dbb9fe8c09728864c
+msgid ""
+"Additional IMU's up to a maximum of 6 can be used if memory and processing "
+"resources permit. There may be insufficient memory and processing resources "
+"to run multiple instances. If this occurs EKF2 will fail to start and the "
+"following message will be sent to the GCS console."
+msgstr ""
+"在内存和处理资源允许的情况下，最多可使用 6 个 IMU。若内存和处理资源不足以运行多个实例，EKF2 将无法启动，并向地面站控制台发送以下消息。"
+
+#: ../../source/docs/ekf2-estimation-system.rst:607
+#: d653154f95f944d58c50614ed2993273
+msgid ""
+"If terrain data is not being used, some additional memory can be released by"
+" setting TERRAIN_ENABLE=0 and rebooting."
+msgstr "如果不使用地形数据，可通过设置 TERRAIN_ENABLE=0 并重启来释放一些额外内存。"

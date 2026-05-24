@@ -1,0 +1,282 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/code-overview-adding-a-new-mavlink-message.rst:5
+#: aeb097bf1bfc4fef8365bf974860225d
+msgid "Adding a new MAVLink Message"
+msgstr "添加新的 MAVLink 消息"
+
+#: ../../source/docs/code-overview-adding-a-new-mavlink-message.rst:7
+#: 2d78d735720b41128de6686c933a564b
+msgid ""
+"Data and commands are passed between the ground station (i.e. Mission "
+"Planner, QGroundControl, MAVProxy, etc.) using the `MAVLink protocol "
+"<https://mavlink.io/en/>`__ over a serial interface. This page provides some"
+" high-level advice for adding a new MAVLink message."
+msgstr ""
+"数据和命令通过串行接口使用 `MAVLink 协议 <https://mavlink.io/en/>`__ 在地面站（即 Mission "
+"Planner、QGroundControl、MAVProxy 等）与飞行器之间传递。本页提供了添加新 MAVLink 消息的一些高层次建议。"
+
+#: ../../source/docs/code-overview-adding-a-new-mavlink-message.rst:11
+#: 22ab0cdf7c4043b88f088b5b3cf83e7c
+msgid ""
+"These instructions have only been tested on Linux (to be precise a VM "
+"running Ubuntu on a Windows machine). Instructions for setting up a VM are "
+"on the :ref:`SITL page <setting-up-sitl-on-windows>`. If you can run SITL, "
+"you should be able to follow the advice here. These instructions will not "
+"run natively on Windows or a Mac."
+msgstr ""
+"这些说明仅在 Linux 上测试过（准确地说是在 Windows 机器上运行 Ubuntu 的虚拟机）。设置虚拟机的说明在 "
+":ref:`SITL（软件在环仿真）页面 <setting-up-sitl-on-windows>` 上。如果您可以运行 "
+"SITL（软件在环仿真），应该能够按照此处的建议操作。这些说明在 Windows 或 Mac 上无法原生运行。"
+
+#: ../../source/docs/code-overview-adding-a-new-mavlink-message.rst:17
+#: 60ce0c04fda34aeb9d03b14eb0517483
+msgid ""
+"**Step #1:** Ensure you have the latest ArduPilot code installed. Also, "
+"check mavproxy. Mavproxy can be updated by running this command in a "
+"Terminal window:"
+msgstr ""
+"**第 1 步：** 确保您已安装最新的 ArduPilot 代码。同时检查 mavproxy。可以通过在终端窗口中运行以下命令来更新 "
+"mavproxy："
+
+#: ../../source/docs/code-overview-adding-a-new-mavlink-message.rst:25
+#: 0df723235a9749c1b0b94a22baaeb6e5
+msgid ""
+"**Step #2:** Decide what type of message you want to add and how it will fit"
+" in with the existing `MAVLink messages <https://mavlink.io/en/>`__."
+msgstr ""
+"**第 2 步：** 决定要添加什么类型的消息，以及它如何与现有 `MAVLink 消息 <https://mavlink.io/en/>`__ 配合。"
+
+#: ../../source/docs/code-overview-adding-a-new-mavlink-message.rst:29
+#: 4660d262b5c84a368bb5050df8d61300
+msgid ""
+"For example, you might want to send a new navigation command to the vehicle "
+"so that it can perform a trick (like a flip) in the middle of a mission "
+"(i.e. in AUTO mode).  In this case, you would need a new MAV_CMD_NAV_TRICK "
+"similar to the `MAV_CMD_NAV_WAYPOINT "
+"<https://mavlink.io/en/messages/common.html#MAV_CMD_NAV_WAYPOINT>`__  "
+"definition (search for \"MAV_CMD_NAV_WAYPOINT\" in the \\ `MAVLink messages "
+"<https://mavlink.io/en/messages/common.html>`__ page)."
+msgstr ""
+"例如，您可能想向飞行器发送新的导航命令，让它在任务中间（即在 Auto 模式下）执行特技（如翻转）。在这种情况下，您需要一个类似于 "
+"`MAV_CMD_NAV_WAYPOINT "
+"<https://mavlink.io/en/messages/common.html#MAV_CMD_NAV_WAYPOINT>`__ 定义的新 "
+"MAV_CMD_NAV_TRICK（在 `MAVLink 消息 "
+"<https://mavlink.io/en/messages/common.html>`__ "
+"页面中搜索「MAV_CMD_NAV_WAYPOINT」）。"
+
+#: ../../source/docs/code-overview-adding-a-new-mavlink-message.rst:35
+#: fefd38bb863f478e843fe99205898105
+msgid ""
+"Alternatively, you may want to send down a new type of sensor data from the "
+"vehicle to the ground station.  Perhaps similar to the `SCALED_PRESSURE "
+"<https://mavlink.io/en/messages/common.html#SCALED_PRESSURE>`__ message."
+msgstr ""
+"或者，您可能想从飞行器向地面站发送新类型的传感器数据，类似于 `SCALED_PRESSURE "
+"<https://mavlink.io/en/messages/common.html#SCALED_PRESSURE>`__ 消息。"
+
+#: ../../source/docs/code-overview-adding-a-new-mavlink-message.rst:40
+#: 476996b317dd479dbb496c0516042f20
+msgid ""
+"**Step #3:** Add the new message definition to the `common.xml "
+"<https://github.com/ArduPilot/mavlink/blob/master/message_definitions/v1.0/common.xml>`__"
+" or `ardupilotmega.xml "
+"<https://github.com/ArduPilot/mavlink/blob/master/message_definitions/v1.0/ardupilotmega.xml>`__"
+" file in the MAVLink submodule."
+msgstr ""
+"**第 3 步：** 将新消息定义添加到 MAVLink 子模块中的 `common.xml "
+"<https://github.com/ArduPilot/mavlink/blob/master/message_definitions/v1.0/common.xml>`__"
+" 或 `ardupilotmega.xml "
+"<https://github.com/ArduPilot/mavlink/blob/master/message_definitions/v1.0/ardupilotmega.xml>`__"
+" 文件。"
+
+#: ../../source/docs/code-overview-adding-a-new-mavlink-message.rst:46
+#: 006e91d808ed4c2d8ccd7c5e2f0e2a0f
+msgid ""
+"If this command is generally useful, and will hopefully be added to the "
+"MAVLink protocol, then it should be added to the "
+"../modules/mavlink/message_definitions/v1.0/common.xml file. If it is only "
+"for your personal use or only applicable to ArduPilot, then it should be "
+"added to the ardupilotmega.xml file."
+msgstr ""
+"如果此命令普遍有用，有望被添加到 MAVLink 协议，则应将其添加到 "
+"../modules/mavlink/message_definitions/v1.0/common.xml 文件。如果仅供个人使用或仅适用于 "
+"ArduPilot，则应添加到 ardupilotmega.xml 文件。"
+
+#: ../../source/docs/code-overview-adding-a-new-mavlink-message.rst:51
+#: 315a914cd98d4963a2328eeab1bfcb16
+msgid ""
+"**Step #4:** Add functions to the main vehicle code to handle sending or "
+"receiving the command to/from the ground station. A compile will be needed "
+"(ie. ./waf copter) to generate the MAVLink packet code so make sure to do "
+"that after editing the XML file. The MAVLink generation happens first, so it"
+" doesn't matter if the project compilation is successful or not due to other"
+" source code changes."
+msgstr ""
+"**第 4 步：** 在主飞行器代码中添加函数以处理向地面站发送或从地面站接收命令。需要进行编译（即 ./waf copter）以生成 MAVLink "
+"数据包代码，因此确保在编辑 XML 文件后执行此操作。MAVLink 生成先于项目编译，因此不管其他源代码更改是否导致项目编译成功，这一步都没有影响。"
+
+#: ../../source/docs/code-overview-adding-a-new-mavlink-message.rst:53
+#: 9b1c2a4794434da6bfbae5dd984e2429
+msgid ""
+"The top-level of this code will most likely be in the vehicle's "
+"GCS_MAVLink_<vehicle>.cpp file (`GCS_MAVLink_Copter.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/GCS_MAVLink_Copter.cpp>`__"
+" for ArduCopter) or in the `../libraries/GCS_MAVLink/GCS "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/GCS_MAVLink/GCS.h>`__"
+" class."
+msgstr ""
+"此代码的顶层最可能位于飞行器的 GCS_MAVLink_<vehicle>.cpp 文件（ArduCopter 的 "
+"`GCS_MAVLink_Copter.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/GCS_MAVLink_Copter.cpp>`__）或"
+" `../libraries/GCS_MAVLink/GCS "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/GCS_MAVLink/GCS.h>`__"
+" 类中。"
+
+#: ../../source/docs/code-overview-adding-a-new-mavlink-message.rst:59
+#: a61c7c42450746de954cb755b1cb290e
+msgid ""
+"In the first example where we want to add support for a new navigation "
+"command (i.e., a trick) the following would be required:"
+msgstr "在第一个示例中，我们想要添加对新导航命令（即特技）的支持，需要以下内容："
+
+#: ../../source/docs/code-overview-adding-a-new-mavlink-message.rst:62
+#: edbbe93abfc04b8ebac901d9e455c85e
+msgid ""
+"Extend the `AP_Mission "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Mission>`__"
+" library's ``mission_cmd_to_mavlink()`` and ``mavlink_to_mission_cmd()`` "
+"functions to convert the MAVProxy command into an "
+"AP_Mission::Mission_Command structure."
+msgstr ""
+"扩展 `AP_Mission "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Mission>`__"
+" 库的 ``mission_cmd_to_mavlink()`` 和 ``mavlink_to_mission_cmd()`` 函数，将 "
+"MAVProxy 命令转换为 AP_Mission::Mission_Command 结构体。"
+
+#: ../../source/docs/code-overview-adding-a-new-mavlink-message.rst:67
+#: fa485615158e436c9e6428eff72781ea
+msgid ""
+"Add a new case to the vehicle's commands_logic.cpp 's (`mode_auto.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/mode_auto.cpp>`__"
+" for ArduCopter) ``start_command()`` and ``verify_command()`` functions to "
+"check for the arrival of the new ``MAV_CMD_NAV_TRICK``. These should call "
+"two new functions that you create called ``do_trick()`` and "
+"``verify_trick()`` (see below)."
+msgstr ""
+"在飞行器的 commands_logic.cpp（ArduCopter 的 `mode_auto.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/mode_auto.cpp>`__）的"
+" ``start_command()`` 和 ``verify_command()`` 函数中添加新 case，以检查新 "
+"``MAV_CMD_NAV_TRICK`` 的到达。这些应调用您创建的两个新函数 ``do_trick()`` 和 "
+"``verify_trick()``（见下文）。"
+
+#: ../../source/docs/code-overview-adding-a-new-mavlink-message.rst:73
+#: df729e757e514a3a89249c0cec8d235f
+msgid ""
+"Create these two new functions,  do_trick() and verify_trick(), that somehow"
+" command the vehicle *to perform the trick* (perhaps by calling another "
+"function in control_auto.cpp (`mode_auto.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/mode_auto.cpp>`__"
+" for ArduCopter) that sets the auto_mode variable and then calls a new "
+"``auto_trick_start()`` function).  The ``do_trick()`` function will be "
+"called when the command is first invoked.  The ``verify_trick()`` will be "
+"called at 10hz (or higher) repeatedly until the trick is complete.  The "
+"``verify_trick()`` function should return true when the trick has been "
+"completed."
+msgstr ""
+"创建这两个新函数 do_trick() 和 verify_trick()，以某种方式命令飞行器*执行特技*（也许通过调用 "
+"control_auto.cpp（ArduCopter 的 `mode_auto.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/mode_auto.cpp>`__）中的另一个函数来设置"
+" auto_mode 变量，然后调用新的 ``auto_trick_start()`` 函数）。``do_trick()`` "
+"函数在命令首次调用时被调用。``verify_trick()`` 将以 "
+"10Hz（或更高）的频率重复调用，直到特技完成。``verify_trick()`` 函数应在特技完成时返回 true。"
+
+#: ../../source/docs/code-overview-adding-a-new-mavlink-message.rst:84
+#: b9ef5cc51d7648129c468075402ff7b0
+msgid ""
+"**Step #5:** Decide how you are going to handle the message at the GCS. One "
+"of the simplest ways is to use Mavproxy. MavProxy uses pymavlink to define "
+"the MAVLink messages, so you will need to rebuild pymavlink to include your "
+"custom message."
+msgstr ""
+"**第 5 步：** 决定如何在地面站处理消息。最简单的方式之一是使用 MAVProxy。MAVProxy 使用 pymavlink 来定义 "
+"MAVLink 消息，因此您需要重新构建 pymavlink 以包含您的自定义消息。"
+
+#: ../../source/docs/code-overview-adding-a-new-mavlink-message.rst:88
+#: 7b5aecf7858c47678b50469694f7b016
+msgid ""
+"Remove the currently installed version of pymavlink. ``pip uninstall "
+"pymavlink``"
+msgstr "卸载当前安装的 pymavlink 版本。``pip uninstall pymavlink``"
+
+#: ../../source/docs/code-overview-adding-a-new-mavlink-message.rst:89
+#: 94c95a918be1437ead789103c563c3e7
+msgid ""
+"Install the updated version. CD to ``ardupilot/modules/mavlink/pymavlink`` "
+"and run ``python3 setup.py install --user``"
+msgstr ""
+"安装更新版本。进入 ``ardupilot/modules/mavlink/pymavlink`` 目录并运行 ``python3 setup.py "
+"install --user``"
+
+#: ../../source/docs/code-overview-adding-a-new-mavlink-message.rst:91
+#: b537580dce774dfa9a2912f744832197
+msgid ""
+"Mavproxy is now capable of sending or receiving the new message. To ask it "
+"to print out or send your message you need to implement a module. Modules "
+"are python plugins that allow you to add functionality to Mavproxy. By "
+"default on Ubuntu they are located in ``/usr/local/lib/python2.7/dist-"
+"packages/MAVProxy/modules/``. Here is an example of a module that prints the"
+" contents of a MY_CUSTOM_PACKET message. Look at the other modules for "
+"examples on how to trigger sending of messages using the command line "
+"interface."
+msgstr ""
+"MAVProxy 现在可以发送或接收新消息。要让它打印或发送您的消息，您需要实现一个模块。模块是 Python 插件，允许您向 MAVProxy "
+"添加功能。在 Ubuntu 上，它们默认位于 ``/usr/local/lib/python2.7/dist-"
+"packages/MAVProxy/modules/`` 中。这里有一个打印 MY_CUSTOM_PACKET "
+"消息内容的模块示例。请查看其他模块，了解如何使用命令行界面触发消息发送的示例。"
+
+#: ../../source/docs/code-overview-adding-a-new-mavlink-message.rst:128
+#: c228cf520fb9469dbc0de48c9dd2ea1f
+msgid ""
+"If the message you added has an ID greater that 255 you will need to enable "
+"MAVLink 2 support. This can be done by setting the relevant "
+"``SERIALn_PROTOCOL`` parameters (e.g. ``SERIAL1_PROTOCOL``) to 2 and "
+"starting Mavproxy with the ``--mav20`` argument."
+msgstr ""
+"如果您添加的消息 ID 大于 255，则需要启用 MAVLink 2 支持。可以通过将相关 ``SERIALn_PROTOCOL`` 参数（例如 "
+"``SERIAL1_PROTOCOL``）设置为 2 并使用 ``--mav20`` 参数启动 MAVProxy 来实现。"
+
+#: ../../source/docs/code-overview-adding-a-new-mavlink-message.rst:131
+#: 40905b7bb7ab43ac9376f5fc2ac90a85
+msgid ""
+"**Step #6:** Consider contributing your code back to the main code base. "
+"Discuss this with other developers on `Discord "
+"<https://ardupilot.org/discord>`__ and/or :ref:`raise a pull request "
+"<submitting-patches-back-to-master>`. If you raise a pull request it is best"
+" to separate the change into at least two separate commits. One commit for "
+"the changes to the .xml files (i.e Step #3) and another for the changes to "
+"the vehicle code."
+msgstr ""
+"**第 6 步：** 考虑将您的代码贡献回主代码库。在 `Discord <https://ardupilot.org/discord>`__ "
+"上与其他开发者讨论，和/或 :ref:`提交 PR <submitting-patches-back-to-master>`。如果提交 "
+"PR，最好将更改分成至少两个独立的提交。一个提交用于 .xml 文件的更改（即第 3 步），另一个用于飞行器代码的更改。"

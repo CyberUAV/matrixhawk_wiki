@@ -1,0 +1,137 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/rover-L1.rst:5 6503e4146f4f485085698ad45ee286bc
+msgid "Rover: L1 navigation overview"
+msgstr "Rover：L1 导航概述"
+
+#: ../../source/docs/rover-L1.rst:7 da7381a2506445be8fae83c6e86c58b0
+msgid ""
+"This page provides an overview of Rover's navigation feature including the "
+"`L1 controller "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_L1_Control>`__"
+" which is also used in Plane. The L1 controller is based on `this paper by "
+"Sanghyuk Park, John Deyst and Jonathan P How of MIT "
+"<http://mercury.kau.ac.kr/park/Archive/PCUAV/gnc_park_deyst_how.pdf>`__."
+msgstr ""
+"本页概述 Rover 的导航功能，包括同样用于 Plane 的 `L1 控制器 "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_L1_Control>`__。L1"
+" 控制器基于 `MIT 的 Sanghyuk Park、John Deyst 和 Jonathan P How 的论文 "
+"<http://mercury.kau.ac.kr/park/Archive/PCUAV/gnc_park_deyst_how.pdf>`__。"
+
+#: ../../source/docs/rover-L1.rst:11 9530839ed9594818b5b7b1898fd642d0
+msgid "Overview"
+msgstr "概述"
+
+#: ../../source/docs/rover-L1.rst:16 47957bc8dad14500ae72390ac75993ef
+msgid ""
+"on every iteration of the main loop (50hz) a call is made to the active "
+"mode's update method (`here is RTL's update function "
+"<https://github.com/ArduPilot/ardupilot/blob/master/Rover/mode_rtl.cpp#L37>`__)."
+" While in Auto, Guide, RTL and SmartRTL mode, the update calls into the Mode"
+" class's `calc_steering_to_waypoint "
+"<https://github.com/ArduPilot/ardupilot/blob/master/Rover/mode.cpp#L303>`__ "
+"method."
+msgstr ""
+"主循环每次迭代（50Hz）时会调用当前活跃模式的 update 方法（`此处为 RTL 的 update 函数 "
+"<https://github.com/ArduPilot/ardupilot/blob/master/Rover/mode_rtl.cpp#L37>`__）。在"
+" Auto、Guided、RTL 和 SmartRTL 模式下，update 会调用 Mode 类的 "
+"`calc_steering_to_waypoint "
+"<https://github.com/ArduPilot/ardupilot/blob/master/Rover/mode.cpp#L303>`__ "
+"方法。"
+
+#: ../../source/docs/rover-L1.rst:19 68070772fe724d2f93b111a054ea828a
+msgid ""
+"Mode's `calc_steering_to_waypoint "
+"<https://github.com/ArduPilot/ardupilot/blob/master/Rover/mode.cpp#L303>`__ "
+"then call's the AP_L1_controller library's `update_waypoint method "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_L1_Control/AP_L1_Control.cpp#L198>`__"
+" providing it the location that the rover should drive towards."
+msgstr ""
+"Mode 的 `calc_steering_to_waypoint "
+"<https://github.com/ArduPilot/ardupilot/blob/master/Rover/mode.cpp#L303>`__ "
+"随后调用 AP_L1_controller 库的 `update_waypoint 方法 "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_L1_Control/AP_L1_Control.cpp#L198>`__，向其提供无人车应前往的目标位置。"
+
+#: ../../source/docs/rover-L1.rst:21 d29f4264ce6f454ca7f0b89fe117c88c
+msgid ""
+"The AP_L1_controller's `update_waypoint method "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_L1_Control/AP_L1_Control.cpp#L198>`__"
+" returns a desired lateral acceleration which is passed into Mode's "
+"`calc_steering_from_lateral_acceleration "
+"<https://github.com/ArduPilot/ardupilot/blob/master/Rover/mode.cpp#L331>`__"
+msgstr ""
+"AP_L1_controller 的 `update_waypoint 方法 "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_L1_Control/AP_L1_Control.cpp#L198>`__"
+" 返回期望横向加速度，并传入 Mode 的 `calc_steering_from_lateral_acceleration "
+"<https://github.com/ArduPilot/ardupilot/blob/master/Rover/mode.cpp#L331>`__"
+
+#: ../../source/docs/rover-L1.rst:23 22ddf097a0ad4ede9df6899d5b625f8c
+msgid ""
+"Mode's `calc_steering_from_lateral_acceleration "
+"<https://github.com/ArduPilot/ardupilot/blob/master/Rover/mode.cpp#L331>`__ "
+"sends the desired acceleration to `APM_Control/AR_AttitudeControl's "
+"get_steering_out_lat_accel "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/APM_Control/AR_AttitudeControl.cpp#L158>`__"
+" which uses a PID controller to calculate a steering output"
+msgstr ""
+"Mode 的 `calc_steering_from_lateral_acceleration "
+"<https://github.com/ArduPilot/ardupilot/blob/master/Rover/mode.cpp#L331>`__ "
+"将期望加速度发送给 `APM_Control/AR_AttitudeControl 的 get_steering_out_lat_accel "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/APM_Control/AR_AttitudeControl.cpp#L158>`__，该函数使用"
+" PID 控制器计算转向输出"
+
+#: ../../source/docs/rover-L1.rst:25 095150ab1fb943c89b9f00c919ad2c5c
+msgid ""
+"The steering output is sent into the AP_MotorsUGV library using the "
+"`set_steering  "
+"<https://github.com/ArduPilot/ardupilot/blob/master/Rover/AP_MotorsUGV.cpp#L146>`__"
+" method"
+msgstr ""
+"转向输出通过 `set_steering "
+"<https://github.com/ArduPilot/ardupilot/blob/master/Rover/AP_MotorsUGV.cpp#L146>`__"
+" 方法发送到 AP_MotorsUGV 库"
+
+#: ../../source/docs/rover-L1.rst:28 9893eafe39fe43c694c8d87dd1a8e72a
+msgid "L1 Controller"
+msgstr "L1 控制器"
+
+#: ../../source/docs/rover-L1.rst:30 4183b8d8299b4183bbbbafface8e9188
+msgid ""
+"The final output of the L1 controller's `update_waypoint method "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_L1_Control/AP_L1_Control.cpp#L198>`__"
+" is a desired lateral acceleration (shown as \"latAccDem\" in red below) "
+"which should bring the vehicle back to the line between the origin and "
+"destination."
+msgstr ""
+"L1 控制器 `update_waypoint 方法 "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_L1_Control/AP_L1_Control.cpp#L198>`__"
+" 的最终输出是期望横向加速度（下图红色标注的「latAccDem」），使飞行器回到起点与目标点连线上。"
+
+#: ../../source/docs/rover-L1.rst:32 22518109e8e248c68353aa0f55347d6b
+msgid ""
+"The formulas used are also shown below.  *damping* is from the "
+":ref:`NAVL1_DAMPING <NAVL1_DAMPING>` parameter. *period* is from the "
+":ref:`NAVL1_PERIOD <NAVL1_PERIOD>` parameter."
+msgstr ""
+"所使用的公式如下所示。*damping* 来自 :ref:`NAVL1_DAMPING <NAVL1_DAMPING>` 参数，*period* 来自 "
+":ref:`NAVL1_PERIOD <NAVL1_PERIOD>` 参数。"

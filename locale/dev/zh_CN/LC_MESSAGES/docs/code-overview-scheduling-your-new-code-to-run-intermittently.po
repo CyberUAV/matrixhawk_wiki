@@ -1,0 +1,168 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/code-overview-scheduling-your-new-code-to-run-intermittently.rst:5
+#: 13f6da6ba3464b1196a29ab5222a3903
+msgid "Scheduling Code to Run Intermittently"
+msgstr "调度代码间歇性运行"
+
+#: ../../source/docs/code-overview-scheduling-your-new-code-to-run-intermittently.rst:7
+#: 2b028e1da53f41deb3885963a111def6
+msgid ""
+"This page describes how you can schedule some new piece of code you have "
+"written to run intermittently."
+msgstr "本页介绍如何将编写的新代码调度为间歇性运行。"
+
+#: ../../source/docs/code-overview-scheduling-your-new-code-to-run-intermittently.rst:11
+#: dd70adcc7a89434f9112e3831429f9fb
+msgid "Running your code with the scheduler"
+msgstr "通过调度器运行代码"
+
+#: ../../source/docs/code-overview-scheduling-your-new-code-to-run-intermittently.rst:13
+#: 4e10c9b18c214df7bee730a50c638298
+msgid ""
+"The most flexible way to run your code at a given interval is to use the "
+"scheduler.  This can be done by adding your new function to the "
+"`scheduler_tasks "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L91>`__"
+" array in `Copter.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp>`__."
+" Note that there are actually two task lists, `the upper list "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L788>`__"
+" is for high speed CPUs (i.e. Pixhawk) and the `lower list "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L856>`__"
+" is for slow CPUs (i.e. APM2)."
+msgstr ""
+"以指定间隔运行代码最灵活的方式是使用调度器。可通过将新函数添加到 `Copter.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp>`__"
+" 中的 `scheduler_tasks "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L91>`__"
+" 数组来实现。注意实际上有两个任务列表，`上方列表 "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L788>`__"
+" 适用于高速 CPU（如 Pixhawk），`下方列表 "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L856>`__"
+" 适用于低速 CPU（如 APM2）。"
+
+#: ../../source/docs/code-overview-scheduling-your-new-code-to-run-intermittently.rst:22
+#: dffa7523175641b5912265594416f825
+msgid ""
+"Adding a task is fairly simple, just create a new row in the list (higher in"
+" the list means high priority).  The first column holds the function name, "
+"the 2nd is a number of 2.5ms units (or 10ms units in case of APM2).  So if "
+"you wanted the function executed at 400Hz this column would contain \"1\", "
+"if you wanted 50Hz it would contain \"8\".  The final column holds the "
+"number of microseconds (i.e. millions of a second) the function is expected "
+"to take.  This helps the scheduler guess whether or not there is enough time"
+" to run your function before the main loop starts the next iteration."
+msgstr ""
+"添加任务相当简单，只需在列表中新建一行（越靠前优先级越高）。第一列为函数名，第二列为 2.5ms 为单位的数值（APM2 情况下为 10ms "
+"为单位）。例如若希望函数以 400Hz 执行，该列填「1」；50Hz "
+"则填「8」。最后一列为函数预计执行所需的微秒数（即百万分之一秒）。这有助于调度器判断在主循环开始下一次迭代前是否有足够时间运行该函数。"
+
+#: ../../source/docs/code-overview-scheduling-your-new-code-to-run-intermittently.rst:60
+#: ffb47ea7578d453799e5caa1b17fcd33
+msgid "Running your code as part of one of the loops"
+msgstr "作为现有循环的一部分运行代码"
+
+#: ../../source/docs/code-overview-scheduling-your-new-code-to-run-intermittently.rst:62
+#: 8838509cc8c1429bbe7b0a5d0688f227
+#, python-format
+msgid ""
+"Instead of creating a new entry in the scheduler task list, you can add your"
+" function to one of the existing timed loops.  There is no real advantage to"
+" this approach over the above approach except in the case of the fast-loop."
+"  Adding your function to the fast-loop will mean that it runs at the "
+"highest possible priority (i.e. it is nearly 100% guaranteed to run at "
+"400Hz)."
+msgstr ""
+"除了在调度器任务列表中新建条目，也可以将函数添加到现有的定时循环中。除 fast-loop 外，此方法相对于上述方法并无实际优势。将函数添加到 "
+"fast-loop 意味着它以最高优先级运行（即近乎 100% 保证以 400Hz 运行）。"
+
+#: ../../source/docs/code-overview-scheduling-your-new-code-to-run-intermittently.rst:69
+#: 11ac9cc0ea7d43a7be9685841333f545
+msgid ""
+"`fast_loop "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L229>`__"
+" : runs at 100Hz on APM2, 400Hz on Pixhawk"
+msgstr ""
+"`fast_loop "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L229>`__：APM2"
+" 上以 100Hz 运行，Pixhawk 上以 400Hz 运行"
+
+#: ../../source/docs/code-overview-scheduling-your-new-code-to-run-intermittently.rst:71
+#: 6c93874bbf344f7bbe8c454d424ec8ab
+msgid ""
+"`fifty_hz_loop "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L370>`__"
+" : runs at 50Hz"
+msgstr ""
+"`fifty_hz_loop "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L370>`__：以"
+" 50Hz 运行"
+
+#: ../../source/docs/code-overview-scheduling-your-new-code-to-run-intermittently.rst:73
+#: 72db2db3aacd4e61aec6cd2b58148d0c
+msgid ""
+"`ten_hz_logging_loop "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L333>`__:"
+" runs at 10Hz"
+msgstr ""
+"`ten_hz_logging_loop "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L333>`__：以"
+" 10Hz 运行"
+
+#: ../../source/docs/code-overview-scheduling-your-new-code-to-run-intermittently.rst:75
+#: f1015a15818640f5b1e96d10543171a4
+msgid ""
+"`three_hz_loop "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L398>`__:"
+" runs at 3.3Hz"
+msgstr ""
+"`three_hz_loop "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L398>`__：以"
+" 3.3Hz 运行"
+
+#: ../../source/docs/code-overview-scheduling-your-new-code-to-run-intermittently.rst:77
+#: b94635cbb3eb49599fc3d3806b865cbd
+msgid ""
+"`one_hz_loop "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L417>`__"
+" : runs at 1Hz"
+msgstr ""
+"`one_hz_loop "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L417>`__：以"
+" 1Hz 运行"
+
+#: ../../source/docs/code-overview-scheduling-your-new-code-to-run-intermittently.rst:80
+#: 3b61bb14877a496898b4ec3b38103670
+msgid ""
+"So for example if you want your new code to run at 10Hz you could add it to "
+"one of the case statements in the `ten_hz_logging_loop() "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L333>`__"
+" function found in `Copter.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp>`__."
+msgstr ""
+"例如，若希望新代码以 10Hz 运行，可将其添加到 `Copter.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp>`__"
+" 中 `ten_hz_logging_loop() "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L333>`__"
+" 函数的某个 case 语句中。"

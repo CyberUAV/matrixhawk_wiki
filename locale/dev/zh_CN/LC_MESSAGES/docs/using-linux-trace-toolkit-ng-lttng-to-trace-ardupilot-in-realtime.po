@@ -1,0 +1,382 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:5
+#: b1e3db08054143de87ca60b0a8b23c24
+msgid ""
+"Using Linux Trace Toolkit ng (LTTng) to Create Realtime ArduPilot Traces"
+msgstr "使用 Linux Trace Toolkit ng（LTTng）实时跟踪 ArduPilot"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:7
+#: ae21a18ab8194a14989be9c74352a8b0
+msgid ""
+"This article explains how to use `LTTng <https://lttng.org>`__ for creating "
+"runtime traces for ArduPilot running on Linux boards (only)."
+msgstr ""
+"本文介绍如何使用 `LTTng <https://lttng.org>`__ 为运行在 Linux 板上的 ArduPilot 创建运行时跟踪（仅限 "
+"Linux）。"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:11
+#: 560da636d7a446c5b750bdbe46899232
+msgid "Overview"
+msgstr "概述"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:13
+#: 9da187ec354b40b4af74414e5ed8b604
+msgid ""
+"Tracing is a technique used to record the real-time behaviour of a software "
+"in memory and analyze the execution of the code off-line. It can be very "
+"useful to understand the interaction between threads, processes, the "
+"duration of certain events and the sequencing of some operations."
+msgstr ""
+"跟踪是一种在内存中记录软件实时行为并离线分析代码执行情况的技术。它对于理解线程间的交互、进程、某些事件的持续时间以及某些操作的执行顺序非常有用。"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:19
+#: fab3fd2e1e454b29968bb27504ef0203
+msgid ""
+"*LTTng* is a Linux tool that can be used to trace either a userspace "
+"application, or the Linux kernel itself. It produces trace files that can be"
+" analyzed later, mostly off-board. Lttng's implementation in ArduPilot uses "
+"userspace tracing but you can at the same time monitor what's going on "
+"inside the kernel, provided the kernel has tracepoints enabled (in its "
+"config)."
+msgstr ""
+"*LTTng* 是一个 Linux 工具，可用于跟踪用户空间应用程序或 Linux 内核本身。它生成的跟踪文件可供后续（主要在板外）分析。LTTng 在"
+" ArduPilot 中的实现使用用户空间跟踪，但您也可以同时监控内核内部的情况，前提是内核在其配置中已启用跟踪点。"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:26
+#: 66e0b004afc547f5be6ac5c6bb085f17
+msgid ""
+"*LTTng* has been integrated using the `Perf_Lttng "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_Linux/Perf_Lttng.cpp>`__"
+" class, which handles 3 operations: ``Begin``, ``End``, ``Count``. You add "
+"tracing to your code by calling the performance utility methods in `Perf.cpp"
+" "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_Linux/Perf.cpp>`__."
+msgstr ""
+"*LTTng* 已通过 `Perf_Lttng "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_Linux/Perf_Lttng.cpp>`__"
+" 类进行集成，该类处理 3 个操作：``Begin``、``End``、``Count``。您可以通过调用 `Perf.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_Linux/Perf.cpp>`__"
+" 中的性能工具方法向代码添加跟踪。"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:33
+#: 1c4aa334a05e4c4fbc2fb056f505ba71
+msgid "Monitoring APM with LTTng"
+msgstr "使用 LTTng 监控 APM"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:35
+#: a76b79dbfb3e472a9e71640c054bd49f
+msgid ""
+"In order to monitor ArduPilot with *LTTng*, the first thing to do is to "
+"install LTTng on your board. The *LTTng* documentation explains how to "
+"install it on your Linux distribution `here <https://lttng.org/docs/#doc-"
+"installing-lttng>`__. If there is no official package for your Linux "
+"distribution, you can also build it from the sources as explained `here "
+"<http://lttng.org/download/#build-from-source>`__"
+msgstr ""
+"为了使用 *LTTng* 监控 ArduPilot，首先需要在您的板上安装 LTTng。*LTTng* 文档 `在此 "
+"<https://lttng.org/docs/#doc-installing-lttng>`__ 说明了如何在您的 Linux "
+"发行版上安装它。如果您的 Linux 发行版没有官方软件包，也可以按照 `此处 <http://lttng.org/download/#build-"
+"from-source>`__ 的说明从源代码构建。"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:44
+#: aac4b6f1b3894d26a9e4e8c920734f48
+msgid ""
+"You can't build statically with *LTTng* enabled because it calls dlopen. On "
+"bebop I had to build the whole system with armhf toolchain, which is not the"
+" one used by default."
+msgstr ""
+"启用 *LTTng* 时无法进行静态构建，因为它会调用 dlopen。在 bebop 上，我不得不使用 armhf "
+"工具链构建整个系统，而这并非默认使用的工具链。"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:49
+#: 6f6985f42acb4a4a8fcc9e15053fc2b8
+msgid "Putting trace events inside the code"
+msgstr "在代码中放置跟踪事件"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:51
+#: 6502149be66c4b59b87be0fd1ecd8dd5
+msgid ""
+"In order to trace ArduPilot, you call the following performance utility "
+"methods:"
+msgstr "为了跟踪 ArduPilot，您可以调用以下性能工具方法："
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:62
+#: 0ab22e25fd854e1aa3e143ec7c8190c3
+msgid "Before calling these functions, ``my_perf`` needs to be allocated"
+msgstr "在调用这些函数之前，需要先分配 ``my_perf``"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:68
+#: 2de18b7d2b714f0f89a18d640cd38815
+msgid ""
+"An example of adding multiple perf events can be seen in `this patch "
+"<https://github.com/jberaud/ardupilot/commit/4bd763d58a6b529630629ad581de198f9d6e6731>`__."
+msgstr ""
+"添加多个性能事件的示例可参见 `此补丁 "
+"<https://github.com/jberaud/ardupilot/commit/4bd763d58a6b529630629ad581de198f9d6e6731>`__。"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:71
+#: d1583eb5669a4109a35aebf775243a3a
+msgid "Trace capture"
+msgstr "跟踪捕获"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:74
+#: bb03e907c1024ca7995534b972d7f0c2
+msgid "Enable trace events in ArduPilot"
+msgstr "在 ArduPilot 中启用跟踪事件"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:76
+#: 81b030efdbb949ad81b6e6e93c8c2f67
+msgid ""
+"Once you have the modified version of ArduPilot launched on your board and "
+"*LTTng* tools installed, you can check that ArduPilot *LTTng* events are "
+"available on your board's console terminal using the following command:"
+msgstr ""
+"在板上启动修改版 ArduPilot 并安装 *LTTng* 工具后，可使用以下命令在板的控制台终端检查 ArduPilot *LTTng* "
+"事件是否可用："
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:85
+#: 5052de6e730d43afa4dbe155cf8ea769
+msgid "This should output a list of events including:"
+msgstr "这应该输出一个事件列表，包括："
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:95
+#: 8e5f16e10c9f46ed938c01e8a4c2830d
+msgid ""
+"Refer to the `LTTng documentation <https://lttng.org/docs/#doc-tracing-the-"
+"linux-kernel>`__ for information on how to list kernel events."
+msgstr ""
+"有关如何列出内核事件的信息，请参阅 `LTTng 文档 <https://lttng.org/docs/#doc-tracing-the-linux-"
+"kernel>`__。"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:99
+#: bf1d6727a3db4b719b1d5a2a5d8b759b
+msgid "Capturing a trace session"
+msgstr "捕获跟踪会话"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:101
+#: 769a68a19292404496bc656044fc2c3b
+msgid "A trace session can be started, stopped, re-started and destroyed."
+msgstr "跟踪会话可以启动、停止、重启和销毁。"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:103
+#: ded9267a3f2944a9984963b3879eb3ce
+msgid ""
+"Destroying a trace session doesn't delete the traces from permanent storage "
+"but means that you have to restart a new session if you want to continue "
+"capturing."
+msgstr "销毁跟踪会话不会从永久存储中删除跟踪，但这意味着如果您想继续捕获，必须重新启动新会话。"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:107
+#: 8cdc77c19527405096a12a8afafd3a4f
+msgid "Create session:"
+msgstr "创建会话："
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:113
+#: 38cf4939e41446b69ce4542c816dd64d
+msgid "Enable ArduPilot events:"
+msgstr "启用 ArduPilot 事件："
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:121
+#: f603c386316e4ee1993fd3d60731bf72
+msgid ""
+"To enable kernel events, see `these instructions "
+"<https://lttng.org/docs/#doc-tracing-the-linux-kernel>`__."
+msgstr ""
+"要启用内核事件，请参阅 `这些说明 <https://lttng.org/docs/#doc-tracing-the-linux-kernel>`__。"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:123
+#: 57ca537cee7f43d7b3394de451c70af0
+msgid "Start capturing:"
+msgstr "开始捕获："
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:129
+#: c6110da2bcb54e3eb1a3f5b8118a0fa4
+msgid "To stop capturing:"
+msgstr "停止捕获："
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:135
+#: 991d43aa39914401aa66ceaeefbc9e55
+msgid ""
+"If you have *babeltrace* installed on board, you can view the result in "
+"text:"
+msgstr "如果板上已安装 *babeltrace*，可以以文本格式查看结果："
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:142
+#: 135eebd70fa94baaba69aeb863bbc9e3
+msgid "Restart or destroy your session:"
+msgstr "重启或销毁您的会话："
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:149
+#: 628810847d9a4e3e9bf962a95ef3c978
+msgid "Analyzing the trace"
+msgstr "分析跟踪"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:151
+#: c5e19a914bb44f9ea81efd697d0b36bc
+msgid ""
+"In order to analyze your trace, first copy the trace directory you indicated"
+" at session creation to your computer."
+msgstr "为了分析跟踪，首先将您在创建会话时指定的跟踪目录复制到您的计算机上。"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:155
+#: 4d6a96456d944ca7b7413fa4a9bd9eb4
+msgid "Babeltrace"
+msgstr "Babeltrace"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:157
+#: 7cd2582011fa4090917df692e75f2217
+msgid ""
+"You can analyze the trace using *babeltrace*. This is a command line tool "
+"that is able to translate the trace into text format:"
+msgstr "您可以使用 *babeltrace* 分析跟踪。这是一个能够将跟踪转换为文本格式的命令行工具："
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:164
+#: 9d26cb3aca2e48858d26b72965ed8902
+msgid ""
+"The result is a series of events with the according timestamps and the "
+"number of the CPU they have been running on."
+msgstr "结果是一系列事件，带有对应的时间戳以及它们运行所在 CPU 的编号。"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:167
+#: d3417fa43ec8488481750052a60d7123
+msgid ""
+"To go further with that, you can use `babeltrace's python bindings "
+"<http://diamon.org/babeltrace/docs/python/>`__ to write a python program "
+"analyzing the trace you have captured."
+msgstr ""
+"要进一步分析，您可以使用 `babeltrace 的 Python 绑定 "
+"<http://diamon.org/babeltrace/docs/python/>`__ 编写 Python 程序来分析捕获的跟踪。"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:171
+#: 175368c1d85d41ebab58a4985d36521a
+msgid "Trace compass"
+msgstr "Trace Compass"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:173
+#: c3b3976b503d4af2bc138fbac28808e9
+msgid ""
+"`Trace compass <https://projects.eclipse.org/projects/tools.tracecompass>`__"
+" is an Eclipse plugin that can read *LTTng* traces and display them in a UI "
+"that is adapted to some analyzes."
+msgstr ""
+"`Trace Compass <https://projects.eclipse.org/projects/tools.tracecompass>`__"
+" 是一个 Eclipse 插件，可以读取 *LTTng* 跟踪并在适合某些分析的 UI 中显示它们。"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:178
+#: f5ea2af41cc24e39ae8645baccd223b9
+msgid "Lttng2lxt"
+msgstr "Lttng2lxt"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:180
+#: acda4f8696614060a97f0d7a3b85cf5f
+msgid ""
+"Trace compass is very powerful but up to now, I haven't been able to analyze"
+" userspace traces in a convenient way."
+msgstr "Trace Compass 非常强大，但到目前为止，我还无法以方便的方式分析用户空间跟踪。"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:183
+#: 1e8e669612504d2e888ecde90beb84a3
+msgid ""
+"*Lttng2lxt* is an open source tool written by Ivan Djelic from Parrot. It is"
+" a very simple command line tool that generate waveforms readable by "
+"`gtkwave <http://gtkwave.sourceforge.net/>`__. I have added support for "
+"ArduPilot events to *lttng2lxt*."
+msgstr ""
+"*Lttng2lxt* 是由 Parrot 的 Ivan Djelic 编写的开源工具。它是一个非常简单的命令行工具，可生成 `gtkwave "
+"<http://gtkwave.sourceforge.net/>`__ 可读的波形。我已为 *lttng2lxt* 添加了对 ArduPilot "
+"事件的支持。"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:188
+#: eacc053037a549458ce720f5d8dbdd41
+msgid "In order to use it, get the sources from my github repository:"
+msgstr "要使用它，请从我的 github 仓库获取源代码："
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:194
+#: 7241ba8cdb6043838d81dedb9cc46f43
+msgid ""
+"You will have to install \\ *libbabeltrace-ctf-dev* and \\ *libbabeltrace*. "
+"On Debian or Ubuntu do this with the following command:"
+msgstr ""
+"您需要安装 *libbabeltrace-ctf-dev* 和 *libbabeltrace*。在 Debian 或 Ubuntu 上使用以下命令安装："
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:202
+#: 59d2162e614e4b508b13e8e481717a7f
+msgid "Compile it:"
+msgstr "编译它："
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:208
+#: bc618e6294f84d23985cb31b407a395b
+msgid "Use it to generate a *gtkwave* waveform file:"
+msgstr "使用它生成 *gtkwave* 波形文件："
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:214
+#: 0be85b8d2852476381e60c321d613b1a
+msgid "This will produce a file called **my_trace_directory.lxt**."
+msgstr "这将生成一个名为 **my_trace_directory.lxt** 的文件。"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:217
+#: 2b00d45267e140b78efa8ae248b6e877
+msgid "Analyzing your trace using gtkwave"
+msgstr "使用 gtkwave 分析您的跟踪"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:219
+#: 62948eaedc7540f9983dc7bb4688b39f
+msgid ""
+"First install *gtkwave*. On Debian or Ubuntu you can do this with the "
+"command:"
+msgstr "首先安装 *gtkwave*。在 Debian 或 Ubuntu 上可以使用以下命令安装："
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:226
+#: 64d740aa696e4e2bb23825eb265c1b6c
+msgid "Then open your trace using *gtkwave*:"
+msgstr "然后使用 *gtkwave* 打开您的跟踪："
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:232
+#: 33c0f18268804d4aafe13b008fffc81a
+msgid "Use the **Zoom fit** button |zoom_fit|."
+msgstr "使用 **缩放适应** 按钮 |zoom_fit|。"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst
+#: a77319d9753541fab3e5e42bd20e394a
+msgid "zoom_fit"
+msgstr "zoom_fit"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:234
+#: 860a212182bb437da09ede7f193a16ca
+msgid "The result should look like this:"
+msgstr "结果应如下所示："
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:239
+#: 434abceab4364ceca8ca5212e70819d8
+msgid ""
+"You can then zoom in or out and see the exact execution sequence, with the "
+"associated timings"
+msgstr "然后您可以放大或缩小，查看精确的执行顺序及相关时间信息"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:245
+#: 980fa1661f1d44638610aad5ee1de19c
+msgid ""
+"You can therefore measure the duration of an event with the cursors (use the"
+" mouse middle button to set the first cursor)"
+msgstr "您可以使用游标测量事件的持续时间（使用鼠标中键设置第一个游标）"

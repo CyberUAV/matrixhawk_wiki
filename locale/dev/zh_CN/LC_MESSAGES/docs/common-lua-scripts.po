@@ -1,0 +1,1869 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 03:48+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/common-lua-scripts.rst:119
+msgid "Accessing/Adding Parameters via Scripts"
+msgstr "通过脚本访问/添加参数"
+
+#: ../../source/docs/common-lua-scripts.rst:565
+msgid "Bindings"
+msgstr "绑定"
+
+#: ../../source/docs/common-lua-scripts.rst:7 ef2c029166874ab5a51e12916cdb828e
+msgid "Lua Scripts"
+msgstr "Lua 脚本"
+
+#: ../../source/docs/common-lua-scripts.rst:9 84bcb5708eb14ad986eab4cc743fccc9
+msgid ""
+"ArduPilot has introduced support for `Lua <https://www.lua.org/>`_ "
+"scripting. Scripting provides a safe, \"sandboxed\" environment for new "
+"behaviors to be added to the autopilot without modifying the core flight "
+"code. Scripts are stored on the SD card and run in parallel with the flight "
+"code."
+msgstr ""
+"ArduPilot 引入了对 `Lua <https://www.lua.org/>`_ "
+"脚本的支持。脚本提供了一个安全的「沙箱」环境，可以在不修改核心飞控代码的情况下向飞控添加新行为。脚本存储在 SD 卡上，与飞控代码并行运行。"
+
+#: ../../source/docs/common-lua-scripts.rst:13
+#: 8b58f55ae04d4413a3c3e40d44647195
+msgid ""
+"This page describes how to setup scripts on your autopilot, the scripting "
+"API, scripting applets,and some examples to help get started."
+msgstr "本页介绍如何在飞控上设置脚本、脚本 API、脚本应用程序以及一些入门示例。"
+
+#: ../../source/docs/common-lua-scripts.rst:15
+#: 167575a1485a46258c21c7be64586ab4
+msgid ""
+"While scripting normally requires at least some LUA programming and editing,"
+" there are some `Applets "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/applets>`__"
+"  available which require no user editing and are ready to use. See links "
+"below."
+msgstr ""
+"虽然脚本通常需要一定的 LUA 编程和编辑，但有些 `应用程序 "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/applets>`__"
+"  无需用户编辑，可直接使用。请参阅下方链接。"
+
+#: ../../source/docs/common-lua-scripts.rst:19
+#: 12d575764a914b80bb545036bcb7c8f4
+msgid "Getting Started"
+msgstr "入门"
+
+#: ../../source/docs/common-lua-scripts.rst:21
+#: 7f985fb4d27c4e57b97f4adbb3aad93b
+msgid ""
+"Ensure your autopilot has at least 2 MB of flash and 80 kB of memory.  High "
+"powered autopilots like the CubePilot Cube Orange and HolyBro Durandal will "
+"certainly work well but check the specifications of your :ref:`autopilot "
+"<common-autopilots>`. Scripting is not available in F4 based autopilots. "
+"Autopilots must have an SD card to store the script unless the user builds "
+"his own firmware and embeds it directly in the firmware (see :ref:`common-"
+"oem-customizations`)."
+msgstr ""
+"确保您的飞控至少有 2 MB 闪存和 80 KB 内存。CubePilot Cube Orange 和 HolyBro Durandal "
+"等高性能飞控肯定可以正常工作，但请检查您的 :ref:`飞控 <common-autopilots>` 规格。脚本在基于 F4 "
+"的飞控上不可用。飞控必须有 SD 卡来存储脚本，除非用户自行构建固件并将其直接嵌入固件（参见 :ref:`common-oem-"
+"customizations`）。"
+
+#: ../../source/docs/common-lua-scripts.rst:22
+#: d0e32f447b004399ba2d0d4b1debf06a
+msgid ""
+"Set :ref:`SCR_ENABLE <SCR_ENABLE>` to 1 to enable scripting (refresh or "
+"reboot to see all ``SCR_`` parameters)."
+msgstr ""
+"将 :ref:`SCR_ENABLE <SCR_ENABLE>` 设为 1 以启用脚本功能（刷新或重启以查看所有 ``SCR_`` 参数）。"
+
+#: ../../source/docs/common-lua-scripts.rst:23
+#: 6fc30089f6834de799be902083fe6e90
+msgid ""
+"Upload scripts (files with extension .lua) to the autopilot's SD card's "
+"``APM/scripts`` folder."
+msgstr "将脚本（扩展名为 .lua 的文件）上传到飞控 SD 卡的 ``APM/scripts`` 文件夹。"
+
+#: ../../source/docs/common-lua-scripts.rst:25
+#: 10a155281aa649b98b9e6c7af7593c8e
+msgid ""
+"If this folder does not exist, you can create it by setting "
+":ref:`SCR_ENABLE<SCR_ENABLE>` to 1 and rebooting. This folder can also be "
+"created manually on the SD card."
+msgstr ""
+"如果该文件夹不存在，可以通过将 :ref:`SCR_ENABLE<SCR_ENABLE>` 设为 1 并重启来创建。也可以在 SD "
+"卡上手动创建该文件夹。"
+
+#: ../../source/docs/common-lua-scripts.rst:26
+#: 98ac904826cf4b99ad4bdc6db40db1e1
+msgid "If using Mission Planner, this can be done using MAVFTP."
+msgstr "如果使用 Mission Planner，可以通过 MAVFTP 完成此操作。"
+
+#: ../../source/docs/common-lua-scripts.rst:27
+#: e0fb0dadd31d4742b2f031d2e2d939da
+msgid ""
+"If using a simulator, the ``scripts`` folder is in the directory the "
+"simulator was started from. MAVFTP will work in this case as well."
+msgstr "如果使用模拟器，``scripts`` 文件夹位于模拟器启动时所在的目录。此情况下 MAVFTP 同样可以使用。"
+
+#: ../../source/docs/common-lua-scripts.rst:33
+#: 9a6f8774dc8e4cf0a07aad54ab695d18
+msgid ""
+"**Sample/Example Scripts** can be found `here for stable Plane "
+"<https://github.com/ArduPilot/ardupilot/tree/ArduPlane-"
+"stable/libraries/AP_Scripting/examples>`__, `Copter "
+"<https://github.com/ArduPilot/ardupilot/tree/ArduCopter-"
+"stable/libraries/AP_Scripting/examples>`__ and `Rover "
+"<https://github.com/ArduPilot/ardupilot/tree/APMrover2-stable/libraries/AP_Scripting/examples>`__."
+"  The latest development scripts can be found `here "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/examples>`__."
+msgstr ""
+"**示例/样本脚本**可在 `此处（稳定版 "
+"Plane）<https://github.com/ArduPilot/ardupilot/tree/ArduPlane-"
+"stable/libraries/AP_Scripting/examples>`__、`Copter "
+"<https://github.com/ArduPilot/ardupilot/tree/ArduCopter-"
+"stable/libraries/AP_Scripting/examples>`__ 和 `Rover "
+"<https://github.com/ArduPilot/ardupilot/tree/APMrover2-stable/libraries/AP_Scripting/examples>`__"
+" 找到。最新开发脚本可在 `此处 "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/examples>`__"
+" 找到。"
+
+#: ../../source/docs/common-lua-scripts.rst:35
+#: 8f99ce68065d47a9ba74bc31b9317d34
+msgid ""
+"**Applets** which are scripts that require no user editing before use, can "
+"be found `here "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/applets>`_"
+" for the \"latest\" firmware branch, and may require code extensions "
+"included in that branch to function properly. Each of these has a .md file "
+"of the same name detailing its capabilities, use, and setup. For example, "
+"there is a script to allow a user to change a SmartAudio capable video "
+"transmitter's output power level from a transmitter channel and set its "
+"power-up value via parameter. See :ref:`common-scripting-applets`."
+msgstr ""
+"**应用程序**（无需用户编辑即可使用的脚本）可在 `此处 "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/applets>`_"
+" 找到（「最新」固件分支），可能需要该分支中包含的代码扩展才能正常工作。每个脚本都有同名的 .md "
+"文件，详细说明其功能、使用方法和设置。例如，有一个脚本允许用户通过遥控器通道更改支持 SmartAudio 的图传输出功率，并通过参数设置上电值。参见 "
+":ref:`common-scripting-applets`。"
+
+#: ../../source/docs/common-lua-scripts.rst:37
+#: fb24a721be0d4629b3120b1f57590b77
+msgid ""
+"**Drivers** Lua scripts can actually provide hardware drivers for new "
+"peripheral hardware that is not directly supported in the ArduPilot "
+"firmware, such a new EFIs or Gimbals. Examples of these can be found `here "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/drivers>`__"
+" for the \"latest\" firmware branch, and may require code extensions "
+"included in that branch to function properly."
+msgstr ""
+"**驱动程序** Lua 脚本实际上可以为 ArduPilot 固件不直接支持的新外设硬件（如新的 EFI 或云台）提供硬件驱动。这些示例可在 `此处 "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/drivers>`__"
+" 找到（「最新」固件分支），可能需要该分支中包含的代码扩展才能正常工作。"
+
+#: ../../source/docs/common-lua-scripts.rst:39
+#: b00e3b3de0ab491cb3145cdfe560b467
+msgid ""
+"To download from the github locations, first click the script name, then "
+"select \"raw\" in upper right corner, then right mouse click to \"Save Page "
+"as\" a text file with the \".lua\" file extension"
+msgstr ""
+"要从 GitHub 位置下载，先点击脚本名称，然后在右上角选择 「raw」，再右键单击选择 「页面另存为」，保存为扩展名为 「.lua」 的文本文件"
+
+#: ../../source/docs/common-lua-scripts.rst:41
+#: 3d8d2c8a3f8b499ea1a61be9207d367e
+msgid ""
+"Up to 8 RC channels can be assigned as scripting inputs/controls using "
+"the``RCX_OPTION`` = \"300-307\" options to be used by scripts. In addition, "
+"four dedicated script parameters are available: :ref:`SCR_USER1<SCR_USER1>` "
+"thru :ref:`SCR_USER4<SCR_USER4>` and are accessed with the same method as "
+"any other parameter, but these are reserved for script use. Scripts can also"
+" generate their own parameters (see :ref:`common-scripting-parameters`)to be"
+" used within the scripts."
+msgstr ""
+"最多可以使用 ``RCX_OPTION`` = 「300-307」 选项将 8 个 RC "
+"通道分配为脚本输入/控制，供脚本使用。此外，还有四个专用脚本参数可用：:ref:`SCR_USER1<SCR_USER1>` 到 "
+":ref:`SCR_USER4<SCR_USER4>`，访问方式与其他参数相同，但这些参数保留供脚本使用。脚本还可以生成自己的参数（参见 "
+":ref:`common-scripting-parameters`），供脚本内部使用。"
+
+#: ../../source/docs/common-lua-scripts.rst:42
+#: 5fe62bc115284c30b533a8115714f6a3
+msgid ""
+"When the autopilot is powered on it will load and start all scripts. By "
+"default it will look in the ROMFS file system for scripts included in the "
+"firmware image by a manufacturer, and the APM/scripts directory on the SD "
+"Card (or if a SITL simulation, the base directory where the simulation was "
+"started.) This can be modified by used the "
+":ref:`SCR_DIR_DISABLE<SCR_DIR_DISABLE>` parameter."
+msgstr ""
+"飞控上电时将加载并启动所有脚本。默认情况下，它会在 ROMFS 文件系统中查找制造商内嵌在固件镜像中的脚本，以及 SD 卡上的 APM/scripts "
+"目录（或 SITL 仿真时，仿真启动的基础目录）。可以使用 :ref:`SCR_DIR_DISABLE<SCR_DIR_DISABLE>` "
+"参数修改此行为。"
+
+#: ../../source/docs/common-lua-scripts.rst:43
+#: 3690b416812f49f8ac8c6a7828a61d4b
+msgid ""
+"Messages and errors are sent to the ground station and, if using Mission "
+"Planner, can be viewed in the Data screen's \"Messages\" tab."
+msgstr "消息和错误会发送到地面站，如果使用 Mission Planner，可在数据界面的 「消息」 标签页中查看。"
+
+#: ../../source/docs/common-lua-scripts.rst:44
+#: 6b6cf0aaef634723b65b7abf5c022e8f
+msgid ""
+":ref:`SCR_HEAP_SIZE <SCR_HEAP_SIZE>` can be adjusted to increase or decrease"
+" the amount of memory available for scripts. The default , which varies from"
+" 43K to 204.8K depending on cpu being used, is sufficient at its smallest "
+"(43K) for small scripts, but many will require more (some applets now need "
+"300K). The autopilot's free memory depends highly upon which features and "
+"peripherals are enabled. If this parameter is set too low, scripts may fail "
+"to run and give an out of memory pre-arm error. If set too high other "
+"autopilot features such as Terrain Following or even the EKF may fail to "
+"initialize. On autopilots with a STM32F4 microcontroller, Smart RTL (Rover, "
+"Copter) and Terrain Following (Plane, Copter) need to be nearly always "
+"disabled. These features are usually enabled by default, set "
+":ref:`SRTL_POINTS <SRTL_POINTS>` = 0, :ref:`TERRAIN_ENABLE <TERRAIN_ENABLE>`"
+" = 0). See also :ref:`RAM Limitations<ram_limitations>` section."
+msgstr ""
+":ref:`SCR_HEAP_SIZE <SCR_HEAP_SIZE>` 可以调整以增加或减少脚本可用内存。默认值因使用的 CPU 不同而异（43K 到"
+" 204.8K），最小值（43K）足够小型脚本使用，但许多脚本需要更多（部分应用程序现在需要 "
+"300K）。飞控的可用内存高度依赖于启用的功能和外设。如果该参数设置过低，脚本可能无法运行并出现内存不足的解锁前错误。如果设置过高，其他飞控功能（如地形跟随甚至"
+" EKF）可能无法初始化。在基于 STM32F4 微控制器的飞控上，Smart "
+"RTL（Rover、Copter）和地形跟随（Plane、Copter）几乎总需要禁用。这些功能通常默认启用，请设置 :ref:`SRTL_POINTS"
+" <SRTL_POINTS>` = 0，:ref:`TERRAIN_ENABLE <TERRAIN_ENABLE>` = 0）。另见 :ref:`RAM"
+" 限制 <ram_limitations>` 部分。"
+
+#: ../../source/docs/common-lua-scripts.rst:47
+#: c8aa77ca0bc846798944f5b185919fa8
+msgid "Step by Step Setup and Use Examples"
+msgstr "逐步设置和使用示例"
+
+#: ../../source/docs/common-lua-scripts.rst:56
+#: 68dd4baea87d4abbbf95558d4e8145b2
+msgid "What Scripts Can Do"
+msgstr "脚本能做什么"
+
+#: ../../source/docs/common-lua-scripts.rst:58
+#: 461e18d633904c1f8a22ad1c0902e2e8
+msgid "Multiple scripts can be run at once"
+msgstr "可以同时运行多个脚本"
+
+#: ../../source/docs/common-lua-scripts.rst:59
+#: 391127fad4ef4181b01360b369458637
+msgid "Monitor the vehicle state"
+msgstr "监控飞行器状态"
+
+#: ../../source/docs/common-lua-scripts.rst:60
+#: 8eb0eed51fdb4d5e9928bba6b23a14e7
+msgid "Start to manipulate vehicle state"
+msgstr "开始操控飞行器状态"
+
+#: ../../source/docs/common-lua-scripts.rst:61
+#: 322cd97f2ce548f9a5855d6f06fc9297
+msgid "Execute MAVLink commands"
+msgstr "执行 MAVLink 命令"
+
+#: ../../source/docs/common-lua-scripts.rst:63
+#: 4dd714c48634450a8a6047be8c99f745
+msgid ""
+"Lua is a garbage collected, imperative programming language. Scripts are run"
+" at a low priority on the system, which ensures that the core flight code "
+"will continue to execute even if a script is taking a long time to process. "
+"In order to allow multiple scripts to be run, each script is allocated a "
+"fixed time chunk (measured in VM instructions) in which it is expected to "
+"complete it’s processing. The script is allowed to specify a new callback "
+"function and time at which it should be called, which allows it to be run "
+"continuously. While this serves to bound the worst-case execution time "
+"safely, scripts are not guaranteed to be run on a reliable schedule."
+msgstr ""
+"Lua "
+"是一种垃圾回收的命令式编程语言。脚本在系统中以低优先级运行，这确保即使脚本处理时间较长，核心飞控代码也会继续执行。为了允许多个脚本运行，每个脚本都分配了固定的时间块（以"
+" VM "
+"指令数衡量），预期在此时间内完成处理。脚本可以指定一个新的回调函数和下次调用时间，从而允许连续运行。虽然这可以安全地限制最坏情况执行时间，但脚本不保证按可靠的时间表运行。"
+
+#: ../../source/docs/common-lua-scripts.rst:69
+#: 5d632076a8a3472989b00bff4694c0e1
+msgid ""
+"Each script is run in its own \"sandboxed\" environment. This allows each "
+"script to manipulate any global variables it wants to without causing other "
+"scripts problems, and allows the script to persist state between calls to "
+"its callback. A side effect of this however is that heavy memory usage in a "
+"script can cause other scripts to be short on memory."
+msgstr ""
+"每个脚本都在自己的「沙箱」环境中运行。这允许每个脚本任意操作全局变量而不影响其他脚本，并允许脚本在回调调用之间保持状态。但是，脚本大量使用内存可能导致其他脚本内存不足。"
+
+#: ../../source/docs/common-lua-scripts.rst:74
+#: 898de75e127b4215b3fef9feb54996df
+msgid "A Sample Script"
+msgstr "示例脚本"
+
+#: ../../source/docs/common-lua-scripts.rst:76
+#: b5578ec865a2479192c9c6fde7674442
+msgid ""
+"The following script is used to change a servo output based on the "
+"aircraft's distance from the home position."
+msgstr "以下脚本根据飞机与 Home 点的距离来改变舵机输出。"
+
+#: ../../source/docs/common-lua-scripts.rst:97
+#: 0409264acde24915b6a7e41758f870de
+msgid ""
+"This script begins by defining the update function, which will be called "
+"periodically. This function fetches the vehicles current position and home "
+"position, and stores them within the local variables current_pos and home. "
+"Both of these variables now either hold a Location userdata, or are nil, if "
+"the information was not currently available from the vehicle. The variables "
+"are then checked to ensure that they were actually provided, before "
+"calculating the distance between the locations. After a check to ensure that"
+" the distance is never measured as more then 1 kilometer away, the distance "
+"is used to set the servo position. The final line in the function is used to"
+" reschedule this function to be run again in 1000 milliseconds from the "
+"current time. The last line of the script is also used to schedule the "
+"function to be run for the first time in 1000 milliseconds from the time at "
+"which it's loaded."
+msgstr ""
+"此脚本首先定义将被定期调用的 update 函数。该函数获取飞行器当前位置和 Home 点位置，并存储在局部变量 current_pos 和 home "
+"中。这两个变量现在要么包含 Location 用户数据，要么为 "
+"nil（如果飞行器当前无法获取该信息）。然后检查这些变量以确保实际提供了数据，再计算位置之间的距离。检查距离不超过 1 "
+"公里后，用距离设置舵机位置。函数中的最后一行用于将此函数重新安排在当前时间 1000 毫秒后再次运行。脚本的最后一行也用于安排该函数在加载后 1000 "
+"毫秒首次运行。"
+
+#: ../../source/docs/common-lua-scripts.rst:106
+#: e114f9310f984c0da0a3f87855252acb
+msgid "Script Crashes and Errors"
+msgstr "脚本崩溃和错误"
+
+#: ../../source/docs/common-lua-scripts.rst:107
+#: ce37b607547248faa31aa348d22857ea
+msgid ""
+"If scripts run out of memory (or panic for any reason) all currently running"
+" scripts are terminated. If an individual script has an error, it will "
+"terminate. If either occurs before arming, a pre-arm failure will be "
+"generated. A scripting restart command or reboot would be needed to restart "
+"the script or scripting as a whole."
+msgstr ""
+"如果脚本内存耗尽（或因任何原因崩溃），所有当前运行的脚本将被终止。如果单个脚本出现错误，它将终止。如果在解锁前发生上述任何情况，将生成解锁前失败。需要脚本重启命令或重启才能重新启动脚本或整个脚本系统。"
+
+#: ../../source/docs/common-lua-scripts.rst:109
+#: fe04def2b92843b38ff259a3ac1fc073
+msgid ""
+"In order to prevent arming if a script is missing (ie. SD card ejected or "
+"file corrupted) or if a script that is supposed to run once before arming "
+"and then terminate, but does not, then either, or both, of two checksum pre-"
+"arm checks can be enabled:"
+msgstr "为了在脚本丢失时（如 SD 卡弹出或文件损坏）或脚本应在解锁前运行一次后终止但未终止时防止解锁，可以启用两种校验和解锁前检查之一或两者："
+
+#: ../../source/docs/common-lua-scripts.rst:111
+#: 3c34d49d096c4828b2679a78f9d6e0c2
+msgid ""
+":ref:`SCR_LD_CHECKSUM<SCR_LD_CHECKSUM>` which checks that the checksum of "
+"all loaded scripts matches this value"
+msgstr ":ref:`SCR_LD_CHECKSUM<SCR_LD_CHECKSUM>` 检查所有已加载脚本的校验和是否与该值匹配"
+
+#: ../../source/docs/common-lua-scripts.rst:112
+#: 15dffe3c9284462fbd2b0a61028b2f47
+msgid ""
+":ref:`SCR_RUN_CHECKSUM<SCR_RUN_CHECKSUM>` which checks that the checksum of "
+"all running scripts matches this value"
+msgstr ":ref:`SCR_RUN_CHECKSUM<SCR_RUN_CHECKSUM>` 检查所有运行中脚本的校验和是否与该值匹配"
+
+#: ../../source/docs/common-lua-scripts.rst:114
+#: 4b98fea79601444cbcc0fef89df0601f
+msgid ""
+"These can be set automatically when the scripts have been loaded and the "
+"desired ones running before arming, by setting the "
+":ref:`SCR_DEBUG_OPTS<SCR_DEBUG_OPTS>` bit 5 which will compute and set these"
+" parameter's values, and then reset bit 5 automatically."
+msgstr ""
+"当脚本已加载并在解锁前运行所需脚本时，可以通过设置 :ref:`SCR_DEBUG_OPTS<SCR_DEBUG_OPTS>` 第 5 "
+"位自动设置这些参数值，然后自动重置第 5 位。"
+
+#: ../../source/docs/common-lua-scripts.rst:117
+#: 700a7d8327da4e07842dca27af91b899
+msgid "Scripting and Parameters"
+msgstr "脚本与参数"
+
+#: ../../source/docs/common-lua-scripts.rst:125
+#: de8ca41f8454427b9f019a1d0d4065b2
+msgid "MAVLink commands"
+msgstr "MAVLink 命令"
+
+#: ../../source/docs/common-lua-scripts.rst:127
+#: 7e55ffdad9fa42bea385adc8ded94d4d
+msgid ""
+"The full set of MAVLink commands can be executed from within a LUA script. "
+"An `example is shown here "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/examples/command_int.lua>`_."
+msgstr ""
+"完整的 MAVLink 命令集可以从 LUA 脚本内执行。`示例在此 "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/examples/command_int.lua>`_。"
+
+#: ../../source/docs/common-lua-scripts.rst:130
+#: 6e45ba50eb1a410fa1e3edcea6953626
+msgid "API Documentation"
+msgstr "API 文档"
+
+#: ../../source/docs/common-lua-scripts.rst:132
+#: 088a52481baf4cd9a6900412f5e9150e
+msgid ""
+"The API documentation described here is not a complete list, but rather some"
+" examples.  For a full list of the methods currently available, the LUA "
+"auto-generated document file is a complete list. `It can be found here "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/docs/docs.lua>`__"
+"  and lists all the available bindings and their parameters."
+msgstr ""
+"此处描述的 API 文档并不是完整列表，而是一些示例。有关当前可用方法的完整列表，LUA 自动生成的文档文件是完整列表。`可在此处找到 "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/docs/docs.lua>`__，列出了所有可用绑定及其参数。"
+
+#: ../../source/docs/common-lua-scripts.rst:135
+#: 259b6a93d8184abdafe2fb268b563f8c
+msgid ""
+"If you use VScode for your editor, by installing `this "
+"<https://marketplace.visualstudio.com/items?itemName=sumneko.lua>`__ lua "
+"extension (version 2.4.1 only as of now), you can get this information "
+"integrated as suggestions and autocomplete in the editor."
+msgstr ""
+"如果您使用 VScode 作为编辑器，通过安装 `此 "
+"<https://marketplace.visualstudio.com/items?itemName=sumneko.lua>`__ lua "
+"扩展（目前仅版本 2.4.1），可以在编辑器中获得集成的建议和自动补全信息。"
+
+#: ../../source/docs/common-lua-scripts.rst 549ac37251e340be9fe4a8c6188eb63a
+msgid ""
+"If you are still getting \"Undefined global\" errors and no completions, you"
+" may need to set path in your local copy of ``ardupilot`` repository in the "
+"`settings <https://code.visualstudio.com/docs/getstarted/settings>`_, for "
+"example:"
+msgstr ""
+"如果您仍然遇到 「Undefined global」 错误且没有补全，可能需要在 `设置 "
+"<https://code.visualstudio.com/docs/getstarted/settings>`_ 中设置本地 "
+"``ardupilot`` 仓库的路径，例如："
+
+#: ../../source/docs/common-lua-scripts.rst 512cf19f38b3433a8e74ca53330f1899
+msgid ""
+"``\"Lua.workspace.library\": [ "
+"\"~/repos/ardupilot/libraries/AP_Scripting/docs\" ]``"
+msgstr ""
+"``\"Lua.workspace.library\": [ "
+"\"~/repos/ardupilot/libraries/AP_Scripting/docs\" ]``"
+
+#: ../../source/docs/common-lua-scripts.rst:140
+#: 71eca2f2718b4df090b60a110fee12d7
+msgid ""
+"For complete information on how a binding works the source can be found in "
+"the `binding generator descriptions "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/generator/description/bindings.desc>`_"
+" ."
+msgstr ""
+"有关绑定工作原理的完整信息，源码可在 `绑定生成器描述 "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/generator/description/bindings.desc>`_"
+" 中找到。"
+
+#: ../../source/docs/common-lua-scripts.rst:142
+#: e7ede9d540784fba901280d1984a6271
+msgid ""
+"See :ref:`Binding Description Method Syntax<common-lua-binding-syntax>` for "
+"more information on how to decode the methods shown there. ArduPilot uses "
+"Lua version 5.3.5."
+msgstr ""
+"更多关于如何解读所示方法的信息，请参见 :ref:`绑定描述方法语法 <common-lua-binding-syntax>`。ArduPilot 使用"
+" Lua 版本 5.3.5。"
+
+#: ../../source/docs/common-lua-scripts.rst:145
+#: 1a6e1182538a4ed48e29098680e619c5
+msgid "Location"
+msgstr "Location"
+
+#: ../../source/docs/common-lua-scripts.rst:147
+#: d6fafef2c01a430191b04491e1ccc505
+msgid ""
+"Location is a userdata object that holds locations expressed as latitude, "
+"longitude, altitude. The altitude can be in several different frames, "
+"relative to home, absolute altitude above mean sea level, or relative to "
+"terrain. To create a new Location userdata you can call Location() to "
+"allocate an empty location object, or call a method that returns one to you."
+msgstr ""
+"Location 是一个用户数据对象，以纬度、经度、高度的形式表示位置。高度可以有多种坐标系，即相对于 Home "
+"点、相对于平均海平面的绝对高度或相对于地形。要创建新的 Location 用户数据，可以调用 Location() 分配一个空的位置对象，或调用某个返回"
+" Location 的方法。"
+
+#: ../../source/docs/common-lua-scripts.rst:149
+#: 2c01beb590fd4b80b83bb3d1c6db150c
+msgid "A Location userdata object supports the following calls:"
+msgstr "Location 用户数据对象支持以下调用："
+
+#: ../../source/docs/common-lua-scripts.rst:151
+#: 7ed6b7ac103045708adf7e7647b5bf4f
+msgid ""
+":code:`lat( [new_lat] )` - If called with no arguments, returns the current "
+"latitude in degrees * 1e7 as an integer. If called with one argument, it "
+"will assign the value to the latitude."
+msgstr ""
+":code:`lat( [new_lat] )` - 如果不带参数调用，则以整数形式返回当前纬度（度 * "
+"1e7）。如果带一个参数调用，则将该值赋给纬度。"
+
+#: ../../source/docs/common-lua-scripts.rst:153
+#: ea6e0b7c2965467d88aa4da7fd9055a1
+msgid ""
+":code:`lng( [new_lng] )` - If called with no arguments, returns the current "
+"longitude in degrees * 1e7 as an integer. If called with one argument, it "
+"will assign the value to the longitude."
+msgstr ""
+":code:`lng( [new_lng] )` - 如果不带参数调用，则以整数形式返回当前经度（度 * "
+"1e7）。如果带一个参数调用，则将该值赋给经度。"
+
+#: ../../source/docs/common-lua-scripts.rst:155
+#: cc0a4267ac5d4653906d511e9d9f9b53
+msgid ""
+":code:`alt( [new_alt] )` - If called with no arguments, returns the current "
+"altitude in cm as an integer. If called with one argument, it will assign "
+"the value to the altitude."
+msgstr ""
+":code:`alt( [new_alt] )` - 如果不带参数调用，则以整数形式返回当前高度（厘米）。如果带一个参数调用，则将该值赋给高度。"
+
+#: ../../source/docs/common-lua-scripts.rst:157
+#: a61d417420ad48c8a931ff17fed530a2
+msgid ""
+":code:`relative_alt( [is_relative] )` - If called with no arguments returns "
+"true if the location is planned as relative to home. If called with a "
+"boolean value this will set the relative altitude."
+msgstr ""
+":code:`relative_alt( [is_relative] )` - 如果不带参数调用，则当位置规划为相对于 Home 点时返回 "
+"true。如果带布尔值调用，则设置相对高度标志。"
+
+#: ../../source/docs/common-lua-scripts.rst:159
+#: 76c910ff1d0345b5b812d64d3656fe51
+msgid ""
+":code:`terrain_alt( [is_terrain] )` - If called with no arguments returns "
+"true if the location is planned as relative to terrain. If called with a "
+"boolean value this will flag if the altitude should be relative to terrain."
+msgstr ""
+":code:`terrain_alt( [is_terrain] )` - 如果不带参数调用，则当位置规划为相对于地形时返回 "
+"true。如果带布尔值调用，则设置是否相对地形的标志。"
+
+#: ../../source/docs/common-lua-scripts.rst:161
+#: 5305405a01634e158168b3c6a2e9375a
+msgid ""
+":code:`origin_alt( [is_origin] )` - If called with no arguments returns true"
+" if the location is planned in absolute altitude relative to mean sea level."
+" If called with a boolean value this will set the altitude to be relative to"
+" mean sea level."
+msgstr ""
+":code:`origin_alt( [is_origin] )` - 如果不带参数调用，则当位置规划为相对于平均海平面的绝对高度时返回 "
+"true。如果带布尔值调用，则设置高度为相对于平均海平面。"
+
+#: ../../source/docs/common-lua-scripts.rst:163
+#: 9f5f16adfa6644cca612709b212a85e5
+msgid ""
+":code:`loiter_xtrack( [should_xtrack] )` - If the location is used for a "
+"loiter location this flags if the aircraft should track from the center "
+"point, or from the exit location of the loiter."
+msgstr ""
+":code:`loiter_xtrack( [should_xtrack] )` - "
+"如果该位置用于盘旋位置，此标志指示飞机是否应从中心点还是从盘旋退出位置进行航迹跟踪。"
+
+#: ../../source/docs/common-lua-scripts.rst:165
+#: 09ff47e167b346b18dd7bae5eb9a5a4b
+msgid ""
+":code:`get_distance( other_Location )` - Given a Location this calculates "
+"the horizontal distance between the two locations in meters."
+msgstr ""
+":code:`get_distance( other_Location )` - 给定一个 Location，计算两个位置之间的水平距离（米）。"
+
+#: ../../source/docs/common-lua-scripts.rst:167
+#: 15244486a76e482d8ecf69cf705e0b7a
+msgid ""
+":code:`offset( offset_north ,  offset_east )` - Translates this Location by "
+"the specified number of meters."
+msgstr ":code:`offset( offset_north ,  offset_east )` - 将此 Location 按指定的米数偏移。"
+
+#: ../../source/docs/common-lua-scripts.rst:169
+#: 78d8666838474995ade6b78186b54da8
+msgid ""
+":code:`get_vector_from_origin_NEU()` - Returns nil or Vector3f that contains"
+" the offset from the EKF origin to this location. This will return nil if "
+"the EKF origin wasn’t available at the time this was called."
+msgstr ""
+":code:`get_vector_from_origin_NEU()` - 返回 nil 或包含从 EKF 原点到此位置偏移量的 "
+"Vector3f。如果调用时 EKF 原点不可用，则返回 nil。"
+
+#: ../../source/docs/common-lua-scripts.rst:171
+#: cff563e0d1f54cd9b8113a20846bb1bf
+msgid ""
+":code:`get_bearing( other_Location )` - Given a Location this calculates the"
+" relative bearing to the location in radians"
+msgstr ""
+":code:`get_bearing( other_Location )` - 给定一个 Location，计算到该位置的相对方位角（弧度）。"
+
+#: ../../source/docs/common-lua-scripts.rst:173
+#: 0326b27b1444468fa23386a6234b6770
+msgid ""
+":code:`get_distance_NED( other_Location )` - Returns nil or Vector3f that "
+"contains the 3D vector in meters to the other Location."
+msgstr ""
+":code:`get_distance_NED( other_Location )` - 返回 nil 或包含到另一个 Location "
+"的三维向量（米）的 Vector3f。"
+
+#: ../../source/docs/common-lua-scripts.rst:175
+#: e55f26e2d13d49069ea91e3104df0776
+msgid ""
+":code:`get_distance_NE( other_Location )` - Returns nil or Vector2f that "
+"contains the 2D vector in meters to the other Location."
+msgstr ""
+":code:`get_distance_NE( other_Location )` - 返回 nil 或包含到另一个 Location "
+"的二维向量（米）的 Vector2f。"
+
+#: ../../source/docs/common-lua-scripts.rst:178
+#: 78975540beac40c99f9b2cb9f03d95c1
+msgid "Vector2f"
+msgstr "Vector2f"
+
+#: ../../source/docs/common-lua-scripts.rst:180
+#: 8cf06d9681a8483d98602f69ea01115e
+msgid ""
+"Vector2f is a userdata object that holds a 2D vector. The components are "
+"stored as floating point numbers. To create a new Vector2f you can call "
+"Vector2f() to allocate a new one, or call a method that returns one to you."
+msgstr ""
+"Vector2f 是一个存储二维向量的用户数据对象，各分量以浮点数形式存储。要创建新的 Vector2f，可以调用 Vector2f() "
+"分配一个新对象，或调用某个返回 Vector2f 的方法。"
+
+#: ../../source/docs/common-lua-scripts.rst:182
+#: a034cc7f3bc649108672b4190de95336
+msgid "A Vector2f object supports the following calls:"
+msgstr "Vector2f 对象支持以下调用："
+
+#: ../../source/docs/common-lua-scripts.rst:184
+#: ../../source/docs/common-lua-scripts.rst:211
+#: 0c6b679a855c4923853ce110e0f8fb95 650c7b5369eb435bb08f6100670f8b28
+msgid ""
+":code:`x( [new_x] )` - If called with no arguments, return the currently set"
+" X component as a floating point number. If called with one argument it will"
+" assign the value to the X component."
+msgstr ":code:`x( [new_x] )` - 如果不带参数调用，则以浮点数返回当前 X 分量。如果带一个参数调用，则将该值赋给 X 分量。"
+
+#: ../../source/docs/common-lua-scripts.rst:186
+#: ../../source/docs/common-lua-scripts.rst:213
+#: 15de476962144afbab670651122e4a2c b518ce9e866c4e8d8e3eae380f1c50f1
+msgid ""
+":code:`y( [new_y] )` - If called with no arguments, return the currently set"
+" Y component as a floating point number. If called with one argument it will"
+" assign the value to the Y component."
+msgstr ":code:`y( [new_y] )` - 如果不带参数调用，则以浮点数返回当前 Y 分量。如果带一个参数调用，则将该值赋给 Y 分量。"
+
+#: ../../source/docs/common-lua-scripts.rst:188
+#: ../../source/docs/common-lua-scripts.rst:217
+#: 5c6ac271e96a4c22ab85cc19cb84a846 844ba9e41fd94611b49cbccc57a09c98
+msgid ""
+":code:`length()` - Returns the length of the vector as a floating point "
+"number."
+msgstr ":code:`length()` - 以浮点数返回向量的长度。"
+
+#: ../../source/docs/common-lua-scripts.rst:190
+#: ../../source/docs/common-lua-scripts.rst:219
+#: 26dbfa01cddc4f7a8e861260db20f6eb 6710a32383074a908587b9d5110ed866
+msgid ":code:`normalize()` - Normalizes the vector to be a unit vector."
+msgstr ":code:`normalize()` - 将向量归一化为单位向量。"
+
+#: ../../source/docs/common-lua-scripts.rst:192
+#: ../../source/docs/common-lua-scripts.rst:221
+#: c74515e7c2d241bcb73a5e257e86819b dc793f63216f443cb7d234e03d7d282f
+msgid ""
+":code:`is_nan()` - Returns true if the vector contains any NaN members."
+msgstr ":code:`is_nan()` - 如果向量包含任何 NaN 成员则返回 true。"
+
+#: ../../source/docs/common-lua-scripts.rst:194
+#: ../../source/docs/common-lua-scripts.rst:223
+#: 120ae73f6fe04babb2a2bca6cce1fb3e 3c7bec8851274cef8be8fc8a2e06e916
+msgid ""
+":code:`is_inf()` - Returns true if the vector contains any infinity members."
+msgstr ":code:`is_inf()` - 如果向量包含任何无穷大成员则返回 true。"
+
+#: ../../source/docs/common-lua-scripts.rst:196
+#: ../../source/docs/common-lua-scripts.rst:225
+#: 351d3819f9454fc1acf2755867e458a1 c2159e9d78ac45a8af571636d2c41d8a
+msgid ":code:`is_zero()` - Returns true if all the vector fields are 0."
+msgstr ":code:`is_zero()` - 如果所有向量字段均为 0 则返回 true。"
+
+#: ../../source/docs/common-lua-scripts.rst:198
+#: 85cae77e3f5d49669b272a3b74f328af
+msgid "The following operators are supported on a Vector2f:"
+msgstr "Vector2f 支持以下运算符："
+
+#: ../../source/docs/common-lua-scripts.rst:200
+#: ../../source/docs/common-lua-scripts.rst:229
+#: 7d9739db51da43ea89429bb11ef9efaf ccf615a322064032a3a6a18a95c45d2e
+msgid ":code:`+` - Adds the two vectors by components."
+msgstr ":code:`+` - 按分量相加两个向量。"
+
+#: ../../source/docs/common-lua-scripts.rst:202
+#: ../../source/docs/common-lua-scripts.rst:231
+#: 29298e2ea6e9408895f9c010bc33f69f ae3820decb034c97aa8d22140593b60d
+msgid ":code:`-` - Subtracts the two vectors by components."
+msgstr ":code:`-` - 按分量相减两个向量。"
+
+#: ../../source/docs/common-lua-scripts.rst:205
+#: c7511c1f25ee4800b051ca8f3e864f30
+msgid "Vector3f"
+msgstr "Vector3f"
+
+#: ../../source/docs/common-lua-scripts.rst:207
+#: c9c144896d2543c1baf845568c5dd35d
+msgid ""
+"Vector3f is a userdata object that holds a 3D vector. The components are "
+"stored as floating point numbers. To create a new Vector3f you can call "
+"Vector3f() to allocate a new one, or call a method that returns one to you."
+msgstr ""
+"Vector3f 是一个存储三维向量的用户数据对象，各分量以浮点数形式存储。要创建新的 Vector3f，可以调用 Vector3f() "
+"分配一个新对象，或调用某个返回 Vector3f 的方法。"
+
+#: ../../source/docs/common-lua-scripts.rst:209
+#: a10437390ad346729ea183ccd293cd47
+msgid "A Vector3f object supports the following calls:"
+msgstr "Vector3f 对象支持以下调用："
+
+#: ../../source/docs/common-lua-scripts.rst:215
+#: fe5f641c22f84c45bb9a6149548c02f3
+msgid ""
+":code:`z( [new_z] )` - If called with no arguments, return the currently set"
+" Z component as a floating point number. If called with one argument it will"
+" assign the value to the Z component."
+msgstr ":code:`z( [new_z] )` - 如果不带参数调用，则以浮点数返回当前 Z 分量。如果带一个参数调用，则将该值赋给 Z 分量。"
+
+#: ../../source/docs/common-lua-scripts.rst:227
+#: d9b05db754c4430f988bb0cc09f8d99d
+msgid "The following operators are supported on a Vector3f:"
+msgstr "Vector3f 支持以下运算符："
+
+#: ../../source/docs/common-lua-scripts.rst:234
+#: 18a9cd12588843f99972f52a8ffe719e
+msgid "AHRS (ahrs:)"
+msgstr "AHRS (ahrs:)"
+
+#: ../../source/docs/common-lua-scripts.rst:236
+#: 682ae5a6f1ac4f1bbf00013e27c21b92
+msgid ""
+"The ahrs library represents the Attitude Heading Reference System computed "
+"by the autopilot. It provides estimates for the vehicles attitude, and "
+"position."
+msgstr "ahrs 库代表飞控计算的姿态航向参考系统（AHRS），提供飞行器姿态和位置的估计。"
+
+#: ../../source/docs/common-lua-scripts.rst:238
+#: 1446ea0f9e92485fa82445bd9a71c04a
+msgid ""
+":code:`get_roll()` - Returns the current vehicle roll angle in radians."
+msgstr ":code:`get_roll()` - 返回当前飞行器横滚角（弧度）。"
+
+#: ../../source/docs/common-lua-scripts.rst:240
+#: aee90fdca7134021aa079a5a7415738e
+msgid ""
+":code:`get_pitch()` - Returns the current vehicle pitch angle in radians."
+msgstr ":code:`get_pitch()` - 返回当前飞行器俯仰角（弧度）。"
+
+#: ../../source/docs/common-lua-scripts.rst:242
+#: 56ebc975d86f409abd8b93d61fbcbd65
+msgid ":code:`get_yaw()` - Returns the current vehicle yaw angle in radians."
+msgstr ":code:`get_yaw()` - 返回当前飞行器偏航角（弧度）。"
+
+#: ../../source/docs/common-lua-scripts.rst:244
+#: cbdd4bf15081417780d4372956a996eb
+msgid ""
+":code:`get_position()` - Returns nil or Location userdata that contains the "
+"vehicles current position. Note: This will only return a Location if the "
+"system considers the current estimate to be reasonable."
+msgstr ""
+":code:`get_position()` - 返回 nil 或包含飞行器当前位置的 Location "
+"用户数据。注意：仅在系统认为当前估计合理时才返回 Location。"
+
+#: ../../source/docs/common-lua-scripts.rst:246
+#: b04ba8e041484644ad91e020fec574e4
+msgid ""
+":code:`get_home()` - Returns a Location that contains the vehicles current "
+"home waypoint."
+msgstr ":code:`get_home()` - 返回包含飞行器当前 Home 航点的 Location。"
+
+#: ../../source/docs/common-lua-scripts.rst:248
+#: dc0090fcb80841cb99766ca5fa767b44
+msgid ""
+":code:`get_gyro()` - Returns a Vector3f containing the current smoothed and "
+"filtered gyro rates (in radians/second)"
+msgstr ":code:`get_gyro()` - 返回包含当前平滑滤波后陀螺仪速率（弧度/秒）的 Vector3f。"
+
+#: ../../source/docs/common-lua-scripts.rst:250
+#: c916e74a09034ac0b6e27301a81da058
+msgid ""
+":code:`get_hagl()` - Returns nil, or the latest altitude estimate above "
+"ground level in meters"
+msgstr ":code:`get_hagl()` - 返回 nil，或最新的离地高度估计（米）。"
+
+#: ../../source/docs/common-lua-scripts.rst:252
+#: a29a0e2f07e2418f94bd2dbac816b1c2
+msgid ""
+":code:`wind_estimate()` - Returns a Vector3f containing the current wind "
+"estimate for the vehicle."
+msgstr ":code:`wind_estimate()` - 返回包含飞行器当前风速估计的 Vector3f。"
+
+#: ../../source/docs/common-lua-scripts.rst:254
+#: 7cc10c03214d4affb8e4d2866c382a6a
+msgid ""
+":code:`groundspeed_vector()` - Returns a Vector2f containing the vehicles "
+"velocity in meters/second in north and east components."
+msgstr ":code:`groundspeed_vector()` - 返回包含飞行器北向和东向速度分量（米/秒）的 Vector2f。"
+
+#: ../../source/docs/common-lua-scripts.rst:256
+#: 26f345297151465683eeb6cce7e7f562
+msgid ""
+":code:`get_velocity_NED()` - Returns nil, or a Vector3f containing the "
+"current NED vehicle velocity in meters/second in north, east, and down "
+"components."
+msgstr ""
+":code:`get_velocity_NED()` - 返回 nil，或包含当前 NED 飞行器速度（米/秒，北、东、下分量）的 Vector3f。"
+
+#: ../../source/docs/common-lua-scripts.rst:258
+#: f5c862e96b3845aca6b2223834547dbd
+msgid ""
+":code:`get_velocity_NE()` - Returns nil, or a Vector2f containing the "
+"current NE vehicle velocity in meters/second in north and east components."
+msgstr ""
+":code:`get_velocity_NE()` - 返回 nil，或包含当前 NE 飞行器速度（米/秒，北向和东向分量）的 Vector2f。"
+
+#: ../../source/docs/common-lua-scripts.rst:260
+#: 0e15f37b3edf458eb3a1a0759c25a834
+msgid ":code:`home_is_set()` - Returns a true if home position has been set."
+msgstr ":code:`home_is_set()` - 如果 Home 位置已设置则返回 true。"
+
+#: ../../source/docs/common-lua-scripts.rst:262
+#: ee9a8630b90a4c12bd5d59942a30d4e8
+msgid ""
+":code:`prearm_healthy()` - Returns a true if current pre-arm checks are "
+"passing."
+msgstr ":code:`prearm_healthy()` - 如果当前解锁前检查全部通过则返回 true。"
+
+#: ../../source/docs/common-lua-scripts.rst:264
+#: 4f514f4eb7aa4c659abd48ca08cd3d9b
+msgid ""
+":code:`airspeed_estimate()` - Returns current airspeed estimate in "
+"meters/second or nil."
+msgstr ":code:`airspeed_estimate()` - 返回当前空速估计（米/秒）或 nil。"
+
+#: ../../source/docs/common-lua-scripts.rst:268
+#: b7f474e3095e41b3b8d139f7f1a470a0
+msgid "Arming (arming:)"
+msgstr "Arming (arming:)"
+
+#: ../../source/docs/common-lua-scripts.rst:270
+#: 8d7e883976044b7d850ee91d686955b1
+msgid "The Arming library provides access to arming status and commands."
+msgstr "Arming 库提供对解锁状态和解锁指令的访问。"
+
+#: ../../source/docs/common-lua-scripts.rst:272
+#: f600a04d1a6743798b9cf8112e4d723d
+msgid ""
+":code:`disarm()` - Disarms the vehicle in all cases. Returns false only if "
+"already disarmed."
+msgstr ":code:`disarm()` - 在任何情况下均对飞行器上锁。仅在已上锁时返回 false。"
+
+#: ../../source/docs/common-lua-scripts.rst:274
+#: 5cb562f65a1449e6ace41f0e74baa05c
+msgid ":code:`is_armed()` -Returns a true if vehicle is currently armed."
+msgstr ":code:`is_armed()` - 如果飞行器当前已解锁则返回 true。"
+
+#: ../../source/docs/common-lua-scripts.rst:276
+#: 8c9fd03da34a4b34ae823b0e72672f94
+msgid ""
+":code:`arm()` - Attempts to arm the vehicle. Returns true if successful."
+msgstr ":code:`arm()` - 尝试解锁飞行器。成功则返回 true。"
+
+#: ../../source/docs/common-lua-scripts.rst:280
+#: 9773205413bb42469f81439050a0c2f9
+msgid "Battery (battery:)"
+msgstr "Battery (battery:)"
+
+#: ../../source/docs/common-lua-scripts.rst:282
+#: 42479fb23f7342a6a3d505c98252ca5d
+msgid ""
+"The battery library provides access to information about the currently "
+"connected batteries on the vehicle."
+msgstr "battery 库提供对飞行器当前连接电池信息的访问。"
+
+#: ../../source/docs/common-lua-scripts.rst:284
+#: 3a51816468084034853c840ef599e79b
+msgid ""
+":code:`num_instances()` - Returns the number of battery instances currently "
+"available."
+msgstr ":code:`num_instances()` - 返回当前可用的电池实例数量。"
+
+#: ../../source/docs/common-lua-scripts.rst:286
+#: ef49d80c82fd44f497dcb7d9420cc683
+msgid ""
+":code:`healthy( instance )` - Returns true if the requested battery instance"
+" is healthy. Healthy is considered to be ArduPilot is currently able to "
+"monitor the battery."
+msgstr ""
+":code:`healthy( instance )` - 如果请求的电池实例正常则返回 true。「正常」指 ArduPilot 当前能够监控该电池。"
+
+#: ../../source/docs/common-lua-scripts.rst:288
+#: 9cf9f20f6cce4d39ac73ff6b4b9874f5
+msgid ""
+":code:`voltage( instance )` - Returns the voltage of the selected battery "
+"instance."
+msgstr ":code:`voltage( instance )` - 返回所选电池实例的电压。"
+
+#: ../../source/docs/common-lua-scripts.rst:290
+#: 4130e47a7f3b4981aef2f2f30f3e727a
+msgid ""
+":code:`voltage_resting( instance )` - Returns the estimated battery voltage "
+"if it was not under load."
+msgstr ":code:`voltage_resting( instance )` - 返回电池在无负载情况下的估计电压。"
+
+#: ../../source/docs/common-lua-scripts.rst:292
+#: 5aaf158d70544664a6d9304f82bc0ba6
+msgid ""
+":code:`current_amps( instance )` - Returns the current (in Amps) that is "
+"currently being consumed by the battery, or nil if current monitoring is not"
+" available."
+msgstr ":code:`current_amps( instance )` - 返回电池当前消耗的电流（安培），如果不支持电流监控则返回 nil。"
+
+#: ../../source/docs/common-lua-scripts.rst:294
+#: f50f6737707442ffbf402492d1fa356b
+msgid ""
+":code:`consumed_mah( instance )` - Returns the capacity (in milliamp hours) "
+"used from the battery, or nil if current monitoring is not available."
+msgstr ":code:`consumed_mah( instance )` - 返回电池已消耗的容量（毫安时），如果不支持电流监控则返回 nil。"
+
+#: ../../source/docs/common-lua-scripts.rst:296
+#: 57d0fc58d6064a9295a554fd75e2381f
+msgid ""
+":code:`consumed_wh( instance )` - Returns the used watt hours from the "
+"battery, or nil if energy monitoring is not available."
+msgstr ":code:`consumed_wh( instance )` - 返回电池已消耗的瓦时，如果不支持能量监控则返回 nil。"
+
+#: ../../source/docs/common-lua-scripts.rst:298
+#: c6ade73425ec42c287dad4bdb33091a9
+msgid ""
+":code:`capacity_remaining_pct( instance )` - Returns the remaining "
+"percentage of battery (from 0 to 100)"
+msgstr ":code:`capacity_remaining_pct( instance )` - 返回电池剩余电量百分比（0 到 100）。"
+
+#: ../../source/docs/common-lua-scripts.rst:300
+#: 92a52dc158a14963bfed242d7033f999
+msgid ""
+":code:`pack_capacity_mah( instance )` - Returns the full pack capacity (in "
+"milliamp hours) from the battery."
+msgstr ":code:`pack_capacity_mah( instance )` - 返回电池的满充容量（毫安时）。"
+
+#: ../../source/docs/common-lua-scripts.rst:302
+#: aa45a145ad6f4288bd7708c4c2ac59ef
+msgid ""
+":code:`has_failsafed()` - Returns true if any of the batteries being "
+"monitored have triggered a failsafe."
+msgstr ":code:`has_failsafed()` - 如果任何被监控的电池触发了失控保护则返回 true。"
+
+#: ../../source/docs/common-lua-scripts.rst:304
+#: eca16af06adf41c7b9b8441ab77782fe
+msgid ""
+":code:`overpower_detected( instance )` - Returns true if too much power is "
+"being drawn from the battery being monitored."
+msgstr ":code:`overpower_detected( instance )` - 如果被监控的电池正在输出过多功率则返回 true。"
+
+#: ../../source/docs/common-lua-scripts.rst:306
+#: 1a55779650654858ae35caab319a686f
+msgid ""
+":code:`get_temperature( instance )` - Returns the temperature of the battery"
+" in degrees Celsius if the battery supports temperature monitoring."
+msgstr ":code:`get_temperature( instance )` - 如果电池支持温度监控，则返回电池温度（摄氏度）。"
+
+#: ../../source/docs/common-lua-scripts.rst:308
+#: f991aad0890f4ae583ec9e21d747b6b5
+msgid ""
+":code:`get_cycle_count( instance )` - Returns cycle count of the battery or "
+"nil if not available."
+msgstr ":code:`get_cycle_count( instance )` - 返回电池循环次数，如果不可用则返回 nil。"
+
+#: ../../source/docs/common-lua-scripts.rst:312
+#: 6a1e840ea2114c86897724113c6fe111
+msgid "GPS (gps:)"
+msgstr "GPS (gps:)"
+
+#: ../../source/docs/common-lua-scripts.rst:314
+#: 6d77c519b7c6405f8b87c0f9d9bc08c1
+msgid ""
+"The GPS library provides access to information about the GPS's on the "
+"vehicle."
+msgstr "GPS 库提供对飞行器 GPS 信息的访问。"
+
+#: ../../source/docs/common-lua-scripts.rst:316
+#: f47010ba5edf4d139bb2e7426523b92f
+msgid ""
+":code:`num_sensors()` - Returns the number of connected GPS devices. If GPS "
+"blending is turned on that will show up as the third sensor, and be reported"
+" here."
+msgstr ""
+":code:`num_sensors()` - 返回已连接 GPS 设备的数量。如果开启 GPS 融合，第三个传感器将代表融合结果并在此统计。"
+
+#: ../../source/docs/common-lua-scripts.rst:318
+#: c342baece6474d3fbdd4af4995b5d3ce
+msgid ""
+":code:`primary_sensor()` - Returns which GPS is currently being used as the "
+"primary GPS device."
+msgstr ":code:`primary_sensor()` - 返回当前被用作主 GPS 设备的 GPS 编号。"
+
+#: ../../source/docs/common-lua-scripts.rst:320
+#: 023eade8a4b8441c921ffa5996318889
+msgid ""
+":code:`status(instance)` - Returns the GPS fix status. Compare this to one "
+"of the GPS fix types (GPS.NO_GPS, GPS.GPS_OK_FIX_2D, GPS.GPS_OK_FIX_3D "
+"GPS.GPS_OK_FIX_3D_DGPS GPS.GPS_OK_FIX_3D_RTK_FLOAT "
+"GPS.GPS_OK_FIX_3D_RTK_FIXED"
+msgstr ""
+":code:`status(instance)` - 返回 GPS "
+"定位状态。与以下定位类型之一对比：GPS.NO_GPS、GPS.GPS_OK_FIX_2D、GPS.GPS_OK_FIX_3D、GPS.GPS_OK_FIX_3D_DGPS、GPS.GPS_OK_FIX_3D_RTK_FLOAT、GPS.GPS_OK_FIX_3D_RTK_FIXED。"
+
+#: ../../source/docs/common-lua-scripts.rst:322
+#: f280ac7ba46e443b82c62dc3d60b9c5d
+msgid ""
+":code:`location( instance )` - Returns a Location userdata for the last GPS "
+"position. You must check the status to know if the location is still "
+"current, if it is NO_GPS, or NO_FIX then it will be returning old data."
+msgstr ""
+":code:`location( instance )` - 返回最后一次 GPS 位置的 Location "
+"用户数据。须检查状态以确认位置是否仍为最新，若为 NO_GPS 或 NO_FIX，则返回的是旧数据。"
+
+#: ../../source/docs/common-lua-scripts.rst:324
+#: 5586df2f532248ab95c22395670a331b
+msgid ""
+":code:`speed_accuracy( instance )` - Returns nil, or the speed accuracy of "
+"the GPS in meters per second, if the information is available for the GPS "
+"instance."
+msgstr ""
+":code:`speed_accuracy( instance )` - 返回 nil，或当该 GPS 实例信息可用时的速度精度（米/秒）。"
+
+#: ../../source/docs/common-lua-scripts.rst:326
+#: 06e105bed9e7434ca36cbc40d3f71c9c
+msgid ""
+":code:`horizontal_accuracy( instance )` - Returns nil, or the horizontal "
+"accuracy of the GPS in meters, if the information is available for the GPS "
+"instance."
+msgstr ""
+":code:`horizontal_accuracy( instance )` - 返回 nil，或当该 GPS 实例信息可用时的水平精度（米）。"
+
+#: ../../source/docs/common-lua-scripts.rst:328
+#: ae9516a11dac4b93bb4e0073d226a22a
+msgid ""
+":code:`vertical_accuracy( instance )` - Returns nil, or the vertical "
+"accuracy of the GPS in meters, if the information is available for the GPS "
+"instance."
+msgstr ""
+":code:`vertical_accuracy( instance )` - 返回 nil，或当该 GPS 实例信息可用时的垂直精度（米）。"
+
+#: ../../source/docs/common-lua-scripts.rst:330
+#: 825c52bf1965428db61d311f837ef8e1
+msgid ""
+":code:`velocity( instance )` - Returns a Vector3f that contains the velocity"
+" as observed by the GPS. You must check the status to know if the velocity "
+"is still current."
+msgstr ""
+":code:`velocity( instance )` - 返回包含 GPS 观测速度的 Vector3f。须检查状态以确认速度是否仍为最新。"
+
+#: ../../source/docs/common-lua-scripts.rst:332
+#: 815bc4593ddd4108b01f4104f859dc77
+msgid ""
+":code:`ground_speed( instance )` - Returns the ground speed of the vehicle "
+"in meters per second. You must check the status to know if the ground speed "
+"is still current."
+msgstr ":code:`ground_speed( instance )` - 返回飞行器地速（米/秒）。须检查状态以确认地速是否仍为最新。"
+
+#: ../../source/docs/common-lua-scripts.rst:334
+#: 63a9b159c9a44ddbb63d69f57a184b53
+msgid ""
+":code:`ground_course( instance )` - Returns the ground course of the vehicle"
+" in degrees. You must check the status to know if the ground course is still"
+" current."
+msgstr ":code:`ground_course( instance )` - 返回飞行器地面航向（度）。须检查状态以确认航向是否仍为最新。"
+
+#: ../../source/docs/common-lua-scripts.rst:336
+#: 39177cbe2bff478bb876d4cb52aa33c8
+msgid ""
+":code:`num_sats( instance )` - Returns the number of satellites that the GPS"
+" is currently tracking."
+msgstr ":code:`num_sats( instance )` - 返回 GPS 当前跟踪的卫星数量。"
+
+#: ../../source/docs/common-lua-scripts.rst:338
+#: f147270696664c30baeb351eefba47c5
+msgid ":code:`time_week( instance )` - Returns the GPS week number."
+msgstr ":code:`time_week( instance )` - 返回 GPS 周数。"
+
+#: ../../source/docs/common-lua-scripts.rst:340
+#: 49a30bcabd7445bc855d0931018f0c98
+msgid ""
+":code:`time_week_ms( instance )` - Returns the number of milliseconds into "
+"the current week."
+msgstr ":code:`time_week_ms( instance )` - 返回当前 GPS 周内的毫秒数。"
+
+#: ../../source/docs/common-lua-scripts.rst:342
+#: 35c8c50c676f40388424bdcb9ee722b8
+msgid ""
+":code:`get_hdop( instance )` - Returns the horizontal dilution of precision "
+"of the GPS instance."
+msgstr ":code:`get_hdop( instance )` - 返回该 GPS 实例的水平精度因子（HDOP）。"
+
+#: ../../source/docs/common-lua-scripts.rst:344
+#: 452c3a88a0ea4deeb30205b8d180903b
+msgid ""
+":code:`get_vdop( instance )` - Returns the vertical dilution of precision of"
+" the GPS instance."
+msgstr ":code:`get_vdop( instance )` - 返回该 GPS 实例的垂直精度因子（VDOP）。"
+
+#: ../../source/docs/common-lua-scripts.rst:346
+#: c243d1879b244220b86fcb27eaaaa353
+msgid ""
+":code:`last_fix_time_ms( instance )` - Returns the time of the last fix in "
+"system milliseconds."
+msgstr ":code:`last_fix_time_ms( instance )` - 返回最后一次定位的系统毫秒时间戳。"
+
+#: ../../source/docs/common-lua-scripts.rst:348
+#: 78e9b97d875243d0816267f009d7c6dd
+msgid ""
+":code:`have_vertical_velocity( instance )` - Returns true if the GPS "
+"instance can report the vertical velocity."
+msgstr ""
+":code:`have_vertical_velocity( instance )` - 如果该 GPS 实例可报告垂直速度则返回 true。"
+
+#: ../../source/docs/common-lua-scripts.rst:350
+#: 953a4ffecd8f4165b7b95982635ce912
+msgid ""
+":code:`get_antenna_offset( instance )` - Returns a Vector3f that contains "
+"the offsets of the GPS in meters in the body frame."
+msgstr ""
+":code:`get_antenna_offset( instance )` - 返回包含 GPS 在机体坐标系中偏移量（米）的 Vector3f。"
+
+#: ../../source/docs/common-lua-scripts.rst:352
+#: 927109b98c174b6e87ed9a1757d72bb8
+msgid ""
+":code:`first_unconfigured_gps()` - Returns nil or the instance number of the"
+" first GPS that has not been fully configured. If all GPS's have been "
+"configured this returns 255 if all the GPS's have been configured."
+msgstr ""
+":code:`first_unconfigured_gps()` - 返回 nil 或第一个未完全配置的 GPS 实例编号。如果所有 GPS "
+"均已配置，则返回 255。"
+
+#: ../../source/docs/common-lua-scripts.rst:356
+#: 7dddbdabf63d4d398ca3e1b6039fbc7a
+msgid "GCS (gcs:)"
+msgstr "GCS (gcs:)"
+
+#: ../../source/docs/common-lua-scripts.rst:358
+#: 1633a207e3ba4da7aad7b53bc4ab5de2
+msgid ""
+":code:`send_text( severity ,  text )` - Will send the text  string with "
+"message severity level . Severity level is :"
+msgstr ":code:`send_text( severity ,  text )` - 以指定消息严重级别发送文本字符串。严重级别为："
+
+#: ../../source/docs/common-lua-scripts.rst:361
+#: ec79de38b4244f2b9895dcdbe05512c9
+msgid "Severity Level"
+msgstr "严重级别"
+
+#: ../../source/docs/common-lua-scripts.rst:361
+#: 5e9163dde5cb4384ac2a916b99a42c35
+msgid "Type"
+msgstr "类型"
+
+#: ../../source/docs/common-lua-scripts.rst:363
+#: f8b3a3f143a7498d834efc7a5af0670e
+msgid "0"
+msgstr "0"
+
+#: ../../source/docs/common-lua-scripts.rst:363
+#: cfefad2f8c204cad943c7d59616f52a8
+msgid "Emergency"
+msgstr "紧急"
+
+#: ../../source/docs/common-lua-scripts.rst:365
+#: 3b0ecb38be6d4e8cb4cdb5ba38a0c42e
+msgid "1"
+msgstr "1"
+
+#: ../../source/docs/common-lua-scripts.rst:365
+#: 25365d43a4ff4740bcead2d7442f9182
+msgid "Alert"
+msgstr "警报"
+
+#: ../../source/docs/common-lua-scripts.rst:367
+#: af3449312333489d98e59d3314df993e
+msgid "2"
+msgstr "2"
+
+#: ../../source/docs/common-lua-scripts.rst:367
+#: e114f53ee8744206962eb6f20907658a
+msgid "Critical"
+msgstr "严重"
+
+#: ../../source/docs/common-lua-scripts.rst:369
+#: 06768a632e954f3dbe5cd69ae1a07482
+msgid "3"
+msgstr "3"
+
+#: ../../source/docs/common-lua-scripts.rst:369
+#: 56754a2172294b11b9d6cc3fc9ddd7da
+msgid "Error"
+msgstr "错误"
+
+#: ../../source/docs/common-lua-scripts.rst:371
+#: 994050ae312f4bf8a68284308bb09863
+msgid "4"
+msgstr "4"
+
+#: ../../source/docs/common-lua-scripts.rst:371
+#: c32ed7e470ad4c87a24e775f4a5a0301
+msgid "Warning"
+msgstr "警告"
+
+#: ../../source/docs/common-lua-scripts.rst:373
+#: 747a7124d2e24ef0a1b2444e1ba5fd2a
+msgid "5"
+msgstr "5"
+
+#: ../../source/docs/common-lua-scripts.rst:373
+#: 2b781e7800264b7fb56cd0ef4c679e89
+msgid "Notice"
+msgstr "通知"
+
+#: ../../source/docs/common-lua-scripts.rst:375
+#: 6f24e49ea1054578ba87df71bcf5cac8
+msgid "6"
+msgstr "6"
+
+#: ../../source/docs/common-lua-scripts.rst:375
+#: c63988128cac433f855ec63c94b6a5b4
+msgid "Info"
+msgstr "信息"
+
+#: ../../source/docs/common-lua-scripts.rst:377
+#: 73b9504b11124b9ab4d9c7c9143041ba
+msgid "7"
+msgstr "7"
+
+#: ../../source/docs/common-lua-scripts.rst:377
+#: f5af95b28e2442fd9ec9647b9c938424
+msgid "Debug"
+msgstr "调试"
+
+#: ../../source/docs/common-lua-scripts.rst:381
+#: 61a6595e032748a4b5a97bd7456d3478
+msgid ""
+":code:`set_message_interval( serial_channel ,  message_type ,  rate )` - "
+"Sets the message_type's update rate on SERIAL(serial_channel). For example, "
+"gcs:set_message_interval(0, 30, 500000) sets SERIAL0 rate for ATTITUDE "
+"message stream (30) to 2.0 Hz (500,000 microseconds)"
+msgstr ""
+":code:`set_message_interval( serial_channel ,  message_type ,  rate )` - 设置 "
+"SERIAL(serial_channel) 上 message_type 的更新速率。例如，gcs:set_message_interval(0, "
+"30, 500000) 将 SERIAL0 的 ATTITUDE 消息流（30）速率设置为 2.0 Hz（500,000 微秒）。"
+
+#: ../../source/docs/common-lua-scripts.rst:384
+#: 7d564548275f4b7e9647dcfc8ee72a1e
+msgid "Serial LED (serialLED:)"
+msgstr "Serial LED (serialLED:)"
+
+#: ../../source/docs/common-lua-scripts.rst:386
+#: 1ad02274c2174d0a9daa2a1999be3508
+msgid ""
+"This library allows the control of WS8212B RGB LED strings via an output "
+"reserved for scripting and  selected by SERVOx_FUNCTION = 94 thru 109 "
+"(Script Out 1 thru 16)"
+msgstr ""
+"该库允许通过为脚本保留的输出（由 SERVOx_FUNCTION = 94 到 109（脚本输出 1 到 16）选择）控制 WS2812B RGB "
+"LED 灯条。"
+
+#: ../../source/docs/common-lua-scripts.rst:388
+#: 22a23678e62c4e47a1533bba1f01208a
+msgid ""
+":code:`set_num_LEDs( output_number ,  number_of_LEDs )` - Sets the "
+"number_of_LEDs in the string on a servo output. output_number is servo "
+"output number 1-16 that the string is attached to with a string having "
+"<number_of_LEDs>."
+msgstr ""
+":code:`set_num_LEDs( output_number ,  number_of_LEDs )` - 设置连接在某舵机输出上的 LED "
+"灯串的 LED 数量。output_number 是灯串所连接的舵机输出编号（1-16），灯串有 <number_of_LEDs> 个 LED。"
+
+#: ../../source/docs/common-lua-scripts.rst:390
+#: dbaf7a1562714106a5ea22f6725c429a
+msgid ""
+":code:`set_RGB( output_number ,  LED_number ,  r , g , b )` - Set the data "
+"for LED_number (1-32) on the string attached servo output_number (1-16) "
+"output to the r,g,b values (0-255)"
+msgstr ""
+":code:`set_RGB( output_number ,  LED_number ,  r , g , b )` - 将连接在舵机输出 "
+"output_number（1-16）上的灯串中 LED_number（1-32）的数据设置为 r, g, b 值（0-255）。"
+
+#: ../../source/docs/common-lua-scripts.rst:392
+#: 840eb1e9fc554d7981893a9eea568271
+msgid ":code:`send()` - Sends the data to the LED strings"
+msgstr ":code:`send()` - 将数据发送到 LED 灯串。"
+
+#: ../../source/docs/common-lua-scripts.rst:396
+#: 64b7e97126d54f8bbab9f506335c8ed8
+msgid "Notify (notify:)"
+msgstr "Notify (notify:)"
+
+#: ../../source/docs/common-lua-scripts.rst:398
+#: 52d7ddb01e6044a8bcb9dde1341520af
+msgid ""
+":code:`play_tune( tune )` - Plays a MML tune through the buzzer on the "
+"vehicle. The tune is provided as a string."
+msgstr ":code:`play_tune( tune )` - 通过飞行器蜂鸣器播放 MML 旋律。旋律以字符串形式提供。"
+
+#: ../../source/docs/common-lua-scripts.rst:400
+#: 0f44993dbd92475da3496fda996a3401
+msgid ""
+"An online `tune tester can be found here "
+"<https://firmware.ardupilot.org/Tools/ToneTester/>`__"
+msgstr "在线 `音调测试器 <https://firmware.ardupilot.org/Tools/ToneTester/>`__"
+
+#: ../../source/docs/common-lua-scripts.rst:404
+#: 182fd0c38d5d4ae3a37229241b76bd97
+msgid "Vehicle (vehicle:)"
+msgstr "Vehicle (vehicle:)"
+
+#: ../../source/docs/common-lua-scripts.rst:406
+#: 2061bc3361ff4902811730dca85fc373
+msgid ""
+":code:`set_mode(mode_number)` - Attempts to change vehicle (in this example "
+"Plane) mode to mode_number. Returns true if successful, false if mode change"
+" is not successful."
+msgstr ""
+":code:`set_mode(mode_number)` - 尝试将飞行器（本例中为固定翼）切换到 mode_number 对应的模式。成功则返回 "
+"true，切换失败则返回 false。"
+
+#: ../../source/docs/common-lua-scripts.rst:408
+#: 3ff8483a4fcd448a956fff80f96d8d9a
+msgid ":code:`get_mode()` - Returns current vehicle mode by mode_number."
+msgstr ":code:`get_mode()` - 以 mode_number 返回飞行器当前模式。"
+
+#: ../../source/docs/common-lua-scripts.rst:410
+#: 558d2983f52149a5a994290373f5d9fd
+msgid ""
+"Mode numbers for each vehicle type can be `found here "
+"<https://mavlink.io/en/messages/ardupilotmega.html#PLANE_MODE>`__"
+msgstr ""
+"各飞行器类型的模式编号可 `在此查看 "
+"<https://mavlink.io/en/messages/ardupilotmega.html#PLANE_MODE>`__。"
+
+#: ../../source/docs/common-lua-scripts.rst:412
+#: 16e0cd35544f4ebcb50993447ff0ca71
+msgid ""
+":code:`get_likely_flying()` - Returns true if the autopilot thinks it is "
+"flying. Not guaranteed to be accurate."
+msgstr ":code:`get_likely_flying()` - 如果飞控认为飞行器正在飞行则返回 true。不保证完全准确。"
+
+#: ../../source/docs/common-lua-scripts.rst:414
+#: 5989034d4cd6415dac72fa4345b49b92
+msgid ""
+":code:`get_flying_time_ms()` - Returns time in milliseconds since the "
+"autopilot thinks it started flying, or zero if not currently flying."
+msgstr ":code:`get_flying_time_ms()` - 返回飞控认为飞行开始以来的毫秒数，如果当前未在飞行则返回零。"
+
+#: ../../source/docs/common-lua-scripts.rst:416
+#: 7e34d28889e8453cb12655ad01121619
+msgid ""
+":code:`start_takeoff(altitude)` - Begins auto takeoff to given altitude "
+"above home in meters. Returns false if not available."
+msgstr ""
+":code:`start_takeoff(altitude)` - 开始自动起飞到指定的相对 Home 点高度（米）。如果不可用则返回 false。"
+
+#: ../../source/docs/common-lua-scripts.rst:418
+#: 711d9eb9dd43490d87d5d0dbd2614817
+msgid ""
+":code:`set_target_location(Location)` - Sets target location using a "
+"Location object. Returns false if not successful."
+msgstr ""
+":code:`set_target_location(Location)` - 使用 Location 对象设置目标位置。不成功则返回 false。"
+
+#: ../../source/docs/common-lua-scripts.rst:420
+#: 08c70740078b4f079bee665ab0701145
+msgid ""
+":code:`get_target_location()` - Returns Location object of the current "
+"target location. Returns false if not available."
+msgstr ":code:`get_target_location()` - 返回当前目标位置的 Location 对象。如果不可用则返回 false。"
+
+#: ../../source/docs/common-lua-scripts.rst:422
+#: 16f1baf032fb40418b5aba0c5c6ddbcf
+msgid ""
+":code:`set_target_velocity_NED()` - Sets the target velocity using a "
+"Vector3f object. Returns false if not available."
+msgstr ""
+":code:`set_target_velocity_NED()` - 使用 Vector3f 对象设置目标速度。如果不可用则返回 false。"
+
+#: ../../source/docs/common-lua-scripts.rst:426
+#: 674baa1b773a4ab395ccbd549fb9f44a
+msgid "Terrain (terrain:)"
+msgstr "Terrain (terrain:)"
+
+#: ../../source/docs/common-lua-scripts.rst:429
+#: b4fe0a17a0cd44fb93b089dfe5d63311
+msgid ""
+"The terrain library provides access to checking heights against a terrain "
+"database."
+msgstr "terrain 库提供对地形数据库高度检查的访问。"
+
+#: ../../source/docs/common-lua-scripts.rst:431
+#: 7ef01d6df5b24830830154c5825d89b2
+msgid ":code:`enabled()` - Returns true if terrain is enabled."
+msgstr ":code:`enabled()` - 如果地形跟随已启用则返回 true。"
+
+#: ../../source/docs/common-lua-scripts.rst:433
+#: ece718a579f84b3ca2b40f07977b782d
+msgid ""
+":code:`status()` - Returns the current status of the rangefinder. Compare "
+"this to one of the terrain statuses (terrain.TerrainStatusDisabled, "
+"terrain.TerrainStatusUnhealthy, terrain.TerrainStatusOK)."
+msgstr ""
+":code:`status()` - "
+"返回测距仪的当前状态。与以下地形状态之一对比（terrain.TerrainStatusDisabled、terrain.TerrainStatusUnhealthy、terrain.TerrainStatusOK）。"
+
+#: ../../source/docs/common-lua-scripts.rst:435
+#: 456a81f75b6a4593833adf74cf4537fe
+msgid ""
+":code:`height_amsl( Location )` - Returns the height (in meters) above mean "
+"sea level at the provided Location userdata, or returns nil if that is not "
+"available."
+msgstr ""
+":code:`height_amsl( Location )` - 返回提供的 Location "
+"用户数据处相对于平均海平面的高度（米），如果不可用则返回 nil。"
+
+#: ../../source/docs/common-lua-scripts.rst:438
+#: d3044ba693dc4397b304d6eed69108d1
+msgid ""
+":code:`height_terrain_difference_home( difference, extrapolate)` -  find the"
+" difference between home terrain height and the terrain"
+msgstr ""
+":code:`height_terrain_difference_home( difference, extrapolate)` - 计算 Home "
+"位置地形高度与当前位置地形高度之差（米）。"
+
+#: ../../source/docs/common-lua-scripts.rst:438
+#: 51265d65f6bc4c6da0b1b6c2bac94004
+msgid ""
+"height at the current location in meters. Returns false if not available. If"
+" extrapolate is true, will return based on last valid terrain data."
+msgstr "如果不可用则返回 false。如果 extrapolate 为 true，则基于最后一次有效地形数据返回结果。"
+
+#: ../../source/docs/common-lua-scripts.rst:440
+#: 3d7e38d91be148b99f93a15c40341b3b
+msgid ""
+":code:`height_above_terrain()` - Returns the height (in meters) that the "
+"vehicle is currently above the terrain, or returns nil if that is not "
+"available."
+msgstr ":code:`height_above_terrain()` - 返回飞行器当前离地高度（米），如果不可用则返回 nil。"
+
+#: ../../source/docs/common-lua-scripts.rst:444
+#: 0d104c74e15844749a81b731b51e93b4
+msgid "Relay (relay:)"
+msgstr "Relay (relay:)"
+
+#: ../../source/docs/common-lua-scripts.rst:446
+#: 6cf38c661f3641b08744f06333fdbb16
+msgid "The relay library provides access to controlling relay outputs."
+msgstr "relay 库提供对继电器输出控制的访问。"
+
+#: ../../source/docs/common-lua-scripts.rst:448
+#: 2158d08e88c74f3faef7185830073252
+msgid ":code:`on(relay_num)` - Turns the requested relay on."
+msgstr ":code:`on(relay_num)` - 打开指定继电器。"
+
+#: ../../source/docs/common-lua-scripts.rst:450
+#: 9d6e2263debf4555ad2fbeef5d340e87
+msgid ":code:`off(relay_num)` - Turns the requested relay off."
+msgstr ":code:`off(relay_num)` - 关闭指定继电器。"
+
+#: ../../source/docs/common-lua-scripts.rst:452
+#: 2b7598de2b3d48d3bff75a9ba1a06935
+msgid ""
+":code:`enabled(relay_num)` - Returns true if the requested relay is enabled."
+msgstr ":code:`enabled(relay_num)` - 如果指定继电器已启用则返回 true。"
+
+#: ../../source/docs/common-lua-scripts.rst:454
+#: 75d9e025c3744afea56ecde3880f6869
+msgid ":code:`toggle(relay_num)` - Toggles the requested relay on or off."
+msgstr ":code:`toggle(relay_num)` - 切换指定继电器的开关状态。"
+
+#: ../../source/docs/common-lua-scripts.rst:458
+#: 46d09ce3e33a4fd2a54e9c144ce04f28
+msgid "Servo Channels (SRV_Channels:)"
+msgstr "Servo Channels (SRV_Channels:)"
+
+#: ../../source/docs/common-lua-scripts.rst:460
+#: d5346e531ba14aaeb7a881818a1137a4
+msgid ""
+":code:`find_channel(output_function)` - Returns first servo output number -1"
+" of an output assigned output_function (See ``SERVOx_FUNCTION`` parameters "
+"). False if none is assigned."
+msgstr ""
+":code:`find_channel(output_function)` - 返回分配了 output_function "
+"的第一个舵机输出编号减一（参见 ``SERVOx_FUNCTION`` 参数）。如果未分配则返回 false。"
+
+#: ../../source/docs/common-lua-scripts.rst:462
+#: 0035ae22bd4e4179a580759f5bea6fce
+msgid ""
+":code:`get_output_pwm(output_function)` - Returns first servo output PWM "
+"value an output assigned output_function (See ``SERVOx_FUNCTION`` parameters"
+" ). False if none is assigned."
+msgstr ""
+":code:`get_output_pwm(output_function)` - 返回分配了 output_function 的第一个舵机输出 PWM"
+" 值（参见 ``SERVOx_FUNCTION`` 参数）。如果未分配则返回 false。"
+
+#: ../../source/docs/common-lua-scripts.rst:464
+#: 8329690c429b4f48a1dcea97e666bcde
+msgid ""
+":code:`set_output_pwm_chan_timeout(channel, pwm, timeout)` - Sets servo "
+"channel to specified PWM for a time in ms. This overrides any commands from "
+"the autopilot until the timeout expires."
+msgstr ""
+":code:`set_output_pwm_chan_timeout(channel, pwm, timeout)` - 将舵机通道设置为指定 PWM "
+"值，持续时间为 ms。超时到期前将覆盖飞控的任何指令。"
+
+#: ../../source/docs/common-lua-scripts.rst:467
+#: 1fc6bfe64545482d88f4c42fd0063b9c
+msgid "RC Channels (rc:)"
+msgstr "RC Channels (rc:)"
+
+#: ../../source/docs/common-lua-scripts.rst:469
+#: c6a927f7bc4a458097c6a9e9dbbd07aa
+msgid ""
+":code:`get_pwm()` - Returns the RC input PWM value given a channel number. "
+"Note that channel here is indexed from 1. Returns false if channel is not "
+"available."
+msgstr ""
+":code:`get_pwm()` - 根据通道编号返回 RC 输入 PWM 值。注意通道索引从 1 开始。如果通道不可用则返回 false。"
+
+#: ../../source/docs/common-lua-scripts.rst:473
+#: eefe0de3364d4632b14b894f249f5f31
+msgid "Serial (serial:)"
+msgstr "Serial (serial:)"
+
+#: ../../source/docs/common-lua-scripts.rst:475
+#: 1f677317723e47359548a1b4a0725eee
+msgid ""
+"The serial library provides access to ArduPilot's serial port infrastructure"
+" and associated devices and drivers. The script can communicate with a "
+"device attached to the autopilot using the ``find_serial(instance)`` "
+"function. The script can also itself simulate being a device attached to the"
+" autopilot using the ``find_simulated_device(protocol, instance)`` function "
+"and ``SCR_SDEV*`` parameters."
+msgstr ""
+"serial 库提供对 ArduPilot 串口基础设施及相关设备和驱动程序的访问。脚本可使用 ``find_serial(instance)`` "
+"函数与连接到飞控的设备通信，也可使用 ``find_simulated_device(protocol, instance)`` 函数及 "
+"``SCR_SDEV*`` 参数模拟连接到飞控的设备。"
+
+#: ../../source/docs/common-lua-scripts.rst:477
+#: c430742b6fdd4d3a8dcc83289e0e9de9
+msgid ""
+"``find_serial(instance)`` - Returns a serial access object that allows a "
+"script to interface with a device over a port set to protocol 28 (Scripting)"
+" (e.g. ``SERIALx_PROTOCOL``, though CAN/NET/etc ports work as well). "
+"Instance 0 is the first such port, instance 1 the second, and so on. If the "
+"requested instance is not found, returns ``nil``."
+msgstr ""
+"``find_serial(instance)`` - 返回串口访问对象，允许脚本通过设置为协议 28（Scripting）的端口与设备通信（如 "
+"``SERIALx_PROTOCOL``，CAN/NET 等端口也支持）。实例 0 为第一个此类端口，实例 1 "
+"为第二个，依此类推。如果请求的实例未找到，则返回 ``nil``。"
+
+#: ../../source/docs/common-lua-scripts.rst:479
+#: 0754f9bcdaa64bdd82faccaf18611e08
+msgid ""
+"``find_simulated_device(protocol, instance)`` - Returns a serial access "
+"object that allows a script to simulate a device attached via a specific "
+"protocol. The device protocol is configured by the parameter "
+"``SCR_SDEVx_PROTO``. Instance 0 is the first such protocol, instance 1 the "
+"second, and so on. If the requested instance is not found, or the parameter "
+"``SCR_SDEV_EN`` is disabled, returns ``nil``."
+msgstr ""
+"``find_simulated_device(protocol, instance)`` - "
+"返回串口访问对象，允许脚本模拟通过特定协议连接的设备。设备协议由参数 ``SCR_SDEVx_PROTO`` 配置。实例 0 为第一个此类协议，实例 1"
+" 为第二个，依此类推。如果请求的实例未找到，或参数 ``SCR_SDEV_EN`` 已禁用，则返回 ``nil``。"
+
+#: ../../source/docs/common-lua-scripts.rst:481
+#: 5d6c1460447f481a98137046d4516a16
+msgid ""
+"The objects returned by the above functions support the following methods:"
+msgstr "上述函数返回的对象支持以下方法："
+
+#: ../../source/docs/common-lua-scripts.rst:483
+#: 11d17e29266a48cd8acf947bd8edbb6e
+msgid ""
+"``port:begin(baud_rate)`` - Start communication at the given baud rate. Must"
+" be called to initialize scripting protocol ports (those from "
+"``find_serial``). No effect for device simulation ports (those from "
+"``find_simulated_device``)."
+msgstr ""
+"``port:begin(baud_rate)`` - 以指定波特率开始通信。须调用此方法初始化脚本协议端口（来自 ``find_serial`` "
+"的端口）。对设备模拟端口（来自 ``find_simulated_device`` 的端口）无效。"
+
+#: ../../source/docs/common-lua-scripts.rst:485
+#: 57e2dac3b11746f39f7ba12b159318a8
+msgid ""
+"``port:write(value)`` - Write a single byte. Returns 1 if successful, or 0 "
+"if failed (i.e. buffer space full)."
+msgstr "``port:write(value)`` - 写入单个字节。成功返回 1，失败（如缓冲区已满）返回 0。"
+
+#: ../../source/docs/common-lua-scripts.rst:487
+#: dfbf8d9af1854307abdb855f4dfd0b3b
+msgid ""
+"``port:writestring(data)`` - Write a string. The number of bytes actually "
+"written, i.e. the length of the written prefix of the string, is returned. "
+"It may be 0 up to the length of the string."
+msgstr ""
+"``port:writestring(data)`` - 写入字符串。返回实际写入的字节数，即字符串已写入前缀的长度，范围为 0 到字符串长度。"
+
+#: ../../source/docs/common-lua-scripts.rst:489
+#: 7f50680cd0724f818ba3334845d5339d
+msgid ""
+"``port:read()`` - Read a single byte. Returns the byte if successful, or -1 "
+"if failed (i.e. none available or some other error)."
+msgstr "``port:read()`` - 读取单个字节。成功返回该字节，失败（如无数据或其他错误）返回 -1。"
+
+#: ../../source/docs/common-lua-scripts.rst:491
+#: b6f2bcb68cd049d6a14e50ad339a0fda
+msgid ""
+"``port:readstring(count)`` - Read up to ``count`` bytes and return the bytes"
+" read as a string. No bytes may be read, in which case a 0-length string is "
+"returned. If there is an error, ``nil`` is returned."
+msgstr ""
+"``port:readstring(count)`` - 读取最多 ``count`` 个字节并以字符串形式返回。如果未读取到任何字节，则返回长度为 0"
+" 的字符串。如果发生错误，则返回 ``nil``。"
+
+#: ../../source/docs/common-lua-scripts.rst:493
+#: 773250ff20364ddfb2f2a8dc00c22b70
+msgid ""
+"``port:available()`` - Returns the number of bytes available to read. A read"
+" of the given number of bytes may fail on certain errors or if there is "
+"another reader (e.g. mavlink passthrough), though these are extremely "
+"unlikely occurrences."
+msgstr ""
+"``port:available()`` - 返回可读取的字节数。在某些错误情况下或存在其他读取方（如 mavlink "
+"透传）时，读取指定字节数可能失败，但这种情况极少发生。"
+
+#: ../../source/docs/common-lua-scripts.rst:495
+#: 3e93ef06b69c43168f64ce58c121a3bd
+msgid ""
+"``port:set_flow_control(fcs)`` - Set flow control setting for scripting "
+"protocol ports (those from ``find_serial``). No effect for device simulation"
+" ports (those from ``find_simulated_device``). ``fcs`` can be 0 to disable, "
+"1 to enable, or 2 for automatic mode."
+msgstr ""
+"``port:set_flow_control(fcs)`` - 设置脚本协议端口（来自 ``find_serial`` "
+"的端口）的流控。对设备模拟端口（来自 ``find_simulated_device`` 的端口）无效。``fcs`` 可设为 0（禁用）、1（启用）或"
+" 2（自动模式）。"
+
+#: ../../source/docs/common-lua-scripts.rst:498
+#: 328c6122528241138d18c1fcf34046bf
+msgid "Barometer (baro:)"
+msgstr "Barometer (baro:)"
+
+#: ../../source/docs/common-lua-scripts.rst:500
+#: fd2f2082a2b143bd8c8c9a7c1510a6ab
+msgid ":code:`get_pressure()` - Returns pressure in Pascal."
+msgstr ":code:`get_pressure()` - 返回气压（帕斯卡）。"
+
+#: ../../source/docs/common-lua-scripts.rst:502
+#: f8d7a1d3f4e946079e9067fe493c7a90
+msgid ":code:`get_temperature()` - Returns temperature in degrees C."
+msgstr ":code:`get_temperature()` - 返回温度（摄氏度）。"
+
+#: ../../source/docs/common-lua-scripts.rst:504
+#: cf62f861ad68465e953500dd8f4564d9
+msgid ""
+":code:`get_external_temperature()` - Returns external temperature in degrees"
+" C."
+msgstr ":code:`get_external_temperature()` - 返回外部温度（摄氏度）。"
+
+#: ../../source/docs/common-lua-scripts.rst:508
+#: 82d91a7aa30e43b88b6dc4b0148f67ac
+msgid "ESC Telemetry (esc_telem:)"
+msgstr "ESC Telemetry (esc_telem:)"
+
+#: ../../source/docs/common-lua-scripts.rst:510
+#: 8a55df9cb8414b0f8e434d92d829de79
+msgid ""
+":code:`get_usage_seconds(channel)` - Returns an individual ESC's usage time "
+"in seconds, or false if not available."
+msgstr ""
+":code:`get_usage_seconds(channel)` - 返回指定 ESC 的使用时间（秒），如果不可用则返回 false。"
+
+#: ../../source/docs/common-lua-scripts.rst:514
+#: 74678931b0284ee7bf67a1f551f7491d
+msgid "Parameters (param:)"
+msgstr "Parameters (param:)"
+
+#: ../../source/docs/common-lua-scripts.rst:516
+#: 68b4ad4c457d4767820782d42efed036
+msgid ""
+":code:`get(parameter_name)` - Returns parameter value if available, or nil "
+"if not found."
+msgstr ":code:`get(parameter_name)` - 如果参数可用则返回其值，未找到则返回 nil。"
+
+#: ../../source/docs/common-lua-scripts.rst:518
+#: 1cfa5590c23e42649f1af5ad52341d17
+msgid ""
+":code:`set(parameter_name)` - Sets a parameter by name if available. Returns"
+" true if the parameter is found."
+msgstr ":code:`set(parameter_name)` - 如果参数可用则按名称设置参数。找到参数则返回 true。"
+
+#: ../../source/docs/common-lua-scripts.rst:520
+#: e991918bf051459286012bf863435d18
+msgid ""
+":code:`set_and_save(parameter_name)` Sets and saves a parameter by name if "
+"available. Returns true if the parameter is found."
+msgstr ":code:`set_and_save(parameter_name)` 如果参数可用则按名称设置并保存参数。找到参数则返回 true。"
+
+#: ../../source/docs/common-lua-scripts.rst:524
+#: 8e69ece07af247cf974a1589c45b1ac7
+msgid "RPM (RPM:)"
+msgstr "RPM (RPM:)"
+
+#: ../../source/docs/common-lua-scripts.rst:526
+#: e579a2950988408598c610e344f4e8f3
+msgid ""
+":code:`get_rpm(instance)` - Returns RPM of given instance, or nil if not "
+"available."
+msgstr ":code:`get_rpm(instance)` - 返回指定实例的转速（RPM），如果不可用则返回 nil。"
+
+#: ../../source/docs/common-lua-scripts.rst:530
+#: fa5acae75d664667ac1480e2f1457658
+msgid "Button (button:)"
+msgstr "Button (button:)"
+
+#: ../../source/docs/common-lua-scripts.rst:532
+#: c6843b5fdf264b29992deb0eb950d16e
+msgid ""
+":code:`get_button_state(button_number)` - Returns button state if available."
+" Buttons are 1 indexed."
+msgstr ":code:`get_button_state(button_number)` - 如果可用则返回按键状态。按键编号从 1 开始。"
+
+#: ../../source/docs/common-lua-scripts.rst:535
+#: 8f3000f5fdbb4877ad62ad488ec86c99
+msgid "Servo Output"
+msgstr "Servo Output"
+
+#: ../../source/docs/common-lua-scripts.rst:537
+#: 4531ca50ce66421f896a64fb7e082557
+msgid "This method stands alone and is called directly as shown below."
+msgstr "此方法独立存在，按如下所示直接调用。"
+
+#: ../../source/docs/common-lua-scripts.rst:539
+#: d86c355b796a416b85e051f0a29bc830
+msgid ""
+":code:`servo.set_output (function_number, PWM)` -Sets servo outputs of type "
+"function_number to a PWM value (typically between 1000 and 2000)"
+msgstr ""
+":code:`servo.set_output (function_number, PWM)` - 将 function_number "
+"类型的舵机输出设置为 PWM 值（通常在 1000 到 2000 之间）。"
+
+#: ../../source/docs/common-lua-scripts.rst:543
+#: 1d887a8363dc40488c4187dac035d171
+msgid "Examples"
+msgstr "示例"
+
+#: ../../source/docs/common-lua-scripts.rst:545
+#: dfe114c1e419452aad1fd8dc5fcf035d
+msgid ""
+"See the `code examples folder  "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/examples>`__"
+msgstr ""
+"参见 `代码示例文件夹 "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/examples>`__。"
+
+#: ../../source/docs/common-lua-scripts.rst:548
+#: c305c2df131548bb827ae249fc0b324d
+msgid "How to Add New Bindings"
+msgstr "如何添加新绑定"
+
+#: ../../source/docs/common-lua-scripts.rst:550
+#: a3474b7c071848fa9fb7c27d58e6663f
+msgid ""
+"To give Lua scripts access to more features of ArduPilot the API can be "
+"extended by creating new bindings. The process is as follows:"
+msgstr "要使 Lua 脚本访问 ArduPilot 的更多功能，可通过创建新绑定来扩展 API。流程如下："
+
+#: ../../source/docs/common-lua-scripts.rst:552
+#: 729e0fa5d8d24ae587cab39f8b130abf
+msgid ""
+"Find the method or function you would like to expose to Lua. For example if "
+"you wanted to expose an additional feature of AHRS you would first find the "
+"method within `libraries/AP_AHRS/AP_AHRS.h "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_AHRS/AP_AHRS.h>`__."
+" This can be an already existing method (function) or a method (function) "
+"newly added to the code."
+msgstr ""
+"找到您想向 Lua 公开的方法或函数。例如，如果要公开 AHRS 的额外功能，首先在 `libraries/AP_AHRS/AP_AHRS.h "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_AHRS/AP_AHRS.h>`__"
+" 中找到该方法。这可以是已有方法（函数），也可以是新添加到代码中的方法（函数）。"
+
+#: ../../source/docs/common-lua-scripts.rst:553
+#: a2fd04de15444cfaadba0c2619d06698
+msgid ""
+"Edit the `libraries/AP_Scripting/generator/description/bindings.desc "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/generator/description/bindings.desc>`__"
+" and add a new line in the appropriate section for the method, or add a new "
+"section if a new class shall be added by following the examples of the other"
+" sections."
+msgstr ""
+"编辑 `libraries/AP_Scripting/generator/description/bindings.desc "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/generator/description/bindings.desc>`__，在适当章节添加新行，或按照其他章节的示例添加新章节（如需添加新类）。"
+
+#: ../../source/docs/common-lua-scripts.rst:554
+#: a190fa77e60c44b4be99f056985fcfa0
+msgid ""
+"Add the method or function to `libraries/AP_Scripting/docs/docs.lua "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/docs/docs.lua>`__."
+msgstr ""
+"将方法或函数添加到 `libraries/AP_Scripting/docs/docs.lua "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/docs/docs.lua>`__。"
+
+#: ../../source/docs/common-lua-scripts.rst:555
+#: 3d22440f96d8408886fff7930b5e5732
+msgid ""
+"Clean the distribution (./waf distclean) and restart compilation from there "
+"as usual."
+msgstr "清理发行版（./waf distclean）并从头重新编译。"
+
+#: ../../source/docs/common-lua-scripts.rst:558
+#: 2ed9a8b329da40edb720a83b80256b95
+msgid "Include Lua scripts in firmware directly"
+msgstr "将 Lua 脚本直接嵌入固件"
+
+#: ../../source/docs/common-lua-scripts.rst:560
+#: 40f0f1e649ce4d0f9e5c4ede879611c1
+msgid ""
+"Lua scripts may be directly embedded in firmware binaries, rather than being"
+" placed on an external SD card. This is useful for manufacturer's to provide"
+" the scripts for included peripherals or when the autopilot does not support"
+" an SD card. Instructions to do so are on `this link "
+"<https://ardupilot.org/dev/docs/common-oem-customizations.html#>`__."
+msgstr ""
+"Lua 脚本可直接嵌入固件二进制文件，而无需放在外部 SD 卡上。这对于制造商为随附外设提供脚本，或飞控不支持 SD 卡的情况非常有用。详情请参见 "
+"`此链接 <https://ardupilot.org/dev/docs/common-oem-customizations.html#>`__。"
+
+#: ../../source/docs/common-lua-scripts.rst:564
+#: 5c02d535e37d437e8ea5dfc23e7727a9
+msgid "Further Information"
+msgstr "更多信息"
+
+#: ../../source/docs/common-lua-scripts.rst:571
+#: 07f48fa84a954ce3bef44017b796ad3d
+msgid ""
+"For more background on technical decisions made before this point you can "
+"reference the presentation from the 2019 ArduPilot Unconference."
+msgstr "如需了解此前技术决策的背景，可参考 2019 年 ArduPilot Unconference 上的演示。"

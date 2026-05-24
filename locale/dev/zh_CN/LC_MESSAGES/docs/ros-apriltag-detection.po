@@ -1,0 +1,597 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/ros-apriltag-detection.rst:5
+#: fcae21149ef9413c81a01aaab491a6c9
+msgid "Indoor autonomous flight with ArduCopter, ROS and AprilTag Detection"
+msgstr "基于 ArduCopter、ROS 和 AprilTag 检测的室内自主飞行"
+
+#: ../../source/docs/ros-apriltag-detection.rst:7
+#: ff3e37da0ce247e386fc50b20d425c3e
+msgid ""
+"This wiki page describes how to setup a system capable to realize indoor "
+"autonomous flight. The system is based on a quadcopter with a Raspberry Pi 3"
+" and a USB camera. Images from the camera are used to calculate poses "
+"estimation on the Raspberry Pi and the result are sent as MAVLink messages "
+"to the Flight Controller. The camera is downward looking and on the floor "
+"there is an AprilTag board like this:"
+msgstr ""
+"本 wiki 页面介绍如何搭建能够实现室内自主飞行的系统。该系统基于配备树莓派 3 和 USB "
+"摄像头的四旋翼飞行器。摄像头图像用于在树莓派上计算位姿估计，结果以 MAVLink 消息发送到飞控。摄像头朝下，地板上放置如下所示的 AprilTag "
+"板："
+
+#: ../../source/docs/ros-apriltag-detection.rst:14
+#: 0e2f3633f833486299a92b89b4d09d99
+msgid "System overview"
+msgstr "系统概述"
+
+#: ../../source/docs/ros-apriltag-detection.rst:16
+#: dec49fd46ea24455b7b63601cbcd74e7
+msgid ""
+"The system uses `ROS <http://www.ros.org/>`__ for all the tasks it has to "
+"do. The images from a `USB camera module "
+"<https://www.tindie.com/products/exlene/8mp-usb-camera-module-for-"
+"linuxwind7wind8/>`__ are captured by `usb_cam node "
+"<http://wiki.ros.org/usb_cam>`__, the pose estimations are calculated by "
+"`apriltag_ros node <https://github.com/AprilRobotics/apriltag_ros>`__, then "
+"processed by `vision_to_mavros node "
+"<https://github.com/hoangthien94/vision_to_mavros>`__, and the relevant "
+"messages are sent to the Flight Controller using `MAVROS "
+"<http://wiki.ros.org/mavros>`__. All of theses ROS packages runs on the "
+"Raspberry Pi 3."
+msgstr ""
+"该系统使用 `ROS <http://www.ros.org/>`__ 完成所有任务。`USB 摄像头模块 "
+"<https://www.tindie.com/products/exlene/8mp-usb-camera-module-for-"
+"linuxwind7wind8/>`__ 的图像由 `usb_cam 节点 <http://wiki.ros.org/usb_cam>`__ "
+"采集，位姿估计由 `apriltag_ros 节点 <https://github.com/AprilRobotics/apriltag_ros>`__"
+" 计算，再由 `vision_to_mavros 节点 "
+"<https://github.com/hoangthien94/vision_to_mavros>`__ 处理，相关消息通过 `MAVROS "
+"<http://wiki.ros.org/mavros>`__ 发送到飞控。所有这些 ROS 软件包均在树莓派 3 上运行。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:18
+#: 2cbc3933e4384b0c9f8ecd672fcedb71
+msgid ""
+"The ``usb_cam`` node publishes ``camera/image`` and ``camera/camera_info`` "
+"topics, the ``apriltag_ros`` node subscribes to these topics and publish a "
+"camera_pose message to the ``mavros/vision_pose/pose`` topic, ``mavros`` "
+"translates ROS messages in MAVLink messages and send it to the Flight "
+"Controller."
+msgstr ""
+"``usb_cam`` 节点发布 ``camera/image`` 和 ``camera/camera_info`` "
+"话题，``apriltag_ros`` 节点订阅这些话题并向 ``mavros/vision_pose/pose`` 话题发布 camera_pose "
+"消息，``mavros`` 将 ROS 消息转换为 MAVLink 消息并发送到飞控。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:20
+#: 30f7588d5b4d4776957df8d60f8fa48d
+msgid ""
+"The messages `SET_GPS_GLOBAL_ORIGIN "
+"<https://mavlink.io/en/messages/common.html#SET_GPS_GLOBAL_ORIGIN>`__ and a "
+"`SET_HOME_POSITION "
+"<https://mavlink.io/en/messages/common.html#SET_HOME_POSITION>`__ are sent "
+"before the system is ready to run. Two methods of setting EKF home:"
+msgstr ""
+"系统就绪运行前需发送 `SET_GPS_GLOBAL_ORIGIN "
+"<https://mavlink.io/en/messages/common.html#SET_GPS_GLOBAL_ORIGIN>`__ 和 "
+"`SET_HOME_POSITION "
+"<https://mavlink.io/en/messages/common.html#SET_HOME_POSITION>`__ 消息。设置 EKF "
+"原点的两种方法："
+
+#: ../../source/docs/ros-apriltag-detection.rst:22
+#: ef3e47ecfb2943d4be298af6b530a462
+msgid "with Mission Planner (Right Click > Set EKF Home > Set Origin)"
+msgstr "使用 Mission Planner（右键 > 设置 EKF 原点 > 设置原点）"
+
+#: ../../source/docs/ros-apriltag-detection.rst:24
+#: b3496254e52c431b9486314a1d8a42a1
+msgid ""
+"with the script `set_origin.py "
+"<https://github.com/anbello/aruco_gridboard/blob/master/script/set_origin.py>`__."
+msgstr ""
+"使用脚本 `set_origin.py "
+"<https://github.com/anbello/aruco_gridboard/blob/master/script/set_origin.py>`__。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:26
+#: b683472a043c46f0954aa630558b24f2
+msgid ""
+"The Flight Controller and the Raspberry Pi 3 on the quadcopter are connected"
+" via serial port whereas the Raspberry Pi 3 and the desktop PC are connected"
+" via WiFi. The desktop PC is used only for configuration and visualization "
+"purposes. `RViz <http://wiki.ros.org/rviz>`__ is used for visualization on "
+"PC in ROS."
+msgstr ""
+"四旋翼上的飞控与树莓派 3 通过串口连接，树莓派 3 与台式电脑通过 WiFi 连接。台式电脑仅用于配置和可视化。ROS 中使用 `RViz "
+"<http://wiki.ros.org/rviz>`__ 在电脑上进行可视化。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:29
+#: 3a6bf2f8ac544ec0af2a50c94a9713bd
+msgid "Components of the system"
+msgstr "系统组成"
+
+#: ../../source/docs/ros-apriltag-detection.rst:31
+#: abf647a7d5234cdc87cde758d959ec98
+msgid ""
+"A small quadcopter equipped with `Pixhack Autopilot "
+"<http://www.helipal.com/pixhack-autopilot-kit.html>`__, `CUAV PX4FLOW "
+"<https://store.cuav.net/index.php?id_product=52&id_product_attribute=0&rewrite=cuav-"
+"px4flow-21-optical-flow-sensor-smart-camera-for-px4-pixhawk-flight-control-"
+"without-sonar-or-with-sonar&controller=product&id_lang=3>`__, `TeraRanger "
+"One <https://ardupilot.org/copter/docs/common-teraranger-one-"
+"rangefinder.html>`__. With this setup, you can follow the wiki to achieve "
+"`non-GPS flight with PX4FLOW <https://ardupilot.org/copter/docs/common-"
+"px4flow-overview.html>`__."
+msgstr ""
+"配备 `Pixhack 自动驾驶仪 <http://www.helipal.com/pixhack-autopilot-"
+"kit.html>`__、`CUAV PX4FLOW "
+"<https://store.cuav.net/index.php?id_product=52&id_product_attribute=0&rewrite=cuav-"
+"px4flow-21-optical-flow-sensor-smart-camera-for-px4-pixhawk-flight-control-"
+"without-sonar-or-with-sonar&controller=product&id_lang=3>`__、`TeraRanger One"
+" <https://ardupilot.org/copter/docs/common-teraranger-one-"
+"rangefinder.html>`__ 的小型四旋翼。通过此配置，可参照 wiki 实现 `PX4FLOW 无 GPS 飞行 "
+"<https://ardupilot.org/copter/docs/common-px4flow-overview.html>`__。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:33
+#: c017b7aa2714454f82249311a876a7af
+msgid ""
+"`Raspberry Pi 3 Model B <https://www.raspberrypi.org/products/raspberry-"
+"pi-3-model-b/>`__ with a 16GB micro SD card running `Ubuntu Mate 16.04 "
+"<https://ubuntu-mate.org/>`__, connected to a `USB camera "
+"<https://www.tindie.com/products/exlene/8mp-usb-camera-module-for-"
+"linuxwind7wind8/>`__ down-facing to the ground, with the x-axis of the "
+"camera to the right."
+msgstr ""
+"`树莓派 3 Model B <https://www.raspberrypi.org/products/raspberry-"
+"pi-3-model-b/>`__，搭配 16GB micro SD 卡，运行 `Ubuntu Mate 16.04 <https://ubuntu-"
+"mate.org/>`__，连接朝下对准地面的 `USB 摄像头 "
+"<https://www.tindie.com/products/exlene/8mp-usb-camera-module-for-"
+"linuxwind7wind8/>`__，摄像头 x 轴朝右。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:36
+#: 16c29c6b87f34661a3123a98053c16a0
+msgid ""
+"There is no hard restriction on the mounting orientation of the camera "
+"beside it being down-facing, but frame transformation is needed to align the"
+" frames for different camera orientation."
+msgstr "摄像头安装方向除朝下外无硬性限制，但不同摄像头朝向需要进行坐标系变换以对齐参考系。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:39
+#: e39d4aa84ff243d6829f3762d92b9672
+msgid "Software setup"
+msgstr "软件设置"
+
+#: ../../source/docs/ros-apriltag-detection.rst:41
+#: 1db93a81dcdb4065afefdd26bdd93ce8
+msgid ":ref:`Install ROS and MAVROS <ros-install>`."
+msgstr ":ref:`安装 ROS 和 MAVROS <ros-install>`。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:43
+#: 861deb5a636a4e11b0f5e70cbc5db2e0
+msgid ":ref:`Connect RPi to ArduPilot with MAVROS <ros-connecting>`."
+msgstr ":ref:`通过 MAVROS 将 RPi 连接到 ArduPilot <ros-connecting>`。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:45
+#: ddd12187c28141beb1449e6c45cb283a
+msgid "Install ROS driver for your camera:"
+msgstr "为摄像头安装 ROS 驱动："
+
+#: ../../source/docs/ros-apriltag-detection.rst:47
+#: 1ab4218318684c79869319ab08b76232
+msgid "For USB camera: ``sudo apt-get install ros-kinetic-usb-cam``"
+msgstr "USB 摄像头：``sudo apt-get install ros-kinetic-usb-cam``"
+
+#: ../../source/docs/ros-apriltag-detection.rst:49
+#: 8c5b93fe90d047f69752b487bda10fa5
+msgid ""
+"For RPi camera module: you can follow `this instruction "
+"<https://larrylisky.com/2016/11/24/enabling-raspberry-pi-camera-v2-under-"
+"ubuntu-mate/>`__ to enable the camera, then install `raspicam_node "
+"<https://github.com/UbiquityRobotics/raspicam_node>`__."
+msgstr ""
+"RPi 摄像头模块：可参照 `此说明 <https://larrylisky.com/2016/11/24/enabling-raspberry-pi-"
+"camera-v2-under-ubuntu-mate/>`__ 启用摄像头，然后安装 `raspicam_node "
+"<https://github.com/UbiquityRobotics/raspicam_node>`__。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:51
+#: b1b95d18ccc44e3dad8b212cc3ef1c8c
+msgid ""
+"Install `Apriltag library <https://github.com/AprilRobotics/apriltag>`__,  "
+"`Apriltag ROS wrapper <https://github.com/AprilRobotics/apriltag_ros>`__ and"
+" `vision_to_mavros <https://github.com/hoangthien94/vision_to_mavros.git>`__"
+" packages."
+msgstr ""
+"安装 `Apriltag 库 <https://github.com/AprilRobotics/apriltag>`__、`Apriltag ROS "
+"封装 <https://github.com/AprilRobotics/apriltag_ros>`__ 和 `vision_to_mavros "
+"<https://github.com/hoangthien94/vision_to_mavros.git>`__ 软件包。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:70
+#: a5b7d428ae2a48b7ba0360a2d078c413
+msgid "Camera calibration"
+msgstr "摄像头标定"
+
+#: ../../source/docs/ros-apriltag-detection.rst:72
+#: 9cc2419104394732a28280c5004ec807
+msgid ""
+"Follow the `ROS wiki "
+"<http://wiki.ros.org/camera_calibration/Tutorials/MonocularCalibration>`__ "
+"to calibrate and obtain the calibration file for your camera."
+msgstr ""
+"参照 `ROS wiki "
+"<http://wiki.ros.org/camera_calibration/Tutorials/MonocularCalibration>`__ "
+"对摄像头进行标定并获取标定文件。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:74
+#: 919393ca37dc40208bfa0cdf404480de
+msgid ""
+"Replace the ``camera_info_url param`` in the `gsoc.launch "
+"<https://github.com/hoangthien94/apriltags2_ros/blob/master/apriltag_ros/launch/gsoc.launch#L13>`__"
+" file with the correct path to the calibration file."
+msgstr ""
+"将 `gsoc.launch "
+"<https://github.com/hoangthien94/apriltags2_ros/blob/master/apriltag_ros/launch/gsoc.launch#L13>`__"
+" 文件中的 ``camera_info_url param`` 替换为标定文件的正确路径。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:77
+#: 18c49d8302da48cba0b876029f5c81ea
+msgid "Prepare the tags board"
+msgstr "准备标签板"
+
+#: ../../source/docs/ros-apriltag-detection.rst:79
+#: 7d5217cc6b9a401ca2a9444d9a8e8375
+msgid ""
+"You can print out an `example A3 size tag "
+"<https://github.com/hoangthien94/apriltags2_ros/blob/master/apriltag_ros/config/A3_bundle.pdf>`__."
+msgstr ""
+"可以打印出 `A3 尺寸示例标签 "
+"<https://github.com/hoangthien94/apriltags2_ros/blob/master/apriltag_ros/config/A3_bundle.pdf>`__。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:81
+#: 924067e014f745e883a74e07dafb2abf
+msgid ""
+"Depends on your printer setting, the actual size and location of the tags "
+"might be slightly different. Measure the true dimension of the tags and "
+"modify the `layout file "
+"<https://github.com/hoangthien94/apriltags2_ros/blob/master/apriltag_ros/config/A3_bundle.yaml>`__"
+" accordingly."
+msgstr ""
+"根据打印机设置，标签的实际尺寸和位置可能略有差异。请测量标签真实尺寸并相应修改 `布局文件 "
+"<https://github.com/hoangthien94/apriltags2_ros/blob/master/apriltag_ros/config/A3_bundle.yaml>`__。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:85
+#: 3839dbb420bd411d84cac2874441d852
+msgid ""
+"Pre-generated tags images can be found at `apriltag-imgs "
+"<https://github.com/AprilRobotics/apriltag-imgs>`__. You can also design "
+"your own tags with `apriltag-generation "
+"<https://github.com/AprilRobotics/apriltag-generation>`__."
+msgstr ""
+"预生成的标签图像可在 `apriltag-imgs <https://github.com/AprilRobotics/apriltag-"
+"imgs>`__ 找到。也可使用 `apriltag-generation "
+"<https://github.com/AprilRobotics/apriltag-generation>`__ 设计自定义标签。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:88
+#: 70e4bdba6b3c4637947349d8a224bf46
+msgid "Configure ArduPilot"
+msgstr "配置 ArduPilot"
+
+#: ../../source/docs/ros-apriltag-detection.rst:90
+#: f82f390fe20b42a984f8c2307907e8c3
+msgid ""
+"Connect to the flight controller with a ground station (i.e. Mission "
+"Planner) and check that the following parameters are set as shown below:"
+msgstr "使用地面站（如 Mission Planner）连接飞控，并确认以下参数已按如下设置："
+
+#: ../../source/docs/ros-apriltag-detection.rst:112
+#: 8c407bd537ce462885455660dda39a58
+msgid "Instruction to reproduce the system"
+msgstr "系统复现说明"
+
+#: ../../source/docs/ros-apriltag-detection.rst:115
+#: 6e36350f016a4d54a3d0d1a46cc18ea2
+msgid "1. Running all the nodes"
+msgstr "1. 运行所有节点"
+
+#: ../../source/docs/ros-apriltag-detection.rst:117
+#: 25ed39b5b08847c0a3cf663c3058ab6b
+msgid ""
+"First, let’s test each ROS node separately and fix any problems that arise:"
+msgstr "首先，分别测试每个 ROS 节点并解决出现的任何问题："
+
+#: ../../source/docs/ros-apriltag-detection.rst:119
+#: c28f08f578ff429bb7f2bdb7e6a0be55
+msgid "``usb_cam`` node:"
+msgstr "``usb_cam`` 节点："
+
+#: ../../source/docs/ros-apriltag-detection.rst:121
+#: 250014699e1c442fac88b495c8799dbc
+msgid "On RPi: ``roslaunch usb_cam usb_cam-test.launch``"
+msgstr "在 RPi 上：``roslaunch usb_cam usb_cam-test.launch``"
+
+#: ../../source/docs/ros-apriltag-detection.rst:123
+#: 582c92ef8a97430fba02caab7195d7c1
+msgid ""
+"If RPi is not connected to a display, view the raw image on PC with Linux "
+"Ubuntu: ``export ROS_MATER_URI=http://<rpi-ip>:11311 && rqt_image_view``"
+msgstr ""
+"若 RPi 未连接显示器，可在 Linux Ubuntu 电脑上查看原始图像：``export ROS_MATER_URI=http://<rpi-"
+"ip>:11311 && rqt_image_view``"
+
+#: ../../source/docs/ros-apriltag-detection.rst:125
+#: 0354fe9894374e6389fc88c645d9bf62
+msgid "Verify that there are images coming from the camera."
+msgstr "确认摄像头有图像输出。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:127
+#: 82c3374cdc1b4315a1814ffa6106f611
+msgid "``MAVROS`` node:"
+msgstr "``MAVROS`` 节点："
+
+#: ../../source/docs/ros-apriltag-detection.rst:129
+#: 2a58381de5fa4fe9b927eeb3ba3fe844
+msgid ""
+"On RPi: ``roslaunch mavros apm.launch fcu_url:=<tty-port>:<baud-rate>``"
+msgstr ""
+"在 RPi 上：``roslaunch mavros apm.launch fcu_url:=<tty-port>:<baud-rate>``"
+
+#: ../../source/docs/ros-apriltag-detection.rst:131
+#: 7f162383a08f4125a5e16a539ec5e6e6
+msgid ""
+"Verify that MAVROS is running OK. For example, ``rostopic echo "
+"/mavros/state`` should show that FCU is “CONNECTED”."
+msgstr ""
+"确认 MAVROS 运行正常。例如，``rostopic echo /mavros/state`` 应显示 FCU 状态为「CONNECTED」。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:133
+#: 67d55b5e27a2406cbf49c4c38e229d87
+msgid "``Apriltag node`` and ``vision_to_mavros`` node:"
+msgstr "``Apriltag 节点`` 和 ``vision_to_mavros`` 节点："
+
+#: ../../source/docs/ros-apriltag-detection.rst:135
+#: 9153ec84dfe44a1bb9e81a8815bde510
+msgid ""
+"Make sure the ``camera_info_url`` points to the correct path to your "
+"camera’s calibration file."
+msgstr "确保 ``camera_info_url`` 指向摄像头标定文件的正确路径。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:137
+#: 606d695aa8d04619ac602a2769fd3fd1
+msgid "On RPi: ``roslaunch vision_to_mavros apriltags_to_mavros.launch``"
+msgstr "在 RPi 上：``roslaunch vision_to_mavros apriltags_to_mavros.launch``"
+
+#: ../../source/docs/ros-apriltag-detection.rst:139
+#: 1d08a899aec44139bdcbe777cbf7143d
+msgid ""
+"Open up RViz and view ``/tf`` and ``/mavros/vision_pose/pose`` topics. With "
+"``/tf``, you should see the camera pose in the tag frame, with z-axis "
+"pointing downwards. If your camera’s x-axis is pointing to the right, then "
+"``/mavros/vision_pose/pose`` will be aligned with body frame. If the "
+"camera’s x-axis is pointing in a different direction, you need to modify the"
+" params of ``vision_to_mavros`` accordingly."
+msgstr ""
+"打开 RViz，查看 ``/tf`` 和 ``/mavros/vision_pose/pose`` 话题。通过 "
+"``/tf``，可以看到标签坐标系中的摄像头位姿，z 轴朝下。若摄像头 x 轴朝右，则 ``/mavros/vision_pose/pose`` "
+"将与机体坐标系对齐。若摄像头 x 轴朝向其他方向，需相应修改 ``vision_to_mavros`` 的参数。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:142
+#: f475a7262ab94b58b262b36285ee20e0
+msgid "2. Ground test"
+msgstr "2. 地面测试"
+
+#: ../../source/docs/ros-apriltag-detection.rst:143
+#: 546f097703c64337a0d426d34561222e
+msgid "If each node can run successfully, you can perform ground test:"
+msgstr "若各节点均能成功运行，可进行地面测试："
+
+#: ../../source/docs/ros-apriltag-detection.rst:145
+#: 7dcbfb8b000e44ff9d6043c6f8fad875
+msgid ""
+"On RPi: launch all the nodes as described above. View the topic "
+"``/mavros/vision_pose/pose`` on RViz. Move the vehicle around and see if the"
+" pose changes according to the movement."
+msgstr ""
+"在 RPi 上：按上述说明启动所有节点。在 RViz 中查看 ``/mavros/vision_pose/pose`` "
+"话题。移动飞行器，观察位姿是否随移动而变化。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:147
+#: f76a4a78144546dab15e093d9063f907
+msgid ""
+"**Set EKF home** by sending the MAVLink messages `SET_GPS_GLOBAL_ORIGIN "
+"<https://mavlink.io/en/messages/common.html#SET_GPS_GLOBAL_ORIGIN>`__ and "
+"`SET_HOME_POSITION "
+"<https://mavlink.io/en/messages/common.html#SET_HOME_POSITION>`__."
+msgstr ""
+"**设置 EKF 原点**，发送 MAVLink 消息 `SET_GPS_GLOBAL_ORIGIN "
+"<https://mavlink.io/en/messages/common.html#SET_GPS_GLOBAL_ORIGIN>`__ 和 "
+"`SET_HOME_POSITION "
+"<https://mavlink.io/en/messages/common.html#SET_HOME_POSITION>`__。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:149
+#: 668ae6dd412a46d9ba5710e719bd7582
+msgid ""
+"**Using Mission Planner**: Right-click on any point on the map > ``Set Home "
+"Here`` > ``Set EKF Origin Here``."
+msgstr "**使用 Mission Planner**：在地图任意位置右键 > ``在此设置原点`` > ``在此设置 EKF 原点``。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:154
+#: 8ff8e08245094d1fb8f5c2cf17c2ec08
+msgid ""
+"**Using code**: you can use this Python script `set_origin.py "
+"<https://github.com/anbello/aruco_gridboard/blob/master/script/set_origin.py>`__."
+msgstr ""
+"**使用代码**：可使用此 Python 脚本 `set_origin.py "
+"<https://github.com/anbello/aruco_gridboard/blob/master/script/set_origin.py>`__。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:156
+#: e7d7ac3ca52c4622a2659f75aee981fa
+msgid ""
+"Install ``pymavlink``: Follow the instructions `here "
+"<https://github.com/ArduPilot/pymavlink#installation>`__."
+msgstr ""
+"安装 ``pymavlink``：参照 `此处 "
+"<https://github.com/ArduPilot/pymavlink#installation>`__ 的说明。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:158
+#: 271c855c8fd54a1bb09746290ea4c119
+msgid "Run the script: ``rosrun vision_to_mavros set_origin.py``."
+msgstr "运行脚本：``rosrun vision_to_mavros set_origin.py``。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:160
+#: dec22165018446e88ba0ead6c20b5991
+msgid ""
+"After the origin of the EKF is set, a quadcopter icon will appear on the "
+"map."
+msgstr "设置 EKF 原点后，地图上将出现四旋翼图标。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:162
+#: bc6738cfa9fa40be8fc2a6a4f2589d98
+msgid ""
+"Hold the vehicle up, move around while keeping the tag board in the field of"
+" view of the camera, and observe the trajectory of the vehicle on Mission "
+"Planner."
+msgstr "手持飞行器移动，保持标签板在摄像头视野内，观察 Mission Planner 上的飞行器轨迹。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:164
+#: 7ba3b68e5a984a2bb65c41323d35d96a
+msgid "If the last step is successful, you can go ahead with flight test."
+msgstr "若上一步成功，即可进行飞行测试。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:167
+#: 881b1b5f84114dc2b55309295846a32f
+msgid "3. Flight test"
+msgstr "3. 飞行测试"
+
+#: ../../source/docs/ros-apriltag-detection.rst:169
+#: be8cf10fb9d5431b8676eb6a3b91302d
+msgid "Takeoff in Stabilize to check whether the quadcopter is stable."
+msgstr "在自稳模式下起飞，检查四旋翼是否稳定。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:171
+#: 8b6facc7531046dfbccd86d2dd43a183
+msgid ""
+"At a height that the camera can have a good view of the tags, switch to Alt-"
+"Hold to adjust level position. Observe the feedback on RViz as well as "
+"Mission Planner to see if tags are detected."
+msgstr ""
+"在摄像头能清晰看到标签的高度，切换到定高模式调整水平位置。观察 RViz 和 Mission Planner 上的反馈，确认标签是否被检测到。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:173
+#: abae3c44b2524a55b976f053a11c75ef
+msgid ""
+"Take a look at Mission Planner map, confirm that the system is still "
+"tracking."
+msgstr "查看 Mission Planner 地图，确认系统仍在追踪。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:175
+#: 3137619ce5c745f6b375a532692fe1ba
+msgid ""
+"Switch to Loiter, but always ready to switch back to Alt-Hold if anything "
+"goes awry."
+msgstr "切换到定点悬停模式，但随时准备在出现异常时切换回定高模式。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:177
+#: 35162dedeaa347279d9a37a3ab44ce1e
+msgid "Otherwise, the quadcopter should hover stably above the tags."
+msgstr "否则，四旋翼应在标签上方稳定悬停。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:180
+#: 1b6954a5f10346eda27e16f950888b73
+msgid ""
+"For external navigation data to be accepted by EKF, the data rate needs to "
+"be higher than a certain threshold (usually 10Hz). If you are also using "
+"RPi, firstly we need to tune the params related to computational costs to "
+"achieve an acceptable detection rate, either by increasing ``tag_decimate``,"
+" which will increase detection rate at the expense of lower accuracy, or "
+"increase ``tag_threads``, if you are not running anything else and have some"
+" CPU to spare. The related tuning parameters are located in the file "
+"`settings.yaml "
+"<https://github.com/hoangthien94/apriltags2_ros/blob/master/apriltag_ros/config/settings.yaml>`__."
+msgstr ""
+"EKF 接受外部导航数据需要数据速率高于某一阈值（通常为 10Hz）。若同时使用 "
+"RPi，首先需要调整与计算开销相关的参数以达到可接受的检测速率，可通过增大 ``tag_decimate``（以牺牲精度换取更高检测速率）或在 CPU "
+"有余量时增大 ``tag_threads`` 来实现。相关调参参数位于 `settings.yaml "
+"<https://github.com/hoangthien94/apriltags2_ros/blob/master/apriltag_ros/config/settings.yaml>`__"
+" 文件中。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:183
+#: aa4bedfb1b7d4387825e18b7bc320c41
+msgid "Some Useful links"
+msgstr "相关参考链接"
+
+#: ../../source/docs/ros-apriltag-detection.rst:185
+#: e35fe167adc74f79b3595951887a7d50
+msgid ""
+"Original `blog post <https://discuss.ardupilot.org/t/indoor-non-gps-flight-"
+"using-apriltags-ros-based/42878>`__."
+msgstr ""
+"原始 `博客文章 <https://discuss.ardupilot.org/t/indoor-non-gps-flight-using-"
+"apriltags-ros-based/42878>`__。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:187
+#: 25846dc3fe4549aeaecca3a58d504e64
+msgid ""
+"Indoor autonomous flight with ArduCopter, ROS and Aruco Boards - :ref:`wiki "
+"page <ros-aruco-detection>` and `blog post "
+"<https://ardupilot.org/dev/docs/ros-aruco-detection.html>`__."
+msgstr ""
+"基于 ArduCopter、ROS 和 Aruco 板的室内自主飞行——:ref:`wiki 页面 <ros-aruco-detection>` 和 "
+"`博客文章 <https://ardupilot.org/dev/docs/ros-aruco-detection.html>`__。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:189
+#: 10a6e05de25e486c9bf8828f7809685c
+msgid ""
+"Indoor Autonomous Flight with Cube, ROS and Aruco Board - `blog post "
+"<https://discuss.cubepilot.org/t/indoor-autonomous-flight-with-cube-ros-and-"
+"aruco-board-ongoing/351>`__."
+msgstr ""
+"基于 Cube、ROS 和 Aruco 板的室内自主飞行——`博客文章 <https://discuss.cubepilot.org/t/indoor-"
+"autonomous-flight-with-cube-ros-and-aruco-board-ongoing/351>`__。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:191
+#: 9a3bf81075c0472186a073ad9fc15d6a
+msgid ""
+"Vision Positioning Experiments using SKYVIPER - `blog post "
+"<https://discuss.ardupilot.org/t/vision-positionning-experiments-using-"
+"skyviper/38348>`__."
+msgstr ""
+"使用 SKYVIPER 的视觉定位实验——`博客文章 <https://discuss.ardupilot.org/t/vision-"
+"positionning-experiments-using-skyviper/38348>`__。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:193
+#: 68372a5e5cc2425591a4582e4a7496aa
+msgid ""
+"Experiment with Visual Odometry - ROVIO, blog posts `part 1 "
+"<https://discuss.ardupilot.org/t/experiment-with-visual-odometry-"
+"rovio/40120>`__ and `part 2 <https://discuss.ardupilot.org/t/experiment-"
+"with-visual-odometry-rovio-part-2/40486>`__."
+msgstr ""
+"视觉里程计（ROVIO）实验，博客文章 `第一部分 <https://discuss.ardupilot.org/t/experiment-with-"
+"visual-odometry-rovio/40120>`__ 和 `第二部分 "
+"<https://discuss.ardupilot.org/t/experiment-with-visual-odometry-rovio-"
+"part-2/40486>`__。"
+
+#: ../../source/docs/ros-apriltag-detection.rst:195
+#: a3deaf59180f4fc1848eb14b9837922c
+msgid ""
+"Indoor flight with external navigation data - `blog post "
+"<https://discuss.ardupilot.org/t/indoor-flight-with-external-navigation-"
+"data/29980>`__."
+msgstr ""
+"使用外部导航数据的室内飞行——`博客文章 <https://discuss.ardupilot.org/t/indoor-flight-with-"
+"external-navigation-data/29980>`__。"

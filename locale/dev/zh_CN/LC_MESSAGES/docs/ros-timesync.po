@@ -1,0 +1,119 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/ros-timesync.rst:5 6565e56ce5de4ddf84c50c1ced1722c0
+msgid "Clock/Time Synchronisation"
+msgstr "时钟/时间同步"
+
+#: ../../source/docs/ros-timesync.rst:7 6cbcf6ce8328488487ba54148d303ed0
+msgid ""
+"The flight controller and companion computer clocks can be synchronised "
+"using MAVLink's `SYSTEM_TIME "
+"<https://mavlink.io/en/messages/common.html#SYSTEM_TIME>`__ and `TIMESYNC "
+"<https://mavlink.io/en/messages/common.html#TIMESYNC>`__ messages.  This is "
+"important so that each side can blend data from the other side into its EKF."
+msgstr ""
+"飞行控制器与伴飞计算机的时钟可通过 MAVLink 的 `SYSTEM_TIME "
+"<https://mavlink.io/en/messages/common.html#SYSTEM_TIME>`__ 和 `TIMESYNC "
+"<https://mavlink.io/en/messages/common.html#TIMESYNC>`__ "
+"消息进行同步。这非常重要，使双方都能将对方的数据融合到自身的 EKF 中。"
+
+#: ../../source/docs/ros-timesync.rst:9 befb444f3c18450bb462e248206065cc
+msgid ""
+"`mavros's sys_time plugin "
+"<https://github.com/mavlink/mavros/blob/master/mavros/src/plugins/sys_time.cpp>`__"
+" implements the mavros/ROS side"
+msgstr ""
+"`mavros 的 sys_time 插件 "
+"<https://github.com/mavlink/mavros/blob/master/mavros/src/plugins/sys_time.cpp>`__"
+" 实现了 mavros/ROS 端的同步"
+
+#: ../../source/docs/ros-timesync.rst:10 61b80deaea9940d6bdad3a47ca904f7a
+msgid ""
+"ArduPilot's `AP_RTC "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_RTC>`__ "
+"library implements the ArduPilot side"
+msgstr ""
+"ArduPilot 的 `AP_RTC "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_RTC>`__ "
+"库实现了 ArduPilot 端的同步"
+
+#: ../../source/docs/ros-timesync.rst:13 eadf5c0bac89415fbb474f09e2f49cf2
+msgid "Mavros Configuration"
+msgstr "Mavros 配置"
+
+#: ../../source/docs/ros-timesync.rst:15 e09d0cae982c48949eb6ea726c9a3da6
+msgid ""
+"Mavros's `apm_config.yaml "
+"<https://github.com/mavlink/mavros/blob/master/mavros/launch/apm_config.yaml>`__"
+" file can be modified to configure the rate of the `SYSTEM_TIME "
+"<https://mavlink.io/en/messages/common.html#SYSTEM_TIME>`__ and `TIMESYNC "
+"<https://mavlink.io/en/messages/common.html#TIMESYNC>`__ messages.  Below "
+"are the recommended settings."
+msgstr ""
+"可修改 mavros 的 `apm_config.yaml "
+"<https://github.com/mavlink/mavros/blob/master/mavros/launch/apm_config.yaml>`__"
+" 文件，配置 `SYSTEM_TIME "
+"<https://mavlink.io/en/messages/common.html#SYSTEM_TIME>`__ 和 `TIMESYNC "
+"<https://mavlink.io/en/messages/common.html#TIMESYNC>`__ 消息的发送频率。以下为推荐设置。"
+
+#: ../../source/docs/ros-timesync.rst:27 2e87d6531170430ca8a39f3f397419b0
+msgid "ArduPilot Configuration"
+msgstr "ArduPilot 配置"
+
+#: ../../source/docs/ros-timesync.rst:29 042f89d3a2304aa094b1133730ecc103
+msgid ""
+"The flight controller's time is set from the GPS by default but can be set "
+"from one of three sources(GPS, MAVLINK, onboard HW clock) using the "
+":ref:`BRD_RTC_TYPES <BRD_RTC_TYPES>` parameter as a bit mask for the time "
+"syncronisation source. When using mavros set ``BRD_RTC_TYPES`` = 2 to only "
+"allow the \"MAVLINK_SYSTEM_TIME\" source which uses the `SYSTEM_TIME "
+"<https://mavlink.io/en/messages/common.html#SYSTEM_TIME>`__ MAVLINK message."
+msgstr ""
+"飞行控制器时间默认由 GPS 设置，但可通过 :ref:`BRD_RTC_TYPES <BRD_RTC_TYPES>` "
+"参数（作为时间同步源的位掩码）从三个来源之一（GPS、MAVLINK、板载硬件时钟）进行设置。使用 mavros 时，将 "
+"``BRD_RTC_TYPES`` 设为 2，以仅允许「MAVLINK_SYSTEM_TIME」来源，该来源使用 `SYSTEM_TIME "
+"<https://mavlink.io/en/messages/common.html#SYSTEM_TIME>`__ MAVLink 消息。"
+
+#: ../../source/docs/ros-timesync.rst:31 75a548a6b1fa433aabff0cba76c79494
+msgid ""
+"If the ``RTT too high for timesync`` message is shown in the Mavros console "
+"(most commonly when using ArduRover), the :ref:`SCHED_LOOP_RATE "
+"<SCHED_LOOP_RATE>` parameter should be increased. This is because Mavros "
+"ignores TIMESYNC messages if the round trip time is more than 10ms."
+msgstr ""
+"若 Mavros 控制台出现「RTT too high for timesync」消息（使用 ArduRover 时最为常见），应增大 "
+":ref:`SCHED_LOOP_RATE <SCHED_LOOP_RATE>` 参数。这是因为 Mavros 会忽略往返时间超过 10ms 的 "
+"TIMESYNC 消息。"
+
+#: ../../source/docs/ros-timesync.rst:34 f43fdb569f414777891c2a71713241b9
+msgid "Testing"
+msgstr "测试"
+
+#: ../../source/docs/ros-timesync.rst:36 3ba8ed1cca2a418b80e621cbea75147f
+msgid ""
+"A MAVLink inspector (available using QGC or MissionPlanner) can be used to "
+"check that the system times are synchronised.  If using Mission Planner, "
+"press Ctrl-F and push the \"MAVLink Inspector\" button."
+msgstr ""
+"可使用 MAVLink 检查器（QGC 或 Mission Planner 均提供）来检验系统时间是否已同步。在 Mission Planner 中，按"
+" Ctrl-F 后点击「MAVLink Inspector」按钮。"

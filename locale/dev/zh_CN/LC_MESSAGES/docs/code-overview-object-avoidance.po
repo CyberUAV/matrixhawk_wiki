@@ -1,0 +1,370 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:5
+#: 4ae4b9d5aa964df2a09eb77b8f588ba2
+msgid "Copter Object Avoidance"
+msgstr "Copter 障碍物规避"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:7
+#: 2136bcde34ed455387c9dcc2a66595c7
+msgid ""
+"ArduCopter, from release 3.5, supports object avoidance using a "
+":ref:`Lightware SF40C <copter:common-lightware-sf40c-objectavoidance>`, "
+":ref:`TeraRanger Tower <copter:common-teraranger-tower-objectavoidance>`  or"
+" with any sensor capable of providing distances using the MAVLink "
+"`DISTANCE_SENSOR "
+"<https://mavlink.io/en/messages/common.html#DISTANCE_SENSOR>`__ message. "
+"This page describes how the object avoidance feature works and how "
+"\"proximity sensors\" should provide data into ArduPilot."
+msgstr ""
+"ArduCopter 从 3.5 版本起支持障碍物规避，可使用 :ref:`Lightware SF40C <copter:common-"
+"lightware-sf40c-objectavoidance>`、:ref:`TeraRanger Tower <copter:common-"
+"teraranger-tower-objectavoidance>` 或任何能通过 MAVLink `DISTANCE_SENSOR "
+"<https://mavlink.io/en/messages/common.html#DISTANCE_SENSOR>`__ "
+"消息提供测距数据的传感器。本页描述障碍物规避功能的工作原理，以及「近距传感器」应如何向 ArduPilot 提供数据。"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:11
+#: ab02479435cd43aebe72be811d02f8cd
+msgid "Avoidance in Loiter"
+msgstr "悬停模式中的规避"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:16
+#: 9f276574c02b46839fb4c376b824c7d0
+msgid ""
+"The video above shows a test of an EnRoute EX700 copter fitted with a "
+":ref:`Lightware SF40C 360degree lidar<common-lightware-"
+"sf40c-objectavoidance>`. The vehicle stops 2m from the fence regardless of "
+"the speed of the vehicle towards the fence. This is possible because "
+"ArduPilot knows the speed of the vehicle (using the GPS and accelerometers),"
+" the distance to the barrier and the maximum acceleration/deceleration of "
+"the vehicle."
+msgstr ""
+"上方视频展示了装有 :ref:`Lightware SF40C 360 度激光雷达 <common-lightware-"
+"sf40c-objectavoidance>` 的 EnRoute EX700 飞行器的测试。无论飞行器接近围栏的速度如何，飞行器都会在距围栏 2m "
+"处停下。这是因为 ArduPilot 知道飞行器的速度（通过 GPS 和加速度计）、到障碍物的距离以及飞行器的最大加速度/减速度。"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:20
+#: 456c7518898a46a080d27d9e7cac736b
+msgid ""
+"The `AP_Proximity library "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Proximity>`__"
+" collects the raw distance measurements from the sensor. These raw distance "
+"measurements are consolidated so that only the closest distance and angle "
+"within 8 sectors is stored and used."
+msgstr ""
+"`AP_Proximity 库 "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Proximity>`__"
+" 收集来自传感器的原始距离测量值。这些原始测量值经过整合，仅保存 8 个扇区中每个扇区内最近的距离和角度。"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:23
+#: 428a0a1062384c619afa48a5157643b2
+msgid ""
+"Each sector is 45 degrees wide with sector 0 pointing forward of the "
+"vehicle, sector 1 is forward-right, etc. From these distances and angles a "
+"fence (an array of 2D Vectors) is built up around the vehicle.  The fence "
+"points fall on the lines between sectors at a conservative distance."
+msgstr ""
+"每个扇区宽 45 度，扇区 0 指向飞行器正前方，扇区 1 "
+"为前右方，以此类推。根据这些距离和角度，在飞行器周围构建围栏（一组二维向量数组）。围栏点落在各扇区之间的分界线上，采用保守距离。"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:28
+#: d07ba866f50948009a10af4b1778844c
+msgid ""
+"The default is to divide the area around the vehicle into 8 sectors but each"
+" proximity sensor driver can override this and use a different number of "
+"sectors."
+msgstr "默认将飞行器周围区域划分为 8 个扇区，但每个近距传感器驱动可以覆盖此设置并使用不同数量的扇区。"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:33
+#: e22790cb5353415b9b7ddb8a49133652
+msgid ""
+"The `AC_Avoidance library "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AC_Avoidance>`__"
+" consumes the above fence and uses it to adjust (mostly shortens) desired "
+"velocity vectors sent to it by the `Loiter controller "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AC_WPNav/AC_Loiter.cpp#L310>`__"
+" (search for \"avoid->adjust_velocity\").  Loiter's desired velocity vectors"
+" come from the pilot's inputs."
+msgstr ""
+"`AC_Avoidance 库 "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AC_Avoidance>`__"
+" 使用上述围栏，对 `悬停控制器 "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AC_WPNav/AC_Loiter.cpp#L310>`__"
+" 发送的期望速度向量进行调整（主要是缩短）（搜索「avoid->adjust_velocity」）。悬停控制器的期望速度向量来自飞手输入。"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:38
+#: 1968e1b23836443c850aaf79bf3870ea
+msgid "Object avoidance also works for Guided mode's velocity controller"
+msgstr "障碍物规避同样适用于引导模式的速度控制器"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:41
+#: 4f1cfbab4227435ba57c58206f6acc48
+msgid "Avoidance in AltHold"
+msgstr "定高模式中的规避"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:43
+#: 308af1627eca4f76884184d3cc6a8c75
+msgid ""
+"The `AP_Proximity "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Proximity>`__"
+" and `AC_Avoidance libraries "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AC_Avoidance>`__"
+" are also used for object avoidance in AltHold.  Because AltHold does not "
+"rely upon the GPS, the vehicle's velocity towards the barriers is not known "
+"and a much simpler version of object avoidance is used in which the distance"
+" to the barrier is converted into a lean angle."
+msgstr ""
+"`AP_Proximity "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Proximity>`__"
+" 和 `AC_Avoidance 库 "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AC_Avoidance>`__"
+" 同样用于定高模式下的障碍物规避。由于定高模式不依赖 GPS，飞行器向障碍物的速度未知，因此使用更简单的障碍物规避方式——将到障碍物的距离转换为倾斜角。"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:47
+#: 84a33e3f220948af93b29a597cdbe737
+msgid ""
+"The image below shows the method by which the distances to various objects "
+"are combined together to result in a final roll/pitch lean angle. Each "
+"sensed object's distance and angle from the vehicle is turned into a "
+"roll/pitch angle.  The largest positive and negative roll and pitch angles "
+"are found and combined together resulting in a final roll/pitch angle."
+msgstr ""
+"下图展示了将到各障碍物的距离合并为最终横滚/俯仰倾斜角的方法。每个感测到的障碍物与飞行器之间的距离和角度被转换为横滚/俯仰角。找出最大正值和负值的横滚角和俯仰角并合并，得到最终的横滚/俯仰角。"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:53
+#: cbfc38baf32b4f2d94210f638fa5a9e1
+msgid ""
+"This final roll/pitch angle is combined with the pilot's input meaning the "
+"vehicle tends to fly away from objects but the pilot always maintains the "
+"ability to override the object avoidance. This is quite different from "
+"Loiter mode in which the pilot cannot force the vehicle to fly into an "
+"object."
+msgstr ""
+"最终的横滚/俯仰角与飞手输入合并，使飞行器倾向于远离障碍物飞行，但飞手始终可以覆盖障碍物规避。这与悬停模式有很大不同，悬停模式中飞手无法强制飞行器撞入障碍物。"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:58
+#: a0dd20093c2b459c926628dead01290d
+msgid ""
+"The vehicle will also stop before hitting barriers above it if there is an "
+"upward facing range finder. Currently this range finder's distance must be "
+"sent to ardupilot using the `DISTANCE_SENSOR "
+"<https://mavlink.io/en/messages/common.html#DISTANCE_SENSOR>`__ message with"
+" the orientation field set to 24 (upwards)."
+msgstr ""
+"如果有朝上的测距仪，飞行器也会在碰到上方障碍物前停下。目前该测距仪的距离必须通过 `DISTANCE_SENSOR "
+"<https://mavlink.io/en/messages/common.html#DISTANCE_SENSOR>`__ 消息发送给 "
+"ArduPilot，orientation 字段设为 24（朝上）。"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:62
+#: 602b62c3111c46a88183900536f0e586
+msgid "Reporting to the Ground Station"
+msgstr "向地面站上报"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:64
+#: 3c4f3017f43347628e2ee3561790087d
+msgid ""
+"MissionPlanner, from v1.3.48 onwards (and hopefully other ground stations in"
+" the future), shows the distance to nearby objects in a RADAR type window."
+msgstr "MissionPlanner v1.3.48 及更高版本（希望未来其他地面站也支持）在雷达类型窗口中显示附近障碍物的距离。"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:69
+#: f3dfaf144fdd4c5a9cf73cf52a137df4
+msgid ""
+"This window can be opened by going to the Flight Data screen, press Ctrl-F "
+"and push the Proximity button.  Values will will appear if the `PRX_TYPE "
+"<https://ardupilot.org/copter/docs/parameters.html#prx-type>`__ parameter is"
+" set to enable a sensor, and messages are being received."
+msgstr ""
+"可通过进入飞行数据页面，按 Ctrl-F 并点击 Proximity 按钮打开该窗口。若 `PRX_TYPE "
+"<https://ardupilot.org/copter/docs/parameters.html#prx-type>`__ "
+"参数已设置为启用传感器且正在接收消息，则会显示数值。"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:75
+#: 9beeb553b0a645c4bb30c53ec53edf35
+msgid ""
+"This is accomplished by the vehicle sending DISTANCE_SENSOR messages to the "
+"ground station at regular intervals. The method that does this can be seen "
+"in the `GCS_Common.cpp file "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/GCS_MAVLink/GCS_Common.cpp#L408>`__"
+" (search for \"send_proximity\"). Note that this means that it is possible "
+"that DISTANCE_SENSOR messages can be used both to send distances into the "
+"vehicle code, and then similar DISTANCE_SENSOR messages might be sent out "
+"from the vehicle to the ground station. These are separate messages though "
+"and are likely transferred at a different rate."
+msgstr ""
+"这是通过飞行器定期向地面站发送 DISTANCE_SENSOR 消息来实现的。实现该功能的方法可在 `GCS_Common.cpp 文件 "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/GCS_MAVLink/GCS_Common.cpp#L408>`__"
+" 中查看（搜索「send_proximity」）。注意，DISTANCE_SENSOR 消息既可用于向飞行器代码发送距离数据，飞行器也可能将类似的 "
+"DISTANCE_SENSOR 消息发送至地面站。这是两条独立的消息，传输频率可能不同。"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:81
+#: 0836d088a6b142a199daf7b6daa668e6
+msgid "Providing Distance Sensor messages to ArduPilot"
+msgstr "向 ArduPilot 提供距离传感器消息"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:83
+#: 9a451f38099f488ab6837c317bc318a6
+msgid ""
+"For developers of new \"proximity\" sensors (i.e. sensors that can somehow "
+"provide the distance to nearby objects) the easiest method to get your "
+"distance measurements into ardupilot is to send `DISTANCE_SENSOR "
+"<https://mavlink.io/en/messages/common.html#DISTANCE_SENSOR>`__ message for "
+"each direction the sensor is capable of. The system id of the message should"
+" match the system id of the vehicle (default is \"1\" but can be changed "
+"using the SYSID_THISMAV parameter). The component id can be anything but "
+"MAV_COMP_ID_PATHPLANNER (195) or MAV_COMP_ID_PERIPHERAL (158) are probably "
+"good choices."
+msgstr ""
+"对于新「近距传感器」（即能够提供附近障碍物距离的传感器）的开发者，将测距数据传入 ArduPilot 最简单的方式是针对传感器每个测距方向分别发送 "
+"`DISTANCE_SENSOR "
+"<https://mavlink.io/en/messages/common.html#DISTANCE_SENSOR>`__ 消息。消息的系统 ID "
+"应与飞行器系统 ID 匹配（默认为「1」，可通过 SYSID_THISMAV 参数修改）。组件 ID 可为任意值，但 "
+"MAV_COMP_ID_PATHPLANNER（195）或 MAV_COMP_ID_PERIPHERAL（158）可能是较好的选择。"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:87
+#: 041f41f6eb984f36ad1d48c35c749e78
+msgid ""
+"These messages should be sent at between 10hz and 50hz (the faster the "
+"better).  The fields should be filled in as shown below:"
+msgstr "这些消息应以 10Hz 至 50Hz 的频率发送（越快越好）。各字段应按如下方式填写："
+
+#: ../../source/docs/code-overview-object-avoidance.rst:89
+#: 5438fe84856443a2ae11101c82fcce49
+msgid "time_boost_ms : 0 (ignored)"
+msgstr "time_boost_ms：0（忽略）"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:90
+#: ecee192f985f4b4c87cb5019a4c9a36a
+msgid ""
+"min_distance : the minimum distance that the sensor can measure in "
+"centimeters (i.e. 100 = 1m).  This number should generally not change and "
+"should be the same regardless of the orientation field."
+msgstr "min_distance：传感器可测量的最小距离（厘米），如 100 = 1m。该值通常不变，与 orientation 字段无关。"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:91
+#: 5b3d8f182c7842f3bbf2162a02f77cd4
+msgid ""
+"max_distance : the maximum distance that the sensor can measure in "
+"centimeters (i.e. 1500 = 15m).  This number should generally not change and "
+"should be the same regardless of the orientation field."
+msgstr "max_distance：传感器可测量的最大距离（厘米），如 1500 = 15m。该值通常不变，与 orientation 字段无关。"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:92
+#: 653f875fd00a4699b4a1e5fe5fb7dc4a
+msgid "current_distance : the shortest distance in cm to the object"
+msgstr "current_distance：到障碍物的最短距离（厘米）"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:93
+#: 4a50d7742a4e4d6a8d297d910c4c9223
+msgid "type : 0 (ignored)"
+msgstr "type：0（忽略）"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:94
+#: 084d0489cb744d4a80f21a47bfbacd7a
+msgid "id : 0 (ignored)"
+msgstr "id：0（忽略）"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:95
+#: 249bd549e01b44acad28c06d72e21ec5
+msgid ""
+"orientation : 0 to 7 (0=forward, each increment is 45degrees more in "
+"clockwise direction), 24 (upwards) or 25 (downwards).  search for "
+"MAV_SENSOR_ORIENTATION on the `mavlink/common page "
+"<https://mavlink.io/en/messages/common.html>`__."
+msgstr ""
+"orientation：0 到 7（0 = 正前方，每增加 1 顺时针增加 45 度），24（朝上）或 25（朝下）。请在 "
+"`mavlink/common 页面 <https://mavlink.io/en/messages/common.html>`__ 中搜索 "
+"MAV_SENSOR_ORIENTATION。"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:96
+#: ab564ba4754243698f86133c8ab92262
+msgid "covariance : 0 (ignored)"
+msgstr "covariance：0（忽略）"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:98
+#: 431b724a37b44d6f89b34e6d601ef18e
+msgid ""
+"When DISTANCE_SENSOR messages are not received for all 8 sectors, empty "
+"sectors are filled in with the distance from an adjacent sector (if "
+"available).  This conveniently leads to a \"cup\" shaped fence which is more"
+" likely to protect the vehicle from hitting the object. It is likely this "
+"will be changed in future releases especially if the \"stop\" behaviour "
+"(instead of \"slide\" behaviour) is configured."
+msgstr ""
+"当 8 个扇区中并非所有扇区都收到 DISTANCE_SENSOR "
+"消息时，空缺扇区将使用相邻扇区的距离填充（如有）。这方便地形成「杯形」围栏，更有效地防止飞行器撞上障碍物。此行为在未来版本中可能会更改，尤其是在配置了「停止」行为（而非「滑行」行为）的情况下。"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:104
+#: 500e2ae656924de4909c11b5761bb29b
+msgid ""
+"These two videos shows a `ZED 3D camera <https://www.stereolabs.com/>`__ "
+"connected to an :ref:`NVidia TX1 <companion-computer-nvidia-tx1>` running "
+"`OpenKai <https://github.com/yankailab/OpenKAI>`__ and providing forward "
+"facing distance measurements to ArduPilot using the method described above."
+msgstr ""
+"这两段视频展示了连接到 :ref:`NVidia TX1 <companion-computer-nvidia-tx1>` 并运行 `OpenKai "
+"<https://github.com/yankailab/OpenKAI>`__ 的 `ZED 3D 摄像头 "
+"<https://www.stereolabs.com/>`__，使用上述方法向 ArduPilot 提供前向距离测量数据。"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:113
+#: 89abd7b9f123441e9ef39a9a43e9c9cd
+msgid "Future Steps"
+msgstr "未来规划"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:115
+#: 59e3fe0f8a0b4ff39cb0bcc3a9a8ffef
+msgid ""
+"add avoidance to other modes including RTL, AUTO (`issue here "
+"<https://github.com/ArduPilot/ardupilot/issues/5607>`__)"
+msgstr ""
+"为其他模式（包括 RTL、AUTO）添加规避功能（`相关 issue "
+"<https://github.com/ArduPilot/ardupilot/issues/5607>`__）"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:116
+#: 0818d2b374ec4a39920d1dc4ff322c74
+msgid ""
+"improve integration with ROS (`issue here "
+"<https://github.com/ArduPilot/ardupilot/issues/5608>`__)"
+msgstr ""
+"改进与 ROS 的集成（`相关 issue "
+"<https://github.com/ArduPilot/ardupilot/issues/5608>`__）"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:117
+#: 483a6ad2f50143aa8f21e71953124ff6
+msgid ""
+"implement a simple occupancy grid for cases where we cannot (or do not want "
+"to) implement ROS on the vehicle (`issue here "
+"<https://github.com/ArduPilot/ardupilot/issues/5609>`__)"
+msgstr ""
+"在无法（或不希望）在飞行器上运行 ROS 的情况下，实现简单的占用栅格（`相关 issue "
+"<https://github.com/ArduPilot/ardupilot/issues/5609>`__）"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:119
+#: d4ad69ea7bb64fd3ae4a5793a30f67e2
+msgid ""
+"If you would like to get involved with the development of this area, please "
+"consider posting in the issues listed above or chatting with the developers "
+"on `ArduPilot Discord <https://ardupilot.org/discord>`__."
+msgstr ""
+"如果您希望参与此领域的开发，请考虑在上述 issue 中发帖，或在 `ArduPilot Discord "
+"<https://ardupilot.org/discord>`__ 上与开发者交流。"
