@@ -1,0 +1,441 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:5
+#: 4b24b88ec4524695b8111c4666f99115
+msgid "Sensor Drivers"
+msgstr "传感器驱动"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:7
+#: aa162fe3957b467ea0744952b48479c9
+msgid ""
+"ArduPilot supports a wide variety of sensors from many different "
+"manufacturers.  One clear example of this can be seen in the :ref:`list of "
+"range finders <copter:common-rangefinder-landingpage>` (aka sonars, lidars)."
+" This page attempts to explain how sensor drivers are written and integrated"
+" into the vehicle code."
+msgstr ""
+"ArduPilot 支持来自众多不同制造商的各种传感器。:ref:`测距仪列表 <copter:common-rangefinder-"
+"landingpage>`（如声纳、激光雷达）是一个典型示例。本页尝试说明传感器驱动的编写方式及其与飞行器代码的集成方法。"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:11
+#: 8b9a42792c624e3ea43ad4221eed5bc8
+msgid "Supported Protocols"
+msgstr "支持的协议"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:13
+#: 5aaddbf516fc4ae8ad5e039127582ec1
+msgid ""
+"`I2C <https://en.wikipedia.org/wiki/I%C2%B2C>`__, `SPI "
+"<https://en.wikipedia.org/wiki/Serial_Peripheral_Interface_Bus>`__, `UART "
+"(aka Serial) "
+"<https://en.wikipedia.org/wiki/Universal_asynchronous_receiver/transmitter>`__"
+" and `CANBUS <https://en.wikipedia.org/wiki/CAN_bus>`__ (in particular "
+"UAVCAN/DroneCAN) protocols are supported."
+msgstr ""
+"支持 `I2C <https://en.wikipedia.org/wiki/I%C2%B2C>`__、`SPI "
+"<https://en.wikipedia.org/wiki/Serial_Peripheral_Interface_Bus>`__、`UART（即串行）<https://en.wikipedia.org/wiki/Universal_asynchronous_receiver/transmitter>`__"
+" 和 `CANBUS <https://en.wikipedia.org/wiki/CAN_bus>`__（尤其是 "
+"UAVCAN/DroneCAN）协议。"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:16
+#: ea025d161369455ca5e56c7c4a00ff80
+msgid ""
+"If you plan to write a new driver, you will likely need to refer to the "
+"sensor's datasheet in order to determine which protocol it uses. "
+"Alternatively, you could utilize an intermediary node to move the necessary "
+"data back to the autopilot."
+msgstr "如果计划编写新驱动，可能需要参考传感器数据手册以确定其使用的协议。或者，也可以利用中间节点将必要数据传回自动驾驶仪。"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:19
+#: 1732a6645488497697981c1f1d7604b1
+msgid "I2C"
+msgstr "I2C"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:21
+#: 82d707b30d5c44ccb8b2da3a29d58dd9
+msgid "one master, many slaves possible"
+msgstr "一个主机，可连接多个从机"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:22
+#: be40f3f0c3db4666817630dc607d6af4
+msgid ""
+"a relatively simple protocol which is good for communicating over short-"
+"distances (i.e. less than 1m)."
+msgstr "相对简单的协议，适合短距离通信（即小于 1m）。"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:23
+#: 54ca74e9e9714c4b8bb8bfb0191b0444
+msgid ""
+"bus runs at 100kHz or 400kHz but the data rate is relatively low compared to"
+" other protocols."
+msgstr "总线运行在 100kHz 或 400kHz，但与其他协议相比数据率相对较低。"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:24
+#: 0d88be1513fe445a90cc1985903913e4
+msgid "only 4 pins are required (VCC, GND, SDA, SCL)"
+msgstr "仅需 4 根引脚（VCC、GND、SDA、SCL）"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:30
+#: 3a6f4e96a694407aadba894156762d9b
+msgid "SPI"
+msgstr "SPI"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:32
+#: ../../source/docs/code-overview-sensor-drivers.rst:43
+#: 2b83737158e9411a861395f1be3f6cb2 af42377935324fee9e5c1b1f3305acdb
+msgid "one master, one slave"
+msgstr "一个主机，一个从机"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:33
+#: e61d2a43046a4b70b48c4f6328e5254a
+msgid "20Mhz+ speed meaning it is very fast especially compared to I2C"
+msgstr "速度 20MHz 以上，尤其比 I2C 快很多"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:34
+#: 5517cbd47ce241f09b1f62ef8a995c2e
+msgid "only works over short distances (10cm)"
+msgstr "仅适用于短距离（10cm）"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:35
+#: 73a0aba1360d47d4855c077a72da400e
+msgid ""
+"requires at least 5 pins (VCC, GND, SCLK, Master-Out-Slave-In, Master-In-"
+"Slave-Out) + 1 slave select pin per slave"
+msgstr "至少需要 5 根引脚（VCC、GND、SCLK、主出从入、主入从出），每个从机额外需要 1 根片选引脚"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:41
+#: 65b37f68b9564e3b9a9255f56f945217
+msgid "Serial / UART"
+msgstr "串行 / UART"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:44
+#: be7b0cc46e4c46a8b3f3c44028e8c88a
+msgid ""
+"character based protocol good for communicating over longer distances "
+"compared to I2C and SPI (i.e. 1m)"
+msgstr "基于字符的协议，适合比 I2C 和 SPI 更长距离的通信（即 1m）"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:45
+#: 01109718886b4d598f240c69ec9e99eb
+msgid "relatively fast at 57Kbps ~ 1.5Mbps"
+msgstr "速度相对较快，57Kbps 至 1.5Mbps"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:46
+#: f1ea2566238240d9ab0b58634dcee8d0
+msgid ""
+"at least 4 pins required (VCC, GND, TX, RX), plus 2 optional pins (Clear-To-"
+"Send, Clear-To-Receive)"
+msgstr "至少需要 4 根引脚（VCC、GND、TX、RX），另有 2 根可选引脚（CTS、CTS）"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:49
+#: a5a112c12c62445aa763752fa2e923a7
+msgid "CAN bus with UAVCAN"
+msgstr "带 UAVCAN 的 CAN 总线"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:51
+#: 101427aefb7c47299459135994d8033f
+msgid ""
+"multimaster bus, any node can initiate transmission of data when they need "
+"to"
+msgstr "多主总线，任意节点可在需要时发起数据传输"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:52
+#: 83181629620842549c9c5dabe2981ed3
+msgid "packet based protocol for very long distances"
+msgstr "基于数据包的协议，适合超长距离"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:53
+#: 9e3a015d0541433fbea5497b71a56eee
+#, python-format
+msgid ""
+"high speed, typically 1 Mb (however only 50% of the bus bitrate can really "
+"be used without major collisions)"
+msgstr "高速，通常 1Mb（但总线位速率中实际只能使用约 50%，否则会发生大量冲突）"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:54
+#: 8c97ee0e7be04796b69afa9b8b64cfe9
+msgid ""
+"at least 3 pins required (GND, CAN HI, CAN LO). Optionally VCC can be used "
+"to power nodes"
+msgstr "至少需要 3 根引脚（GND、CAN HI、CAN LO）。可选使用 VCC 为节点供电"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:55
+#: dc916d82c5fd4e1c8104b0cf9c6dbeb1
+msgid "point-to-point topology. Star or stubs topolgy is not advised"
+msgstr "点对点拓扑。不建议使用星形或分支拓扑"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:56
+#: 4fcf4f3f601b48b7917a08b7a3d643b8
+msgid "termination is required at each end of the bus"
+msgstr "总线两端各需要一个终端电阻"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:61
+#: ef89ae2a8eab4757bb871bb591dca6df
+msgid "FrontEnd / BackEnd Split"
+msgstr "前端 / 后端分层"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:63
+#: ea28643c768e42369bb3f33f0a2260b0
+msgid ""
+"An important concept within the sensor driver architecture is the front-end "
+"/ back-end split."
+msgstr "传感器驱动架构中的一个重要概念是前端 / 后端分层。"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:67
+#: ec4d13d9835c4227950ac44fc28a83b4
+msgid ""
+"The vehicle code only ever calls into the Library's (aka sensor driver's) "
+"front-end."
+msgstr "飞行器代码只调用库（即传感器驱动）的前端。"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:69
+#: 2b5930d39af84e38bbe30783749fdbac
+msgid ""
+"On start-up the front-end creates one or more back-ends based either on "
+"automatic detection of the sensor (i.e. probing for a response on a known "
+"I2C address) or by using the user defined _TYPE params (i.e. RNGFND_TYPE, "
+"RNGFND_TYPE2).  The front-end maintains pointers to each back-end which are "
+"normally held within an array named _drivers[]."
+msgstr ""
+"启动时，前端根据传感器自动检测（即在已知 I2C 地址上探测响应）或用户定义的 _TYPE 参数（如 "
+"RNGFND_TYPE、RNGFND_TYPE2）创建一个或多个后端。前端通过指针维护各后端，通常存放在名为 _drivers[] 的数组中。"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:72
+#: 4e2cdd04f18542ea831f54f63557d434
+msgid "User settable parameters are always held within the front-end."
+msgstr "用户可设置的参数始终保存在前端。"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:75
+#: f5c6e243d2a04cbd91bd32c2e43046df
+msgid "How and When the driver code is run"
+msgstr "驱动代码的运行方式与时机"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:79
+#: f0880cda838a455e989e483936e84e51
+msgid ""
+"The image above shows a zoomed in view of the ardupilot architecture.  The "
+"top-left blue box illustrates how the sensor driver's back-ends are run in a"
+" background thread. Raw data from the sensors is collected, converted into "
+"standard units and then held within buffers within the driver."
+msgstr ""
+"上图展示了 ArduPilot "
+"架构的放大视图。左上角蓝色框说明传感器驱动的后端在后台线程中运行。来自传感器的原始数据被收集、转换为标准单位，然后存储在驱动内的缓冲区中。"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:82
+#: 2005de5fb3a34e57baebd2c003d42124
+msgid ""
+"The vehicle code's main thread runs regularly (i.e. 400hz for copter) and "
+"accesses the latest data available through methods in the driver's front-"
+"end. For example in order to calculate the latest attitude estimate, the "
+"AHRS/EKF would pull the latest accelerometer, gyro and compass information "
+"from the sensor drivers' front-ends."
+msgstr ""
+"飞行器代码的主线程定期运行（如 Copter 为 400Hz），通过驱动前端的方法访问最新数据。例如，AHRS/EKF "
+"会从传感器驱动前端获取最新的加速度计、陀螺仪和罗盘信息，以计算最新的姿态估计。"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:85
+#: 4db511be2d474f6a91a621e52f4d32f9
+msgid ""
+"The image is a slight generalization, for drivers using I2C or SPI, they "
+"must run in the background thread so that the highrate communication with "
+"the sensor does not affect the main loop's performance but for driver's "
+"using a serial (aka UART) interface, it is safe to run in the main thread "
+"because the underlying serial driver itself collects data in the background "
+"and includes a buffer."
+msgstr ""
+"上图存在一定的概括性简化：对于使用 I2C 或 SPI 的驱动，必须在后台线程中运行，以避免与传感器的高频通信影响主循环性能；而对于使用串行（即 "
+"UART）接口的驱动，则可以安全地在主线程中运行，因为底层串行驱动本身在后台收集数据并包含缓冲区。"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:90
+#: 89326bc7a14b4eb2991abd247d8c839e
+msgid "Vehicle Code and Front-End Example"
+msgstr "飞行器代码与前端示例"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:92
+#: c34767df249c4788a2d9d16ee3dd8ac0
+msgid ""
+"The example below shows how the Copter vehicle code pulls data from range "
+"finder (aka sonar, lidar) drivers. The Copter code's `scheduler "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L107>`__"
+" calls the vehicle's read_rangefinder() method at 20Hz. Below is a picture "
+"of this method, the latest version can be seen in the `sensors.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/sensors.cpp>`__"
+" file. The rangefinder.update() method is a call into the driver's front-"
+"end."
+msgstr ""
+"以下示例展示了 Copter 飞行器代码如何从测距仪（如声纳、激光雷达）驱动中获取数据。Copter 代码的 `调度器 "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L107>`__"
+" 以 20Hz 调用飞行器的 read_rangefinder() 方法。该方法可在 `sensors.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/sensors.cpp>`__"
+" 文件中查看。rangefinder.update() 方法是对驱动前端的调用。"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:99
+#: 51f83c2fb35a477695b3976b8a192da1
+msgid ""
+"Below is the range finder driver's front-end `update method "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_RangeFinder/AP_RangeFinder.cpp#L289>`__."
+" This gives the driver a chance to do any general processing it might want "
+"to within the main thread. Each back-end's update method is called in turn."
+msgstr ""
+"以下是测距仪驱动前端的 `update 方法 "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_RangeFinder/AP_RangeFinder.cpp#L289>`__。这为驱动提供了在主线程中进行通用处理的机会。各后端的"
+" update 方法会依次被调用。"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:106
+#: 810ca530e33b46dbbdd5230e63cfae1d
+msgid "UART/Serial Back-End Example"
+msgstr "UART/串行后端示例"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:108
+#: 52e6ff47408741db89f62fc4a245ceb6
+msgid ""
+"Next is the update method of the `LightWare back-end "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_RangeFinder/AP_RangeFinder_LightWareSerial.cpp>`__"
+" using the serial protocol. As described on the `user wiki "
+"<https://ardupilot.org/copter/docs/common-lightware-sf10-lidar.html#serial-"
+"connection>`__ the serial range finder can be connected to any of the flight"
+" controller's serial ports but the user must specify which serial port, and "
+"what baud rate is used by setting the SERIALX_BAUD and SERIALX_PROTOCOL "
+"parameters."
+msgstr ""
+"以下是使用串行协议的 `LightWare 后端 "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_RangeFinder/AP_RangeFinder_LightWareSerial.cpp>`__"
+" 的 update 方法。如 `用户 wiki <https://ardupilot.org/copter/docs/common-lightware-"
+"sf10-lidar.html#serial-connection>`__ 所述，串行测距仪可连接到飞控的任意串口，但用户必须通过设置 "
+"SERIALX_BAUD 和 SERIALX_PROTOCOL 参数指定使用哪个串口及波特率。"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:113
+#: 448dc151ff9c415e803106532b9d5e10
+msgid ""
+"Within the serial driver's `backend code "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_RangeFinder/AP_RangeFinder_Backend_Serial.cpp>`__,"
+" it first finds which UART the user would like to use via the serial_manager"
+" class which looks for the parameters settings described above."
+msgstr ""
+"在串行驱动的 `后端代码 "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_RangeFinder/AP_RangeFinder_Backend_Serial.cpp>`__"
+" 中，首先通过 serial_manager 类查找用户希望使用的 UART，该类会查找上述参数设置。"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:117
+#: 5774779f2067465cbd2fbe0fb99b1885
+msgid ""
+"Each time the driver's back-end update() method is called it calls the "
+"get_reading method which checks if new characters have arrived from the "
+"sensor and then decodes them."
+msgstr "每次调用驱动后端的 update() 方法时，它都会调用 get_reading 方法，检查是否有来自传感器的新字符到达并对其进行解码。"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:119
+#: c34a9f204d964bb981bfee92cd2151b1
+msgid ""
+"As mentioned above, because the serial protocol implements its own "
+"buffering, the processing of any data (see get_reading method) from the "
+"sensor is run here in the main thread. I.e. there is no "
+"\"register_periodic_callback\" like you will see in I2C and SPI drivers."
+msgstr ""
+"如上所述，由于串行协议本身实现了缓冲，来自传感器的数据处理（见 get_reading 方法）在主线程中运行。即不存在 I2C 和 SPI "
+"驱动中常见的「register_periodic_callback」。"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:126
+#: d6f38aa85aee48d485c4bcd9561851b2
+msgid "I2C Back-End Example"
+msgstr "I2C 后端示例"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:128
+#: e61fb1f7b0c849e29b34bfba78271284
+msgid ""
+"This example shows the back-end for the Lightware I2C driver. In this case, "
+"the front-end gets the I2C bus and passes it to the back-end during "
+"initialisation."
+msgstr "本示例展示了 Lightware I2C 驱动的后端。在此情况下，前端在初始化时获取 I2C 总线并将其传递给后端。"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:133
+#: 1f49918575064a54a09d5f3571236d04
+msgid ""
+"The back-end's init method then registers its \"timer\" method to be called "
+"at 20hz.  Within the timer method (not shown) the get_reading() method is "
+"called which reads bytes from the sensor and converts the distance to "
+"centimeters."
+msgstr ""
+"后端的 init 方法随后将其「timer」方法注册为以 20Hz 被调用。在 timer 方法中（未显示），get_reading() "
+"方法会被调用，从传感器读取字节并将距离转换为厘米。"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:136
+#: 8e2311d0e39242c79ea3740d9ee4e596
+msgid "SPI Back-End Example"
+msgstr "SPI 后端示例"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:138
+#: bc16d970e83841b883e8363f25cb8b82
+msgid ""
+"This example shows the back-end for the MPU9250 IMU which includes a gyro, "
+"accelerometer and compass. The front-end gets the SPI bus and passes it to "
+"the back-end during initialisation."
+msgstr "本示例展示了 MPU9250 IMU（包含陀螺仪、加速度计和罗盘）的后端。前端在初始化时获取 SPI 总线并将其传递给后端。"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:143
+#: 8e1232d5955341eb81d67526866d59cf
+msgid ""
+"the start() method is called during initialisation and configures the "
+"sensor. It uses semaphores to ensure no interference with other SPI devices "
+"on the same bus."
+msgstr "start() 方法在初始化期间被调用，并对传感器进行配置。它使用信号量确保与同一总线上其他 SPI 设备之间不发生干扰。"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:146
+#: fe7cd20c60114daeb97217ecef0e5a34
+msgid ""
+"The _read_sample method is registered so that it is called at 1000hz.  Note "
+"there is no need to take/give semaphores within the _read_sample method "
+"because that is done as part of the periodic callback code."
+msgstr ""
+"_read_sample 方法已被注册为以 1000Hz 调用。注意，无需在 _read_sample "
+"方法内加锁/解锁信号量，因为这已作为周期性回调代码的一部分处理。"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:148
+#: 1616200228b341158c2ef5ace1e249c2
+msgid ""
+"the _block_read method shows how data can be read from the sensor's "
+"registers."
+msgstr "_block_read 方法展示了如何从传感器寄存器读取数据。"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:153
+#: 75e818f54ee74053a5c5a186134bdc30
+msgid "Additional Advice"
+msgstr "补充建议"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:155
+#: 7ef2c4ed0b83492a8773ee84801a2bf0
+msgid ""
+"When writing a sensor driver, never include any wait or sleep code because "
+"this will either delay the main thread or the background thread associated "
+"with the bus being used."
+msgstr "编写传感器驱动时，切勿加入任何等待或睡眠代码，否则会导致主线程或与所用总线关联的后台线程延迟。"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:157
+#: 29e59ef44ee14e37bfe57c3ff97aae75
+msgid ""
+"If a new library is written, it must be added to the wscript file in the "
+"vehicle directory (i.e. /ardupilot/ArduCopter/wscript) in order for it to be"
+" linked into the final binary"
+msgstr ""
+"如果编写了新库，必须将其添加到飞行器目录（即 /ardupilot/ArduCopter/wscript）中的 wscript "
+"文件，才能将其链接到最终的二进制文件中"

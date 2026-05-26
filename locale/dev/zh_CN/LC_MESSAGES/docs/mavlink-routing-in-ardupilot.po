@@ -1,0 +1,230 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:5
+#: fecf75e9e951476cab8450dd8ffa55b4
+msgid "MAVLink Routing in ArduPilot"
+msgstr "ArduPilot 中的 MAVLink 路由"
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:7
+#: eea211844ce847569896182cca165efc
+msgid ""
+"ArduPilot (which runs on the flight controller) can route MAVLink messages "
+"received on one telemetry port to all other telemetry ports.  This is "
+"important in cases where there are multiple MAVLink enabled components on "
+"the vehicle (i.e. a flight controller and a companion computer) but only a "
+"single telemetry connection between the vehicle and the ground station.  "
+"This page describes how ArduPilot decides which messages should be routed "
+"and to which telemetry ports."
+msgstr ""
+"ArduPilot（运行于飞控板）可以将一个遥测端口上收到的 MAVLink 消息路由到所有其他遥测端口。当飞行器上有多个 MAVLink "
+"组件（如飞控和伴随计算机），而飞行器与地面站之间只有一个遥测连接时，这一功能尤为重要。本页描述了 ArduPilot "
+"如何决定哪些消息应被路由以及路由到哪个遥测端口。"
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:13
+#: 6e4ac7f530d148d99648430c40562eef
+msgid ""
+"As described on the :ref:`MAVLink Basics <mavlink-basics>` page a MAVLink "
+"network is made up of *systems* (vehicles, GCS, antenna trackers, etc) which"
+" are themselves made up of *components* (flight controller, camera system, "
+"etc)."
+msgstr ""
+"如 :ref:`MAVLink 基础 <mavlink-basics>` 页面所述，MAVLink 网络由 "
+"*系统*（飞行器、地面站、天线追踪器等）组成，每个系统又由 *组件*（飞控、相机系统等）构成。"
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:15
+#: 30b0dca876f6486498e15d3776fcbf11
+msgid ""
+"Each message contains a ``System ID`` and ``Component ID`` field to specify "
+"where the message came from.  In addition *some messages* (including "
+"`SET_POSITION_TARGET_GLOBAL_INT "
+"<https://mavlink.io/en/messages/common.html#SET_POSITION_TARGET_GLOBAL_INT>`__)"
+" include ``target_system`` and ``target_component`` fields to allow "
+"specifying which system/component should execute the command."
+msgstr ""
+"每条消息包含 ``System ID`` 和 ``Component ID`` 字段，用于指明消息来源。此外，*部分消息*（包括 "
+"`SET_POSITION_TARGET_GLOBAL_INT "
+"<https://mavlink.io/en/messages/common.html#SET_POSITION_TARGET_GLOBAL_INT>`__）还包含"
+" ``target_system`` 和 ``target_component`` 字段，以指定应执行该命令的系统/组件。"
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:17
+#: a7087eeb00df45e893f7fe523153e303
+msgid ""
+"A value of 0 for the ``target_system`` or ``target_component`` is considered"
+" a broadcast ID, and will be sent to all systems in the network/components "
+"on the target system."
+msgstr ""
+"``target_system`` 或 ``target_component`` 值为 0 时视为广播 "
+"ID，将发送至网络中的所有系统/目标系统上的所有组件。"
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:21
+#: fe01ae9a4afb4153ac74c8cd42120509
+msgid "The routing on ArduPilot systems works in the following way:"
+msgstr "ArduPilot 系统中的路由规则如下："
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:23
+#: c221c31e9bb34c48a2799fe4a117ca7c
+msgid ""
+"All received MAVLink messages are checked by the `MAVLink_routing "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/GCS_MAVLink/MAVLink_routing.h>`__"
+" class."
+msgstr ""
+"所有收到的 MAVLink 消息均由 `MAVLink_routing "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/GCS_MAVLink/MAVLink_routing.h>`__"
+" 类进行检查。"
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:24
+#: 019b0c1abcbb4e889e1fe2768b2dc309
+msgid ""
+"The class extracts the source system id (aka *sysid*) and component id (aka "
+"*compid*) and builds up a routing array which maps the channel (i.e. USB "
+"port, Telem1, Telem2) to the *<sysid,compid>* pair."
+msgstr ""
+"该类提取源系统 ID（即 *sysid*）和组件 ID（即 *compid*），并构建一个路由数组，将通道（如 USB "
+"端口、Telem1、Telem2）映射到 *<sysid,compid>* 对。"
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:25
+#: c3959dbccadf4142a986d6d6dd3a9029
+msgid ""
+"The class also extracts the target system id (``target_system``) and "
+"component id (``target_component``) and if these don’t match the vehicle’s "
+"*<sysid,compid>* the messages are forwarded to the appropriate channel using"
+" the array above."
+msgstr ""
+"该类还提取目标系统 ID（``target_system``）和组件 ID（``target_component``），若与飞行器的 "
+"*<sysid,compid>* 不匹配，则使用上述数组将消息转发到适当通道。"
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:26
+#: 7f5e033eca264a1da71cf872b65b68b1
+msgid ""
+"Messages that don’t have a target *<sysid,compid>* are processed by the "
+"vehicle and then forwarded to each known system/component."
+msgstr "没有目标 *<sysid,compid>* 的消息由飞行器处理后转发给每个已知的系统/组件。"
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:29
+#: 99914a8bb1024067999ff8fb4c8b6d5a
+msgid "Detailed theory of MAVLink routing"
+msgstr "MAVLink 路由详细原理"
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:31
+#: 2029c32727da44a68752e2d85ce0813f
+msgid ""
+"This information below is reproduced from the routing code in-source "
+"comments (`/libraries/GCS_MAVLink/MAVLink_routing.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/GCS_MAVLink/MAVLink_routing.cpp>`__)"
+msgstr ""
+"以下信息摘自路由代码的源码注释（`/libraries/GCS_MAVLink/MAVLink_routing.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/GCS_MAVLink/MAVLink_routing.cpp>`__）。"
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:35
+#: e3da1df93d784d47a279eb35cca32c6d
+msgid ""
+"When a flight controller receives a message it should process it locally if "
+"any of these conditions hold:"
+msgstr "当飞控收到消息时，若满足以下任意条件，应在本地处理该消息："
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:38
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:52
+#: 33e4c2572d754902ad2d00fcd9bed052 5f29a28913d745e9836c7c8ce589150c
+msgid "It has no ``target_system`` field"
+msgstr "消息没有 ``target_system`` 字段"
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:39
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:53
+#: 2a247f61e66647feb4d94a7ee40879ca 879b3a1e3dee465fa1b7b3f6107c0a63
+msgid "It has a ``target_system`` of zero"
+msgstr "消息的 ``target_system`` 为零"
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:40
+#: 8af6cdfbb25543e3a921f5155317a765
+msgid ""
+"It has the flight controllers target system and has no ``target_component`` "
+"field"
+msgstr "消息的目标系统与飞控匹配，且没有 ``target_component`` 字段"
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:42
+#: 2f1dc3806e0b4ba193fe8aa4aa210051
+msgid ""
+"It has the flight controllers target system and has the flight controllers "
+"``target_component``"
+msgstr "消息的目标系统与飞控匹配，且 ``target_component`` 也与飞控匹配"
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:44
+#: 9ce782a5df6442f386b4daadf4e3deec
+msgid ""
+"It has the flight controllers target system and the flight controller has "
+"not seen any messages on any of its links from a system that has the "
+"messages ``target_system``/``target_component`` combination"
+msgstr ""
+"消息的目标系统与飞控匹配，且飞控在其所有链路上均未收到过来自该消息的 ``target_system``/``target_component`` "
+"组合的消息"
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:49
+#: 9740e15eb16c4ed59d72c6ae33340d41
+msgid ""
+"When a flight controller receives a message it should forward it onto "
+"another different link if any of these conditions hold for that link:"
+msgstr "当飞控收到消息时，若某链路满足以下任意条件，应将消息转发到该链路："
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:54
+#: 4d06a4cf3e2c4fb28e8f9e3929229099
+msgid ""
+"It does not have the flight controllers ``target_system`` and the flight "
+"controller has seen a message from the messages ``target_system`` on the "
+"link"
+msgstr "消息的目标系统不与飞控匹配，但飞控在该链路上收到过来自该 ``target_system`` 的消息"
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:57
+#: b3a9759ecb2041f7b48954484e747fa2
+msgid ""
+"It has the flight controllers ``target_system`` and has a "
+"``target_component`` field and the flight controllers has seen a message "
+"from the ``target_system``/``target_component`` combination on the link"
+msgstr ""
+"消息的目标系统与飞控匹配，且存在 ``target_component`` 字段，且飞控在该链路上收到过来自该 "
+"``target_system``/``target_component`` 组合的消息"
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:64
+#: 8e998ae372c4428fa59012595452c448
+msgid ""
+"This proposal assumes that ground stations will not send command packets to "
+"a non-broadcast destination (sysid/compid combination) until they have "
+"received at least one package from that destination over the link. This is "
+"essential to prevent a flight controller from acting on a message that is "
+"not meant for it. For example, a ``PARAM_SET`` cannot be sent to a specific "
+"*<sysid/compid>* combination until the GCS has seen a packet from that "
+"*<sysid/compid>* combination on the link."
+msgstr ""
+"本方案假设地面站在通过链路收到来自某非广播目标（sysid/compid "
+"组合）的至少一个数据包之前，不会向该目标发送命令包。这对于防止飞控处理非面向自身的消息至关重要。例如，在地面站通过链路收到来自某 "
+"*<sysid/compid>* 组合的数据包之前，不能向该组合发送 ``PARAM_SET``。"
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:72
+#: 2e94b3e8cbad4936868a8bf4c3c78cc0
+msgid ""
+"The GCS must also reset what\\ *<sysid/compid>* combinations it has seen on "
+"a link when it sees a SYSTEM_TIME message with a decrease in time_boot_ms "
+"from a particular *<sysid/compid>*. That is essential to detect a reset of "
+"the flight controller, which implies a reset of its routing table."
+msgstr ""
+"当地面站收到来自某 *<sysid/compid>* 的 SYSTEM_TIME 消息且 time_boot_ms "
+"减小时，地面站还必须重置在该链路上已见过的 *<sysid/compid>* 组合。这对检测飞控重置（意味着路由表重置）至关重要。"

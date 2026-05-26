@@ -1,0 +1,824 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:5
+#: 70f7224b7ec44e9cafc385de7e8fda62
+msgid "Threading"
+msgstr "线程"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:8
+#: 53a3e96d5af2429a83ca849423046e34
+msgid "Understanding ArduPilot threading"
+msgstr "理解 ArduPilot 线程"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:10
+#: 63d3fc51d50745f2bbbaeb6db259fce5
+msgid ""
+"Once you have learned the basic of the ArduPilot libraries it is time for "
+"you to understand how ArduPilot deals with threading. The setup()/loop() "
+"structure that was inherited from arduino may make it seem that ArduPilot is"
+" a single threaded system, but in fact it isn't."
+msgstr ""
+"一旦您了解了 ArduPilot 库的基础知识，就该理解 ArduPilot 如何处理线程了。从 Arduino 继承的 setup()/loop() "
+"结构可能让人感觉 ArduPilot 是单线程系统，但实际上并非如此。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:15
+#: 3ec8468b664f45df8354242ad020fafd
+msgid ""
+"The threading approach in ArduPilot depends on the board it is built for. "
+"Some boards (such as the APM1 and APM2) don't support threads, so make do "
+"with a simple timer and callbacks. Some boards (PX4 and Linux) support a "
+"rich Posix threading model with realtime priorities, and these are used "
+"extensively by ArduPilot."
+msgstr ""
+"ArduPilot 中的线程方式取决于目标主板。某些主板（如 APM1 和 APM2）不支持线程，因此使用简单的定时器和回调代替。某些主板（PX4 和 "
+"Linux）支持具有实时优先级的丰富 Posix 线程模型，ArduPilot 广泛使用这些功能。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:21
+#: 2cf4adc47399496885ec10748cb80f54
+msgid ""
+"There are a number of key concepts related to threading that you need to "
+"understand in ArduPilot:"
+msgstr "在 ArduPilot 中，您需要理解以下几个与线程相关的关键概念："
+
+#: ../../source/docs/learning-ardupilot-threading.rst:24
+#: ../../source/docs/learning-ardupilot-threading.rst:34
+#: 76da5190ca3a41268a418dbb7be65185 cbdfc64dad1a47e588ae66ccee46fbd4
+msgid "The timer callbacks"
+msgstr "定时器回调"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:25
+#: ../../source/docs/learning-ardupilot-threading.rst:65
+#: 7f3d0906cf91493baa7776b75fa05bf2 a1a7774754f143e597eb137a69859839
+msgid "HAL specific threads"
+msgstr "HAL 特定线程"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:26
+#: 52a83b7328364c75b48f9aa4ac80d480
+msgid "driver specific threads"
+msgstr "驱动特定线程"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:27
+#: df0c2dd53494465ab694d184d7be4209
+msgid "ardupilot drivers versus platform drivers"
+msgstr "ArduPilot 驱动与平台驱动的对比"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:28
+#: 3353e51cc3a6425492295d69a5db694d
+msgid "platform specific threads and tasks"
+msgstr "平台特定线程和任务"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:29
+#: fb957a2ee12a4fcd9331e73d9a7e679a
+msgid "the AP_Scheduler system"
+msgstr "AP_Scheduler 系统"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:30
+#: 73e2214221fd4ac9bbd8bb495f11f019
+msgid "semaphores"
+msgstr "信号量"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:31
+#: 4c18ed48989b46a0ae88d0d867b4b0a8
+msgid "lockless data structures"
+msgstr "无锁数据结构"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:36
+#: 969f5094e9d84404b8fc5c55fe1b7a1f
+msgid ""
+"Every platform provides a 1kHz timer in the AP_HAL. Any code in ArduPilot "
+"can register a timer function which is then called at 1kHz. All registered "
+"timer functions are called sequentially. This very primitive mechanism is "
+"used as it is extremely portable, and yet very useful. You register a timer "
+"callback by calling the hal.scheduler->register_timer_process() like this:"
+msgstr ""
+"每个平台都在 AP_HAL 中提供一个 1kHz 定时器。ArduPilot 中的任何代码都可以注册一个定时器函数，该函数随后以 1kHz "
+"频率被调用。所有注册的定时器函数按顺序依次调用。使用这种非常基础的机制是因为它极具可移植性，同时也非常有用。您可以像这样调用 "
+"hal.scheduler->register_timer_process() 来注册定时器回调："
+
+#: ../../source/docs/learning-ardupilot-threading.rst:47
+#: 1cf9e63f4a374bf08ca5793268a4b43a
+msgid ""
+"that particular example is from the MS5611 barometer driver. The "
+"AP_HAL_MEMBERPROC() macro provides a way to encapsulate a C++ member "
+"function as a callback argument (bundling up the object context with the "
+"function pointer)."
+msgstr ""
+"这个特定示例来自 MS5611 气压计驱动。AP_HAL_MEMBERPROC() 宏提供了一种将 C++ "
+"成员函数封装为回调参数的方法（将对象上下文与函数指针捆绑在一起）。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:52
+#: 08bb4cdf90734d85925b704ae92a7f09
+msgid ""
+"When a piece of code wants something to happen at less than 1kHz then it "
+"should maintain its own \"last_called\" variable and return immediately if "
+"not enough time has passed. You can use the hal.scheduler->millis() and "
+"hal.scheduler->micros() functions to get the time since boot in milliseconds"
+" and microseconds to support this."
+msgstr ""
+"当某段代码希望以低于 1kHz 的频率运行时，应维护自己的「last_called」变量，如果时间间隔不够则立即返回。您可以使用 "
+"hal.scheduler->millis() 和 hal.scheduler->micros() "
+"函数以毫秒和微秒为单位获取自启动以来的时间，以支持此功能。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:58
+#: 54ae9cdd2ccc445f97fe1e47befa4185
+msgid ""
+"You should now go and modify an existing example sketch (or create a new "
+"one) and add a timer callback. Make the timer increment a counter then print"
+" the value of the counter every second in the loop() function. Modify your "
+"function so that it increments the counter  every 25 milliseconds."
+msgstr ""
+"现在请修改一个现有示例草图（或创建新草图），并添加一个定时器回调。让定时器递增一个计数器，然后在 loop() "
+"函数中每秒打印计数器的值。修改您的函数，使其每 25 毫秒递增一次计数器。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:67
+#: ca32843b29b04599816fb3246b0aa370
+msgid ""
+"On platforms that support real threads the AP_HAL for that platform will "
+"create a number of threads to support basic operations. For example, on "
+"Pixhawk the following HAL specific threads are created:"
+msgstr "在支持真实线程的平台上，该平台的 AP_HAL 将创建多个线程以支持基本操作。例如，在 Pixhawk 上会创建以下 HAL 特定线程："
+
+#: ../../source/docs/learning-ardupilot-threading.rst:71
+#: 178bd4087e65444db1cfd276d7554a12
+msgid "The UART thread, for reading and writing UARTs (and USB)"
+msgstr "UART 线程，用于读写 UART（及 USB）"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:72
+#: 241846a428ed486cbb9ea7a1dd92f4ad
+msgid ""
+"The timer thread, which supports the 1kHz timer functionality described "
+"above"
+msgstr "定时器线程，支持上述 1kHz 定时器功能"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:74
+#: 03b751035edd4e0cbb733ad5daabbf78
+msgid ""
+"The IO thread, which supports writing to the microSD card, EEPROM and FRAM"
+msgstr "IO 线程，支持向 microSD 卡、EEPROM 和 FRAM 写入数据"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:77
+#: b2406cd660834c28a2eacce6793d4373
+msgid ""
+"Have a look in Scheduler.cpp inside each AP_HAL implementation to see what "
+"threads are created and what the realtime priority of each thread is."
+msgstr "请查看每个 AP_HAL 实现中的 Scheduler.cpp，了解创建了哪些线程以及每个线程的实时优先级。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:81
+#: fd8c2cad90ea4c608656ff0e7c6ba0eb
+msgid ""
+"If you have a Pixhawk then you should also now setup a debug console cable "
+"and attach it to the nsh console (the serial5 port). Connect at 57600. When "
+"you have connected, try the \"ps\" command and you will get something like "
+"this:"
+msgstr ""
+"如果您有 Pixhawk，现在还应该设置调试控制台线缆并连接到 NSH 控制台（serial5 端口）。以 57600 "
+"波特率连接。连接后，尝试「ps」命令，您将看到类似如下内容："
+
+#: ../../source/docs/learning-ardupilot-threading.rst:101
+#: 391352691bba4a83954df23ccb9c7c17
+msgid ""
+"In this example you can see the \"AHRS_Test\" thread, which is running the "
+"example sketch from libraries/AP_AHRS/examples/AHRS_Test. You can also see "
+"the timer thread (priority 181), the UART thread (priority 60) and the IO "
+"thread (priority 59)."
+msgstr ""
+"在本例中，您可以看到「AHRS_Test」线程，它正在运行来自 libraries/AP_AHRS/examples/AHRS_Test "
+"的示例草图。您还可以看到定时器线程（优先级 181）、UART 线程（优先级 60）和 IO 线程（优先级 59）。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:106
+#: 84d4f5e37bc649c6bc8f6b3399e08553
+msgid ""
+"Additionally you can see the px4io, fmuservo, uavcan, lpwork, hpwork and "
+"idle tasks. More about those later."
+msgstr "此外，您还可以看到 px4io、fmuservo、uavcan、lpwork、hpwork 和 idle 任务。稍后会详细介绍这些内容。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:109
+#: 495124e4ef5547bc8df8ddb731f5be71
+msgid ""
+"Other AP_HAL ports have more or less threads depending on what is needed."
+msgstr "其他 AP_HAL 移植版本根据需求有更多或更少的线程。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:112
+#: 7151ae076c6d439fa7fbf959698b9fe0
+msgid ""
+"One common use of threads is to provide drivers a way to schedule slow tasks"
+" without interrupting the main autopilot flight code. For example, the "
+"AP_Terrain library needs to be able to do file IO to the microSD card (to "
+"store and retrieve terrain data). The way it does this is it calls the "
+"function hal.scheduler->register_io_process() like this:"
+msgstr ""
+"线程的一种常见用途是为驱动提供调度慢速任务的方式，而不中断主要的自动驾驶飞行代码。例如，AP_Terrain 库需要能够对 microSD 卡进行文件 "
+"IO（以存储和检索地形数据）。它的实现方式是像这样调用 hal.scheduler->register_io_process()："
+
+#: ../../source/docs/learning-ardupilot-threading.rst:122
+#: 9bf0648f73844db491b2b174ba7aad36
+msgid ""
+"The sets up the AP_Terrain::io_timer function to be called regularly. That "
+"is called within the boards IO thread, meaning it is a low realtime priority"
+" and is suitable for storage IO tasks. It is important that slow IO tasks "
+"like this not be called on the timer thread as they would cause delays in "
+"the more important processing of high speed sensor data."
+msgstr ""
+"这将设置 AP_Terrain::io_timer 函数被定期调用。它在主板的 IO 线程中调用，意味着实时优先级较低，适合存储 IO "
+"任务。重要的是，像这样的慢速 IO 任务不应在定时器线程上调用，因为这会导致更重要的高速传感器数据处理出现延迟。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:129
+#: 87784a9cf98745369977c3e0e85a72ed
+msgid "Driver specific threads"
+msgstr "驱动特定线程"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:131
+#: 8e8685668afb40b190955d5de6e05a81
+msgid ""
+"It is also possible to create driver specific threads, to support "
+"asynchronous processing in a manner specific to one driver. Currently you "
+"can only create driver specific threads in a manner that is platform "
+"dependent, so this is only appropriate if your driver is intended to run "
+"only on one type of autopilot board. If you want it to run on multiple "
+"AP_HAL targets then you have two choices:"
+msgstr ""
+"也可以创建驱动特定线程，以支持特定于某个驱动的异步处理方式。目前，您只能以平台相关的方式创建驱动特定线程，因此这仅适用于您的驱动只打算在一种类型的自动驾驶仪主板上运行的情况。如果您希望它在多个"
+" AP_HAL 目标上运行，则有两种选择："
+
+#: ../../source/docs/learning-ardupilot-threading.rst:138
+#: 24769df981594b8abc97b696ba455606
+msgid ""
+"you can use the register_io_process() and register_timer_process() scheduler"
+" calls to use the existing timer or IO threads"
+msgstr ""
+"可以使用 register_io_process() 和 register_timer_process() 调度器调用，利用现有的定时器或 IO 线程"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:141
+#: 0dfa8e16b455408784384efcac3d80b5
+msgid ""
+"you can add a new HAL interface that provides a generic way to create "
+"threads on multiple AP_HAL targets (please contribute patches back)"
+msgstr "可以添加一个新的 HAL 接口，为在多个 AP_HAL 目标上创建线程提供通用方式（欢迎贡献补丁）"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:144
+#: cfcc4540f3bc4745b520ba90f260a8a3
+msgid ""
+"An example of a driver specific thread is the ToneAlarm thread in the Linux "
+"port. See AP_HAL_Linux/ToneAlarmDriver.cpp"
+msgstr ""
+"驱动特定线程的一个例子是 Linux 移植版中的 ToneAlarm 线程。请参阅 AP_HAL_Linux/ToneAlarmDriver.cpp"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:148
+#: 4f485767dce143229c1d2d13b0df9972
+msgid "ArduPilot drivers versus platform drivers"
+msgstr "ArduPilot 驱动与平台驱动"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:150
+#: cc24e0933bad425e88b452371d484c37
+msgid ""
+"You may notice some driver duplication in ArduPilot. For example, we have a "
+"MPU6000 driver in libraries/AP_InertalSensor/AP_InertialSensor_MPU6000.cpp, "
+"and another MPU6000 driver in PX4Firmware/src/drivers/mpu6000."
+msgstr ""
+"您可能会注意到 ArduPilot 中存在一些驱动重复。例如，我们在 "
+"libraries/AP_InertalSensor/AP_InertialSensor_MPU6000.cpp 中有一个 MPU6000 驱动，在 "
+"PX4Firmware/src/drivers/mpu6000 中还有另一个 MPU6000 驱动。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:155
+#: 17843e6bfd674655aa43fb4d4aeb5f2f
+msgid ""
+"The reason for this duplication is that the PX4 project already provides a "
+"set of well tested drivers for hardware that comes with Pixhawk boards, and "
+"we enjoy a good collaborative relationship with the PX4 team on developing "
+"and enhancing these drivers. So when we build ArduPilot for PX4 we take "
+"advantage of the PX4 drivers by writing small \"shim\" drivers which present"
+" the PX4 drivers with the standard ArduPilot library interface. If you look "
+"at libraries/AP_InertialSensor/AP_InertialSensor_PX4.cpp you will see a "
+"small shim driver that asks the PX4 what IMU drivers are available on this "
+"board and automatically makes all of them available as part of the ArduPilot"
+" AP_InertialSensor library."
+msgstr ""
+"出现这种重复的原因是，PX4 项目已经为 Pixhawk 主板附带的硬件提供了一套经过充分测试的驱动，我们与 PX4 "
+"团队在开发和改进这些驱动方面保持着良好的合作关系。因此，当我们为 PX4 构建 ArduPilot 时，我们通过编写小型「垫片」驱动来利用 PX4 "
+"驱动，这些垫片驱动以标准 ArduPilot 库接口呈现 PX4 驱动。如果您查看 "
+"libraries/AP_InertialSensor/AP_InertialSensor_PX4.cpp，将看到一个小型垫片驱动，它向 PX4 "
+"查询该主板上有哪些 IMU 驱动，并自动将所有这些驱动作为 ArduPilot AP_InertialSensor 库的一部分提供。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:167
+#: d835f65d64f64abda15b791902c2da3a
+msgid ""
+"So if we have an MPU6000 on the board we use the "
+"AP_InertialSensor_MPU6000.cpp driver on non-Pixhawk/NuttX platforms, and the"
+" AP_InertialSensor_PX4.cpp driver on NuttX based platforms."
+msgstr ""
+"因此，如果主板上有 MPU6000，我们在非 Pixhawk/NuttX 平台上使用 AP_InertialSensor_MPU6000.cpp "
+"驱动，在基于 NuttX 的平台上使用 AP_InertialSensor_PX4.cpp 驱动。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:171
+#: ff3f2a5906ea4b45826fe755946903ad
+msgid ""
+"The same type of split can also happen for other AP_HAL ports. For example, "
+"we could use Linux kernel drivers for some sensors on Linux boards. For "
+"other sensors we use the generic AP_HAL I2C and SPI interfaces to use the "
+"ArduPilot \"in-tree\" drivers which work across a wide range of boards."
+msgstr ""
+"同样的拆分也可能发生在其他 AP_HAL 移植版本中。例如，对于 Linux 主板上的某些传感器，我们可以使用 Linux "
+"内核驱动。对于其他传感器，我们使用通用的 AP_HAL I2C 和 SPI 接口来使用 ArduPilot「树内」驱动，这些驱动可在各种主板上工作。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:178
+#: f185a4c90fed48a9b9f45e476abc4117
+msgid "Platform specific threads and tasks"
+msgstr "平台特定线程和任务"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:180
+#: 0820e630f2424126b9de4feaf0d16ced
+msgid ""
+"On some platforms there will be a number of base tasks and threads that will"
+" be created by the startup process. These are very platform specific so for "
+"the sake of this tutorial I will concentrate on the tasks used on PX4 based "
+"boards."
+msgstr "在某些平台上，启动过程会创建一些基础任务和线程。这些内容非常依赖于平台，因此本教程将重点介绍基于 PX4 主板上使用的任务。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:185
+#: f42e497ded72467abcfbdc62fee26fee
+msgid ""
+"In the \"ps\" output above we saw a number of tasks and threads that were "
+"not started by the AP_HAL_PX4 Scheduler code. Specifically they are:"
+msgstr "在上面的「ps」输出中，我们看到了一些不是由 AP_HAL_PX4 Scheduler 代码启动的任务和线程。具体包括："
+
+#: ../../source/docs/learning-ardupilot-threading.rst:188
+#: e5c1f5fe68464e0087609c170a369b01
+msgid "idle task - called when there is nothing else to run"
+msgstr "idle 任务——当没有其他任务运行时调用"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:189
+#: c97e0ca3c5fc443eb3a87200271dda8d
+msgid "init - used to start up the system"
+msgstr "init——用于启动系统"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:190
+#: 94ee11ffdade4960854de838a49d958f
+msgid "px4io - handle the communication with the PX4IO co-processor"
+msgstr "px4io——处理与 PX4IO 协处理器的通信"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:191
+#: 1b4a7a89171745f98c4fa7b339bac24e
+msgid "hpwork - handle thread based PX4 drivers (mainly I2C drivers)"
+msgstr "hpwork——处理基于线程的 PX4 驱动（主要是 I2C 驱动）"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:192
+#: 2540447b484c49f4a3d77a9b9035f8e3
+msgid "lpwork - handle thread based low priority work (eg. IO)"
+msgstr "lpwork——处理基于线程的低优先级工作（如 IO）"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:193
+#: 688f79dc9a4044c4a88cb2425017bff2
+msgid "fmuservo - handle talking to the auxiliary PWM outputs on the FMU"
+msgstr "fmuservo——处理与 FMU 上辅助 PWM 输出的通信"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:194
+#: 1b2104ddab584ea4ba7a56a0e624e03d
+msgid "uavcan - handle the uavcan CANBUS protocol"
+msgstr "uavcan——处理 UAVCAN CANBUS 协议"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:196
+#: ba3566d12fc548b88308452f0e7eb490
+msgid ""
+"The startup of all of these tasks is controlled by the PX4 specific `rc.APM "
+"script "
+"<https://github.com/ArduPilot/ardupilot/blob/master/mk/PX4/ROMFS/init.d/rc.APM>`__."
+" That script is run when the PX4 boots, and is responsible for detecting "
+"what sort of PX4 board we are using then loading the right tasks and drivers"
+" for that board. It is a \"nsh\" script, which is similar to a bourne shell "
+"script (though nsh is much more primitive)."
+msgstr ""
+"所有这些任务的启动由 PX4 特定的 `rc.APM 脚本 "
+"<https://github.com/ArduPilot/ardupilot/blob/master/mk/PX4/ROMFS/init.d/rc.APM>`__"
+" 控制。该脚本在 PX4 启动时运行，负责检测我们使用的 PX4 主板类型，然后为该主板加载正确的任务和驱动。它是一个「nsh」脚本，类似于 "
+"Bourne shell 脚本（尽管 nsh 更为原始）。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:203
+#: cfda25c4082640a5bffd14e27a6e3ff8
+msgid ""
+"As an exercise, try editing the rc.APM script and adding some sleep and echo"
+" commands. Then upload a new firmware and connect to the debug console while"
+" the board is booting. Your echo commands should show up on the console."
+msgstr ""
+"作为练习，尝试编辑 rc.APM 脚本并添加一些 sleep 和 echo 命令。然后上传新固件，并在主板启动时连接到调试控制台。您的 echo "
+"命令应该出现在控制台上。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:208
+#: c1b7501ae3c746daab78b63f30c1de90
+msgid ""
+"Another very useful way of exploring the startup of the PX4 is to boot "
+"without a microSD card in the slot. The `rcS script "
+"<https://github.com/ArduPilot/ardupilot/blob/master/mk/PX4/ROMFS/init.d/rcS>`__,"
+" which runs just before rc.APM, detects if a microSD is inserted and gives "
+"you a bare nsh console on the USB port if it isn't. You can then manually "
+"run all the steps of rc.APM yourself on the USB console to learn how it "
+"works."
+msgstr ""
+"探索 PX4 启动过程的另一种非常有用的方式是在不插入 microSD 卡的情况下启动。`rcS 脚本 "
+"<https://github.com/ArduPilot/ardupilot/blob/master/mk/PX4/ROMFS/init.d/rcS>`__（在"
+" rc.APM 之前运行）会检测是否插入了 microSD，如果没有则通过 USB 端口提供一个裸 NSH 控制台。然后您可以在 USB "
+"控制台上手动运行 rc.APM 的所有步骤来了解其工作原理。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:215
+#: ef8988fa31b9424694de2ab5e1f78508
+msgid ""
+"Try the following exercise after booting a Pixhawk without a microSD card "
+"and connecting to the USB console:"
+msgstr "在不插入 microSD 卡的情况下启动 Pixhawk 并连接到 USB 控制台后，尝试以下练习："
+
+#: ../../source/docs/learning-ardupilot-threading.rst:229
+#: c98fa98ce4ef4274aa59e0ae588f3f34
+msgid ""
+"Try playing with the other drivers. Have a look in /bin to see what is "
+"available. The source code for most of these commands is in "
+"`PX4Firmware/src/drivers "
+"<https://github.com/ArduPilot/PX4Firmware/tree/master/src/drivers>`__. Have "
+"a look through the mpu6000 driver to get an idea of what is involved."
+msgstr ""
+"尝试使用其他驱动。查看 /bin 目录了解有哪些可用驱动。大多数这些命令的源代码在 `PX4Firmware/src/drivers "
+"<https://github.com/ArduPilot/PX4Firmware/tree/master/src/drivers>`__ 中。通读 "
+"mpu6000 驱动，了解其中涉及的内容。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:235
+#: 4fc0bab0197c4cdca1c7ca89c3eb10fe
+msgid ""
+"Given we are on the topic of threads and tasks, a brief description of "
+"threads in the PX4Firmware git tree is worth mentioning. If you look in the "
+"mpu6000 driver you will see a line like this:"
+msgstr ""
+"既然我们在讨论线程和任务，简要介绍一下 PX4Firmware git 树中的线程是值得的。如果您查看 mpu6000 驱动，会看到类似这样的一行："
+
+#: ../../source/docs/learning-ardupilot-threading.rst:243
+#: 9f0e2e37c620464db9c3670c8f1567da
+msgid ""
+"that is the equivalent of the hal.scheduler->register_timer_process() "
+"function in the AP_HAL, but is PX4 specific and is also much more flexible. "
+"It says that it wants the HRT (high resolution timer) subsystem of the PX4 "
+"to call the MPU6000::measure_trampoline function every 1000 microseconds."
+msgstr ""
+"这等同于 AP_HAL 中的 hal.scheduler->register_timer_process() 函数，但它是 PX4 "
+"特定的，也更加灵活。它表明希望 PX4 的 HRT（高分辨率定时器）子系统每 1000 微秒调用一次 "
+"MPU6000::measure_trampoline 函数。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:249
+#: ab298fbd902c4fc69b1b81032b1af009
+msgid ""
+"Using hrt_call_every() is the common method used for regular events in "
+"drivers where the operations are very fast, such as SPI device drivers. The "
+"operations are typically run with interrupts disabled, and should take only "
+"a few tens of microseconds at most."
+msgstr ""
+"使用 hrt_call_every() 是驱动中用于操作非常快速的定期事件的常见方法，例如 SPI "
+"设备驱动。这些操作通常在禁用中断的情况下运行，最多应只需几十微秒。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:254
+#: 08dbea73ff034fb79c6d56a5b1a12b39
+msgid ""
+"If you compare this to the hmc5883 driver, you will instead see a line like "
+"this:"
+msgstr "如果与 hmc5883 驱动相比，您将看到类似这样的一行："
+
+#: ../../source/docs/learning-ardupilot-threading.rst:261
+#: 865608934f4f48cebbe716b0faaefc27
+msgid ""
+"that uses an alternative mechanism for regular events which is suitable for "
+"slower devices, such as I2C devices. What this does is add the "
+"cycle_trampoline function to a work queue within the hpwork thread that you "
+"saw above. Calls made within HPWORK workers should run with interrupts "
+"enabled and may take up to a few hundred microseconds. For tasks which will "
+"take longer than that the LPWORK work queue should be used, which runs them "
+"in the lower priority lpwork thread."
+msgstr ""
+"这使用了适用于较慢设备（如 I2C 设备）的定期事件替代机制。它将 cycle_trampoline 函数添加到上面提到的 hpwork "
+"线程中的工作队列中。在 HPWORK 工作者中的调用应在启用中断的情况下运行，最多可能耗时几百微秒。对于耗时更长的任务，应使用 LPWORK "
+"工作队列，在较低优先级的 lpwork 线程中运行。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:270
+#: 118e9d0cd240472382b2acb09a9ff9b8
+msgid "The AP_Scheduler system"
+msgstr "AP_Scheduler 系统"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:272
+#: a8eec29ed1864147ac5128a6d31dff77
+msgid ""
+"The next aspect of ArduPilot threading and tasks to understand is the "
+"AP_Scheduler system. The AP_Scheduler library is used to divide up time "
+"within the main vehicle thread, while providing some simple mechanisms to "
+"control how much time is used for each operation (called a 'task' in "
+"AP_Scheduler)."
+msgstr ""
+"接下来要了解的 ArduPilot 线程和任务方面是 AP_Scheduler 系统。AP_Scheduler "
+"库用于在主飞行器线程内分配时间，同时提供一些简单的机制来控制每个操作（在 AP_Scheduler 中称为「任务」）所使用的时间。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:278
+#: bbb62a280b694b0fb86335cf9db26f4c
+msgid ""
+"The way it works is that the loop() function for each vehicle implementation"
+" contains some code that does this:"
+msgstr "其工作方式是：每个飞行器实现的 loop() 函数包含执行以下操作的代码："
+
+#: ../../source/docs/learning-ardupilot-threading.rst:281
+#: 9ab18154465f40aaaeed7b96975f6fc3
+msgid "wait for a new IMU sample to arrive"
+msgstr "等待新的 IMU 采样到来"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:282
+#: 87e9fb4d88034618bdb84bc3642e8783
+msgid "call a set of tasks between each IMU sample"
+msgstr "在每次 IMU 采样之间调用一组任务"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:284
+#: 9cac518b376e49109cb48d8136d3dcad
+msgid ""
+"It is a table driven scheduler, and each vehicle type has a "
+"AP_Scheduler::Task table. To learn how it works have a look at the "
+"`AP_Scheduler/examples/Scheduler_test.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scheduler/examples/Scheduler_test/Scheduler_test.cpp>`__"
+" sketch."
+msgstr ""
+"这是一个表驱动的调度器，每种飞行器类型都有一个 AP_Scheduler::Task 表。要了解其工作原理，请查看 "
+"`AP_Scheduler/examples/Scheduler_test.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scheduler/examples/Scheduler_test/Scheduler_test.cpp>`__"
+" 草图。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:289
+#: d70ff9248d304e3094ff5906e1fb1d8e
+msgid ""
+"If you look inside that file you will see a small table with a set of 3 "
+"scheduling tasks. Associated with each task are two numbers. The table looks"
+" like this:"
+msgstr "查看该文件内部，您会看到一个包含 3 个调度任务的小表格。每个任务关联两个数字。表格如下所示："
+
+#: ../../source/docs/learning-ardupilot-threading.rst:301
+#: 8fc8fe9022b4437589d19a700fcbb726
+msgid ""
+"The first number after each function name is the call frequency, in units "
+"controlled by the ins.init() call. For this example sketch the ins.init() "
+"uses RATE_50HZ, so each scheduling step is 20ms. That means the ins_update()"
+" call is made every 20ms, the one_hz_print() function is called every 50 "
+"times (ie. once a second) and the five_second_call() is called every 250 "
+"times (ie. once every 5 seconds)."
+msgstr ""
+"每个函数名后的第一个数字是调用频率，单位由 ins.init() 调用控制。对于本示例草图，ins.init() 使用 "
+"RATE_50HZ，因此每个调度步骤为 20ms。这意味着 ins_update() 每 20ms 调用一次，one_hz_print() 函数每 50"
+" 次调用一次（即每秒一次），five_second_call() 每 250 次调用一次（即每 5 秒一次）。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:309
+#: 39401baac3164493a271993a0f3fba80
+msgid ""
+"The second number is the maximum time that the function is expected to take."
+" This is used to avoid making the call unless there is enough time left in "
+"this scheduling run to run the function. When scheduler.run() is called it "
+"is passed the amount of time (in microseconds) available for running tasks, "
+"and if the worst case time for this task would mean it wouldn't fit before "
+"that time runs out then it won't be called."
+msgstr ""
+"第二个数字是函数预计占用的最长时间。这用于避免在本次调度运行中没有足够时间来运行该函数的情况下调用它。调用 scheduler.run() "
+"时会传入可用于运行任务的时间量（以微秒为单位），如果该任务的最坏情况时间意味着在可用时间耗尽前无法完成，则不会调用该任务。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:316
+#: 7249e070c26e4b9e935711472699c441
+msgid ""
+"Another point to look at closely is the ins.wait_for_sample() call. That is "
+"the \"metronome\" that drives the scheduling in ArduPilot. It blocks "
+"execution of the main vehicle thread until a new IMU sample is available. "
+"The time between IMU samples is controlled by the arguments to the "
+"ins.init() call."
+msgstr ""
+"另一个需要仔细观察的是 ins.wait_for_sample() 调用。这是驱动 ArduPilot "
+"调度的「节拍器」。它阻塞主飞行器线程的执行，直到新的 IMU 采样可用。IMU 采样之间的时间由 ins.init() 调用的参数控制。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:322
+#: 8884563ce7054bd485bfaeba6bf39ae8
+msgid ""
+"Note that tasks in AP_Scheduler tables must have the following attributes:"
+msgstr "请注意，AP_Scheduler 表中的任务必须具有以下特性："
+
+#: ../../source/docs/learning-ardupilot-threading.rst:325
+#: 500492455695491ba1ba1efe4ec3bfb6
+msgid "they should never block (except for the ins.update() call)"
+msgstr "它们绝不能阻塞（ins.update() 调用除外）"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:326
+#: 84dfbbf60b8445948b6bd79a4f089442
+msgid ""
+"they should never call sleep functions when flying (an autopilot, like a "
+"real pilot, should never sleep while flying)"
+msgstr "飞行期间绝不能调用休眠函数（自动驾驶仪就像真实飞行员一样，在飞行时绝不能休眠）"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:328
+#: 7424324ef8c7490d9818d78cddf23729
+msgid "they should have predictable worst case timing"
+msgstr "它们应该具有可预测的最坏情况时序"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:330
+#: 295d90ebc07944a2ba61423a7f5c91a5
+msgid ""
+"You should now go and modify the Scheduler_test example and add in your own "
+"tasks to run. Try adding tasks that do the following:"
+msgstr "现在请修改 Scheduler_test 示例，添加您自己的运行任务。尝试添加执行以下操作的任务："
+
+#: ../../source/docs/learning-ardupilot-threading.rst:333
+#: 7530ca1fac134b0a9989bdc873d24b47
+msgid "read the barometer"
+msgstr "读取气压计"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:334
+#: 65dcb9bc24f54ed7be8f8aedcb59cb3c
+msgid "read the compass"
+msgstr "读取罗盘"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:335
+#: 0824b8dc00004b6f9401549df51b6d82
+msgid "read the GPS"
+msgstr "读取 GPS"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:336
+#: 22c96b09e48b4794b73f765b90bbe611
+msgid "update the AHRS and print the roll/pitch"
+msgstr "更新 AHRS 并打印横滚/俯仰角"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:338
+#: df34ebd4b6ce45f883865cfe5befe318
+msgid ""
+"Look at the example sketches for each library that you worked with earlier "
+"in this tutorial to understand how to use each sensor library."
+msgstr "查看本教程前面章节中使用过的各个库的示例代码，以了解如何使用每个传感器库。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:342
+#: 13de4c22046d4d14a9e3f1a125992599
+msgid "Semaphores"
+msgstr "信号量"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:344
+#: 7ece2b60623f4c1a9a1f880293268932
+msgid ""
+"When you have multiple threads (or timer callbacks) you need to ensure that "
+"data structures shared by the two logical threads of execution are updated "
+"in a way that prevents corruption. There are 3 principle ways of doing this "
+"in ArduPilot - semaphores, lockless data structures and the PX4 ORB."
+msgstr ""
+"当存在多个线程（或定时器回调）时，需要确保两个逻辑执行线程共享的数据结构以防止数据损坏的方式进行更新。ArduPilot "
+"中主要有三种方式实现这一目标：信号量、无锁数据结构和 PX4 ORB。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:350
+#: 0fee39fe38064fc58c6293d48871bd65
+msgid ""
+"AP_HAL Semaphores are just wrappers around whatever semaphore system is "
+"available on the specific platform, and provide a simple mechanism for "
+"mutual exclusion. For example, I2C drivers can ask for the I2C bus semaphore"
+" to ensure that only one I2C device is used at a time."
+msgstr ""
+"AP_HAL 信号量只是对特定平台上可用信号量系统的封装，提供了一种简单的互斥机制。例如，I2C 驱动可以请求 I2C "
+"总线信号量，以确保同一时刻只有一个 I2C 设备在使用。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:355
+#: 5c14d9b8212e41f6a458d4e77e581f53
+msgid ""
+"Go and have a look at the hmc5843 driver in "
+"libraries/AP_Compass/AP_Compass_HMC5843.cpp and look for the "
+"\\get_semaphore() call. Look at all the places it is used, and see if you "
+"can work out why it is needed."
+msgstr ""
+"查看 libraries/AP_Compass/AP_Compass_HMC5843.cpp 中的 hmc5843 驱动，找到 "
+"get_semaphore() 调用。查看它在所有使用位置，分析为什么需要它。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:361
+#: 8b95f8de46034fd7a368e2c92a611053
+msgid "Lockless Data Structures"
+msgstr "无锁数据结构"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:363
+#: a848f8e04acf49af92ac34da38af87c8
+msgid ""
+"The ArduPilot code also contains examples of using lockless data structures "
+"to avoid the need for a semaphore. This can be a lot more efficient than "
+"semaphores."
+msgstr "ArduPilot 代码中还包含使用无锁数据结构的示例，以避免使用信号量。这比信号量的效率高得多。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:367
+#: 8eb67113c2754899bbd47169f1112646
+msgid "Two examples of lockless data structures in ArduPilot are:"
+msgstr "ArduPilot 中无锁数据结构的两个示例如下："
+
+#: ../../source/docs/learning-ardupilot-threading.rst:369
+#: 6cf151a02a96415281deeb5cfafd4a2b
+msgid ""
+"the \\_shared_data structure in "
+"libraries/AP_InertialSensor/AP_InertialSensor_MPU9250.cpp"
+msgstr ""
+"libraries/AP_InertialSensor/AP_InertialSensor_MPU9250.cpp 中的 _shared_data 结构"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:371
+#: 7ce54bccc01e46ddb0a350c9326f07d0
+msgid ""
+"the ring buffers used in numerous places. A good example is "
+"libraries/DataFlash/DataFlash_File.cpp"
+msgstr "在很多地方使用的环形缓冲区。一个好的例子是 libraries/DataFlash/DataFlash_File.cpp"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:374
+#: bc63b0d4672a4337b2f5103ed368b393
+msgid ""
+"Go and have a look at these two examples, and prove to yourself that they "
+"are safe for concurrent access. For DataFlash_File look at the use of the "
+"\\_writebuf_head and \\_writebuf_tail variables."
+msgstr ""
+"查看这两个示例，自行验证它们对并发访问是安全的。对于 DataFlash_File，请关注 _writebuf_head 和 "
+"_writebuf_tail 变量的使用方式。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:378
+#: 71a9df2d0825465392f81ef75e7daa0e
+msgid ""
+"It would be nice to create a generic ring buffer class which could be used "
+"instead of the separate ringbuffer implementations in several places in "
+"ArduPilot. If you want to contribute that then please do a pull request!"
+msgstr ""
+"如果能创建一个通用的环形缓冲区类来替代 ArduPilot 中多处独立的环形缓冲区实现，那将非常好。如果你愿意贡献这部分代码，请提交 pull "
+"request！"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:384
+#: 7956eda2062c4062bf8ae4b83522adfa
+msgid "The PX4 ORB"
+msgstr "PX4 ORB"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:386
+#: 7cf35d7d150d41369cef0a430f89fdf7
+msgid ""
+"Another example of this type of mechanism is the PX4 ORB. The ORB (Object "
+"Request Broker) is a way of providing data from one part of the system to "
+"another (eg. device driver -> vehicle code) using a publish/subscribe model "
+"that is safe in a multi-threaded environment."
+msgstr ""
+"此类机制的另一个示例是 PX4 ORB。ORB（对象请求代理）是一种通过发布/订阅模型在系统各部分之间（例如设备驱动程序 -> "
+"飞行器代码）传递数据的方式，在多线程环境中是安全的。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:391
+#: a2e5722732d741f0aef7b87b4922693f
+msgid ""
+"The ORB provides a nice mechanism for declaring structures which will be "
+"shared in this way (all defined in `PX4Firmware/src/modules/uORB/ "
+"<https://github.com/ArduPilot/PX4Firmware/tree/master/src/modules/uORB>`__)."
+" Code can then \"publish\" data to one of these topics, which is picked up "
+"by other pieces of code."
+msgstr ""
+"ORB 提供了一种声明以此方式共享的结构的机制（全部定义在 PX4Firmware/src/modules/uORB/ "
+"中）。代码随后可以向这些主题「发布」数据，其他代码即可接收。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:397
+#: 0486e0053f0b45b79569a7de8ee955ad
+msgid ""
+"An example is the publication of actuator values so the uavcan ESCs can be "
+"used on Pixhawk. Have a look at the \\_publish_actuators() function in "
+"AP_HAL_PX4/RCOutput.cpp. You will see that it advertises a "
+"\"actuator_direct\" topic, which contains the speed desired for each ESC. "
+"The uavcan code these watches for changes to this topic in "
+"`PX4Firmware/src/modules/uavcan/uavcan_main.cpp "
+"<https://github.com/ArduPilot/PX4Firmware/blob/master/src/modules/uavcan/uavcan_main.cpp>`__\\"
+" and outputs the new values to the uavcan ESCs."
+msgstr ""
+"一个示例是发布执行器数值，以便在 Pixhawk 上使用 uavcan 电调。查看 AP_HAL_PX4/RCOutput.cpp 中的 "
+"_publish_actuators() 函数，可以看到它广播了一个 「actuator_direct」 主题，其中包含每个电调所需的转速。uavcan"
+" 代码在 PX4Firmware/src/modules/uavcan/uavcan_main.cpp 中监听该主题的变化，并将新值输出到 uavcan"
+" 电调。"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:405
+#: 08aad1a060f249e9933ba7591831d6a3
+msgid "Two other common mechanisms for communicating with PX4 drivers are:"
+msgstr "与 PX4 驱动通信的另外两种常见机制是："
+
+#: ../../source/docs/learning-ardupilot-threading.rst:407
+#: b24d1afa817d429299ccbc90af10de1d
+msgid "ioctl calls (see the examples in AP_HAL_PX4/RCOutput.cpp)"
+msgstr "ioctl 调用（参见 AP_HAL_PX4/RCOutput.cpp 中的示例）"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:408
+#: ea9178b5dee14baa832b6599bf69a5ac
+msgid "/dev/xxx read/write calls (see \\_timer_tick in AP_HAL_PX4/RCOutput.cpp)"
+msgstr "/dev/xxx 读写调用（参见 AP_HAL_PX4/RCOutput.cpp 中的 _timer_tick）"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:411
+#: a83fbaf4be4b4520b15e2b44dfd2aa68
+msgid ""
+"Please talk to the ardupilot development team on the `ArduPilot Developers "
+"Discord <https://ardupilot.org/discord>`__ if you are not sure which "
+"mechanism to use for new code."
+msgstr "如果不确定新代码应使用哪种机制，请在 ArduPilot Developers Discord 上联系 ArduPilot 开发团队。"

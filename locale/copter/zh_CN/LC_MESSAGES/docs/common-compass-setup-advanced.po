@@ -1,0 +1,614 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 03:48+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:191
+msgid "Magfit WebTools Utilty"
+msgstr "Magfit WebTools 工具"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:5
+#: bedbdc84a49f4223844e48a66bd0c888
+msgid "Advanced Compass Setup"
+msgstr "高级罗盘设置"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:7
+#: 6553c03029fb4e2ba73539ed449fa891
+msgid ""
+"This article provides advanced guidance for how to setup the system "
+"compass(es) and advanced compass related features."
+msgstr "本文为如何设置系统罗盘及高级罗盘相关功能提供高级指导。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:11
+#: 880b5e739886483c99ca53a3d554b7a1
+msgid ""
+"Users who have only internal compasses or an external compass using a UBlox "
+"GPS + compass combination,such as :ref:`UBlox GPS + Compass Module <common-"
+"installing-3dr-ublox-gps-compass-module>`, and have mounted it in the "
+"default orientation can usually perform a simple \"Onboard Calibration\" as "
+"described in :ref:`Compass Calibration <common-compass-calibration-in-"
+"mission-planner>`)."
+msgstr ""
+"仅使用内部罗盘或使用 UBlox GPS + 罗盘组合的外置罗盘（例如 :ref:`UBlox GPS + Compass Module "
+"<common-installing-3dr-ublox-gps-compass-"
+"module>`）且按默认方向安装的用户，通常只需执行简单的「机载校准」，如 :ref:`Compass Calibration <common-"
+"compass-calibration-in-mission-planner>`) 中所述。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:14
+#: ca7dafdb00b64ae5abc3289a38a0d1d2
+msgid "Overview"
+msgstr "概述"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:16
+#: d96776d91c354eb2bf732d827c3b8ab3
+msgid ""
+"Accurately setting up the compass is critical because it is the primary "
+"source of heading information. Without an accurate heading the vehicle will "
+"not move in the correct direction in autopilot modes (i.e. AUTO, LOITER, "
+"PosHold, RTL, etc). This can lead to circling (aka \"toiletbowling\") or "
+"fly-aways."
+msgstr ""
+"准确设置罗盘至关重要，因为它是航向信息的主要来源。如果航向不准确，飞行器在飞控模式下（即 AUTO、LOITER、PosHold、RTL "
+"等）将无法朝正确方向移动。这可能导致绕圈（俗称「马桶效应」）或飞走。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:22
+#: 96678993da6d483da25ceeb9c45754ed
+msgid ""
+"ArduPilot allows multiple compasses to be connected, but only three are used"
+" at one time. And usually, only the primary compass is used, unless there "
+"are consistency problems with its readings versus other compasses and/or "
+"other sensors. In this case, the autopilot will automatically determine "
+"which of the first three compasses to use."
+msgstr ""
+"ArduPilot "
+"允许连接多个罗盘，但一次只使用三个。通常只使用主罗盘，除非其读数与其他罗盘和/或其他传感器存在一致性问题。在这种情况下，飞控将自动确定使用前三个罗盘中的哪一个。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:24
+#: 8b4f7d81111d4f34a7769c53ecbd63b8
+msgid ""
+"While many autopilots have an internal compass or compasses, many "
+"applications will instead use an external compass. This provides more "
+"reliable data than an internal compass because of the separation from other "
+"electronics. See :ref:`common-autopilots` for details about the specific "
+"autopilot to determine how many built-in compasses the autopilot may have, "
+"if any."
+msgstr ""
+"虽然许多飞控具有内置罗盘，但许多应用会使用外置罗盘。由于与其他电子设备的距离较远，外置罗盘提供的数据比内置罗盘更可靠。有关特定飞控内置罗盘数量的详细信息，请参阅"
+" :ref:`common-autopilots`。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:28
+#: 8356b92a936f46a39a38e84efd70977a
+msgid ""
+"Most users will only need to  perform the normal :ref:`Compass "
+"Calibration<common-compass-calibration-in-mission-planner>` but details are "
+"also given on the less-used  :ref:`CompassMot <common-compass-setup-"
+"advanced_compassmot_compensation_for_interference_from_the_power_wires_escs_and_motors>`"
+msgstr ""
+"大多数用户只需执行常规 :ref:`Compass Calibration<common-compass-calibration-in-mission-"
+"planner>`，但也会提供较少使用的 :ref:`CompassMot <common-compass-setup-"
+"advanced_compassmot_compensation_for_interference_from_the_power_wires_escs_and_motors>`"
+" 的详细信息"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:32
+#: eee8b55580f047eaa0e8c94f528abdfa
+msgid "Compass Settings"
+msgstr "罗盘设置"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:34
+#: 0fc02bfd5d094e7b9e06d965420c5e28
+msgid ""
+"The *Mission Planner Compass Setup screen* can be found in menu **Setup \\| "
+"Mandatory Hardware \\| Compass** in the sidebar. This screen is used for "
+"setting compass ordering, priority, calibration, and use. No other settings "
+"are required for normal use."
+msgstr ""
+"*Mission Planner 罗盘设置界面* 可在侧边栏菜单 **Setup \\| Mandatory Hardware \\| "
+"Compass** 中找到。此界面用于设置罗盘排序、优先级、校准和使用。正常使用不需要其他设置。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:41
+#: f33315d7c015456f81d05975f7afc52d
+msgid "Mission Planner: Advanced Compass Setup and Calibration"
+msgstr "Mission Planner：高级罗盘设置与校准"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:45
+#: ccd8c53c611d49f0b842535a0c7614fd
+msgid "Compass Ordering and Priority"
+msgstr "罗盘排序与优先级"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:47
+#: 89d2dfb99e944e0da1d61aab634f6cf4
+msgid ""
+"During boot, ArduPilot automatically detects the compasses present in the "
+"system, adds them to a list, and assigns the first three a priority (1-3) "
+"linked to their DEV ID (``COMPASS_PRIOx_ID``), according to the order in "
+"which they are discovered. This priority determines which compass is used by"
+" the EKF lanes. The primary compass (highest priority, 1) will be used by "
+"all lanes, and fallback to the next viable compass in the first three "
+"priorities, if the primary becomes unhealthy."
+msgstr ""
+"启动时，ArduPilot 会自动检测系统中存在的罗盘，将其添加到列表中，并根据发现顺序为前三个罗盘分配优先级（1-3），并通过其设备 "
+"ID（``COMPASS_PRIOx_ID``）进行关联。此优先级决定了 EKF "
+"通道使用哪个罗盘。主罗盘（最高优先级，1）将被所有通道使用，如果主罗盘不健康，则回退到前三个优先级中下一个可用的罗盘。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:49
+#: dd3bd77ab82f47eb992c8e95eeccfa7b
+msgid ""
+"The list of discovered compasses and their priority is maintained across "
+"boots."
+msgstr "已发现罗盘的列表及其优先级在重启后保持不变。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:51
+#: ac1fd7b7b2fb4120a24a20e2d4fbcd2e
+msgid ""
+"If a user wishes to change to a different compass for one of the three "
+"priorities, he can change the ``COMPASS_PRIOx_ID`` to that compass's "
+"``COMPASS_DEV_IDx`` ID value. If a ``COMPASS_PRIOx_ID`` is set to zero, the "
+"compasses will be moved up contiguously, in order, to fill that priority "
+"slot on the next reboot. This is easily done in Mission Planner with the "
+"arrows on the right side."
+msgstr ""
+"如果用户希望将某个优先级更改为不同的罗盘，可以将 ``COMPASS_PRIOx_ID`` 更改为该罗盘的 ``COMPASS_DEV_IDx`` ID"
+" 值。如果将 ``COMPASS_PRIOx_ID`` 设置为零，则罗盘将在下次重启时按顺序连续向上填充该优先级位置。在 Mission Planner"
+" 中，通过右侧的箭头可以轻松完成此操作。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:53
+#: 85342d2a5fc149e9b98f6b839b198047
+msgid ""
+"never change a compass's ``COMPASS_DEV_IDx`` ID value manually and then "
+"reboot!"
+msgstr "切勿手动更改罗盘的 ``COMPASS_DEV_IDx`` ID 值后重启！"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:55
+#: d3c50cbf85744ce2abc2ce9994aecf9a
+msgid ""
+"If a previously discovered compass is missing or not detected on boot, and "
+"is in one of the three priority positions, a pre-arm failure will occur "
+"warning the user. The user will need to either remove the compass from the "
+"priority position, or correct the problem in order to prevent the pre-arm "
+"failure. Mission Planner provides a button to remove an undetected compass "
+"on the above screen."
+msgstr ""
+"如果之前发现的罗盘在启动时缺失或未被检测到，且处于三个优先级位置之一，则会发生预解锁失败，警告用户。用户需要从优先级位置中移除该罗盘，或纠正问题以防止预解锁失败。Mission"
+" Planner 在上述界面提供了删除未检测到罗盘的按钮。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:57
+#: 32a378f817e64770ad3423355c9f9b56
+msgid ""
+"Compasses not present or detected during a calibration will automatically be"
+" removed."
+msgstr "在校准过程中未出现或未被检测到的罗盘将被自动移除。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:60
+#: b8285db12f044143ab21c8f7ca9d7288
+msgid "Compass Enables"
+msgstr "罗盘启用"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:62
+#: 4ba5083e4d384516aada401bd563f5bb
+msgid ""
+"Any one of the first three compasses can be disabled. This would leave only "
+"the remaining ones to be used by the autopilot. You may wish to disable any "
+"internal compasses if you are consistently seeing the “inconsistent "
+"compasses” pre-arm message often and you are sure that the external compass "
+"is calibrated."
+msgstr ""
+"前三个罗盘中的任意一个都可以被禁用。这将只留下其余罗盘供飞控使用。如果您经常看到「罗盘不一致」的预解锁提示，并且确定外置罗盘已校准，则可以考虑禁用所有内置罗盘。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:66
+#: f337366080904824abad02f1aeea7a21
+msgid ""
+"Compasses should always be enabled for Copter/Rover, but may be disabled "
+"(not recommended, if one is available) for Plane."
+msgstr "对于旋翼机/漫游车，罗盘应始终启用，但对于飞机可以禁用（如果有罗盘，不建议禁用）。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:69
+#: ca0d92504b9e40e4bd4b076be1bd33ab
+msgid "Orientation"
+msgstr "方向"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:71
+#: 1b396017adec40f78c1efec3ac545cdd
+msgid ""
+"The :ref:`AHRS_ORIENTATION<AHRS_ORIENTATION>` must be set correctly for the "
+"compass calibration to be successful. In addition,the :ref:`common-"
+"accelerometer-calibration` should be completed before the Compass "
+"Calibration."
+msgstr ""
+"必须正确设置 :ref:`AHRS_ORIENTATION<AHRS_ORIENTATION>`，才能成功进行罗盘校准。此外，应在罗盘校准之前完成 "
+":ref:`common-accelerometer-calibration`。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:73
+#: 799cd768120d42ef902cc5bc1a96f2ba
+msgid ""
+"The setting of the orientation of external compasses is no longer required. "
+"It's determined automatically during :ref:`common-compass-calibration-in-"
+"mission-planner` now. This can be disabled, or only report the orientation "
+"determined during Compass Calibration, using the "
+":ref:`COMPASS_AUTO_ROT<COMPASS_AUTO_ROT>` parameter. The orientation "
+"determination CAN fail if the magnetic fields are compromised by nearby "
+"metal or other interference, especially on 45 deg offset orientations. If "
+"the compass is known to be mounted on a 45 degree bias to the "
+"accelerometers, and fails to determine orientation during the Compass "
+"Calibration, then setting :ref:`COMPASS_AUTO_ROT<COMPASS_AUTO_ROT>` to \"3\""
+" and repeating the calibration, may yield a successful completion."
+msgstr ""
+"现在不再需要手动设置外置罗盘的方向，它会在 :ref:`common-compass-calibration-in-mission-planner` "
+"期间自动确定。可以使用 :ref:`COMPASS_AUTO_ROT<COMPASS_AUTO_ROT>` "
+"参数禁用此功能，或仅报告罗盘校准期间确定的方向。如果附近有金属或其他干扰，尤其是在 45 度偏移方向上，方向确定可能失败。如果已知罗盘相对于加速度计以 "
+"45 度偏置安装，且在罗盘校准期间无法确定方向，则将 :ref:`COMPASS_AUTO_ROT<COMPASS_AUTO_ROT>` "
+"设置为「3」并重复校准可能会成功完成。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:75
+#: 24f6d2caad7340a387f1070c5c036d45
+msgid ""
+"automatic determination of compass orientation ONLY occurs using normal "
+"Compass Calibration. :ref:`In-flight Calibration<automatic-compass-offset-"
+"calibration>` and :ref:`Large Vehicle Mag Calibration <large-vehicle-mag-"
+"cal>` require that the orientation be properly set BEFORE attempting these "
+"types of calibration."
+msgstr ""
+"罗盘方向的自动确定仅在正常罗盘校准时发生。:ref:`飞行中校准<automatic-compass-offset-calibration>` 和 "
+":ref:`大型飞行器磁校准 <large-vehicle-mag-cal>` 要求在尝试这些类型的校准之前正确设置方向。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:77
+#: f6716bf02cec42689d884eac9276c008
+msgid ""
+"However, if the need to double-check the orientation of a compass should "
+"arise:"
+msgstr "但是，如果需要再次检查罗盘方向："
+
+#: ../../source/docs/common-compass-setup-advanced.rst:79
+#: 0f88272ad7c641cd8f65814620663c2c
+msgid ""
+"When rotating your aircraft through all axes each of the compasses should "
+"move in the same direction, and should be of approximately the same values:"
+msgstr "当您将飞行器在所有轴上旋转时，每个罗盘应沿相同方向移动，且数值应大致相同："
+
+#: ../../source/docs/common-compass-setup-advanced.rst:84
+#: 612ba6df55ff4a9aabe842425a80f308
+msgid "Northern Hemisphere:"
+msgstr "北半球："
+
+#: ../../source/docs/common-compass-setup-advanced.rst:82
+#: 6139964b004b41149070dcce004a61fd
+msgid "Z-component should be *positive*"
+msgstr "Z 分量应为 *正值*"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:83
+#: f276f4d4a5684b668b5253019df62af7
+msgid ""
+"when pitching the vehicle down, the X component should *increase* in value"
+msgstr "当飞行器向下俯仰时，X 分量应 *增大*"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:84
+#: 1a987eea88504814a71e5f0efd7aff95
+msgid ""
+"when rolling the vehicle right, the Y component should *increase* in value"
+msgstr "当飞行器向右横滚时，Y 分量应 *增大*"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:89
+#: e7b3b8844deb4e57981dca49a8ff5533
+msgid "Southern Hemisphere:"
+msgstr "南半球："
+
+#: ../../source/docs/common-compass-setup-advanced.rst:87
+#: 8b5278d6f9f949a6bc2c87b379ffc348
+msgid "Z-component should be *negative*"
+msgstr "Z 分量应为 *负值*"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:88
+#: 07813bc676e244fbb80915f39db2ca7b
+msgid ""
+"when pitching the vehicle down, the X component should *decrease* in value"
+msgstr "当飞行器向下俯仰时，X 分量应 *减小*"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:89
+#: ab3711ab91fa46f6bcbc2dceecf9563f
+msgid ""
+"when rolling the vehicle right, the Y component should *decrease* in value"
+msgstr "当飞行器向右横滚时，Y 分量应 *减小*"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:92
+#: e40a2785475f4ae6b622637ef4e329bd
+msgid "Other parameters"
+msgstr "其他参数"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:94
+#: 7b95c3f6353647afb0716d69c5841a79
+msgid ""
+"Earlier versions of ArduPilot did not incorporate the world magnetic model "
+"database, and a locations magnetic declination might need to manually "
+"entered, or learned through flight. This is not necessary now. In addition, "
+"this allows the declination to be continuously updated on long distance "
+"flights."
+msgstr ""
+"ArduPilot "
+"的早期版本未包含世界磁场模型数据库，某地点的磁偏角可能需要手动输入或通过飞行学习。现在已不再需要此操作。此外，这还允许在长途飞行中持续更新磁偏角。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:96
+#: f8c26de76f954d44bcfdedd24c897c54
+msgid ""
+"Also, learning the compass offsets in flight, instead of ground calibration,"
+" is an option for vehicles difficult to move in order to calibrate. But is "
+"not recommended, since the Large Vehicle MagCal option is now available. See"
+" :ref:`common-compass-calibration-in-mission-planner` page for details."
+msgstr ""
+"此外，在飞行中学习罗盘偏移量（而不是地面校准）是难以移动以进行校准的飞行器的一个选项。但不建议使用，因为大型飞行器 MagCal "
+"选项现在已可用。有关详细信息，请参阅 :ref:`common-compass-calibration-in-mission-planner` 页面。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:102
+#: 921997d11a93450884f387ae6da67f40
+msgid ""
+"CompassMot — compensation for interference from the power wires, ESCs and "
+"motors"
+msgstr "CompassMot — 补偿电源线、ESC 和电机的干扰"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:104
+#: ba14edf6ad984bb7b7368fa9123b22fc
+msgid ""
+"This is recommended for vehicles that have only an internal compass and on "
+"vehicles where there is significant interference on the compass from the "
+"motors, power wires, etc. CompassMot only works well if you have a "
+":ref:`battery current monitor <common-powermodule-landingpage>` because the "
+"magnetic interference is linear with current drawn.  It is technically "
+"possible to set-up CompassMot using throttle but this is not recommended."
+msgstr ""
+"建议在仅有内置罗盘的飞行器以及电机、电源线等对罗盘干扰较大的飞行器上使用此功能。CompassMot 仅在您有 :ref:`电池电流监测器 "
+"<common-powermodule-landingpage>` 时效果良好，因为磁干扰与电流成线性关系。从技术上讲，可以使用油门设置 "
+"CompassMot，但不建议这样做。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:112
+#: a3aad180e440402db4f32881557f0d81
+msgid "Please follow these instructions:"
+msgstr "请按照以下说明操作："
+
+#: ../../source/docs/common-compass-setup-advanced.rst:114
+#: 7e1fa37516214a7dbe42d98b70f55c6b
+msgid ""
+"Enable the current monitor (aka :ref:`Power Module <common-powermodule-"
+"landingpage>`)"
+msgstr "启用电流监测器（即 :ref:`电源模块 <common-powermodule-landingpage>`）"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:115
+#: 2dd2868953a144c49cfcf54163e29a51
+msgid ""
+"Disconnect your props, flip them over and rotate them one position around "
+"the frame.  In this configuration they should push the copter down into the "
+"ground when the throttle is raised"
+msgstr "拆下螺旋桨，翻转并在机架上旋转一个位置。在这种配置下，当油门升高时，螺旋桨应将飞行器向下推向地面"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:118
+#: deb43210122e45b1b75fba32451b91d1
+msgid "Secure the copter (perhaps with tape) so that it does not move"
+msgstr "固定飞行器（可以用胶带），使其不会移动"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:119
+#: ba265365ee6c49418ef812338223389f
+msgid "Turn on your transmitter and keep throttle at zero"
+msgstr "打开遥控器，保持油门为零"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:120
+#: 677814cd043e435d865bab387699f591
+msgid "Connect your vehicle's LiPo battery"
+msgstr "连接飞行器的 LiPo 电池"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:121
+#: 29f0463f2a9c419697b746348a2a554c
+msgid "Connect your autopilot to your computer with the usb cable"
+msgstr "使用 USB 线缆将飞控连接到计算机"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:122
+#: cdc93b1fb045453985e6f2d420c19f2b
+msgid ""
+"Open the **Initial Setup \\| Optional Hardware \\| Compass/Motor Calib** "
+"screen"
+msgstr "打开 **Initial Setup \\| Optional Hardware \\| Compass/Motor Calib** 界面"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:123
+#: e079bb443f0e4174896c2dc4051d7886
+msgid "Press the **Start** button"
+msgstr "按 **Start** 按钮"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:128
+#: 5566afcf3e5349db98481dae10ba9fa8
+msgid "You should hear your ESCs arming beep"
+msgstr "您应该听到 ESC 解锁蜂鸣声"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:129
+#: 1629bb3470dd4febaccd587f5707e033
+msgid ""
+"Raise the throttle slowly to between 50% ~ 75% (the props will spin!) for 5 "
+"~ 10 seconds"
+msgstr "缓慢将油门提高到 50%～75%（螺旋桨会旋转！），持续 5～10 秒"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:131
+#: 2ace9fcce1774d86aba068769087f79a
+msgid "Quickly bring the throttle back down to zero"
+msgstr "迅速将油门降回零"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:132
+#: f8f51a1bf60a4183a6ea169080de4157
+msgid "Press the **Finish** button to complete the calibration"
+msgstr "按 **Finish** 按钮完成校准"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:133
+#: c40faa52df594ba092c6c79ca2ea058f
+#, python-format
+msgid ""
+"Check the % of interference displayed.  If it is less than 30% then your "
+"compass interference is acceptable and you should see good Loiter, RTL and "
+"AUTO performance.  If it is 31% ~ 60% then the interference is in the \"grey"
+" zone\" where it may be ok (some users are fine, some are not).  If it is "
+"higher than 60% you should try moving your autopilot further up and away "
+"from the sources of interference or consider purchasing an external compass "
+"(or :ref:`GPS+compass module<common-positioning-landing-page>` (some of "
+"these))."
+msgstr ""
+"检查显示的干扰百分比。如果小于 30%，则罗盘干扰可以接受，您应该会看到良好的 Loiter、RTL 和 AUTO 性能。如果为 "
+"31%～60%，则干扰处于「灰色地带」，可能没问题（部分用户没问题，部分有问题）。如果高于 "
+"60%，您应该尝试将飞控移得更高且远离干扰源，或考虑购买外置罗盘（或 :ref:`GPS+罗盘模块<common-positioning-"
+"landing-page>`（其中一些））。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:148
+#: 1f94121001854bf5977de83d8926b7fe
+msgid "Automatic Offset Calibration"
+msgstr "自动偏移校准"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:150
+#: 13f55b2b88dd4e65bc071e9f04307e95
+msgid ""
+"DO NOT USE THIS WITH GPS-DERIVED YAW! ie :ref:`common-gps-for-yaw` in  "
+"firmware versions before 4.5.2!"
+msgstr "请勿在 4.5.2 之前的固件版本中与 GPS 衍生偏航（即 :ref:`common-gps-for-yaw`）一起使用！"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:152
+#: 7d3e4ef800854962986c9fbcced54d64
+msgid ""
+"In the 4.0 and later releases of ArduPilot, an automatic offset learning "
+"feature is available. The :ref:`COMPASS_LEARN<COMPASS_LEARN>` parameter "
+"determines how this feature works. This is for advanced users and not "
+"recommended."
+msgstr ""
+"在 ArduPilot 4.0 及更高版本中，提供了自动偏移学习功能。:ref:`COMPASS_LEARN<COMPASS_LEARN>` "
+"参数决定此功能的工作方式。这适用于高级用户，不建议一般用户使用。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:154
+#: 9360d341e4c74dcc9c09f4670247874f
+msgid ""
+"If set to 3, the offsets will be learned automatically during flight, be "
+"saved, and this parameter reset to 0. Position control modes (Loiter, Auto, "
+"etc.) should not be used while the offsets are being learned."
+msgstr ""
+"如果设置为 3，偏移量将在飞行过程中自动学习，保存后该参数重置为 0。在学习偏移量期间，不应使用位置控制模式（Loiter、Auto 等）。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:156
+#: 5cd810b1d54c47098f27cb451ba79fb6
+msgid ""
+"Setting :ref:`COMPASS_LEARN<COMPASS_LEARN>` to 1 or 2 is not recommended. "
+"These modes are deprecated and are either non-functional, or still in "
+"development."
+msgstr ""
+"不建议将 :ref:`COMPASS_LEARN<COMPASS_LEARN>` 设置为 1 或 2。这些模式已弃用，要么无功能，要么仍在开发中。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:158
+#: 15d5a5c682f241d7a2b65f252006b486
+msgid "The procedure for :ref:`COMPASS_LEARN<COMPASS_LEARN>` = 3 is:"
+msgstr ":ref:`COMPASS_LEARN<COMPASS_LEARN>` = 3 的程序为："
+
+#: ../../source/docs/common-compass-setup-advanced.rst:160
+#: 8a509f64f2d14a73a6396d2bba3245b7
+msgid ""
+"set :ref:`COMPASS_LEARN<COMPASS_LEARN>` = 3. The message “CompassLearn: "
+"Initialised” will appear on the MP’s message tab (it does not appear in red "
+"letters on the HUD)."
+msgstr ""
+"将 :ref:`COMPASS_LEARN<COMPASS_LEARN>` 设置为 3。Mission Planner "
+"的消息选项卡上将出现「CompassLearn: Initialised」消息（不以红色字母显示在 HUD 上）。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:161
+#: ae0c7fbac9374c0ca3035d404ddfc317
+msgid ""
+"“Bad Compass” will appear but this is nothing to be worried about. We will "
+"hopefully make this disappear before the final release."
+msgstr "「Bad Compass」将会出现，但无需担心。我们希望在最终发布之前使其消失。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:162
+#: ff9e51e793744578875799584fa43c33
+msgid ""
+"Arm and drive/fly the vehicle around in whatever mode you like, do some "
+"turns “CompassLearn: have earth field” should appear on MP’s message tab and"
+" then eventually “CompassLearn: finished”."
+msgstr ""
+"解锁并以任意模式驾驶/飞行飞行器，进行一些转弯，「CompassLearn: have earth field」应出现在 Mission Planner"
+" 的消息选项卡上，最终显示「CompassLearn: finished」。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:164
+#: fab2192f7b354e94ad1211bade2967d6
+msgid ""
+"You MUST have a GPS lock and signal for this to be successful. Be sure the "
+"GPS has a clear \"view\" of the sky and there are no obstructions blocking "
+"the GPS signals."
+msgstr "要成功完成此操作，必须有 GPS 锁定和信号。确保 GPS 对天空有清晰的「视野」，没有遮挡物阻挡 GPS 信号。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:166
+#: a8a4908b61f841df86655a832ec7f601
+msgid ""
+"If you want you can check the :ref:`COMPASS_LEARN<COMPASS_LEARN>` parameter "
+"has been set back to zero (you may need to refresh parameters to see this) "
+"and the COMPASS_OFS_X/Y/Z values will have changed."
+msgstr ""
+"如果需要，您可以检查 :ref:`COMPASS_LEARN<COMPASS_LEARN>` 参数是否已重置为零（您可能需要刷新参数才能看到），并且 "
+"COMPASS_OFS_X/Y/Z 的值将会改变。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:167
+#: 7b8e3180ea104188858f72f426ec01eb
+msgid ""
+"This method can also be evoked using the RCxOPTION for \"Compass Learn\". It"
+" will activate when the channel goes above 1800uS and automatically complete"
+" and save."
+msgstr "此方法也可以使用「Compass Learn」的 RCxOPTION 触发。当通道值超过 1800uS 时激活，并自动完成和保存。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:172
+#: 387c96e1a45c4b508975542fa3c74871
+msgid "Compass error messages"
+msgstr "罗盘错误消息"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:174
+#: 27e4cf6cff8f422a875ba7b730e944aa
+msgid ""
+"**Compass Health**: The compass has not sent a signal for at least half a "
+"second."
+msgstr "**Compass Health**：罗盘至少半秒未发送信号。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:176
+#: c6936d447d774733a6172456adea5809
+msgid ""
+"**Compass Variance**: In the EKF solution, compass heading disagrees with "
+"the heading estimate from other inertial sensors. Clicking the EKF button on"
+" the Mission Planner HUD will show the magnitude of the error."
+msgstr ""
+"**Compass Variance**：在 EKF 解算中，罗盘航向与其他惯性传感器估计的航向不一致。单击 Mission Planner HUD "
+"上的 EKF 按钮将显示误差大小。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:180
+#: fddc69666bb340b78e1f9071817feeba
+msgid "**Compass Not Calibrated**: The compass needs to be calibrated."
+msgstr "**Compass Not Calibrated**：罗盘需要进行校准。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:181
+#: 156c98cf3c864defb8d0f29889de0278
+msgid ""
+"**Compass Offsets High**: One of your compass offsets exceeds 600, "
+"indicating likely magnetic interference. Check for sources of interference "
+"and try calibrating again."
+msgstr "**Compass Offsets High**：您的某个罗盘偏移量超过 600，表明可能存在磁干扰。请检查干扰源并尝试重新校准。"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:186
+#: 1d00f00567f64eac83ab32ba7e71830b
+msgid "Refining Calibration Parameters using a Flight Log"
+msgstr "使用飞行日志优化校准参数"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:188
+#: 1d3e9d024e4944b2849ccb5026ef7e44
+msgid ""
+"The compass offsets, scales, diagonals, and even motor compensation can be "
+"determined from a flight dataflash log of the vehicle using an analysis "
+"utility."
+msgstr "可以使用分析工具从飞行器的飞行数据日志中确定罗盘偏移量、缩放比例、对角线值，甚至电机补偿。"

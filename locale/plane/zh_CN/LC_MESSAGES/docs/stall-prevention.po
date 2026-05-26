@@ -1,0 +1,272 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 14:59+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/stall-prevention.rst:5 cfb87e8b26034e52ac058fd39d9138aa
+msgid "Stall Prevention"
+msgstr "失速防护"
+
+#: ../../source/docs/stall-prevention.rst:7 9c5534da8f0e410ab27b4aef64b40009
+msgid ""
+"Plane has logic to try to prevent stalls when in certain modes. This page "
+"describes how it works and how to configure it."
+msgstr "在某些模式下，Plane 有逻辑来尝试防止失速。本页描述其工作原理及配置方法。"
+
+#: ../../source/docs/stall-prevention.rst:11 7926cb176911467bbb42ca0b08b65d06
+msgid "Basic Idea"
+msgstr "基本原理"
+
+#: ../../source/docs/stall-prevention.rst:13 75504d34f87c430d935a387d829023a0
+msgid ""
+"One of the most common ways that users crash is through a stall. A stall "
+"happens when the airflow over the wing is not sufficient to hold the "
+"aircraft in the air. Stalls can happen at any speed, but the most common "
+"type of stall is a low speed stall, where the airflow is too slow to provide"
+" enough lift."
+msgstr ""
+"用户坠机的最常见原因之一是失速。失速发生在机翼上的气流不足以将飞行器保持在空中时。失速可以在任何速度发生，但最常见的类型是低速失速，即气流太慢无法提供足够的升力。"
+
+#: ../../source/docs/stall-prevention.rst:19 5b431b5af2894075bb1717591ea93219
+msgid ""
+"The amount of airflow you need over the wing to hold the aircraft in the air"
+" depends (among other things) on the bank angle you are flying at. If you "
+"are banked over hard then you need to fly faster to get enough lift to stay "
+"in the air. This is because the lift is produced perpendicular to the wing, "
+"so when the wing is rolled over it provides only part of the lift to holding"
+" the aircraft up, and the rest of the lift goes into making the aircraft "
+"turn."
+msgstr ""
+"保持飞行器在空中所需的机翼气流量（除其他因素外）取决于您飞行时的倾斜角。如果倾斜角很大，则需要飞得更快以获得足够的升力保持在空中。这是因为升力垂直于机翼产生，所以当机翼倾斜时，它只提供部分升力来支撑飞行器，其余升力用于使飞行器转弯。"
+
+#: ../../source/docs/stall-prevention.rst:27 085bae17851849beac786b45a4addbce
+msgid ""
+"When the :ref:`STALL_PREVENTION <STALL_PREVENTION>` parameter is set to 1 "
+"then two things are done:"
+msgstr "当 :ref:`STALL_PREVENTION <STALL_PREVENTION>` 参数设置为 1 时，将进行以下两件事："
+
+#: ../../source/docs/stall-prevention.rst:30 e625780d2b224948ad57402caca8c74f
+msgid ""
+"when in roll controlled modes the autopilot will monitor your demanded bank "
+"angle and airspeed and work out if you have sufficient margin above the "
+"stall speed to turn at the demanded bank angle. If you don't then the turn "
+"will be limited to the safe limit, but it will always allow a bank of at "
+"least 25 degrees (to ensure you can still manoeuvre if your airspeed "
+"estimate is badly off)."
+msgstr ""
+"在横滚控制模式下，飞控将监测您要求的倾斜角和空速，并计算是否有足够的余量高于失速速度以在要求的倾斜角下转弯。如果没有，则转弯将被限制在安全限制内，但始终允许至少"
+" 25 度的倾斜（以确保在空速估算严重偏差时仍能机动）。"
+
+#: ../../source/docs/stall-prevention.rst:36 a52eb50592e34a62bda9ef5d73c887a7
+msgid ""
+"when in auto-throttle modes the autopilot will also raise the minimum "
+"airspeed in the :ref:`TECS system <tecs-total-energy-control-system-for-"
+"speed-height-tuning-guide>` to the level at which the current demanded bank "
+"angle can be safely achieved. So it will add more engine power or lower the "
+"nose to raise the airspeed so that the bank angle that the navigation "
+"controller is demanding can be achieved without a stall"
+msgstr ""
+"在自动油门模式下，飞控还将提高 :ref:`TECS 系统 <tecs-total-energy-control-system-for-speed-"
+"height-tuning-guide>` "
+"中的最低空速至可以安全实现当前要求倾斜角的水平。因此它将增加发动机功率或降低机头以提高空速，使导航控制器要求的倾斜角能够实现而不会失速"
+
+#: ../../source/docs/stall-prevention.rst:44 17a95b6d36ce4176b14f53b7e730ae77
+msgid "Configuring stall prevention"
+msgstr "配置失速防护"
+
+#: ../../source/docs/stall-prevention.rst:46 73916c41aafc4d759086e29e827d478b
+msgid "There are two key parameters that control stall prevention:"
+msgstr "有两个关键参数控制失速防护："
+
+#: ../../source/docs/stall-prevention.rst:48 3bc95284503e47af8b9e380cda4a7ddd
+msgid ""
+"The :ref:`STALL_PREVENTION <STALL_PREVENTION>` parameter. If this is set to "
+"zero then no stall prevention is done. This may be useful if you have no "
+"airspeed sensor and the synthetic airspeed estimate is not good enough"
+msgstr ""
+":ref:`STALL_PREVENTION <STALL_PREVENTION>` "
+"参数。如果设置为零，则不执行失速防护。如果没有空速传感器且合成空速估算不够好，这可能很有用"
+
+#: ../../source/docs/stall-prevention.rst:52 f54b03e6c4a646f99000986a2e6ff1de
+msgid ""
+"The :ref:`AIRSPEED_STALL<AIRSPEED_STALL>` parameter. If stall prevention is "
+"enabled this speed is used to calculate the minimum airspeed while banking. "
+"If this is set to 0 then the stall speed is assumed to be the "
+":ref:`AIRSPEED_MIN<AIRSPEED_MIN>`. Typically it is set slightly higher then "
+"true stall speed. It is this value that is scaled with the bank angle to "
+"calculate the safe airspeed for any demanded bank angle."
+msgstr ""
+":ref:`AIRSPEED_STALL<AIRSPEED_STALL>` 参数。如果启用了失速防护，该速度用于在倾斜时计算最低空速。如果设置为 "
+"0，则假设失速速度为 "
+":ref:`AIRSPEED_MIN<AIRSPEED_MIN>`。通常设置为略高于真实失速速度。该值与倾斜角缩放，以计算任何要求倾斜角的安全空速。"
+
+#: ../../source/docs/stall-prevention.rst:55 37a027ffae184275bb78981ff439ef56
+msgid "Affected modes"
+msgstr "受影响的模式"
+
+#: ../../source/docs/stall-prevention.rst:57 10e4a04aa6e94fc49b28323dfd3b6b8b
+msgid ""
+"The following modes are affected by the bank angle limiting of the stall "
+"prevention code:"
+msgstr "以下模式受失速防护代码倾斜角限制的影响："
+
+#: ../../source/docs/stall-prevention.rst:60 a7532662ccbf49b5b64197d6b01cb997
+msgid "FBWA"
+msgstr "FBWA"
+
+#: ../../source/docs/stall-prevention.rst:61 432e303997714330a6df851b180517a7
+msgid "FBWB"
+msgstr "FBWB"
+
+#: ../../source/docs/stall-prevention.rst:62 a39e50d53bcb4594bcbed1207540d7ea
+msgid "AUTOTUNE"
+msgstr "AUTOTUNE"
+
+#: ../../source/docs/stall-prevention.rst:63
+#: ../../source/docs/stall-prevention.rst:80 3f4a83bdf69943bd95a99ab2b1ed363c
+#: 76dfc0cefa264ec9bab930d34e429e94
+msgid "CIRCLE"
+msgstr "CIRCLE"
+
+#: ../../source/docs/stall-prevention.rst:64
+#: ../../source/docs/stall-prevention.rst:81 4e253cc6742f47ca903e6dcd66629256
+#: 86b1e2ee3d074d0a9e71d345b341615d
+msgid "RTL"
+msgstr "RTL"
+
+#: ../../source/docs/stall-prevention.rst:65
+#: ../../source/docs/stall-prevention.rst:82 3ce55ee960d548459792757309d663f6
+#: b1c91036e2474fc0a203fe487056880a
+msgid "AUTO"
+msgstr "AUTO"
+
+#: ../../source/docs/stall-prevention.rst:66
+#: ../../source/docs/stall-prevention.rst:83 949d9575405746d38ee72cab9405849e
+#: b33b726b33b64e9a97a1ab06686be7ac
+msgid "CRUISE"
+msgstr "Cruise"
+
+#: ../../source/docs/stall-prevention.rst:67
+#: ../../source/docs/stall-prevention.rst:84 5aab251b834d46e08ef345642327a65c
+#: b021edaa4f984f39ae5b18a0377005fd
+msgid "LOITER"
+msgstr "Loiter"
+
+#: ../../source/docs/stall-prevention.rst:68
+#: ../../source/docs/stall-prevention.rst:85 6d956abbef6341348bb64559a6c4d5bb
+#: eade8ae306b94d0fb7983359b2fc614e
+msgid "GUIDED"
+msgstr "Guided"
+
+#: ../../source/docs/stall-prevention.rst:69 51583c999c584953b15ffa6c294582dc
+msgid "TRAINING"
+msgstr "Training"
+
+#: ../../source/docs/stall-prevention.rst:71 86f0c2c3fee54be5abfc54921e66ac38
+msgid ""
+"In each of these modes the aircraft is either calculating a desired bank "
+"angle for the navigation code, or the user is inputting a desired bank angle"
+" via the aileron stick. In both cases the stall prevention code will limit "
+"the bank angle based on the amount of margin between ``AIRSPEED_MIN`` and "
+"the current airspeed."
+msgstr ""
+"在这些模式中，飞行器要么由导航代码计算所需倾斜角，要么用户通过副翼摇杆输入所需倾斜角。在两种情况下，失速防护代码都将根据 "
+"``AIRSPEED_MIN`` 与当前空速之间的余量来限制倾斜角。"
+
+#: ../../source/docs/stall-prevention.rst:77 5e71aa1b6f8c4885bbfb5332b90830e4
+msgid ""
+"The following modes are affected by the automatic speed increase in TECS "
+"when the bank angle is limited by stall prevention:"
+msgstr "以下模式受当倾斜角被失速防护限制时 TECS 自动速度增加的影响："
+
+#: ../../source/docs/stall-prevention.rst:87 a2982309ef1c443da013a71d877bddb0
+msgid ""
+"These are all of the \"auto throttle\" modes, where the TECS controller "
+"controls pitch and throttle."
+msgstr "这些都是「自动油门」模式，其中 TECS 控制器控制俯仰和油门。"
+
+#: ../../source/docs/stall-prevention.rst:91 a81954da6de74c2c91440516e6ab4212
+msgid "Example Usage"
+msgstr "使用示例"
+
+#: ../../source/docs/stall-prevention.rst:93 115d8a9e8e4149578d886125693c49d6
+msgid ""
+"An example of how stall prevention works is in AUTO mode when making a turn "
+"for an automated landing. The landing approach will aim for an airspeed of "
+":ref:`TECS_LAND_ARSPD <TECS_LAND_ARSPD>`, which is often quite low, and may "
+"be just above the stall speed. If the final turn is sharp (it is often 90 "
+"degrees) the plane may be trying to perform a sharp turn while dropping "
+"speed for landing. That could induce a stall. The stall prevention code "
+"means two things happen:"
+msgstr ""
+"失速防护工作方式的一个示例是在 Auto 模式下进行自动降落转弯时。降落进近将以 :ref:`TECS_LAND_ARSPD "
+"<TECS_LAND_ARSPD>` 的空速为目标，通常相当低，可能刚好高于失速速度。如果最终转弯很急（通常为 90 "
+"度），飞机可能在降落减速时尝试进行急转弯。这可能导致失速。失速防护代码意味着两件事会发生："
+
+#: ../../source/docs/stall-prevention.rst:101 435dd412ded04a0f839628f1a16e9e91
+msgid "the initial turn is kept shallow enough to prevent the stall"
+msgstr "初始转弯保持足够浅以防止失速"
+
+#: ../../source/docs/stall-prevention.rst:102 1e15038ed8b043bcab6518a2a1421069
+msgid ""
+"the target airspeed is kept high enough during the turn to allow the turn to"
+" complete, after which it is lowered"
+msgstr "转弯期间目标空速保持足够高以允许转弯完成，之后再降低"
+
+#: ../../source/docs/stall-prevention.rst:106 c4cac21e0ccf417db626847eea2ed539
+msgid "Nose Down in FBWA and AUTOTUNE"
+msgstr "FBWA 和 AUTOTUNE 中的机头下压"
+
+#: ../../source/docs/stall-prevention.rst:108 638bfa48b05e4316b035399f1988825a
+msgid ""
+"The FBWA mode has an additional special feature to help prevent straight "
+"line stalls. It is often difficult for a pilot to judge the airspeed of a "
+"plane when it is coming head on, and so many pilots find themselves flying "
+"too slow when they are trying to fly gently in FBWA mode. This is especially"
+" true if the ArduPilot pitch controller is well tuned and manages to keep "
+"the nose up even when flying slowly."
+msgstr ""
+"FBWA 模式有一个额外的特殊功能，有助于防止直线失速。飞手通常很难判断迎头飞来的飞机的空速，因此许多飞手在 FBWA 模式下轻柔飞行时会飞得太慢。如果"
+" ArduPilot 俯仰控制器调参良好，能够在低速飞行时保持机头上仰，这尤为如此。"
+
+#: ../../source/docs/stall-prevention.rst:115 85eef79416a04defae894e144fe331f0
+msgid ""
+"To make a level flight low speed stall less likely some additional down "
+"pitch is added in FBWA and AUTOTUNE modes based on the throttle position. "
+"The amount of down pitch added is based on the :ref:`STAB_PITCH_DOWN "
+"<STAB_PITCH_DOWN>` parameter, which defaults to 2 degrees. At zero throttle "
+"this full down pitch is added. If throttle is above ``TRIM_THROTTLE`` then "
+"no down pitch is added. Between those two values the down pitch is added in "
+"proportion to the throttle."
+msgstr ""
+"为了降低水平低速失速的可能性，在 FBWA 和 AUTOTUNE 模式下，根据油门位置会增加一些额外的下压俯仰。增加的下压俯仰量基于 "
+":ref:`STAB_PITCH_DOWN <STAB_PITCH_DOWN>` 参数，默认为 2 度。在零油门时，全部下压俯仰被添加。如果油门高于 "
+"``TRIM_THROTTLE``，则不添加下压俯仰。在这两个值之间，下压俯仰按比例与油门成反比添加。"
+
+#: ../../source/docs/stall-prevention.rst:124 9cab142282004ec3b76edeb8f8264b6f
+msgid ""
+"This has the effect of slightly lowering the nose when you lower throttle in"
+" FBWA and AUTOTUNE modes, which makes the plane gain a bit of speed, and "
+"thus makes it less likely to stall. The value you need for "
+"``STAB_PITCH_DOWN`` depends on how much drag your plane has. A very sleek "
+"model will need a smaller value. A high drag model will need a larger value."
+msgstr ""
+"这在 FBWA 和 AUTOTUNE 模式下降低油门时会稍微降低机头，使飞机获得一点速度，从而降低失速的可能性。``STAB_PITCH_DOWN`` "
+"所需的值取决于飞机的阻力大小。非常流线型的模型需要较小的值。高阻力模型需要较大的值。"

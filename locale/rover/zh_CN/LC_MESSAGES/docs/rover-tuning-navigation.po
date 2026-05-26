@@ -1,0 +1,321 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Rover package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rover\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-22 11:39+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/rover-tuning-navigation.rst:5
+#: dbadd8d8590a48bf9ff5bbcbc8142e53
+msgid "Tuning Navigation"
+msgstr "导航调参"
+
+#: ../../source/docs/rover-tuning-navigation.rst:7
+#: 812ad210da62458a8cbd7aca4bc29509
+msgid ""
+"This page describes how to tune the Navigation control including "
+"\"S-Curves\" and the \"Position controller\".  The lower level "
+":ref:`speed<rover-tuning-throttle-and-speed>` and :ref:`turn rate<rover-"
+"tuning-steering-rate>` controllers should be tuned before attempting to tune"
+" this controller."
+msgstr ""
+"本页介绍如何调整导航控制器，包括「S 曲线」和「位置控制器」。在尝试调整此控制器之前，应先调整底层的 :ref:`速度<rover-tuning-"
+"throttle-and-speed>` 和 :ref:`转向速率<rover-tuning-steering-rate>` 控制器。"
+
+#: ../../source/docs/rover-tuning-navigation.rst:12
+#: 097bc6f23c734b97b5f47aac381c3bfa
+msgid ""
+"S-Curves and the position controller are used all the autonomous modes "
+"including :ref:`Auto<auto-mode>`, :ref:`Guided<guided-mode>`, :ref:`RTL<rtl-"
+"mode>` and :ref:`SmartRTL<smartrtl-mode>`."
+msgstr ""
+"S 曲线和位置控制器用于所有自主模式，包括 :ref:`Auto<auto-mode>`、:ref:`Guided<guided-"
+"mode>`、:ref:`RTL<rtl-mode>` 和 :ref:`SmartRTL<smartrtl-mode>`。"
+
+#: ../../source/docs/rover-tuning-navigation.rst:15
+#: a88bfcd972724ff18ab06db6adff474c
+msgid "S-Curves"
+msgstr "S 曲线"
+
+#: ../../source/docs/rover-tuning-navigation.rst:17
+#: 0cb36f962f754cc9af953e5f3dc6bf6a
+msgid ""
+"S-Curves are used to plan a smooth path that brings the vehicle close to "
+"each waypoint while not exceeding speed or acceleration limits.  The "
+"resulting path includes continuous position and 2D velocity targets."
+msgstr "S 曲线用于规划一条平滑路径，使车辆在不超过速度和加速度限制的前提下经过每个航点附近。生成的路径包含连续的位置和二维速度目标。"
+
+#: ../../source/docs/rover-tuning-navigation.rst:19
+#: 45d8f83552984338b77499ddf955fa0e
+msgid "Factors affecting the path include:"
+msgstr "影响路径的因素包括："
+
+#: ../../source/docs/rover-tuning-navigation.rst:21
+#: e31474407f5c471694dc6ef1138b0bdd
+msgid ""
+"The vehicle will cut the corners but will always try to pass within "
+":ref:`WP_RADIUS<WP_RADIUS>` or :ref:`TURN_RADIUS<TURN_RADIUS>` (whichever is"
+" larger) of each waypoint"
+msgstr ""
+"车辆会切弯，但始终尝试在每个航点的 :ref:`WP_RADIUS<WP_RADIUS>` 或 "
+":ref:`TURN_RADIUS<TURN_RADIUS>`（取较大值）范围内通过"
+
+#: ../../source/docs/rover-tuning-navigation.rst:22
+#: 2a7300f7e2ab46af83ea9a3ee0f00677
+msgid "The vehicle will cut the corners more at higher speeds"
+msgstr "速度越快，切弯幅度越大"
+
+#: ../../source/docs/rover-tuning-navigation.rst:23
+#: 19c3c752c7c445d7a8afb11e3ece8bf1
+msgid ""
+"The vehicle will cut the corners more if the maximum accelerations are "
+"reduced (e.g. the lowest of :ref:`ATC_ACCEL_MAX<ATC_ACCEL_MAX>`, "
+":ref:`ATC_DECEL_MAX<ATC_DECEL_MAX>` and "
+":ref:`ATC_TURN_MAX_G<ATC_TURN_MAX_G>` * 9.81)"
+msgstr ""
+"最大加速度越小（即 "
+":ref:`ATC_ACCEL_MAX<ATC_ACCEL_MAX>`、:ref:`ATC_DECEL_MAX<ATC_DECEL_MAX>` 和 "
+":ref:`ATC_TURN_MAX_G<ATC_TURN_MAX_G>` * 9.81 三者中最小值越小），切弯幅度越大"
+
+#: ../../source/docs/rover-tuning-navigation.rst:24
+#: 2fecbb9ce49d4e4f94ce16cbc9d09ddc
+msgid ""
+"The vehicle will slow down in the corners if necessary to pass within "
+":ref:`WP_RADIUS<WP_RADIUS>` of the waypoint without exceeding the maximum "
+"accelerations (e.g. the lowest of :ref:`ATC_ACCEL_MAX<ATC_ACCEL_MAX>`, "
+":ref:`ATC_DECEL_MAX<ATC_DECEL_MAX>` and "
+":ref:`ATC_TURN_MAX_G<ATC_TURN_MAX_G>` * 9.81)"
+msgstr ""
+"若有必要，车辆会在弯道减速，以在不超过最大加速度（即 "
+":ref:`ATC_ACCEL_MAX<ATC_ACCEL_MAX>`、:ref:`ATC_DECEL_MAX<ATC_DECEL_MAX>` 和 "
+":ref:`ATC_TURN_MAX_G<ATC_TURN_MAX_G>` * 9.81 三者中最小值）的前提下在航点 "
+":ref:`WP_RADIUS<WP_RADIUS>` 范围内通过"
+
+#: ../../source/docs/rover-tuning-navigation.rst:25
+#: 00d954e68e0b42d89107741c60538716
+msgid ""
+"Placing waypoints close together may lead to the vehicle traveling slowly"
+msgstr "航点间距过近可能导致车辆行驶缓慢"
+
+#: ../../source/docs/rover-tuning-navigation.rst:28
+#: 1b75d8ad966c46eb82fe8da2c8dba34e
+msgid "Position Controller"
+msgstr "位置控制器"
+
+#: ../../source/docs/rover-tuning-navigation.rst:30
+#: d167b0b5615f4968958f20145a1ed6bc
+msgid ""
+"The position controller is responsible for calculating the desired speed and"
+" turn rate so the vehicle follows the path between waypoints created by the "
+"S-Curves (see above).  The desired speed and turn rate are then passed to "
+"the lower level controllers."
+msgstr "位置控制器负责计算期望速度和转向速率，使车辆沿 S 曲线（见上文）生成的航点间路径行驶。期望速度和转向速率随后传递给底层控制器。"
+
+#: ../../source/docs/rover-tuning-navigation.rst:32
+#: e5a864a9b51f4308976a88dfab32f619
+msgid "Method for tuning the position controller:"
+msgstr "位置控制器调整方法："
+
+#: ../../source/docs/rover-tuning-navigation.rst:34
+#: 34c0bc6260714c8485e80ed6bbe7a726
+msgid "Connect the ground station to the vehicle using a telemetry radio"
+msgstr "通过数传将地面站连接到车辆"
+
+#: ../../source/docs/rover-tuning-navigation.rst:35
+#: f2f13f7487dc435e8ea52943c86631ca
+msgid ""
+"Create a rectangular or back-and-forth mission with long straight segments "
+"and upload to the vehicle"
+msgstr "创建包含长直线段的矩形或来回往返任务，并上传到车辆"
+
+#: ../../source/docs/rover-tuning-navigation.rst:40
+#: bb8385c200684124acfa8434749f6a27
+msgid ""
+"Arm the vehicle (in :ref:`Manual<manual-mode>` or :ref:`Hold<hold-mode>`) "
+"and then switch to :ref:`Auto<auto-mode>` mode"
+msgstr ""
+"在 :ref:`Manual<manual-mode>` 或 :ref:`Hold<hold-mode>` 下解锁车辆，然后切换到 "
+":ref:`Auto<auto-mode>` 模式"
+
+#: ../../source/docs/rover-tuning-navigation.rst:41
+#: 2baa74bed4674450bb1c498c2d24f14d
+msgid ""
+"Adjust these parameters to improve the vehicle's tracking along the lines"
+msgstr "调整以下参数以改善车辆的直线跟踪效果"
+
+#: ../../source/docs/rover-tuning-navigation.rst:43
+#: a1a54ce678614aac97dcd83df928acc2
+msgid ""
+"set :ref:`PSC_VEL_I<PSC_VEL_I>` and :ref:`PSC_VEL_D<PSC_VEL_D>` to zero"
+msgstr "将 :ref:`PSC_VEL_I<PSC_VEL_I>` 和 :ref:`PSC_VEL_D<PSC_VEL_D>` 设为零"
+
+#: ../../source/docs/rover-tuning-navigation.rst:44
+#: 3cbcb847569d44c5910171090f00542b
+msgid ""
+"increase :ref:`PSC_VEL_P<PSC_VEL_P>` until the vehicle tracks the corners "
+"nicely without oscillating in the straights"
+msgstr "逐步增大 :ref:`PSC_VEL_P<PSC_VEL_P>`，直至车辆能良好跟踪弯道而直线段不出现振荡"
+
+#: ../../source/docs/rover-tuning-navigation.rst:45
+#: c144d9f9d24645b287606a09c2e774b1
+#, python-format
+msgid ""
+"increase :ref:`PSC_VEL_D<PSC_VEL_D>` enough to make the corners more "
+"responsive but without introducing oscillations in the straights.  This "
+"should normally be not more than 10% of :ref:`PSC_VEL_P<PSC_VEL_P>`"
+msgstr ""
+"适当增大 :ref:`PSC_VEL_D<PSC_VEL_D>` 以使弯道响应更灵敏，但不要在直线段引入振荡。通常不应超过 "
+":ref:`PSC_VEL_P<PSC_VEL_P>` 的 10%"
+
+#: ../../source/docs/rover-tuning-navigation.rst:46
+#: ca5a67bbe87d44cea8cb8590538c48cd
+#, python-format
+msgid "set :ref:`PSC_VEL_I<PSC_VEL_I>` to 20% of :ref:`PSC_VEL_P<PSC_VEL_P>`"
+msgstr "将 :ref:`PSC_VEL_I<PSC_VEL_I>` 设为 :ref:`PSC_VEL_P<PSC_VEL_P>` 的 20%"
+
+#: ../../source/docs/rover-tuning-navigation.rst:48
+#: d9fdc822f5654d97a4c2d2bad10a7875
+msgid "These values normally do not need to be changed"
+msgstr "以下参数通常无需更改"
+
+#: ../../source/docs/rover-tuning-navigation.rst:50
+#: 3ae3290358e343d0be034889a89a5420
+msgid ""
+":ref:`PSC_POS_P<PSC_POS_P>` should be left at 0.2 (the default).  This "
+"converts the position error into a desired velocity.  Higher values will "
+"lead to the vehicle trying to drive back to the line more quickly but if "
+"raised too high may lead to oscillation"
+msgstr ""
+":ref:`PSC_POS_P<PSC_POS_P>` 应保持默认值 0.2，用于将位置误差转换为期望速度。值越高，车辆越快返回路线，但过高可能引起振荡"
+
+#: ../../source/docs/rover-tuning-navigation.rst:51
+#: e4c3d01bac90400499ca5c43b61b80dd
+msgid ":ref:`PSC_VEL_FF<PSC_VEL_FF>` should always be 0"
+msgstr ":ref:`PSC_VEL_FF<PSC_VEL_FF>` 应始终为 0"
+
+#: ../../source/docs/rover-tuning-navigation.rst:52
+#: 9d5794befc6a4954b0d11bea0d4e02ed
+msgid ":ref:`PSC_VEL_IMAX<PSC_VEL_IMAX>` should always be 1"
+msgstr ":ref:`PSC_VEL_IMAX<PSC_VEL_IMAX>` 应始终为 1"
+
+#: ../../source/docs/rover-tuning-navigation.rst:53
+#: 271f57b737a54430966535b34c12c50d
+msgid ""
+":ref:`PSC_VEL_FLTD<PSC_VEL_FLTD>`, :ref:`PSC_VEL_FLTE<PSC_VEL_FLTE>` should "
+"be left at the default of 5 although small vehicle may benefit from higher "
+"values"
+msgstr ""
+":ref:`PSC_VEL_FLTD<PSC_VEL_FLTD>`、:ref:`PSC_VEL_FLTE<PSC_VEL_FLTE>` 应保留默认值 "
+"5，但小型车辆可能受益于更高的值"
+
+#: ../../source/docs/rover-tuning-navigation.rst:55
+#: 84dc443394c04e178b6430f0bc7764aa
+msgid "It may also help to monitor the velocity controller PIDs in real-time"
+msgstr "实时监控速度控制器 PID 数据也可能有所帮助"
+
+#: ../../source/docs/rover-tuning-navigation.rst:57
+#: 4a44e9c389d74faa9c9681da49824592
+msgid ""
+"Ensure the mission has long straight segments aligned either North-South or "
+"West-East"
+msgstr "确保任务具有沿南北或东西方向对齐的长直线段"
+
+#: ../../source/docs/rover-tuning-navigation.rst:62
+#: 440a4fab007c478caa6c184ac5f70446
+msgid ""
+"Enable real time PID reporting of the position controller's velocity "
+"controller"
+msgstr "启用位置控制器速度控制器的实时 PID 上报"
+
+#: ../../source/docs/rover-tuning-navigation.rst:64
+#: ac5ae292c06e4cfea4c163e633aa1122
+msgid "If the mission runs West-East set GCS_PID_MASK = 64 (Velocity North)"
+msgstr "若任务沿东西方向运行，将 GCS_PID_MASK 设为 64（北向速度）"
+
+#: ../../source/docs/rover-tuning-navigation.rst:65
+#: ce4621c40d044200b559e84911331cab
+msgid "If the mission runs North-South set GCS_PID_MASK = 128 (Velocity East)"
+msgstr "若任务沿南北方向运行，将 GCS_PID_MASK 设为 128（东向速度）"
+
+#: ../../source/docs/rover-tuning-navigation.rst:67
+#: 648f2a919a0c4cb5bee89e34d23ef7d8
+msgid ""
+"Display the real-time PID values on the ground station.  If using MP, go to "
+"the Data screen, check the \"Tuning\" checkbox.  Double click on the display"
+" area and select, \"piddesired\", \"pidachieved\", \"pidP\", \"pidI\" and "
+"\"pidD\""
+msgstr ""
+"在地面站显示实时 PID 值。若使用 Mission "
+"Planner，进入数据界面，勾选「Tuning」复选框，双击显示区域并选择「piddesired」、「pidachieved」、「pidP」、「pidI」及「pidD」"
+
+#: ../../source/docs/rover-tuning-navigation.rst:73
+#: f7a8c303fa8a4a71a3c0c4354dfc755a
+msgid "Other Parameters"
+msgstr "其他参数"
+
+#: ../../source/docs/rover-tuning-navigation.rst:75
+#: 82520bff1b0247d58e831d30d94d0a1d
+msgid ""
+":ref:`WP_SPEED<WP_SPEED>` defines the target speed (in m/s) that the vehicle"
+" will drive at in :ref:`Auto<auto-mode>` and :ref:`Guided<guided-mode>`.  It"
+" will also be used in :ref:`RTL<rtl-mode>` and :ref:`SmartRTL<smartrtl-"
+"mode>` if :ref:`RTL_SPEED<RTL_SPEED>` is set to zero"
+msgstr ""
+":ref:`WP_SPEED<WP_SPEED>` 定义车辆在 :ref:`Auto<auto-mode>` 和 "
+":ref:`Guided<guided-mode>` 模式下的目标速度（单位：m/s）。若 :ref:`RTL_SPEED<RTL_SPEED>` "
+"设为零，该值也将用于 :ref:`RTL<rtl-mode>` 和 :ref:`SmartRTL<smartrtl-mode>` 模式"
+
+#: ../../source/docs/rover-tuning-navigation.rst:76
+#: 7501e212fb3749219778dc10e34e9479
+msgid ""
+":ref:`WP_RADIUS<WP_RADIUS>` specifies the distance before the waypoint that "
+"the vehicle may begin turning towards the next waypoint"
+msgstr ":ref:`WP_RADIUS<WP_RADIUS>` 指定车辆在到达航点前可以开始转向下一航点的距离"
+
+#: ../../source/docs/rover-tuning-navigation.rst:79
+#: 5c4a1d1b671941328aaf6715891888d6
+msgid "How the Position Controller works"
+msgstr "位置控制器工作原理"
+
+#: ../../source/docs/rover-tuning-navigation.rst:81
+#: 7d33cd43e55347a2a22a399887dcfbf9
+msgid ""
+"Compares the vehicle's current location to the desired location and "
+"calculating a desired 2D velocity to close the gap"
+msgstr "比较车辆当前位置与目标位置，计算所需的二维速度以消除偏差"
+
+#: ../../source/docs/rover-tuning-navigation.rst:82
+#: 89e8dc0011734ece824527f8ca3611f5
+msgid ""
+"Compares the vehicle's current velocity to the above velocity (aka position "
+"correction velocity) + the S-Curve provided velocity and calculating a "
+"desired 2D acceleration to reduce the error"
+msgstr "比较车辆当前速度与上述速度（即位置修正速度）加 S 曲线提供速度之和，计算所需的二维加速度以减小误差"
+
+#: ../../source/docs/rover-tuning-navigation.rst:83
+#: efaa211de4a247659af3583269ba0cd6
+msgid ""
+"The vehicle forward-back portion of position correction velocity + S-Curve "
+"velocity is the target forward speed"
+msgstr "位置修正速度与 S 曲线速度的车辆前后分量即为目标前进速度"
+
+#: ../../source/docs/rover-tuning-navigation.rst:84
+#: 7910e5ff4cf3443c98db3fc93220e4e6
+msgid ""
+"the lateral component of the 2D acceleration becomes the target turn rate"
+msgstr "二维加速度的横向分量成为目标转向速率"

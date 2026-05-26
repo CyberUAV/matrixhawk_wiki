@@ -1,0 +1,486 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 14:59+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/common-terrain-following.rst:5
+#: dbf6b20c079a49799bd5713eb7b872c7
+msgid "Terrain Following"
+msgstr "地形跟随"
+
+#: ../../source/docs/common-terrain-following.rst:7
+#: 1a6e83e61d6949f3827e9dc09234643b
+msgid ""
+"You can use automatic terrain following for fixed wing aircraft if you have "
+"an autopilot board with local storage (such as the Pixhawk). This page "
+"explains how terrain following works, how to enable it and what its "
+"limitations are."
+msgstr "如果飞控具有本地存储（如 Pixhawk），可以为固定翼飞机使用自动地形跟随功能。本页介绍地形跟随的工作原理、如何启用以及其局限性。"
+
+#: ../../source/docs/common-terrain-following.rst:12
+#: 418920d14d6e456087e0ef498bbb7e5b
+msgid ""
+"If using Copter, see :ref:`Copter specific terrain following instructions "
+"here <copter:terrain-following>`."
+msgstr "如果使用 Copter，请参阅 :ref:`Copter 专用地形跟随说明<copter:terrain-following>`。"
+
+#: ../../source/docs/common-terrain-following.rst:18
+#: 54a6d467b07f47cf939e3baa91113508
+msgid "How it works"
+msgstr "工作原理"
+
+#: ../../source/docs/common-terrain-following.rst:20
+#: 2ab68c355b6c4d248a46dc295ccf0d4c
+msgid ""
+"Terrain following works by maintaining a terrain database on the microSD "
+"card on the autopilot which gives the terrain height in meters above sea "
+"level for a grid of geographic locations. On the autopilot this database is "
+"stored in the APM/TERRAIN directory on the microSD card."
+msgstr ""
+"地形跟随通过在飞控的 SD 卡上维护一个地形数据库来工作，该数据库以地理位置网格的形式提供海拔高度（单位：米）。在飞控上，此数据库存储在 SD 卡的 "
+"APM/TERRAIN 目录中。"
+
+#: ../../source/docs/common-terrain-following.rst:25
+#: 95efb8c367644199b1b3d22a94777fcc
+msgid ""
+"The database is populated automatically by the autopilot requesting terrain "
+"data from the ground station over a MAVLink telemetry link. This can happen "
+"either during flight planning when the autopilot is connected over USB, or "
+"during flight when connected over a radio link."
+msgstr ""
+"数据库通过飞控经 MAVLink 数传链路向地面站请求地形数据来自动填充。这可以在任务规划时通过 USB "
+"连接飞控时发生，也可以在飞行中通过无线链路连接时发生。"
+
+#: ../../source/docs/common-terrain-following.rst:30
+#: a75d729b85b740769b768506572ac04a
+msgid ""
+"One can directly download terrain data via PC to the SD card using the this "
+"`web utility <https://terrain.ardupilot.org/>`__. See below."
+msgstr ""
+"可以使用此 `网页工具 <https://terrain.ardupilot.org/>`__ 通过 PC 直接将地形数据下载到 SD 卡。见下文。"
+
+#: ../../source/docs/common-terrain-following.rst:32
+#: af01ed7cfa3c4a119edca6c05c4c4406
+msgid ""
+"The data is only transferred if the autopilot has a GPS lock. So to make "
+"sure your missions have the terrain data prior to flight (in case the ground"
+" station is not connected during the flight and/or does not have internet "
+"connection to obtain the data), be sure that GPS lock is in effect when "
+"loading the mission to the autopilot."
+msgstr ""
+"数据仅在飞控获取 GPS "
+"定位后才会传输。为确保任务在飞行前已具备地形数据（以防飞行中地面站未连接和/或无法获取互联网连接以获取数据），请确保将任务加载到飞控时 GPS 已定位。"
+
+#: ../../source/docs/common-terrain-following.rst:34
+#: 73e1f7a17a7a4c309da50795f1b07ec9
+msgid ""
+"Once the terrain data is sent from the GCS to the autopilot it is stored on "
+"the microSD card so that it is available even when the GCS is not connected."
+" This makes it possible for the autopilot to use terrain data to perform a "
+"terrain following RTL (Return To Launch) even when it is not able to talk to"
+" the ground station."
+msgstr ""
+"地形数据一旦从地面站发送到飞控，将存储在 SD 卡上，即使地面站断开连接后仍然可用。这使飞控即使无法与地面站通信，也能利用地形数据执行地形跟随 "
+"RTL（返回起飞点）。"
+
+#: ../../source/docs/common-terrain-following.rst:40
+#: 4975efe7123a4becbabbb15ae4cbec58
+msgid ""
+"During flight the ArduPilot code automatically pages in the needed terrain "
+"data from the microSD card into memory as the aircraft approaches a new "
+"area. It maintains an area of about 7km by 8km in memory if the default "
+"terrain grid spacing is used."
+msgstr ""
+"飞行中，ArduPilot 代码会随着飞机进入新区域，自动从 SD 卡将所需地形数据分页加载到内存中。使用默认地形网格间距时，内存中维护约 7km × "
+"8km 的区域。"
+
+#: ../../source/docs/common-terrain-following.rst:45
+#: 877eec2e426849c1aee63f7e841350eb
+msgid ""
+"In addition to any terrain data for the immediate vicinity of the aircraft, "
+"ArduPilot also asks the ground station for terrain data for any mission "
+"waypoints which are loaded, and for any rally points which are loaded. This "
+"ensures that terrain data is available on the microSD card for a whole "
+"mission even if the GCS becomes unavailable."
+msgstr ""
+"除飞机当前位置附近的地形数据外，ArduPilot "
+"还会向地面站请求所有已加载任务航点和集结点的地形数据。这确保即使地面站不可用，整个任务的地形数据也能在 SD 卡上保持可用。"
+
+#: ../../source/docs/common-terrain-following.rst:52
+#: 624561f7fdb84d1b88a357df776b34e9
+msgid "Terrain Following Flight Modes"
+msgstr "支持地形跟随的飞行模式"
+
+#: ../../source/docs/common-terrain-following.rst:54
+#: 92011c64f47d49748352c16d1958a3af
+msgid "In Plane terrain following is available in the following flight modes:"
+msgstr "在 Plane 中，地形跟随在以下飞行模式中可用："
+
+#: ../../source/docs/common-terrain-following.rst:56
+#: cd662ebcc5bd46318fd5cb0c3b5da81b
+msgid "RTL - Return to launch"
+msgstr "RTL - 返回起飞点"
+
+#: ../../source/docs/common-terrain-following.rst:57
+#: e639331e3e8e4ea790cc88a467f21294
+msgid "LOITER - circle a point"
+msgstr "LOITER - 绕点盘旋"
+
+#: ../../source/docs/common-terrain-following.rst:58
+#: 5c98f686b0d547728a47e9ccde88981d
+msgid "CRUISE - long distance cruising"
+msgstr "CRUISE - 长距离巡航"
+
+#: ../../source/docs/common-terrain-following.rst:59
+#: 5f3e6299647145bf90fdc2551c931b7b
+msgid "FBWB - speed/height maintenance"
+msgstr "FBWB - 速度/高度保持"
+
+#: ../../source/docs/common-terrain-following.rst:60
+#: de341c97ae914ab48fed4a411115359a
+msgid "GUIDED - \"fly to\" waypoints"
+msgstr "GUIDED - 「飞往」航点"
+
+#: ../../source/docs/common-terrain-following.rst:61
+#: 0beccaf2b10d40e7b0cc91e412322ab8
+msgid "AUTO - fully autonomous missions"
+msgstr "AUTO - 全自主任务"
+
+#: ../../source/docs/common-terrain-following.rst:63
+#: f77e9db24d4d4fe7a47820e25013b913
+msgid ""
+"Use of terrain following in RTL, LOITER, CRUISE, FBWB and GUIDED modes is "
+"controlled by the :ref:`TERRAIN_FOLLOW<TERRAIN_FOLLOW>` parameter. That "
+"parameter defaults to off, so no terrain following will be used in those "
+"modes. Setting the bitmask in :ref:`TERRAIN_FOLLOW<TERRAIN_FOLLOW>` "
+"determines which altitude controlled modes terrain following is active. For "
+"example, setting it to \"10\" enables following in FBWB and AUTO."
+msgstr ""
+"在 RTL、LOITER、CRUISE、FBWB 和 GUIDED 模式中使用地形跟随由 "
+":ref:`TERRAIN_FOLLOW<TERRAIN_FOLLOW>` 参数控制。该参数默认关闭，因此这些模式中不会使用地形跟随。通过设置 "
+":ref:`TERRAIN_FOLLOW<TERRAIN_FOLLOW>` 的位掩码可确定哪些高度控制模式激活地形跟随。例如，将其设为 「10」 可在 "
+"FBWB 和 AUTO 中启用跟随。"
+
+#: ../../source/docs/common-terrain-following.rst:67
+#: 53b49709809f45878765c8caa46a40ca
+msgid ""
+"Terrain Following in CRUISE and FBWB modes can be disabled with an RC switch"
+" assigned ``RCx_OPTION`` = 86. When enabling (<1200us) or disabling "
+"(>1800us) terrain following with the switch, the present altitude will be "
+"the target set point either above terrain, or home, respectively. The target"
+" altitude can be changed as normal with elevator whether the altitude "
+"reference being used is above home or above terrain."
+msgstr ""
+"可通过分配 ``RCx_OPTION`` = 86 的 RC 开关禁用 CRUISE 和 FBWB "
+"模式中的地形跟随。通过开关启用（<1200us）或禁用（>1800us）地形跟随时，当前高度将分别作为地形上方或 Home "
+"上方的目标设定点。目标高度可以像正常情况一样用升降舵更改，无论使用的是相对 Home 的高度参考还是相对地形的高度参考。"
+
+#: ../../source/docs/common-terrain-following.rst:69
+#: f59ca379cc3346849b0a067495032e26
+msgid ""
+"Use of terrain following in AUTO missions is controlled on a waypoint by "
+"waypoint basis using the reference frame of the waypoint. Normal (non "
+"terrain following) waypoints have a \"Relative\" reference frame, and "
+"altitudes are specified relative to the home location. Not by the "
+":ref:`TERRAIN_FOLLOW<TERRAIN_FOLLOW>` parameter. Terrain following waypoints"
+" have a \"Terrain\" reference frame, and altitudes are relative to the "
+"ground level given in the terrain database."
+msgstr ""
+"AUTO 任务中的地形跟随使用按航点逐一控制的方式，基于航点的参考坐标系。正常（非地形跟随）航点使用「相对」参考坐标系，高度相对于 Home "
+"位置指定，不受 :ref:`TERRAIN_FOLLOW<TERRAIN_FOLLOW>` "
+"参数影响。地形跟随航点使用「地形」参考坐标系，高度相对于地形数据库中给定的地面高度。"
+
+#: ../../source/docs/common-terrain-following.rst:76
+#: 0b0c98bbe9ee4d658d9dd7cf786be4ee
+msgid ""
+"in AUTO mode autolandings, the :ref:`TERRAIN_FOLLOW<TERRAIN_FOLLOW>` "
+"parameter does have an impact, when a rangefinder is also used. See "
+":ref:`rangefinder-autolanding`."
+msgstr ""
+"在 AUTO 模式自动降落中，当同时使用测距仪时，:ref:`TERRAIN_FOLLOW<TERRAIN_FOLLOW>` 参数确实有影响。详见 "
+":ref:`rangefinder-autolanding`。"
+
+#: ../../source/docs/common-terrain-following.rst:78
+#: 9b83f1e9b0ab4745962e89f27f72ef59
+msgid "See :ref:`common-understanding-altitude` for altitude definitions."
+msgstr "有关高度定义，请参阅 :ref:`common-understanding-altitude`。"
+
+#: ../../source/docs/common-terrain-following.rst:82
+#: e1daa4a55dcb4506864581c77884e469
+msgid "Uses of Terrain Following"
+msgstr "地形跟随的用途"
+
+#: ../../source/docs/common-terrain-following.rst:84
+#: 969a97a8b6a240ca996926bc6bc79199
+msgid ""
+"Terrain following is very useful when flying ArduPilot in areas where the "
+"terrain may vary significantly. Key uses are:"
+msgstr "在地形变化显著的区域飞行时，地形跟随非常有用。主要用途包括："
+
+#: ../../source/docs/common-terrain-following.rst:87
+#: aa56c34bbcd341baa7621ccc22e96c88
+msgid ""
+"**Safe RTL**. Being able to come over a hill rather than trying to fly "
+"through it when you enter RTL in a hilly area is very useful!"
+msgstr "**安全 RTL**。在丘陵地区进入 RTL 时，能够飞越山丘而不是试图穿越山丘非常有用！"
+
+#: ../../source/docs/common-terrain-following.rst:89
+#: f4cbffcad9cc46cc9c048ecbbedae78a
+msgid ""
+"**Aerial Photography.** It is useful to be able to maintain a constant "
+"altitude over the ground when taking a sequence of aerial photos"
+msgstr "**航空摄影。** 在拍摄一系列航拍照片时，维持相对地面的恒定高度非常有用。"
+
+#: ../../source/docs/common-terrain-following.rst:92
+#: 88ed50d521294a2f9ea847224c8e271d
+msgid ""
+"**FPV flying.** When flying FPV in CRUISE mode it is useful to maintain "
+"constant height above the ground so you can spend more time enjoying the "
+"scenary and less time avoiding hills"
+msgstr ""
+"**FPV 飞行。** 在 CRUISE 模式下进行 FPV 飞行时，维持相对地面的恒定高度非常有用，这样可以将更多时间用于欣赏风景，而不是避开山丘。"
+
+#: ../../source/docs/common-terrain-following.rst:98
+#: d0733c7465dd4c2c911014a4f66a9d35
+msgid "Sources of Terrain Data"
+msgstr "地形数据来源"
+
+#: ../../source/docs/common-terrain-following.rst:100
+#: b1038f28ffdc4e729e6ec1e2d6dd03fd
+msgid ""
+"The ground station is normally responsible for providing the raw terrain "
+"data which is sent to the aircraft via MAVLink. Right now only Mission "
+"Planner and MAVProxy support the required TERRAIN_DATA and TERRAIN_REQUEST "
+"MAVLink messages needed for terrain following download support. If you are "
+"using a different ground station , in order to download terrain data you "
+"will need to connect using one of those two ground stations in order to "
+"allow ArduPilot to load terrain data onto your board on the ground or in "
+"flight.  Once it is loaded, it is saved permanently on the microSD card."
+msgstr ""
+"地面站通常负责提供通过 MAVLink 发送给飞机的原始地形数据。目前只有 Mission Planner 和 MAVProxy 支持地形跟随下载所需的"
+" TERRAIN_DATA 和 TERRAIN_REQUEST MAVLink "
+"消息。如果使用其他地面站，为了下载地形数据，需要用上述两种地面站之一连接，以便在地面或飞行中将地形数据加载到飞控板上。加载后，数据将永久保存在 SD "
+"卡上。"
+
+#: ../../source/docs/common-terrain-following.rst:102
+#: e8d5f0c357ab4cd0b98adde68dc89954
+msgid ""
+"Both MissionPlanner and MAVProxy support the global SRTM database for "
+"terrain data.  The ArduPilot SRTM server used by MAVProxy and Mission "
+"Planner has 100m grid spacing. Unless the ground control station uses a "
+"different server with closer spacing, setting the :ref:`TERRAIN_SPACING "
+"<TERRAIN_SPACING>` parameter lower than 100m provides no better resolution, "
+"and only consumes more space on the SD card."
+msgstr ""
+"Mission Planner 和 MAVProxy 均支持全球 SRTM 数据库的地形数据。MAVProxy 和 Mission Planner "
+"使用的 ArduPilot SRTM 服务器具有 100 米的网格间距。除非地面站使用间距更小的其他服务器，否则将 "
+":ref:`TERRAIN_SPACING <TERRAIN_SPACING>` 参数设置低于 100 米无法提供更高分辨率，只会占用更多 SD "
+"卡空间。"
+
+#: ../../source/docs/common-terrain-following.rst:104
+#: 63b824948e904948bad5f512c225f283
+msgid ""
+"Terrain Data is downloaded any time you save or connect with a loaded "
+"mission with these ground stations, or, if flying, the autopilot will "
+"request data if it's flying into an area not already downloaded, assuming "
+"the ground station can provide it. Usually an internet connection is "
+"required by the ground station."
+msgstr ""
+"只要通过这些地面站保存或连接加载了任务，就会随时下载地形数据；如果在飞行中，飞控将在飞入尚未下载的区域时请求数据，前提是地面站能够提供数据。通常地面站需要互联网连接。"
+
+#: ../../source/docs/common-terrain-following.rst:106
+#: 995b240d255c4ef590920455a58491a6
+msgid ""
+"While the autopilot will request the terrain data around waypoints and home "
+"location, if it is not connected to a GCS that can supply enroute tiles, the"
+" autopilot just interpolates between waypoint's terrain elevation. See "
+"below:"
+msgstr "虽然飞控会请求航点和 Home 位置附近的地形数据，但若未连接能够提供途经瓦片数据的地面站，飞控只会在航点地形高度之间进行插值。见下文："
+
+#: ../../source/docs/common-terrain-following.rst:109
+#: 0be9e94a5d73458991eb2e1cd0577038
+msgid ""
+"If you are not flying with a GCS that can fetch and supply terrain data as "
+"the vehicles flies between waypoints, the you may need to load terrain data "
+"covering the flight route and/or area for RTL paths manually."
+msgstr "如果飞行时使用的地面站无法在飞机在航点间飞行时获取和提供地形数据，则可能需要手动加载覆盖飞行路线和/或 RTL 路径区域的地形数据。"
+
+#: ../../source/docs/common-terrain-following.rst:111
+#: 0b4d0aec1655487a92eb78a5cc86546f
+msgid ""
+"You can download a set of terrain data tiles for any anticipated flight area"
+" using this `web utility <https://terrain.ardupilot.org/>`__."
+msgstr "可使用此 `网页工具 <https://terrain.ardupilot.org/>`__ 下载任何预期飞行区域的一组地形数据瓦片。"
+
+#: ../../source/docs/common-terrain-following.rst:115
+#: 24c4f9c47f86441ba847e8a5de09271b
+msgid ""
+"It will create tiles for the specified radius around a geographic location. "
+"Then you can download them, unzip and write in the APM/TERRAIN folder of the"
+" SD card."
+msgstr "工具将为指定地理位置周围的半径范围创建瓦片。下载后解压，写入 SD 卡的 APM/TERRAIN 文件夹中。"
+
+#: ../../source/docs/common-terrain-following.rst:117
+#: ec3ff5990e9e42e2a7f2b629252b05e6
+msgid ""
+"You can also download .zip files for entire continents, or individual tiles "
+"from `here <https://terrain.ardupilot.org/continentsdat3/>`__."
+msgstr ""
+"也可从 `此处 <https://terrain.ardupilot.org/continentsdat3/>`__ 下载整个大洲或单个瓦片的 .zip"
+" 文件。"
+
+#: ../../source/docs/common-terrain-following.rst:120
+#: d72a7e0f6365445a867b39770691cb0b
+msgid "Terrain Spacing"
+msgstr "地形间距"
+
+#: ../../source/docs/common-terrain-following.rst:122
+#: d8a8988064344385b7b97db881ad0a08
+msgid ""
+"The ArduPilot terrain code has a user settable parameter called "
+":ref:`TERRAIN_SPACING<TERRAIN_SPACING>` which controls the grid spacing "
+"which is used for requests for terrain data from the aircraft to the ground "
+"station. The default :ref:`TERRAIN_SPACING<TERRAIN_SPACING>` is 100 meters, "
+"but users may set a different grid spacing for specialist applications."
+msgstr ""
+"ArduPilot 地形代码有一个用户可设置的参数 "
+":ref:`TERRAIN_SPACING<TERRAIN_SPACING>`，用于控制飞机向地面站请求地形数据时使用的网格间距。默认 "
+":ref:`TERRAIN_SPACING<TERRAIN_SPACING>` 为 100 米，用户可为特殊应用设置不同的网格间距。"
+
+#: ../../source/docs/common-terrain-following.rst:128
+#: 6e0b555979854fbaabcce14abcab5c2c
+msgid ""
+"Note that the amount of terrain data kept in memory is directly related to "
+"the grid spacing. If you decrease the ``TERRAIN_SPACING`` by a factor of 2 "
+"then the amount of terrain area kept in memory is reduced by a factor of 4. "
+"It is recommended that you use a ``TERRAIN_SPACING`` of 100 meters to "
+"prevent the aircraft running off the side of a grid in flight and not having"
+" data available."
+msgstr ""
+"请注意，内存中保存的地形数据量与网格间距直接相关。若将 ``TERRAIN_SPACING`` 减小 2 倍，内存中保存的地形区域将减少 4 "
+"倍。建议使用 100 米的 ``TERRAIN_SPACING``，以防止飞机在飞行中偏出网格边界而无法获取数据。"
+
+#: ../../source/docs/common-terrain-following.rst:135
+#: 7eb681ac2e67431bb4f26a7122f75f7e
+msgid ""
+"If the ground station does not have terrain data available at the resolution"
+" requested by the aircraft then the ground station will interpolate as "
+"necessary to provide the requested grid size. Currently, MAVPRoxy and "
+"Mission Planner can only provide data down to 100m spacing."
+msgstr ""
+"若地面站没有飞机请求分辨率的地形数据，地面站将根据需要进行插值以提供所需的网格尺寸。目前，MAVProxy 和 Mission Planner "
+"只能提供最低 100 米间距的数据。"
+
+#: ../../source/docs/common-terrain-following.rst:140
+#: 3d00ed4e4f2b46a1b34ce77661b9d11d
+msgid "Terrain Accuracy"
+msgstr "地形精度"
+
+#: ../../source/docs/common-terrain-following.rst:142
+#: a80440f7c4a344988bca12e7bbc46a0f
+msgid ""
+"The accuracy of the SRTM database varies over the surface of the earth. "
+"Typical accuracy is around 10 to 20 meters, although some areas are worse. "
+"This makes terrain following suitable for aircraft that are flying at "
+"altitudes of 60 meters or more. Using terrain data for low flights is not "
+"recommended."
+msgstr ""
+"SRTM 数据库的精度因地球表面位置而异，典型精度约为 10 至 20 米，部分区域更差。这使得地形跟随适用于在 60 "
+"米或以上高度飞行的飞机。不建议将地形数据用于低空飞行。"
+
+#: ../../source/docs/common-terrain-following.rst:149
+#: 54cd3159bba34a528e75a7ba142d3cb4
+msgid "Setting up for terrain following"
+msgstr "地形跟随配置"
+
+#: ../../source/docs/common-terrain-following.rst:151
+#: 6f2e78f90cd64d7b900e189a5a1e5aa9
+msgid ""
+"To setup your fixed wing aircraft for terrain following follow these steps"
+msgstr "要为固定翼飞机配置地形跟随，请按以下步骤操作："
+
+#: ../../source/docs/common-terrain-following.rst:154
+#: 2b5d7027750b4e1a812c3f0ae10ed3d0
+msgid "make sure you have the latest MissionPlanner installed"
+msgstr "确保已安装最新版 Mission Planner"
+
+#: ../../source/docs/common-terrain-following.rst:155
+#: d23598de00844d128e0560ee4bfc2050
+msgid ""
+"set :ref:`TERRAIN_ENABLE<TERRAIN_ENABLE>` to 1 and "
+":ref:`TERRAIN_FOLLOW<TERRAIN_FOLLOW>` to 1"
+msgstr ""
+"将 :ref:`TERRAIN_ENABLE<TERRAIN_ENABLE>` 设为 "
+"1，:ref:`TERRAIN_FOLLOW<TERRAIN_FOLLOW>` 设为 1"
+
+#: ../../source/docs/common-terrain-following.rst:156
+#: 2edb9109ca964d83a514765bfccf71fd
+msgid "connect to your vehicle over USB when you have GPS lock"
+msgstr "在 GPS 已定位时通过 USB 连接飞机"
+
+#: ../../source/docs/common-terrain-following.rst:157
+#: 900f6d4dc1054e48960c5f2c54f69305
+msgid ""
+"check the FlightData->Status page in MissionPlanner and look for the terrain"
+" status data:"
+msgstr "在 Mission Planner 的 FlightData->Status 页面查看地形状态数据："
+
+#: ../../source/docs/common-terrain-following.rst:163
+#: a480f052242049759470429ba9b4ba48
+msgid ""
+"When the autopilot has finished loading terrain data you should see "
+"\"ter_pend\" goes to zero and the current terrain altitude in meters showing"
+" up in \"ter_alt\". The \"ter_pend\" value is the number of terrain blocks "
+"that the autopilot is waiting to load from the ground station."
+msgstr ""
+"当飞控完成地形数据加载后，应看到 「ter_pend」 降至零，且 「ter_alt」 中显示当前地形高度（单位：米）。「ter_pend」 "
+"值为飞控等待从地面站加载的地形块数量。"
+
+#: ../../source/docs/common-terrain-following.rst:169
+#: 48e6bddb3a9f4c0b98160ab130884f72
+msgid "Terrain Look-ahead"
+msgstr "地形前瞻"
+
+#: ../../source/docs/common-terrain-following.rst:171
+#: f51f19506f0b4d7e81bbd0c0e291e395
+msgid ""
+"The terrain following code \"looks ahead\" of the current position along the"
+" flight path to try to ensure that the aircraft climbs soon enough to avoid "
+"upcoming terrain. The amount of look-ahead is controlled by the "
+":ref:`TERRAIN_LOOKAHD<TERRAIN_LOOKAHD>` parameter, which defaults to 2000 "
+"meters. The look-ahead is also limited by the distance to the next waypoint "
+"in AUTO mode, so you need to ensure that you don't have any legs of your "
+"mission which include climb rates your aircraft cannot achieve."
+msgstr ""
+"地形跟随代码会沿飞行路径对当前位置进行「前瞻」，以确保飞机能够及时爬升以避开前方地形。前瞻量由 "
+":ref:`TERRAIN_LOOKAHD<TERRAIN_LOOKAHD>` 参数控制，默认值为 2000 米。在 AUTO "
+"模式下，前瞻量还受下一个航点距离限制，因此需要确保任务中没有飞机无法实现所需爬升率的航段。"
+
+#: ../../source/docs/common-terrain-following.rst:182
+#: 50e7b4b9029a425081cacdf1a2373ca9
+msgid "The climb rate used in the terrain look-ahead is based on the"
+msgstr "地形前瞻中使用的爬升率基于"
+
+#: ../../source/docs/common-terrain-following.rst:180
+#: cc12cec6642e4a1bbeabe08997fa37a2
+msgid ""
+":ref:`TECS_CLMB_MAX<TECS_CLMB_MAX>` parameter, combined with your current "
+"ground speed."
+msgstr ":ref:`TECS_CLMB_MAX<TECS_CLMB_MAX>` 参数，结合当前地速。"

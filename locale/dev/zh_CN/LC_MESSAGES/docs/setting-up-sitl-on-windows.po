@@ -1,0 +1,396 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:5
+#: ef2c0fe89f7f4ac68ca8bec4b9cbbf0c
+msgid "SITL setup on Windows in a VM (not recommended)"
+msgstr "在 VM 中的 Windows 上设置 SITL（不推荐）"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:9
+#: 024459d87e2f42aa92ea02bf35f2a8bd
+msgid ""
+"These instructions are out-of-date.  We recommend Windows users follow the "
+"instructions for :ref:`Setting up the Build Environment using WSL <building-"
+"setup-windows>` and :ref:`Setting up SITL on WSL <sitl-on-windows-wsl>`"
+msgstr ""
+"这些说明已过时。我们建议 Windows 用户按照 :ref:`使用 WSL 设置构建环境 <building-setup-windows>` 和 "
+":ref:`在 WSL 上设置 SITL <sitl-on-windows-wsl>` 中的说明进行操作。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:11
+#: 8bea60f5ece341a6afd0841b40428b1f
+msgid ""
+"This article explains how to *manually* set up the :ref:`SITL ArduPilot "
+"Simulator <sitl-simulator-software-in-the-loop>` in a virtual machine "
+"environment on Windows, and connect it to a Ground Control Station"
+msgstr ""
+"本文介绍如何在 Windows 的虚拟机环境中*手动*设置 :ref:`SITL ArduPilot 仿真器 <sitl-simulator-"
+"software-in-the-loop>`，并将其连接到地面控制站。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:16
+#: 373603313054484caf2cf0854bdc5852
+msgid ""
+"See :ref:`Setting up SITL using Vagrant <setting-up-sitl-using-vagrant>` for"
+" a more automated setup process."
+msgstr ""
+"如需更自动化的设置流程，请参阅 :ref:`使用 Vagrant 设置 SITL <setting-up-sitl-using-vagrant>`。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:20
+#: 8334a3a401d340f49458389686525f98
+msgid "Overview"
+msgstr "概述"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:22
+#: 75560c2f39f14dfc91ae3feff4ec17af
+msgid ""
+"The SITL (Software In The Loop) simulator allows you to run Plane, Copter or"
+" Rover without any hardware. The simulator runs the normal ArduPilot code as"
+" a native executable on a Linux PC. SITL can also be run within a virtual "
+"machine on Windows, Mac OSX or Linux."
+msgstr ""
+"SITL（软件在环）仿真器允许您在无需任何硬件的情况下运行 Plane、Copter 或 Rover。该仿真器将正常的 ArduPilot "
+"代码作为本地可执行文件在 Linux PC 上运行。SITL 也可以在 Windows、Mac OSX 或 Linux 上的虚拟机中运行。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:27
+#: 85749072a5c5494192f4cdb61608df97
+msgid ""
+"This article shows how to manually set up SITL on a Linux environment hosted"
+" in a VMware virtual machine. You can use any Virtual Machine provider such "
+"a VirtualBox, Vmware, etc."
+msgstr ""
+"本文介绍如何在 VMware 虚拟机托管的 Linux 环境中手动设置 SITL。您可以使用任何虚拟机提供商，如 VirtualBox、VMware "
+"等。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:32
+#: ce4380408b794b7cb5b26b6255f78e0b
+msgid ""
+"The instructions were tested on Windows 8 with VMware ver 7.1.0 "
+"build-2496824 and Ubuntu 14.10."
+msgstr "本说明在 Windows 8、VMware 版本 7.1.0 build-2496824 和 Ubuntu 14.10 上测试通过。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:39
+#: b73b69f5f59243cfb6860264929bc5e4
+msgid "Preconditions"
+msgstr "前提条件"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:41
+#: 7b5b1546070541bbb86a355c01c72069
+msgid ""
+"Please note that before attempting this you should already have "
+":ref:`downloaded the code <where-to-get-the-code>` to your machine."
+msgstr "请注意，在尝试此操作之前，您应该已经将 :ref:`代码下载 <where-to-get-the-code>` 到您的计算机上。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:45
+#: 79defb16b7514b58877bc553eb414bb7
+msgid "Step #1 - Install VMWare and create an Ubuntu Virtual Machine"
+msgstr "第 1 步 - 安装 VMWare 并创建 Ubuntu 虚拟机"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:47
+#: 8134359216024a589f20540f8d4695a4
+msgid ""
+"Download and install `VMware "
+"<https://my.vmware.com/web/vmware/free#desktop_end_user_computing/vmware_player/6_0>`__"
+" (look for VMware Workstation Player for Windows)"
+msgstr ""
+"下载并安装 `VMware "
+"<https://my.vmware.com/web/vmware/free#desktop_end_user_computing/vmware_player/6_0>`__（查找适用于"
+" Windows 的 VMware Workstation Player）。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:49
+#: a1c3e58dd80a49d28aaa067a4704f03c
+msgid "Download the latest Ubuntu version : 22.04 LTS for example."
+msgstr "下载最新版本的 Ubuntu，例如 22.04 LTS。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:51
+#: 507564402ec2493cbbdf75b106df4a7f
+msgid ""
+"3. Start VMware and create new ubuntu machine by selecting Player > File > "
+"New Virtual Machine"
+msgstr "3. 启动 VMware，通过选择「播放器 > 文件 > 新建虚拟机」创建新的 Ubuntu 机器。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:54
+#: 55cdc6532223400bbc357cd17ea56896
+msgid "Select the iso you just downloaded"
+msgstr "选择您刚刚下载的 ISO 镜像。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:55
+#: 11efee3474f7405b8d8a7e6f53be3f59
+msgid ""
+"Enter your Full name, User name and Password for the virtual machine. you "
+"will use these later when you log onto this virtual machine"
+msgstr "输入虚拟机的全名、用户名和密码，您稍后登录该虚拟机时将使用这些信息。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:57
+#: fd437d09b0e74cbdbb2499dd87d821f7
+msgid "Name your virtual machine (i.e. Copter-SITL)"
+msgstr "为虚拟机命名（例如 Copter-SITL）。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:58
+#: 2140bd089c504b5d9d6101e8e781eb17
+msgid ""
+"Specify Disk Capacity - leave Max disk size as default 20GB, and \"Split "
+"virtual disk into multiple files\" checked"
+msgstr "指定磁盘容量——将最大磁盘大小保留为默认的 20GB，并勾选「将虚拟磁盘拆分为多个文件」。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:60
+#: bb81c4355a304bdc8e215c50feb0a7ad
+msgid ""
+"On next page of \"New Virtual Machine Wizard\" click the \"Customize "
+"Hardware..\" button"
+msgstr "在「新建虚拟机向导」的下一页，点击「自定义硬件...」按钮。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:62
+#: 338182b190d94e40a2c3ba529a2fc037
+msgid ""
+"On the Hardware tab set Memory: 3GB,Processors: 4,Hard Disk: 20GB,Network "
+"Adapter: NAT"
+msgstr "在「硬件」选项卡上设置：内存：3GB，处理器：4 个，硬盘：20GB，网络适配器：NAT。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:69
+#: 581dca6c64444add85845968b275e873
+msgid "Step #2 - Start the VM for the first time"
+msgstr "第 2 步 - 首次启动虚拟机"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:71
+#: d13ec96da93043fa88c9802d40abadfc
+msgid ""
+"Power on the machine by double clicking on item just created in the VMware "
+"Player"
+msgstr "在 VMware Player 中双击刚刚创建的条目，为机器加电。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:73
+#: e2de3948a1d94676b69f437d4d03bde1
+msgid ""
+"Press \"No\" to any questions like \"Cannot connect to the XXX device "
+"because no corresponding device is available on the host\""
+msgstr "对于类似「无法连接到 XXX 设备，因为主机上没有对应的可用设备」的问题，点击「否」。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:75
+#: bf90da1b09904ea1905df1a5d771e393
+msgid "Enter your password when the login screen appears"
+msgstr "登录界面出现时输入您的密码。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:76
+#: 2537647614a5496f842e40d3ed38c713
+msgid "Say \"no\" to any options to upgrade versions"
+msgstr "对任何升级版本的选项选择「否」。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:77
+#: 36b4e22d4ed14ff59d917f7f34d471b3
+msgid ""
+"Open firefox and make sure it can access some web page like ardupilot.org"
+msgstr "打开 Firefox，确保可以访问如 ardupilot.org 等网页。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:83
+#: 1d1e3267116e4af5a2115efb4ead0b94
+msgid ""
+"Set the clock by double clicking on the top right corner, select your "
+"location on the map and \"Set the time:\" to \"Automatically from the "
+"internet\""
+msgstr "通过双击右上角设置时钟，在地图上选择您的位置，并将「设置时间：」设为「自动从互联网同步」。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:87
+#: e2222f76830748b6957fd57129467b4a
+msgid "|Ubuntu_setTimezone|"
+msgstr "|Ubuntu_setTimezone|"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst
+#: 4659932386fc4417aac065be30ed71ce
+msgid "Ubuntu_setTimezone"
+msgstr "Ubuntu_setTimezone"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:88
+#: 61d3f704497b4c44806700741b6e025f
+msgid ""
+"Setup a terminal short by clicking on the Dash Home icon on the top left, "
+"Type \"terminal\" and then drag the terminal application to the left start "
+"pane"
+msgstr "通过点击左上角的「Dash Home」图标设置终端快捷方式，输入「terminal」，然后将终端应用程序拖到左侧启动栏。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:92
+#: a1959d444bce43be828399eea6664577
+msgid "|Ubuntu_TerminalShortcut|"
+msgstr "|Ubuntu_TerminalShortcut|"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst
+#: 268db8c6457a42c7b04ee9b5b8e1da7d
+msgid "Ubuntu_TerminalShortcut"
+msgstr "Ubuntu_TerminalShortcut"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:95
+#: 94d08009e96b4ab986845f7d31d24c8d
+msgid ""
+"Step #3 - Setting up shared partition with Windows & Ubuntu Virtual Machine"
+msgstr "第 3 步 - 设置 Windows 与 Ubuntu 虚拟机之间的共享分区"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:97
+#: 9f65aabe1e7442219c2bd7099594e7df
+msgid ""
+"1. Ensure the VM is powered down by selecting its name, then select the "
+"drop-down beside the green play button and select \"Power Off\" if it's not "
+"greyed"
+msgstr "1. 确认虚拟机已关机：选中其名称，然后点击绿色播放按钮旁边的下拉菜单，如果「关机」选项未置灰则点击它。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:104
+#: f9dc1d7a87cf4c4ca1bfd63dc843e8e7
+msgid ""
+"2.On VMware Player select Player > Manage > Virtual Machine Settings... > "
+"Options Tab > Shared Folders"
+msgstr "2. 在 VMware Player 中选择「播放器 > 管理 > 虚拟机设置... > 选项选项卡 > 共享文件夹」。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:107
+#: 2ec14e4cdde445fab8be172d090eb955
+msgid "Check \"Always enabled\","
+msgstr "勾选「始终启用」，"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:108
+#: 48b75efb5efc474d8c174fadb3ebafca
+msgid "Click \"Add...\""
+msgstr "点击「添加...」"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:109
+#: 224d70c0f0e7436983c465ea06174052
+msgid ""
+"Set \"Host Path\" to folder one level above where you have installed "
+"ardupilot software"
+msgstr "将「主机路径」设置为安装 ardupilot 软件目录的上一级目录。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:111
+#: 3a3db1be10f34a8b828b4a349a1fb44e
+msgid "Check \"Enable this share\""
+msgstr "勾选「启用此共享」。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:116
+#: 73b7dcf75d27474e88b3d4ea8b0f196b
+msgid "Power on the VM, enter your login information"
+msgstr "启动虚拟机，输入您的登录信息。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:118
+#: ac4325ec01fa45acba1dfbbd59c26158
+msgid ""
+"4. Open Terminal window and type \"ls /mnt/hgfs\" and the share you set-up "
+"should be visible"
+msgstr "4. 打开终端窗口，输入「ls /mnt/hgfs」，您设置的共享文件夹应该可见。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:121
+#: cb47c00c9fb442d1918c00512ec56c35
+msgid ""
+"5. type \"ln -s /mnt/hgfs/<foldername>\" (where <foldername> is replaced "
+"with the name of the folder you set-up) to create a symbolic link to the "
+"shared folder from your home directory"
+msgstr ""
+"5. 输入「ln -s /mnt/hgfs/<foldername>」（其中 <foldername> "
+"替换为您设置的文件夹名称），从主目录创建到共享文件夹的符号链接。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:126
+#: 8c261d1f3cea4443aa7ce74971723991
+msgid "Step #4 - Follow the Linux instructions"
+msgstr "第 4 步 - 按照 Linux 说明操作"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:128
+#: eb567139a87c43aaa9cfad9dc1a62c6b
+msgid ""
+"Now that you have a Linux VM you should follow the :ref:`SITL instructions "
+"for Linux <setting-up-sitl-on-linux>`"
+msgstr ""
+"现在您已经有了 Linux 虚拟机，请按照 :ref:`Linux 版 SITL 说明 <setting-up-sitl-on-linux>` "
+"进行操作。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:133
+#: d5fde680c3a24a1fac2bcbe6fcf9dadb
+msgid "Connecting with the Mission Planner"
+msgstr "通过 Mission Planner 连接"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:135
+#: c5076129bd124869832dbbfecc7feae9
+msgid ""
+"In addition to using the mavproxy ground station (the command line style "
+"ground station written in python) it should be possible to connect with the "
+"Mission Planner by appending the ``--viewerip=XXX.X.X.X`` to the end of the "
+"start up command where the Xs are replaced with your machine's IP address.  "
+"This address can be found by typing \"ipconfig\" into a command prompt."
+msgstr ""
+"除使用 mavproxy 地面站（用 Python 编写的命令行风格地面站）外，还可以通过在启动命令末尾附加 "
+"``--viewerip=XXX.X.X.X`` 来使用 Mission Planner 连接，其中 X 替换为您机器的 IP "
+"地址。该地址可通过在命令提示符中输入「ipconfig」找到。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:144
+#: 11194f49edea41bab32c938bbd4326ce
+msgid ""
+"You will likely see many more than one IP address listed so you may need to "
+"try a few different addresses to find one that works."
+msgstr "您可能会看到列出的 IP 地址不止一个，因此可能需要尝试几个不同的地址才能找到有效的那个。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:150
+#: 03b20f16f451439fa9674607f4763934
+msgid ""
+"So for this example the following would then be entered into the terminal on"
+" the Ubuntu VM while in the ardupilot directory:"
+msgstr "本示例中，在 ardupilot 目录下的 Ubuntu 虚拟机终端中输入以下命令："
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:157
+#: 5be8e623a6594320896acf77e09aca7f
+msgid ""
+"Next connect with the mission planner after first setting the \"COM Port\" "
+"to \"UDP\"."
+msgstr "然后先将「COM 端口」设置为「UDP」，再通过 Mission Planner 连接。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:164
+#: f311641035964553975b86519197f4ef
+msgid "Dataflash logs"
+msgstr "Dataflash 日志"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:166
+#: 0821df5f24474312bf49666ca3ff8ed8
+msgid ""
+"After the simulation is run, dataflash logs named \"Copter.flashlog\" or "
+"\"CopterAVC.flashlog\" will be created the \"buildlogs\" directory. This "
+"directory is created at the same level as the ardupilot directory (i.e. the "
+"top level directly that holds the \"Copter\", \"Plane\" and \"libraries\" "
+"directories). Because of the inconvenient name you'll need to change the "
+"file extension to \".log\" before opening in Mission Planner."
+msgstr ""
+"仿真运行后，名为「Copter.flashlog」或「CopterAVC.flashlog」的 Dataflash "
+"日志文件将在「buildlogs」目录中生成。该目录与 ardupilot "
+"目录同级（即包含「Copter」、「Plane」和「libraries」目录的顶层目录）。由于文件名不便直接使用，在 Mission Planner "
+"中打开之前，需要将文件扩展名更改为「.log」。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:174
+#: 12a8abdda7e04bf9bfcd8fac798764b9
+msgid "Next steps"
+msgstr "后续步骤"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:176
+#: 7f6019803b5d4600861af32c351923d9
+msgid ""
+"To get the most out of SITL we recommend you read the :ref:`MAVProxy "
+"documentation <mavproxy:home>`."
+msgstr "要充分发挥 SITL 的潜力，建议您阅读 :ref:`MAVProxy 文档 <mavproxy:home>`。"
+
+#: ../../source/docs/setting-up-sitl-on-windows.rst:178
+#: b824c78c40a448919e3dacc9ecfcc21f
+msgid ""
+"The topic :ref:`Using SITL for ArduPilot Testing <using-sitl-for-ardupilot-"
+"testing>` explains how to use the simulator, and covers topics like how to "
+"use SITL with Ground Stations other than Mission Planner and MAVProxy."
+msgstr ""
+"主题 :ref:`使用 SITL 进行 ArduPilot 测试 <using-sitl-for-ardupilot-testing>` "
+"介绍了如何使用仿真器，并涵盖如何将 SITL 与 Mission Planner 和 MAVProxy 以外的地面站配合使用等主题。"

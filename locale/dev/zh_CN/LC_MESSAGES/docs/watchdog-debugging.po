@@ -1,0 +1,108 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/watchdog-debugging.rst:5 40c86d6882a7436ea069aef046bb1a02
+msgid "Debugging Watchdog Reset Events"
+msgstr "调试看门狗复位事件"
+
+#: ../../source/docs/watchdog-debugging.rst:7 d7973f8fd04a4121bf65eb09483eae33
+msgid ""
+"We attempt to provide as much information as we can about watchdog reset "
+"events in the onboard logs and via our telemetry streams.  This document "
+"outlines ways in which you can use that information to root-cause the issue "
+"causing the watchdog."
+msgstr "我们尝试在板载日志和遥测流中提供尽可能多的关于看门狗复位事件的信息。本文档概述了您可以如何使用这些信息来找出导致看门狗触发的根本原因。"
+
+#: ../../source/docs/watchdog-debugging.rst:13
+#: 3179fe90c0db4b3e843f7ae8e3f242fb
+msgid "The ``decode_watchdog.py`` Utility"
+msgstr "``decode_watchdog.py`` 工具"
+
+#: ../../source/docs/watchdog-debugging.rst:15
+#: e7ba96cd4684412da6375f61bed011b9
+msgid ""
+"A Python script is provided in ArduPilot's Tools directory.  A string from "
+"either a telemetry log or an onboard log can be passed in to this script and"
+" it spits human-readable information out on stdout."
+msgstr ""
+"ArduPilot 的 Tools 目录中提供了一个 Python "
+"脚本。来自遥测日志或板载日志的字符串可以传递给此脚本，它会在标准输出上输出人类可读的信息。"
+
+#: ../../source/docs/watchdog-debugging.rst:26
+#: 64fb205b66a04c3b8fd2f0aec163e4b9
+msgid "Understanding the T (thread) field"
+msgstr "理解 T（线程）字段"
+
+#: ../../source/docs/watchdog-debugging.rst:28
+#: c27f3f6190374ec680daa0a160a2da5e
+msgid ""
+"This is an offset into the scheduler table, which is a combination of "
+"vehicle-specific tasks and general system tasks.   It can be found in the "
+"@SYS/tasks.txt file which can be retrieved from the vehicle, and found in "
+"dataflash logs."
+msgstr ""
+"这是调度器表中的偏移量，调度器表是飞行器特定任务和通用系统任务的组合。它可以在可从飞行器获取的 @SYS/tasks.txt 文件中找到，也可在 "
+"dataflash 日志中找到。"
+
+#: ../../source/docs/watchdog-debugging.rst:30
+#: fcadb1d5a8254a4088275f72509352b3
+msgid "There are three magic tasks:"
+msgstr "有三个特殊任务："
+
+#: ../../source/docs/watchdog-debugging.rst:38
+#: cc2cb30d3cf34359b412f78772d336d1
+msgid ""
+"If in state -3 then the code was almost certainly in an interrupt handler "
+"when the fault occured."
+msgstr "如果状态为 -3，则代码在发生故障时几乎可以肯定处于中断处理程序中。"
+
+#: ../../source/docs/watchdog-debugging.rst:41
+#: 24f4c9518d7449dcb16e7b0252594c8c
+msgid "Converting the LR field into a line of code"
+msgstr "将 LR 字段转换为代码行"
+
+#: ../../source/docs/watchdog-debugging.rst:43
+#: 109fbd5160d644868fe4eeceae9a8573
+msgid ""
+"Certain faults will fill the Function Level Reset (FLR) register with the "
+"address of an instruction which caused the processor to fault.  That address"
+" can be turned into a line of code."
+msgstr "某些故障会将函数级复位（FLR）寄存器填充为导致处理器故障的指令地址。该地址可以转换为代码行。"
+
+#: ../../source/docs/watchdog-debugging.rst:45
+#: c69d78b1aa634bfc9975690b7e16713f
+msgid "Ensure you can identically reproduce the binary running on the board."
+msgstr "确保您可以完全相同地重现板上运行的二进制文件。"
+
+#: ../../source/docs/watchdog-debugging.rst:46
+#: c631ba71a1b34e74b616ea0ed47898f5
+msgid "Try addr2line"
+msgstr "尝试 addr2line"
+
+#: ../../source/docs/watchdog-debugging.rst:47
+#: b145f50aa60a41b48095153cb1b160de
+msgid ""
+"disassemble the binary: arm-none-eabi-objdump --demangle --disassemble-all "
+"--full-contents --all-headers"
+msgstr ""
+"反汇编二进制文件：arm-none-eabi-objdump --demangle --disassemble-all --full-contents "
+"--all-headers"

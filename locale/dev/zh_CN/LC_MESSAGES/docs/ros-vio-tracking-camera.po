@@ -1,0 +1,793 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:5
+#: d9d616758b504c6fa96ada1fcb3512ca
+msgid "ROS and VIO tracking camera for non-GPS Navigation"
+msgstr "使用 ROS 和 VIO 跟踪相机实现无 GPS 导航"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:7
+#: 62d88b2397bb4815b66abb0171a469fc
+msgid ""
+"This wiki page describes how a `VIO tracking camera "
+"<https://www.intelrealsense.com/visual-inertial-tracking-case-study/>`__ "
+"such as the `Intel RealSense T265 <https://www.intelrealsense.com/tracking-"
+"camera-t265/>`__ can be used with ROS to facilitate non-GPS flight."
+msgstr ""
+"本 wiki 页面介绍了如何将 `VIO 跟踪相机 <https://www.intelrealsense.com/visual-inertial-"
+"tracking-case-study/>`__（如 `Intel RealSense T265 "
+"<https://www.intelrealsense.com/tracking-camera-t265/>`__）与 ROS 配合使用，实现无 GPS"
+" 飞行。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:10
+#: 31211a9fb0c048598a6461a721adf840
+msgid ""
+"Explanation for some parts of the system will be kept short for the sake of "
+"brevity. More in-depth discussion can be found in the following blog posts "
+"`part 1 <https://discuss.ardupilot.org/t/integration-of-ardupilot-and-vio-"
+"tracking-camera-part-1-getting-started-with-the-intel-realsense-t265-on-"
+"rasberry-pi-3b/43162>`__, `part 2 "
+"<https://discuss.ardupilot.org/t/integration-of-ardupilot-and-vio-tracking-"
+"camera-part-2-complete-installation-and-indoor-non-gps-flights/43405>`__, "
+"`part 3 <https://discuss.ardupilot.org/t/integration-of-ardupilot-and-vio-"
+"tracking-camera-part-3-indoor-autonomous-flights-and-performance-"
+"tests/43626>`__."
+msgstr ""
+"为简洁起见，部分系统内容仅作简要说明。更深入的讨论可参阅以下博客文章：`第 1 部分 "
+"<https://discuss.ardupilot.org/t/integration-of-ardupilot-and-vio-tracking-"
+"camera-part-1-getting-started-with-the-intel-realsense-t265-on-rasberry-"
+"pi-3b/43162>`__、`第 2 部分 <https://discuss.ardupilot.org/t/integration-of-"
+"ardupilot-and-vio-tracking-camera-part-2-complete-installation-and-indoor-"
+"non-gps-flights/43405>`__、`第 3 部分 "
+"<https://discuss.ardupilot.org/t/integration-of-ardupilot-and-vio-tracking-"
+"camera-part-3-indoor-autonomous-flights-and-performance-tests/43626>`__。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:13
+#: 983978ad05e3498db2533740f791a55d
+msgid "Video"
+msgstr "视频"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:19
+#: 6636db1923e242288686f0441e77b630
+msgid "Hardware Requirements"
+msgstr "硬件要求"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:20
+#: fe0a11faf0544045bd345fd5ea7a286a
+msgid ""
+"Sensor: `Intel RealSense Tracking Camera T265 "
+"<https://www.intelrealsense.com/tracking-camera-t265/>`__"
+msgstr ""
+"传感器：`Intel RealSense 跟踪相机 T265 <https://www.intelrealsense.com/tracking-"
+"camera-t265/>`__"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:21
+#: 9057cac1b7c34ba085b79351ef25a171
+msgid ""
+"Companion computer: `Raspberry Pi 3 Model B "
+"<https://www.raspberrypi.org/products/raspberry-pi-3-model-b/>`__"
+msgstr ""
+"伴飞计算机：`Raspberry Pi 3 Model B "
+"<https://www.raspberrypi.org/products/raspberry-pi-3-model-b/>`__"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:24
+#: eb85bcb3da4a4f20b909e0192e0794e4
+msgid ""
+"Depends on what you need from the T265, the companion computer should have "
+"USB2 (**pose** data only) or USB3 (**pose** + **image** data). For "
+"localization and navigation, we only need to capture pose data, so RPi 3B is"
+" sufficient for the task."
+msgstr ""
+"根据对 T265 的需求，伴飞计算机应具备 USB2（仅**姿态**数据）或 USB3（**姿态** + "
+"**图像**数据）。对于定位和导航，我们只需捕获姿态数据，因此 RPi 3B 即可满足需求。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:27
+#: 211d348d86784990819e0f81fddec249
+msgid "System Overview"
+msgstr "系统概述"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:32
+#: bce56d2819c44ae0a17196d637ae26f1
+msgid ""
+"The position data obtained from ``realsense-ros`` node will be processed by "
+"``vision_to_mavros`` node and send to ``mavros`` node via the topic "
+"``/mavros/vision_pose/pose``. ``mavros`` will take care of the ENU - NED "
+"frames transformation and send it to ArduPilot through MAVLink."
+msgstr ""
+"从 ``realsense-ros`` 节点获取的位置数据将由 ``vision_to_mavros`` 节点处理，并通过话题 "
+"``/mavros/vision_pose/pose`` 发送至 ``mavros`` 节点。``mavros`` 负责完成 ENU 到 NED "
+"坐标系的转换，并通过 MAVLink 发送给 ArduPilot。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:35
+#: bd9cf00a08ca492caaab9a05ed50b8ce
+msgid "Install ``librealsense``"
+msgstr "安装 ``librealsense``"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:38
+#: b35f38ad1e7d42efbadbbcc734441dc5
+msgid ""
+"The Realsense T265 is supported via `librealsense "
+"<https://github.com/IntelRealSense/librealsense>`__ on Windows and Linux. "
+"Installation process varies widely for different systems. Refer to `the "
+"official github page <https://github.com/IntelRealSense/librealsense>`__ for"
+" instructions on specific system, such as `Jetson "
+"<https://github.com/IntelRealSense/librealsense/blob/master/doc/installation_jetson.md>`__,"
+" `Odroid "
+"<https://github.com/IntelRealSense/librealsense/blob/master/doc/installation_odroid.md>`__,"
+" `Windows "
+"<https://github.com/IntelRealSense/librealsense/blob/master/doc/installation_windows.md>`__,"
+" `Raspbian "
+"<https://github.com/IntelRealSense/librealsense/blob/master/doc/installation_raspbian.md>`__."
+msgstr ""
+"Realsense T265 在 Windows 和 Linux 上通过 `librealsense "
+"<https://github.com/IntelRealSense/librealsense>`__ "
+"提供支持。不同系统的安装过程差异较大。特定系统的安装说明请参阅 `官方 github 页面 "
+"<https://github.com/IntelRealSense/librealsense>`__，例如 `Jetson "
+"<https://github.com/IntelRealSense/librealsense/blob/master/doc/installation_jetson.md>`__、`Odroid"
+" "
+"<https://github.com/IntelRealSense/librealsense/blob/master/doc/installation_odroid.md>`__、`Windows"
+" "
+"<https://github.com/IntelRealSense/librealsense/blob/master/doc/installation_windows.md>`__、`Raspbian"
+" "
+"<https://github.com/IntelRealSense/librealsense/blob/master/doc/installation_raspbian.md>`__。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:40
+#: 8439f92c0e0a4ba5b018ce1739005b30
+msgid ""
+"The following steps are intended for Ubuntu Linux. Since no Debian package "
+"is available for RPi, ``librealsense`` must be built from source."
+msgstr ""
+"以下步骤适用于 Ubuntu Linux。由于 RPi 没有可用的 Debian 软件包，``librealsense`` 必须从源码编译。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:42
+#: 5b1c2e9ac6584a01be8ed16546cbbf5b
+msgid ""
+"**Install OS** (if you have not done so): `Ubuntu MATE 16.04 LTS "
+"<https://ubuntu-mate.org/blog/ubuntu-mate-xenial-final-release/>`__."
+msgstr ""
+"**安装操作系统**（如尚未安装）：`Ubuntu MATE 16.04 LTS <https://ubuntu-"
+"mate.org/blog/ubuntu-mate-xenial-final-release/>`__。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:43
+#: 242d7d20b3b24877b78ed20109ef68ed
+msgid ""
+"**Increase swap size**: RPi does not have enough RAM to compile the SDK, "
+"hence swap size needs to be increased. Swap size of 2048 (2GB) seems to work"
+" well, but you can go with less."
+msgstr ""
+"**增大交换空间**：RPi 的 RAM 不足以编译 SDK，因此需要增大交换空间。2048（2GB）的交换空间通常可正常工作，也可使用更小的值。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:66
+#: 9e5c5dce058847a7bed9edeef431b128
+msgid "**Clone librealsense repo and compile SDK**"
+msgstr "**克隆 librealsense 仓库并编译 SDK**"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:107
+#: fd505c5076084105ad89ede26929e58f
+msgid ""
+"**Test that librealsense is installed correctly**: The easiest way is to "
+"plug in the T265 and play with the `examples "
+"<https://github.com/IntelRealSense/librealsense/tree/master/examples>`__ and"
+" `tools "
+"<https://github.com/IntelRealSense/librealsense/tree/master/tools>`__ "
+"included in the SDK."
+msgstr ""
+"**测试 librealsense 是否正确安装**：最简便的方法是插入 T265，运行 SDK 附带的 `示例 "
+"<https://github.com/IntelRealSense/librealsense/tree/master/examples>`__ 和 "
+"`工具 <https://github.com/IntelRealSense/librealsense/tree/master/tools>`__。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:109
+#: 95d1d498544047548433407b4ba13b27
+msgid ""
+"If you have a monitor plugged in, you can open `Intel Realsense Viewer "
+"<https://github.com/IntelRealSense/librealsense/tree/master/tools/realsense-"
+"viewer>`__ by typing in into the terminal: ``realsense-viewer``. If the T265"
+" is connected, the device will be available on the left panel. Click on the "
+"slider to start the device and switch to 3D view. Move the T265 around and "
+"you should see its trajectory."
+msgstr ""
+"若已连接显示器，可在终端输入 ``realsense-viewer`` 打开 `Intel Realsense Viewer "
+"<https://github.com/IntelRealSense/librealsense/tree/master/tools/realsense-"
+"viewer>`__。若 T265 已连接，设备将显示在左侧面板。点击滑块启动设备并切换到 3D 视图，移动 T265 即可看到其运动轨迹。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:110
+#: 5898a9a009c24f7bafe7a73dcac80e48
+msgid ""
+"If no monitor is connected, other demos can also be launched from the "
+"terminal, for example ``rs-pose``, ``rs-pose-predict``, ``rs-capture`` etc."
+msgstr ""
+"若未连接显示器，也可从终端启动其他演示程序，例如 ``rs-pose``、``rs-pose-predict``、``rs-capture`` 等。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:112
+#: 0bb3b1fc24194757901c2ec3428738b4
+msgid ""
+"**Test pyrealsense2 python wrapper**: If you enabled building Python wrapper"
+" (``BUILD_PYTHON_BINDINGS`` flag), the compiled library is located in the "
+"build folder: ``~/librealsense/build/wrappers/python``."
+msgstr ""
+"**测试 pyrealsense2 Python 封装**：若在构建时启用了 Python 封装（``BUILD_PYTHON_BINDINGS`` "
+"标志），编译后的库位于构建文件夹：``~/librealsense/build/wrappers/python``。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:114
+#: a5667349e4ac4bb5bdb63c8c33ef17cc
+msgid ""
+"Update the ``PYTHONPATH`` environment variable to add the path to the "
+"``pyrealsense`` library: ``export PYTHONPATH=$PYTHONPATH:/usr/local/lib``. "
+"Alternatively, copy the build output (``librealsense2.so`` and "
+"``pyrealsense2.so`` files, located in ``~/librealsense/build/``) next to "
+"your script."
+msgstr ""
+"更新 ``PYTHONPATH`` 环境变量以添加 ``pyrealsense`` 库的路径：``export "
+"PYTHONPATH=$PYTHONPATH:/usr/local/lib``。或者，将构建输出文件（``librealsense2.so`` 和 "
+"``pyrealsense2.so``，位于 ``~/librealsense/build/``）复制到脚本所在目录。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:115
+#: 60fc33ef2afe4cf99fece827aa9f0aac
+msgid ""
+"The basic examples provided by Intel can be found in the folder "
+"``~/librealsense/wrappers/python/example``. Run it with Python3."
+msgstr ""
+"Intel 提供的基础示例可在 ``~/librealsense/wrappers/python/example`` 文件夹中找到。使用 Python3"
+" 运行。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:127
+#: 1b2e89d705184165888097330e0bfe74
+msgid ""
+"The RPi 3B with USB2 cannot handle the image streams. Trying to display the "
+"fisheye images might crash the application."
+msgstr "带 USB2 的 RPi 3B 无法处理图像流。尝试显示鱼眼图像可能导致应用程序崩溃。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:130
+#: 7a205b3790d94b45af6154b3de430c5a
+msgid "Install ``realsense-ros``"
+msgstr "安装 ``realsense-ros``"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:132
+#: 51c7efb5be2c4c3f8442e6a2ed44d4b4
+msgid ""
+"The installation steps for ROS are straightforward and you can follow the "
+"instruction on the official repo `here "
+"<https://github.com/IntelRealSense/realsense-ros#installation-"
+"instructions>`__."
+msgstr ""
+"ROS 的安装步骤较为简单，请按照官方仓库的说明操作：`点击此处 "
+"<https://github.com/IntelRealSense/realsense-ros#installation-"
+"instructions>`__。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:133
+#: 529cbcb5c9b3441aab8855147d155dda
+msgid ""
+"Launch the node: ``roslaunch realsense2_camera rs_t265.launch``. All sensor "
+"data will be published as ROS topics:"
+msgstr ""
+"启动节点：``roslaunch realsense2_camera rs_t265.launch``。所有传感器数据将作为 ROS 话题发布："
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:143
+#: 0e51ea0789e24eb59263679964909b2f
+msgid "In another terminal, run ``top`` to view current CPU usage."
+msgstr "在另一个终端中运行 ``top`` 查看当前 CPU 使用情况。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:146
+#: 37cc6b26264848188eeaaa754f44a438
+msgid ""
+"The version of ``realsense-ros`` needs to match with the version of "
+"``librealsense``, so every time you update ros/lib, the other should be "
+"updated as well."
+msgstr ""
+"``realsense-ros`` 的版本需要与 ``librealsense`` 的版本匹配，因此每次更新其中一个时，也应同步更新另一个。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:149
+#: 7246ea7bb12d4e52b0ac85fb4353d836
+msgid "Install ``mavros``"
+msgstr "安装 ``mavros``"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:151
+#: 91af5589e0d04dc68267a2f4cd6b119d
+msgid ""
+"Establish serial connection: :ref:`Connect RPi to ArduPilot with MAVLink "
+"<raspberry-pi-via-mavlink>`."
+msgstr ""
+"建立串口连接：:ref:`通过 MAVLink 将 RPi 连接到 ArduPilot <raspberry-pi-via-mavlink>`。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:153
+#: 44529cf1d7264ad7a6b49e19d65296db
+msgid ""
+"If the connection between RPi-ArduPilot is established via the UART serial "
+"port, also `change the setting in /boot/config.txt "
+"<https://discuss.ardupilot.org/t/communicating-with-raspberry-"
+"pi-3b/39269/8>`__."
+msgstr ""
+"若 RPi 与 ArduPilot 之间通过 UART 串口建立连接，还需 `修改 /boot/config.txt 中的设置 "
+"<https://discuss.ardupilot.org/t/communicating-with-raspberry-"
+"pi-3b/39269/8>`__。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:155
+#: 832cef79465243298472da2bba34ec7e
+msgid ""
+"Install ``mavros``: follow instructions on our :ref:`wiki page <ros-"
+"install>`."
+msgstr "安装 ``mavros``：按照我们的 :ref:`wiki 页面 <ros-install>` 上的说明操作。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:157
+#: a3bb1bb797284b5dba79f12ee7071428
+msgid ""
+"Establish connection in ROS: :ref:`Connect to ArduPilot with MAVROS <ros-"
+"connecting>`."
+msgstr "在 ROS 中建立连接：:ref:`使用 MAVROS 连接到 ArduPilot <ros-connecting>`。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:160
+#: 9af8b2486bf3490c835c043a8394da05
+msgid "Install ``vision_to_mavros``"
+msgstr "安装 ``vision_to_mavros``"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:162
+#: 68b54174f606488abbccceffbd395133
+msgid "Clone and build the package:"
+msgstr "克隆并构建软件包："
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:178
+#: ab4dca09a8b74c458e3323bd4b80f7d6
+msgid ""
+"Modify parameters according to your T265 camera's orientation: The default "
+"parameters are set for a **front-facing camera**. In the launch file "
+"``t265_tf_to_mavros.launch``, modify params ``roll_cam``, ``pitch_cam``, "
+"``yaw_cam``, ``gamma_world`` from the list of values or with your own values"
+" corresponding to your setup."
+msgstr ""
+"根据您的 T265 相机朝向修改参数：默认参数适用于**前向相机**。在启动文件 ``t265_tf_to_mavros.launch`` "
+"中，从参数列表中选择或自定义 ``roll_cam``、``pitch_cam``、``yaw_cam``、``gamma_world`` "
+"参数值以匹配您的安装方式。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:181
+#: f61db2b1503e473798e76ebcdc2bce41
+msgid ""
+"There is a `known issue "
+"<https://github.com/IntelRealSense/librealsense/issues/4080>`__ about "
+"inconsistent yaw angle for **down facing** orientation and some workarounds "
+"have been discussed. As of this writing, here is what seems to work: the "
+"camera needs to be slightly tilted (i.e. not completely flat out) when it "
+"starts streaming poses (launching ``realsense-ros`` or calling "
+"``librealsense``’s API to invoke pose data. Otherwise, the yaw angle of the "
+"world coordinates might be randomly initialized."
+msgstr ""
+"关于**朝下**安装时偏航角不一致的 `已知问题 "
+"<https://github.com/IntelRealSense/librealsense/issues/4080>`__ "
+"已有讨论，并给出了一些解决方法。截至本文撰写时，以下方法似乎有效：相机在开始发布位姿数据时（启动 ``realsense-ros`` 或调用 "
+"``librealsense`` API 获取位姿数据时），需要略微倾斜（即不完全水平放置）。否则，世界坐标系的偏航角可能会被随机初始化。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:184
+#: cf6b8a46d73747dc9e18c46e416d1f74
+msgid "Configure ArduPilot"
+msgstr "配置 ArduPilot"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:186
+#: 9f2b890c30df4e0591dd82c85206c9f7
+msgid ""
+"Connect to the flight controller with a ground station (i.e. Mission "
+"Planner) and check that the following parameters are set as shown below:"
+msgstr "使用地面站（如 Mission Planner）连接飞行控制器，并确认以下参数按如下设置："
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:188
+#: f009e16d8a3d4f3cb9af806c102465cb
+msgid ""
+"`AHRS_EKF_TYPE <https://ardupilot.org/copter/docs/parameters.html#ahrs-ekf-"
+"type>`__ = 2 (the default) to use EKF2 (as of this writing, EKF3 is not "
+"supported for handling external navigation data)"
+msgstr ""
+"`AHRS_EKF_TYPE <https://ardupilot.org/copter/docs/parameters.html#ahrs-ekf-"
+"type>`__ = 2（默认值），使用 EKF2（截至本文撰写时，EKF3 不支持处理外部导航数据）"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:189
+#: 5942fa3a15e24f79bceb5f70e88c3613
+msgid ""
+"`EK2_ENABLE "
+"<https://ardupilot.org/copter/docs/parameters.html#ek2-enable>`__ = 1 (the "
+"default)"
+msgstr ""
+"`EK2_ENABLE "
+"<https://ardupilot.org/copter/docs/parameters.html#ek2-enable>`__ = 1（默认值）"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:190
+#: 3d74e2e6c3974d6383f0a9fbae02576c
+msgid ""
+"`EK3_ENABLE "
+"<https://ardupilot.org/copter/docs/parameters.html#ek3-enable>`__ = 0 (the "
+"default)"
+msgstr ""
+"`EK3_ENABLE "
+"<https://ardupilot.org/copter/docs/parameters.html#ek3-enable>`__ = 0（默认值）"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:191
+#: 202828f85bef4196918c64e5ed71c06e
+msgid ""
+"`GPS_TYPE <https://ardupilot.org/copter/docs/parameters.html#gps-type>`__ = "
+"0 to disable the GPS"
+msgstr ""
+"`GPS_TYPE <https://ardupilot.org/copter/docs/parameters.html#gps-type>`__ = "
+"0，禁用 GPS"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:192
+#: e495cef006794757a74436d776357fc0
+msgid ""
+"`EK2_GPS_TYPE <https://ardupilot.org/copter/docs/parameters.html#ek2-gps-"
+"type>`__ = 3 to disable the EKF’s use of the GPS"
+msgstr ""
+"`EK2_GPS_TYPE <https://ardupilot.org/copter/docs/parameters.html#ek2-gps-"
+"type>`__ = 3，禁止 EKF 使用 GPS"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:193
+#: ff3f7a16b3a340d38a4931ece05bc1f6
+msgid ""
+"`EK2_POSNE_M_NSE "
+"<https://ardupilot.org/copter/docs/parameters.html#ek2-posne-m-nse-gps-"
+"horizontal-position-measurement-noise-m>`__ = 0.1"
+msgstr ""
+"`EK2_POSNE_M_NSE "
+"<https://ardupilot.org/copter/docs/parameters.html#ek2-posne-m-nse-gps-"
+"horizontal-position-measurement-noise-m>`__ = 0.1"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:194
+#: af7664173b0d47098d865b1e30342d1e
+msgid ""
+"`EK2_VELD_M_NSE <https://ardupilot.org/copter/docs/parameters.html#ek2-veld-"
+"m-nse-gps-vertical-velocity-measurement-noise-m-s>`__ = 0.1"
+msgstr ""
+"`EK2_VELD_M_NSE <https://ardupilot.org/copter/docs/parameters.html#ek2-veld-"
+"m-nse-gps-vertical-velocity-measurement-noise-m-s>`__ = 0.1"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:195
+#: 0f48e6681bee4bdc8b3e2cd10f9a0905
+msgid ""
+"`EK2_VELNE_M_NSE "
+"<https://ardupilot.org/copter/docs/parameters.html#ek2-velne-m-nse-gps-"
+"horizontal-velocity-measurement-noise-m-s>`__ = 0.1"
+msgstr ""
+"`EK2_VELNE_M_NSE "
+"<https://ardupilot.org/copter/docs/parameters.html#ek2-velne-m-nse-gps-"
+"horizontal-velocity-measurement-noise-m-s>`__ = 0.1"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:196
+#: 5f7f3b5e622f42f5b9737393fa7bdcc3
+msgid ""
+":ref:`COMPASS_ENABLE<copter:COMPASS_ENABLE>` = 0,  `COMPASS_USE "
+"<https://ardupilot.org/copter/docs/parameters.html#compass-use-use-compass-"
+"for-yaw>`__ = 0, `COMPASS_USE2 "
+"<https://ardupilot.org/copter/docs/parameters.html#compass-use2>`__ = 0, "
+"`COMPASS_USE3 <https://ardupilot.org/copter/docs/parameters.html#compass-"
+"use3>`__ = 0 to disable the EKF’s use of the compass and instead rely on the"
+" heading from external navigation data."
+msgstr ""
+":ref:`COMPASS_ENABLE<copter:COMPASS_ENABLE>` = 0、`COMPASS_USE "
+"<https://ardupilot.org/copter/docs/parameters.html#compass-use-use-compass-"
+"for-yaw>`__ = 0、`COMPASS_USE2 "
+"<https://ardupilot.org/copter/docs/parameters.html#compass-use2>`__ = "
+"0、`COMPASS_USE3 <https://ardupilot.org/copter/docs/parameters.html#compass-"
+"use3>`__ = 0，禁止 EKF 使用罗盘，转而依赖外部导航数据提供的航向"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:198
+#: 03813d04a030495596f8f2140c85b70e
+msgid "After the parameters are modified, reboot the flight controller."
+msgstr "修改参数后，重启飞行控制器。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:201
+#: 2df2be117610459188666620634633df
+msgid "Verify that all ROS nodes are working"
+msgstr "验证所有 ROS 节点正常运行"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:203
+#: 35f9cc4de99842768952d5d705832c76
+msgid ""
+"There are 3 ROS nodes running in this setup: ``realsense-ros``, ``mavros`` "
+"and ``vision_to_mavros``. Launch in 3 separated terminals on:"
+msgstr ""
+"此方案中共运行 3 个 ROS 节点：``realsense-ros``、``mavros`` 和 ``vision_to_mavros``。分别在 3"
+" 个独立终端中启动："
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:205
+#: dcaa6352aa314710a2fe1eeeb78a91c0
+msgid ""
+"``realsense-ros`` node: ``roslaunch realsense2_camera rs_t265.launch``."
+msgstr "``realsense-ros`` 节点：``roslaunch realsense2_camera rs_t265.launch``。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:207
+#: f8c23ad403a948dd8e901aa2e7ac5dc7
+msgid ""
+"The topic ``/camera/odom/sample/`` and ``/tf`` should be published at 200Hz."
+msgstr "话题 ``/camera/odom/sample/`` 和 ``/tf`` 应以 200Hz 频率发布。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:209
+#: ff6c37d57205418cb5f2b48825170565
+msgid ""
+"``mavros`` node: ``roslaunch mavros apm.launch`` (with ``fcu_url`` and other"
+" parameters in ``apm.launch`` modified to your setup)."
+msgstr ""
+"``mavros`` 节点：``roslaunch mavros apm.launch``（需根据您的配置修改 ``apm.launch`` 中的 "
+"``fcu_url`` 及其他参数）。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:211
+#: 66138eea5c254438a17a3118f65b0920
+msgid "``rostopic echo /mavros/state`` should show that FCU is connected."
+msgstr "``rostopic echo /mavros/state`` 应显示 FCU 已连接。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:212
+#: 81b862ba3eb541168d4ced14a25ed12a
+msgid "``rostopic echo /mavros/vision_pose/pose`` is not published."
+msgstr "此时 ``rostopic echo /mavros/vision_pose/pose`` 尚未发布数据。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:214
+#: 134e5480ba8d48a2b64bc5b25e9ddc79
+msgid ""
+"``vision_to_mavros`` node: ``roslaunch vision_to_mavros "
+"t265_tf_to_mavros.launch``"
+msgstr ""
+"``vision_to_mavros`` 节点：``roslaunch vision_to_mavros "
+"t265_tf_to_mavros.launch``"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:216
+#: 8154ec8c2a054ae69f29de8580507a9b
+msgid ""
+"``rostopic echo /mavros/vision_pose/pose`` should now show pose data from "
+"the T265."
+msgstr "``rostopic echo /mavros/vision_pose/pose`` 现在应显示来自 T265 的位姿数据。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:217
+#: b6f7554d61664147b4e810df32d1ec62
+msgid ""
+"``rostopic hz /mavros/vision_pose/pose`` should show that the topic is being"
+" published at 30Hz."
+msgstr "``rostopic hz /mavros/vision_pose/pose`` 应显示该话题以 30Hz 频率发布。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:219
+#: 9e3c0fee257d4f8589b52d67b62f3f01
+msgid ""
+"To verify that ArduPilot is receiving ``VISION_POSITION_ESTIMATE`` on "
+"Mission Planner: press ``Ctrl+F`` and click on “Mavlink Inspector”, you "
+"should be able to see data coming in."
+msgstr ""
+"要在 Mission Planner 中验证 ArduPilot 是否收到 ``VISION_POSITION_ESTIMATE``：按 "
+"``Ctrl+F`` 并点击「Mavlink Inspector」，应能看到数据传入。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:224
+#: 492dbc79cf384f95935b16f803bc1679
+msgid ""
+"Once all of the nodes can run successfully, next time you can launch all of "
+"them at once with ``roslaunch vision_to_mavros t265_all_nodes.launch``, "
+"which will launch:"
+msgstr ""
+"所有节点均能成功运行后，下次可使用 ``roslaunch vision_to_mavros t265_all_nodes.launch`` "
+"一次性启动所有节点，该命令将启动："
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:226
+#: 66f6ee9aecf74da99a72ce24198df66f
+msgid ""
+"``rs_t265.launch``, as originally provided by ``realsense-ros``, no "
+"modification needed."
+msgstr "``rs_t265.launch``，使用 ``realsense-ros`` 原始提供的文件，无需修改。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:228
+#: 4aa017aca2534dae8f78ba9862a949aa
+msgid "``apm.launch``, modified with your own configuration."
+msgstr "``apm.launch``，已根据您的配置修改。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:230
+#: 8ea662889db64c65b26a5e286e9a3c66
+msgid ""
+"``t265_tf_to_mavros.launch`` with parameters according to your T265’s "
+"orientation."
+msgstr "``t265_tf_to_mavros.launch``，参数已根据您的 T265 朝向配置。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:233
+#: 361ee77cffce4688a7e2f4c92f8b2665
+msgid "Ground Test"
+msgstr "地面测试"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:235
+#: 3cbee8c935074392a7ba634c42381181
+msgid "After power on, launch all of the ROS nodes."
+msgstr "上电后，启动所有 ROS 节点。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:237
+#: 8e1b339412c148038b2b0101ae563290
+msgid ""
+"Generally (but not always), once ``mavros`` is running and the FCU starts "
+"receiving ``VISION_POSITION_ESTIMATE`` message, you will see the messages "
+"“GPS Glitch” and “GPS Glitch cleared” confirming that the external "
+"localization data is being recognized by the system."
+msgstr ""
+"通常情况下（但并非总是），一旦 ``mavros`` 开始运行且 FCU 开始接收 ``VISION_POSITION_ESTIMATE`` "
+"消息，您将看到「GPS Glitch」和「GPS Glitch cleared」消息，确认系统已识别外部定位数据。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:239
+#: c6695c64545a47a0b60cd6d40e36526d
+msgid ""
+"Now you need to tell the EKF where the vehicle is in the world (i.e. **set "
+"EKF home**), otherwise incoming data will not be fused. To do this, you need"
+" to send the MAVLink messages `SET_GPS_GLOBAL_ORIGIN "
+"<https://mavlink.io/en/messages/common.html#SET_GPS_GLOBAL_ORIGIN>`__ and "
+"`SET_HOME_POSITION "
+"<https://mavlink.io/en/messages/common.html#SET_HOME_POSITION>`__. There are"
+" a number of options for this to be done:"
+msgstr ""
+"现在需要告知 EKF 飞行器在世界坐标中的位置（即**设置 EKF 原点**），否则传入数据将不会被融合。为此，需要发送 MAVLink 消息 "
+"`SET_GPS_GLOBAL_ORIGIN "
+"<https://mavlink.io/en/messages/common.html#SET_GPS_GLOBAL_ORIGIN>`__ 和 "
+"`SET_HOME_POSITION "
+"<https://mavlink.io/en/messages/common.html#SET_HOME_POSITION>`__。可通过以下几种方式实现："
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:241
+#: 92bda4611ea24805b683331bb4d3c937
+msgid ""
+"**Use Mission Planner**: Right-click on any point on the map > ``Set Home "
+"Here`` > ``Set EKF Origin Here``."
+msgstr ""
+"**使用 Mission Planner**：在地图上任意点右键单击 > ``Set Home Here`` > ``Set EKF Origin "
+"Here``。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:246
+#: 460a46398b62491193678e8f53b4d4cc
+msgid ""
+"**Use code**: to send the required messages to the FCU through MAVLink. In "
+"Python, you can use this script `set_origin.py "
+"<https://github.com/anbello/aruco_gridboard/blob/master/script/set_origin.py>`__."
+msgstr ""
+"**使用代码**：通过 MAVLink 向 FCU 发送所需消息。在 Python 中，可使用脚本 `set_origin.py "
+"<https://github.com/anbello/aruco_gridboard/blob/master/script/set_origin.py>`__。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:248
+#: 6a321fa329e0417791c94bf64231b6de
+msgid ""
+"Install ``pymavlink``: Follow the instructions `here "
+"<https://github.com/ArduPilot/pymavlink#installation>`__."
+msgstr ""
+"安装 ``pymavlink``：请按照 `此处 "
+"<https://github.com/ArduPilot/pymavlink#installation>`__ 的说明操作。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:250
+#: f8f00cff2c5d404ab82348cf0b8ea22c
+msgid "Run the script: ``rosrun vision_to_mavros set_origin.py``."
+msgstr "运行脚本：``rosrun vision_to_mavros set_origin.py``。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:252
+#: eccc4ded69214d35b54a44a760dc9f9b
+msgid "You should see a quadcopter icon appear on the map."
+msgstr "地图上应出现四旋翼飞行器图标。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:254
+#: 67b700b16cfa437f971a6da5d8348fc1
+msgid ""
+"Pick-up the vehicle and walk it around, check that the vehicle’s position "
+"movements are shown on the map. The trajectory of the vehicle on the map "
+"should reflect the real movements without too much distortion or overshoot. "
+"Below is an example of walking in a 2m x 2m square."
+msgstr ""
+"拿起飞行器走动，检查飞行器的位置变化是否显示在地图上。地图上飞行器的轨迹应反映实际运动，不应有过多失真或过冲。以下是在 2m x 2m "
+"正方形区域内行走的示例。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:260
+#: 73f88e901c384354a900080e4bd5ce3e
+msgid "Flight Test"
+msgstr "飞行测试"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:262
+#: caf7ba04534342c281ecb0ad831097b8
+msgid ""
+"For your first flight: - Takeoff in Stabilize or Alt-Hold, check that the "
+"vehicle is stable."
+msgstr "首次飞行：在 Stabilize 或 Alt-Hold 模式下起飞，检查飞行器是否稳定。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:265
+#: b01fac07078443c9aa367e68d9769cdb
+msgid ""
+"Move the vehicle around and observe the position on Mission Planner as well "
+"as ``rviz`` to see if tracking is stable."
+msgstr "移动飞行器，同时在 Mission Planner 和 ``rviz`` 中观察位置，检查跟踪是否稳定。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:267
+#: b78a923db0454e70affcbef34baa61ec
+msgid ""
+"Switch to Loiter, but always ready to switch back to Stabilize/Alt-Hold if "
+"anything goes awry."
+msgstr "切换至 Loiter 模式，但始终准备好随时切回 Stabilize/Alt-Hold 模式以防意外。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:269
+#: 615bf92f9ff64ea6af3adac96421a50d
+msgid ""
+"Otherwise, the vehicle should hover stably and able to keep its position. "
+"Move the vehicle back and forth 2-3 meters, verify the scale (easier to view"
+" on ``rviz``)."
+msgstr "飞行器应能稳定悬停并保持位置。将飞行器前后移动 2-3 米，验证比例尺（在 ``rviz`` 中更易于观察）。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:271
+#: bd4029a81d5b43899b13955e9d4701f4
+msgid ""
+"Move the vehicle around (translate, rotate) at varying speed, always ready "
+"to switch back to Stabilize/Alt-Hold."
+msgstr "以不同速度移动飞行器（平移、旋转），始终准备好切回 Stabilize/Alt-Hold 模式。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:273
+#: 472c9c05c53f42898afb5a142e4f26d8
+msgid ""
+"If everything works as expected, next time you can arm and take-off in "
+"Loiter mode."
+msgstr "若一切正常，下次可直接在 Loiter 模式下解锁并起飞。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:277
+#: e129382412bf4a20bed8f437bc2f576c
+msgid ""
+"Always confirm that position feedback is running ok before switching to "
+"Loiter mode. Look out for the working boundary in your environment, i.e. "
+"where tracking might be lost due to lack of features, fast or rotation "
+"movement."
+msgstr ""
+"切换至 Loiter 模式前，始终确认位置反馈正常运行。注意环境中跟踪可能失效的边界区域，例如特征匮乏、快速运动或旋转运动可能导致跟踪丢失的区域。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:286
+#: 96bc92da231c452e94768d45142680f8
+msgid "Data Logging"
+msgstr "数据日志"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:288
+#: 56e1adb47462498ab286c91fecea8503
+msgid ""
+"Visual odometry information will appear in the ``VISO`` dataflash log "
+"messages."
+msgstr "视觉里程计信息将出现在 ``VISO`` dataflash 日志消息中。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:291
+#: 97cfe1a1880a42738a0e34b31942ab61
+msgid "References"
+msgstr "参考资料"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:293
+#: 7ec640dabcb94294b6d62a8e16d4ca5d
+msgid ""
+"Original blog posts: `part 1 <https://discuss.ardupilot.org/t/integration-"
+"of-ardupilot-and-vio-tracking-camera-part-1-getting-started-with-the-intel-"
+"realsense-t265-on-rasberry-pi-3b/43162/1>`__, `part 2 "
+"<https://discuss.ardupilot.org/t/integration-of-ardupilot-and-vio-tracking-"
+"camera-part-2-complete-installation-and-indoor-non-gps-flights/43405/1>`__, "
+"`part 3 <https://discuss.ardupilot.org/t/integration-of-ardupilot-and-vio-"
+"tracking-camera-part-3-indoor-autonomous-flights-and-performance-"
+"tests/43626>`__."
+msgstr ""
+"原始博客文章：`第 1 部分 <https://discuss.ardupilot.org/t/integration-of-ardupilot-"
+"and-vio-tracking-camera-part-1-getting-started-with-the-intel-"
+"realsense-t265-on-rasberry-pi-3b/43162/1>`__、`第 2 部分 "
+"<https://discuss.ardupilot.org/t/integration-of-ardupilot-and-vio-tracking-"
+"camera-part-2-complete-installation-and-indoor-non-gps-"
+"flights/43405/1>`__、`第 3 部分 <https://discuss.ardupilot.org/t/integration-of-"
+"ardupilot-and-vio-tracking-camera-part-3-indoor-autonomous-flights-and-"
+"performance-tests/43626>`__。"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:295
+#: 8028563e87444cd2b8874c275ed11f0c
+msgid "`ROS frame convention <http://www.ros.org/reps/rep-0105.html>`__"
+msgstr "`ROS 坐标系约定 <http://www.ros.org/reps/rep-0105.html>`__"
+
+#: ../../source/docs/ros-vio-tracking-camera.rst:297
+#: f960ddd1d2fb4b5496766245628a0fc8
+msgid ""
+"`ENU-NED coordinate "
+"<https://dev.px4.io/en/ros/external_position_estimation.html#setup_specific_systems>`__."
+msgstr ""
+"`ENU-NED 坐标系 "
+"<https://dev.px4.io/en/ros/external_position_estimation.html#setup_specific_systems>`__。"

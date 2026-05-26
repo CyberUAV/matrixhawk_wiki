@@ -1,0 +1,495 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:5
+#: 637ca36687324122886a426dfd0c92b5
+msgid "Plane SITL/MAVProxy Tutorial"
+msgstr "Plane SITL/MAVProxy 教程"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:7
+#: 617db04eb8aa4b34acf7d4888c658943
+msgid ""
+"This tutorial provides a basic walk-through of how to use :ref:`SITL <sitl-"
+"simulator-software-in-the-loop>` and :ref:`MAVProxy<mavproxy:home>` for "
+"*Plane* testing."
+msgstr ""
+"本教程提供了如何使用 :ref:`SITL <sitl-simulator-software-in-the-loop>` 和 "
+":ref:`MAVProxy<mavproxy:home>` 进行 *Plane* 测试的基本操作指南。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:12
+#: d1c2a6430df74b91a9e9a9060cdc6cfe
+msgid "Overview"
+msgstr "概述"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:14
+#: 34800f7a7c034f0390b125d7bc3314a2
+msgid ""
+"The article is intended primarily for developers who want to test new Plane "
+"builds and bug fixes using SITL and *MAVProxy*. It shows how to take off, "
+"run missions, fly in ``GUIDED`` mode, set a geofence, and perform a number "
+"of other basic testing tasks."
+msgstr ""
+"本文主要面向希望使用 SITL 和 *MAVProxy* 测试新 Plane 构建版本及修复 bug 的开发者。文中展示了如何起飞、执行任务、在 "
+"``GUIDED`` 模式下飞行、设置地理围栏以及执行其他基本测试任务。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:19
+#: b53d0f28bba940a4a8f8e3af229cb7c4
+msgid ""
+"The tutorial is complementary to the topic :ref:`Using SITL for ArduPilot "
+"Testing <using-sitl-for-ardupilot-testing>`."
+msgstr ""
+"本教程是 :ref:`Using SITL for ArduPilot Testing <using-sitl-for-ardupilot-"
+"testing>` 主题的补充内容。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:23
+#: b7a3dad4964d447db341856d250bfa8f
+msgid ""
+"We use *MAVProxy* here, but you can :ref:`attach another ground station to "
+"SITL <using-sitl-for-ardupilot-"
+"testing_connecting_otheradditional_ground_stations>` if you prefer (similar "
+"instructions can be used in any GCS)."
+msgstr ""
+"本文使用 *MAVProxy*，但您也可以 :ref:`将其他地面站连接到 SITL <using-sitl-for-ardupilot-"
+"testing_connecting_otheradditional_ground_stations>`（类似操作步骤适用于任何 GCS）。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:25
+#: 35da091d0103440f96ef04b7bd3fa355
+msgid ""
+"This tutorial is for Plane - see :ref:`Copter <copter-sitl-mavproxy-"
+"tutorial>` and :ref:`Rover <rover-sitlmavproxy-tutorial>` for similar "
+"tutorials on the other vehicles."
+msgstr ""
+"本教程适用于 Plane——有关其他机型的类似教程，请参阅 :ref:`Copter <copter-sitl-mavproxy-tutorial>` "
+"和 :ref:`Rover <rover-sitlmavproxy-tutorial>`。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:30
+#: 85722581bc56467d817767c9c591b1ac
+msgid "Preconditions"
+msgstr "前提条件"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:32
+#: caecc6a8a3f14f3092dbee0d03264118
+msgid ""
+"The tutorial assumes you have already set up :ref:`SITL on Windows <sitl-"
+"native-on-windows>` or :ref:`Linux <setting-up-sitl-on-linux>` and that you "
+"have started SITL using the ``--map`` and ``--console`` options:"
+msgstr ""
+"本教程假设您已在 :ref:`Windows <sitl-native-on-windows>` 或 :ref:`Linux <setting-up-"
+"sitl-on-linux>` 上配置好 SITL，并使用 ``--map`` 和 ``--console`` 选项启动了 SITL："
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:43
+#: d5197d4448a142c7ab5bbf265c08ca88
+msgid ""
+"If you wish to start the simulation at a different map location or use a "
+"different frame type (-f option for quadplane,firefly,etc.) than a standard "
+"aileron/elevator/rudder/throttle plane, see :ref:`SITL Advance Testing "
+"<using-sitl-for-ardupilot-testing>`. A complete list of startup options for "
+"the simulator can be found using the --help option:"
+msgstr ""
+"如果您希望在不同地图位置启动仿真，或使用不同于标准副翼/升降舵/方向舵/油门固定翼的机架类型（使用 -f 选项指定 quadplane、firefly "
+"等），请参阅 :ref:`SITL 高级测试 <using-sitl-for-ardupilot-testing>`。仿真器的完整启动选项列表可使用 "
+"--help 选项查看："
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:53
+#: 726c8129465643d3b241428411eb0cbf
+msgid ""
+"The *MAVProxy Command Prompt*, *Console* and *Map* should be arranged "
+"conveniently so you can observe the status and send commands at the same "
+"time."
+msgstr "*MAVProxy 命令提示符*、*控制台* 和 *地图* 应合理排列，以便同时观察状态并发送命令。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:61
+#: dcd8af05a8d548fbab314ea04705d7ce
+msgid "Taking off"
+msgstr "起飞"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:63
+#: e9ed775f0918445bb4e8b64d9bd11189
+msgid ""
+"To take off with Plane you can use a mission (AUTO mode) that contains the "
+":ref:`MAV_CMD_NAV_TAKEOFF <plane:mav_cmd_nav_takeoff>` command, or use the "
+"TAKEOFF mode. If it's a quadplane, you can also takeoff in a VTOL mode such "
+"as QLOITER, QHOVER, or QSTABILIZE, by raising the throttle above mid-stick "
+"(using normal defaults, RC 3 1600 command for example). Once you are "
+"airborne you can switch to other :ref:`flight modes <plane:flight-modes>` "
+"(be sure your throttle is set at an appropriate value for that mode)."
+msgstr ""
+"Plane 起飞可使用包含 :ref:`MAV_CMD_NAV_TAKEOFF <plane:mav_cmd_nav_takeoff>` "
+"命令的任务（AUTO 模式），也可使用 TAKEOFF 模式。若为四旋翼固定翼（quadplane），还可在 QLOITER、QHOVER 或 "
+"QSTABILIZE 等垂直起降模式下通过将油门推过中间位置来起飞（使用默认设置，例如 RC 3 1600 命令）。起飞后可切换至其他 "
+":ref:`飞行模式 <plane:flight-modes>`（请确保油门设置在该模式的适当值）。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:69
+#: d7bfcb45822b46cba6f3f4607dffd25f
+msgid ""
+"First load the **CMAC-circuit.txt** test mission using the ``wp load`` "
+"command as shown below (this mission contains the takeoff command):"
+msgstr "首先使用 ``wp load`` 命令加载 **CMAC-circuit.txt** 测试任务（如下所示），该任务包含起飞命令："
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:77
+#: 62d676631bd14a9985024eb43e54f62f
+msgid ""
+"Once the mission is loaded you can take off by arming the throttle and "
+"setting the mode to ``AUTO`` (the order of these operations does not "
+"matter):"
+msgstr "任务加载完成后，可通过解锁油门并将模式设置为 ``AUTO`` 来起飞（这两步操作的顺序不影响结果）："
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:86
+#: 7cf73d19ab154817a9594e168a3b2867
+msgid ""
+"The plane should take off to an altitude of 40 metres and then proceed "
+"through the other mission waypoints (most of which have an altitude of "
+"100m). You can stop/pause the mission at any time by changing the mode."
+msgstr "飞机应起飞至 40 米高度，然后依次飞越其余任务航点（大多数航点高度为 100 米）。可随时通过更改模式来停止/暂停任务。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:91
+#: d50418012b554674b5846baf819eaa12
+msgid "Monitoring"
+msgstr "监控"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:93
+#: c24d8a44544446d3b7a358bc3a6a6726
+msgid ""
+"During takeoff you can watch the altitude increase on the console in the "
+"*Alt* field."
+msgstr "起飞过程中，可在控制台的 *Alt* 字段中观察高度的增加情况。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:96
+#: 4770cca50173498a91da74365972e457
+msgid ""
+"Developers may find it useful to **graph** the takeoff by first entering the"
+" ``gtakeoff`` command."
+msgstr "开发者可先输入 ``gtakeoff`` 命令，以图表方式查看起飞过程，这可能会很有帮助。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:102
+#: 43bcd3f1b0d944dc9136d5f27095d740
+msgid "MAVProxy: PlaneTakeoff Graph (gtakeoff)"
+msgstr "MAVProxy：Plane 起飞图表（gtakeoff）"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:105
+#: 5f88eb7032c347f3bcc5adf886f07e90
+msgid "Troubleshooting"
+msgstr "故障排除"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:107
+#: 94a9821186c14eafb934cdb08e573a24
+msgid "The most common sources of difficulty taking off are:"
+msgstr "起飞困难最常见的原因如下："
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:109
+#: 422b9a565bba431ea97edbd8833ec291
+msgid "Using a mission that does not contain a takeoff command!"
+msgstr "使用了不包含起飞命令的任务！"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:110
+#: 0f2b1d06845d4ed686d221045cd8bd02
+msgid ""
+"Attempting to takeoff when the vehicle is not armed. This can happen if the "
+"vehicle fails pre-arm checks."
+msgstr "在飞行器未解锁时尝试起飞。若飞行器未通过预解锁检查，则可能出现此情况。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:113
+#: 9cd81b605d58423483f3d56e1aae3440
+msgid "You can list all *enabled* checks using the command ``arm list``:"
+msgstr "可使用 ``arm list`` 命令列出所有*已启用*的检查项："
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:128
+#: fe1d3ca9d62d4f07942b83430ced87a8
+msgid ""
+"You can enable and disable checks using ``arm check n`` and ``arm uncheck "
+"n`` respectively, where n is the name of the check. Use ``n`` value of "
+"``all`` to enables/disable all checks."
+msgstr ""
+"可分别使用 ``arm check n`` 和 ``arm uncheck n`` 启用和禁用检查项，其中 n 是检查项的名称。将 ``n`` 设为 "
+"``all`` 可启用/禁用所有检查项。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:133
+#: 08d44c3c867040eca72025b91ad98951
+msgid "Flying a mission"
+msgstr "执行任务飞行"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:135
+#: 35f6ce7e19fe404490bba0f02e1f8390
+msgid ""
+"You can load a mission at any time using the ``wp load`` command. The "
+"mission will start as soon as the vehicle is armed and you're in ``AUTO`` "
+"mode."
+msgstr "可随时使用 ``wp load`` 命令加载任务。飞行器解锁并切换至 ``AUTO`` 模式后，任务将立即开始执行。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:139
+#: 80c6db5449d34616912be6e26dd0cb61
+msgid ""
+"The example below shows how to load and start one of the test missions, skip"
+" to the second waypoint using ``wp set n``, and *loop* the mission:"
+msgstr "以下示例展示了如何加载并启动一个测试任务、使用 ``wp set n`` 跳转到第二个航点，以及*循环*执行任务："
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:149
+#: a7236136d0044f0fa58fe7adc62b4364
+msgid ""
+"The :ref:`MAVProxy Waypoints documentation <mavproxy:mavproxy-waypoints>` "
+"lists the full set of available commands (or you can get them using auto-"
+"completion by typing \"wp\" on the command line)."
+msgstr ""
+":ref:`MAVProxy 航点文档 <mavproxy:mavproxy-waypoints>` 列出了全部可用命令（也可在命令行输入 「wp」 "
+"后使用自动补全获取）。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:153
+#: 24c3abf1e1dc4d47899a661bf2141ce1
+msgid ""
+"If you want to create a waypoint mission, this is most easily done on the "
+"map:"
+msgstr "如需创建航点任务，最便捷的方式是在地图上操作："
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:156
+#: 9b6fe4fe920949ed8a209ce401d57cb6
+msgid "Right-click on the map and then select **Mission \\| Draw**."
+msgstr "在地图上右键单击，然后选择 **任务 \\| 绘制**。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:161
+#: 199b55ed1ac8440889bbe368439244ed
+msgid "MAVProxy: Draw Mission Menu"
+msgstr "MAVProxy：绘制任务菜单"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:163
+#: 9785c8b9c9054433bb5471ac378b8f66
+msgid "Left-click on the map where you want the points to appear."
+msgstr "在地图上左键单击您希望航点出现的位置。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:167
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:278
+#: ad3b4351c8734cf4bf82ddc8bda49b73 b03519a026a04c80b5bc48813788ea23
+msgid ""
+"Nothing visible will happen when you make the first click. After the second "
+"click, lines will join your points to show the path."
+msgstr "第一次单击时不会有任何可见变化。第二次单击后，各点之间会出现连线以显示飞行路径。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:170
+#: 7979c10600b8410bab77c333a5f08322
+msgid ""
+"When you're done, you can loop the mission by right-clicking on the map and "
+"selecting **Mission \\| Loop**."
+msgstr "完成后，可在地图上右键单击并选择 **任务 \\| 循环** 来循环执行任务。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:173
+#: aa4ff8db93b64f0c93214038682f3f18
+msgid ""
+"This approach only allows you to create :ref:`MAV_CMD_NAV_WAYPOINT "
+"<plane:mav_cmd_nav_waypoint>` commands. You can edit missions and use other "
+"commands on Linux using the *misseditor* module (``module load "
+"misseditor``). This is currently broken on Windows. It is also possible to "
+"load other types of commands from files."
+msgstr ""
+"此方法只能创建 :ref:`MAV_CMD_NAV_WAYPOINT <plane:mav_cmd_nav_waypoint>` 命令。在 Linux "
+"上可使用 *misseditor* 模块（``module load misseditor``）编辑任务并使用其他命令。该功能目前在 Windows "
+"上无法使用。也可以从文件中加载其他类型的命令。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:181
+#: 4766e4fc9fe04443b286fb03a5de3ffe
+msgid "Changing flight modes"
+msgstr "切换飞行模式"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:183
+#: 6bb1c1960bda4543b07c08542d7c6c1d
+msgid ""
+"Plane supports a :ref:`number of flight modes <plane:flight-modes>`, which "
+"you can list in *MAVProxy* using the ``mode`` command:"
+msgstr ""
+"Plane 支持 :ref:`多种飞行模式 <plane:flight-modes>`，可在 *MAVProxy* 中使用 ``mode`` 命令列出："
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:191
+#: 4ffa3dc91fe04d17af7451b148ea27cc
+msgid ""
+"You can set the mode by entering ``mode MODENAME`` on the *MAVProxy command "
+"prompt*."
+msgstr "可在 *MAVProxy 命令提示符* 中输入 ``mode MODENAME`` 来设置飞行模式。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:194
+#: e41cb0189da747a9bf5030a02edb7a32
+msgid ""
+"For example, the command below shows how to put Plane into :ref:`CIRCLE mode"
+" <plane:circle-mode>` (this is like Loiter, except that the plane does not "
+"attempt to hold position)."
+msgstr ""
+"例如，以下命令展示了如何将 Plane 切换至 :ref:`CIRCLE 模式 <plane:circle-mode>`（与 Loiter "
+"模式类似，但飞机不尝试保持位置）。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:203
+#: fe95b333ddcc4386a5fe440fdabd688b
+msgid "Guiding the vehicle"
+msgstr "引导飞行器"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:205
+#: c8767a34ce2349d2a1fe4562aab3ab13
+msgid ""
+"Once you've taken off you can move the vehicle around the map in ``GUIDED`` "
+"mode. Plane will fly to a specified point, and then circle it."
+msgstr "起飞后，可在 ``GUIDED`` 模式下在地图上移动飞行器。Plane 将飞至指定点，然后围绕该点盘旋。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:209
+#: 0f01ca5374fe4a04aea5177164c0a1d0
+msgid "First change the mode:"
+msgstr "首先切换模式："
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:215
+#: e4d05614dfbc4d188fd06922df2b9fa7
+msgid ""
+"The easiest way to set a target point is to right-click on the map where you"
+" want to go, select **Fly to**, and then enter the target altitude."
+msgstr "设置目标点最简便的方法是在地图上目标位置右键单击，选择 **飞往**，然后输入目标高度。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:221
+#: fafb09d30c4444a18fbd5fa21e36faa6
+msgid "MAVProxy: Fly toLocation"
+msgstr "MAVProxy：飞往位置"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:223
+#: 9f975b21395f4445ab4abffff55c1f89
+msgid ""
+"You can also enter the target position manually on the command line using "
+"the two formats below. If only the altitude is specified, the last specified"
+" LAT/LON will be used."
+msgstr "也可在命令行中使用以下两种格式手动输入目标位置。若仅指定高度，则将使用上次指定的经纬度。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:234
+#: 61343930841c4962ae7669762b367e59
+msgid ""
+"Unlike with Copter, you can't do much with Plane in ``GUIDED`` mode because "
+"the mode does not support many commands. This mode is primarily useful for "
+"simply flying to a point."
+msgstr ""
+"与 Copter 不同，Plane 在 ``GUIDED`` 模式下能执行的操作有限，因为该模式不支持很多命令。此模式主要用于简单地飞往某个目标点。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:239
+#: 5fbad3326027409fbd20102da10b91b2
+msgid "Setting a GeoFence"
+msgstr "设置地理围栏"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:241
+#: 41cb65ae7fd04a36b24805469c69d659
+msgid ""
+"A GeoFence is is a virtual barrier that Plane uses to constrain the movement"
+" of the vehicle (and move it to a safe location if control is lost). Plane "
+"allows you to specify an arbitrarily shaped region on the map for the fence,"
+" and an upper and lower altitude. If the fence is breached, Plane will fly "
+"to the centre of the fence and circle (or a rally poin)t. :ref:`Geo-Fencing "
+"in Plane <plane:geofencing>` describes the fence in more detail."
+msgstr ""
+"地理围栏是 Plane 用于限制飞行器活动范围的虚拟屏障（若失去控制，将飞行器移至安全位置）。Plane "
+"允许您在地图上指定任意形状的围栏区域及上下限高度。若飞行器突破围栏，Plane 将飞至围栏中心并盘旋（或飞向集合点）。:ref:`Plane 地理围栏 "
+"<plane:geofencing>` 对此有更详细的描述。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:249
+#: 558c1b66293344d7a3d57f130de29d36
+msgid ""
+"The fence behaviour is set using the :ref:`Plane Fence Parameters "
+"<plane:FENCE_ACTION>`. You can list these with ``param show``:"
+msgstr ""
+"围栏行为通过 :ref:`Plane 围栏参数 <plane:FENCE_ACTION>` 进行设置。可使用 ``param show`` "
+"列出这些参数："
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:264
+#: 2a2a43e02f0e4188a569d9930788caec
+msgid "Creating the fence is very similar to creating a waypoint mission:"
+msgstr "创建围栏与创建航点任务非常相似："
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:266
+#: 25b15463aec64af29f9ef85b698b5c7d
+msgid "Right-click on the map and then select **Fence \\| Draw**."
+msgstr "在地图上右键单击，然后选择 **围栏 \\| 绘制**。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:271
+#: 952a234652de4f4c80b1c2e9bfd1d641
+msgid "MAVProxy: Draw Fence Menu"
+msgstr "MAVProxy：绘制围栏菜单"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:273
+#: a28236470b164d1f9515dddb953fc3d9
+msgid ""
+"Left-click on the map at points where you want the fence \"posts\" to "
+"appear."
+msgstr "在地图上左键单击您希望围栏「桩点」出现的位置。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:281
+#: 44365a09c708447c859d840387e11880
+msgid "When you're done, you can loop the fence by right-clicking on the map."
+msgstr "完成后，在地图上右键单击即可闭合围栏。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:287
+#: c8c488a3d040453399057d4f2d32a6ee
+msgid "MAVProxy: Draw Fence Points"
+msgstr "MAVProxy：绘制围栏点"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:289
+#: 8fe6bbb1ab8d4c44a52f384dbbfd8f2e
+msgid "The fence is initially disabled. To turn it on set the value to one:"
+msgstr "围栏默认为禁用状态。要启用围栏，请将其值设置为 1："
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:295
+#: 894a82e3627d4b619f95c3d5078f3dd3
+msgid ""
+"Now lets make the plane cross the barrier. Assuming you are already flying "
+"you can use the following to make it fly straight ahead into the fence:"
+msgstr "现在让飞机越过围栏。假设飞机已在飞行中，可使用以下命令让其直线飞入围栏："
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:303
+#: 2679ea5c685c4317898af012c35181e1
+msgid ""
+"When the fence is crossed, the plane will fly to the centre of the fence "
+"region and then circle. The console shows that the breach has occurred."
+msgstr "当飞机越过围栏后，将飞至围栏区域的中心并开始盘旋。控制台将显示围栏已被突破的信息。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:310
+#: 9497d8acda56451dbfe30ddfb9f9c102
+msgid "MAVProxy: Fence Breach shown on Console and Map"
+msgstr "MAVProxy：控制台和地图上显示的围栏突破信息"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:312
+#: 2507f4f1091d41e181a0df253608b4a2
+msgid ""
+"Instead of flying to the centre of the fence you can instead add a "
+":ref:`rally point <plane:common-rally-points>` to the map and fly to it by "
+"enabling the parameter ``FENCE_RET_RALLY``."
+msgstr ""
+"除飞往围栏中心外，还可在地图上添加 :ref:`集合点 <plane:common-rally-points>`，并通过启用参数 "
+"``FENCE_RET_RALLY`` 使飞机飞向该集合点。"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:317
+#: 3c6b82465dc843129c8973b7dfd1b6c6
+msgid "Testing the vehicle"
+msgstr "测试飞行器"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:319
+#: 5fc75fc81a73478f925ebec587fdb055
+msgid ""
+"*MAVProxy* allows you to list all the parameters affecting the vehicle and "
+"simulation using ``param show *``, and to set any parameter using: ``param "
+"set PARAM_NAME VALUE``. In addition to affecting the vehicle itself some "
+"parameters simulate the performance/failure of specific hardware components "
+"and the environment (for example, the wind). These can be listed using: "
+"``param show sim*``. The topic :ref:`Using SITL for ArduPilot Testing "
+"<using-sitl-for-ardupilot-testing>` explains more about how you can test "
+"using SITL."
+msgstr ""
+"*MAVProxy* 允许您使用 ``param show *`` 列出影响飞行器和仿真的所有参数，并使用 ``param set PARAM_NAME"
+" VALUE`` 设置任意参数。除影响飞行器本身外，部分参数还可仿真特定硬件组件的性能/故障及环境因素（如风况）。可使用 ``param show "
+"sim*`` 列出这些参数。:ref:`使用 SITL 进行 ArduPilot 测试 <using-sitl-for-ardupilot-"
+"testing>` 主题对如何使用 SITL 进行测试有更详细的说明。"

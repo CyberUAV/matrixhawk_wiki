@@ -1,0 +1,546 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:5
+#: 50b623b2bfd94c7e9427e9a9f1e65342
+msgid "Storage and EEPROM management"
+msgstr "存储与 EEPROM 管理"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:7
+#: 94e5c313db954daea97b464f5e738699
+msgid ""
+"Every board that ArduPilot supports has some form of persistent storage "
+"available. This is used to hold user parameters, waypoints, rally points, "
+"terrain data and many other useful things. To provide access to this storage"
+" ArduPilot has 4 basic mechanisms:"
+msgstr ""
+"ArduPilot "
+"支持的每块主板都提供某种形式的持久存储。这用于保存用户参数、航点、集结点、地形数据以及许多其他有用信息。为访问这些存储，ArduPilot 提供了 4 "
+"种基本机制："
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:12
+#: ee7fbef47de94df9926be2416d2ed8d1
+msgid "the AP_HAL::Storage object, accessed as hal.storage"
+msgstr "AP_HAL::Storage 对象，通过 hal.storage 访问"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:13
+#: fe5e7be0701249b892d843ab6856de65
+msgid ""
+"the StorageManager library to give a higher level abstraction layer on "
+"hal.storage"
+msgstr "StorageManager 库，为 hal.storage 提供更高层次的抽象层"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:15
+#: 1e2a41511a1b4db1be56a4fb3737c198
+msgid "DataFlash for storing to an on-board logging area"
+msgstr "DataFlash，用于写入板载日志区域"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:16
+#: 7c19daa9772b484da588a66aff9fe379
+msgid ""
+"Posix IO functions to traditional filesystems (for example VFAT on a microSD"
+" card), on boards that support it"
+msgstr "Posix IO 函数，用于访问传统文件系统（例如 microSD 卡上的 VFAT），适用于支持此功能的主板"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:19
+#: 7cd80c42d67b42bba5b2f8c01a23ad37
+msgid ""
+"The other libraries and functions that need persistent storage are built on "
+"these basic systems. For example, the AP_Param library (which handles user "
+"settable parameters) is built on top of StorageManager, which in turn is "
+"built on top of AP_HAL::Storage. The AP_Terrain library (which handles "
+"terrain data) is built on top of Posix IO functions for holding the terrain "
+"database."
+msgstr ""
+"其他需要持久存储的库和函数均构建于这些基础系统之上。例如，AP_Param 库（处理用户可设置参数）构建在 StorageManager "
+"之上，后者又构建在 AP_HAL::Storage 之上。AP_Terrain 库（处理地形数据）构建在 Posix IO "
+"函数之上，用于存储地形数据库。"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:27
+#: 90b025e3cc594e768f65bb2712ee1159
+msgid "The AP_HAL::Storage library"
+msgstr "AP_HAL::Storage 库"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:29
+#: c88feb1cc7ed4e1b9238f32cf532224b
+msgid ""
+"The AP_HAL::Storage object is available on all platforms. The minimum size "
+"of storage available via this interface on boards that ArduPilot supports is"
+" 4096 bytes. Some boards provide more space - for example the PX4v1 has 8k "
+"of EEPROM and the Pixhawk has 16k of FRAM. All of that is hidden behind the "
+"AP_HAL::Storage API."
+msgstr ""
+"AP_HAL::Storage 对象在所有平台上均可使用。ArduPilot 支持的主板通过此接口可用的最小存储空间为 4096 "
+"字节。某些主板提供更多空间——例如 PX4v1 有 8K EEPROM，Pixhawk 有 16K FRAM。所有这些细节都隐藏在 "
+"AP_HAL::Storage API 背后。"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:35
+#: 40adf2b5c4c743cb8c2eb039cde72d9e
+msgid "The hal.storage API is extremely simple. It has just 3 functions"
+msgstr "hal.storage API 极为简单，只有 3 个函数"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:37
+#: 8c860e051dd1474188656118a80887d8
+msgid "init() to start up the storage subsystem"
+msgstr "init()，启动存储子系统"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:38
+#: c88b036600d34f65b2e6167dd19cdb60
+msgid "read_block() to read a block of bytes"
+msgstr "read_block()，读取一段字节数据"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:39
+#: 82126cec4dd34a2abff93230a444f299
+msgid "write_block() to write a block of bytes"
+msgstr "write_block()，写入一段字节数据"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:41
+#: 502f3ee80f784062a20826fd7283bbc3
+msgid ""
+"The reason for this very simple API is that developers are encouraged to use"
+" the StorageManager API instead of hal.storage. You should only be delving "
+"into hal.storage when doing bringup of a new board, or when debugging."
+msgstr ""
+"之所以 API 如此简单，是因为鼓励开发者使用 StorageManager API 而非直接使用 "
+"hal.storage。只有在对新主板进行初始调试或排查问题时，才需要深入研究 hal.storage。"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:46
+#: 585172579e754454b561b1a36a6698e5
+msgid ""
+"The size of storage available is set inside `AP_HAL/AP_HAL_Boards.h "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL/AP_HAL_Boards.h>`__"
+" in the macro HAL_STORAGE_SIZE. This means we don't yet support dynamically "
+"determining the size of storage available for this interface. If you want "
+"dynamically sized storage you need to use Posix IO for now."
+msgstr ""
+"可用存储的大小在 `AP_HAL/AP_HAL_Boards.h "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL/AP_HAL_Boards.h>`__"
+" 中的宏 HAL_STORAGE_SIZE 里设置。这意味着我们目前不支持动态确定此接口可用存储的大小。如果需要动态大小的存储，目前需要使用 Posix"
+" IO。"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:53
+#: afcd26e3421846228216a46aa286b7cf
+msgid ""
+"We don't have an example sketch for the AP_HAL::Storage API, so this is your"
+" chance to write one. If you have gotten this far into the ArduPilot "
+"tutorial you should have seen enough example sketches to know how to write "
+"one from scratch. So write a libraries/AP_HAL/examples/Storage example that "
+"calculates an 8 bit XOR of the full contents of the hal.storage data, and "
+"prints it to the console. Then :ref:`submit the example as a patch "
+"<submitting-patches-back-to-master>` to the ArduPilot github, being careful "
+"to follow the patch submission guidelines."
+msgstr ""
+"我们目前没有 AP_HAL::Storage API 的示例草图，这正是您编写一个的机会。如果您已学习到 ArduPilot "
+"教程的这一步，应该已经看过足够多的示例草图，知道如何从头编写。所以请编写一个 libraries/AP_HAL/examples/Storage "
+"示例，计算 hal.storage 数据完整内容的 8 位异或值，并将其打印到控制台。然后 :ref:`将该示例作为补丁提交 <submitting-"
+"patches-back-to-master>` 到 ArduPilot GitHub，注意遵循补丁提交指南。"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:62
+#: b53ccd31b5e24a7996da25c3fe8cff9b
+msgid ""
+"I will be quite interested to see how long after I add this exercise to the "
+"tutorial before we get a submission ...."
+msgstr "我很想知道，在我将这个练习加入教程之后，多久会收到第一个提交……"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:66
+#: c023f187b91f46a18ffeb959d4d74e24
+msgid "The StorageManager library"
+msgstr "StorageManager 库"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:68
+#: c8cc0f80805f47fb9a9a67e7e2f9c15a
+msgid ""
+"The simple hal.storage API makes it nice and easy to port ArduPilot to a new"
+" board, but isn't convenient for actually using the available storage. For "
+"that we have StorageManager. The StorageManager library provides an API "
+"which abstracts the storage into pseudo-contiguous blocks of data that have "
+"an assigned purpose. So we chop up the available storage into areas that "
+"provide:"
+msgstr ""
+"简单的 hal.storage API 使得将 ArduPilot 移植到新主板变得方便快捷，但对于实际使用可用存储来说并不方便。为此，我们有 "
+"StorageManager。StorageManager 库提供一个 "
+"API，将存储抽象为具有指定用途的伪连续数据块。因此，我们将可用存储划分为以下用途的区域："
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:75
+#: 48ae40c53b5f4f0c86e628953640d9ff
+msgid "parameters"
+msgstr "参数"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:76
+#: e535bd58c78e49368d7a87f56bc9454b
+msgid "fence points"
+msgstr "电子围栏点"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:77
+#: d33e44f32e934745a411e50ed1fa3f0c
+msgid "waypoints"
+msgstr "航点"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:78
+#: 82901e2234c340798ea9d15dfd321c3d
+msgid "rally points"
+msgstr "集结点"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:79
+#: 1e53c1a4163f480fbd5267a227c4d692
+msgid "signing key"
+msgstr "签名密钥"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:80
+#: c65f9fdb527b4c6dacdf6d4dab449270
+msgid "RC bind info"
+msgstr "RC 对码信息"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:82
+#: c336d62f0b8945ea975c989c81cccf1c
+msgid ""
+"Go and have a read of `libraries/StorageManager/StorageManager.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/StorageManager/StorageManager.cpp>`__."
+" In particular look at the tables at the top. Notice how multiple areas of "
+"each type are defined for systems with have larger amounts of storage. This "
+"ability to combine multiple non-contiguous areas of storage into a single "
+"logical storage area was the main motivation for adding StorageManager. It "
+"allowed us to grow from using 4k of storage on all boards to using the full "
+"storage available on each board without asking users to reload all their "
+"parameters or reload their waypoints."
+msgstr ""
+"请阅读 `libraries/StorageManager/StorageManager.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/StorageManager/StorageManager.cpp>`__，特别关注顶部的表格。注意对于具有更大存储空间的系统，每种类型定义了多个区域。将多个不连续的存储区域合并为单个逻辑存储区域的能力，是添加"
+" StorageManager 的主要动机。它使我们能够从在所有主板上使用 4K "
+"存储，扩展到充分利用每块主板上的全部可用存储，而无需要求用户重新加载所有参数或航点。"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:92
+#: 2381beb3c0bf4299adee59aba1564dc9
+msgid ""
+"This theme of trying to avoid making users reconfigure their autopilot "
+"boards is a common one in ArduPilot. We like it when users can update to the"
+" latest firmware and everything they previously setup still works, while "
+"gaining new features. Sometimes that means we have to do a bit more work as "
+"developers to make that possible - such as happened with StorageManager."
+msgstr ""
+"尽量避免让用户重新配置自动驾驶仪主板，是 ArduPilot "
+"的一贯理念。我们希望用户能够升级到最新固件，之前的所有配置仍然有效，同时还能获得新功能。有时这意味着我们作为开发者需要做更多工作来实现这一点——StorageManager"
+" 就是一个例子。"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:99
+#: 65c4dfa6b852443581a9d2b5c2d57086
+msgid ""
+"The StorageManager API also provides convenient functions for reading and "
+"writing variables like integers. This is the API that libraries like "
+"AP_Mission use to save and restore waypoints."
+msgstr "StorageManager API 还提供了读写整数等变量的便捷函数。这是 AP_Mission 等库用于保存和恢复航点的 API。"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:103
+#: 172b995b2c654bba941929e950f57ef0
+msgid ""
+"Now go and have a look at `libraries/StorageManager/examples/StorageTest.cpp"
+" "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/StorageManager/examples/StorageTest/StorageTest.cpp>`__."
+" This is a stress test for the StoageManager layer, and as a result is also "
+"a stress test for the AP_HAL::Storage object. It does random IO at random "
+"offsets of random lengths. That means it does IOs that cross boundaries "
+"where a single parameter value may be non-contiguous in FRAM or EEPROM. This"
+" test sketch was designed to stress test the StorageManager API, but it is "
+"also terribly useful when porting ArduPilot to a new board, as it stresses "
+"the EEPROM access functions very nicely."
+msgstr ""
+"现在请查看 `libraries/StorageManager/examples/StorageTest.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/StorageManager/examples/StorageTest/StorageTest.cpp>`__。这是对"
+" StorageManager 层的压力测试，同时也是对 AP_HAL::Storage 对象的压力测试。它在随机偏移处执行随机长度的随机 "
+"IO，意味着会跨越单个参数值在 FRAM 或 EEPROM 中可能不连续的边界。该测试草图设计用于对 StorageManager API "
+"进行压力测试，在将 ArduPilot 移植到新主板时也非常有用，因为它很好地压测了 EEPROM 访问函数。"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:114
+#: 06fe23b1a68a455eac898b1a66e16398
+msgid ""
+"Go and try StorageTest on your board, but be warned that it is a destructive"
+" test. It won't destroy your board, but it will wipe all your parameters and"
+" waypoints. So backup your configuration if you are testing on the board in "
+"your favourite aircraft."
+msgstr ""
+"请在您的主板上尝试 "
+"StorageTest，但请注意这是一个破坏性测试。它不会损坏您的主板，但会清除所有参数和航点。因此，如果您在自己最常用的飞行器上进行测试，请先备份配置。"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:119
+#: 91d5391606ee4f208dfd60e7ee974421
+msgid ""
+"As an exercise, add some profiling to StorageTest so it prints the total IO "
+"rate in kbytes/sec along with the IO rate for reads and writes. Do you "
+"notice something about the difference between the read and write rates? Do "
+"you notice anything about the speed of writing values which are already set "
+"at that address in storage? See if you can find the code in StorageManager "
+"that explains your observations. Then :ref:`submit a patch <submitting-"
+"patches-back-to-master>` adding the profiling output to the ArduPilot "
+"github."
+msgstr ""
+"作为练习，在 StorageTest 中添加一些性能分析，使其打印总 IO 速率（KB/秒）以及读写各自的 IO "
+"速率。您注意到读写速率之间有什么区别吗？对于已在存储该地址处设置过的值，写入速度是否有所不同？试着在 StorageManager "
+"中找到解释您观察结果的代码。然后 :ref:`提交一个补丁 <submitting-patches-back-to-master>` "
+"将性能分析输出添加到 ArduPilot GitHub。"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:127
+#: ba295ae6dadc49ee92088f588d52515f
+msgid ""
+"Next go and search through the ArduPilot libraries to fine all the places "
+"that use the StorageManager. What you are looking for is StorageAccess "
+"handles, like this:"
+msgstr ""
+"接下来，搜索 ArduPilot 的所有库，找出所有使用 StorageManager 的地方。您要寻找的是 StorageAccess "
+"句柄，如下所示："
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:135
+#: 7bf0c6b9406d484b9466cf33075a998c
+msgid ""
+"that declares a variable called AP_Param::_storage which provides access to "
+"the StorageParam area of the storage on this board. What libraries use "
+"StorageAccess?"
+msgstr ""
+"这声明了一个名为 AP_Param::_storage 的变量，用于访问该主板存储中的 StorageParam 区域。哪些库使用了 "
+"StorageAccess？"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:140
+#: ee81cb4f2002432aaa69513160a22940
+msgid "The DataFlash library"
+msgstr "DataFlash 库"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:142
+#: 3d9f55e2cdcc43f98ee2b2af740bb823
+msgid ""
+"Another type of storage that autopilots need is for on-board logs. For "
+"ArduPilot that is provided by the DataFlash library. It is quite an odd "
+"library in many ways. For a start the name is weird and comes from the fact "
+"that it was originally designed around the DataFlash chip for the APM1. It "
+"was a hardware device driver library which morphed over time into a general "
+"logging system. Internally the structure of the library shows this history "
+"in several ways (and not good ways!)."
+msgstr ""
+"自动驾驶仪还需要另一种存储：板载日志。在 ArduPilot 中，这由 DataFlash "
+"库提供。这个库在许多方面都比较特殊。首先，它的名称很奇怪，源于最初是围绕 APM1 的 DataFlash "
+"芯片设计的。它原本是一个硬件设备驱动库，随着时间推移演变为通用日志系统。从库的内部结构可以看出这段历史（而且不是以好的方式！）。"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:150
+#: a7a78400e8de4f63a2d69712a6ed1a45
+msgid ""
+"These days the DataFlash API is designed around a logging infrastructure "
+"model. It allows you to define self-describing data structures for "
+"individual log messages - such as a \"GPS\" message to log data from a GPS "
+"sensor. It handles logging that data to persistent storage in an efficient "
+"manner and also provides APIs for other libraries to use to get the data "
+"back out when the user wants to download their log files after a flight."
+msgstr ""
+"如今，DataFlash API 围绕日志基础设施模型设计。它允许您为各个日志消息定义自描述的数据结构——例如用于记录 GPS "
+"传感器数据的「GPS」消息。它以高效方式将数据记录到持久存储，并为其他库提供 API，以便在用户飞行后想下载日志文件时获取数据。"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:158
+#: e0c07de9a3e3477bad4e884607234e05
+msgid ""
+"If you have seen the '\\*.bin' files that ArduPilot uses these days when you"
+" download a log then you have seen the format that ArduPilot uses to store "
+"log messages. It is \"self describing\", meaning that the ground station can"
+" work out the format of the messages in the log file without having to have "
+"some common scheme. At the front of each log file is a set of FMT messages "
+"which have a well known format and which describe the format of the messages"
+" that follow."
+msgstr ""
+"如果您见过 ArduPilot 现在下载日志时使用的「\\*.bin」文件，就已经看到了 ArduPilot "
+"存储日志消息的格式。它是「自描述」的，意味着地面站无需公共方案就能解析日志文件中消息的格式。每个日志文件开头都有一组 FMT "
+"消息，这些消息具有规定格式，用于描述后续消息的格式。"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:166
+#: 980a753b350141b9be963982add53007
+msgid ""
+"Go and have a look at "
+"`libraries/AP_FlashStorage/examples/FlashTest/FlashTest.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_FlashStorage/examples/FlashTest/FlashTest.cpp>`__."
+" You'll see a little table at the top that defines the log messages we will "
+"be writing, in this case a 'TEST' message which contains 4 unsigned 16 bit "
+"integers and two signed 32 bit integers (that is what \"HHHHii\" means). It "
+"also gives names for those 6 variables (cunningly labelled V1 to V4 and L1 "
+"and L2)."
+msgstr ""
+"请查看 `libraries/AP_FlashStorage/examples/FlashTest/FlashTest.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_FlashStorage/examples/FlashTest/FlashTest.cpp>`__。顶部有一个小表格，定义了将要写入的日志消息——本例为「TEST」消息，包含"
+" 4 个无符号 16 位整数和两个有符号 32 位整数（即「HHHHii」的含义）。它还为这 6 个变量命名（巧妙地标注为 V1 至 V4 以及 L1 "
+"和 L2）。"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:174
+#: 615105a5d2fe43968054eecf509ad226
+msgid "In the loop() function you will see a rather strange call like this:"
+msgstr "在 loop() 函数中，您会看到类似这样的奇特调用："
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:180
+#: 204d29877fd84a3cb69d27c1e7284bea
+msgid ""
+"This is the public API for the way that the DataFlash library hides how the "
+"board actually stores log files. On a system that has Posix IO (such as "
+"Pixhawk or Linux) log files are stored as separate files in a \"LOGS\" "
+"directory on the microSD card. These files can be directly copied by a user "
+"by pulling out the microSD card and putting it into their PC."
+msgstr ""
+"这是 DataFlash 库隐藏主板实际存储日志文件方式的公共 API。在具有 Posix IO 的系统上（如 Pixhawk 或 "
+"Linux），日志文件以独立文件的形式存储在 microSD 卡的「LOGS」目录中。用户可以通过取出 microSD 卡并插入电脑，直接复制这些文件。"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:186
+#: 4ac4b8a985314e69bd6ea05dad7109d9
+msgid ""
+"On a board like the APM2 things aren't quite that simple. The APM2 has 4 "
+"megabytes of storage on a DataFlash chip, accessible across an SPI "
+"interface. The interface itself is page oriented, so you need to fill one "
+"512 byte (or possibly 528 byte!) page, then tell the chip to copy that page "
+"to persistent storage while you fill the next page. Doing random IO on this "
+"DataFlash is not good - it is designed for use by code that needs to write "
+"continuously, which is what happens when logging. The 4 megabyte size is "
+"really not very large compared to the amount of data an autopilot likes to "
+"log, so we need to handle wrapping when it fills up as well."
+msgstr ""
+"在 APM2 这样的主板上，情况并没有那么简单。APM2 通过 SPI 接口访问一块 DataFlash 芯片上的 4 MB "
+"存储。该接口本身是面向页的，因此需要填满一个 512 字节（或可能是 528 字节！）的页，然后通知芯片将该页复制到持久存储，同时再填充下一页。在这种 "
+"DataFlash 上进行随机 IO 并不理想——它专为需要连续写入的代码设计，这正是日志记录时的场景。与自动驾驶仪希望记录的数据量相比，4 MB "
+"的大小实在不大，因此在存储满时还需要处理回绕。"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:197
+#: e260927873e14b0695b24a3f2ff4c699
+msgid ""
+"All of that complexity is hidden behind an API that presents the concept of "
+"a \"log number\", which is just a bunch of bytes that were written in one "
+"flight of the autopilot. The DataFlash implementation on APM1 and APM2 uses "
+"little marker bytes at the front of each page to say which log number is "
+"being written. These log numbers correspond to the log numbers that are "
+"downloaded when the user asks to retrieve their logs."
+msgstr ""
+"所有这些复杂性都隐藏在一个 API 背后，该 API 呈现「日志编号」的概念，即自动驾驶仪一次飞行中写入的一组字节。APM1 和 APM2 上的 "
+"DataFlash 实现在每页开头使用少量标记字节来标识正在写入的日志编号。这些日志编号与用户请求下载日志时对应的编号一致。"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:205
+#: 05d178ad431e45de82d145c4e06d2d1b
+msgid "Posix IO"
+msgstr "Posix IO"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:207
+#: fb910b5b429d40828e1752df45884fc9
+msgid ""
+"Some of the autopilot boards that ArduPilot supports are based on an "
+"operating system that has a Posix-like API. For example the Linux ports have"
+" a very good Posix subsystems, and the NuttX operating system used for PX4 "
+"(such as on Pixhawk) have a pretty reasonable Posix layer. You can take "
+"advantage of this in libraries for ArduPilot as long as you don't rely on it"
+" for anything that has to work on all boards."
+msgstr ""
+"ArduPilot 支持的某些自动驾驶仪主板基于具有类 Posix API 的操作系统。例如，Linux 移植版具有非常好的 Posix 子系统，而用于"
+" PX4（如 Pixhawk）的 NuttX 操作系统也有相当合理的 Posix 层。只要不依赖于必须在所有主板上工作的内容，您就可以在 "
+"ArduPilot 库中利用这一特性。"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:214
+#: 9983e9f7aae64a10b7542b15c09937a2
+msgid ""
+"A good example of this is the AP_Terrain library, which holds terrain data. "
+"Terrain data is much too large to fit in EEPROM, and it is random access, so"
+" it isn't suitable for DataFlash. It is also not essential for the basic "
+"functionality of an autopilot, so it is a great candidate for implementing "
+"using Posix IO."
+msgstr ""
+"一个很好的例子是存储地形数据的 AP_Terrain 库。地形数据远大于 EEPROM 的容量，且需要随机访问，因此不适合使用 "
+"DataFlash。它也不是自动驾驶仪基本功能所必需的，因此非常适合使用 Posix IO 实现。"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:220
+#: 272b9d277ffe4dddbc1978de59de0424
+msgid ""
+"The way we use Posix IO is that you first check if the board has Posix IO "
+"support by checking the HAVE_OS_POSIX_IO macro from `AP_HAL_Boards.h "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL/AP_HAL_Boards.h>`__."
+" Then to know where on the filesystem you should store the data you add a "
+"data specific macro in AP_HAL_Boards.h which gives the directory path where "
+"that sort of data should be placed. For example, the macro "
+"HAL_BOARD_TERRAIN_DIRECTORY is used to define the directory where terrain "
+"data should go."
+msgstr ""
+"使用 Posix IO 的方式是：首先通过检查 `AP_HAL_Boards.h "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL/AP_HAL_Boards.h>`__"
+" 中的 HAVE_OS_POSIX_IO 宏来确认主板是否支持 Posix IO。然后，为了确定数据在文件系统中的存储位置，在 "
+"AP_HAL_Boards.h 中为该类数据添加一个特定宏，给出数据应存放的目录路径。例如，宏 HAL_BOARD_TERRAIN_DIRECTORY "
+"用于定义地形数据的存放目录。"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:229
+#: eca388ec13514df5b270bb1866e6fe89
+msgid ""
+"Once you have those two things you should just use normal Posix IO functions"
+" (ie. open, close, read, write etc), although there are some caveats:"
+msgstr "具备上述两项条件后，直接使用普通 Posix IO 函数即可（即 open、close、read、write 等），但有以下注意事项："
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:233
+#: 091aeedcaf8b47e8ad11942832c3f0fa
+msgid ""
+"you must only call IO functions from either the IO timer or from your own "
+"low priority thread."
+msgstr "只能从 IO 定时器或您自己的低优先级线程中调用 IO 函数。"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:235
+#: 579a399498d64c8fb154a863f5e34e49
+msgid ""
+"Never call any IO functions from APIs directly accessible in your library. "
+"Not even a simple one like stat()."
+msgstr "永远不要从库中直接可访问的 API 调用任何 IO 函数，即使是像 stat() 这样简单的函数也不行。"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:237
+#: 01b31b15157c4070b91242b8e87aa327
+msgid ""
+"try to be friendly to slow storage cards, do IO in reasonably sized chunks, "
+"and avoid seeks where possible"
+msgstr "尽量对慢速存储卡友好，以合理大小的块进行 IO，并尽可能避免随机寻址"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:240
+#: 7c4345d8ee4d4cf29d7d1bedf90701e6
+msgid ""
+"These rules really matter. A simple IO on a microSD card on Pixhawk could "
+"take up to a second. That is enough time for your precious quadcopter to be "
+"flying upside down and heading for its final meeting with the ground. The "
+"average time for an IO on a Pixhawk microSD card is quite low (a few "
+"milliseconds), but just occasionally you will get a slow one when the "
+"microSD card decides it need to spend some quality time re-reading the SD "
+"card specification and calculating Pi. Don't be tempted to sneak a little "
+"operation in just because it seems fast most of the time."
+msgstr ""
+"这些规则非常重要。Pixhawk 上 microSD 卡的一次简单 IO "
+"操作可能耗时长达一秒。这足以让您珍贵的四旋翼飞行器翻转并冲向地面。Pixhawk microSD 卡的平均 IO 时间很短（几毫秒），但偶尔当 "
+"microSD 卡决定花时间重读 SD 卡规范并计算圆周率时，就会出现慢速情况。不要因为大多数情况下操作很快就忍不住偷偷插入一个小操作。"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:250
+#: 3bc60ec0e2944149b1e2cdbe41e9578c
+msgid ""
+"The one exception to this is initialization functions that you know for "
+"certain can only be called when the vehicle is starting up or is disarmed. A"
+" bit of delay at that time is fine."
+msgstr "唯一的例外是您确定只在飞行器启动或未解锁时才会调用的初始化函数。此时有一定的延迟是可以接受的。"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:254
+#: b004f3b811b94e419d0e7655ad214b4f
+msgid ""
+"Now go and have a read of `libraries/AP_Terrain/TerrainIO.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Terrain/TerrainIO.cpp>`__"
+" and look at how it uses Posix IO. Notice the little state machine it uses "
+"to handle all the IO, which is all called from the ``AP_Terrain::io_timer`` "
+"function. See if you can spot any bugs, and report them if you can!"
+msgstr ""
+"现在请阅读 `libraries/AP_Terrain/TerrainIO.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Terrain/TerrainIO.cpp>`__，了解它如何使用"
+" Posix IO。注意它用于处理所有 IO 的小型状态机，这些都从 ``AP_Terrain::io_timer`` "
+"函数调用。看看您能否发现任何缺陷，如果能，请报告！"

@@ -1,0 +1,821 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-18 12:49+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:5
+#: ac6868baffe448108892fb8f3bf48185
+msgid "3DR Solo - ArduCopter Master Upgrade"
+msgstr "3DR Solo - ArduCopter Master 升级"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:7
+#: 00b9780e0e6a49acbbcade1b4f1a0e77
+msgid ""
+"This article details upgrading and operating ArduCopter version 3.5.0 and "
+"higher a 3DR Solo."
+msgstr "本文详细介绍了如何在 3DR Solo 上升级并使用 ArduCopter 3.5.0 及更高版本。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:10
+#: f7493eae081446499455ce2e52e3934a
+msgid "Overview"
+msgstr "概述"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:11
+#: e91dbac431c24f09839f6705fc105800
+msgid ""
+"The 3DR Solo contains, among many things, a Pixhawk 2.0 autopilot. It comes "
+"with a heavily customized branch of an early ArduCopter 3.3 compiled "
+"specifically for the Solo by 3DR. When you do the initial pre-flight update "
+"on a new Solo (or after a factory reset), part of that update is this Solo  "
+"branch of ArduCopter. It is installed on the Pixhawk, and has all the "
+"necessary default parameters and customizations baked into it. It is "
+"essentially transparent to the user, taking place behind the curtains.  "
+"Since 3DR is no longer in the consumer UAS business, this custom branch of "
+"ArduCopter will not be seeing any further updates. It was last updated in "
+"early 2016, and is now very far behind."
+msgstr ""
+"3DR Solo 内置了众多组件，其中包括一个 Pixhawk 2.0 飞控。它出厂时搭载了一个由 3DR 专门为 Solo 编译的、经过大量定制的早期"
+" ArduCopter 3.3 分支版本。当您对新 Solo 进行首次飞行前更新（或出厂重置后），此次更新的一部分就是这个 Solo 专用的 "
+"ArduCopter 分支，它被安装在 Pixhawk 上，并内置了所有必要的默认参数和定制配置，对用户来说基本是透明的，在幕后运行。由于 3DR "
+"已退出消费级无人机市场，这个定制的 ArduCopter 分支将不再有任何更新。它最后一次更新是在 2016 年初，目前已大幅落后于主线版本。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:14
+#: 5dacc668836241119e35bfe41fed983b
+msgid "Life After 3DR"
+msgstr "3DR 之后的新生"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:15
+#: 2f1a527c41b4490b96d03af93c084a1e
+msgid ""
+"Since the Solo uses a Pixhawk autopilot, it is capable of running variations"
+" of ArduCopter besides the 3DR customized Solo version. This article will "
+"focus on installing, configuring, and operating ArduCopter version 3.5.0 or "
+"higher on a 3DR Solo. ArduCopter continues where 3DR left off, keeping the "
+"Solo a modern, advanced, and highly capable sUAS.  There are countless "
+"advances in the autopilot firmware making it a more stable, reliable, and "
+"agile aircraft. There are many new features such as boat mode, RTK GPS, "
+"enhanced telemetry, ADS-B, lidar laser altimeters, terrain awareness and "
+"following, IR precision landing, and even and \"indoor GPS\"."
+msgstr ""
+"由于 Solo 使用的是 Pixhawk 飞控，因此它能够运行除 3DR 定制 Solo 版本之外的其他 ArduCopter "
+"变体。本文将重点介绍如何在 3DR Solo 上安装、配置和使用 ArduCopter 3.5.0 或更高版本。ArduCopter 在 3DR "
+"停止支持后继续发展，使 Solo "
+"保持现代化、先进且高度可用的小型无人机状态。飞控固件有无数改进，使飞行更加稳定、可靠且灵活。还增加了许多新功能，如船只模式、RTK "
+"GPS、增强型数传、ADS-B、激光雷达测距仪、地形感知与跟随、红外精确降落，甚至还有\"室内 GPS\"功能。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:27
+#: 825b85fb53df4b7eb773c09f1ff07993
+msgid ""
+"*Photos by Andrew Emmett, Matt Lawrence, Stephan Schindewolf, & Paul "
+"Dinardi*"
+msgstr ""
+"*照片由 Andrew Emmett、Matt Lawrence、Stephan Schindewolf 和 Paul Dinardi 提供*"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:32
+#: 321214bcb86c41eb933f0ece4a34e185
+msgid "Hardware Requirements"
+msgstr "硬件要求"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:33
+#: 12b6ef6cc2594d96aba514cc0e0c3817
+msgid ""
+"The Pixhawk 2.1 Green Cube (or a traditional Cube with the internal jumper "
+"set for 5 volts) is currently required for safe and reliable use of "
+"ArduCopter 3.5.0 and higher on a 3DR Solo. You can purchase the Green Cube "
+"from `Jesters Drones "
+"<http://www.jestersdrones.org/store/index.php?rt=product/category&path=68>`_"
+" or directly from  `ProfiCNC <http://www.proficnc.com/3dr-solo-"
+"accessories/79-the-cube.html>`_.  The Cube has significantly more advanced "
+"components.  This includes 3 temperature controlled IMUs and the 5 volt "
+"signalling the Solo needs to operate safely. If you already have a Cube, you"
+" can set an internal solder jumper to 5 volt signalling and use it in your "
+"Solo.  The Green Cube comes with this jumper pre-set for 5 volts."
+msgstr ""
+"目前，在 3DR Solo 上安全可靠地使用 ArduCopter 3.5.0 及更高版本需要 Pixhawk 2.1 Green "
+"Cube（或内部跳线设置为 5 伏的传统 Cube）。您可以从 `Jesters Drones "
+"<http://www.jestersdrones.org/store/index.php?rt=product/category&path=68>`_"
+" 或直接从 `ProfiCNC <http://www.proficnc.com/3dr-solo-accessories/79-the-"
+"cube.html>`_ 购买 Green Cube。The Cube 拥有更加先进的硬件组件，包括 3 个温控 IMU 以及 Solo 安全运行所需的"
+" 5 伏信号。如果您已有 Cube，可以将内部焊接跳线设置为 5 伏信号后用于 Solo。Green Cube 出厂时已预设此跳线为 5 伏。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:40
+#: d4f4a7cf0924463aa1d02097552609f6
+msgid ""
+"You *can* install ArduCopter master on the stock Pixhawk 2.0, but it is "
+"highly discouraged. It will install, and it will fly.  But you are at fairly"
+" high risk for motors shutting down in flight, leading to a serious crash. "
+"This is because of an electrical hardware flaw in the Solo's motor pods.  "
+"The old stock firmware has a software patch to *mostly* mitigate this flaw. "
+"This is what you may hear referred to as \"slew rate protection\". You can "
+"view the code for the slew rate protection in the stock 3DR firmware `here "
+"on their GitHub site <https://github.com/3drobotics/ardupilot-"
+"solo/blob/master/libraries/AP_Motors/AP_MotorsMatrix.cpp#L388>`_.  The "
+"production versions of ArduCopter, including ArduCopter 3.5 do not have this"
+" slew rate protection. It is severely handicapping and difficult to manage "
+"for a world of vehicles that use ArduCopter besides the Solo.  The 5 volt "
+"signalling used in the Pixhawk 2.1 Green Cube effectively solves the "
+"electrical problem on the motor pods."
+msgstr ""
+"您*可以*在原装 Pixhawk 2.0 上安装 ArduCopter "
+"master，但强烈不建议这样做。它可以安装并飞行，但电机在飞行中意外关闭导致严重坠机的风险相当高。这是由于 Solo "
+"电机舱存在电气硬件缺陷。原装固件通过软件补丁*基本上*缓解了这一缺陷，也就是您可能听说过的\"斜率保护（slew rate "
+"protection）\"。您可以在 `这里的 3DR GitHub 站点 "
+"<https://github.com/3drobotics/ardupilot-"
+"solo/blob/master/libraries/AP_Motors/AP_MotorsMatrix.cpp#L388>`_ 上查看原装 3DR "
+"固件中斜率保护的代码。包括 ArduCopter 3.5 在内的 ArduCopter 量产版本均不包含此斜率保护，因为它对于使用 ArduCopter"
+" 的众多其他飞行器来说过于限制且难以管理。Pixhawk 2.1 Green Cube 使用的 5 伏信号从根本上解决了电机舱的电气问题。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:42
+#: fbf0d6d81a264c16b6f500b9f66455b6
+msgid ""
+"There are other potential ways to mitigate the electrical problem with the "
+"motor pods without buying a new Cube.  You could use conventional DIY ESCs "
+"and bypass the ones built into the motor pods.  Or you could build a level "
+"converter that steps the signalling voltage up from 3v to 5v.  None of these"
+" solutions are commercially available as a kit, but can be done on a DIY "
+"basis if you are creative. You would not have the benefit of enhanced "
+"hardware in The Cube, but it would be just as safe and reliable to fly."
+msgstr ""
+"还有其他一些在不购买新 Cube 的情况下缓解电机舱电气问题的方法。您可以使用普通 DIY ESC 并绕过电机舱内置的 ESC，或者制作一个将信号电压从"
+" 3V 升压到 5V 的电平转换器。这些方案目前没有商业化的套件可购买，但如果您有创意，可以自己动手实现。虽然您无法享受 The Cube "
+"增强硬件带来的好处，但飞行的安全性和可靠性与之相当。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:44
+#: 1e6b8def8a82402bad4879de34826838
+msgid ""
+"You cannot use the old stock 3DR Solo firmware on the Cube. It is entirely "
+"incompatible. This also means you cannot do a factory reset on the Solo with"
+" The Cube still in the Solo. The factory reset tries to reload the old Solo "
+"firmware, which is incompatible.  If you need to Factory Reset, you will "
+"need to put the old stock Pixhawk 2.0 back in, run the full factory reset "
+"and update, then put the Green Cube back in. This is annoying, but there is "
+"no way around it now or in the foreseeable future. In short, do not need to "
+"factory reset. Which also means do not lose your WiFi password!  Do not "
+"throw away your old stock cube!"
+msgstr ""
+"您无法在 Cube 上使用原装 3DR Solo 固件，两者完全不兼容。这也意味着在 Solo 中装有 The Cube "
+"的情况下无法进行出厂重置，因为出厂重置会尝试重新加载与之不兼容的旧 Solo 固件。如果需要出厂重置，您需要先将原装 Pixhawk 2.0 "
+"装回，完整执行出厂重置和更新，然后再将 Green Cube "
+"装回。这很麻烦，但目前及可预见的将来都没有解决办法。简而言之，尽量避免需要出厂重置的情况，也就是说不要忘记 WiFi 密码！不要丢弃您的原装 Cube！"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:49
+#: 29591bf8aaa8477cace02248d1af53ae
+msgid "Resources"
+msgstr "资源"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:50
+#: 611590b811024aceb9f49a2274a88289
+msgid ""
+"There are several great resources online for modification ideas,vendors, "
+"beta testing firmware, troubleshooting, and support"
+msgstr "网上有几个很好的资源，可用于改装创意、供应商信息、Beta 固件测试、故障排查和技术支持"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:52
+#: a765c486e88e44929ba8fdd4ad900c99
+msgid ""
+"`Solo Beta Test Facebook group "
+"<https://www.facebook.com/groups/617648671719759/>`_"
+msgstr ""
+"`Solo Beta Test Facebook group "
+"<https://www.facebook.com/groups/617648671719759/>`_"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:53
+#: 995b2ed1d118456da39a9e3e213825af
+msgid ""
+"`Solo Mod Club Facebook group "
+"<https://www.facebook.com/groups/3DRSOLOModClub/>`_"
+msgstr ""
+"`Solo Mod Club Facebook group "
+"<https://www.facebook.com/groups/3DRSOLOModClub/>`_"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:54
+#: 4adcc25c2b3f439eb754d4f78e8a9ae8
+msgid ""
+"`Solex Users Facebook group "
+"<https://www.facebook.com/groups/176789056089526/>`_"
+msgstr ""
+"`Solex Users Facebook group "
+"<https://www.facebook.com/groups/176789056089526/>`_"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:55
+#: e0dc2469f5684c2cabc96bae63680d8f
+msgid ""
+"`ArduPilot Discuss Forums "
+"<https://discuss.ardupilot.org/c/arducopter/copter-3-5>`_"
+msgstr ""
+"`ArduPilot Discuss Forums "
+"<https://discuss.ardupilot.org/c/arducopter/copter-3-5>`_"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:56
+#: ea4b6b4febde4e79a3851feae4b798f0
+msgid ""
+"`ArduPilot copter Wiki <https://ardupilot.org/copter/docs/common-advanced-"
+"configuration.html>`_"
+msgstr ""
+"`ArduPilot copter Wiki <https://ardupilot.org/copter/docs/common-advanced-"
+"configuration.html>`_"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:57
+#: a30bfbee25e44c9aaa225433ef698b4f
+msgid "`3DR Pilots Forum <https://3drpilots.com/>`_"
+msgstr "`3DR Pilots Forum <https://3drpilots.com/>`_"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:58
+#: 4356b449a40644b39f5a3358f911c306
+msgid ":ref:`Solo Battery Calibration Process <solo_battery_calibration>`"
+msgstr ":ref:`Solo Battery Calibration Process <solo_battery_calibration>`"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:69
+#: edf7414deffa4ee79500dfcd27070089
+msgid "Upgrade Process"
+msgstr "升级流程"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:72
+#: a2e56bc6d7944186b4841ce4894889ce
+msgid "Preparation"
+msgstr "准备工作"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:73
+#: 5bc8328ef658476a8550f31e845251ec
+msgid ""
+"Before beginning the upgrade to ArduCopter 3.5 with the Pixhawk 2.1 Green "
+"Cube on your Solo, you need to complete some important requisites."
+msgstr ""
+"在开始使用 Pixhawk 2.1 Green Cube 将 Solo 升级到 ArduCopter 3.5 之前，您需要完成一些重要的前期准备工作。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:75
+#: be3fd3b9b82d4a1ebc64c78cadacc64d
+msgid ""
+"Complete Solo and controller in good working order, paired, flyable, and "
+"fully charged."
+msgstr "Solo 和遥控器状态良好，已配对，可以飞行，并已充满电。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:76
+#: c059a065cc754080b614e59fc6fb3d2b
+msgid ""
+"Solo and controller both up to date with current 3DR Solo firmware from the "
+"initial pre-flight update. The current 3DR firmware is 2.4.2."
+msgstr "Solo 和遥控器均已通过首次飞行前更新升级到当前的 3DR Solo 固件，当前 3DR 固件版本为 2.4.2。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:77
+#: 9b053aa54c8a43168203050ca66b5427
+msgid ""
+"Flight tested, working properly in all respects. An untested or "
+"malfunctioning Solo should not be used for this process. It won't fix it."
+msgstr "已经过飞行测试，各方面工作正常。存在问题或未经测试的 Solo 不应用于此流程，这样做无法解决问题。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:78
+#: 46eeaff555e541e5828787bfef281b38
+msgid "Pixhawk 2.1 Green Cube"
+msgstr "Pixhawk 2.1 Green Cube"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:79
+#: 57746f24f9284fcfade6a4ce97db73f6
+msgid "Philips and flat head screwdrivers"
+msgstr "十字头和一字头螺丝刀"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:80
+#: de914540ad5f44f49dd89fa809a09014
+msgid "Solex App for Android or a Windows PC for Mission Planner and WinSCP"
+msgstr "Android 版 Solex App 或装有 Mission Planner 和 WinSCP 的 Windows PC"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:84
+#: 56ae21c1bfe74a8c8f471dbba368dfd7
+msgid "Instructions"
+msgstr "操作说明"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:85
+#: 01c1498f06e048f18e9eb0cb765a8500
+msgid ""
+"There are two ways to do the upgrade that have detailed instructions "
+"published here."
+msgstr "此处提供了两种有详细说明的升级方式。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:87
+#: f0970103e29a494ca5e67429c6bcb33e
+msgid ""
+":ref:`Initial installation using the Solex app "
+"<solo_arducopter_solex_install>`. This is by far the most straight forward "
+"and highly recommended method.  Solex has the means to load and reset "
+"firmware and parameters, and has access to all the necessary files online "
+"directly."
+msgstr ""
+":ref:`使用 Solex 应用进行初始安装 "
+"<solo_arducopter_solex_install>`。这是迄今为止最直接且强烈推荐的方法。Solex "
+"可以加载和重置固件及参数，并能直接在线访问所有必要文件。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:88
+#: 5dfd89874df148a99483489dabd9c400
+msgid ""
+":ref:`Initial installation using Mission Planner and WinSCP "
+"<solo_arducopter_other_install>`. This method is a little more involved but "
+"is just as successful. You will need to download zip files, use Mission "
+"Planner to change settings, and use WinSCP to transfer files.  If you do not"
+" have the Solex app, this is the method you will need to follow."
+msgstr ""
+":ref:`使用 Mission Planner 和 WinSCP 进行初始安装 "
+"<solo_arducopter_other_install>`。此方法稍微复杂一些，但同样有效。您需要下载 zip 文件，使用 Mission "
+"Planner 更改设置，并使用 WinSCP 传输文件。如果您没有 Solex 应用，则需要采用此方法。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:96
+#: d855f9fa38ad441d9f2125053f31adff
+msgid "FIRST FLIGHT"
+msgstr "首次飞行"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:97
+#: 59b21dd21e3f47e680a89364dd48d5a9
+msgid ""
+"Once the upgrade process is complete, you're ready to make your first flight"
+" using ArduCopter 3.5 on the Solo.  It is recommended that your first flight"
+" be conducted at a location and time that allows you to test some basic "
+"functions and safety systems. Choose a wide open are free of obstructions, "
+"crowds of people, lakes, etc."
+msgstr ""
+"升级完成后，您就可以在 Solo 上使用 ArduCopter 3.5 "
+"进行首次飞行了。建议选择合适的时间和地点进行首次飞行，以便测试一些基本功能和安全系统。请选择宽阔的开放区域，避免有障碍物、人群、湖泊等。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:100
+#: 9886249eead24f9db7c069c6a06c5b70
+msgid "Solo/Solex App Settings"
+msgstr "Solo/Solex 应用设置"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:101
+#: 1a8b54defc604e8db86ec2fda326de9f
+msgid ""
+"You will need to go through all the settings in the 3DR Solo App (and the "
+"Solex app if you use that too) to verify and update sliders, options, and "
+"settings. Hot items to set include in this sweep include but are certainly "
+"not limited to:"
+msgstr ""
+"您需要逐一检查 3DR Solo App（以及 Solex "
+"应用，如果您也使用的话）中的所有设置，以验证和更新滑块、选项和配置。此次检查中需要重点设置的项目包括但不限于："
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:103
+#: 9bfc142500d9438cadcd2612fa661651
+msgid "RTH altitude"
+msgstr "返航高度"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:104
+#: 4654427feaaa4d06a49e79afea7aed01
+msgid "RTH/RTM* & Rewind"
+msgstr "RTH/RTM* 与回溯"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:105
+#: 2de66eb710b648af80638d2085466b71
+msgid "Maximum altitude"
+msgstr "最大高度"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:106
+#: 905748d4fb4f4376b01b14f4951b50d5
+msgid "A/B Buttons"
+msgstr "A/B 按钮"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:107
+#: 40f3163ec1344a4aaa4bc15a695287b8
+msgid "Advanced Flight Modes"
+msgstr "高级飞行模式"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:108
+#: 922af1a918ce4650ac530830e7919bbb
+msgid "Speed sliders"
+msgstr "速度滑块"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:109
+#: ff4c15835ba4442284c033a5ff960ee2
+msgid "GoPo settings"
+msgstr "GoPro 设置"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:112
+#: c2809db7e58a419ba5d99e7565dc1b8f
+msgid "Go Airborne"
+msgstr "起飞"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:113
+#: 31207651e6b34a89878f0f84b4b47a23
+msgid ""
+"With all of the above complete, it is time to take your first flight on "
+"ArduCopter master!"
+msgstr "完成以上所有步骤后，是时候进行 ArduCopter master 的首次飞行了！"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:115
+#: 6c3b6b4cb69243b0bd86dd18976b2058
+msgid "Take off and verify the Solo flies stable and predictably."
+msgstr "起飞并验证 Solo 飞行稳定且响应可预期。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:116
+#: e1a207ed9f7546d6ad5774d039dec9e2
+msgid ""
+"Test all axes... pitch, roll, yaw, climbs, descends, and even all at once."
+msgstr "测试所有轴向……俯仰、横滚、偏航、上升、下降，甚至同时进行所有操作。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:117
+#: 5b104f888cc8486db7dab17fb31f9100
+msgid "Test the flight modes you have on the A & B buttons"
+msgstr "测试您在 A & B 按钮上设置的飞行模式"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:118
+#: b89091bb331e4ef7b7690fe56178b43a
+msgid "Make sure you are getting a good GPS lock"
+msgstr "确保 GPS 锁定良好"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:119
+#: c73b53cb08ca40299e689c12997aa0e7
+msgid ""
+"Make sure the distance, altitude, speed, modes, and GPS data displayed on "
+"the app and controller are correct and as you expect to see."
+msgstr "确保应用程序和遥控器上显示的距离、高度、速度、飞行模式和 GPS 数据正确且符合预期。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:120
+#: 8728c202895b4bdfa80ea7c77ceefa71
+msgid ""
+"Let the battery run down to the failsafe while hovering safely nearby. "
+"Observe its behavior and verify it appropriately executed the RTH/RTM "
+"procedure."
+msgstr "在附近安全悬停，让电池电量耗尽至失控保护触发。观察其行为，确认它正确执行了 RTH/RTM 程序。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:122
+#: ac8be83d2d7e44bb8cc3e5556d819212
+msgid ""
+"If you need help troubleshooting a problem during with this process or have "
+"questions, the `Solo Beta Test Facebook group "
+"<https://www.facebook.com/groups/617648671719759/>`_ is the best place to "
+"go."
+msgstr ""
+"如果您在此过程中遇到问题需要排查，或有任何疑问，`Solo Beta Test Facebook group "
+"<https://www.facebook.com/groups/617648671719759/>`_ 是最佳求助地点。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:132
+#: c47ba344cb7147b5ab1ba92a4e40bab9
+msgid "ArduCopter Parameters"
+msgstr "ArduCopter 参数"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:133
+#: 36832f59cb894ff3aca792954a7c3923
+msgid ""
+"There are over 700 parameters in ArduCopter. For everyday use of the Solo, "
+"you still do not need to worry about any of them. They're all pre-set for "
+"you in the above processes and by way of defaults.  All the configuration "
+"parameters for the Solo that require a value different from the ArduCopter "
+"defaults can be found in the `ArduPilot GitHub repository "
+"/tools/frame_params/ directory "
+"<https://github.com/ArduPilot/ardupilot/blob/master/Tools/Frame_params/Solo_AC35.param>`_."
+" These are the parameters that are loaded during the upgrade process. If you"
+" are not familiar with editting parameters and have no special use case to "
+"warrant changing them, altering them is not recommended."
+msgstr ""
+"ArduCopter 中有超过 700 个参数。对于日常使用 Solo "
+"的用户，您仍然无需关心任何参数，它们在上述流程中以及通过默认值已为您预先设置好。Solo 所有需要与 ArduCopter 默认值不同的配置参数，均可在"
+" `ArduPilot GitHub 仓库的 /tools/frame_params/ 目录 "
+"<https://github.com/ArduPilot/ardupilot/blob/master/Tools/Frame_params/Solo_AC35.param>`_"
+" 中找到。这些是在升级过程中加载的参数。如果您不熟悉参数编辑且没有特殊使用场景需要修改，建议不要随意更改。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:135
+#: 1dbb7b4674db4bebae9cf2351bcad4e1
+msgid ""
+"However, there are some advanced and special use cases that may require "
+"changing some parameters. Some key parameters for advanced users are "
+"detailed below. This list will likely grow as new use cases and "
+"modifications develop."
+msgstr ""
+"然而，某些高级和特殊使用场景可能需要修改某些参数。以下详细介绍了一些针对高级用户的关键参数，随着新使用场景和改装方案的发展，此列表将会继续扩充。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:139
+#: 9725918e428546d997509df5aaf59527
+msgid ""
+":ref:`COMPASS_ORIENT <COMPASS_ORIENT>` is the orientation of the external "
+"compass."
+msgstr ":ref:`COMPASS_ORIENT <COMPASS_ORIENT>` 是外部罗盘的方向设置。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:141
+#: ../../source/docs/solo_arducopter_upgrade.rst:150
+#: ../../source/docs/solo_arducopter_upgrade.rst:161
+#: ../../source/docs/solo_arducopter_upgrade.rst:171
+#: ../../source/docs/solo_arducopter_upgrade.rst:181
+#: ../../source/docs/solo_arducopter_upgrade.rst:191
+#: ../../source/docs/solo_arducopter_upgrade.rst:202
+#: ../../source/docs/solo_arducopter_upgrade.rst:212
+#: ../../source/docs/solo_arducopter_upgrade.rst:221
+#: 3c82ab739d5140678c3a87527317d1fd 505f053f1f3b4c3f9c762fb9aaccffed
+#: 71d268b2e070412db3f64deb8c09cc42 7fbc515b43f746baae8655d288d0b173
+#: 8371b17d178340f7b1060845c90f3b96 bf0997f89e114d7a8c5773a15ae12543
+#: e857b3d84aaa48f1a83c6347ee412efc e98919585b8d4c398c47035c03ee5ec0
+#: ff214dbf218746bf971036465ed02d9b
+msgid "Value"
+msgstr "值"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:141
+#: ../../source/docs/solo_arducopter_upgrade.rst:150
+#: ../../source/docs/solo_arducopter_upgrade.rst:161
+#: ../../source/docs/solo_arducopter_upgrade.rst:171
+#: ../../source/docs/solo_arducopter_upgrade.rst:181
+#: ../../source/docs/solo_arducopter_upgrade.rst:191
+#: ../../source/docs/solo_arducopter_upgrade.rst:202
+#: ../../source/docs/solo_arducopter_upgrade.rst:212
+#: ../../source/docs/solo_arducopter_upgrade.rst:221
+#: 529998083f534017a2762219d6eaf427 5f262e91ec85409ab21e5889bb9d75c8
+#: 6b79578671cb4531b5794d2293d484bf 8c002e2af717406d80946bcbb3ab0d4e
+#: 919682f858564c04b90dcc12b60429c3 9afeb1e9a03b4933948fafb0f7eb489b
+#: a675846b7b024350a5782980da2e0002 ad147e88b00c48deb24b3c1c7642b613
+#: de0a3ed15c154118bb4e9736db68313a
+msgid "Meaning"
+msgstr "含义"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:143
+#: abbc31130d9a40299a0610cb5481ece6
+msgid "38"
+msgstr "38"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:143
+#: 77c2843bd8ee49f6ae5d5433c1e76658
+msgid "Stock compass in right rear leg"
+msgstr "原装罗盘位于右后脚架"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:144
+#: ../../source/docs/solo_arducopter_upgrade.rst:152
+#: ../../source/docs/solo_arducopter_upgrade.rst:163
+#: ../../source/docs/solo_arducopter_upgrade.rst:173
+#: ../../source/docs/solo_arducopter_upgrade.rst:183
+#: ../../source/docs/solo_arducopter_upgrade.rst:193
+#: ../../source/docs/solo_arducopter_upgrade.rst:204
+#: ../../source/docs/solo_arducopter_upgrade.rst:214
+#: ../../source/docs/solo_arducopter_upgrade.rst:223
+#: 297b02c304ae42e89ce63f2e7f83cf79 76877f5a4aaa4fd1b8fe23f7d9eade50
+#: 77a5d97ef70f435aaacc8ea83d929077 96c7cd5ab9a4403aabb6105de08a08f7
+#: 9bb843a2553d4c2e8227f2d6d202d859 a2b298da637b44b692f0f353ef195921
+#: a9a9bb69543b4b80adf679c6d3948c6f af4a709a4b804acaa32a4a055d263a99
+#: c557c03697dc4b61bb0babfeb354e107
+msgid "0"
+msgstr "0"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:144
+#: 20075683ade54e5683f5c0028a976793
+msgid "HERE External Compass"
+msgstr "HERE 外部罗盘"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:148
+#: 09038d8e6cc04547bc03ee2aa0f11c46
+msgid ""
+":ref:`FS_THR_ENABLE <FS_THR_ENABLE>` controls how the Solo respond to a loss"
+" of signal from the controller."
+msgstr ":ref:`FS_THR_ENABLE <FS_THR_ENABLE>` 控制 Solo 在失去遥控器信号时的响应方式。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:152
+#: c731c601fc184ac19fab2297b4b2bed6
+msgid "No failsafe. This should not be used."
+msgstr "无失控保护。不建议使用此设置。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:153
+#: ../../source/docs/solo_arducopter_upgrade.rst:164
+#: ../../source/docs/solo_arducopter_upgrade.rst:194
+#: ../../source/docs/solo_arducopter_upgrade.rst:205
+#: ../../source/docs/solo_arducopter_upgrade.rst:215
+#: ../../source/docs/solo_arducopter_upgrade.rst:224
+#: 63cdcd60a5cc4ca0a2985154c3474fed 9c1aa5d0766d4a72920b9aef5ee4281d
+#: b567ce8ef288441b9f8b9898d36ec7ed dda3b1972b364e63a3f109077065b889
+#: eaec3decd4fb403484f2474dc60c3bac f77a5c5691284e7f862847c821108c9e
+msgid "1"
+msgstr "1"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:153
+#: 4a5a50e71447422fb3ee9b08daf753be
+msgid "RTH/RTM will initiate if GPS available. If no GPS, Solo will land."
+msgstr "如果 GPS 可用则启动 RTH/RTM。如果无 GPS，Solo 将就地降落。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:154
+#: ../../source/docs/solo_arducopter_upgrade.rst:165
+#: ../../source/docs/solo_arducopter_upgrade.rst:195
+#: ../../source/docs/solo_arducopter_upgrade.rst:206
+#: 6e65ba63a1e24c8aada6e1670e4264c3 b49f67e9c5b1475d82292fcb2a0a48dd
+#: cf25417da7c9451fa4d610b872ab850a fe802420839d41c9bb01210ba42cd44f
+msgid "2"
+msgstr "2"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:154
+#: 0a9a55d0c1dc43eca535419f1c1b0cee
+msgid ""
+"Continue with Smart Shot or auto mission. Otherwise RTH/RTM if GPS "
+"available. If no GPS, Solo will land."
+msgstr "如果正在执行智能拍摄或自动任务则继续执行，否则在 GPS 可用时执行 RTH/RTM。如果无 GPS，Solo 将就地降落。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:155
+#: ../../source/docs/solo_arducopter_upgrade.rst:196
+#: 2936d649b5b34effb2aef1ccfce9899c edc883b57b584a1f902e011b61f92d8e
+msgid "3"
+msgstr "3"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:155
+#: 4600b10838e44b03a5df5f14acd8cb1e
+msgid "Land only, no RTH/RTM. This is useful for indoor flying."
+msgstr "仅就地降落，不执行 RTH/RTM。适用于室内飞行。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:159
+#: 8a6a9d3968544cc0925cac9d167656e0
+msgid ""
+"FS_BATT_ENABLE controls the low battery failsafe action for Copter-3.5 (and "
+"earlier). For Copter-3.6 (and higher) check the :ref:`BATT_FS_LOW_ACT "
+"<BATT_FS_LOW_ACT>` parameter. The low battery failsafe kicks in when when "
+"the values set in parameters ``FS_BATT_VOLTAGE`` or ``FS_BATT_MAH`` are "
+"breached."
+msgstr ""
+"FS_BATT_ENABLE 控制 Copter-3.5（及更早版本）的低电量失控保护动作。对于 Copter-3.6（及更高版本），请查看 "
+":ref:`BATT_FS_LOW_ACT <BATT_FS_LOW_ACT>` 参数。当 ``FS_BATT_VOLTAGE`` 或 "
+"``FS_BATT_MAH`` 参数中设定的值被触及时，低电量失控保护将触发。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:163
+#: a9d24ef39a3f49838d8d621b15bd61e0
+msgid "No failsafe action"
+msgstr "无失控保护动作"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:164
+#: 42a6a8aabe3742c891122426a15c0b7a
+msgid "Land immediately, no RTH/RTM. Useful for indoors."
+msgstr "立即就地降落，不执行 RTH/RTM。适用于室内飞行。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:165
+#: 481c37c52348465398b92cb239f05e5e
+msgid "RTH/RTM"
+msgstr "RTH/RTM"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:169
+#: 87afadfab3124dfba7dd246d0614e808
+msgid ""
+"FS_BATT_VOLTAGE is the low battery voltage threshold for Copter-3.5 (and "
+"earlier). For Copter-3.6 (and higher) check the :ref:`BATT_LOW_VOLT "
+"<BATT_LOW_VOLT>` parameter. When the battery voltage drops below this point,"
+" the low battery beeper sounds and it will do what you have "
+"``FS_BATT_ENABLE`` set for. This value is expressed in volts. The default is"
+" 14.0. You can adjust this higher or lower depending on use case and "
+"preference."
+msgstr ""
+"FS_BATT_VOLTAGE 是 Copter-3.5（及更早版本）的低电压阈值。对于 Copter-3.6（及更高版本），请查看 "
+":ref:`BATT_LOW_VOLT <BATT_LOW_VOLT>` 参数。当电池电压低于此值时，低电量蜂鸣器将响起，并执行 "
+"``FS_BATT_ENABLE`` 中设定的动作。此值以伏特为单位，默认值为 14.0。您可以根据使用场景和偏好调整此值的高低。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:173
+#: 2b80aaf7f6514f648020587e194e9eeb
+msgid "No low voltage alarm or failsafe"
+msgstr "无低电压报警或失控保护"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:174
+#: 51869790169844cca99bd1e66b0c5145
+msgid "14"
+msgstr "14"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:174
+#: e6a72aa174654918b877b39e55629949
+msgid "14 volts"
+msgstr "14 伏"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:179
+#: 71b5f808830f4e4480a2ba70b8ec69fd
+msgid ""
+"FS_BATT_MAH is the battery capacity remaining threshold expressed in "
+"milliamperes (MAH) for Copter-3.5 (and earlier). For Copter-3.6 (and higher)"
+" check the :ref:`BATT_LOW_MAH <BATT_LOW_VOLT>` parameter. When the battery "
+"remaining capacity drops below this point, the low battery beeper sounds and"
+" it will do what you have ``FS_BATT_ENABLE`` set for. The default is 520. On"
+" the solo, that is on average about 1.5 minutes of flying time remaining. "
+"You can adjust this up or down to fit your preference and use case. Setting "
+"it for 0 will disable capacity remaining based alarms and failsafes."
+msgstr ""
+"FS_BATT_MAH 是 Copter-3.5（及更早版本）以毫安时（MAH）表示的剩余电池容量阈值。对于 Copter-3.6（及更高版本），请查看"
+" :ref:`BATT_LOW_MAH <BATT_LOW_VOLT>` 参数。当剩余电池容量低于此值时，低电量蜂鸣器将响起，并执行 "
+"``FS_BATT_ENABLE`` 中设定的动作。默认值为 520，在 Solo 上平均约相当于 1.5 "
+"分钟的飞行时间。您可以根据偏好和使用场景调整此值。设置为 0 将禁用基于剩余容量的报警和失控保护。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:183
+#: 9210e1ed43454e55a30e1753c9105a0b
+msgid "No battery capacity remaining alarm or failsafe"
+msgstr "无剩余电池容量报警或失控保护"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:184
+#: a7c5051a024a425bb71eb6f8231f01ba
+msgid "520"
+msgstr "520"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:184
+#: 8dc8eb81ed0242d9afb85be42c3b1013
+msgid "520 MAH"
+msgstr "520 MAH"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:189
+#: 0884099fc72f4833adcde611ad0f46ec
+msgid ""
+":ref:`WP_YAW_BEHAVIOR <WP_YAW_BEHAVIOR>` specifies the yaw behavior in auto "
+"missions and RTH/RTM."
+msgstr ":ref:`WP_YAW_BEHAVIOR <WP_YAW_BEHAVIOR>` 指定自动任务和 RTH/RTM 中的偏航行为。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:193
+#: e46d8445cb5942bf9fd07475264c161d
+msgid ""
+"No change. The Solo's yaw will keep pointing in the same direction unless "
+"you change it."
+msgstr "不变。Solo 的偏航将保持同一方向，除非您主动更改。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:194
+#: 45099db84a724d81804ee35f2e4f7241
+msgid "Face the next waypoint regardless of direction of flight."
+msgstr "无论飞行方向如何，始终朝向下一个航点。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:195
+#: 4a8294d005e5482e80f445c229c6ae19
+msgid "Face the next waypoint except in RTH/RTM."
+msgstr "朝向下一个航点，RTH/RTM 时除外。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:196
+#: 728ecd68204d42b7969a2c3190b8ba5c
+msgid "Face forward along the GPS course."
+msgstr "沿 GPS 航迹方向朝前。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:200
+#: 363fa33561d24a96a23c4384f6a2546e
+msgid ""
+"**NTF_OREO_THEME** controls the Solo's motor pod LED theme. This is for "
+"ArduCopter 3.5.0 and higher only."
+msgstr "**NTF_OREO_THEME** 控制 Solo 电机舱 LED 主题。仅适用于 ArduCopter 3.5.0 及更高版本。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:204
+#: 13f598070b864ce4861219828b3bd4f6
+msgid "Disabled"
+msgstr "禁用"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:205
+#: 10cc81f93c0248d093f0596b4be720de
+msgid "Aircraft theme with red/green front and white strobes rear."
+msgstr "飞机主题：前方红/绿灯，后方白色频闪灯。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:206
+#: 1b47131efe1949bd88fe8c9d9af6007f
+msgid ""
+"Rover theme with white front & red rear (like a stock Solo used to be)."
+msgstr "地面车辆主题：前方白灯，后方红灯（与原装 Solo 相同）。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:210
+#: 779688d6c04c480e85be8311120b8020
+msgid ""
+":ref:`AHRS_GPS_USE <AHRS_GPS_USE>` is for enabling or disabling the GPS on "
+"you Solo. The default is 1 for enabled. The primary use case for disabling "
+"the GPS is for indoor flight. If the GPS is disabled, it cannot and will not"
+" try to use it for flight, failsafes, or any other function. That means RTH "
+"mode is not available. You must be familiar with how the failsafes work "
+"without a GPS. In most cases, the Solo will land since it cannot RTH."
+msgstr ""
+":ref:`AHRS_GPS_USE <AHRS_GPS_USE>` 用于启用或禁用 Solo 的 GPS。默认值为 1（启用）。禁用 GPS "
+"的主要使用场景是室内飞行。如果禁用 GPS，飞控将不会尝试将其用于飞行、失控保护或任何其他功能，这意味着 RTH 模式不可用。您必须熟悉在没有 GPS "
+"情况下失控保护的工作方式，在大多数情况下，由于无法执行 RTH，Solo 将就地降落。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:214
+#: 032d7830db5f439b80467c0b8bf7255d
+msgid "GPS disabled"
+msgstr "GPS 禁用"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:215
+#: db4aeb4219f349fab61bb26dc97e50bb
+msgid "GPS enabled"
+msgstr "GPS 启用"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:219
+#: 6a2a8815c2824547b1050aecb3513416
+msgid ""
+":ref:`LOG_DISARMED <LOG_DISARMED>` enables and disables dataflash (\\*.bin) "
+"logging when the Solo is disarmed.  It is currently enabled by default since"
+" it can be very useful for testing and troubleshooting. But it does result "
+"in large and often unneccessary logs.  If you are comfortable and confident "
+"in your Solo, you disable logging while disarmed.  The dataflash logs be "
+"much cleaner and volumnous."
+msgstr ""
+":ref:`LOG_DISARMED <LOG_DISARMED>` 用于启用或禁用 Solo 上锁时的 "
+"dataflash（\\*.bin）日志记录。由于对测试和故障排查非常有用，目前默认启用。但这会产生大量且通常不必要的日志。如果您对 Solo "
+"的状态感到满意和有信心，可以禁用上锁状态下的日志记录，这样 dataflash 日志将更加简洁和精简。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:223
+#: 61049575d7d442eaa7ec4d9ccacae5ca
+msgid "Disabled / No dataflash logging while disarmed"
+msgstr "禁用 / 上锁时不记录 dataflash 日志"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:224
+#: 3919c83875dd4cfdab9e0b9c1f68e4ec
+msgid "Enabled / Dataflash logging while disarmed and armed."
+msgstr "启用 / 上锁和解锁时均记录 dataflash 日志。"
+
+#: ../../source/docs/solo_arducopter_upgrade.rst:229
+#: 3edd4c48cc5a4b2390da44eef571f646
+msgid "Further Information"
+msgstr "更多信息"

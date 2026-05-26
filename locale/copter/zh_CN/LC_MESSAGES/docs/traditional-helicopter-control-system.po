@@ -1,0 +1,158 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-18 12:49+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/traditional-helicopter-control-system.rst:5
+#: 6b816fed66c14659bdc1613fee23c7a3
+msgid "General ArduCopter Attitude Controller Description"
+msgstr "ArduCopter 姿态控制器通用说明"
+
+#: ../../source/docs/traditional-helicopter-control-system.rst:7
+#: edf7a9296b9e44ed8deb3723ef8e3cc4
+msgid ""
+"Users should generally understand the flight control laws before tuning. At "
+"a high level, the ArduCopter control laws are designed as a model following "
+"architecture where the software converts the pilot or autopilot's input into"
+" a demanded attitude (Stabilized Modes) or a pilot demanded axial rate (Acro"
+" mode) and controls the aircraft to achieve that demanded value."
+msgstr ""
+"用户通常应在调参前了解飞行控制律。从较高层面看，ArduCopter "
+"控制律设计为模型跟随架构，软件将飞手或飞控的输入转换为期望姿态（稳定模式）或飞手期望的轴向速率（Acro 模式），并控制飞行器实现该期望值。"
+
+#: ../../source/docs/traditional-helicopter-control-system.rst:13
+#: d27a60bc159e46fc9a9c8a6b8beab159
+msgid ""
+"It has two controllers (attitude and rate) that work together to ensure the "
+"actual aircraft is following the demanded pitch and roll rates and "
+"attitudes."
+msgstr "它有两个控制器（姿态控制器和速率控制器），协同工作以确保实际飞行器跟随期望的俯仰和横滚速率及姿态。"
+
+#: ../../source/docs/traditional-helicopter-control-system.rst:16
+#: 4101d5131cd847ffb20b76dc268abf54
+msgid ""
+"The pilot’s commands are limited by the amount of acceleration that can be "
+"commanded through the :ref:`ATC_ACCEL_P_MAX<ATC_ACCEL_P_MAX>` for pitch and "
+":ref:`ATC_ACCEL_R_MAX<ATC_ACCEL_R_MAX>` for roll."
+msgstr ""
+"飞手指令受到可命令加速度的限制，俯仰轴由 :ref:`ATC_ACCEL_P_MAX<ATC_ACCEL_P_MAX>` 限制，横滚轴由 "
+":ref:`ATC_ACCEL_R_MAX<ATC_ACCEL_R_MAX>` 限制。"
+
+#: ../../source/docs/traditional-helicopter-control-system.rst:19
+#: d2413e9a5e124d03ad8caabd22d22488
+msgid ""
+"The initial responsiveness (crispness/sluggishness) of the aircraft to the "
+"pilot input can be adjusted through the :ref:`ATC_INPUT_TC<ATC_INPUT_TC>` "
+"parameter. The pilot input and these parameters are used to determine the "
+"rate required to achieve the demanded response that is fed to the rate "
+"controller."
+msgstr ""
+"飞行器对飞手输入的初始响应性（灵敏度/迟滞感）可以通过 :ref:`ATC_INPUT_TC<ATC_INPUT_TC>` "
+"参数进行调整。飞手输入和这些参数用于确定实现期望响应所需的速率，该速率被送入速率控制器。"
+
+#: ../../source/docs/traditional-helicopter-control-system.rst:23
+#: a2a4bf9f614b4c848fc3d03cb1c9cee2
+msgid ""
+"The attitude controller is used to ensure the actual attitude of the "
+"aircraft matches the demanded attitude of the autopilot. It uses the "
+":ref:`ATC_ANG_PIT_P<ATC_ANG_PIT_P>` in pitch and the "
+":ref:`ATC_ANG_RLL_P<ATC_ANG_RLL_P>` in roll to determine a rate proportional"
+" to the difference between demanded and current attitude that is fed to the "
+"rate controller to drive the aircraft to the demanded attitude."
+msgstr ""
+"姿态控制器用于确保飞行器的实际姿态与飞控的期望姿态相匹配。它使用俯仰轴的 :ref:`ATC_ANG_PIT_P<ATC_ANG_PIT_P>` "
+"和横滚轴的 :ref:`ATC_ANG_RLL_P<ATC_ANG_RLL_P>` "
+"来确定与期望姿态和当前姿态之差成比例的速率，该速率被送入速率控制器以驱动飞行器达到期望姿态。"
+
+#: ../../source/docs/traditional-helicopter-control-system.rst:28
+#: 94f8b904ff0e47a59d6acccd9f11f0b1
+msgid ""
+"The rate controller receives the demanded rate resulting from the pilot "
+"input and/or the rate from the attitude controller and determines the "
+"swashplate commands required to achieve that rate. The rate controller uses "
+"a PID control algorithm with a feed forward path to control the aircraft and"
+" achieve the demanded rate."
+msgstr ""
+"速率控制器接收来自飞手输入和/或姿态控制器的期望速率，并确定实现该速率所需的斜盘指令。速率控制器使用带有前馈路径的 PID "
+"控制算法来控制飞行器并实现期望速率。"
+
+#: ../../source/docs/traditional-helicopter-control-system.rst:34
+#: 35c4d6eac3dc41138d19301b87329fb7
+msgid ""
+"The feed forward path uses the input rate and applies the "
+":ref:`ATC_RAT_PIT_FF<ATC_RAT_PIT_FF__AC_AttitudeControl_Heli>` gain for "
+"pitch and :ref:`ATC_RAT_RLL_FF<ATC_RAT_RLL_FF__AC_AttitudeControl_Heli>` "
+"gain for roll to determine its portion of the swashplate command. The PID "
+"algorithm uses the error between the measured rate and input demanded rate "
+"to determine its portion of the swashplate command. These are summed and "
+"sent to the mixing unit where the servo positions are determined."
+msgstr ""
+"前馈路径使用输入速率，对俯仰轴应用 "
+":ref:`ATC_RAT_PIT_FF<ATC_RAT_PIT_FF__AC_AttitudeControl_Heli>` 增益，对横滚轴应用 "
+":ref:`ATC_RAT_RLL_FF<ATC_RAT_RLL_FF__AC_AttitudeControl_Heli>` "
+"增益，以确定其斜盘指令部分。PID 算法使用测量速率与输入期望速率之间的误差来确定其斜盘指令部分。这些被求和并发送到混合单元，在那里确定舵机位置。"
+
+#: ../../source/docs/traditional-helicopter-control-system.rst:42
+#: 2732d15213c74406ada5837a664f74b9
+msgid ""
+"So this tuning method uses the FF gain initially to ensure the requested "
+"rates match the actual rates.  However the rates can vary from the requested"
+" due to disturbances and inaccuracies. The P, I, and D gains "
+"(``ATC_RAT_x_P/I/D``) are then used to correct any disturbances that cause "
+"the actual rates to deviate from the requested rates."
+msgstr ""
+"因此，该调参方法首先使用 FF 增益来确保请求速率与实际速率匹配。但由于扰动和不准确性，速率可能与请求值不同。P、I 和 D "
+"增益（``ATC_RAT_x_P/I/D``）随后用于纠正导致实际速率偏离请求速率的任何扰动。"
+
+#: ../../source/docs/traditional-helicopter-control-system.rst:46
+#: 3d9fae141b914d1f86477ffa3b9abdce
+msgid ""
+"Error between demanded and measured rates is multiplied by the P term. The D"
+" term determines the rate of error change and adds a correction based on "
+"that, providing faster response to quickly occurring errors and providing "
+"dampening to control overshoots, like shock absorbers on a car."
+msgstr ""
+"期望速率和测量速率之间的误差乘以 P 项。D "
+"项确定误差变化率并基于此添加校正，提供对快速发生误差的更快响应，并提供阻尼以控制超调，类似于汽车上的减震器。"
+
+#: ../../source/docs/traditional-helicopter-control-system.rst:48
+#: 46f8eeccfad446dfa49015a72b89a1bd
+msgid ""
+"Since there may be systemic offsets (like CG errors or mechanical trim "
+"imperfections) resulting in some long term errors to achieving the demanded "
+"rates, an integrator accumulates all errors over time, and provides an "
+"additional correction via the I gain. I gain is multiplied by the integrator"
+" and summed with the other outputs of the rate controller to form the input "
+"to the swashplate."
+msgstr ""
+"由于可能存在系统偏移（如重心误差或机械配平不完善），导致实现期望速率出现一些长期误差，积分器随时间累积所有误差，并通过 I 增益提供额外校正。I "
+"增益乘以积分器并与速率控制器的其他输出求和，形成斜盘的输入。"
+
+#: ../../source/docs/traditional-helicopter-control-system.rst:53
+#: 278771b1fadf44ea89b444c003f7adea
+msgid ""
+"The integrator maximum I path contribution is limited by the "
+":ref:`ATC_RAT_RLL_IMAX<ATC_RAT_RLL_IMAX__AC_AttitudeControl_Heli>` in roll "
+"and :ref:`ATC_RAT_PIT_IMAX<ATC_RAT_PIT_IMAX__AC_AttitudeControl_Heli>` in "
+"pitch."
+msgstr ""
+"积分器最大 I 路径贡献受横滚轴 "
+":ref:`ATC_RAT_RLL_IMAX<ATC_RAT_RLL_IMAX__AC_AttitudeControl_Heli>` 和俯仰轴 "
+":ref:`ATC_RAT_PIT_IMAX<ATC_RAT_PIT_IMAX__AC_AttitudeControl_Heli>` 的限制。"

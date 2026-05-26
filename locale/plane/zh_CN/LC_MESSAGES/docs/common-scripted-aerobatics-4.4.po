@@ -1,0 +1,1138 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 14:59+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:191
+msgid "Aerobatic Tuning"
+msgstr "特技调参"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:7
+#: 5a6bec262d7543ec9640b1d4290f0ea5
+msgid "Scripted Aerobatics"
+msgstr "脚本化特技飞行"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:10
+#: bf29da06a56e4118b634bdf8a0ddbcce
+msgid "this capability is in ArduPlane 4.2 and higher"
+msgstr "此功能适用于 ArduPlane 4.2 及更高版本"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:12
+#: c8a2daeba0c3411484fe29e836ef045f
+msgid ""
+"ArduPilot has the capability of executing aerobatics from a LUA script. "
+"Either via AUTO mode mission items, or via scripts executed in many normal "
+"plane flight modes, usually controlled via a transmitter switch and "
+"selection RC channels."
+msgstr ""
+"ArduPilot 支持通过 LUA 脚本执行特技飞行动作。既可通过 Auto "
+"模式任务项执行，也可在许多正常固定翼飞行模式下通过脚本运行，通常由遥控器开关和选择 RC 通道进行控制。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:14
+#: 044add6dc0834e52850599d1a467daff
+msgid ""
+"this requires a vehicle capable of aerobatic flight, properly tuned "
+"pitch,roll, and yaw rate controllers, and the pilot should be capable of "
+"safely taking over control (by switch or mode change) the vehicle while in "
+"an unusual attitude, if the need arises. The ``ACRO_x_RATE`` parameters "
+"limit the maximum commanded rate for each axis, as in ACRO mode."
+msgstr ""
+"此功能要求飞机具备特技飞行能力，且俯仰、横滚和偏航速率控制器已正确调参。飞手应具备在飞机处于异常姿态时安全接管控制权（通过拨动开关或切换飞行模式）的能力。``ACRO_x_RATE``"
+" 参数限制每个轴的最大指令速率，与 Acro 模式相同。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:17
+#: c22a66405a93474a8714963dd187932b
+msgid "Mission NAV_SCRIPT_TIME"
+msgstr "任务 NAV_SCRIPT_TIME"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:19
+#: d80f768bd4dd424e925e854f0d477d78
+msgid ""
+"The SCRIPT_TIME waypoint type allows for a :ref:`LUA<common-lua-scripts>` "
+"script to take control of the roll/pitch/yaw rates of the vehicle for a "
+"time. For protection against lack of an appropriate script being active (ie "
+"was not loaded in the APM/Scripts directory of the SD card) to assume "
+"control, or LUA script crash due to error, there is a mandatory parameter "
+"which provides a maximum time the script can takeover, before the next "
+"mission item is executed. An additional layer of protection is provided "
+"within the firmware execution of the NAV_SCRIPT_TIME command that requires "
+"the script to access it within every 200ms, so the command's timeout "
+"parameter (P2) can be set to 0 (unlimited time out) for longer running "
+"aerobatics sequences (> 255 seconds), IF they are known to be otherwise "
+"well-behaved and present on the SD card."
+msgstr ""
+"SCRIPT_TIME 航点类型允许 :ref:`LUA<common-lua-scripts>` "
+"脚本在一段时间内接管飞机横滚/俯仰/偏航速率控制。为防止合适的脚本未激活（即未加载到 SD 卡 APM/Scripts 目录）或 LUA "
+"脚本因错误崩溃，设有一个强制参数用于指定脚本可接管的最大时间，超时后将执行下一个任务项。固件在执行 NAV_SCRIPT_TIME "
+"命令时还提供额外保护层，要求脚本每 200ms 至少访问一次该命令，因此对于较长的特技飞行序列（>255 秒），如果确认脚本行为正常且 SD "
+"卡上已存在脚本，可将命令的超时参数（P2）设为 0（无限超时）。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:21
+#: bda0168a5c6b48aaa22b7823fc6cddd2
+msgid "The format of the SCRIPT_TIME item is:"
+msgstr "SCRIPT_TIME 任务项的格式如下："
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:71
+#: 351ce647b45a4ce5b9e6aa7614510d74
+msgid ""
+"A LUA script would need to be running when the above mission command is "
+"encountered to recognize that it needs to take control, and start sending "
+"pitch/roll/yaw rate inputs into the autopilot to control its attitude and/or"
+" trajectory. It can use the four variable input parameters of the command to"
+" control aspects of the maneuver, such as rate of rolls/loops, repeat "
+"counts, time for certain segments of the maneuver, etc. An example is "
+"provided in the LUA Scripting Applet directory called `plane_aerobatics.lua "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/applets/Aerobatics/FixedWing>`__"
+" for several types of tricks and full aerobatic schedules."
+msgstr ""
+"当上述任务命令被触发时，需要有一个 LUA "
+"脚本正在运行，以识别需要接管控制并开始向飞控发送俯仰/横滚/偏航速率输入来控制飞机姿态和/或轨迹。脚本可利用命令的四个可变输入参数来控制动作的各个方面，如横滚/循环的速率、重复次数、动作特定阶段的时间等。LUA"
+" 脚本小程序目录中提供了一个名为 `plane_aerobatics.lua "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/applets/Aerobatics/FixedWing>`__"
+" 的示例，涵盖多种特技类型及完整特技飞行程序。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:73
+#: 6d2b547553cf4d6aa6d9d35916ea2651
+msgid ""
+"The execution of a script running during the NAV_SCRIPT_TIME item can easily"
+" be interrupted by switching modes out of AUTO."
+msgstr "在 NAV_SCRIPT_TIME 任务项执行期间运行的脚本，可通过切换出 Auto 模式来轻松中断。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:75
+#: e9ded0ce383f4f7bb4f08fc21d4d101d
+msgid ""
+"returning to AUTO mode would resume the AUTO mission at the last item before"
+" switching modes. If this was a NAV_SCRIPT_TIME command it would re-start "
+"from the beginning."
+msgstr ""
+"返回 Auto 模式将从切换模式前的上一个任务项继续执行 Auto 任务。若该项为 NAV_SCRIPT_TIME 命令，则将从头重新开始。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:77
+#: 1d932b60e7d247b2ae97a72b01f2d759
+msgid ""
+"be sure to have valid waypoints before and after a NAV_SCRIPT_TIME sequence "
+"of commands in order to establish path for the scripts to use (optionally) "
+"and to have sufficient altitude before trying this feature."
+msgstr "请确保在 NAV_SCRIPT_TIME 命令序列前后设置有效航点，以便为脚本建立路径（可选），并在尝试此功能前确保有足够的飞行高度。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:79
+#: 08e0fe0054e84f95b2dbd7ae59d207c0
+msgid ""
+"if you create your mission, and place the LUA script you intend to use in "
+"the /scripts subdirectory of a SITL simulation, you can test the script and "
+"the mission without risking your vehicle."
+msgstr "若在 SITL 仿真的 /scripts 子目录中创建任务并放置计划使用的 LUA 脚本，可在不损坏实机的情况下测试脚本和任务。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:82
+#: eae2b8d71fd94294bf731efb005440c3
+msgid ""
+"Trajectory Precise Plane Aerobatics LUA script (firmware 4.4 and higher)"
+msgstr "轨迹精确固定翼特技飞行 LUA 脚本（固件 4.4 及更高版本）"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:84
+#: a880c7c06fb54817a72ce0e8882ab059
+msgid ""
+"A trajectory precise (attempts to track an exact earth referenced geospatial"
+" path), plane aerobatics script example is provided in the LUA Scripting "
+"Applet directory called `plane_aerobatics.lua "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/applets/Aerobatics/FixedWing>`__"
+" . This LUA applet has a multitude of maneuvers, as well as complete "
+"sequences of routines, and the ability to easily create and add new sequence"
+" of routines."
+msgstr ""
+"LUA 脚本小程序目录中提供了一个轨迹精确（尝试跟踪精确的地球参考地理空间路径）的固定翼特技飞行脚本示例，名为 "
+"`plane_aerobatics.lua "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/applets/Aerobatics/FixedWing>`__。该"
+" LUA 小程序包含大量动作以及完整的飞行程序序列，并支持轻松创建和添加新的程序序列。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:86
+#: 907f9a0173c54e9c82d447cc9121f82b
+msgid ""
+"These tricks and sequences can be either run as part of a mission using the "
+"NAV_SCRIPT_TIME mission command above, or activated by a switch on the RC "
+"transmitter."
+msgstr "这些特技动作和序列既可作为任务的一部分通过上述 NAV_SCRIPT_TIME 任务命令运行，也可通过 RC 遥控器上的开关激活。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:88
+#: c06932eaf0784beda083e646fcdf714f
+msgid ""
+"The script provides numerous individual tricks, and a table of their IDs is "
+"provided in the `README.md "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/applets/Aerobatics/FixedWing/README.md>`__"
+" file. Below is a list, but future expansion is anticipated so check the "
+"README:"
+msgstr ""
+"该脚本提供了大量单独特技动作，其 ID 表格收录于 `README.md "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/applets/Aerobatics/FixedWing/README.md>`__"
+" 文件。以下为列表，但预计未来会有扩展，请查阅 README："
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:91
+#: e3b8ce7e1003413ba9384095a3959534
+msgid "ID"
+msgstr "ID"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:91
+#: 266a013fdb274835b0302ca6a00b910f
+msgid "Name"
+msgstr "名称"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:91
+#: 71105e58d014420e8e6800623059b8fa
+msgid "Arg1"
+msgstr "参数1"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:91
+#: 9035a967119d4362b4400c4dbbfe7603
+msgid "Arg2"
+msgstr "参数2"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:91
+#: e1a667f6dfc949a091db6bbda79a6fd9
+msgid "Arg3"
+msgstr "参数3"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:91
+#: adf07eed1f374faf8fd78dc0f91fa909
+msgid "Arg4"
+msgstr "参数4"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:91
+#: 47ee927ada084fe78aa807c9380adfc8
+msgid "Turnaround"
+msgstr "Turnaround"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:93
+#: 499ed36f601c4771896b1a7de5c8b2ea
+msgid "1"
+msgstr "1"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:93
+#: b6eb2a9795154de8a50144183c8b319e
+msgid "Figure Eight"
+msgstr "Figure Eight"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:93
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:94
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:95
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:96
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:97
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:98
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:100
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:101
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:102
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:103
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:104
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:106
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:107
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:108
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:109
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:110
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:111
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:112
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:113
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:114
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:115
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:116
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:118
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:121
+#: 0668c6fe6f344459a1312749a61b199d 1ff1e60e8ca447d3b8c433e3c0bb2f11
+#: 3196d8e108084dc7b83199edbdf60849 4150f0bb89aa4710918c6a75f05b76ff
+#: 4890e52337174fc8b80677389cc8ae73 5d8e8e38aca14b3ba19bd2ac47db32b1
+#: 659247f94d8d4c64ae2057da252b7a6a 65c2c13aa82b4298aa39ffae376b2daa
+#: 80a2d9be3f374a5c8ba37e567cb8caad 96ecd12be7664df194f50681ed793dff
+#: a279bcbb4604465cb5147ab24f0398d9 ae3905d879534a7fb65cc4e5e33ec5ad
+#: b0462532177645e5bc0b745074de4e2a b6c34dcc63a849ff9a1ee5648bc37b08
+#: bd0cc78e57034cc7802301878672c081 c145c168781d4a0693a4a2c8249af734
+#: c18ef02bf7c6470597e1abea7a1cc615 c231d4d33411448293ef967b3f1630b8
+#: c9a468dbc0c14004af4d18bcd2080c37 c9d0ef9d739942f2a50c09f072432de6
+#: cb706108c4224ece9dc90cdb2674dfec cbe160b8bf4c46c5915161742a3d4d56
+#: d56f46d5f70b47609e015d326fb3a4f9 eff8abade91a43e0a7c2e4d80b2be85e
+msgid "radius"
+msgstr "半径"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:93
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:94
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:95
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:96
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:105
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:106
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:112
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:113
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:114
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:117
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:118
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:121
+#: 138ff5d0e4a148558ac833d85843e815 13c19fd78351421289aa30d9d7abdf44
+#: 17782d1e21184e35912c425f79fa2ea5 508db12de80c4d78b1e2ecfa1437593a
+#: 5eee64fd8ef4430d94205e51540da78d 7d4238ae30e14a1082d0e67497102cbc
+#: 88c5c07824a24f2ab17e3c78c9c03a3c 897bc3654d6e42439db71385d1bb7d5d
+#: b042687b9a4641a7b67eaf15d521c50b b3639cebc46a4471839d8838584e0394
+#: cd59ec099ec243ad82358f2fb3540426 f4a5d96a1f824e26a40e7474db0acdf7
+msgid "bank angle"
+msgstr "坡度角"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:93
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:94
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:95
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:96
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:97
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:99
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:100
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:103
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:105
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:106
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:109
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:110
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:113
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:116
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:117
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:118
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:119
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:120
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:121
+#: 030822f500ef4e9e9c92d7b4fced7eab 07af5e77841843d693204dba04f83d9d
+#: 093a6190a22747828fcafe246bf55429 2c3c7a5a5fe843a18726eb76c2ad7c9b
+#: 2ceeb9eac827455b973ead72519be29d 4072448075e74ea7930db9d25bd1e9e0
+#: 4b823a4436974f97baf43c9cf5582b31 5ae135d435644956906fca561d4d71c1
+#: 6c4c2db4811a4a2f81f8d324b8a6f851 7117f4fd8e3746b8b127b9136d80341c
+#: 792b7e6959284e028cf042fd3a2b31a9 9373924fe44e43d899cafb94e1fa6c44
+#: a8783bc5fd3a46c5a9d18574a9f7f912 b0093905a1ce48adb11f8dbd3834590a
+#: c8d0d1c9d89f4d40a5144e7fb46978c7 d1d5e3b4463e42868c7fad9954d0bbde
+#: dad02f60d85a481b8668780e0119361d dec32d838f6348269a0564d8199ebcaf
+#: ebb979d326774c298541f391e7988ed0
+msgid "No"
+msgstr "否"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:94
+#: ff8f5d6e925942e380264508da4d27a4
+msgid "2"
+msgstr "2"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:94
+#: a6dae66f40c24a70b22d6ed0848a13b3
+msgid "Loop"
+msgstr "Loop"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:94
+#: 14483cd27a884d718fda9cb1ad73f842
+msgid "#   loops"
+msgstr "循环次数"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:95
+#: 996bfd12bce74dc781b47dacb5417207
+msgid "3"
+msgstr "3"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:95
+#: f5e912a8034349a09efeff57854f9748
+msgid "Horizontal Rectangle"
+msgstr "Horizontal Rectangle"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:95
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:97
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:99
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:105
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:116
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:117
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:119
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:120
+#: 00ec5a8594f5481e89653056d2563550 4b74f90f112a4cd5a8941e92d7191b61
+#: 52177344c541414f86f846d460b48c3c 55c47ea0b0ae4cf393b0af9534758378
+#: 7a1cc327bd144ed09df4fadda8f6ff4d cfa543c16b5346679ff15f51e690e6c0
+#: f7389f1930ac4befba7f5ee8fd7bed40 ff90400cbe6b4e6ab3a616ee5527f99b
+msgid "length"
+msgstr "长度"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:95
+#: ca5cbaf8e86649fb9d3319f6c3a7f9a3
+msgid "width"
+msgstr "宽度"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:96
+#: d32d25b0fd944dabb9017b759570769d
+msgid "4"
+msgstr "4"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:96
+#: 4f0a531483b341cb817ee83032bb9f6c
+msgid "Climbing Circle"
+msgstr "Climbing Circle"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:96
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:97
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:104
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:111
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:114
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:115
+#: 2a49600814b0441e8496ee3a7b299626 72a0232a34b54304949acc67c3f4509a
+#: 8997be4a16a84f11bfd46db05923c509 d01a577b1c6e4419814aaa8275378ee3
+#: d6ebc81eba1d4e6aa995eaca4143004d dcbadd71149f422e99691c3b5462a3a8
+msgid "height"
+msgstr "高度"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:97
+#: 32c5e21407ec4defb87ba00c08eec423
+msgid "5"
+msgstr "5"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:97
+#: 36757184594d480db15b56290e5b93c9
+msgid "vertical Box"
+msgstr "vertical Box"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:98
+#: a666c937deaa44af8c0dc407440496ff
+msgid "6"
+msgstr "6"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:98
+#: 03e9238b66ab44248e5238698ca5404d
+msgid "Immelmann (FastRoll)"
+msgstr "Immelmann (FastRoll)"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:98
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:101
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:102
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:104
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:107
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:108
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:111
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:112
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:114
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:115
+#: 05b9541fbcb14e459d9fc6f45e1b6933 30feeb2888e24409bf47778fde6b3d12
+#: 7af02a43e480489d854f0eb8eb67fd38 830beeb65d3b431685f6af2317d8a719
+#: b3a85c9e91a94bb688b2a9a885ee7502 bcc324c09b9542b4a5dc6a0a038730d1
+#: c4450f41fa3f4239aad62f6e28fe11e8 dc360ff6c00e4b8c92b0f3147ee31b9a
+#: f1efd43a74974d76b722a0e0cc8a8cdc f80a60c406ba41b6857f4ffb7d6d4995
+msgid "Yes"
+msgstr "是"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:99
+#: 059aa194f704462dace52cf4b7dda9ec
+msgid "7"
+msgstr "7"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:99
+#: e08f10cac92b4cbda66b445bb8480ba4
+msgid "Straight Roll"
+msgstr "Straight Roll"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:99
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:100
+#: 2eb36f11282247cd86600d9651f7b593 5724e3720a634e4e868e571f9acc0b96
+msgid "num rolls"
+msgstr "横滚次数"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:100
+#: 402dbf22afb9451899b8b5dcddaabc63
+msgid "8"
+msgstr "8"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:100
+#: 27db2ab708eb462d9820b594c505d3db
+msgid "Rolling Circle"
+msgstr "Rolling Circle"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:101
+#: 7d657b0dec384d2aa7713c447e056e9f
+msgid "9"
+msgstr "9"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:101
+#: 8cb962923b6345658fe99e6af687fc8c
+msgid "Half Cuban Eight"
+msgstr "Half Cuban Eight"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:102
+#: bea7b9d0345145fbbeb37788114e9f30
+msgid "10"
+msgstr "10"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:102
+#: 22f00f571be54786bbeabc781980fe79
+msgid "Half Reverse Cuban Eight"
+msgstr "Half Reverse Cuban Eight"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:103
+#: 0a4631876e7f46e08ebd2f80308c3634
+msgid "11"
+msgstr "11"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:103
+#: 2f190dd241b14fffae7b662abba7113f
+msgid "Cuban Eight"
+msgstr "Cuban Eight"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:104
+#: 429a15a7113a473ea820192e567bd407
+msgid "12"
+msgstr "12"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:104
+#: 3c59648352d64f81934f4fa06c32d50e
+msgid "Humpty Bump"
+msgstr "Humpty Bump"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:105
+#: 931d808b043640588b2fcc931f835eda
+msgid "13"
+msgstr "13"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:105
+#: 44f007fc51c24932890208be3ecf35fb
+msgid "Straight Flight"
+msgstr "Straight Flight"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:106
+#: ab2a20fad3c14264ab724ae3138ecd66
+msgid "14"
+msgstr "14"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:106
+#: 99099353af974459a3feea50b7779ce0
+msgid "Scale Figure Eight"
+msgstr "Scale Figure Eight"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:107
+#: 12e0b7242c6e4b5daef5708e2d650a5e
+msgid "15"
+msgstr "15"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:107
+#: e2c3ba9b62df4dcfacf534e76139b536
+msgid "Immelmann Turn"
+msgstr "Immelmann Turn"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:108
+#: e675b07b2d594fc6b07e74513805a235
+msgid "16"
+msgstr "16"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:108
+#: b4e248e8baa6415f85fa487c103ddb38
+msgid "Split-S"
+msgstr "Split-S"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:109
+#: 0f663140ebe5424697d46346b4936150
+msgid "17"
+msgstr "17"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:109
+#: 1ae853bfc824401b95bccab826aa31db
+msgid "Upline-45"
+msgstr "Upline-45"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:109
+#: dcd1af28a6024a56b75e3c16a3b32bf1
+msgid "height gain"
+msgstr "高度增益"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:110
+#: 2b57c557f35b493ba70290e289eb90b1
+msgid "18"
+msgstr "18"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:110
+#: 0db0319a59bb462ab9a61d7ed7a84f04
+msgid "Downline-45"
+msgstr "Downline-45"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:110
+#: 16086325351e44fd98166c38d39f0bed
+msgid "height loss"
+msgstr "高度损失"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:111
+#: 0466467fd52c422d811fa16e8878a47e
+msgid "19"
+msgstr "19"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:111
+#: 2ceef962ce074f07a0094875e812c1b2
+msgid "Stall Turn"
+msgstr "Stall Turn"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:111
+#: 189f8abef670409f899fdb33a838d456
+msgid "direction"
+msgstr "方向"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:112
+#: 636dbf4408e0412c9800b24398798420
+msgid "20"
+msgstr "20"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:112
+#: 3b9a8dff672c46de9576b64bd80258a5
+msgid "Procedure Turn"
+msgstr "Procedure Turn"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:112
+#: 090943bd78ca46989714eda3b1304602
+msgid "step-out"
+msgstr "步出距离"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:113
+#: 5ddffc5ccaf24c8b9319d3c3603be608
+msgid "21"
+msgstr "21"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:113
+#: 40645ef1662c4385b5ee104cba363ac5
+msgid "Derry Turn"
+msgstr "Derry Turn"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:114
+#: 7fc83e331aef40ad8c793d1135032c70
+msgid "23"
+msgstr "23"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:114
+#: 9c74b78c5e024b02b933aeeff70203fd
+msgid "Half Climbing Circle"
+msgstr "Half Climbing Circle"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:115
+#: 2e3ad590228846f08bf31edefc9a7cd9
+msgid "25"
+msgstr "25"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:115
+#: 0cf27983417b453eb829c741c5d7082f
+msgid "Laydown Humpty"
+msgstr "Laydown Humpty"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:116
+#: 35b0ab50c054404f84d9bfedcb265091
+msgid "26"
+msgstr "26"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:116
+#: 70a3997c0db54c92aadbdaaa43f665aa
+msgid "Barrell Roll"
+msgstr "Barrell Roll"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:116
+#: 8e148c4cbe2e455f9715cd6490202a46
+msgid "# spirals"
+msgstr "螺旋次数"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:117
+#: bfc7d825b9724389bad168386d043191
+msgid "27"
+msgstr "27"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:117
+#: 7c6125c328ed40e4845e959fdb5ea0a1
+msgid "Straight Hold"
+msgstr "Straight Hold"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:118
+#: db895142a1bb47d697ca4423f0233fae
+msgid "28"
+msgstr "28"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:118
+#: 57357b3dee414310be7e539fc29f568a
+msgid "Partial Circle"
+msgstr "Partial Circle"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:119
+#: 2303468cd5514eb0881787c6336607d6
+msgid "30"
+msgstr "30"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:119
+#: 5da5960dc8ff4dd1971023e42776f965
+msgid "Eight Point Roll"
+msgstr "Eight Point Roll"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:120
+#: 384a85ba75a748248bccc5a0eb44bb89
+msgid "31"
+msgstr "31"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:120
+#: f9e414b7afb94007ac48c18718f07591
+msgid "Multi Point Roll"
+msgstr "Multi Point Roll"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:120
+#: b76ca0b8590447778952f83fdabb266e
+msgid "num points"
+msgstr "点数"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:121
+#: 6ad7bcc8ca204f6694af16baa13d08bc
+msgid "32"
+msgstr "32"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:121
+#: f142763bfac04e8691f9c683340be970
+msgid "Side Step"
+msgstr "Side Step"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:124
+#: 8cda5662efc44ef9867baa0b82e6dcef
+msgid ""
+"To use as part of a mission, you would insert a SCRIPT_TIME mission item as "
+"shown:"
+msgstr "若要将其用于任务，可插入如下所示的 SCRIPT_TIME 任务项："
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:129
+#: 638a5f75761f4ebdaba561f79e7a2651
+msgid ""
+"in the above example, once WP3 is reached the airshow (shown here as "
+"\"204\", loaded from a shedules file named trick204.txt, see scheduels "
+"section below) will execute, and when finished, proceed to WP5."
+msgstr ""
+"在上述示例中，到达 WP3 后，飞行表演（此处显示为 「204」，从名为 trick204.txt "
+"的程序文件加载，见下方程序章节）将执行，完成后继续前往 WP5。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:132
+#: ca189a158e9a4b46abb117604a98e5ba
+msgid "Tricks on a Switch"
+msgstr "开关特技（Tricks on a Switch）"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:134
+#: 2db92d47be18425cad80d8a5ddf63b60
+msgid ""
+"This applet also provides a means to execute tricks or sequences via an RC "
+"Switch in normal modes like ACRO, LOITER, CRUISE, or FBWA."
+msgstr "该小程序还支持在 Acro、LOITER、CRUISE 或 FBWA 等正常飞行模式下通过 RC 开关执行特技或序列。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:137
+#: e0be3116d1ce4a7fa07e14e5f793ee2c
+msgid "Setup"
+msgstr "配置"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:139
+#: b1278ebd19a042c7adc27698e40bbeda
+msgid ""
+"Make sure you have Autotuned your plane and that its capable of doing "
+"aerobatics in ACRO mode well (Bixlers and flying wings only can do rolls and"
+" loops, generally, since they have insufficient yaw authority and side "
+"fuselage area...ie must be able to knife edge for full capability). This "
+"includes Autotuning the new YAW rate controller. Enable "
+":ref:`YAW_RATE_ENABLE<YAW_RATE_ENABLE>` and set "
+":ref:`ACRO_YAW_RATE<ACRO_YAW_RATE>` appropriately (90deg/s is a good start)."
+" When you Autotune, not only do pitch and roll, but also yaw by exercising "
+"the rudder, like pitch and roll."
+msgstr ""
+"确保已对飞机进行 Autotune，且飞机能在 Acro 模式下良好执行特技飞行（Bixler "
+"和飞翼一般只能做横滚和筋斗，因为它们偏航控制权限不足，机身侧面面积不够……即必须能做刀锋飞行才具备完整能力）。这包括对新的偏航速率控制器进行 "
+"Autotune。启用 :ref:`YAW_RATE_ENABLE<YAW_RATE_ENABLE>` 并适当设置 "
+":ref:`ACRO_YAW_RATE<ACRO_YAW_RATE>`（90度/秒是个好的起点）。进行 Autotune "
+"时，不仅要做俯仰和横滚，还要通过拨动方向舵进行偏航，方式与俯仰和横滚相同。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:140
+#: 36c31d7d5828422f869e45789948893e
+msgid ""
+"Enable scripting, on an autopilot that is capable (F7 or H7) with "
+":ref:`SCR_ENABLE<SCR_ENABLE>` =1, reboot and set "
+":ref:`SCR_HEAP_SIZE<SCR_HEAP_SIZE>` = 250000 (you will need more if other "
+"scripts are running also) and :ref:`SCR_VM_I_COUNT<SCR_VM_I_COUNT>` = "
+"200000."
+msgstr ""
+"在具备能力的飞控（F7 或 H7）上通过 :ref:`SCR_ENABLE<SCR_ENABLE>` =1 启用脚本，重启后设置 "
+":ref:`SCR_HEAP_SIZE<SCR_HEAP_SIZE>` = 250000（若有其他脚本同时运行则需更多），以及 "
+":ref:`SCR_VM_I_COUNT<SCR_VM_I_COUNT>` = 200000。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:141
+#: 7e30f34924024006914da534baee47d9
+msgid ""
+"Copy the `plane_aerobatic.lua "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/applets/FixedWing>`__"
+" script into your SD card APM/scripts directory. Use the RAW view and copy "
+"to files on the SD card. Reboot."
+msgstr ""
+"将 `plane_aerobatic.lua "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/applets/FixedWing>`__"
+" 脚本复制到 SD 卡的 APM/scripts 目录。请使用 RAW 视图查看并将文件复制到 SD 卡。重启。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:142
+#: c3f1ca34128d476ab7e1ae3598db825f
+msgid ""
+"If you want to activate tricks and schedules from an RC switch, assign an RC"
+" channel to ``RCx_OPTION`` = 300 for the trick activation switch "
+"(low=disable,mid=show trick number selected, high= do it) and one for 301 "
+"which is trick selection. This normally a pot or slider, but can be any "
+"switch (which limits the number of tricks to the number of switch "
+"positions). Set the ``TRIK_ENABLE`` to 1 and reboot. Then set `TRIK_COUNT`` "
+"parameter to the number of tricks (11 maximum) to be selectable by the trick"
+" selection channel. Reboot."
+msgstr ""
+"若要通过 RC 开关激活特技和程序，将 RC 通道分配 ``RCx_OPTION`` = 300 "
+"作为特技激活开关（低=禁用，中=显示所选特技编号，高=执行），另一个分配 301 "
+"作为特技选择。通常使用旋钮或滑块，也可使用任意开关（这会将特技数量限制为开关位数）。设置 ``TRIK_ENABLE`` 为 1 并重启。然后将 "
+"`TRIK_COUNT`` 参数设置为可由特技选择通道选择的特技数量（最多 11 个）。重启。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:143
+#: 6119f1348a9541dbac2bf2a8aa6226f5
+msgid ""
+"For each trick/schedule, set its corresponding "
+"``TRIKn_ID/ARG1/ARG2/ARG3/ARG4`` parameters. For example, if you wish TRIK3 "
+"to be a Vertical Box, 50 meters tall, 100 meters long, with corner radii of "
+"15 meters, set ``TRIK3_ID`` = 5, ``TRIK3_ARG1`` = 100, ``TRIK3_ARG2`` = 50, "
+"and ``TRIK3_ARG3`` = 15. Other TRIK3 argument values are ignored."
+msgstr ""
+"对于每个特技/程序，设置对应的 ``TRIKn_ID/ARG1/ARG2/ARG3/ARG4`` 参数。例如，若要将 TRIK3 设为 50 "
+"米高、100 米长、转角半径 15 米的 Vertical Box，则设置 ``TRIK3_ID`` = 5、``TRIK3_ARG1`` = "
+"100、``TRIK3_ARG2`` = 50、``TRIK3_ARG3`` = 15，其他 TRIK3 参数值忽略。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:144
+#: 6b62c3101be1410aae184e861b791c8b
+msgid ""
+"Setting the activation switch to mid position will identify the trick number"
+" selected by the selection channel on the ground station or TX, if running "
+":ref:`Yaapu <common-frsky-yaapu>` telemetry."
+msgstr ""
+"将激活开关拨至中间位置，可在地面站或遥控器上（如运行 :ref:`Yaapu <common-frsky-yaapu>` "
+"数传）显示选择通道所选的特技编号。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:145
+#: 7a19b0203c3640fbbb753d4802fccdeb
+msgid ""
+"You can abort out of the trick by putting activation switch low, change "
+"modes, or set selector to 0. A trick or sequence will also abort if the "
+"programmed trajectory is not being met with an error limit. This usually "
+"indicates a lack of sufficient vehicle tuning or power."
+msgstr ""
+"可通过将激活开关拨低、切换飞行模式或将选择器置为 0 "
+"来中止特技。如果编程轨迹未在误差范围内得到跟踪，特技或序列也会自动中止，这通常表明飞机调参不足或动力不够。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:149
+#: c8dacad42fb4417fa22ad18d7b4eb4d6
+msgid ""
+"Remember: ALTITUDE IS YOUR FRIEND! dont attempt your first one below "
+"200feet! and FPV is a good way to try it out first, if you have trouble with"
+" seeing the vehicle at that altitude."
+msgstr "记住：高度是你的朋友！首次尝试不要低于 200 英尺！如果在该高度难以看清飞机，FPV 是一个很好的试飞方式。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:152
+#: b1a654d7c67f4287b6c9e2cf39286a07
+msgid "AEROM Parameters"
+msgstr "AEROM 参数"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:154
+#: f2b59b4dfcd54257a5b9382c1de479df
+msgid ""
+"Many new parameters will appear when this script is loaded, which control "
+"the tuning of the tricks. See the `README.md "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/applets/Aerobatics/FixedWing/README.md>`__"
+" file for up to date information, but a few should be changed from their "
+"defaults in most cases:"
+msgstr ""
+"加载此脚本后将出现许多新参数，用于控制特技的调参。有关最新信息请查看 `README.md "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/applets/Aerobatics/FixedWing/README.md>`__"
+" 文件，但在大多数情况下以下几个参数需要从默认值修改："
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:156
+#: 91e22bf391634c9286c4b4b267f50747
+msgid ""
+"``AEROM_PATH_SCALE`` this is probably the most critical when using the "
+"example schedules. Individual tricks in a mission, or a trick on a switch, "
+"can adjust the trick dimensions with the TRIKx_ARGy parameters. But the "
+"schedules, unless edited, have dimensions suited to high performance pattern"
+" planes with significant vertical speed capability. For normal 3D planes or "
+"sport planes these are too aggressive and the sequence will probably abort "
+"on many tricks, especially in wind. However, if you lower the path scale "
+"from \"1\" (no scaling) to \".75\", more normal 3D planes will be able to "
+"execute the schedule. For marginally powered (can barely hover vertically) "
+"planes, even a \".5\" scale factor, or less, might be required, scaling all "
+"radii and lengths of the pattern by 50%."
+msgstr ""
+"``AEROM_PATH_SCALE`` 这可能是使用示例程序时最关键的参数。任务中的单个特技或开关特技可通过 TRIKx_ARGy "
+"参数调整特技尺寸。但程序序列（除非经过编辑）的尺寸是为具有显著垂直速度能力的高性能表演机设计的，对于普通 3D "
+"飞机或运动飞机来说过于激进，序列可能在很多特技上中止，尤其是在有风时。如果将路径比例从 「1」（不缩放）降低到 「.75」，较普通的 3D "
+"飞机将能够执行程序序列。对于动力勉强够用（刚好能垂直悬停）的飞机，可能需要 「.5」 的比例因子甚至更低，将所有图形的半径和长度缩小 50%。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:157
+#: c83eddf7556d40caae64002de48c65ad
+msgid ""
+"``AEROM_THR_MIN`` should be set to 15-20 (%) to maintain inertia at the "
+"bottom of loops, etc."
+msgstr "``AEROM_THR_MIN`` 应设置为 15-20（%）以在筋斗底部等处维持惯性。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:158
+#: ecc6cc867cc248cb8f6d73418371b6de
+msgid ""
+"``AEROM_KE_ANG`` most planes need a little boost to the knife edge rudder, "
+"so setting this 10 is usually needed"
+msgstr "``AEROM_KE_ANG`` 大多数飞机需要稍微增强刀锋飞行的方向舵，因此通常需要将此值设为 10。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:159
+#: b50fb3410eea4deda582780bafd52833
+msgid ""
+":ref:`AIRSPEED_CRUISE<AIRSPEED_CRUISE>`: while the script does NOT use the "
+"airspeed sensor, it  uses GPS velocity to track the trajectory and this "
+"parameter to set target ground speeds. As such you may wish to set this "
+"(even if there is no airspeed sensor) to a \"fast\" cruise speed within the "
+"vehicles capability. Flying on the fast end of cruise helps deal with wind "
+"impacts."
+msgstr ""
+":ref:`AIRSPEED_CRUISE<AIRSPEED_CRUISE>`：虽然脚本不使用空速传感器，但它使用 GPS "
+"速度来跟踪轨迹，并使用此参数设定目标地速。因此，即使没有空速传感器，也可以将此值设为飞机能力范围内的「较快」巡航速速。以较快的巡航速度飞行有助于应对风的影响。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:162
+#: 5738e0c757db40378be3f2e5d258e5b6
+msgid "Schedules"
+msgstr "程序序列"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:163
+#: 6618e410f82b496286bd6537077a148d
+msgid ""
+"The applet also allows loading sequences of tricks to perform contest "
+"schedules like F3A or airshows as a single trick which can be executed from "
+"a mission or as Trick on a Switch. These are text files of the form "
+"``trickX.txt``, where X would be the trick id, and located in the /scripts "
+"directory, or the root directory on the SD card where the "
+"plane_aerobatics.lua script is stored. These should not be the same number "
+"as existing tricks."
+msgstr ""
+"该小程序还支持加载特技序列来执行 F3A 竞赛程序或飞行表演，作为单个特技，可从任务中执行或作为开关特技执行。这些是形如 ``trickX.txt`` "
+"的文本文件，其中 X 为特技 ID，存放于 /scripts 目录或存储 plane_aerobatics.lua 脚本的 SD "
+"卡根目录。这些文件的编号不应与现有特技重复。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:166
+#: 53a6e998139e45d6a5e2dbe62c5b9496
+msgid ""
+"An example for a schedule is included as `trick72.txt "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/applets/Aerobatics/FixedWing/trick72.txt>`__"
+" and would be executed as ``TRIKx_ID`` = 72 via switch or in an AUTO mission"
+" command. The schedule will display its \"name\" when started, and as each "
+"trick begins a \"message\" will sent to the GCS to indicate its start."
+msgstr ""
+"作为程序示例，`trick72.txt "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/applets/Aerobatics/FixedWing/trick72.txt>`__"
+" 已包含在内，可通过开关或 AUTO 任务命令以 ``TRIKx_ID`` = 72 "
+"执行。程序开始时将显示其「名称」，每个特技开始时向地面站发送「消息」以指示其启动。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:168
+#: a9196181161740d1bca7dfaa0eed4e0e
+msgid ""
+"Several sequences, such as F3A, etc. are included in the `Schedules folder "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/applets/Aerobatics/FixedWing/Schedules>`__."
+" The above 'trick72.txt' is the SuperAirshow Sequence, consisting of "
+"Loop/HalfReverseCubanEight/ScaleFigureEight/Immelmann/Roll/Split-S/RollingCircle/HumptyBump/Barrel"
+" Rool/Cross Box TopHat/Triangular Loop:"
+msgstr ""
+"在 `程序文件夹 "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/applets/Aerobatics/FixedWing/Schedules>`__"
+" 中包含了多个序列，如 F3A 等。上述 「trick72.txt」 是 SuperAirshow "
+"序列，由以下动作组成：Loop/HalfReverseCubanEight/ScaleFigureEight/Immelmann/Roll/Split-S/RollingCircle/HumptyBump/Barrel"
+" Rool/Cross Box TopHat/Triangular Loop："
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:173
+#: 4fc692bf2f6a42e187a56782a49e4840
+msgid ""
+"Adding new basic tricks can also be done via a schedule file. This is shown "
+"in the SuperAirShow schedule file where a triangle loop and a crossbox "
+"tophat trick have been created and loaded with the schedule sequence."
+msgstr ""
+"也可以通过程序文件添加新的基本特技。在 SuperAirShow 程序文件中即展示了这一点，其中已创建并加载了三角形筋斗和 crossbox "
+"tophat 特技及程序序列。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:176
+#: 72fa8cf7a1f040d495a10b579ac339f4
+msgid "Trick File Commands"
+msgstr "特技文件命令"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:178
+#: f764057c4b314ef5bb989eb17569e418
+msgid "Several commands can be used within the trick file:"
+msgstr "特技文件中可以使用以下命令："
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:180
+#: 7ac5a63af16e494583962916aab58cf2
+msgid "name: <the name of the Trick>"
+msgstr "name: <特技名称>"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:181
+#: 942a52c454254d3f9ec297061277cf4d
+msgid ""
+"message: <usually the trick name>  displayed as a GCS message. This should "
+"be positioned immediately before the trick"
+msgstr "message: <通常是特技名称>  作为地面站消息显示，应紧靠在特技之前"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:182
+#: 7a0f6afbae724cc2b94618d2c5625d63
+msgid ""
+"<trick name> <param1><parm2>..<param4>   the subroutine name in the "
+"plane_aerobatics file that actually performs the trick and its passed "
+"parameters"
+msgstr "<特技名称> <参数1><参数2>..<参数4>   plane_aerobatics 文件中实际执行该特技的子程序名称及其传入参数"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:183
+#: af51fac786ac467b990cc7eceec1022b
+msgid ""
+"align_center:   this will wait to start the following trick until the "
+"vehicle is centered, or if beyond the center (in the direction of flight) of"
+" the aerobatic box, immediately. The center is where the trick schedule was "
+"started."
+msgstr ""
+"align_center：等待下一个特技开始，直到飞机到达中心位置，或者若飞机已越过中心（沿飞行方向），则立即执行。中心为特技程序开始时的位置。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:184
+#: 477c72412ced40c3b5dd351702cd37c5
+msgid ""
+"align_box x:  this positions the start of the next trick \"x\" from the box "
+"end in the direction of travel, ie \"1\" would make the trick be aligned at "
+"the box end, while .75 would start it 3/4 the way from center to it. Usually"
+" a value of \"1\" is used."
+msgstr ""
+"align_box x：将下一个特技的起始位置定位在距飞行方向箱体端点 「x」 处，即 「1」 表示特技在箱体端点对齐，「.75」 "
+"表示从中心到箱体端点的 3/4 处开始。通常使用 「1」。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:187
+#: dcb8e502479e47d89d8f25d9cd898381
+msgid "Tuning for Aerobatics"
+msgstr "特技飞行调参"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:189
+#: 431beed6392f4189836e723a86e536fc
+msgid ""
+"Normal ArduPilot Autotune provides a safe, stable PID tune for most "
+"vehicles. As such, its not optimized for precision aerobatics which require "
+"a tight tune. See below:"
+msgstr ""
+"正常的 ArduPilot Autotune 为大多数飞机提供安全稳定的 PID 调参。因此，它并未针对需要精确调参的精准特技飞行进行优化。请参见下文："
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:197
+#: 81bc13901626431ea26d14288d8c6873
+msgid "Analyzing Performance"
+msgstr "性能分析"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:199
+#: baab0d50e01c4e1b8afb7170077390f9
+msgid ""
+"Analyzing the resulting execution of the trick(s) or schedules can easily be"
+" done by using the `Plot3d tool <http://plot3d.ardupilot.org>`__ which "
+"displays the programmed path and the actual executed path graphically. The "
+"first part of the timeline will trace the programmed path, while the second "
+"half traces the actual. Both are overlaid at the start to show path errors. "
+"The lua script will log additional items while executing the trick(s) to "
+"allow this tool to display this information."
+msgstr ""
+"分析特技或程序的执行效果，可通过使用 `Plot3d 工具 <http://plot3d.ardupilot.org>`__ "
+"轻松完成，该工具以图形方式显示编程路径和实际执行路径。时间轴的前半部分描绘编程路径，后半部分描绘实际路径，两者在起点叠加以显示路径误差。LUA "
+"脚本在执行特技时会记录额外信息，以便该工具显示这些信息。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:201
+#: 53287a3418bd407aa804cb5e20ba0846
+msgid ""
+"To use this tool, load your flight log file using the **Load BIN** button, "
+"select \"manual\" site selection and **Copy Origin** to set the view to you "
+"home location."
+msgstr ""
+"使用此工具时，用 **Load BIN** 按钮加载飞行日志文件，选择「手动」站点选择并 **Copy Origin** 将视图设置为 Home 位置。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:206
+#: 16d7cd9c85eb4e498c949f4cc27f6c16
+msgid ""
+"Overlaid on the above image is the second tool: using the ``AERT.Perr`` log "
+"message which shows the 3D position error from programmed path in meters. "
+"The above shows that the vehicle was blown downwind in high crosswinds out "
+"of the rolling circle by 15m at one point. This was greatly improved in "
+"later flights by increasing the speed at which the plane did the routine "
+"(increase :ref:`AIRSPEED_CRUISE<AIRSPEED_CRUISE>`)"
+msgstr ""
+"叠加在上图上的第二个工具：使用 ``AERT.Perr`` "
+"日志消息，显示飞机与编程路径的三维位置误差（单位：米）。上图显示飞机在强侧风中执行滚转圆时被吹离轨道达 15 "
+"米。在后续飞行中通过提高飞机执行程序的速度（增大 :ref:`AIRSPEED_CRUISE<AIRSPEED_CRUISE>`）大幅改善了这一情况。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:210
+#: 97f3558869eb46e18abdf562e9f2c11f
+msgid "Simulation"
+msgstr "仿真"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:212
+#: ad997dd1571849ab82d3bdf97cb61c27
+msgid ""
+"Using SITL, especially in conjunction with :ref:`RealFlight<dev:sitl-with-"
+"realflight>` and a RealFlight model like the `AddictionX "
+"<https://github.com/ArduPilot/SITL_Models/tree/master/RealFlight/Released_Models/Planes/Addiction_3D>`__,"
+" makes development and debugging much easier without risking a real vehicle."
+" However, simulation can also be done without RealFlight using Mission "
+"Planner alone with ArduPilot's provided 3D plane model."
+msgstr ""
+"使用 SITL，尤其是结合 :ref:`RealFlight<dev:sitl-with-realflight>` 和类似 `AddictionX "
+"<https://github.com/ArduPilot/SITL_Models/tree/master/RealFlight/Released_Models/Planes/Addiction_3D>`__"
+" 的 RealFlight 模型，可在不损坏实机的情况下大幅简化开发和调试工作。此外，仅使用 Mission Planner 配合 ArduPilot "
+"提供的 3D 飞机模型，也可以进行不依赖 RealFlight 的仿真。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:214
+#: d72e5ee63723473eb70225c07636887a
+msgid ""
+"Below is a video showing simulation using Mission Planner and the built-in "
+"3D plane simulation:"
+msgstr "以下视频展示了使用 Mission Planner 和内置 3D 飞机仿真的模拟效果："
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:218
+#: 4515ef002c004b569721bdd38a18dae6
+msgid ""
+"If you are using RealFlight for simulations, here is how to setup the "
+"Addiction 3D model to do scripted trajectory aerobatics:"
+msgstr "如果使用 RealFlight 进行仿真，以下是配置 Addiction 3D 模型执行脚本轨迹特技的方法："
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:223
+#: 225e2c5101dc498ca05e863eceeee45e
+msgid "Script Calls into the firmware"
+msgstr "脚本对固件的调用"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:225
+#: 716ab3a21b154bf0a18604e99ae17c12
+msgid ""
+"Other scripts can be developed which allow control of the vehicle, either "
+"via NAV_SCRIPT_TIME mission items or from normal flight modes. The key calls"
+" are:"
+msgstr "可以开发其他脚本来控制飞机，无论是通过 NAV_SCRIPT_TIME 任务项还是从正常飞行模式。关键调用如下："
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:227
+#: 0f499d58d55d494ca8e29907a09f3d9b
+msgid ""
+"Enabling scripting control override of roll/pitch/yaw rates and throttle "
+"with a specific call \"vehicle:nav_scripting_enable(..)\" which returns a "
+"boolean indicating  success or failure."
+msgstr ""
+"通过特定调用 "
+"「vehicle:nav_scripting_enable(..)」启用脚本对横滚/俯仰/偏航速率及油门的控制覆盖，该调用返回布尔值表示成功或失败。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:229
+#: 4f5e61636ef54ddc802f84aefaf12417
+msgid ""
+"Obtaining the arguments of a NAV_SCRIPT_TIME command using "
+"\"vehicle:nav_script_time()\" if running while in AUTO mode."
+msgstr "在 Auto 模式运行时，通过 「vehicle:nav_script_time()」获取 NAV_SCRIPT_TIME 命令的参数。"
+
+#: ../../source/docs/common-scripted-aerobatics-4.4.rst:231
+#: 26c845dd83944fb19b571b639bae2875
+msgid ""
+"Controlling the above rates and throttle with the "
+"\"vehicle:set_target_throttle_rate_rpy(....)\" function, which must be "
+"called regularly (at least every second) to set the roll/pitch/yaw rates and"
+" throttle percentage. Failure to do so, will disable the control override "
+"and return control to the original flight mode. Changing flight modes also "
+"disables script control."
+msgstr ""
+"通过 "
+"「vehicle:set_target_throttle_rate_rpy(....)」函数控制上述速率和油门，该函数必须定期调用（至少每秒一次）以设置横滚/俯仰/偏航速率和油门百分比。若未及时调用，将禁用控制覆盖并将控制权返还给原飞行模式。切换飞行模式也会禁用脚本控制。"

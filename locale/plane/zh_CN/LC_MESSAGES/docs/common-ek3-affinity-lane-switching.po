@@ -1,0 +1,203 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 03:48+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:6
+#: ef5241c477704df5adcd78720921030a
+msgid "EKF3 Affinity and Lane Switching"
+msgstr "EKF3 亲和性与通道切换"
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:8
+#: 5568c140f5bb4f58b766efa8e60b0981
+msgid ""
+"The :ref:`EKF <dev:extended-kalman-filter>` instantiates multiple instances "
+"of the filter called 'lanes'. The primary lane is the one that provides "
+"state estimates, rest are updated in the background and available for "
+"switching to. The number of possible lanes is exactly equal to the number of"
+" IMUs enabled for use. Conventionally, each lane uses the primary instance "
+"of the Airspeed, Barometer, GPS and Magnetometer sensors. The primary sensor"
+" can be set as a user-modifiable parameter, but can be later changed by the "
+"system, even in-flight, in case of a driver-level fault. However, modern-day"
+" vehicles are known to have multiple sensors installed of good quality. "
+"Affinity is a way for the EKF lanes to use non-primary sensors within any "
+"running lane. This provides a statistically consistent way to make use of "
+"multiple high quality sensors and use lane-switching to select the lane "
+"which has best performing combination of sensors. The lane error score takes"
+" into account innovations from all sensors used by a lane. This way, the "
+"vehicle can be saved from mishaps using noisy non-IMU sensors as well."
+msgstr ""
+":ref:`EKF <dev:extended-kalman-filter>` "
+"实例化了多个滤波器实例，称为「通道」。主通道提供状态估计，其余通道在后台更新，随时可切换使用。可用通道数量等于启用的 IMU "
+"数量。通常，每个通道使用空速、气压计、GPS "
+"和磁力计传感器的主实例。主传感器可通过用户可修改的参数设置，但在驱动层面发生故障时系统可在飞行中更改。然而，现代飞行器通常安装有多个高质量传感器。亲和性是让"
+" EKF "
+"通道在任意运行通道中使用非主传感器的一种方式。这提供了统计上一致的方法来利用多个高质量传感器，并通过通道切换选择传感器组合性能最佳的通道。通道误差分数综合考虑了该通道所有传感器的新息。这样，飞行器也可以避免由噪声较大的非"
+" IMU 传感器引起的事故。"
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:11
+#: 109991aef8844e16959901c02b66dc42
+msgid ""
+"**A simple example of an affinity configuration for a vehicle which has 2 "
+"Barometers, 2 GPS, 2 Airspeeds, 3 Magnetometers and 3 IMUs -**"
+msgstr "**一个具有 2 个气压计、2 个 GPS、2 个空速计、3 个磁力计和 3 个 IMU 的飞行器的亲和性配置简单示例 -**"
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:23
+#: 60ba88b3b50d4e4eb1e2e9915b4bc97a
+msgid "*Numbers are the respective sensor instances*"
+msgstr "*数字为各传感器实例编号*"
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:26
+#: 3ef112ff4e8e438b9cfcba9d62cd3233
+msgid "Configuration Parameters"
+msgstr "配置参数"
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:30
+#: 7562131baaf54ac78003defdd32211b1
+msgid ""
+"Affinity is only available with EKF3, so make sure you are using it by "
+"ensuring :ref:`EK3_ENABLE <EK3_ENABLE>` is set to \"1\" and "
+":ref:`AHRS_EKF_TYPE <AHRS_EKF_TYPE>` is set to \"3\""
+msgstr ""
+"亲和性仅适用于 EKF3，请确保通过将 :ref:`EK3_ENABLE <EK3_ENABLE>` 设置为「1」，将 "
+":ref:`AHRS_EKF_TYPE <AHRS_EKF_TYPE>` 设置为「3」来启用 EKF3。"
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:32
+#: 25e879c3b87a4d6998041060f0c3c802
+msgid ""
+"The :ref:`EK3_AFFINITY <EK3_AFFINITY>` parameter is a bitmask which gives "
+"you the option to choose the sensors you want to enable affinity for. Non-"
+"enabled will follow the default primary sensor allotment."
+msgstr ""
+":ref:`EK3_AFFINITY <EK3_AFFINITY>` "
+"参数是一个位掩码，可选择要启用亲和性的传感器。未启用的传感器将遵循默认主传感器分配。"
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:34
+#: 56f8a6f0472c44c8b15478552f952e21
+msgid ""
+"The :ref:`EK3_ERR_THRESH <EK3_ERR_THRESH>` parameter controls the "
+"sensitivity of lane switching. Lane errors are accumulated over time "
+"relative to the active primary lane. This threshold controls how much of an "
+"error difference between a non-primary and primary lane is required to "
+"consider the former performing better. Lowering this parameter makes lane "
+"switching more responsive to smaller 'relative' errors, and in practical you"
+" will see a more aggressive lane switching, and, vice-versa."
+msgstr ""
+":ref:`EK3_ERR_THRESH <EK3_ERR_THRESH>` "
+"参数控制通道切换的灵敏度。通道误差相对于活跃主通道随时间累积。该阈值控制非主通道与主通道之间需要多大的误差差值才认为前者表现更好。降低该参数会使通道切换对较小的「相对」误差更敏感，实际上会看到更积极的通道切换，反之亦然。"
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:38
+#: 501858bd09e64e1ba14e5373c13bc658
+msgid ""
+"Misconfiguring the :ref:`EK3_ERR_THRESH <EK3_ERR_THRESH>` parameter could "
+"adversely affect the lane switching mechanism and have serious consequences "
+"which could lead to the loss of your vehicle. Please tune carefully."
+msgstr ""
+"错误配置 :ref:`EK3_ERR_THRESH <EK3_ERR_THRESH>` "
+"参数可能会对通道切换机制产生不利影响，并产生严重后果，可能导致飞行器丢失。请谨慎调参。"
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:42
+#: a42e61eef0cf4467be09dc04f0d70ded
+msgid "Test Results"
+msgstr "测试结果"
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:44
+#: b2c366d757a54683b4b04d0af05b923f
+msgid ""
+"Following graphs are from SITL testing that show Affinity enabled lane "
+"changing when the primary lane's sensor is subjected to "
+"noise/malfunctioning."
+msgstr "以下图表来自 SITL 测试，显示了当主通道传感器受到噪声/故障时，启用亲和性的通道切换过程。"
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:47
+#: b2ad3c87d7434990a3527b527fd6f8c9
+msgid "AIRSPEED"
+msgstr "AIRSPEED"
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:48
+#: af59411d1c4340278d13a7d34a8532e5
+msgid ""
+"An example of lane switching for a plane with 2 airspeed sensors and "
+"airspeed affinity enabled. There are 2 IMUs, hence 2 active lanes. The "
+"primary lane's airspeed sensor has failed to show changes in pressure, hence"
+" reporting a constant value. The speed of the plane is increased and a lane "
+"switch occurs. Similarly, the second airspeed sensor of the second lane (now"
+" the primary lane) is failed and the plane's speed is decreased which again "
+"triggers a lane switch."
+msgstr ""
+"一个具有 2 个空速传感器且启用空速亲和性的固定翼飞行器通道切换示例。有 2 个 IMU，因此有 2 "
+"个活跃通道。主通道的空速传感器失效，无法显示气压变化，持续报告恒定值。飞机速度增加后触发通道切换。类似地，第二通道（现为主通道）的第二个空速传感器失效，飞机速度降低再次触发通道切换。"
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:53
+#: 28ea164f75bd407980396c882ea1ef83
+msgid "BAROMETER"
+msgstr "BAROMETER"
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:54
+#: 96e4561e23884f8ea54b73e388c0fbdf
+msgid ""
+"An example of lane switching for a plane with 2 barometers and barometer "
+"affinity enabled. There are 2 IMUs, hence 2 active lanes. The primary lane's"
+" barometer has failed to show changes in pressure, hence reporting a "
+"constant value. The altitude of the plane is increased and a lane switch "
+"occurs. Similarly, the second barometer of the second lane (now the primary "
+"lane) is failed and the plane's altitude is decreased which again triggers a"
+" lane switch."
+msgstr ""
+"一个具有 2 个气压计且启用气压计亲和性的固定翼飞行器通道切换示例。有 2 个 IMU，因此有 2 "
+"个活跃通道。主通道的气压计失效，无法显示气压变化，持续报告恒定值。飞机高度增加后触发通道切换。类似地，第二通道（现为主通道）的第二个气压计失效，飞机高度降低再次触发通道切换。"
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:59
+#: f88cf6fdd8014167a85e597aa4723324
+msgid "GPS"
+msgstr "GPS"
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:60
+#: cd626761a83541b1a2134e428efe49f1
+msgid ""
+"An example of lane switching for a plane with 2 GPS and GPS affinity "
+"enabled. There are 2 IMUs, hence 2 active lanes. The primary lane's GPS is "
+"simulated with a random GPS Velocity Noise of range ±2m in all 3-axis. The "
+"actual speed can be tracked with the 2nd GPS. Subsequently, the EKF primary "
+"lane starts reporting a consistently high error and a lane switch occurs "
+"when the error crosses the set threshold."
+msgstr ""
+"一个具有 2 个 GPS 且启用 GPS 亲和性的固定翼飞行器通道切换示例。有 2 个 IMU，因此有 2 个活跃通道。主通道的 GPS 以 ±2m "
+"的随机 GPS 速度噪声在所有 3 轴进行仿真。实际速度可通过第 2 个 GPS 跟踪。随后，EKF "
+"主通道开始持续报告高误差，误差超过设定阈值时触发通道切换。"
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:66
+#: 3d418435ea1d47c0b146de6ae009bde7
+msgid "MAGNETOMETER"
+msgstr "MAGNETOMETER"
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:67
+#: 8ffbf91751484102893739550e66fc02
+msgid ""
+"An example of lane switching for a plane with 2 Magnetometers and "
+"magnetometer affinity enabled. There are 2 IMUs, hence 2 active lanes. An "
+"error is simulated in the primary lane's magnetometer by changing the offset"
+" of the z-axis while flying. The offset change can be tracked with the 2nd "
+"magnetometer. Subsequently, the EKF primary lane starts reporting a "
+"consistently high error and a lane switch occurs when the error crosses the "
+"set threshold."
+msgstr ""
+"一个具有 2 个磁力计且启用磁力计亲和性的固定翼飞行器通道切换示例。有 2 个 IMU，因此有 2 个活跃通道。通过在飞行时更改主通道磁力计的 Z "
+"轴偏移量来模拟误差，偏移量变化可通过第 2 个磁力计跟踪。随后，EKF 主通道开始持续报告高误差，误差超过设定阈值时触发通道切换。"

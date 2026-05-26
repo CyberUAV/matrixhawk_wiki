@@ -1,0 +1,393 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 14:59+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:5
+#: cce71baa78cd4ec7a0ec5905ab8941d8
+msgid "Tuning Ground Steering for a Plane"
+msgstr "固定翼地面转向调参"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:7
+#: 57929711d7724642adcd169428e916c0
+msgid ""
+"The Plane firmware has the ability to control ground steering if you have "
+"either a tail wheel or nose wheel in your aircraft. Ground steering is "
+"activated in all modes except MANUAL, and when properly tuned it makes it "
+"much easier to keep a plane on a straight track along the runway for takeoff"
+" and landing."
+msgstr ""
+"Plane 固件具有控制地面转向的能力，如果您的飞机有尾轮或前轮的话。地面转向在除 Manual "
+"以外的所有模式下都处于激活状态，正确调参后，在跑道起飞和降落时保持飞机直线滑行会容易得多。"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:13
+#: 81138a7d3d0a455d9d320b09501ec40c
+msgid ""
+"Ground steering may be implemented either by using a wheel coupled to a "
+"RUDDER output (``SERVOx_FUNCTION`` =21), either mechanically or with an "
+"second servo, or with the dedicated GroundSteering output "
+"(``SERVOx_FUNCTION`` =26). If the GroundSteering output is assigned, then it"
+" operates independently of the RUDDER output, otherwise, the Ground Steering"
+" controller's output controls the RUDDER when below "
+":ref:`GROUND_STEER_ALT<GROUND_STEER_ALT>`."
+msgstr ""
+"地面转向可以通过以下方式实现：使用与RUDDER输出（``SERVOx_FUNCTION`` "
+"=21）联动的轮子，机械联动或使用第二个舵机；或使用专用GroundSteering输出（``SERVOx_FUNCTION`` "
+"=26）。如果分配了GroundSteering输出，则它独立于RUDDER输出运行；否则，地面转向控制器的输出在低于 "
+":ref:`GROUND_STEER_ALT<GROUND_STEER_ALT>` 时控制RUDDER。"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:15
+#: 1d93e49cd41343cfb54c385178165490
+msgid ""
+"When setting up ground steering for a plane there are 4 key parameters you "
+"need to get right. This guide provides a set of steps to get those "
+"parameters right, so that your plane will accurately track down a runway on "
+"the ground."
+msgstr "为飞机设置地面转向时，需要正确设置4个关键参数。本指南提供了一组步骤来正确设置这些参数，使您的飞机能够在地面上精确地沿跑道行驶。"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:21
+#: ad04b4def95e4a39ac865362a5c16cdf
+msgid "Controlling steering"
+msgstr "控制转向"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:23
+#: b870d8cb13e44918807b03fe77c3e71b
+msgid ""
+"To enable ground steering you need to set the "
+":ref:`GROUND_STEER_ALT<GROUND_STEER_ALT>` parameter to something above zero."
+" This is the barometric altitude above the initial altitude at which the "
+"steering changes from ground steering of a wheel to rudder steering for "
+"aerodynamic control. It is recommended that you set this to 5 meters to "
+"allow for a bit of barometric drift."
+msgstr ""
+"要启用地面转向，需要将 :ref:`GROUND_STEER_ALT<GROUND_STEER_ALT>` "
+"参数设置为大于零的值。这是气压高度相对于初始高度的值，超过此高度时转向从地面轮式转向切换到气动舵面转向。建议将其设置为5米，以允许一定的气压漂移余量。"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:29
+#: 5a479fc6c4ea42a0a6525f46a9875a73
+msgid ""
+"When ground steering is active it locks onto a compass heading whenever you "
+"have no rudder or aileron input. So to steer the plane on the ground while "
+"taxiing you should use the rudder to change direction, then take your hand "
+"off both rudder and aileron to hold the current compass heading. Ground "
+"steering will only work properly if you have a compass enabled."
+msgstr ""
+"当地面转向激活时，只要您没有方向舵或副翼输入，它就会锁定罗盘航向。因此，在地面滑行时，应使用方向舵改变方向，然后将手从方向舵和副翼上移开，以保持当前罗盘航向。地面转向仅在启用罗盘时才能正常工作。"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:37
+#: ee8478ba9a234d0180ba06bd46aa4e44
+msgid "THE KEY PARAMETERS"
+msgstr "关键参数"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:39
+#: 8595b5229f9a4446be0dfa62005ae48c
+msgid ""
+":ref:`STEER2SRV_P<STEER2SRV_P>`: This tells the code what the turning circle"
+" (as a diameter in meters) is for your plane. It is critical that you get "
+"this parameter right, as it tells the code what steering angle to choose to "
+"achieve a desired turn rate."
+msgstr ""
+":ref:`STEER2SRV_P<STEER2SRV_P>`：这告诉代码您的飞机的转弯圆（以米为单位的直径）。正确设置此参数至关重要，因为它告诉代码选择什么转向角来实现所需的转弯率。"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:43
+#: 99df1f3b9bea45c38603db910e9f9aa3
+msgid ""
+":ref:`STEER2SRV_I<STEER2SRV_I>`: This is the gain from the integral of "
+"steering angle. Increasing this gain causes the controller to trim out "
+"steady offsets due to an out of trim vehicle.."
+msgstr ":ref:`STEER2SRV_I<STEER2SRV_I>`：这是转向角积分的增益。增大此增益会使控制器消除由飞行器偏差引起的稳态偏移。"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:46
+#: 043c80745e3b4d9a9f9e823c8c184810
+msgid ""
+":ref:`STEER2SRV_D<STEER2SRV_D>`: This adjusts the damping of the steering "
+"control loop. This gain helps to reduce steering jitter with vibration. It "
+"should be increased in 0.01 increments as too high a value can lead to a "
+"high frequency steering oscillation that could overstress the vehicle."
+msgstr ""
+":ref:`STEER2SRV_D<STEER2SRV_D>`：这调整转向控制回路的阻尼。此增益有助于减少震动引起的转向抖动。应以0.01为步长增加，因为值过高会导致高频转向振荡，可能使飞行器过载。"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:51
+#: 6b22d9521f174cccad9adc8e2e2dd53a
+msgid ""
+":ref:`STEER2SRV_IMAX<STEER2SRV_IMAX>`: This limits the number of degrees of "
+"steering in centi-degrees over which the integrator will operate. At the "
+"default setting of 1500 centi-degrees, the integrator will be limited to +- "
+"15 degrees of servo travel. The maximum servo deflection is +- 45 centi-"
+"degrees, so the default value represents a 1/3rd of the total control throw "
+"which is adequate unless the vehicle is severely out of trim."
+msgstr ""
+":ref:`STEER2SRV_IMAX<STEER2SRV_IMAX>`：这限制积分器运行的转向度数（百分度）。在默认设置1500百分度下，积分器将被限制在±15度的舵机行程内。最大舵机偏转为±45百分度，因此默认值代表总控制行程的1/3，这在飞行器严重偏差的情况下是足够的。"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:58
+#: 401a6d735b6e4307b0255f1e4169043d
+msgid ""
+":ref:`STEER2SRV_MINSPD<STEER2SRV_MINSPD>`: This is the minimum assumed "
+"ground speed in meters/second for steering. Having a minimum speed prevents "
+"oscillations when the vehicle first starts moving. The vehicle can still "
+"driver slower than this limit, but the steering calculations will be done "
+"based on this minimum speed."
+msgstr ""
+":ref:`STEER2SRV_MINSPD<STEER2SRV_MINSPD>`：这是转向的最小假定地速（米/秒）。设置最小速度可防止飞行器开始移动时出现振荡。飞行器仍然可以以低于此限制的速度行驶，但转向计算将基于此最小速度进行。"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:63
+#: e738e6b006574e638f9fc64f90fd3f1d
+msgid ""
+":ref:`STEER2SRV_TCONST<STEER2SRV_TCONST>`: This controls the time constant "
+"in seconds from demanded to achieved steering angle. A value of 0.75 is a "
+"good default and will work with nearly all rovers. Ground steering in "
+"aircraft needs a bit smaller time constant, and a value of 0.5 is "
+"recommended for best ground handling in fixed wing aircraft. A value of 0.75"
+" means that the controller will try to correct any deviation between the "
+"desired and actual steering angle in 0.75 seconds. Advanced users may want "
+"to reduce this time to obtain a faster response but there is no point "
+"setting a time less than the vehicle can achieve."
+msgstr ""
+":ref:`STEER2SRV_TCONST<STEER2SRV_TCONST>`：这控制从需求到实现转向角的时间常数（秒）。0.75的值是一个好的默认值，几乎适用于所有地面车辆。飞机中的地面转向需要稍小的时间常数，建议固定翼飞机使用0.5以获得最佳地面操控。0.75意味着控制器将在0.75秒内纠正期望和实际转向角之间的任何偏差。高级用户可能希望减少此时间以获得更快的响应，但设置小于飞行器实际能达到的时间没有意义。"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:73
+#: fbf8628336a74110906127b470b8c3f0
+msgid ""
+":ref:`GROUND_STEER_ALT<GROUND_STEER_ALT>`: Altitude at which to use the "
+"ground steering controller on the rudder. If non-zero, then the STEER2SRV "
+"controller will be used to control the rudder for altitudes below this limit"
+" with respect to the home altitude."
+msgstr ""
+":ref:`GROUND_STEER_ALT<GROUND_STEER_ALT>`：使用地面转向控制器控制方向舵的高度。如果非零，STEER2SRV控制器将用于控制相对于Home高度低于此限制的方向舵。"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:79
+#: 54240909691a4b0baa698367b77680d2
+msgid "STEP 1: SETTING INITIAL PARAMETERS"
+msgstr "第1步：设置初始参数"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:81
+#: ff342008bd0d4951a27ead30f5641a69
+msgid "To start the tuning process set the following values:"
+msgstr "要开始调参过程，请设置以下值："
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:83
+#: 78b372120b82446295abebdede7e4dab
+msgid "**STEER2SRV_P**:             =      See step 2"
+msgstr "**STEER2SRV_P**:             =      见第2步"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:84
+#: 82253b84ceca48899a44bb7cdec33f1a
+msgid "**STEER2SRV_I**:              =      0.1"
+msgstr "**STEER2SRV_I**:              =      0.1"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:85
+#: 7599ae7c584b45748df42f15f149fef0
+msgid "**STEER2SRV_D**:             =     0.02"
+msgstr "**STEER2SRV_D**:             =     0.02"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:86
+#: be09476b373b4c81a506330b7a9372ff
+msgid "**STEER2SRV_IMAX**:      =    1500"
+msgstr "**STEER2SRV_IMAX**:      =    1500"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:87
+#: 55083af09380480fb3f26e3c5ce109f5
+msgid "**STEER2SRV_MINSPD**: =    1"
+msgstr "**STEER2SRV_MINSPD**: =    1"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:88
+#: a0d733e5fe354489a9031d28245ef2f6
+msgid "**STEER2SRV_TCONST**: =    0.5"
+msgstr "**STEER2SRV_TCONST**: =    0.5"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:89
+#: 8281135f7034416a868ad27268f156ad
+msgid "**GROUND_STEER_ALT**: =    5"
+msgstr "**GROUND_STEER_ALT**: =    5"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:91
+#: 3ac64d9f89ee406bb7d7b933e6882c91
+msgid ""
+"These are conservative values that should give you reasonable behaviour for "
+"most PLANES."
+msgstr "这些是保守值，对大多数固定翼飞机应能提供合理的行为。"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:95
+#: c368778da7c0460095df409136b94ac9
+msgid "STEP 2: SETTING THE :ref:`STEER2SRV_P<STEER2SRV_P>`"
+msgstr "第2步：设置 :ref:`STEER2SRV_P<STEER2SRV_P>`"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:97
+#: 9e1fb4877d8c4ac7a2a0e0a37d5c2e68
+msgid ""
+"To set your :ref:`STEER2SRV_P<STEER2SRV_P>` parameter you need to measure "
+"the diameter of the turning circle of your plane."
+msgstr "要设置 :ref:`STEER2SRV_P<STEER2SRV_P>` 参数，需要测量飞机转弯圆的直径。"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:100
+#: d02549c6ae934b58891302ebd80efd89
+msgid ""
+"With your motor off put your plane into MANUAL mode, and put the rudder hard"
+" over to one side. Then slowly push your plane in a circle. Use a tape "
+"measure to measure the diameter of that circle and set "
+":ref:`STEER2SRV_P<STEER2SRV_P>` to that value in meters. Most planes have a "
+"turning diameter of around 4 meters. If your turning diameter is a long way "
+"from 4 then you may have the rates or throw on your rudder set incorrectly."
+msgstr ""
+"关闭电机，将飞机设置为 Manual 模式，将方向舵打到一侧到底。然后慢慢推动飞机画一个圆。用卷尺测量该圆的直径，并将 "
+":ref:`STEER2SRV_P<STEER2SRV_P>` "
+"设置为该值（米）。大多数飞机的转弯直径约为4米。如果转弯直径与4相差很远，则方向舵的速率或行程可能设置不正确。"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:108
+#: 05d3b29d5eb94b84922e63f520482707
+msgid "Fixing Problems with weaving"
+msgstr "解决S形蛇行问题"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:110
+#: db0a2bee7ad545d388c95e06a1cab7a0
+msgid ""
+"A common issue with ground steering is that the steering 'weaves', turning "
+"from side to side rather than turning smoothly. There can be several "
+"possible reasons for this happening."
+msgstr "地面转向的常见问题是转向「蛇行」，左右摇摆而不是平滑转弯。这可能有几个可能的原因。"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:114
+#: 27f02224662440e9b353eab8df6b72aa
+msgid ""
+"The first thing you need to work out is if the problem is confined to low "
+"speed or also affects higher speed driving. If the problem only happens at "
+"very low speed then the most likely problem is that "
+":ref:`STEER2SRV_MINSPD<STEER2SRV_MINSPD>` is too low. The default is 1.0 "
+"m/s, which is quite low, and if your GPS heading isn't very reliable at low "
+"speed then you may need to raise that number. Try 2.0 and see if that helps "
+"with low speed weaving."
+msgstr ""
+"首先需要确定问题是仅限于低速还是也影响高速行驶。如果问题仅在非常低的速度下发生，最可能的原因是 "
+":ref:`STEER2SRV_MINSPD<STEER2SRV_MINSPD>` 太低。默认值为1.0 "
+"m/s，这相当低，如果您的GPS航向在低速时不太可靠，可能需要提高该数值。尝试2.0，看看是否有助于解决低速蛇行。"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:122
+#: 2c9eb6f39086427ab2572fe204439f49
+msgid ""
+"In the steering controller there are 3 key parameters that will control "
+"weaving:"
+msgstr "在转向控制器中，有3个关键参数会控制蛇行："
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:125
+#: 68c79acac23a44199f0f5404a0a0427c
+msgid ""
+"A smaller :ref:`STEER2SRV_P<STEER2SRV_P>` will reduce weaving, try reducing "
+"it by 0.1 at a time"
+msgstr "较小的 :ref:`STEER2SRV_P<STEER2SRV_P>` 将减少蛇行，尝试每次减少0.1"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:127
+#: cfc1907964ab435e9c5a1f3cbfded5fa
+msgid ""
+"A larger :ref:`STEER2SRV_D<STEER2SRV_D>` will \"damp\" the weaving, but if "
+"you make it too large then you will get high speed oscillation. For example "
+"you may find that a value of 0.1 reduces the damping, but a value of 0.2 "
+"could cause a high speed oscillation in the steering servo. If you get fast "
+"oscillation then reduce the :ref:`STEER2SRV_D<STEER2SRV_D>` value by 50%."
+msgstr ""
+"较大的 :ref:`STEER2SRV_D<STEER2SRV_D>` "
+"将「阻尼」蛇行，但如果过大会导致高速振荡。例如，您可能发现0.1的值减少了阻尼，但0.2的值可能导致转向舵机高速振荡。如果出现快速振荡，则将 "
+":ref:`STEER2SRV_D<STEER2SRV_D>` 值减小50%。"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:132
+#: 6be858223d49412389f9a306f5a654fc
+msgid ""
+"A larger :ref:`STEER2SRV_TCONST<STEER2SRV_TCONST>` will slow down the "
+"steering controller, which will reduce weaving. Try raising it in steps of "
+"0.1."
+msgstr ""
+"较大的 :ref:`STEER2SRV_TCONST<STEER2SRV_TCONST>` 将减慢转向控制器，从而减少蛇行。尝试以0.1为步长增加。"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:135
+#: 2a9eed7d90e942a9a9c3b27038b9b591
+msgid ""
+"With the current controller system you do need to experiment a bit with "
+"these values to get the behaviour you want."
+msgstr "使用当前的控制器系统，确实需要对这些值进行一些实验，以获得所需的行为。"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:139
+#: 33f8b8f666ea4af9873ff2f5888c8ce4
+msgid "Tuning for auto-takeoff"
+msgstr "自动起飞调参"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:141
+#: 63c9379f46d8445993ee31237c03a6c3
+msgid ""
+"To tune the ground steering for auto-takeoff it is generally best to do the "
+"tuning in FBWA mode, and only change to auto-takeoff once you can takeoff in"
+" FBWA mode without overriding the steering at all (ie. takeoff without using"
+" the rudder stick)."
+msgstr ""
+"要为自动起飞调参地面转向，通常最好先在FBWA模式下进行调参，只有在FBWA模式下能够起飞而完全不需要覆盖转向（即起飞时不使用方向舵摇杆）之后，再切换到自动起飞。"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:146
+#: e9cd16ebc1ce407cb348fddf0f9805d9
+msgid ""
+"It can also be very helpful to use the :ref:`FBWA Takeoff Elevator <takeoff-"
+"fbwa>` option to setup the same automated elevator behaviour as is used in "
+"auto-takeoff when in FBWA mode. That helps keep tail wheels on the ground in"
+" taildragger aircraft (and can also be used to keep nose wheels on the "
+"ground in tricycle aircraft)."
+msgstr ""
+"使用 :ref:`FBWA起飞升降舵 <takeoff-fbwa>` "
+"选项来设置与FBWA模式下自动起飞相同的自动升降舵行为也非常有帮助。这有助于在尾撑飞机中将尾轮保持在地面（也可用于在三轮飞机中将前轮保持在地面）。"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:153
+#: aa9d624308bb48f8a9afe080b148a467
+msgid "Limiting the steering to prevent a roll on a wing"
+msgstr "限制转向以防止机翼侧翻"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:155
+#: 4095f1ae12754e2c9476790a4a18cf9d
+msgid ""
+"On a large fast planes, especially with large wingspan, there is a chance on"
+" rolling on the wing if the steering is too aggressive. To coupe with this "
+"problem steering limiting can be setup that will derate steering angles with"
+" increasing speed. When the speed is lower than the set derating speed, no "
+"limit occurs and the angle for steering is passed through without changes. "
+"When the speed increase, the steering angle starts to decrease at a setup "
+"rate until the minimum steering angle is reached."
+msgstr ""
+"对于大型高速飞机，尤其是翼展较大的飞机，如果转向过于激进，有机翼侧翻的风险。为了解决这个问题，可以设置转向限制，随着速度增加降低转向角。当速度低于设定的降额速度时，不发生限制，转向角直接通过不变化。当速度增加时，转向角开始以设定速率减小，直到达到最小转向角。"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:164
+#: aa57b1d9a4bb44c1a512ea9e3abd72ac
+msgid ""
+":ref:`STEER2SRV_DRTSPD<STEER2SRV_DRTSPD>`: After this speed the steering "
+"angle gets reduced. The units are m/s"
+msgstr ":ref:`STEER2SRV_DRTSPD<STEER2SRV_DRTSPD>`：超过此速度后转向角开始减小。单位为m/s"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:165
+#: edf60d5994124b07ad0cd22a331b8cad
+msgid ""
+":ref:`STEER2SRV_DRTFCT<STEER2SRV_DRTFCT>`: Amount of degrees to reduce per "
+"each additional m/s increase in speed. The units are in °/m/s"
+msgstr ":ref:`STEER2SRV_DRTFCT<STEER2SRV_DRTFCT>`：每增加1 m/s速度减少的度数。单位为°/m/s"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:166
+#: f748c894168447fbb21cbae111283a6e
+msgid ""
+":ref:`STEER2SRV_DRTMIN<STEER2SRV_DRTMIN>`: Minimum angle in centi-degrees of"
+" steering that will not be decreased further"
+msgstr ":ref:`STEER2SRV_DRTMIN<STEER2SRV_DRTMIN>`：不会进一步减小的最小转向角（百分度）"
+
+#: ../../source/docs/tuning-ground-steering-for-a-plane.rst:168
+#: 28b11cf49a3e49e89641bab6d79b9773
+msgid "The steering angle vs. speed can be illustrated with following chart:"
+msgstr "转向角与速度的关系可以用以下图表说明："

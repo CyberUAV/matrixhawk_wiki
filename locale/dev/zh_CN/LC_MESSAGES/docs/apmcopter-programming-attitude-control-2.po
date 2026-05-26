@@ -1,0 +1,332 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/apmcopter-programming-attitude-control-2.rst:5
+#: 88bdf5e2e35a48fb84828fe6c712aa6c
+msgid "Copter Attitude Control"
+msgstr "Copter 姿态控制"
+
+#: ../../source/docs/apmcopter-programming-attitude-control-2.rst:7
+#: c1dd082043fa48a5b23d66c79fae7b6c
+msgid ""
+"Below is a high level diagram showing how the attitude control is done."
+msgstr "下方是展示姿态控制如何实现的高层图示。"
+
+#: ../../source/docs/apmcopter-programming-attitude-control-2.rst:12
+#: 31883b1710e0450593449e84fb5cdd3b
+msgid ""
+"Below describes what is done for each axis.  A P controller converts the "
+"angle error (the difference between the target angle and actual angle) into "
+"a desired rotation rate followed by a PID controller to convert the rotate "
+"rate error into a high level motor command. The \"square root controller\" "
+"portion of the diagram shows the curve used with the angle control's P "
+"controller."
+msgstr ""
+"以下描述每个轴的处理方式。P 控制器将角度误差（目标角度与实际角度之差）转换为期望旋转速率，随后 PID 控制器将旋转速率误差转换为高层电机指令。图中 "
+"「平方根控制器」 部分展示了角度控制 P 控制器所用的曲线。"
+
+#: ../../source/docs/apmcopter-programming-attitude-control-2.rst:18
+#: 63368a0c429e4daeb4456efafd6073d5
+msgid ""
+"The diagram below shows the code path followed from pilot input down to pwm "
+"output."
+msgstr "下图展示了从飞手输入到 PWM 输出的代码执行路径。"
+
+#: ../../source/docs/apmcopter-programming-attitude-control-2.rst:23
+#: 3ffd56984f274190bad7938b9df16077
+msgid ""
+"On every update (i.e. 400hz on Pixhawk, 100hz on APM2.x) the following "
+"happens:"
+msgstr "每次更新时（即 Pixhawk 上 400hz、APM2.x 上 100hz），会执行以下操作："
+
+#: ../../source/docs/apmcopter-programming-attitude-control-2.rst:26
+#: 00edcb51d7f144de839d910f4e3192d4
+msgid ""
+"the top level flight-mode.cpp's \"update_flight_mode()\" function is called."
+"  This function checks the vehicle's flight mode (ie. \"control_mode\" "
+"variable) and then calls the appropriate <flight mode>_run() function (i.e. "
+"`stabilize_run "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/mode_stabilize.cpp#L9>`__"
+" for stabilize mode, `rtl_run "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/mode_rtl.cpp#L49>`__"
+" for RTL mode, etc).  The <flight mode>_run() function can be found in the "
+"appropriately named mode_<flight mode>.cpp file (i.e. `mode_stabilize.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/mode_stabilize.cpp>`__,"
+" `mode_rtl.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/mode_rtl.cpp>`__,"
+" etc)."
+msgstr ""
+"调用顶层 flight-mode.cpp 的 「update_flight_mode()」 函数。该函数检查飞行器的飞行模式（即 "
+"「control_mode」 变量），然后调用相应的 <飞行模式>_run() 函数（如 stabilize 模式调用 `stabilize_run "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/mode_stabilize.cpp#L9>`__，RTL"
+" 模式调用 `rtl_run "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/mode_rtl.cpp#L49>`__"
+" 等）。<飞行模式>_run() 函数可在相应命名的 mode_<飞行模式>.cpp 文件中找到（如 `mode_stabilize.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/mode_stabilize.cpp>`__、`mode_rtl.cpp"
+" "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/mode_rtl.cpp>`__"
+" 等）。"
+
+#: ../../source/docs/apmcopter-programming-attitude-control-2.rst:37
+#: e07e248644c84474bb8ab8ae67db165b
+msgid ""
+"the <flight mode>_run function is responsible for converting the user's "
+"input (found in g.rc_1.control_in, g.rc_2.control_in, etc) into a lean "
+"angle, rotation rate, climb rate, etc that is appropriate for this flight "
+"mode.  For example `AltHold "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/mode_althold.cpp#L22>`__"
+" converts the user's roll and pitch input into lean angles (in degrees), the"
+" yaw input is converted into a rotation rate (in degrees per second) and the"
+" throttle input is converted to a climb rate (in cm/s)."
+msgstr ""
+"<飞行模式>_run 函数负责将用户输入（位于 g.rc_1.control_in、g.rc_2.control_in "
+"等）转换为适合该飞行模式的倾斜角、旋转速率、爬升速率等。例如，`AltHold "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/mode_althold.cpp#L22>`__"
+" 将用户的横滚和俯仰输入转换为倾斜角（度），偏航输入转换为旋转速率（度/秒），油门输入转换为爬升速率（cm/s）。"
+
+#: ../../source/docs/apmcopter-programming-attitude-control-2.rst:46
+#: 402a1e60f01244a09dc7d230f95c297b
+msgid ""
+"the last thing the <flight mode>_run function must do is pass these desired "
+"angles, rates etc into Attitude Control and/or Position Control libraries "
+"(these are both held in the `AC_AttitudeControl "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AC_AttitudeControl>`__"
+" folder)."
+msgstr ""
+"<飞行模式>_run 函数最后必须将这些期望角度、速率等传递给姿态控制和/或位置控制库（均位于 `AC_AttitudeControl "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AC_AttitudeControl>`__"
+" 目录）。"
+
+#: ../../source/docs/apmcopter-programming-attitude-control-2.rst:51
+#: e8885b4e8a6e4c23bc18e53ec5380eee
+msgid ""
+"The `AC_AttitudeControl "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_AttitudeControl.h>`__"
+" library provides 5 possible ways to control the attitude of the vehicle, "
+"the most common 3 are described below."
+msgstr ""
+"`AC_AttitudeControl "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_AttitudeControl.h>`__"
+" 库提供了 5 种控制飞行器姿态的方式，以下介绍最常用的 3 种。"
+
+#: ../../source/docs/apmcopter-programming-attitude-control-2.rst:55
+#: 543c705f43f9481a96eb3a9f9820c443
+msgid ""
+"`angle_ef_roll_pitch_rate_ef_yaw() "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_AttitudeControl.h#L98>`__"
+" : this accepts an \"earth frame\" angle for roll and pitch, and an \"earth "
+"frame\" rate for yaw.  For example providing this function roll = -1000, "
+"pitch = -1500, yaw = 500 means lean the vehicle left to 10degrees, pitch "
+"forward to 15degrees and rotate right at 5deg/second."
+msgstr ""
+"`angle_ef_roll_pitch_rate_ef_yaw() "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_AttitudeControl.h#L98>`__：接受横滚和俯仰的"
+" 「地球坐标系」 角度，以及偏航的 「地球坐标系」 速率。例如，传入 roll = -1000、pitch = -1500、yaw = 500 "
+"表示飞行器向左倾斜 10 度、前俯 15 度、向右旋转 5 度/秒。"
+
+#: ../../source/docs/apmcopter-programming-attitude-control-2.rst:61
+#: 15093e027c78400aaad80a351927bc24
+msgid ""
+"`angle_ef_roll_pitch_yaw() "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_AttitudeControl.h#L102>`__"
+" : this accepts \"earth frame\" angles for roll, pitch and yaw. similar to "
+"above except providing yaw of 500 means rotate the vehicle to 5 degrees east"
+" of north."
+msgstr ""
+"`angle_ef_roll_pitch_yaw() "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_AttitudeControl.h#L102>`__：接受横滚、俯仰和偏航的"
+" 「地球坐标系」 角度。与上述类似，但传入 yaw = 500 表示飞行器旋转至北偏东 5 度方向。"
+
+#: ../../source/docs/apmcopter-programming-attitude-control-2.rst:65
+#: 2327572d872844d18a9008f9b02b3a66
+msgid ""
+"`rate_bf_roll_pitch_yaw() "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_AttitudeControl.h#L108>`__"
+" : this accepts a \"body frame\" rate (in degrees/sec) for roll pitch and "
+"yaw.  For example providing this function roll = -1000, pitch = -1500, yaw ="
+" 500 would lead to the vehicle rolling left at 10deg/sec, pitching forward "
+"at 15deg/sec and rotating about the vehicle's z axis at 5 deg/sec."
+msgstr ""
+"`rate_bf_roll_pitch_yaw() "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_AttitudeControl.h#L108>`__：接受横滚、俯仰和偏航的"
+" 「机体坐标系」 速率（度/秒）。例如，传入 roll = -1000、pitch = -1500、yaw = 500 将导致飞行器以 10 "
+"度/秒向左横滚、15 度/秒前俯，并以 5 度/秒绕机体 z 轴旋转。"
+
+#: ../../source/docs/apmcopter-programming-attitude-control-2.rst:72
+#: 3ad0850b75a54e418879a0668b5b741f
+msgid ""
+"After any calls to these functions are made the "
+"`AC_AttitudeControl::rate_controller_run() "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_AttitudeControl.h#L114>`__"
+" is called.  This converts the output from the methods listed above into "
+"roll, pitch and yaw inputs which are sent to the `AP_Motors "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Motors>`__ "
+"library via it's `set_roll, set_pitch, set_yaw and set_throttle "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Motors/AP_Motors_Class.h#L99>`__"
+" methods."
+msgstr ""
+"调用上述任意函数后，将调用 `AC_AttitudeControl::rate_controller_run() "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_AttitudeControl.h#L114>`__。该方法将上述函数的输出转换为横滚、俯仰和偏航输入，并通过"
+" `set_roll、set_pitch、set_yaw 和 set_throttle "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Motors/AP_Motors_Class.h#L99>`__"
+" 方法发送给 `AP_Motors "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Motors>`__ "
+"库。"
+
+#: ../../source/docs/apmcopter-programming-attitude-control-2.rst:80
+#: fcc2890b8974411aa90b7ffb5c332b17
+msgid ""
+"The `AC_PosControl "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_PosControl.h>`__"
+" library allows 3D position control of the vehicle.  Normally only the "
+"simpler Z-axis (i.e. altitude control) methods are used because more "
+"complicated 3D position flight modes (i.e. `Loiter "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/control_loiter.cpp#L30>`__)"
+" make use of the `AC_WPNav "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AC_WPNav/AC_WPNav.h>`__"
+" library.  In any case, some commonly used methods of this library include:"
+msgstr ""
+"`AC_PosControl "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_PosControl.h>`__"
+" 库支持对飞行器进行三维位置控制。通常仅使用较简单的 Z 轴（即高度控制）方法，因为更复杂的三维位置飞行模式（如 `Loiter "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/control_loiter.cpp#L30>`__）会使用"
+" `AC_WPNav "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AC_WPNav/AC_WPNav.h>`__"
+" 库。无论如何，该库常用方法包括："
+
+#: ../../source/docs/apmcopter-programming-attitude-control-2.rst:90
+#: 914a1f0f2183421b88acaa7f1df2d33c
+msgid ""
+"`set_alt_target_from_climb_rate() "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_PosControl.h#L109>`__"
+" : this accepts a climb rate in cm/s and updates an absolute altitude target"
+msgstr ""
+"`set_alt_target_from_climb_rate() "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_PosControl.h#L109>`__：接受"
+" cm/s 的爬升速率并更新绝对高度目标"
+
+#: ../../source/docs/apmcopter-programming-attitude-control-2.rst:93
+#: 69bf7bc7bb0c44d59a56349b72dd69b7
+msgid ""
+"`set_pos_target() "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_PosControl.h#L171>`__"
+" : this accepts a 3D position vector which is an offset from home in cm"
+msgstr ""
+"`set_pos_target() "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_PosControl.h#L171>`__：接受三维位置向量，该向量为相对于返航点的偏移量（单位"
+" cm）"
+
+#: ../../source/docs/apmcopter-programming-attitude-control-2.rst:97
+#: 559b9c5a7b5a4043ba9ca6881b5264ed
+msgid ""
+"If any methods in AC_PosControl are called then the flight mode code must "
+"also call the `AC_PosControl::update_z\\_controller() "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_PosControl.h#L134>`__"
+" method.  This will run the z-axis position control PID loops and send low-"
+"level throttle level to the `AP_Motors "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Motors>`__ "
+"library.  If any xy-axis methods are called then "
+"`AC_PosControl::update_xy_controller() "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_PosControl.h#L202>`__"
+" must be called."
+msgstr ""
+"如果调用了 AC_PosControl 中的任何方法，飞行模式代码还必须调用 `AC_PosControl::update_z_controller()"
+" "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_PosControl.h#L134>`__"
+" 方法。该方法将运行 Z 轴位置控制 PID 循环，并向 `AP_Motors "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Motors>`__ "
+"库发送低层油门值。如果调用了任何 XY 轴方法，则必须调用 `AC_PosControl::update_xy_controller() "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_PosControl.h#L202>`__。"
+
+#: ../../source/docs/apmcopter-programming-attitude-control-2.rst:107
+#: 7aacf61e8fc94159ab8d52f1242674f0
+msgid ""
+"The AP_Motors library holds the \"motor mixing\" code.  This code is "
+"responsible for converting the roll, pitch, yaw and throttle values received"
+" from the AC_AttitudeControl and AC_PosControl libraries into absolute motor"
+" outputs (i.e. PWM values).  So the higher level libs would make use of "
+"these functions:"
+msgstr ""
+"AP_Motors 库包含 「电机混控」 代码。该代码负责将从 AC_AttitudeControl 和 AC_PosControl "
+"库接收的横滚、俯仰、偏航和油门值转换为绝对电机输出（即 PWM 值）。高层库将使用以下函数："
+
+#: ../../source/docs/apmcopter-programming-attitude-control-2.rst:113
+#: 2f2ce498a09c4506b610c3bfbb3c36c8
+msgid ""
+"`set_roll(), set_pitch(), set_yaw() "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Motors/AP_Motors_Class.h#L99>`__"
+" : accepts roll, pitch and yaw values in the range of -4500 ~ 4500.  These "
+"are not desired angles or even rates but rather just a value.  For example "
+"set_roll(-4500) would mean roll left as fast as possible."
+msgstr ""
+"`set_roll()、set_pitch()、set_yaw() "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Motors/AP_Motors_Class.h#L99>`__：接受"
+" -4500 ~ 4500 范围内的横滚、俯仰和偏航值。这些不是期望角度或速率，而只是一个数值。例如，set_roll(-4500) "
+"表示以最大速度向左横滚。"
+
+#: ../../source/docs/apmcopter-programming-attitude-control-2.rst:118
+#: 3df66993a12943a5a2df9635209dec98
+msgid ""
+"set_throttle() : accepts an absolute throttle value in the range of 0 ~ "
+"1000.  0 = motors off, 1000 = full throttle."
+msgstr "set_throttle()：接受 0 ~ 1000 范围内的绝对油门值。0 = 电机停止，1000 = 全油门。"
+
+#: ../../source/docs/apmcopter-programming-attitude-control-2.rst:121
+#: 1a6c6b56db644ce4afade5895f2fd02c
+msgid ""
+"There are different classes for each frame type (quad, Y6, traditional "
+"helicopter) but in each there is an \"`output_armed "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Motors/AP_MotorsMatrix.cpp#L123>`__\\"
+" \" function which is responsible for implementing the conversion of these "
+"roll, pitch, yaw and throttle values into pwm outputs.  This conversion "
+"often includes implementing a \"stability patch\" which handles prioritising"
+" one axis of control over another when the input requests are outside the "
+"physical limits of the frame (i.e. max throttle and max roll is not possible"
+" with a quad because some motors must be less than others to cause a roll)."
+"  At the bottom of the \"output_armed\" function there is a call to the "
+"hal.rcout->write() which passes the desired pwm values to the AP_HAL layer."
+msgstr ""
+"每种机架类型（四旋翼、Y6、传统直升机）都有不同的类，但每种类中都有一个 「`output_armed "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Motors/AP_MotorsMatrix.cpp#L123>`__」"
+" 函数，负责将横滚、俯仰、偏航和油门值转换为 PWM 输出。该转换通常包含实现 "
+"「稳定性补丁」，当输入请求超出机架物理限制时（如四旋翼无法同时达到最大油门和最大横滚，因为某些电机必须低于其他电机才能产生横滚），该补丁处理控制轴的优先级。「output_armed」"
+" 函数底部调用 hal.rcout->write()，将期望 PWM 值传递给 AP_HAL 层。"
+
+#: ../../source/docs/apmcopter-programming-attitude-control-2.rst:123
+#: ebbf7124c7594ac2b4f38e7ad6bd4e52
+msgid ""
+"The `AP_HAL "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_HAL>`__ "
+"libraries (hardware abstraction layer) provides a consistent interface for "
+"all boards.  In particular the hal.rc_out_write() function will cause the "
+"specified PWM received from the AP_Motors class to appear on the appropriate"
+" pwm pin out for the board."
+msgstr ""
+"`AP_HAL "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_HAL>`__ "
+"库（硬件抽象层）为所有飞控板提供统一接口。尤其是 hal.rc_out_write() 函数，它将从 AP_Motors 类接收的指定 PWM "
+"值输出到飞控板相应的 PWM 引脚。"
+
+#: ../../source/docs/apmcopter-programming-attitude-control-2.rst:126
+#: 8bd2429963dd4b0ba1936fd8cd531660
+msgid "Leonard Hall, Developer Un-Conference 2018"
+msgstr "Leonard Hall，开发者非正式会议 2018"

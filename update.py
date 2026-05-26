@@ -84,6 +84,14 @@ ALL_WIKIS = [
 ]
 COMMON_DIR = 'common'
 
+# i18n: read language <-> URL prefix mapping from common_conf so update.py,
+# conf.py and the theme template share one source of truth.
+import common_conf  # noqa: E402
+LANGUAGES = common_conf.LANGUAGES                  # [(sphinx_code, url_prefix, name)]
+URL_PREFIX = common_conf.URL_PREFIX                # {sphinx_code -> url_prefix}
+DEFAULT_LANGUAGE = 'en'
+COMMON_MANIFEST_PATH = 'locale/_common_manifest.json'
+
 WIKI_NAME_TO_VEHICLE_NAME = {
     'copter': 'Copter',
     'plane': 'Plane',
@@ -240,18 +248,29 @@ def fetch_ardupilot_generated_data(site_mapping: Dict, base_url: str, sub_url: s
         executor.map(fetch_and_rename, urls, targetfiles, names, timeout=5*60)
 
 
-def build_one(wiki, fast):
-    """build one wiki"""
-    progress(f'build_one: {wiki}')
+def build_one(wiki, lang, fast):
+    """build one wiki in a single language.
+
+    Each (wiki, lang) pair writes to its own html-<lang>/ and doctrees-<lang>/
+    so concurrent languages do not collide and a non-fast rebuild only wipes
+    the current language's artifacts.
+    """
+    progress(f'build_one: {wiki} [{lang}]')
 
     source_dir = os.path.join(wiki, 'source')
     output_dir = os.path.join(wiki, 'build')
-    html_dir = os.path.join(output_dir, 'html')
-    doctree_dir = os.path.join(output_dir, 'doctrees')
+    html_dir = os.path.join(output_dir, f'html-{lang}')
+    doctree_dir = os.path.join(output_dir, f'doctrees-{lang}')
 
-    # This will fail if there's no folder to clean, so we check first
-    if not fast and os.path.exists(output_dir):
-        shutil.rmtree(output_dir)
+    if not fast:
+        if os.path.exists(html_dir):
+            shutil.rmtree(html_dir)
+        if os.path.exists(doctree_dir):
+            shutil.rmtree(doctree_dir)
+
+    # Child-local env var, read by conf.py to populate html_context.current_language.
+    # Safe under multiprocessing because each build_one runs in its own process.
+    os.environ['MWIKI_CURRENT_LANGUAGE'] = lang
 
     app = Sphinx(
         buildername='html',
@@ -260,28 +279,30 @@ def build_one(wiki, fast):
         outdir=html_dir,
         parallel=2,
         srcdir=source_dir,
+        confoverrides={'language': lang},
     )
     app.build()
 
 
-def sphinx_make(site, parallel, fast):
+def sphinx_make(site, parallel, fast, languages):
     """
-    Calls 'make html' to build each site
+    Build the cartesian product of (vehicle wiki) x (language) in parallel.
+    `languages` is a list of Sphinx locale codes (e.g. ['en', 'zh_CN']).
     """
-    done = set()
-    wikis = set(ALL_WIKIS[:])
-    procs = []
-
-    while len(done) != len(wikis):
-        wiki = list(wikis.difference(done))[0]
-        done.add(wiki)
+    jobs = []
+    for wiki in ALL_WIKIS:
         if site == 'common' or site == 'frontend':
             continue
         if wiki == 'frontend':
             continue
-        if site is not None and not site == wiki:
+        if site is not None and site != wiki:
             continue
-        p = multiprocessing.Process(target=build_one, args=(wiki, fast))
+        for lang in languages:
+            jobs.append((wiki, lang))
+
+    procs = []
+    for wiki, lang in jobs:
+        p = multiprocessing.Process(target=build_one, args=(wiki, lang, fast))
         p.start()
         procs.append(p)
         while parallel != -1 and len(procs) >= parallel:
@@ -302,9 +323,9 @@ def sphinx_make(site, parallel, fast):
         time.sleep(0.1)
 
 
-def check_build(site):
+def check_build(site, languages):
     """
-    check that build was successful
+    check that build was successful for each (wiki, language) pair
     """
     if platform.system() == "Windows":
         debug("Skipping check_build on windows")
@@ -314,60 +335,17 @@ def check_build(site):
             continue
         if wiki in ['common', 'frontend']:
             continue
-        index_html = os.path.join(wiki, "build", "html", "index.html")
-        if not os.path.exists(index_html):
-            fatal("%s site not built - missing %s" % (wiki, index_html))
+        for lang in languages:
+            index_html = os.path.join(wiki, "build", f"html-{lang}", "index.html")
+            if not os.path.exists(index_html):
+                fatal("%s [%s] site not built - missing %s" % (wiki, lang, index_html))
 
 
-def copy_build(site, destdir):
+def copy_build(site, destdir, languages):
     """
-    Copies each site into the target location
-    """
-    for wiki in ALL_WIKIS:
-        if site == 'common':
-            continue
-        if site is not None and site != wiki:
-            continue
-        if wiki == 'frontend':
-            continue
-        debug('Copy: %s' % wiki)
-        targetdir = os.path.join(destdir, wiki)
-        debug("Creating backup")
-        olddir = os.path.join(destdir, 'old')
-        debug('Recreating %s' % olddir)
-        if os.path.exists(olddir):
-            shutil.rmtree(olddir)
-        os.makedirs(olddir)
-        if os.path.exists(targetdir):
-            debug('Moving %s into %s' % (targetdir, olddir))
-            shutil.move(targetdir, olddir)
-        # copy new dir to targetdir
-        # progress("DEBUG: targetdir: %s" % targetdir)
-        # sourcedir='./%s/build/html/*' % wiki
-        sourcedir = './%s/build/html/' % wiki
-        # progress("DEBUG: sourcedir: %s" % sourcedir)
-        # progress('DEBUG: mv %s %s' % (sourcedir, destdir) )
-
-        html_moved_dir = os.path.join(destdir, 'html')
-        try:
-            shutil.move(sourcedir, html_moved_dir)
-            # Rename move! (single move to html/* failed)
-            shutil.move(html_moved_dir, targetdir)
-            debug(f"Moved to {targetdir}")
-        except shutil.Error:
-            error(f"FAIL moving output to {targetdir}")
-
-        # copy jquery
-        os.makedirs(os.path.join(targetdir, '_static'), exist_ok=True)
-
-        # delete the old directory
-        debug('Removing %s' % olddir)
-        shutil.rmtree(olddir)
-
-
-def make_backup(site, destdir, backupdestdir):
-    """
-    backup current site
+    Copies each (wiki, lang) build into <destdir>/<url_prefix>/<wiki>/.
+    URL_PREFIX maps sphinx locale codes (e.g. 'zh_CN') to short URL segments
+    (e.g. 'zh') so the deployed tree is /en/copter/, /zh/copter/, ...
     """
     for wiki in ALL_WIKIS:
         if site == 'common':
@@ -376,23 +354,64 @@ def make_backup(site, destdir, backupdestdir):
             continue
         if wiki == 'frontend':
             continue
-        debug('Backing up: %s' % wiki)
+        for lang in languages:
+            prefix = URL_PREFIX.get(lang, lang)
+            debug('Copy: %s [%s -> %s]' % (wiki, lang, prefix))
+            lang_root = os.path.join(destdir, prefix)
+            os.makedirs(lang_root, exist_ok=True)
+            targetdir = os.path.join(lang_root, wiki)
 
-        targetdir = os.path.join(destdir, wiki)
-        distutils.dir_util.mkpath(targetdir)
+            olddir = os.path.join(destdir, f'old-{prefix}-{wiki}')
+            if os.path.exists(olddir):
+                shutil.rmtree(olddir)
+            if os.path.exists(targetdir):
+                debug('Moving %s into %s' % (targetdir, olddir))
+                shutil.move(targetdir, olddir)
 
-        if not os.path.exists(targetdir):
-            fatal("FAIL backup when looking for folder %s" % targetdir)
+            sourcedir = './%s/build/html-%s/' % (wiki, lang)
+            try:
+                shutil.move(sourcedir, targetdir)
+                debug(f"Moved to {targetdir}")
+            except shutil.Error:
+                error(f"FAIL moving output to {targetdir}")
 
-        bkdir = os.path.join(backupdestdir, str(building_time + '-wiki-bkp'), str(wiki))
-        debug('Checking %s' % bkdir)
-        distutils.dir_util.mkpath(bkdir)
-        debug('Copying %s into %s' % (targetdir, bkdir))
-        try:
-            subprocess.check_call(["rsync", "-a", "--delete", targetdir + "/", bkdir])
-        except subprocess.CalledProcessError as ex:
-            progress(ex)
-            fatal("Failed to backup %s" % wiki)
+            os.makedirs(os.path.join(targetdir, '_static'), exist_ok=True)
+
+            if os.path.exists(olddir):
+                debug('Removing %s' % olddir)
+                shutil.rmtree(olddir)
+
+
+def make_backup(site, destdir, backupdestdir, languages):
+    """
+    backup current site (per language)
+    """
+    for wiki in ALL_WIKIS:
+        if site == 'common':
+            continue
+        if site is not None and site != wiki:
+            continue
+        if wiki == 'frontend':
+            continue
+        for lang in languages:
+            prefix = URL_PREFIX.get(lang, lang)
+            debug('Backing up: %s [%s]' % (wiki, prefix))
+
+            targetdir = os.path.join(destdir, prefix, wiki)
+            distutils.dir_util.mkpath(targetdir)
+
+            if not os.path.exists(targetdir):
+                fatal("FAIL backup when looking for folder %s" % targetdir)
+
+            bkdir = os.path.join(backupdestdir, str(building_time + '-wiki-bkp'), prefix, str(wiki))
+            debug('Checking %s' % bkdir)
+            distutils.dir_util.mkpath(bkdir)
+            debug('Copying %s into %s' % (targetdir, bkdir))
+            try:
+                subprocess.check_call(["rsync", "-a", "--delete", targetdir + "/", bkdir])
+            except subprocess.CalledProcessError as ex:
+                progress(ex)
+                fatal("Failed to backup %s [%s]" % (wiki, prefix))
 
 
 def delete_old_wiki_backups(folder, n_to_keep):
@@ -423,7 +442,11 @@ def create_dir_if_not_exists(dir_path: str) -> None:
 
 def copy_common_source_files(start_dir=COMMON_DIR):
     """
-    copies files common to all Wikis to the source directories for each Wiki
+    copies files common to all Wikis to the source directories for each Wiki.
+
+    Also writes locale/_common_manifest.json mapping each vehicle to the list
+    of docnames it received from common/. i18n_sync_common.py reads this to
+    deduplicate translations of common-sourced pages.
     """
 
     # Clean existing common topics (easiest way to guarantee old ones
@@ -443,6 +466,8 @@ def copy_common_source_files(start_dir=COMMON_DIR):
         create_dir_if_not_exists(f'{wiki}/source/docs')
         create_dir_if_not_exists(f'{wiki}/source/_static')
 
+    manifest: Dict[str, List[str]] = {}
+
     debug("Copying common source files to each Wiki")
     for root, dirs, files in os.walk(start_dir):
         for file in files:
@@ -454,6 +479,7 @@ def copy_common_source_files(start_dir=COMMON_DIR):
                 source_file.close()
                 targets = get_copy_targets(source_content)
                 # progress(targets)
+                docname = f"docs/{os.path.splitext(file)[0]}"
                 for wiki in targets:
                     # progress("CopyTarget: %s" % wiki)
                     content = strip_content(source_content, wiki)
@@ -462,6 +488,7 @@ def copy_common_source_files(start_dir=COMMON_DIR):
                     destination_file = open(targetfile, 'w', 'utf-8')
                     destination_file.write(content)
                     destination_file.close()
+                    manifest.setdefault(wiki, []).append(docname)
             elif file.endswith(".css"):
                 for wiki in ALL_WIKIS:
                     shutil.copy2(os.path.join(root, file),
@@ -480,6 +507,19 @@ def copy_common_source_files(start_dir=COMMON_DIR):
                     destination_file = open(targetfile, 'w', 'utf-8')
                     destination_file.write(content)
                     destination_file.close()
+
+    # Deduplicate (multiple roots could produce same docname) and persist
+    # manifest so scripts/i18n_sync_common.py can move common-sourced .po
+    # entries into the shared locale/common/ catalog.
+    for wiki in manifest:
+        manifest[wiki] = sorted(set(manifest[wiki]))
+    try:
+        os.makedirs(os.path.dirname(COMMON_MANIFEST_PATH), exist_ok=True)
+        with open(COMMON_MANIFEST_PATH, 'w', encoding='utf-8') as f:
+            json.dump(manifest, f, indent=2, ensure_ascii=False)
+        debug(f'wrote {COMMON_MANIFEST_PATH} ({sum(len(v) for v in manifest.values())} entries)')
+    except Exception as e:
+        error(f'failed to write {COMMON_MANIFEST_PATH}: {e}')
 
 
 def get_copy_targets(content):
@@ -686,11 +726,15 @@ def create_latest_parameter_redirect(default_param_file, vehicle):
           default_param_file[:-3])
 
 
-def cache_parameters_files(site=None):
+def cache_parameters_files(site=None, languages=None):
     """
     For each vechile: put new_params_mversion/ content in
     old_params_mversion/ folders and .html built files as well.
+
+    Parameters HTML content is the same across languages (just data tables),
+    so we cache from the first available language build.
     """
+    langs = languages or [DEFAULT_LANGUAGE]
     for key, value in PARAMETER_SITE.items():
         if (site == key or site is None) and (key != 'AP_Periph'):  # and (key != 'AP_Periph') workaround until create a versioning for AP_Periph in firmware server # noqa: E501
             try:
@@ -714,25 +758,29 @@ def cache_parameters_files(site=None):
                           (filename, old_parameters_folder))
                     shutil.copy2(filename, old_parameters_folder)
 
-                built_folder = os.getcwd() + "/" + key + "/build/html/docs/"
-                built_parameters_files = [
-                    f for f in glob.glob(built_folder + "parameters-*.html")
-                ]
-                for built in built_parameters_files:
-                    debug("Copying %s to %s" %
-                          (built, old_parameters_folder))
-                    shutil.copy2(built, old_parameters_folder)
+                for lang in langs:
+                    built_folder = os.getcwd() + "/" + key + f"/build/html-{lang}/docs/"
+                    if not os.path.isdir(built_folder):
+                        continue
+                    built_parameters_files = [
+                        f for f in glob.glob(built_folder + "parameters-*.html")
+                    ]
+                    for built in built_parameters_files:
+                        debug("Copying %s to %s" %
+                              (built, old_parameters_folder))
+                        shutil.copy2(built, old_parameters_folder)
+                    break  # one language is enough
 
             except Exception as e:
                 error(e)
                 pass
 
 
-def put_cached_parameters_files_in_sites(site=None):
+def put_cached_parameters_files_in_sites(site=None, languages=None):
     """
-    For each vechile: put built .html files in site folder
-
+    For each vechile: put built .html files in every language's site folder.
     """
+    langs = languages or [DEFAULT_LANGUAGE]
     for key, value in PARAMETER_SITE.items():
         if (site == key or site is None) and (key != 'AP_Periph'): # and (key != 'AP_Periph') workaround until create a versioning for AP_Periph in firmware server # noqa: E501
             try:
@@ -741,14 +789,17 @@ def put_cached_parameters_files_in_sites(site=None):
                 built_parameters_files = [
                     f for f in glob.glob(built_folder + "parameters-*.html")
                 ]
-                vehicle_folder = os.getcwd() + "/" + key + "/build/html/docs/"
-                debug("Site %s getting previously built files from %s" %
-                      (site, built_folder))
-                for built in built_parameters_files:
-                    if ("latest" not in built):  # latest parameters files must be built every time
-                        debug("Reusing built %s in %s " %
-                              (built, vehicle_folder))
-                        shutil.copy(built, vehicle_folder)
+                for lang in langs:
+                    vehicle_folder = os.getcwd() + "/" + key + f"/build/html-{lang}/docs/"
+                    if not os.path.isdir(vehicle_folder):
+                        continue
+                    debug("Site %s [%s] getting previously built files from %s" %
+                          (site, lang, built_folder))
+                    for built in built_parameters_files:
+                        if ("latest" not in built):  # latest parameters files must be built every time
+                            debug("Reusing built %s in %s " %
+                                  (built, vehicle_folder))
+                            shutil.copy(built, vehicle_folder)
             except Exception as e:
                 error(e)
                 pass
@@ -766,29 +817,109 @@ def update_frontend_json():
         pass
 
 
-def copy_static_html_sites(site, destdir):
+def copy_static_html_sites(site, destdir, languages=None):
     """
-    Copy pure HMTL folder the same way that Sphinx builds it
+    Copy the static frontend landing site into each language root so that
+    /en/ and /zh/ each have a working landing page that links to the wiki
+    under the same language prefix (frontend/index.html uses relative
+    ./<vehicle>/ links, which resolve correctly within /<lang>/).
+
+    Also writes <destdir>/index.html as a language-redirect entry page so
+    bare matrixhawk.hk lands somewhere sensible.
+
+    Phase 2A: same (English) frontend is replicated into every language.
+    Phase 2B will replace this with real per-language frontend authoring.
     """
-    if (site in ['frontend', None]) and (destdir is not None):
-        debug('Copying static sites (only frontend so far).')
-        update_frontend_json()
-        folder = 'frontend'
+    if not (site in ['frontend', None] and destdir is not None):
+        return
+
+    debug('Copying static sites (only frontend so far).')
+    update_frontend_json()
+    langs = languages or [DEFAULT_LANGUAGE]
+    folder = 'frontend'
+    site_folder = os.path.join(os.getcwd(), folder)
+
+    for lang in langs:
+        prefix = URL_PREFIX.get(lang, lang)
+        lang_root = os.path.join(destdir, prefix)
         try:
-            site_folder = os.getcwd() + "/" + folder
-            targetdir = os.path.join(destdir, folder)
-            shutil.rmtree(targetdir, ignore_errors=True)
-            shutil.copytree(site_folder, targetdir)
+            os.makedirs(lang_root, exist_ok=True)
+            # Copy each file/subdir from frontend/ into <destdir>/<prefix>/.
+            # Skip per-language index variants — they're applied below as overrides.
+            for entry in os.listdir(site_folder):
+                if entry.startswith('index.') and entry != 'index.html' and entry.endswith('.html'):
+                    continue
+                src = os.path.join(site_folder, entry)
+                dst = os.path.join(lang_root, entry)
+                if os.path.exists(dst):
+                    if os.path.isdir(dst):
+                        shutil.rmtree(dst)
+                    else:
+                        os.remove(dst)
+                if os.path.isdir(src):
+                    shutil.copytree(src, dst)
+                else:
+                    shutil.copy2(src, dst)
+            # If a per-language frontend variant exists, use it as index.html.
+            # Convention: frontend/index.<sphinx_code>.html (e.g. index.zh_CN.html)
+            variant = os.path.join(site_folder, f'index.{lang}.html')
+            if os.path.exists(variant):
+                shutil.copy2(variant, os.path.join(lang_root, 'index.html'))
+                debug(f'frontend: using {variant} as {lang_root}/index.html')
+            debug(f'frontend copied into {lang_root}')
         except Exception as e:
             error(e)
-            pass
+
+    _write_top_level_redirect(destdir, langs)
+
+
+def _write_top_level_redirect(destdir, languages):
+    """Write <destdir>/index.html that redirects to /<default_lang>/, with a
+    JS Accept-Language sniff so zh-* browsers land on /zh/."""
+    default_prefix = URL_PREFIX.get(DEFAULT_LANGUAGE, 'en')
+    # Build list of (prefix, sphinx_code) for the JS sniff
+    options = [(URL_PREFIX[c], c) for c, _, _ in LANGUAGES if c in URL_PREFIX]
+    js_options = ", ".join(f'["{p}", "{c}"]' for p, c in options)
+    html = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MatrixHawk Wiki</title>
+<script>
+(function() {{
+  var langs = [{js_options}];
+  var nav = (navigator.language || navigator.userLanguage || "en").toLowerCase();
+  for (var i = 0; i < langs.length; i++) {{
+    var prefix = langs[i][0], code = langs[i][1].toLowerCase();
+    if (nav.startsWith(code) || nav.startsWith(code.split("_")[0])) {{
+      location.replace("/" + prefix + "/");
+      return;
+    }}
+  }}
+  location.replace("/{default_prefix}/");
+}})();
+</script>
+<meta http-equiv="refresh" content="0;url=/{default_prefix}/">
+</head>
+<body>
+<p>Redirecting to <a href="/{default_prefix}/">/{default_prefix}/</a> ...</p>
+</body>
+</html>
+"""
+    path = os.path.join(destdir, 'index.html')
+    try:
+        with open(path, 'w', encoding='utf-8') as f:
+            f.write(html)
+        debug(f'wrote top-level redirect {path}')
+    except Exception as e:
+        error(e)
 
 
 def check_imports():
     '''check key imports work'''
     import importlib.metadata
     # package names to check the versions of. Note that these can be different than the string used to import the package
-    required_packages = ["sphinx_rtd_theme>=1.3.0", "sphinxcontrib.youtube>=1.2.0", "sphinx>=7.1.2", "docutils<0.19"]
+    required_packages = ["matrixhawk_sphinx_rtd_theme>=0.1.0", "sphinxcontrib.youtube>=1.2.0", "sphinx>=7.1.2", "docutils<0.19"]
     for package in required_packages:
         debug("Checking for %s" % package)
         try:
@@ -1044,8 +1175,21 @@ if __name__ == "__main__":
         help=("Incremental build using already downloaded parameters, log messages, and video thumbnails rather than cleaning "
               "before build."),
     )
+    parser.add_argument(
+        '--languages',
+        default=DEFAULT_LANGUAGE,
+        help=("Comma-separated list of Sphinx language codes to build, e.g. "
+              "'en,zh_CN'. Output goes to <destdir>/<url_prefix>/<vehicle>/ "
+              "using the URL_PREFIX map in common_conf.py."),
+    )
 
     args = parser.parse_args()
+    # Resolve --languages into a clean list and verify each is configured.
+    languages = [code.strip() for code in args.languages.split(',') if code.strip()]
+    unknown = [c for c in languages if c not in URL_PREFIX]
+    if unknown:
+        fatal(f"Unknown language code(s): {unknown}. Known: {list(URL_PREFIX)}. "
+              f"Add them to LANGUAGES in common_conf.py first.")
     # progress(args.site)
     # progress(args.clean)
 
@@ -1069,22 +1213,22 @@ if __name__ == "__main__":
         # Fetch most recent LogMessage metadata from autotest:
         fetchlogmessages(args.site, args.cached_parameter_files)
 
-    copy_static_html_sites(args.site, args.destdir)
+    copy_static_html_sites(args.site, args.destdir, languages)
     copy_common_source_files()
-    sphinx_make(args.site, args.parallel, args.fast)
+    sphinx_make(args.site, args.parallel, args.fast, languages)
 
     if args.paramversioning:
-        put_cached_parameters_files_in_sites(args.site)
-        cache_parameters_files(args.site)
+        put_cached_parameters_files_in_sites(args.site, languages)
+        cache_parameters_files(args.site, languages)
 
-    check_build(args.site)
+    check_build(args.site, languages)
 
     if args.enablebackups:
-        make_backup(args.site, args.destdir, args.backupdestdir)
+        make_backup(args.site, args.destdir, args.backupdestdir, languages)
         delete_old_wiki_backups(args.backupdestdir, N_BACKUPS_RETAIN)
 
     if args.destdir:
-        copy_build(args.site, args.destdir)
+        copy_build(args.site, args.destdir, languages)
 
     # To navigate locally and view versioning script for parameters
     # working is necessary run Chrome as "chrome

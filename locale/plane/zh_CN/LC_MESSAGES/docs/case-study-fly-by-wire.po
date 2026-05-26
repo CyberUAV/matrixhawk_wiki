@@ -1,0 +1,356 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 14:59+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:5
+#: 1066661f919c4aa2bc59ea7c644157e4
+msgid "Log Analysis Case Study: Fly-by-Wire"
+msgstr "日志分析案例研究：线传飞行"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:7
+#: 078616c888f84d279b5c5c036f0c2a47
+msgid ""
+"Analyzing flight logs can help you diagnose problems with your missions. "
+"This case study brings you an example of a flight where, by analyzing the "
+"log data, our resident expert, Andrew Tridgell, suggested increasing the "
+"waypoint radius to correct the plane's failure to complete a neat navigation"
+" path. The original forum posts can be found \\ `**here** "
+"<https://diydrones.com/forum/topics/arduplane-2-73-released?commentId=705844%3AComment%3A1265467>`__."
+msgstr ""
+"分析飞行日志可以帮助您诊断任务中的问题。本案例研究为您提供一个飞行示例，通过分析日志数据，我们的驻场专家 Andrew Tridgell "
+"建议增大航点半径以纠正飞机无法完成整洁导航路径的问题。原始论坛帖子可在 `**此处** "
+"<https://diydrones.com/forum/topics/arduplane-2-73-released?commentId=705844%3AComment%3A1265467>`__"
+" 找到。"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:14
+#: 3f41cc2cf9ba48bea0108b7c714a5d0a
+msgid ""
+"DIY Drones member Iskess posted these logs of his X8 plane using APM code "
+"2.73. He described an issue with auto take off where his plane wasn't "
+"achieving enough bank angle in FBW (only about 30 degrees) but used the full"
+" 60 degrees perfectly in the auto modes. Iskess notes that the flight starts"
+" off with a couple laps around a course of tightly set waypoints, and FBW-B "
+"doesn't start until 77.2% through the log."
+msgstr ""
+"DIY Drones 成员 Iskess 使用 APM 代码2.73发布了他 X8 飞机的这些日志。他描述了一个自动起飞问题，他的飞机在 FBW "
+"中未能达到足够的坡度角（只有约30度），但在自动模式中完美使用了60度。Iskess 指出，飞行从几圈紧密设置航点的绕圈开始，FBW-B "
+"直到日志77.2%处才开始。"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:21
+#: be173b4720714f269e9e28814ef02654
+msgid ""
+"5/23/2013 tlog file (1.9 MB) - Download from original blog post \\ `**here**"
+" "
+"<https://diydrones.com/forum/topics/arduplane-2-73-released?commentId=705844%3AComment%3A1265467>`__."
+" - `X8 Parameters spreadsheet file download (14 KB) "
+"<https://download.ardupilot.org/downloads/wiki/other_files/X8Parameters.xlsx>`__"
+msgstr ""
+"5/23/2013 tlog 文件（1.9 MB）——从原始博客帖子 `**此处** "
+"<https://diydrones.com/forum/topics/arduplane-2-73-released?commentId=705844%3AComment%3A1265467>`__"
+" 下载。- `X8 参数电子表格文件下载（14 "
+"KB）<https://download.ardupilot.org/downloads/wiki/other_files/X8Parameters.xlsx>`__"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:24
+#: 706877ae512641b18ddfe89400a3cb0c
+msgid ""
+"By analyzing this data using \\ **`Mavgraph "
+"<http://qgroundcontrol.org/mavlink/mavproxy_startpage#mavgraphpy>`__**, "
+"Tridge was able to provide the following insight."
+msgstr ""
+"通过使用 `**Mavgraph** "
+"<http://qgroundcontrol.org/mavlink/mavproxy_startpage#mavgraphpy>`__ "
+"分析这些数据，Tridge 能够提供以下见解。"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:28
+#: 62364691c1034406b0925789f8ce255d
+msgid "***May 29, 2013 DIYDrones; posted to Plane 2.x Software forum:***"
+msgstr "***2013年5月29日 DIYDrones；发布至 Plane 2.x 软件论坛：***"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:30
+#: 4f4cca44793a478b85d26bad4884bd87
+msgid "\"Let's look at the 2nd auto mission first:"
+msgstr "「让我们先看第二次自动任务："
+
+#: ../../source/docs/case-study-fly-by-wire.rst:35
+#: 5e6e0e166ecb426db3fcd08344e3fb1a
+msgid ""
+"It clearly could do with some improvement. Let's see if we can find out "
+"what's wrong."
+msgstr "显然需要一些改进。让我们看看能否找出问题所在。"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:38
+#: b83db71b7be540e8963ed6ceb1929606
+msgid "First off, let's graph the demanded roll versus the actual roll:"
+msgstr "首先，让我们绘制要求横滚与实际横滚的对比图："
+
+#: ../../source/docs/case-study-fly-by-wire.rst:43
+#: fb9eadd5248b4ee5966810b0ed024b5b
+msgid ""
+"That looks good! The plane is achieving the desired roll quickly and "
+"accurately. Now let's check the pitch:"
+msgstr "看起来不错！飞机迅速且准确地达到了期望横滚。现在让我们检查俯仰："
+
+#: ../../source/docs/case-study-fly-by-wire.rst:49
+#: dae2099ebcef4117b86ffa9f0b5d1ee4
+msgid ""
+"That's not as good, though its only off by a few degrees. The PTCH2SRV\\_\\*"
+" parameters could do with some improvement. I'd add a bit of I term to that "
+"(increase :ref:`PTCH_RATE_I<PTCH_RATE_I>` to 0.1), and also increase "
+":ref:`PTCH_RATE_IMAX<PTCH_RATE_IMAX>` to around 1000."
+msgstr ""
+"效果不太好，尽管只偏差了几度。PTCH2SRV\\_\\* 参数需要一些改进。我会在其中添加一些 I 项（将 "
+":ref:`PTCH_RATE_I<PTCH_RATE_I>` 增加到0.1），并将 "
+":ref:`PTCH_RATE_IMAX<PTCH_RATE_IMAX>` 增加到约1000。"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:54
+#: 72f27749fb9742098c57435ac0ad39b5
+msgid ""
+"That isn't the cause of the navigation problems though. Let's look more "
+"carefully at the key nav parameters you have:"
+msgstr "但这不是导航问题的原因。让我们更仔细地看您拥有的关键导航参数："
+
+#: ../../source/docs/case-study-fly-by-wire.rst:57
+#: c088a84cb10e4863aa429a38ccf6b75a
+msgid ":ref:`WP_RADIUS<WP_RADIUS>`: 8"
+msgstr ":ref:`WP_RADIUS<WP_RADIUS>`：8"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:58
+#: 3b184ce2befd4d63b40e59335c82fd3f
+msgid ":ref:`NAVL1_PERIOD<NAVL1_PERIOD>`: 18"
+msgstr ":ref:`NAVL1_PERIOD<NAVL1_PERIOD>`：18"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:59
+#: 9a07a7b7491f44e3aaac35190ac4a6f1
+msgid ":ref:`NAVL1_DAMPING<NAVL1_DAMPING>`: 0.8"
+msgstr ":ref:`NAVL1_DAMPING<NAVL1_DAMPING>`：0.8"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:60
+#: c9564dee89d74f828564bd7e2c71710c
+msgid ":ref:`ROLL_LIMIT_DEG<ROLL_LIMIT_DEG>`: 60"
+msgstr ":ref:`ROLL_LIMIT_DEG<ROLL_LIMIT_DEG>`：60"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:62
+#: c769e2d7783c47c193fc2e9695bffa60
+msgid ""
+"The one that is furthest off for this sort of track is WP_RADIUS. You are "
+"flying at about 18 m/s on average, and your uBlox GPS will have a lag of "
+"around 0.6 seconds which is about 11 m of flight distance, which means you "
+"are not turning until you are past the waypoint. If that is what you want "
+"then that's fine, but if you want the plane to turn neatly onto the next "
+"track then you'll need to turn earlier."
+msgstr ""
+"对于这种航迹来说偏差最大的是 WP_RADIUS。您平均飞行速度约18 m/s，您的 uBlox GPS "
+"延迟约0.6秒，即约11米的飞行距离，这意味着您在通过航点后才开始转弯。如果这正是您想要的，那没问题，但如果您希望飞机整齐地转向下一条航迹，则需要更早转弯。"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:69
+#: 6f919e75ba754f96b8dde8738f42fe61
+msgid ""
+"Your :ref:`ROLL_LIMIT_DEG<ROLL_LIMIT_DEG>` of 60 degrees at 18 m/s "
+"corresponds to a turn radius of 19.1 m. The plane also takes a second or two"
+" to change attitude. (The X8 is not a fast response plane! It's more like "
+"flying a manta ray). If we add 1 second of flight time for the attitude "
+"change plus the GPS lag plus the turn radius, then you'd need to turn about "
+"48 m before a 90 degree turn to end up neatly on track. (That is very rough "
+"of course, but won't be too far off). So :ref:`WP_RADIUS<WP_RADIUS>` of 48 "
+"or so will produce a much neater track."
+msgstr ""
+"您的 :ref:`ROLL_LIMIT_DEG<ROLL_LIMIT_DEG>` 为60度，在18 "
+"m/s时对应转弯半径19.1米。飞机也需要一两秒才能改变姿态。（X8 不是响应快的飞机！更像是在驾驶蝠鲼）。如果我们加上1秒的姿态变化飞行时间加上 "
+"GPS "
+"延迟加上转弯半径，那么在90度转弯前需要约48米处开始转弯，才能整齐地回到航迹上。（这当然是粗略估算，但不会相差太多）。因此，:ref:`WP_RADIUS<WP_RADIUS>`"
+" 设为48左右将产生整洁得多的航迹。"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:78
+#: f64fa3a0e54f4163bcaa686d00485669
+msgid ""
+"I also think you could lower :ref:`NAVL1_PERIOD<NAVL1_PERIOD>` a bit more. I"
+" don't see any weaving there, just xtrack changes, so I'd try 15 and see if "
+"it weaves. You may even find 13 works well. You'll need to experiment as the"
+" right value is very airframe dependent (and even depends on the type of "
+"servo you have!). You may also like to increase ROLL_LIMIT_DEG to 65 for a "
+"bit faster turns."
+msgstr ""
+"我也认为你可以将 :ref:`NAVL1_PERIOD<NAVL1_PERIOD>` "
+"再降低一些。我在那里没有看到任何蛇形飞行，只是横向偏差的变化，所以我会尝试设为 15，看看是否会蛇行。你甚至可能发现 13 "
+"效果不错。你需要通过实验来找到合适的值，因为正确的数值非常依赖于机架（甚至取决于你使用的舵机类型！）。你可能还希望将 ROLL_LIMIT_DEG "
+"增加到 65，以实现更快的转弯。"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:85
+#: 0f88b9e8f8ff467ba2b4afa47e64b2b9
+msgid "Finally let's look at your altitude handling:"
+msgstr "最后，让我们看看你的高度处理："
+
+#: ../../source/docs/case-study-fly-by-wire.rst:90
+#: 4d381afe52f746a69ee88b7b3682e34c
+msgid ""
+"The most noticeable thing is that you started the mission well above the "
+"mission altitude of 61 m. It took it four waypoints just to get down to the "
+"target altitude. That makes using the log for nav tuning harder, as the "
+"plane was trying to descend while navigating. Once it reached the target "
+"altitude it held it OK, varying by about 10 m. That isn't fantastic, but "
+"tuning the X8 for good altitude handling in turns is very hard with the "
+"current controller in APM. You'll need the new TECS controller Paul is "
+"working on to get really good results. So for now I wouldn't suggest "
+"changing anything there."
+msgstr ""
+"最明显的问题是，你开始任务时的高度远高于 61 "
+"米的任务高度。飞机花了四个航点才降到目标高度。这使得利用日志进行导航调参变得更加困难，因为飞机在导航的同时还在尝试下降。一旦到达目标高度，它保持得还算好，偏差约为"
+" 10 米。这并不理想，但在当前 APM 控制器下，对 X8 进行良好的高度处理调参（尤其是在转弯时）非常困难。你需要 Paul 正在开发的新 TECS"
+" 控制器才能获得真正好的结果。所以目前我不建议在那里做任何更改。"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:100
+#: 9e783a47569740b192909136eaae15af
+msgid ""
+"Regarding FWB-B, that can be a little tricky to analyze, and is one of the "
+"reasons I added ELEVON_OUTPUT, as it makes analyzing demanded roll a lot "
+"easier! As you'll see below, working out the demanded roll for elevons is "
+"somewhat tricky."
+msgstr ""
+"关于 FWB-B，分析起来可能有些棘手，这也是我添加 ELEVON_OUTPUT "
+"的原因之一，因为它使分析所需横滚变得容易得多！正如你将在下面看到的，计算升降副翼的所需横滚有些复杂。"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:105
+#: d4421f73f4c7488bb0bba3faf923caf7
+msgid "First we should grab the demanded and achieved roll when in FBW-B:"
+msgstr "首先，我们应该获取 FBW-B 模式下的所需横滚和实际横滚："
+
+#: ../../source/docs/case-study-fly-by-wire.rst:110
+#: 311202d13ef842499c80bc81fe66b2da
+msgid ""
+"You can see that the X8 is achieving the roll that is being asked for fairly"
+" well. The roll is a bit jittery in level flight (maybe elevons a bit too "
+"loose? or wind effects? hard to say), but it does generally do what is being"
+" asked of it."
+msgstr ""
+"你可以看到，X8 相当好地实现了所要求的横滚。在水平飞行中横滚有些抖动（也许升降副翼有点松？还是风的影响？很难说），但它通常能做到被要求的动作。"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:115
+#: 99e25564cdda439c830280968a163205
+msgid ""
+"Now let's look at what your RC input was against the demanded roll. The "
+"demanded roll is in blue, and your RC inputs are in green and red."
+msgstr "现在让我们看看你的 RC 输入与所需横滚的对比。所需横滚用蓝色表示，你的 RC 输入用绿色和红色表示。"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:121
+#: 76b26e85e0444070b9b732f880a4bde2
+msgid "The RC limits you had set were:"
+msgstr "你设置的 RC 限制值为："
+
+#: ../../source/docs/case-study-fly-by-wire.rst:123
+#: a705d5bb9b9b4806bcb9c407853ce608
+msgid ":ref:`RC1_MAX<RC1_MAX>`         1936"
+msgstr ":ref:`RC1_MAX<RC1_MAX>`         1936"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:124
+#: 1a341b2e438d4cacb9441ac3ca4d71c3
+msgid ":ref:`RC1_MIN<RC1_MIN>`         1012"
+msgstr ":ref:`RC1_MIN<RC1_MIN>`         1012"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:125
+#: 0ddd4110d5284f76b628026c67757a26
+msgid ":ref:`RC2_MAX<RC2_MAX>`         1927"
+msgstr ":ref:`RC2_MAX<RC2_MAX>`         1927"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:126
+#: 68106bb2b8874321903c0b7a553f1ca2
+msgid ":ref:`RC2_MIN<RC2_MIN>`         986"
+msgstr ":ref:`RC2_MIN<RC2_MIN>`         986"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:127
+#: 520c709989884950964943b370ea3c29
+msgid ":ref:`ROLL_LIMIT_DEG<ROLL_LIMIT_DEG>`  60"
+msgstr ":ref:`ROLL_LIMIT_DEG<ROLL_LIMIT_DEG>`  60"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:129
+#: dd0725b2ce204057bbf61f0716a06022
+msgid ""
+"We can also see from this graph that you had a bit of transmitter trim. The "
+"part of the graph where the nav_roll is zero shows your RC input was around "
+"1420 for each channel. That is important."
+msgstr ""
+"我们也可以从这张图中看出，你有一点遥控器微调偏差。图中 nav_roll 为零的部分显示，你的 RC 输入在每个通道上约为 1420。这一点很重要。"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:133
+#: 74852b858f01438aba0574d1cba0c6db
+msgid ""
+"Let's zoom in a bit on the part of the FBWB flight where you were trying to "
+"turn hard right:"
+msgstr "让我们放大一下 FBWB 飞行中你试图大幅右转的部分："
+
+#: ../../source/docs/case-study-fly-by-wire.rst:139
+#: 4b018523cd274442bedaa00cdfa78e0e
+msgid ""
+"You can see that your transmitter was not outputting values anywhere near "
+"the limits that had been setup in radio calibration. The average of the two "
+"channels was a bit above 1700, which is 320 above trim, and 227 below the "
+"RC1_MAX."
+msgstr ""
+"你可以看到，你的遥控器输出的数值远低于无线电校准中设置的限制值。两个通道的平均值约为 1700 出头，比微调值高 320，比 RC1_MAX 低 "
+"227。"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:144
+#: 0e8cacdcc28a4a7e88435a453bc620f3
+msgid ""
+"So now we know its output is 320 PWM above trim, the full range above trim "
+"is 1420 to 1927, and the roll limit is 60 degrees. It is a simple linear "
+"proportion to get demanded roll, so that corresponds to 320/(1927-1420)\\*60"
+" degrees of demanded roll, which is 37.8 degrees. That matches the nav_roll "
+"the plane got and what it ended up flying."
+msgstr ""
+"现在我们知道其输出比微调值高 320 PWM，微调值以上的完整范围是 1420 到 1927，横滚限制是 60 "
+"度。通过简单的线性比例就可以得到所需横滚，即 320/(1927-1420)\\*60 度，也就是 37.8 度。这与飞机获得的 nav_roll "
+"及其最终飞行角度相符。"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:150
+#: e89ec3ceaa9b4409b5390dc3ee7b2eca
+msgid ""
+"Note that I've done a few shortcuts in the above. The full calculation for "
+"demanded roll with elevons is a bit messier. See the code in \\ `radio.cpp "
+"<https://github.com/tridge/ardupilot/blob/master/ArduPlane/radio.cpp#L129>`__"
+" in the ``read_radio()`` function."
+msgstr ""
+"请注意，我在上面做了一些简化。实际计算升降副翼所需横滚要复杂一些。请参阅 \\ `radio.cpp "
+"<https://github.com/tridge/ardupilot/blob/master/ArduPlane/radio.cpp#L129>`__"
+" 中 ``read_radio()`` 函数的代码。"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:155
+#: bb0b076697b1483e8a45a4b07c5d033e
+msgid ""
+"(If you read that code you may understand why I don't like the ELEVON_MIXING"
+" option and much prefer the simpler ELEVON_OUTPUT code!)"
+msgstr ""
+"（如果你阅读了那段代码，你可能会理解为什么我不喜欢 ELEVON_MIXING 选项，而更喜欢更简单的 ELEVON_OUTPUT 代码！）"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:158
+#: 77e76b2cd720479baa79606c83bf3971
+msgid ""
+"To answer your question, your transmitter is giving RC outputs which are "
+"much less than the :ref:`RC1_MAX<RC1_MAX>` and :ref:`RC1_MIN<RC1_MIN>` "
+"values you have in the autopilot (presumably from when you did radio "
+"calibration). That is why it isn't rolling over as much as you want."
+msgstr ""
+"为了回答你的问题，你的遥控器发出的 RC 输出远低于你在飞控中设置的 :ref:`RC1_MAX<RC1_MAX>` 和 "
+":ref:`RC1_MIN<RC1_MIN>` 值（大概是你做无线电校准时设置的）。这就是它滚转幅度没有你想要那么大的原因。"
+
+#: ../../source/docs/case-study-fly-by-wire.rst:163
+#: 78b5f583888647fbb4507f1406086221
+msgid "Cheers, Tridge\""
+msgstr "致礼，Tridge「」"

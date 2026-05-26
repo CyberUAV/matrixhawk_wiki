@@ -15,7 +15,8 @@ extensions = [
     'sphinx.ext.ifconfig',
     'sphinxcontrib.youtube',  # For youtube embedding
     'sphinxcontrib.jquery',
-    'sphinx_tabs.tabs'        # For clickable tabs
+    'sphinx_tabs.tabs',       # For clickable tabs
+    'mwiki_translation_coverage',  # Injects per-page coverage into html_context
 ]
 
 # Set False to re-enable warnings for non-local images.
@@ -32,6 +33,24 @@ intersphinx_base_url = wiki_base_url + '%s/'
 # Where to point the base of the build for the main site menu
 html_context = {'target': '/'}
 # This needs to change to the actual URL root once the theme updated.
+
+
+# --- i18n: language code <-> URL prefix mapping (single source of truth) ---
+# Sphinx internally uses standard locale codes (en, zh_CN); URLs use short
+# prefixes (en, zh) for cleaner paths. update.py, conf.py and the theme
+# template all read from these constants.
+LANGUAGES = [
+    # (sphinx_code, url_prefix, display_name)
+    ('en',    'en', 'English'),
+    ('zh_CN', 'zh', '简体中文'),
+]
+URL_PREFIX = {code: prefix for code, prefix, _ in LANGUAGES}
+SPHINX_CODE_FROM_PREFIX = {prefix: code for code, prefix, _ in LANGUAGES}
+
+# gettext catalog config (consumed by each vehicle's conf.py)
+# Keep messages split per source file (matches sphinx-intl default layout).
+gettext_compact = False
+gettext_uuid = True
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'copter': (intersphinx_base_url % 'copter',

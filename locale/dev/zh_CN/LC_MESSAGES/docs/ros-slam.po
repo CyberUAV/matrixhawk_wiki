@@ -1,0 +1,339 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/ros-slam.rst:5 19157b21681f4a0e85dc506f98f84805
+msgid "ROS and Hector SLAM for Non-GPS Navigation"
+msgstr "使用 ROS 和 Hector SLAM 实现非 GPS 导航"
+
+#: ../../source/docs/ros-slam.rst:7 c55464c5cf6e48ee8c8b35b30c6fa920
+msgid ""
+"This page shows how to setup ROS and `Hector SLAM "
+"<http://wiki.ros.org/hector_slam>`__ using an `RPLidarA2 lidar "
+"<http://wiki.ros.org/rplidar>`__ to provided a local position estimate for "
+"ArduPilot so that it can operate without a GPS."
+msgstr ""
+"本页介绍如何配置 ROS 和 `Hector SLAM <http://wiki.ros.org/hector_slam>`__，使用 "
+"`RPLidarA2 激光雷达 <http://wiki.ros.org/rplidar>`__ 为 ArduPilot 提供本地位置估计，从而实现无 "
+"GPS 操作。"
+
+#: ../../source/docs/ros-slam.rst:9 80edfa548d3044238568f3e43b23be7a
+msgid ""
+"These instructions were tested on an :ref:`NVidia TX2 <companion-computer-"
+"nvidia-tx2>` flashed with :ref:`APSync <apsync-intro>` and then ROS and "
+"MAVROS were :ref:`installed as described here <ros-install>`."
+msgstr ""
+"这些说明在刷入 :ref:`APSync <apsync-intro>` 的 :ref:`NVidia TX2 <companion-computer-"
+"nvidia-tx2>` 上测试，然后按 :ref:`此处说明 <ros-install>` 安装 ROS 和 MAVROS。"
+
+#: ../../source/docs/ros-slam.rst:11 da84ef2e9be442cfb03ba589f8d787e0
+msgid ""
+"They were also tested on an :ref:`RaspberryPi 3 B+ <raspberry-pi-via-"
+"mavlink>` with ROS and MAVROS installed :ref:`installed as described here "
+"<ros-install>`."
+msgstr ""
+"这些说明也在安装了 ROS 和 MAVROS（按 :ref:`此处说明 <ros-install>` 安装）的 :ref:`树莓派 3 B+ "
+"<raspberry-pi-via-mavlink>` 上测试。"
+
+#: ../../source/docs/ros-slam.rst:15 306aa23f48e34ebcb2db63c8f53e395b
+msgid "these pages are a work-in-progress"
+msgstr "这些页面仍在持续完善中"
+
+#: ../../source/docs/ros-slam.rst:18 f1022415a8a44857b1da9f680967df98
+msgid "Mounting the RPLidar and Pixhawk"
+msgstr "安装 RPLidar 和 Pixhawk"
+
+#: ../../source/docs/ros-slam.rst:23 d96e6b20fb464bab9b09b82543bb65c7
+msgid ""
+"The RPLidar should be oriented so that its USB cable wire is pointing "
+"forward in the same direction as the arrow on the flight controller."
+msgstr "RPLidar 应朝向与飞控箭头相同的正前方，即 USB 线朝前。"
+
+#: ../../source/docs/ros-slam.rst:25 ae165c4903254f42a7b4bf6963b4d75d
+msgid ""
+"The USB cable should be plugged into a USB port on the companion computer "
+"running ROS."
+msgstr "USB 线应插入运行 ROS 的伴飞计算机的 USB 接口。"
+
+#: ../../source/docs/ros-slam.rst:28 36c9e9fb4cfd475ba03ee778616b40a2
+msgid "Check the RPLidar's serial port"
+msgstr "检查 RPLidar 的串口"
+
+#: ../../source/docs/ros-slam.rst:30 11723397b34a4ee0bd33c123b262bb6f
+msgid ""
+"plug the RPLidarA2 into the companion computer.  If using a TX2 mounted on "
+"an AUVidea J120 board, ensure the lidar is plugged into the lower USB port."
+msgstr "将 RPLidarA2 插入伴飞计算机。若 TX2 安装在 AUVidea J120 板上，请确保激光雷达插入下方 USB 接口。"
+
+#: ../../source/docs/ros-slam.rst:36 59356ef0938c4313b0abe5b1803d1acc
+msgid "the lidar should appear as /dev/ttyUSB0 or /dev/ttyACM0."
+msgstr "激光雷达应出现为 /dev/ttyUSB0 或 /dev/ttyACM0。"
+
+#: ../../source/docs/ros-slam.rst:37 75cf68c5a9b54f148a50515d954aabb2
+msgid ""
+"if you type \"lsusb\" the device should also be listed as \"Cygnal "
+"Integrated Products, Inc. CP210x UART Bridge / myAVR mySmartUSB light\""
+msgstr ""
+"输入「lsusb」时，设备应显示为「Cygnal Integrated Products, Inc. CP210x UART Bridge / "
+"myAVR mySmartUSB light」"
+
+#: ../../source/docs/ros-slam.rst:38 6d0ca91945224bdea6241411887d77a0
+msgid ""
+"allow anyone to read from the device by entering just one of the following "
+"two commands depending upon which serial port was found above"
+msgstr "根据上面找到的串口，输入以下两条命令之一，允许任何用户读取该设备"
+
+#: ../../source/docs/ros-slam.rst:45 7e91419c643f4e698852da4b987c5b50
+msgid "Install more packages"
+msgstr "安装更多软件包"
+
+#: ../../source/docs/ros-slam.rst:47 29afcd55538d42fbbc6ac98724f7b44a
+msgid "install the ROS desktop full:"
+msgstr "安装 ROS 完整桌面版："
+
+#: ../../source/docs/ros-slam.rst:53 04008d8348f44ebcb6d34f57871e0c95
+msgid ""
+"OR install each of these individual packages (this list is not yet "
+"complete):"
+msgstr "或者分别安装以下各软件包（此列表尚不完整）："
+
+#: ../../source/docs/ros-slam.rst:63 343f9b15fdfd43fb92a6008d14f15672
+msgid "Create a Catkin WorkSpace"
+msgstr "创建 Catkin 工作空间"
+
+#: ../../source/docs/ros-slam.rst:65 f7c73ac1a4e540689feff14d0bfc0b02
+msgid "In your home directory:"
+msgstr "在主目录中："
+
+#: ../../source/docs/ros-slam.rst:75 74c4d0230df0415489efb08f6ce5c37a
+msgid "Install RPLidar node and Hector SLAM"
+msgstr "安装 RPLidar 节点和 Hector SLAM"
+
+#: ../../source/docs/ros-slam.rst:77 1faf9417969b4ca69e4e6b66f3c75085
+msgid "Install the RPLidar node and Hector SLAM software in the workspace"
+msgstr "在工作空间中安装 RPLidar 节点和 Hector SLAM 软件"
+
+#: ../../source/docs/ros-slam.rst:85 ce644e381f69483abf1ae15edcdfcadf
+msgid ""
+"Using your favourite editor open Hector SLAM's launch file which can be "
+"found at "
+"`$HOME/catkin_ws/src/hector_slam/hector_mapping/launch/mapping_default.launch"
+" <https://github.com/tu-darmstadt-ros-"
+"pkg/hector_slam/blob/catkin/hector_mapping/launch/mapping_default.launch>`__"
+" and modify the \"base_frame\", \"odom_frame\" and commented out \"tf\" "
+"lines to look like below:"
+msgstr ""
+"使用您喜欢的编辑器打开 Hector SLAM 的 launch 文件（位于 "
+"`$HOME/catkin_ws/src/hector_slam/hector_mapping/launch/mapping_default.launch"
+" <https://github.com/tu-darmstadt-ros-"
+"pkg/hector_slam/blob/catkin/hector_mapping/launch/mapping_default.launch>`__），修改「base_frame」、「odom_frame」并注释掉「tf」相关行，使其如下所示："
+
+#: ../../source/docs/ros-slam.rst:94 ce3d8948c58f4f1aa9cb808b3121844a
+msgid ""
+"Edit Hector SLAM's `hector_imu_attitude_to_tf/launch/example.launch "
+"<https://github.com/tu-darmstadt-ros-"
+"pkg/hector_slam/blob/catkin/hector_imu_attitude_to_tf/launch/example.launch>`__"
+" file which can be found at "
+"`$HOME/catkin_ws/src/hector_slam/hector_imu_attitude_to_tf/launch/example.launch"
+" <https://github.com/tu-darmstadt-ros-"
+"pkg/hector_slam/blob/catkin/hector_imu_attitude_to_tf/launch/example.launch>`__"
+" and change it to consume IMU data from the flight controller (via mavros) "
+"by replacing \"thumper_imu\" with \"/mavros/imu/data\" so that it looks like"
+" below:"
+msgstr ""
+"编辑 Hector SLAM 的 `hector_imu_attitude_to_tf/launch/example.launch "
+"<https://github.com/tu-darmstadt-ros-"
+"pkg/hector_slam/blob/catkin/hector_imu_attitude_to_tf/launch/example.launch>`__"
+" 文件（位于 "
+"`$HOME/catkin_ws/src/hector_slam/hector_imu_attitude_to_tf/launch/example.launch"
+" <https://github.com/tu-darmstadt-ros-"
+"pkg/hector_slam/blob/catkin/hector_imu_attitude_to_tf/launch/example.launch>`__），将「thumper_imu」替换为「/mavros/imu/data」，使其消费来自飞控（通过"
+" mavros）的 IMU 数据，结果如下："
+
+#: ../../source/docs/ros-slam.rst:100 6e82794ddde04b7ab19ce8d710bcac68
+msgid ""
+"Edit Hector SLAM's tutorial.launch file which can be found at "
+"`$HOME/catkin_ws/src/hector_slam/hector_slam_launch/launch/tutorial.launch "
+"<https://github.com/tu-darmstadt-ros-"
+"pkg/hector_slam/blob/catkin/hector_slam_launch/launch/tutorial.launch>`__ "
+"and change the \"use_sim_time\" line to look like below:"
+msgstr ""
+"编辑 Hector SLAM 的 tutorial.launch 文件（位于 "
+"`$HOME/catkin_ws/src/hector_slam/hector_slam_launch/launch/tutorial.launch "
+"<https://github.com/tu-darmstadt-ros-"
+"pkg/hector_slam/blob/catkin/hector_slam_launch/launch/tutorial.launch>`__），将「use_sim_time」行修改如下："
+
+#: ../../source/docs/ros-slam.rst:106 4e5520d327d64b918ea0c2aadd3fd7d2
+msgid ""
+"Continue editing the `tutorial.launch <https://github.com/tu-darmstadt-ros-"
+"pkg/hector_slam/blob/catkin/hector_slam_launch/launch/tutorial.launch>`__ "
+"and add a new line (just below the existing include line) so that the "
+"`example.launch <https://github.com/tu-darmstadt-ros-"
+"pkg/hector_slam/blob/catkin/hector_imu_attitude_to_tf/launch/example.launch>`__"
+" file modified above is included:"
+msgstr ""
+"继续编辑 `tutorial.launch <https://github.com/tu-darmstadt-ros-"
+"pkg/hector_slam/blob/catkin/hector_slam_launch/launch/tutorial.launch>`__，在现有"
+" include 行下方添加新行，引入上面修改的 `example.launch <https://github.com/tu-darmstadt-"
+"ros-"
+"pkg/hector_slam/blob/catkin/hector_imu_attitude_to_tf/launch/example.launch>`__"
+" 文件："
+
+#: ../../source/docs/ros-slam.rst:112 57e4e26f87e14f6c8157e4c2f6f76263
+msgid ""
+"By default, once started, Hector SLAM will pop-up a window to show the map "
+"in real-time but this can be disabled by commenting out one line of "
+"`tutorial.launch <https://github.com/tu-darmstadt-ros-"
+"pkg/hector_slam/blob/catkin/hector_slam_launch/launch/tutorial.launch>`__ "
+"file so that it looks like below:"
+msgstr ""
+"默认情况下，Hector SLAM 启动后会弹出窗口实时显示地图，可通过注释掉 `tutorial.launch "
+"<https://github.com/tu-darmstadt-ros-"
+"pkg/hector_slam/blob/catkin/hector_slam_launch/launch/tutorial.launch>`__ "
+"文件中的一行来禁用，结果如下："
+
+#: ../../source/docs/ros-slam.rst:120 0c0aa5c1cbef430385ab45bad5b289fe
+msgid "Build the Packages"
+msgstr "构建软件包"
+
+#: ../../source/docs/ros-slam.rst:129 76ba214acb9845d19cc4e5a1556adcdd
+msgid "Start Hector SLAM"
+msgstr "启动 Hector SLAM"
+
+#: ../../source/docs/ros-slam.rst:131 3d43442c1c6646d1be57391093ca46b3
+msgid ""
+"Plug the RPLidarA2 into the companion computer and then open up four "
+"terminals and in each terminal type:"
+msgstr "将 RPLidarA2 插入伴飞计算机，然后打开四个终端，在每个终端中输入："
+
+#: ../../source/docs/ros-slam.rst:138 1f1249ce30e146fd8200cfe41cd16143
+msgid "Then in Terminal1:"
+msgstr "然后在终端 1 中："
+
+#: ../../source/docs/ros-slam.rst:144 79859e41b44e4e5dbd4cc0c4064f7acf
+msgid "In Terminal2:"
+msgstr "在终端 2 中："
+
+#: ../../source/docs/ros-slam.rst:150 a5c1c5dd7da74029b61392cef81756f4
+msgid ""
+"In Terminal3 (For RaspberryPi we recommend running this on another Machine "
+"explained `here <http://wiki.ros.org/ROS/Tutorials/MultipleMachines>`__):"
+msgstr ""
+"在终端 3 中（对于树莓派，建议在另一台机器上运行，说明见 `此处 "
+"<http://wiki.ros.org/ROS/Tutorials/MultipleMachines>`__）："
+
+#: ../../source/docs/ros-slam.rst:156 98ed01fea7d34824ba425c0be78a0437
+msgid "In Terminal4:"
+msgstr "在终端 4 中："
+
+#: ../../source/docs/ros-slam.rst:158 44a406df782b4a1e8f8c8623de36934c
+msgid ""
+"Start mavros as described on the :ref:`Connecting with ROS page <ros-"
+"connecting>` which involves running a command like below:"
+msgstr "按照 :ref:`ROS 连接页面 <ros-connecting>` 的说明启动 mavros，运行如下命令："
+
+#: ../../source/docs/ros-slam.rst:165 d6503515668d42cd9db5e080e6ba6949
+msgid "Configure ArduPilot"
+msgstr "配置 ArduPilot"
+
+#: ../../source/docs/ros-slam.rst:167 f17ecea387a44ff6b266b5a88b0b121b
+msgid ""
+"Connect to the flight controller with a ground station (i.e. Mission "
+"Planner) and check that the following parameters are set as shown below:"
+msgstr "使用地面站（如 Mission Planner）连接飞行控制器，并确认以下参数按如下设置："
+
+#: ../../source/docs/ros-slam.rst:169 8e3a171ca9694184ae275eb574e7caad
+msgid ""
+":ref:`AHRS_EKF_TYPE <copter:AHRS_EKF_TYPE>` = 2 (the default) to use EKF2 "
+"(at the time this page was written the EKF3 did not yet support external "
+"position estimates)"
+msgstr ""
+":ref:`AHRS_EKF_TYPE <copter:AHRS_EKF_TYPE>` = 2（默认值），使用 EKF2（本页编写时 EKF3 "
+"尚不支持外部位置估计）"
+
+#: ../../source/docs/ros-slam.rst:170 e1202146624642c1abf8ce0c4a61c287
+msgid ":ref:`EK2_ENABLE <copter:EK2_ENABLE>` = 1 (the default)"
+msgstr ":ref:`EK2_ENABLE <copter:EK2_ENABLE>` = 1（默认值）"
+
+#: ../../source/docs/ros-slam.rst:171 6c642f043f594eb3b1867c73997c7a10
+msgid ":ref:`EK3_ENABLE <copter:EK3_ENABLE>` = 0 (the default)"
+msgstr ":ref:`EK3_ENABLE <copter:EK3_ENABLE>` = 0（默认值）"
+
+#: ../../source/docs/ros-slam.rst:172 ce6ba1ecffd348a09e08925df32ec808
+msgid ":ref:`GPS1_TYPE <GPS1_TYPE>` = 0 to disable the GPS"
+msgstr ":ref:`GPS1_TYPE <GPS1_TYPE>` = 0，禁用 GPS"
+
+#: ../../source/docs/ros-slam.rst:173 85494e11ce8a45ec845e1f74570743d5
+msgid ""
+":ref:`EK2_GPS_TYPE <copter:EK2_GPS_TYPE>` = 3 to disable the EKF's use of "
+"the GPS"
+msgstr ":ref:`EK2_GPS_TYPE <copter:EK2_GPS_TYPE>` = 3，禁止 EKF 使用 GPS"
+
+#: ../../source/docs/ros-slam.rst:174 2b3cda89ed454e37a42782d75fe9ec4a
+msgid ""
+":ref:`COMPASS_ENABLE<copter:COMPASS_ENABLE>` = 0, :ref:`COMPASS_USE "
+"<copter:COMPASS_USE>` = 0, :ref:`COMPASS_USE2 <copter:COMPASS_USE2>` = 0, "
+":ref:`COMPASS_USE3 <copter:COMPASS_USE3>` = 0 to disable the EKF's use of "
+"the compass and instead rely on the heading from ROS and Hector SLAM"
+msgstr ""
+":ref:`COMPASS_ENABLE<copter:COMPASS_ENABLE>` = 0、:ref:`COMPASS_USE "
+"<copter:COMPASS_USE>` = 0、:ref:`COMPASS_USE2 <copter:COMPASS_USE2>` = "
+"0、:ref:`COMPASS_USE3 <copter:COMPASS_USE3>` = 0，禁止 EKF 使用罗盘，转而依赖 ROS 和 "
+"Hector SLAM 提供的航向"
+
+#: ../../source/docs/ros-slam.rst:176 c6c7bc8fd0e14c53931acac9212f1906
+msgid "After changing any of the values above, reboot the flight controller."
+msgstr "更改上述任意参数后，重启飞行控制器。"
+
+#: ../../source/docs/ros-slam.rst:178 a4d26d252206426a976a830c77b003c5
+msgid ""
+"If all is working, vision position estimates should begin flowing in from "
+"ROS to ArduPilot.  This can be confirmed by connecting to the flight "
+"controller using the Mission Planner (or similar) and check the Flight Data "
+"screen's Messages tab (bottom left) for messages from the EKF like below:"
+msgstr ""
+"若一切正常，视觉位置估计数据应开始从 ROS 流入 ArduPilot。可通过 Mission "
+"Planner（或类似工具）连接飞行控制器，在飞行数据界面的「Messages」标签（左下角）中查看 EKF 的如下消息加以确认："
+
+#: ../../source/docs/ros-slam.rst:187 8a800a8982f44c94bb657275ca97f7a9
+msgid ""
+"Using the Mission Planner (or similar) go to the Flight Data screen and "
+"right-mouse-button click on the map and select \"Set Home Here\" >> \"Set "
+"EKF Origin\".  The vehicle should appear immediately on the map where you "
+"clicked."
+msgstr ""
+"使用 Mission Planner（或类似工具）进入飞行数据界面，在地图上右键单击并选择「Set Home Here」>>「Set EKF "
+"Origin」。飞行器应立即出现在您点击的地图位置。"
+
+#: ../../source/docs/ros-slam.rst:190 8d7efb3653104497ac07a6bd0bc8e44a
+msgid "Video"
+msgstr "视频"
+
+#: ../../source/docs/ros-slam.rst:197 8b81930659ae48b2808c926959330fb2
+msgid ""
+"We are keen to improve ArduPilot's support of ROS so if you find issues "
+"(such as commands that do not seem to be supported), please report them in "
+"the `ArduPilot issues list "
+"<https://github.com/ArduPilot/ardupilot/issues>`__ with a title that "
+"includes \"ROS\" and we will attempt to resolve them as quickly as possible."
+msgstr ""
+"我们致力于改善 ArduPilot 对 ROS 的支持。若您发现问题（如某些命令似乎不被支持），请在 `ArduPilot 问题列表 "
+"<https://github.com/ArduPilot/ardupilot/issues>`__ 中以包含「ROS」的标题提交报告，我们将尽快处理。"

@@ -1,0 +1,168 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:5
+#: 872d90e0437c40e6bbddc2f76a33a452
+msgid "Copter Position Control and Navigation"
+msgstr "Copter 位置控制与导航"
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:7
+#: 8c0e1dcd1fc045f8bc183950454932fa
+msgid ""
+"This page covers the basics of Copter's `Position Control  "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AC_AttitudeControl/AC_PosControl.h>`__"
+" and `Waypoint Navigation "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AC_WPNav>`__ "
+"libraries"
+msgstr ""
+"本页介绍 Copter 的 `位置控制库 "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AC_AttitudeControl/AC_PosControl.h>`__"
+" 和 `航点导航库 "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AC_WPNav>`__ "
+"的基础知识"
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:9
+#: 1eac4abb256d467093023d1b02ba3470
+msgid ""
+"As a reference the diagram below provides a high level code flow view of "
+"Copter's RTL mode"
+msgstr "下图提供了 Copter RTL 模式的高层代码流程视图，供参考"
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:16
+#: b1591433b7ff4886b64286a99a709fb5
+msgid "Class Hierarchy and Description"
+msgstr "类层次结构与说明"
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:22
+#: 764e3c9768494c69a56fa50602938de0
+msgid ""
+"At the highest level, AC_WPNav, AC_Circle and AC_Loiter libraries are peers "
+"and all make use of the AC_PosControl library"
+msgstr "在最高层，AC_WPNav、AC_Circle 和 AC_Loiter 库相互并列，均使用 AC_PosControl 库"
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:24
+#: b1a4e2a2554c44c9b56e4c43ecf0cc77
+msgid ""
+"AC_WPNav is made up of three independent controllers (these may be separated"
+" into individual libraries in the future):"
+msgstr "AC_WPNav 由三个独立控制器组成（未来可能拆分为独立库）："
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:26
+#: b57a44f3046749ad9024cfc641b753fb
+msgid ""
+"Waypoint attempts to fly the vehicle in a straight line to a target "
+"waypoints.  This interface accepts a 3D target destination specified as a "
+"latitude, longitude and altitude or as an offset from the EKF origin"
+msgstr "航点控制器尝试使飞行器沿直线飞向目标航点。该接口接受以纬度、经度和高度或 EKF 原点偏移量指定的三维目标位置"
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:27
+#: ee5932b274be4a218d452b0bce798716
+msgid ""
+"Spline flies the vehile in a smooth curved path to a 3D target waypoint with"
+" a final velocity that will allow it to continue smoothly towards a "
+"subsequent waypoint.  Its interface is very similar to the Waypoint "
+"controller above"
+msgstr "样条曲线控制器使飞行器沿平滑曲线路径飞向三维目标航点，并以允许平滑过渡到后续航点的终速飞行。其接口与航点控制器非常相似"
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:28
+#: 6a882ed85eec49c59ca0a125e61b211e
+msgid "Brake tries to slow the vehicle to a stop as quickly as possible"
+msgstr "刹车控制器尝试尽快使飞行器减速停止"
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:29
+#: 359073056de2405194c00521dab4c1ca
+msgid ""
+"Waypoint, Spline and Brake controllers do not use PIDs directly.  Instead "
+"they update target positions or velocities which are then passed to the "
+"Position Controller"
+msgstr "航点、样条曲线和刹车控制器不直接使用 PID。它们更新目标位置或速度，然后将其传递给位置控制器"
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:35
+#: 4788da8466dd4c9bb2782be30f509b69
+msgid "AC_PosControl:"
+msgstr "AC_PosControl："
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:37
+#: a6fa88e688864ff7ae077e9922fdd4c3
+msgid ""
+"Separate interfaces for horizontal (X and Y axis) control and vertical "
+"(Z-axis) control.  These interfaces are separated because some flight modes "
+"(like AltHold mode) only require the Z-axis controller"
+msgstr "水平（X 和 Y 轴）控制与垂直（Z 轴）控制采用独立接口。之所以分离，是因为某些飞行模式（如定高模式）仅需 Z 轴控制器"
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:38
+#: 0c5c8fc2beec44a49764f2a2bc947c17
+msgid "Layered PID controllers are used"
+msgstr "使用分层 PID 控制器"
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:40
+#: a75367c99eb049d58ac031c193b6929a
+msgid ""
+"XY axis uses a Position P to convert position error to a target velocity.  A"
+" velocity PID converts velocity error into a desired acceleration which is "
+"then converted to a desired lean angle which is then sent into the attitude "
+"control library."
+msgstr "XY 轴使用位置 P 控制器将位置误差转换为目标速度。速度 PID 将速度误差转换为期望加速度，再转换为期望倾斜角，最终发送至姿态控制库。"
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:46
+#: 5f9b5f11c18347b283627fb6ee9e3364
+msgid ""
+"The Z axis uses a Position P controller to convert position error to a "
+"target vertical velocity (aka climb rate).  A Velocity P controller converts"
+" velocity error to a desired acceleration.  An Acceleration PID converts "
+"acceleration error into a desired throttle which is then sent into the "
+"attitude control library (which mostly just passes it through to the low "
+"level motors library)"
+msgstr ""
+"Z 轴使用位置 P 控制器将位置误差转换为目标垂直速度（即爬升率）。速度 P 控制器将速度误差转换为期望加速度。加速度 PID "
+"将加速度误差转换为期望油门，再发送至姿态控制库（后者基本直接将其传递给底层电机库）"
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:48
+#: b7a0524b683a4a52829fb1ea320e1a44
+msgid ""
+"AC_PosControl also includes a 3D velocity controller and a 3D "
+"Position+Velocity controller"
+msgstr "AC_PosControl 还包含三维速度控制器和三维位置+速度控制器"
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:51
+#: 9730547c390442e898763e204dfdd2e0
+msgid "Should I use PosControl or WPNav?"
+msgstr "应使用 PosControl 还是 WPNav？"
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:53
+#: a2a5f33387c44fca87ef4bb780049080
+msgid ""
+"Because both AC_PosControl and AC_WPNav allow the caller to move a vehicle "
+"to a 3D target point it may not be clear which should be used."
+msgstr "由于 AC_PosControl 和 AC_WPNav 均允许调用者将飞行器移动到三维目标点，可能不清楚应选用哪个。"
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:55
+#: 981bd711fbdd4960b932193f615c307a
+msgid ""
+"In general the vehicle code (i.e. flight mode code) should use the AC_WPNav "
+"library because it will ensure the vehicle flies a straight path to the "
+"target.  AC_PosControl should normally only be used by other higher level "
+"navigation libraries.  The exception to this rule is simpler flight modes "
+"that simply want Z-axis control - these make direct use of AC_PosControl."
+msgstr ""
+"一般来说，飞行器代码（即飞行模式代码）应使用 AC_WPNav 库，因为它能确保飞行器沿直线飞向目标。AC_PosControl "
+"通常应仅由其他更高层的导航库使用。例外情况是只需 Z 轴控制的简单飞行模式——这些模式直接使用 AC_PosControl。"

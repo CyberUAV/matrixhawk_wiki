@@ -1,0 +1,729 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:5
+#: 27b85094213645f988686fd25270b4d6
+msgid "Archived: Building for Qualcomm Snapdragon Flight Kit"
+msgstr "归档：为 Qualcomm Snapdragon Flight Kit 构建"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:9
+#: c9a874417d1440afb06627d1348b9b29
+msgid "**ARCHIVED ARTICLE**"
+msgstr "**已归档文章**"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:11
+#: 6001aa2ea4604e64a09c37dec797dfcf
+msgid "ArduPilot no longer supports Qualcomm Snapdragon Flight Kit."
+msgstr "ArduPilot 不再支持 Qualcomm Snapdragon Flight Kit。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:13
+#: 11b21c1c85ad44e3ab1357fdc89b7b8a
+msgid ""
+"This article shows how to build ArduPilot for :ref:`Qualcomm® Snapdragon "
+"Flight™ Kit (Developer’s Edition) <copter:common-qualcomm-snapdragon-flight-"
+"kit>` with *Make* on Linux."
+msgstr ""
+"本文介绍如何在 Linux 上使用 *Make* 为 :ref:`高通® Snapdragon Flight™ "
+"套件（开发者版）<copter:common-qualcomm-snapdragon-flight-kit>` 构建 ArduPilot。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:19
+#: f01c8b4927254efbac35f995b542478b
+msgid ""
+"Due to some rather unusual licensing terms from Intrinsyc we cannot "
+"distribute binaries of ArduPilot (or any program built with the Qualcomm "
+"libraries). So you will have to build the firmware yourself."
+msgstr ""
+"由于 Intrinsyc 的一些特殊许可条款，我们无法分发 ArduPilot（或任何使用高通库构建的程序）的二进制文件。因此你必须自行构建固件。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:25
+#: 87186837c2f14d91bf148a85df9d4fa7
+msgid "Overview"
+msgstr "概述"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:27
+#: 85d0c20a00734d578441aa6f199db2f3
+msgid "There are two ports of ArduPilot to this board:"
+msgstr "ArduPilot 针对该板有两个移植版本："
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:29
+#: 5a7f4b0517ba44f2a4814b6ef20ce937
+msgid ""
+"`QFLIGHT "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_HAL_Linux/qflight>`__"
+" runs mostly on the ARM cores, with just sensor and UARTs on the DSPs. This "
+"port is much easier to debug and you can use all of the normal Linux "
+"development tools."
+msgstr ""
+"`QFLIGHT "
+"<https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_HAL_Linux/qflight>`__"
+" 主要运行在 ARM 核心上，仅传感器和 UART 在 DSP 上运行。该移植版本更易于调试，可使用所有常规 Linux 开发工具。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:33
+#: 0d28487768ff4de5ae4d7f8e978d6976
+msgid ""
+"`HAL_QURT "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_QURT/README.md>`__"
+" runs primarily on the DSPs, with just a small shim on the ARM cores. This "
+"port has better performance due to its extremely accurate realtime "
+"scheduling, and is also more robust as it can keep flying if Linux crashes "
+"for some reason (the QFLIGHT port relies on both Linux and QURT working to "
+"keep flying). However it is harder to debug!"
+msgstr ""
+"`HAL_QURT "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_QURT/README.md>`__"
+" 主要运行在 DSP 上，ARM 核心只有一个小型 shim。该移植版本由于极精确的实时调度而具有更好的性能，并且更为健壮——即使 Linux "
+"崩溃也能继续飞行（而 QFLIGHT 移植版本依赖 Linux 和 QURT 同时正常工作）。但它更难调试！"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:40
+#: d76b4772cdfb4e09a3283ece12296322
+msgid ""
+"The build instructions for the two ArduPilot ports are almost exactly the "
+"same (both are covered here)."
+msgstr "两种 ArduPilot 移植版本的构建说明几乎完全相同（本文均有介绍）。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:45
+#: ba35b52884904246883322d8b7c63a80
+msgid ""
+"We recommend that developers use QFLIGHT port for development and debugging,"
+" but recompile and target QURT for production use."
+msgstr "建议开发者在开发和调试时使用 QFLIGHT 移植版本，但在生产使用时重新编译并针对 QURT 构建。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:48
+#: 4db02fa6e5224c98a6ae49d2b6ea9440
+msgid ""
+"The instructions in this article demonstrate building for Copter (from the "
+"ArduCopter directory). Plane and Rover are build in the same way, from their"
+" respective vehicle source directories."
+msgstr ""
+"本文中的说明以 Copter 的构建为例（在 ArduCopter 目录下）。Plane 和 Rover "
+"的构建方式相同，分别在其对应的飞行器源码目录下进行。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:53
+#: fddb75870183411bb6b1d2836f9a329a
+msgid "Preparing the board"
+msgstr "准备板子"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:56
+#: db4e12324f29451eb9c80cac9aa32215
+msgid "Flashing the OS with QFIL on Windows"
+msgstr "在 Windows 上使用 QFIL 刷写操作系统"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:58
+#: 2d3307d5b5b94da08ec12fbacf00e3f9
+msgid ""
+"Boards purchased from Intrinsyc come pre-loaded with an operating system "
+"(i.e. Ubuntu) but it may not if you receive a board from a different source."
+"  Use the instructions below to flash the OS onto the board from a Windows "
+"PC."
+msgstr ""
+"从 Intrinsyc 购买的板子预装了操作系统（即 Ubuntu），但其他来源的板子可能没有。请按照以下说明从 Windows PC "
+"将操作系统刷写到板子上。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:63
+#: e891fd441baf404da6c4e3982c64dc6a
+msgid ""
+"Download and install QFIL (`here <http://androidurdu.net/download-qualcomm-"
+"flash-image-loader-qfil/>`__ - search for the green download button with "
+"\"QPST 2.7.422\" written below it)."
+msgstr ""
+"下载并安装 QFIL（`此处 <http://androidurdu.net/download-qualcomm-flash-image-loader-"
+"qfil/>`__ — 搜索下方写有「QPST 2.7.422」的绿色下载按钮）。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:67
+#: 1e763b0c668b49f4bb41c3ee50d97aba
+msgid ""
+"Put the board into bootloader mode by first powering the board using the "
+"power brick and then connect with a USB cable to your PC (note the board has"
+" a USB3.0 port but a normal micro USB cable will work)"
+msgstr ""
+"通过先使用电源砖为板子供电，再用 USB 线连接到电脑的方式，将板子置于 bootloader 模式（注意板子有 USB3.0 接口，但普通的 "
+"micro USB 线也适用）。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:70
+#: e68ad51eb00c4ed283e045f1a708dadc
+msgid ""
+"Start QFIL and the COM port the board is connected to should automatically "
+"appear to the left of the **Select Port** button. Normally it appears with "
+"the name \"QDLoader 9008\"."
+msgstr ""
+"启动 QFIL，板子所连接的 COM 端口应自动出现在 **Select Port** 按钮左侧，通常名称为 「QDLoader 9008」。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:73
+#: 6694febbd3a94f688d9491e94fdc541a
+msgid ""
+"Under \"Select Programmer\" click the **Browse** button and find "
+"prog_emmc_firehose_8974.mbn (To-Do: which of the packages was this from?)"
+msgstr ""
+"在 「Select Programmer」下，点击 **Browse** 按钮，找到 "
+"prog_emmc_firehose_8974.mbn（待定：该文件来自哪个包？）"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:76
+#: 93d04ef02a24456785a6c577be52adf5
+msgid ""
+"Under \"Download\" the rawprogram_unsprse.xml\" should be found "
+"automatically (?)"
+msgstr "在 「Download」下，rawprogram_unsprse.xml 应该会被自动找到（？）"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:78
+#: 47a200deebac45db81ddf499de281b46
+msgid ""
+"Click the **Download** button and if all goes well the OS will be flashed to"
+" the board"
+msgstr "点击 **Download** 按钮，若一切顺利，操作系统将被刷写到板子上。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:85
+#: 194dd97cfa374730ab87e12b532e3dcb
+msgid "Connecting to the board using the FTDI cable"
+msgstr "使用 FTDI 线连接到板子"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:87
+#: 3fb42b29540c43e89f90c937210a8cf2
+msgid ""
+"The board should come with an FTDI cable and small green serial adapter "
+"board which can be plugged into the rectangular black connector on the top "
+"of the board next to the USB port.  Use a ssh program such as Putty to "
+"connect to the FTDI cable's serial port at 115200 baud (no password is "
+"required to log into the board this way)."
+msgstr ""
+"板子应随附一根 FTDI 线和一块小型绿色串口转接板，可插入板子顶部 USB 口旁边的矩形黑色接口。使用 Putty 等 SSH 程序以 115200 "
+"波特率连接到 FTDI 线的串口（以此方式登录板子无需密码）。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:94
+#: 63a8a7d694374776bb3d09caf8189e22
+msgid "Changing the root password and enabling login as root"
+msgstr "更改 root 密码并启用 root 登录"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:96
+#: f9c8b4b2eb944e199ab5b11306c2c0e5
+msgid ""
+"Connect using the FTDI cable using the instructions above and change the "
+"root password by typing ``passwd`` on the command line and entering your "
+"desired password twice (ie. \"penguin\")."
+msgstr ""
+"按上述说明使用 FTDI 线连接，然后在命令行输入 ``passwd``，并两次输入所需密码（如 「penguin」）来更改 root 密码。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:100
+#: da16d0425925470791b8ba205a1242d0
+msgid ""
+"Enable logging in as root by editing /etc/ssh/sshd_config and modifying line"
+" 28 to look like below:"
+msgstr "通过编辑 /etc/ssh/sshd_config 并将第 28 行修改为如下内容来启用 root 登录："
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:103
+#: ac97c46413af43c2a3886eda58cc675b
+msgid "``PermitRootLogin yes``"
+msgstr "``PermitRootLogin yes``"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:106
+#: 1d1095cf1cb145d882b8fbd8bcd20c48
+msgid "Connecting to the board's wifi access point"
+msgstr "连接到板子的 wifi 热点"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:108
+#: ab988ff43fdd4006bbc1ffdbd15d945a
+msgid ""
+"The board's wifi access point will appear as ssid \"Atlanticus_XXXXX\" "
+"(where X is a 5 digit number) and password \"password\"."
+msgstr "板子的 wifi 热点名称为 「Atlanticus_XXXXX」（X 为 5 位数字），密码为 「password」。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:111
+#: b24d48d4922c4a7bab7afcf79db1fb33
+msgid ""
+"The IP address assigned to your computer (default range is 192.168.1.10 ~ "
+"192.168.1.20) can be changed by modifying the files below.  This may be "
+"necessary to avoid conflicting with your home/business wifi network."
+msgstr ""
+"分配给你的电脑的 IP 地址（默认范围为 192.168.1.10 ~ "
+"192.168.1.20）可通过修改以下文件进行更改。这可能有必要，以避免与家庭/办公 wifi 网络冲突。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:115
+#: 65ac9ffc98424b0db363739686d07df1
+msgid "Lines 304, 305 of /etc/dnsmasq.conf as shown below."
+msgstr "/etc/dnsmasq.conf 的第 304、305 行，如下所示。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:117
+#: 02b420db0eb64065a167d1fa24d029d6
+msgid "``interface=wlan0``"
+msgstr "``interface=wlan0``"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:119
+#: e9488dc8653e4270a0d6607e2ba13d4c
+msgid "dhcp-range=192.168.**2**.10,192.168.**2**.20,infinite"
+msgstr "dhcp-range=192.168.**2**.10,192.168.**2**.20,infinite"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:121
+#: 9761eba8511644c5ad5fcac9929d3309
+msgid ""
+"Line 39 of /etc/network/interfaces.d/.qca6234.cfg.softap as shown below."
+msgstr "/etc/network/interfaces.d/.qca6234.cfg.softap 的第 39 行，如下所示。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:123
+#: 585e274a713c41cdaf47d85ffd2398f7
+msgid "`` address 192.168.2.1``"
+msgstr "`` address 192.168.2.1``"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:125
+#: 2ddbfafbc6314af98b3252e31cbfb689
+msgid ""
+"You should be able to use a terminal program such as Putty to ssh to the "
+"board at the IP address shown above (i.e. 192.168.2.1) using user/password "
+"of linaro/linaro or root/penguin."
+msgstr ""
+"你应该可以使用 Putty 等终端程序通过 SSH 连接到上述 IP 地址（如 192.168.2.1），用户名/密码为 linaro/linaro 或"
+" root/penguin。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:130
+#: def632641b9c440faa927f60792fd07e
+msgid "Correct home directory permissions"
+msgstr "修正 home 目录权限"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:132
+#: da3aed1821ff43829b2807fbca0ff7a8
+msgid "By default the /home/linaro directory permission are incorrect."
+msgstr "默认情况下 /home/linaro 目录的权限设置不正确。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:134
+#: 52e3b9ec06a44feba3dad68f779ba03b
+msgid "``sudo chown -R linaro.linaro /home/linaro``"
+msgstr "``sudo chown -R linaro.linaro /home/linaro``"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:137
+#: 7f008f4e998843a785a5ce106b1856e0
+msgid "Create a logs directory"
+msgstr "创建日志目录"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:139
+#: f1760f05024f42d4bd7a7188b34034bc
+msgid ""
+"On the flight board, create the logs directory in a location where the DSPs "
+"can write to:"
+msgstr "在飞行控制板上，在 DSP 可写入的位置创建 logs 目录："
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:142
+#: 1f37c6ce08854fd08a7e07f408cf2572
+msgid "``mkdir /usr/share/data/adsp/logs``"
+msgstr "``mkdir /usr/share/data/adsp/logs``"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:145
+#: 80b5037d1c69478b829c2e415107dbb5
+msgid "Checking and upgrading the Ubuntu kernel version on the board"
+msgstr "检查并升级板子上的 Ubuntu 内核版本"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:147
+#: 0be9ad901ba04e3f92bfa3112702c881
+msgid ""
+"Connect to the board using the FTDI cable or ssh via sifi can type \"uname "
+"-a\".  The output should appear as below (or with a later date), if it does "
+"not then it should be updated."
+msgstr ""
+"通过 FTDI 线连接或通过 wifi 进行 SSH 后，输入 「uname -a」。输出应如下所示（或显示更新的日期），如果不同则需要更新。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:151
+#: 75d0db792a864f8180972139d0917407
+msgid ""
+"``Linux linaro-developer 3.4.0-eagle8074 #1 SMP PREEMPT Wed Dec 9 17:42:13 "
+"PST 2015 armv7l armv7l armv7l GNU/Linux``"
+msgstr ""
+"``Linux linaro-developer 3.4.0-eagle8074 #1 SMP PREEMPT Wed Dec 9 17:42:13 "
+"PST 2015 armv7l armv7l armv7l GNU/Linux``"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:153
+#: 98d7b64ea0d048ff89b8d65abd4ec384
+msgid ""
+"To upgrade to a later version of Ubuntu first `download and extract the "
+"latest \"Flight_BSP_X.X\" file from the Intrinsic site (Note: these files "
+"had at least temporarily disappeared as of Jan-2016). "
+"<http://support.intrinsyc.com/projects/snapdragon-flight/files?val=1>`__"
+msgstr ""
+"要升级到更新版本的 Ubuntu，请先`下载并解压 Intrinsic 网站上的最新「Flight_BSP_X.X」文件（注意：这些文件在 2016 年"
+" 1 月前后曾至少短暂消失）。<http://support.intrinsyc.com/projects/snapdragon-"
+"flight/files?val=1>`__"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:159
+#: ef3cf70d6db64cbd8a10fa159fe253eb
+msgid "Upgrade using the fastboot-all script:"
+msgstr "使用 fastboot-all 脚本升级："
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:161
+#: 9a857971631441dbb8614a3d5860380a
+msgid ""
+"On an Ubuntu machine find the Binaries/fastboot-all.bat script from the "
+"above download."
+msgstr "在 Ubuntu 机器上找到上述下载文件中的 Binaries/fastboot-all.bat 脚本。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:164
+#: 7337a3b5884141fa8fefb34e278b247d
+msgid ""
+"Edit the script and remove the reboot line (line 16) which is shown below "
+"(this reboot can cause the board to become bricked if the upgrade fails)"
+msgstr "编辑脚本并删除第 16 行（如下所示），因为如果升级失败，该 reboot 命令可能导致板子变砖。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:168
+#: 8e1ba2992b924e7b982ec6fd678468a3
+msgid "``fastboot reboot``"
+msgstr "``fastboot reboot``"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:170
+#: c17ed51252724808a934894cab01991c
+msgid "Run the script:"
+msgstr "运行脚本："
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:172
+#: 9fcee1bb1a7642da99a99622ddb1aaff
+msgid "``sudo ./Binaries/fastboot-all.bat``"
+msgstr "``sudo ./Binaries/fastboot-all.bat``"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:174
+#: 893a56d90eec4446aa1b2491ace58ea1
+msgid ""
+"After the upgrade, the board will be completely wiped meaning any previous "
+"setup (i.e. root passwords, wifi IP addresses) will need to be redone."
+msgstr "升级后，板子将被完全清空，之前的所有配置（如 root 密码、wifi IP 地址）均需重新设置。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:178
+#: b4a2323511b0451a941b5e8f94c42dfa
+msgid ""
+"Note: On 25-Jan-2016, while after performing this upgrade and writing this "
+"wiki page we found the /firmware/image was out of date.  We should add "
+"instructions on which files needed to be updated and where the new files can"
+" be found."
+msgstr ""
+"注意：2016 年 1 月 25 日，在完成此次升级并编写本 wiki 页面后，我们发现 /firmware/image "
+"已过时。我们应补充说明哪些文件需要更新，以及新文件的下载位置。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:184
+#: 07351a6da0be4fadb7d573aa24c868c6
+msgid "Upgrade by manually copying images"
+msgstr "通过手动复制镜像升级"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:186
+#: 7193f24b4bc347f1a5cdc79108a8b655
+msgid ""
+"extract the contents of the above zip and find the following files in the "
+"Binaries directory"
+msgstr "解压上述 zip 文件，在 Binaries 目录中找到以下文件"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:189
+#: aabd1d57ec274f6bb086489f3ff0a973
+msgid "boot.img, cache.img, persist.img, system.img"
+msgstr "boot.img, cache.img, persist.img, system.img"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:191
+#: 885317b0bb444c6ba1ed4647937e9374
+msgid "on an Ubuntu machine, unpack 3 of the 4 images:"
+msgstr "在 Ubuntu 机器上解包其中 3 个镜像："
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:193
+#: 52103c2db0974f5db9f8628ec27dea87
+msgid "simg2img cache.img cache.ext4"
+msgstr "simg2img cache.img cache.ext4"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:194
+#: 064229bd1e0b48d2aa2125f55054f4f0
+msgid "simg2img persist.img persist.ext4"
+msgstr "simg2img persist.img persist.ext4"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:195
+#: 572b1a406aae44379b16ad6bb294e2f6
+msgid "simg2img system.img system.ext4"
+msgstr "simg2img system.img system.ext4"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:197
+#: 1b27817dd4a94ecd91c9b2bbb91ace10
+msgid ""
+"transfer these four files into a new /images directory on the flight board "
+"(either transfer via wifi or put on an sd card)"
+msgstr "将这四个文件传输到飞行控制板的新建 /images 目录（通过 wifi 传输或放入 SD 卡）"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:200
+#: 244e6a9f216847d28cdd7cef1ffa442a
+msgid "boot.img, cache.ext4, persist.ext4, system.ext4"
+msgstr "boot.img, cache.ext4, persist.ext4, system.ext4"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:202
+#: d444fadbd3004d2a8c3c5fb952bb1600
+msgid "check if any partitions are in use by typing \"mount\""
+msgstr "输入 「mount」检查是否有分区正在使用中"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:204
+#: 390e7863afb746afac06008cb89aca1b
+msgid ""
+"normally only \"persist\" will be being used so unmount it with the \"umount"
+" /mnt/persist/\" command"
+msgstr "通常只有 「persist」在使用中，使用 「umount /mnt/persist/」命令将其卸载"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:207
+#: a045d17e5d7a4c5085ef2ed3fcc7d0b4
+msgid "mount the images:"
+msgstr "挂载镜像："
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:209
+#: f8609072226848068cbffa3f24dfc002
+msgid "dd if=boot.img of=/dev/disk/by-partlabel/boot bs=1M"
+msgstr "dd if=boot.img of=/dev/disk/by-partlabel/boot bs=1M"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:211
+#: a2b836e3b6174678b2d46974d028e040
+msgid "dd if=cache.ext4 of=/dev/disk/by-partlabel/cache bs=1M"
+msgstr "dd if=cache.ext4 of=/dev/disk/by-partlabel/cache bs=1M"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:213
+#: 910b76fe8f2b4ab3a648f2dedc806144
+msgid "dd if=persist.ext4 of=/dev/disk/by-partlabel/persist bs=1M"
+msgstr "dd if=persist.ext4 of=/dev/disk/by-partlabel/persist bs=1M"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:215
+#: 88c2c5d1afd74bd28833002278fbeefd
+msgid "dd if=system.ext4 of=/dev/disk/by-partlabel/boot bs=1M"
+msgstr "dd if=system.ext4 of=/dev/disk/by-partlabel/boot bs=1M"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:218
+#: 6c9911ba03724f8681d06655a0176277
+msgid "Install the baro and mpu9250 drivers"
+msgstr "安装气压计和 mpu9250 驱动"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:220
+#: 9afdfdd6edd041ee9fd889e6a3472973
+msgid "Copy these two files to the flight board's /usr/share/data/adsp:"
+msgstr "将以下两个文件复制到飞行控制板的 /usr/share/data/adsp："
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:222
+#: cc2f3b0fe5434e4a88baf5441ce07fae
+msgid "libbmp280.so, libmpu9x50.so"
+msgstr "libbmp280.so, libmpu9x50.so"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:225
+#: 023b5beef6f34db5a2c8e008bbc921a7
+msgid "Edit dangerous Q6 service startup script"
+msgstr "编辑危险的 Q6 服务启动脚本"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:227
+#: 52c73d3380b14a4aa80f5c4a8c8af4bf
+msgid ""
+"On the flight board, edit /etc/init/q6.conf script and comment out the line "
+"below which, if left in place, can cause the board to stall forever during "
+"the boot up process is \"q6\" fails to start"
+msgstr ""
+"在飞行控制板上，编辑 /etc/init/q6.conf 脚本，注释掉以下这行——如果保留，当 「q6」启动失败时，可能导致板子在启动过程中永久卡住。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:231
+#: 4bd612866e50479cba7b8967a5ebc57b
+msgid ""
+"``#watch -n 1 --precise -g grep -m 1 \"2\" /sys/kernel/debug/msm_subsys/adsp"
+" && true``"
+msgstr ""
+"``#watch -n 1 --precise -g grep -m 1 「2」 /sys/kernel/debug/msm_subsys/adsp "
+"&& true``"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:234
+#: 8221b3b23a8d4eedac2432c499341432
+msgid "Putting the board in to \"Storage mode\""
+msgstr "将板子置于「存储模式」"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:236
+#: 326c1f4a0a3e425e98a8f44f794a4d69
+msgid ""
+"During the upgrade process, if the above step is skipped, it is possible to "
+"get the board into a state where it will not completely boot up.  You will "
+"be unable to login using FTDI or wifi.  If this occurs you can exploit a "
+"race condition in the startup sequence to get the board in \"storage mode\" "
+"which allows accessing the disks on the board."
+msgstr ""
+"在升级过程中，如果跳过了上述步骤，板子可能进入无法完全启动的状态，也无法通过 FTDI 或 wifi "
+"登录。此时可以利用启动序列中的竞争条件，将板子置于「存储模式」，从而访问板子上的磁盘。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:242
+#: 625f798aec4b4a2ba1771f4248b93ba9
+msgid "first ensure both power and usb cables are disconnected"
+msgstr "首先确保电源线和 USB 线均已断开"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:243
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:246
+#: bf3dfac8a28d428c81f1674aa01909a0 f4849b9ad86548b68a25b2bc977c0112
+msgid "plug in the power"
+msgstr "插入电源"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:244
+#: 6d05b871b01c45f78b8c11778c97a284
+msgid "quickly plug in the usb"
+msgstr "迅速插入 USB 线"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:245
+#: a0b97b08e40848cd8df8dccf648cdfed
+msgid "disconnect the power brick, hopefully the led will turn red"
+msgstr "断开电源砖，此时 LED 有望变为红色"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:248
+#: 7365b880c40e4d0f99351c6e21060ed0
+msgid ""
+"If all goes well, 10 or 20 disk devices will appear on the Windows or Ubuntu"
+" machine connected via USB.  The files on the disk can be edited including "
+"perhaps editing the startup scripts to resolve the boot-up issue."
+msgstr ""
+"若一切顺利，通过 USB 连接的 Windows 或 Ubuntu 机器上将出现 10 或 20 "
+"个磁盘设备，可以编辑磁盘上的文件，包括修改启动脚本以解决启动问题。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:254
+#: 169d6bf6a90745d7866609cdfe18de56
+msgid "Preconditions for building"
+msgstr "构建前提条件"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:256
+#: 37ad95fd29cc453896f96eccf2d16350
+msgid ""
+"These instructions will only work for 64bit Linux machines (including "
+"Ubuntu)."
+msgstr "这些说明仅适用于 64 位 Linux 机器（包括 Ubuntu）。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:260
+#: 6eb24008cd154754ae3e716d16470cc9
+msgid "Get the source code"
+msgstr "获取源代码"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:262
+#: 933f5df4c51b4fdf8c0f0f397061354f
+msgid "First clone the source:"
+msgstr "首先克隆源码："
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:270
+#: 0a5302fe0e574b33903a37ed0a66a8d3
+msgid "Get additional tools/libraries"
+msgstr "获取额外工具/库"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:272
+#: 4a1ff1d9e9984286bd02432658026b90
+msgid ""
+"To build ArduPilot for either port you will also need 3 library packages "
+"from Intrinsyc (download links are supplied when you buy the board):"
+msgstr "要为任一移植版本构建 ArduPilot，还需要从 Intrinsyc 获取 3 个库包（购买板子时会提供下载链接）："
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:275
+#: 6b7f76efcc904bb89addc0a8f4e8585a
+msgid "**HEXAGON_Tools** package, tested with version 7.2.11"
+msgstr "**HEXAGON_Tools** 包，已测试版本 7.2.11"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:276
+#: 406015d4135c462db26aef5abc1704d7
+msgid "**Hexagon_SDK** packet, version 2.0"
+msgstr "**Hexagon_SDK** 包，版本 2.0"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:277
+#: c274d68460bd42468864082734eb7824
+msgid "**HexagonFCAddon** package, tested with Flight_BSP_1.1_ES3_003.2"
+msgstr "**HexagonFCAddon** 包，已测试版本 Flight_BSP_1.1_ES3_003.2"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:279
+#: fa9f157dd1814cc6936c57d04a34b0b6
+msgid ""
+"These packages should all be unpacked in a ``$HOME/Qualcomm`` directory."
+msgstr "这些包都应解压到 ``$HOME/Qualcomm`` 目录下。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:282
+#: b8f8f38969b045a8bf2dce78644e17f6
+msgid "Building for QURT"
+msgstr "为 QURT 构建"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:284
+#: dc0547ccd9a14db5af24c15f257ee370
+msgid "To build Copter you do:"
+msgstr "构建 Copter 的命令为："
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:291
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:332
+#: 36559eed62f64b30a8f45e4496a447ec 5d7cca51ad00433fbf499e72e12d4c65
+msgid ""
+"Upload the firmware to the board by joining to the WiFi network of the board"
+" and entering the following command (where ``myboard`` is the hostname or IP"
+" address of your board):"
+msgstr "通过连接到板子的 WiFi 网络并输入以下命令，将固件上传到板子（``myboard`` 为板子的主机名或 IP 地址）："
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:299
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:340
+#: 3f54b944d72d4f29b880eb756a0c1b1a ddcf3505281643f891d84f02df2fe4ab
+msgid "This will install two files:"
+msgstr "这将安装两个文件："
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:306
+#: 62ac470bf1664b0cbd033ea71fec4b6d
+msgid ""
+"To start ArduPilot just run the **.elf** file as root on the flight board."
+msgstr "要启动 ArduPilot，只需在飞行控制板上以 root 身份运行 **.elf** 文件。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:315
+#: ebe1be9833714e86a4921a2662902f95
+msgid ""
+"For the QURT port you can't use arguments to specify the purpose of each "
+"UART."
+msgstr "对于 QURT 移植版本，不能使用参数指定每个 UART 的用途。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:318
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:359
+#: 6e123814fbb545da8172d5f049df360a 925491b2d2244d5d84162b459651fca3
+msgid ""
+"By default ArduPilot will send telemetry on UDP 14550 to the local WiFi "
+"network. Just open your favourite MAVLink compatible GCS and connect with "
+"UDP."
+msgstr ""
+"默认情况下，ArduPilot 将通过 UDP 14550 向本地 WiFi 网络发送遥测数据。只需打开你喜爱的支持 MAVLink 的地面站，并通过 "
+"UDP 连接即可。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:323
+#: e8086b4bd5b8412baaf4b573c285a0ba
+msgid "Building for QFLIGHT"
+msgstr "为 QFLIGHT 构建"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:325
+#: 04ec5a96548c4f87b29e07a51e6ae9c7
+msgid "To build Copter for QFLIGHT do:"
+msgstr "为 QFLIGHT 构建 Copter："
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:347
+#: b23e774aa64049688ca3ad69ec805055
+msgid ""
+"To start ArduPilot just run the **.elf** file as root on the flight board. "
+"You can control UART output with command line options. A typical startup "
+"command would be:"
+msgstr ""
+"要启动 ArduPilot，只需在飞行控制板上以 root 身份运行 **.elf** 文件。可以使用命令行选项控制 UART 输出。典型的启动命令为："
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:355
+#: 788829032eed48d0a44dae860927238e
+msgid ""
+"That will start ArduPilot with telemetry over UDP on port 14550, GPS on "
+"tty-2 on the DSPs, Skektrum satellite RC input on tty-4 and ESC output on "
+"tty-3."
+msgstr ""
+"这将启动 ArduPilot，遥测通过 UDP 14550 端口发送，GPS 在 DSP 的 tty-2 上，Skektrum 卫星遥控输入在 "
+"tty-4 上，ESC 输出在 tty-3 上。"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:364
+#: 520a0713d6c94e95adac1e965c41ab8c
+msgid "Starting ArduPilot on boot"
+msgstr "启动时自动运行 ArduPilot"
+
+#: ../../source/docs/building-for-qualcomm-snapdragon-flight-kit.rst:366
+#: 3c65c21583124dee97cad47ff9bee489
+msgid ""
+"You can also set up ArduPilot to start on boot by adding the startup command"
+" to **/etc/rc.local**. For example, on QURT build you'd add the line:"
+msgstr ""
+"也可以通过将启动命令添加到 **/etc/rc.local** 来设置 ArduPilot 开机自启。例如，对于 QURT 构建，添加以下行："

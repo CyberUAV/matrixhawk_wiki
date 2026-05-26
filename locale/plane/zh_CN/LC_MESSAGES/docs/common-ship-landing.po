@@ -1,0 +1,718 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 14:59+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/common-ship-landing.rst:6
+#: effa1a5627054042b6fe2c709c5818fc
+msgid "Moving Platform Takeoff and Landing (Ships, Trucks, etc.)"
+msgstr "移动平台起降（舰船、卡车等）"
+
+#: ../../source/docs/common-ship-landing.rst:8
+#: bb26c809042b4630b2170071a5e545c3
+msgid ""
+"The Plane 4.2 firmware supports VTOL taking off and landing on a moving "
+"platform with QuadPlanes. VTOL Takeoffs and Landings will track the "
+"platform's motion to remain vertically above the takeoff/landing pad and "
+"landings will provide a tracking hold-off loitering point and controlled "
+"angular approach to avoid vehicle superstructures or other obstructions. "
+"This article describes how to setup and use this functionality."
+msgstr ""
+"Plane 4.2 固件支持 QuadPlane 在移动平台上进行 VTOL 起降。VTOL "
+"起降将跟踪平台运动以保持在起降平台正上方，降落时将提供跟踪保持等待盘旋点，并以受控角度进场以避开舰船上层建筑或其他障碍物。本文介绍如何配置和使用此功能。"
+
+#: ../../source/docs/common-ship-landing.rst:11
+#: 80c04f0d6c2d4f54ae4dab9ab5c78b84
+msgid "Equipment Needed"
+msgstr "所需设备"
+
+#: ../../source/docs/common-ship-landing.rst:13
+#: e53ae763c8ae4b229f4bbddb650bc166
+msgid ""
+"To use this feature you need a beacon setup on the landing platform. This "
+"beacon should be based on an ArduPilot autopilot running the ArduPilot Rover"
+" firmware. You can set the ``FRAME_CLASS`` parameter on the beacon autopilot"
+" to \"2\" to make it a “boat” or \"1\" to make it a truck, so that the right"
+" icon shows in the ground station. The beacon will be broadcasting its "
+"position to allow the QuadPlane to track its moving HOME position, similar "
+"to :ref:`Copter's Follow Mode<copter:follow-mode>`."
+msgstr ""
+"要使用此功能，需要在降落平台上配置一个信标。该信标应基于运行 ArduPilot Rover 固件的 ArduPilot 飞控。可将信标飞控的 "
+"``FRAME_CLASS`` 参数设为 「2」（船只）或 「1」（卡车），以在地面站显示对应图标。信标将广播其位置，使 QuadPlane "
+"能够跟踪其移动的 Home 位置，类似于 :ref:`Copter 的跟随模式<copter:follow-mode>`。"
+
+#: ../../source/docs/common-ship-landing.rst:17
+#: 93182f033d4e4c3f8f4bd7f0a72e7ecb
+msgid "The beacon system needs the following:"
+msgstr "信标系统需要以下条件："
+
+#: ../../source/docs/common-ship-landing.rst:19
+#: fd8d3caaaac449d3bb54d0a1d0a7d28e
+msgid ""
+"a reliable yaw source. Using dual-F9P GPS with :ref:`moving baseline "
+"yaw<common-gps-for-yaw>` is recommended if the moving platform will cause "
+"problems with compasses."
+msgstr ""
+"可靠的偏航源。若移动平台会对罗盘造成干扰，推荐使用双 F9P GPS 配合 :ref:`移动基线偏航<common-gps-for-yaw>`。"
+
+#: ../../source/docs/common-ship-landing.rst:20
+#: eb7973a0c00e4e9c9d89a7e9a5a842d7
+msgid ""
+"a telemetry radio setup so that the aircraft can see GLOBAL_POSITION_INT "
+"mavlink messages from the beacon autopilot. There are multiple methods of "
+"achieving that, see the section below on radio setup"
+msgstr ""
+"数传无线电配置，使飞机能够接收来自信标飞控的 GLOBAL_POSITION_INT MAVLink 消息。有多种实现方法，详见下方无线电配置章节。"
+
+#: ../../source/docs/common-ship-landing.rst:21
+#: 7d3e9bcd32f04275b53e80b5e6d5c707
+msgid ""
+"the beacon needs a different mavlink system ID to the aircraft and the GCS. "
+"You set this with the :ref:`MAV_SYSID<MAV_SYSID>` parameter. In the example "
+"below, :ref:`MAV_SYSID<MAV_SYSID>` = 17, has been set."
+msgstr ""
+"信标需要与飞机和地面站使用不同的 MAVLink 系统 ID。通过 :ref:`MAV_SYSID<MAV_SYSID>` "
+"参数设置。在下方示例中，已设置 :ref:`MAV_SYSID<MAV_SYSID>` = 17。"
+
+#: ../../source/docs/common-ship-landing.rst:22
+#: 738b70e5f33c452e9a72688acfe6df35
+msgid ""
+"the beacon can be offset from the actual landing location. The beacon should"
+" be placed for optimal radio performance, then the instructions below can be"
+" used to setup the actual landing location relative to the beacon."
+msgstr "信标可以偏离实际降落位置。应将信标放置在无线电性能最佳的位置，然后按照下方说明相对于信标设置实际降落位置。"
+
+#: ../../source/docs/common-ship-landing.rst:24
+#: c17317f7ca82494fab6dfc17ef269f3a
+msgid ""
+"Here are examples a nice setups for the beacon (courtesy of FreeSpace "
+"Operations and Offshore Aviation):"
+msgstr "以下是一些精良的信标配置示例（由 FreeSpace Operations 和 Offshore Aviation 提供）："
+
+#: ../../source/docs/common-ship-landing.rst:31
+#: b81ac409f177470ebc59f783610667cf
+msgid "Telemetry"
+msgstr "数传"
+
+#: ../../source/docs/common-ship-landing.rst:32
+#: 3300f2bdcf7743bbbb792f3de736eae3
+msgid "The telemetry system needs to be capable of:"
+msgstr "数传系统需要具备以下能力："
+
+#: ../../source/docs/common-ship-landing.rst:34
+#: 6b48c6a234e64e43abd9b5b5658a278f
+msgid ""
+"allowing the ground station to see MAVLink packets from both the beacon and "
+"the aircraft"
+msgstr "允许地面站同时接收来自信标和飞机的 MAVLink 数据包"
+
+#: ../../source/docs/common-ship-landing.rst:35
+#: 1a8f10571b9f42f79a4a0f333f9e7006
+msgid ""
+"allowing the aircraft see MAVLink packets that originate from the beacon "
+"(the only packet the aircraft needs from the beacon is the "
+"GLOBAL_POSITION_INT message)"
+msgstr "允许飞机接收来自信标的 MAVLink 数据包（飞机从信标只需要 GLOBAL_POSITION_INT 消息）"
+
+#: ../../source/docs/common-ship-landing.rst:37
+#: 9f1d06a39ca540409589d1cbccf181d9
+msgid ""
+"There are several ways to setup this type :ref:`Telemetry<common-telemetry-"
+"landingpage>`:"
+msgstr "有几种方式可以配置此类 :ref:`数传<common-telemetry-landingpage>`："
+
+#: ../../source/docs/common-ship-landing.rst:39
+#: 9164b065287c40928ba8fcbcb81ce0a5
+msgid "WiFi, with a multicast network"
+msgstr "WiFi，使用组播网络"
+
+#: ../../source/docs/common-ship-landing.rst:40
+#: d757dd0381e9474fabd2a4a18dd9f359
+msgid "a mesh-capable telemetry radio"
+msgstr "支持 Mesh 的数传无线电"
+
+#: ../../source/docs/common-ship-landing.rst:41
+#: 3adced2629984948b1c44dfd8bd1d1ec
+msgid ""
+"using any kind of telemtry for GCS <-> vehicle and GCS <-> beacon, setup the"
+" GCS to forward GLOBAL_POSITION_INT packets from the beacon to the aircraft "
+"(for example, MAVProxy GCS can do this by setting the fwdpos to TRUE (ie "
+"type 'set fwdpos true' from the command line)"
+msgstr ""
+"使用任意类型的数传实现地面站与飞机以及地面站与信标的通信，并将地面站配置为将信标的 GLOBAL_POSITION_INT "
+"数据包转发给飞机（例如，MAVProxy 地面站可通过将 fwdpos 设为 TRUE 来实现，即在命令行输入 「set fwdpos true」）"
+
+#: ../../source/docs/common-ship-landing.rst:43
+#: 8a15733c14b24fd49ec3452d32aa722a
+msgid ""
+"For mesh capable radios, you could use three RFD900x radios, with the radios"
+" setup for broadcast.(see :ref:`common-rfd900`)"
+msgstr "对于支持 Mesh 的无线电，可使用三个 RFD900x 无线电，并将其配置为广播模式（见 :ref:`common-rfd900`）。"
+
+#: ../../source/docs/common-ship-landing.rst:45
+#: a978a8dc1e5d44a69c2d75dc30aa76e1
+msgid ""
+"Alternatively you could use the RFD900x relay firmware from `here "
+"<https://firmware.ardupilot.org/SiK/RFD900x-relay/>`__  with the GCS set as "
+"NODE=1, the beacon set as NODE=0 and the aircraft set as NODE=2."
+msgstr ""
+"或者，可使用 `此处 <https://firmware.ardupilot.org/SiK/RFD900x-relay/>`__ 的 RFD900x "
+"中继固件，将地面站设为 NODE=1，信标设为 NODE=0，飞机设为 NODE=2。"
+
+#: ../../source/docs/common-ship-landing.rst:48
+#: 9668de94a91b4b35bf9a22a156abd1b9
+msgid "Firmware"
+msgstr "固件"
+
+#: ../../source/docs/common-ship-landing.rst:49
+#: 7afa394dd4544174a2c10839665f7d42
+msgid "You will need ArduPilot plane 4.2 or later"
+msgstr "需要 ArduPilot Plane 4.2 或更高版本"
+
+#: ../../source/docs/common-ship-landing.rst:52
+#: 8ab69cf05d9a45d982dc43673331fd6c
+msgid "Lua Script"
+msgstr "LUA 脚本"
+
+#: ../../source/docs/common-ship-landing.rst:54
+#: 5618aeb84efe43c5b9511ae9b47e95d0
+msgid ""
+"The ship landing functionality is in a :ref:`LUA script<common-lua-"
+"scripts>`. You will need the plane_ship_landing.lua script from `here "
+"<https://github.com/ardupilot/ardupilot/blob/master/libraries/AP_Scripting/applets/plane_ship_landing.lua>`__"
+msgstr ""
+"舰船降落功能通过 :ref:`LUA 脚本<common-lua-scripts>` 实现。需要从 `此处 "
+"<https://github.com/ardupilot/ardupilot/blob/master/libraries/AP_Scripting/applets/plane_ship_landing.lua>`__"
+" 获取 plane_ship_landing.lua 脚本。"
+
+#: ../../source/docs/common-ship-landing.rst:56
+#: 71b766c0d7754d809aede6b73b290e20
+msgid ""
+"This script needs to be put in the APM/scripts directory on your microSD "
+"card on the aircraft."
+msgstr "该脚本需放置在飞机 SD 卡的 APM/scripts 目录中。"
+
+#: ../../source/docs/common-ship-landing.rst:58
+#: ecfe96d0a29246069322f8f6669f0f00
+msgid ""
+"This script also creates several new ``SHIP_`` parameters that will need to "
+"be setup (see below)."
+msgstr "该脚本还会创建若干新的 ``SHIP_`` 参数，需要进行配置（见下文）。"
+
+#: ../../source/docs/common-ship-landing.rst:61
+#: bfdef995c3674399ad2f989eeab1aaef
+msgid "Parameter Setup"
+msgstr "参数配置"
+
+#: ../../source/docs/common-ship-landing.rst:64
+#: 64f993f1e8244dd889d2e991f394b9cb
+msgid "Aircraft"
+msgstr "飞机"
+
+#: ../../source/docs/common-ship-landing.rst:66
+#: 687bdc7ba9d14ae49ce0331979a797f3
+msgid ":ref:`SCR_ENABLE<SCR_ENABLE>` = 1"
+msgstr ":ref:`SCR_ENABLE<SCR_ENABLE>` = 1"
+
+#: ../../source/docs/common-ship-landing.rst:67
+#: 48d20a13068c45c4b15a95a1e275aa59
+msgid ""
+":ref:`SCR_HEAP_SIZE<SCR_HEAP_SIZE>` = 100000 (perhaps more if other scripts "
+"are running)"
+msgstr ":ref:`SCR_HEAP_SIZE<SCR_HEAP_SIZE>` = 100000（若有其他脚本同时运行则可能需要更多）"
+
+#: ../../source/docs/common-ship-landing.rst:68
+#: 48c6fc82cbcf41e9bce86045e9bd6c98
+msgid "``SHIP_ENABLE`` = 1"
+msgstr "``SHIP_ENABLE`` = 1"
+
+#: ../../source/docs/common-ship-landing.rst:69
+#: 41f0c7314b7140a8a3374c586b40ebdd
+msgid ":ref:`FOLL_ENABLE<FOLL_ENABLE>` = 1"
+msgstr ":ref:`FOLL_ENABLE<FOLL_ENABLE>` = 1"
+
+#: ../../source/docs/common-ship-landing.rst:70
+#: 073f4c3f52804b78a92dfa12a4be22b8
+msgid ""
+":ref:`FOLL_SYSID<FOLL_SYSID>` = 17 (this needs to be the SYSID of the beacon"
+" set above)"
+msgstr ":ref:`FOLL_SYSID<FOLL_SYSID>` = 17（需与上方设置的信标 SYSID 一致）"
+
+#: ../../source/docs/common-ship-landing.rst:71
+#: d7f9fcdf8a5e43dab957bd19dfdbaa75
+msgid ":ref:`Q_RTL_MODE<Q_RTL_MODE>` = 0 (execute a normal RTL)"
+msgstr ":ref:`Q_RTL_MODE<Q_RTL_MODE>` = 0（执行正常 RTL）"
+
+#: ../../source/docs/common-ship-landing.rst:72
+#: 88404a456baf41f3a17c3c7e6221b447
+msgid ""
+":ref:`FS_LONG_ACTN<FS_LONG_ACTN>` either 0 or 1 (Continue if in AUTO or RTL "
+"always)"
+msgstr ":ref:`FS_LONG_ACTN<FS_LONG_ACTN>` 设为 0 或 1（在 AUTO 模式下继续飞行，或始终执行 RTL）"
+
+#: ../../source/docs/common-ship-landing.rst:73
+#: 9c1a4e502fc44bfd94790a7d4814deb3
+msgid ":ref:`RTL_AUTOLAND<RTL_AUTOLAND>` = 0"
+msgstr ":ref:`RTL_AUTOLAND<RTL_AUTOLAND>` = 0"
+
+#: ../../source/docs/common-ship-landing.rst:74
+#: 5e102a250f564098bfc618bb18ae4c03
+msgid ""
+":ref:`Q_OPTIONS<Q_OPTIONS>` bit 5 set (QRTL return in RC failsafes while in "
+"a VTOL mode)"
+msgstr ":ref:`Q_OPTIONS<Q_OPTIONS>` 第 5 位置 1（在 VTOL 模式下 RC 失控保护时执行 QRTL 返航）"
+
+#: ../../source/docs/common-ship-landing.rst:76
+#: 55c9468ae4a54466b59432cd3bb6651c
+msgid ""
+"Note that you will need to refresh parameters and reboot for these to all "
+"take effect. The ``SHIP_ENABLE``, ``SHIP_LAND_ANGLE`` and "
+"``SHIP_AUTO_OFS_n`` parameters will appear when the script is running "
+"correctly."
+msgstr ""
+"请注意，需要刷新参数并重启才能使所有设置生效。当脚本正常运行后，``SHIP_ENABLE``、``SHIP_LAND_ANGLE`` 和 "
+"``SHIP_AUTO_OFS_n`` 参数将会出现。"
+
+#: ../../source/docs/common-ship-landing.rst:79
+#: a7f31daa25ac420fb958614932a16aea
+msgid "Beacon"
+msgstr "信标"
+
+#: ../../source/docs/common-ship-landing.rst:81
+#: f843a7671025423ca55a999aceaff729
+msgid ":ref:`Moving baseline setup<common-gps-for-yaw>`"
+msgstr ":ref:`移动基线配置<common-gps-for-yaw>`"
+
+#: ../../source/docs/common-ship-landing.rst:82
+#: 39c76e1ab4954505bca5bf8ca9b84c0c
+msgid ""
+":ref:`EK3_SRC1_POSZ<EK3_SRC1_POSZ>` = 3 (GPS altitude as altitude source)"
+msgstr ":ref:`EK3_SRC1_POSZ<EK3_SRC1_POSZ>` = 3（使用 GPS 高度作为高度源）"
+
+#: ../../source/docs/common-ship-landing.rst:85
+#: e849852403a24ea1b7070051e2fe4ad4
+msgid "Land Angle"
+msgstr "进场角度"
+
+#: ../../source/docs/common-ship-landing.rst:86
+#: ba839dea7f134adfa725c9ffb97803e1
+msgid ""
+"You can choose the approach angle of the aircraft to the ship. The default "
+"is ``SHIP_LAND_ANGLE`` = 0 which means land from behind the ship. A value of"
+" 90 will mean that the aircraft approaches the ship from the left-hand side."
+" A value of -90 means it approaches from the right-hand side. A value of 180"
+" means the aircraft will approach the landing from the front of the ship."
+msgstr ""
+"可以选择飞机对舰船的进场角度。默认值 ``SHIP_LAND_ANGLE`` = 0 表示从舰船后方降落。值为 90 表示飞机从左侧进场，-90 "
+"表示从右侧进场，180 表示飞机从舰船前方进场降落。"
+
+#: ../../source/docs/common-ship-landing.rst:88
+#: b7c7246308bf48b386b4270bae5e4719
+msgid ""
+"You should choose a ``SHIP_LAND_ANGLE`` value to avoid obstructions on the "
+"ship, for example masts. The angle should also be chosen such that if you "
+"need to abort the landing, flying straight ahead will leave plenty of "
+"clearance to obstacles."
+msgstr ""
+"应选择能够避开舰船上障碍物（如桅杆）的 ``SHIP_LAND_ANGLE`` "
+"值。此外，角度选择还应确保在需要中止降落时，飞机直飞前方能够与障碍物保持足够间隙。"
+
+#: ../../source/docs/common-ship-landing.rst:91
+#: 52296ad1835744a9ad1f5b85b5132ffe
+msgid "Beacon Messages"
+msgstr "信标消息"
+
+#: ../../source/docs/common-ship-landing.rst:92
+#: ed83ab28a00a4f8d9fbbed367160c0bb
+msgid ""
+"When the aircraft can see the beacon position it will print a GCS message "
+"like this: “Have beacon”."
+msgstr "当飞机能够接收到信标位置时，将向地面站发送消息，如：「Have beacon」。"
+
+#: ../../source/docs/common-ship-landing.rst:95
+#: e561acc1eba34c1dbaefcb3f6edac003
+msgid ""
+"If you lose the connection to the beacon (after 3 seconds) you will see a "
+"GCS message “Lost Beacon”."
+msgstr "若失去与信标的连接（超过 3 秒），将看到地面站消息 「Lost Beacon」。"
+
+#: ../../source/docs/common-ship-landing.rst:98
+#: bcf3f794e7a544508c50fc5afb047af8
+msgid ""
+"You will also get an arming failure if you try to arm without the beacon "
+"working."
+msgstr "若在信标未正常工作的情况下尝试解锁，也会收到解锁失败提示。"
+
+#: ../../source/docs/common-ship-landing.rst:101
+#: 84a939e91a6649ec8dded20abde71954
+msgid "Landing Offset"
+msgstr "降落偏移量"
+
+#: ../../source/docs/common-ship-landing.rst:102
+#: e3448f66feed48d7a7180daeee84e9ab
+msgid ""
+"It is important to set the correct values for :ref:`FOLL_OFS_X<FOLL_OFS_X>`,"
+" :ref:`FOLL_OFS_Y<FOLL_OFS_Y>` and :ref:`FOLL_OFS_Z<FOLL_OFS_Z>` on the "
+"aircraft for the landing point relative to the beacon. These values are in "
+"meters, in front-right-down format. The easiest way to set these is to place"
+" the aircraft in the correct landing location with the beacon working and "
+"then set the parameter ``SHIP_AUTO_OFS`` to 1. When this parameter is set to"
+" 1 then the ship landing lua script will calculate the right offset values "
+"and set them in the :ref:`FOLL_OFS_X<FOLL_OFS_X>`, "
+":ref:`FOLL_OFS_Y<FOLL_OFS_Y>` and :ref:`FOLL_OFS_Z<FOLL_OFS_Z>` values."
+msgstr ""
+"在飞机上正确设置 :ref:`FOLL_OFS_X<FOLL_OFS_X>`、:ref:`FOLL_OFS_Y<FOLL_OFS_Y>` 和 "
+":ref:`FOLL_OFS_Z<FOLL_OFS_Z>` 的值非常重要，这些值表示降落点相对于信标的偏移量，单位为米，格式为前-"
+"右-下。设置这些值最简单的方法是：在信标正常工作时将飞机放置在正确的降落位置，然后将参数 ``SHIP_AUTO_OFS`` 设为 1。当该参数设为 1"
+" 时，舰船降落 LUA 脚本将计算正确的偏移值并将其写入 "
+":ref:`FOLL_OFS_X<FOLL_OFS_X>`、:ref:`FOLL_OFS_Y<FOLL_OFS_Y>` 和 "
+":ref:`FOLL_OFS_Z<FOLL_OFS_Z>`。"
+
+#: ../../source/docs/common-ship-landing.rst:105
+#: 6864885f4d424892826c92f352b13c98
+msgid "The values are:"
+msgstr "各值含义如下："
+
+#: ../../source/docs/common-ship-landing.rst:107
+#: fc99a92208b34a10b943d482ed0250ce
+msgid ""
+":ref:`FOLL_OFS_X<FOLL_OFS_X>` distance in front of the beacon to land (use a"
+" negative value for landing behind the beacon)"
+msgstr ":ref:`FOLL_OFS_X<FOLL_OFS_X>` 在信标前方的降落距离（若在信标后方降落则使用负值）"
+
+#: ../../source/docs/common-ship-landing.rst:108
+#: b1a899a192ae426bac117d99dece727d
+msgid ""
+":ref:`FOLL_OFS_Y<FOLL_OFS_Y>` distance to the right of the beacon to land "
+"(use a negative value for left)"
+msgstr ":ref:`FOLL_OFS_Y<FOLL_OFS_Y>` 在信标右侧的降落距离（若在左侧则使用负值）"
+
+#: ../../source/docs/common-ship-landing.rst:109
+#: 399b3b2a885346db88b81d05b74aa225
+msgid ""
+":ref:`FOLL_OFS_Z<FOLL_OFS_Z>` distance below the beacon to land (use a "
+"negative value to land above the beacon)"
+msgstr ":ref:`FOLL_OFS_Z<FOLL_OFS_Z>` 在信标下方的降落距离（若在信标上方降落则使用负值）"
+
+#: ../../source/docs/common-ship-landing.rst:111
+#: 536fc81899184b209c2dd0ff1711ea0a
+msgid ""
+"When the beacon is active you should see the HOME icon on the GCS move to "
+"match the landing position. The HOME position is continuously updated while "
+"you are flying which gives you a good way to ensure that the beacon is "
+"working properly before you land."
+msgstr ""
+"信标激活后，地面站上的 Home 图标应移动到与降落位置匹配的位置。Home 位置在飞行过程中持续更新，是在降落前确认信标正常工作的好方法。"
+
+#: ../../source/docs/common-ship-landing.rst:113
+#: 5e58c91d4e9a4a4fa321718773d9a0b8
+msgid ""
+"It is recommended that the method of setting ``SHIP_AUTO_OFS`` = 1 is used "
+"to get the location before each flight. Look carefully at the message it "
+"gives when this parameter is set(use the Messages tab in MissionPlanner):"
+msgstr ""
+"建议在每次飞行前使用 ``SHIP_AUTO_OFS`` = 1 的方法获取位置。设置此参数时请仔细查看给出的消息（使用 Mission Planner"
+" 中的消息标签页）："
+
+#: ../../source/docs/common-ship-landing.rst:115
+#: b1df8a510fc54d71b62f83135b487c1e
+msgid "Set follow offset (-10.82,3.29,0.46)"
+msgstr "Set follow offset (-10.82,3.29,0.46)"
+
+#: ../../source/docs/common-ship-landing.rst:117
+#: 1c95e8b59b1b4b4a934bf813d7606e6a
+msgid ""
+"That message confirms that the X, Y and Z offset has calculated. Check that "
+"they are reasonable, paying close attention to the Z offset. If you get a "
+"bad Z offset (ie. a long way off from the actual height difference between "
+"the beacon and the aircraft) then you may need to reboot the beacon and/or "
+"aircraft to cope with GPS altitude drift."
+msgstr ""
+"该消息确认已计算出 X、Y 和 Z 偏移量。请检查这些值是否合理，尤其要注意 Z 偏移量。如果 Z "
+"偏移量异常（即与信标和飞机之间的实际高度差相差悬殊），则可能需要重启信标和/或飞机以应对 GPS 高度漂移问题。"
+
+#: ../../source/docs/common-ship-landing.rst:120
+#: 010ab4c469844b20b400c039fca6e675
+msgid "Takeoff Procedure"
+msgstr "起飞程序"
+
+#: ../../source/docs/common-ship-landing.rst:121
+#: c5227dcde08c4acba52d114ff539267c
+msgid ""
+"When ``SHIP_ENABLE`` = 1 and the beacon is visible to the aircraft then an "
+"AUTO VTOL takeoff will use velocity matching, so the aircraft will hold its "
+"velocity relative to the beacon while ascending. This velocity matching is "
+"only done for VTOL takeoff as a mission item in AUTO mode."
+msgstr ""
+"当 ``SHIP_ENABLE`` = 1 且飞机可见信标时，AUTO 模式下的 VTOL "
+"自动起飞将使用速度匹配，即飞机在上升过程中将保持相对于信标的速度。速度匹配仅在 AUTO 模式任务项中的 VTOL 起飞时执行。"
+
+#: ../../source/docs/common-ship-landing.rst:124
+#: 36c26f7bda70434faf75fef29fd3af06
+msgid "Hold-off Position"
+msgstr "保持等待位置"
+
+#: ../../source/docs/common-ship-landing.rst:125
+#: 0167455676e14346a31a1b999fb00c46
+msgid ""
+"A key part of ship landing is the “hold-off position”. The hold-off position"
+" is where the aircraft will loiter while waiting for the pilot to command "
+"the landing via the movement of the throttle stick (see throttle stick "
+"information below)."
+msgstr "舰船降落的关键部分是「保持等待位置」。保持等待位置是飞机在等待飞手通过油门杆（详见下方油门杆说明）发出降落指令时盘旋等待的位置。"
+
+#: ../../source/docs/common-ship-landing.rst:127
+#: cc855835da604e9cbd996065668d57f6
+msgid "The holdoff position is based on a few criteria:"
+msgstr "保持等待位置基于以下几个条件："
+
+#: ../../source/docs/common-ship-landing.rst:129
+#: 5e611019c6f647888aaa1e5409f523fc
+msgid ""
+":ref:`RTL_RADIUS<RTL_RADIUS>` in meters (negative for counter-clockwise "
+"loiter, positive for clockwise loiter). If :ref:`RTL_RADIUS<RTL_RADIUS>` is "
+"zero, then the :ref:`WP_LOITER_RAD<WP_LOITER_RAD>` parameter is used."
+msgstr ""
+":ref:`RTL_RADIUS<RTL_RADIUS>`，单位为米（负值为逆时针盘旋，正值为顺时针盘旋）。若 "
+":ref:`RTL_RADIUS<RTL_RADIUS>` 为零，则使用 :ref:`WP_LOITER_RAD<WP_LOITER_RAD>` 参数。"
+
+#: ../../source/docs/common-ship-landing.rst:130
+#: 6269f0fd003f4a0f93cb6f14deb84c0a
+msgid ""
+"``SHIP_LAND_ANGLE`` parameter, which controls the angle that the aircraft "
+"will approach the ship for landing. A value of zero means to approach from "
+"behind the ship. The hold-off loiter position will be setup so that the "
+"tangent of the circle intercepts the beacon landing point."
+msgstr ""
+"``SHIP_LAND_ANGLE`` 参数，控制飞机对舰船的进场角度。值为零表示从舰船后方进场。保持等待盘旋位置将设置为使圆的切线与信标降落点相交。"
+
+#: ../../source/docs/common-ship-landing.rst:131
+#: db1594a66837425385d4653323e782b3
+msgid ""
+":ref:`Q_TRANS_DECEL<Q_TRANS_DECEL>` parameter, which determines how fast the"
+" aircraft can slow down"
+msgstr ":ref:`Q_TRANS_DECEL<Q_TRANS_DECEL>` 参数，决定飞机可以减速的速率"
+
+#: ../../source/docs/common-ship-landing.rst:132
+#: 2135951032414f37b9d9f79a4a2770f2
+msgid "The speed of the ship, the wind speed and the speed of the aircraft"
+msgstr "舰船速度、风速和飞机速度"
+
+#: ../../source/docs/common-ship-landing.rst:134
+#: 112e531bd53f4fd7aace25de29a82bc6
+msgid ""
+"Here is an example where ``SHIP_LAND_ANGLE`` is -45 and "
+":ref:`RTL_RADIUS<RTL_RADIUS>` is -100:"
+msgstr ""
+"以下是 ``SHIP_LAND_ANGLE`` = -45 且 :ref:`RTL_RADIUS<RTL_RADIUS>` = -100 的示例："
+
+#: ../../source/docs/common-ship-landing.rst:138
+#: 780453bbcc5d4404b5a2258673569f03
+msgid ""
+"and here is an example with ``SHIP_LAND_ANGLE`` at 0 and "
+":ref:`RTL_RADIUS<RTL_RADIUS>` at 100:"
+msgstr ""
+"以下是 ``SHIP_LAND_ANGLE`` = 0 且 :ref:`RTL_RADIUS<RTL_RADIUS>` = 100 的示例："
+
+#: ../../source/docs/common-ship-landing.rst:143
+#: 0335e2684dc540caaa9a0fa7c2ae6aa3
+msgid "Landing Procedure"
+msgstr "降落程序"
+
+#: ../../source/docs/common-ship-landing.rst:144
+#: 417c29596d1b402ab5de1e84802ac8b3
+msgid ""
+"When you are ready to land you can switch the vehicle to RTL mode. When in "
+"RTL mode the aircraft will fly towards the landing location (you can see "
+"this location before you land from the HOME icon on the GCS, which moves "
+"with the beacon)."
+msgstr ""
+"准备降落时，可将飞机切换至 RTL 模式。在 RTL 模式下，飞机将朝向降落位置飞行（降落前可从地面站的 Home 图标看到该位置，随信标移动）。"
+
+#: ../../source/docs/common-ship-landing.rst:146
+#: b31b1e310b5844e9a233b1658318ff74
+msgid ""
+"The aircraft will initially approach the “hold-off” position. The altitude "
+"of the holdoff position is set by the :ref:`RTL_ALTITUDE<RTL_ALTITUDE>` "
+"parameter (in centimeters above the landing location). A good value of this "
+"is around 9000, which is 90 meters above the landing location."
+msgstr ""
+"飞机最初将飞向「保持等待」位置。保持等待位置的高度由 :ref:`RTL_ALTITUDE<RTL_ALTITUDE>` "
+"参数设定（单位为厘米，相对于降落位置上方）。建议设为约 9000，即降落位置上方 90 米。"
+
+#: ../../source/docs/common-ship-landing.rst:148
+#: d765108daca74a4884a1360a2b8b9554
+msgid ""
+"The description below will assume that ``SHIP_LAND_ANGLE`` = 0 which means "
+"landing happens from behind the beacon. The approach and landing is rotated "
+"by the value of this parameter in degrees. With ``SHIP_LAND_ANGLE`` = 0, the"
+" hold-off position will be behind and above the beacon. The distance depends"
+" on the beacon speed, wind speed and the :ref:`Q_TRANS_DECEL<Q_TRANS_DECEL>`"
+" parameter (which controls the deceleration of the aircraft)."
+msgstr ""
+"以下说明假设 ``SHIP_LAND_ANGLE`` = 0，即从信标后方降落。进场和降落角度随该参数值（度数）旋转。当 "
+"``SHIP_LAND_ANGLE`` = 0 时，保持等待位置将在信标后方上方。距离取决于信标速度、风速以及 "
+":ref:`Q_TRANS_DECEL<Q_TRANS_DECEL>` 参数（控制飞机减速率）。"
+
+#: ../../source/docs/common-ship-landing.rst:151
+#: b3908d6528a3419989892b558d82c7b6
+msgid ""
+"Once the aircraft arrives at the hold-off position it will circle until the "
+"throttle stick is lowered below 40%. The throttle stick on the transmitter "
+"is used to control the landing sequence and also to abort the landing."
+msgstr "飞机到达保持等待位置后将持续盘旋，直到油门杆降至 40% 以下。遥控器上的油门杆用于控制降落序列，也可用于中止降落。"
+
+#: ../../source/docs/common-ship-landing.rst:153
+#: a6ae7ec6d1844644a9ee8961ad4364ab
+msgid "Throttle stick controls are:"
+msgstr "油门杆控制如下："
+
+#: ../../source/docs/common-ship-landing.rst:155
+#: 4562af8cce4c42e2bc3f3fbf0e7255ea
+#, python-format
+msgid ""
+"Throttle at 40% or above means to hold at the hold-off position (at "
+":ref:`RTL_ALTITUDE<RTL_ALTITUDE>` height above beacon in centimeters)"
+msgstr "油门杆在 40% 或以上：保持在等待位置（位于信标上方 :ref:`RTL_ALTITUDE<RTL_ALTITUDE>` 厘米高度处）"
+
+#: ../../source/docs/common-ship-landing.rst:156
+#: 1610a91a5f81418f841fe1ab947c9e28
+msgid ""
+"Throttle below 40% and above 10% means to descend while loitering to the "
+"approach altitude. The approach altitude is giving by "
+":ref:`Q_RTL_ALT<Q_RTL_ALT>` in meters above the beacon. A good value for "
+"testing may be 40 meters."
+msgstr ""
+"油门杆低于 40% 且高于 10%：在盘旋中下降至进场高度。进场高度由 :ref:`Q_RTL_ALT<Q_RTL_ALT>` "
+"给定（单位为米，相对于信标上方）。测试时建议设为 40 米。"
+
+#: ../../source/docs/common-ship-landing.rst:157
+#: c4b3922d2c87477d8ea5cc6eb83528df
+msgid ""
+"Throttle below 10% means to start landing approach once the aircraft is at "
+"the :ref:`Q_RTL_ALT<Q_RTL_ALT>` and lined up with the ``SHIP_LAND_ANGLE`` to"
+" move toward the vehicle."
+msgstr ""
+"油门杆低于 10%：当飞机在 :ref:`Q_RTL_ALT<Q_RTL_ALT>` 高度且与 ``SHIP_LAND_ANGLE`` "
+"方向对齐后，开始向飞机移动的降落进场。"
+
+#: ../../source/docs/common-ship-landing.rst:159
+#: 213f831706e8456da72e932906b551a9
+msgid ""
+"Once the landing descent has started can still abort the landing. To do "
+"this, the :ref:`Q_OPTIONS<Q_OPTIONS>` bit 15 must be set to enable "
+"ThrLandControl. When that option is set you can raise the throttle "
+"momentarily above 70% to enable throttle control for climb and descent rate."
+" You can use this to slow the descent or climb back up. If you climb up past"
+" the :ref:`Q_RTL_ALT<Q_RTL_ALT>` approach altitude then the aircraft will go"
+" back to loitering at the hold-off location at :ref:`Q_RTL_ALT<Q_RTL_ALT>`."
+msgstr ""
+"降落下降开始后仍可中止降落。为此，:ref:`Q_OPTIONS<Q_OPTIONS>` 第 15 位必须置 1 以启用 "
+"ThrLandControl。设置该选项后，可将油门瞬间提高至 70% 以上来启用油门控制下降和爬升速率。可用此功能减慢下降速度或重新爬升。若爬升超过 "
+":ref:`Q_RTL_ALT<Q_RTL_ALT>` 进场高度，飞机将返回在保持等待位置以 :ref:`Q_RTL_ALT<Q_RTL_ALT>` "
+"高度盘旋。"
+
+#: ../../source/docs/common-ship-landing.rst:161
+#: 9cdad89e593e44599c892650b3e7da61
+msgid ""
+"You may also want to enable horizontal repositioning with the "
+":ref:`Q_OPTIONS<Q_OPTIONS>` bit 17(EnableLandResponsition). If that is "
+"enabled then you can manually reposition the aircraft horizontally while "
+"landing to account for any GPS position errors."
+msgstr ""
+"还可以通过 :ref:`Q_OPTIONS<Q_OPTIONS>` 第 17 "
+"位（EnableLandResponsition）启用水平重新定位。启用后，可在降落过程中手动水平移动飞机以应对 GPS 位置误差。"
+
+#: ../../source/docs/common-ship-landing.rst:164
+#: 69fa91a6690d45a5a25cad25c1943148
+msgid "Simple Mission"
+msgstr "简单任务"
+
+#: ../../source/docs/common-ship-landing.rst:165
+#: 1b37c8d1a25e4a7391fddd98b33f8865
+msgid ""
+"The simplest mission would be a single VTOL_TAKEOFF waypoint. Once the "
+"takeoff is complete the aircraft will immediately switch to RTL mode and go "
+"to the hold-off location. You should have the throttle stick above 40% to "
+"keep the aircraft circling at the hold-off location. This very simple "
+"mission is good for ship operations as it does not have specific "
+"latitude/longitude, so will work wherever the ship is."
+msgstr ""
+"最简单的任务是单个 VTOL_TAKEOFF 航点。起飞完成后，飞机将立即切换至 RTL 模式并前往保持等待位置。应将油门杆保持在 40% "
+"以上，使飞机持续在保持等待位置盘旋。这个非常简单的任务非常适合舰船作业，因为它不包含特定的经纬度坐标，无论舰船在何处都能使用。"
+
+#: ../../source/docs/common-ship-landing.rst:167
+#: 1283f296aa1144b9901a09d68c558cd1
+msgid ""
+"You could also switch to a fixed wing mode just before reaching the takeoff "
+"altitude you set, then fly under pilot control and when ready to land, "
+"simply switch back into AUTO to RTL and land."
+msgstr "也可以在达到设定的起飞高度之前切换至固定翼模式，在飞手控制下飞行，准备降落时直接切换回 AUTO 模式执行 RTL 并降落。"
+
+#: ../../source/docs/common-ship-landing.rst:170
+#: ea9b8cc2472945e288ce7b70e9137c15
+msgid "Simulation"
+msgstr "仿真"
+
+#: ../../source/docs/common-ship-landing.rst:172
+#: 8bc382e679694958a9f9fd97dd509080
+msgid "To simulate a QuadPlane ship landing:"
+msgstr "仿真 QuadPlane 舰船降落："
+
+#: ../../source/docs/common-ship-landing.rst:174
+#: 9f2ef1395b9a4bd4aafaa556fded3b06
+msgid ""
+"Copy the plane_ship_landing.lua LUA script, into the /scripts directory "
+"where you will run the simulation"
+msgstr "将 plane_ship_landing.lua LUA 脚本复制到将要运行仿真的 /scripts 目录"
+
+#: ../../source/docs/common-ship-landing.rst:175
+#: 4144aabeeb444cf7a2c1573e9cd7cf1f
+msgid "Run the following commands for Linux SITL:"
+msgstr "在 Linux SITL 中运行以下命令："
+
+#: ../../source/docs/common-ship-landing.rst:187
+#: e0e51f9d22d14f9dadb6371053bfaebd
+msgid "Then setup a mission item: VTOL_TAKEOFF to the desired altitude"
+msgstr "然后设置任务项：VTOL_TAKEOFF 到所需高度"
+
+#: ../../source/docs/common-ship-landing.rst:188
+#: df7cb14aa9894b1fad344b3be9c750d0
+msgid "Enter:"
+msgstr "输入："
+
+#: ../../source/docs/common-ship-landing.rst:196
+#: c5878151fb8a4dc28648f437c2535458
+msgid ""
+"The QuadPlane will takeoff and then execute an RTL to the hold-off point and"
+" wait until the throttle is lowered (rc 3 1000) to start the landing."
+msgstr "QuadPlane 将起飞，然后执行 RTL 飞向保持等待点，等待油门降低（rc 3 1000）后开始降落。"
+
+#: ../../source/docs/common-ship-landing.rst:199
+#: ea72bfceb5df4c1282291e59c64bddea
+msgid "Credit:"
+msgstr "致谢："
+
+#: ../../source/docs/common-ship-landing.rst:201
+#: 4a123cf6edf047a183448578b2604384
+msgid ""
+"Many thanks to SpektreWorks for funding a lot of the work on ship landing "
+"support!"
+msgstr "衷心感谢 SpektreWorks 为舰船降落支持功能提供的大量资金支持！"

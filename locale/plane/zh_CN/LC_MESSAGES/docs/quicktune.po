@@ -1,0 +1,256 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 14:59+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/quicktune.rst:5 22ee7c6733ba4ee388dc9d58a17a8537
+msgid "VTOL QUICKTUNE"
+msgstr "VTOL QUICKTUNE（快速调参）"
+
+#: ../../source/docs/quicktune.rst:9 77cb0a1f71bc481e828f0cf9787e31b7
+msgid ""
+"ArduPlane provides a quick means of obtaining a good tune for Quadplanes in "
+"VTOL modes. The process slowly increases the relevant gains until it detects"
+" an oscillation.  It then reduces the gains by 60% and moves onto the next "
+"gain. Once all the gains have been tuned the tune completes and the user can"
+" decide to save or discard the new gains."
+msgstr ""
+"ArduPlane 提供了一种快速获得 QuadPlane 在 VTOL 模式下良好调参结果的方法。该过程缓慢增大相关增益直到检测到振荡，然后将增益降低"
+" 60% 并进入下一个增益的调参。待所有增益调参完成后，用户可以选择保存或放弃新的增益值。"
+
+#: ../../source/docs/quicktune.rst:11 74ae315b259e405ca516edb0989185a0
+msgid ""
+"be sure that you have prepared the vehicle for tuning by setting up "
+"parameters discussed here: :ref:`quadplane-vtol-tuning-process` Steps 1 to "
+"11 and then use this mechanism in Step 12. Also to assure the best tune, "
+"setup the noise notch filtering, see :ref:`common-imu-notch-filtering`. You "
+"may run QUICKTUNE without this step to obtain initial fine tune, see "
+":ref:`ac_rollpitchtuning` if the vehicle cant do an initial hover stably. "
+"Then setup the filters and retune for best results."
+msgstr ""
+"请确保已按照此处讨论的参数为飞机调参做好准备：:ref:`quadplane-vtol-tuning-process` 步骤 1 至 11，然后在步骤 "
+"12 使用此机制。此外，为保证最佳调参效果，请设置噪声陷波滤波器，详见 :ref:`common-imu-notch-"
+"filtering`。若飞机无法稳定初次悬停，可先运行 QUICKTUNE 以获得初步微调，参见 "
+":ref:`ac_rollpitchtuning`。之后设置滤波器并重新调参以获得最佳结果。"
+
+#: ../../source/docs/quicktune.rst:13 847c1b770b6b43009bc45902986a0023
+msgid ""
+"The script attempts to automatically tune the P/I and D gain of each axis "
+"enabled for tuning when an two or three position RC switch, whose "
+"``RCx_OPTION`` is \"181\", is moved to the \"tune\" position. It will, by "
+"default, also adjust some PID loop filter values based on the "
+":ref:`INS_GYRO_FILTER<INS_GYRO_FILTER>` setting."
+msgstr ""
+"当 ``RCx_OPTION`` 为 「181」 的二档或三档 RC 开关移到「调参」位置时，该脚本会尝试自动调参每个启用调参轴的 P/I 和 D "
+"增益。默认情况下，还会根据 :ref:`INS_GYRO_FILTER<INS_GYRO_FILTER>` 设置调整一些 PID 环滤波器数值。"
+
+#: ../../source/docs/quicktune.rst:15 beba994616934dd88418ff4da5348bc6
+msgid ""
+"The advantage over QAUTOTUNE is that QUICKTUNE is safer because the vehicle "
+"does not need to move or twitch and QAUTOTUNE can occasionally result in "
+"instablity. Therefore QAUTOTUNE is not longer recommended for use, except by"
+" experts."
+msgstr ""
+"相比 QAUTOTUNE，QUICKTUNE 的优势在于更安全，因为飞机无需移动或抖动，而 QAUTOTUNE "
+"偶尔会导致不稳定。因此除专家外，不再推荐使用 QAUTOTUNE。"
+
+#: ../../source/docs/quicktune.rst:17 08f287ed213243bfa7336f4eb54bed04
+msgid ""
+"The disadvantage is that QUICKTUNE cannot find the vehicle's maximum "
+"rotational accelerations or tune the attitude angle outer loops from their "
+"default or pre-tune adjusted (:ref:`quadplane-vtol-tuning-process`) values. "
+"However, tuning only the inner rate loops usually will yield a stable, safe "
+"flying vehicle."
+msgstr ""
+"缺点是 QUICKTUNE 无法找到飞机的最大旋转加速度，也无法从默认值或预调整值（:ref:`quadplane-vtol-tuning-"
+"process`）中调整姿态角外环。但仅调参内部速率环通常也能获得稳定、安全的飞行效果。"
+
+#: ../../source/docs/quicktune.rst:20 1d69cfa19bca49f290e45acb914c4874
+msgid "Setup"
+msgstr "设置"
+
+#: ../../source/docs/quicktune.rst:21 09c01e165cc0402e913606f54e480964
+msgid "Set :ref:`QWIK_ENABLE<QWIK_ENABLE>` = \"1\" to enable QUICKTUNE."
+msgstr "将 :ref:`QWIK_ENABLE<QWIK_ENABLE>` 设为 「1」 以启用 QUICKTUNE。"
+
+#: ../../source/docs/quicktune.rst:22 3c5f8a5b54a6479e99dd7fd4aafbcdf7
+msgid "Set :ref:`QWIK_AXES<QWIK_AXES>` to which axes (Roll/Pitch/Yaw)."
+msgstr "将 :ref:`QWIK_AXES<QWIK_AXES>` 设为需要调参的轴（横滚/俯仰/偏航）。"
+
+#: ../../source/docs/quicktune.rst:25 d577967654b640729924d2b2da800c5f
+msgid "Activation RC Switch"
+msgstr "激活 RC 开关"
+
+#: ../../source/docs/quicktune.rst:26 04b2effd5f9e4986b5d18ea0f67463b0
+msgid ""
+"Set up a two or three position RC switch with `RCx_OPTION`` = \"181\". If it"
+" is a two position switch set :ref:`QWIK_OPTIONS<QWIK_OPTIONS>` bit 0 to "
+"\"1\", and you probably want to set the "
+":ref:`QWIK_AUTO_SAVE<QWIK_AUTO_SAVE>` parameter to autosave the tune once "
+"completed."
+msgstr ""
+"设置一个 `RCx_OPTION`` = 「181」 的二档或三档 RC 开关。若为二档开关，将 "
+":ref:`QWIK_OPTIONS<QWIK_OPTIONS>` 位 0 设为 「1」，并建议设置 "
+":ref:`QWIK_AUTO_SAVE<QWIK_AUTO_SAVE>` 参数以在调参完成后自动保存。"
+
+#: ../../source/docs/quicktune.rst:28 a578b9b441bc4d4d811b41ce95010925
+msgid ""
+"With a three position switch, moving the switch to \"high\" (>1800us) is the"
+" \"save\" position which will save the current tune parameters, even if the "
+"tune is not completed yet. Moving the switch to the middle position "
+"activates the tuning process (\"tune\"). Moving the switch to the \"low\" "
+"position (<1200us), stops the tuning and reverts the parameters to their "
+"values before tuning began."
+msgstr ""
+"使用三档开关时，拨到「高」（>1800us）为「保存」位置，将保存当前调参参数（即使调参尚未完成）。拨到中间位置激活调参过程（「调参」）。拨到「低」位置（<1200us）停止调参并将参数恢复到调参开始前的值。"
+
+#: ../../source/docs/quicktune.rst:30 3d2cec9169314d0683847b9fb795b70b
+msgid ""
+"RC AUX switches only operate on transitions of the switch. Their position at"
+" boot does nothing, so if a switch is \"high\" at boot, in order to get the "
+"\"high\" function, it must be moved to another position and then back "
+"\"high\"."
+msgstr ""
+"RC AUX 开关仅在开关状态转换时触发。开机时的位置无效，因此若开关在开机时处于「高」位，需先拨到其他位置再拨回「高」才能触发「高」功能。"
+
+#: ../../source/docs/quicktune.rst:32 7d96558c2dfa434ab57df5e2d0a7eddb
+msgid ""
+"With a two position switch, \"high\" is the \"tune\" position, and \"low\" "
+"stops/reverts tuning. In order to save parameters, you must have set the "
+":ref:`QWIK_AUTO_SAVE<QWIK_AUTO_SAVE>` parameter or use a GCS AUX switch "
+"facility."
+msgstr ""
+"使用二档开关时，「高」为「调参」位置，「低」停止/恢复调参。要保存参数，必须已设置 "
+":ref:`QWIK_AUTO_SAVE<QWIK_AUTO_SAVE>` 参数，或使用地面站 AUX 开关功能。"
+
+#: ../../source/docs/quicktune.rst:35 a9c9de3987454a7088b1795e06017c23
+msgid "Tuning Flight"
+msgstr "调参飞行"
+
+#: ../../source/docs/quicktune.rst:36 b8702bb38d544316af323634de8324a0
+msgid "Wait for a calm day and go to an open area with good GPS reception"
+msgstr "选择平静的天气，前往有良好 GPS 信号的开阔区域"
+
+#: ../../source/docs/quicktune.rst:37 883876b186344633a9a44a058bf06b1c
+msgid ""
+"Use an OSD, TX OSD (using :ref:`Yaapu <common-frsky-yaapu>`), or GCS. This "
+"is where output from the tune will appear"
+msgstr "使用 OSD、TX OSD（使用 :ref:`Yaapu <common-frsky-yaapu>`）或地面站。调参输出将显示在这里"
+
+#: ../../source/docs/quicktune.rst:38 dba7057684b547fe9752ea9310036cfb
+msgid ""
+"Move the RC switch to the low position OR push MP's Aux Function's \"Low\" "
+"button"
+msgstr "将 RC 开关拨到低位，或按下 Mission Planner 辅助功能中的「Low」按钮"
+
+#: ../../source/docs/quicktune.rst:39 cd3045129f644e05a72eb13cb2645fef
+msgid "Arm and takeoff in QLOITER mode and climb to a height of about 3m"
+msgstr "在 QLOITER 模式下解锁并起飞，爬升至约 3m 高度"
+
+#: ../../source/docs/quicktune.rst:40 7c0976bd77344e648445f4fd976ad865
+msgid ""
+"Begin the tune by moving the RC switch to the \"tune\" position OR push MP's"
+" Aux Function's \"Mid\" button"
+msgstr "将 RC 开关拨到「调参」位置，或按下 Mission Planner 辅助功能中的「Mid」按钮，开始调参"
+
+#: ../../source/docs/quicktune.rst:41 57b82369057f4c2d8dcc333a71c84f36
+msgid "Monitor the progress of the tune using the GCS's Messages tab"
+msgstr "通过地面站的消息标签页监控调参进度"
+
+#: ../../source/docs/quicktune.rst:42 705627d7f36b4a12abf66a106c154eea
+msgid ""
+"If necessary reposition the vehicle using the RC transmitter.  This will "
+"temporarily pause tuning.  Tuning will resume a few seconds after the RC "
+"sticks are returned to their center position"
+msgstr "如有必要，使用 RC 遥控器重新定位飞机。这将暂时暂停调参。待 RC 摇杆回到中立位置几秒钟后，调参将恢复"
+
+#: ../../source/docs/quicktune.rst:43 1b07add7fdfd4c589bb1ce15acd9e2fd
+msgid ""
+"If the vehicle begins oscillating violently you can cancel the tune by "
+"moving the RC switch to the low position OR push MP's Aux Function's \"Low\""
+" button. If the vehicle rocks or pitches more than "
+":ref:`QWIK_ANGLE_MAX<QWIK_ANGLE_MAX>` the tune will automatically abort."
+msgstr ""
+"若飞机开始剧烈振荡，可将 RC 开关拨到低位或按下 Mission Planner 辅助功能中的「Low」按钮取消调参。若飞机横滚或俯仰超过 "
+":ref:`QWIK_ANGLE_MAX<QWIK_ANGLE_MAX>`，调参将自动中止。"
+
+#: ../../source/docs/quicktune.rst:44 e04d3202d9384d2c883d39892e058568
+msgid ""
+"Once the tune has completed accept the new gains by moving the RC aux switch"
+" to the \"save\" position, wait for the "
+":ref:`QWIK_AUTO_SAVE<QWIK_AUTO_SAVE>` timeout, OR push MP's Aux Function's "
+"\"High\" button"
+msgstr ""
+"调参完成后，将 RC 辅助开关拨到「保存」位置，等待 :ref:`QWIK_AUTO_SAVE<QWIK_AUTO_SAVE>` 超时，或按下 "
+"Mission Planner 辅助功能中的「High」按钮，接受新的增益值"
+
+#: ../../source/docs/quicktune.rst:45 e65399bea5034fb380db38be0bd69511
+msgid "Land and disarm the vehicle"
+msgstr "降落并上锁飞机"
+
+#: ../../source/docs/quicktune.rst:48 2dcd16ef59dd43a9b8c56d3de8659855
+msgid "Advanced Configuration"
+msgstr "高级配置"
+
+#: ../../source/docs/quicktune.rst:49 3d018db659db4bd1adc23e1f1bf6717d
+msgid ""
+"Additional advanced parameters are shown below, but normally do not need to "
+"be changed and, then only by experienced users:"
+msgstr "以下显示了额外的高级参数，通常无需更改，且仅供有经验的用户使用："
+
+#: ../../source/docs/quicktune.rst:51 459acdba6b0a4b20acf9ea2d590a3a50
+msgid ":ref:`QWIK_AUTO_FILTER<QWIK_AUTO_FILTER>`"
+msgstr ":ref:`QWIK_AUTO_FILTER<QWIK_AUTO_FILTER>`"
+
+#: ../../source/docs/quicktune.rst:52 8423d032820c4be7a3bf607b49e21c46
+msgid ":ref:`QWIK_DOUBLE_TIME<QWIK_DOUBLE_TIME>`"
+msgstr ":ref:`QWIK_DOUBLE_TIME<QWIK_DOUBLE_TIME>`"
+
+#: ../../source/docs/quicktune.rst:53 4b502b34e9e74651b8a408a2ff3d5594
+msgid ":ref:`QWIK_GAIN_MARGIN<QWIK_GAIN_MARGIN>`"
+msgstr ":ref:`QWIK_GAIN_MARGIN<QWIK_GAIN_MARGIN>`"
+
+#: ../../source/docs/quicktune.rst:54 c431a069e4744ee995e31c223e192cf0
+msgid ":ref:`QWIK_OSC_SMAX<QWIK_OSC_SMAX>`"
+msgstr ":ref:`QWIK_OSC_SMAX<QWIK_OSC_SMAX>`"
+
+#: ../../source/docs/quicktune.rst:55 424d421969c74acfa737fde6ac39a2c6
+msgid ":ref:`QWIK_YAW_P_MAX<QWIK_YAW_P_MAX>`"
+msgstr ":ref:`QWIK_YAW_P_MAX<QWIK_YAW_P_MAX>`"
+
+#: ../../source/docs/quicktune.rst:56 400974a9e69d483592cff687b11ddade
+msgid ":ref:`QWIK_YAW_D_MAX<QWIK_YAW_D_MAX>`"
+msgstr ":ref:`QWIK_YAW_D_MAX<QWIK_YAW_D_MAX>`"
+
+#: ../../source/docs/quicktune.rst:57 1cc260429e25486682084dc3fed381f8
+msgid ":ref:`QWIK_RP_PI_RATIO<QWIK_RP_PI_RATIO>`"
+msgstr ":ref:`QWIK_RP_PI_RATIO<QWIK_RP_PI_RATIO>`"
+
+#: ../../source/docs/quicktune.rst:58 914aa8e864e0404f8d1b19ae3a3cb3e1
+msgid ":ref:`QWIK_Y_PI_RATIO<QWIK_Y_PI_RATIO>`"
+msgstr ":ref:`QWIK_Y_PI_RATIO<QWIK_Y_PI_RATIO>`"
+
+#: ../../source/docs/quicktune.rst:59 35b7133eb0d94364923fc587eff5f2a5
+msgid ":ref:`QWIK_REDUCE_MAX<QWIK_REDUCE_MAX>`"
+msgstr ":ref:`QWIK_REDUCE_MAX<QWIK_REDUCE_MAX>`"
+
+#: ../../source/docs/quicktune.rst:60 d1b1e636adfb4c408f2c3d63a919c9ee
+msgid ":ref:`QWIK_ANGLE_MAX<QWIK_ANGLE_MAX>`"
+msgstr ":ref:`QWIK_ANGLE_MAX<QWIK_ANGLE_MAX>`"

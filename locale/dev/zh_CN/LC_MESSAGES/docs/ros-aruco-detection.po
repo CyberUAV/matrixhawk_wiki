@@ -1,0 +1,374 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/ros-aruco-detection.rst:5
+#: cda1ab97e9b2497b8a0fac7f9e7ff46b
+msgid ""
+"Indoor autonomous flight with ArduCopter, ROS and Aruco Boards Detection"
+msgstr "基于 ArduCopter、ROS 和 Aruco 板检测的室内自主飞行"
+
+#: ../../source/docs/ros-aruco-detection.rst:11
+#: 40f8a85692c94dc9b421b1768585db75
+msgid ""
+"This wiki page describes how to setup a system capable to realize indoor "
+"autonomous flight. The system is based on a quadcopter with a Raspberry Pi 3"
+" and a Raspberry Pi Camera Module v2. Images from camera are used to "
+"calculate poses estimation on the Raspberry Pi and the result are sent as "
+"MAVLink messages to the Flight Controller. The camera is downward looking "
+"and on the floor there is an Aruco Boards like this:"
+msgstr ""
+"本 wiki 页面介绍如何搭建能够实现室内自主飞行的系统。该系统基于配备树莓派 3 和树莓派摄像头模块 v2 "
+"的四旋翼飞行器。摄像头图像用于在树莓派上计算位姿估计，结果以 MAVLink 消息发送到飞控。摄像头朝下，地板上放置如下所示的 Aruco 板："
+
+#: ../../source/docs/ros-aruco-detection.rst:18
+#: 8e8bbc5c22a249a2a6fdaf1f46b57072
+msgid ""
+"The system uses `ROS <http://www.ros.org/>`__ for all the tasks it has to "
+"do. The images from Raspberry Pi Camera are captured by `raspicam_node "
+"<https://github.com/UbiquityRobotics/raspicam_node>`__, the poses estimation"
+" are calculated by a modified version of `aruco_gridboard "
+"<https://github.com/anbello/aruco_gridboard>`__ and the relevant messages "
+"are sent to the Flight Controller using `mavros "
+"<http://wiki.ros.org/mavros>`__. All this ROS packages, and other we will "
+"see later, runs on the Raspberry Pi 3."
+msgstr ""
+"该系统使用 `ROS <http://www.ros.org/>`__ 完成所有任务。树莓派摄像头图像由 `raspicam_node "
+"<https://github.com/UbiquityRobotics/raspicam_node>`__ 采集，位姿估计由修改版 "
+"`aruco_gridboard <https://github.com/anbello/aruco_gridboard>`__ 计算，相关消息通过 "
+"`mavros <http://wiki.ros.org/mavros>`__ 发送到飞控。所有这些 ROS 软件包以及后续介绍的其他软件包均在树莓派 "
+"3 上运行。"
+
+#: ../../source/docs/ros-aruco-detection.rst:20
+#: 80894f71d06b462cb329fb5f0ce9def5
+msgid ""
+"The ROS node raspicam_node publish camera/image and camera/camera_info "
+"topics, the node aruco_gridboard subscribes to these topics and publish a "
+"camera_pose message to the mavros/vision_pose/pose topic, mavros translates "
+"ROS messages in MAVLink messages and send it to the Flight Controller."
+msgstr ""
+"ROS 节点 raspicam_node 发布 camera/image 和 camera/camera_info 话题，aruco_gridboard"
+" 节点订阅这些话题并向 mavros/vision_pose/pose 话题发布 camera_pose 消息，mavros 将 ROS 消息转换为 "
+"MAVLink 消息并发送到飞控。"
+
+#: ../../source/docs/ros-aruco-detection.rst:22
+#: bb8ed56bb81048b1b32944303a106221
+msgid ""
+"The messages SET_GPS_GLOBAL_ORIGIN and a SET_HOME_POSITION are sent with a "
+"`script "
+"<https://github.com/anbello/aruco_gridboard/blob/master/script/set_origin.py>`__"
+" before starting to use the system."
+msgstr ""
+"在开始使用系统前，需通过 `脚本 "
+"<https://github.com/anbello/aruco_gridboard/blob/master/script/set_origin.py>`__"
+" 发送 SET_GPS_GLOBAL_ORIGIN 和 SET_HOME_POSITION 消息。"
+
+#: ../../source/docs/ros-aruco-detection.rst:24
+#: 1b05208c78b74c13a9e69f52d9fe4360
+msgid ""
+"The Flight Controller and the Raspberry Pi 3 on the quadcopter are connected"
+" via serial port whereas the Rapsberry Pi 3 and the desktop PC are connected"
+" via WiFi. The desktop PC is used only for configuration and visualization "
+"purposes. `rviz <http://wiki.ros.org/rviz>`__ from ROS is used for "
+"visualization on PC."
+msgstr ""
+"四旋翼上的飞控与树莓派 3 通过串口连接，树莓派 3 与台式电脑通过 WiFi 连接。台式电脑仅用于配置和可视化。使用 ROS 的 `rviz "
+"<http://wiki.ros.org/rviz>`__ 在电脑上进行可视化。"
+
+#: ../../source/docs/ros-aruco-detection.rst:27
+#: 56f06e1d019044d9a066926d439584d6
+msgid "Components of the system"
+msgstr "系统组成"
+
+#: ../../source/docs/ros-aruco-detection.rst:29
+#: 763893b0bcd6443c9f8a59d56697177c
+msgid ""
+"A little quadcopter (160mm) with Revolution Flight Controller with "
+"ArduCopter 3.7-dev and the following relevant parameters:"
+msgstr "一台 160mm 小型四旋翼，搭载 Revolution 飞控，运行 ArduCopter 3.7-dev，相关参数如下："
+
+#: ../../source/docs/ros-aruco-detection.rst:51
+#: 9d85a163fcc5466e82043fc6c58df1db
+msgid ""
+"On the quadcopter there is a Raspberry Pi 3 (connected to Flight Controller "
+"with serial port) and a Raspberry Pi Camera"
+msgstr "四旋翼上安装了树莓派 3（通过串口连接到飞控）和树莓派摄像头"
+
+#: ../../source/docs/ros-aruco-detection.rst:52
+#: eec2e18bd7d043febc46d54eaeea839a
+msgid ""
+"On the Raspberry Pi there is ROS Kinetic with raspicam_node, aruco_gridboard"
+" and mavros packages."
+msgstr "树莓派上运行 ROS Kinetic，安装了 raspicam_node、aruco_gridboard 和 mavros 软件包。"
+
+#: ../../source/docs/ros-aruco-detection.rst:55
+#: cfa2552ad7c94e1b8b55d5b66e448339
+msgid "Instructions to reproduce the system"
+msgstr "系统复现说明"
+
+#: ../../source/docs/ros-aruco-detection.rst:58
+#: 4d310b47c6954fedaf114142b8dcaecd
+msgid "On the Raspberry Pi 3 on quadcopter"
+msgstr "在四旋翼上的树莓派 3"
+
+#: ../../source/docs/ros-aruco-detection.rst:59
+#: 57c24d76b7d04a5ca96fae62db78770d
+msgid ""
+"Install Ubuntu 16.04 and ROS Kinetic with Ubiquity Robotics `Raspberry Pi "
+"images <https://downloads.ubiquityrobotics.com/pi.html>`__"
+msgstr ""
+"使用 Ubiquity Robotics 的 `树莓派镜像 "
+"<https://downloads.ubiquityrobotics.com/pi.html>`__ 安装 Ubuntu 16.04 和 ROS "
+"Kinetic"
+
+#: ../../source/docs/ros-aruco-detection.rst:60
+#: 18b568c6d9ca403492a500587f000b5a
+msgid ""
+"Edit /boot/config.txt to have higher serial speed on /dev/ttyAMA0 "
+"(connection at 921600 baud)"
+msgstr "编辑 /boot/config.txt 以提高 /dev/ttyAMA0 的串口速度（连接波特率为 921600）"
+
+#: ../../source/docs/ros-aruco-detection.rst:72
+#: 61fceb582f224edc93bbaf77b569bd01
+msgid ""
+"Connect the serial port with one telemetry port on the Flight Controller"
+msgstr "将串口与飞控的某个数传端口连接"
+
+#: ../../source/docs/ros-aruco-detection.rst:73
+#: 79dbbee40bd2433d9bf5bef47b354d29
+msgid ""
+"Connect to the PC using WiFi following the `instructions "
+"<https://learn.ubiquityrobotics.com/connect_network>`__ on Ubiquity Robotics"
+" site"
+msgstr ""
+"参照 Ubiquity Robotics 网站的 `说明 "
+"<https://learn.ubiquityrobotics.com/connect_network>`__ 通过 WiFi 连接到电脑"
+
+#: ../../source/docs/ros-aruco-detection.rst:74
+#: 1232b4bb967b431d9ab00919ad09246e
+msgid ""
+"Edit mavros configuration file apm_config.yaml to syncronize the flight "
+"controller and companion computer (Raspberry Pi) clocks using MAVLink’s "
+"SYSTEM_TIME and TIMESYNC messages as in this `wiki "
+"<https://ardupilot.org/dev/docs/ros-timesync.html>`__"
+msgstr ""
+"编辑 mavros 配置文件 apm_config.yaml，使用 MAVLink 的 SYSTEM_TIME 和 TIMESYNC "
+"消息同步飞控与伴飞计算机（树莓派）时钟，参见此 `wiki <https://ardupilot.org/dev/docs/ros-"
+"timesync.html>`__"
+
+#: ../../source/docs/ros-aruco-detection.rst:75
+#: 50da1110025d423aa4a25d2f32675301
+msgid ""
+"Calibrate the camera following the instructions in this `wiki "
+"<http://wiki.ros.org/camera_calibration/Tutorials/MonocularCalibration>`__"
+msgstr ""
+"参照此 `wiki "
+"<http://wiki.ros.org/camera_calibration/Tutorials/MonocularCalibration>`__ "
+"的说明标定摄像头"
+
+#: ../../source/docs/ros-aruco-detection.rst:76
+#: ../../source/docs/ros-aruco-detection.rst:107
+#: 0b988aa9f395452f8f4ed4d4f636c2ca 5cbfeac5938e4698b97fb2bc4817e0ca
+msgid ""
+"Clone this fork of `aruco_gridboard "
+"<https://github.com/anbello/aruco_gridboard>`__ in ~/catkin_ws/src"
+msgstr ""
+"将此 `aruco_gridboard <https://github.com/anbello/aruco_gridboard>`__ 分支克隆到 "
+"~/catkin_ws/src"
+
+#: ../../source/docs/ros-aruco-detection.rst:77
+#: ../../source/docs/ros-aruco-detection.rst:108
+#: 3d730c1156d54d0f936604d19687f669 fa1124ba85d1474fba67adee307623a5
+msgid "Build all"
+msgstr "全部构建"
+
+#: ../../source/docs/ros-aruco-detection.rst:86
+#: 7db3ec66857f4e76b79302f8209d293d
+msgid "On the desktop PC"
+msgstr "在台式电脑上"
+
+#: ../../source/docs/ros-aruco-detection.rst:87
+#: 6f946563d4a644778e29871c779f714b
+msgid ""
+"Install `ROS Kinetic <http://wiki.ros.org/kinetic/Installation/Ubuntu>`__ on"
+" Ubuntu 16.04 (maybe newer version work the same but was not tested)"
+msgstr ""
+"在 Ubuntu 16.04 上安装 `ROS Kinetic "
+"<http://wiki.ros.org/kinetic/Installation/Ubuntu>`__（更新版本可能同样适用，但未经测试）"
+
+#: ../../source/docs/ros-aruco-detection.rst:88
+#: eef164e43a2e488eb56ef1d430dc400b
+msgid ""
+"Install ros-kinetic-joy-teleop (sudo apt install ros-kinetic-joy-teleop) and"
+" configure for your Joystick - We use a Joystick instead of RC because using"
+" 2.4GHz RC disturb the WiFi video streaming. In mavros there is a "
+"configuration file for Logitech F710 Joystick, In the aruco_gridboard "
+"package we added a configuration file for the Xbox one Joystick."
+msgstr ""
+"安装 ros-kinetic-joy-teleop（sudo apt install ros-kinetic-joy-"
+"teleop）并为您的手柄进行配置——我们使用手柄代替遥控器，因为 2.4GHz 遥控器会干扰 WiFi 视频流。mavros 中有 Logitech "
+"F710 手柄的配置文件，aruco_gridboard 软件包中添加了 Xbox One 手柄的配置文件。"
+
+#: ../../source/docs/ros-aruco-detection.rst:90
+#: adf0f2787ac64305a1403739ad127370
+msgid "Install mavros (sudo apt install ros-kinetic-mavros*)"
+msgstr "安装 mavros（sudo apt install ros-kinetic-mavros*）"
+
+#: ../../source/docs/ros-aruco-detection.rst:91
+#: b8aef294c3334b058ec35c7f8d4408a7
+msgid ""
+"If you are not familiar with ROS follow the `tutorials "
+"<http://wiki.ros.org/ROS/Tutorials>`__"
+msgstr "如不熟悉 ROS，请参照 `教程 <http://wiki.ros.org/ROS/Tutorials>`__"
+
+#: ../../source/docs/ros-aruco-detection.rst:92
+#: d96dcd59e7854aedb6c8b9b018eb7ada
+msgid "Edit ~/.bashrc and append the following line:"
+msgstr "编辑 ~/.bashrc 并追加以下内容："
+
+#: ../../source/docs/ros-aruco-detection.rst:98
+#: 8fb9b32505744036a8c700401b2eb48a
+msgid ""
+"Create a Catkin WorkSpace (on Raspberry Pi this is not necessary because it "
+"is already in Ubiquity Robotics image)"
+msgstr "创建 Catkin 工作空间（树莓派上无需此步骤，因为 Ubiquity Robotics 镜像中已包含）"
+
+#: ../../source/docs/ros-aruco-detection.rst:115
+#: ddba0727592f4877a2cf66760e0bd16b
+msgid ""
+"On PC you also have to run a GCS of your choice to configure the quadcopter,"
+" see telemetry data, see MAVLink inspector, set flight modes and give "
+"commands. All of this things can be done also via ROS messages and services "
+"but in this way could be easier."
+msgstr ""
+"在电脑上还需运行您选择的地面站（GCS）来配置四旋翼、查看数传数据、MAVLink 检查器、设置飞行模式和发送指令。所有这些操作也可通过 ROS "
+"消息和服务实现，但这种方式可能更简便。"
+
+#: ../../source/docs/ros-aruco-detection.rst:118
+#: ec378d632cec441eb499fb33b131cff3
+msgid "Starting all ROS node"
+msgstr "启动所有 ROS 节点"
+
+#: ../../source/docs/ros-aruco-detection.rst:119
+#: 0606fa3eb2354dee850e39886f62a57f
+msgid ""
+"Now to start all the node needed by the system to work give the following "
+"command on different term (or tab with CTRL+SHIFT+T) (in this example "
+"192.168.10.16 is the PC and 192.168.10.10 is the Raspberry Pi on the "
+"quadcopter)"
+msgstr ""
+"现在在不同终端（或用 CTRL+SHIFT+T 新建标签页）中输入以下命令启动系统所需的所有节点（本示例中 192.168.10.16 "
+"为电脑，192.168.10.10 为四旋翼上的树莓派）"
+
+#: ../../source/docs/ros-aruco-detection.rst:122
+#: 17d3e7c6c3aa48e692e44f59726a8633
+msgid "tab1"
+msgstr "标签页 1"
+
+#: ../../source/docs/ros-aruco-detection.rst:130
+#: 367cf44b4331474eab1404df1798d29d
+msgid "tab2"
+msgstr "标签页 2"
+
+#: ../../source/docs/ros-aruco-detection.rst:138
+#: d8d101c0e20d47c3983917ffe9f48f98
+msgid "tab3"
+msgstr "标签页 3"
+
+#: ../../source/docs/ros-aruco-detection.rst:146
+#: c3b049a2b6aa4693afedcd84fd36a0b6
+msgid "tab4"
+msgstr "标签页 4"
+
+#: ../../source/docs/ros-aruco-detection.rst:153
+#: f2aeeeaefe024b058f776526ee01a9f7
+msgid "tab5"
+msgstr "标签页 5"
+
+#: ../../source/docs/ros-aruco-detection.rst:159
+#: db066bbdabd54ed89f74283795935a49
+msgid ""
+"At this point it should be possible to see /mavros/vision_pose/pose and "
+"/mavros/local_position/pose, represented as 3 Axes, on rviz and moving the "
+"quadcopter with the camera towards the Aruco Board, you should see the two "
+"poses moving close to each other. Connecting the GCS to the quadcopter (tcp "
+"192.168.10.10 2000) it should be possible to see the quadcopter on the map, "
+"set flight mode and give commands."
+msgstr ""
+"此时应能在 rviz 中看到以 3 轴表示的 /mavros/vision_pose/pose 和 "
+"/mavros/local_position/pose，将四旋翼的摄像头朝向 Aruco 板移动时，应看到两个位姿互相靠近。将地面站连接到四旋翼（tcp"
+" 192.168.10.10 2000）后，应能在地图上看到四旋翼，并设置飞行模式和发送指令。"
+
+#: ../../source/docs/ros-aruco-detection.rst:165
+#: b2ded59060a64ef09cb7f485be350ea5
+msgid ""
+"If this last point is OK the first test could be done arming the quadcopter "
+"in Loiter mode, takeoff and hover over the Aruco Board with the Joystick, "
+"then land."
+msgstr "若以上步骤正常，可进行首次测试：在定点悬停模式下解锁四旋翼，用手柄起飞并在 Aruco 板上方悬停，然后降落。"
+
+#: ../../source/docs/ros-aruco-detection.rst:167
+#: 624212815b3246d690d96705856a667d
+msgid ""
+"The last step (for now) is to test an all autonomous flight using one of the"
+" script included, to do this open another term or tab"
+msgstr "最后一步（目前阶段）是使用内含脚本之一测试全自主飞行，为此打开另一个终端或标签页"
+
+#: ../../source/docs/ros-aruco-detection.rst:175
+#: c54ac03c266e412da8343db574ede9c1
+msgid ""
+"You should see the quadcopter arm, takeoff, flight along the square and land"
+" as showed in the video at the beginning of this page."
+msgstr "您应能看到四旋翼解锁、起飞、沿方形路径飞行并降落，如本页开头视频所示。"
+
+#: ../../source/docs/ros-aruco-detection.rst:178
+#: 336b0aaef3c349d583732903804ca580
+msgid "Some Useful links"
+msgstr "相关参考链接"
+
+#: ../../source/docs/ros-aruco-detection.rst:180
+#: 13353734c7074933bd8b2f70b0bdf024
+msgid ""
+"Blog post `Indoor autonomous flight with ArduCopter, ROS and Aruco Boards "
+"Detection <https://discuss.ardupilot.org/t/indoor-autonomous-flight-with-"
+"arducopter-ros-and-aruco-boards-detection/34699>`__: A similar system to the"
+" one described here but on the quadcopter there is a Raspberry Pi 0 (instead"
+" of Raspberry Pi 3), due to the limited computing resources the "
+"aruco_gridboard node run on desktop PC and the relevant data (mainly images "
+"and pose estimation) are exchanged with the quadcopter using ROS messages."
+msgstr ""
+"博客文章 `基于 ArduCopter、ROS 和 Aruco 板检测的室内自主飞行 "
+"<https://discuss.ardupilot.org/t/indoor-autonomous-flight-with-arducopter-"
+"ros-and-aruco-boards-detection/34699>`__：与本文所述系统类似，但四旋翼上使用树莓派 0（而非树莓派 "
+"3），由于计算资源有限，aruco_gridboard 节点在台式电脑上运行，相关数据（主要是图像和位姿估计）通过 ROS 消息与四旋翼交换。"
+
+#: ../../source/docs/ros-aruco-detection.rst:183
+#: 452c46ecfb8247f088e2b3eaace4d3db
+msgid ""
+"Blog post `Vision Positionning Experiments using SKYVIPER "
+"<https://discuss.ardupilot.org/t/vision-positionning-experiments-using-"
+"skyviper/38348>`__: Here is described a system similar to the previous one, "
+"in place of the DIY quadcopter a Skyviper one is used, because of this it "
+"should be easier to replicate."
+msgstr ""
+"博客文章 `使用 SKYVIPER 的视觉定位实验 <https://discuss.ardupilot.org/t/vision-"
+"positionning-experiments-using-skyviper/38348>`__：描述了与上一篇类似的系统，使用 Skyviper "
+"代替 DIY 四旋翼，因此应更易于复现。"

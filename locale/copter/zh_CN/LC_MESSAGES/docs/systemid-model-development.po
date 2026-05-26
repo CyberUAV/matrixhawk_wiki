@@ -1,0 +1,840 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-18 12:49+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/systemid-model-development.rst:3
+#: f0a606288fef4bdb9ab63d4473866a8d
+msgid "Contents"
+msgstr "目录"
+
+#: ../../source/docs/systemid-model-development.rst:6
+#: fcfbd3d758f7455bb42370051c4eb79d
+msgid "Identification of a Multicopter"
+msgstr "多旋翼系统辨识"
+
+#: ../../source/docs/systemid-model-development.rst:9
+#: de1d7ca73bbe45a99256f9abda563d70
+msgid "Model Scope"
+msgstr "模型范围"
+
+#: ../../source/docs/systemid-model-development.rst:11
+#: 770a5890a67847f5a42cf95553d2b932
+#, python-brace-format
+msgid ""
+"The following block diagram depicts the complete vehicle control system and "
+"its components. System identification will create a mathematical model of "
+"the motor mixer, the motors and the electronic speed controllers (ESCs) as "
+"well as the airframe of the copter. This mathematical model is known as the "
+"plant model in control literature. The frequency sweep inputs "
+":ref:`SID_AXIS<SID_AXIS>` [10, 11, 12] are used for the identification since"
+" they provide direct input to the regarded system by superimposing the Mixer"
+" inputs :math:`\\delta_{rll}`, :math:`\\delta_{pit}` and "
+":math:`\\delta_{yaw}` with the stimulus signal. These inputs are less "
+"modified by the controllers when compared to the other chirp inputs. The "
+"input control signal of the plant must be persistently excited, which means "
+"that the chirp is not canceled out by the controller. The magnitude of the "
+"chirp signal must be chosen accordingly. This ensures that the waveforms at "
+"the inputs of the plant model are mostly chirp-like. With the default "
+"controller parameters, which are quite low, the magnitude of the rate "
+"controller outputs is relatively low."
+msgstr ""
+"下面的框图描述了完整的飞行器控制系统及其组成部分。系统辨识将建立电机混控器、电机和 ESC "
+"以及飞机机架的数学模型，这个数学模型在控制文献中称为被控对象模型。频率扫描输入 :ref:`SID_AXIS<SID_AXIS>` [10, 11, "
+"12] 用于辨识，因为它们通过将激励信号叠加到混控器输入 :math:`\\delta_{rll}`、:math:`\\delta_{pit}` 和 "
+":math:`\\delta_{yaw}` "
+"上，直接输入到目标系统。与其他啁啾输入相比，这些输入受控制器的修改较少。被控对象的输入控制信号必须持续激励，这意味着啁啾信号不会被控制器抵消。啁啾信号的幅值必须相应选择，以确保被控对象模型输入端的波形主要呈啁啾形状。使用默认控制器参数（较小）时，速率控制器输出的幅值相对较低。"
+
+#: ../../source/docs/systemid-model-development.rst:25
+#: dcc0f8d769f64a488fe380e0c650efe0
+msgid "ArduPilot Control System"
+msgstr "ArduPilot 控制系统"
+
+#: ../../source/docs/systemid-model-development.rst:28
+#: d95a5f672f1f4bb58c5120e1fca5e437
+msgid "Model Structure"
+msgstr "模型结构"
+
+#: ../../source/docs/systemid-model-development.rst:32
+#: efd75c01ffdf4664a242d2299abfbc9c
+msgid "Quad Body Diagram"
+msgstr "四旋翼机体示意图"
+
+#: ../../source/docs/systemid-model-development.rst:34
+#: c63b1acdc7f747f6a5ac325320142c01
+#, python-brace-format
+msgid ""
+"The quadcopter model is based on its equations of motion. Looking at the "
+"quadcopter as a rigid body, it has 6 degrees of freedom, consisting of three"
+" translational and three rotational motions. The image above shows a "
+"sketched quadcopter during flight within the inertial, earth-fixed "
+"coordinate frame made up of the vectors (:math:`e_{x}`, :math:`e_{y}`, "
+":math:`e_{z}`). The Quadcopter has its own coordinate system attached to its"
+" center of gravity, which is called the body-fixed coordinate frame. Its "
+"axes are represented by the vectors (:math:`b_{x}`, :math:`b_{y}`, "
+":math:`b_{z}`). [#f1]_ The equations of motion within the body-fixed frame "
+"can be expressed as"
+msgstr ""
+"四旋翼模型基于其运动方程。将四旋翼视为刚体，它具有 6 个自由度，包括三个平移运动和三个旋转运动。上图展示了四旋翼在惯性地球固定坐标系（由向量 "
+"(:math:`e_{x}`, :math:`e_{y}`, :math:`e_{z}`) "
+"构成）中飞行时的草图。四旋翼有其自身的坐标系连接在重心上，称为机体固定坐标系，其轴由向量 (:math:`b_{x}`, :math:`b_{y}`, "
+":math:`b_{z}`) 表示。[#f1]_ 机体固定坐标系中的运动方程可以表示为"
+
+#: ../../source/docs/systemid-model-development.rst:43
+#: f1d984d8040440a3b8302bfe42c3763d
+msgid "Equations of motion"
+msgstr "运动方程"
+
+#: ../../source/docs/systemid-model-development.rst:45
+#: def41be6c5da449294eaad6a32bc2326
+#, python-brace-format
+msgid ""
+"where :math:`u`, :math:`v` and :math:`w` are the velocities in "
+":math:`b_{x}`, :math:`b_{y}`, :math:`b_{z}` direction respectively, whereas "
+":math:`p`, :math:`q`, :math:`r` represent the angular velocities about the "
+":math:`x`, :math:`y` and :math:`z` axis of the body-frame. The variables "
+":math:`X`, :math:`Y`, :math:`Z` and :math:`L`, :math:`M`, :math:`N` "
+"represent forces and torques acting on the airframe due to thrust "
+":math:`T_i` and reaction torque :math:`Q_i` generated by the propellers as "
+"well as external forces and moments caused by air resistance and wind. "
+"[#f2]_ :math:`\\phi` and :math:`\\theta` are the Euler angles, that describe"
+" the orientation of the copter within the earth-frame. Thrust and reaction "
+"torque can be calculated by the following equations"
+msgstr ""
+"其中 :math:`u`、:math:`v` 和 :math:`w` 分别是在 "
+":math:`b_{x}`、:math:`b_{y}`、:math:`b_{z}` 方向上的速度，而 "
+":math:`p`、:math:`q`、:math:`r` 表示绕机体坐标系 :math:`x`、:math:`y` 和 :math:`z` "
+"轴的角速度。变量 :math:`X`、:math:`Y`、:math:`Z` 和 :math:`L`、:math:`M`、:math:`N` "
+"表示由螺旋桨产生的推力 :math:`T_i` 和反应扭矩 "
+":math:`Q_i`，以及空气阻力和风引起的外力和力矩作用在机架上的合力和合力矩。[#f2]_ :math:`\\phi` 和 "
+":math:`\\theta` 是欧拉角，描述飞机在地球坐标系中的方向。推力和反应扭矩可以通过以下方程计算"
+
+#: ../../source/docs/systemid-model-development.rst:54
+#: 0365d0354fda48b880a8f0f386cfdadd
+msgid "Thrust reaction torque equations"
+msgstr "推力反应扭矩方程"
+
+#: ../../source/docs/systemid-model-development.rst:56
+#: 08c8a68101ad49a3b1de36d85d3271c3
+msgid ""
+"with :math:`\\omega_i` being the propeller's angular velocity and "
+":math:`C_T` as well as :math:`C_Q` standing for constants dependent on the "
+"propeller geometry. Based on these two quantities, the created forces and "
+"torques by the propulsion system acting on the copter's airframe for an "
+"X-configuration can be written as"
+msgstr ""
+"其中 :math:`\\omega_i` 为螺旋桨角速度，:math:`C_T` 和 :math:`C_Q` "
+"为依赖螺旋桨几何形状的常数。基于这两个量，推进系统作用于 X 型构型飞机机架的合力和力矩可以写成"
+
+#: ../../source/docs/systemid-model-development.rst:63
+#: 9575cf1a230c4bf5a8c43edae4af7514
+msgid "Force torque allocation matrix"
+msgstr "力矩分配矩阵"
+
+#: ../../source/docs/systemid-model-development.rst:65
+#: a9f0bb9ae38c4f5e81ff98b16b3ffc9f
+msgid ""
+"where :math:`d` represents the arm length between the respective propeller "
+"and the airframe's center of gravity, while :math:`\\varphi_i` stands for "
+"the angle of the propeller's arm in regard to the :math:`b_x` axis of the "
+"copter. [#f3]_ :math:`\\Gamma` is called the allocation matrix."
+msgstr ""
+"其中 :math:`d` 表示各螺旋桨与机架重心之间的臂长，:math:`\\varphi_i` 表示螺旋桨臂相对于飞机 :math:`b_x` "
+"轴的角度。[#f3]_ :math:`\\Gamma` 称为分配矩阵。"
+
+#: ../../source/docs/systemid-model-development.rst:68
+#: 2914490cbe394e91bfad21d651de4997
+msgid ""
+"These equations are non-linear, interdependent and hard to use. Most control"
+" system analysis and tools are based on simpler linear or linearized "
+"systems. Because of this, the equations of motion are linearized around the "
+"stationary hover state by looking at small disturbances of the state "
+"variables and inputs. This assumes that the parameter "
+":ref:`MOT_THST_EXPO<MOT_THST_EXPO>` has been :ref:`set correctly<motor-"
+"thrust-scaling>`."
+msgstr ""
+"这些方程是非线性的、相互依赖的，难以直接使用。大多数控制系统分析和工具基于更简单的线性或线性化系统。因此，通过分析状态变量和输入的小扰动，将运动方程在稳定悬停状态附近线性化。这假设参数"
+" :ref:`MOT_THST_EXPO<MOT_THST_EXPO>` 已 :ref:`正确设置<motor-thrust-scaling>`。"
+
+#: ../../source/docs/systemid-model-development.rst:73
+#: fb331e69e1d0406780cb88c90a3352aa
+msgid ""
+"As an example, the lateral velocity :math:`u` can then be expressed by its "
+"stationary condition :math:`u_0` and its perturbation :math:`\\Delta u`"
+msgstr "例如，横向速度 :math:`u` 可以用其稳态值 :math:`u_0` 和扰动量 :math:`\\Delta u` 表示"
+
+#: ../../source/docs/systemid-model-development.rst:77
+#: 01ac8585a21e46379e077ff2fa2afc46
+msgid "Small perturbation equation"
+msgstr "小扰动方程"
+
+#: ../../source/docs/systemid-model-development.rst:79
+#: 945e514f396e400293ead66730fb7b77
+msgid ""
+"While hovering, the stationary condition of every state and input quantity "
+"is 0, since there is no translational or rotational motion of the vehicle. "
+"[#f4]_ The equations of motion can then be simplified to"
+msgstr "在悬停状态下，每个状态和输入量的稳态值均为 0，因为飞行器没有平移或旋转运动。[#f4]_ 运动方程可以简化为"
+
+#: ../../source/docs/systemid-model-development.rst:84
+#: 3c2bb711b76a4337a166eb741f432580
+msgid "Linearized motion equations"
+msgstr "线性化运动方程"
+
+#: ../../source/docs/systemid-model-development.rst:86
+#: 6c9712fd05b947759532877c0d388181
+msgid ""
+"This linearization removes the interdependencies between the pitch, roll and"
+" yaw motions of the copter, thereby yielding three decoupled systems. Next, "
+"the perturbations in each force and torque are modeled to obtain the "
+"influences of these system inputs on the state variables. By using a Taylor "
+"series expansion, the forces and torques are described as a linear function "
+"of the disturbances in the state and input variables that they depend on. "
+"The coefficients of each state variable are the so-called stability or "
+"control derivatives of the respective force and torque. [#f4]_ [#f5]_"
+msgstr ""
+"这种线性化消除了飞机俯仰、横滚和偏航运动之间的相互依赖关系，从而得到三个解耦的系统。接下来，对每个力和力矩中的扰动进行建模，以获得这些系统输入对状态变量的影响。通过使用泰勒级数展开，将力和力矩描述为其所依赖的状态变量和输入变量扰动的线性函数。每个状态变量的系数称为相应力和力矩的稳定性或控制导数。[#f4]_"
+" [#f5]_"
+
+#: ../../source/docs/systemid-model-development.rst:93
+#: 57d8a81c0b75466781f3be87f9848ef5
+msgid "Perturbed forces torque equations"
+msgstr "扰动力矩方程"
+
+#: ../../source/docs/systemid-model-development.rst:95
+#: 1fe73957235247e59ead205d07ea7e8e
+#, python-brace-format
+msgid ""
+"By inserting these descriptions of forces and torques, the linearized "
+"equations of motion are rewritten in a state-space representation, with the "
+"control forces :math:`F_{c}` and torques :math:`M_{c}` generated by the "
+"propellers being the model inputs. Since only perturbed quantities are "
+"contained in the equations, the :math:`\\Delta` indicating the small "
+"perturbations is left out."
+msgstr ""
+"通过代入这些力和力矩的描述，线性化运动方程被改写为状态空间表示形式，以螺旋桨产生的控制力 :math:`F_{c}` 和力矩 :math:`M_{c}`"
+" 作为模型输入。由于方程中只包含扰动量，表示小扰动的 :math:`\\Delta` 符号被省略。"
+
+#: ../../source/docs/systemid-model-development.rst:101
+#: ef9d56e3ec8f41ce8ebb71f7ddc70ac6
+msgid ""
+"The actual control inputs of the system are the rate controller outputs as "
+"shown in the :ref:`Control System Diagram<control_system_diagram>`. The "
+"motor mixer converts the controller outputs to thrust demands for each "
+"motor. The motor model describes the transfer function from mixer outputs to"
+" control forces and torques that are acting on the airframe. The motors are "
+"not able to instantly realize the mixer demands. Instead, they have their "
+"own dynamic which needs to be modeled. For this purpose, it is assumed that "
+"the relation between thrust demand and provided voltage to the motors by the"
+" ESC is proportional. The transfer from motor voltage to angular motor speed"
+" is modeled by a first-order system. [#f2]_ Apart from that, it is necessary"
+" to model the relation between voltage and motor torque that equals the "
+"reaction torque of the propulsion unit :math:`Q_i`. The equation for "
+":math:`Q_i` in the :ref:`Thrust reaction torque "
+"equations<fig_eq_thrust_torque>` only models the stationary reaction torque "
+"of the propeller. The acceleration or deceleration of the motor leads to an "
+"additional, dynamic reaction torque due to the inertia of the motor. [#f3]_ "
+"The transfer function can then be written as"
+msgstr ""
+"系统的实际控制输入是如 :ref:`控制系统框图<control_system_diagram>` "
+"所示的速率控制器输出。电机混控器将控制器输出转换为每个电机的推力需求。电机模型描述了从混控器输出到作用于机架的控制力和力矩的传递函数。电机无法瞬间实现混控器的需求，而是有其自身的动态特性，需要进行建模。为此，假设推力需求与"
+" ESC 向电机提供的电压成正比。从电机电压到电机角速度的传递用一阶系统建模。[#f2]_ 此外，还需要对电压与电机扭矩（即推进装置的反应扭矩 "
+":math:`Q_i`）之间的关系进行建模。:ref:`推力反应扭矩方程<fig_eq_thrust_torque>` 中的 :math:`Q_i` "
+"方程只描述了螺旋桨的稳态反应扭矩。由于电机惯量，电机的加速或减速会产生额外的动态反应扭矩。[#f3]_ 传递函数可以写成"
+
+#: ../../source/docs/systemid-model-development.rst:117
+#: 1f5aa1b9b30f408d8fd15e83c05b723a
+msgid "Motor model transfer functions"
+msgstr "电机模型传递函数"
+
+#: ../../source/docs/systemid-model-development.rst:119
+#: b7c31841dd5a445cba76a31294c4f384
+msgid ""
+"The thrust demands of the motors are calculated from the controller outputs "
+"by inverting the :ref:`allocation matrix<fig-eq-force-torque-prop>` [#f9]_"
+msgstr "电机的推力需求通过对 :ref:`分配矩阵<fig-eq-force-torque-prop>` 求逆 [#f9]_ 从控制器输出计算得出"
+
+#: ../../source/docs/systemid-model-development.rst:123
+#: 57f3f84ad5fc4fd38b2792fa3ae34d5f
+msgid "Control outputs to thrust commands"
+msgstr "控制器输出到推力指令"
+
+#: ../../source/docs/systemid-model-development.rst:125
+#: 7e9ae8ba35c44db08f7dd41ff9e18897
+msgid ""
+"As a consequence, the inverted matrix above and the :ref:`allocation "
+"matrix<fig-eq-force-torque-prop>` cancel each other out, thereby leaving the"
+" following four separate control paths: heave, roll, pitch and yaw. The "
+"motor dynamics are incorporated in these models by using the :ref:`transfer "
+"functions<fig-eq-motor-model>` as a relation between the controller outputs "
+"and the generated force or torque acting on the respective axis. To model "
+"this in a state-space representation, control forces and torques are added "
+"to the states of the system. [#f6]_ The state-space models for the roll, "
+"pitch and yaw axis are formulated as"
+msgstr ""
+"因此，上述逆矩阵与 :ref:`分配矩阵<fig-eq-force-torque-prop>` "
+"相互抵消，从而产生以下四条独立的控制路径：升沉、横滚、俯仰和偏航。电机动态通过使用 :ref:`传递函数<fig-eq-motor-model>` "
+"作为控制器输出与作用于相应轴的生成力或力矩之间的关系，被纳入这些模型。为了在状态空间表示中对此进行建模，将控制力和力矩添加到系统的状态中。[#f6]_ "
+"横滚、俯仰和偏航轴的状态空间模型表示为"
+
+#: ../../source/docs/systemid-model-development.rst:134
+#: d644e6f541d94a349aa0eee7273f2242
+msgid "Axis models"
+msgstr "轴模型"
+
+#: ../../source/docs/systemid-model-development.rst:136
+#: 83e35b344f1e42d2ba4f043f26a3d527
+msgid ""
+"The used transfer function model of each axis is derived from the state-"
+"space models above through Laplace-Transformation and by solving for the "
+"angular velocities :math:`p`, :math:`q` and :math:`r` as the outputs of each"
+" model. For simplicity, generic coefficients are used. Also, dead time terms"
+" are added to account for delays, that were not regarded in the modeling. "
+"[#f6]_ These three transfer functions represent the model structures used in"
+" the identification of the pitch, roll and yaw axes."
+msgstr ""
+"每个轴所使用的传递函数模型通过对上述状态空间模型进行拉普拉斯变换，并求解各模型输出的角速度 :math:`p`、:math:`q` 和 "
+":math:`r` 得到。为简化起见，使用了通用系数。此外，还添加了纯延迟项以考虑建模中未涉及的延迟。[#f6]_ "
+"这三个传递函数代表了用于辨识俯仰、横滚和偏航轴的模型结构。"
+
+#: ../../source/docs/systemid-model-development.rst:146
+#: 63d1755538c6455cbe4795a343018f81
+msgid "Axis models transfer function equations"
+msgstr "轴模型传递函数方程"
+
+#: ../../source/docs/systemid-model-development.rst:149
+#: 129e5a3eee6144398d545e6762a02f9c
+msgid "Example of Identification Process"
+msgstr "辨识过程示例"
+
+#: ../../source/docs/systemid-model-development.rst:151
+#: 3afa212b5cd14baaadcd282501c1f59f
+msgid ""
+"To gather identification data, separate sysid test flights are to be "
+"conducted for the pitch, roll and yaw axis. This process is mostly "
+"independent of the vehicle PID tuning and can be performed in an un-tuned "
+"vehicle. But the tune must be stable enough to fly the vehicle safely. So "
+"the :ref:`Tuning Process Instructions<tuning-process-instructions>` must be "
+"first followed step-by-step but the autotune step can be skipped. In the "
+"example presented in this section default parameters were used for the angle"
+" and rate controller. To prevent the rate controllers from compensating too "
+"much of the frequency-sweep signal, the integrator gain of each axis must be"
+" set to zero and the feed-forward of the angle controller disabled:"
+msgstr ""
+"为收集辨识数据，需要分别对俯仰、横滚和偏航轴进行单独的 SysID 测试飞行。此过程在很大程度上独立于飞行器 PID "
+"调参，可以在未经调参的飞行器上执行。但调参必须足够稳定以保证飞行安全。因此必须先按步骤遵循 :ref:`调参流程说明<tuning-process-"
+"instructions>`，但可以跳过 AutoTune "
+"步骤。在本节所示的示例中，角度和速率控制器使用了默认参数。为防止速率控制器过多补偿频率扫描信号，必须将每个轴的积分增益设为零，并禁用角度控制器的前馈："
+
+#: ../../source/docs/systemid-model-development.rst:160
+#: ../../source/docs/systemid-model-development.rst:178
+#: 7d2d114b15144a5c9e411c4055df6efb d564af9f688e425e9a09209e49c665ec
+msgid "Parameter"
+msgstr "参数"
+
+#: ../../source/docs/systemid-model-development.rst:160
+#: ../../source/docs/systemid-model-development.rst:178
+#: 0a09ce8df8b241dd85f03137bd325357 d2153d05dadb46f79abe01d213e1947b
+msgid "Value"
+msgstr "值"
+
+#: ../../source/docs/systemid-model-development.rst:162
+#: 2ce37d0580fe4c68bcf1c4b2fa37d73c
+msgid ":ref:`ATC_RAT_RLL_I<ATC_RAT_RLL_I__AC_AttitudeControl_Multi>`"
+msgstr ":ref:`ATC_RAT_RLL_I<ATC_RAT_RLL_I__AC_AttitudeControl_Multi>`"
+
+#: ../../source/docs/systemid-model-development.rst:162
+#: ../../source/docs/systemid-model-development.rst:164
+#: ../../source/docs/systemid-model-development.rst:166
+#: ../../source/docs/systemid-model-development.rst:168
+#: 8a8ea8fe825a46aa9634127b37294785 98ffb59f9bcf4ba8b15077be4cb14969
+#: a6f3e272e108441b852074e00f96dcc8 d8a2f87f94df4611b945783d238bbf85
+msgid "0"
+msgstr "0"
+
+#: ../../source/docs/systemid-model-development.rst:164
+#: b5d80898ecbd44168acda31aabb83a66
+msgid ":ref:`ATC_RAT_PIT_I<ATC_RAT_PIT_I__AC_AttitudeControl_Multi>`"
+msgstr ":ref:`ATC_RAT_PIT_I<ATC_RAT_PIT_I__AC_AttitudeControl_Multi>`"
+
+#: ../../source/docs/systemid-model-development.rst:166
+#: b5067e43b4bc41b6bf3973e6d1d1c8f2
+msgid ":ref:`ATC_RAT_YAW_I<ATC_RAT_YAW_I__AC_AttitudeControl_Multi>`"
+msgstr ":ref:`ATC_RAT_YAW_I<ATC_RAT_YAW_I__AC_AttitudeControl_Multi>`"
+
+#: ../../source/docs/systemid-model-development.rst:168
+#: 69b4f1f81f1249abb4134b3cc47fc21d
+msgid ":ref:`ATC_RATE_FF_ENAB<ATC_RATE_FF_ENAB>`"
+msgstr ":ref:`ATC_RATE_FF_ENAB<ATC_RATE_FF_ENAB>`"
+
+#: ../../source/docs/systemid-model-development.rst:171
+#: 17495f669aec415a8633dd3588dbe816
+msgid ""
+"Please make sure that the vehicle is stable after performing these changes, "
+"and selectively revert them if not."
+msgstr "请确保在进行上述更改后飞行器仍然稳定，如有必要请选择性地恢复部分更改。"
+
+#: ../../source/docs/systemid-model-development.rst:173
+#: b0259dffeeb44611ba9c1154dff27c50
+msgid ""
+"In this section, the results for a relatively small quadcopter are "
+"presented. It weighs 1.5 kg, has an arm length of 22 cm and is equipped with"
+" 9-inch propellers. The following table contains the settings of the system "
+"identification mode for each axis:"
+msgstr "本节展示了一架相对较小的四旋翼的结果。该飞行器重 1.5 kg，臂长 22 cm，配备 9 英寸螺旋桨。下表包含每个轴的系统辨识模式设置："
+
+#: ../../source/docs/systemid-model-development.rst:180
+#: 37c0c11b22e4489c9d678942f42dee6f
+msgid "Roll"
+msgstr "横滚"
+
+#: ../../source/docs/systemid-model-development.rst:180
+#: 20034fe6876344f38ad5a28ed2779467
+msgid "Pitch"
+msgstr "俯仰"
+
+#: ../../source/docs/systemid-model-development.rst:180
+#: cd5b7233e0694655bbeb9907df0646b1
+msgid "Yaw"
+msgstr "偏航"
+
+#: ../../source/docs/systemid-model-development.rst:182
+#: f9e5d0c5e12f41a38bf9eeba7f83ecfc
+msgid ":ref:`SID_AXIS<SID_AXIS>`"
+msgstr ":ref:`SID_AXIS<SID_AXIS>`"
+
+#: ../../source/docs/systemid-model-development.rst:182
+#: 185db03430cf4ea79dbca2a779036176
+msgid "10"
+msgstr "10"
+
+#: ../../source/docs/systemid-model-development.rst:182
+#: c452f8913757452ea5b8437ec5d35669
+msgid "11"
+msgstr "11"
+
+#: ../../source/docs/systemid-model-development.rst:182
+#: 063a23622ddb49fd95eea021f6b6b14e
+msgid "12"
+msgstr "12"
+
+#: ../../source/docs/systemid-model-development.rst:184
+#: 8c5bbcb07f9041c6b38a071f955010e7
+msgid ":ref:`SID_MAGNITUDE<SID_MAGNITUDE>`"
+msgstr ":ref:`SID_MAGNITUDE<SID_MAGNITUDE>`"
+
+#: ../../source/docs/systemid-model-development.rst:184
+#: 73ba458224e140969c2c7d64f993665e c0d8cbf95f0d417f816d3501419b759e
+msgid "0.15"
+msgstr "0.15"
+
+#: ../../source/docs/systemid-model-development.rst:184
+#: 2ca6e7653c7d4fe9b5a6d2fc037478f6
+msgid "0.55"
+msgstr "0.55"
+
+#: ../../source/docs/systemid-model-development.rst:186
+#: cf4ae0fc848d45879e280ed486cd0f98
+msgid ":ref:`SID_F_START_HZ<SID_F_START_HZ>`"
+msgstr ":ref:`SID_F_START_HZ<SID_F_START_HZ>`"
+
+#: ../../source/docs/systemid-model-development.rst:186
+#: 0d0100076b1946839e43a163c10e560f 74fd8554a1c845a9bd58eded93178b6e
+#: f421632b4a65446d876e06d5973fc2d6
+msgid "0.05 Hz"
+msgstr "0.05 Hz"
+
+#: ../../source/docs/systemid-model-development.rst:188
+#: cc388df8a99d47378b3a1e820707ec75
+msgid ":ref:`SID_F_STOP_HZ<SID_F_STOP_HZ>`"
+msgstr ":ref:`SID_F_STOP_HZ<SID_F_STOP_HZ>`"
+
+#: ../../source/docs/systemid-model-development.rst:188
+#: 3f62b3194040419096201c3d038b0949 6875958f06d8492894f9126eece3028f
+#: ad7f1832ea32469fb6e028b18d16d412
+msgid "5 Hz"
+msgstr "5 Hz"
+
+#: ../../source/docs/systemid-model-development.rst:190
+#: 0132e7086e8a4d83a64bd005521405a6
+msgid ":ref:`SID_T_FADE_IN<SID_T_FADE_IN>`"
+msgstr ":ref:`SID_T_FADE_IN<SID_T_FADE_IN>`"
+
+#: ../../source/docs/systemid-model-development.rst:190
+#: ../../source/docs/systemid-model-development.rst:192
+#: 0df646faef344be4b3ade1b2db4f5c4a 71ede23a98e940a2acd8e5b1e9599273
+#: 7c724b9a94974621a2c0c1602c79c115 8cc136d6214341208baaa8fea635a93d
+#: 93fb484aaa8f463a888e3dc121b66f00 96f20e8ca54149fdb53dda7300ed90b2
+msgid "5 s"
+msgstr "5 s"
+
+#: ../../source/docs/systemid-model-development.rst:192
+#: d9551f93452242e3b1e34f7a7de0c688
+msgid ":ref:`SID_T_FADE_OUT<SID_T_FADE_OUT>`"
+msgstr ":ref:`SID_T_FADE_OUT<SID_T_FADE_OUT>`"
+
+#: ../../source/docs/systemid-model-development.rst:194
+#: d14f5ad6d2ee4272927ee16be89ef302
+msgid ":ref:`SID_T_REC<SID_T_REC>`"
+msgstr ":ref:`SID_T_REC<SID_T_REC>`"
+
+#: ../../source/docs/systemid-model-development.rst:194
+#: 05a8b7a95f9e4e9ab1605a877773e78c 1f93d53407434bb38390fd053a09daa0
+#: 30021b0c1f754284beab5c6e09aa009c
+msgid "130 s"
+msgstr "130 s"
+
+#: ../../source/docs/systemid-model-development.rst:197
+#: ae8cf0bce6f5440cbd87fc9eb85af193
+msgid ""
+"Change these values according to the dynamic of your own vehicle. The "
+"frequency range was chosen based on literature [#f6]_ [#f10]_ and flight "
+"tests. If using a heavier and/or larger system, it may be necessary to use "
+"lower frequencies to excite the desired dynamics. If using a lighter and/or "
+"smaller system, it may be necessary to use higher frequencies."
+msgstr ""
+"请根据您自己飞行器的动态特性调整这些值。频率范围是根据文献 [#f6]_ [#f10]_ "
+"和飞行测试选定的。如果使用较重和/或较大的系统，可能需要使用更低的频率来激励所需的动态特性。如果使用较轻和/或较小的系统，则可能需要使用更高的频率。"
+
+#: ../../source/docs/systemid-model-development.rst:202
+#: 1d122254b0bc457a9e7c3b9af4a52351
+msgid ""
+"Dataflash logs are used to obtain the flight data. For the rate controller "
+"outputs the signals ``RATE.ROut``, ``RATE.POut`` and ``RATE.YOut`` are used."
+" The signals ``SIDD.Gx``, ``SIDD.Gy`` and ``SIDD.Gz`` correspond to the "
+"measured angular rates of the copter."
+msgstr ""
+"使用 Dataflash 日志获取飞行数据。速率控制器输出信号使用 ``RATE.ROut``、``RATE.POut`` 和 "
+"``RATE.YOut``。信号 ``SIDD.Gx``、``SIDD.Gy`` 和 ``SIDD.Gz`` 对应飞机测量到的角速度。"
+
+#: ../../source/docs/systemid-model-development.rst:206
+#: 14ab278e57ed45ac8a5bd75721869187
+msgid ""
+"The following figures show the injected frequency-sweep and the resulting "
+"control input of the plant, which is the sum of the sweep and the rate "
+"controller output. The plots for the roll and pitch axis show a reduction of"
+" the system excitation especially in the range of medium frequency. The "
+"reason for the sweep attenuation is the amplified controller output due to "
+"the larger magnitude of the system response (see :ref:`roll response<fig-"
+"bode-data-rll>` and :ref:`pitch response<fig-bode-data-pit>`). Although "
+"attenuated, the system excitation is still large enough to obtain a reliable"
+" frequency response with a sufficiently high coherence as shown below."
+msgstr ""
+"以下图形展示了注入的频率扫描和被控对象的控制输入（即扫描信号与速率控制器输出的叠加结果）。横滚和俯仰轴的图形显示系统激励在中频范围内有所衰减，原因是由于系统响应幅值较大导致控制器输出被放大（参见"
+" :ref:`横滚响应<fig-bode-data-rll>` 和 :ref:`俯仰响应<fig-bode-data-"
+"pit>`）。虽然有所衰减，系统激励仍足够大，能够获得具有足够高相干性的可靠频率响应，如下图所示。"
+
+#: ../../source/docs/systemid-model-development.rst:213
+#: 2ccd7c3a1bbd49ac9aa945e2907441cd
+msgid "Roll sweep plant input"
+msgstr "横滚扫描被控对象输入"
+
+#: ../../source/docs/systemid-model-development.rst:217
+#: 478e4549545d4770915266f947dafcfe
+msgid "Pitch sweep plant input"
+msgstr "俯仰扫描被控对象输入"
+
+#: ../../source/docs/systemid-model-development.rst:221
+#: b53fd12987664aceae7a6a3863fdc2b0
+msgid "Yaw sweep plant input"
+msgstr "偏航扫描被控对象输入"
+
+#: ../../source/docs/systemid-model-development.rst:223
+#: b6b5fafdd7b14efdbb5827049c8e3f52
+msgid ""
+"The frequency response of each axis is obtained through spectral analysis of"
+" the flight data. Only test flights with sufficient coherence between input "
+"and output are used for the system identification. To increase the accuracy "
+"of the resulting plant model and to compensate for process errors, multiple "
+"flights for each axis are performed and an averaged frequency response is "
+"computed. The following diagrams show the data-based frequency responses of "
+"all three axes. The bottom plot shows the coherence between input and output"
+" which quantifies the linearity between input and output."
+msgstr ""
+"通过对飞行数据进行频谱分析得到每个轴的频率响应。只有输入和输出之间具有足够相干性的测试飞行才用于系统辨识。为提高被控对象模型的精度并补偿过程误差，每个轴进行多次飞行，并计算平均频率响应。以下图表显示了三个轴基于数据的频率响应，底部图形显示输入和输出之间的相干性，用于量化输入和输出之间的线性度。"
+
+#: ../../source/docs/systemid-model-development.rst:233
+#: 043da457c8cb456da5a72cc3fd1d08a2
+msgid "Roll Bode plot"
+msgstr "横滚 Bode 图"
+
+#: ../../source/docs/systemid-model-development.rst:239
+#: 8b29904c9fc24aeda0a91c34bef6e3f1
+msgid "Pitch Bode plot"
+msgstr "俯仰 Bode 图"
+
+#: ../../source/docs/systemid-model-development.rst:243
+#: 5572cb6e7e74449b8603850df7ce2a9e
+msgid "Yaw Bode plot"
+msgstr "偏航 Bode 图"
+
+#: ../../source/docs/systemid-model-development.rst:245
+#: 859bb90e40404dc893252e18e8ad4205
+msgid ""
+"The composite frequency responses are used to determine the parameters of "
+"the :ref:`transfer function models<fig-eq-axis-models-Tf>`. The parameters "
+"of the plant model transfer functions are optimized to maximize their fit to"
+" the collected real-world data frequency responses. The result is shown in "
+"the following three figures."
+msgstr ""
+"综合频率响应用于确定 :ref:`传递函数模型<fig-eq-axis-models-Tf>` "
+"的参数。被控对象模型传递函数的参数通过优化来最大化其与收集的真实世界数据频率响应的吻合程度。结果如下面三张图所示。"
+
+#: ../../source/docs/systemid-model-development.rst:251
+#: c35c9fda9d2c4708b72f9afac64c3986
+msgid "Roll transfer function"
+msgstr "横滚传递函数"
+
+#: ../../source/docs/systemid-model-development.rst:255
+#: 614ed30050cf4bf39103baef3f0bf5ed
+msgid "Pitch transfer function"
+msgstr "俯仰传递函数"
+
+#: ../../source/docs/systemid-model-development.rst:259
+#: 6e9d18364229417d8ed5189aeb173930
+msgid "Yaw transfer function"
+msgstr "偏航传递函数"
+
+#: ../../source/docs/systemid-model-development.rst:261
+#: f3052b552dbf4c5daf2bfbf929a99bf2
+msgid "The derived transfer function models are as follows:"
+msgstr "推导出的传递函数模型如下："
+
+#: ../../source/docs/systemid-model-development.rst:265
+#: 24e5e03c85f640f6bf1e7cb6ebbaea7b
+msgid "Axis models transfer functions"
+msgstr "轴模型传递函数"
+
+#: ../../source/docs/systemid-model-development.rst:268
+#: 1e860c79232e4548b0b7814a764e00d7
+msgid "Example of Identification Results and Model Verification"
+msgstr "辨识结果与模型验证示例"
+
+#: ../../source/docs/systemid-model-development.rst:270
+#: dbe2115faf644b5faf712c5290b05768
+msgid ""
+"The system of a quadcopter is inherently unstable. Slight modeling errors or"
+" unconsidered external inputs of the real system lead to divergence of the "
+"axis models [#f7]_. Since a model does never fully reproduce the behavior of"
+" the real system, the model validation is conducted in closed-loop with the "
+"same stabilize controller used during the test flights. For the validation "
+"test runs, the closed-loop model is given the same input signals that were "
+"given to the real system, which are the references for the stabilize "
+"controller (desired angle or rate in case of the yaw axis). The outputs of "
+"the models, namely the angular rates, are then compared to the measured "
+"system outputs during real flight. First, it is examined if the models "
+"reproduce the test signals, i.e. the frequency-sweeps. The desired angles of"
+" the stabilize controller are set to zero and the sweeps are directly added "
+"to the output of the rate controllers."
+msgstr ""
+"四旋翼系统本质上是不稳定的。实际系统中轻微的建模误差或未考虑的外部输入会导致轴模型发散 "
+"[#f7]_。由于模型永远无法完全复现真实系统的行为，模型验证在闭环中进行，使用与测试飞行相同的稳定控制器。在验证测试中，闭环模型接收与真实系统相同的输入信号，即稳定控制器的参考输入（期望角度，或偏航轴的期望速率）。模型输出（即角速度）随后与真实飞行中测量到的系统输出进行比较。首先检验模型是否能够复现测试信号（即频率扫描）。稳定控制器的期望角度设为零，扫描信号直接叠加到速率控制器的输出上。"
+
+#: ../../source/docs/systemid-model-development.rst:278
+#: aebe672ecc6443de9bcb68542850aca0
+msgid ""
+"In this chapter, the results for a relatively small quadcopter are "
+"presented. It weighs 1.5 kg, has an arm length of 22 cm and is equipped with"
+" 9-inch propellers. As seen in the following three figures, each model is "
+"capable of reproducing the measured angular rates."
+msgstr ""
+"本章展示了一架相对较小的四旋翼的结果。该飞行器重 1.5 kg，臂长 22 cm，配备 9 "
+"英寸螺旋桨。如以下三张图所示，每个模型都能够复现测量到的角速度。"
+
+#: ../../source/docs/systemid-model-development.rst:284
+#: c69cd39dc7e64059932e5c4a4e6eae24
+msgid "Roll axis model validation sweep"
+msgstr "横滚轴模型验证扫描"
+
+#: ../../source/docs/systemid-model-development.rst:288
+#: ff4cb4e767df41ac89c25e2224ee367a
+msgid "Pitch axis model validation sweep"
+msgstr "俯仰轴模型验证扫描"
+
+#: ../../source/docs/systemid-model-development.rst:292
+#: a623503df01a40bbaa20b3a5ec8045df
+msgid "Yaw axis model validation sweep"
+msgstr "偏航轴模型验证扫描"
+
+#: ../../source/docs/systemid-model-development.rst:294
+#: e60ffd31a17944b8aea9c472fa336b63
+msgid ""
+"Since the frequency-sweeps are used for the identification, it is important "
+"to test the models against another test signal to check for their "
+"robustness. A widely recommended verification signal is the so-called "
+"doublet maneuver which is a double step [#f8]_. For time-domain validation, "
+"a similar signal is used as the input of the stabilize controller. As shown "
+"in the following figure, it consists of two consecutive doublet maneuvers."
+msgstr ""
+"由于频率扫描用于辨识，因此用另一种测试信号来检验模型的鲁棒性非常重要。广泛推荐的验证信号是所谓的双脉冲机动（doublet "
+"maneuver），即双阶跃信号 [#f8]_。对于时域验证，使用类似信号作为稳定控制器的输入。如下图所示，该信号由两个连续的双脉冲机动组成。"
+
+#: ../../source/docs/systemid-model-development.rst:301
+#: c0bbf4c5f1a0425fa1fa83362adef2e5
+msgid "Model validation doublet"
+msgstr "模型验证双脉冲"
+
+#: ../../source/docs/systemid-model-development.rst:303
+#: ec0e05916f6743ecba30509a35bcd09d
+msgid ""
+"The next three figures contain the angular rates of the axis models compared"
+" to the measured ones during the validation flights. Due to the high fitting"
+" between model outputs and measured angular rates, the fidelity of the "
+"models is seen as satisfactory."
+msgstr "接下来的三张图包含了在验证飞行中轴模型的角速度与实测值的对比。由于模型输出与实测角速度高度吻合，认为模型的保真度令人满意。"
+
+#: ../../source/docs/systemid-model-development.rst:308
+#: 8048af3cdb414b299932a98cf33bfcd8
+msgid "Roll axis model validation angle rates"
+msgstr "横滚轴模型验证角速度"
+
+#: ../../source/docs/systemid-model-development.rst:312
+#: 14119b02e12e4409a958b2fccaeb72a6
+msgid "Pitch axis model validation angle rates"
+msgstr "俯仰轴模型验证角速度"
+
+#: ../../source/docs/systemid-model-development.rst:316
+#: ff7b3ef322ee40a08dcb076b317dd899
+msgid "Yaw axis model validation angle rates"
+msgstr "偏航轴模型验证角速度"
+
+#: ../../source/docs/systemid-model-development.rst:319
+#: 2a9060d477bb40f58f7075f9d2fdf314
+msgid "How to optimize the PIDs once a vehicle model is available"
+msgstr "获得飞行器模型后如何优化 PID"
+
+#: ../../source/docs/systemid-model-development.rst:321
+#: 065c6dcfee524478aeabfb4fbf323cb7
+msgid ""
+"In the sections above an analytical mathematical model of a multicopter was "
+"derived and validated. That model can be used to optimize ArduCopter's PID "
+"parameters. One example of such an optimization process is shown in `this "
+"ArduPilot blog post <https://discuss.ardupilot.org/t/analytical-multicopter-"
+"flight-controller-pid-optimization/109759>`__."
+msgstr ""
+"上述章节推导并验证了多旋翼的解析数学模型。该模型可用于优化 ArduCopter 的 PID 参数。此类优化过程的一个示例见于 `这篇 "
+"ArduPilot 博客文章 <https://discuss.ardupilot.org/t/analytical-multicopter-"
+"flight-controller-pid-optimization/109759>`__。"
+
+#: ../../source/docs/systemid-model-development.rst:326
+#: 3ce759a94f17489fab191fe3e4b3967e
+msgid "References"
+msgstr "参考文献"
+
+#: ../../source/docs/systemid-model-development.rst:327
+#: 0745a94e7f664a8bbc09b5018758d050
+msgid ""
+"Teodor Tomic: \"Model-Based Control of Flying Robots for Robust Interaction "
+"under Wind Influence\", Hannover: Gottfried Wilhelm Leibniz Universität "
+"Hannover, 2018."
+msgstr ""
+"Teodor Tomic：《Model-Based Control of Flying Robots for Robust Interaction "
+"under Wind Influence》，汉诺威：戈特弗里德·威廉·莱布尼茨汉诺威大学，2018。"
+
+#: ../../source/docs/systemid-model-development.rst:328
+#: ef461702490f46ed926b348394eb1e7c
+msgid ""
+"Gabriele Perozzi et al.: \"Trajectory Tracking for a quadrotor under wind "
+"perturbations: sliding mode control with state-dependent gains\", 2018."
+msgstr ""
+"Gabriele Perozzi 等：《Trajectory Tracking for a quadrotor under wind "
+"perturbations: sliding mode control with state-dependent gains》，2018。"
+
+#: ../../source/docs/systemid-model-development.rst:329
+#: 9c8fae11b22d473c98f016d2dc745cf5
+msgid ""
+"Quan Quan: \"Introduction to Multicopter Design and Control\", Singapore: "
+"Springer Singapore, 2017."
+msgstr ""
+"Quan Quan：《Introduction to Multicopter Design and Control》，新加坡：Springer "
+"Singapore，2017。"
+
+#: ../../source/docs/systemid-model-development.rst:330
+#: 4783c61edfef4c12a2f21ff1fd9d16cd
+msgid ""
+"Wei Wei: \"Development of an Effective System Identification and Control "
+"Capability for Quadcopter UAVs\", Cincinnati: University of Cincinnati, "
+"2015."
+msgstr ""
+"Wei Wei：《Development of an Effective System Identification and Control "
+"Capability for Quadcopter UAVs》，辛辛那提：辛辛那提大学，2015。"
+
+#: ../../source/docs/systemid-model-development.rst:331
+#: 57592c363049407f8fa4c668d7e387ee
+msgid ""
+"Brijesh Raghavan and N. Ananthkrishnan: \"Small-Perturbation Analysis of "
+"Airplane Dynamics with Dynamic Stability Derivatives Redefined\", "
+"Blacksburg: Virginia Polytechnic Institute and State University, 2005."
+msgstr ""
+"Brijesh Raghavan 和 N. Ananthkrishnan：《Small-Perturbation Analysis of "
+"Airplane Dynamics with Dynamic Stability Derivatives "
+"Redefined》，布莱克斯堡：弗吉尼亚理工学院，2005。"
+
+#: ../../source/docs/systemid-model-development.rst:332
+#: 994674af6e59450ebf6c66fbb61b3508
+msgid ""
+"Sung H. Cho et al.: \"System Identification and Controller Optimization of a"
+" Coaxial Quadrotor UAV in Hover\", AIAA Scitech Forum, 2019."
+msgstr ""
+"Sung H. Cho 等：《System Identification and Controller Optimization of a "
+"Coaxial Quadrotor UAV in Hover》，AIAA Scitech Forum，2019。"
+
+#: ../../source/docs/systemid-model-development.rst:333
+#: 647863b64937428fb7c24f76bcc14e6d
+msgid ""
+"Philipp Niermeyer, Thomas Raffler and Florian Holzapfel: \"Open-Loop "
+"Quadcopter Flight Dynamics Identification in Frequency Domain via Closed-"
+"Loop Flight Testing\", München: Technische Universität München, 2015."
+msgstr ""
+"Philipp Niermeyer、Thomas Raffler 和 Florian Holzapfel：《Open-Loop Quadcopter "
+"Flight Dynamics Identification in Frequency Domain via Closed-Loop Flight "
+"Testing》，慕尼黑：慕尼黑工业大学，2015。"
+
+#: ../../source/docs/systemid-model-development.rst:334
+#: 8f5bf177dfb9452b876929ff8fb4e422
+msgid ""
+"Mark B. Tischler, Robert K. Remple: \"Aircraft and Rotorcraft System "
+"Identification\", 2006."
+msgstr ""
+"Mark B. Tischler、Robert K. Remple：《Aircraft and Rotorcraft System "
+"Identification》，2006。"
+
+#: ../../source/docs/systemid-model-development.rst:335
+#: ce8bfec6a2f046cdbc6c00314c068520
+msgid ""
+"Robert Mahony, Vijay Kumar and Peter Corke: \"Multirotor Aerial Vehicles: "
+"Modeling, Estimation, and Control of Quadrotor\", IEEE Robotics & Automation"
+" Magazine, 2012."
+msgstr ""
+"Robert Mahony、Vijay Kumar 和 Peter Corke：《Multirotor Aerial Vehicles: "
+"Modeling, Estimation, and Control of Quadrotor》，IEEE Robotics & Automation "
+"Magazine，2012。"
+
+#: ../../source/docs/systemid-model-development.rst:336
+#: 8d08832de4674444980808dafab0a5a3
+msgid ""
+"Yuksek, B., Saldiran, E., Cetin, A., Yeniceri, R. & Inalhan, G.: „System "
+"Identification and Model-Based Flight Control System Design for an Agile "
+"Maneuvering Quadrotor Platform“. In: AIAA SciTech 2020 Forum, S. 1835., "
+"2020."
+msgstr ""
+"Yuksek, B., Saldiran, E., Cetin, A., Yeniceri, R. & Inalhan, G.：《System "
+"Identification and Model-Based Flight Control System Design for an Agile "
+"Maneuvering Quadrotor Platform》。见：AIAA SciTech 2020 Forum，第 1835 页，2020。"

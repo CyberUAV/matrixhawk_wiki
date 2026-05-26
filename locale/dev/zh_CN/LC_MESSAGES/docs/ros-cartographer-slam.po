@@ -1,0 +1,399 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/ros-cartographer-slam.rst:5
+#: c7d500c3dd04488392b2d2ce7df569cf
+msgid "Cartographer SLAM for Non-GPS Navigation"
+msgstr "用于非 GPS 导航的 Cartographer SLAM"
+
+#: ../../source/docs/ros-cartographer-slam.rst:7
+#: 4a203ff2dd6c4e0e98de7a0acff3e17b
+msgid ""
+"This page shows how to setup ROS and `Google Cartographer SLAM "
+"<https://google-cartographer.readthedocs.io/en/latest>`__ using an "
+"`RPLidarA2 lidar <http://wiki.ros.org/rplidar>`__ to provided a local "
+"position estimate for ArduPilot so that it can operate without a GPS."
+msgstr ""
+"本页介绍如何配置 ROS 和 `Google Cartographer SLAM <https://google-"
+"cartographer.readthedocs.io/en/latest>`__，使用 `RPLidarA2 激光雷达 "
+"<http://wiki.ros.org/rplidar>`__ 为 ArduPilot 提供本地位置估计，从而实现无 GPS 操作。"
+
+#: ../../source/docs/ros-cartographer-slam.rst:9
+#: 86e689b1744f4b3fa66ee9c1bb42932c
+msgid ""
+"These instructions were tested on an :ref:`NVidia TX2 <companion-computer-"
+"nvidia-tx2>` flashed with :ref:`APSync <apsync-intro>` and then ROS and "
+"MAVROS were :ref:`installed as described here <ros-install>`."
+msgstr ""
+"这些说明在刷入 :ref:`APSync <apsync-intro>` 的 :ref:`NVidia TX2 <companion-computer-"
+"nvidia-tx2>` 上测试，然后按 :ref:`此处说明 <ros-install>` 安装 ROS 和 MAVROS。"
+
+#: ../../source/docs/ros-cartographer-slam.rst:13
+#: fe2375249e7b432daf3e95894ca8a066
+msgid "these pages are a work-in-progress"
+msgstr "这些页面仍在持续完善中"
+
+#: ../../source/docs/ros-cartographer-slam.rst:16
+#: 707ce8bbd92140789e8c7eaa5fa88d19
+msgid "Mounting the RPLidar and Pixhawk"
+msgstr "安装 RPLidar 和 Pixhawk"
+
+#: ../../source/docs/ros-cartographer-slam.rst:21
+#: d2283a9b08384b06bdecf2e1101caf32
+msgid ""
+"The RPLidar should be oriented so that its USB cable wire is pointing "
+"forward in the same direction as the arrow on the flight controller."
+msgstr "RPLidar 应朝向与飞控箭头相同的正前方，即 USB 线朝前。"
+
+#: ../../source/docs/ros-cartographer-slam.rst:23
+#: 0a9b8ef17f554baabd61916c26686186
+msgid ""
+"The USB cable should be plugged into a USB port on the companion computer "
+"running ROS."
+msgstr "USB 线应插入运行 ROS 的伴飞计算机的 USB 接口。"
+
+#: ../../source/docs/ros-cartographer-slam.rst:26
+#: 6d1e81405d6544c285fb971c47193672
+msgid "Check the RPLidar's serial port"
+msgstr "检查 RPLidar 的串口"
+
+#: ../../source/docs/ros-cartographer-slam.rst:28
+#: eed1d53b15214ed98813a4b6dd6a1bdb
+msgid ""
+"plug the RPLidarA2 into the companion computer.  If using a TX2 mounted on "
+"an AUVidea J120 board, ensure the lidar is plugged into the lower USB port."
+msgstr "将 RPLidarA2 插入伴飞计算机。若 TX2 安装在 AUVidea J120 板上，请确保激光雷达插入下方 USB 接口。"
+
+#: ../../source/docs/ros-cartographer-slam.rst:34
+#: 182c21713ba24fb1b7b97f6ad3681b2a
+msgid "the lidar should appear as /dev/ttyUSB0 or /dev/ttyACM0."
+msgstr "激光雷达应出现为 /dev/ttyUSB0 或 /dev/ttyACM0。"
+
+#: ../../source/docs/ros-cartographer-slam.rst:35
+#: 88532a4d703747c89510f1a17d69ca8b
+msgid ""
+"if you type \"lsusb\" the device should also be listed as \"Cygnal "
+"Integrated Products, Inc. CP210x UART Bridge / myAVR mySmartUSB light\""
+msgstr ""
+"输入「lsusb」时，设备应显示为「Cygnal Integrated Products, Inc. CP210x UART Bridge / "
+"myAVR mySmartUSB light」"
+
+#: ../../source/docs/ros-cartographer-slam.rst:36
+#: 9f462d5fd3754a8395720ba129428473
+msgid ""
+"allow anyone to read from the device by entering just one of the following "
+"two commands depending upon which serial port was found above"
+msgstr "根据上面找到的串口，输入以下两条命令之一，允许任何用户读取该设备"
+
+#: ../../source/docs/ros-cartographer-slam.rst:43
+#: 032ef64abd6a4ad49067cbdfb82c267c
+msgid "Install more packages"
+msgstr "安装更多软件包"
+
+#: ../../source/docs/ros-cartographer-slam.rst:45
+#: f200d1fbfcf64336913204dbfb88bd50
+msgid "install the ROS desktop full:"
+msgstr "安装 ROS 完整桌面版："
+
+#: ../../source/docs/ros-cartographer-slam.rst:51
+#: 503406898bb645858a485a3834ed36ca
+msgid ""
+"OR install each of these individual packages (this list is not yet "
+"complete):"
+msgstr "或者分别安装以下各软件包（此列表尚不完整）："
+
+#: ../../source/docs/ros-cartographer-slam.rst:61
+#: 445482b1d7cf4650a9f172becd5cecbe
+msgid "Create a Catkin WorkSpace"
+msgstr "创建 Catkin 工作空间"
+
+#: ../../source/docs/ros-cartographer-slam.rst:63
+#: 76c87346da5c45a38a03ddd37b2e2c6c
+msgid "In your home directory:"
+msgstr "在主目录中："
+
+#: ../../source/docs/ros-cartographer-slam.rst:73
+#: 2cae5d86ebe8462cb7fbad2cda9b2921
+msgid "Install RPLidar node"
+msgstr "安装 RPLidar 节点"
+
+#: ../../source/docs/ros-cartographer-slam.rst:75
+#: c482cab997d54364ac698c7bf0fa7e7e
+msgid "Install the RPLidar node in the workspace"
+msgstr "在工作空间中安装 RPLidar 节点"
+
+#: ../../source/docs/ros-cartographer-slam.rst:83
+#: 670946a2299543a1a892b0b6eaf405d6
+msgid "Install Google Cartographer"
+msgstr "安装 Google Cartographer"
+
+#: ../../source/docs/ros-cartographer-slam.rst:85
+#: 30dce895ed2645d59743c59a7786cbe2
+msgid "Install some more packages"
+msgstr "安装更多软件包"
+
+#: ../../source/docs/ros-cartographer-slam.rst:91
+#: fb7e549ea00a4ab7a4d7a19c5581c92c
+msgid ""
+"Re-initialise the workspace with `wstool <http://wiki.ros.org/wstool>`__ "
+"then merge the cartographer_ros.rosinstall file and fetch code for "
+"dependencies."
+msgstr ""
+"使用 `wstool <http://wiki.ros.org/wstool>`__ 重新初始化工作空间，然后合并 "
+"cartographer_ros.rosinstall 文件并拉取依赖代码。"
+
+#: ../../source/docs/ros-cartographer-slam.rst:100
+#: c55efad5f8bc4e39b115e21be67c19b5
+msgid "Install proto3 and deb dependencies"
+msgstr "安装 proto3 和 deb 依赖"
+
+#: ../../source/docs/ros-cartographer-slam.rst:109
+#: 0f669e027ac1492883fd100316508d89
+msgid ""
+"Clone the `Robot Pose Publisher "
+"<http://wiki.ros.org/robot_pose_publisher>`__ package into the workspace"
+msgstr ""
+"将 `Robot Pose Publisher <http://wiki.ros.org/robot_pose_publisher>`__ "
+"软件包克隆到工作空间"
+
+#: ../../source/docs/ros-cartographer-slam.rst:116
+#: 75405f774de344079f607aaeef8e845b
+msgid ""
+"Create the cartographer_ros launch file using your favourite editor (like "
+"\"gedit\")"
+msgstr "使用您喜欢的编辑器（如「gedit」）创建 cartographer_ros launch 文件"
+
+#: ../../source/docs/ros-cartographer-slam.rst:123
+#: ../../source/docs/ros-cartographer-slam.rst:158
+#: 80831a7f190247ada4c1124e54470cd1 f944bd342e3045acae7068c8754c5f14
+msgid "Copy-paste the contents below into the file"
+msgstr "将以下内容复制粘贴到文件中"
+
+#: ../../source/docs/ros-cartographer-slam.rst:151
+#: 8089d4882d8d4e18852bebe8f9fba109
+msgid ""
+"Create the cartographer.lua script using our favourite editor (like "
+"\"gedit\")"
+msgstr "使用您喜欢的编辑器（如「gedit」）创建 cartographer.lua 脚本"
+
+#: ../../source/docs/ros-cartographer-slam.rst:220
+#: d594692b45e34d8ebacf694a27bd7804
+msgid ""
+"Instead of manually modifying the above packages, clone `this "
+"<https://github.com/ArduPilot/ardupilot_ros>`__ repository and install the "
+"dependencies."
+msgstr ""
+"与其手动修改上述软件包，不如克隆 `此 <https://github.com/ArduPilot/ardupilot_ros>`__ 仓库并安装依赖。"
+
+#: ../../source/docs/ros-cartographer-slam.rst:224
+#: c843d468bc4f4956b727a0c420cc8b92
+msgid "Build the Packages"
+msgstr "构建软件包"
+
+#: ../../source/docs/ros-cartographer-slam.rst:233
+#: ddcd33ffed644262a057baf860baed5b
+msgid "Start Cartographer"
+msgstr "启动 Cartographer"
+
+#: ../../source/docs/ros-cartographer-slam.rst:235
+#: 75c1133a877e47a59920d3a00c7ad8f9
+msgid ""
+"Plug the RPLidarA2 into the companion computer and then open up four "
+"terminals and in each terminal type:"
+msgstr "将 RPLidarA2 插入伴飞计算机，然后打开四个终端，在每个终端中输入："
+
+#: ../../source/docs/ros-cartographer-slam.rst:242
+#: f5fb57986465460d9f84843cad1a7089
+msgid "Then in Terminal1:"
+msgstr "然后在终端 1 中："
+
+#: ../../source/docs/ros-cartographer-slam.rst:248
+#: f618c9c765af4a2fba419bfde713d32a
+msgid "In Terminal2:"
+msgstr "在终端 2 中："
+
+#: ../../source/docs/ros-cartographer-slam.rst:254
+#: f379f2ea18d84b9eaa7d26279b8b6f97
+msgid "In Terminal3:"
+msgstr "在终端 3 中："
+
+#: ../../source/docs/ros-cartographer-slam.rst:260
+#: d67fbdf9094e4b6ab0fff8170f7a6fd8
+msgid "In Terminal4:"
+msgstr "在终端 4 中："
+
+#: ../../source/docs/ros-cartographer-slam.rst:262
+#: 170b3ce21de046d698d22a9fc317463f
+msgid ""
+"Start mavros as described on the :ref:`Connecting with ROS page <ros-"
+"connecting>` which involves running a command like below:"
+msgstr "按 :ref:`连接 ROS 页面 <ros-connecting>` 所述启动 mavros，需运行如下命令："
+
+#: ../../source/docs/ros-cartographer-slam.rst:270
+#: 434fb159ba544ad59b52d69e4825a705
+msgid "Configure ArduPilot"
+msgstr "配置 ArduPilot"
+
+#: ../../source/docs/ros-cartographer-slam.rst:272
+#: 2ae9c40c24cb4945a4e0f4bfeef2e516
+msgid ""
+"Connect to the flight controller with a ground station (i.e. Mission "
+"Planner) and check that the following parameters are set as shown below:"
+msgstr "使用地面站（如 Mission Planner）连接飞控，并确认以下参数已按如下设置："
+
+#: ../../source/docs/ros-cartographer-slam.rst:274
+#: f8c0a911ed014395a8a6824b8879eca0
+msgid ":ref:`AHRS_EKF_TYPE <copter:AHRS_EKF_TYPE>` = 3 to use EKF3"
+msgstr ":ref:`AHRS_EKF_TYPE <copter:AHRS_EKF_TYPE>` = 3，使用 EKF3"
+
+#: ../../source/docs/ros-cartographer-slam.rst:275
+#: cd626a6a26cf446ab9c4680111738388
+msgid ":ref:`EK2_ENABLE <copter:EK2_ENABLE>` = 0 to disable EKF2"
+msgstr ":ref:`EK2_ENABLE <copter:EK2_ENABLE>` = 0，禁用 EKF2"
+
+#: ../../source/docs/ros-cartographer-slam.rst:276
+#: 2151426880f9433796b0cac4d0c766fe
+msgid ":ref:`EK3_ENABLE <copter:EK3_ENABLE>` = 1 to enable EKF3"
+msgstr ":ref:`EK3_ENABLE <copter:EK3_ENABLE>` = 1，启用 EKF3"
+
+#: ../../source/docs/ros-cartographer-slam.rst:277
+#: 9c741167a31c4273a11af4dbc9950ad9
+msgid ""
+":ref:`EK3_SRC1_POSXY <copter:EK3_SRC1_POSXY>` = 6 to set position horizontal"
+" source to ExternalNAV"
+msgstr ""
+":ref:`EK3_SRC1_POSXY <copter:EK3_SRC1_POSXY>` = 6，将水平位置来源设为外部导航（ExternalNAV）"
+
+#: ../../source/docs/ros-cartographer-slam.rst:278
+#: 3836d6e8422248478626ffaf681baade
+msgid ""
+":ref:`EK3_SRC1_POSZ <copter:EK3_SRC1_POSZ>` = 1 to set position vertical "
+"source to Baro"
+msgstr ":ref:`EK3_SRC1_POSZ <copter:EK3_SRC1_POSZ>` = 1，将垂直位置来源设为气压计"
+
+#: ../../source/docs/ros-cartographer-slam.rst:279
+#: dd7158cb439f4eef8c2c3556385c33f7
+msgid ""
+":ref:`EK3_SRC1_VELXY <copter:EK3_SRC1_VELXY>` = 6 to set velocity horizontal"
+" source to ExternalNAV"
+msgstr ""
+":ref:`EK3_SRC1_VELXY <copter:EK3_SRC1_VELXY>` = 6，将水平速度来源设为外部导航（ExternalNAV）"
+
+#: ../../source/docs/ros-cartographer-slam.rst:280
+#: 2a723b93f28f4f21ba209fbe387785b7
+msgid ""
+":ref:`EK3_SRC1_VELZ <copter:EK3_SRC1_VELZ>` = 6 to set vertical velocity "
+"source to ExternalNAV"
+msgstr ""
+":ref:`EK3_SRC1_VELZ <copter:EK3_SRC1_VELZ>` = 6，将垂直速度来源设为外部导航（ExternalNAV）"
+
+#: ../../source/docs/ros-cartographer-slam.rst:281
+#: 4dc067333c394023bc60e9eb43d9c023
+msgid ""
+":ref:`EK3_SRC1_YAW <copter:EK3_SRC1_YAW>` = 6 to set yaw source to "
+"ExternalNAV"
+msgstr ""
+":ref:`EK3_SRC1_YAW <copter:EK3_SRC1_YAW>` = 6，将偏航来源设为外部导航（ExternalNAV）"
+
+#: ../../source/docs/ros-cartographer-slam.rst:282
+#: bdc6e6af1f7a4849bf773969070623a9
+msgid ":ref:`GPS1_TYPE <GPS1_TYPE>` = 0 to disable the GPS"
+msgstr ":ref:`GPS1_TYPE <GPS1_TYPE>` = 0，禁用 GPS"
+
+#: ../../source/docs/ros-cartographer-slam.rst:283
+#: bf223dda2c5c4089ae186008ca611109
+msgid ":ref:`VISO_TYPE <copter:VISO_TYPE>` = 1 to enable visual odometry"
+msgstr ":ref:`VISO_TYPE <copter:VISO_TYPE>` = 1，启用视觉里程计"
+
+#: ../../source/docs/ros-cartographer-slam.rst:284
+#: faca6c7d849f4c588f115bfd17fda36a
+msgid ""
+":ref:`ARMING_CHECK <copter:ARMING_CHECK>` = 388598 (optional, to disable GPS"
+" checks)"
+msgstr ":ref:`ARMING_CHECK <copter:ARMING_CHECK>` = 388598（可选，用于禁用 GPS 检查）"
+
+#: ../../source/docs/ros-cartographer-slam.rst:287
+#: 94e157876bd447c8a9853f150602f2fc
+msgid "After changing any of the values above, reboot the flight controller."
+msgstr "更改上述任意值后，重启飞控。"
+
+#: ../../source/docs/ros-cartographer-slam.rst:289
+#: 3c45554ae1c449bbbccc9f53c03f4e1b
+msgid ""
+"If all is working, vision position estimates should begin flowing in from "
+"ROS to ArduPilot.  This can be confirmed by connecting to the flight "
+"controller using the Mission Planner (or similar) and check the Flight Data "
+"screen's Messages tab (bottom left) for messages from the EKF like below:"
+msgstr ""
+"若一切正常，视觉位置估计应开始从 ROS 流向 ArduPilot。可通过 Mission "
+"Planner（或类似软件）连接飞控，在飞行数据屏幕左下角的「消息」标签页中查看来自 EKF 的如下消息进行确认："
+
+#: ../../source/docs/ros-cartographer-slam.rst:298
+#: b53c2964c9b941b6888ab2bd0e9807fb
+msgid ""
+"Using the Mission Planner (or similar) go to the Flight Data screen and "
+"right-mouse-button click on the map and select \"Set Home Here\" >> \"Set "
+"EKF Origin\".  The vehicle should appear immediately on the map where you "
+"clicked."
+msgstr ""
+"使用 Mission Planner（或类似软件）进入飞行数据屏幕，在地图上右键单击并选择「在此设置原点」>>「设置 EKF "
+"原点」。飞行器应立即出现在您单击的地图位置。"
+
+#: ../../source/docs/ros-cartographer-slam.rst:301
+#: 442a38bc22a544e6af769da8ecd13948
+msgid "Testing"
+msgstr "测试"
+
+#: ../../source/docs/ros-cartographer-slam.rst:303
+#: 0b090a2bf36a46f58158782125d3dd1e
+msgid ""
+"To confirm the ROS side is working correctly type the command below and live"
+" updates of position estimates from cartographer should be displayed"
+msgstr "输入以下命令确认 ROS 端工作正常，应能看到来自 cartographer 的实时位置估计更新"
+
+#: ../../source/docs/ros-cartographer-slam.rst:313
+#: efa4250eb2694957b5435ec19921b455
+msgid ""
+"Mission Planner's MAVLink Inspector (press Ctrl-F and then press the "
+"\"MAVLink Inspector\" button) can be used to check if "
+"VISION_POSITION_ESTIMATE messages are being successfully sent to the flight "
+"controller"
+msgstr ""
+"可使用 Mission Planner 的 MAVLink 检查器（按 Ctrl-F 然后点击「MAVLink Inspector」按钮）检查 "
+"VISION_POSITION_ESTIMATE 消息是否成功发送到飞控"
+
+#: ../../source/docs/ros-cartographer-slam.rst:320
+#: 47ab613de0a64ff099ef34f1f27a6ec2
+msgid "Video"
+msgstr "视频"
+
+#: ../../source/docs/ros-cartographer-slam.rst:327
+#: 250f65962a544831be8cab85ed565f8c
+msgid ""
+"We are keen to improve ArduPilot's support of ROS so if you find issues "
+"(such as commands that do not seem to be supported), please report them in "
+"the `ArduPilot issues list "
+"<https://github.com/ArduPilot/ardupilot/issues>`__ with a title that "
+"includes \"ROS\" and we will attempt to resolve them as quickly as possible."
+msgstr ""
+"我们致力于改进 ArduPilot 对 ROS 的支持，若发现问题（如似乎不支持的命令），请在 `ArduPilot 问题列表 "
+"<https://github.com/ArduPilot/ardupilot/issues>`__ 中提交，标题包含「ROS」，我们将尽快解决。"

@@ -1,0 +1,382 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:5
+#: 661427521acc45818c165db9dec41936
+msgid "CAN bus driver implementation roadmap"
+msgstr "CAN 总线驱动实现路线图"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:7
+#: d18c23e6563944d2b0455b2928245e36
+msgid ""
+"The base for hardware CAN bus support is located in AP_HAL library and "
+"consist of two classes:"
+msgstr "硬件 CAN 总线支持的基础位于 AP_HAL 库中，由两个类组成："
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:10
+#: e9101fbacb3449bcb699805634b0d4e2
+msgid ""
+"CANHal class that is responsible for representation of one physical "
+"interface on board. This class manages opening, setup and operation of the "
+"interface and is a main connection point between software and hardware"
+msgstr "CANHal 类，负责表示飞控板上的一个物理接口。该类管理接口的打开、配置和操作，是软件与硬件之间的主要连接点"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:14
+#: aecccbecec1443ea8642a9afde382fec
+msgid ""
+"CANManager class is wrapping all physical interfaces. It does enumeration of"
+" interfaces, provides access to them and also holds connection point for "
+"accessing UAVCAN managing class."
+msgstr "CANManager 类，封装所有物理接口。它负责枚举接口、提供对接口的访问，同时也持有用于访问 UAVCAN 管理类的连接点。"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:19
+#: a0bf5f361c674566a4709c9fee8fbadb
+msgid "CANHal class"
+msgstr "CANHal 类"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:21
+#: c83fc06dc3cf44e9bf0c5442b6e4bc45
+msgid "New class should be based on AP_HAL::CANHal class."
+msgstr "新类应基于 AP_HAL::CANHal 类。"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:23
+#: f63e0dbdd5cc43028561091fcb946c15
+msgid ""
+"The class is responsible for managing the hardware and also managing of RX "
+"and TX queues. Apart from this also the time management is provided."
+msgstr "该类负责管理硬件以及 RX 和 TX 队列，同时还提供时间管理功能。"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:26
+#: ../../source/docs/can-bus-driver-roadmap.rst:104
+#: 117b5b7f085d40cf8d3b6f6b921dca0b 13be4048913749bf9c147e412c8031c8
+msgid "Necessary methods are following:"
+msgstr "必要方法如下："
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:28
+#: ../../source/docs/can-bus-driver-roadmap.rst:106
+#: 3adb11d1f8cf415385d7463e738d7322 4ddd178030c74c38bc17001afd15ebab
+msgid "Constructor"
+msgstr "构造函数"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:30
+#: 31950a4b7fb44dabba98942f3672a135
+msgid "int init(const uint32_t bitrate, const OperatingMode mode)"
+msgstr "int init(const uint32_t bitrate, const OperatingMode mode)"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:32
+#: a6dad3b811e54ff7b86ca77e08415135
+msgid ""
+"Initializes the hardware CAN controller with specific bitrate and operating "
+"mode. The driver should try to match the specified bitrate as close as "
+"possible. Operating mode is either Normal that allows sending frames or "
+"Silent - only for receiving of frames. This method is used internally only "
+"by begin() method."
+msgstr ""
+"以指定的比特率和工作模式初始化硬件 CAN 控制器。驱动应尽量匹配指定的比特率。工作模式为正常模式（允许发送帧）或静默模式（仅接收帧）。此方法仅由 "
+"begin() 方法内部调用。"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:38
+#: 6f49f6bbcab740f3a94eec39dbb53c58
+msgid "bool begin(uint32_t bitrate)"
+msgstr "bool begin(uint32_t bitrate)"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:40
+#: 6ad67db5fb2e4fc9896f3f56075daeb0
+msgid ""
+"This method should try to initialize CAN interface with specified bitrate."
+msgstr "此方法应尝试以指定比特率初始化 CAN 接口。"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:42
+#: 6574f8711706435b983e9b47b7f3d2ee
+msgid "void end()"
+msgstr "void end()"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:44
+#: 8ea5d19e0fce4706950f04854e1977a3
+msgid "Finishes the instance of CAN interfaces"
+msgstr "结束 CAN 接口实例"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:46
+#: c466dee610ed4b1fb058a48f7d1dfb16
+msgid "void reset()"
+msgstr "void reset()"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:48
+#: 1f754c0d15524bdca6f8fa10c8536879
+msgid "Reinitialize the interface with previous settings"
+msgstr "使用先前设置重新初始化接口"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:50
+#: fdad63cbaee64a9abdcd4914903eb771
+msgid "bool is_initialized()"
+msgstr "bool is_initialized()"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:52
+#: 36d428a4413d44f09772dbe0e7d17d48
+msgid "Returns true if the CAN interface was initialized successfully"
+msgstr "如果 CAN 接口已成功初始化，则返回 true"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:54
+#: ae66f031a27e411d865cf8e10b8ef577
+msgid "int32_t available()"
+msgstr "int32_t available()"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:56
+#: e8dc51f47f7d4239b07133b5e0683055
+msgid "This method should return the length of RX queue."
+msgstr "此方法应返回接收队列的长度。"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:58
+#: 28bb6a58ca0f40b4b3aef39c2dae01e0
+msgid "int32_t tx_pending()"
+msgstr "int32_t tx_pending()"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:60
+#: 624adcb3882a495a8775ff6ed3ad0e2c
+msgid ""
+"The number of pending messages to be transmitted is returned by this method."
+msgstr "此方法返回待发送消息的数量。"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:62
+#: 816336cfc33948e0b0e6158fb4cda4d6
+msgid "bool canAcceptNewTxFrame(const uavcan::CanFrame& frame)"
+msgstr "bool canAcceptNewTxFrame(const uavcan::CanFrame& frame)"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:64
+#: 98883bf6a2c0494aba96d2d51af750c9
+msgid ""
+"This method returns true if new message for transmitting can be placed in TX"
+" queue."
+msgstr "若可以将新消息放入发送队列，此方法返回 true。"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:66
+#: 447d7908a4864ee9a6fd1672c3a6b51b
+msgid "bool isRxBufferEmpty()"
+msgstr "bool isRxBufferEmpty()"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:68
+#: 79e16aa216bb40fbbcabd6696ef5de55
+msgid "Method checks if the RX queue is empty."
+msgstr "此方法检查接收队列是否为空。"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:70
+#: 63794090babd4475b4dac27696864bea
+msgid "uint64_t getErrorCount()"
+msgstr "uint64_t getErrorCount()"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:72
+#: f8d0587f799c41cf84443730a121714b
+msgid ""
+"Total number of hardware failures and other kinds of errors (e.g. queue "
+"overruns). May increase continuously if the interface is not connected to "
+"the bus."
+msgstr "硬件故障和其他类型错误（如队列溢出）的总数。若接口未连接到总线，该值可能持续增加。"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:75
+#: b8045275e31f4a6193ae05875f4645cd
+msgid "uint32_t getVoluntaryTxAbortCount()"
+msgstr "uint32_t getVoluntaryTxAbortCount()"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:77
+#: 8bebfb29dabf4a249e3aada93c365290
+msgid ""
+"Number of times the driver exercised library's requirement to abort "
+"transmission on first error."
+msgstr "驱动程序根据库的要求在第一个错误时中止发送的次数。"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:79
+#: dc9f6a072cbb4d42992507997574b310
+msgid "unsigned getRxQueueLength()"
+msgstr "unsigned getRxQueueLength()"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:81
+#: 0b50b211ada94147b8ab3d9f741dba90
+msgid "Returns the number of frames pending in the RX queue."
+msgstr "返回接收队列中待处理帧的数量。"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:83
+#: 1bd206f9b9844420886562e69b01679c
+msgid "bool hadActivity()"
+msgstr "bool hadActivity()"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:85
+#: 427ad4d6ea9c42e39d25141fed7322fb
+msgid ""
+"Returns whether this iface had at least one successful IO since the previous"
+" call of this method. This is designed for use with iface activity LEDs."
+msgstr "返回自上次调用此方法以来该接口是否至少有一次成功的 IO 操作。设计用于接口活动 LED。"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:88
+#: 37801f55f8ef4976a6de8bdb83876d96
+msgid ""
+"int16_t send(const uavcan::CanFrame& frame, uavcan::MonotonicTime "
+"tx_deadline, uavcan::CanIOFlags flags)"
+msgstr ""
+"int16_t send(const uavcan::CanFrame& frame, uavcan::MonotonicTime "
+"tx_deadline, uavcan::CanIOFlags flags)"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:90
+#: b4f06a8f72cd4be6bac99caada050ddd
+msgid ""
+"The method is responsible for putting a new frame to transmitting queue. The"
+" maximum transmitting deadline is also provided and it is a responsibility "
+"of driver to remove frame from queue if the deadline has passed. The flags "
+"can be combination of none or Loopback or AbortOnError."
+msgstr ""
+"此方法负责将新帧放入发送队列。同时提供最大发送截止时间，驾驶员有责任在截止时间过后从队列中移除帧。flags 可以是 none、Loopback 或 "
+"AbortOnError 的组合。"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:95
+#: b7103c3dbdf74df2aa52aaf5418c49bc
+msgid ""
+"int16_t receive(uavcan::CanFrame& out_frame, uavcan::MonotonicTime& "
+"out_ts_monotonic, uavcan::UtcTime& out_ts_utc, uavcan::CanIOFlags& "
+"out_flags)"
+msgstr ""
+"int16_t receive(uavcan::CanFrame& out_frame, uavcan::MonotonicTime& "
+"out_ts_monotonic, uavcan::UtcTime& out_ts_utc, uavcan::CanIOFlags& "
+"out_flags)"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:97
+#: 650d3dfcfc01486f8ed120c1e5ea0da6
+msgid ""
+"The method fills all the data in the passed references with the first "
+"message in RX queue."
+msgstr "此方法用接收队列中的第一条消息填充所有传入引用中的数据。"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:100
+#: f04f33e3845a420fabfc8adbe042016d
+msgid "CANManager class"
+msgstr "CANManager 类"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:102
+#: 45155a3e2b0d48adac0714c8cca2e04b
+msgid "New class should be based on AP_HAL::CANManager class."
+msgstr "新类应基于 AP_HAL::CANManager 类。"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:108
+#: 70e3d42ce57b4a42ad0315c750205173
+msgid ""
+"int init(const uint32_t bitrate, const PX4CAN::OperatingMode mode, uint8_t "
+"can_number)"
+msgstr ""
+"int init(const uint32_t bitrate, const PX4CAN::OperatingMode mode, uint8_t "
+"can_number)"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:110
+#: 6660196d58444dacb01950bc3d51b6fa
+msgid ""
+"Initializes the specified CAN interface with specific bitrate and operating "
+"mode. This method is used internally only by begin() method."
+msgstr "以特定比特率和操作模式初始化指定的 CAN 接口。此方法仅由 begin() 方法在内部调用。"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:113
+#: 8b86f21dc6d24643bf1821ac1affc062
+msgid "bool begin(uint32_t bitrate, uint8_t can_number)"
+msgstr "bool begin(uint32_t bitrate, uint8_t can_number)"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:115
+#: 07075c0983b94f4692bd2caf721c1fbe
+msgid ""
+"This method should try to initialize specified CAN interface with specified "
+"bitrate."
+msgstr "此方法应尝试以指定比特率初始化指定的 CAN 接口。"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:117
+#: f2ffa324da474adda60150f03f44a104
+msgid ""
+"uavcan::CanSelectMasks makeSelectMasks(const uavcan::CanFrame* "
+"(&pending_tx)[uavcan::MaxCanIfaces])"
+msgstr ""
+"uavcan::CanSelectMasks makeSelectMasks(const uavcan::CanFrame* "
+"(&pending_tx)[uavcan::MaxCanIfaces])"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:119
+#: 13bbfcd2c1ef43df9f747127aef3a098
+msgid ""
+"This function returns select masks indicating which interfaces are available"
+" for read/write."
+msgstr "此函数返回选择掩码，指示哪些接口可用于读/写。"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:121
+#: d192e97c990040b8b17d2a3557c2ff97
+msgid "PX4CAN* getIface(uint8_t iface_index)"
+msgstr "PX4CAN* getIface(uint8_t iface_index)"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:123
+#: 45d74de1ec9b48568c7adac13d3895d8
+msgid "Returns reference to the specified interface"
+msgstr "返回对指定接口的引用"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:125
+#: f516d07980b44df580b85f0141582438
+msgid "uint8_t getNumIfaces()"
+msgstr "uint8_t getNumIfaces()"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:127
+#: 1574b856022d437aab89c266cfa5cdce
+msgid "Returns number of interfaces"
+msgstr "返回接口数量"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:129
+#: bf05b7e903d04f57b6b7182bf0ebf86f
+msgid "bool hadActivity();"
+msgstr "bool hadActivity();"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:131
+#: 3cd8b1c5e32b48bd81bbaefc4844b462
+msgid ""
+"Whether at least one iface had at least one successful IO since previous "
+"call of this method. This is designed for use with iface activity LEDs."
+msgstr "自上次调用此方法以来，是否至少有一个接口至少有一次成功的 IO 操作。设计用于接口活动 LED。"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:134
+#: c9a2236063c04f009ea887747ceb867b
+msgid "bool is_initialized() override;"
+msgstr "bool is_initialized() override;"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:136
+#: 7ce8022bcb8f440e953f6cb9661aa5e2
+msgid "Returns true if the CAN manager was initialized successfully"
+msgstr "若 CAN 管理器成功初始化则返回 true"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:138
+#: 42829adc44a84d87b2f8ed1dd1e7d522
+msgid "void set_UAVCAN(AP_UAVCAN \\*uavcan)"
+msgstr "void set_UAVCAN(AP_UAVCAN \\*uavcan)"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:140
+#: 7a58d35aeb4b444da2d5d4de42c8e1f5
+msgid "Method stores the pointer to the UAVCAN instance"
+msgstr "此方法存储指向 UAVCAN 实例的指针"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:142
+#: 6051b3bbacd14daf9fcdbdefc6e3042c
+msgid "AP_UAVCAN \\*get_UAVCAN(void)"
+msgstr "AP_UAVCAN \\*get_UAVCAN(void)"
+
+#: ../../source/docs/can-bus-driver-roadmap.rst:144
+#: 96990239140049ad93d7cc9113393f92
+msgid ""
+"Method returns the pointer to the UAVCAN instance that is connected with "
+"this manager"
+msgstr "此方法返回与该管理器关联的 UAVCAN 实例的指针"

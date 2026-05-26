@@ -1,0 +1,293 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 03:48+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:5
+#: 9715e7f006114c8d93e51139ee964a95
+msgid "Extended Kalman Filter (EKF)"
+msgstr "扩展卡尔曼滤波器（EKF）"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:9
+#: 4a489d0ef6ed4b488bb46879fdc42dce
+msgid ""
+"An Extended Kalman Filter (EKF) algorithm is used to estimate vehicle "
+"position, velocity and angular orientation based on rate gyroscopes, "
+"accelerometer, compass, GPS, airspeed and barometric pressure measurements."
+msgstr "扩展卡尔曼滤波器（EKF）算法基于角速度陀螺仪、加速度计、罗盘、GPS、空速和气压测量数据来估计飞行器的位置、速度和姿态。"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:14
+#: 4df28f2338c94f5aa6b303b63c311ef0
+msgid ""
+"The advantage of the EKF over the simpler complementary filter algorithms "
+"(i.e. \"Inertial Nav\" or DCM), is that by fusing all available measurements"
+" it is better able to reject measurements with significant errors. This "
+"makes the vehicle less susceptible to faults that affect a single sensor. An"
+" EKF also enables measurements from optional sensors such as optical flow "
+"and laser range finders to be used to assist navigation."
+msgstr ""
+"EKF 相较于较简单的互补滤波算法（即「惯性导航」或 "
+"DCM）的优势在于，通过融合所有可用测量数据，它能更好地拒绝含有显著误差的测量值，使飞行器不易受到单一传感器故障的影响。EKF "
+"还可以融合光流和激光测距仪等可选传感器的测量数据来辅助导航。"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:21
+#: 29c43fbc1e5a4a14a809b2c60d33c034
+msgid ""
+"Current stable versions of ArduPilot use EKF3 as their primary attitude and "
+"position estimation source with DCM running quietly in the background. If "
+"the autopilot has two (or more) IMUs available, two EKF \"cores\" (i.e. two "
+"instances of the EKF) will run in parallel, each using a different IMU. At "
+"any one time, only the output from a single EKF core is ever used, that core"
+" being the one that reports the best health which is determined by the "
+"consistency of its sensor data."
+msgstr ""
+"当前 ArduPilot 稳定版本使用 EKF3 作为主要姿态和位置估计源，DCM 在后台静默运行。如果飞控具有两个（或更多）IMU，则会并行运行两个 "
+"EKF「核」（即两个 EKF 实例），每个使用不同的 IMU。在任意时刻，仅使用单个 EKF 核的输出，即传感器数据一致性最好、健康状态最佳的那个核。"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:25
+#: 3d64278ac21648c1a2a157caabfeec95
+msgid ""
+"Most users should not need to modify any EKF parameters, but the information"
+" below provides some information on those parameters that are most commonly "
+"changed. More detailed information can be found on the :ref:`developer EKF "
+"wiki page <dev:extended-kalman-filter>`."
+msgstr ""
+"大多数用户无需修改任何 EKF 参数，但以下信息介绍了最常修改的参数。更多详细信息请参阅 :ref:`开发者 EKF Wiki 页面 "
+"<dev:extended-kalman-filter>`。"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:29
+#: ff28933246294013934eab8b1933e730
+msgid "Should the EKF2 or EKF3 be used?"
+msgstr "应使用 EKF2 还是 EKF3？"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:31
+#: 40ec2f2a61ed446cb0882afce50c6219
+msgid ""
+"In general, we recommend users stick with the EKF3, which is now the "
+"default. In addition, 1MB autopilots only have this option due to space "
+"limitations. EKF2 can still be used but does not have many of the "
+"enhancements of EKF3 such as newer sensor sources including Beacons, Wheel "
+"Encoders and Visual Odometry."
+msgstr ""
+"一般而言，我们建议用户坚持使用 EKF3，这已是默认选项。此外，1MB 飞控由于空间限制，只有这一选项。EKF2 仍可使用，但不具备 EKF3 "
+"的许多增强功能，例如信标、轮式编码器和视觉里程计等较新的传感器源。"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:35
+#: 40e246acdfa74ff6b8a92d9443917188
+msgid "Choosing the EKF and number of cores"
+msgstr "选择 EKF 和核数"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:37
+#: f4d2fd88ba124145a71659f38695f97a
+msgid ""
+":ref:`AHRS_EKF_USE <dev:extended-kalman-filter_ahrs_ekf_use>`: set to \"1\" "
+"to use the EKF, \"0\" to use DCM for attitude control and ahrs dead "
+"reckoning (Plane) for position control.  In Copter this parameter is forced "
+"to \"1\" and cannot be changed."
+msgstr ""
+":ref:`AHRS_EKF_USE <dev:extended-kalman-filter_ahrs_ekf_use>`：设置为 「1」使用 "
+"EKF，「0」使用 DCM 进行姿态控制，以及 AHRS 航位推算（Plane）进行位置控制。在 Copter 中此参数强制为 「1」，不可更改。"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:39
+#: 15d8520ab7bc4d38a82d0ac71b128de8
+msgid ""
+":ref:`AHRS_EKF_TYPE <AHRS_EKF_TYPE>`: set to \"2\" to use EKF2 for attitude "
+"and position estimation, \"3\" for EKF3."
+msgstr ""
+":ref:`AHRS_EKF_TYPE <AHRS_EKF_TYPE>`：设置为 「2」使用 EKF2 进行姿态和位置估计，「3」使用 EKF3。"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:41
+#: ae93095b0d4841108a33002296e3f486
+msgid ""
+":ref:`EK2_ENABLE <EK2_ENABLE>`, :ref:`EK3_ENABLE <EK3_ENABLE>`: set to \"1\""
+" to enable the EKF2 and/or EKF3 respectively."
+msgstr ""
+":ref:`EK2_ENABLE <EK2_ENABLE>`、:ref:`EK3_ENABLE <EK3_ENABLE>`：分别设置为 「1」以启用 "
+"EKF2 和/或 EKF3。"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:43
+#: 2126eb762f5740298cc8e5f04119f391
+msgid ""
+":ref:`EK2_IMU_MASK <EK2_IMU_MASK>`, :ref:`EK3_IMU_MASK <EK3_IMU_MASK>`: a "
+"bitmask specifying which IMUs (i.e. accelerometer/gyro) to use.  An EKF "
+"\"core\" (i.e. a single EKF instance) will be started for each IMU "
+"specified."
+msgstr ""
+":ref:`EK2_IMU_MASK <EK2_IMU_MASK>`、:ref:`EK3_IMU_MASK <EK3_IMU_MASK>`：指定使用哪些"
+" IMU（即加速度计/陀螺仪）的位掩码。每个指定的 IMU 将启动一个 EKF「核」（即单个 EKF 实例）。"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:45
+#: 1fb85364e3ef4eb8b407882bc6983714
+msgid "1: starts a single EKF core using the first IMU"
+msgstr "1：使用第一个 IMU 启动单个 EKF 核"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:46
+#: 26536bad40124d309c7df6f7494f3661
+msgid "2: starts a single EKF core using only the second IMU"
+msgstr "2：仅使用第二个 IMU 启动单个 EKF 核"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:47
+#: c3c966e088c34f15add179e191a3a740
+msgid ""
+"3: starts two separate EKF cores using the first and second IMUs "
+"respectively"
+msgstr "3：分别使用第一和第二个 IMU 启动两个独立的 EKF 核"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:49
+#: 94dd5f3682254630882dd5ae299ac69b
+msgid ""
+":ref:`EK3_PRIMARY<EK3_PRIMARY>`: selects which \"core\" or \"lane\" is used "
+"as the primary. A value of 0 selects the first IMU lane in the "
+":ref:`EK3_IMU_MASK <EK3_IMU_MASK>`, 1 the second, etc. Be sure that the "
+"selected primary lane exists. See Affinity and Lane Switching below."
+msgstr ""
+":ref:`EK3_PRIMARY<EK3_PRIMARY>`：选择哪个「核」或「通道」作为主通道。值 0 选择 :ref:`EK3_IMU_MASK "
+"<EK3_IMU_MASK>` 中第一个 IMU 通道，1 选择第二个，依此类推。请确保所选主通道存在。参见下方的亲和性与通道切换。"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:53
+#: 6eb9897fbc7849e380164c6bf0f1dff7
+msgid ""
+"Plane and Rover will fall back from EKF2 or EKF3 to DCM if the EKF becomes "
+"unhealthy or the EKF is not fusing GPS data despite the GPS having 3D Lock. "
+"There is no fallback from EKF3 to EKF2 (or EKF2 to EKF1)"
+msgstr ""
+"如果 EKF 变得不健康，或 EKF 在 GPS 具有 3D 锁定的情况下仍无法融合 GPS 数据，Plane 和 Rover 将从 EKF2 或 "
+"EKF3 回退到 DCM。不支持从 EKF3 回退到 EKF2（或从 EKF2 回退到 EKF1）。"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:58
+#: 223fe4187c9345228787d21233fa73ef
+msgid ""
+"Using the parameters above it is possible to run up to 5 AHRSs in parallel "
+"at the same time (DCMx1, EKF2x2, EKF3x2) but this can result in performance "
+"problems so if running EKF2 and EKF3 in parallel, set the IMU_MASK to reduce"
+" the total number of cores."
+msgstr ""
+"使用上述参数，最多可同时并行运行 5 个 AHRS（DCMx1、EKF2x2、EKF3x2），但这可能导致性能问题，因此如果同时运行 EKF2 和 "
+"EKF3，请设置 IMU_MASK 以减少核的总数。"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:61
+#: 070971045ddb40ffabc0f5aa491b73da
+msgid "Affinity and Lane Switching"
+msgstr "亲和性与通道切换"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:63
+#: 2ba1458c086644319b0c404e4d562ac1
+msgid ""
+"EKF3 provides the feature of sensor affinity which allows the EKF cores to "
+"also use non-primary instances of sensors, specifically, Airspeed, "
+"Barometer, Compass (Magnetometer) and GPS. This allows the vehicle to better"
+" manage good quality sensors and be able to switch lanes accordingly to use "
+"the best-performing one for state estimation. For more details and "
+"configuration, refer :ref:`EKF3 Affinity and Lane Switching <common-"
+"ek3-affinity-lane-switching>`."
+msgstr ""
+"EKF3 提供传感器亲和性功能，允许 EKF 核使用非主实例的传感器，具体包括空速、气压计、罗盘（磁力计）和 "
+"GPS。这使飞行器能够更好地管理高质量传感器，并相应地切换通道以使用性能最佳的传感器进行状态估计。更多详情和配置请参阅 :ref:`EKF3 "
+"亲和性与通道切换 <common-ek3-affinity-lane-switching>`。"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:66
+#: f524cba08990448ea1ef2bdd5429e762
+msgid "GPS / Non-GPS Transitions"
+msgstr "GPS / 非 GPS 切换"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:68
+#: 2de59add22fc47558c613b24696c740e
+msgid ""
+"EKF3 supports in-flight switching of sensors which can be useful for "
+"transitioning between GPS and Non-GPS environments.  See :ref:`GPS / Non-GPS"
+" Transitions <common-non-gps-to-gps>` for more details."
+msgstr ""
+"EKF3 支持飞行中切换传感器，这对于在 GPS 和非 GPS 环境之间转换很有用。详见 :ref:`GPS / 非 GPS 切换 <common-"
+"non-gps-to-gps>`。"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:71
+#: 4ccec6b415c548c0991d0a6ccb7f92bb
+msgid "Commonly modified parameters"
+msgstr "常用修改参数"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:73
+#: 33811a1f717642f7821325dcf55a131d
+msgid "EKF sensor sources, see :ref:`common-ekf-sources`."
+msgstr "EKF 传感器源，参见 :ref:`common-ekf-sources`。"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:75
+#: cdc8a532c8d54d89985d65740979da02
+msgid ""
+":ref:`EK3_ALT_M_NSE <dev:extended-kalman-filter_ekf_alt_noise>`: Default is "
+"\"1.0\".  Lower number reduces reliance on accelerometers, increases "
+"reliance on barometer."
+msgstr ""
+":ref:`EK3_ALT_M_NSE <dev:extended-kalman-filter_ekf_alt_noise>`：默认值为 "
+"「1.0」。数值越小，对加速度计的依赖越低，对气压计的依赖越高。"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:77
+#: 64b97d8544984599b1157a3a6421fc05
+msgid ""
+":ref:`EK3_GPS_TYPE <dev:extended-kalman-filter_ekf_gps_type>`: Controls how "
+"GPS is used."
+msgstr ""
+":ref:`EK3_GPS_TYPE <dev:extended-kalman-filter_ekf_gps_type>`：控制 GPS 的使用方式。"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:80
+#: ccf984eac10a47f4bccb9aead4e773b5
+msgid "0 : use 3D velocity & 2D position from GPS"
+msgstr "0：使用 GPS 的三维速度和二维位置"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:81
+#: 96f7878b23ae4f53ba68898ee59ca476
+msgid ""
+"1 : use 2D velocity & 2D position (GPS velocity does not contribute to "
+"altitude estimate)"
+msgstr "1：使用二维速度和二维位置（GPS 速度不参与高度估计）"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:83
+#: f1bf99fa92444342a8f58979b2bee462
+msgid "2: use 2D position"
+msgstr "2：仅使用二维位置"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:84
+#: b26f5b3bae19436e8b3f07567a4efb67
+msgid ""
+"3 : no GPS (will use :ref:`optical flow <copter:common-optical-flow-sensors-"
+"landingpage>` only if available)"
+msgstr ""
+"3：不使用 GPS（如果可用，将仅使用 :ref:`光流 <copter:common-optical-flow-sensors-"
+"landingpage>`）"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:86
+#: 4ea4a83569e744f89f28e3a19f96efad
+msgid ""
+":ref:`EK3_YAW_M_NSE <EK3_YAW_M_NSE>`: Controls the weighting between GPS and"
+" Compass when calculating the heading.  Default is \"0.5\", lower values "
+"will cause the compass to be trusted more (i.e. higher weighting to the "
+"compass)"
+msgstr ""
+":ref:`EK3_YAW_M_NSE <EK3_YAW_M_NSE>`：控制计算航向时 GPS 与罗盘之间的权重。默认为 "
+"「0.5」，数值越小则对罗盘的信任度越高（即罗盘权重越大）。"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:88
+#: 2a8f19d44f6d4c2890c6b2c5121cb49e
+msgid ""
+"As mentioned above, a more detailed overview of EKF theory and tuning "
+"parameters is available on the developer wiki's :ref:`Extended Kalman Filter"
+" Navigation Overview and Tuning <dev:extended-kalman-filter>`."
+msgstr ""
+"如上所述，EKF 理论和调参参数的更详细概述可在开发者 Wiki 的 :ref:`扩展卡尔曼滤波器导航概述与调参 <dev:extended-"
+"kalman-filter>` 中找到。"

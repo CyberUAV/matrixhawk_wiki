@@ -1,0 +1,441 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Rover package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rover\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-22 11:39+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/sonar-sensors.rst:5 79c119f7899f491484d60ba12039a141
+msgid "Sonar Sensors"
+msgstr "声纳传感器"
+
+#: ../../source/docs/sonar-sensors.rst:7 07e35e63c83642bc84b3b92efcda1fb2
+msgid "**ARCHIVED**"
+msgstr "**已归档**"
+
+#: ../../source/docs/sonar-sensors.rst:9 4bbb287c433b45bbaa1384bc51687b1b
+msgid ""
+"Sonar sensors can provide obstacle avoidance functionality for Rover. This "
+"page provides instructions for installing, configuring, and testing single "
+"and double sonar setups."
+msgstr "声纳传感器可为 Rover 提供避障功能。本页提供单个和双声纳设置的安装、配置和测试说明。"
+
+#: ../../source/docs/sonar-sensors.rst:15 c1b32f3bffc44e849837aca375ffd2e2
+msgid ""
+"This article is out of date. Sonars are now more generically represented by "
+"\"Rangefinders\" - Rover can support 4. The relevant parameters have morphed"
+" from \"SONAR\" to \"RNGFND\" . See the ``RNGFNDx_y`` parameters, such as "
+":ref:`RNGFND1_TYPE<RNGFND1_TYPE>`."
+msgstr ""
+"本文已过时。声纳现在更通用地以「测距仪」表示——Rover 最多支持4个。相关参数已从「SONAR」更名为「RNGFND」。请参阅 "
+"``RNGFNDx_y`` 参数，例如 :ref:`RNGFND1_TYPE<RNGFND1_TYPE>`。"
+
+#: ../../source/docs/sonar-sensors.rst:20 4bae416dbb684042a760cae41b0262d9
+msgid "What you'll need"
+msgstr "所需物品"
+
+#: ../../source/docs/sonar-sensors.rst:22 48ee07bb8e1f4541b22a662c85856031
+msgid ""
+"Sonar (ultrasonic) sensors allow Rover to detect obstacles and avoid them. "
+"Sonar sensors can be more sensitive than IR sensors, making them the "
+"preferred option for obstacle avoidance. Normally, a single sonar sensor is "
+"used, at the front of the rover. But Rover also supports the use of two "
+"sonar sensors, one pointing a bit to the right and the other a bit to the "
+"left, to not only detect obstacles but steer away from them."
+msgstr ""
+"声纳（超声波）传感器允许 Rover 检测障碍物并规避它们。声纳传感器可能比红外传感器更灵敏，使其成为避障的首选方案。通常在 Rover "
+"前方使用单个声纳传感器。但 Rover 也支持使用两个声纳传感器，一个稍微朝右，另一个稍微朝左，不仅可以检测障碍物，还可以引导车辆转向避开。"
+
+#: ../../source/docs/sonar-sensors.rst:30 918a0ebb824b49408ef88e0a894b6328
+msgid "To implement sonar sensors, you will need:"
+msgstr "要实施声纳传感器，您需要："
+
+#: ../../source/docs/sonar-sensors.rst:32 baa990f9b7a444a1a998d4e4c7421a62
+msgid ""
+"One or two `Maxbotics MB1240 XL Maxsonar EZ4 sensors "
+"<http://www.maxbotix.com/Ultrasonic_Sensors/MB1240.htm>`__."
+msgstr ""
+"一个或两个 `Maxbotics MB1240 XL Maxsonar EZ4 传感器 "
+"<http://www.maxbotix.com/Ultrasonic_Sensors/MB1240.htm>`__。"
+
+#: ../../source/docs/sonar-sensors.rst:33 e75bead4fa2e4bd1b900dbda206f9628
+msgid ""
+"A servo extension cable with female connector on one end to connect each "
+"sensor (or cut one end off a `female-female servo cable "
+"<http://www.hobbytronics.co.uk/radio-control/servo-cables-connectors/servo-"
+"ext-cable-6in>`__)."
+msgstr ""
+"一端带有母接头的舵机延长线，用于连接每个传感器（或剪掉一根 `母对母舵机线 <http://www.hobbytronics.co.uk/radio-"
+"control/servo-cables-connectors/servo-ext-cable-6in>`__ 的一端）。"
+
+#: ../../source/docs/sonar-sensors.rst:37 2556c5cacf544dad88b4f5e7e34d49c2
+msgid "Connect the sensor"
+msgstr "连接传感器"
+
+#: ../../source/docs/sonar-sensors.rst:39 cf4ae4a0d48842e49e35ba3f159de9d8
+msgid ""
+"Solder the servo cable wires to the sensor's GND (black wire), V+ (red wire)"
+" and \"3\" (white wire) holes as shown below. *Click on images to enlarge.*"
+msgstr "将舵机线的导线焊接到传感器的 GND（黑线）、V+（红线）和「3」（白线）焊孔，如下图所示。*点击图片可放大查看。*"
+
+#: ../../source/docs/sonar-sensors.rst:46 cabdb09b787c490abb376f180b3d7101
+msgid ""
+"Then plug the servo connector into APM 2's A0 pins as shown in the picture "
+"below. If you're using a second sonar sensor, plug it into A1."
+msgstr "然后将舵机接头插入 APM 2 的 A0 引脚，如下图所示。如果使用第二个声纳传感器，请将其插入 A1。"
+
+#: ../../source/docs/sonar-sensors.rst:52 3695dfee478642b59276c8107430a651
+msgid ""
+"Next, mount your sonar sensor on the front of your rover. To avoid "
+"interference from the ground, it should be either raised high off the ground"
+" and/or tilted slightly upwards. Below is an example, on a very small rover."
+" The sonar sensor is on the front, nearest to us. The sensor on the other "
+"side is an IR sensor, used to compare results."
+msgstr ""
+"接下来，将声纳传感器安装在 Rover 前方。为避免地面干扰，应将其抬高离地，和/或略微向上倾斜。下图是一个示例，安装在一辆非常小的 Rover "
+"上。声纳传感器在前方（靠近我们），另一侧的传感器是红外传感器，用于对比结果。"
+
+#: ../../source/docs/sonar-sensors.rst:61 a45a6d24db2b4be6ace9a71398c2fcb2
+msgid ""
+"**PX4 Sonar Pins:** Sonar is now supported for Rover on PX4FMU/PX4IO. You "
+"will need to assign one or both possible Sonars to the appropriate "
+"\"SONAR_PIN and SONAR2_PIN parameters in: Mission Planner - Configuration - "
+"Advanced Params - Adv Parameter List."
+msgstr ""
+"**PX4 声纳引脚：** 现在 PX4FMU/PX4IO 上的 Rover 支持声纳。您需要在 Mission Planner - 配置 - 高级参数"
+" - 高级参数列表中，将一个或两个声纳分配到相应的「SONAR_PIN 和 SONAR2_PIN 参数」。"
+
+#: ../../source/docs/sonar-sensors.rst:66 6236609eed844d31b1ffe24866024ce3
+msgid "The following PX4FMU/PX4IO \"Pins\" are available for Sonar use."
+msgstr "以下 PX4FMU/PX4IO 「引脚」可用于声纳。"
+
+#: ../../source/docs/sonar-sensors.rst:68 fba3687b4e9747b08566038c97fa4ef8
+msgid ""
+"PIN = 11 : The \"airspeed\" pin. Located on a 3 pin DF13 connector on the "
+"PX4IO board, but directly visible to the ADC on the PX4FMU. This pin can "
+"take voltages up to 6.6V (it has an internal voltage divider)."
+msgstr ""
+"PIN = 11：「空速」引脚。位于 PX4IO 板上的3针 DF13 接口，但对 PX4FMU 的 ADC "
+"直接可见。该引脚最高可承受6.6V电压（内置分压器）。"
+
+#: ../../source/docs/sonar-sensors.rst:72 a809a9b0ad4247cd800bb551f679af14
+msgid ""
+"PIN = 12: A general analog input pin. Located on pin 3 of the \"FMUSPI\" "
+"port on the PX4IO board, this pin is directly visible to the PX4FMU analog "
+"input code. This can take voltages up to 3.3V."
+msgstr ""
+"PIN = 12：通用模拟输入引脚。位于 PX4IO 板「FMUSPI」端口的引脚3，对 PX4FMU 模拟输入代码直接可见。最高可承受3.3V电压。"
+
+#: ../../source/docs/sonar-sensors.rst:75 7206ca9038424d46a12168297cfae600
+msgid ""
+"PIN = 13: A general analog input pin. Located on pin 4 of the \"FMUSPI\" "
+"port on the PX4IO board, this pin is directly visible to the PX4FMU analog "
+"input code. This can take voltages up to 3.3V.  It is being worked on and "
+"will be included in this section when it is available."
+msgstr ""
+"PIN = 13：通用模拟输入引脚。位于 PX4IO 板「FMUSPI」端口的引脚4，对 PX4FMU "
+"模拟输入代码直接可见。最高可承受3.3V电压。目前仍在开发中，待可用后将补充至本节。"
+
+#: ../../source/docs/sonar-sensors.rst:81 0f82704dbd00481bbb6792aba6d07ddd
+msgid ""
+"It is recommended to use the PX4IO board's FMU-SPI port connector pin 3 "
+"(SONAR_PIN = 12) and connector pin 4 (SONAR2_PIN = 13)"
+msgstr "建议使用 PX4IO 板 FMU-SPI 端口接口的引脚3（SONAR_PIN = 12）和引脚4（SONAR2_PIN = 13）。"
+
+#: ../../source/docs/sonar-sensors.rst:85 123836c28a344bdbae1bf6c1ab0476f6
+msgid "Enable sonar in Mission Planner"
+msgstr "在 Mission Planner 中启用声纳"
+
+#: ../../source/docs/sonar-sensors.rst:87 afd3e85e34314ddaadf35cce3635f0f6
+msgid ""
+"All configuration can be done via MAVLink parameters in the Mission Planner."
+" There is no need to edit the Rover code itself."
+msgstr "所有配置均可通过 Mission Planner 中的 MAVLink 参数完成，无需修改 Rover 代码本身。"
+
+#: ../../source/docs/sonar-sensors.rst:90 0ea10940b6684dd194a5335aa41c37cb
+msgid ""
+"There are two ways to configure the sensors. You can either use the "
+"simplified interface in the \"Advanced Params\" option of the Mission "
+"Planner Configuration tab, or, if you want to get into more detailed control"
+" of the sensors, you can use the full set of options in the longer \"Adv "
+"Parameters List\". (Note: Although there is a sonar sensor enable option in "
+"the Hardware Options tab, this is just for Copter and Plane and is disabled "
+"for Rover. Because the Rover sonar settings are more detailed and have more "
+"options, they must be set in the Advanced lists)"
+msgstr ""
+"有两种配置传感器的方式。您可以使用 Mission Planner "
+"配置选项卡中「高级参数」选项的简化界面，或者如果需要更详细地控制传感器，可使用更长的「高级参数列表」中的完整选项集。（注意：虽然「硬件选项」选项卡中有声纳传感器启用选项，但这仅适用于"
+" Copter 和 Plane，对 Rover 不可用。由于 Rover 声纳设置更详细、选项更多，必须在高级列表中设置。）"
+
+#: ../../source/docs/sonar-sensors.rst:100 64c15eda5e764a0bb98cdc11440c6a5e
+msgid ""
+"First, connect to Rover via USB or 3DR radio with the Mission Planner. "
+"Remember, select 115200 as the baud rate for USB or 57600 for the 3DR "
+"wireless radios."
+msgstr ""
+"首先，通过 USB 或 3DR 数传电台连接 Mission Planner 与 Rover。请记住，USB 连接选择波特率 115200，3DR "
+"无线数传选择 57600。"
+
+#: ../../source/docs/sonar-sensors.rst:107 c2ab34adf66f4311baf017a481800ae8
+msgid ""
+"Once you've done that, go to the Configuration tab and select the Advanced "
+"Params option. Set \"Sonar enabled\" to enabled. (If you're using a second "
+"sonar sensor, we'll set that up in the next step.)"
+msgstr "完成后，进入「配置」选项卡并选择「高级参数」选项，将「声纳已启用」设为启用。（如果使用第二个声纳传感器，将在下一步进行设置。）"
+
+#: ../../source/docs/sonar-sensors.rst:114 2c6ce93485244b01b4a854c94a53bd1c
+msgid ""
+"At this point, you should be able to see the sonar data in the Flight Data "
+"screen. Look for the little \"Tuning\" checkbox on the right side, under the"
+" map view, and check it. This will bring up the data window. Click on legend"
+" and this will bring up the \"Graph This\" window of data fields to display."
+" Unselect everything but \"sonarrange\" and \"sonarvoltage\". At this point "
+"it should start displaying the real-time data from your primary sonar "
+"sensor, as shown below:"
+msgstr ""
+"此时，您应该能在「飞行数据」屏幕中看到声纳数据。查找地图视图右侧的「调试」复选框并勾选。这将弹出数据窗口。点击图例，将弹出「图形显示」数据字段选择窗口。取消选中除「sonarrange」和「sonarvoltage」以外的所有项目。此时应开始显示来自主声纳传感器的实时数据，如下图所示："
+
+#: ../../source/docs/sonar-sensors.rst:126 425c1111b20a469f8b9891347ec9f490
+msgid "Enabling a second sonar sensor"
+msgstr "启用第二个声纳传感器"
+
+#: ../../source/docs/sonar-sensors.rst:128 f0b7be52bc74486d97ade1a8bcac7e2a
+msgid ""
+"Having two sonar sensors tells APM:Rrover which way to turn to avoid an "
+"obstacle. If the obstacle is on the right, it turns left and vice versa. "
+"This is a little tricky to set up, but well worth it for reliable autonomy."
+msgstr ""
+"使用两个声纳传感器可让 APM:Rover "
+"判断应转向哪个方向来规避障碍物。如果障碍物在右侧，则向左转，反之亦然。设置稍微复杂，但对于可靠的自主性非常值得。"
+
+#: ../../source/docs/sonar-sensors.rst:133 59bd616b9e9d4b6b8cd41dc2138a4dda
+msgid "**Physical mounting:**"
+msgstr "**物理安装：**"
+
+#: ../../source/docs/sonar-sensors.rst:135 b271d7cb44054107ac7c2f42adc5dabe
+msgid ""
+"Mount the two sensors facing about 10-15 degrees out from the front of the "
+"rover, and 10-15 degrees up from the horizontal, so they don't see the "
+"road/ground.  You should also mount them raised as high as you can, to avoid"
+" noise from ground reflections. In the picture below, they are raised as "
+"high as they can be and still comply with the 4\" height limit of the "
+"Sparkfun AVC competition Micro category rover."
+msgstr ""
+"将两个传感器分别朝 Rover "
+"前方约10-15度偏角安装，并向上倾斜10-15度，使其不会看到路面/地面。应尽量将其安装得尽可能高，以避免地面反射噪声。下图中，它们被安装在尽可能高的位置，同时仍符合"
+" Sparkfun AVC 竞赛微型组 Rover 4英寸高度限制。"
+
+#: ../../source/docs/sonar-sensors.rst:142 274f7ac19df24ff6b9ed37be3b4eb431
+msgid ""
+"If you're going to use aluminium mounts as shown below, make sure you have "
+"double-sided foam tape on the back of the sensors so they don't ground out "
+"on the metal mounts."
+msgstr "如果要使用如下图所示的铝制支架，请确保在传感器背面粘贴双面泡棉胶带，以免传感器与金属支架接地短路。"
+
+#: ../../source/docs/sonar-sensors.rst:149 06fc9bd634c0435a9fa454be783a3951
+msgid "Mount Sonar to Rover"
+msgstr "将声纳安装到 Rover"
+
+#: ../../source/docs/sonar-sensors.rst:151 5a9dfb1df2e54beeb661aa2206e8c6ab
+msgid ""
+"The picture below shows twin sonar sensors mounted to Tom Coyle's Slash "
+"Rover (winner of the AVC 2013 Peloton Class). The shielded signal cable and "
+"capacitor (see section on power filtering) can be seen on the rover."
+msgstr ""
+"下图显示安装在 Tom Coyle 的 Slash Rover（2013 年 AVC "
+"团体组冠军）上的双声纳传感器。可以看到屏蔽信号线和电容器（见电源滤波章节）。"
+
+#: ../../source/docs/sonar-sensors.rst:158 c9d4a3bb682641839ee6432eff11ca50
+msgid "**Electrical connections:**"
+msgstr "**电气连接：**"
+
+#: ../../source/docs/sonar-sensors.rst:160 ca2aba043dfe4e1c8c559890e24eaea5
+msgid ""
+"You can use any ports you want (A0-A8), but here's the way we do it: Connect"
+" the left sensor's connector to A0, and the right to A1."
+msgstr "您可以使用任意端口（A0-A8），以下是我们的接法：将左侧传感器的接头连接到 A0，右侧的连接到 A1。"
+
+#: ../../source/docs/sonar-sensors.rst:163 bc3b6f6c090f40a38d31defbc5e919aa
+msgid ""
+"You're also going to need to connect a wire from each sensor's control pin "
+"to APM so it can tell the sensors when to read, so they don't both read at "
+"the same time and get echoes from each other's signals (this is explained in"
+" the Maxbotix datasheet `here <http://www.maxbotix.com/documents/XL-"
+"MaxSonar-EZ_Datasheet.pdf>`__). To do this, solder a wire from each sensor's"
+" pin #4 to a cable with a connector on the end that you can plug into APM, "
+"as shown below. We use standard `jumper cables "
+"<http://adafruit.com/products/266>`__ for this."
+msgstr ""
+"还需要将每个传感器的控制引脚连接到 APM，使其能够控制传感器的触发时机，防止两个传感器同时测距而造成回波干扰（Maxbotix "
+"数据手册中有说明，`见此处 <http://www.maxbotix.com/documents/XL-MaxSonar-"
+"EZ_Datasheet.pdf>`__）。具体做法是从每个传感器的4号引脚焊接导线，连接到带接头的线缆后插入 APM，如下图所示。我们使用标准 `跳线"
+" <http://adafruit.com/products/266>`__。"
+
+#: ../../source/docs/sonar-sensors.rst:175 01945bc81a354b34b6befbe58b9ea837
+msgid "**Software setup:**"
+msgstr "**软件设置：**"
+
+#: ../../source/docs/sonar-sensors.rst:177 39e6b41daae44dc2b0bf25f2f4c95684
+msgid ""
+"First, if you're using a second sonar sensor, you need to tell the software "
+"what APM pins it is connected to. You can do that in the Adv Parameters List"
+" in the \"SONAR2_PIN\" parameter (scroll down to the parameters that begin "
+"with SONAR). Typically you will set that to 1 and connect your second sonar "
+"sensor to APM 2.5's A1 port."
+msgstr ""
+"首先，如果使用第二个声纳传感器，需要在软件中告知它连接到哪个 APM 引脚。可在「SONAR2_PIN」参数（在高级参数列表中向下滚动至以 SONAR "
+"开头的参数）中进行设置。通常将其设为1并将第二个声纳传感器连接到 APM 2.5 的 A1 端口。"
+
+#: ../../source/docs/sonar-sensors.rst:183 28f86b4b99714f2b8a3a0adcc845fccc
+msgid ""
+"Likewise for the \"stop pins\" that APM uses to control when the sonar "
+"sensors fire, to ensure that they don't interfere with each other. We use A2"
+" for Sonar 1 (left) and A3 for Sonar 2 (right)."
+msgstr ""
+"「停止引脚」同理，APM 使用它来控制声纳传感器的触发时机，确保它们不会相互干扰。我们使用 A2 作为声纳1（左）、A3 作为声纳2（右）的停止引脚。"
+
+#: ../../source/docs/sonar-sensors.rst:187 f21353d41567420bacc79755918f6175
+msgid ""
+"The rest of the parameters shown below are appropriate for the recommended "
+"MB1240 sensors.  Here are a few other parameters you'll want to review and "
+"set as appropriate for your setup:"
+msgstr "下面显示的其余参数适用于推荐的 MB1240 传感器。以下是其他几个您需要根据设置审查和配置的参数："
+
+#: ../../source/docs/sonar-sensors.rst:191 873856ae29c74ecca5661cec3ab722d5
+msgid ""
+"SONAR_TRIGGER is the distance at which you want the sonar to start to cause "
+"a steering deviation when an object is detected. We typically use 300cm (3 "
+"meters)"
+msgstr "SONAR_TRIGGER 是您希望声纳开始触发转向偏转以检测到障碍物时的距离。我们通常使用 300cm（3米）。"
+
+#: ../../source/docs/sonar-sensors.rst:194 524fcc865c90497c91629d176930d65f
+msgid ""
+"SONAR_SCALING is the value used to convert the input voltage into distance. "
+"Since we use the MB1240 sonar, our scaling parameter is 2.04 which is based "
+"on 4.9mv/cm @5vdc."
+msgstr ""
+"SONAR_SCALING 是用于将输入电压转换为距离的值。由于我们使用 MB1240 声纳，我们的缩放参数为2.04，基于 @5VDC 时的 "
+"4.9mV/cm。"
+
+#: ../../source/docs/sonar-sensors.rst:197 9a96fae523b84b3e80ed0f1a19b1c434
+msgid ""
+"SONAR_TURN_ANGLE is the angle, in degrees, the steering will make when the "
+"trigger distance is detected. A positive value will cause a right turn and a"
+" negative value will cause a left turn when only one sonar is in use.  We "
+"typically use 25 degrees for that."
+msgstr ""
+"SONAR_TURN_ANGLE 是检测到触发距离时转向偏转的角度（度）。正值在仅使用一个声纳时触发右转，负值触发左转。我们通常使用25度。"
+
+#: ../../source/docs/sonar-sensors.rst:201 b1b723c34564440aaef452d6e8324f14
+msgid ""
+"SONAR_TURN_TIME is the amount of time that the steering will deviate when "
+"the trigger distance is detected. Defaults to 1 sec. We've actually used a "
+"smaller value (0.2 seconds) in the below so it doesn't turn away as long (we"
+" just want it to veer, not turn around)"
+msgstr ""
+"SONAR_TURN_TIME "
+"是检测到触发距离后转向偏转的持续时间。默认为1秒。我们实际使用了更小的值（0.2秒），以减少偏转时间（我们只想让车辆稍微转向，而不是完全掉头）。"
+
+#: ../../source/docs/sonar-sensors.rst:206 0c25783fce6c436db6baab605e581411
+msgid ""
+"All of these parameters, along with the others not documented here, are "
+"fully described in :doc:`the Parameters List here <parameters>`."
+msgstr "以上参数及此处未记录的其他参数，均在 :doc:`参数列表 <parameters>` 中有完整说明。"
+
+#: ../../source/docs/sonar-sensors.rst:213 8c5e86370e024cd0887671b96f58e377
+msgid "Testing your sonar setup"
+msgstr "测试声纳设置"
+
+#: ../../source/docs/sonar-sensors.rst:215 8729b479bf42425388758bb3a2ca8e3a
+msgid ""
+"The best way to test your sonar is by driving your rover around in Steering "
+"mode."
+msgstr "测试声纳的最佳方式是在 Steering 模式下驾驶 Rover 行驶。"
+
+#: ../../source/docs/sonar-sensors.rst:218 c865bc44e26e4122946449c0fbad38c4
+msgid "**Steering Mode:**"
+msgstr "**Steering 模式：**"
+
+#: ../../source/docs/sonar-sensors.rst:220 0b5b6c2084ee4c7095aa83905d9cd2b9
+msgid ""
+"The best way to test both your settings and the physical placement of your "
+"sensors is in \"Steering Mode\", which will let you drive around in manual "
+"RC mode but will override you when the sensors detect an obstacle. Either "
+"assign that mode to a position on your RC Mode Switch or select it via the "
+"Mission Planner over the wireless telemetry link by using the Actions box on"
+" the Mission Planner Flight Data screen as shown below."
+msgstr ""
+"同时测试设置和传感器物理位置的最佳方式是使用「Steering 模式」，这允许您以手动 RC "
+"模式驾驶，但当传感器检测到障碍物时会自动介入覆盖操控。可将该模式分配给 RC 模式开关的某个位置，或通过无线数传链路在 Mission Planner "
+"飞行数据屏幕的操作框中选择，如下图所示。"
+
+#: ../../source/docs/sonar-sensors.rst:231 dce4c752a3a948afaa67892f0f99784a
+msgid ""
+"When you're in this mode, approach obstacles and ensure that the rover "
+"steers away as you expect. A few troubleshooting tips:"
+msgstr "在此模式下，靠近障碍物，确保 Rover 按预期转向回避。几点排障提示："
+
+#: ../../source/docs/sonar-sensors.rst:234 57c4c8f3276b44a6bcbb60108a6f9c13
+msgid ""
+"If the rover detects phantom obstacles while just moving on open ground, try"
+" one or more of the following:"
+msgstr "如果 Rover 在空旷地面行驶时检测到幻影障碍物，请尝试以下一种或多种方法："
+
+#: ../../source/docs/sonar-sensors.rst:237 67372019a423474d8594c77f74707677
+msgid "Tilt the sensors up a bit more so they don't see the ground"
+msgstr "将传感器再向上倾斜一些，使其不会看到地面"
+
+#: ../../source/docs/sonar-sensors.rst:238 e6120973273b4d2e9c159ffa8716ae45
+msgid ""
+"Raise the SONAR_DEBOUNCE parameter from the default of 2 (50hz detections)"
+msgstr "将 SONAR_DEBOUNCE 参数从默认值2（50Hz检测）提高"
+
+#: ../../source/docs/sonar-sensors.rst:240 cc2cddefe24d4d9894f1f3d4a554a1ef
+msgid "Turn the detection range a bit down from 300 cm"
+msgstr "将检测范围从 300cm 适当降低"
+
+#: ../../source/docs/sonar-sensors.rst:243 b5d4177b013549b0a68d2f34f98376d0
+msgid "Power filtering (optional)"
+msgstr "电源滤波（可选）"
+
+#: ../../source/docs/sonar-sensors.rst:245 64bb6a47cb3148b48eaf8c5c6293c7bc
+msgid ""
+"If you're getting a lot of electrical noise on your sensor (from you rover's"
+" motors or the other electronics) you can improve performance markedly by "
+"adding a simple filter."
+msgstr "如果传感器受到来自 Rover 电机或其他电子设备的大量电气噪声干扰，可通过添加简单滤波器显著改善性能。"
+
+#: ../../source/docs/sonar-sensors.rst:249 3b7292be172749b9acd084cdaec4d76e
+msgid ""
+"To avoid spikes in the sonar data you should connect with a shielded cable "
+"and include a cap and resistor to filter the power to the sonar as described"
+" in \\ `this tutorial <http://www.diydrones.com/profiles/blogs/fantastic-"
+"maxbotics-tutorial-on-using-sonor-sensors-with-multicop>`__ on techniques to"
+" reduce noise and improve sensor performance. Maxbotics sells the necessary "
+"components `here <http://www.maxbotix.com/Ultrasonic_Sensors/MB7961.htm>`__."
+msgstr ""
+"为避免声纳数据出现尖峰，应使用屏蔽线缆连接，并加入电容和电阻对声纳电源进行滤波，具体方法参见 `本教程 "
+"<http://www.diydrones.com/profiles/blogs/fantastic-maxbotics-tutorial-on-"
+"using-sonor-sensors-with-multicop>`__，该教程介绍了减少噪声和提升传感器性能的技术。Maxbotics 在 `此处 "
+"<http://www.maxbotix.com/Ultrasonic_Sensors/MB7961.htm>`__ 销售所需组件。"
+
+#: ../../source/docs/sonar-sensors.rst:259 a945f8c6144041f6893857de9885037c
+msgid ""
+"This image shows Slash Rover's twin sonars and shielded cables as part of a "
+"power filtering setup."
+msgstr "此图展示了 Slash Rover 双声纳传感器及其屏蔽线缆，作为电源滤波设置的一部分。"

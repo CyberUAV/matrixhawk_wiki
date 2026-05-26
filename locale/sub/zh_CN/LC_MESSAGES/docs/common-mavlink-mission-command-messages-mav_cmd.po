@@ -1,0 +1,1702 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-22 15:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:5
+#: 7fc43d9bd81343a3a11c10bc67e1b5d4
+msgid "Mission Commands"
+msgstr "任务指令"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:6
+#: c069fd5ebe1e46c084b2fb02f0c610a9
+msgid ""
+"This article describes the mission commands that are supported by Copter, "
+"Plane, Sub and Rover when switched into Auto mode."
+msgstr "本文介绍 Copter、Plane、Sub 和 Rover 切换到 Auto 模式时支持的任务指令。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:8
+#: 72f30faaf9d047b8937435582f84ee59
+msgid ""
+"there are many other MAVLink commands that a GCS or other device can send to"
+" the autopilot. See the ArduPilot/navlink repository, or the documentation "
+"for your GCS."
+msgstr "地面站或其他设备可向飞控发送许多其他 MAVLink 指令。请参阅 ArduPilot/navlink 仓库或您的地面站文档。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:13
+#: 5f4137a8f2da4290aa1e82f13d3e131f
+msgid "Overview"
+msgstr "概述"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:15
+#: 77e6cef5d13448c0b728dbb43c179f1e
+msgid ""
+"The MAVLink protocol defines a large number of `MAV_CMD "
+"<https://github.com/ArduPilot/mavlink/blob/master/message_definitions/v1.0/common.xml#L1008>`__"
+" waypoint command types (sent in a ``MAVLink_mission_item_message``). "
+"ArduPilot implements handling for the subset of these commands and command "
+"parameters that are *most relevant* and meaningful for each of the vehicles."
+" Unsupported commands that are sent to a particular autopilot will simply be"
+" dropped."
+msgstr ""
+"MAVLink 协议定义了大量 `MAV_CMD "
+"<https://github.com/ArduPilot/mavlink/blob/master/message_definitions/v1.0/common.xml#L1008>`__"
+" 航点指令类型（通过 ``MAVLink_mission_item_message`` 发送）。ArduPilot "
+"针对每种飞行器实现了这些指令及指令参数中*最相关、最有意义*的子集。向特定飞控发送不支持的指令将被直接丢弃。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:23
+#: be99ff516ecb48b984b42f8e733c2919
+msgid ""
+"This article lists and describes the commands and command-parameters that "
+"are supported on each of the vehicle types. Any parameter that is \"grey\" "
+"is not supported by the autopilot and will be ignored. They are still "
+"documented to make it clear which properties are supported by the `MAV_CMD "
+"protocol "
+"<https://github.com/ArduPilot/mavlink/blob/master/message_definitions/v1.0/common.xml#L1008>`__"
+" are not implemented by the vehicle."
+msgstr ""
+"本文列出并描述了每种飞行器类型支持的指令和指令参数。「灰色」参数表示飞控不支持，将被忽略。这些参数仍被记录在案，以明确说明 `MAV_CMD 协议 "
+"<https://github.com/ArduPilot/mavlink/blob/master/message_definitions/v1.0/common.xml#L1008>`__"
+" 支持哪些属性但飞行器未实现。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:30
+#: 322ce192c73f43009ea4c05d9a6dc0b5
+msgid ""
+"Some commands and command parameters are not implemented because they are "
+"not relevant for particular vehicle types (for example "
+"\"MAV_CMD_NAV_TAKEOFF\" command makes sense for Plane and Copter but not "
+"Rover and the pitch parameter only makes sense for Plane). There are also "
+"some potentially useful command parameters that are not handled because "
+"there is a limit to the message size, and a decision has been made to "
+"prioritize some parameters over others."
+msgstr ""
+"部分指令和指令参数未实现，是因为它们与特定飞行器类型不相关（例如 「MAV_CMD_NAV_TAKEOFF」指令对 Plane 和 Copter "
+"有意义，但对 Rover 无意义；俯仰参数仅对 Plane 有意义）。另有一些可能有用的指令参数因消息大小限制而未处理，需要在参数之间进行优先级取舍。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:40
+#: 79d80ce4dbcd4156bcba49c3f4467aa3
+msgid ""
+"There is additional information about the supported commands on Copter (from"
+" a Mission Planner perspective) in the :ref:`Copter Mission Command List "
+"<copter:mission-command-list>`."
+msgstr ""
+"关于 Copter 支持指令的更多信息（从 Mission Planner 视角），请参阅 :ref:`Copter 任务指令列表 "
+"<copter:mission-command-list>`。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:44
+#: 6a84bf8f78ed433a90eeace7b3a6547a
+msgid "Types of commands"
+msgstr "指令类型"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:46
+#: 94f09544d14e4f9eb1a7399060ab7ce6
+msgid ""
+"There are several different types of commands that can be used within "
+"missions:"
+msgstr "任务中可使用的指令类型有以下几种："
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:49
+#: 64bbde176c1846ee89c0db05084d5462
+msgid ""
+"Navigation commands are used to control the movement of the vehicle, "
+"including takeoff, moving to and around waypoints, changing altitude, and "
+"landing."
+msgstr "导航指令用于控制飞行器的运动，包括起飞、飞往和围绕航点移动、改变高度以及降落。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:52
+#: 3529cde9eaab41e28b8431e1bf3aef3c
+msgid ""
+"DO commands are for auxiliary functions and do not affect the vehicle’s "
+"position (for example, setting the camera trigger distance, or setting a "
+"servo value)."
+msgstr "DO 指令用于辅助功能，不影响飞行器位置（例如设置相机触发距离或设置舵机值）。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:55
+#: 687bca5b3e6a40a8824c61d779b71c2f
+msgid ""
+"Condition commands are used to delay DO commands until some condition is "
+"met, for example, the UAV reaches a certain altitude or distance from the "
+"waypoint."
+msgstr "Condition 指令用于延迟 DO 指令的执行，直到满足某个条件，例如飞行器到达特定高度或距航点的特定距离。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:59
+#: 41b55674c04643fea115c524c6a9f6db
+msgid ""
+"During a mission at most one “Navigation” command and one “Do” or "
+"\"Condition\" command can be running at one time. A typical mission might "
+"set a waypoint (NAV command), add a CONDITION command that doesn't complete "
+"until a certain distance from the destination "
+"(:ref:`MAV_CMD_CONDITION_DISTANCE <mav_cmd_condition_distance>`), and then "
+"add a number of DO commands that are executed sequentially (for example "
+":ref:`MAV_CMD_DO_SET_CAM_TRIGG_DIST <mav_cmd_do_set_cam_trigg_dist>` to take"
+" pictures at regular intervals) when the condition completes."
+msgstr ""
+"在任务执行过程中，同一时刻最多只能运行一个「导航」指令和一个「DO」或「Condition」指令。典型的任务可能包括：设置一个航点（NAV "
+"指令），添加一个 CONDITION 指令（在到达目的地一定距离前不完成，参见 :ref:`MAV_CMD_CONDITION_DISTANCE "
+"<mav_cmd_condition_distance>`），然后在条件满足后顺序执行一系列 DO 指令（例如使用 "
+":ref:`MAV_CMD_DO_SET_CAM_TRIGG_DIST <mav_cmd_do_set_cam_trigg_dist>` "
+"按固定间隔拍照）。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:71
+#: c7e5f190a5bc49d7ad8999b4548efa73
+msgid ""
+"CONDITION and DO commands are associated with the preceding NAV command: if "
+"the UAV reaches the next waypoint before these commands are executed, the "
+"next NAV command is loaded and they will be skipped."
+msgstr ""
+"CONDITION 和 DO 指令与前面的 NAV 指令相关联：如果飞行器在这些指令执行完毕前到达下一个航点，则加载下一个 NAV "
+"指令，这些指令将被跳过。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:80
+#: c15bd8204d564b768e22d330e9e8c3ad
+msgid "Frames of reference"
+msgstr "参考坐标系"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:82
+#: 77cded5c54db4beea5751db8e4135b09
+msgid ""
+"Many of the commands (in particular the :ref:`NAV\\_ commands <common-"
+"mavlink-mission-command-messages-mav_cmd_navigation_commands>`) include "
+"position/location information. The information is provided relative to a "
+"particular \"frame of reference\", which is specified in the message's "
+":ref:`common-mavlink-mission-command-messages-"
+"mav_cmd_navigation_commands_frames` field. Copter and Rover Mission use "
+":ref:`MAV_CMD_DO_SET_HOME <mav_cmd_do_set_home>` command to set the \"home "
+"position\" in the global coordinate frame (MAV_FRAME_GLOBAL), `WGS84 "
+"coordinate system <https://en.wikipedia.org/wiki/World_Geodetic_System>`__, "
+"where the altitude is relative to mean sea level. All other commands use the"
+" MAV_FRAME_GLOBAL_RELATIVE_ALT frame, which uses the same latitude and "
+"longitude, but sets altitude as relative to the *home position* (home "
+"altitude = 0)."
+msgstr ""
+"许多指令（尤其是 :ref:`NAV\\_ 指令 <common-mavlink-mission-command-messages-"
+"mav_cmd_navigation_commands>`）包含位置/地点信息。该信息相对于特定的「参考坐标系」提供，在消息的 "
+":ref:`common-mavlink-mission-command-messages-"
+"mav_cmd_navigation_commands_frames` 字段中指定。Copter 和 Rover 任务使用 "
+":ref:`MAV_CMD_DO_SET_HOME <mav_cmd_do_set_home>` "
+"指令在全局坐标系（MAV_FRAME_GLOBAL）中设置「Home 位置」，即 `WGS84 坐标系 "
+"<https://en.wikipedia.org/wiki/World_Geodetic_System>`__（高度相对于平均海平面）。其他所有指令使用"
+" MAV_FRAME_GLOBAL_RELATIVE_ALT 坐标系，采用相同的纬度和经度，但高度相对于 *Home 位置*（Home 高度 = 0）。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:92
+#: 444c27385a1c4fe3970961f9de4bd02e
+msgid ""
+"Plane commands can additionally use MAV_FRAME_GLOBAL_TERRAIN_ALT frame of "
+"reference. This again has the same WGS84 frame of reference for "
+"latitude/longitude, but specifies altitude relative to ground height (as "
+"defined in a terrain database)."
+msgstr ""
+"Plane 指令还可以使用 MAV_FRAME_GLOBAL_TERRAIN_ALT 参考坐标系。该坐标系采用相同的 WGS84 "
+"纬度/经度，但高度相对于地面高度（由地形数据库定义）。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:99
+#: becbbfb598d645f3ab4e8edbc57cc1fa
+msgid ""
+"The other frame types are defined in the MAVLink protocol (see `MAV_FRAME "
+"<https://github.com/ArduPilot/mavlink/blob/master/message_definitions/v1.0/common.xml#L795>`__)"
+" are not supported for mission commands."
+msgstr ""
+"MAVLink 协议中定义的其他坐标系类型（参见 `MAV_FRAME "
+"<https://github.com/ArduPilot/mavlink/blob/master/message_definitions/v1.0/common.xml#L795>`__）不支持用于任务指令。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:104
+#: 69d38a4a0a204d80a5540067cc23f18c
+msgid "How accurate is the information?"
+msgstr "信息的准确性如何？"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:106
+#: 1a53ce2ff246499c82c3641f1c8a82f5
+msgid ""
+"If a command or parameter is marked as supported then it is likely (but not "
+"guaranteed) that it will behave as indicated. If a command or parameter is "
+"not listed (or marked as not supported) then it is extremely likely that it "
+"is not supported on ArduPilot."
+msgstr ""
+"如果某指令或参数被标记为已支持，则很可能（但不保证）按照说明运行。如果某指令或参数未列出（或标记为不支持），则极大概率在 ArduPilot "
+"中不受支持。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:111
+#: 2e77107417f547ce91fcfeceb3e7e576
+msgid ""
+"The reason for this is that the information was predominantly inferred by "
+"inspecting the command handlers for messages:"
+msgstr "这是因为相关信息主要是通过检查消息的指令处理程序推断得出的："
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:114
+#: c76ec48ab12646c4953d70d705f6cd90
+msgid ""
+"The switch statement in `AP_Mission::mavlink_to_mission_cmd "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Mission/AP_Mission.cpp#L466>`__"
+" was inspected to determine which commands are handled by *all* vehicle "
+"platforms, and which parameters from the message are stored."
+msgstr ""
+"通过检查 `AP_Mission::mavlink_to_mission_cmd "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Mission/AP_Mission.cpp#L466>`__"
+" 中的 switch 语句，确定*所有*飞行器平台处理的指令以及从消息中存储的参数。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:117
+#: eb8b88105115467bb512f663071dfd67
+msgid ""
+"The command handler switch for each vehicle type (`Plane "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduPlane/commands_logic.cpp#L33>`__,"
+" `Copter "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/commands_logic.cpp#L49>`__,"
+" `Rover "
+"<https://github.com/ArduPilot/ardupilot/blob/master/Rover/commands_logic.cpp#L25>`__)"
+" tells us which commands are likely to be supported in each vehicle and "
+"which parameters are passed to the handler."
+msgstr ""
+"各飞行器类型的指令处理 switch 语句（`Plane "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduPlane/commands_logic.cpp#L33>`__、`Copter"
+" "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/commands_logic.cpp#L49>`__、`Rover"
+" "
+"<https://github.com/ArduPilot/ardupilot/blob/master/Rover/commands_logic.cpp#L25>`__）可以告诉我们每种飞行器可能支持哪些指令以及哪些参数传递给处理程序。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:124
+#: 649b3d5bb216407885928f0d9046effd
+msgid ""
+"The above checks give a very accurate picture of what commands and "
+"parameters are not supported. They give a fairly accurate picture of what "
+"commands/parameters are *likely to be supported*. However, this indication "
+"is not guaranteed to be accurate because a command handler could just throw "
+"away all the information (and we have not fully checked all of these)."
+msgstr ""
+"上述检查能非常准确地反映哪些指令和参数不受支持，也能较为准确地反映哪些指令/参数*可能受支持*。但这并不能保证完全准确，因为指令处理程序可能会丢弃所有信息（我们并未完全检查所有处理程序）。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:131
+#: 2e5184199bf74e26b56e62ea9eadc679
+msgid ""
+"In addition to the above checks, we have also merged information from the "
+":ref:`Copter Mission Command List <copter:mission-command-list>`."
+msgstr ""
+"除上述检查外，我们还合并了 :ref:`Copter 任务指令列表 <copter:mission-command-list>` 中的信息。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:135
+#: 89368efcc6ba4d749698633814097183
+msgid "How to interpret the command parameters"
+msgstr "如何解读指令参数"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:137
+#: 650e8f4a955f4b81bf62d63f9be4f8bc
+msgid ""
+"The parameters for each command are listed in a table. The parameters that "
+"are \"greyed out\" are not supported. The command field column (param name) "
+"uses \"bold\" text to indicate those parameters that are defined in the "
+"protocol (normal text is used for \"empty\" parameters)."
+msgstr ""
+"每个指令的参数均以表格形式列出。「灰色」参数表示不支持。指令字段列（参数名）使用「粗体」文本标识协议中定义的参数（普通文本用于「空」参数）。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:142
+#: 0ce25a87046e4974892b8d50747eaf25
+msgid ""
+"This allows users/developers to see both what is supported, and what "
+"protocol fields are not supported in ArduPilot."
+msgstr "这使用户/开发者能够同时了解 ArduPilot 支持和不支持的内容。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:146
+#: 5698671139e84e94bb75b1460b7b9318
+msgid "Using this information with a GCS"
+msgstr "在地面站中使用这些信息"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:148
+#: cb29f25718024488966aaf38300c43b4
+msgid ""
+"*Mission Planner* (MP) exposes the full subset of commands and parameters "
+"supported by ArduPilot, filtered to display just those relevant to the "
+"currently connected vehicle. Mapping the MP commands to this documentation "
+"is easy, because it simply names commands using a cut-down version of the "
+"full command name (e.g. ``DO_SET_SERVO`` rather than the full command name: "
+"``MAV_CMD_DO_SET_SERVO``). In addition, this document conveniently lists the"
+" column label used by Mission Planner alongside each of the parameters."
+msgstr ""
+"*Mission Planner*（MP）公开了 ArduPilot 支持的完整指令和参数子集，并过滤为仅显示与当前连接飞行器相关的内容。将 MP "
+"指令映射到本文档很简单，因为它使用完整指令名的简化版本来命名指令（例如 ``DO_SET_SERVO`` 而非完整指令名 "
+"``MAV_CMD_DO_SET_SERVO``）。此外，本文档方便地在每个参数旁边列出了 Mission Planner 使用的列标签。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:157
+#: cf11926d4fdc4dc2848e8ec5ed6029d0
+msgid ""
+"Other GCSs (APM Planner 2, Tower etc.) may support some other subset of "
+"commands/parameters and use alternative names/labels for them. In most "
+"cases, the mapping should be obvious."
+msgstr ""
+"其他地面站（APM Planner 2、Tower 等）可能支持某些其他指令/参数子集，并使用不同的名称/标签。大多数情况下，映射关系应该很明显。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:165
+#: 6320515836fa4190bc326b2ac48b3c61
+msgid "Commands supported by Sub"
+msgstr "Sub 支持的命令"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:167
+#: 695282fa0b2d4788826e48c125ed5a0c
+msgid ""
+"This list of commands was inferred from the command handler in "
+"`/ArduSub/commands_logic.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduSub/commands_logic.cpp#L7>`__."
+msgstr ""
+"此命令列表根据 `/ArduSub/commands_logic.cpp "
+"<https://github.com/ArduPilot/ardupilot/blob/master/ArduSub/commands_logic.cpp#L7>`__"
+" 中的命令处理程序推断得出。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:170
+#: f63fa94c7fb84a73a7ed2da476ae6593
+msgid ":ref:`MAV_CMD_NAV_WAYPOINT <mav_cmd_nav_waypoint>`"
+msgstr ":ref:`MAV_CMD_NAV_WAYPOINT <mav_cmd_nav_waypoint>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:171
+#: 93917dd03c1f4261a2a6e67961dc1af6
+msgid ":ref:`MAV_CMD_NAV_RETURN_TO_LAUNCH <mav_cmd_nav_return_to_launch>`"
+msgstr ":ref:`MAV_CMD_NAV_RETURN_TO_LAUNCH <mav_cmd_nav_return_to_launch>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:172
+#: 581b4fa44c2c444da4c05dd4500334d9
+msgid ":ref:`MAV_CMD_NAV_LAND <mav_cmd_nav_land>`"
+msgstr ":ref:`MAV_CMD_NAV_LAND <mav_cmd_nav_land>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:173
+#: d55c8607fe494e5592917458bf73c61d
+msgid ":ref:`MAV_CMD_NAV_LOITER_UNLIM <mav_cmd_nav_loiter_unlim>`"
+msgstr ":ref:`MAV_CMD_NAV_LOITER_UNLIM <mav_cmd_nav_loiter_unlim>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:174
+#: c457d9f1e08345eb9deb364fd0853a60
+msgid ":ref:`MAV_CMD_NAV_LOITER_TURNS <mav_cmd_nav_loiter_turns>`"
+msgstr ":ref:`MAV_CMD_NAV_LOITER_TURNS <mav_cmd_nav_loiter_turns>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:175
+#: f3afd5e1dfac4b028d864eee7b88d3d7
+msgid ":ref:`MAV_CMD_NAV_LOITER_TIME <mav_cmd_nav_loiter_time>`"
+msgstr ":ref:`MAV_CMD_NAV_LOITER_TIME <mav_cmd_nav_loiter_time>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:176
+#: acae89a321234f45ab57a40a0c32e646
+msgid ""
+":ref:`MAV_CMD_NAV_GUIDED_ENABLE <mav_cmd_nav_guided_enable>` (NAV_GUIDED "
+"only)"
+msgstr ""
+":ref:`MAV_CMD_NAV_GUIDED_ENABLE <mav_cmd_nav_guided_enable>`（仅 NAV_GUIDED）"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:177
+#: ee0603d7e2c24b0da07183d8f7226847
+msgid ":ref:`MAV_CMD_NAV_DELAY <mav_cmd_nav_delay>`"
+msgstr ":ref:`MAV_CMD_NAV_DELAY <mav_cmd_nav_delay>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:178
+#: b44b2f14561644699d73779b00c52ecc
+msgid ":ref:`MAV_CMD_DO_JUMP <mav_cmd_do_jump>`"
+msgstr ":ref:`MAV_CMD_DO_JUMP <mav_cmd_do_jump>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:179
+#: 94868f0139954a219aab63b21880111b
+msgid ":ref:`MAV_CMD_JUMP_TAG <mav_cmd_jump_tag>`"
+msgstr ":ref:`MAV_CMD_JUMP_TAG <mav_cmd_jump_tag>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:180
+#: a3da173d0a954c30bed81591d8cbf67d
+msgid ":ref:`MAV_CMD_DO_JUMP_TAG <mav_cmd_do_jump_tag>`"
+msgstr ":ref:`MAV_CMD_DO_JUMP_TAG <mav_cmd_do_jump_tag>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:181
+#: 648bc03794ea45cda476e57ba4cd2513
+msgid ":ref:`MAV_CMD_MISSION_START <mav_cmd_mission_start>`"
+msgstr ":ref:`MAV_CMD_MISSION_START <mav_cmd_mission_start>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:182
+#: 5987b96766244dc6ac5056eddc6dd780
+msgid ":ref:`MAV_CMD_COMPONENT_ARM_DISARM <mav_cmd_component_arm_disarm>`"
+msgstr ":ref:`MAV_CMD_COMPONENT_ARM_DISARM <mav_cmd_component_arm_disarm>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:183
+#: 4e720404a0294306b22ec53e0b7f6c43
+msgid ":ref:`MAV_CMD_CONDITION_DELAY <mav_cmd_condition_delay>`"
+msgstr ":ref:`MAV_CMD_CONDITION_DELAY <mav_cmd_condition_delay>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:184
+#: 38cefab4b65244bba8f49a64475e5c2b
+msgid ":ref:`MAV_CMD_CONDITION_DISTANCE <mav_cmd_condition_distance>`"
+msgstr ":ref:`MAV_CMD_CONDITION_DISTANCE <mav_cmd_condition_distance>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:185
+#: 969d2df5103a460fa31dc3cab436bfaa
+msgid ":ref:`MAV_CMD_CONDITION_YAW <mav_cmd_condition_yaw>`"
+msgstr ":ref:`MAV_CMD_CONDITION_YAW <mav_cmd_condition_yaw>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:186
+#: 680bd59d47fb49309ec88fb10ffa77be
+msgid ":ref:`MAV_CMD_DO_AUX_FUNCTION <mav_cmd_do_aux_function>`"
+msgstr ":ref:`MAV_CMD_DO_AUX_FUNCTION <mav_cmd_do_aux_function>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:187
+#: 1ed4d424c98e4028b0326e53e9e16120
+msgid ":ref:`MAV_CMD_DO_CHANGE_SPEED <mav_cmd_do_change_speed>`"
+msgstr ":ref:`MAV_CMD_DO_CHANGE_SPEED <mav_cmd_do_change_speed>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:188
+#: 39f32a2dc7b34a79b7a836d7c1785c4a
+msgid ":ref:`MAV_CMD_DO_SET_HOME <mav_cmd_do_set_home>`"
+msgstr ":ref:`MAV_CMD_DO_SET_HOME <mav_cmd_do_set_home>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:189
+#: 9bb8a8d0bd844e3387e8946ea2a9c5da
+msgid ":ref:`MAV_CMD_DO_SET_SERVO <mav_cmd_do_set_servo>`"
+msgstr ":ref:`MAV_CMD_DO_SET_SERVO <mav_cmd_do_set_servo>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:190
+#: 428ead00f5e246b8a805d5410db33a9a
+msgid ":ref:`MAV_CMD_DO_SET_RELAY <mav_cmd_do_set_relay>`"
+msgstr ":ref:`MAV_CMD_DO_SET_RELAY <mav_cmd_do_set_relay>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:191
+#: 3475e067bfd541b0b7354557cc5e208b
+msgid ":ref:`MAV_CMD_DO_REPEAT_SERVO <mav_cmd_do_repeat_servo>`"
+msgstr ":ref:`MAV_CMD_DO_REPEAT_SERVO <mav_cmd_do_repeat_servo>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:192
+#: de7a7a220d5b4e33a34f94384fb02874
+msgid ":ref:`MAV_CMD_DO_REPEAT_RELAY <mav_cmd_do_repeat_relay>`"
+msgstr ":ref:`MAV_CMD_DO_REPEAT_RELAY <mav_cmd_do_repeat_relay>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:193
+#: 3061fb7832c84c3fa27a3fac3291ca75
+msgid ""
+":ref:`MAV_CMD_DO_DIGICAM_CONFIGURE <mav_cmd_do_digicam_configure>` (Camera "
+"enabled only)"
+msgstr ""
+":ref:`MAV_CMD_DO_DIGICAM_CONFIGURE <mav_cmd_do_digicam_configure>`（仅限启用摄像头）"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:194
+#: cf74002a23b9443680fddf7be5f85dab
+msgid ""
+":ref:`MAV_CMD_DO_DIGICAM_CONTROL <mav_cmd_do_digicam_control>` (Camera "
+"enabled only)"
+msgstr ""
+":ref:`MAV_CMD_DO_DIGICAM_CONTROL <mav_cmd_do_digicam_control>`（仅限启用摄像头）"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:195
+#: 85cc7a16ccbf400ebe69102a8fee8e59
+msgid ""
+":ref:`MAV_CMD_DO_SET_CAM_TRIGG_DIST <mav_cmd_do_set_cam_trigg_dist>` (Camera"
+" enabled only)"
+msgstr ""
+":ref:`MAV_CMD_DO_SET_CAM_TRIGG_DIST "
+"<mav_cmd_do_set_cam_trigg_dist>`（仅限启用摄像头）"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:196
+#: c903d5b490654f12a4f4db035edef48b
+msgid ":ref:`MAV_CMD_DO_SET_ROI <mav_cmd_do_set_roi>`"
+msgstr ":ref:`MAV_CMD_DO_SET_ROI <mav_cmd_do_set_roi>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:197
+#: 6fde03c238a84b8bb75fa9de01bdb71e
+msgid ""
+":ref:`MAV_CMD_DO_MOUNT_CONTROL <mav_cmd_do_mount_control>` (Gimbal/mount "
+"enabled only)"
+msgstr ":ref:`MAV_CMD_DO_MOUNT_CONTROL <mav_cmd_do_mount_control>`（仅限启用云台/挂载）"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:198
+#: 6bc2d78df8f5450b8298cdd450ac0b6d
+msgid ""
+":ref:`MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW "
+"<mav_cmd_do_gimbal_manager_pitchyaw>` (Gimbal/mount enabled only)"
+msgstr ""
+":ref:`MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW "
+"<mav_cmd_do_gimbal_manager_pitchyaw>`（仅限启用云台/挂载）"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:199
+#: f105f8eef2b14906930c397b4fd7b675
+msgid ""
+":ref:`MAV_CMD_DO_PARACHUTE <mav_cmd_do_parachute>` (Parachute enabled only)"
+msgstr ":ref:`MAV_CMD_DO_PARACHUTE <mav_cmd_do_parachute>`（仅限启用降落伞）"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:200
+#: 8ae347f39f0e4598a85afc425e023c12
+msgid ":ref:`MAV_CMD_DO_GRIPPER <mav_cmd_do_gripper>`"
+msgstr ":ref:`MAV_CMD_DO_GRIPPER <mav_cmd_do_gripper>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:201
+#: 16a06d3b4a5a404a956f0ed4c0e677a8
+msgid ""
+":ref:`MAV_CMD_DO_GUIDED_LIMITS <mav_cmd_do_guided_limits>` (NAV_GUIDED only)"
+msgstr ""
+":ref:`MAV_CMD_DO_GUIDED_LIMITS <mav_cmd_do_guided_limits>`（仅 NAV_GUIDED）"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:202
+#: 69c5e5182069454ba6611897e81fe6b9
+msgid ""
+":ref:`MAV_CMD_DO_SET_RESUME_REPEAT_DIST <mav_cmd_do_set_resume_repeat_dist>`"
+msgstr ""
+":ref:`MAV_CMD_DO_SET_RESUME_REPEAT_DIST <mav_cmd_do_set_resume_repeat_dist>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:203
+#: bd984c85e8b04544a323966908e89e45
+msgid ":ref:`MAV_CMD_DO_FENCE_ENABLE <mav_cmd_do_fence_enable>`"
+msgstr ":ref:`MAV_CMD_DO_FENCE_ENABLE <mav_cmd_do_fence_enable>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:204
+#: cd60e8720097426091e5c8d967500c90
+msgid ":ref:`MAV_CMD_DO_WINCH <mav_cmd_do_winch>`"
+msgstr ":ref:`MAV_CMD_DO_WINCH <mav_cmd_do_winch>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:205
+#: e5d03ca704a64510976b5b1162fe430d
+msgid ":ref:`MAV_CMD_STORAGE_FORMAT <mav_cmd_storage_format>`"
+msgstr ":ref:`MAV_CMD_STORAGE_FORMAT <mav_cmd_storage_format>`"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:216
+#: ca3cac71e0eb455bb9fa0c294c8d3efa
+msgid "Navigation commands"
+msgstr "导航指令"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:218
+#: d73b28294ebf466e9b8da0a830d680e2
+msgid ""
+"Navigation commands are used to control the movement of the vehicle, "
+"including takeoff, moving to and around waypoints, and landing."
+msgstr "导航指令用于控制飞行器的运动，包括起飞、飞往和围绕航点移动以及降落。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:221
+#: 0c87b3a4dfcd41c0883e9c7c4c49034c
+msgid ""
+"NAV commands have the highest priority. Any DO\\_ and CONDITION\\_ commands "
+"that have not executed when a NAV command is loaded are skipped (for "
+"example, if a waypoint completes and the NAV command for another waypoint is"
+" loaded, and unexecuted DO/CONDITION commands associated with the first "
+"waypoint are dropped."
+msgstr ""
+"NAV 指令具有最高优先级。当 NAV 指令加载时，尚未执行的 DO\\_ 和 CONDITION\\_ "
+"指令将被跳过（例如，如果一个航点完成并加载了另一个航点的 NAV 指令，与第一个航点关联的未执行 DO/CONDITION 指令将被丢弃）。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:230
+#: 8b7669eef578424f84ae1d875f5397d6
+msgid "MAV_CMD_NAV_WAYPOINT"
+msgstr "MAV_CMD_NAV_WAYPOINT"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:232
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:254
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:285
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:396
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:641
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:719
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:820
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:901
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:973
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1043
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1114
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1206
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1282
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1360
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1430
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1500
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1574
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1633
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1708
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1766
+#: 046db85371dd48a3905697220f2fb7f6 2f6741be0df44e32b5bf1a96b57c305d
+#: 362b916bd4d445bba27014fb994fadbb 3ed8d96c62f848d59f60b23fe1b35061
+#: 4d78618954084dc1a665a1cb15b6bcb4 50d4d4b8bd65450db948e4442ccf25de
+#: 58bd218a7ebf42e0844b3c7c5c9c9130 59406ce61995441fb737dd85e20011c6
+#: 6b2ccaa484b34e6eb83dec8dd3cb7241 8476575c5202444c9304cfad6aa71f61
+#: 9266a5b3e978410f9e2d700702021525 9d71f46f6f2b436085405c656795d047
+#: b70b10c7310f4d578bf1380c4f97dfa3 bd732f7ded544073a81abd40e1dda8d1
+#: cfecb63a0419494aa5b7d5bcb0b110ce d29c04d9c6d647528d93c5b54fea1099
+#: e1531535876047bd92a0585631b3d489 e396c03e4f3d414fbfa3ecb73e2962bd
+#: e715c5702ebe4a829e7cf426ef28ec4a f7f44c78cbf04ad6a4905fd30662932e
+msgid "Supported by: All vehicles."
+msgstr "支持的飞行器：所有飞行器。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:234
+#: 574a3ad6c68241e599ba0199af776d84
+msgid "Navigate to the specified position."
+msgstr "飞往指定位置。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:252
+#: d31d04d93eff47eaa2df7c46c3ca3673
+msgid "MAV_CMD_NAV_LOITER_UNLIM"
+msgstr "MAV_CMD_NAV_LOITER_UNLIM"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:256
+#: cb5c217c8320482cbe5db99665ee0048
+msgid "Loiter at the specified location for an unlimited amount of time."
+msgstr "在指定位置无限期悬停。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:273
+#: bafc638ca11e4120bdeec11bc1bccdd1
+msgid "MAV_CMD_NAV_LOITER_TIME"
+msgstr "MAV_CMD_NAV_LOITER_TIME"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:275
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:483
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:543
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:807
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1194
+#: 006ca80da073427a9a3886629e9cf51c 08781eb9ec45484da03d3df93ccba46a
+#: 271c2da2ae7b4fd8804685e5f60a856c c64d5778378d48959e1a45af40650351
+#: d59268901f284622be343ecf1a73e6d8
+msgid "Supported by: Copter, Plane, Rover."
+msgstr "支持的飞行器：Copter、Plane、Rover。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:283
+#: d181a4cc6d0e49b6a8222071ab27dbad
+msgid "MAV_CMD_NAV_RETURN_TO_LAUNCH"
+msgstr "MAV_CMD_NAV_RETURN_TO_LAUNCH"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:287
+#: 074c72d1ff034527bc26551207970a3e
+msgid ""
+"Return to the *home location* or the nearest `Rally Point <common-rally-"
+"points>`__, if closer. The home location is where the vehicle was last armed"
+" (or when it first gets GPS lock after arming if the vehicle configuration "
+"allows this)."
+msgstr ""
+"返回 *Home 位置*，或返回最近的 `集结点 <common-rally-points>`__（如果更近）。Home "
+"位置是飞行器最后一次解锁的位置（如果飞行器配置允许，则为解锁后首次获得 GPS 锁定的位置）。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:322
+#: 140c7d88b3db4143a32a4d09de6a4ef8
+msgid "MAV_CMD_NAV_DELAY"
+msgstr "MAV_CMD_NAV_DELAY"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:324
+#: 7a12355339004106a632120d537d04dc
+msgid "Supported by: Copter, Rover, Plane."
+msgstr "支持的飞行器：Copter、Rover、Plane。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:332
+#: 39c6ca0c8f1e44ed914e629d2fe85502
+msgid "MAV_CMD_NAV_PAYLOAD_PLACE"
+msgstr "MAV_CMD_NAV_PAYLOAD_PLACE"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:334
+#: 1c9aa4d2478b4f719c014fd292956a96
+msgid "Supported by: Copter and Plane."
+msgstr "支持的飞行器：Copter 和 Plane。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:338
+#: 709d295f127a435c8bd27b0d8b61ce28
+msgid "[wiki site=\"copter,plane\"] **Command parameters**"
+msgstr "[wiki site=\"copter,plane\"] **指令参数**"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:389
+#: bf88f6a670154218935539f6c949097e
+msgid "[/site]"
+msgstr "[/site]"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:394
+#: c6c7f3cf72884241988aea68ff65ec0a
+msgid "MAV_CMD_DO_JUMP"
+msgstr "MAV_CMD_DO_JUMP"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:398
+#: 8e557a2ef9dc4ac2846f61da7dec01d9
+msgid ""
+"Jump to the specified command in the mission list. The jump command can be "
+"repeated either a specified number of times before continuing the mission, "
+"or it can be repeated indefinitely."
+msgstr "跳转到任务列表中指定的指令。跳转指令可以在继续任务前重复指定次数，也可以无限期重复。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:404
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:551
+#: 4f099c62a4494fd7a2e7a965d28676e8 702ae2d562804ef29278f0eb7b0bc02f
+msgid ""
+"Despite the name, this command is really a \"NAV\\_\" command rather than a "
+"\"DO\\_\" command. Conditional commands like CONDITION_DELAY don't affect "
+"DO_JUMP (it will always perform the jump as soon as it reaches the command)."
+msgstr ""
+"尽管名称如此，此指令实际上是 「NAV\\_」 指令而非 「DO\\_」 指令。CONDITION_DELAY 等条件指令不影响 "
+"DO_JUMP（飞行器到达该指令时会立即执行跳转）。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:411
+#: d6439fdd486d45d0b0b832a8075e34ab
+msgid ""
+"There can be a maximum of 15 jump commands in a mission after which new "
+"DO_JUMP commands are ignored."
+msgstr "一次任务中最多可有 15 条跳转指令，超出后新的 DO_JUMP 指令将被忽略。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:413
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:487
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:560
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:653
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:729
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:835
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:906
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:979
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1047
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1124
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1214
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1286
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1369
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1439
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1510
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1579
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1638
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1712
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1770
+#: 04900d7602814eaea017889f070fb35c 086e5b6be42e4bebb6d3b268af9f2d1b
+#: 1d662e0f21734cdaa484547d3154ae15 28b027fbcace4494b77949066c8c8e90
+#: 4f93e70c49cc4e49a6e8789b41e4958d 5118a548da864a42a924240cf5f0bc10
+#: 73fc94177c6c4aaaa20f5682d9addcf2 79f40b0641a94781a62e2bd8483f9417
+#: 7b4b1dae85c34ac19d57f90357b32a9a 819bc01445bf443cafcff76b9616f443
+#: 91536156b7744cc2a6df347a48a58db0 96681433001a47bb9c1708cd1ad419b4
+#: ae854ca422404e9daa683e1e32c12010 b34d40d5b82a4753aeecb47cdb9e8e4c
+#: c694910495d042499c5e969d80a9a9a5 ccafc2d1882544dab9bf80cfbd3bef79
+#: d41c380a25564a3899c4101ba077dc8c ec8c99a4e99042409f9f61d838af8c87
+#: f87d2036ef0c46068082cb3b33984ff5
+msgid "**Command parameters**"
+msgstr "**指令参数**"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:468
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:615
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:703
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:778
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:889
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:961
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1028
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1096
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1173
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1348
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1418
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1488
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1558
+#: 1444dafe01a34b2395e0f28e85cd5111 1f66b48b28aa41c398d1f78390c30c19
+#: 2a49b7d894b34347a74f07cd8f0a0b1d 2cdb252995bc48c0b4f5599eb454dc16
+#: 3609db5a7651496381b2063ea2651480 56b6fdad42d84a5ca401f561c8070a30
+#: 74129efc2de94299b4ef717d1d7644d6 a95de68a63a2453eb035dae6b9b1f8b1
+#: afda61ef48a24b74910173f9ab748987 ce7895d3c7e74e1bade8664409e1bd0f
+#: d8e61843dc1f4d8a9b9df2f7fda8b50d d99ac79756bf44369497dedeca369194
+#: de9517d6142a4464b155ee0a1b81b872
+msgid "**Mission planner screenshots**"
+msgstr "**Mission Planner 截图**"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:473
+#: 2d7d11098b2144099f65d3ab38eceb80
+msgid "Mission Planner Settings for DO_JUMP command"
+msgstr "DO_JUMP 指令的 Mission Planner 设置"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:475
+#: 46746653236a4cd3856ae44a33b6512b
+msgid ""
+"In the example above the vehicle would fly back-and-forth between waypoints "
+"#1 and #2 a total of 3 times before flying on to waypoint #4."
+msgstr "在上述示例中，飞行器将在航点 #1 和 #2 之间来回飞行共 3 次，然后继续飞往航点 #4。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:481
+#: 5d2c806ff4db4d45932f931a87d9670f
+msgid "MAV_CMD_JUMP_TAG"
+msgstr "MAV_CMD_JUMP_TAG"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:485
+#: 21d4c25abd394f13bd5c1434efb7ba61
+msgid ""
+"This is a location marker in the mission command sequence that can be used "
+"as a \"jump to\" location for the "
+":ref:`MAV_CMD_DO_JUMP_TAG<MAV_CMD_DO_JUMP_TAG>` command. The tag id in its "
+"parameter field can be any arbitrary number between 1 and 65535."
+msgstr ""
+"这是任务指令序列中的位置标记，可作为 :ref:`MAV_CMD_DO_JUMP_TAG<MAV_CMD_DO_JUMP_TAG>` "
+"指令的「跳转目标」位置。参数字段中的标签 ID 可以是 1 到 65535 之间的任意数字。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:541
+#: 744631f3dac44692a9eed6b8d80d34ab
+msgid "MAV_CMD_DO_JUMP_TAG"
+msgstr "MAV_CMD_DO_JUMP_TAG"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:545
+#: 4841b2a0db0b457f8ea16b6e10946aa2
+msgid ""
+"Jump to the specified :ref:`MAV_CMD_JUMP_TAG<MAV_CMD_JUMP_TAG>` item in the "
+"mission list. The jump tag command can be repeated, either a specified "
+"number of times before continuing the mission, or it can be repeated "
+"indefinitely."
+msgstr ""
+"跳转到任务列表中指定的 :ref:`MAV_CMD_JUMP_TAG<MAV_CMD_JUMP_TAG>` "
+"项。跳转标签指令可以重复，在继续任务前重复指定次数，也可以无限期重复。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:558
+#: f1d534ea2f15445b969b0689ca5fec17
+msgid ""
+"There can be a maximum of 15 jump_tag commands in a mission after which new "
+"DO_JUMP_TAG commands are ignored."
+msgstr "一次任务中最多可有 15 条 jump_tag 指令，超出后新的 DO_JUMP_TAG 指令将被忽略。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:620
+#: ccf39d6778714ef4ae57e1ac35a9ba6e
+msgid "Mission Planner Settings for DO_JUMP_TAG command"
+msgstr "DO_JUMP_TAG 指令的 Mission Planner 设置"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:622
+#: 53a6f5edbfef4ceea820300836bf0128
+msgid ""
+"In the example above, the vehicle would fly back-and-forth between waypoints"
+" #3 and #4 a total of 3 times before completing the mission. This is because"
+" the DO_JUMP_TAG redirects the vehicle to JUMP_TAG #565 twice."
+msgstr ""
+"在上述示例中，飞行器将在航点 #3 和 #4 之间来回飞行共 3 次后完成任务。这是因为 DO_JUMP_TAG 将飞行器重定向到 JUMP_TAG "
+"#565 两次。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:625
+#: 4f88ad2cfb634a578918bdc3aa3039e0
+msgid "Conditional commands"
+msgstr "条件指令"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:627
+#: e93dd9c80c0f43918091f9ab619117dc
+msgid ""
+"Conditional commands control the execution of \\_DO\\_ commands. For "
+"example, a conditional command can prevent DO commands from executing based "
+"on a time delay, until the vehicle is at a certain altitude, or at a "
+"specified distance from the next target position."
+msgstr "条件指令控制 \\_DO\\_ 指令的执行。例如，条件指令可以根据时间延迟、直到飞行器到达特定高度或距下一目标位置特定距离来阻止 DO 指令执行。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:632
+#: 2a823c6178ba49a991a5d93fc41c96a5
+msgid ""
+"A conditional command may not be complete before reaching the next waypoint."
+" In this case, any unexecuted \\_DO\\_ commands associated with the last "
+"waypoint will be skipped."
+msgstr "条件指令可能在到达下一个航点前尚未完成。在这种情况下，与上一个航点相关联的任何未执行的 \\_DO\\_ 指令将被跳过。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:639
+#: 5228457d5bad4bedb9db7a92e3c60539
+msgid "MAV_CMD_CONDITION_DELAY"
+msgstr "MAV_CMD_CONDITION_DELAY"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:643
+#: 2bf872c5283849e0bf78b4d4736b363a
+msgid ""
+"After reaching a waypoint, delay the execution of the next conditional "
+"\"_DO_\" command for the specified number of seconds (e.g. "
+":ref:`MAV_CMD_DO_SET_ROI <mav_cmd_do_set_roi>`)."
+msgstr ""
+"到达航点后，将下一条条件「_DO_」指令（例如 :ref:`MAV_CMD_DO_SET_ROI "
+"<mav_cmd_do_set_roi>`）的执行延迟指定秒数。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:649
+#: a19690ca11014965be5553219e079e3a
+msgid ""
+"This command does not stop the vehicle. If the vehicle reaches the next "
+"waypoint before the delay timer completes, the delayed \"_DO_\" commands "
+"will never trigger."
+msgstr "此指令不会停止飞行器。如果飞行器在延迟计时器完成前到达下一个航点，延迟的「_DO_」指令将永远不会触发。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:708
+#: 5df497d2963b49919754d04dcfa5a223
+msgid "Mission Planner Settings for CONDITION_DELAY command"
+msgstr "CONDITION_DELAY 指令的 Mission Planner 设置"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:710
+#: 2d77349c186848d09f68adb58b0eb339
+msgid ""
+"In the example above, Command #4 (``DO_SET_ROI``) is delayed so that it "
+"starts 5 seconds after the vehicle has passed Waypoint #2."
+msgstr "在上述示例中，指令 #4（``DO_SET_ROI``）被延迟，使其在飞行器经过航点 #2 后 5 秒才开始执行。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:717
+#: a2adf627cc5d4fd9b197363047b5af35
+msgid "MAV_CMD_CONDITION_DISTANCE"
+msgstr "MAV_CMD_CONDITION_DISTANCE"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:721
+#: 80b1ff7b05434fb1a19477d87e49d737
+msgid ""
+"Delays the start of the next \"``_DO_``\\ \" command until the vehicle is "
+"within the specified number of meters of the next waypoint."
+msgstr "延迟下一条「``_DO_``\\ 」指令的执行，直到飞行器距下一个航点在指定米数范围内。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:726
+#: d27730ccd0504d1c80b370d969d67494
+msgid "This command does not stop the vehicle: it only affects DO commands."
+msgstr "此指令不会停止飞行器：它只影响 DO 指令。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:783
+#: 16fc830daf114ee8944845ed5d0ec30c
+msgid "Mission PlannerSettings for CONDITION_DISTANCE command"
+msgstr "CONDITION_DISTANCE 指令的 Mission Planner 设置"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:785
+#: fba54197a1814bfd91c371b560ea228c
+msgid ""
+"In the example above, Command #4 (``DO_SET_ROI``) is delayed so that it only"
+" starts once the vehicle is within 50m of waypoint #5."
+msgstr "在上述示例中，指令 #4（``DO_SET_ROI``）被延迟，使其仅在飞行器距航点 #5 50m 范围内时才开始执行。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:795
+#: 8833716307f14235b35ee8c191a71d93
+msgid "DO commands"
+msgstr "DO 指令"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:797
+#: 70b8f84d54b44aa7889d1474faa1c5c4
+msgid ""
+"The \"DO\" or \"Now\" commands are executed once to perform some action. All"
+" the DO commands associated with a waypoint are executed immediately."
+msgstr "「DO」或「立即」指令被执行一次以执行某个动作。与航点相关的所有 DO 指令立即执行。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:805
+#: 8fc63048cbca446e9b9168491718bd2c
+msgid "MAV_CMD_DO_CHANGE_SPEED"
+msgstr "MAV_CMD_DO_CHANGE_SPEED"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:818
+#: 3678244a3a634d40aaec656b394f90e1
+msgid "MAV_CMD_DO_SET_HOME"
+msgstr "MAV_CMD_DO_SET_HOME"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:822
+#: cf2ca21310644f2790c58d305d1d741b
+msgid ""
+"Sets the home location either as the current location or at the location "
+"specified in the command. For SITL work, altitude input here needs to be "
+"with reference to absolute altitude, taking into account SRTM elevation."
+msgstr "将 Home 位置设置为当前位置或指令中指定的位置。对于 SITL 工作，此处输入的高度需参考绝对高度，并考虑 SRTM 高程数据。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:827
+#: 645aafb725c64378b78418f25d5d2b75
+msgid ""
+"For Plane and Rover, if a good GPS fix cannot be obtained the location "
+"specified in the command is used."
+msgstr "对于 Plane 和 Rover，如果无法获取良好的 GPS 定位，则使用指令中指定的位置。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:829
+#: fdd1b89931e649aa860c137a47cd322f
+msgid ""
+"For Copter, the command will also try to use the current position if all the"
+" location parameters are set to 0. The location information in the command "
+"is only used if it is close to the EKF origin."
+msgstr "对于 Copter，如果所有位置参数均设置为 0，该指令也会尝试使用当前位置。指令中的位置信息仅在其接近 EKF 原点时使用。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:894
+#: bce7cce5bc624adcbe8c8b2a51496e95
+msgid "Mission Planner Settings for DO_SET_HOME command"
+msgstr "DO_SET_HOME 指令的 Mission Planner 设置"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:899
+#: 85b0356495f54db1a7135c5cb971da88
+msgid "MAV_CMD_DO_SET_RELAY"
+msgstr "MAV_CMD_DO_SET_RELAY"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:903
+#: 13245fe6b0064caaad7852ba1e0e08ba
+msgid "Set a `Relay <common-relay>`__ pin's voltage high (on) or low (off)."
+msgstr "将 `继电器 <common-relay>`__ 引脚电压设为高电平（开）或低电平（关）。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:966
+#: c5434d70818d49998a22c3ea3c80babb
+msgid "MissionPlanner Settings for DO_SET_RELAY command"
+msgstr "DO_SET_RELAY 指令的 Mission Planner 设置"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:971
+#: e1268bf9dd0e4a52ae5d16b82523c1d3
+msgid "MAV_CMD_DO_REPEAT_RELAY"
+msgstr "MAV_CMD_DO_REPEAT_RELAY"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:975
+#: d26c6caf82ac450ba274238d7b78059b
+msgid ""
+"Toggle the :ref:`Relay <common-relay>` pin's voltage/state a specified "
+"number of times with a given period. Toggling the Relay will turn an off "
+"relay on and vice versa"
+msgstr "以给定周期将 :ref:`继电器 <common-relay>` 引脚电压/状态切换指定次数。切换继电器将使关闭的继电器打开，反之亦然"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1033
+#: 077011d733a248359393f9984978fec8
+msgid "Mission Planner Settings for DO_RELAY_REPEAT command"
+msgstr "DO_RELAY_REPEAT 指令的 Mission Planner 设置"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1035
+#: 303ed4599f464d1cb38616b78a66e5b8
+msgid ""
+"In the example above, assuming the relay was off to begin with, it would be "
+"set high and then after 3 seconds, it would be toggled low again."
+msgstr "在上述示例中，假设继电器初始状态为关，它将被设为高电平，然后 3 秒后再次切换为低电平。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1041
+#: e69c8f8dfb4d426c96dc00cbf4531987
+msgid "MAV_CMD_DO_SET_SERVO"
+msgstr "MAV_CMD_DO_SET_SERVO"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1045
+#: 25a0a3736c6a4a618943b5b5ffdf4806
+msgid ""
+"Set a given :ref:`servo pin <common-servo>` output to a specific PWM value."
+msgstr "将指定的 :ref:`舵机引脚 <common-servo>` 输出设置为特定 PWM 值。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1101
+#: 4ae6aa322d214584be02588d5fd903f1
+msgid "Mission Planner Settingsfor DO_SET_SERVO command"
+msgstr "DO_SET_SERVO 指令的 Mission Planner 设置"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1103
+#: 927c53e75ab84c6b92e512878d819b8e
+msgid ""
+"In the example above, the servo attached to output channel 8 would be moved "
+"to PWM 1700 (servos generally accept PWM values between 1000 and 2000)."
+msgstr "在上述示例中，连接到输出通道 8 的舵机将移动到 PWM 1700（舵机通常接受 1000 到 2000 之间的 PWM 值）。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1107
+#: 56b0e82d148544f7932e7b8686ad0014
+msgid ""
+"as of firmware versions 4.0 and later, this command can be used on any "
+"output configured by its ``SERVOx_FUNCTION`` command as 0,1, or 51-66  "
+"(disabled or RC pass-throughs)"
+msgstr ""
+"从固件 4.0 版本起，此指令可用于任何通过 ``SERVOx_FUNCTION`` 命令配置为 0、1 或 51-66（禁用或 RC 直通）的输出"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1112
+#: 959d3625cbf34c0d8193b4ab474df081
+msgid "MAV_CMD_DO_REPEAT_SERVO"
+msgstr "MAV_CMD_DO_REPEAT_SERVO"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1116
+#: 1e48f39dfe2c42d5b235d6a0ce930652
+msgid ""
+"Cycle a :ref:`servo <common-servo>` PWM output pin between its mid-position "
+"value and a specified PWM value, for a given number of cycles and with a set"
+" period."
+msgstr ""
+"在给定周期和设定次数内，将 :ref:`舵机 <common-servo>` PWM 输出引脚在其中间位置值和指定 PWM 值之间循环切换。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1120
+#: 543e7e7a30d840d1bc91d8ba05ab5624
+msgid ""
+"The mid-position value is specified in the ``RCn_TRIM`` parameter for the "
+"channel (``RC8_TRIM`` in the screenshot below). The default value is 1500.."
+msgstr "中间位置值在该通道的 ``RCn_TRIM`` 参数中指定（下方截图中为 ``RC8_TRIM``）。默认值为 1500。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1178
+#: 082d4689573d46cdbf419174879c3d38
+msgid "Mission Planner Settingsfor DO_REPEAT_SERVO command"
+msgstr "DO_REPEAT_SERVO 指令的 Mission Planner 设置"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1180
+#: 8a0c2d68b806446b948eeaeaf4faf17b
+msgid ""
+"In the example above, the servo attached to output channel 8 would be moved "
+"to PWM 1700, then after 4 second, back to mid, after another 4 seconds it "
+"would be moved to 1700 again, then finally after 4 more seconds it would be "
+"moved back to mid."
+msgstr ""
+"在上述示例中，连接到输出通道 8 的舵机将移动到 PWM 1700，4 秒后返回中间位置，再过 4 秒后再次移动到 1700，最后再过 4 "
+"秒后返回中间位置。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1192
+#: 46017286d3634802b1411674b14d7543
+msgid "MAV_CMD_DO_SET_ROI"
+msgstr "MAV_CMD_DO_SET_ROI"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1204
+#: d5bee59ad1ec44e8ab540161d75de3ee
+msgid "MAV_CMD_DO_DIGICAM_CONFIGURE"
+msgstr "MAV_CMD_DO_DIGICAM_CONFIGURE"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1208
+#: 7f5016ea7a9549a3b6a45c9ada7b4720
+msgid "Configure an on-board camera controller system."
+msgstr "配置机载相机控制器系统。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1210
+#: abfc417c496846ff825b43cf801d3b38
+msgid ""
+"The parameters are forwarded to an on-board camera controller system (like "
+"the `3DR Camera Control Board <common-camera-control-board>`__), if one is "
+"present."
+msgstr ""
+"参数将被转发到机载相机控制器系统（如 `3DR Camera Control Board <common-camera-control-"
+"board>`__）（如果存在）。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1280
+#: 7b3f1adc3f3647f4b860e477e9370b7e
+msgid "MAV_CMD_DO_DIGICAM_CONTROL"
+msgstr "MAV_CMD_DO_DIGICAM_CONTROL"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1284
+#: d810b456b65a4ebf96fe33e0ae5d6643
+msgid ""
+"Trigger the :ref:`camera shutter <common-camera-shutter-with-servo>` once. "
+"This command takes no additional arguments."
+msgstr "触发 :ref:`相机快门 <common-camera-shutter-with-servo>` 一次。此指令不需要额外参数。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1288
+#: 8064b08fff164702af788de439470d45
+msgid "In general, if a command field is set to 0 it is ignored."
+msgstr "通常，如果指令字段设置为 0，则被忽略。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1353
+#: 78607482108d4e169404b3bc6fda889f
+msgid "Mission PlannerSettings for DO_DIGICAM_CONTROL command."
+msgstr "DO_DIGICAM_CONTROL 指令的 Mission Planner 设置。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1358
+#: ed27da078e444c6eb57c5b972aefe054
+msgid "MAV_CMD_DO_MOUNT_CONTROL"
+msgstr "MAV_CMD_DO_MOUNT_CONTROL"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1362
+#: d71d4d073da7429d84a7c65b4b08e1df
+msgid "Mission command to control a camera or antenna mount."
+msgstr "用于控制相机或天线挂载的任务指令。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1364
+#: d37c01fb2a2e4a108a55360b0edc3bba
+msgid ""
+"This command allows you to specify a roll, pitch and yaw angle which will be"
+" sent to the :ref:`camera gimbal <common-cameras-and-gimbals>`. This can be "
+"used to point the camera in specific directions at various times in the "
+"mission."
+msgstr ""
+"此指令允许您指定横滚、俯仰和偏航角度，并将其发送至 :ref:`相机云台 <common-cameras-and-"
+"gimbals>`。可用于在任务的不同时刻将相机指向特定方向。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1423
+#: 919fa776d84447b8ae84c54b42f32e6d
+msgid "Mission Planner Settings for DO_MOUNT_CONTROL command"
+msgstr "DO_MOUNT_CONTROL 指令的 Mission Planner 设置"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1428
+#: 6c619d2feb03425799cb3a4adcde4d0b
+msgid "MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW"
+msgstr "MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1432
+#: ac7930fe378349458666bceb16cd9efc
+msgid ""
+"Mission command to move the gimbal to the desired pitch and yaw angles (in "
+"degrees)."
+msgstr "将云台移动到期望俯仰和偏航角度（度）的任务指令。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1434
+#: a7ee222eb99446c7a2ac21dcd364c9d1
+msgid ""
+"This command allows you to specify a pitch and yaw angle which will be sent "
+"to the :ref:`camera gimbal <common-cameras-and-gimbals>`. This can be used "
+"to point the camera in specific directions at various times in the mission. "
+"Positive pitch angles are up, Negative are down.  Positive yaw angles are "
+"clockwise, negative are counter clockwise."
+msgstr ""
+"此指令允许您指定俯仰和偏航角度，并将其发送至 :ref:`相机云台 <common-cameras-and-"
+"gimbals>`。可用于在任务的不同时刻将相机指向特定方向。俯仰角正值表示向上，负值表示向下。偏航角正值为顺时针，负值为逆时针。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1493
+#: a87ed8f9e9aa4ca493d20736d869b74d
+msgid "Mission PlannerSettings for DO_GIMBAL_MANAGE_PITCHYAW command"
+msgstr "DO_GIMBAL_MANAGE_PITCHYAW 指令的 Mission Planner 设置"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1498
+#: 3ace199096024390bbe85499f7f186d7
+msgid "MAV_CMD_DO_SET_CAM_TRIGG_DIST"
+msgstr "MAV_CMD_DO_SET_CAM_TRIGG_DIST"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1502
+#: dc725b6423004a6a840420cd6eec6f2f
+msgid ""
+"Trigger the :ref:`camera shutter <common-camera-shutter-with-servo>` at "
+"regular distance intervals. This command is useful in :ref:`camera survey "
+"missions <common-camera-control-and-auto-missions-in-mission-planner>`. To "
+"trigger the camera once, immediately after passing the DO command, set "
+"param3 to 1."
+msgstr ""
+"以固定距离间隔触发 :ref:`相机快门 <common-camera-shutter-with-servo>`。此指令在 :ref:`相机航拍任务 "
+"<common-camera-control-and-auto-missions-in-mission-planner>` 中很有用。如需在经过 DO "
+"指令后立即触发相机一次，将 param3 设为 1。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1508
+#: 7da93cfce46b4fc2a1e12549969cab67
+msgid ""
+"Providing a distance of zero will stop the camera shutter from being "
+"triggered."
+msgstr "将距离设为零将停止相机快门的触发。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1563
+#: b289fd7450a248d4b9068de5b85bf98a
+msgid "Mission PlannerSettings for DO_SET_CAM_TRIGG_DIST command"
+msgstr "DO_SET_CAM_TRIGG_DIST 指令的 Mission Planner 设置"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1565
+#: 8dde35df7b4e411392b3f9200dc9f59a
+msgid ""
+"The above configuration will cause the camera shutter to trigger after every"
+" 5m that the vehicle travels."
+msgstr "上述配置将使相机快门在飞行器每飞行 5m 后触发一次。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1572
+#: c3439620db574a00ae232b0996af2784
+msgid "MAV_CMD_DO_FENCE_ENABLE"
+msgstr "MAV_CMD_DO_FENCE_ENABLE"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1576
+#: 047a97428c4a45f9960fb883dbfcb0f4
+msgid ""
+"Mission commands to enable the Plane :ref:`GeoFence <geofencing>`, "
+"Copter/Rover :ref:`common-ac2_simple_geofence` and/or :ref:`common-"
+"polygon_fence`."
+msgstr ""
+"启用 Plane :ref:`电子围栏 <geofencing>`、Copter/Rover :ref:`common-"
+"ac2_simple_geofence` 和/或 :ref:`common-polygon_fence` 的任务指令。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1631
+#: 8cec621b8b76481180357ab71ebc255a
+msgid "MAV_CMD_DO_AUX_FUNCTION"
+msgstr "MAV_CMD_DO_AUX_FUNCTION"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1635
+#: c9cdc09867fb4fe8b1d7b9c47894aa29
+msgid ""
+"Mission command to control an :ref:`Auxiliary Function<common-auxiliary-"
+"functions>` in the same manner as an RC channel switch."
+msgstr "以与 RC 通道开关相同方式控制 :ref:`辅助功能<common-auxiliary-functions>` 的任务指令。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1706
+#: 5bd5e48a89a24cde84a07e373a4ab049
+msgid "MAV_CMD_DO_SET_RESUME_REPEAT_DIST"
+msgstr "MAV_CMD_DO_SET_RESUME_REPEAT_DIST"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1710
+#: b7272e902bec40d38f98d1cb09aa00ab
+msgid ""
+"Set the distance that the mission will be rewound when resuming after an "
+"interrupt (switching modes).  A full explanation of this feature can be "
+"found on the :ref:`Mission Rewind on Resume Page <common-mission-rewind>`.  "
+"After setting a rewind distance in a mission, setting the distance to zero "
+"will switch off the rewind feature from that point on the mission."
+msgstr ""
+"设置中断（切换模式）后恢复任务时任务将回退的距离。此功能的完整说明请参阅 :ref:`任务恢复回退页面 <common-mission-"
+"rewind>`。在任务中设置回退距离后，将距离设为零将从该点起关闭回退功能。"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1764
+#: 93918cee195245df808b5b853340d66a
+msgid "MAV_CMD_STORAGE_FORMAT"
+msgstr "MAV_CMD_STORAGE_FORMAT"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1768
+#: baa9397427de4deeaf110fe0d8af77c2
+msgid ""
+"Format SD Card. Useful for vehicles where SD card is inaccessible. Param1 "
+"and Param2 must be set to 1."
+msgstr "格式化 SD 卡。适用于 SD 卡无法访问的飞行器。Param1 和 Param2 必须设为 1。"
+
+#~ msgid ""
+#~ "A simpler list just for :ref:`Copter can be found here <copter:mission-"
+#~ "command-list>`"
+#~ msgstr "仅适用于 :ref:`Copter 的简化列表可在此处找到 <copter:mission-command-list>`"
+
+#~ msgid ":ref:`MAV_CMD_NAV_TAKEOFF <mav_cmd_nav_takeoff>`"
+#~ msgstr ":ref:`MAV_CMD_NAV_TAKEOFF <mav_cmd_nav_takeoff>`"
+
+#~ msgid ":ref:`MAV_CMD_NAV_SPLINE_WAYPOINT <mav_cmd_nav_spline_waypoint>`"
+#~ msgstr ":ref:`MAV_CMD_NAV_SPLINE_WAYPOINT <mav_cmd_nav_spline_waypoint>`"
+
+#~ msgid ":ref:`MAV_CMD_NAV_PAYLOAD_PLACE <mav_cmd_nav_payload_place>`"
+#~ msgstr ":ref:`MAV_CMD_NAV_PAYLOAD_PLACE <mav_cmd_nav_payload_place>`"
+
+#~ msgid ""
+#~ "The Copter will fly a straight line to the specified latitude, longitude , "
+#~ "and altitude. It will then wait at the point for a specified delay time and "
+#~ "then proceed to the next waypoint."
+#~ msgstr "飞行器将沿直线飞往指定的纬度、经度和高度，然后在该点等待指定的延迟时间，再继续前往下一个航点。"
+
+#~ msgid "**Mission Planner screenshots**"
+#~ msgstr "**Mission Planner 截图**"
+
+#~ msgid "Copter: Mission Planner Settings for WAYPOINT command"
+#~ msgstr "Copter：WAYPOINT 指令的 Mission Planner 设置"
+
+#~ msgid "MAV_CMD_NAV_TAKEOFF"
+#~ msgstr "MAV_CMD_NAV_TAKEOFF"
+
+#~ msgid "Supported by: Copter, Plane (not Rover)."
+#~ msgstr "支持的飞行器：Copter、Plane（不含 Rover）。"
+
+#~ msgid ""
+#~ "Takeoff (either from the ground or by hand-launch). It should be the first "
+#~ "command of nearly all Plane and Copter missions."
+#~ msgstr "起飞（从地面或手抛起飞）。该指令应作为几乎所有 Plane 和 Copter 任务的第一条指令。"
+
+#~ msgid ""
+#~ "The vehicle will climb straight up from its current location to the "
+#~ "specified altitude. If the mission is begun while the copter is already "
+#~ "flying, the vehicle will climb straight up to the specified altitude, if the"
+#~ " vehicle is already above the altitude the command will be ignored and the "
+#~ "mission will move on to the next command immediately."
+#~ msgstr ""
+#~ "飞行器将从当前位置垂直爬升至指定高度。如果任务开始时飞行器已在飞行中，则垂直爬升至指定高度；如果飞行器已高于该高度，则忽略该指令并立即执行下一条指令。"
+
+#~ msgid "Copter: Mission Planner Settings for TAKEOFF command"
+#~ msgstr "Copter：TAKEOFF 指令的 Mission Planner 设置"
+
+#~ msgid ""
+#~ "Fly to the specified location and then loiter there indefinitely — where "
+#~ "loiter means \"wait in place\" (rather than \"circle\"). If zero is "
+#~ "specified for a latitude/longitude/altitude parameter then the current "
+#~ "location value for the parameter will be used."
+#~ msgstr ""
+#~ "飞往指定位置并在该处无限期悬停——此处悬停指「在原地等待」（而非「绕圈飞行」）。如果纬度/经度/高度参数中任一指定为零，则使用该参数的当前位置值。"
+
+#~ msgid ""
+#~ "The mission will not proceed past this command while in AUTO mode. In order "
+#~ "to break out of this command you need to change the mode (i.e. to MANUAL). "
+#~ "If there are subsequent commands then you can continue the mission at the "
+#~ "next command, if the Copter ``MIS_RESTART`` parameter is set to resume, by "
+#~ "switching back to AUTO mode (otherwise the mission will restart)."
+#~ msgstr ""
+#~ "在 AUTO 模式下，任务不会跳过此指令继续执行。要退出此指令，需要切换飞行模式（例如切换到 MANUAL 模式）。如果后续还有其他指令，可将飞行器的 "
+#~ "``MIS_RESTART`` 参数设置为恢复模式，然后切换回 AUTO 模式以从下一条指令继续任务（否则任务将从头开始）。"
+
+#~ msgid "Copter: Mission Planner Settings for LOITER_UNLIM command"
+#~ msgstr "Copter：LOITER_UNLIM 指令的 Mission Planner 设置"
+
+#~ msgid "MAV_CMD_NAV_LOITER_TURNS"
+#~ msgstr "MAV_CMD_NAV_LOITER_TURNS"
+
+#~ msgid ""
+#~ "Loiter (circle) the specified location for at least the specified number of "
+#~ "complete turns, and then proceed to the next command upon intersection of "
+#~ "the course to it with the circle's perimeter. If zero is specified for a "
+#~ "latitude/longitude/altitude parameter then the current location value for "
+#~ "the parameter will be used. Fractional turns between 0 and 1 are supported, "
+#~ "while turns greater than 1 must be integers."
+#~ msgstr ""
+#~ "在指定位置盘旋（绕圈）至少指定的完整圈数，然后在飞行路线与圆弧相交时继续执行下一条指令。如果纬度/经度/高度参数中任一指定为零，则使用该参数的当前位置值。支持"
+#~ " 0 到 1 之间的小数圈数，大于 1 的圈数必须为整数。"
+
+#~ msgid ""
+#~ "The radius of the circle is controlled by the command parameter. A radius of"
+#~ " 0 will result in the copter loitering at the location and pirouetting the "
+#~ "specified number of turns. Negative radius values result in counter-"
+#~ "clockwise turns instead of clockwise turns. Radius values over 255 meters "
+#~ "will be rounded down to the nearest 10 meter mark."
+#~ msgstr ""
+#~ "圆圈半径由指令参数控制。半径为 0 时，飞行器将在原地悬停并原地旋转指定圈数。负半径值将使飞行器逆时针转圈而非顺时针。超过 255 "
+#~ "米的半径值将向下取整到最近的 10 米整数。"
+
+#~ msgid ""
+#~ "This is the command equivalent of the :ref:`Circle flight mode "
+#~ "<copter:circle-mode>`."
+#~ msgstr "此指令等同于 :ref:`Circle 飞行模式 <copter:circle-mode>`。"
+
+#~ msgid "Copter: Mission Planner Settings for LOITER_TURNS command"
+#~ msgstr "Copter：LOITER_TURNS 指令的 Mission Planner 设置"
+
+#~ msgid ""
+#~ "Fly/Drive to the specified location and then loiter there for the specified "
+#~ "number of seconds — where loiter means \"wait in place\" (rather than "
+#~ "\"circle\"). The timer starts when the waypoint is reached; when it expires "
+#~ "the waypoint is complete. If zero is specified for a "
+#~ "latitude/longitude/altitude parameter then the current location value for "
+#~ "the parameter will be used."
+#~ msgstr ""
+#~ "飞往/驶往指定位置，然后在该处悬停指定秒数——此处悬停指「在原地等待」（而非「绕圈飞行」）。计时器在到达航点时开始；到期后航点完成。如果纬度/经度/高度参数中任一指定为零，则使用该参数的当前位置值。"
+
+#~ msgid ""
+#~ "This is the mission equivalent of the :ref:`Loiter flight mode "
+#~ "<copter:loiter-mode>` or :ref:`Hold mode <rover:hold-mode>`."
+#~ msgstr ""
+#~ "此指令等同于任务中的 :ref:`Loiter 飞行模式 <copter:loiter-mode>` 或 :ref:`Hold 模式 "
+#~ "<rover:hold-mode>`。"
+
+#~ msgid "Copter: Mission Planner Settings for LOITER_TIME command"
+#~ msgstr "Copter：LOITER_TIME 指令的 Mission Planner 设置"
+
+#~ msgid "Copter"
+#~ msgstr "Copter"
+
+#~ msgid ""
+#~ "Return to the *home location* (or the nearest :ref:`Rally Point <common-"
+#~ "rally-points>` if closer) and then land. The home location is where the "
+#~ "vehicle was last armed (or when it first gets GPS lock after arming if the "
+#~ "vehicle configuration allows this)."
+#~ msgstr ""
+#~ "返回 *Home 位置*（或最近的 :ref:`集结点 <common-rally-points>`，如果更近），然后降落。Home "
+#~ "位置是飞行器最后一次解锁的位置（如果飞行器配置允许，则为解锁后首次获得 GPS 锁定的位置）。"
+
+#~ msgid ""
+#~ "This is the mission equivalent of the :ref:`RTL flight mode <copter:rtl-"
+#~ "mode>`.  The vehicle will first climb to the :ref:`RTL_ALT <copter:RTL_ALT>`"
+#~ " parameter's specified altitude (default is 15m) before returning home."
+#~ msgstr ""
+#~ "此指令等同于 :ref:`RTL 飞行模式 <copter:rtl-mode>`。飞行器将先爬升至 :ref:`RTL_ALT "
+#~ "<copter:RTL_ALT>` 参数指定的高度（默认为 15m），然后返回 Home。"
+
+#~ msgid ""
+#~ "This command takes no parameters and generally should be the last command in"
+#~ " the mission."
+#~ msgstr "此指令不需要任何参数，通常应作为任务的最后一条指令。"
+
+#~ msgid "Copter: Mission PlannerSettings for RETURN_TO_LAUNCH command"
+#~ msgstr "Copter：RETURN_TO_LAUNCH 指令的 Mission Planner 设置"
+
+#~ msgid "MAV_CMD_NAV_LAND"
+#~ msgstr "MAV_CMD_NAV_LAND"
+
+#~ msgid ""
+#~ "The copter will land at its current location or proceed at current altitude "
+#~ "to the lat/lon coordinates provided (if non-zero) and land.  This is the "
+#~ "mission equivalent of the :ref:`LAND flight mode <copter:land-mode>`."
+#~ msgstr ""
+#~ "飞行器将在当前位置降落，或以当前高度飞往指定的经纬度坐标（如果非零）并降落。此指令等同于 :ref:`LAND 飞行模式 <copter:land-"
+#~ "mode>`。"
+
+#~ msgid ""
+#~ "The motors will not stop on their own: you must exit AUTO mode to cut the "
+#~ "engines."
+#~ msgstr "电机不会自动停止：必须退出 AUTO 模式才能关闭电机。"
+
+#~ msgid "Copter: Mission Planner Settings for LAND command"
+#~ msgstr "Copter：LAND 指令的 Mission Planner 设置"
+
+#~ msgid "MAV_CMD_NAV_SPLINE_WAYPOINT"
+#~ msgstr "MAV_CMD_NAV_SPLINE_WAYPOINT"
+
+#~ msgid "Supported by: Copter (not Plane or Rover)."
+#~ msgstr "支持的飞行器：Copter（不含 Plane 或 Rover）。"
+
+#~ msgid ""
+#~ "Fly to the target location using a `Spline path "
+#~ "<https://en.wikipedia.org/wiki/Spline_%28mathematics%29>`__, then wait "
+#~ "(hover) for a specified time before proceeding to the next command."
+#~ msgstr ""
+#~ "使用 `样条曲线路径 <https://en.wikipedia.org/wiki/Spline_%28mathematics%29>`__ "
+#~ "飞往目标位置，然后等待（悬停）指定时间后继续执行下一条指令。"
+
+#~ msgid ""
+#~ "The Spline commands take all the same arguments are regular waypoints (lat, "
+#~ "lon, alt, delay) but when executed the vehicle will fly smooth paths (both "
+#~ "vertically and horizontally) instead of straight lines. Spline waypoints can"
+#~ " be mixed with regular straight-line waypoints as shown in the screenshot "
+#~ "below."
+#~ msgstr ""
+#~ "样条指令与普通航点使用相同的参数（纬度、经度、高度、延迟），但执行时飞行器将沿平滑路径飞行（垂直和水平方向均如此），而非沿直线飞行。样条航点可与普通直线航点混用，如下方截图所示。"
+
+#~ msgid "Copter: Mission Planner Settings for SPLINE_WAYPOINT command"
+#~ msgstr "Copter：SPLINE_WAYPOINT 指令的 Mission Planner 设置"
+
+#~ msgid "The Mission Planner screenshot shows the path the vehicle will take."
+#~ msgstr "Mission Planner 截图显示了飞行器将要飞行的路径。"
+
+#~ msgid ""
+#~ "The 1 second delay at the end of Waypoint #1 causes the vehicle to stop so "
+#~ "Spline command #2 begins by taking a sharp 90degree turn"
+#~ msgstr "航点 #1 末尾的 1 秒延迟导致飞行器停止，因此样条指令 #2 从急转 90 度开始"
+
+#~ msgid ""
+#~ "The direction of travel as the vehicle passes through Spline Waypoint #3 is "
+#~ "parallel to an imaginary line drawn between waypoints #2 and #4"
+#~ msgstr "飞行器经过样条航点 #3 时的飞行方向与航点 #2 和 #4 之间的假想连线平行"
+
+#~ msgid ""
+#~ "Waypoint #5 is a straight line so the vehicle lines itself up to point "
+#~ "towards waypoint #5 even before reaching waypoint #4."
+#~ msgstr "航点 #5 是直线，因此飞行器在到达航点 #4 之前就已经开始朝向航点 #5 方向对齐。"
+
+#~ msgid "MAV_CMD_NAV_GUIDED_ENABLE"
+#~ msgstr "MAV_CMD_NAV_GUIDED_ENABLE"
+
+#~ msgid ""
+#~ "Enable ``GUIDED`` mode to hand over control to an external "
+#~ "controller/:ref:`common-companion-computers`. ee :ref:`Guided Mode "
+#~ "<copter:ac2_guidedmode>` for more information. The :ref:`common-companion-"
+#~ "computers`  would then send MAVLink commands to control the vehicle."
+#~ msgstr ""
+#~ "启用 ``GUIDED`` 模式，将控制权移交给外部控制器/:ref:`common-companion-computers`。详情请参阅 "
+#~ ":ref:`Guided 模式 <copter:ac2_guidedmode>`。:ref:`common-companion-computers` "
+#~ "随后将发送 MAVLink 指令来控制飞行器。"
+
+#~ msgid ""
+#~ "See also :ref:`MAV_CMD_DO_GUIDED_LIMITS <mav_cmd_do_guided_limits>` for "
+#~ "information on how to apply time, altitude and distance limits on the "
+#~ "external control."
+#~ msgstr ""
+#~ "另请参阅 :ref:`MAV_CMD_DO_GUIDED_LIMITS "
+#~ "<mav_cmd_do_guided_limits>`，了解如何对外部控制设置时间、高度和距离限制。"
+
+#~ msgid ""
+#~ "After reaching this waypoint, delay the execution of the next mission "
+#~ "command until either the time in seconds has elapsed or the time entered(in "
+#~ "the future) is reached. Execution of the next mission item then occurs. For "
+#~ "Copters, they will loiter until then, and Rovers hold position."
+#~ msgstr ""
+#~ "到达此航点后，延迟执行下一条任务指令，直到经过指定秒数或到达指定时间（将来某时刻）。然后继续执行下一条任务项。Copter 在此期间悬停，Rover "
+#~ "保持位置。"
+
+#~ msgid ""
+#~ "After reaching this waypoint, the vehicle will descend up to the maximum "
+#~ "descent value. If the payload has not touched the ground before this limit "
+#~ "is reached, the vehicle will climb back up to the waypoint altitude and "
+#~ "continue to the next mission item. If it reaches the ground, it will "
+#~ "automatically release the gripper if enabled, and optionally wait a period, "
+#~ "re-grip, and ascend back to the waypoint altitude and continue the mission. "
+#~ "Numerous parameters that control the payload touch-down detection, wait "
+#~ "period, etc. are prefaced with ``PLDP_``."
+#~ msgstr ""
+#~ "到达此航点后，飞行器将下降至最大下降值。如果在到达此限制前负载未接触地面，飞行器将重新爬升至航点高度并继续执行下一条任务项。如果接触地面，将自动释放抓手（如果启用），可选择等待一段时间，然后重新抓取并爬升回航点高度继续任务。控制负载触地检测、等待时间等的众多参数均以"
+#~ " ``PLDP_`` 为前缀。"
+
+#~ msgid "MAV_CMD_CONDITION_YAW"
+#~ msgstr "MAV_CMD_CONDITION_YAW"
+
+#~ msgid "Point (yaw) the nose of the vehicle towards a specified heading."
+#~ msgstr "将飞行器机头（偏航）指向指定航向。"
+
+#~ msgid ""
+#~ "The parameters allow you to specify whether the target direction is absolute"
+#~ " or relative to the current yaw direction. If the direction is relative you "
+#~ "can also (separately) specify whether the value is added or subtracted from "
+#~ "the current heading (note that the vehicle will always turn in the direction"
+#~ " that most quickly gets it to the new target heading regardless of the "
+#~ "``param3`` value)."
+#~ msgstr ""
+#~ "参数允许您指定目标方向是绝对方向还是相对于当前偏航方向。如果方向是相对的，您还可以（单独地）指定该值是加到还是减去当前航向（注意飞行器始终会以最快的方式转向新目标航向，而不管"
+#~ " ``param3`` 的值）。"
+
+#~ msgid "Copter: Mission Planner Settings for CONDITION_YAW command"
+#~ msgstr "Copter：CONDITION_YAW 指令的 Mission Planner 设置"
+
+#~ msgid "Special Commands"
+#~ msgstr "特殊指令"
+
+#~ msgid ""
+#~ "This section is for commands that may be relevant to missions, but which are"
+#~ " not mission commands (part of the mission)."
+#~ msgstr "本节介绍可能与任务相关，但不是任务指令（不是任务的一部分）的指令。"
+
+#~ msgid "MAV_CMD_MISSION_START"
+#~ msgstr "MAV_CMD_MISSION_START"
+
+#~ msgid "Supported by: Copter"
+#~ msgstr "支持的飞行器：Copter"
+
+#~ msgid ""
+#~ "This command can be used to start a mission when the Copter is on the ground"
+#~ " in AUTO mode. If the vehicle is already in the air then the mission will "
+#~ "start as soon as you switch into AUTO mode (so this command is not "
+#~ "needed/ignored). This allows a GCS/companion computer to start a mission in "
+#~ "AUTO without raising the throttle."
+#~ msgstr ""
+#~ "当 Copter 在地面处于 AUTO 模式时，此指令可用于启动任务。如果飞行器已在飞行中，切换到 AUTO "
+#~ "模式后任务将立即开始（因此此指令不需要/被忽略）。这允许地面站/伴飞计算机在不拉高油门的情况下以 AUTO 模式启动任务。"
+
+#~ msgid ""
+#~ "Previously a mission would only start after the pilot engaged the throttle. "
+#~ "This command makes it possible to start missions without directly "
+#~ "controlling the throttle (though that approach is still available)."
+#~ msgstr "以前，任务只能在飞手操作油门后才能启动。此指令使得在不直接控制油门的情况下启动任务成为可能（尽管那种方式仍然可用）。"
+
+#~ msgid ""
+#~ "This is not a \"mission command\" (it can't be used as a type of mission "
+#~ "waypoint). It is run from the **Action** menu (see the screenshot below)."
+#~ msgstr "这不是「任务指令」（不能作为任务航点类型使用）。它从**动作**菜单运行（见下方截图）。"
+
+#~ msgid "The parameters are all ignored."
+#~ msgstr "所有参数均被忽略。"
+
+#~ msgid "Mission Planner: MISSION_START command"
+#~ msgstr "Mission Planner：MISSION_START 指令"
+
+#~ msgid "MAV_CMD_COMPONENT_ARM_DISARM"
+#~ msgstr "MAV_CMD_COMPONENT_ARM_DISARM"
+
+#~ msgid "Disarm the motors."
+#~ msgstr "上锁电机。"
+
+#~ msgid "The command supports disarming on the ground and in flight."
+#~ msgstr "该指令支持在地面和飞行中上锁。"
+
+#~ msgid "The motors will disarm automatically after landing."
+#~ msgstr "降落后电机将自动上锁。"
+
+#~ msgid ""
+#~ "This is not a \"mission command\" (it can't be used as a type of mission "
+#~ "waypoint)."
+#~ msgstr "这不是「任务指令」（不能作为任务航点类型使用）。"
+
+#~ msgid ""
+#~ "Sets the desired maximum speed in meters/second (only). Both the speed-type "
+#~ "and throttle settings are ignored."
+#~ msgstr "仅设置期望最大速度（米/秒）。速度类型和油门设置均被忽略。"
+
+#~ msgid "Copter: Mission Planner Settings for DO_CHANGE_SPEED command"
+#~ msgstr "Copter：DO_CHANGE_SPEED 指令的 Mission Planner 设置"
+
+#~ msgid ""
+#~ "Points the :ref:`camera gimbal <common-cameras-and-gimbals>` at the \"region"
+#~ " of interest\", and also rotates the nose of the vehicle if the mount type "
+#~ "does not support a yaw feature."
+#~ msgstr ""
+#~ "将 :ref:`相机云台 <common-cameras-and-gimbals>` "
+#~ "指向「感兴趣区域」，如果挂载类型不支持偏航功能，还会旋转飞行器机头。"
+
+#~ msgid ""
+#~ "After setting the ROI, the camera/vehicle will continue to follow it until "
+#~ "the end of the mission, unless it is changed or cleared by setting another "
+#~ "ROI. Clearing the ROI is achieved by setting a later DO_SET_ROI command with"
+#~ " all zero for ``param5``-``param7`` (Lat, Lon and Alt)."
+#~ msgstr ""
+#~ "设置 ROI 后，相机/飞行器将持续跟踪该区域，直到任务结束，除非通过设置另一个 ROI 来更改或清除。清除 ROI 的方法是在后续设置一条 "
+#~ "DO_SET_ROI 指令，将 ``param5``-``param7``（纬度、经度和高度）全部设为零。"
+
+#~ msgid "**Mission planner screenshots/video**"
+#~ msgstr "**Mission Planner 截图/视频**"
+
+#~ msgid "Copter: Mission Planner Settings for DO_SET_ROI command"
+#~ msgstr "Copter：DO_SET_ROI 指令的 Mission Planner 设置"
+
+#~ msgid ""
+#~ "In the example above the nose and camera would be pointed at the red marker."
+#~ msgstr "在上述示例中，机头和相机将指向红色标记。"
+
+#~ msgid "MAV_CMD_DO_PARACHUTE"
+#~ msgstr "MAV_CMD_DO_PARACHUTE"
+
+#~ msgid "Mission command to trigger a parachute (if enabled)."
+#~ msgstr "触发降落伞的任务指令（如果已启用）。"
+
+#~ msgid "MAV_CMD_DO_GRIPPER"
+#~ msgstr "MAV_CMD_DO_GRIPPER"
+
+#~ msgid "Mission command to operate EPM gripper."
+#~ msgstr "操作 EPM 抓手的任务指令。"
+
+#~ msgid ""
+#~ "The :ref:`instructions for integrating Copter with gripper <common-electro-"
+#~ "permanent-magnet-gripper>` are out of date and use DO_SET_SERVO to activate "
+#~ "the gripper (April 2015)."
+#~ msgstr ""
+#~ ":ref:`将 Copter 与抓手集成的说明 <common-electro-permanent-magnet-gripper>` 已过时，使用 "
+#~ "DO_SET_SERVO 激活抓手（2015 年 4 月）。"
+
+#~ msgid "MAV_CMD_DO_GUIDED_LIMITS"
+#~ msgstr "MAV_CMD_DO_GUIDED_LIMITS"
+
+#~ msgid ""
+#~ "This command sets the time, altitude, and distance limits for external "
+#~ "control (GUIDED mode). When these limits are exceeded, control will return "
+#~ "from GUIDED mode to the mission. Setting any of these parameters to zero "
+#~ "will remove the associated limit."
+#~ msgstr ""
+#~ "此指令设置外部控制（GUIDED 模式）的时间、高度和距离限制。超出这些限制后，控制权将从 GUIDED "
+#~ "模式返回到任务。将任何参数设置为零将取消相应限制。"
+
+#~ msgid "MAV_CMD_DO_WINCH"
+#~ msgstr "MAV_CMD_DO_WINCH"
+
+#~ msgid "Supported by: Copter."
+#~ msgstr "支持的飞行器：Copter。"
+
+#~ msgid "Control Winch operation."
+#~ msgstr "控制绞车操作。"

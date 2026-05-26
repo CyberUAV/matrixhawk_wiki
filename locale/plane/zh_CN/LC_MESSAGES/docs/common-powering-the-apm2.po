@@ -1,0 +1,968 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 03:48+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/common-powering-the-apm2.rst:5
+#: 747bcbeae810414f8dcc1a1d94f34cb8
+msgid "Archived:Powering the APM2"
+msgstr "存档：APM2 供电"
+
+#: ../../source/docs/common-powering-the-apm2.rst:9
+#: 3df1c6fabb354469857811a525eff50d
+msgid "**ARCHIVED**"
+msgstr "**已存档**"
+
+#: ../../source/docs/common-powering-the-apm2.rst:11
+#: 5bb534054f404ef28954e465aaf391a2
+msgid ""
+"The APM2.x is end of life for use with ArduPilot. This article is made "
+"available for existing users."
+msgstr "APM2.x 已停止在 ArduPilot 中使用。本文仅供现有用户参考。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:14
+#: c154b3e31684491da5fdbbdfc63afa76
+msgid ""
+"This article demonstrates the options for powering the APM2.x board along "
+"with information about the requirements for connecting the power rail."
+msgstr "本文介绍了 APM2.x 飞控板的供电选项，以及连接电源轨的相关要求。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:19
+#: ba5f58edeb6a442f893612f22bbfd18d
+msgid "Overview"
+msgstr "概述"
+
+#: ../../source/docs/common-powering-the-apm2.rst:21
+#: 901f468160e64365b2b7374232273b3e
+msgid ""
+"Like any computer, the APM needs a power supply with a steady clean voltage "
+"and sufficient current."
+msgstr "与任何计算机一样，APM 需要稳定、纯净、足够电流的电源供应。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:24
+#: 68d70b184f294b04ba8b61f0c018d0ce
+msgid ""
+"3DR provides an :ref:`3DR Power Module <common-3dr-power-module>` that "
+"supplies 2.25A at 5.37V. The module is designed to convert power from the "
+"main flight battery (18 Volt maximum).  That module will supply sufficient "
+"power for your APM, and low power radios including your RC receiver (without"
+" servos). Your RC receiver can be powered from any APM Input (+5V and "
+"ground). This is normally done by connecting a 2 or 3 wire cable between an "
+"APM Input and one of the output channels on the RC radio."
+msgstr ""
+"3DR 提供了一个 :ref:`3DR Power Module <common-3dr-power-module>`，可在 5.37V 下输出 "
+"2.25A。该模块设计用于从主飞行电池（最高 18V）转换电源。该模块可为您的 APM "
+"以及包括接收机在内的低功耗无线设备提供足够的电源（不含舵机）。您的接收机可从任意 APM 输入引脚（+5V 和地）取电，通常通过在 APM "
+"输入端和遥控接收机某个输出通道之间连接一根 2 或 3 芯线缆来实现。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:33
+#: ce6657da4cb649d3a8fbbdee2cc51a8d
+msgid ""
+"If you are using any servos such as are required with a traditional "
+"helicopter or a camera gimbal, you will need to provide an additional "
+"dedicated power supply for the servos. The APM is intended to **control** "
+"servos, not power them."
+msgstr "如果您使用了舵机（如传统直升机或云台摄像头所需），则需要为舵机提供专用的额外电源。APM 的作用是**控制**舵机，而不是为其供电。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:38
+#: 3643d2a72b504198ae5bc5d1f66de3a5
+msgid ""
+"The following sections describe the APM power circuit (you will need to "
+"understand this in order to design a power supply for your APM, or provide "
+"additional power), and your options for powering the APM and connected "
+"components."
+msgstr ""
+"以下各节介绍了 APM 的供电电路（您需要了解这些内容，以便为 APM 设计供电方案或提供额外电源），以及为 APM 及其连接组件供电的各种选项。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:44
+#: 87b28eb4063447ca862d4cf1447e6f8c
+msgid "APM power circuit"
+msgstr "APM 供电电路"
+
+#: ../../source/docs/common-powering-the-apm2.rst:49
+#: e340f70a70794fc6b8a18e795c87bd93
+msgid ""
+"There are two \"sides\" to the positive circuit in the board. Each side has "
+"positive-rails available for inputing power or distributing it to peripheral"
+" devices. The center row of pins in the three groups of pins (Outputs, "
+"Inputs, Analog) labeled \"+\" are referred to as a \"positive-rail\". This "
+"means that the base of all the + pins are connected so they represent a "
+"single electrical path. The positive-rails of the Input and Analog group are"
+" connected together. So we have two separate positive circuits, one in the "
+"Outputs and the other made up of the Input/Analog."
+msgstr ""
+"电路板上的正极回路分为两「侧」。每侧均有可用于输入电源或向外围设备分配电源的正极排针。三组引脚（输出、输入、模拟）中间行标有「+」的引脚称为「正极排」，即所有"
+" + 引脚的底部相互连接，形成单一电气通路。输入组和模拟组的正极排相互连通，因此共有两条独立的正极回路：一条在输出侧，另一条由输入/模拟侧共同构成。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:59
+#: 8ac42662ca7b461284ac6394159d32d7
+msgid ""
+"All of the components on the board take power from various points on these "
+"rails, so it is necessary for both \"sides\" to be receiving +5V (within the"
+" specs below) for the board to function."
+msgstr "板上所有元件均从这些排针的各个位置取电，因此两「侧」都必须接收 +5V（在下述规格范围内），电路板才能正常工作。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:63
+#: 9e35e9b6887548f6828e14e8731cd984
+msgid ""
+"These positive-rails can be joined together by placing JP1 in its position "
+"on the board. This connects all the positive-rails ands provides power to "
+"both sides of the board, so that low-level power can be distributed to "
+"peripheral sensors and devices: 3DR Radios, sonar, RC Rx, etc. via the "
+"power-rails."
+msgstr ""
+"通过将 JP1 "
+"安装到电路板上的对应位置，可将这些正极排连接在一起。这样可连通所有正极排，并为电路板两侧供电，使低级电源能够通过电源排向外围传感器和设备（3DR "
+"无线电、声纳、RC 接收机等）分配。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:69
+#: bad9b12713e04598a6f4945bd082847a
+msgid "When using the power module, the circuit path is as follows:"
+msgstr "使用电源模块时，电路路径如下："
+
+#: ../../source/docs/common-powering-the-apm2.rst:71
+#: a3e3e465d0fc41dd93035a39a19a94d1
+msgid ""
+"From the power module connection the negative wire is connected to a "
+"negative-rail shared by the entire board regardless of JP1."
+msgstr "从电源模块连接处，负线连接到无论 JP1 如何设置、全板共用的负极排。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:74
+#: 8df38283a79b41078d00035e425a1511
+msgid ""
+"Positive voltage comes in to a T-junction. to the left is a path through the"
+" JP1 to the positive-rail of the Outputs. To the right it flows through an "
+"over-voltage, over-current, reverse-polarity protection(500mA fuse and 6V "
+"Zener diode). A side effect of passing through the Zener diode is a .37V "
+"loss, therefore input voltage should be bumped up by .37V to account for "
+"this. From here the positive voltage runs to the positive-rails of the "
+"Inputs and Analog. Inputs should not be used to power anything except your "
+"RC receiver."
+msgstr ""
+"正电压进入一个 T 形接头。向左经过 JP1 到达输出侧正极排；向右则经过过压、过流、反极性保护（500mA 保险丝和 6V "
+"稳压二极管）。通过稳压二极管时会损失 0.37V，因此输入电压应相应提高 0.37V "
+"以补偿损耗。之后正电压流向输入和模拟的正极排。输入端除接收机外不应为其他设备供电。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:83
+#: 67668b1a077e47c7816b236f88a086b7
+msgid ""
+"Higher current loads such as servos should be powered from the power-rails "
+"(positive-negative) of the Output side. You must use an adequate voltage-"
+"regulator to provide power directly to the Output power-rails, all servo "
+"power leads will attach to these same rails (the signal wires can connect on"
+" the Analog \"S\" pins in the case of a camera gimbal). Since JP1 is removed"
+" in this scenario, the other \"side\" of the board will need power provided "
+"to its power-rails directly."
+msgstr ""
+"较大电流负载（如舵机）应从输出侧电源排（正负极）取电。您必须使用足够的稳压器直接向输出电源排供电，所有舵机的电源线均连接到这些排针上（信号线可连接到模拟侧的「S」引脚，例如用于云台摄像头）。由于在此场景中"
+" JP1 已拆除，电路板另「侧」需要直接向其电源排供电。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:92
+#: 00bb8024c705471198542ae100e63c40
+msgid "Alternative ways to power your board"
+msgstr "为电路板供电的其他方式"
+
+#: ../../source/docs/common-powering-the-apm2.rst:94
+#: a244037285ca4501b93b7c303a1b422a
+msgid ""
+"If you are using the 3DR Power Module please find instructions here: \\ "
+":ref:`Using the 3DR Power Module <common-3dr-power-module>`"
+msgstr ""
+"如果您使用的是 3DR 电源模块，请在此处查阅说明：\\ :ref:`Using the 3DR Power Module <common-3dr-"
+"power-module>`"
+
+#: ../../source/docs/common-powering-the-apm2.rst:99
+#: d55839ffc97d46e8a6214f819a86052d
+msgid ""
+"Under no circumstances should you ever attempt to draw servo power from the "
+"analog input connector."
+msgstr "任何情况下都不得尝试从模拟输入连接器取用舵机电源。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:104
+#: 7a1333bc2fdc4a44aaea5f55e757b6a5
+msgid ""
+"You may \"control\" servos from A9, A10 and A11 from the A0 - A11 I/O "
+"connector, but you must run servo power separately."
+msgstr "您可以从 A0–A11 I/O 连接器的 A9、A10 和 A11 「控制」舵机，但必须单独提供舵机电源。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:107
+#: 8a654cd3303e43318125de3b3bd093e9
+msgid "The A0 - A11 I/O connector cannot supply sufficient power for servos."
+msgstr "A0–A11 I/O 连接器无法为舵机提供足够的电源。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:108
+#: 34f236a419eb46c7a4a140a5e83346ea
+msgid ""
+"A9, A10 and A11 of the I/O connector come pre-wired to correct digital out "
+"for use as servo control lines."
+msgstr "I/O 连接器的 A9、A10 和 A11 已预先连接到正确的数字输出，可用作舵机控制线。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:110
+#: 91e65e8c2f944e4dacb77abf619c3360
+msgid ""
+"For servo use, it is imperative that they have not been reassigned to analog"
+" use with the pads on the back of the APM board."
+msgstr "若用于舵机，必须确保这些引脚未通过 APM 板背面的焊盘被重新分配为模拟用途。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:114
+#: 7534b1e9b45d46d8b277274ff2147b34
+msgid "Non-technical description of the power supply requirements"
+msgstr "电源需求的非技术性说明"
+
+#: ../../source/docs/common-powering-the-apm2.rst:116
+#: abe3e1a19d694669be4d73abcf5a9996
+msgid ""
+"The description below simply supplements and provides an alternate view of "
+"the information above."
+msgstr "以下说明仅作为上述信息的补充，提供另一种理解视角。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:119
+#: fd38fa67305044d3829f64b73ec3255e
+msgid ""
+"The APM 2.5/2.6 board has two separate power circuits which make it very "
+"easy to power by a variety of methods."
+msgstr "APM 2.5/2.6 电路板具有两条独立的供电回路，可通过多种方式方便地供电。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:122
+#: 83b3f251c3794cb393ad07e81396213d
+msgid ""
+"A fused power circuit provides primary board and general I/O power: (It "
+"cannot provide power for servos)."
+msgstr "一条带保险丝的供电回路为电路板主体及通用 I/O 供电（无法为舵机供电）。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:124
+#: 7c524df9e4084636b70be399772fdc1c
+msgid ""
+"The Other power circuit is for the OUTPUT connector power rail: (it can "
+"provide power for servos)."
+msgstr "另一条供电回路用于输出连接器电源排（可为舵机供电）。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:127
+#: 10d0006bf1bc4dafbec71e0858b5e3be
+msgid ""
+"The jumper JP 1 determines whether the two power circuits are connected or "
+"separate."
+msgstr "跳线 JP1 决定两条供电回路是连通还是分离。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:130
+#: bf1578bd91ce4c528373262ac41e8fb3
+msgid ""
+"If JP1 is removed, the power rail on the OUTPUT connector \"Floats\" and may"
+" be used to distribute power."
+msgstr "若拆除 JP1，输出连接器上的电源排将「悬空」，可用于分配电源。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:132
+#: c6f8c27e7afc4ed5a6638bcc66b163dc
+msgid ""
+"Although if JP1 is removed the OUTPUT connector cannot be used to supply "
+"power to the APM board."
+msgstr "但若拆除 JP1，则不能通过输出连接器向 APM 电路板供电。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:135
+#: 24d8ef875e674c5d8d46b203063dae73
+msgid ""
+"It is possible to power the APM board from the Power Module connector or the"
+" OUTPUT or INPUT connectors."
+msgstr "可通过电源模块连接器、输出连接器或输入连接器为 APM 电路板供电。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:137
+#: 835d1c8d9000421caa6518dc6d6cbc90
+msgid ""
+"Normally the APM 2.5/2.6 \"Power Module\" is used to provide primary APM 2.5"
+" board and general I/O power."
+msgstr "通常使用 APM 2.5/2.6 「电源模块」为 APM 2.5 电路板及通用 I/O 提供主供电。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:139
+#: 94b016e96085436a95f20aca9a118791
+msgid ""
+"Alternatively primary board power can be supplied by a BEC either from one "
+"of the ESCs or from an external BEC."
+msgstr "也可通过 ESC 自带的 BEC 或外接独立 BEC 为电路板提供主供电。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:141
+#: eafe869afa8b408cba60e4d1eec11a33
+msgid "If servos are used, supplementary power is required."
+msgstr "如果使用了舵机，则需要补充供电。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:143
+#: 8b72a40ba1724b65a4045b2f0a65122b
+msgid ""
+"Generally one power supply is provided for the board and one or more "
+"additional power supplies for the servos."
+msgstr "一般情况下，为电路板提供一路电源，再为舵机提供一路或多路附加电源。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:145
+#: b3972c46ca18450794f70ff11da54845
+msgid ""
+"But if a sufficiently large external BEC is used it can supply power for "
+"both via the OUTPUT connector."
+msgstr "但如果使用了功率足够大的外接 BEC，也可通过输出连接器同时为两者供电。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:148
+#: e0d016082cc14d90a39e8f3ba5d415db
+msgid ""
+"Only the OUTPUT connector can provide power for servos as the other circuit "
+"is fused."
+msgstr "只有输出连接器可为舵机供电，因为另一条回路带有保险丝。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:151
+#: 917d083f8f3a47278a5d81431a18523c
+msgid ""
+"The address connector is sometimes used provide servo signals, but the "
+"servos power must come from elsewhere."
+msgstr "地址连接器有时用于提供舵机信号，但舵机电源必须另行提供。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:154
+#: 9895f28b78794ee48b3be9a16e511bb1
+msgid ""
+"How you are powering your APM board and or servos determines whether JP1 is"
+"  installed or not."
+msgstr "您为 APM 电路板和/或舵机供电的方式决定了是否需要安装 JP1。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:157
+#: 7ce24a05c4a14dea842cf9af7e2d2f83
+msgid "(Whether the two power circuits are separated or connected)."
+msgstr "（即两条供电回路是分离还是连通）。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:158
+#: 747f785cd1734a50bb1c9104fca93d69
+msgid "All possible configurations are detailed Below."
+msgstr "所有可能的配置详见下文。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:160
+#: add42caeb7304906ae202187c70a6c81
+msgid "The type of use will determine which options are available."
+msgstr "使用类型将决定哪些选项可用。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:162
+#: 03d4201a635342c9837e0742c20bde39
+msgid ""
+"Copter can power the APM from a power module or a UBEC or a BEC from one of "
+"the ESCs and can power servos from a UBEC or from the other ESC's BECs."
+msgstr ""
+"Copter 可通过电源模块、UBEC 或某个 ESC 的 BEC 为 APM 供电，并可通过 UBEC 或其他 ESC 的 BEC 为舵机供电。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:165
+#: f9d388f8a45140c5b212e6bf6e43126a
+msgid ""
+"Plane can power the APM from the power module,  the BEC from the flight "
+"motors ESC or a  separate UBEC and can power servos from a separate UBEC or "
+"the flight motors BEC if it is large enough."
+msgstr ""
+"Plane 可通过电源模块、飞行电机 ESC 的 BEC 或独立 UBEC 为 APM 供电，并可通过独立 UBEC 或飞行电机 "
+"BEC（若功率足够）为舵机供电。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:168
+#: 8aa1397aef754d15b9a54d09a0adb2de
+msgid ""
+"Rover  can power the APM from the power module,  the BEC from the drive "
+"motor's ESC or a  separate UBEC and can power the steering servo from a "
+"separate UBEC or the drive motors BEC if it is large enough."
+msgstr ""
+"Rover 可通过电源模块、驱动电机 ESC 的 BEC 或独立 UBEC 为 APM 供电，并可通过独立 UBEC 或驱动电机 "
+"BEC（若功率足够）为转向舵机供电。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:174
+#: e44683e99eda4b429e45859894feae3c
+msgid "Power supply rails connected requirements (JP1 Installed)"
+msgstr "电源排已连接的要求（JP1 已安装）"
+
+#: ../../source/docs/common-powering-the-apm2.rst:178
+#: ../../source/docs/common-powering-the-apm2.rst:270
+#: 4686d752bc01444baae7787ce4324936 f5984a4e51604977a89c130d88913bfb
+msgid ""
+"Do not exceed Abs MAX input voltages when connecting the power supply or you"
+" will damage your board."
+msgstr "连接电源时请勿超过绝对最大输入电压，否则将损坏电路板。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:183
+#: ../../source/docs/common-powering-the-apm2.rst:275
+#: ../../source/docs/common-powering-the-apm2.rst:355
+#: 2ec1d2849b5048179a795e4d88751a33 70371caefebe40f7a4724d1d2a154599
+#: b200d91e49cf4975b4dfc0c4532d0552
+msgid ""
+"Connecting USB when you have input voltages at the high end of the range "
+"(near Abs Max) can damage the board. Disconnect battery before connecting "
+"USB or test input voltages so they are within the specified range."
+msgstr "当输入电压处于范围高端（接近绝对最大值）时连接 USB 可能损坏电路板。连接 USB 前请先断开电池，或确认输入电压在规定范围内。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:189
+#: ../../source/docs/common-powering-the-apm2.rst:281
+#: 81f4bcfa1c964428a73d9267f358c56a ef76ada0c3a147419e5b438ee4c48839
+msgid "Power Options"
+msgstr "供电选项"
+
+#: ../../source/docs/common-powering-the-apm2.rst:189
+#: ../../source/docs/common-powering-the-apm2.rst:281
+#: 57fd000068f346b4a175b75ade5fa504 59b015aa176c429a90ff3a86667cead2
+msgid "Nominal"
+msgstr "标称值"
+
+#: ../../source/docs/common-powering-the-apm2.rst:189
+#: ../../source/docs/common-powering-the-apm2.rst:281
+#: 36b31c785dae4f4abe8eb65dc5aab170 375443513f7248d49f33bebbef1bfc02
+msgid "Abs MAX"
+msgstr "绝对最大值"
+
+#: ../../source/docs/common-powering-the-apm2.rst:189
+#: ../../source/docs/common-powering-the-apm2.rst:281
+#: 42e3459f23a94829aa8dc88020678cc4 46bb710ec7b5429fa61e3b6eb724d299
+msgid "JP1 status"
+msgstr "JP1 状态"
+
+#: ../../source/docs/common-powering-the-apm2.rst:191
+#: ../../source/docs/common-powering-the-apm2.rst:283
+#: 33fe0ab3e2d24ff38b382674b9218d25 e535930d08874d06a0da83f0a9106bdf
+msgid "Power on Output PWM connector"
+msgstr "输出 PWM 连接器供电"
+
+#: ../../source/docs/common-powering-the-apm2.rst:191
+#: 8e176973279846f6a0fe78ffb69edb7f
+msgid "5.37V +-0.5"
+msgstr "5.37V +-0.5"
+
+#: ../../source/docs/common-powering-the-apm2.rst:191
+#: ../../source/docs/common-powering-the-apm2.rst:283
+#: 5a485261afbb4db3b2b84a041d7f5f74 6da589795a42496a925b2d731aca5bc4
+msgid "6V"
+msgstr "6V"
+
+#: ../../source/docs/common-powering-the-apm2.rst:191
+#: ../../source/docs/common-powering-the-apm2.rst:193
+#: 4364b56af52545a4a32401462f98c832 b30224dd1f534f298e97c0e8f517bedb
+msgid "JP1 connected"
+msgstr "JP1 已连接"
+
+#: ../../source/docs/common-powering-the-apm2.rst:193
+#: ../../source/docs/common-powering-the-apm2.rst:285
+#: 631c052cd8ca421f8354e32330aebc7f d48a5c78091647598d905c388ec00432
+msgid "Power on Input PWM connector"
+msgstr "输入 PWM 连接器供电"
+
+#: ../../source/docs/common-powering-the-apm2.rst:193
+#: ../../source/docs/common-powering-the-apm2.rst:285
+#: 14cae5da9e3843bb994353ee7633f83f 25922a38a1c54599970811a5e29788d9
+msgid "5.00V +-0.25"
+msgstr "5.00V +-0.25"
+
+#: ../../source/docs/common-powering-the-apm2.rst:193
+#: ../../source/docs/common-powering-the-apm2.rst:285
+#: 984450ceed30439fa3b99739425a7af6 b5622f34b32e4d5f9afe19e0049b0b1e
+msgid "5.5V"
+msgstr "5.5V"
+
+#: ../../source/docs/common-powering-the-apm2.rst:197
+#: cc68560ec8954ebe8ebca006a352b0da
+msgid "No Power Module and no servos and power provided by BEC from ESC"
+msgstr "无电源模块、无舵机，由 ESC 的 BEC 供电"
+
+#: ../../source/docs/common-powering-the-apm2.rst:199
+#: 7015b953191148e99a3fc7b882314d6f
+msgid "If you do not have a power module and you are not using servos."
+msgstr "如果您没有电源模块且不使用舵机。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:200
+#: 0d927defc5e4412abd7714e3f26c43b7
+msgid ""
+"Ensure JP1 is installed and provide the necessary power via the BEC from one"
+" of your ESC's."
+msgstr "确保已安装 JP1，并通过某个 ESC 的 BEC 提供所需电源。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:202
+#: 89275bec5235459ca3b905628f6ae10b
+msgid ""
+"Connect one ESC's BEC power and ground wires to one pair of the APM OUTPUT "
+"connectors power and ground pins."
+msgstr "将一个 ESC 的 BEC 电源和地线连接到 APM 输出连接器中的一对电源和地引脚。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:204
+#: d623400a73e341ada1490cce6c2108d8
+msgid "Clip the BEC power leads on the remaining 3 wire connectors."
+msgstr "剪断其余 3 芯连接器上的 BEC 电源线。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:205
+#: 09ed2bc8266d49f2b39373a54a1ae67c
+msgid ""
+"Ensure that the ESC's signal wires are connected to the appropriate APM "
+"OUTPUT connector signal pins."
+msgstr "确保各 ESC 的信号线连接到 APM 输出连接器上的相应信号引脚。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:207
+#: 47bc5f89c2f145d5aeba190008faae73
+msgid ""
+"You must ensure that your ESC's BEC has a sufficient power capability (at "
+"least 2 amps)."
+msgstr "您必须确保 ESC 的 BEC 具有足够的供电能力（至少 2A）。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:210
+#: 9d22f7a8bdad47a98c556732268ce13e
+msgid "Most 20 amp or higher ESCs have 2 amp BECs."
+msgstr "大多数 20A 及以上的 ESC 配有 2A 的 BEC。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:213
+#: c3dd8d62ce9143c1b50b6f188dec8725
+msgid "No Power Module but using servos and a high power External BEC"
+msgstr "无电源模块但使用舵机，并使用大功率外接 BEC"
+
+#: ../../source/docs/common-powering-the-apm2.rst:215
+#: 4ef958a66b3540ceabf4e5a7c1247f7d
+msgid ""
+"If you do not have a power module and are using servos you can use a high "
+"power external BEC."
+msgstr "如果您没有电源模块但使用舵机，可以使用大功率外接 BEC。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:217
+#: 26aad49a5361458e904968af08bf539e
+msgid ""
+"Ensure JP1 is installed and provide the necessary power via a high power "
+"external BEC (5 to 10 amps or more)."
+msgstr "确保已安装 JP1，并通过大功率外接 BEC（5 至 10A 或更大）提供所需电源。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:219
+#: 38f004aa70e742db809232e29c019353
+msgid ""
+"The BEC power **must** be provided to one pair of the APM OUTPUT connector "
+"pins."
+msgstr "BEC 电源**必须**连接到 APM 输出连接器的一对引脚上。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:224
+#: 0ebfd610f84742efa5ea1bfff133bff4
+msgid "Clip all power leads on the ESC's BECs (they would conflict"
+msgstr "剪断所有 ESC 的 BEC 电源线（否则会与外接 BEC 冲突"
+
+#: ../../source/docs/common-powering-the-apm2.rst:225
+#: 917af00fcd8a4afbbd40c318ac825d90
+msgid "with the external BEC)."
+msgstr "与外接 BEC 冲突）。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:227
+#: 38bf3f8491054cbc99b82cfea79e7c96
+msgid "Your servos will determine the size of the BEC required."
+msgstr "所需 BEC 的规格取决于您的舵机需求。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:228
+#: 88ddfdeefd504fa8bbf21593db2e1a9d
+msgid ""
+"You should allow at least 2 or 3 amps extra to power the APM, receiver and "
+"to prevent (brown outs)."
+msgstr "至少应预留 2 至 3A 的余量，用于为 APM、接收机供电并防止欠压断电。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:230
+#: 5f8d1c41755049a0b86898d877d10ae1
+msgid ""
+"All of the positive power for driving each servo must come from the OUTPUT "
+"connector."
+msgstr "驱动每个舵机的所有正极电源必须来自输出连接器。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:233
+#: 407c0d59e5bd42dfb3f2e3db43cf87cd
+msgid ""
+"This is true even if the servo(s) signal wires are connected to the ADDRESS "
+"connector."
+msgstr "即使舵机信号线连接到地址连接器，此规则仍然适用。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:236
+#: d6d3d86e4c174cb2b0eb57b013899cca
+msgid ""
+"This option requires you to take responsibility for providing sufficient "
+"power to prevent brownout."
+msgstr "此选项要求您自行负责提供足够电源以防止欠压断电。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:240
+#: 1812d05ec925402abff61eeb40ee23a8
+msgid ""
+"No Power Module but using servos and multiple BECs from ESC's (A BEC for "
+"each servo)"
+msgstr "无电源模块但使用舵机，并使用多个 ESC 的 BEC（每个舵机对应一个 BEC）"
+
+#: ../../source/docs/common-powering-the-apm2.rst:242
+#: fd900c7282184533ab43374762ddf0c9
+msgid ""
+"If you do not have a power module and are using servos you can use multiple "
+"BECs from your ESC's."
+msgstr "如果您没有电源模块但使用舵机，可以使用多个 ESC 的 BEC。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:244
+#: f6f4b16010f4479088acc32b9e4e2248
+msgid ""
+"Ensure JP1 is installed and plug one of your ESC's signal cables with power "
+"leads into the OUTPUT connector."
+msgstr "确保已安装 JP1，并将一个 ESC 的带电源线信号电缆插入输出连接器。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:246
+#: ef76bb7d3a314c5882fcd1d24edd77e4
+msgid ""
+"Remove the power and ground leads from the remaining ESCs signal cable "
+"connectors."
+msgstr "从其余 ESC 的信号电缆连接器上去除电源和地线。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:248
+#: ca72a0833fae47da8cf4dbb694511a8e
+msgid ""
+"Plug the signal wire connector from each ESC onto the appropriate pin on the"
+" OUTPUT connector."
+msgstr "将每个 ESC 的信号线连接器插入输出连接器上的相应引脚。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:251
+#: 845384b7b0a44f3a8289a36cf167115d
+msgid ""
+"You can heat shrink these or plug them into a multi-wire connector "
+"appropriate for your copter."
+msgstr "可用热缩管套住这些连接器，也可插入适合您飞行器的多芯连接器。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:254
+#: 740eee518a074a25a6bf2b4463b8a8f9
+msgid ""
+"Connect one pair of each of the remaining BEC power and ground lines to the "
+"power and ground of each individual servo."
+msgstr "将其余每个 BEC 的一对电源和地线分别连接到对应舵机的电源和地。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:256
+#: fd20c6857d504faf966fd085149d71bc
+msgid "Clip or heat shrink any remaining excess BEC power and ground leads."
+msgstr "剪掉或用热缩管处理多余的 BEC 电源和地线。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:257
+#: 217497015288446099671abafb7e45a4
+msgid ""
+"The BEC power from one ESC \\ **must** be provided to one pair of the APM "
+"output connector pins."
+msgstr "一个 ESC 的 BEC 电源\\ **必须**连接到 APM 输出连接器的一对引脚上。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:259
+#: c4a00c93b8a44c68aa22b2a08b7f9f0a
+msgid ""
+"Plug only the signal input wire from your servos into the appropriate OUTPUT"
+" or ADDRESS connector pin."
+msgstr "仅将舵机的信号输入线插入输出连接器或地址连接器的相应引脚。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:261
+#: 701f7ad11f3444998c4528f1fb21e683
+msgid "Your ESC's BECs should be at least 2 amps."
+msgstr "您的 ESC 的 BEC 应至少为 2A。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:262
+#: 2ee7f25910d74be78af1afab90c5a4de
+msgid ""
+"The ESC's BEC grounds are in common with battery and internal signal ground "
+"so grounding the servos this way is OK."
+msgstr "ESC 的 BEC 地与电池和内部信号地共用，因此以这种方式为舵机接地是可行的。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:266
+#: 2d51806bf1eb434f9dfd10a580dced85
+msgid "Power supply rails not connected requirements (JP1 Not Installed)"
+msgstr "电源排未连接的要求（JP1 未安装）"
+
+#: ../../source/docs/common-powering-the-apm2.rst:283
+#: 6e0a34fff2ed44c79fc75cbb6c6caf63
+msgid "5.00V +-0.5"
+msgstr "5.00V +-0.5"
+
+#: ../../source/docs/common-powering-the-apm2.rst:283
+#: ../../source/docs/common-powering-the-apm2.rst:285
+#: 051088752a0f4eb6865a23515f275699 2d7fc94f9e4c42ab87a2eeeddf68a774
+msgid "JP1 open"
+msgstr "JP1 断开"
+
+#: ../../source/docs/common-powering-the-apm2.rst:289
+#: 392da3aa52d14472b60f3d7f09b180d2
+msgid "Power Module and no servos"
+msgstr "有电源模块且不使用舵机"
+
+#: ../../source/docs/common-powering-the-apm2.rst:291
+#: 8461026714844494a5dfbace3b74a949
+msgid "If you have a power module and you are not using servos."
+msgstr "如果您有电源模块且不使用舵机。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:292
+#: 42eff25d689f41df9eeaa885a5402af4
+msgid "Ensure JP1 is not installed."
+msgstr "确保未安装 JP1。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:293
+#: 9750efbe27f649b4afcb117d201c61d3
+msgid ""
+"Provide the necessary power via the power module connected to the APM's "
+"power module connector."
+msgstr "通过连接到 APM 电源模块连接器的电源模块提供所需电源。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:295
+#: ../../source/docs/common-powering-the-apm2.rst:310
+#: 26416fb774e743d397137733127cd8ac 5c2f9aedd14b4c208a2b8223f8b3b35f
+msgid ""
+"When connecting your ESCs to the OUTPUT connector clip the BEC power leads "
+"on each ESC's 3 wire connector."
+msgstr "将 ESC 连接到输出连接器时，请剪断每个 ESC 3 芯连接器上的 BEC 电源线。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:298
+#: 0c3b86803e554a9ea8919e8d6f4ed986
+msgid "Or connect only the ESC's signal wires to the OUTPUT connector."
+msgstr "或仅将 ESC 的信号线连接到输出连接器。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:301
+#: 495a4af3a93d4f0797421e4900624bdb
+msgid "Power Module and using servos with external BEC power"
+msgstr "有电源模块且使用舵机，并通过外接 BEC 供电"
+
+#: ../../source/docs/common-powering-the-apm2.rst:303
+#: d60a7d4ff01e4ac0be922bcce63a1e4b
+msgid ""
+"If you have a power module and an external BEC and you are using servos."
+msgstr "如果您有电源模块和外接 BEC 且使用舵机。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:305
+#: f4d95a4dc11b44f29d2d871c312dee1b
+msgid "Ensure JP1 is Not installed"
+msgstr "确保**未**安装 JP1"
+
+#: ../../source/docs/common-powering-the-apm2.rst:306
+#: 43d93f5ecdd34be79c35c515cdfdca23
+msgid ""
+"Provide APM board and receiver power via the power module connected to the "
+"power module connector."
+msgstr "通过连接到电源模块连接器的电源模块为 APM 电路板和接收机供电。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:308
+#: 6d1ee003a71347a0b0f7a379f528c4cd
+msgid ""
+"Connect an external BEC with sufficient power for your servos to one pair of"
+" the OUTPUT connector power pins."
+msgstr "将功率足够的外接 BEC 连接到输出连接器的一对电源引脚上，为舵机供电。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:313
+#: d53ab4a9c5a64c65bc122f59a0713f78
+msgid "Or connect only the ESC signal wires to the OUTPUT connector."
+msgstr "或仅将 ESC 信号线连接到输出连接器。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:316
+#: 6227da0f4302422e9234c8435b904616
+msgid "Power Module and using servos with BEC power from one ESC"
+msgstr "有电源模块且使用舵机，并通过一个 ESC 的 BEC 供电"
+
+#: ../../source/docs/common-powering-the-apm2.rst:318
+#: b281c310d6fe4b079df808971f9ea61d
+msgid "If you have a power module and you are using servos Remove JP1."
+msgstr "如果您有电源模块且使用舵机，请拆除 JP1。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:319
+#: a874da750c7c4399b291d11ddc681e6f
+msgid ""
+"Provide APM and receiver power via the power module connected to the APM's "
+"power module connector."
+msgstr "通过连接到 APM 电源模块连接器的电源模块为 APM 和接收机供电。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:321
+#: ../../source/docs/common-powering-the-apm2.rst:339
+#: cc5adc7f4007492389c73f5a53ce80a1 e511ea01ddd14001bf9c320ecca4d942
+msgid ""
+"The BEC of a single ESC must provide sufficient power for all your servos."
+msgstr "单个 ESC 的 BEC 必须为所有舵机提供足够的电源。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:323
+#: 13b89542430c48488852a80f0d630eee
+msgid ""
+"When connecting your ESCs to the OUTPUT connector clip the BEC power leads "
+"on all but one of the ESC's connectors."
+msgstr "将 ESC 连接到输出连接器时，除保留一个 ESC 连接器外，其余均剪断 BEC 电源线。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:325
+#: ca69493afe0e4ba2b0714b9de3a527e7
+msgid ""
+"Or connect only the ESC signal wires to the OUTPUT connector for all except "
+"one ESC."
+msgstr "或对除一个 ESC 外的所有 ESC，仅将信号线连接到输出连接器。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:328
+#: b493eacc28454022a95e3863592839ba
+msgid "And on that ESC connect all 3 wires to the OUTPUT connector."
+msgstr "对保留的那个 ESC，将全部 3 根线连接到输出连接器。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:331
+#: 47a037f8c57140328cf3c7917167f660
+msgid "No Power Module and using Servos with BEC power from two ESCs"
+msgstr "无电源模块但使用舵机，并通过两个 ESC 的 BEC 供电"
+
+#: ../../source/docs/common-powering-the-apm2.rst:333
+#: b07eb363c53047efbf653a590d806651
+msgid "If you do not have a power module and you are using servos remove JP1."
+msgstr "如果您没有电源模块且使用舵机，请拆除 JP1。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:335
+#: ca02ae85c28948faa74e7954fb43b32e
+msgid ""
+"Provide APM and receiver power via 1 pair of ESC-BEC power wires connected "
+"to the APM INPUT connector power pins."
+msgstr "通过 1 对 ESC-BEC 电源线连接到 APM 输入连接器的电源引脚，为 APM 和接收机供电。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:337
+#: 55bc950941cd4aeab7e76321275efb7c
+msgid ""
+"Also connect another of the ESCs power wire pair to the OUTPUT connector."
+msgstr "另将另一个 ESC 的一对电源线连接到输出连接器。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:341
+#: b960e39757264955a810368fd79b5907
+msgid "Clip the signal power leads on your remaining ESC's."
+msgstr "剪断其余 ESC 的信号电源线。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:342
+#: 8fd402461cdb418c86b08e97582a8449
+msgid "Connect all ESC signal wires to the appropriate OUTPUT connector pins."
+msgstr "将所有 ESC 信号线连接到输出连接器的相应引脚。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:346
+#: 5971c8a718f34f95b125d655bd607a95
+msgid "APM Power Wiring Example"
+msgstr "APM 供电接线示例"
+
+#: ../../source/docs/common-powering-the-apm2.rst:350
+#: ../../source/docs/common-powering-the-apm2.rst:394
+#: 3928f79168444c529998f5cd2d3de59a e7919c5826c74a01aa24cf37e4a60427
+msgid ""
+"Do not exceed Abs MAX input voltages when connecting power supply or you "
+"will damage your board."
+msgstr "连接电源时请勿超过绝对最大输入电压，否则将损坏电路板。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:360
+#: fae973c4fc3b48e8a9e66e053d69f8b1
+msgid ""
+"On the bench, you'll probably be powering the board via your USB cable while"
+" you set it up and test it. But in your aircraft, you'll need to power it "
+"with your on board power system, which is usually your LiPo battery going "
+"through an ESC or the Power Module. In the case of a multicopter, this can "
+"come through your Power Distribution Board (PDB), which will break out the "
+"5V output from the one of the electronic speed controls (ESCs) or the Power "
+"module which is wored directly to the battery."
+msgstr ""
+"在桌面调试时，您可能通过 USB 线为电路板供电进行设置和测试。但在飞行器上，您需要使用机载电源系统供电，通常是通过 ESC 或电源模块的 LiPo "
+"电池。对于多旋翼，这可以通过电源分配板（PDB）实现，PDB 将从某个 ESC 或直接接电池的电源模块输出 5V 电源。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:369
+#: b85ced24f0284f85b3f6ea2cff82f31f
+msgid ""
+"In the picture below, the red and black wires are the 5b    m hV power cable"
+" coming from a PDB. You can plug them into any two pins along the 5V and "
+"Ground (middle and outer) rows of pins on APM 2.5's Output side. The other "
+"cable, which in this case is a four-wire cable with orange and white wires "
+"for a quadcopter, is the signal cable to the PDB, which are the wires that "
+"APM 2.5 will use to command each of the ESCs."
+msgstr ""
+"在下图中，红色和黑色导线是来自 PDB 的 5V 电源线。可以将其插入 APM 2.5 输出侧 5V "
+"和地（中间和外侧）引脚排上的任意两个引脚。另一根线缆在本例中是四芯线，橙色和白色导线用于四旋翼，是连接到 PDB 的信号线，APM 2.5 "
+"通过这些线发出对每个 ESC 的控制命令。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:376
+#: 5ad93f3a244349c5b07e38397350ff53
+msgid ""
+"The picture below is of APM 2; but the concept is applicable to APM 2.5."
+msgstr "下图为 APM 2 的示例，但概念同样适用于 APM 2.5。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:381
+#: cefcd1c6797240c0b6192d0281a68a0e
+msgid ""
+"It's also possible to power APM 2.5 from two separate sources, one powering "
+"the RC system on the input side, and the other powering the output side "
+"(servos or ESCs). This is determined by a jumper on the JP1 pins (see "
+"below). If the jumper is on, which is the factory default, the board is "
+"powered from the OUTPUT rail or the USB. If the jumper is off, the board is "
+"powered from the INPUT rail, but the OUTPUT rail will need its own power "
+"source. This configuration is used if you want to have two separate power "
+"sources in your aircraft, one powering the servos and the other powering the"
+" electronics. The ideal input voltage is 5.37v +/-0.0v and may not be "
+"provided by a typical ESC."
+msgstr ""
+"APM 2.5 也可以使用两路独立电源供电，一路为输入侧的 RC 系统供电，另一路为输出侧（舵机或 ESC）供电。这由 JP1 "
+"引脚上的跳线决定（见下文）。如果跳线已安装（出厂默认），电路板从输出排或 USB "
+"取电。如果跳线断开，电路板从输入排取电，但输出排需要自行供电。如果您希望飞行器中有两路独立电源，一路为舵机供电，另一路为电子设备供电，就需要此配置。理想输入电压为"
+" 5.37V ±0.0V，普通 ESC 可能无法满足此要求。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:397
+#: 8a0194e843664f29a6a2c220b2e6f774
+msgid ""
+"In some cases it may be a good idea to set the input voltage slightly above "
+"the median (but below the maximum) to account for possible voltage drops "
+"during momentary high current events."
+msgstr "在某些情况下，将输入电压略微设置在中间值以上（但低于最大值）是个好主意，以应对瞬时大电流事件可能导致的电压下降。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:401
+#: cdace5b464bc4a5facb824725ac542eb
+msgid ""
+"The APM2.5 by itself draws relatively little current (200ma range) and a "
+"power source capable of providing 300 - 500ma will provide plenty of margin."
+" However, if servos or other power consuming devices are being driven by the"
+" same power source you must consider the power requirements for those "
+"devices as well and provide plenty of margin to prevent disastrous \"brown-"
+"outs\". For instance, a single digital servo can easily draw 1-5 amps "
+"depending on its size and performance. (Note: ESCs do not consume power from"
+" the APM) If you experience spurious resets or other odd behavior it is most"
+" likely due to noisy or insufficient power to the APM. As with all logic "
+"boards, electrical noise from the motors, servos, or other high current "
+"devices on the power source can cause unpredictable behavior."
+msgstr ""
+"APM 2.5 本身耗电较少（约 200mA），能提供 300–500mA 的电源即可留有充足余量。但如果舵机或其他耗电设备与 APM "
+"共用同一电源，则必须综合考虑这些设备的功耗需求，并留有足够余量以防止灾难性的「欠压断电」。例如，单个数字舵机根据尺寸和性能不同，可能轻松消耗 "
+"1–5A。（注意：ESC 不会从 APM 消耗电源。）如果出现随机复位或其他异常行为，最可能是由于 APM "
+"供电噪声大或电源不足。与所有逻辑板一样，电机、舵机或其他大电流设备在电源上产生的电气噪声可能导致不可预测的行为。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:414
+#: 3f131a8ebb674639bb2f4874316df6b5
+msgid ""
+"It is recommend that a \\ `power filter <http://www.dpcav.com/xcart/Power-"
+"Supply-Filter-L-C-Type.html>`__ be used in such conditions."
+msgstr ""
+"在此类情况下，建议使用\\ `电源滤波器 <http://www.dpcav.com/xcart/Power-Supply-Filter-L-C-"
+"Type.html>`__。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:417
+#: fe7907fdf9bb49a989a161e483eea178
+msgid ""
+"Too short or long power wires, bad or old connectors, or insufficient "
+"current capability of the APM power source can result in a \"brown-out\" "
+"situation resulting in unpredictable operation. This is particularly true in"
+" traditional helicopters where the collective servos can draw 3-20 amps in "
+"short bursts. The power source must be able to accommodate this without "
+"voltage droop or voltage spikes. A quality switching type BEC (e.g one of "
+"`these <http://www.castlecreations.com/products-search?qs=bec>`__ or one of "
+"`these <http://www.western-robotics.com/WRL-HBECM2>`__) can be a solution "
+"depending on overall current requirements. Many of these type of regulators "
+"are programmable so remember to program them with in the safe operating "
+"range of the APM2. Linear voltage regulators are not recommended as they are"
+" inefficient and prone to overheating and heat induced failures. APM2 should"
+" never be connected directly to a battery of any type."
+msgstr ""
+"过短或过长的电源线、老化或劣质的连接器、APM "
+"电源不足，都可能导致「欠压断电」，进而引发不可预测的操作。这在传统直升机上尤为突出，因为操纵舵机可能在短时间内消耗 "
+"3–20A。电源必须能在不产生电压跌落或尖峰的情况下应对此类需求。优质开关型 BEC "
+"可以作为解决方案（具体取决于总电流需求）。此类调节器大多可编程，请记得将其编程在 APM 2 "
+"的安全工作范围内。不推荐使用线性稳压器，因为其效率低下，容易过热并因温度导致故障。APM 2 绝对不能直接连接到任何类型的电池。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:433
+#: b4bd0b11947b49cb9cbdd4a1e7f1b4a1
+msgid ""
+"Power source problems are common and can be insidious and frustrating. Be "
+"meticulous. Any autopilot or autopilot is useless and potentially dangerous "
+"without good clean power source."
+msgstr "电源问题较为常见，且往往难以察觉，令人沮丧。请务必细心处理。没有良好、清洁的电源，任何飞控或飞控都是无用甚至危险的。"
+
+#: ../../source/docs/common-powering-the-apm2.rst:437
+#: 21070e49e5bc4e75bec301b7e44952f8
+msgid ""
+"The picture below is of APM 2; but the concept is applicable to APM 2.5/2.6."
+msgstr "下图为 APM 2 的示例，但概念同样适用于 APM 2.5/2.6。"

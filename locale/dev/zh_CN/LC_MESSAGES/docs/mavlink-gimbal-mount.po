@@ -1,0 +1,644 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:5
+#: e7082d2837474a938a046fedd8fa6ee5
+msgid "Control a Gimbal / Camera Mount"
+msgstr "通过 MAVLink 控制云台/相机挂载"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:7
+#: 8230b04551de460ea9ac1f94731e47a4
+msgid ""
+"This page explains how MAVLink can be used to control a gimbal (aka camera "
+"mount).  In particular this page describes how to"
+msgstr "本页介绍如何使用 MAVLink 控制云台（即相机挂载）。具体而言，本页描述了如何："
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:9
+#: 719ec663a725450b9f64c8c1d93cb9c0
+msgid "use MAV_CMD_DO_MOUNT_CONTROL to set the gimbal's mode (aka mount mode)"
+msgstr "使用 MAV_CMD_DO_MOUNT_CONTROL 设置云台模式（即挂载模式）"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:10
+#: 8f57e2557faa456fb8088be05f4a0cb6
+msgid ""
+"use MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW to move to a desired angle or at a "
+"desired rate"
+msgstr "使用 MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW 移动至目标角度或以目标速率运动"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:11
+#: 498276ce98474a8dba0661ac37013720
+msgid "use MAV_CMD_DO_SET_ROI_LOCATION to point at a Location"
+msgstr "使用 MAV_CMD_DO_SET_ROI_LOCATION 指向某个位置"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:12
+#: b8badfbeb0eb4e7aa450f092f25c1af6
+msgid "use MAV_CMD_DO_SET_ROI_NONE to stop point at a Location or vehicle"
+msgstr "使用 MAV_CMD_DO_SET_ROI_NONE 停止指向某个位置或飞行器"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:13
+#: f9eb1ec475c446908fb28ba1362b7544
+msgid "use MAV_CMD_DO_SET_ROI_SYSID to point at another vehicle"
+msgstr "使用 MAV_CMD_DO_SET_ROI_SYSID 指向另一架飞行器"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:14
+#: d0355c1a7cd94e5f9165986b1bad6730
+msgid ""
+"use MAV_CMD_DO_GIMBAL_MANAGER_CONFIGURE to take control of the gimbal "
+"(optional)"
+msgstr "使用 MAV_CMD_DO_GIMBAL_MANAGER_CONFIGURE 接管云台控制权（可选）"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:16
+#: 708ecbe344234c67ae7076c456103ca2
+msgid ""
+"The gimbal's attitude (in body-frame Quaternion form) can be monitored by "
+"decoding the `GIMBAL_DEVICE_ATTITUDE_STATUS "
+"<https://mavlink.io/en/messages/common.html#GIMBAL_DEVICE_ATTITUDE_STATUS>`__"
+" message."
+msgstr ""
+"可通过解码 `GIMBAL_DEVICE_ATTITUDE_STATUS "
+"<https://mavlink.io/en/messages/common.html#GIMBAL_DEVICE_ATTITUDE_STATUS>`__"
+" 消息来监控云台的姿态（以机体坐标系四元数形式表示）。"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:20
+#: 5cbb9148fe234f7097706e412fded075
+msgid ""
+"ArduPilot's MAVLink interface for controlling gimbals was significantly "
+"upgraded for 4.3 compared with earlier versions. This page primarily "
+"discusses the interface for 4.3 (and higher) which aims to comply with the "
+"`MAVLink Gimbalv2 protocol "
+"<https://mavlink.io/en/services/gimbal_v2.html>`__"
+msgstr ""
+"与早期版本相比，ArduPilot 4.3 的云台 MAVLink 控制接口有了重大升级。本页主要讨论 4.3（及更高版本）的接口，该接口旨在遵从 "
+"`MAVLink Gimbalv2 协议 <https://mavlink.io/en/services/gimbal_v2.html>`__。"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:24
+#: 4578802169f0498d90c107d299ee28da
+msgid ""
+"The :ref:`user wiki pages for gimbals is here <copter:common-cameras-and-"
+"gimbals>`."
+msgstr ":ref:`云台用户 wiki 页面请见此处 <copter:common-cameras-and-gimbals>`。"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:27
+#: aa99cf9a85554c9783e883e06adf9520
+msgid "Set the mode with MAV_CMD_DO_MOUNT_CONTROL"
+msgstr "使用 MAV_CMD_DO_MOUNT_CONTROL 设置模式"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:29
+#: f54f957c82c545a8a51766ad42370349
+msgid ""
+"The gimbal/mount's mode can be set by sending a `COMMAND_LONG "
+"<https://mavlink.io/en/messages/common.html#COMMAND_LONG>`__ with the "
+"command and param7 fields set as specified for the `MAV_CMD_DO_MOUNT_CONTROL"
+" <https://mavlink.io/en/messages/common.html#MAV_CMD_DO_MOUNT_CONTROL>`__ "
+"command. The supported modes are:"
+msgstr ""
+"可通过发送 `COMMAND_LONG "
+"<https://mavlink.io/en/messages/common.html#COMMAND_LONG>`__ 并按照 "
+"`MAV_CMD_DO_MOUNT_CONTROL "
+"<https://mavlink.io/en/messages/common.html#MAV_CMD_DO_MOUNT_CONTROL>`__ "
+"命令的规范设置 command 和 param7 字段来设定云台/挂载的模式。支持的模式如下："
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:32
+#: ef070bfe36d74702a78ced8bf2fab5db
+msgid ""
+"Retract : gimbal will move to a retracted position (see MNT1_RETRACT_X, Y, "
+"Z) or relax"
+msgstr "Retract（收起）：云台将移动至收起位置（见 MNT1_RETRACT_X, Y, Z）或松弛"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:33
+#: 5bba7464a53343598b33ac77627355cb
+msgid ""
+"Neutral : gimbal will move to a neutral position (see MNT1_NEUTRAL_X, Y, Z)"
+msgstr "Neutral（中立）：云台将移动至中立位置（见 MNT1_NEUTRAL_X, Y, Z）"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:34
+#: f9ad94b7478d491fa3a3ed65c7216d08
+msgid ""
+"MAVLink Targeting : gimbal's angle or rate targets are controlled via "
+"mavlink messages (see MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW).  It is not "
+"necessary to specifically change to this mode, this will happen "
+"automatically if MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW is sent"
+msgstr ""
+"MAVLink Targeting（MAVLink 目标控制）：通过 MAVLink 消息控制云台的角度或速率目标（见 "
+"MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW）。无需特意切换到此模式，发送 "
+"MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW 后将自动切换。"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:35
+#: d3c121d0cb2443e0a3a33250cb61863b
+msgid ""
+"RC Targeting : pilot controls the gimbal angle or rate using RC input (see "
+"MNT_RC_IN_PAN/ROLL/TILT and MNT_RC_RATE parameters)"
+msgstr ""
+"RC Targeting（遥控目标控制）：飞手通过 RC 输入控制云台角度或速率（见 MNT_RC_IN_PAN/ROLL/TILT 及 "
+"MNT_RC_RATE 参数）"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:36
+#: 539f5bca4e554a1ea844f026ffd16049
+msgid ""
+"GPS Point: gimbal points towards a Location (Lat, Lon, Alt) (see "
+"MAV_CMD_DO_SET_ROI).  It is not necessary to specifically change to this "
+"mode, this will happen automatically if MAV_CMD_DO_SET_ROI is sent"
+msgstr ""
+"GPS Point（GPS 点位）：云台指向某个位置（纬度、经度、高度）（见 MAV_CMD_DO_SET_ROI）。无需特意切换到此模式，发送 "
+"MAV_CMD_DO_SET_ROI 后将自动切换。"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:37
+#: 277dcf3512524f5c982b88c9090b9aca
+msgid ""
+"SysId Target: gimbal points towards another vehicle (see "
+"MAV_CMD_DO_SET_ROI_SYSID).  It is not necessary to specifically change to "
+"this mode, this will happen automatically if MAV_CMD_DO_SET_ROI_SYSID is "
+"sent"
+msgstr ""
+"SysId Target（系统 ID 目标）：云台指向另一架飞行器（见 MAV_CMD_DO_SET_ROI_SYSID）。无需特意切换到此模式，发送 "
+"MAV_CMD_DO_SET_ROI_SYSID 后将自动切换。"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:38
+#: dd9fa803bef54e01b33840211d64aa62
+msgid "Home Location: gimbal points towards home"
+msgstr "Home Location（返航点）：云台指向返航点"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:107
+#: 761d9564809b4068a2e28f23d0628d49
+msgid "**Example**"
+msgstr "**示例**"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:109
+#: c37653494ba042a8b783682efbd7fd1a
+msgid ""
+"The example commands below can be copy-pasted into MAVProxy (aka SITL) to "
+"test this command.  Before running these commands enter"
+msgstr "以下示例命令可直接复制粘贴到 MAVProxy（即 SITL）中测试。运行这些命令前，请先输入"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:111
+#: ../../source/docs/mavlink-gimbal-mount.rst:210
+#: ../../source/docs/mavlink-gimbal-mount.rst:326
+#: ../../source/docs/mavlink-gimbal-mount.rst:423
+#: ../../source/docs/mavlink-gimbal-mount.rst:509
+#: ../../source/docs/mavlink-gimbal-mount.rst:594
+#: 22c5bfebb20f4814976263c694e9db99 2e5d50130b864c7a931bdf58037766c5
+#: c80c89fa72284bc9ae2ecbf6c1b4e2f9 cfdd2514cd0b4bf09f47106b7279dd9a
+#: df1abc8424c74a27a9e5c6cc56884811 f3d0067c56c344c78105e355d3607b57
+msgid "module load message"
+msgstr "module load message"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:114
+#: ../../source/docs/mavlink-gimbal-mount.rst:213
+#: ../../source/docs/mavlink-gimbal-mount.rst:329
+#: ../../source/docs/mavlink-gimbal-mount.rst:426
+#: ../../source/docs/mavlink-gimbal-mount.rst:512
+#: ../../source/docs/mavlink-gimbal-mount.rst:597
+#: 36400878dd9542a7a14b752bc60ac906 4d8fa78360f14fc9bbaf0849a4924b9a
+#: 7cbc23fc7a56487d89d869c18da09ebc 82a77941b73749b4a730a990d9d51183
+#: a6136decab024c638af1a87d1047b865 b0da53175ccb4edaad2172757189805c
+msgid "Example MAVProxy/SITL Command"
+msgstr "MAVProxy/SITL 示例命令"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:114
+#: ../../source/docs/mavlink-gimbal-mount.rst:213
+#: ../../source/docs/mavlink-gimbal-mount.rst:329
+#: ../../source/docs/mavlink-gimbal-mount.rst:426
+#: ../../source/docs/mavlink-gimbal-mount.rst:512
+#: ../../source/docs/mavlink-gimbal-mount.rst:597
+#: 083406cea2de499182d6a421297ced7d 2e44ee7165e14db5a481fc91225007fa
+#: 5c081de9dbe54ea9a0def05e1e5e466c 6abd96e2bc57435993a84d7468eb9d47
+#: d4f4d1fd58e0452ebdd1f891cba7d292 e75a3daa3b8d4bd99cb64ecf4b91b2c6
+msgid "Description"
+msgstr "描述"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:116
+#: 7d8246e4c8be4092a2b42905a0771f34
+msgid "``message COMMAND_LONG 0 0 205 0 0 0 0 0 0 0 0``"
+msgstr "``message COMMAND_LONG 0 0 205 0 0 0 0 0 0 0 0``"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:116
+#: f0f9e8ffa5fd42cf83ca6acfd0644a9c
+msgid "Retract Gimbal"
+msgstr "收起云台"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:118
+#: 80e71dfc1147449f8a7826cb180adb60
+msgid "``message COMMAND_LONG 0 0 205 0 0 0 0 0 0 0 2``"
+msgstr "``message COMMAND_LONG 0 0 205 0 0 0 0 0 0 0 2``"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:118
+#: 18d1c4249d1940d5b59f486dcf94cb50
+msgid "Switch to MAVLink Targeting (MAVLink messages control gimbal)"
+msgstr "切换至 MAVLink 目标控制模式（由 MAVLink 消息控制云台）"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:121
+#: 130ebc03c58c4366a935cd3e1833e890
+msgid "``message COMMAND_LONG 0 0 205 0 0 0 0 0 0 0 3``"
+msgstr "``message COMMAND_LONG 0 0 205 0 0 0 0 0 0 0 3``"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:121
+#: 4f88f544c371497a8ce14e70df4649e0
+msgid "Switch to RC Targeting (Pilot controls gimbal from RC)"
+msgstr "切换至遥控目标控制模式（飞手通过 RC 控制云台）"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:124
+#: 9a517124714a442a97e71b37cc4c683d
+msgid "``message COMMAND_LONG 0 0 205 0 0 0 0 0 0 0 5``"
+msgstr "``message COMMAND_LONG 0 0 205 0 0 0 0 0 0 0 5``"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:124
+#: 80637ae33c284c3e9727a64e75f42c05
+msgid "Point gimbal at another vehicle see MAV_CMD_DO_SET_ROI_SYSID"
+msgstr "将云台指向另一架飞行器，见 MAV_CMD_DO_SET_ROI_SYSID"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:127
+#: 30567578d1a34b4b8bec82019567d6c9
+msgid "``message COMMAND_LONG 0 0 205 0 0 0 0 0 0 0 6``"
+msgstr "``message COMMAND_LONG 0 0 205 0 0 0 0 0 0 0 6``"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:127
+#: d6cebfb45ba94b96aefbdba336f1e03a
+msgid "Point gimbal at home"
+msgstr "将云台指向返航点"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:131
+#: 33ccae9660fb4096acc8805323a78e1b
+msgid ""
+"MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW to move to a desired angle or at a "
+"desired rate"
+msgstr "MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW：移动至目标角度或以目标速率运动"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:133
+#: 06292845d5af46deba0596a1ba6228ba
+msgid ""
+"The gimbal's attitude can be changed to a desired pitch and yaw angle or "
+"changed at a desired rate by sending a `COMMAND_LONG "
+"<https://mavlink.io/en/messages/common.html#COMMAND_LONG>`__ with the "
+"command and param1 through param7 fields set as specified for the "
+"`MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW "
+"<https://mavlink.io/en/messages/common.html#MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW>`__"
+" command."
+msgstr ""
+"可通过发送 `COMMAND_LONG "
+"<https://mavlink.io/en/messages/common.html#COMMAND_LONG>`__ 并按照 "
+"`MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW "
+"<https://mavlink.io/en/messages/common.html#MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW>`__"
+" 命令的规范设置 command 及 param1 至 param7 字段，将云台姿态调整至目标俯仰和偏航角，或以目标速率改变姿态。"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:136
+#: 42f480b858f2433c9573e86d3795e0f9
+msgid ""
+"The gimbal's yaw behaviour as the vehicle rotates can also be controlled.  "
+"The two behaviour are:"
+msgstr "飞行器旋转时云台的偏航行为也可以被控制。两种行为模式如下："
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:138
+#: 9e8e998a922f4ecaabc91fea4d2dd0fc
+msgid "body-frame/follow means the gimbal's yaw will rotate with the vehicle"
+msgstr "body-frame/follow（机体坐标系/跟随）：云台偏航将随飞行器一起旋转"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:139
+#: 438203f2909f4fe4885ea5059b6f54c7
+msgid ""
+"earth-frame / lock means the gimbal's yaw will remain fixed and will not "
+"rotate with the vehicle"
+msgstr "earth-frame/lock（地球坐标系/锁定）：云台偏航将保持固定，不随飞行器旋转"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:208
+#: ../../source/docs/mavlink-gimbal-mount.rst:324
+#: ../../source/docs/mavlink-gimbal-mount.rst:421
+#: ../../source/docs/mavlink-gimbal-mount.rst:507
+#: ../../source/docs/mavlink-gimbal-mount.rst:592
+#: 151a6cac44b94375a0f4f76ac7857ef6 5e8a1f9f821044679fb7b81d78ecee71
+#: 861405b0ab5a4511ac3ed323cb8f0d4b bf39aa1a60c7472298d1c6fcf3247b45
+#: ff35007b0b1d43f5934738862da47c14
+msgid ""
+"The example commands below can be copy-pasted into MAVProxy (aka SITL) to "
+"test this command.  Before running these commands enter:"
+msgstr "以下示例命令可直接复制粘贴到 MAVProxy（即 SITL）中测试。运行这些命令前，请先输入："
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:215
+#: 8224a0664c9b4dac8fe610a1bc48a954
+msgid "``message COMMAND_LONG 0 0 1000 0 -20 90 float(\"NaN\") float(\"NaN\") 0 0 0``"
+msgstr ""
+"``message COMMAND_LONG 0 0 1000 0 -20 90 float(\"NaN\") float(\"NaN\") 0 0 "
+"0``"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:215
+#: e0b8472095c14383903fa6ec5a24b6f3
+msgid "Pitch down 20deg, yaw right 90 deg, body-frame / follow"
+msgstr "俯仰下倾 20 度，偏航右转 90 度，机体坐标系/跟随模式"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:217
+#: 7e024d4e10a74dd8bbcd69f11d71184c
+msgid ""
+"``message COMMAND_LONG 0 0 1000 0 -20 90 float(\"NaN\") float(\"NaN\") 16 0 "
+"0``"
+msgstr ""
+"``message COMMAND_LONG 0 0 1000 0 -20 90 float(\"NaN\") float(\"NaN\") 16 0 "
+"0``"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:217
+#: 4f25eb4f4d08477c83265183e34d253a
+msgid "Pitch down 20deg, yaw East, earth-frame / lock"
+msgstr "俯仰下倾 20 度，偏航朝东，地球坐标系/锁定模式"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:219
+#: 7102ce50a859489aa115d0abc279fd4d
+msgid "``message COMMAND_LONG 0 0 1000 0 float(\"NaN\") float(\"NaN\") 5 0 0 0 0``"
+msgstr "``message COMMAND_LONG 0 0 1000 0 float(\"NaN\") float(\"NaN\") 5 0 0 0 0``"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:219
+#: 83b82ee43b5b4cd5850f6f691cc61609
+msgid "Pitch down at 5deg/sec, yaw hold, body-frame / follow"
+msgstr "以 5 度/秒速率下俯，偏航保持，机体坐标系/跟随模式"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:221
+#: 7cb0c427b7064178acf897a129da40a0
+msgid "``message COMMAND_LONG 0 0 1000 0 float(\"NaN\") float(\"NaN\") 0 5 0 0 0``"
+msgstr "``message COMMAND_LONG 0 0 1000 0 float(\"NaN\") float(\"NaN\") 0 5 0 0 0``"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:221
+#: 16280587a5184e659411f0867c71f855
+msgid "Pitch hold, yaw clockwise at 5deg/sec in body-frame"
+msgstr "俯仰保持，在机体坐标系中以 5 度/秒速率顺时针偏航"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:223
+#: da6e346d9f0a434da3dcfbf881026e9e
+msgid "``message COMMAND_LONG 0 0 1000 0 float(\"NaN\") float(\"NaN\") 0 5 16 0 0``"
+msgstr "``message COMMAND_LONG 0 0 1000 0 float(\"NaN\") float(\"NaN\") 0 5 16 0 0``"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:223
+#: bcbb824449c14a9ab2f54564c8f229fc
+msgid "Pitch hold, yaw clockwise at 5deg/sec in eartj-frame"
+msgstr "俯仰保持，在地球坐标系中以 5 度/秒速率顺时针偏航"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:227
+#: 5bc82acf22ef4ad08d3dec51595dcef1
+msgid "MAV_CMD_DO_SET_ROI_LOCATION to point at a Location"
+msgstr "MAV_CMD_DO_SET_ROI_LOCATION：指向某个位置"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:229
+#: 8e37a5f6e5e04a9caaf0d0ba509d4d54
+msgid ""
+"The gimbal can be pointed at a Location (Lat, Lon, Alt) by sending a "
+"`COMMAND_INT <https://mavlink.io/en/messages/common.html#COMMAND_INT>`__ "
+"with the command and param1 through param6 fields set as specified for the "
+"`MAV_CMD_DO_SET_ROI_LOCATION "
+"<https://mavlink.io/en/messages/common.html#MAV_CMD_DO_SET_ROI_LOCATION>`__ "
+"command."
+msgstr ""
+"可通过发送 `COMMAND_INT "
+"<https://mavlink.io/en/messages/common.html#COMMAND_INT>`__ 并按照 "
+"`MAV_CMD_DO_SET_ROI_LOCATION "
+"<https://mavlink.io/en/messages/common.html#MAV_CMD_DO_SET_ROI_LOCATION>`__ "
+"命令的规范设置 command 及 param1 至 param6 字段，将云台指向某个位置（纬度、经度、高度）。"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:256
+#: 843280881bff4283a16dbc8673b74e78
+msgid "Valid options are:"
+msgstr "有效选项如下："
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:258
+#: a9c7eae55be24bedb262ff7f4ba8dee5
+msgid "MAV_FRAME_GLOBAL (0): alt is meters above sea level"
+msgstr "MAV_FRAME_GLOBAL (0)：高度为海拔米数"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:259
+#: 60323cc2249841c58addae7f94c380ab
+msgid "MAV_FRAME_GLOBAL_INT (5): alt is meters above sea level"
+msgstr "MAV_FRAME_GLOBAL_INT (5)：高度为海拔米数"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:260
+#: 66928bfd1d6d44df81ab654b31754e78
+msgid "MAV_FRAME_GLOBAL_RELATIVE_ALT (3): alt is meters above home"
+msgstr "MAV_FRAME_GLOBAL_RELATIVE_ALT (3)：高度为相对返航点的米数"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:261
+#: 05c44b69924348ef9ae4e47d23a042aa
+msgid "MAV_FRAME_GLOBAL_RELATIVE_ALT_INT (6): alt is meters above home"
+msgstr "MAV_FRAME_GLOBAL_RELATIVE_ALT_INT (6)：高度为相对返航点的米数"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:262
+#: 2de361d8ce9b4485b00788f0c2688236
+msgid "MAV_FRAME_GLOBAL_TERRAIN_ALT (10): alt is meters above terrain"
+msgstr "MAV_FRAME_GLOBAL_TERRAIN_ALT (10)：高度为相对地形的米数"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:263
+#: 7607605c628f4a75810b76c2563ec673
+msgid "MAV_FRAME_GLOBAL_TERRAIN_ALT_INT (11): alt is meters above terrain"
+msgstr "MAV_FRAME_GLOBAL_TERRAIN_ALT_INT (11)：高度为相对地形的米数"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:331
+#: e0b7bf84d1bd4e54b76859f4ca1843c6
+msgid "``message COMMAND_INT 0 0 6 195 0 0 0 0 0 0 -353632632 1491663846 10``"
+msgstr ""
+"``message COMMAND_INT 0 0 6 195 0 0 0 0 0 0 -353632632 1491663846 10``"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:331
+#: f6ad19a37b684dd58457e42abfa45660
+msgid "Point at Lat:-35.3632632 Lon:149.1663846 Alt:10m above home"
+msgstr "指向纬度 -35.3632632、经度 149.1663846、海拔高于返航点 10 米处"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:333
+#: e467144e8b3a4d4f84d1fe77395b4df4
+msgid "``message COMMAND_INT 0 0 0 195 0 0 0 0 0 0 -353632632 1491663846 10``"
+msgstr ""
+"``message COMMAND_INT 0 0 0 195 0 0 0 0 0 0 -353632632 1491663846 10``"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:333
+#: 1a5f65969ce448ecbe83f836fa7dc14b
+msgid "Point at Lat:-35.3632632 Lon:149.1663846 Alt:10m above sea level"
+msgstr "指向纬度 -35.3632632、经度 149.1663846、海拔 10 米处"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:335
+#: 8778a3ea5b7845f381a57b8450640b06
+msgid ""
+"``message COMMAND_INT 0 0 11 195 0 0 0 0 0 0 -353632632 1491663846 10``"
+msgstr ""
+"``message COMMAND_INT 0 0 11 195 0 0 0 0 0 0 -353632632 1491663846 10``"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:335
+#: 3f64ed779b0c4343aec381a6b3f2a858
+msgid "Point at Lat:-35.3632632 Lon:149.1663846 Alt:10m above terrain"
+msgstr "指向纬度 -35.3632632、经度 149.1663846、高于地形 10 米处"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:339
+#: ae60325dca004f5da6cc11a1cf8b1c5c
+msgid "MAV_CMD_DO_SET_ROI_NONE to stop pointing at a Location"
+msgstr "MAV_CMD_DO_SET_ROI_NONE：停止指向某个位置"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:341
+#: cedab58aa50e49d7915c9900ce6b1379
+msgid ""
+"The gimbal ROI can be stopped (e.g. the gimbal will switch to its default "
+"mode held in the MNT1_DEFLT_MODE param)) by sending a `COMMAND_INT "
+"<https://mavlink.io/en/messages/common.html#COMMAND_INT>`__ with the command"
+" and param1 specified for the `MAV_CMD_DO_SET_ROI_NONE "
+"<https://mavlink.io/en/messages/common.html#MAV_CMD_DO_SET_ROI_NONE>`__ "
+"command."
+msgstr ""
+"可通过发送 `COMMAND_INT "
+"<https://mavlink.io/en/messages/common.html#COMMAND_INT>`__ 并按照 "
+"`MAV_CMD_DO_SET_ROI_NONE "
+"<https://mavlink.io/en/messages/common.html#MAV_CMD_DO_SET_ROI_NONE>`__ "
+"命令的规范设置 command 和 param1 字段，停止云台的兴趣区域跟踪（例如云台将切换到 MNT1_DEFLT_MODE "
+"参数所指定的默认模式）。"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:428
+#: 2b25e92fa06245f39d1e4a89a5f99a9a
+msgid "``message COMMAND_INT 0 0 0 197 0 0 0 0 0 0 0 0 0``"
+msgstr "``message COMMAND_INT 0 0 0 197 0 0 0 0 0 0 0 0 0``"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:428
+#: 9491121585294473ab75256567634fa1
+msgid ""
+"Stop pointing at a Location or another vehicle (gimbal will return to its "
+"default mode)"
+msgstr "停止指向某个位置或另一架飞行器（云台将返回默认模式）"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:433
+#: 05d176ae2b494aa5b401f63cfb46b81c
+msgid "MAV_CMD_DO_SET_ROI_SYSID to point at another vehicle"
+msgstr "MAV_CMD_DO_SET_ROI_SYSID：指向另一架飞行器"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:435
+#: 5fd3ec06b39f49d39c0d05e3e3ec6593
+msgid ""
+"The gimbal can be pointed at another vehicle by sending a `COMMAND_LONG "
+"<https://mavlink.io/en/messages/common.html#COMMAND_LONG>`__ with the "
+"command and param1 fields set as specified for the `MAV_CMD_DO_SET_ROI_SYSID"
+" <https://mavlink.io/en/messages/common.html#MAV_CMD_DO_SET_ROI_SYSID>`__ "
+"command."
+msgstr ""
+"可通过发送 `COMMAND_LONG "
+"<https://mavlink.io/en/messages/common.html#COMMAND_LONG>`__ 并按照 "
+"`MAV_CMD_DO_SET_ROI_SYSID "
+"<https://mavlink.io/en/messages/common.html#MAV_CMD_DO_SET_ROI_SYSID>`__ "
+"命令的规范设置 command 和 param1 字段，将云台指向另一架飞行器。"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:438
+#: dc2523845ed14302885ee62f611b1ce2
+msgid ""
+"This feature relies on the main vehicle receiving the other vehicle's "
+"position at regular intervals via the `GLOBAL_POSITION_INT "
+"<https://mavlink.io/en/messages/common.html#GLOBAL_POSITION_INT>`__ message."
+msgstr ""
+"此功能依赖主飞行器通过 `GLOBAL_POSITION_INT "
+"<https://mavlink.io/en/messages/common.html#GLOBAL_POSITION_INT>`__ "
+"消息定期接收另一架飞行器的位置。"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:514
+#: ff69a6dad29d4d3fb26d34b6a082afbf
+msgid "``message COMMAND_LONG 0 0 198 0 2 0 0 0 0 0 0``"
+msgstr "``message COMMAND_LONG 0 0 198 0 2 0 0 0 0 0 0``"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:514
+#: cc47ee074d014f9fb09bd8508252a597
+msgid "Point at vehicle with SysId=2"
+msgstr "指向 SysId=2 的飞行器"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:518
+#: e64b8b7b8e344fc18fb40c3dddf0ea81
+msgid ""
+"MAV_CMD_DO_GIMBAL_MANAGER_CONFIGURE to take control of the gimbal (optional)"
+msgstr "MAV_CMD_DO_GIMBAL_MANAGER_CONFIGURE：接管云台控制权（可选）"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:520
+#: 88acd6a3f77446ea8795f2f3ef1e18cc
+msgid ""
+"The `MAVLink Gimbalv2 protocol "
+"<https://mavlink.io/en/services/gimbal_v2.html#starting--configuring-gimbal-"
+"control>`__ includes support for deconflicting commands received "
+"simultaneously from multiple MAVLink enabled ground stations using the "
+"DO_GIMBAL_MANAGER_CONFIGURE command.  ArduPilot consumes these commands and "
+"reports who is in control using the GIMBAL_MANAGER_STATUS message but does "
+"not actually enforce their use due to concerns around backwards "
+"compatibility and the number of support calls this would generate."
+msgstr ""
+"`MAVLink Gimbalv2 协议 <https://mavlink.io/en/services/gimbal_v2.html#starting"
+"--configuring-gimbal-control>`__ 支持使用 DO_GIMBAL_MANAGER_CONFIGURE 命令对来自多个 "
+"MAVLink 地面站的并发指令进行冲突消解。ArduPilot 会消费这些命令并通过 GIMBAL_MANAGER_STATUS "
+"消息上报当前控制方，但出于向后兼容性及可能产生大量支持请求的顾虑，并不实际强制执行。"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:522
+#: 9f16fb5e7cd34d91b76da45e3e32a4c2
+msgid ""
+"A ground station (or other MAVLink enabled device) can take control of the "
+"gimbal by sending a `COMMAND_LONG "
+"<https://mavlink.io/en/messages/common.html#COMMAND_LONG>`__ with the "
+"command and param1 fields set as specified for the "
+"`MAV_CMD_DO_GIMBAL_MANAGER_CONFIGURE "
+"<https://mavlink.io/en/messages/common.html#MAV_CMD_DO_GIMBAL_MANAGER_CONFIGURE>`__"
+" command."
+msgstr ""
+"地面站（或其他 MAVLink 设备）可通过发送 `COMMAND_LONG "
+"<https://mavlink.io/en/messages/common.html#COMMAND_LONG>`__ 并按照 "
+"`MAV_CMD_DO_GIMBAL_MANAGER_CONFIGURE "
+"<https://mavlink.io/en/messages/common.html#MAV_CMD_DO_GIMBAL_MANAGER_CONFIGURE>`__"
+" 命令的规范设置 command 和 param1 字段来接管云台控制权。"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:599
+#: d926cd49384a4231a2deb86672bd8ea6
+msgid "``message COMMAND_LONG 0 0 511 0 281 1000000 0 0 0 0 0``"
+msgstr "``message COMMAND_LONG 0 0 511 0 281 1000000 0 0 0 0 0``"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:599
+#: 08443500841a4a478332a248a9c2adfe
+msgid "request GIMBAL_MANAGER_STATUS at 1hz"
+msgstr "以 1Hz 频率请求 GIMBAL_MANAGER_STATUS"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:601
+#: 27937f4225024f2cb3226a91986138f3
+msgid "``message COMMAND_LONG 0 0 1001 0 -2 0 0 0 0 0 0``"
+msgstr "``message COMMAND_LONG 0 0 1001 0 -2 0 0 0 0 0 0``"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:601
+#: 27fb6bae4bd54d99b1bc361eb7a5c710
+msgid "set self in control"
+msgstr "将自身设为控制方"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:603
+#: d53f301e53c7439bb4ea8ae27834310e
+msgid "``message COMMAND_LONG 0 0 1001 0 -3 0 0 0 0 0 0``"
+msgstr "``message COMMAND_LONG 0 0 1001 0 -3 0 0 0 0 0 0``"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:603
+#: e52dae7a7731471c9e8faa8378c41776
+msgid "release control"
+msgstr "释放控制权"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:605
+#: 8248619e37254bcd8909ecee2cf04f26
+msgid "``message COMMAND_LONG 0 0 1001 0 123 1 0 0 0 0 0``"
+msgstr "``message COMMAND_LONG 0 0 1001 0 123 1 0 0 0 0 0``"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:605
+#: 1fcb81e752bf44aeb937a8cadeb5bb09
+msgid "set sysid:123 / compid:1 in control"
+msgstr "将 sysid:123 / compid:1 设为控制方"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:608
+#: 43a1600021a649459b348ae1734d2d85
+msgid ""
+"You can see the results of by monitoring the GIMBAL_MANAGER_STATUS message"
+msgstr "可通过监控 GIMBAL_MANAGER_STATUS 消息查看结果"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:610
+#: fa02cb3bbefe4feaade9c447b3e96468
+msgid "status GIMBAL_MANAGER_STATUS"
+msgstr "status GIMBAL_MANAGER_STATUS"

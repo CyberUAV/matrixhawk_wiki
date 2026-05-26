@@ -1,0 +1,401 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:5
+#: 8e86eacc6ff1484198063a4b4d8300cb
+msgid "Using last_letter as an External SITL Simulator"
+msgstr "将 last_letter 用作外部 SITL 仿真器"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:7
+#: 8358e8d292ec464d901e78522071e8c8
+msgid ""
+"This article explains how to run :ref:`SITL <sitl-simulator-software-in-the-"
+"loop>` for Plane using `last_letter "
+"<https://github.com/Georacer/last_letter>`__ as the flight simulation engine"
+" (instead of *JSBSim*)."
+msgstr ""
+"本文介绍如何使用 `last_letter <https://github.com/Georacer/last_letter>`__ "
+"作为飞行仿真引擎（代替 *JSBSim*）来运行 Plane 的 :ref:`SITL <sitl-simulator-software-in-the-"
+"loop>`。"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:14
+#: ec375ea884b646f1aca1111c902a2f77
+msgid ""
+"Currently the *last_letter* simulator is in early development stage and also"
+" only supports fixed-wing aircraft. Expect frequent updates and changes in "
+"its architecture. Up-to-date documentation on *last_letter* is always found "
+"at its Github page."
+msgstr ""
+"目前 *last_letter* 仿真器处于早期开发阶段，且仅支持固定翼飞机。预计其架构会频繁更新和变更。*last_letter* "
+"的最新文档始终可在其 Github 页面上找到。"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:23
+#: 7d79619eff974833934bc974632de2a4
+msgid "Overview"
+msgstr "概述"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:25
+#: 732566d6ca484bd2be3e053a99fa141d
+msgid ""
+"Currently, the default simulation software for Plane SITL is `JSBSim "
+"<http://jsbsim.sourceforge.net/>`__. While this is a renowned simulation "
+"solution for fixed-wing aircraft, it is primarily targeted towards full-"
+"scale vehicles and focuses on relevant features such as fuel management, "
+"variable pitch drives and oleos. After many years of life it is difficult to"
+" modify to cater for UAV-specific applications. Moreover it is paired with "
+"`FlightGear <http://www.flightgear.org/>`__ as the visualizer, which is a "
+"quite a demanding piece of software in terms of system resources."
+msgstr ""
+"目前，Plane SITL 的默认仿真软件是 `JSBSim "
+"<http://jsbsim.sourceforge.net/>`__。虽然这是固定翼飞机领域知名的仿真解决方案，但它主要面向全尺寸飞行器，专注于燃油管理、变距螺旋桨和起落架减震器等相关功能。经过多年的发展，要针对"
+" UAV 特定应用进行修改已十分困难。此外，它与 `FlightGear <http://www.flightgear.org/>`__ "
+"配套作为可视化工具，该软件对系统资源要求相当高。"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:35
+#: 989807ff7b2b4ba09712c155b9257d79
+msgid ""
+"In contrast, during the development of a robotic platform it is often more "
+"important to have easy access to the system states, be able to change "
+"simulator components easily, add new subsystems, and interface with other "
+"packages."
+msgstr "相比之下，在机器人平台的开发过程中，能够轻松访问系统状态、方便地更换仿真器组件、添加新子系统并与其他软件包接口往往更为重要。"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:40
+#: 20a3dbf921e449fba10cab80c4244430
+msgid ""
+"The `Robotics Operating System <http://www.ros.org/>`__ (ROS) framework is a"
+" potential answer to this need. It is a software framework which resides on "
+"top of the operating system, orchestrating the execution of multiple "
+"programs and the communication between them. It provides the tools to "
+"compile programs written in C++ and Python and monitor their execution. It "
+"is specifically targeted for development of modular robotics applications by"
+" providing standardized message headers, universally useful system tools, "
+"logging capabilities, execution across multiple machines and most "
+"importantly a large codebase of user-submitted, stand-alone packages, fit "
+"for diverse applications."
+msgstr ""
+"`机器人操作系统 "
+"<http://www.ros.org/>`__（ROS）框架是解决这一需求的潜在方案。它是一个运行于操作系统之上的软件框架，负责协调多个程序的执行及其相互通信。它提供了编译"
+" C++ 和 Python "
+"程序并监控其运行的工具，专门针对模块化机器人应用的开发，提供标准化消息头、通用系统工具、日志记录能力、跨多机执行，以及最重要的——大量用户提交的独立软件包代码库，适用于各种应用场景。"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:51
+#: c95aeb79b9ec4d87897cbeb584edb578
+msgid ""
+"*last_letter* is a flight simulator written mostly in C++ under the ROS "
+"framework. It incorporates a modular description of the airplane model, "
+"modeling aerodynamics, propeller and motor dynamics, ground reactions, wind "
+"and gust disturbances and much more. Its structure allows for relatively "
+"easy coding of additional functions, and offers the potential for a unified "
+"simulator for all platforms, compatibility with other ROS packages and a "
+"modular, detailed simulation solution."
+msgstr ""
+"*last_letter* 是一个在 ROS 框架下主要用 C++ "
+"编写的飞行仿真器。它包含对飞机模型的模块化描述，对气动力学、螺旋桨和电机动力学、地面反应、风和阵风扰动等进行建模。其结构允许相对容易地编写附加功能，并提供了统一仿真所有平台、与其他"
+" ROS 软件包兼容以及模块化详细仿真解决方案的潜力。"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:60
+#: 6a4730e6d731453d83c0e4df6978aedf
+msgid "Preconditions"
+msgstr "前提条件"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:63
+#: 2e137ec0801c4f27b4b1c925275f6635
+msgid "ROS version"
+msgstr "ROS 版本"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:65
+#: 87e39fd6e0ff418fa8cffa681c33d951
+msgid ""
+"*Last_letter* is being developed under *ROS Indigo*, and this is the only "
+"supported version."
+msgstr "*Last_letter* 在 *ROS Indigo* 下开发，这是唯一受支持的版本。"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:70
+#: 41179f03fa0a4ff48d001d5ed6dc4e20
+msgid ""
+"*Last_letter* was originally developed under ROS Hydro, and no code changes "
+"were required during the transition. While ROS Hydro is no longer supported,"
+" developers that need to use *last_letter* on this version may find it still"
+" works."
+msgstr ""
+"*Last_letter* 最初在 ROS Hydro 下开发，迁移过程中无需更改代码。虽然 ROS Hydro 已不再受支持，但需要在该版本上使用 "
+"*last_letter* 的开发者可能会发现它仍然可以工作。"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:76
+#: 763b81de20114d49879765d7f5906bf8
+msgid "Operating System requirements"
+msgstr "操作系统要求"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:78
+#: ef1ad64c60d64520af9f14130a138c4c
+msgid ""
+"The selected operating system must be `compatible with ROS Indigo "
+"<http://wiki.ros.org/indigo/Installation>`__ in order to run *last_letter*."
+msgstr ""
+"所选操作系统必须 `与 ROS Indigo 兼容 <http://wiki.ros.org/indigo/Installation>`__ 才能运行 "
+"*last_letter*。"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:81
+#: 7b5ec5048151478e814dac34c7a244e2
+msgid ""
+"We recommend Ubuntu 14.04.2 as this is the platform used for developing "
+"*last_letter* and is also known to be compatible with SITL. Ubuntu Linux "
+"13.10 and 14.04 are also supported by both *ROS Indigo* and SITL."
+msgstr ""
+"我们推荐使用 Ubuntu 14.04.2，因为这是开发 *last_letter* 所使用的平台，也已知与 SITL 兼容。Ubuntu Linux "
+"13.10 和 14.04 也同时受 *ROS Indigo* 和 SITL 的支持。"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:86
+#: 1685d9ebf30348e48cda40c996144626
+msgid "Installation"
+msgstr "安装"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:88
+#: ddfeeb7aaad340f195f12947d4c48613
+msgid ""
+"First install the Plane SITL on your Linux machine, as described "
+":ref:`Setting up SITL on Linux <setting-up-sitl-on-linux>`."
+msgstr ""
+"首先在您的 Linux 机器上安装 Plane SITL，如 :ref:`在 Linux 上设置 SITL <setting-up-sitl-on-"
+"linux>` 所述。"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:91
+#: c5a9b39195b44f54bf6fa204e18b556c
+msgid ""
+"Like any other set of ROS packages, *last_letter* and its companion library "
+"packages **last_letter_msgs**, **uav_utils**, **math_utils** and "
+"**rqt_dashboard** require ROS to be present on your system. If you have "
+"previous experience with ROS and have it on your system, installation of\\ "
+"*last_letter* is as simple as cloning the package files in your workspace. "
+"If not, the following instructions will guide you through the process."
+msgstr ""
+"与任何其他 ROS 软件包集合一样，*last_letter* 及其配套库软件包 "
+"**last_letter_msgs**、**uav_utils**、**math_utils** 和 **rqt_dashboard** "
+"需要系统中已安装 ROS。如果您有使用 ROS 的经验并已安装，安装 *last_letter* "
+"只需将软件包文件克隆到您的工作空间即可。否则，请按照以下说明进行操作。"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:100
+#: efbfe4b9abe74e8691dcfa7ed55a6a5b
+msgid "ROS installation"
+msgstr "ROS 安装"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:102
+#: 49f3b3b393da4fd9ac99dee8a58e01eb
+msgid ""
+"Follow the `instructions on the ROS website "
+"<http://wiki.ros.org/indigo/Installation/Ubuntu>`__ to install *ROS Indigo* "
+"in your machine."
+msgstr ""
+"按照 `ROS 网站上的说明 <http://wiki.ros.org/indigo/Installation/Ubuntu>`__ 在您的机器上安装 "
+"*ROS Indigo*。"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:106
+#: 76ea12cbbfce457391ab8f7dc641efd5
+msgid "Workspace creation"
+msgstr "创建工作空间"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:108
+#: e8c229184fe141c3a62811482428e105
+msgid ""
+"After installing ROS you need to create a ROS Workspace. This is the "
+"directory where custom software packages (packages which are not part of the"
+" official ROS repository) are created, copied or edited. This is also where "
+"the ROS compiler (also known as *catkin*) looks for your code."
+msgstr ""
+"安装 ROS 后，您需要创建一个 ROS 工作空间。这是创建、复制或编辑自定义软件包（不属于官方 ROS 仓库的软件包）的目录。这也是 ROS "
+"编译器（也称为 *catkin*）查找您代码的位置。"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:113
+#: bc85c465c4334a22bc6682b506c4b1a5
+msgid ""
+"Follow these `instructions to create your workspace "
+"<http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment#Create_a_ROS_Workspace>`__."
+" They instruct you to create your workspace under your home folder, but it "
+"can also be created elsewhere. Just be sure you have full rights to this "
+"folder, so a subfolder in your home folder is a good choice. Make sure "
+"``$ROS_PACKAGE_PATH`` sees your **catkin_ws/src** folder."
+msgstr ""
+"按照这些 `创建工作空间的说明 "
+"<http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment#Create_a_ROS_Workspace>`__。说明建议在主文件夹下创建工作空间，也可在其他位置创建。只需确保您对该文件夹拥有完全权限，因此主文件夹的子文件夹是个好选择。确保"
+" ``$ROS_PACKAGE_PATH`` 能找到您的 **catkin_ws/src** 文件夹。"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:121
+#: 34adbb22689f473b958e9e3779a7ab82
+msgid ""
+"You probably don't want to source your workspace path every time you open a "
+"new console. To avoid this, add the following line to your "
+"**/home/<username>/.bashrc** file (assuming that you created your catkin "
+"workspace directly under your home folder)."
+msgstr ""
+"您可能不希望每次打开新控制台时都要手动加载工作空间路径。为避免这种情况，请将以下行添加到您的 **/home/<username>/.bashrc** "
+"文件中（假设您直接在主文件夹下创建了 catkin 工作空间）。"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:131
+#: 8cc37a1f414e4aca81921128fc0f36d1
+msgid "Cloning the last_letter simulator files"
+msgstr "克隆 last_letter 仿真器文件"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:133
+#: d4ddfab12b71489dae6d0a06b58b95a1
+msgid ""
+"Execute the following commands in your console to download and compile the "
+"simulator (without the comments):"
+msgstr "在控制台中执行以下命令以下载和编译仿真器（忽略注释）："
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:145
+#: adb9a6837c7341c08533015205f5b1b0
+msgid "Compilation may take a while."
+msgstr "编译可能需要一段时间。"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:148
+#: 7a73a1dcffc74548b4489a410aa6d3a6
+msgid "Testing everything is installed properly"
+msgstr "测试所有内容是否已正确安装"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:150
+#: 5d74513fc610496eb6b5519f0b2a744b
+msgid "In a console, run:"
+msgstr "在控制台中运行："
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:156
+#: 20ce1197766c456e890a0925781981b8
+msgid ""
+"This should start the simulator and open a 3D simulation environment using "
+"an application called *RViz*. The *rqt_gui* application will start as well; "
+"this is where the avionics instruments are displayed."
+msgstr "这将启动仿真器并使用名为 *RViz* 的应用打开 3D 仿真环境。*rqt_gui* 应用也将同时启动；这是显示航电仪表的地方。"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:160
+#: 453af7a3c6214b098b7a5f2795cf9adb
+msgid ""
+"If everything went smoothly, you can close everything and proceed to "
+"interface *last_letter* with Plane SITL."
+msgstr "如果一切顺利，您可以关闭所有内容，然后继续将 *last_letter* 与 Plane SITL 对接。"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:164
+#: add75eb26a6f45479f9fec5a9cacf63b
+msgid "Using last_letter as the physics simulator for SITL"
+msgstr "将 last_letter 用作 SITL 的物理仿真器"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:166
+#: c35bb9d9ced84995aef87eca1e8120fc
+msgid ""
+"Follow the :ref:`Plane SITL instructions <setting-up-sitl-on-linux>` to "
+"download and compile the Plane code. Make sure your local git branch is "
+"checked out on ``master``."
+msgstr ""
+"按照 :ref:`Plane SITL 说明 <setting-up-sitl-on-linux>` 下载并编译 Plane 代码。确保您的本地 git"
+" 分支已切换到 ``master``。"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:170
+#: 1e2795fa05204164ad70941f42bb8f4c
+msgid ""
+"When everything is done, enter the Plane directory and start the SITL "
+"simulation:"
+msgstr "完成后，进入 Plane 目录并启动 SITL 仿真："
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:178
+#: e1f4d0dd78d84505b1bf17de92ef93e9
+msgid ""
+"This will run SITL, Plane, MAVProxy and *last_letter* along with *RViz* all "
+"in one go (the *RViz* visualizer may take several seconds to start). This "
+"procedure will automatically invoke the *last_letter* launch file and set "
+"the ``Plane`` parameter to ``true`` so that the communication nodes between "
+"*last_letter* and Plane are raised. If *last_letter* communicates with Plane"
+" correctly, the MAVProxy console should display 3D satellite fix and track "
+"10 satellites."
+msgstr ""
+"这将一次性运行 SITL、Plane、MAVProxy 和 *last_letter* 以及 *RViz*（*RViz* "
+"可视化器可能需要几秒钟才能启动）。此过程将自动调用 *last_letter* 启动文件，并将 ``Plane`` 参数设置为 "
+"``true``，以便建立 *last_letter* 和 Plane 之间的通信节点。如果 *last_letter* 与 Plane "
+"通信正常，MAVProxy 控制台应显示 3D 卫星定位并追踪 10 颗卫星。"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:186
+#: 1fa5d35b0bbc4e14b67c8ff08c1b81ff
+msgid ""
+"When you start sim_vehicle.py an xterm will be created which launches "
+"ArduPilot and last_letter. If you have troubles running the simulator then "
+"finding this (minimised) xterm and looking at the debug output there can be "
+"very helpful."
+msgstr ""
+"启动 sim_vehicle.py 时，将创建一个 xterm 窗口用于启动 ArduPilot 和 "
+"last_letter。如果运行仿真器遇到问题，找到这个（最小化的）xterm 并查看其中的调试输出会很有帮助。"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:191
+#: 1f14c9b212af42a7b53321510d86c633
+msgid "You can issue commands or RC overrides using MAVProxy as normal."
+msgstr "您可以像往常一样使用 MAVProxy 发出命令或遥控覆盖。"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:194
+#: 76c25ddd82fa461d84d5adbcaf796222
+msgid "Missing features"
+msgstr "缺失功能"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:196
+#: a80c170443c246dcb13ce012d0445e78
+msgid ""
+"At time of writing (17 March, 2015), *last_letter* does not support the "
+"common initialization arguments (such as starting location). Moreover, the "
+"MAVProxy commands which would control the JSBSim simulator (such as the wind"
+" and pause commands) are not supported."
+msgstr ""
+"在撰写本文时（2015 年 3 月 17 日），*last_letter* 不支持常见的初始化参数（如起始位置）。此外，用于控制 JSBSim 仿真器的"
+" MAVProxy 命令（如风和暂停命令）也不受支持。"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:201
+#: 21ee1c78b1d1453baf7cbc8a2ee56161
+msgid ""
+"Currently, the only way to select the aircraft and alter its initial states "
+"is by editing the parameter files of the simulator, as described in `the "
+"corresponding manual page "
+"<https://github.com/Georacer/last_letter/blob/master/last_letter/doc/manual/parameterFiles.md>`__."
+msgstr ""
+"目前，选择飞机和修改其初始状态的唯一方法是编辑仿真器的参数文件，如 `相应手册页 "
+"<https://github.com/Georacer/last_letter/blob/master/last_letter/doc/manual/parameterFiles.md>`__"
+" 所述。"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:206
+#: f9cec357b3474783969c87581dd84fcb
+msgid "Running last_letter in a virtual machine"
+msgstr "在虚拟机中运行 last_letter"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:208
+#: 3067ece2126f4430a747630d1391839e
+msgid ""
+"*Last_letter* has been successfully run within virtual machines using the "
+"configurations described in its `compatibility information "
+"<https://github.com/Georacer/last_letter/blob/master/last_letter/doc/manual/compatibility.md>`__."
+" To test the performance of the simulator in a particular environment, look "
+"at the xterm window assigned for the simulator output: There should be a "
+"framerate message, updating every 5 seconds."
+msgstr ""
+"*Last_letter* 已成功在虚拟机中使用其 `兼容性信息 "
+"<https://github.com/Georacer/last_letter/blob/master/last_letter/doc/manual/compatibility.md>`__"
+" 中描述的配置运行。要测试仿真器在特定环境中的性能，请查看分配给仿真器输出的 xterm 窗口：应有帧率消息每 5 秒更新一次。"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:214
+#: 18c99deb18ec4f199f6238c30f3fab50
+msgid ""
+"Currently, Plane and SITL are set to run at a nominal 500Hz. A frequency of "
+"over 480Hz indicates that the simulator is running at an acceptable speed."
+msgstr "目前，Plane 和 SITL 设置为以标称 500Hz 运行。频率超过 480Hz 表示仿真器以可接受的速度运行。"

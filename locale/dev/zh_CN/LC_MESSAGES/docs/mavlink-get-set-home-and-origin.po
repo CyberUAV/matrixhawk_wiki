@@ -1,0 +1,271 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:5
+#: f39aec39292c4fd892cd85ec7cfe1f36
+msgid "Setting Home and/or EKF origin"
+msgstr "设置 Home 位置和/或 EKF 原点"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:7
+#: 86d52a7ff55d4ed9837acccc57d729e7
+msgid ""
+"This page explains how MAVLink can be used by a ground station or companion "
+"computer to get or set the home or EKF origin."
+msgstr "本页说明地面站或伴随计算机如何使用 MAVLink 获取或设置 Home 位置或 EKF 原点。"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:10
+#: faf205f61d164042ac2a38683f10907c
+msgid "Home vs EKF Origin"
+msgstr "Home 位置与 EKF 原点的区别"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:12
+#: cb15f4c4f755457a8d11005e34d14a73
+msgid ""
+"The vehicles \"Home\" position is the location (specified as a latitude, "
+"longitude and altitude above sea level) that the vehicle will return to in "
+":ref:`RTL <copter:rtl-mode>` mode.  For most vehicles this location is set "
+"to the vehicle's current location each time the vehicle is armed but it may "
+"also be moved at any time.  Moving home can be useful in situations where "
+"the user wishes RTL mode to return the vehicle to a different location than "
+"it took off from."
+msgstr ""
+"飞行器的「Home」位置是飞行器在 :ref:`RTL <copter:rtl-mode>` "
+"模式下将返回的地点（以纬度、经度和海拔高度表示）。对于大多数飞行器，每次解锁时该位置将被设置为当前位置，但也可随时更改。在用户希望 RTL "
+"模式返回到与起飞点不同位置的情况下，移动 Home 位置非常有用。"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:14
+#: af2926c5a78b469280271e41f8eae0a0
+msgid ""
+"The \"EKF origin\" is the location that the EKF (aka AHRS) uses for internal"
+" calculations.  This location is normally set to the vehicle's location soon"
+" after the GPS provides a good quality location.  Once set the EKF origin "
+"cannot be moved.  Users are not normally aware of the EKF origin's location "
+"unless they are using Non-GPS navigation on a vehicle with no GPS attached "
+"(without a GPS, the user must specify the EKF origin using the ground "
+"station)."
+msgstr ""
+"「EKF 原点」是 EKF（即 AHRS）用于内部计算的位置。该位置通常在 GPS 提供高质量定位后不久设置为飞行器的当前位置。一旦设置，EKF "
+"原点不能移动。用户通常不需要关注 EKF 原点的位置，除非在没有 GPS 的飞行器上使用非 GPS 导航（在没有 GPS "
+"的情况下，用户必须通过地面站指定 EKF 原点）。"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:16
+#: f3dc50e0db514a11ac610b8842bd5d33
+msgid ""
+"Whenever the Home or EKF origin is updated the vehicle will send a "
+"`HOME_POSITION <https://mavlink.io/en/messages/common.html#HOME_POSITION>`__"
+" or `GPS_GLOBAL_ORIGIN "
+"<https://mavlink.io/en/messages/common.html#GPS_GLOBAL_ORIGIN>`__ message "
+"(respectively) on all active mavlink channels."
+msgstr ""
+"每当 Home 位置或 EKF 原点更新时，飞行器将分别在所有活动的 MAVLink 通道上发送 `HOME_POSITION "
+"<https://mavlink.io/en/messages/common.html#HOME_POSITION>`__ 或 "
+"`GPS_GLOBAL_ORIGIN "
+"<https://mavlink.io/en/messages/common.html#GPS_GLOBAL_ORIGIN>`__ 消息。"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:18
+#: e0189e226fbe4b4b872204d97d315cbb
+msgid ""
+"The home will also be sent in response to a `MAV_CMD_GET_HOME_POSITION "
+"<https://mavlink.io/en/messages/common.html#MAV_CMD_GET_HOME_POSITION>`__ "
+"sent within a `COMMAND_LONG "
+"<https://mavlink.io/en/messages/common.html#COMMAND_LONG>`__ or `COMMAND_INT"
+" <https://mavlink.io/en/messages/common.html#COMMAND_INT>`__ message."
+msgstr ""
+"Home 位置也会在收到 `COMMAND_LONG "
+"<https://mavlink.io/en/messages/common.html#COMMAND_LONG>`__ 或 `COMMAND_INT "
+"<https://mavlink.io/en/messages/common.html#COMMAND_INT>`__ 消息中的 "
+"`MAV_CMD_GET_HOME_POSITION "
+"<https://mavlink.io/en/messages/common.html#MAV_CMD_GET_HOME_POSITION>`__ "
+"命令时作为响应发送。"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:23
+#: 322eac187a864d9baaf2d6acfff7a045
+msgid "MAV_CMD_DO_SET_HOME within COMMAND_INT"
+msgstr "在 COMMAND_INT 中使用 MAV_CMD_DO_SET_HOME"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:25
+#: 213ac24a1f7c45fc941406c864e2db3a
+msgid ""
+"Set the home location by sending a `COMMAND_INT "
+"<https://mavlink.io/en/messages/common.html#COMMAND_INT>`__ with the command"
+" and parameter fields set as specified for the `MAV_CMD_DO_SET_HOME "
+"<https://mavlink.io/en/messages/common.html#MAV_CMD_DO_SET_HOME>`__ command."
+msgstr ""
+"通过发送 `COMMAND_INT "
+"<https://mavlink.io/en/messages/common.html#COMMAND_INT>`__（其中 command "
+"和参数字段按照 `MAV_CMD_DO_SET_HOME "
+"<https://mavlink.io/en/messages/common.html#MAV_CMD_DO_SET_HOME>`__ "
+"命令的规定设置）来设置 Home 位置。"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:102
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:184
+#: 19943443337745d1b4a5bb7f8a194cc7 ec046bf7d2f4432ba5a75ce5a823de07
+msgid "**Examples**"
+msgstr "**示例**"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:104
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:186
+#: 3f06c0d8d3e5453fbffd9cecba52f421 445027a1febf47c9bc24b65acaf28a82
+msgid ""
+"The example commands below can be copy-pasted into MAVProxy (aka SITL) to "
+"test this command.  Before running these commands enter, \"module load "
+"message\""
+msgstr ""
+"以下示例命令可直接复制粘贴到 MAVProxy（即 SITL）中进行测试。运行这些命令之前，请先输入 「module load message」。"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:107
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:189
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:252
+#: 825646839cc34b74800a020ac339fa66 b4340251426b4eab859bdc3d88c5cc96
+#: f9b42cab26784aef86c00bf254d61abe
+msgid "Example MAVProxy/SITL Command"
+msgstr "MAVProxy/SITL 示例命令"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:107
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:189
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:252
+#: c0e5fcbc1c1b48fa9a45c59797542d01 dcdc1a83d42541c190425a9fc5faf6f4
+#: ef0ad4f2b0354b0eb43d79c8cb9401a9
+msgid "Description"
+msgstr "描述"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:109
+#: a290d006935a4df38b391b5b22ee270d
+msgid "``message COMMAND_INT 0 0 0 179 0 0 1 0 0 0 0 0 0``"
+msgstr "``message COMMAND_INT 0 0 0 179 0 0 1 0 0 0 0 0 0``"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:109
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:191
+#: 0e987023749f4559a1f731a3d163f013 c30d4d5d702a406896185a0d171ed93f
+msgid "set home to the vehicle's current location"
+msgstr "将 Home 设置为飞行器当前位置"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:111
+#: 0cb2c978d4b94ac09331834c8293be4e
+msgid ""
+"``message COMMAND_INT 0 0 0 179 0 0 0 0 0 0 -353630000 1491650000 575``"
+msgstr ""
+"``message COMMAND_INT 0 0 0 179 0 0 0 0 0 0 -353630000 1491650000 575``"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:111
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:193
+#: 42f031e8caf24a2098e0ab18349eadfd d7458c871a044c1b89dd11141b0731b6
+msgid "set home to the specified location"
+msgstr "将 Home 设置为指定位置"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:115
+#: b842153e6f424a13bfbbfb4a39d9aacb
+msgid "MAV_CMD_DO_SET_HOME within COMMAND_LONG"
+msgstr "在 COMMAND_LONG 中使用 MAV_CMD_DO_SET_HOME"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:117
+#: 2da35bad3bd547d099c8faecf0f87f66
+msgid ""
+"Set the home location by sending a `COMMAND_LONG "
+"<https://mavlink.io/en/messages/common.html#COMMAND_LONG>`__ with the "
+"command and parameter fields set as specified for the `MAV_CMD_DO_SET_HOME "
+"<https://mavlink.io/en/messages/common.html#MAV_CMD_DO_SET_HOME>`__ command."
+"  Note that this method sets the home position with less accuracy than the "
+"COMMAND_INT method from above."
+msgstr ""
+"通过发送 `COMMAND_LONG "
+"<https://mavlink.io/en/messages/common.html#COMMAND_LONG>`__（其中 command "
+"和参数字段按照 `MAV_CMD_DO_SET_HOME "
+"<https://mavlink.io/en/messages/common.html#MAV_CMD_DO_SET_HOME>`__ "
+"命令的规定设置）来设置 Home 位置。请注意，此方法设置的 Home 位置精度低于上述 COMMAND_INT 方法。"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:191
+#: d339a8ba0589481b81952ba4df48552b
+msgid "``message COMMAND_LONG 0 0 179 0 1 0 0 0 0 0 0``"
+msgstr "``message COMMAND_LONG 0 0 179 0 1 0 0 0 0 0 0``"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:193
+#: 1ce4fb1b26454a73a4da29b9b8fb9374
+msgid "``message COMMAND_LONG 0 0 179 0 0 0 0 0 -35.363 149.165 575``"
+msgstr "``message COMMAND_LONG 0 0 179 0 0 0 0 0 -35.363 149.165 575``"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:199
+#: 81b34898c6584610aa19aa82be0134b4
+msgid "SET_GPS_GLOBAL_ORIGIN"
+msgstr "SET_GPS_GLOBAL_ORIGIN"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:201
+#: 398d77a536144c209dd8a254450e4138
+msgid ""
+"Sets the location used by the EKF/AHRS for internal calculations.  This "
+"location is normally automatically set soon after the GPS first returns a "
+"good location.  The operator may be required to set this manually if Non-GPS"
+" navigation is used.  Once set the EKF origin cannot be moved."
+msgstr ""
+"设置 EKF/AHRS 用于内部计算的位置。该位置通常在 GPS 首次返回高质量位置后自动设置。若使用非 GPS "
+"导航，操作员可能需要手动设置。一旦设置，EKF 原点不能移动。"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:203
+#: 2029f87a254747d6a27d118d59b9e48f
+msgid ""
+"The message definition can be found `here "
+"<https://mavlink.io/en/messages/common.html#SET_GPS_GLOBAL_ORIGIN>`__"
+msgstr ""
+"消息定义可在 `此处 "
+"<https://mavlink.io/en/messages/common.html#SET_GPS_GLOBAL_ORIGIN>`__ 找到。"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:242
+#: b00b537cffaf43399be2f0582dea7639
+msgid "**Example**"
+msgstr "**示例**"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:244
+#: fc9c2554a2664b608e6ce4d11a224df1
+msgid ""
+"The example command below can be copy-pasted into MAVProxy (aka SITL) to "
+"test this command.  Before running these commands enter the following"
+msgstr "以下示例命令可直接复制粘贴到 MAVProxy（即 SITL）中进行测试。运行这些命令之前，请先输入以下内容："
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:246
+#: 9422a3e487394319a0223c13d1e7ad5e
+msgid "module load message"
+msgstr "module load message"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:247
+#: cf145a9379be403fa56d112ec19e5853
+msgid "param set EK3_SRC1_POSXY 0"
+msgstr "param set EK3_SRC1_POSXY 0"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:248
+#: cdf0dd8c93a644a39c500677db1571db
+msgid "param set EK3_SRC1_VELXY 0"
+msgstr "param set EK3_SRC1_VELXY 0"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:249
+#: ada45db465e9494891785a286ac12c2e
+msgid "param set EK3_SRC1_VELZ 0"
+msgstr "param set EK3_SRC1_VELZ 0"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:254
+#: 6d50a04d4a8843f9969e535db6242662
+msgid "``message SET_GPS_GLOBAL_ORIGIN 0 -353621474 1491651746 600000 0``"
+msgstr "``message SET_GPS_GLOBAL_ORIGIN 0 -353621474 1491651746 600000 0``"
+
+#: ../../source/docs/mavlink-get-set-home-and-origin.rst:254
+#: ba98247a44e548e6a856336d513e258c
+msgid "set EKF origin to lat,lon of -35.36,149.16 and 600m above sea level"
+msgstr "将 EKF 原点设置为纬度 -35.36、经度 149.16、海拔 600 米"

@@ -1,0 +1,371 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 14:59+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/quadplane-transitions.rst:5
+#: 6a537d7304fe4ef0b049d9f43b67d806
+msgid "Transitions"
+msgstr "过渡"
+
+#: ../../source/docs/quadplane-transitions.rst:7
+#: 4a8cebc7b9a247db93735f28faa19439
+msgid ""
+"QuadPlane transition is where the aircraft is changing between flying "
+"primarily as a VTOL (copter-like) aircraft and flying as a conventional "
+"fixed wing aircraft. Transition happens in both directions, and can either "
+"be commanded by the pilot or happen automatically based on "
+"airspeed/attitude/altitude(:ref:`assisted_fixed_wing_flight`) or flight mode"
+" changes during a mission."
+msgstr ""
+"四旋翼飞机过渡是指飞行器在主要以 "
+"VTOL（类多旋翼）飞行和以传统固定翼飞行之间切换的过程。过渡可以双向进行，可以由飞手手动指令，也可以根据空速/姿态/高度（:ref:`assisted_fixed_wing_flight`）或任务中的飞行模式变化自动发生。"
+
+#: ../../source/docs/quadplane-transitions.rst:13
+#: c0a6b69640f84334a494d81e1f4dab68
+msgid ""
+"The primary way to initiate a transition is to change flight mode, either "
+"using the flight mode channel on your transmitter or using a ground station "
+"to command a mode change."
+msgstr "启动过渡的主要方式是切换飞行模式，可以使用遥控器上的飞行模式通道，也可以使用地面站发送模式切换指令。"
+
+#: ../../source/docs/quadplane-transitions.rst:17
+#: ce347f65f113464fbeac52315dd06a00
+msgid ""
+"During a transition, depending on type of QuadPlane and various "
+":ref:`Q_OPTIONS<Q_OPTIONS>` settings, pilot control of the vehicle's "
+"attitude, climb rate, etc. may be modified or restricted to assure "
+"successful transition as detailed below."
+msgstr ""
+"在过渡期间，根据四旋翼飞机的类型和各种 :ref:`Q_OPTIONS<Q_OPTIONS>` "
+"设置，飞手对飞行器姿态、爬升率等的控制可能会被修改或限制，以确保成功过渡，详见下文。"
+
+#: ../../source/docs/quadplane-transitions.rst:19
+#: a4e84f3096aa4d6dbd47ec15a51881e3
+msgid ""
+"See :ref:`Tailsitter Section <guide-tailsitter>` for details on transitions "
+"for tailsitters, which are different than non-tailsitters discussed below:"
+msgstr "有关尾坐式飞机过渡的详情，请参阅 :ref:`尾坐式部分 <guide-tailsitter>`，其与下文讨论的非尾坐式有所不同："
+
+#: ../../source/docs/quadplane-transitions.rst:22
+#: bc56f790cc2d4fdeb7a4bbf138294b42
+msgid "Transition to Fixed Wing Mode from VTOL"
+msgstr "从 VTOL 过渡到固定翼模式"
+
+#: ../../source/docs/quadplane-transitions.rst:24
+#: 31d03d3b128d4d5a89e065e7f6803c06
+msgid ""
+"If you transition to :ref:`MANUAL <manual-mode>` or :ref:`ACRO <acro-mode>`,"
+" then the VTOL motors will immediately stop. In the case of a tilt-rotor, "
+"the motors will also immediately rotate to forward flight orientation."
+msgstr ""
+"如果您过渡到 :ref:`MANUAL <manual-mode>` 或 :ref:`ACRO <acro-mode>`，则 VTOL "
+"电机将立即停止。对于倾转旋翼，电机也将立即旋转到前飞方向。"
+
+#: ../../source/docs/quadplane-transitions.rst:26
+#: e9cbba7b9efe46d5b096353246c6491d
+msgid ""
+"If you do not have sufficient airspeed, an immediate stall will occur! Since"
+" MANUAL mode is often setup as a reflex driven \"bail-out\", some users "
+"move, or remove this mode, and substitute QSTABLIZE or QLOITER as an "
+"alternative \"bail-out\" for a QuadPlane. Also if the transition is made "
+"downwind, the transition time is short, and no airspeed sensor is used in "
+"non-tailsitters, a stall could occur also since insufficient airspeed has "
+"been obtained when VTOL assistance has terminated."
+msgstr ""
+"如果空速不足，将立即发生失速！由于 Manual 模式通常被设置为反应性「紧急退出」，一些用户会移除或替换此模式，改用 QSTABILIZE 或 "
+"QLOITER 作为四旋翼飞机的备用「紧急退出」。此外，如果顺风过渡，过渡时间短，且在非尾坐式中未使用空速传感器，当 VTOL "
+"辅助终止时可能尚未获得足够的空速，也可能发生失速。"
+
+#: ../../source/docs/quadplane-transitions.rst:28
+#: 666bf40428f0448498adb3f5a6bdc6c5
+msgid ""
+"If you transition to any other fixed wing mode then the VTOL motors will "
+"continue to supply lift and stability until you have reached the "
+":ref:`AIRSPEED_MIN <AIRSPEED_MIN>` airspeed (or airspeed estimate if no "
+"airspeed sensor). This phase is called \"Transition airspeed wait\"."
+msgstr ""
+"如果您过渡到任何其他固定翼模式，VTOL 电机将继续提供升力和稳定性，直到达到 :ref:`AIRSPEED_MIN <AIRSPEED_MIN>` "
+"空速（或在无空速传感器时为空速估算值）。这个阶段称为「过渡空速等待」。"
+
+#: ../../source/docs/quadplane-transitions.rst:31
+#: 0f8e920cf9004dc0b681beef0d3e23ec
+msgid ""
+"In non-tilt rotor configurations, the forward motor(s) thrust is controlled "
+"by the throttle stick in a manner similar to whatever fixed wing mode was "
+"entered."
+msgstr "在非倾转旋翼配置中，前进电机的推力由油门杆控制，方式与进入的固定翼模式相似。"
+
+#: ../../source/docs/quadplane-transitions.rst:30
+#: 7922704618694b9c8f8822c8b4c5ccab
+msgid ""
+"Transitioning to FBWB/CRUISE, throttle stick controls forward thrust as in "
+"that mode, as a speed or throttle value, depending on whether or not an "
+"airspeed sensor is in use. A minimum pusher throttle value is applied during"
+" the transition. If :ref:`TKOFF_THR_MIN<TKOFF_THR_MIN>` is nonzero, then it "
+"will be the minimum throttle. If it is zero, "
+":ref:`TRIM_THROTTLE<TRIM_THROTTLE>` will be used as the minimum throttle."
+msgstr ""
+"过渡到 FBWB/Cruise 时，油门杆像在该模式下一样控制前进推力，根据是否使用空速传感器，以速度或油门值表示。过渡期间会应用最小前推油门值。如果 "
+":ref:`TKOFF_THR_MIN<TKOFF_THR_MIN>` 非零，则它将作为最小油门。如果为零，则 "
+":ref:`TRIM_THROTTLE<TRIM_THROTTLE>` 将用作最小油门。"
+
+#: ../../source/docs/quadplane-transitions.rst:31
+#: bd63c9228081481a8e5006e1310b0fff
+msgid ""
+"In FBWA/STABILIZE transitions, the forward throttle is directly controlled, "
+"ie low stick is minimum/zero thrust and the QuadPlane will just hover, "
+"higher stick provides more forward throttle. The VTOL motors will behave "
+"similar to that in QHOVER and will try to maintain present altitude "
+"throughout the transition."
+msgstr ""
+"在 FBWA/Stabilize 过渡中，前进油门直接受控，即低杆位为最小/零推力，四旋翼飞机将仅悬停，高杆位提供更多前进油门。VTOL "
+"电机的行为类似于 QHOVER 中，在整个过渡过程中尝试保持当前高度。"
+
+#: ../../source/docs/quadplane-transitions.rst:32
+#: 493bd85196af48c5b9caae3f55213d6a
+msgid ""
+"During the transition, elevator input will act as climb/descent demand to "
+"the VTOL motors, roll input as roll attitude change, unless "
+":ref:`Q_OPTIONS<Q_OPTIONS>` bit 0 is set."
+msgstr ""
+"过渡期间，除非设置了 :ref:`Q_OPTIONS<Q_OPTIONS>` 第 0 位，否则升降舵输入将作为对 VTOL "
+"电机的爬升/下降需求，横滚输入作为横滚姿态变化。"
+
+#: ../../source/docs/quadplane-transitions.rst:33
+#: a9d2061f24bb4d7290a17e0875f0b973
+msgid ""
+"In the case of tilt-rotors, the motors will tilt to "
+":ref:`Q_TILT_MAX<Q_TILT_MAX>` for throttle stick positions at or above mid-"
+"stick to begin building forward airspeed for the transition.  In "
+"FBWA/STABILIZE transitions, throttle stick positions below mid-stick will "
+"proportionately rotate VTOL motors back towards vertical, since that "
+"controls the forward thrust component. Transitioning to FBWB/CRUISE in any "
+"configuration, throttle stick has no effect until transition is complete. "
+"Overall thrust to the motors will behave similar to that in QHOVER and will "
+"try to maintain present altitude throughout the transition. During the "
+"transition, elevator input will act as climb/descent demand to the VTOL "
+"motors, roll input as roll attitude change, unless "
+":ref:`Q_OPTIONS<Q_OPTIONS>` bit 0 is set."
+msgstr ""
+"对于倾转旋翼，当油门杆处于中位或以上时，电机将倾转至 :ref:`Q_TILT_MAX<Q_TILT_MAX>`，以开始为过渡积累前进空速。在 "
+"FBWA/Stabilize 过渡中，低于中位的油门杆位置将按比例将 VTOL 电机旋转回垂直位置，因为这控制前进推力分量。在任何配置中过渡到 "
+"FBWB/Cruise 时，油门杆在过渡完成前均无效。电机的总推力行为类似于 QHOVER，将在整个过渡过程中尝试保持当前高度。过渡期间，除非设置了 "
+":ref:`Q_OPTIONS<Q_OPTIONS>` 第 0 位，否则升降舵输入将作为对 VTOL 电机的爬升/下降需求，横滚输入作为横滚姿态变化。"
+
+#: ../../source/docs/quadplane-transitions.rst:35
+#: ecfe2af2b16b4395afa83fae4bc3b4d2
+msgid ""
+"Unless the :ref:`Q_OPTIONS<Q_OPTIONS>` bit 0 is set, pulling back on "
+"elevator will not only pitch the nose up but also increase the VTOL motor "
+"output to assist in climbing during the transition airspeed wait phase. If "
+"bit 0 is set, only the pitch will change and altitude will not. In tilt-"
+"rotors, this can lead to delaying, or even preventing, the transition from "
+"ever completing! For tilt-rotors, do not pull back on pitch if this bit is "
+"set, until the transition is completed!"
+msgstr ""
+"除非设置了 :ref:`Q_OPTIONS<Q_OPTIONS>` 第 0 位，否则向后拉升降舵不仅会使机头上仰，还会增加 VTOL "
+"电机输出，以在过渡空速等待阶段辅助爬升。如果设置了第 0 "
+"位，则只有俯仰会改变，高度不会改变。对于倾转旋翼，这可能导致延迟甚至完全阻止过渡完成！对于倾转旋翼，如果设置了此位，请在过渡完成之前不要向后拉俯仰！"
+
+#: ../../source/docs/quadplane-transitions.rst:37
+#: e9b2eded6d7a49f390421e20601adb53
+msgid ""
+"Once :ref:`AIRSPEED_MIN <AIRSPEED_MIN>` is reached the VTOL only motors' "
+"contribution will slowly drop in power over :ref:`Q_TRANSITION_MS "
+"<Q_TRANSITION_MS>` milliseconds (default is 5000, so 5 seconds) and will "
+"switch off after that. And tilt-rotors will slowly rotate to full forward "
+"thrust configuration. Once transition is completed, normal control of "
+"throttle and attitude resumes for whatever fixed wing mode the vehicle is "
+"now in."
+msgstr ""
+"一旦达到 :ref:`AIRSPEED_MIN <AIRSPEED_MIN>`，仅用于 VTOL 的电机的贡献将在 "
+":ref:`Q_TRANSITION_MS <Q_TRANSITION_MS>` 毫秒内（默认为 5000，即 5 "
+"秒）缓慢降低功率，之后关闭。倾转旋翼将缓慢旋转到完全前飞推力配置。过渡完成后，飞行器当前固定翼模式的油门和姿态控制将恢复正常。"
+
+#: ../../source/docs/quadplane-transitions.rst:39
+#: a63ae64b03e64c719f41970c806c0178
+msgid ""
+"Usually by this time the VTOL motor contribution is already very low, since "
+"the QuadPlane is already flying, providing lift or climbing, and the VTOL "
+"contribution is only aiding attitude stabilization as required."
+msgstr "通常到此时 VTOL 电机的贡献已经非常低，因为四旋翼飞机已经在飞行、提供升力或爬升，VTOL 贡献仅根据需要辅助姿态稳定。"
+
+#: ../../source/docs/quadplane-transitions.rst:41
+#: 249692b434c24545b0dae5ae1fada38c
+msgid ""
+"If :ref:`Q_TRANS_FAIL<Q_TRANS_FAIL>` is not zero, then exceeding this time "
+"before reaching  :ref:`AIRSPEED_MIN <AIRSPEED_MIN>` airspeed will cancel the"
+" transition and the aircraft will immediately execute the action specified "
+"by :ref:`Q_TRANS_FAIL_ACT<Q_TRANS_FAIL_ACT>`. The default is 0, which "
+"disables this timeout."
+msgstr ""
+"如果 :ref:`Q_TRANS_FAIL<Q_TRANS_FAIL>` 不为零，则在达到 :ref:`AIRSPEED_MIN "
+"<AIRSPEED_MIN>` 空速之前超过此时间将取消过渡，飞行器将立即执行 "
+":ref:`Q_TRANS_FAIL_ACT<Q_TRANS_FAIL_ACT>` 指定的动作。默认值为 0，即禁用此超时。"
+
+#: ../../source/docs/quadplane-transitions.rst:43
+#: 9e9f801830394938bea96ed1636d08c8
+msgid ""
+"for tiltrotors only: if bit 19 of :ref:`Q_OPTIONS<Q_OPTIONS>` is set and "
+":ref:`Q_TRANS_FAIL<Q_TRANS_FAIL>` is not zero, and if the groundspeed is "
+"greater than 1/2 of :ref:`AIRSPEED_MIN<AIRSPEED_MIN>`, then the transition "
+"to fixed wing will immediately complete. This is useful if no airspeed "
+"sensor is being used, and the transition is into a headwind, which could "
+"prevent an accurate airspeed estimate from being obtained until a turn is "
+"made. Without using the :ref:`Q_TRANS_FAIL<Q_TRANS_FAIL>` timeout and this "
+"Q_OPTION, the transition could be indefinitely long since airspeed might be "
+"reported as below :ref:`AIRSPEED_MIN<AIRSPEED_MIN>` due to low groundspeed."
+msgstr ""
+"仅适用于倾转旋翼：如果设置了 :ref:`Q_OPTIONS<Q_OPTIONS>` 第 19 位且 "
+":ref:`Q_TRANS_FAIL<Q_TRANS_FAIL>` 不为零，且如果地速大于 "
+":ref:`AIRSPEED_MIN<AIRSPEED_MIN>` 的 "
+"1/2，则过渡到固定翼将立即完成。这在未使用空速传感器且过渡逆风飞行时很有用，逆风可能导致在转弯前无法获得准确的空速估算。如果不使用 "
+":ref:`Q_TRANS_FAIL<Q_TRANS_FAIL>` 超时和此 Q_OPTION，过渡可能无限期延长，因为由于低地速，空速可能被报告为低于"
+" :ref:`AIRSPEED_MIN<AIRSPEED_MIN>`。"
+
+#: ../../source/docs/quadplane-transitions.rst:45
+#: 0ce3faf9777c4cbfb19091025eff5c5f
+msgid ""
+"The airspeed used during transition can be found in dataflash logs as "
+"CTUN.As. This is a canonical value which will include the airspeed sensor if"
+" enabled, or use the synthetic airspeed if not."
+msgstr "过渡期间使用的空速可以在数据闪存日志的 CTUN.As 中找到。这是一个规范值，如果启用了空速传感器则使用其数据，否则使用合成空速。"
+
+#: ../../source/docs/quadplane-transitions.rst:48
+#: 486498400a224c96b99c0d6aadcbcde3
+msgid "Transition to a VTOL mode from Fixed Wing"
+msgstr "从固定翼过渡到 VTOL 模式"
+
+#: ../../source/docs/quadplane-transitions.rst:50
+#: ed629b96a0f14ce196af5f0cd2fbda3e
+msgid ""
+"If you transition from a fixed wing mode to a QuadPlane VTOL mode then the "
+"forward motor/thrust will immediately stop, and the control surfaces will "
+"continue to provide stability while the plane slows down. This allows for "
+"transitions to QuadPlane modes while flying at high speed. Tilt-rotors will,"
+" therefore, immediately move to VTOL position."
+msgstr ""
+"如果您从固定翼模式过渡到四旋翼飞机 VTOL "
+"模式，前进电机/推力将立即停止，控制面将继续提供稳定性，同时飞机减速。这允许在高速飞行时过渡到四旋翼飞机模式。因此，倾转旋翼将立即移动到 VTOL "
+"位置。"
+
+#: ../../source/docs/quadplane-transitions.rst:55
+#: aeda17f142d648328862a061edf5a46e
+msgid "VTOL attitude control will be provided as needed as the vehicle slows."
+msgstr "随着飞行器减速，将按需提供 VTOL 姿态控制。"
+
+#: ../../source/docs/quadplane-transitions.rst:56
+#: 0f4b7d44a716437b930f9179da56d891
+msgid ""
+"Transition to altitude holding VTOL modes will manage power to the VTOL "
+"motors as necessary to hold altitude as the vehicle slows from forward fixed"
+" wing flight."
+msgstr "过渡到保持高度的 VTOL 模式时，将根据需要管理 VTOL 电机的功率，以在飞行器从固定翼前飞减速时保持高度。"
+
+#: ../../source/docs/quadplane-transitions.rst:57
+#: d8b3472476cb49bdbc7f95763e8a42a3
+msgid ""
+"Transition to non-altitude holding VTOL modes will provide vertical thrust "
+"as commanded by the throttle."
+msgstr "过渡到非保持高度的 VTOL 模式时，将按油门命令提供垂直推力。"
+
+#: ../../source/docs/quadplane-transitions.rst:58
+#: 70084938468145fcbdfa624ff0e83efd
+msgid ""
+"Transition to position holding modes will project a stopping position to "
+"maintain based on deceleration of the vehicle and then hold it once reached."
+msgstr "过渡到位置保持模式时，将根据飞行器的减速预测一个停止位置并保持，直到到达该位置。"
+
+#: ../../source/docs/quadplane-transitions.rst:59
+#: 52d52a5224f04fdf9a497d0ebfb32b67
+msgid ""
+"When transitioning to a position holding mode, like QLIOTER, QuadPlane will "
+"try to decelerate, which can result in the nose pitching up rapidly if "
+"traveling at high speeds (which will result in considerable altitude gain in"
+" most cases). In order to prevent this, the pitch is initially limited to 0 "
+"degrees, relaxing this limit to the smaller of "
+":ref:`Q_ANGLE_MAX<Q_ANGLE_MAX>` or :ref:`PTCH_LIM_MAX_DEG<PTCH_LIM_MAX_DEG>`"
+" over the period of :ref:`Q_BACKTRANS_MS<Q_BACKTRANS_MS>`. Even with these "
+"limits altitude gain can result during the deceleration while transitioning."
+msgstr ""
+"当过渡到位置保持模式（如 "
+"QLOITER）时，四旋翼飞机将尝试减速，如果高速飞行，这可能导致机头迅速上仰（在大多数情况下会导致相当大的高度增加）。为防止这种情况，俯仰最初被限制为"
+" 0 度，在 :ref:`Q_BACKTRANS_MS<Q_BACKTRANS_MS>` 期间将此限制放宽至 "
+":ref:`Q_ANGLE_MAX<Q_ANGLE_MAX>` 或 :ref:`PTCH_LIM_MAX_DEG<PTCH_LIM_MAX_DEG>` "
+"中较小的值。即使有这些限制，在过渡减速期间也可能产生高度增加。"
+
+#: ../../source/docs/quadplane-transitions.rst:61
+#: 0107a483a05a4ec39789e8999b34ec84
+msgid ""
+"this phased-in pitch limit is applied for all fixed wing to VTOL "
+"transitions, except for transitions to QACRO."
+msgstr "此分阶段俯仰限制适用于所有固定翼到 VTOL 的过渡，但过渡到 QACRO 除外。"
+
+#: ../../source/docs/quadplane-transitions.rst:63
+#: da994ff9285f4b20b7e3bc80631291f9
+msgid ""
+"The one exception to the forward motor stopping in QuadPlane VTOL modes is "
+"if you have the :ref:`Q_VFWD_GAIN <Q_VFWD_GAIN>` parameter set to a non-zero"
+" value. In that case the forward motor will be used to hold the aircraft "
+"position in a wind. See the description of :ref:`Q_VFWD_GAIN <Q_VFWD_GAIN>`."
+msgstr ""
+"四旋翼飞机 VTOL 模式下前进电机停止的唯一例外是，如果您将 :ref:`Q_VFWD_GAIN <Q_VFWD_GAIN>` "
+"参数设置为非零值。在这种情况下，前进电机将被用于在风中保持飞行器位置。请参阅 :ref:`Q_VFWD_GAIN <Q_VFWD_GAIN>` 的描述。"
+
+#: ../../source/docs/quadplane-transitions.rst:68
+#: 528e9ffe9630439c925063c52ad22b41
+msgid ""
+"During transitions from VTOL to fixed wing mode, all motors can be running "
+"at very high levels. Battery sag below minimum levels (3.0V/cell for LiPo "
+"batteries) and resulting battery damage is possible. Extreme cases may even "
+"result in a crash due to VTOL motor output being too low. This is especially"
+" true when using high capacity, low C rating flight batteries common for "
+"long duration setups. This can be managed somewhat with manual throttle "
+"control when manually transitioning, but in AUTO mode, a VTOL to fixed wing "
+"transition is currently done with :ref:`TKOFF_THR_MAX<TKOFF_THR_MAX>` on the"
+" forward motor until transition is complete, so very high currents can be "
+"experienced. Whether or not this will be an issue can be determined by "
+"examining the battery voltage during a manually initiated transition from "
+"the flight log. If too much voltage sag is seen, the best solutions are to "
+"use a higher C rating flight battery, or use separate batteries for forward "
+"motors and the VTOL motors, or to use :ref:`BATT_WATT_MAX<BATT_WATT_MAX>` "
+"and other parameters to limit excessive current draw during transitions. "
+"(See :ref:`Limiting Excessive Battery Power Draw <batt-watt-max>` )"
+msgstr ""
+"在从 VTOL 到固定翼模式的过渡期间，所有电机可能以非常高的水平运行。电池电压可能下垂至最低水平以下（锂聚合物电池为 "
+"3.0V/节）并导致电池损坏。极端情况甚至可能因 VTOL 电机输出过低而导致坠机。这在使用长续航设置中常见的高容量低 C "
+"值飞行电池时尤为如此。手动过渡时可以通过手动油门控制在一定程度上管理，但在 Auto 模式下，VTOL 到固定翼的过渡目前以 "
+":ref:`TKOFF_THR_MAX<TKOFF_THR_MAX>` "
+"运行前进电机直到过渡完成，因此可能会出现非常高的电流。是否会成为问题可以通过检查飞行日志中手动启动过渡期间的电池电压来确定。如果电压下垂过大，最佳解决方案是使用更高"
+" C 值的飞行电池，或为前进电机和 VTOL 电机使用单独的电池，或使用 :ref:`BATT_WATT_MAX<BATT_WATT_MAX>` "
+"和其他参数来限制过渡期间过大的电流消耗。（参见 :ref:`限制过大的电池功率消耗 <batt-watt-max>`）"
+
+#: ../../source/docs/quadplane-transitions.rst:71
+#: 0abe7f2e890e47279487b8c718d2d2bf
+msgid "Tailsitter Transitions"
+msgstr "尾坐式过渡"
+
+#: ../../source/docs/quadplane-transitions.rst:73
+#: 1086a19a165646649073f249ed02d85d
+msgid ""
+"Tailsitter transitions are slightly different. See :ref:`Tailsitter Section "
+"<guide-tailsitter>` for details."
+msgstr "尾坐式过渡略有不同。详情请参阅 :ref:`尾坐式部分 <guide-tailsitter>`。"

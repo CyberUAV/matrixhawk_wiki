@@ -1,0 +1,593 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 03:48+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/common-network.rst:180
+msgid "Ethernet Connected ArduPilot Vehicle Example"
+msgstr "以太网连接的 ArduPilot 飞行器示例"
+
+#: ../../source/docs/common-network.rst:5 562225e047e2498eb5296b3f91aae1c1
+msgid "Ethernet / Network Setup"
+msgstr "以太网/网络设置"
+
+#: ../../source/docs/common-network.rst:7 c9062fc0b8c74467800c07e79e9c38be
+msgid ""
+"ArduPilot 4.5 (and higher) provides a network interface framework to allow "
+"local and wide-area network connections. Several later generation "
+"autopilots, like Pixhawk6X and CubePilot CubeRed, provide Ethernet MAC "
+"interfaces, which allows ArduPilot to connect to vehicle peripherals, data "
+"servers, and even the wide area network via IP using transport layer UDP or "
+"TCP protocols."
+msgstr ""
+"ArduPilot 4.5（及更高版本）提供了网络接口框架，支持本地网络和广域网连接。Pixhawk6X 和 CubePilot CubeRed "
+"等新一代飞控提供了以太网 MAC 接口，使 ArduPilot 可通过 UDP 或 TCP 传输层 IP 协议连接飞行器外设、数据服务器，甚至广域网。"
+
+#: ../../source/docs/common-network.rst:9 48641a0c219947f0b3a8ff703544fa94
+msgid ""
+"In addition, autopilots with H7 based processors can connect to Ethernet "
+"over a serial port using PPP (Point-to-Point Protocol), a :ref:`PPP to "
+"Ethernet Adapter <common-ethernet-adapters>` and a custom firmware build.  "
+"See the :ref:`PPP Configuration section <ppp-config>` below for more "
+"details."
+msgstr ""
+"此外，搭载 H7 处理器的飞控还可通过串口使用 PPP（点对点协议）、:ref:`PPP 转以太网适配器 <common-ethernet-"
+"adapters>` 和自定义固件来连接以太网。详情请参阅下方的 :ref:`PPP 配置章节 <ppp-config>`。"
+
+#: ../../source/docs/common-network.rst:11 515caa208af64a3ea63ea890c7b796b4
+msgid ""
+"Currently, hooks into the normal serial manager within ArduPilot now allow "
+"serial protocols not only to be connected to the autopilot via the normal "
+"UART connections, but also via network connections. These can be used either"
+" with Etnernet or PPP interfaces."
+msgstr ""
+"目前，ArduPilot 内部串口管理器的钩子机制使得串口协议不仅可以通过常规 UART 连接接入飞控，也可以通过网络连接接入，可与以太网或 PPP "
+"接口配合使用。"
+
+#: ../../source/docs/common-network.rst:13 133f486c2e3b4cf9aaa5a170c9010f3a
+msgid ""
+"In addition, LUA Scripting bindings allow the autopilot to run network "
+"server type applications via LUA scripts. A web server LUA example is "
+"available as an applet that allows faster log downloads, as well as "
+"vehicle/system status data to be presented."
+msgstr ""
+"此外，LUA 脚本绑定允许飞控通过 LUA 脚本运行网络服务器类型的应用程序。一个 Web 服务器 LUA "
+"示例作为应用模块提供，支持更快的日志下载以及飞行器/系统状态数据展示。"
+
+#: ../../source/docs/common-network.rst:15 9e0e5a96238249eda20a2601e16a5d00
+msgid ""
+"For peripherals with a network interface ArduPilot has AP_Periph firmware "
+"that allows the easy development of network peripheral devices using the "
+"peripheral's Serial or DroneCAN interfaces to the peripheral device and an "
+"easily set up means to pass those devices' data to the autopilot over the "
+"network."
+msgstr ""
+"对于具有网络接口的外设，ArduPilot 提供了 AP_Periph 固件，可利用外设的串口或 DroneCAN "
+"接口轻松开发网络外设设备，并通过网络将设备数据传递给飞控。"
+
+#: ../../source/docs/common-network.rst:18 444c2c215e2747968ed04680be3f94fa
+msgid "ArduPilot Network Framework Overview"
+msgstr "ArduPilot 网络框架概述"
+
+#: ../../source/docs/common-network.rst:20 5c27dfb098cf4e97a99f5796e96e2197
+msgid ""
+"ArduPilot provides a NET manager facility that provides the IP protocol "
+"engine, as well as UDP and TCP transport layer engines. Four configurable IP"
+" ports are available, and each one can be a UDP or TCP, Client or Server. "
+"Data flow to/from these ports can be used by the autopilot as if the data "
+"streams were those of a:"
+msgstr ""
+"ArduPilot 提供 NET 管理器，包含 IP 协议引擎以及 UDP 和 TCP 传输层引擎。提供四个可配置的 IP 端口，每个端口均可设置为 "
+"UDP 或 TCP 的客户端或服务器模式。这些端口的数据流可被飞控像以下设备的数据流一样使用："
+
+#: ../../source/docs/common-network.rst:22 22961abcd775486fbd64f88aa4f65bdf
+msgid ""
+"A serial device supported by ArduPilot (ie. Rangefinder, Gimbal, serial ESC,"
+" etc.)"
+msgstr "ArduPilot 支持的串口设备（如测距仪、云台、串口 ESC 等）"
+
+#: ../../source/docs/common-network.rst:23 1b3b7c0f2fc049028e121afcbdb8a473
+msgid "A MAVLink connection to another vehicle or GCS"
+msgstr "与其他飞行器或地面站的 MAVLink 连接"
+
+#: ../../source/docs/common-network.rst:25 6882a3f74d534ac381d97bb3f4e42509
+msgid ""
+"In addition, LUA Scripting running on an autopilot can access these data "
+"ports."
+msgstr "此外，在飞控上运行的 LUA 脚本也可访问这些数据端口。"
+
+#: ../../source/docs/common-network.rst:30 d0ab65dbcad64bcaa2ac3855eb8b7781
+msgid "Configuration"
+msgstr "配置"
+
+#: ../../source/docs/common-network.rst:32 01522fda130245649005f58337444020
+msgid ""
+":ref:`NET_ENABLE<NET_ENABLE>` must be set to \"1\" and autopilot rebooted in"
+" order to see the network parameters:"
+msgstr ":ref:`NET_ENABLE<NET_ENABLE>` 必须设置为 「1」 并重启飞控，才能看到网络相关参数："
+
+#: ../../source/docs/common-network.rst:35 511e27f0f30b423dbc4f71537d670854
+msgid "Ethernet MAC Configuration"
+msgstr "以太网 MAC 配置"
+
+#: ../../source/docs/common-network.rst:37 c3cca2dcbb6f42d4b76b06236383311c
+msgid ""
+"If the autopilot has an Ethernet MAC the following parameters apply.  This "
+"is the global 6 byte MAC address. The default is automatically generated "
+"from the autopilot's CPU unique id, but can be changed if desired."
+msgstr ""
+"如果飞控具有以太网 MAC，则以下参数适用。这是全局 6 字节 MAC 地址。默认值由飞控 CPU 唯一 ID 自动生成，如需要也可手动修改。"
+
+#: ../../source/docs/common-network.rst:39 8dba716016fe42fa898facc1e6a86e3c
+msgid ":ref:`NET_MACADDR0<NET_MACADDR0>`"
+msgstr ":ref:`NET_MACADDR0<NET_MACADDR0>`"
+
+#: ../../source/docs/common-network.rst:40 5ed217c6b9c6467fb81f2cd74e389e66
+msgid ":ref:`NET_MACADDR1<NET_MACADDR1>`"
+msgstr ":ref:`NET_MACADDR1<NET_MACADDR1>`"
+
+#: ../../source/docs/common-network.rst:41 d7a3406f8d7b4a98a0e2de990f7bccad
+msgid ":ref:`NET_MACADDR2<NET_MACADDR2>`"
+msgstr ":ref:`NET_MACADDR2<NET_MACADDR2>`"
+
+#: ../../source/docs/common-network.rst:42 65116791ae984ce7867ec131916af453
+msgid ":ref:`NET_MACADDR3<NET_MACADDR3>`"
+msgstr ":ref:`NET_MACADDR3<NET_MACADDR3>`"
+
+#: ../../source/docs/common-network.rst:43 ad75eab23ad84bc0a04ef039fde696b3
+msgid ":ref:`NET_MACADDR4<NET_MACADDR4>`"
+msgstr ":ref:`NET_MACADDR4<NET_MACADDR4>`"
+
+#: ../../source/docs/common-network.rst:44 fda94289847c4ab99639327c8e7dbcb1
+msgid ":ref:`NET_MACADDR5<NET_MACADDR5>`"
+msgstr ":ref:`NET_MACADDR5<NET_MACADDR5>`"
+
+#: ../../source/docs/common-network.rst:47 d9a17739c1204860b7222237c6a21d8b
+msgid "Autopilot IP address"
+msgstr "飞控 IP 地址"
+
+#: ../../source/docs/common-network.rst:49 8bdeda2e21a84485b5724db00b885b7d
+msgid ""
+"The following parameters holds the autopilot's 4 byte IP address.  It "
+"defaults to ``192.168.144.14``"
+msgstr "以下参数保存飞控的 4 字节 IP 地址，默认值为 ``192.168.144.14``"
+
+#: ../../source/docs/common-network.rst:51 46e2e6eb75f948739598b3c8cd692539
+msgid ":ref:`NET_IPADDR0<NET_IPADDR0>` (e.g. 192)"
+msgstr ":ref:`NET_IPADDR0<NET_IPADDR0>` (例如 192)"
+
+#: ../../source/docs/common-network.rst:52 a650762c430640aa8e2f57f5423dc6d7
+msgid ":ref:`NET_IPADDR1<NET_IPADDR1>` (e.g. 168)"
+msgstr ":ref:`NET_IPADDR1<NET_IPADDR1>` (例如 168)"
+
+#: ../../source/docs/common-network.rst:53 3a5bd91fedd6406d8ec2d67c9cd91cb3
+msgid ":ref:`NET_IPADDR2<NET_IPADDR2>` (e.g. 144)"
+msgstr ":ref:`NET_IPADDR2<NET_IPADDR2>` (例如 144)"
+
+#: ../../source/docs/common-network.rst:54 c832a34864484feaaf7660a0a325da52
+msgid ":ref:`NET_IPADDR3<NET_IPADDR3>` (e.g. 14)"
+msgstr ":ref:`NET_IPADDR3<NET_IPADDR3>` (例如 14)"
+
+#: ../../source/docs/common-network.rst:56 4aca750bd4334fd49be2d59850a27579
+msgid ""
+"These can be dynamically assigned if the network has a DHCP server by "
+"enabling ArduPilot's DHCP client using the :ref:`NET_DHCP<NET_DHCP>` "
+"parameter, or manually set as desired."
+msgstr ""
+"如果网络中有 DHCP 服务器，可通过 :ref:`NET_DHCP<NET_DHCP>` 参数启用 ArduPilot 的 DHCP 客户端来动态分配"
+" IP 地址，也可以手动设置。"
+
+#: ../../source/docs/common-network.rst:59 086419f73a284a3f9155d9b28a7b13b2
+msgid "Subnet Mask and Gateway"
+msgstr "子网掩码与网关"
+
+#: ../../source/docs/common-network.rst:61 45bc9da3b0604e1295d7e9ceb72188c7
+msgid ""
+"The subnet mask limits the IP addresses that the autopilot may directly "
+"communicate with."
+msgstr "子网掩码限制了飞控可直接通信的 IP 地址范围。"
+
+#: ../../source/docs/common-network.rst:63 042afea3a54c432596ba3db92e04a839
+msgid ""
+":ref:`NET_NETMASK<NET_NETMASK>` is the number of leading bits set in the "
+"subnet mask. For example, if set to 24 (the default) then the subnet mask is"
+" 255.255.255.0."
+msgstr ""
+":ref:`NET_NETMASK<NET_NETMASK>` 为子网掩码前导位数。例如，若设为 24（默认值），则子网掩码为 "
+"255.255.255.0。"
+
+#: ../../source/docs/common-network.rst:65 9b7d599cb42f45b586a4840e87bc6d1a
+msgid ""
+"The gateway IP address is used for routing when communicating with IP "
+"addresses out of the local subnet defined by "
+":ref:`NET_NETMASK<NET_NETMASK>`. Any destination IPs that are outside the "
+"masked subnet range will be sent to the gateway's MAC address with the final"
+" destinations IP address. The default is ``192.168.144.1``."
+msgstr ""
+"网关 IP 地址用于在与 :ref:`NET_NETMASK<NET_NETMASK>` 定义的本地子网之外的 IP "
+"地址通信时进行路由。任何不在子网范围内的目标 IP 数据包将发送至网关的 MAC 地址，并携带最终目标 IP 地址。默认值为 "
+"``192.168.144.1``。"
+
+#: ../../source/docs/common-network.rst:67 629c4aa6fd614aa8bd1a8e529c76f03f
+msgid ":ref:`NET_GWADDR0<NET_GWADDR0>` (e.g. 192)"
+msgstr ":ref:`NET_GWADDR0<NET_GWADDR0>` (例如 192)"
+
+#: ../../source/docs/common-network.rst:68 ece6839ba1214ad3b7a3a4fa025c7b47
+msgid ":ref:`NET_GWADDR1<NET_GWADDR1>` (e.g. 168)"
+msgstr ":ref:`NET_GWADDR1<NET_GWADDR1>` (例如 168)"
+
+#: ../../source/docs/common-network.rst:69 ed724405670442509e18bb1b3fff1837
+msgid ":ref:`NET_GWADDR2<NET_GWADDR2>` (e.g. 144)"
+msgstr ":ref:`NET_GWADDR2<NET_GWADDR2>` (例如 144)"
+
+#: ../../source/docs/common-network.rst:70 da5d2a49e40247af8de29f0931b3dea5
+msgid ":ref:`NET_GWADDR3<NET_GWADDR3>` (e.g. 1)"
+msgstr ":ref:`NET_GWADDR3<NET_GWADDR3>` (例如 1)"
+
+#: ../../source/docs/common-network.rst:75 d23dc165baab48c185d7d9adb8aa225b
+msgid "PPP Configuration"
+msgstr "PPP 配置"
+
+#: ../../source/docs/common-network.rst:77 b00b9626e1d14d96948c62217f35d6c5
+msgid ""
+"This feature allows any H7 cpu-based autopilot to connect to networks via a "
+"Serial port using PPP. This can be to a serial PPP device or to an :ref:`PPP"
+" to Ethernet Adapter <common-ethernet-adapters>`."
+msgstr ""
+"此功能允许任何基于 H7 CPU 的飞控通过串口使用 PPP 连接至网络。可连接至串口 PPP 设备或 :ref:`PPP 转以太网适配器 "
+"<common-ethernet-adapters>`。"
+
+#: ../../source/docs/common-network.rst:79 4e0ce424f0be47cab09fe56491f2cc7a
+msgid ""
+"this cannot be used with autopilots having a built-in Ethernet MAC. Only one"
+" network connection per autopilot is allowed currently. Also, only one "
+"serial port on the autopilot can be configured for PPP."
+msgstr "此功能不能用于内置以太网 MAC 的飞控。目前每台飞控只允许一个网络连接，且只能有一个串口被配置为 PPP。"
+
+#: ../../source/docs/common-network.rst:81 09ef61d7ddc643a8b5f1902cd00a50ed
+msgid ""
+"To enable this feature, it first must be present in the autopilot firmware. "
+"This can be done using the `Custom Firmware Build Server "
+"<https://firmware.ardupilot.org/>`__ or by building the code locally using "
+"the \"\\-\\-enable-PPP\" waf configuration option (See :ref:`building-the-"
+"code`)"
+msgstr ""
+"要启用此功能，首先需要将其包含在飞控固件中。可使用 `自定义固件构建服务器 <https://firmware.ardupilot.org/>`__ "
+"或在本地使用 「\\-\\-enable-PPP」 waf 配置选项构建代码（参见 :ref:`building-the-code`）"
+
+#: ../../source/docs/common-network.rst:86 79195780c85240ceb43f93153158e353
+msgid ""
+"Connect one of the H7 based autopilot's serial ports to the ethernet "
+"switch's or Ethernet-to-PPP-adapter's USART port. For optimum performance a "
+"serial port with flow control should be used (e.g. normally SERIAL1 or "
+"SERIAL2).  If a port without flow control if used, the baud rate may be set "
+"as high as 921000"
+msgstr ""
+"将 H7 飞控的某个串口连接到以太网交换机或以太网转 PPP 适配器的 USART 端口。为获得最佳性能，应使用支持流控的串口（通常为 SERIAL1 "
+"或 SERIAL2）。若使用不带流控的端口，波特率最高可设置为 921000。"
+
+#: ../../source/docs/common-network.rst:88 9729f2c95c8b4259a8d67124ab4fd82e
+msgid ""
+"Alternatively, any Linux-based computer with a UART (or USB-UART) can be "
+"used with the \"pppd\" software. An example of the command to run this is:"
+msgstr "另外，任何带 UART（或 USB 转 UART）的 Linux 计算机均可配合 「pppd」 软件使用。运行示例命令如下："
+
+#: ../../source/docs/common-network.rst:94 33b8428f97294a0a8c9a482752f03fc6
+msgid ""
+"The above command will take the incoming stream from /dev/ttyAMA0 (at a "
+"12.5M Baudrate) destined for 192.168.144.15 (the local IP of pppd) and "
+"defines the remote (the flight controller) as 192.168.144.14."
+msgstr ""
+"上述命令将来自 /dev/ttyAMA0（波特率 12.5M）、目标地址为 192.168.144.15（pppd 本地 "
+"IP）的数据流传输，并将远端（飞控）定义为 192.168.144.14。"
+
+#: ../../source/docs/common-network.rst:96 afac1120630e44489eb455f9e45b6b99
+msgid "To configure a serial port for PPP (Serial2 is used in this example):"
+msgstr "为串口配置 PPP（本例使用 Serial2）："
+
+#: ../../source/docs/common-network.rst:98 8ac9d468754140b08cf6abaaebcc84ae
+msgid ""
+"set :ref:`SERIAL2_PROTOCOL<SERIAL2_PROTOCOL>` = 48 (PPP) requires a reboot "
+"to take effect."
+msgstr "设置 :ref:`SERIAL2_PROTOCOL<SERIAL2_PROTOCOL>` = 48 (PPP)，需重启生效。"
+
+#: ../../source/docs/common-network.rst:99 bf07e122d67845a591a224d1fc1543d2
+msgid "set :ref:`SERIAL2_BAUD<SERIAL2_BAUD>` = 12500000 (12.5MBaud)"
+msgstr "设置 :ref:`SERIAL2_BAUD<SERIAL2_BAUD>` = 12500000 (12.5MBaud)"
+
+#: ../../source/docs/common-network.rst:102 88b68f19051847fda6be3fa7f2a9904f
+msgid "Networking Options"
+msgstr "网络选项"
+
+#: ../../source/docs/common-network.rst:103 a32092a759194e12bb1e624c01c2a941
+msgid ""
+"Several setup options are available for networking operation via the "
+":ref:`NET_OPTIONS<NET_OPTIONS>` bitmask parameter:"
+msgstr "通过 :ref:`NET_OPTIONS<NET_OPTIONS>` 位掩码参数可配置多个网络运行选项："
+
+#: ../../source/docs/common-network.rst:106 8202153a52684bdea5a93e18059efe29
+msgid "Bit"
+msgstr "位"
+
+#: ../../source/docs/common-network.rst:106 e22a9013ca83403eab3b881a46237e3e
+msgid "Function"
+msgstr "功能"
+
+#: ../../source/docs/common-network.rst:108 439fd1eda78f4cec9c85744c06560b77
+msgid "0"
+msgstr "0"
+
+#: ../../source/docs/common-network.rst:108 85d3a6a6c9fa476b90a15c96613ac920
+msgid "EnablePPP Ethernet gateway"
+msgstr "启用 PPP 以太网网关"
+
+#: ../../source/docs/common-network.rst:109 53c13198ad7c4525a7dd7af8c0f4ee8d
+msgid "1"
+msgstr "1"
+
+#: ../../source/docs/common-network.rst:109 0a6a5fc38b524a21b03284387faa7a90
+msgid "Enable CAN1 multicast endpoint"
+msgstr "启用 CAN1 组播端点"
+
+#: ../../source/docs/common-network.rst:110 e0a6a6d21d454002a9cbfa7f162313ea
+msgid "2"
+msgstr "2"
+
+#: ../../source/docs/common-network.rst:110 a9531d453c764e479a3902b8885111e7
+msgid "Enable CAN2 multicast endpoint"
+msgstr "启用 CAN2 组播端点"
+
+#: ../../source/docs/common-network.rst:111 c307d520b60442a69f8492db02215194
+msgid "3"
+msgstr "3"
+
+#: ../../source/docs/common-network.rst:111 3d723d2ff20444a99c1a95db4d605a64
+msgid "Enable CAN1 multicast bridged"
+msgstr "启用 CAN1 组播桥接"
+
+#: ../../source/docs/common-network.rst:112 e732a6cf31fc4b2f9271054461dd21f6
+msgid "4"
+msgstr "4"
+
+#: ../../source/docs/common-network.rst:112 d9fe91db544c42309a6374f4c4e18732
+msgid "Enable CAN2 multicast bridged"
+msgstr "启用 CAN2 组播桥接"
+
+#: ../../source/docs/common-network.rst:113 a4c068b1c4ed4add93f7684f03607ec2
+msgid "5"
+msgstr "5"
+
+#: ../../source/docs/common-network.rst:113 790b6572c0f94e96b3fd8929ae358c21
+msgid "DisablePPPTimeout"
+msgstr "禁用 PPP 超时"
+
+#: ../../source/docs/common-network.rst:114 f1c9872b94a645afa4e4dd2f0e2e35e1
+msgid "6"
+msgstr "6"
+
+#: ../../source/docs/common-network.rst:114 76d6a807adae42c78ee3752e43b7ce28
+msgid "DisablePPPEchoLimit"
+msgstr "禁用 PPP 回显限制"
+
+#: ../../source/docs/common-network.rst:118 d13e1ef3d9354aef94f12410762b6ada
+msgid "ArduPilot Port Configuration"
+msgstr "ArduPilot 端口配置"
+
+#: ../../source/docs/common-network.rst:120 87af476babeb45129d974b8ab32a9504
+msgid ""
+"These parameters apply for either Ethernet or PPP data link connections to "
+"the network. Parameters for each of the four logical ports per network "
+"physical interface (example shown only for Port 1):"
+msgstr "以下参数适用于以太网或 PPP 数据链路网络连接。每个网络物理接口有四个逻辑端口，以下以端口 1 为例："
+
+#: ../../source/docs/common-network.rst:123 ec083f869b804a689775d56469657159
+msgid ""
+":ref:`NET_P1_TYPE<NET_P1_TYPE>`: Type can be disabled (0), UDP Client (1), "
+"UDP Server (2), TCP Client (3), or TCP Server(4). For the two client types a"
+" valid destination IP address must be set. For the two server types either "
+"0.0.0.0 or the autopilot's local IP address can be used. The UDP client type"
+" will use broadcast if the IP is set to 255.255.255.255 and will use UDP "
+"multicast if the IP is in the multicast address range. A reboot is required "
+"to see the following parameters once the TYPE is set."
+msgstr ""
+":ref:`NET_P1_TYPE<NET_P1_TYPE>`：类型可以是 禁用(0)、UDP 客户端(1)、UDP 服务器(2)、TCP 客户端(3)"
+" 或 TCP 服务器(4)。两种客户端类型均需设置有效的目标 IP 地址。两种服务器类型可使用 0.0.0.0 或飞控本机 IP。UDP 客户端若 IP"
+" 设为 255.255.255.255 则使用广播，若 IP 在组播地址范围内则使用 UDP 组播。设置 TYPE 后需重启才能看到后续参数。"
+
+#: ../../source/docs/common-network.rst:124 3f5e9eedf5cc4f14b65036de0d1a0a3c
+msgid ""
+":ref:`NET_P1_IP0<NET_P1_IP0>`, :ref:`NET_P1_IP1<NET_P1_IP1>`, "
+":ref:`NET_P1_IP2<NET_P1_IP2>`, :ref:`NET_P1_IP3<NET_P1_IP3>`:IP address for "
+"outgoing packets from Clients. Can be 0.0.0.0 or the autopilot's IP address "
+"for Servers. A reboot is required after changing."
+msgstr ""
+":ref:`NET_P1_IP0<NET_P1_IP0>`、:ref:`NET_P1_IP1<NET_P1_IP1>`、:ref:`NET_P1_IP2<NET_P1_IP2>`、:ref:`NET_P1_IP3<NET_P1_IP3>`：客户端出包的目标"
+" IP 地址。对于服务器，可使用 0.0.0.0 或飞控本机 IP。修改后需重启。"
+
+#: ../../source/docs/common-network.rst:125 e493ec9cc748407f8f42addd751d7025
+msgid ""
+":ref:`NET_P1_PORT<NET_P1_PORT>`: This is the TCP or UDP port number. Reboot "
+"required after changing."
+msgstr ":ref:`NET_P1_PORT<NET_P1_PORT>`：TCP 或 UDP 端口号，修改后需重启。"
+
+#: ../../source/docs/common-network.rst:126 ad42cc2ad9d64efa9556b9d34ec3e831
+msgid ""
+":ref:`NET_P1_PROTOCOL<NET_P1_PROTOCOL>`: This registers this port with the "
+"ArduPilot Serial Manager as having a device attached which uses the "
+"specified protocol. This allows ArduPilot to use the data as if it had come "
+"from a UART attached device or connection. A reboot is required after "
+"changing."
+msgstr ""
+":ref:`NET_P1_PROTOCOL<NET_P1_PROTOCOL>`：将该端口在 ArduPilot "
+"串口管理器中注册为使用指定协议的设备连接，使 ArduPilot 能像处理 UART 连接设备的数据一样处理该端口数据。修改后需重启。"
+
+#: ../../source/docs/common-network.rst:128 db40565639d44a848aff240bdb5208a4
+msgid ""
+"The figure below shows a typical single device setup for an Ethernet gimbal."
+msgstr "下图展示了以太网云台的典型单设备配置。"
+
+#: ../../source/docs/common-network.rst:132 7d5cc8c8592a42d3a530a9322fdda477
+msgid ""
+"The figure below shows a typical vehicle system with multiple peripherals "
+"and an optional ground-based connection to a factory network for data "
+"retrieval and vehicle setup."
+msgstr "下图展示了一个典型的多外设飞行器系统，以及可选的与工厂地面网络的连接（用于数据采集和飞行器设置）。"
+
+#: ../../source/docs/common-network.rst:137 a7447a3373a5408680f81d15ddf0814d
+msgid "Server or Client?"
+msgstr "服务器还是客户端？"
+
+#: ../../source/docs/common-network.rst:139 4a03764117e54ba1a7dea6fb5f37dd2d
+msgid ""
+"The choice of client or server is determined by the capabilities of the "
+"device being connected. If it is a TCP server, then ArduPilot's port should "
+"be a TCP Client. If its a UDP Client, then ArduPilot would be a UDP Server."
+msgstr ""
+"客户端或服务器的选择取决于所连接设备的能力。若设备是 TCP 服务器，则 ArduPilot 端口应设为 TCP 客户端；若设备是 UDP 客户端，则 "
+"ArduPilot 应设为 UDP 服务器。"
+
+#: ../../source/docs/common-network.rst:141 3bf36b3184344324bba970a170745385
+msgid ""
+"In general if a device is a controllable object to the autopilot, it would "
+"be a server, always listening for commands (ESC, Gimbal,etc.). If a "
+"continuous data stream (like an airspeed sensor), it would probably be a "
+"client, able to send data without inquiry."
+msgstr ""
+"通常，若设备是受飞控控制的对象（如 "
+"ESC、云台等），则设为服务器，始终监听命令。若为连续数据流（如空速传感器），则可能设为客户端，能主动发送数据而无需查询。"
+
+#: ../../source/docs/common-network.rst:144 b32d38577bbd49239662574bd3d9d627
+msgid "Scripting"
+msgstr "脚本"
+
+#: ../../source/docs/common-network.rst:146 f573230295bb4fb68f6be4fe56ba826d
+msgid ""
+"Network access to LUA scripts is provided with several `socket style "
+"bindings "
+"<https://github.com/ArduPilot/ardupilot/blob/d90224280e416d0475eaadd06648bbf0daab7f7d/libraries/AP_Scripting/docs/docs/docs.lua>`__"
+"  (search for \"socket\") that allows the script to connect and manage UDP "
+"or TCP data flow to the network from the script."
+msgstr ""
+"通过多个 `socket 风格绑定 "
+"<https://github.com/ArduPilot/ardupilot/blob/d90224280e416d0475eaadd06648bbf0daab7f7d/libraries/AP_Scripting/docs/docs/docs.lua>`__（搜索"
+" 「socket」）可为 LUA 脚本提供网络访问，允许脚本连接并管理与网络之间的 UDP 或 TCP 数据流。"
+
+#: ../../source/docs/common-network.rst:148 4f86a3d1db9b444f9391595f7021a813
+msgid ""
+"An example script implementing a simple web server application on the "
+"autopilot which allows access to the SD card (for rapid log downloading), "
+"and access to autopilot state(arming and GPS/AHRS location in this example) "
+"is available `here "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/applets/net_webserver.lua>`__"
+" and its `readme file here "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/applets/net_webserver.md>`__"
+msgstr ""
+"一个在飞控上实现简单 Web 服务器应用的示例脚本可在 `这里 "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/applets/net_webserver.lua>`__"
+" 找到，支持访问 SD 卡（用于快速日志下载）以及访问飞控状态（本示例中为解锁状态和 GPS/AHRS 位置）。其 `readme 文件在此 "
+"<https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/applets/net_webserver.md>`__"
+
+#: ../../source/docs/common-network.rst:151 5c7cce7ee3514af2a784ab768d22de60
+msgid "Running the Webserver Script Under SITL"
+msgstr "在 SITL 下运行 Web 服务器脚本"
+
+#: ../../source/docs/common-network.rst:153 53e3f61689d84fef9f4ab4f1a643f7fa
+msgid "run SITL"
+msgstr "运行 SITL"
+
+#: ../../source/docs/common-network.rst:154 eebd088e27a64213ad4da29ed29f5333
+msgid "enable scripting (:ref:`SCR_ENABLE<SCR_ENABLE>` = 1), reboot SITL"
+msgstr "启用脚本（:ref:`SCR_ENABLE<SCR_ENABLE>` = 1），重启 SITL"
+
+#: ../../source/docs/common-network.rst:155 7715f0e2ded44034a47cade98c0b1267
+msgid "set :ref:`SCR_VM_I_COUNT<SCR_VM_I_COUNT>` = 1000000, reboot SITL"
+msgstr "设置 :ref:`SCR_VM_I_COUNT<SCR_VM_I_COUNT>` = 1000000，重启 SITL"
+
+#: ../../source/docs/common-network.rst:156 32eff6104ba8439ebe36c460849d7f58
+msgid ""
+"connect local webrowser to \"http://127.0.0.1:8080\" (not types as shown to "
+"avoid https)"
+msgstr "用本地浏览器访问 「http://127.0.0.1:8080」（注意不要使用 https）"
+
+#: ../../source/docs/common-network.rst:158 36f3e964261144eba8fce37aaede8d74
+msgid "Resulting web page"
+msgstr "生成的网页"
+
+#: ../../source/docs/common-network.rst:163 e13b9c42d98444ab8c16642fb8033636
+msgid "Connecting to Webserver via Network Attached Autopilot"
+msgstr "通过网络连接的飞控访问 Web 服务器"
+
+#: ../../source/docs/common-network.rst:164 515f05fea58d4219b97299c9675c4fa7
+msgid ""
+"In order to connect an autopilot running the webserver to the local network "
+"to allow other PCs to access the server:"
+msgstr "要将运行 Web 服务器的飞控连接到本地网络，允许其他 PC 访问："
+
+#: ../../source/docs/common-network.rst:166 d677aa45d8954812859ee2db7b591ef8
+msgid ""
+"connect autopilot to the local network (directly or via Ethernet switch)"
+msgstr "将飞控连接到本地网络（直连或通过以太网交换机）"
+
+#: ../../source/docs/common-network.rst:167 f678d7e252ec46adb9a8cfd9197a472c
+msgid ""
+"make sure ``NET_IPADDR`` is an address within the local network range or use"
+" the network DHCP server to set it if using the Ethernet interface. For PPP "
+"configurations the connected PPP access peripheral should be already setup "
+"for network operation as required, and its PPP daemon should have an arp "
+"proxy runniing."
+msgstr ""
+"确保 ``NET_IPADDR`` 在本地网络范围内，若使用以太网接口也可通过网络 DHCP 服务器进行分配。对于 PPP 配置，所连接的 PPP "
+"访问外设应已完成网络运行所需的设置，且其 PPP 守护进程应已运行 arp proxy。"
+
+#: ../../source/docs/common-network.rst:168 1eb4e04a38754996bb0a92ebe3bae445
+msgid ""
+"connect local webrowser to \"http://<NET_IPADDR>:8080\" (note: type exactly "
+"as shown... \"https://\" will not work)"
+msgstr "用本地浏览器访问 「http://<NET_IPADDR>:8080」（注意：请严格按所示输入……「https://」 无效）"
+
+#: ../../source/docs/common-network.rst:171 33426685fe4c47f2a26e60c82d0ea33f
+msgid "Cable Adapters, Cabling, and Wiring"
+msgstr "电缆适配器、走线与接线"
+
+#: ../../source/docs/common-network.rst:173 b101fe2e233b464e81ab06654455b461
+msgid ""
+"Most Ethernet devices are interconnected with CAT5 (or higher) cables with "
+"RJ-45 connectors. These connectors are obviously too bulky for use on an "
+"autopilot or vehicle Ethernet switches. Instead 4 or 5 pin JST-GH or "
+"Picoblade connectors are used. See the :ref:`Ethernet adapters <common-"
+"ethernet-adapters>` page for a list of known devices"
+msgstr ""
+"大多数以太网设备使用带 RJ-45 接头的 CAT5（或更高规格）线缆互连。这类接头对于飞控或飞行器以太网交换机来说体积过大。因此改用 4 或 5 针 "
+"JST-GH 或 Picoblade 接头。已知设备列表见 :ref:`以太网适配器 <common-ethernet-adapters>` 页面。"
+
+#: ../../source/docs/common-network.rst:175 71b918397fa34c21b74f4f9bf79699fe
+msgid ""
+"Using full CAT5 cables to interconnect vehicle components for longer runs "
+"may be required, but runs 1-2 meters or less can be done with two twisted "
+"pairs of 22-24 AWG wire. Runs from autopilot to switch and to peripherals "
+"may all be implemented with short twisted pair runs and JST-GH/Picoblade "
+"connectors."
+msgstr ""
+"较长连接可能需要使用完整的 CAT5 线缆，但 1-2 米以内的连接可用两对 22-24 AWG "
+"双绞线实现。飞控到交换机及各外设的连接均可使用短双绞线配 JST-GH/Picoblade 接头完成。"
+
+#: ../../source/docs/common-network.rst:178 83247994baec481fb27c86f1d06e6a9f
+msgid "Example Ethernet Connected Vehicle System"
+msgstr "以太网连接飞行器系统示例"

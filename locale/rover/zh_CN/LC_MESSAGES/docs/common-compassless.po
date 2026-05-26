@@ -1,0 +1,228 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 03:48+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/common-compassless.rst:5 2c60c5c89770405c8917b1b2cc6ffbab
+msgid "Compass-less Operation"
+msgstr "无罗盘操作"
+
+#: ../../source/docs/common-compassless.rst:7 9fe83a042fad470b9b06344b6d517389
+msgid ""
+"Operation without a compass has been possible for Plane for a long time. "
+"However, recent additions of alternative yaw sources has opened the "
+"possibility of compass-less operation of multicopters, quadplanes and "
+"rovers.  The available mechanism are:"
+msgstr ""
+"飞机长期以来都可以在没有罗盘的情况下运行。然而，近期增加的替代偏航来源使得多旋翼、四旋翼垂直起降固定翼和漫游车在无罗盘下运行成为可能。可用机制有："
+
+#: ../../source/docs/common-compassless.rst:9 dd8220489bfc4d9e93fc289e37da1773
+msgid "Align yaw to GPS after takeoff (Plane only)"
+msgstr "起飞后将偏航对齐到 GPS（仅限飞机）"
+
+#: ../../source/docs/common-compassless.rst:10
+#: 6812bc79ebd94ce5a1e042f9e293095f
+msgid ""
+"GSF (Gaussian Sum Filter) estimates the heading by comparing a single GPS's "
+"outputs to the IMU movements"
+msgstr "GSF（高斯求和滤波器）通过比较单个 GPS 的输出与 IMU 运动来估计航向"
+
+#: ../../source/docs/common-compassless.rst:11
+#: 509a6604c3134f11aba6f4d42c7b6b95
+msgid ""
+":ref:`GPS-for-Yaw <common-gps-for-yaw>` uses the position of two UBlox F9 "
+"GPSs to calculate yaw"
+msgstr ":ref:`GPS-for-Yaw <common-gps-for-yaw>` 使用两个 UBlox F9 GPS 的位置来计算偏航"
+
+#: ../../source/docs/common-compassless.rst:12
+#: e94a797ff1b5479eabf378786e1f831f
+msgid ""
+":ref:`Intel RealSense T265 <common-vio-tracking-camera>` can provide yaw "
+"relative to its startup yaw"
+msgstr ""
+":ref:`Intel RealSense T265 <common-vio-tracking-camera>` 可以提供相对于其启动偏航的偏航"
+
+#: ../../source/docs/common-compassless.rst:15
+#: c435624d8ba340469d334aef5278ba07
+msgid "Align Yaw to GPS (Plane only)"
+msgstr "将偏航对齐到 GPS（仅限飞机）"
+
+#: ../../source/docs/common-compassless.rst:17
+#: e51fa9bd6ab04010b98bc74c115b5fe5
+msgid ""
+"On Plane, a steady GPS heading is used after takeoff to align the "
+"/attitude/velocity/position/heading estimation filters (EKFs) for yaw. This "
+"usually occurs a few seconds after takeoff on Planes without compass. "
+"However, this approach cannot be used for Quadplane's VTOL navigation, since"
+" it needs to be accurate very shortly after takeoffs with no GPS velocity or"
+" heading inputs."
+msgstr ""
+"在飞机上，起飞后使用稳定的 GPS "
+"航向来对齐姿态/速度/位置/航向估计滤波器（EKF）的偏航。这通常在无罗盘飞机起飞后几秒钟内发生。但是，此方法不能用于四旋翼垂直起降固定翼的 VTOL "
+"导航，因为它需要在起飞后很短时间内就能准确，而没有 GPS 速度或航向输入。"
+
+#: ../../source/docs/common-compassless.rst:21
+#: 9dce31a5f8f8459d816efc3435d96679
+msgid "GSF"
+msgstr "GSF"
+
+#: ../../source/docs/common-compassless.rst:23
+#: 0309097297b94fbd9fb2a260c3084843
+msgid ""
+"ArduPilot supports a Gaussian Sum Filter (GSF) which takes IMU and GPS "
+"inputs to compute a probable heading, if a yaw source (like a compass) is "
+"unavailable, or unhealthy."
+msgstr ""
+"ArduPilot 支持高斯求和滤波器（GSF），当偏航来源（如罗盘）不可用或不健康时，它会利用 IMU 和 GPS 输入来计算可能的航向。"
+
+#: ../../source/docs/common-compassless.rst:25
+#: c25a9100cb5a4650865ab8cdcc989c0b
+msgid ""
+"Currently, it does not function well for QuadPlane VTOL tailsitters, since "
+"their nose is pointed vertically in VTOL flight. Compasses are still "
+"recommended for Tailsitters. Also, for this to work well at all, vibration "
+"should be low and the GPS velocity accurate, see below."
+msgstr ""
+"目前，它不适用于 QuadPlane VTOL 尾坐式飞机，因为其机头在 VTOL "
+"飞行时垂直朝上。尾坐式飞机仍建议使用罗盘。此外，要使其正常工作，震动应该较低且 GPS 速度应准确，请参见下文。"
+
+#: ../../source/docs/common-compassless.rst:27
+#: 2a5de51e3d2148558e79d4729cf22b1c
+msgid ""
+"GSF depends on good velocity reports from the GPS. Do not attempt with older"
+" generation GPSes, and use at least UBlox M8 or equivalent performance "
+"GPSes. Also, be sure GPS view of the sky is unobstructed throughout the "
+"flight. Otherwise, poor heading estimation will result. On Plane, if the GPS"
+" accuracy is impaired by interference from other nearby vehicle devices "
+"(like cameras, etc.), GSF can result in poorer performance than relying "
+"solely on Align Yaw to GPS heading, above. In those cases, it may be better "
+"to disable GSF use by setting the :ref:`EK3_GSF_USE_MASK<EK3_GSF_USE_MASK>` "
+"= 0."
+msgstr ""
+"GSF 依赖于 GPS 提供的准确速度报告。不要尝试使用旧一代的 GPS，至少使用 UBlox M8 或同等性能的 GPS。此外，确保 GPS "
+"对天空的视野在整个飞行过程中不受阻碍。否则会导致航向估计不准确。在飞机上，如果 GPS 精度因其他近距离飞行器设备（如相机等）的干扰而受损，GSF "
+"可能会比单纯依靠将偏航对齐到 GPS 航向表现更差。在这些情况下，最好通过将 "
+":ref:`EK3_GSF_USE_MASK<EK3_GSF_USE_MASK>` 设置为 0 来禁用 GSF。"
+
+#: ../../source/docs/common-compassless.rst:30
+#: 4865257fbd11487ab0f676a75d2e0d18
+msgid "Setup"
+msgstr "设置"
+
+#: ../../source/docs/common-compassless.rst:32
+#: 6885f50f60dd41f7a5f26a856535d732
+msgid ""
+"Simply, set :ref:`COMPASS_ENABLE<COMPASS_ENABLE>` = 0. Fallback to the GSF "
+"will be automatic if normal default values are being used for EKF "
+"parameters."
+msgstr ""
+"只需将 :ref:`COMPASS_ENABLE<COMPASS_ENABLE>` 设置为 0。如果使用 EKF 参数的正常默认值，则会自动回退到 "
+"GSF。"
+
+#: ../../source/docs/common-compassless.rst:34
+#: 4e3d86d5e0054a8c99e45f0d29ba852b
+msgid ""
+"For configure EKF3 to always use GSF set :ref:`EK3_SRC1_YAW <EK3_SRC1_YAW>` "
+"= 8 (GSF)."
+msgstr "要将 EKF3 配置为始终使用 GSF，请将 :ref:`EK3_SRC1_YAW <EK3_SRC1_YAW>` 设置为 8（GSF）。"
+
+#: ../../source/docs/common-compassless.rst:37
+#: 354762a48d39443b921d4f14af65e26a
+msgid "Operation"
+msgstr "操作"
+
+#: ../../source/docs/common-compassless.rst:39
+#: b087d6bc03f64e658fab6dbec6dc2347
+msgid ""
+"Currently, only Plane will arm if the :ref:`ARMING_CHECK<ARMING_CHECK>` for "
+"compass (or ALL) is enabled, when no compasses are enabled. Copter and "
+"QuadPlane will give an pre-arming failure. Three possible methods to arm "
+"Copter and QuadPlane are:"
+msgstr ""
+"目前，当没有罗盘启用时，只有飞机在 :ref:`ARMING_CHECK<ARMING_CHECK>` "
+"中对罗盘（或全部）的检查启用的情况下才能解锁。旋翼机和 QuadPlane 将给出预解锁失败。解锁旋翼机和 QuadPlane 的三种可能方法是："
+
+#: ../../source/docs/common-compassless.rst:41
+#: efb8165c889d4db199aef444f231eac6
+msgid ""
+"Disable :ref:`ARMING_CHECK<ARMING_CHECK>` for Compass (keep the others!)."
+msgstr "为罗盘禁用 :ref:`ARMING_CHECK<ARMING_CHECK>`（保持其他检查！）。"
+
+#: ../../source/docs/common-compassless.rst:42
+#: 262120effe474535961633e93f7ef7b3
+msgid "Force arming from ground station."
+msgstr "从地面站强制解锁。"
+
+#: ../../source/docs/common-compassless.rst:43
+#: b36687d083834e1793f031095dff7df3
+msgid ""
+"Before arming, but after GPS lock has been obtained and EKF origin has been "
+"set and is \"using GPS\", pick up the vehicle and walk around in a circle a "
+"few meters in diameter. This should allow the GSF to acquire yaw alignment "
+"and the message \"EKF yaw alignment complete\" would be sent to the ground "
+"station."
+msgstr ""
+"在解锁之前，但在获得 GPS 锁定、设置 EKF 原点并「使用 GPS」之后，拿起飞行器绕直径几米的圆圈行走。这应该允许 GSF "
+"获得偏航对齐，并向地面站发送「EKF yaw alignment complete」消息。"
+
+#: ../../source/docs/common-compassless.rst:45
+#: 09bcf7ea700c41999762d5c6382f8ce8
+msgid ""
+"If either of the first two methods are used, then the first movements of the"
+" vehicle in VTOL position controlled modes may be initially in the wrong "
+"direction, but should quickly stop once yaw alignment of the GSF has been "
+"obtained. Either fly the vehicle a bit in a non-position controller mode "
+"(like STABILIZE or QHOVER), or give the vehicle sufficient clearance for the"
+" unknown initial movement direction."
+msgstr ""
+"如果使用前两种方法中的任何一种，则在 VTOL 位置控制模式下，飞行器的初始运动可能最初朝错误方向，但在 GSF "
+"获得偏航对齐后应该很快停止。可以在非位置控制模式（如 Stabilize 或 QHOVER）下短暂飞行，或给飞行器留出足够空间以应对未知的初始运动方向。"
+
+#: ../../source/docs/common-compassless.rst:47
+#: 5d011abfd5014616b1695926cb9fb47c
+msgid "Afterwards, flight and navigation should be acceptable."
+msgstr "之后，飞行和导航应该是可接受的。"
+
+#: ../../source/docs/common-compassless.rst:49
+#: 4a914f9b876c4a60b962104f7d108d8b
+msgid ""
+"on Plane, without compass, after arming the vehicle will fall back to DCM "
+"(\"DCM Active\"  message over MAVLinK) from EKF3 since it has no yaw sensor "
+"yet. This will be flagged in MP HUD as \"Unhealthy AHRS\" or on RC telemetry"
+" systems (like CRSF) with a \"AHRS Bad\" message. Ignore this, once the "
+"plane starts moving EKF3 will obtain yaw information and align, and "
+"operation will switch back to it (\"EKF3 active\")."
+msgstr ""
+"在飞机上，没有罗盘时，解锁后飞行器将从 EKF3 回退到 DCM（通过 MAVLink 发送「DCM "
+"Active」消息），因为它还没有偏航传感器。这将在 Mission Planner HUD 中标记为「Unhealthy "
+"AHRS」，或在遥控数传系统（如 CRSF）上显示「AHRS Bad」消息。忽略此消息，一旦飞机开始移动，EKF3 将获取偏航信息并对齐，操作将切换回 "
+"EKF3（「EKF3 active」）。"
+
+#: ../../source/docs/common-compassless.rst:51
+#: c0658299ace1422f9ee1a181deb7db46
+msgid ""
+"If any problems are experienced, please post logs on the "
+"https://discuss.ardupilot.org forum."
+msgstr "如果遇到任何问题，请在 https://discuss.ardupilot.org 论坛上发布日志。"
+
+#: ../../source/docs/common-compassless.rst:54
+#: cdaa186d14964acabcac139c378ed530
+msgid "Video"
+msgstr "视频"

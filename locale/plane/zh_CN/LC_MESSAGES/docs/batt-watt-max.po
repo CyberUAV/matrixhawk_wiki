@@ -1,0 +1,181 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 14:59+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/batt-watt-max.rst:5 7cb4c3b265314d69b75bc0517291fed1
+msgid "Limiting Maximum Battery Power Draw"
+msgstr "限制最大电池功率消耗"
+
+#: ../../source/docs/batt-watt-max.rst:7 84defe86590b43ceb339fa41672fc2dc
+msgid ""
+"Often, long range vehicles utilize lower C rating batteries to maximize "
+"battery power to weight ratio. Unfortunately, some situations, especially "
+"QuadPlane transitions which have full throttle power applied to forward "
+"motors during the transition, can cause excessive battery voltage sag with "
+"lower C rated batteries. This can lead to permanent damage in some kinds of "
+"batteries (LiPo for example) if the cell voltage drops too low. In addition,"
+" this can cause premature battery failsafes, or even crashes. This topic "
+"discusses ways to limit the maximum power draw from batteries."
+msgstr ""
+"通常，长航程飞行器使用较低 C 值的电池以最大化电池功率重量比。不幸的是，某些情况下，特别是 QuadPlane 过渡时对前向电机施加满油门，可能导致低"
+" C "
+"值电池出现过度电压下垂。这可能导致某些类型电池（如锂聚合物电池）在单节电压过低时造成永久损坏。此外，这可能导致过早触发电池失控保护，甚至坠机。本文讨论限制电池最大功率消耗的方法。"
+
+#: ../../source/docs/batt-watt-max.rst:10 b415444aa9ac427d931560a79944a6b2
+msgid "Methods to Limit Maximum Power Draw"
+msgstr "限制最大功率消耗的方法"
+
+#: ../../source/docs/batt-watt-max.rst:12 dadc488740854c24a612d02775194f90
+msgid ""
+"The first and simplest is to restrict :ref:`THR_MAX<THR_MAX>` to a lower "
+"value. This limits the maximum throttle applied in throttle controlled modes"
+" (AUTO, FBWB, CRUISE, etc.). Unfortunately, while this could be used to "
+"limit maximum power to the forward motors in a QuadPlane transition, it will"
+" also limit it in normal fixed wing throttle controlled modes also, when the"
+" VTOL motors are not running and adding to the total instantaneous battery "
+"power being drawn."
+msgstr ""
+"第一种也是最简单的方法是将 :ref:`THR_MAX<THR_MAX>` 限制为较低值。这限制了油门控制模式（AUTO、FBWB、CRUISE "
+"等）中施加的最大油门。不幸的是，虽然这可用于限制 QuadPlane 过渡中对前向电机的最大功率，但在 VTOL "
+"电机不运行、不向总瞬时电池功率消耗添加功率的正常固定翼油门控制模式中，也会限制功率。"
+
+#: ../../source/docs/batt-watt-max.rst:14 8984678cc4884b65a31e59735af71f3d
+msgid "A better way is to use one or more of the power limiting parameters:"
+msgstr "更好的方法是使用一个或多个功率限制参数："
+
+#: ../../source/docs/batt-watt-max.rst:16 f8c6b564246b42188220c507ac88b84f
+msgid ":ref:`BATT_WATT_MAX<BATT_WATT_MAX>`"
+msgstr ":ref:`BATT_WATT_MAX<BATT_WATT_MAX>`"
+
+#: ../../source/docs/batt-watt-max.rst:18 a032fabe59e94b148881d8cdab44953e
+msgid ""
+"The :ref:`BATT_WATT_MAX<BATT_WATT_MAX>` parameter (``BATTx_WATT_MAX``, for "
+"any additional batteries) to limit the total instantaneous power that can be"
+" drawn from the battery(s) by the forward motors. This will help issues "
+"during QuadPlane transitions."
+msgstr ""
+":ref:`BATT_WATT_MAX<BATT_WATT_MAX>` "
+"参数（``BATTx_WATT_MAX``，适用于任何额外电池）用于限制前向电机从电池消耗的总瞬时功率。这将有助于解决 QuadPlane "
+"过渡期间的问题。"
+
+#: ../../source/docs/batt-watt-max.rst:20 5e0fc89c0b174c2ab54443bdd089302c
+msgid ""
+"If battery wattage (voltage * current) exceeds this value then the system "
+"will reduce max throttle (:ref:`THR_MAX<THR_MAX>`, "
+":ref:`TKOFF_THR_MAX<TKOFF_THR_MAX>` and :ref:`THR_MIN<THR_MIN>` for reverse "
+"thrust) to be below :ref:`BATT_WATT_MAX<BATT_WATT_MAX>`. If power demand is "
+"reduced, the max throttle will slowly grow back to :ref:`THR_MAX<THR_MAX>` "
+"(or :ref:`TKOFF_THR_MAX<TKOFF_THR_MAX>` ) and/or :ref:`THR_MIN<THR_MIN>`, "
+"even if demanding the current max but as long as power remains under the "
+"watt max. Use 0 (default) to disable this feature."
+msgstr ""
+"如果电池瓦特数（电压×电流）超过此值，系统将降低最大油门（:ref:`THR_MAX<THR_MAX>`、:ref:`TKOFF_THR_MAX<TKOFF_THR_MAX>`"
+" 和用于反推力的 :ref:`THR_MIN<THR_MIN>`）以保持在 :ref:`BATT_WATT_MAX<BATT_WATT_MAX>` "
+"以下。如果功率需求降低，最大油门将缓慢增长回 :ref:`THR_MAX<THR_MAX>`（或 "
+":ref:`TKOFF_THR_MAX<TKOFF_THR_MAX>`）和/或 "
+":ref:`THR_MIN<THR_MIN>`，即使要求当前最大值，只要功率保持在瓦特最大值以下。使用0（默认）禁用此功能。"
+
+#: ../../source/docs/batt-watt-max.rst:22 3e2e8fd44aaa4711a5ce721d15b8c8ce
+#, python-format
+msgid ""
+"Since this limit is applied to the throttle slowly (~10%/second), it may not"
+" react fast enough in some situations to prevent battery sag at the "
+"beginning of transition. Setting the :ref:`THR_SLEWRATE<THR_SLEWRATE>` to "
+"50% or less per second to prevent rapid application of maximum forward "
+"throttle at the beginning of transition, will help prevent this."
+msgstr ""
+"由于此限制是缓慢施加到油门的（约10%/秒），在某些情况下可能反应不够快，无法在过渡开始时防止电池下垂。将 "
+":ref:`THR_SLEWRATE<THR_SLEWRATE>` 设置为50%/秒或更低，以防止过渡开始时最大前向油门快速施加，将有助于防止这种情况。"
+
+#: ../../source/docs/batt-watt-max.rst:24 c2abf106cb334f75837b3a5a292a7b98
+msgid ""
+"This only affects the forward motors, VTOL motors are unaffected by "
+":ref:`BATT_WATT_MAX<BATT_WATT_MAX>`."
+msgstr "这只影响前向电机，VTOL 电机不受 :ref:`BATT_WATT_MAX<BATT_WATT_MAX>` 影响。"
+
+#: ../../source/docs/batt-watt-max.rst:26 edb04852136c435d8d2d28f7a03ce14e
+msgid ":ref:`Q_M_BAT_CURR_MAX<Q_M_BAT_CURR_MAX>`"
+msgstr ":ref:`Q_M_BAT_CURR_MAX<Q_M_BAT_CURR_MAX>`"
+
+#: ../../source/docs/batt-watt-max.rst:28 e57630e8dfa346aa9581e92062ab3fbd
+msgid ""
+"This can be used to limit the maximum current when the VTOL motors are "
+"active. Power will be reduced to the VTOL motors to prevent exceeding this "
+"value."
+msgstr "当 VTOL 电机激活时，可用此参数限制最大电流。VTOL 电机的功率将降低以防止超过此值。"
+
+#: ../../source/docs/batt-watt-max.rst:30 c5109a07069b4e158c6809613db4215b
+msgid ":ref:`Q_M_BAT_VOLT_MIN<Q_M_BAT_VOLT_MIN>`"
+msgstr ":ref:`Q_M_BAT_VOLT_MIN<Q_M_BAT_VOLT_MIN>`"
+
+#: ../../source/docs/batt-watt-max.rst:32 07b5a277d48148e0b8e5cfa19efc661f
+msgid ""
+"This has two effects if non-zero. First, it sets the lower limit for thrust "
+"scaling versus voltage. If :ref:`Q_M_BAT_VOLT_MAX<Q_M_BAT_VOLT_MAX>` is non-"
+"zero, then voltage compensation is applied to throttle to offset battery "
+"voltage variations on thrust. Second, it sets a lower limit on battery "
+"voltage sag by predicting the throttle value that would cause this, using an"
+" estimate of battery internal resistance calculated during flight. It will "
+"limit current applied to the VTOL motors to prevent this from occurring. If "
+":ref:`Q_M_BAT_CURR_MAX<Q_M_BAT_CURR_MAX>` is also  non-zero, then it will "
+"use the lower of the two limits, the one set by "
+":ref:`Q_M_BAT_CURR_MAX<Q_M_BAT_CURR_MAX>` or predicted internally using "
+":ref:`Q_M_BAT_VOLT_MIN<Q_M_BAT_VOLT_MIN>`  as the minimum voltage sag "
+"target."
+msgstr ""
+"如果非零，此参数有两个效果。第一，它设置推力缩放与电压的下限。如果 :ref:`Q_M_BAT_VOLT_MAX<Q_M_BAT_VOLT_MAX>` "
+"非零，则对油门应用电压补偿以抵消电池电压变化对推力的影响。第二，它通过预测会导致电压下垂的油门值，使用飞行期间计算的电池内阻估算，设置电池电压下垂的下限。它将限制施加到"
+" VTOL 电机的电流以防止这种情况发生。如果 :ref:`Q_M_BAT_CURR_MAX<Q_M_BAT_CURR_MAX>` 也非零，则将使用 "
+":ref:`Q_M_BAT_CURR_MAX<Q_M_BAT_CURR_MAX>` 设定的限制与使用 "
+":ref:`Q_M_BAT_VOLT_MIN<Q_M_BAT_VOLT_MIN>` 作为最小电压下垂目标内部预测的限制中较低的那个。"
+
+#: ../../source/docs/batt-watt-max.rst:34 3162bfd8e0674c0e821c39eede10aee0
+msgid ""
+"the battery used for monitoring and the battery resistance estimate is "
+"determined by  :ref:`Q_M_BAT_IDX<Q_M_BAT_IDX>`"
+msgstr "用于监控的电池和电池内阻估算由 :ref:`Q_M_BAT_IDX<Q_M_BAT_IDX>` 决定"
+
+#: ../../source/docs/batt-watt-max.rst:36 79a60bcd729e4db8ae9e0fa383f9b650
+#, python-format
+msgid ""
+"Setting :ref:`Q_M_BAT_CURR_MAX<Q_M_BAT_CURR_MAX>` to 150% of hover current "
+"is a good starting point, while 3.3V * number of cells is a good value for "
+":ref:`Q_M_BAT_VOLT_MIN<Q_M_BAT_VOLT_MIN>`."
+msgstr ""
+"将 :ref:`Q_M_BAT_CURR_MAX<Q_M_BAT_CURR_MAX>` "
+"设置为悬停电流的150%是一个良好的起始点，而3.3V×电池节数对 :ref:`Q_M_BAT_VOLT_MIN<Q_M_BAT_VOLT_MIN>` "
+"是一个好值。"
+
+#: ../../source/docs/batt-watt-max.rst:39 80dde45cad2a4bb0b1ac132573a7b65b
+msgid "How to Set Max Watts"
+msgstr "如何设置最大瓦特数"
+
+#: ../../source/docs/batt-watt-max.rst:41 97a545504b7944009415a2db7fcdfa1d
+#, python-format
+msgid ""
+"By examining a post flight log, and noting anywhere excessive battery "
+"voltage sag first occurs, you can take the battery voltage and current at "
+"that point, multiply to obtain the power, and set the "
+":ref:`BATT_WATT_MAX<BATT_WATT_MAX>` to below that value. 80% to 70% of the "
+"value noted at the sag point would be a good value to start with."
+msgstr ""
+"通过检查飞行后日志，注意首次出现过度电池电压下垂的位置，您可以记录该时刻的电池电压和电流，相乘得到功率，然后将 "
+":ref:`BATT_WATT_MAX<BATT_WATT_MAX>` 设置低于该值。将下垂点记录值的70%至80%作为起始值是合适的。"

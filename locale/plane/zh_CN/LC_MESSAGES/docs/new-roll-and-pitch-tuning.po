@@ -1,0 +1,875 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 14:59+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:5
+#: 19ffb2ef70434a04b39eee223e4cb7f6
+msgid "Roll, Pitch and Yaw Controller Tuning"
+msgstr "横滚、俯仰和偏航控制器调参"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:6
+#: d7cfc81317fa4ae0be0fb8f361ab760b
+msgid ""
+"Except for very heavy, slow, or extremely nimble vehicles, Autotune should "
+"produce very acceptable results. Manual tuning should be reserved for "
+"vehicles that do not fly well after Autotune has been done."
+msgstr ""
+"除了非常重型、缓慢或极为灵活的飞行器外，AutoTune 应能产生非常可接受的结果。手动调参应留给 AutoTune 完成后飞行效果仍不佳的飞行器。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:10
+#: 18c9732bcc49447694dac1195c679282
+msgid ""
+"The default values for the roll and pitch controllers in Plane prior to "
+"Autotuning are quite deliberately a bit small for most aircraft. This is "
+"because small values may cause ArduPilot to not navigate as well and be "
+"sluggish, but are less likely to cause the aircraft to crash."
+msgstr ""
+"Plane 在 AutoTuning 前的横滚和俯仰控制器默认值故意设置得对大多数飞机偏小。这是因为较小的值可能导致 ArduPilot "
+"导航效果不佳且响应迟钝，但不太可能导致飞机坠毁。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:12
+#: 9af970ce35e749dc925897fddf1ee787
+msgid ""
+"There is a new YAW controller which can be used in ACRO mode (previous "
+"versions had no YAW rate stabilization in ACRO mode). This controller can be"
+" AutoTuned just like roll and pitch during an AutoTuning session using "
+"AUTOTUNE mode or RCx_OPTION = 107 on a switch. This is independent of the "
+"yaw dampner and side-slip controller used in other angle stablized modes "
+"such as CRUISE or AUTO (see :ref:`yaw-controller-tuning`) below."
+msgstr ""
+"有一个新的偏航控制器，可在 ACRO 模式下使用（以前版本在 ACRO 模式下没有偏航速率稳定）。此控制器可以像横滚和俯仰一样在 AutoTuning "
+"会话中自动调参，使用 AUTOTUNE 模式或开关上的 RCx_OPTION = 107。这独立于其他角度稳定模式（如 CRUISE 或 "
+"AUTO）中使用的偏航阻尼和侧滑控制器（参见下方 :ref:`yaw-controller-tuning`）。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:16
+#: b286226bb1e147a987267a22fadeb057
+msgid "Preconditions"
+msgstr "前提条件"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:18
+#: b81a24c22c4d4b649c2b44e62f4e9a8a
+msgid "The following instruction assume that:"
+msgstr "以下说明假设："
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:20
+#: f261b1d46729407483dbef65bd0610f5
+msgid ""
+"Your model is trimmed appropriately on the bench, usually neutral on "
+"ailerons and neutral or a bit of up elevator"
+msgstr "您的飞机在台架上已适当配平，通常副翼中立，升降舵中立或略微上偏"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:21
+#: 95d37ed27020491bb8df465d560387c8
+msgid "You have done your radio calibration"
+msgstr "您已完成遥控器校准"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:22
+#: 95306d1107e34d1abf3b0eefe39c0b90
+msgid "You have calibrated your airspeed sensor, if present."
+msgstr "您已校准空速传感器（如有）。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:23
+#: 7d3c7487c1c0495081d1e41fdda14283
+msgid ""
+"You have set the airspeed parameters (See :ref:`airspeed-parameters-setup`),"
+" even if not using an airspeed sensor."
+msgstr "您已设置空速参数（参见 :ref:`airspeed-parameters-setup`），即使不使用空速传感器。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:24
+#: 3a7f96cf0d524a1cb165b29f81eeeb9b
+msgid "You have leveled the autopilot"
+msgstr "您已调平飞控"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:25
+#: 6f5d7346dda84df4af77fb83863e147f
+msgid ""
+"You have set your autopilot and transmitter to be able to select :ref:`FBWA "
+"mode <fbwa-mode>`"
+msgstr "您已设置飞控和遥控器以选择 :ref:`FBWA 模式 <fbwa-mode>`"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:26
+#: ca172df0752b497dbbbfbc8c14d2fa7f
+msgid ""
+"You have checked your pitch roll and yaw angle on the HUD and verified that "
+"they match the rotation of the model and that the surfaces move to oppose "
+"movement when in FBWA mode as described below."
+msgstr "您已检查 HUD 上的俯仰、横滚和偏航角度，并确认它们与飞机旋转一致，且在 FBWA 模式下舵面会相应地对抗运动，如下所述。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:31
+#: 5209f8295fd0432dbb709c5dfebf5cdf
+msgid "Ground Checks"
+msgstr "地面检查"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:33
+#: ae2516803aed44e890b0a6f43370902a
+msgid "On the ground select FBWA mode"
+msgstr "在地面选择 FBWA 模式"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:34
+#: d441789f46e94a4ab58e4116a90ba1d7
+msgid ""
+"Rotate your model nose up - you should see the elevators/elevons deflect "
+"down"
+msgstr "将飞机机头向上旋转——您应该看到升降舵/升降副翼向下偏转"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:36
+#: 1e9fd032b27c45319b7d1d8c41877994
+msgid ""
+"Rotate your model nose down - you should see the elevators/elevons deflect "
+"up"
+msgstr "将飞机机头向下旋转——您应该看到升降舵/升降副翼向上偏转"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:38
+#: d14129dd777e4dbfa631b070671cf252
+msgid ""
+"Roll the model to the right - you should see the left aileron/elevon go up "
+"and the right aileron/elevon go down."
+msgstr "将飞机向右滚转——您应该看到左副翼/升降副翼上偏，右副翼/升降副翼下偏。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:40
+#: 6bf1dd7c3d6d4a63820d8b5f17cb0138
+msgid ""
+"Roll the model to the left - you should see the left aileron/elevon go down "
+"and the right aileron/elevon go up."
+msgstr "将飞机向左滚转——您应该看到左副翼/升降副翼下偏，右副翼/升降副翼上偏。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:42
+#: 24c47898541e4a54a42294dd9cc7548e
+#, python-format
+msgid ""
+"Level the model - the control surfaces should be close to neutral. There "
+"will be a little bit of displacement, but any more than 10% of your maximum "
+"throw indicates that the autopilot has not been leveled or the radio "
+"calibration needs to be repeated."
+msgstr "将飞机水平——控制舵面应接近中立。会有轻微偏移，但超过最大行程 10% 的偏移表明飞控未调平或需要重新进行遥控器校准。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:46
+#: e6fa9358dc5342e59d87bb821ab14356
+msgid ""
+"With the model level apply left and right roll stick inputs on your "
+"transmitter - the controls should deflect in the same direction that they "
+"would in manual mode."
+msgstr "飞机水平时，在遥控器上施加左右横滚输入——控制应与手动模式下偏转方向相同。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:49
+#: d83247ad06b94a1f8970cb6a11111d0d
+msgid ""
+"With the model level apply up and down pitch stick inputs on your "
+"transmitter the controls should deflect in the same direction that they "
+"would in manual mode."
+msgstr "飞机水平时，在遥控器上施加上下俯仰输入——控制应与手动模式下偏转方向相同。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:52
+#: 04392d2cdc1a48a898c358e8d40217fa
+msgid ""
+"If you have an airspeed sensor enabled then blow air towards the front of "
+"the pitot tube and watch the HUD. You should see the airspeed reading "
+"increase"
+msgstr "如果启用了空速传感器，向皮托管前端吹气并观察 HUD。您应该看到空速读数增加"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:57
+#: a8cfd2accbfe46258234def0b30b8c2c
+msgid "Tuning Overview"
+msgstr "调参概述"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:59
+#: 921aac358e54468f9e482cb3aab53978
+msgid ""
+"ArduPilot maintains attitude stability by detecting the difference between "
+"demanded attitude angle in either pitch or roll, turning whatever error is "
+"present in that into a demanded axial rate change, and then using a PID-FF "
+"(Proportional/Integral/Derivative-FeedForward) control loop to attain and "
+"control that rate to ultimately attain the desired attitude."
+msgstr ""
+"ArduPilot 通过检测俯仰或横滚中的期望姿态角与实际姿态角的差异来保持姿态稳定，将该误差转化为期望轴向速率变化，然后使用 PID-"
+"FF（比例/积分/微分-前馈）控制环来达到并控制该速率，最终获得期望姿态。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:61
+#: 4a5f43343c664e88b78a5f51add6199d
+msgid ""
+"Normally, most the demanded rate is attained using the FF, or feedforward, "
+"term. Much like the human pilot deflects the control surface directly from "
+"the transmitter in MANUAL mode to obtain the desired roll or pitch rate. "
+"Then the other PID terms act on any errors in demanded axis rate to reduce "
+"errors from external (turbulence) or internal (noise,miss-trim, CG) sources "
+"to obtain the desired attitude."
+msgstr ""
+"通常，大部分期望速率使用 FF（前馈）项来达到，就像人类飞手在 MANUAL 模式下直接从遥控器偏转控制舵面以获得期望的横滚或俯仰速率一样。然后其他 "
+"PID 项作用于期望轴向速率的任何误差，以减少来自外部（湍流）或内部（噪声、配平偏差、重心）源的误差，从而获得期望姿态。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:63
+#: db80149a9aa84fe398282d1206a69e90
+msgid ""
+"The P term acts on any short term error, the I term integrates over time any"
+" long term errors, while the D term acts as a speed-up/damping action to get"
+" to the desired attitude more quickly, yet eliminate overshoot and ringing "
+"as the desired attitude is obtained and maintained."
+msgstr ""
+"P 项作用于任何短期误差，I 项随时间积分任何长期误差，D 项作为加速/阻尼动作，更快地达到期望姿态，同时消除在获得和维持期望姿态时的过冲和震荡。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:67
+#: a77d46f21206459881653d7cf5b6a300
+msgid "Tuning Process"
+msgstr "调参过程"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:69
+#: acf9abe3572340e587668df58b6a2f37
+msgid "Do this for each axis (pitch and roll), one at a time."
+msgstr "对每个轴（俯仰和横滚）分别进行，每次一个。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:72
+#: db015da8860342bc967f1e8439149d1e
+msgid "Determining the FF gain"
+msgstr "确定 FF 增益"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:74
+#: 0a21ec571fef4e808421f3fe5c5748ae
+msgid ":ref:`PTCH_RATE_FF<PTCH_RATE_FF>`"
+msgstr ":ref:`PTCH_RATE_FF<PTCH_RATE_FF>`"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:75
+#: 4ad532cd1de840c4b3c5d315ea8519a1
+msgid ":ref:`RLL_RATE_FF<RLL_RATE_FF>`"
+msgstr ":ref:`RLL_RATE_FF<RLL_RATE_FF>`"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:77
+#: 1f6eba05a8444a75aa7abfacff42184c
+msgid ""
+"First the amount of FF term can be determined by analyzing the data log "
+"after the initial flight in which the axis is exercised with the sticks in "
+"FBWA to obtain transitions resulting from several fast, full stick "
+"deflections in both directions. Using the log of that flight (See "
+":ref:`common-logs`), create the following graph for the axis you are tuning "
+"(roll in the following examples):"
+msgstr ""
+"首先，可以通过分析在 FBWA 模式下用摇杆在两个方向上进行多次快速全行程偏转的初始飞行后的数据日志来确定 FF 项的大小。使用该飞行的日志（参见 "
+":ref:`common-logs`），为正在调参的轴（以下示例为横滚）创建以下图表："
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:79
+#: 3689905f54e6456abcb0b079749d0a77
+msgid "ATT.Roll (as a reference on when the hard stick transitions occur)"
+msgstr "ATT.Roll（作为硬摇杆过渡发生时间的参考）"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:80
+#: 5b05ec2c06cd4c5fa7a8a3bc44447b7f
+msgid ""
+".345\\*PIDR.Act\\*AETR.SS  (this uses 0.345, the default, for the proposed "
+":ref:`RLL_RATE_FF<RLL_RATE_FF>` term as a starting point). This is taking "
+"the total output from the PID controller, which results in the surface "
+"deflection in the next graph, as a proposed feedforward."
+msgstr ""
+".345\\*PIDR.Act\\*AETR.SS（使用 0.345（默认值）作为建议的 :ref:`RLL_RATE_FF<RLL_RATE_FF>`"
+" 项的起始点）。这是从 PID 控制器获取总输出，它产生下一图中的舵面偏转，作为建议的前馈。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:81
+#: 815afc912eac43acb89d9cfeb5a55b54
+msgid "AETR.Ail*0.01"
+msgstr "AETR.Ail*0.01"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:83
+#: d42b79db2daa4f28a6608ee189cd7a21
+msgid ""
+"here is an example plot using `UAV LogViwer online "
+"<https://ardupilot.org/plane/docs/common-uavlogviewer.html>`__."
+msgstr ""
+"以下是使用 `UAV LogViwer online <https://ardupilot.org/plane/docs/common-"
+"uavlogviewer.html>`__ 的示例图。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:88
+#: 8f1ff8e3339b4f3c97a4826ca032f552
+msgid ""
+"you can see that the second curve exceeds the third, indicating that the FF "
+"term (0.345 used in the first curve) is too high....re-plotting the same "
+"data with the first curve multiplied by a lower FF proposal of 0.11:"
+msgstr ""
+"可以看到第二条曲线超过第三条曲线，表明 FF 项（第一条曲线中使用的 0.345）过高……用较低的 FF 建议值 0.11 "
+"重新绘制相同数据的第一条曲线："
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:90
+#: a26db45f94e549899bdbfb66b79bf934
+msgid ""
+".11*PIDR.Act*AETR.SS (.11 was the actual FF gain result of an Autotune done "
+"later)"
+msgstr ".11*PIDR.Act*AETR.SS（0.11 是之后 AutoTune 实际 FF 增益结果）"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:95
+#: 0ee6eb9aa81a413b864c4ba18c24ef24
+msgid ""
+"you can see that the two curves match in magnitude, indicating that the FF "
+"term should be .11."
+msgstr "可以看到两条曲线幅度匹配，表明 FF 项应为 0.11。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:97
+#: 60ca45d2fbb74703915f59b9b98589d9
+msgid ""
+"This technique works in all cases since FF is an open loop gain and we are "
+"just determining how much surface deflection results from how much output in"
+" the PID controller. This is then used to make the FF gain basically create "
+"the baseline control surface deflection."
+msgstr ""
+"此技术在所有情况下均有效，因为 FF 是开环增益，我们只是在确定 PID 控制器多少输出导致多少舵面偏转。然后用于使 FF "
+"增益基本上创建基线控制舵面偏转。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:99
+#: ca11a91ac69246d29a43e62169ba5249
+msgid "For the pitch axis the plots are:"
+msgstr "对于俯仰轴，图表为："
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:101
+#: ac95b015d79c41e48d5bf90fd35bc81f
+msgid "ATT.Pitch (as a reference on when the hard stick transitions occur)"
+msgstr "ATT.Pitch（作为硬摇杆过渡发生时间的参考）"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:102
+#: 7e61fc4dc1994381a5b0c236b9eff8eb
+msgid ""
+"(proposed FF)\\*PIDP.Act\\*AETR.SS  (proposed FF is the proposed "
+":ref:`PTCH_RATE_FF<PTCH_RATE_FF>` term as a starting point). This is taking "
+"the total output from the PID controller, which results in the surface "
+"deflection in the next graph, as a proposed feedforward."
+msgstr ""
+"（建议 FF）\\*PIDP.Act\\*AETR.SS（建议 FF 是建议的 :ref:`PTCH_RATE_FF<PTCH_RATE_FF>` "
+"项的起始点）。这是从 PID 控制器获取总输出，它产生下一图中的舵面偏转，作为建议的前馈。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:103
+#: 16c3eb93c003434d816a08897c686b18
+msgid "AETR.Elev*0.01"
+msgstr "AETR.Elev*0.01"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:105
+#: 1a6a703fb97c437fa27792b16051e02f
+msgid ""
+"Now we can tune the other PID gains to take care of disturbances and miss-"
+"trims."
+msgstr "现在可以调参其他 PID 增益来处理扰动和配平偏差。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:108
+#: 90fbbb3fe0b248569dc4275c6de20cc4
+msgid "I term"
+msgstr "I 项"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:110
+#: 14f0a693ad474910a97b8d758591da41
+msgid ":ref:`PTCH_RATE_I<PTCH_RATE_I>`"
+msgstr ":ref:`PTCH_RATE_I<PTCH_RATE_I>`"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:111
+#: 7455c8e761a842808d44fd55ca59e3b1
+msgid ":ref:`RLL_RATE_I<RLL_RATE_I>`"
+msgstr ":ref:`RLL_RATE_I<RLL_RATE_I>`"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:113
+#: fa79157477d243bfa0e24b5ea56584d5
+msgid ""
+"For Plane we recommend setting the I gain to be equal to the FF gain. This "
+"gives about a 1 sec control loop response timeframe for CG or surface trim "
+"during takeoffs."
+msgstr "对于 Plane，我们建议将 I 增益设置为等于 FF 增益。这可为起飞时的重心或舵面配平提供约 1 秒的控制环响应时间。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:116
+#: a982fb989d0c4aae9e083d6dac423038
+msgid "P and D term"
+msgstr "P 和 D 项"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:118
+#: 88b8a6d67b0b4727b6a6599e03f9439d
+msgid ":ref:`PTCH_RATE_P<PTCH_RATE_P>`"
+msgstr ":ref:`PTCH_RATE_P<PTCH_RATE_P>`"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:119
+#: 2d1ddb4f94a24c8388a3f75d2429d15b
+msgid ":ref:`RLL_RATE_P<RLL_RATE_P>`"
+msgstr ":ref:`RLL_RATE_P<RLL_RATE_P>`"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:120
+#: 24a6b30bc1a746b292a869e4e345148b
+msgid ":ref:`PTCH_RATE_D<PTCH_RATE_D>`"
+msgstr ":ref:`PTCH_RATE_D<PTCH_RATE_D>`"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:121
+#: f9cfedd751ec4dedb374af10581e171b
+msgid ":ref:`RLL_RATE_D<RLL_RATE_D>`"
+msgstr ":ref:`RLL_RATE_D<RLL_RATE_D>`"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:123
+#: 4f938c5297a848b9aa3c35d0e138d46e
+msgid ""
+"Now, the vehicle can be flown again to start trimming P and D. Starting with"
+" D and P at 0:"
+msgstr "现在，可以再次飞行飞机，开始调整 P 和 D。从 D 和 P 均为 0 开始："
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:125
+#: 925958d2c00740ddba7c490f7d1d73bc
+msgid ""
+"With the model in FBWA mode, increase P in 0.01 increments. Check each "
+"change by putting in a rapid angle demand, hold it and release. Do the same "
+"in the other direction. You want the model to move quickly and smoothly to "
+"the new angle and back again without overshoot or any porpoising."
+msgstr ""
+"在 FBWA 模式下，以 0.01 为增量增大 "
+"P。通过快速角度输入来检查每次变化，保持然后释放。在另一方向上做同样操作。您希望飞机快速平滑地移动到新角度，然后再返回，无过冲或海豚式摆动。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:129
+#: 31746fca9ddc40099bf32f4a4e5ad8f3
+msgid ""
+"When you get pitch angle oscillation or overshoot, then you need to reduce P"
+" by 25-50%."
+msgstr "当出现俯仰角震荡或过冲时，需要将 P 减少 25-50%。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:131
+#: 9e4698171dad4094b4f8c1a59724a443
+msgid ""
+"Increase the D gain in increments of 0.001 until it it starts to oscillate, "
+"then halve it. Be sure to check the temperature of your servos when you land"
+" as in extreme cases turning up this gain can cause rapid servo movement and"
+" overheat the servos leading to premature failure."
+msgstr ""
+"以 0.001 为增量增大 D "
+"增益，直到开始震荡，然后减半。落地后请务必检查舵机温度，因为在极端情况下提高此增益可能导致快速舵机运动并使舵机过热，导致过早故障。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:135
+#: c45af30f4d0b4c3bb0dadef589515966
+msgid "You can sometimes then go back and increase P gain a bit more."
+msgstr "有时之后可以再次适当增大 P 增益。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:138
+#: 5a6d4f6660294dd28f3ae62a69dbe6d6
+msgid "ACRO YAW Rate Controller Tuning"
+msgstr "ACRO 偏航速率控制器调参"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:140
+#: 92a05cce2e3f40b28fd2584a2a83c8ef
+msgid ""
+"As of version 4.2, a full YAW rate controller for use in ACRO mode is also "
+"provided. ``YAW_RATE_x`` parameters exist and can be adjusted after "
+":ref:`YAW_RATE_ENABLE<YAW_RATE_ENABLE>` is set to 1. When enabled, the "
+":ref:`ACRO_YAW_RATE<ACRO_YAW_RATE>` parameter can be used to adjust maximum "
+"yaw rate demanded at rudder stick full deflections in ACRO mode."
+msgstr ""
+"从 4.2 版本起，还提供了用于 ACRO 模式的完整偏航速率控制器。``YAW_RATE_x`` 参数存在，可在 "
+":ref:`YAW_RATE_ENABLE<YAW_RATE_ENABLE>` 设为 1 "
+"后调整。启用后，:ref:`ACRO_YAW_RATE<ACRO_YAW_RATE>` 参数可用于调整 ACRO 模式下方向舵摇杆全偏时的最大偏航速率。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:142
+#: 12b3b92d90694ec1a070a3678d7f49d1
+msgid ""
+"Manual tuning adjustment follows the same methodology as explained above for"
+" the pitch and roll axes. PID parameters can also be AutoTuned in the same "
+"manner as those for the pitch and roll axes."
+msgstr "手动调参调整遵循上述俯仰和横滚轴相同的方法。PID 参数也可以以与俯仰和横滚轴相同的方式进行 AutoTuning。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:144
+#: ba0b7c039b77445499a39d89ebec0da2
+msgid ""
+"this is different than the YAW damper/sideslip controller provided for "
+"stabilized flight modes. See :ref:`yaw-controller-tuning` below."
+msgstr "这与稳定飞行模式提供的偏航阻尼/侧滑控制器不同。参见下方 :ref:`yaw-controller-tuning`。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:147
+#: f9d29e6922e84f24b225d68b7858053c
+msgid "Roll to Pitch Compensation"
+msgstr "横滚到俯仰补偿"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:149
+#: a9d9b61c773d4834b1b1b48699568171
+msgid ""
+"Another tuning parameter is :ref:`PTCH2SRV_RLL<PTCH2SRV_RLL>` which "
+"compenstates pitch in turns to avoid altitude loss due to loss of lift "
+"caused by the roll. To set this:"
+msgstr ""
+"另一个调参参数是 :ref:`PTCH2SRV_RLL<PTCH2SRV_RLL>`，用于补偿转弯中因横滚导致升力损失引起的高度损失。设置方法："
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:151
+#: 0686d403a56a414884c3898f7000ebe1
+msgid ""
+"Roll the model to maximum bank in each direction. The nose should stay "
+"fairly level during the turns without significant gain or loss of altitude. "
+"Some loss of altitude during sustained turns at constant throttle is "
+"expected, because the extra drag of turning slows the model down which will "
+"cause a mild descent. If the model gains height during the turns then you "
+"need to reduce the :ref:`PTCH2SRV_RLL<PTCH2SRV_RLL>` by small increments of "
+"0.05 from the default value of 1.0. If the model descends immediately when "
+"the model banks (a mild descent later in the turn when the model slows down "
+"is normal as explained earlier) default value of 1.0. If you need to change "
+"the :ref:`PTCH2SRV_RLL<PTCH2SRV_RLL>` parameter outside the range from 0.7 "
+"to 1.4 then something is likely wrong with either the earlier tuning of your"
+" pitch loop, your airspeed calibration or your autopilot's bank angle "
+"estimate."
+msgstr ""
+"将飞机向每个方向滚转到最大坡度。转弯中机头应保持相对水平，没有明显的高度获得或损失。在恒定油门的持续转弯中预期会有一些高度损失，因为转弯的额外阻力会使飞机减速导致轻微下沉。如果飞机在转弯时获得高度，需要以"
+" 0.05 为步长减小 :ref:`PTCH2SRV_RLL<PTCH2SRV_RLL>` 的默认值 "
+"1.0。如果飞机在倾斜时立即下沉（在转弯后期因飞机减速导致的轻微下沉是正常的，如前所述），则为默认值 1.0。如果需要将 "
+":ref:`PTCH2SRV_RLL<PTCH2SRV_RLL>` 参数更改到 0.7 至 1.4 "
+"范围之外，则可能是俯仰环的早期调参、空速校准或飞控坡度角估计存在问题。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:167
+#: 1d91cc720f644cafa57583ae6d5658d7
+msgid "Tuning tips"
+msgstr "调参技巧"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:169
+#: 1e2005cdeac64846a89d541e80084b2f
+msgid ""
+"Select the tuning box on the bottom of the Mission Planners Flight Data "
+"page. You should get a scrolling black window above the map. Double click in"
+" the black window and you should get a list of parameters to plot. Change "
+"the selection until you have the pitch and nav_pitch plotted. Nav_pitch is "
+"the demand and pitch is the response. You can use this to look for overshoot"
+" and other behaviour that isn't so obvious from the ground looking at the "
+"model."
+msgstr ""
+"在 Mission Planner "
+"飞行数据页面底部选择调参框。您应该在地图上方看到一个滚动的黑色窗口。在黑色窗口中双击，应该看到要绘制的参数列表。更改选择，直到显示 pitch 和 "
+"nav_pitch 的图表。Nav_pitch 是期望值，pitch 是响应值。您可以用此查找过冲和其他从地面看飞机不那么明显的行为。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:176
+#: 03f598ae57d44db4b6dca125900e2145
+msgid ""
+"Although the autopilot will prevent the integrator from increasing if the "
+"maximum elevator is exceeded, there is additional protection provided by the"
+" :ref:`PTCH_RATE_IMAX<PTCH_RATE_IMAX>` parameter. This parameter sets the "
+"maximum amount of elevator that the integrator can control. The default "
+"value of 0.666 allows the integrator to trim up to 2/3 of the total elevator"
+" travel. This should be enough to allow for the trim offset and variation in"
+" trim with speed for most models."
+msgstr ""
+"尽管飞控会在超过最大升降舵时阻止积分器增加，但 :ref:`PTCH_RATE_IMAX<PTCH_RATE_IMAX>` "
+"参数提供了额外保护。此参数设置积分器可控制的最大升降舵量。默认值 0.666 允许积分器修正最多 2/3 "
+"的总升降舵行程。这对大多数飞机来说应该足以允许配平偏移和速度配平变化。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:183
+#: 2c62e60c9c8341e7b0e8b829f9036fcd
+msgid ""
+"WARNING : If :ref:`PTCH_RATE_IMAX<PTCH_RATE_IMAX>` is set too high, then "
+"there is a danger that in FBWA, if the model has been leveled so that zero "
+"pitch is too nose-up to glide at a safe speed, that the integrator will "
+"continue to keep increasing the elevator to maintain the demanded pitch "
+"angle until the model stalls. :ref:`PTCH_RATE_IMAX<PTCH_RATE_IMAX>` should "
+"be set to a value that is big enough to allow from trim changes, but small "
+"enough so that it cannot stall the plane. The default for Plane is 2/3 of "
+"total throw, which could produce this problem."
+msgstr ""
+"警告：如果 :ref:`PTCH_RATE_IMAX<PTCH_RATE_IMAX>` 设置过高，则在 FBWA "
+"模式下存在危险，即如果飞机调平后零俯仰角时机速不足以安全滑翔，积分器将继续增大升降舵以维持期望俯仰角直到飞机失速。:ref:`PTCH_RATE_IMAX<PTCH_RATE_IMAX>`"
+" 应设置为足够大以允许配平变化，但足够小以防止飞机失速。Plane 的默认值为总行程的 2/3，可能产生此问题。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:191
+#: 1537418868204151b4b305c28ffc0a5a
+msgid ""
+"Be sure that :ref:`STAB_PITCH_DOWN<STAB_PITCH_DOWN>` is setup to add "
+"negative pitch at low throttle in stablized modes."
+msgstr "确保 :ref:`STAB_PITCH_DOWN<STAB_PITCH_DOWN>` 已设置为在稳定模式低油门时添加负俯仰。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:193
+#: 8da0b3b51f4246a697b75867af3de66b
+msgid ""
+"The rate of pitch (and therefore the reduce the number of g's) used to "
+"correct pitch angle errors can be limited setting the pitch rate limit "
+":ref:`PTCH2SRV_RMAX_DN<PTCH2SRV_RMAX_DN>` and "
+":ref:`PTCH2SRV_RMAX_UP<PTCH2SRV_RMAX_UP>` parameters to non-zero values. "
+"Setting these values to 560 divided by the airspeed (in metres/second) gives"
+" a limit equivalent to approximately +- 1g."
+msgstr ""
+"用于修正俯仰角误差的俯仰速率（因此减少 g 值）可以通过将俯仰速率限制 "
+":ref:`PTCH2SRV_RMAX_DN<PTCH2SRV_RMAX_DN>` 和 "
+":ref:`PTCH2SRV_RMAX_UP<PTCH2SRV_RMAX_UP>` 参数设为非零值来限制。将这些值设为 560 "
+"除以空速（米/秒）给出的限制大约等于 +/-1g。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:198
+#: 68a7a7f65ff140ff8702260dfeea3730
+msgid ""
+"The time constant parameter :ref:`PTCH2SRV_TCONST<PTCH2SRV_TCONST>` can also"
+" be used to adjust how rapidly the pitch angle reaches the demanded value. "
+"The effect of this parameter will be seen mostly in the response to small "
+"step changes in demanded pitch. For larger pitch demands, the pitch rate "
+"limits :ref:`PTCH2SRV_RMAX_DN<PTCH2SRV_RMAX_DN>` and "
+":ref:`PTCH2SRV_RMAX_UP<PTCH2SRV_RMAX_UP>` tend to mask its effect. Making "
+"this parameter smaller will cause the aircraft to reach its demanded pitch "
+"angle in less time, but only if the aircraft is capable. A very slow "
+"responding airframe may require a slightly larger setting for this "
+"parameter."
+msgstr ""
+"时间常数参数 :ref:`PTCH2SRV_TCONST<PTCH2SRV_TCONST>` "
+"也可用于调整俯仰角达到期望值的速度。此参数的效果主要在响应小幅期望俯仰变化时体现。对于更大的俯仰需求，俯仰速率限制 "
+":ref:`PTCH2SRV_RMAX_DN<PTCH2SRV_RMAX_DN>` 和 "
+":ref:`PTCH2SRV_RMAX_UP<PTCH2SRV_RMAX_UP>` "
+"倾向于掩盖其效果。使此参数更小将使飞机在更短时间内达到期望俯仰角，但前提是飞机有能力。响应非常慢的机架可能需要略大的此参数设置。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:207
+#: ac07fd7e074142c39d1490e11bfb2a26
+msgid ""
+"Plot the pitch_speed in the tuning window. This shows the rate of pitch in "
+"radians/second. A value of 1 radian/second is approximately equal to 60 "
+"degrees/second (57 to be more precise), so if for example you had \\ "
+":ref:`PTCH2SRV_RMAX_DN<PTCH2SRV_RMAX_DN>`/UP set to 30, the maximum "
+"pitch_speed when responding to a large pitch angle demand (eg full pitch one"
+" way to full pitch the other way) should be just above 0.5."
+msgstr ""
+"在调参窗口中绘制 pitch_speed。这显示了以弧度/秒为单位的俯仰速率。1 弧度/秒约等于 60 度/秒（更精确地说是 57 度），因此例如如果将"
+" :ref:`PTCH2SRV_RMAX_DN<PTCH2SRV_RMAX_DN>`/UP 设为 "
+"30，在响应大幅俯仰角需求时（例如从最大俯仰到最大反向俯仰）的最大 pitch_speed 应略高于 0.5。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:215
+#: 2833f15d3bd84f6584b1af1bff6d3b6a
+msgid "Filtering"
+msgstr "滤波"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:217
+#: 619145943e6046c3a968d6b2214384a9
+msgid ""
+"The new PID-FF controller in Plane also has a number of lowpass filters "
+"whose frequencies can be adjusted. The defaults should be satisfactory, "
+"however, experimentation on these may yield better response to external "
+"disturbances in certain situations, or when special requirements, such as "
+"video filming would suggest lowering the responsiveness as a trade-off for "
+"increased smoothness. These are:"
+msgstr ""
+"Plane 中新的 PID-FF "
+"控制器还具有多个低通滤波器，其频率可以调整。默认值应令人满意，但在某些情况下对这些进行试验可能会对外部扰动产生更好的响应，或在视频拍摄等特殊需求建议以增加平滑度为代价降低响应性时使用。这些参数为："
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:219
+#: b3619b28a8654277bfaf1c4c00daf750
+msgid ""
+":ref:`PTCH_RATE_FLTT<PTCH_RATE_FLTT>`: filter on target demanded pitch rate"
+msgstr ":ref:`PTCH_RATE_FLTT<PTCH_RATE_FLTT>`：目标期望俯仰速率滤波器"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:220
+#: c14d65b843574695ac2d4e3784a85876
+msgid ":ref:`PTCH_RATE_FLTE<PTCH_RATE_FLTE>`: filter on pitch rate error"
+msgstr ":ref:`PTCH_RATE_FLTE<PTCH_RATE_FLTE>`：俯仰速率误差滤波器"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:221
+#: 64a272771ee948ee81f7fa78cb7fccf5
+msgid ""
+":ref:`PTCH_RATE_FLTD<PTCH_RATE_FLTD>`: filter on D term (tends to be noisy)"
+msgstr ":ref:`PTCH_RATE_FLTD<PTCH_RATE_FLTD>`：D 项滤波器（通常噪声较大）"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:222
+#: b8562d4119a04a7f99fd0b638413d5b3
+msgid ""
+":ref:`RLL_RATE_FLTT<RLL_RATE_FLTT>`: filter on target demanded roll rate"
+msgstr ":ref:`RLL_RATE_FLTT<RLL_RATE_FLTT>`：目标期望横滚速率滤波器"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:223
+#: 8132df5e8ea4442c974df853feec65d2
+msgid ":ref:`RLL_RATE_FLTE<RLL_RATE_FLTE>`: filter on roll rate error"
+msgstr ":ref:`RLL_RATE_FLTE<RLL_RATE_FLTE>`：横滚速率误差滤波器"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:224
+#: d7624c5720c541908915c41676524a0a
+msgid ""
+":ref:`RLL_RATE_FLTD<RLL_RATE_FLTD>`: filter on D term (tends to be noisy)"
+msgstr ":ref:`RLL_RATE_FLTD<RLL_RATE_FLTD>`：D 项滤波器（通常噪声较大）"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:227
+#: 22e76fd58ed7476586a1b017c749bfd6
+msgid "Speed Scaling (SS)"
+msgstr "速度缩放（SS）"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:229
+#: 06098ba6bcba4570828a721f2b79b032
+msgid ""
+"ArduPilot automatically adjusts the stabilization gains in the PID-FF loops "
+"based on the airspeed. This helps avoid oscillations when flying fast and "
+"ensures effective stabilization during slower flight, even if the aircraft "
+"doesn't have an airspeed sensor. This parameter is "
+":ref:`SCALING_SPEED<SCALING_SPEED>`. This should be set close to the normal "
+"cruising speed of the aircraft. The loop gains are scaled above and below "
+"this value with a multiplier determined base on the above min  and max "
+"flying speeds. These parameters are :ref:`AIRSPEED_MIN<AIRSPEED_MIN>` and "
+":ref:`AIRSPEED_MAX<AIRSPEED_MAX>`, respectively. See :ref:`airspeed-"
+"parameters-setup` for more details."
+msgstr ""
+"ArduPilot 根据空速自动调整 PID-FF "
+"环中的稳定增益。这有助于避免高速飞行时的震荡，并确保低速飞行时的有效稳定，即使飞机没有空速传感器。此参数为 "
+":ref:`SCALING_SPEED<SCALING_SPEED>`，应设置为接近飞机正常巡航速度。环增益在此值上下根据上述最小和最大飞行速度确定的乘数进行缩放。这些参数分别是"
+" :ref:`AIRSPEED_MIN<AIRSPEED_MIN>` 和 "
+":ref:`AIRSPEED_MAX<AIRSPEED_MAX>`。更多详情请参见 :ref:`airspeed-parameters-setup`。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:238
+#: 6fdc8891bcf64467b5977149e396ed5d
+msgid ""
+"Changing this parameter after tuning will affect your controller settings, "
+"and can cause poor performance of your aircraft. If you change the "
+"SCALING_SPEED after completing a tune, you must re-run AUTOTUNE or manually "
+"retune the controller gains."
+msgstr ""
+"调参完成后更改此参数将影响您的控制器设置，可能导致飞机性能不佳。如果在完成调参后更改了 SCALING_SPEED，必须重新运行 AUTOTUNE "
+"或手动重新调参控制器增益。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:242
+#: a8f1d11443ce408d91b555a96280a1c9
+msgid "Slew Rate Limiter"
+msgstr "斜率速率限制器"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:244
+#: e0dac27263fb4f69962e2bc58c311da2
+msgid ""
+"ArduPilot includes an algorithm that monitors the actuator slew rates. If "
+"the rates exceed the thresholds defined by the _SMAX parameters, it "
+"automatically reduces the control loop gains to help stop the oscillations. "
+"One can set the slew rate limits for the pitch and roll control surfaces "
+"using the following parameters: :ref:`PTCH_RATE_SMAX<PTCH_RATE_SMAX>` for "
+"pitch and :ref:`RLL_RATE_SMAX<RLL_RATE_SMAX>` for roll. See :ref:`common-"
+"servo-limit-cycle-detection` for more details."
+msgstr ""
+"ArduPilot 包含一个监测执行器斜率速率的算法。如果速率超过 _SMAX "
+"参数定义的阈值，它会自动降低控制环增益以帮助停止震荡。可以使用以下参数设置俯仰和横滚控制舵面的斜率速率限制：俯仰用 "
+":ref:`PTCH_RATE_SMAX<PTCH_RATE_SMAX>`，横滚用 "
+":ref:`RLL_RATE_SMAX<RLL_RATE_SMAX>`。更多详情请参见 :ref:`common-servo-limit-cycle-"
+"detection`。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:250
+#: 1729f1402ad241b7a9a79de9ab997938
+msgid "PID Controller Flow Diagram"
+msgstr "PID 控制器流程图"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:257
+#: e05350b121514d66bda69dc08b73dc70
+msgid "Yaw Damper/SideSlip Tuning"
+msgstr "偏航阻尼/侧滑调参"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:259
+#: 657529ff10104828b6f8ba3a332d7385
+msgid ""
+"The yaw control loop can be configured either as a simple yaw damper (good "
+"for models with inadequate fin area) or as a combined yaw damper and side-"
+"slip controller. Because control of side-slip uses measured lateral "
+"acceleration, it will only work for those models that have enough fuselage "
+"side area to produce a measurable lateral acceleration when they side-slip "
+"(an extreme example of this is an aerobatic model flying a knife-edge "
+"maneuver where all of the lift is produced by the fuselage). Gliders with "
+"slender fuselages and flying wings cannot use this feature, but can still "
+"benefit from the yaw damper provided they have a yaw control (rudder, "
+"differential airbrakes, etc)"
+msgstr ""
+"偏航控制环可以配置为简单的偏航阻尼器（适用于垂尾面积不足的飞机），或组合偏航阻尼器和侧滑控制器。由于侧滑控制使用测量的侧向加速度，它只适用于机身侧面面积足够大、侧滑时能产生可测量侧向加速度的飞机（极端例子是飞机以刀锋飞行时，所有升力由机身产生）。具有细长机身的滑翔机和飞翼无法使用此功能，但如果它们有偏航控制（方向舵、差动减速板等），仍可从偏航阻尼器中获益。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:271
+#: 50434c36b66840dda556700c5cbe4ab8
+msgid "Tuning the yaw damper"
+msgstr "偏航阻尼器调参"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:273
+#: 0acc821f23c1404484275e0995669aba
+msgid ""
+"Verify that the :ref:`YAW2SRV_SLIP<YAW2SRV_SLIP>` and "
+":ref:`YAW2SRV_INT<YAW2SRV_INT>` gain terms are set to zero, the "
+"``YAW2SRV_RLL`` gain term is set to 1.0 and the "
+":ref:`YAW2SRV_DAMP<YAW2SRV_DAMP>` gain term is set to zero"
+msgstr ""
+"验证 :ref:`YAW2SRV_SLIP<YAW2SRV_SLIP>` 和 :ref:`YAW2SRV_INT<YAW2SRV_INT>` "
+"增益项设为零，``YAW2SRV_RLL`` 增益项设为 1.0，:ref:`YAW2SRV_DAMP<YAW2SRV_DAMP>` 增益项设为零"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:276
+#: f3255fc718e5408f810c5d15f7193d9f
+msgid ""
+"Now rapidly roll the model from maximum bank angle in one direction to "
+"maximum bank angle in the opposite direction. Do this several times going in"
+" each direction and observe the yawing motion of the model. If as the wings "
+"pass through level the nose is yawed in the opposite direction to the roll "
+"(for example when rolling from left to right bank, the nose points left) "
+"then increase the value of :ref:`KFF_RDDRMIX<KFF_RDDRMIX>` gain until the "
+"yaw goes away. Do not use a value larger than 1."
+msgstr ""
+"现在快速将飞机从一侧最大坡度滚转到另一侧最大坡度。在每个方向重复多次，观察飞机的偏航运动。如果机翼过水平位置时机头向横滚的反方向偏航（例如从左横滚到右横滚时机头向左），则增大"
+" :ref:`KFF_RDDRMIX<KFF_RDDRMIX>` 增益直到偏航消失。不要使用大于 1 的值。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:284
+#: bdaeacf4bbba4e62a9cc7caa868c7003
+msgid ""
+"Increase :ref:`YAW2SRV_DAMP<YAW2SRV_DAMP>` in small increments of 0.05 until"
+" the yaw angle starts to oscillate. When this happens, the tail will appear "
+"to 'wag'. Halve the gain from the value that caused the oscillation."
+msgstr ""
+"以 0.05 为小步长增大 "
+":ref:`YAW2SRV_DAMP<YAW2SRV_DAMP>`，直到偏航角开始震荡。发生这种情况时，尾翼将出现「摆动」现象。将增益从导致震荡的值减半。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:287
+#: 0dd33af5f4024556a630be19b8876b1a
+msgid ""
+"Now roll the model into and out of turns in both directions. If the model "
+"has a tendency to yaw the nose to the outside of the turn, then increase the"
+" :ref:`YAW2SRV_RLL<YAW2SRV_RLL>` gain term in increments of 0.05 from its "
+"default value of 1.0. Conversely if the model has a tendency to yaw the nose"
+" to the inside of the turn on turn entry, then reduce the "
+":ref:`YAW2SRV_RLL<YAW2SRV_RLL>` gain term in increments of 0.01 from its "
+"default value of 1.0. If you have to go outside the range from 0.7 to 1.4, "
+"then there is something else that needs to be sorted and you should check "
+"that you have performed step 2) correctly and check your airspeed "
+"calibration if airspeed is being used."
+msgstr ""
+"现在将飞机在两个方向上进出转弯。如果飞机有向转弯外侧偏航机头的趋势，以 0.05 为增量从其默认值 1.0 增大 "
+":ref:`YAW2SRV_RLL<YAW2SRV_RLL>` 增益项。反之，如果飞机在进弯时有向转弯内侧偏航机头的趋势，以 0.01 为增量从其默认值"
+" 1.0 减小 :ref:`YAW2SRV_RLL<YAW2SRV_RLL>` 增益项。如果需要将值调整到 0.7 至 1.4 "
+"范围之外，则可能存在其他需要解决的问题，应检查步骤 2) 是否正确执行，并检查空速传感器校准（如使用空速）。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:299
+#: deeee91dca7c408ca655718058ba7723
+msgid "Tuning the sideslip controller"
+msgstr "侧滑控制器调参"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:301
+#: 737af029ec034cffb88c94c6882ac4bb
+msgid "Tune the yaw damper first"
+msgstr "首先调好偏航阻尼器"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:302
+#: 7ce79a3e527f49ccba977b180a799844
+msgid ""
+"Bring up the tuning graph window in the mission planner and plot the lateral"
+" acceleration ay."
+msgstr "在 Mission Planner 中打开调参图表窗口，绘制侧向加速度 ay。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:304
+#: f99b68bc3c81420180272360ff48871d
+msgid ""
+"Roll the model rapidly from full bank in each direction and observe the "
+"lateral acceleration ay. If the lateral acceleration sits around zero and "
+"doesn't change when you roll into or out of turns then no side-slip control "
+"is necessary. You can finish at this point."
+msgstr "快速将飞机从每个方向的最大坡度滚转，观察侧向加速度 ay。如果侧向加速度保持在零附近，在进出转弯时不变化，则不需要侧滑控制。可以在此结束。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:308
+#: 8ffe8205232d48559a317fb2a317e043
+msgid ""
+"Set the :ref:`YAW2SRV_INT<YAW2SRV_INT>` gain term to 1.0. If this causes the"
+" yaw angle to oscillate then halve the gain from the smallest value that "
+"causes oscillation."
+msgstr ""
+"将 :ref:`YAW2SRV_INT<YAW2SRV_INT>` 增益项设为 1.0。如果这导致偏航角震荡，则从导致震荡的最小值减半增益。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:311
+#: 5d7d73536f554b30873b780ff807f364
+msgid ""
+"If you see that the y acceleration is offset or spikes up during turns, then"
+" progressively increase the :ref:`YAW2SRV_SLIP<YAW2SRV_SLIP>` gain in steps "
+"of 0.5 until the error goes away or the yaw angle starts to oscillate. If "
+"yaw oscillation occurs, then halve the gain from the value at which caused "
+"the oscillation."
+msgstr ""
+"如果您看到 y 加速度有偏移或在转弯时出现峰值，则以 0.5 为步长逐步增大 :ref:`YAW2SRV_SLIP<YAW2SRV_SLIP>` "
+"增益，直到误差消失或偏航角开始震荡。如果发生偏航震荡，则从导致震荡的值减半增益。"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:318
+#: c0d4a9c8575a4098aaa135c3879212c7
+msgid "Yaw Controller Diagram"
+msgstr "偏航控制器图"

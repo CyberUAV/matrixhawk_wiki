@@ -1,0 +1,1365 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/extended-kalman-filter.rst:5
+#: 56999f9d5a3e405390348ef0773be76d
+msgid "Extended Kalman Filter Navigation Overview and Tuning"
+msgstr "扩展卡尔曼滤波器导航概述与调参"
+
+#: ../../source/docs/extended-kalman-filter.rst:9
+#: a805434238824a939faf1e07924a3bfb
+msgid ""
+"**IMPORTANT:** This article is about EKF1 which has been removed from the "
+"codebase. It's kept as a reference, as it has been the basis for EKF2 and "
+"EKF3. EKF3 is now the default."
+msgstr ""
+"**重要提示：** 本文介绍的是已从代码库中移除的 EKF1。此文件作为参考保留，因为它是 EKF2 和 EKF3 的基础。EKF3 现已成为默认版本。"
+
+#: ../../source/docs/extended-kalman-filter.rst:14
+#: c931481f2a85412ba2085b28a17c15ee
+msgid ""
+"This article describes the Extended Kalman Filter (EKF) algorithm used to "
+"estimate vehicle position, velocity and angular orientation based on rate "
+"gyroscopes, accelerometer, compass (magnetometer), GPS, airspeed and "
+"barometric pressure measurements. It includes both an overview of the "
+"algorithm and information about the available tuning parameters."
+msgstr ""
+"本文介绍了扩展卡尔曼滤波器（EKF）算法，该算法基于角速率陀螺仪、加速度计、罗盘（磁力计）、GPS、空速和气压测量来估计飞行器的位置、速度和姿态。文章既包含算法概述，也包含可用调参参数的信息。"
+
+#: ../../source/docs/extended-kalman-filter.rst:22
+#: 7c7e731cb8244429835b9c5e88dcd50b
+msgid "Overview"
+msgstr "概述"
+
+#: ../../source/docs/extended-kalman-filter.rst:24
+#: a8a587748a1040c6a8900d6e2ab32a5c
+msgid ""
+"The availability of faster processors (like the one on Pixhawk) have enabled"
+" more advanced mathematical algorithms to be implemented to estimate the "
+"orientation, velocity and position of the flight vehicle. An Extended Kalman"
+" Filter (EKF) algorithm has been developed that uses rate gyroscopes, "
+"accelerometer, compass, GPS, airspeed and barometric pressure measurements "
+"to estimate the position, velocity and angular orientation of the flight "
+"vehicle. This algorithm is implemented in the **AP_NavEKF2** and "
+"**AP_NavEKF3** libraries and is based on initial work documented here: "
+"https://github.com/priseborough/InertialNav"
+msgstr ""
+"更快处理器的出现（如 Pixhawk "
+"上的处理器）使得可以实现更先进的数学算法来估计飞行器的姿态、速度和位置。已开发出一种扩展卡尔曼滤波器（EKF）算法，利用角速率陀螺仪、加速度计、罗盘、GPS、空速和气压测量来估计飞行器的位置、速度和姿态。该算法在"
+" **AP_NavEKF2** 和 **AP_NavEKF3** "
+"库中实现，并基于此处记录的初始工作：https://github.com/priseborough/InertialNav"
+
+#: ../../source/docs/extended-kalman-filter.rst:34
+#: 8f1ca0d72ee742beaf32be7b8cb90ce0
+msgid ""
+"The advantage of the EKF over the simpler complementary filter algorithms "
+"used by DCM and Copter's Inertial Nav, is that by fusing all available "
+"measurements it is better able to reject measurements with significant "
+"errors so that the vehicle becomes less susceptible to faults that affect a "
+"single sensor."
+msgstr ""
+"EKF 相对于 DCM 和 Copter "
+"的惯性导航所用的简单互补滤波算法的优势在于，通过融合所有可用测量，它能更好地拒绝含有显著误差的测量，从而使飞行器对影响单一传感器的故障不那么敏感。"
+
+#: ../../source/docs/extended-kalman-filter.rst:40
+#: a8a6a2b07bed44efb53be5de5145d3b6
+msgid ""
+"Another feature of the EKF algorithm is that it is able to estimate offsets "
+"in the vehicle's compass readings and also estimate the earth's magnetic "
+"field for both plane and copter as well as rover applications. This makes it"
+" less sensitive to compass calibration errors than current DCM and INAV "
+"algorithms."
+msgstr ""
+"EKF 算法的另一个特性是能够估计飞行器罗盘读数的偏差，并估计飞机和旋翼机以及漫游车应用中的地球磁场。这使得它比现有的 DCM 和 INAV "
+"算法对罗盘校准误差的敏感性更低。"
+
+#: ../../source/docs/extended-kalman-filter.rst:46
+#: 1f752123ac9c455f913428712c2f8f17
+msgid ""
+"It also enables measurements from optional sensors such as optical flow and "
+"laser range finders to be used to assist navigation."
+msgstr "它还能利用光流和激光测距仪等可选传感器的测量数据来辅助导航。"
+
+#: ../../source/docs/extended-kalman-filter.rst:50
+#: f0b55d77c12d41ad81b746f35e0cdc9f
+msgid "Theory"
+msgstr "理论原理"
+
+#: ../../source/docs/extended-kalman-filter.rst:52
+#: e82a95a5d4da43a3917405a6a9db229b
+msgid ""
+"The EKF (Extended Kalman Filter) algorithm implemented, estimates a total of"
+" 22 states with the underlying equations derived using the following: "
+"https://github.com/priseborough/InertialNav/blob/master/derivations/GenerateEquations22states.m"
+msgstr ""
+"所实现的 EKF（扩展卡尔曼滤波器）算法共估计 22 "
+"个状态，底层方程使用以下资料推导：https://github.com/priseborough/InertialNav/blob/master/derivations/GenerateEquations22states.m"
+
+#: ../../source/docs/extended-kalman-filter.rst:57
+#: 974708f975d3466a85ecddafc0fb9148
+msgid ""
+"The following is a greatly simplified non-mathematical description of how "
+"the filter works:"
+msgstr "以下是对滤波器工作原理的高度简化非数学描述："
+
+#: ../../source/docs/extended-kalman-filter.rst:60
+#: 34a0571f066e4f5383690896f2f0e165
+msgid "IMU angular rates are integrated to calculate the angular position"
+msgstr "IMU 角速率被积分以计算角度位置"
+
+#: ../../source/docs/extended-kalman-filter.rst:61
+#: 8fe2c9a13479472e8a384e96d1a76e8b
+msgid ""
+"IMU accelerations are converted using the angular position from body X,Y,Z "
+"to earth North,East and Down axes and corrected for gravity"
+msgstr "IMU 加速度利用机体 X、Y、Z 轴到地球北、东、下坐标系的角度位置转换，并修正重力"
+
+#: ../../source/docs/extended-kalman-filter.rst:63
+#: 110dcad3f6d44b92921449450e79e246
+msgid "Accelerations are integrated to calculate the velocity"
+msgstr "加速度被积分以计算速度"
+
+#: ../../source/docs/extended-kalman-filter.rst:64
+#: c72dabe9d39847d6b4b3b6fd9192579d
+msgid "Velocity is integrated to calculate the position"
+msgstr "速度被积分以计算位置"
+
+#: ../../source/docs/extended-kalman-filter.rst:66
+#: 9f486b839f6646be8183a3cb890e49d9
+msgid ""
+"This process from 1) to 4) is referred to as 'State Prediction'. A 'state' "
+"is a variable we are trying to estimate like roll, pitch, yaw, height, wind "
+"speed, etc. The filter has other states besides position, velocity and "
+"angles that are assumed to change slowly. These include gyro biases, Z "
+"accelerometer bias, wind velocities, compass biases and the earth's magnetic"
+" field. These other states aren't modified directly by the 'State "
+"Prediction' step but can be modified by measurements as described later."
+msgstr ""
+"从步骤 1) 到 4) "
+"的过程称为「状态预测」。「状态」是我们试图估计的变量，如横滚、俯仰、偏航、高度、风速等。除位置、速度和角度之外，滤波器还有其他被认为变化缓慢的状态，包括陀螺仪偏置、Z"
+" 轴加速度计偏置、风速、罗盘偏置和地球磁场。这些其他状态不会直接被「状态预测」步骤修改，但可以通过测量进行修改（如后文所述）。"
+
+#: ../../source/docs/extended-kalman-filter.rst:74
+#: 6567bec257864f8580d0e7ab029603f6
+msgid ""
+"Estimated gyro and accelerometer noise (``EKF_GYRO_NOISE`` and "
+"``EKF_ACC_NOISE``) are used to estimate the growth in error in the angles, "
+"velocities and position calculated using IMU data. Making these parameters "
+"larger causes the filters error estimate to grow faster. If no corrections "
+"are made using other measurements (eg GPS), this error estimate will "
+"continue to grow. These estimated errors are captured in a large matrix "
+"called the 'State Covariance Matrix'."
+msgstr ""
+"估计的陀螺仪和加速度计噪声（``EKF_GYRO_NOISE`` 和 ``EKF_ACC_NOISE``）用于估计使用 IMU "
+"数据计算的角度、速度和位置误差的增长。增大这些参数会使滤波器的误差估计增长更快。如果不使用其他测量（如 "
+"GPS）进行修正，此误差估计将持续增长。这些估计误差存储在一个称为「状态协方差矩阵」的大矩阵中。"
+
+#: ../../source/docs/extended-kalman-filter.rst:82
+#: e28a679e6c3c42178f54132338c84d5c
+msgid ""
+"Steps 1) to 5) are repeated every time we get new IMU data until a new "
+"measurement from another sensor is available."
+msgstr "步骤 1) 至 5) 在每次获得新 IMU 数据时重复，直到有来自其他传感器的新测量可用。"
+
+#: ../../source/docs/extended-kalman-filter.rst:85
+#: 5729d2451eea458abcc2c14ac11f5456
+msgid ""
+"If we had a perfect initial estimate, perfect IMU measurements and perfect "
+"calculations, then we could keep repeating 1) to 4) throughout the flight "
+"with no other calculations required. However, errors in the initial values, "
+"errors in the IMU measurements and rounding errors in our calculations mean "
+"that we can only go for a few seconds before the velocity and position "
+"errors become too large."
+msgstr ""
+"如果我们有完美的初始估计、完美的 IMU 测量和完美的计算，那么整个飞行过程中只需重复步骤 1) 至 4) 即可，无需其他计算。然而，初始值误差、IMU"
+" 测量误差和计算中的舍入误差意味着，仅需几秒钟速度和位置误差就会变得过大。"
+
+#: ../../source/docs/extended-kalman-filter.rst:92
+#: c93f4db7504047d1ab601ea34e531d3a
+msgid ""
+"The Extended Kalman Filter algorithm provides us with a way of combining or "
+"fusing data from the IMU, GPS, compass, airspeed, barometer and other "
+"sensors to calculate a more accurate and reliable estimate of our position, "
+"velocity and angular orientation."
+msgstr ""
+"扩展卡尔曼滤波器算法为我们提供了一种融合来自 IMU、GPS、罗盘、空速计、气压计和其他传感器数据的方法，以计算更准确可靠的位置、速度和姿态估计。"
+
+#: ../../source/docs/extended-kalman-filter.rst:97
+#: b66ed24ef9a847a1bd0f8e3f22f4477e
+msgid ""
+"The following example describes how GPS horizontal position measurements are"
+" used, however the same principal applies to other measurement types "
+"(barometric altitude, GPS velocity, etc)"
+msgstr "以下示例描述了如何使用 GPS 水平位置测量，但相同原理也适用于其他测量类型（气压高度、GPS 速度等）"
+
+#: ../../source/docs/extended-kalman-filter.rst:101
+#: 8afab875d3054530aea579c7e585ba36
+msgid ""
+"When a GPS measurement arrives, the filter calculates the difference between"
+" the predicted position from 4) and the position from the GPS. This "
+"difference is called an 'Innovation'."
+msgstr "当 GPS 测量到达时，滤波器计算步骤 4) 预测位置与 GPS 位置之间的差值。这个差值称为「新息」。"
+
+#: ../../source/docs/extended-kalman-filter.rst:104
+#: 16c430d10b2e4ea084c7f9c592bbed7d
+msgid ""
+"The 'Innovation' from 6), 'State Covariance Matrix' from 5), and the GPS "
+"measurement error specified by ``EKF_POSNE_NOISE`` are combined to calculate"
+" a correction to each of the filter states. This is referred to as a 'State "
+"Correction'."
+msgstr ""
+"步骤 6) 中的「新息」、步骤 5) 中的「状态协方差矩阵」以及 ``EKF_POSNE_NOISE`` 指定的 GPS "
+"测量误差组合在一起，计算对每个滤波器状态的修正。这称为「状态修正」。"
+
+#: ../../source/docs/extended-kalman-filter.rst:109
+#: 5e954ac30c1844ffb389d7a0ccbbf1ea
+msgid ""
+"This is the clever part of the a Kalman Filter, as it is able to use "
+"knowledge of the correlation between different errors and different states "
+"to correct states other than the one being measured. For example GPS "
+"position measurements are able to correct errors in position, velocity, "
+"angles and gyro bias."
+msgstr ""
+"这是卡尔曼滤波器的精妙之处，它能利用不同误差与不同状态之间的相关性来修正被测量之外的状态。例如，GPS "
+"位置测量能够修正位置、速度、角度和陀螺仪偏置中的误差。"
+
+#: ../../source/docs/extended-kalman-filter.rst:115
+#: 605d98ec9ed943f497df2f8674c3286a
+msgid ""
+"The amount of correction is controlled by the assumed ratio of the error in "
+"the states to the error in the measurements. This means if the filter thinks"
+" its own calculated position is more accurate than the GPS measurement, then"
+" the correction from the GPS measurement will be smaller. If it thinks its "
+"own calculated position is less accurate than the GPS measurement, then the "
+"correction from the GPS measurement will be larger. The assumed accuracy of "
+"the GPS measurement is controlled by the ``EKF_POSNE_NOISE``, parameter. "
+"Making ``EKF_POSNE_NOISE`` larger causes the filter to think the GPS "
+"position is less accurate."
+msgstr ""
+"修正量的大小由状态误差与测量误差的假设比率控制。这意味着，如果滤波器认为自己计算的位置比 GPS 测量更准确，则 GPS "
+"测量的修正量就会更小。如果它认为自己的位置比 GPS 测量不准确，则修正量就会更大。GPS 测量的假设精度由 ``EKF_POSNE_NOISE`` "
+"参数控制。增大 ``EKF_POSNE_NOISE`` 会使滤波器认为 GPS 位置不那么准确。"
+
+#: ../../source/docs/extended-kalman-filter.rst:126
+#: a81b5b00d17a45caba327108b2bf8a98
+msgid ""
+"Because we have now taken a measurement, the amount of uncertainty in each "
+"of the states that have been updated is reduced. The filter calculates the "
+"reduction in uncertainty due to the 'State Correction', updates the 'State "
+"Covariance Matrix' and returns to step 1)"
+msgstr ""
+"由于我们现在已经取了一次测量，已更新的每个状态的不确定性都会减小。滤波器计算「状态修正」引起的不确定性减少量，更新「状态协方差矩阵」，然后返回步骤 1）"
+
+#: ../../source/docs/extended-kalman-filter.rst:133
+#: 384109323b4b40cfb517da0e666cbaa6
+msgid "Tuning Parameters"
+msgstr "调参参数"
+
+#: ../../source/docs/extended-kalman-filter.rst:138
+#: b024b1555c0848a89338f468fe6f09a2
+msgid "AHRS_EKF_USE"
+msgstr "AHRS_EKF_USE"
+
+#: ../../source/docs/extended-kalman-filter.rst:140
+#: 25e9b36224fe424f97f5c91f22eb5cdb
+msgid ""
+"This should be set to 1 to enable use of the filter, or set to 0 to use the "
+"legacy algorithms. Be aware that both algorithms are running regardless of "
+"this parameter, and all the EKF data will be logged regardless, provided "
+"full rate AHRS data logging is enabled."
+msgstr ""
+"设为 1 以启用滤波器，或设为 0 使用传统算法。请注意，无论此参数如何设置，两种算法都在运行，并且只要启用了全速率 AHRS 数据记录，所有 EKF "
+"数据都会被记录。"
+
+#: ../../source/docs/extended-kalman-filter.rst:145
+#: f25703018b2c4130be011f4d4179aa15
+msgid ""
+"From Copter3.3 onwards the EKF has been enabled by default and this "
+"parameter is not available. Plane and Rover users can still elect to use the"
+" legacy algorithms."
+msgstr "从 Copter3.3 起，EKF 已默认启用，此参数不再可用。Plane 和 Rover 用户仍可选择使用传统算法。"
+
+#: ../../source/docs/extended-kalman-filter.rst:150
+#: 1a4da8d18e3649d99d48f230cf04ee3d
+msgid "EKF_ABIAS_PNOISE"
+msgstr "EKF_ABIAS_PNOISE"
+
+#: ../../source/docs/extended-kalman-filter.rst:152
+#: 13b850e9b3344632877865cae5661005
+msgid ""
+"This noise controls the growth of the vertical accelerometer bias state "
+"error estimate. Increasing it makes accelerometer bias estimation faster and"
+" noisier."
+msgstr "该噪声控制垂直加速度计偏置状态误差估计的增长速度。增大此值会使加速度计偏置估计更快但噪声更大。"
+
+#: ../../source/docs/extended-kalman-filter.rst:157
+#: 9a9cbabad2c44b83bf025810bef4ef81
+msgid "EKF_ACC_PNOISE"
+msgstr "EKF_ACC_PNOISE"
+
+#: ../../source/docs/extended-kalman-filter.rst:159
+#: 0ab654a7a6584e3fbbbabc6037058b37
+msgid ""
+"This noise controls the growth of estimated error due to accelerometer "
+"measurement errors excluding bias. Increasing it makes the filter trust the "
+"accelerometer measurements less and other measurements more."
+msgstr "该噪声控制由加速度计测量误差（不含偏置）引起的估计误差增长速度。增大此值会使滤波器对加速度计测量的信任度降低，对其他测量的信任度提高。"
+
+#: ../../source/docs/extended-kalman-filter.rst:166
+#: bf1e9f3ecc2343ad93fc90e0b34ce7df
+msgid "EKF_ALT_NOISE"
+msgstr "EKF_ALT_NOISE"
+
+#: ../../source/docs/extended-kalman-filter.rst:168
+#: 279b4a7290bd4177bc6a16dc873889ea
+msgid ""
+"This is the RMS value of noise in the altitude measurement. If you increase "
+"this parameter, the filter will think the barometer is more noisy and will "
+"place less weighting on its measurements."
+msgstr "此参数为高度测量噪声的均方根值。增大此参数，滤波器会认为气压计噪声更大，对其测量的权重更低。"
+
+#: ../../source/docs/extended-kalman-filter.rst:172
+#: 1824b23e2f3a44599437abac0e0b7de1
+msgid ""
+"If this parameter is set too small, then the filter will constantly react to"
+" noise in the barometer measurement which will cause the filter height to be"
+" noisy. In copters this will cause the copter to jiggle up and down during "
+"altitude hold."
+msgstr "若此参数设置过小，滤波器会持续对气压计测量噪声作出反应，导致滤波器高度估计噪声大。在旋翼机中，这将导致高度保持时飞行器上下抖动。"
+
+#: ../../source/docs/extended-kalman-filter.rst:177
+#: 50f4222c07cd4fc4b0877a030df1261b
+msgid ""
+"If this parameter is set too high, then the height will tend to wander more "
+"and will be more susceptible to GPS vertical velocity glitches."
+msgstr "若此参数设置过高，高度估计会趋于漂移，并对 GPS 垂直速度异常值更敏感。"
+
+#: ../../source/docs/extended-kalman-filter.rst:180
+#: ../../source/docs/extended-kalman-filter.rst:400
+#: ../../source/docs/extended-kalman-filter.rst:442
+#: ../../source/docs/extended-kalman-filter.rst:466
+#: 15f9ad6d71f94df0888f8644febcde46 555b7c3331fe437bba0ea872e04b794c
+#: 669b2a68911545d59d1594f31ef6e8d2 bd880305f0eb4c5491d99af4608ab1b8
+msgid ""
+"See the section on interpreting EKF3 log data for more information on using "
+"log data to help set this parameter."
+msgstr "有关使用日志数据帮助设置此参数的更多信息，请参见解读 EKF3 日志数据章节。"
+
+#: ../../source/docs/extended-kalman-filter.rst:184
+#: 72da17ced096492293466eab69652ff7
+msgid "EKF_ALT_SOURCE"
+msgstr "EKF_ALT_SOURCE"
+
+#: ../../source/docs/extended-kalman-filter.rst:186
+#: fd689bb4e81647e08b307dc6e17867e9
+msgid ""
+"This parameter controls which measurement source is used to determine height"
+" during optical flow navigation. Set to 0 to use the barometer or to 1 to "
+"use the range finder. If set to 1,the vehicle will attempt to maintain a "
+"constant height relative to the terrain, which is the default behaviour "
+"during optical flow navigation. Warning : EK2_ALT_SOURCE = 1 is only "
+"suitable for low altitude and low speed operation over flat surfaces, not "
+"for up and away flight. To use range finder at lower altitudes and barometer"
+" for up and away flight, set EK2_ALT_SOURCE = 0 and use the RNG_USE_HGT "
+"parameter."
+msgstr ""
+"此参数控制光流导航期间用于确定高度的测量源。设为 0 使用气压计，设为 1 使用测距仪。设为 1 "
+"时，飞行器将尝试保持相对地形的恒定高度，这是光流导航期间的默认行为。警告：EK2_ALT_SOURCE = 1 "
+"仅适用于平坦地面上的低空低速飞行，不适用于大范围飞行。若要在低空使用测距仪、高空使用气压计，请将 EK2_ALT_SOURCE = 0 并使用 "
+"RNG_USE_HGT 参数。"
+
+#: ../../source/docs/extended-kalman-filter.rst:197
+#: fcd463cb5b2248358629eaf5bfaa1235
+msgid "EKF_EAS_GATE"
+msgstr "EKF_EAS_GATE"
+
+#: ../../source/docs/extended-kalman-filter.rst:199
+#: d589eb66624a4fe089ef2c4c1245fb7c
+msgid ""
+"This parameter scales the threshold used for the airspeed measurement "
+"innovation consistency check. Decreasing it makes it more likely that good "
+"measurements will be rejected. Increasing it makes it more likely that bad "
+"measurements will be accepted. It is scaled in units of standard deviation. "
+"For example a setting of 3 means that differences greater than than 3 x the "
+"assumed standard deviation will cause the measurement to be rejected."
+msgstr ""
+"此参数缩放用于空速测量新息一致性检查的阈值。减小此值会使正确测量更容易被拒绝。增大此值会使错误测量更容易被接受。单位为标准差。例如，设为 3 "
+"意味着差异超过 3 倍假设标准差时，测量将被拒绝。"
+
+#: ../../source/docs/extended-kalman-filter.rst:208
+#: b78352bbb4e7452993bb3651584a5252
+msgid "EKF_EAS_NOISE"
+msgstr "EKF_EAS_NOISE"
+
+#: ../../source/docs/extended-kalman-filter.rst:210
+#: f4000cdc78204710aa265d3c46d80b8e
+msgid ""
+"This is the RMS value of noise in airspeed measurements. Increasing it "
+"reduces the weighting on these measurements. See the section on interpreting"
+" EKF3 log data for more information on using log data to help set this "
+"parameter. See the section on interpreting EKF3 log data for more "
+"information on using log data to help set this parameter."
+msgstr ""
+"此参数为空速测量噪声的均方根值。增大此值会降低这些测量的权重。有关使用日志数据帮助设置此参数的更多信息，请参见解读 EKF3 日志数据章节。"
+
+#: ../../source/docs/extended-kalman-filter.rst:217
+#: 98cd850874a842c3bc55094f7c334a8b
+msgid "EKF_FALLBACK"
+msgstr "EKF_FALLBACK"
+
+#: ../../source/docs/extended-kalman-filter.rst:219
+#: 0bafc8c28ec54fe2aead7fe98673357c
+msgid ""
+"This parameter controls whether inconsistency in sensor data can cause a "
+"fallback to DCM. If set to 0, then detection of inconsistent sensor cannot "
+"cause a fallback. If set to 1, then large inconsistencies in data will "
+"result a fallback to DCM if available."
+msgstr ""
+"此参数控制传感器数据不一致是否会导致回退到 DCM。设为 0 时，检测到传感器数据不一致不会导致回退。设为 1 时，数据大量不一致将导致回退到 "
+"DCM（如可用）。"
+
+#: ../../source/docs/extended-kalman-filter.rst:225
+#: bc6118c0082547bf877a1ad277226f16
+msgid "EKF_FLOW_DELAY"
+msgstr "EKF_FLOW_DELAY"
+
+#: ../../source/docs/extended-kalman-filter.rst:227
+#: 788424c0f488482da1f28ce5448dd233
+msgid ""
+"This is the number of msec that the optical flow rate measurements lag "
+"behind the IMU measurements."
+msgstr "此参数为光流速率测量相对于 IMU 测量的滞后毫秒数。"
+
+#: ../../source/docs/extended-kalman-filter.rst:231
+#: 38baf4639038442f804eb6fbb689a6c6
+msgid "EKF_FLOW_GATE"
+msgstr "EKF_FLOW_GATE"
+
+#: ../../source/docs/extended-kalman-filter.rst:233
+#: 0bd4f8dc49014b2f9d33c84b18d38abb
+msgid ""
+"This parameter controls the maximum amount of difference in between the "
+"measured optical flow rates and the predicted rates before the EKF starts to"
+" reject the measurements. Reducing this parameter makes it more likely that "
+"valid optical flow rate measurements will be rejected. Increasing this "
+"parameter makes it more likely that invalid optical flow rate measurements "
+"will be accepted. It is scaled in units of standard deviation. For example a"
+" setting of 3 means that differences greater than than 3 x the assumed "
+"standard deviation will cause the measurement to be rejected."
+msgstr ""
+"此参数控制在 EKF "
+"开始拒绝测量之前，光流速率测量值与预测速率之间允许的最大差异。减小此参数会使有效的光流速率测量更容易被拒绝。增大此参数会使无效的光流速率测量更容易被接受。单位为标准差。例如，设为"
+" 3 意味着差异超过 3 倍假设标准差时，测量将被拒绝。"
+
+#: ../../source/docs/extended-kalman-filter.rst:244
+#: 5d5a5b8cf1c64d3a90f7b54715bea51d
+msgid "EKF_FLOW_NOISE"
+msgstr "EKF_FLOW_NOISE"
+
+#: ../../source/docs/extended-kalman-filter.rst:246
+#: 9cf8cdabc0554973845263c78a5a8d96
+msgid ""
+"This parameter allows for optical flow rate measurement errors and noise. It"
+" represents the expected RMS error in rad/sec. If set too large the position"
+" will drift more. If set too small the position and velocity output from the"
+" EKF will become noisy and there is a risk that the EKF could start "
+"rejecting optical flow measurements during manoeuvres."
+msgstr ""
+"此参数用于考虑光流速率测量误差和噪声，以弧度/秒为单位表示预期均方根误差。若设置过大，位置漂移会增加。若设置过小，EKF "
+"输出的位置和速度将变得嘈杂，并有风险在机动过程中开始拒绝光流测量。"
+
+#: ../../source/docs/extended-kalman-filter.rst:253
+#: 16d41e22015c4ab0b0ca0f4d5b24b839
+msgid "EKF_GBIAS_PNOISE"
+msgstr "EKF_GBIAS_PNOISE"
+
+#: ../../source/docs/extended-kalman-filter.rst:255
+#: 540e9da48ff8480a9910ec0104d7daae
+msgid ""
+"This noise controls the growth of gyro bias state error estimates. "
+"Increasing it makes rate gyro bias estimation faster and noisier."
+msgstr "该噪声控制陀螺仪偏置状态误差估计的增长速度。增大此值会使角速率陀螺仪偏置估计更快但噪声更大。"
+
+#: ../../source/docs/extended-kalman-filter.rst:259
+#: 08798cd95055410da091531fac33070c
+msgid "EKF_GLITCH_ACCEL"
+msgstr "EKF_GLITCH_ACCEL"
+
+#: ../../source/docs/extended-kalman-filter.rst:261
+#: a7b59390bd5d4512a152ac3f18a1f4be
+msgid ""
+"This parameter controls the maximum amount of difference in horizontal "
+"acceleration (in cm/s^2) between the value predicted by the filter and the "
+"value measured by the GPS, before the GPS position measurement is rejected. "
+"If this value is set too low, then valid GPS data will be regularly "
+"discarded, and the position accuracy will degrade. If this parameter is set "
+"too high, then GPS glitches can cause large rapid changes in position."
+msgstr ""
+"此参数控制滤波器预测水平加速度与 GPS 测量水平加速度之间允许的最大差异（单位 cm/s²），超过此值时 GPS 位置测量将被拒绝。若设置过低，有效的"
+" GPS 数据将被频繁丢弃，位置精度下降。若设置过高，GPS 异常值可能导致位置出现大幅快速变化。"
+
+#: ../../source/docs/extended-kalman-filter.rst:270
+#: 4d8a84235f8a4a7a9dcf1b9f79d0575b
+msgid "EKF_GLITCH_RAD"
+msgstr "EKF_GLITCH_RAD"
+
+#: ../../source/docs/extended-kalman-filter.rst:272
+#: 6e0ea4fe2bf740309d4f2c5bc63aa2d6
+msgid ""
+"This parameter controls the maximum amount of difference in horizontal "
+"position (in m) between the value predicted by the filter and the value "
+"measured by the GPS, before the long term glitch protection logic is "
+"activated and an offset is applied to the GPS measurement to compensate. "
+"Position jumps smaller than this parameter will be temporarily ignored, but "
+"if they persist will then be accepted and the filter will move to the new "
+"position. Position steps larger than this value, will also be ignored "
+"initially, but if they persist, the GPS position measurement will be "
+"corrected by the amount of the step before being used. This prevents a large"
+" step change in position. This correction is decayed back to zero at a "
+"constant rate so that the new GPS position will be realised gradually. The "
+"value of this correction in the north and east directions can be checked by "
+"plotting the EKF4.OFN and EKF4.OFE flashlog data."
+msgstr ""
+"此参数控制滤波器预测水平位置与 GPS 测量水平位置之间允许的最大差异（单位米），超过此值时将激活长期突变保护逻辑并对 GPS "
+"测量施加偏移补偿。小于此参数的位置跳变将被暂时忽略，但如果持续出现，则会被接受，滤波器将移动到新位置。大于此值的位置跳变也会被初始忽略，但如果持续出现，GPS"
+" 位置测量将在使用前被修正该跳变量，从而防止位置出现大幅突变。该修正以恒定速率衰减回零，使新 GPS 位置逐渐被接受。北向和东向的修正值可通过查看 "
+"EKF4.OFN 和 EKF4.OFE 日志数据来检查。"
+
+#: ../../source/docs/extended-kalman-filter.rst:288
+#: 218c0c58aa6641388a6f8259ff6fd902
+msgid "EKF_GND_GRADIENT"
+msgstr "EKF_GND_GRADIENT"
+
+#: ../../source/docs/extended-kalman-filter.rst:290
+#: 0b73323d22c8497291c9fba910427152
+msgid ""
+"This parameter controls the amount of terrain gradient in % that is assumed "
+"when fusing range finder data and influences how rapidly the estimated "
+"terrain height responds to changes in measurement. This can be increased "
+"when operating over uneven terrain to allow the terrain estimate to change "
+"more rapidly."
+msgstr ""
+"此参数控制融合测距仪数据时假设的地形坡度百分比，并影响估计地形高度对测量变化的响应速度。在不平坦地形上飞行时可增大此值，以允许地形估计更快响应变化。"
+
+#: ../../source/docs/extended-kalman-filter.rst:299
+#: 40447f85da0b45fd863e6e9b3ea1b4b9
+msgid "EKF_GPS_TYPE"
+msgstr "EKF_GPS_TYPE"
+
+#: ../../source/docs/extended-kalman-filter.rst:301
+#: e6af52bdd7384e3eac3fc7694fb959d6
+msgid ""
+"This parameter controls use of GPS velocity measurements : 0 = use 3D "
+"velocity, 1 = use 2D velocity, 2 = use no velocity"
+msgstr "此参数控制 GPS 速度测量的使用：0 = 使用 3D 速度，1 = 使用 2D 速度，2 = 不使用速度"
+
+#: ../../source/docs/extended-kalman-filter.rst:305
+#: a053e21ebf48451bb6333299dabb9089
+msgid "EKF_GYRO_PNOISE"
+msgstr "EKF_GYRO_PNOISE"
+
+#: ../../source/docs/extended-kalman-filter.rst:307
+#: ace4f2719f1e4a04ba555fd10ac75bc8
+msgid ""
+"This noise controls the growth of estimated error due to gyro measurement "
+"errors excluding bias. Increasing it makes the filter trust the gyro "
+"measurements less and other measurements more."
+msgstr "该噪声控制由陀螺仪测量误差（不含偏置）引起的估计误差增长速度。增大此值会使滤波器对陀螺仪测量的信任度降低，对其他测量的信任度提高。"
+
+#: ../../source/docs/extended-kalman-filter.rst:312
+#: 1b104663bf884120aeb3d53f43019fef
+msgid "EKF_HGT_GATE"
+msgstr "EKF_HGT_GATE"
+
+#: ../../source/docs/extended-kalman-filter.rst:314
+#: 66df7e29e1d7439f8f3599032daa285f
+msgid ""
+"This parameter scales the threshold used for the height measurement "
+"innovation consistency check. Decreasing it makes it more likely that good "
+"measurements will be rejected. Increasing it makes it more likely that bad "
+"measurements will be accepted."
+msgstr "此参数缩放用于高度测量新息一致性检查的阈值。减小此值会使正确测量更容易被拒绝。增大此值会使错误测量更容易被接受。"
+
+#: ../../source/docs/extended-kalman-filter.rst:320
+#: d17dd7eaebd14b3ab716d5e70df612aa
+msgid "EKF_MAGB_PNOISE"
+msgstr "EKF_MAGB_PNOISE"
+
+#: ../../source/docs/extended-kalman-filter.rst:322
+#: 5167979c2be44e4e8f295b1ced8cbabd
+msgid ""
+"This noise controls the growth of body magnetic field state error estimates."
+" Increasing it makes compass offset estimation faster and noisier."
+msgstr "该噪声控制机体磁场状态误差估计的增长速度。增大此值会使罗盘偏置估计更快但噪声更大。"
+
+#: ../../source/docs/extended-kalman-filter.rst:327
+#: b642b119a7314ba2be71ed016fe6d72c
+msgid "EKF_MAGE_PNOISE"
+msgstr "EKF_MAGE_PNOISE"
+
+#: ../../source/docs/extended-kalman-filter.rst:329
+#: 5f502e06c5ed4ea28f7c89b05cd94e94
+msgid ""
+"This noise controls the growth of earth magnetic field state error "
+"estimates. Increasing it makes earth magnetic field bias estimation faster "
+"and noisier."
+msgstr "该噪声控制地球磁场状态误差估计的增长速度。增大此值会使地球磁场偏置估计更快但噪声更大。"
+
+#: ../../source/docs/extended-kalman-filter.rst:334
+#: ccac9a64c6af435aa393ce92029010f3
+msgid "EKF_MAG_CAL"
+msgstr "EKF_MAG_CAL"
+
+#: ../../source/docs/extended-kalman-filter.rst:336
+#: 5bdcabe97f404d0094e7b6156df02e6e
+msgid ""
+"The EKF is capable of learning magnetometer offsets in-flight. This "
+"parameter controls when the learning is active:"
+msgstr "EKF 能够在飞行中学习磁力计偏置。此参数控制学习何时启用："
+
+#: ../../source/docs/extended-kalman-filter.rst:339
+#: 16c705b0a5014e518d2f03283d745264
+msgid ""
+"``EKF_MAG_CAL = 0``: Learning is enabled when speed and height indicate the "
+"vehicle is airborne"
+msgstr "``EKF_MAG_CAL = 0``：当速度和高度表明飞行器在空中时启用学习"
+
+#: ../../source/docs/extended-kalman-filter.rst:341
+#: af933fc6e8b54485be21ea115a706ec0
+msgid ""
+"``EKF_MAG_CAL = 1``: Learning is enabled when the vehicle is manoeuvring"
+msgstr "``EKF_MAG_CAL = 1``：当飞行器机动时启用学习"
+
+#: ../../source/docs/extended-kalman-filter.rst:343
+#: 8807e3d97e974ba289465632e14d8e07
+msgid "``EKF_MAG_CAL = 2``: Learning is disabled"
+msgstr "``EKF_MAG_CAL = 2``：禁用学习"
+
+#: ../../source/docs/extended-kalman-filter.rst:344
+#: 127123eb09e44d87bdbc4e644f8ef85d
+msgid "``EKF_MAG_CAL = 3``: Learning is enabled when the vehicle is armed"
+msgstr "``EKF_MAG_CAL = 3``：当飞行器解锁时启用学习"
+
+#: ../../source/docs/extended-kalman-filter.rst:347
+#: 77b3b2118fbb45b3bd2b14eeca790049
+msgid "EKF_MAG_GATE"
+msgstr "EKF_MAG_GATE"
+
+#: ../../source/docs/extended-kalman-filter.rst:349
+#: 9ec3e6db34e04a28a7f52c9ba15d06d3
+msgid ""
+"This parameter scales the threshold used for the magnetometer measurement "
+"innovation consistency check. Decreasing it makes it more likely that good "
+"measurements will be rejected. Increasing it makes it more likely that bad "
+"measurements will be accepted. It is scaled in units of standard deviation. "
+"For example a setting of 3 means that differences greater than than 3 x the "
+"assumed standard deviation will cause the measurement to be rejected."
+msgstr ""
+"此参数缩放用于磁力计测量新息一致性检查的阈值。减小此值会使正确测量更容易被拒绝。增大此值会使错误测量更容易被接受。单位为标准差。例如，设为 3 "
+"意味着差异超过 3 倍假设标准差时，测量将被拒绝。"
+
+#: ../../source/docs/extended-kalman-filter.rst:358
+#: f980e79f956a4b9d9d933ce6d2902877
+msgid "EKF_MAG_NOISE"
+msgstr "EKF_MAG_NOISE"
+
+#: ../../source/docs/extended-kalman-filter.rst:360
+#: b6b7d3286b7146ccbeeb4636b18d8fd9
+msgid ""
+"This is the RMS value of noise in magnetometer measurements / 1000. The "
+"magnetometer readings are scaled by 1/1000 before they are used by the "
+"filter to reduce the effect of numerical rounding errors. Increasing this "
+"noise parameter reduces the weighting on magnetometer measurements. This "
+"would make the filter yaw less affected less by magnetometer errors, but "
+"more affected by Z gyro drift. See the section on interpreting EKF3 log data"
+" for more information on using log data to help set this parameter."
+msgstr ""
+"此参数为磁力计测量噪声/1000 的均方根值。磁力计读数在被滤波器使用前被缩放 1/1000 "
+"以减少数值舍入误差的影响。增大此噪声参数会降低磁力计测量的权重。这会使滤波器偏航受磁力计误差的影响减小，但受 Z "
+"轴陀螺仪漂移的影响增大。有关使用日志数据帮助设置此参数的更多信息，请参见解读 EKF3 日志数据章节。"
+
+#: ../../source/docs/extended-kalman-filter.rst:370
+#: ad60560ee8ef4ddea1e9808ec9c6f72a
+msgid "EKF_MAX_FLOW"
+msgstr "EKF_MAX_FLOW"
+
+#: ../../source/docs/extended-kalman-filter.rst:372
+#: 3ba9cba1f869496e91b775c8b948ddaa
+msgid ""
+"This parameter controls the maximum amount of optical flow rate (in rad/sec)"
+" that will be accepted as a valid measurement by the EKF. This helps to "
+"reject measurements corrupted during data transfer or when the flow sensor "
+"is unable to keep up with the motion of the vehicle."
+msgstr ""
+"此参数控制 EKF 可接受为有效测量的最大光流速率（弧度/秒）。有助于拒绝数据传输过程中损坏的测量，或光流传感器无法跟上飞行器运动时的测量。"
+
+#: ../../source/docs/extended-kalman-filter.rst:378
+#: ab5126bb979f493e8307ef7a43bb9628
+msgid "EKF_POS_DELAY"
+msgstr "EKF_POS_DELAY"
+
+#: ../../source/docs/extended-kalman-filter.rst:380
+#: 77d94f89003c4b7eb77fe6961e92a3b1
+msgid ""
+"This is the number of msec that the GPS position measurements lag behind the"
+" inertial measurements."
+msgstr "此参数为 GPS 位置测量相对于惯性测量的滞后毫秒数。"
+
+#: ../../source/docs/extended-kalman-filter.rst:384
+#: b60cce7f9e8749369d4233792377fa1b
+msgid "EKF_POSNE_NOISE"
+msgstr "EKF_POSNE_NOISE"
+
+#: ../../source/docs/extended-kalman-filter.rst:386
+#: 02a8556b96ef46249c5b4b5bb3659dd3
+msgid ""
+"This is the RMS value of noise in the GPS horizontal position measurements. "
+"If you increase this parameter, the filter will think the GPS is more noisy "
+"and will place less weighting on the horizontal GPS velocity measurements."
+msgstr "此参数为 GPS 水平位置测量噪声的均方根值。增大此参数，滤波器会认为 GPS 噪声更大，对水平 GPS 速度测量的权重更低。"
+
+#: ../../source/docs/extended-kalman-filter.rst:391
+#: 94070723b6264dce9de28c1d0fc0e79b
+msgid ""
+"If this parameter is set to small, then the filter will constantly react to "
+"noise in the GPS position which can cause continual and rapid small attitude"
+" and position changes in copters during loiter."
+msgstr "若此参数设置过小，滤波器会持续对 GPS 位置噪声作出反应，在悬停时可能导致旋翼机持续快速小幅姿态和位置变化。"
+
+#: ../../source/docs/extended-kalman-filter.rst:395
+#: 5ce95492e54e41bbb4ca67d0e2f71e5f
+msgid ""
+"If this parameter is set to large, then the inertial sensor errors will "
+"cause the filter position to wander slowly as errors in the inertial "
+"calculations are not corrected enough by the GPS. This can cause excessive "
+"wander in position for copters during loiter."
+msgstr "若此参数设置过大，惯性传感器误差将导致滤波器位置缓慢漂移，因为 GPS 的修正不足。这会导致悬停时旋翼机位置漂移过大。"
+
+#: ../../source/docs/extended-kalman-filter.rst:404
+#: a8870d53bae143c59ce384eea9807268
+msgid "EKF_POS_GATE"
+msgstr "EKF_POS_GATE"
+
+#: ../../source/docs/extended-kalman-filter.rst:406
+#: d8d1e2c7c7d54d7f9fddb798a71bb5a6
+msgid ""
+"This parameter scales the threshold used for the GPS position measurement "
+"innovation consistency check. Decreasing it makes it more likely that good "
+"measurements will be rejected. Increasing it makes it more likely that bad "
+"measurements will be accepted. It is scaled in units of standard deviation. "
+"For example a setting of 3 means that differences greater than than 3 x the "
+"assumed standard deviation will cause the measurement to be rejected."
+msgstr ""
+"此参数缩放用于 GPS 位置测量新息一致性检查的阈值。减小此值会使正确测量更容易被拒绝。增大此值会使错误测量更容易被接受。单位为标准差。例如，设为 3 "
+"意味着差异超过 3 倍假设标准差时，测量将被拒绝。"
+
+#: ../../source/docs/extended-kalman-filter.rst:415
+#: a74a3856f08a418a9d291c7b04609fd3
+msgid "EKF_RNG_GATE"
+msgstr "EKF_RNG_GATE"
+
+#: ../../source/docs/extended-kalman-filter.rst:417
+#: ba517b2d6bd846ec8eb8b24a9d330bfb
+msgid ""
+"This parameter controls the maximum amount of difference in between the "
+"measured range to ground and the predicted range before the EKF starts to "
+"reject the measurements. Reducing this parameter makes it more likely that "
+"valid range finder measurements will be rejected. Increasing this parameter "
+"makes it more likely that invalid range finder measurements will be "
+"accepted. It is scaled in units of standard deviation. For example a setting"
+" of 3 means that differences greater than than 3 x the assumed standard "
+"deviation will cause the measurement to be rejected."
+msgstr ""
+"此参数控制在 EKF "
+"开始拒绝测量之前，测量的离地距离与预测距离之间允许的最大差异。减小此参数会使有效的测距仪测量更容易被拒绝。增大此参数会使无效的测距仪测量更容易被接受。单位为标准差。例如，设为"
+" 3 意味着差异超过 3 倍假设标准差时，测量将被拒绝。"
+
+#: ../../source/docs/extended-kalman-filter.rst:427
+#: d97de0c06be34bd09eeae84f852da9fa
+msgid "EKF_VELD_NOISE"
+msgstr "EKF_VELD_NOISE"
+
+#: ../../source/docs/extended-kalman-filter.rst:429
+#: 622c95fea7b34931be93de4d320b83f1
+msgid ""
+"This is the RMS value of noise in the vertical GPS velocity measurement in "
+"m/s. If you increase this parameter, the filter will think the GPS is more "
+"noisy and will place less weighting on the vertical GPS velocity "
+"measurements."
+msgstr "此参数为垂直 GPS 速度测量噪声的均方根值（m/s）。增大此参数，滤波器会认为 GPS 噪声更大，对垂直 GPS 速度测量的权重更低。"
+
+#: ../../source/docs/extended-kalman-filter.rst:434
+#: e8eace48e2e3474da403a197c6a25ba2
+msgid ""
+"If this parameter is set too small, then the filter will constantly react to"
+" noise in the GPS measurement which will cause the filter height to be "
+"noisy. In copters this will cause the copter to jiggle up and down."
+msgstr "若此参数设置过小，滤波器会持续对 GPS 测量噪声作出反应，导致滤波器高度估计噪声大。在旋翼机中，这将导致飞行器上下抖动。"
+
+#: ../../source/docs/extended-kalman-filter.rst:438
+#: 21c711af4c9d4825b9f84b6f9348ac12
+msgid ""
+"If this parameter is set too high then the filter will be not take full "
+"advantage of the GPS velocity information, and will be more susceptible to "
+"Barometer height glitches."
+msgstr "若此参数设置过高，滤波器将无法充分利用 GPS 速度信息，并对气压计高度异常值更敏感。"
+
+#: ../../source/docs/extended-kalman-filter.rst:446
+#: 1288a72be1544f0f8788305d8047563c
+msgid "EKF_VELNE_NOISE"
+msgstr "EKF_VELNE_NOISE"
+
+#: ../../source/docs/extended-kalman-filter.rst:448
+#: cda0aa4402714739984b18c8a07b6842
+msgid ""
+"This is the RMS value of noise in the North and East GPS velocity "
+"measurements in m/s. If you increase this parameter, the filter will think "
+"the GPS is more noisy and will place less weighting on the horizontal GPS "
+"velocity measurements."
+msgstr ""
+"此参数为北向和东向 GPS 速度测量噪声的均方根值（m/s）。增大此参数，滤波器会认为 GPS 噪声更大，对水平 GPS 速度测量的权重更低。"
+
+#: ../../source/docs/extended-kalman-filter.rst:453
+#: af14005ed00e4275aed53797dc183ae1
+msgid ""
+"If this parameter is set too small, then the filter will constantly react to"
+" noise in the GPS measurement which will cause the filter roll and pitch "
+"angles to be noisy. If you have the vehicle outside with a clear view of the"
+" sky and away from buildings and other large objects, then the HUD in "
+"mission planer should be steady. If it is moving around noticeably, then it "
+"is likely the GPS noise is too high for the filter setting. This will also "
+"result in continual and rapid small angle and position changes in copters "
+"during loiter."
+msgstr ""
+"若此参数设置过小，滤波器会持续对 GPS 测量噪声作出反应，导致滤波器横滚和俯仰角噪声大。如果飞行器在空旷天空下远离建筑物和大型物体，任务规划器中的 "
+"HUD 应该是稳定的。如果明显晃动，则 GPS 噪声可能对于滤波器设置过大。这也会导致悬停时旋翼机持续快速小幅角度和位置变化。"
+
+#: ../../source/docs/extended-kalman-filter.rst:462
+#: 085c93d238c34e5b9a77f5e3bd8f0364
+msgid ""
+"If this parameter is set too high then the filter will be not take full "
+"advantage of the GPS velocity information, will wander more in position and "
+"will be more susceptible to GPS position glitches."
+msgstr "若此参数设置过高，滤波器将无法充分利用 GPS 速度信息，位置漂移会更大，并对 GPS 位置异常值更敏感。"
+
+#: ../../source/docs/extended-kalman-filter.rst:470
+#: cffb8d3c9ee74ca9b77371135e905d98
+msgid "EKF_VEL_DELAY"
+msgstr "EKF_VEL_DELAY"
+
+#: ../../source/docs/extended-kalman-filter.rst:472
+#: 5f5cca56d0cf40159de2df5667b4c962
+msgid ""
+"This is the number of msec that the GPS velocity measurements lag behind the"
+" inertial measurements."
+msgstr "此参数为 GPS 速度测量相对于惯性测量的滞后毫秒数。"
+
+#: ../../source/docs/extended-kalman-filter.rst:476
+#: 85d1c04696384c739a6b177c5f3fc389
+msgid "EKF_VEL_GATE"
+msgstr "EKF_VEL_GATE"
+
+#: ../../source/docs/extended-kalman-filter.rst:478
+#: f56bda69bb1f45fa9a783a34c98e89fd
+msgid ""
+"This parameter scales the threshold used for the GPS velocity measurement "
+"innovation consistency check. Decreasing it makes it more likely that good "
+"measurements will be rejected. Increasing it makes it more likely that bad "
+"measurements will be accepted. It is scaled in units of standard deviation. "
+"For example a setting of 3 means that differences greater than than 3 x the "
+"assumed standard deviation will cause the measurement to be rejected."
+msgstr ""
+"此参数缩放用于 GPS 速度测量新息一致性检查的阈值。减小此值会使正确测量更容易被拒绝。增大此值会使错误测量更容易被接受。单位为标准差。例如，设为 3 "
+"意味着差异超过 3 倍假设标准差时，测量将被拒绝。"
+
+#: ../../source/docs/extended-kalman-filter.rst:487
+#: 72d71b36ab2c44108ced6057e9d5de19
+msgid "EKF_WIND_PNOISE"
+msgstr "EKF_WIND_PNOISE"
+
+#: ../../source/docs/extended-kalman-filter.rst:489
+#: ae5e8f6805484105b9c35d02dcb1286f
+msgid ""
+"This noise controls the growth of wind state error estimates. Increasing it "
+"makes wind estimation faster and noisier."
+msgstr "该噪声控制风速状态误差估计的增长速度。增大此值会使风速估计更快但噪声更大。"
+
+#: ../../source/docs/extended-kalman-filter.rst:493
+#: dba24a3a85894c7c91ae30653efd459a
+msgid "EKF_WIND_PSCALE"
+msgstr "EKF_WIND_PSCALE"
+
+#: ../../source/docs/extended-kalman-filter.rst:495
+#: 2b9b6ef780b046b9bd91161644b19e08
+msgid ""
+"Increasing this parameter increases how rapidly the wind states adapt when "
+"changing altitude, but does make wind speed estimation noisier."
+msgstr "增大此参数会使风速状态在高度变化时适应更快，但也会使风速估计噪声更大。"
+
+#: ../../source/docs/extended-kalman-filter.rst:501
+#: d63d54447bb94504b09baf101ca0030a
+msgid "Interpreting Log Data"
+msgstr "解读日志数据"
+
+#: ../../source/docs/extended-kalman-filter.rst:503
+#: 3169bf4b68154240b823eead0e696809
+msgid ""
+"Correct tuning the Navigation filter is not possible without some analysis "
+"of the data logged by the filter in the flash logs. To log this data, it is "
+"important that AHRS data logging is enabled. The EKF data is contained in "
+"the EKF1, EKF2, EKF3 and EKF4 log messages. This section describes the "
+"meaning of the various EKF log data and shows examples obtained from "
+"plotting data using the Mission Planner DataFlash log review feature."
+msgstr ""
+"若不分析滤波器在闪存日志中记录的数据，就无法正确调整导航滤波器。要记录这些数据，必须启用 AHRS 数据记录。EKF 数据包含在 "
+"EKF1、EKF2、EKF3 和 EKF4 日志消息中。本节介绍各种 EKF 日志数据的含义，并展示使用 Mission Planner "
+"DataFlash 日志查看功能绘制数据的示例。"
+
+#: ../../source/docs/extended-kalman-filter.rst:512
+#: eeebe6d72860400ea940e29a61c97905
+msgid "EKF1"
+msgstr "EKF1"
+
+#: ../../source/docs/extended-kalman-filter.rst:514
+#: cafd4f59c89e4e04999c646da7995684
+msgid "**TimeMS** - time in msec from startup"
+msgstr "**TimeMS** - 自启动以来的时间（毫秒）"
+
+#: ../../source/docs/extended-kalman-filter.rst:516
+#: eec6e47911f14c98a5638f2d4a608372
+msgid "**Roll** - Roll angle (deg)"
+msgstr "**Roll** - 横滚角（度）"
+
+#: ../../source/docs/extended-kalman-filter.rst:518
+#: 0b7a7cc57709483da63ed8692029f78e
+msgid "**Pitch** - Pitch angle (deg)"
+msgstr "**Pitch** - 俯仰角（度）"
+
+#: ../../source/docs/extended-kalman-filter.rst:520
+#: c7a1516fe6ae4389b83d30ef69b07c20
+msgid "**Yaw** - Yaw angle (deg)"
+msgstr "**Yaw** - 偏航角（度）"
+
+#: ../../source/docs/extended-kalman-filter.rst:522
+#: f3e0d0a67a0e4030b45f8ed03c4fb1c2
+msgid "**VN,VE,VD** - North,East,Down velocities (m/s)"
+msgstr "**VN、VE、VD** - 北、东、下向速度（m/s）"
+
+#: ../../source/docs/extended-kalman-filter.rst:524
+#: 0e1f8b01d4f246a0a12ea178cf977f80
+msgid ""
+"**PN,PE,PD** - North,East,Down positions (m) relative to where the vehicle "
+"was armed"
+msgstr "**PN、PE、PD** - 相对于解锁位置的北、东、下向位置（m）"
+
+#: ../../source/docs/extended-kalman-filter.rst:527
+#: 771bbccd637a41fdb8ce2155f7f1a9d3
+msgid "**GX,GY,GZ** - X,Y,Z Gyro biases (deg/min)"
+msgstr "**GX、GY、GZ** - X、Y、Z 轴陀螺仪偏置（度/分）"
+
+#: ../../source/docs/extended-kalman-filter.rst:529
+#: a6216d9aae4d4b90a8b4997c79a66a94
+msgid ""
+"The following figure shows the gyro biases from a plane with a Pixhawk "
+"controller. The gyro biases can be seen to vary at the start and stabilise "
+"about new values as the sensor warms up and reaches its operating "
+"temperature. The cheap MEMS inertial sensors used by our controllers can "
+"have significant bias variation with temperature."
+msgstr ""
+"下图显示了一架配备 Pixhawk "
+"控制器的飞机的陀螺仪偏置。可以看出，陀螺仪偏置在启动初期发生变化，随后随着传感器升温至工作温度而趋于稳定在新值。我们控制器所使用的廉价 MEMS "
+"惯性传感器在温度变化时会有显著的偏置变化。"
+
+#: ../../source/docs/extended-kalman-filter.rst:539
+#: 8e81cd2df0bd42bb9defe1f7bb893b10
+msgid "EKF2"
+msgstr "EKF2"
+
+#: ../../source/docs/extended-kalman-filter.rst:541
+#: c59d81c36fd24ab28025510f09909956
+msgid "**TimeMS** - time in msec from startup."
+msgstr "**TimeMS** - 自启动以来的时间（毫秒）。"
+
+#: ../../source/docs/extended-kalman-filter.rst:543
+#: d6c0a347203443aab2684d3d228b041d
+#, python-format
+msgid ""
+"**Ratio** - Weighting percentage of the IMU1 accelerometer data used in the "
+"blending of IMU1 and IMU2 data. If two IMU's are available with your "
+"hardware (eg Pixhawk), then this will normally fluctuate rapidly in the 50% "
+"region as seen here."
+msgstr ""
+"**Ratio** - IMU1 和 IMU2 数据混合中 IMU1 加速度计数据的权重百分比。如果您的硬件有两个 IMU（如 "
+"Pixhawk），通常会如图所示在 50% 附近快速波动。"
+
+#: ../../source/docs/extended-kalman-filter.rst:551
+#: 6b26d679da144f0ca5ab3001905d24fb
+#, python-format
+msgid ""
+"If it swings close to 100 or 0 % for parts of the flight, then this "
+"indicates that you likely have aliasing affecting your accelerometer data "
+"and you should look for solutions to reduce this (eg vibration isolation "
+"mounts for your autopilot)."
+msgstr "如果飞行期间接近 100% 或 0%，这表明加速度计数据可能受到混叠影响，应寻找解决方案（如为自动驾驶仪安装防振安装架）。"
+
+#: ../../source/docs/extended-kalman-filter.rst:556
+#: ba47073b89724f4ba7440194e3d544db
+msgid "**AZ1bias** - Z accelerometer bias for IMU1 (cm/s:sup:`2`)"
+msgstr "**AZ1bias** - IMU1 的 Z 轴加速度计偏置（cm/s²）"
+
+#: ../../source/docs/extended-kalman-filter.rst:558
+#: 74159de36edf483cae41a268a60192b4
+msgid "**AZ2bias** - Z accelerometer bias for IMU2 (cm/s:sup:`2`)"
+msgstr "**AZ2bias** - IMU2 的 Z 轴加速度计偏置（cm/s²）"
+
+#: ../../source/docs/extended-kalman-filter.rst:560
+#: f1f796a8b6d34f1f93f9217ed4f3a70a
+msgid ""
+"**VWN,VWE** - North and East wind velocity (m/s). A positive value means the"
+" wind is moving in the direction of that axis, eg a positive North wind "
+"velocity is blowing from the South."
+msgstr "**VWN、VWE** - 北向和东向风速（m/s）。正值表示风沿该轴方向运动，例如北向正风速表示风从南方吹来。"
+
+#: ../../source/docs/extended-kalman-filter.rst:564
+#: eb997719b50b48df8c1289efa88ec9c5
+msgid ""
+"**MN,ME,MD** - North, East, Down earth magnetic field strength (sensor "
+"units). If you are flying quickly, or are at low speed with ``EKF_MAG_CAL`` "
+"enabled, these will slowly change during flight as the filter 'learns' the "
+"earth's magnetic field."
+msgstr ""
+"**MN、ME、MD** - 北、东、下地球磁场强度（传感器单位）。如果您飞行速度快，或在低速下启用了 "
+"``EKF_MAG_CAL``，这些值会在飞行中缓慢变化，因为滤波器在「学习」地球磁场。"
+
+#: ../../source/docs/extended-kalman-filter.rst:572
+#: b241772fb5784d7ab7a6775fa29afc49
+msgid ""
+"**MX,MY,MZ** - X, Y, Z body magnetic field biases (sensor units). If you are"
+" flying quickly, or are at low speed with ``EKF_MAG_CAL`` enabled, these "
+"will slowly change during flight as the filter 'learns' the earth's magnetic"
+" field. These have the same meaning as the compass offsets, but are the "
+"opposite sign (eg in the following figure MX stabilises at a value of +35, "
+"indicating that a ``COMPASS_OFS_X`` value of -35 should be used."
+msgstr ""
+"**MX、MY、MZ** - X、Y、Z 机体磁场偏置（传感器单位）。如果您飞行速度快，或在低速下启用了 "
+"``EKF_MAG_CAL``，这些值会在飞行中缓慢变化。其含义与罗盘偏置相同，但符号相反（例如下图中 MX 稳定在 +35，表示应使用 "
+"``COMPASS_OFS_X`` 值为 -35）。"
+
+#: ../../source/docs/extended-kalman-filter.rst:584
+#: 5e1450abc54a4879b0504674c510df56
+msgid "EKF3"
+msgstr "EKF3"
+
+#: ../../source/docs/extended-kalman-filter.rst:586
+#: c5c5bbf7a70441148ce2c0578deeac22
+msgid ""
+"This message contains the innovations for each sensor (GPS, barometer, "
+"magnetometer and airspeed). Innovations are the difference between the value"
+" predicted using the IMU data before corrections are applied, and the value "
+"measured by the sensor."
+msgstr "此消息包含每个传感器（GPS、气压计、磁力计和空速计）的新息图表。新息是在施加修正前使用 IMU 数据预测的值与传感器测量值之间的差异。"
+
+#: ../../source/docs/extended-kalman-filter.rst:591
+#: ../../source/docs/extended-kalman-filter.rst:703
+#: 4dfe9f7bd4204963a9719775de5adf8f 69bdbab9277e4da3aad08593feb3f49e
+msgid "**TimeMS** - Time in msec from startup"
+msgstr "**TimeMS** - 自启动以来的时间（毫秒）"
+
+#: ../../source/docs/extended-kalman-filter.rst:593
+#: 3cd767bf6795441f901d1d699ef33050
+msgid ""
+"**IVN,IVE,IVD** - Innovations for the North,East,Down GPS velocity "
+"measurements (m/s). These are an important measure of health for the "
+"navigation filter. If you have god quality IMU and GPS data they will be "
+"small and around zero as shown in the following figure:"
+msgstr ""
+"**IVN、IVE、IVD** - 北、东、下向 GPS 速度测量新息（m/s）。这是导航滤波器健康状态的重要指标。如果 IMU 和 GPS "
+"数据质量良好，这些值将较小且接近零，如下图所示："
+
+#: ../../source/docs/extended-kalman-filter.rst:601
+#: bddc56bc05794ee49db6feed9818eb04
+msgid ""
+"The noise level on these innovations when the vehicle is not maneuvering can"
+" be used to set the value of ``EKF_VELNE_NOISE`` and ``EKF_VELD_NOISE``. For"
+" example in the above figure, the velocity noise when the vehicle was non-"
+"manoeuvring was around +-0.3 m/s for both the North,East and Down "
+"velocities. This means that a good starting value for \\ ``EKF_VELNE_NOISE``"
+" and ``EKF_VELD_NOISE`` for this example would be 0.3 m/s."
+msgstr ""
+"飞行器非机动时这些新息的噪声水平可用于设置 ``EKF_VELNE_NOISE`` 和 ``EKF_VELD_NOISE`` "
+"的值。例如，上图中飞行器非机动时北、东和下向速度的速度噪声约为 ±0.3 m/s。这意味着在本示例中 ``EKF_VELNE_NOISE`` 和 "
+"``EKF_VELD_NOISE`` 的合理起始值为 0.3 m/s。"
+
+#: ../../source/docs/extended-kalman-filter.rst:609
+#: 5b904da06ee34aac8cf352fab4a63bd3
+msgid ""
+"**IPN,IPE** - Innovations in the North, East GPS position measurements (m). "
+"Similarly to the velocity innovations, they should be small and centred on "
+"zero as in the following example:"
+msgstr "**IPN、IPE** - 北、东向 GPS 位置测量新息（m）。与速度新息类似，它们应该较小且以零为中心，如下例所示："
+
+#: ../../source/docs/extended-kalman-filter.rst:616
+#: df2848627f9f4001a4b190c0e14a344f
+msgid ""
+"The noise levels on these innovations can be used to set the value of "
+"``EKF_POSNE_NOISE``. In the above figure, the noise sits within a band of "
+"+-0.5m, so a good starting value for the value of ``EKF_POSNE_NOISE`` in "
+"this example would be 0.5m."
+msgstr ""
+"这些新息的噪声水平可用于设置 ``EKF_POSNE_NOISE`` 的值。上图中噪声在 ±0.5m 范围内，因此本示例中 "
+"``EKF_POSNE_NOISE`` 的合理起始值为 0.5m。"
+
+#: ../../source/docs/extended-kalman-filter.rst:621
+#: 03032496b14d418caf8976f6f6beb951
+msgid ""
+"**IPD** - Innovations on the barometer height measurement (m). They should "
+"be small and centered on zero as in the following example, although "
+"transients of around 2m are common when sudden height changes or manoeuvres "
+"are performed due to IMU errors, sensor lag and the effect of changes in "
+"airflow on he barometer reading."
+msgstr ""
+"**IPD** - 气压计高度测量新息（m）。它们应该较小且以零为中心，如下例所示，但由于 IMU "
+"误差、传感器滞后以及气流变化对气压计读数的影响，在高度突变或机动时约 2m 的瞬变是常见的。"
+
+#: ../../source/docs/extended-kalman-filter.rst:630
+#: 7b43dd537f684097b12af592d057d837
+msgid ""
+"In the above figure it can be seen that there is a small 1m negative offset "
+"that is removed after 2min. This is due to bias errors on the Z "
+"accelerometers which take time to be learned by the filter and compensated "
+"for. In this example, the underlying sensor noise is low at about +-0.15m, "
+"which indicates a good starting value for ``EKF_ALT_NOISE`` for plane "
+"applications would be 0.15m."
+msgstr ""
+"上图可见，存在约 1m 的负偏移，在 2 分钟后被消除。这是由于 Z 轴加速度计的偏置误差需要时间被滤波器学习和补偿。在本示例中，底层传感器噪声约为 "
+"±0.15m 较低，这表明飞机应用中 ``EKF_ALT_NOISE`` 的合理起始值为 0.15m。"
+
+#: ../../source/docs/extended-kalman-filter.rst:637
+#: 690b974a986a4cf88706900c48b314b4
+msgid ""
+"Note: For copter, experience has shown the value of ``EKF_ALT_NOISE`` "
+"normally has to be increased above the theoretical value to smooth out the "
+"height response"
+msgstr "注意：对于旋翼机，经验表明 ``EKF_ALT_NOISE`` 的值通常需要高于理论值以平滑高度响应"
+
+#: ../../source/docs/extended-kalman-filter.rst:641
+#: 9aa149f177224db0bc5bb4b5f92bcddc
+msgid ""
+"**IMX,IMY,IMZ** - Innovations for the Magnetometer X,Y,Z measurements. These"
+" should be centered around zero and not exceed +- 50 during manoeuvres as "
+"shown in the following figure:"
+msgstr "**IMX,IMY,IMZ** - 磁力计 X、Y、Z 测量值的新息。如下图所示，这些值应以零为中心，机动过程中不应超过 ±50："
+
+#: ../../source/docs/extended-kalman-filter.rst:648
+#: 7b8afe565e37461d863b588279843f75
+msgid ""
+"In the above example ``EKF_MAG_CAL`` was set to 1, so the copter quickly "
+"learnt the magnetometer biases (compass offsets). Although the underlying "
+"noise of the magnetometer is relatively low (5 or less in most cases), there"
+" are other errors due to differences in scale factors between axes, "
+"magnetometer misalignment, and varying magnetic fields produced by "
+"electrical power systems that cause larger errors. Typically these result in"
+" sharp transients of about 50 in the innovations, as can be seen in the "
+"above figure. For this reason the default value of ``EKF_MAG_NOISE`` is set "
+"to 0.05 (which represents a noise of 50 in sensor units)."
+msgstr ""
+"在上述示例中，``EKF_MAG_CAL`` 设置为 1，因此飞行器很快学会了磁力计偏差（罗盘偏移）。尽管磁力计的底层噪声相对较低（大多数情况下不超过 "
+"5），但由于各轴之间比例因子差异、磁力计安装偏差以及电气系统产生的变化磁场，还存在其他误差导致更大的误差。如上图所示，这些误差通常在新息中产生约 50 "
+"的急剧瞬变。因此，``EKF_MAG_NOISE`` 的默认值设置为 0.05（代表传感器单位为 50 的噪声）。"
+
+#: ../../source/docs/extended-kalman-filter.rst:659
+#: 703bc2414b5d473687e0130fff497db4
+msgid ""
+"The following figure is taken from a slow speed copter flight with a bad "
+"magnetometer calibration and ``EKF_MAG_CAL`` = 0. The innovations vary "
+"noticeably as the vehicle changes its orientation."
+msgstr "下图取自磁力计校准不良且 ``EKF_MAG_CAL`` = 0 的低速飞行器飞行数据。随着飞行器改变姿态方向，新息明显变化。"
+
+#: ../../source/docs/extended-kalman-filter.rst:666
+#: 4d1ce80255544a4c8c043bba448d9749
+msgid ""
+"**IVT** - Innovation for the true airspeed measurement (m/s). This will be "
+"zero if the airspeed sensor is not fitted or is not being used (e.g. on "
+"ground). It should be centered around zero if the airspeed sensor is "
+"calibrated correctly, but will vary in noise level depending on how gusty "
+"the flight conditions are. the following is an example from a flight with a "
+"well calibrated airspeed sensor in moderate wind conditions of around 7m/s "
+"in low turbulence:"
+msgstr ""
+"**IVT** - "
+"真空速测量值的新息（m/s）。如果未安装空速传感器或未使用（例如在地面），该值将为零。如果空速传感器校准正确，该值应以零为中心，但噪声级别会根据飞行条件的阵风程度而变化。以下是使用经过良好校准的空速传感器在约"
+" 7m/s 中等风速低湍流条件下飞行的示例："
+
+#: ../../source/docs/extended-kalman-filter.rst:677
+#: d24d6888880449d0b73dc809f65398d8
+msgid ""
+"A constant offset of 1m/s from zero would indicate a steady 1m/s airspeed "
+"error. Steady airspeed errors can be caused if the airspeed sensor is "
+"uncovered during initialisation on a windy day resulting in a significant "
+"pressure offset, is out of cal, or has experienced a large change in "
+"temperature since initialisation."
+msgstr ""
+"相对于零点 1m/s 的恒定偏移表示存在稳定的 1m/s "
+"空速误差。稳定的空速误差可能由以下原因造成：在初始化期间多风天气空速传感器暴露在外导致显著的压力偏移、校准失准，或者自初始化以来经历了较大的温度变化。"
+
+#: ../../source/docs/extended-kalman-filter.rst:683
+#: af8170f420d341f3a04158b0f44d5b93
+msgid ""
+"This figure can also be used to set the value for ``EKF_EAS_NOISE``. For the"
+" example shown above, the total noise (including gusts) is around 1.4 m/s, "
+"so this would be a good starting value for ``EKF_EAS_NOISE``."
+msgstr ""
+"该图也可用于设置 ``EKF_EAS_NOISE`` 的值。在上述示例中，总噪声（包括阵风）约为 1.4 m/s，这将是 "
+"``EKF_EAS_NOISE`` 的一个良好初始值。"
+
+#: ../../source/docs/extended-kalman-filter.rst:688
+#: a5a7e5f5f82b475c8b9291f106e389e4
+msgid "EKF4"
+msgstr "EKF4"
+
+#: ../../source/docs/extended-kalman-filter.rst:690
+#: 20472970233b47038544c64fe4e9d722
+msgid ""
+"This message contains plots showing how each sensor is performing relative "
+"to the error gates set by the ``EKF_POS_GATE``, ``EKF_VEL_GATE``, "
+"``EKF_HGT_GATE``, ``EKF_MAG_GATE`` and ``EKF_EAS_GATE``. These parameters "
+"control how inconsistent a measurement is allowed to be before the filter "
+"won't use it. When we refer to inconsistency of measurements in this "
+"section, we are talking about the amount of difference between the "
+"measurement predicted by the filter and the measurement taken by the sensor."
+" Checking measurements for inconsistencies is particularly important with "
+"GPS, because GPS measurements can have very large transient position and "
+"velocity errors that would cause a crash if they were to be used by the "
+"filter. The following messages are available in EKF4:"
+msgstr ""
+"该消息包含各传感器相对于 "
+"``EKF_POS_GATE``、``EKF_VEL_GATE``、``EKF_HGT_GATE``、``EKF_MAG_GATE`` 和 "
+"``EKF_EAS_GATE`` "
+"所设置误差门限的性能图表。这些参数控制测量值的不一致程度在滤波器拒绝使用前所允许的范围。本节所述测量不一致性是指滤波器预测值与传感器实测值之间的差异量。对"
+" GPS 进行一致性检查尤为重要，因为 GPS 测量值可能存在非常大的瞬态位置和速度误差，一旦被滤波器使用将导致坠机。EKF4 中包含以下消息："
+
+#: ../../source/docs/extended-kalman-filter.rst:705
+#: 6a37bf02019d48a0975e18daa2c3618d
+msgid ""
+"**SV** - ratio of the combined GPS velocity inconsistency to the limit set "
+"by the ``EKF_VEL_GATE`` parameter. For a flight with good GPS data, this can"
+" have the occasional spike to over 1/2, but should never go above 1. If this"
+" line goes above 1, then it indicates that the filter stopped using the GPS "
+"velocity data for that period in flight. This should never happen with good "
+"sensor data. The following figure shows **SV** taken from a quadrotor flight"
+" with 9 to 10 satellites in good GPS conditions, using the default "
+"parameters. If this line is too high and goes above 1 with good GPS, then "
+"the ``EKF_VEL_GATE`` parameter should be increased."
+msgstr ""
+"**SV** - GPS 综合速度不一致量与 ``EKF_VEL_GATE`` 参数设置限值之比。对于 GPS 数据良好的飞行，该值偶尔可能出现超过 "
+"1/2 的峰值，但不应超过 1。若该线超过 1，表明滤波器在该飞行阶段停止使用 GPS 速度数据。在良好传感器数据条件下不应发生此情况。下图显示了在良好"
+" GPS 条件下搭载 9 至 10 颗卫星的四旋翼飞行时使用默认参数采集的 **SV** 数据。若在 GPS 良好条件下该线仍过高并超过 1，则应增大 "
+"``EKF_VEL_GATE`` 参数。"
+
+#: ../../source/docs/extended-kalman-filter.rst:719
+#: 02a206918a45446497a623217cd4e26c
+msgid ""
+"**SP** - ratio of the GPS total position inconsistency to the limit set by "
+"the ``EKF_POS_GATE`` parameter. For a flight with good GPS data, this can "
+"have the occasional spike to over 1/2, but should never go above 1. If this "
+"line goes above 1, then it indicates that the filter stopped using the GPS "
+"position data for that period in flight. This should never happen with good "
+"sensor data. The following figure shows **SP** taken from a quadrotor flight"
+" with 9 to 10 satellites in good GPS conditions, using the default "
+"parameters. If this line is too high and goes above 1 with good GPS, then "
+"the ``EKF_POS_GATE`` parameter should be increased."
+msgstr ""
+"**SP** - GPS 总位置不一致量与 ``EKF_POS_GATE`` 参数设置限值之比。对于 GPS 数据良好的飞行，该值偶尔可能出现超过 "
+"1/2 的峰值，但不应超过 1。若该线超过 1，表明滤波器在该飞行阶段停止使用 GPS 位置数据。在良好传感器数据条件下不应发生此情况。下图显示了在良好"
+" GPS 条件下搭载 9 至 10 颗卫星的四旋翼飞行时使用默认参数采集的 **SP** 数据。若在 GPS 良好条件下该线仍过高并超过 1，则应增大 "
+"``EKF_POS_GATE`` 参数。"
+
+#: ../../source/docs/extended-kalman-filter.rst:733
+#: 26c1fa839425412d83fb5e25073664a5
+msgid ""
+"**SH** - ratio of the barometer height inconsistency to the limit set by the"
+" ``EKF_HGT_GATE`` parameter. This can have the occasional spike to over 1/2,"
+" but should never go above 1. If this line goes above 1, then it indicates "
+"that the filter stopped using the barometer data for that period in flight. "
+"This should never happen with good sensor data. The following figure shows "
+"**SH** taken from a quadrotor flight at airspeeds up to 16 m/s, using the "
+"default parameters. If this line is too high and goes above 1, then "
+"the``EKF_HGT_GATE`` parameter should be increased. Factors that can cause "
+"this to be high include airflow past the autopilot affecting the barometer "
+"reading and accelerometer errors due to sensor drift or aliasing."
+msgstr ""
+"**SH** - 气压计高度不一致量与 ``EKF_HGT_GATE`` 参数设置限值之比。该值偶尔可能出现超过 1/2 的峰值，但不应超过 "
+"1。若该线超过 1，表明滤波器在该飞行阶段停止使用气压计数据。在良好传感器数据条件下不应发生此情况。下图显示了在空速最高达 16 m/s "
+"的四旋翼飞行中使用默认参数采集的 **SH** 数据。若该线过高并超过 1，则应增大 ``EKF_HGT_GATE`` "
+"参数。导致该值偏高的因素包括流经自动驾驶仪的气流影响气压计读数，以及传感器漂移或混叠引起的加速度计误差。"
+
+#: ../../source/docs/extended-kalman-filter.rst:748
+#: 4c8c5ff30dcb4860ad34b83518edcf6d
+msgid ""
+"**SMX,SMY,SMZ** - ratio of the magnetometer X,Y and Z measurement "
+"inconsistencies to the limit set by the ``EKF_MAG_GATE`` parameter. This can"
+" have the occasional spike to over 1/2, but should never go above 1. If this"
+" line goes above 1, then it indicates that the filter stopped using that "
+"component of magnetometer data for that period in flight. This should never "
+"happen with good sensor data. The following figure shows the SMX, SMY and "
+"SMZ data taken from a quadrotor flight using the default parameters. If this"
+" line is too high and goes above 1 on a regular basis, then it indicates a "
+"problem with the compass calibration or installation. It is recommended that"
+" the reasons for the compass errors be investigated first before resorting "
+"to increasing the ``EKF_MAG_GATE`` parameter."
+msgstr ""
+"**SMX,SMY,SMZ** - 磁力计 X、Y、Z 测量不一致量与 ``EKF_MAG_GATE`` 参数设置限值之比。该值偶尔可能出现超过 1/2"
+" 的峰值，但不应超过 1。若该线超过 "
+"1，表明滤波器在该飞行阶段停止使用磁力计该分量数据。在良好传感器数据条件下不应发生此情况。下图显示了使用默认参数采集的四旋翼飞行 SMX、SMY 和 "
+"SMZ 数据。若该线经常性地超过 1，则表明罗盘校准或安装存在问题。建议在调大 ``EKF_MAG_GATE`` 参数之前，先调查罗盘误差的原因。"
+
+#: ../../source/docs/extended-kalman-filter.rst:764
+#: ee1913193a11418088de95b2a02bd85c
+msgid ""
+"The next figure shows **SMX**, **SMY** and **SMZ** taken from a rover log, "
+"with the throttle demand **ThrOutR** also plotted."
+msgstr "下图显示了从漫游车日志中采集的 **SMX**、**SMY** 和 **SMZ** 数据，同时绘制了油门需求 **ThrOutR**。"
+
+#: ../../source/docs/extended-kalman-filter.rst:770
+#: 79fbfdeb557949c9ab6a51d06db404b7
+msgid ""
+"The large spikes above 1 every time the throttle steps up, and the large "
+"values during throttle operation can be clearly seen. In this example it "
+"would be recommended that steps be taken to reduce the amount of compass "
+"interference"
+msgstr "可以清晰看到每次油门增大时超过 1 的大幅峰值，以及油门运转期间的大数值。在此示例中，建议采取措施减少罗盘干扰量。"
+
+#: ../../source/docs/extended-kalman-filter.rst:775
+#: a599a0dbc1c34c349836d375ba21b549
+msgid ""
+"**SVT** - ratio of the airspeed measurement inconsistency to the limit set "
+"by the ``EKF_EAS_GATE`` parameter. This can have the occasional spike to "
+"over 1/2, but should rarely go above 1. If this line goes above 1, then it "
+"indicates that the filter stopped using the airspeed data for that period in"
+" flight. Factors that can cause this to be high include airspeed calibration"
+" errors, the presence of strong gusts and turbulence, and rapid changes in "
+"wind speed. It is normal for this to be higher at the start of the flight "
+"before the filter has estimated the wind velocity."
+msgstr ""
+"**SVT** - 空速测量不一致量与 ``EKF_EAS_GATE`` 参数设置限值之比。该值偶尔可能出现超过 1/2 的峰值，但很少应超过 "
+"1。若该线超过 "
+"1，表明滤波器在该飞行阶段停止使用空速数据。导致该值偏高的因素包括空速校准误差、强阵风和湍流，以及风速的快速变化。在飞行开始阶段滤波器尚未估计风速之前，该值偏高属于正常现象。"
