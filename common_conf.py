@@ -106,5 +106,15 @@ if disable_non_local_image_warnings:
 # ENDPATH
 
 
+def _set_search_language(app, config):
+    """Derive html_search_language from the (possibly overridden) build
+    language. Runs at config-inited so it sees -D/confoverrides values —
+    this makes zh word segmentation work for ANY builder (Read the Docs,
+    plain sphinx-build), not only update.py's confoverride injection."""
+    if not config.html_search_language:
+        config.html_search_language = SEARCH_LANGUAGE.get(config.language, 'en')
+
+
 def setup(app):
     app.add_css_file("common_theme_override.css")
+    app.connect('config-inited', _set_search_language)

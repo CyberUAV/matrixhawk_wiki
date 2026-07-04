@@ -1,17 +1,31 @@
+# Read the Docs — bilingual pilot build.
+#
+# The real site is the update.py matrix (11 vehicles x en,zh_CN), which far
+# exceeds RTD community build limits, so RTD hosts a *pilot subset* as the
+# public preview channel: one vehicle, both languages, in a single build.
+# update.py writes /en/<vehicle>/ and /zh/<vehicle>/ plus a top-level
+# Accept-Language redirect page, all placed into RTD's output dir, so the
+# published tree is:
+#
+#   https://<project>.readthedocs.io/en/latest/          -> language redirect
+#   https://<project>.readthedocs.io/en/latest/zh/antennatracker/
+#   https://<project>.readthedocs.io/en/latest/en/antennatracker/
+#
+# (the leading /en/latest/ segment is RTD's own project-language/version
+# prefix and is unrelated to our internal /en /zh scheme)
+#
+# To preview a different vehicle, change --site. The full-matrix production
+# deploy belongs to self-hosted CI (see ARCHITECTURE_I18N.md §3.2).
+#
+# zh search segmentation needs no special flags here: common_conf.py derives
+# html_search_language from the build language at config-inited time.
+
 version: 2
 
 build:
   os: ubuntu-22.04
   tools:
     python: "3.11"
-
-sphinx:
-  configuration: ardupilot/source/conf.py
-
-formats:
-  - pdf
-  - epub
-
-python:
-  install:
-    - requirements: requirements.txt
+  commands:
+    - pip install -r requirements.txt
+    - python3 update.py --site antennatracker --languages en,zh_CN --parallel 2 --destdir $READTHEDOCS_OUTPUT/html
