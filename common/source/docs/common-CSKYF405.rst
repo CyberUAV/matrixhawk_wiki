@@ -107,7 +107,7 @@ Battery Monitor Configuration
 =============================
 These settings are set as defaults when the firmware is loaded (except :ref:`BATT_AMP_PERVLT<BATT_AMP_PERVLT__AP_BattMonitor_Analog>` which needs to be changed from the default value). However, if they are ever lost, you can manually set the parameters:
 
-Enimages/CSKY405_wiring.pngable Battery monitor.
+Enable Battery monitor.
 
 - :ref:`BATT_MONITOR<BATT_MONITOR>` =4
 

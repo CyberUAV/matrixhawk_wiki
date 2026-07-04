@@ -93,7 +93,7 @@ Installing it in your car
 
 The below shows a typical setup in a small rover, using APM2.x, 3DR
 radio telemetry and both sonar and IR sensors (instructions on setting
-them up are :ref:`here) <sonar-sensors>`. Note a few elements:
+them up are :ref:`here <sonar-sensors>`. Note a few elements:
 
 -  The RC car's plastic body shell has been removed and a plywood sheet
    cut and drilled to fit on the mounting posts.
