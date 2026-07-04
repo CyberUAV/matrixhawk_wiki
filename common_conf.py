@@ -47,6 +47,17 @@ LANGUAGES = [
 URL_PREFIX = {code: prefix for code, prefix, _ in LANGUAGES}
 SPHINX_CODE_FROM_PREFIX = {prefix: code for code, prefix, _ in LANGUAGES}
 
+# Sphinx search-indexer language per build language. Sphinx does NOT derive
+# this from `language` for regional codes ('zh_CN' is not in its search
+# language map, so it silently falls back to the English word splitter and
+# Chinese pages become unsearchable). update.py injects this via
+# confoverrides. 'zh' uses SearchChinese, which segments hanzi with jieba
+# when importable (jieba is in requirements.txt).
+SEARCH_LANGUAGE = {
+    'en': 'en',
+    'zh_CN': 'zh',
+}
+
 # gettext catalog config (consumed by each vehicle's conf.py)
 # Keep messages split per source file (matches sphinx-intl default layout).
 gettext_compact = False
