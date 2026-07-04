@@ -1,0 +1,48 @@
+name: i18n lint
+
+# Quality gate for translated catalogs: reST-marker integrity (i18n_lint.py)
+# plus gettext validity (msgfmt -c). This is the check that would have caught
+# the ~790 marker defects and batch-misaligned translations shipped by the
+# original AI pretranslation run.
+
+on:
+  push:
+    paths:
+      - 'locale/**'
+      - 'scripts/i18n_*.py'
+      - '.github/workflows/i18n-lint.yml'
+  pull_request:
+    paths:
+      - 'locale/**'
+      - 'scripts/i18n_*.py'
+      - '.github/workflows/i18n-lint.yml'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: |
+          # docutils gives i18n_lint.py the exact inline-markup punctuation
+          # classes for the class-I check (falls back to an approximation
+          # without it)
+          pip install polib docutils
+          sudo apt-get update -qq && sudo apt-get install -y -qq gettext
+
+      - name: reST marker lint
+        run: python3 scripts/i18n_lint.py locale/
+
+      - name: msgfmt -c all catalogs
+        run: |
+          fails=0
+          while IFS= read -r f; do
+            msgfmt -c -o /dev/null "$f" 2>/dev/null || { echo "FAIL: $f"; fails=$((fails+1)); }
+          done < <(find locale -name '*.po')
+          echo "msgfmt failures: $fails"
+          exit "$fails"
