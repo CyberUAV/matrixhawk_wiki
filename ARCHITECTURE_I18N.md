@@ -155,6 +155,38 @@ python3 scripts/i18n_autofix.py locale/            # 机械修复
   confoverrides 一并传 intersphinx_mapping，或构建后做 objects.inv 本地化）。
   这是双语体验闭环的**最后一块架构短板**。
 
+## 4. 业界对标（2026-07 硬件厂商文档站调研）
+
+| 模式 | 代表 | 做法 | 适用前提 |
+|---|---|---|---|
+| **A. 平行源树** | Espressif esp-docs（ESP-IDF 英/中） | `docs/en` + `docs/zh_CN` 文件结构逐一对应，纪律是"一段一行 + 两语言行号对齐"，CI 校验目录同步（`check_lang_switch.py`），未译文件用 include 指令回退英文 | **自己原创双语内容**的厂商；两棵树靠人力纪律同步 |
+| **B. TMS 字符串管理** | PX4 / QGroundControl（Crowdin） | 源码只有英文，Crowdin 自动导入变更字符串→社区翻译→审核→导出 PR；未译字符串显示英文；URL `/{version}/{lang}/` | 社区众包翻译；TM/术语库/进度面板/审核流由平台托管 |
+| **C. 仓内 gettext .po** | 经典 Sphinx/RTD（**我们**） | .po 目录进仓库，msgmerge 跟踪源变更，段落级英文回退，工具链自持 | 跟踪上游的 fork + 自动化(AI)翻译 |
+| （企业门户） | ST Developer Zone 中/日文版 | 独立本地化门户、企业 CMS，"feature parity" | 企业预算；不适用 |
+| （不翻译） | Zephyr、Raspberry Pi、NVIDIA 技术文档 | 官方只维护英文 | ——反衬维护成本之高 |
+
+**结论：模式 C 对我们是正确选型**，不必迁移：
+
+- 模式 A 不可取：我们不原创英文，上游高频变更下两棵 RST 树的 merge 是灾难；
+  Espressif 的行号对齐纪律只在"自家作者写双语"时成立。
+- 模式 B 的核心能力我们已用 gettext 等价实现：字符串级变更跟踪=msgmerge、
+  未译回退英文=gettext 内建（我们还多一个覆盖率横幅，比静默回退更诚实）、
+  TM/术语=harmonize 投票+词表 YAML、质量门=lint(Crowdin 没有 reST 语义检查,我们更强)。
+- PX4 的经验教训直接适用："translation closely tracks the source" 是维护
+  多语言的生死线——**它靠 Crowdin 自动导入实现，我们必须靠自动化上游同步实现**
+  （见 3.3 的循环，当前还是手动，这是与业界最大的 workflow 差距）。
+- PX4 只维护"社区有承诺"的语言——维护成本是真实约束；我们的答案是
+  AI 流水线 + lint 门禁把边际成本压到接近零。
+- 若将来要引入社区校对：**Weblate**（自托管、原生 .po、内建 TM/术语库/审核流）
+  可零架构改动接入——.po 选型保住了这扇门。
+
+**对标催生的调整清单**（并入 3.5 优先级）：
+- 上游同步自动化（cron CI：fetch upstream → msgmerge → AI 译增量 → lint → PR）
+- 全站翻译覆盖率汇总页（复用 mwiki_translation_coverage 的数据，构建时聚合）
+- 语言切换器逐页深链 + hreflang（Espressif/PX4 都有,已在 3.4）
+- 版本化（Espressif/PX4/ST 都做）**明确不做**——上游 ArduPilot wiki 即无版本,
+  参数页已有 --paramversioning 兜底
+
 ### 3.5 待办（按优先级）
 
 1. common 目录去重（3.1）
