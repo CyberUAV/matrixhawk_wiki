@@ -35,7 +35,8 @@ msgid ""
 "frequency.  In the image below, the rotor speed is 25hz.  Note that the next"
 " two biggest spikes occur at 50 Hz and 100 Hz."
 msgstr ""
-"对于使用外部调速器控制旋翼转速的直升机，通常使用静态陷波（:ref:`INS_HNTCH_MODE<INS_HNTCH_MODE>` = 0）。"
+"对于使用外部调速器控制旋翼转速的直升机，通常使用静态陷波（:ref:`INS_HNTCH_MODE<common-imu-notch-"
+"filtering-flight-and-post-flight-analysis>` = 0）。"
 
 #: ../../source/docs/common-imu-notch-filtering-helicopter-setup.rst:14
 #: 4fd3032e930346fbbdb2c8987405a90e
@@ -74,7 +75,10 @@ msgid ""
 "  So here are the settings for the static harmonic notch.  Note that the "
 "parameter :ref:`INS_HNTCH_REF <INS_HNTCH_REF>` is set to zero for the static"
 " harmonic notch."
-msgstr "例如：旋翼转速 1500 RPM、双桨叶时，基频 = 1500 × 2 ÷ 60 = 50 Hz。"
+msgstr ""
+"如果没有转速传感器，谐波陷波参考频率将是固定不变的。若已知 ESC 调速器或内部 RSC 调速器设定的旋翼转速（RPM），把该值换算为 Hz "
+"即可用来设置谐波陷波参考频率。静态谐波陷波的设置如下。注意静态谐波陷波要把参数 :ref:`INS_HNTCH_REF <INS_HNTCH_REF>`"
+" 设为零。"
 
 #: ../../source/docs/common-imu-notch-filtering-helicopter-setup.rst:23
 #: ../../source/docs/common-imu-notch-filtering-helicopter-setup.rst:36
@@ -82,7 +86,7 @@ msgstr "例如：旋翼转速 1500 RPM、双桨叶时，基频 = 1500 × 2 ÷ 60
 msgid ""
 "Set :ref:`INS_HNTCH_ENABLE <INS_HNTCH_ENABLE>` = 1 to enable the harmonic "
 "notch"
-msgstr "对于 ICE（内燃机）发动机，其转速可能在更宽范围内变化，建议使用 RPM 传感器动态跟踪。"
+msgstr "设置 :ref:`INS_HNTCH_ENABLE <INS_HNTCH_ENABLE>` = 1，启用谐波陷波"
 
 #: ../../source/docs/common-imu-notch-filtering-helicopter-setup.rst:24
 #: 24875830255c4d12aa90ce724c35f80b
@@ -90,15 +94,14 @@ msgid ""
 "Set :ref:`INS_HNTCH_REF <INS_HNTCH_REF>` = 0 to set the harmonic notch "
 "reference value for the static harmonic notch"
 msgstr ""
-"对于尾桨产生的高频振动，可使用第二组谐波陷波滤波器（:ref:`INS_HNTC2_ENABLE<INS_HNTC2_ENABLE>` = "
-"1）进行处理。"
+"对于尾桨产生的高频振动，可使用第二组谐波陷波滤波器（:ref:`INS_HNTC2_ENABLE<INS_HNTCH_REF>` = 1）进行处理。"
 
 #: ../../source/docs/common-imu-notch-filtering-helicopter-setup.rst:25
 #: 5139a2cc0c4645d29f5a40bbfa084493
 msgid ""
 "Set :ref:`INS_HNTCH_FREQ <INS_HNTCH_FREQ>` = Rotor Speed in Hz to set the "
 "harmonic notch reference frequency"
-msgstr "传统直升机陷波滤波器设置"
+msgstr "设置 :ref:`INS_HNTCH_FREQ <INS_HNTCH_FREQ>` = 旋翼转速（Hz），设定谐波陷波参考频率"
 
 #: ../../source/docs/common-imu-notch-filtering-helicopter-setup.rst:26
 #: ../../source/docs/common-imu-notch-filtering-helicopter-setup.rst:41
@@ -106,7 +109,7 @@ msgstr "传统直升机陷波滤波器设置"
 msgid ""
 "Set :ref:`INS_HNTCH_BW <INS_HNTCH_BW>` = 10 to set the harmonic notch "
 "bandwidth"
-msgstr "直升机振动频率通常较低（50–150 Hz），且相对稳定（使用调速器时），因此静态或基于 RPM 的陷波通常足够有效。"
+msgstr "设置 :ref:`INS_HNTCH_BW <INS_HNTCH_BW>` = 10，设定谐波陷波带宽"
 
 #: ../../source/docs/common-imu-notch-filtering-helicopter-setup.rst:27
 #: ../../source/docs/common-imu-notch-filtering-helicopter-setup.rst:42
@@ -114,7 +117,7 @@ msgstr "直升机振动频率通常较低（50–150 Hz），且相对稳定（�
 msgid ""
 "Set :ref:`INS_HNTCH_HMNCS <INS_HNTCH_HMNCS>` = 11 to set 1st, 2nd, and 4th "
 "harmonics"
-msgstr "通过分析飞行日志中的 ``IMU`` 消息（振动数据），可以确认陷波滤波器是否有效减少了振动。"
+msgstr "设置 :ref:`INS_HNTCH_HMNCS <INS_HNTCH_HMNCS>` = 11，选定第 1、2、4 次谐波"
 
 #: ../../source/docs/common-imu-notch-filtering-helicopter-setup.rst:30
 #: 030f2b0d1564423791fed71c7d2e60b5
@@ -133,8 +136,9 @@ msgid ""
 "dynamically set the harmonic notch reference frequency.  It is recommended "
 "that this be set to half of the governed rotor speed."
 msgstr ""
-"对于 ICE 发动机，额外的引擎振动（不规则爆燃、点火不均等）可能需要宽带陷波，可通过增加 "
-":ref:`INS_HNTCH_BW<INS_HNTCH_BW>` 来实现。"
+"如果 RPM 1 上设置了转速传感器，谐波陷波参考频率可由 RPM 1 传感器动态设定（:ref:`INS_HNTCH_MODE "
+"<INS_HNTCH_MODE>` = 2）。谐波陷波参考频率参数 :ref:`INS_HNTCH_FREQ <INS_HNTCH_FREQ>` "
+"用于指定使用 RPM 传感器动态设定参考频率的最低旋翼转速，建议设为额定（调速器控制的）旋翼转速的一半。"
 
 #: ../../source/docs/common-imu-notch-filtering-helicopter-setup.rst:34
 #: 43a2c5a9754c485c9798366e08f38f9f
@@ -150,7 +154,13 @@ msgid ""
 "at 10 to 1 to the rotor RPM.  Then the :ref:`INS_HNTCH_REF <INS_HNTCH_REF>` "
 "parameter would be set to 0.1 to scale the RPM sensor data for the rotor "
 "RPM.  So here are the settings for the dynamic harmonic notch."
-msgstr "设置完成后，在不同的飞行条件下（低速平飞、悬停、机动飞行）测试滤波效果，并使用日志分析工具验证振动水平。"
+msgstr ""
+"首先，确认 RPM 1 数据有效，并已通过 :ref:`RPM1_SCALING<RPM1_SCALING>` 参数换算为旋翼转速。然后把 "
+":ref:`INS_HNTCH_REF <INS_HNTCH_REF>` 参数设为 1，即可启用谐波陷波的动态设置。谐波陷波功能会自动把 RPM "
+"传感器数据换算为 Hz。如果 RPM 传感器因故无法直接测得旋翼转速，可用 :ref:`INS_HNTCH_REF <INS_HNTCH_REF>` "
+"参数对 RPM 传感器数据进行换算。例如，假设 RPM 传感器测的是发动机转速，而发动机与旋翼的传动比为 10:1，那么把 "
+":ref:`INS_HNTCH_REF <INS_HNTCH_REF>` 参数设为 0.1 即可把 RPM "
+"传感器数据换算为旋翼转速。动态谐波陷波的设置如下。"
 
 #: ../../source/docs/common-imu-notch-filtering-helicopter-setup.rst:37
 #: 7748990d1522454d8ff8cbcea3f3b927
@@ -158,7 +168,9 @@ msgid ""
 "Set :ref:`INS_HNTCH_REF <INS_HNTCH_REF>` = 1 to set the harmonic notch "
 "reference value to the RPM sensor data. RPM sensor data is automatically "
 "scaled to Hz."
-msgstr "传统直升机陷波滤波器设置"
+msgstr ""
+"设置 :ref:`INS_HNTCH_REF <INS_HNTCH_REF>` = 1，把谐波陷波参考值设为 RPM 传感器数据。RPM "
+"传感器数据会自动换算为 Hz。"
 
 #: ../../source/docs/common-imu-notch-filtering-helicopter-setup.rst:39
 #: d8a9ebbe3a2745289e0f52364c02d10b
@@ -166,9 +178,7 @@ msgid ""
 "Set :ref:`INS_HNTCH_FREQ <INS_HNTCH_FREQ>` = half of governed Rotor Speed in"
 " Hz to set the lower bound of the dynamic harmonic notch reference "
 "frequency."
-msgstr ""
-"完整的传统直升机陷波滤波器设置指南，请参阅 :ref:`直升机陷波设置<common-imu-notch-filtering-helicopter-"
-"setup>` 页面。"
+msgstr "完整的传统直升机陷波滤波器设置指南，请参阅 :ref:`直升机陷波设置<INS_HNTCH_FREQ>` 页面。"
 
 #: ../../source/docs/common-imu-notch-filtering-helicopter-setup.rst:45
 #: 5af3ac97443b4f239922e760fb138dc6
@@ -184,6 +194,5 @@ msgid ""
 "can be checked using the instructions for :ref:`common-imu-notch-filtering-"
 "post-configuration-flight-and-post-flight-analysis`."
 msgstr ""
-"完成设置后，使用网页版 `滤波器审查工具 "
-"<https://firmware.ardupilot.org/Tools/WebTools/FilterReview/>`__ "
-"根据实际飞行日志验证和优化滤波器参数，无需进行额外的迭代测试飞行。"
+"设置好谐波陷波之后，可按照 :ref:`common-imu-notch-filtering-post-configuration-flight-"
+"and-post-flight-analysis` 中的说明检查其对控制信号数据的影响。"

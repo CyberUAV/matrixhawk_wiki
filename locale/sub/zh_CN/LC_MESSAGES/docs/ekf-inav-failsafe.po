@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../../source/docs/ekf-inav-failsafe.rst:5 d506dfa83e9448418b0fec72f1395cf9
 msgid "EKF Failsafe"
-msgstr "EKF 故障保护"
+msgstr "EKF 失控保护"
 
 #: ../../source/docs/ekf-inav-failsafe.rst:7 b3737577d22f41d6bce636f3f1a223e9
 msgid ""
@@ -31,7 +31,7 @@ msgid ""
 "(caused by compass errors or velocity estimate errors) and prevent "
 "\"swimaways\"."
 msgstr ""
-"EKF 故障保护监控 EKF（位置与姿态估计系统）的健康状态，以捕获飞行器位置估计的问题（由罗盘误差或速度估计误差引起），并防止 「游走」。"
+"EKF 失控保护监控 EKF（位置与姿态估计系统）的健康状态，以捕获飞行器位置估计的问题（由罗盘误差或速度估计误差引起），并防止 「游走」。"
 
 #: ../../source/docs/ekf-inav-failsafe.rst:10 9fe87528bb544aabbea2cfda2b576e5b
 msgid "When will it trigger?"
@@ -43,16 +43,15 @@ msgid ""
 "compass, position or velocity are higher than the :ref:`FS_EKF_THRESH "
 "<FS_EKF_THRESH>` parameter value for 1 second."
 msgstr ""
-"当罗盘、位置或速度的任意两项 EKF「方差」超过 :ref:`FS_EKF_THRESH <FS_EKF_THRESH>` 参数值持续 1 秒时，EKF"
-" 故障保护将触发。"
+"当罗盘、位置或速度的任意两个 EKF\"方差\"超过 :ref:`FS_EKF_THRESH <FS_EKF_THRESH>` 参数值持续 1 "
+"秒时，EKF 失控保护将触发。"
 
 #: ../../source/docs/ekf-inav-failsafe.rst:14 245b13b9e21d40c597bdc0617acf771a
 msgid ""
 "These \"variances\" come from the EKF itself and are numbers indicating the "
 "EKF's confidence in its estimates.  The values are between 0 and 1 with 0 "
 "meaning the estimate is very trustworthy and 1.0 is very untrustworthy."
-msgstr ""
-"这些「方差」来自 EKF 本身，表示 EKF 对其估计值的置信度。值介于 0 到 1 之间，0 表示估计值非常可靠，1.0 表示非常不可靠。"
+msgstr "这些\"方差\"来自 EKF 本身，是表示 EKF 对其估计置信度的数值。数值在 0 到 1 之间，0 表示估计非常可信，1.0 表示非常不可信。"
 
 #: ../../source/docs/ekf-inav-failsafe.rst:16 f8d1b4bce84e4a539e21c2b344f08527
 msgid ""
@@ -61,18 +60,18 @@ msgid ""
 "the accelerometers do not show a sudden acceleration, the EKF variance for "
 "position would climb (i.e become less trustworthy)"
 msgstr ""
-"EKF 通过比较多个传感器的结果来计算这些「方差」。例如，如果 GPS 位置突然跳变但加速度计未显示突然加速，则 EKF "
-"的位置方差将升高（即变得不那么可信）。"
+"EKF 通过比较多个传感器的结果来计算这些\"方差\"。例如，如果 GPS 位置突然跳变，而加速度计未显示突然加速，则位置的 EKF "
+"方差将升高（即变得不那么可信）"
 
 #: ../../source/docs/ekf-inav-failsafe.rst:18 eaf0fb37e8d543cc8168d70f6bf1cf62
 msgid ""
 "The variances can be viewed in real-time on the ground station.  If using "
 "Mission Planner click on the \"EKF\" label on the HUD."
-msgstr "方差可在地面站实时查看。如果使用 Mission Planner，请单击 HUD 上的「EKF」标签。"
+msgstr "方差可以在地面站上实时查看。使用 Mission Planner 时，点击 HUD 上的\"EKF\"标签。"
 
 #: ../../source/docs/ekf-inav-failsafe.rst:25 0a08c99fd0834cc686746a94646fc569
 msgid "What will happen when the failsafe triggers?"
-msgstr "故障保护触发后会发生什么？"
+msgstr "失控保护触发后会发生什么？"
 
 #: ../../source/docs/ekf-inav-failsafe.rst:27 27b33219f6d4473790b23d96253269c6
 msgid ""
@@ -80,14 +79,14 @@ msgid ""
 " will sound "
 "<https://www.youtube.com/watch?v=j-CMLrAwlco&feature=player_detailpage&t=60s>`__"
 msgstr ""
-"自动驾驶仪的 `LED 将闪烁红黄色或蓝黄色，并发出音调报警 "
+"飞控的 `LED 将闪烁红黄色或蓝黄色，并发出音调报警 "
 "<https://www.youtube.com/watch?v=j-CMLrAwlco&feature=player_detailpage&t=60s>`__"
 
 #: ../../source/docs/ekf-inav-failsafe.rst:28 a3aeafac004745268e5c4a8f1d5f369c
 msgid ""
 "\"EKF variance\" will appear on the ground station's HUD if telemetry is "
 "connected"
-msgstr "如果遥测已连接，地面站 HUD 上将显示「EKF variance」（EKF 方差）"
+msgstr "如果数传已连接，地面站 HUD 上将显示「EKF variance」（EKF 方差）"
 
 #: ../../source/docs/ekf-inav-failsafe.rst:29 a2a2dd4f1af54bbf8b95c852859fa280
 msgid ""
@@ -111,7 +110,7 @@ msgstr ""
 
 #: ../../source/docs/ekf-inav-failsafe.rst:31 1cb1d8e0dd1444c29689df0f637bf520
 msgid "An EKF failsafe error will be written to the dataflash logs"
-msgstr "EKF 故障保护错误将写入数据闪存日志"
+msgstr "EKF 失控保护错误将写入 dataflash 日志"
 
 #: ../../source/docs/ekf-inav-failsafe.rst:33 0e83428f0c754d4a8725e05266ee44fb
 msgid ""
@@ -119,23 +118,23 @@ msgid ""
 "flight mode switch) in a manual flight mode such as :ref:`AltHold "
 "<altholdmode>` to bring the vehicle home."
 msgstr ""
-"EKF 故障保护触发后，飞手可通过飞行模式开关切换到手动飞行模式（如 :ref:`AltHold "
-"<altholdmode>`）重新接管控制权，将飞行器驶回。"
+"EKF 失控保护发生后，飞手可以通过飞行模式开关切换到手动飞行模式（如 :ref:`AltHold "
+"<altholdmode>`）重新接管控制，将飞行器飞回。"
 
 #: ../../source/docs/ekf-inav-failsafe.rst:36 b456d7aab43d4cfba1c98ad0330adf71
 msgid "Adjusting the Sensitivity of the failsafe"
-msgstr "调整故障保护灵敏度"
+msgstr "调整失控保护的灵敏度"
 
 #: ../../source/docs/ekf-inav-failsafe.rst:38 aac1302d071f402db6a0956704dded04
 msgid ""
 "The :ref:`FS_EKF_THRESH <FS_EKF_THRESH>` parameter can be adjusted to "
 "control the sensitivity of the failsafe"
-msgstr ":ref:`FS_EKF_THRESH <FS_EKF_THRESH>` 参数可用于调整故障保护的灵敏度"
+msgstr "可调整 :ref:`FS_EKF_THRESH <FS_EKF_THRESH>` 参数来控制失控保护的灵敏度"
 
 #: ../../source/docs/ekf-inav-failsafe.rst:40 aaa5185c285d46b893c3510a1821f7b5
 msgid ""
 "Set :ref:`FS_EKF_THRESH <FS_EKF_THRESH>` = 0 to disable the EKF failsafe"
-msgstr "将 :ref:`FS_EKF_THRESH <FS_EKF_THRESH>` 设为 0 可禁用 EKF 故障保护"
+msgstr "将 :ref:`FS_EKF_THRESH <FS_EKF_THRESH>` 设为 0 以禁用 EKF 失控保护"
 
 #: ../../source/docs/ekf-inav-failsafe.rst:41 7fe21061f3d8480caa6e2f4107d66e7f
 msgid ""
@@ -146,7 +145,7 @@ msgid ""
 "is activated."
 msgstr ""
 "将 :ref:`FS_EKF_THRESH <FS_EKF_THRESH>` 提高至 0.8 到 1.0 之间的值，可降低 EKF "
-"故障保护触发概率。提高此参数值的代价是：在因罗盘故障或定位异常导致失控游走时，飞行器将游走更远距离后才激活故障保护。"
+"失控保护触发概率。提高此参数值的代价是：在因罗盘故障或定位异常导致失控游走时，飞行器将游走更远距离后才激活失控保护。"
 
 #: ../../source/docs/ekf-inav-failsafe.rst:42 0a846b5cd11944979f09ec9ee5a8b2d3
 msgid ""
@@ -156,4 +155,4 @@ msgid ""
 "maneuvers"
 msgstr ""
 "将 :ref:`FS_EKF_THRESH <FS_EKF_THRESH>` 降低至 0.6 左右，可提高 EKF "
-"故障保护快速触发的概率。降低此值的代价是在大机动飞行时可能误触发 EKF 故障保护。"
+"失控保护快速触发的概率。降低此值的代价是在大机动飞行时可能误触发 EKF 失控保护。"

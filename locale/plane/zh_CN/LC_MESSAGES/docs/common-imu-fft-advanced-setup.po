@@ -151,9 +151,10 @@ msgid ""
 " with minimal latency and can be a good option for certain applications. To "
 "setup the harmonic notch this way:"
 msgstr ""
-"也可以在测试飞行中使用飞行中 FFT 生成精确的 :ref:`INS_HNTCH_FREQ <INS_HNTCH_FREQ>` 和/或 "
-":ref:`INS_HNTC2_FREQ <INS_HNTC2_FREQ>`。然后禁用飞行中 "
-"FFT，使用数据设置基于油门的中心频率来驱动动态谐波陷波。这具有非常低的 CPU 开销和最小延迟，对某些应用来说是一个好选择。以此方式设置谐波陷波："
+"也可以在试飞中用飞行中 FFT 生成精确的 :ref:`INS_HNTCH_FREQ <INS_HNTCH_FREQ>` 和/或 "
+":ref:`INS_HNTC2_FREQ <INS_HNTC2_FREQ>` :ref:`INS_HNTCH_FREQ "
+"<INS_HNTCH_FREQ>`。之后关闭飞行中 FFT，用这些数据设置基于油门的中心频率来驱动动态谐波陷波。这种方式 CPU "
+"开销极低、延迟极小，对某些应用是不错的选择。按以下方式设置谐波陷波："
 
 #: ../../source/docs/common-imu-fft-advanced-setup.rst:42
 #: c1472b6583c1471fab222e393755fd17
@@ -320,7 +321,9 @@ msgid ""
 "frequency energy, which is the ratio in dB of the gyro noise at startup to "
 "the gyro noise of the detected frequency peak in flight. Here is an example "
 "from the same 4\" quad:"
-msgstr "小型多旋翼飞行器（3英寸及以下桨叶）"
+msgstr ""
+"对小型多旋翼来说另一个重要指标是频率能量。最直观的方式是绘制频率能量的信噪比曲线，即飞行中检测到的频率峰值处陀螺仪噪声与启动时陀螺仪噪声之比（单位 "
+"dB）。下面是同一台 4 寸四轴的示例："
 
 #: ../../source/docs/common-imu-fft-advanced-setup.rst:86
 #: f3123d76213d445a96918ef0edc5af55
@@ -331,8 +334,8 @@ msgid ""
 "noise. The default setting is 25dB and so in this example the peak is "
 "correctly detected as a signal."
 msgstr ""
-"通常可以将 ``FFT_SNR_REF`` 降低至 10 dB 以下，并适当降低 "
-"``FFT_MINHZ``，因为此类飞行器的电机噪声频率通常较低，且信噪比较差。"
+"可以看到，横滚轴约 50dB、俯仰轴约 40dB 处有一个很强的信号。FFT 引擎使用 :ref:`FFT_SNR_REF <FFT_SNR_REF>`"
+" 设置来判定检测到的频率峰值究竟是信号还是噪声。默认值为 25dB，因此本例中该峰值被正确判定为信号。"
 
 #: ../../source/docs/common-imu-fft-advanced-setup.rst:88
 #: 0343e1aa1f8b42a1b42c5179551758a0
@@ -352,8 +355,10 @@ msgid ""
 "enormous. Thus it is likely that for smaller builds it will be necessary to "
 "reduce :ref:`FFT_SNR_REF <FFT_SNR_REF>`."
 msgstr ""
-"对于使用 Y6B 配置的飞行器，由于共轴电机会产生多个峰值，建议将 ``FFT_HMNC_PEAK`` 设置为 0（跟踪最大峰值）或 "
-"2（仅跟踪第三个峰值），以获得最佳效果。"
+"这次可以看到信噪比正好在 25dB 附近——如果 :ref:`FFT_SNR_REF <FFT_SNR_REF>` 设为 "
+"25dB，检测到的峰值会有相当多的时间被当成噪声。所以对这台多旋翼我把 :ref:`FFT_SNR_REF <FFT_SNR_REF>` 设为 "
+"15dB，以正确检出峰值。从机械上很容易理解为什么必须这样做：几乎所有飞控用的都是同款 MEMS 陀螺仪，但 10 寸桨与 3 "
+"寸桨的震动能量差异巨大。因此小机架很可能需要调低 :ref:`FFT_SNR_REF <FFT_SNR_REF>`。"
 
 #: ../../source/docs/common-imu-fft-advanced-setup.rst:98
 #: 4983738eaaff4954bd54cd14f5ef6acd
@@ -374,7 +379,9 @@ msgid ""
 "instance Y6 with difference prop sizes in a coaxial configuration. These "
 "differences can make the fundamental harmonic frequency hard to find. Here "
 "are the detected frequency peaks for a Y6B:"
-msgstr "概述"
+msgstr ""
+"从噪声的角度看，小型多旋翼相对简单——电机的噪声特征干净漂亮，用算法找出噪声频率相对容易。大型多旋翼要复杂得多：噪声能量大得多，而且可能出现在意想不到的地方。任何多旋翼在偏航时，由于各电机以不同转速实现偏航机动，电机噪声频率都会发散。电机越多（如"
+" Y6 或 X8 构型）、或存在任何不平衡（如共轴异桨径的 Y6），这种发散越明显。这些差异会让基频谐波难以确定。下面是一台 Y6B 检测到的频率峰："
 
 #: ../../source/docs/common-imu-fft-advanced-setup.rst:106
 #: a5671af27dc94f7f9a827b12faf11689
@@ -407,8 +414,17 @@ msgid ""
 " instance setting :ref:`FFT_HMNC_PEAK <FFT_HMNC_PEAK>` to 2, will allow us "
 "to accurately target the first harmonic."
 msgstr ""
-"本页面介绍了如何使用飞行中实时 FFT 功能来设置谐波陷波滤波器，以滤除电机噪声。如需了解背景知识，请参阅 :ref:`谐波陷波滤波器<common-"
-"imu-notch-filtering>` 页面。"
+"可以看到，噪声最大的电机峰值约在 150Hz，第二大的约在 75Hz，而第三大的峰值似乎在 120Hz 与 225Hz "
+"之间跳动。这是怎么回事？其实电机的转动频率确实是 75Hz，但 FFT 默认锁定的频率是 "
+"150Hz。从控制角度看这很糟糕：谐波陷波瞄准的是基频的整数倍谐波，如果谐波陷波配置为 150Hz，那么 75Hz 的噪声峰将完全不被陷波。75Hz "
+"已经低到接近飞机的控制频率，忽略这个噪声可能造成严重问题。150Hz 的信号清晰明确，但 120Hz 与 225Hz "
+"之间的跳动看起来很怪。从机械上想想我这台 Y6B "
+"的构型就能理解了：它上层用更大的螺旋桨，意味着上下桨几乎必然以不同频率旋转；它绕中轴平衡，但前后略有不平衡。这些因素叠加意味着至少存在两个基频谐波，120Hz"
+" 的信号几乎可以肯定就是其中之一，而 225Hz 则是 75Hz 基频的三次谐波。那么如何正确地设置陷波目标？我们显然希望把 75Hz "
+"当作基频谐波。幸运的是，ArduPilot 默认把 :ref:`FFT_HMNC_PEAK <FFT_HMNC_PEAK>` 设为 "
+"0，即\"自动\"。自动模式下，飞控会尝试检测某一频率是另一频率的谐波这种情况，并把较低的频率交给谐波陷波滤波器使用。这在四轴上工作得很好，但在我的 "
+"Y6B 上这种关系太弱而不可用——多半是 120Hz 的谐波把事情搅乱了。所以在这个例子中，把 :ref:`FFT_HMNC_PEAK "
+"<FFT_HMNC_PEAK>` 设为 2 就能准确锁定一次谐波。"
 
 #: ../../source/docs/common-imu-fft-advanced-setup.rst:108
 #: 10e1c540e61e4b0d95e00a9418145b64
@@ -427,7 +443,8 @@ msgid ""
 "is the energy-weighted average of roll and pitch axes. If roll and pitch are"
 " tracking different peaks then the energy weighted average will be somewhere"
 " in-between - totally useless for the purposes of notch filtering."
-msgstr "飞行中 FFT 的工作原理"
+msgstr ""
+"可以看到，横滚轴跟踪得相当好，俯仰轴在一次谐波与二次谐波之间偶有跳动，而偏航轴则一直在跳。在较大的多旋翼上，不同轴检测到不同峰值并不罕见，但这对谐波陷波是个麻烦：其使用的频率是横滚和俯仰轴的能量加权平均值。如果横滚和俯仰跟踪的是不同的峰值，能量加权平均将落在两者之间——对陷波滤波来说毫无用处。"
 
 #: ../../source/docs/common-imu-fft-advanced-setup.rst:116
 #: 01c72f0faa65498392c8c9b22021ce00
@@ -435,7 +452,8 @@ msgid ""
 "In order to address this problem it is possible to set :ref:`FFT_HMNC_PEAK "
 "<FFT_HMNC_PEAK>` to 4 to track the roll-axis only or 5 to track the pitch-"
 "axis only."
-msgstr "FFT 通过分析陀螺仪的振动数据来识别主要噪声频率，然后将该频率实时反馈给谐波陷波滤波器作为其中心频率。"
+msgstr ""
+"为解决这个问题，可以把 :ref:`FFT_HMNC_PEAK <FFT_HMNC_PEAK>` 设为 4 只跟踪横滚轴，或设为 5 只跟踪俯仰轴。"
 
 #: ../../source/docs/common-imu-fft-advanced-setup.rst:118
 #: 282b16fd9ae94c6f90738a13bf0e0ab2
@@ -450,7 +468,13 @@ msgid ""
 ":ref:`INS_HNTCH_OPTS<INS_HNTCH_OPTS>` and/or "
 ":ref:`INS_HNTC2_OPTS<INS_HNTC2_OPTS>` set to 3 - dynamic harmonics and "
 "double notch:"
-msgstr "窗口大小（``FFT_WINDOW_SIZE``）决定了频率分辨率：窗口越大，分辨率越高，但延迟也越大。建议从默认值 32 开始。"
+msgstr ""
+"最后，噪声最大的那些峰值也可能彼此并不构成谐波关系——本例显然如此。这时可以通过设置 "
+":ref:`INS_HNTCH_OPTS<INS_HNTCH_OPTS>` 和/或 "
+":ref:`INS_HNTC2_OPTS<INS_HNTC2_OPTS>` 的位 2（若未配置其他选项则设为 "
+"2），让谐波陷波直接跟踪各频率峰。这样频率跟踪非常精确、噪声更低。下面是一台 Solo 的日志，其 "
+":ref:`INS_HNTCH_OPTS<INS_HNTCH_OPTS>` 和/或 "
+":ref:`INS_HNTC2_OPTS<INS_HNTC2_OPTS>` 设为 3——动态谐波加双陷波："
 
 #: ../../source/docs/common-imu-fft-advanced-setup.rst:124
 #: 639dbbf442fa4de8bedcb737c98205f8

@@ -44,7 +44,7 @@ msgid ""
 "features. See :ref:`Firmware Limitations <common-limited_firmware>` for "
 "details."
 msgstr ""
-"由于闪存限制，此板不包含所有 ArduPilot 功能。详情请参见 :ref:`固件限制 <common-limited_firmware>`。"
+"由于闪存容量限制，此板不包含所有 ArduPilot 功能。详情参见 :ref:`固件限制 <common-limited_firmware>`。"
 
 #: ../../source/docs/common-heewingf405.rst:21
 #: 1c474d7f793744cb985087b647813941
@@ -211,7 +211,7 @@ msgstr "默认 UART 顺序"
 msgid ""
 "The UARTs are marked Rn and Tn in the above pinouts. The Rn pin is the "
 "receive pin for UARTn. The Tn pin is the transmit pin for UARTn."
-msgstr "上图引脚定义中，UART 标注为 Rn 和 Tn。Rn 引脚为 UARTn 的接收引脚，Tn 引脚为 UARTn 的发送引脚。"
+msgstr "上述引脚图中 UART 标记为 Rn 和 Tn。Rn 引脚为 UARTn 的接收引脚，Tn 引脚为 UARTn 的发送引脚。"
 
 #: ../../source/docs/common-heewingf405.rst:83
 #: bc150c2218ce4fc8ab40487d134c130b
@@ -305,7 +305,7 @@ msgid ""
 "Channels within the same group need to use the same output rate. If any "
 "channel in a group uses DShot then all channels in the group need to use "
 "DShot."
-msgstr "同一组内的通道必须使用相同的输出频率。若组内任一通道使用 DShot，则该组所有通道均需使用 DShot。"
+msgstr "同一组内的通道必须使用相同的输出速率。如果某组中任一通道使用 DShot，则该组中所有通道都必须使用 DShot。"
 
 #: ../../source/docs/common-heewingf405.rst:108
 #: 03b8755289044f36bf1a949cbf482e35
@@ -322,7 +322,7 @@ msgid ""
 "manner, can provide RC without telemetry."
 msgstr ""
 "RCIN 引脚经过反相器后接到 RX2（UART2 RX），默认映射为定时器输入而非 UART，支持所有 ArduPilot 支持的接收机协议，但 "
-"CRSF/ELRS 和 SRXL2 除外（它们需要真正的 UART 连接）。但是，以此方式连接的 FPort 只能提供 RC 信号而无遥测。"
+"CRSF/ELRS 和 SRXL2 除外（它们需要真正的 UART 连接）。但是，以此方式连接的 FPort 只能提供 RC 信号而无数传。"
 
 #: ../../source/docs/common-heewingf405.rst:112
 #: cdf647af295a429a99842a84532aa7cb
@@ -333,7 +333,7 @@ msgid ""
 ":ref:`BRD_ALT_CONFIG<BRD_ALT_CONFIG>` to “1” so it becomes the SERIAL2 "
 "port's RX input pin."
 msgstr ""
-"要允许 FPort、CRSF 和 SRXL2 接收机使用 CRSF 和内嵌遥测，可通过将 "
+"要允许 FPort、CRSF 和 SRXL2 接收机使用 CRSF 和内嵌数传，可通过将 "
 ":ref:`BRD_ALT_CONFIG<BRD_ALT_CONFIG>` 设置为 「1」，将 RX2 引脚配置为真正的 UART2 RX "
 "引脚，以支持双向系统，使其成为 SERIAL2 端口的 RX 输入引脚。"
 
@@ -354,14 +354,14 @@ msgstr "不支持 PPM/SBUS。"
 msgid ""
 "FPort requires connection to TX2 and RX2 via a bi-directional inverter. See "
 ":ref:`common-FPort-receivers`."
-msgstr "FPort 需要通过双向反相器连接到 TX2 和 RX2。请参见 :ref:`common-FPort-receivers`。"
+msgstr "FPort 需通过双向电平转换器连接至 TX2 和 RX2。请参阅 :ref:`common-FPort-receivers`。"
 
 #: ../../source/docs/common-heewingf405.rst:120
 #: e169eb30cdbd4f2bab01d3d39edc7619
 msgid ""
 "CRSF also requires a TX2 connection, in addition to RX2, and automatically "
 "provides telemetry."
-msgstr "CRSF 除需要 RX2 外还需要 TX2 连接，并自动提供遥测。"
+msgstr "CRSF 除需要 RX2 外还需要 TX2 连接，并自动提供数传。"
 
 #: ../../source/docs/common-heewingf405.rst:122
 #: 17677e8f712f4216bd00d21df06dec21
@@ -369,7 +369,7 @@ msgid ""
 "SRXL2 requires a connection to TX2 and automatically provides telemetry.  "
 "Set :ref:`SERIAL6_OPTIONS<SERIAL6_OPTIONS>` to \"4\"."
 msgstr ""
-"SRXL2 需要连接到 TX2 并自动提供遥测。设置 :ref:`SERIAL6_OPTIONS<SERIAL6_OPTIONS>` 为 「4」。"
+"SRXL2 需连接至 TX2 并自动提供数传回传。将 :ref:`SERIAL6_OPTIONS<SERIAL6_OPTIONS>` 设为「4」。"
 
 #: ../../source/docs/common-heewingf405.rst:124
 #: e9b3801246064a3db02f8dc9d664b579
@@ -388,8 +388,8 @@ msgid ""
 "compatible with all protocols except PPM (SBUS requires external inversion "
 "on other UARTs). See :ref:`common-rc-systems` for details."
 msgstr ""
-"ArduPilot 中任意 UART 也可用于 RC 系统连接，兼容除 PPM 以外的所有协议（SBUS 在其他 UART 上需要外部反相）。详情请参见"
-" :ref:`common-rc-systems`。"
+"任意 UART 也可用于 ArduPilot 中的 RC 系统连接，兼容除 PPM 以外的所有协议（SBUS 在其他 UART "
+"上需要外部反相器）。详情参见 :ref:`common-rc-systems`。"
 
 #: ../../source/docs/common-heewingf405.rst:129
 #: 4604457b524845799b84fc7745afc1e4
@@ -466,8 +466,8 @@ msgid ""
 "GPS/compass <common-positioning-landing-page>` should be connected in order "
 "for autonomous modes to function."
 msgstr ""
-"此板不包含 GPS 或罗盘，因此应连接 :ref:`外部 GPS/罗盘 <common-positioning-landing-page>` "
-"以使自主模式正常工作。"
+"此飞控不含 GPS 或罗盘，需连接 :ref:`外部 GPS/罗盘 <common-positioning-landing-page>` "
+"方可使用自主飞行模式。"
 
 #: ../../source/docs/common-heewingf405.rst:157
 #: d6dfdf0571d34cc9b7a2f05791d8b43e
@@ -498,7 +498,7 @@ msgid ""
 "  can be used and loaded like normal ArduPilot firmware (this is rev 4.3.7 "
 "Plane firmware) as a custom firmware file in Mission Planner."
 msgstr ""
-"可以使用`「过渡」固件 "
+"可以使用 `「过渡」固件 "
 "<https://firmware.ardupilot.org/Tools/TransitionalFirmware/HeeWingF405/>`__，并像正常"
 " ArduPilot 固件一样加载（这是 rev 4.3.7 Plane 固件），在 Mission Planner 中作为自定义固件文件加载。"
 

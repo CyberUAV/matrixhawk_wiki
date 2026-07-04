@@ -42,8 +42,11 @@ msgid ""
 "values the approximate frequency of the noise. The highest frequency that "
 "can be detected by an FFT is the Nyquist frequency of *f*\\ :sub:`s` / *2*"
 msgstr ""
-"ArduPilot 的飞行中 FFT "
-"系统利用板载处理器对陀螺仪数据进行快速傅里叶变换（FFT），从而识别振动噪声的主频率并动态调整谐波陷波滤波器的中心频率。"
+"FFT 取一组陀螺仪采样，对其做频率分析，得到一组频率仓（bin）及各自的能量，表示该仓内噪声信号的\"多少\"。例如取长度为 32 的一组采样——称为"
+" *FFT 长度* 或 *窗口大小*、*N*——将得到一组宽度各为 *f*\\ :sub:`s` / *32* 的频率仓，其中 *f*\\ "
+":sub:`s` 是采样频率。由于这些采样来自陀螺仪，采样率通常为 1KHz，因此每个仓约 32Hz 宽。FFT "
+"分析会给出每个仓的能量值，代表该仓频率上的噪声能量。比如电机噪声在 80Hz，则大部分能量会落在第三个仓里，由能量值即可判断噪声的大致频率。FFT "
+"能检测到的最高频率是奈奎斯特频率 *f*\\ :sub:`s` / *2*"
 
 #: ../../source/docs/common-imu-fft-how-it-works.rst:11
 #: aa9ae55f5d4a4634ae8cb0402bca16f8
@@ -65,7 +68,12 @@ msgid ""
 "run on F4 processors. Higher values such as 128 require F7 processors and "
 "anything above this should typically only be run on an H7."
 msgstr ""
-"FFT 窗口大小（``FFT_WINDOW_SIZE``）越大，频率分辨率越高，但需要更多处理能力。对于大多数应用，默认值 32 即可满足需求。"
+"显然，增大 FFT 长度能获得高得多的频率分辨率，你可能因此认为应该总是使用长 FFT。有两个事实决定了不能这样做。其一，FFT 的计算量约为 *O(N"
+" log N)* 的 CPU 时间，因此更长的 FFT 很快就贵得离谱。其二，FFT "
+"在频率与时间之间存在类似海森堡不确定性的关系——你可以选择高时间分辨率或高频率分辨率，但无法同时兼得。对多旋翼而言时间分辨率很重要，因为计算出的频率可能用于驱动动态谐波陷波这类对时间敏感的控制。因此"
+" FFT "
+"长度的选择要在频率计算的精度与结果的时效性之间仔细权衡。对大型多旋翼或直升机，高频率分辨率更有益；而对姿态控制敏感的小型多旋翼，高时间分辨率更重要。默认值"
+" 32 通常表现良好，F4 处理器即可运行。128 之类更高的值需要 F7 处理器，再往上通常只应在 H7 上运行。"
 
 #: ../../source/docs/common-imu-fft-how-it-works.rst:13
 #: ba33d028aa1c4199981de05162fa133e

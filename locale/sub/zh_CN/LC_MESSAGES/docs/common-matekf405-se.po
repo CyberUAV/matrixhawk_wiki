@@ -39,7 +39,7 @@ msgid ""
 "features. See :ref:`Firmware Limitations <common-limited_firmware>` for "
 "details."
 msgstr ""
-"由于闪存限制，此板不包含所有 ArduPilot 功能。详情参见 :ref:`固件限制 <common-limited_firmware>`。"
+"由于闪存容量限制，此板不包含所有 ArduPilot 功能。详情参见 :ref:`固件限制 <common-limited_firmware>`。"
 
 #: ../../source/docs/common-matekf405-se.rst:24
 #: 60e3a5f3caf340f9b21f28dbf20a3699
@@ -248,12 +248,12 @@ msgstr "SERIAL6 = 用户 = USART6（仅 RX；用于 ESC 数传时，设置 SERIA
 #: ../../source/docs/common-matekf405-se.rst:81
 #: 1fc7dadbbcea46a49307537842e64cfc
 msgid "SERIAL7 = USER = USART2 (only if BRD_ALT_CONFIG =1)"
-msgstr "SERIAL7 = 用户 = USART2（仅当 BRD_ALT_CONFIG =1 时）"
+msgstr "SERIAL7 = 用户 = USART2（仅当 BRD_ALT_CONFIG =1 时可用）"
 
 #: ../../source/docs/common-matekf405-se.rst:83
 #: 4bdc3be59e484e76884172b1d8587abf
 msgid "Serial protocols can be adjusted to personal preferences."
-msgstr "串口协议可根据个人需求调整。"
+msgstr "串口协议可根据个人偏好调整。"
 
 #: ../../source/docs/common-matekf405-se.rst:86
 #: 63b87d94f3014126966e16665be2348f
@@ -288,8 +288,9 @@ msgid ""
 "of motors with a common DShot or PWM frequency without sacrificing the use "
 "of an output for servo use due to rate issues (see above Dshot discussion)."
 msgstr ""
-"前 8 路舵机/电机输出在板上标注为：M1、M2、S3-S8。S9 是板上的焊盘，S10 在 ArduPilot 定义中连接到标有 LED 的引脚。使用"
-" S10 可方便地将奇数数量的电机分组，使用统一的 DShot 或 PWM 频率，而不必因频率问题牺牲一路舵机输出（参见上述 DShot 讨论）。"
+"前 8 路舵机/电机输出在飞控上标记为 M1、M2、S3~S8。S9 为飞控上的焊盘，S10 在 ArduPilot 定义中连接到标记为 LED "
+"的引脚。使用 S10 可以轻松将奇数个电机分组，共用 DShot 或 PWM 频率，而无需为避免频率问题牺牲舵机用途的输出（参见上方 DShot "
+"讨论）。"
 
 #: ../../source/docs/common-matekf405-se.rst:97
 #: 9e5366e57ce94e5193f96a35aae2ce87
@@ -305,8 +306,8 @@ msgid ""
 "require a true UART connection. However, FPort, when connected in this "
 "manner, will only provide RC without telemetry."
 msgstr ""
-"SBUS 引脚通过反相器传递到 R2（UART2 RX），默认映射到定时器输入而非 UART，支持所有 ArduPilot 支持的接收机协议，但 "
-"CRSF/ELRS 和 SRXL2 除外（这些协议需要真实 UART 连接）。不过，FPort 以此方式连接时只能提供 RC 功能（无数传）。"
+"SBUS 引脚经反相器传递至 R2（UART2 RX），默认映射为定时器输入而非 UART，支持所有 ArduPilot 支持的接收机协议，但 "
+"CRSF/ELRS 和 SRXL2 除外（这两种协议需要真正的 UART 连接）。但是，FPort 以此方式连接时仅能提供 RC 信号，不含数传。"
 
 #: ../../source/docs/common-matekf405-se.rst:101
 #: cc40b16091574ab3820d55b28c940397
@@ -317,16 +318,16 @@ msgid ""
 ":ref:`BRD_ALT_CONFIG<BRD_ALT_CONFIG>` to “1” so it becomes the SERIAL7 "
 "port's RX input pin."
 msgstr ""
-"为使用 FPort、CRSF、SRXL2 接收机中的 CRSF 和内嵌数传功能，R2 引脚也可通过将 "
-":ref:`BRD_ALT_CONFIG<BRD_ALT_CONFIG>` 设置为「1」来配置为真实 UART2 RX 引脚，供双向系统使用，成为 "
-"SERIAL7 接口的 RX 输入引脚。"
+"如需在 FPort、CRSF 和 SRXL2 接收机中使用 CRSF 及内嵌数传，可将 R2 引脚配置为真正的 UART2 RX 引脚，将 "
+":ref:`BRD_ALT_CONFIG<BRD_ALT_CONFIG>` 设为 「1」，使其成为 SERIAL7 端口的 RX "
+"输入引脚，从而支持双向系统。"
 
 #: ../../source/docs/common-matekf405-se.rst:103
 #: 87bd52d8e19243d4ac5383391264fe4b
 msgid ""
 "With this option, :ref:`SERIAL7_PROTOCOL<SERIAL7_PROTOCOL>` must be set to "
 "\"23\", and:"
-msgstr "使用此选项时，:ref:`SERIAL7_PROTOCOL<SERIAL7_PROTOCOL>` 必须设置为「23」，并且："
+msgstr "使用此选项时，:ref:`SERIAL7_PROTOCOL<SERIAL7_PROTOCOL>` 必须设为 「23」，并且："
 
 #: ../../source/docs/common-matekf405-se.rst:105
 #: b9b9433c9ae4477f90378e0cf5287c1f
@@ -337,21 +338,21 @@ msgstr "不支持 PPM。"
 #: 8dbbb44fd4884e74a364be964b411e67
 msgid ""
 "DSM/SRXL connects to the R2  pin, but SBUS would still be connected to SBUS."
-msgstr "DSM/SRXL 连接到 R2 引脚，但 SBUS 仍连接到 SBUS 引脚。"
+msgstr "DSM/SRXL 连接到 R2 引脚，但 SBUS 仍连接到 SBUS 端口。"
 
 #: ../../source/docs/common-matekf405-se.rst:109
 #: 364e6412ab7849a79eb8458c8d74982c
 msgid ""
 "FPort requires connection to T2 and R2 via a bi-directional inverter. See "
 ":ref:`common-FPort-receivers`."
-msgstr "FPort 需通过双向反相器连接到 T2 和 R2。参见 :ref:`common-FPort-receivers`。"
+msgstr "FPort 需要通过双向反相器连接到 T2 和 R2。请参阅 :ref:`common-FPort-receivers`。"
 
 #: ../../source/docs/common-matekf405-se.rst:111
 #: 67be7d4c13f24746be8956eeb64604c1
 msgid ""
 "CRSF also requires a T2 connection, in addition to R2, and automatically "
 "provides telemetry."
-msgstr "CRSF 除 R2 外还需要 T2 连接，并自动提供数传。"
+msgstr "CRSF 除需连接 R2 外，还需要 T2 连接，并自动提供数传。"
 
 #: ../../source/docs/common-matekf405-se.rst:113
 #: 471ea5595b234ed38fd39d09584f7728
@@ -359,7 +360,7 @@ msgid ""
 "SRXL2 requires a connection to T2 and automatically provides telemetry.  Set"
 " :ref:`SERIAL6_OPTIONS<SERIAL6_OPTIONS>` to \"4\"."
 msgstr ""
-"SRXL2 需连接 T2 并自动提供数传。将 :ref:`SERIAL6_OPTIONS<SERIAL6_OPTIONS>` 设置为「4」。"
+"SRXL2 需要连接到 T2，并自动提供数传。将 :ref:`SERIAL6_OPTIONS<SERIAL6_OPTIONS>` 设为 「4」。"
 
 #: ../../source/docs/common-matekf405-se.rst:115
 #: 347c85363d2a445a9da5b91d5385de44
@@ -368,8 +369,8 @@ msgid ""
 "compatible with all protocols except PPM (SBUS requires external inversion "
 "on other UARTs). See :ref:`common-rc-systems` for details."
 msgstr ""
-"在 ArduPilot 中，任意 UART 也可用于 RC 系统连接，与除 PPM 外的所有协议兼容（SBUS 在其他 UART 上需外部反相）。详情见"
-" :ref:`common-rc-systems`。"
+"任意 UART 也可用于 ArduPilot 中的 RC 系统连接，兼容除 PPM 以外的所有协议（SBUS 在其他 UART "
+"上需要外部反相器）。详情参见 :ref:`common-rc-systems`。"
 
 #: ../../source/docs/common-matekf405-se.rst:118
 #: dde394d97c2c425fb8813c21c0743ba1
