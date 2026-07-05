@@ -4,6 +4,8 @@
 # This information is imported by the conf.py files in each of the sub wikis
 
 
+import os
+
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
@@ -30,9 +32,8 @@ wiki_base_url = 'https://ardupilot.org/'
 intersphinx_base_url = wiki_base_url + '%s/'
 
 
-# Where to point the base of the build for the main site menu
-html_context = {'target': '/'}
-# This needs to change to the actual URL root once the theme updated.
+# html_context (incl. the language-aware 'target' menu prefix) is defined
+# below, after LANGUAGES/URL_PREFIX.
 
 
 # --- i18n: language code <-> URL prefix mapping (single source of truth) ---
@@ -57,6 +58,16 @@ SEARCH_LANGUAGE = {
     'en': 'en',
     'zh_CN': 'zh',
 }
+
+# Where to point the base of the build for the main site menu.
+# The deployed tree is /<lang-prefix>/<wiki>/, so cross-wiki links in the
+# top menu ({{target}}copter/index.html) must carry the language prefix or
+# every menu click falls out of the current language tree (straight 404 on
+# the bilingual site). The prefix is resolved in _set_language_target()
+# below (config-inited hook), NOT here: update.py imports this module once
+# at startup — before it sets MWIKI_CURRENT_LANGUAGE per build — so a
+# module-level env read would be frozen at '/' for every build.
+html_context = {'target': '/'}
 
 # gettext catalog config (consumed by each vehicle's conf.py)
 # Keep messages split per source file (matches sphinx-intl default layout).
@@ -115,6 +126,16 @@ def _set_search_language(app, config):
         config.html_search_language = SEARCH_LANGUAGE.get(config.language, 'en')
 
 
+def _set_language_target(app, config):
+    """Resolve the top-menu cross-wiki prefix from the per-build language.
+    Runs at config-inited (fresh env read per Sphinx app), see the
+    html_context comment above for why this cannot be module-level."""
+    lang = os.environ.get('MWIKI_CURRENT_LANGUAGE')
+    if lang and config.html_context.get('target') == '/':
+        config.html_context['target'] = '/%s/' % URL_PREFIX.get(lang, lang)
+
+
 def setup(app):
     app.add_css_file("common_theme_override.css")
     app.connect('config-inited', _set_search_language)
+    app.connect('config-inited', _set_language_target)
