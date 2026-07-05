@@ -1,68 +1,234 @@
-/*! HTML5 Boilerplate v9.0.0-RC1 | MIT License | https://html5boilerplate.com/ */
-
-/* main.css 3.0.0 | MIT License | https://github.com/h5bp/main.css#readme */
-/*
- * What follows is the result of much research on cross-browser styling.
- * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
- * Kroc Camen, and the H5BP dev community and team.
+/* matrixhawk landing — MIKROE-inspired design language.
+ *
+ * Palette lifted from mikroe.com (me-simplicity theme) and mapped onto the
+ * matrixhawk brand: black chrome, brand yellow accent, red hover accent,
+ * white cards on light-gray section alternation. Self-contained: no CDN
+ * fonts/frameworks (the previous Bootstrap-on-jsdelivr dependency was slow
+ * or blocked for zh readers).
  */
 
-/* ==========================================================================
-   Base styles: opinionated defaults
-   ========================================================================== */
+:root {
+    --yellow: #ffcb05;   /* matrixhawk brand / mikroe accent  */
+    --red: #d02600;      /* mikroe primary red                */
+    --ink: #111111;      /* header / footer chrome            */
+    --ink-2: #1d1d1f;
+    --text: #24262a;
+    --text-dim: #5c5f66;
+    --paper: #ffffff;
+    --wash: #f2f2f4;     /* mikroe #efefef section wash       */
+    --line: #dddddd;
+    --maxw: 1200px;
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+            "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB",
+            "Microsoft YaHei", sans-serif;
+}
 
-html {
-    font-family: Oxygen;
-    font-weight: 400;
-    font-size: 1em;
-    line-height: 1.6;
+* { box-sizing: border-box; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+    margin: 0;
+    font-family: var(--font);
+    color: var(--text);
+    background: var(--paper);
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
 }
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
 
+/* ---------- header ---------- */
+.site-header {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--ink);
+    border-bottom: 3px solid var(--yellow);
+}
+.site-header .wrap {
+    display: flex; align-items: center; gap: 28px;
+    min-height: 62px;
+}
+.brand { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+.brand img { height: 30px; width: auto; }
+.brand .tagline {
+    color: #9a9da3; font-size: .72rem; letter-spacing: .06em;
+    border-left: 1px solid #3a3d42; padding-left: 10px;
+    text-transform: uppercase;
+}
+.nav-toggle { display: none; }
+.nav-toggle-label {
+    display: none; margin-left: auto; cursor: pointer;
+    width: 40px; height: 40px; position: relative;
+}
+.nav-toggle-label span,
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+    content: ""; position: absolute; left: 8px; right: 8px; height: 2px;
+    background: #fff; top: 19px; transition: transform .2s;
+}
+.nav-toggle-label span::before { top: -7px; }
+.nav-toggle-label span::after  { top:  7px; }
+.site-nav { margin-left: auto; display: flex; align-items: center; gap: 4px; }
+.site-nav a {
+    color: #e8e9eb; font-weight: 600; font-size: .92rem;
+    padding: 8px 13px; border-radius: 4px;
+    letter-spacing: .02em;
+}
+.site-nav a:hover { color: var(--yellow); }
+.lang-switch {
+    margin-left: 10px;
+    border: 1px solid #4a4d52; border-radius: 999px;
+    display: flex; overflow: hidden; font-size: .8rem;
+}
+.lang-switch a { padding: 4px 12px; color: #c9ccd1; font-weight: 600; }
+.lang-switch a.on { background: var(--yellow); color: #111; }
 
-.carousel-inner {
-    width: 100%;
-    height: auto;
+/* ---------- hero ---------- */
+.hero {
+    position: relative; color: #fff; background: var(--ink-2);
+    overflow: hidden;
+}
+.hero .bg {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    filter: brightness(.42);
+}
+.hero .wrap { position: relative; padding: 96px 20px 104px; }
+.hero .kicker {
+    color: var(--yellow); font-weight: 700; letter-spacing: .18em;
+    text-transform: uppercase; font-size: .82rem; margin: 0 0 14px;
+}
+.hero h1 {
+    margin: 0 0 18px; font-size: clamp(1.9rem, 4.4vw, 3.1rem);
+    line-height: 1.18; font-weight: 800; max-width: 21em;
+}
+.hero h1 em { color: var(--yellow); font-style: normal; }
+.hero p.sub { max-width: 44em; color: #d4d6da; font-size: 1.06rem; margin: 0 0 30px; }
+.btn {
+    display: inline-block; font-weight: 700; font-size: .95rem;
+    padding: 12px 26px; border-radius: 4px; border: 2px solid transparent;
+    transition: all .15s;
+}
+.btn + .btn { margin-left: 12px; }
+.btn-solid { background: var(--yellow); color: #111; }
+.btn-solid:hover { background: var(--red); color: #fff; }
+.btn-ghost { border-color: #8b8e94; color: #fff; }
+.btn-ghost:hover { border-color: var(--yellow); color: var(--yellow); }
+
+/* ---------- section scaffolding ---------- */
+section { padding: 64px 0; }
+section.wash { background: var(--wash); }
+.sec-head { margin-bottom: 34px; }
+.sec-head .label {
+    display: inline-block; color: var(--red); font-weight: 800;
+    letter-spacing: .16em; text-transform: uppercase; font-size: .8rem;
+    margin-bottom: 8px;
+}
+.sec-head h2 {
+    margin: 0; font-size: 1.7rem; font-weight: 800; color: var(--ink-2);
+}
+.sec-head h2::after {
+    content: ""; display: block; width: 56px; height: 4px;
+    background: var(--yellow); margin-top: 12px;
+}
+.sec-head p { color: var(--text-dim); margin: 12px 0 0; max-width: 52em; }
+
+/* ---------- vehicle cards (mikroe product boxes) ---------- */
+.grid { display: grid; gap: 22px; }
+.grid.v3 { grid-template-columns: repeat(3, 1fr); }
+.grid.v4 { grid-template-columns: repeat(4, 1fr); }
+.vcard {
+    background: var(--paper); border: 1px solid var(--line); border-radius: 6px;
+    overflow: hidden; position: relative;
+    transition: transform .18s, box-shadow .18s, border-color .18s;
+}
+.vcard::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: var(--yellow); transform: scaleX(0); transform-origin: left;
+    transition: transform .2s; z-index: 1;
+}
+.vcard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 30px rgba(17, 17, 17, .13);
+    border-color: transparent;
+}
+.vcard:hover::before { transform: scaleX(1); }
+.vcard .ph { aspect-ratio: 16/10; overflow: hidden; background: var(--wash); }
+.vcard .ph img { width: 100%; height: 100%; object-fit: cover; }
+.vcard .body { padding: 18px 20px 20px; }
+.vcard h3 { margin: 0 0 6px; font-size: 1.12rem; font-weight: 800; color: var(--ink-2); }
+.vcard p { margin: 0 0 14px; color: var(--text-dim); font-size: .92rem; min-height: 3em; }
+.vcard .go { color: var(--red); font-weight: 700; font-size: .9rem; }
+.vcard .go::after { content: " →"; }
+
+/* ---------- stats strip ---------- */
+.stats { background: var(--ink); color: #fff; padding: 52px 0; }
+.stats .grid { grid-template-columns: repeat(3, 1fr); text-align: center; }
+.stats .num {
+    color: var(--yellow); font-size: 2.6rem; font-weight: 800; line-height: 1;
+}
+.stats .cap { color: #b9bcc2; margin-top: 8px; font-size: .95rem; }
+
+/* ---------- resource mini-cards ---------- */
+.rcard {
+    background: var(--paper); border: 1px solid var(--line); border-radius: 6px;
+    padding: 22px; transition: border-color .15s, box-shadow .15s;
+}
+.rcard:hover { border-color: var(--red); box-shadow: 0 8px 20px rgba(17,17,17,.08); }
+.rcard h3 { margin: 0 0 6px; font-size: 1.02rem; font-weight: 800; }
+.rcard p { margin: 0; color: var(--text-dim); font-size: .88rem; }
+
+/* ---------- community gallery ---------- */
+.gallery {
+    display: flex; gap: 16px; overflow-x: auto; padding-bottom: 8px;
+    scroll-snap-type: x mandatory;
+}
+.gallery img {
+    height: 210px; width: auto; border-radius: 6px; flex: 0 0 auto;
+    scroll-snap-align: start;
 }
 
-.carousel-inner img {
-    max-height: 480px;
+/* ---------- footer (mikroe footer2022) ---------- */
+.site-footer { background: var(--ink); color: #b9bcc2; margin-top: 24px; }
+.site-footer .cols {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px;
+    padding: 52px 0 40px;
+}
+.site-footer h4 {
+    color: #fff; font-size: .86rem; letter-spacing: .12em;
+    text-transform: uppercase; margin: 0 0 14px;
+}
+.site-footer h4::after {
+    content: ""; display: block; width: 28px; height: 3px;
+    background: var(--yellow); margin-top: 8px;
+}
+.site-footer ul { list-style: none; margin: 0; padding: 0; }
+.site-footer li { margin: 7px 0; }
+.site-footer a { font-size: .92rem; }
+.site-footer a:hover { color: var(--yellow); }
+.site-footer .bottom {
+    border-top: 1px solid #2c2f34; padding: 18px 0;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: .84rem;
 }
 
-.carousel-control-next,
-.carousel-control-prev {
-    width: 30px;
+/* ---------- responsive ---------- */
+@media (max-width: 960px) {
+    .grid.v3, .grid.v4 { grid-template-columns: repeat(2, 1fr); }
+    .site-footer .cols { grid-template-columns: repeat(2, 1fr); }
+    .brand .tagline { display: none; }
 }
-
-
-.carousel-control-next-icon,
-.carousel-control-prev-icon {
-    display: inline-block;
-    width: 30px; /* ArduPilot */
-    height: 30px; /* ArduPilot */
-
+@media (max-width: 720px) {
+    .nav-toggle-label { display: block; }
+    .site-nav {
+        display: none; position: absolute; top: 62px; left: 0; right: 0;
+        background: var(--ink); flex-direction: column; align-items: stretch;
+        padding: 10px 16px 18px; border-bottom: 3px solid var(--yellow);
+    }
+    .nav-toggle:checked ~ .site-nav { display: flex; }
+    .site-nav a { padding: 12px 8px; }
+    .lang-switch { margin: 12px 0 0; align-self: flex-start; }
+    .hero .wrap { padding: 64px 20px 72px; }
+    .grid.v3, .grid.v4, .stats .grid { grid-template-columns: 1fr; }
+    .btn + .btn { margin-left: 0; margin-top: 10px; }
+    .site-footer .bottom { flex-direction: column; gap: 8px; }
 }
-
-.col_min {
-    aspect-ratio: 4/3;
-    width: 100%;
-    min-height: 0; /* This is important! */
-}
-
-.card-header {
-    min-height: 85px; /* Adjust this value as needed */
-    display: flex;
-    align-items: center;
-}
-
-.card-header h3 {
-    margin-bottom: 0;
-}
-
-.text-justify {
-  text-align: justify;
-}
-/* Make dropdown menu appear on hover */
-/* .navbar-nav li:hover .dropdown-menu {
-    display: block;
-} */
