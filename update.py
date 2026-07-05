@@ -279,13 +279,10 @@ def build_one(wiki, lang, fast):
         outdir=html_dir,
         parallel=2,
         srcdir=source_dir,
-        confoverrides={
-            'language': lang,
-            # zh_CN must map to the 'zh' search indexer (jieba word
-            # segmentation) or Chinese pages are not searchable; see
-            # common_conf.SEARCH_LANGUAGE.
-            'html_search_language': common_conf.SEARCH_LANGUAGE.get(lang, 'en'),
-        },
+        # html_search_language (zh word segmentation) is derived from the
+        # language by common_conf's config-inited hook — one code path for
+        # every builder (here, RTD, bare sphinx-build), not two.
+        confoverrides={'language': lang},
     )
     app.build()
 
