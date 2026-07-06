@@ -107,17 +107,26 @@ update.py、各分册 conf.py、主题模板都从这里读。新增语言只改
 
 ## 3. 已知架构债与建议路线
 
-### 3.1 common-*.po 重复 11 份（最大的债）
+### 3.1 common-*.po 重复 11 份（最大的债）——✅ 已于 2026-07 完成
 
-上游把 `common/` 的 RST 复制进每个分册再构建，因此 626 个 common-*.po
-在 11 个分册的 locale 里各存一份——18.4 万条目里约 85% 是重复。
-现状靠 `scripts/i18n_sync_common.py`（读 update.py 生成的
-`locale/_common_manifest.json`）在分册间同步，但共享目录方案
-（`locale/common/` 单一目录 + 各 conf.py `locale_dirs` 按序查找）
-**设计了未执行**——manifest 还没生成过。
-建议：跑一次完整 update.py 生成 manifest → 迁移到共享目录 →
-分册目录只留分册特有 .po。收益：翻译只改一处、仓库瘦 ~80%、
-lint/构建时间等比例下降。
+上游把 `common/` 的 RST 复制进每个分册再构建，因此 642 个 common-*.po
+曾在 11 个分册的 locale 里各存一份——18.4 万条目里约 85% 是重复，
+也是跨册译文漂移（同句最多 17 种译法）的土壤。
+
+**已执行**（`scripts/i18n_sync_common.py`，读 update.py 写的
+`locale/_common_manifest.json`）：各册条目**并集合并**进
+`locale/common/zh_CN/LC_MESSAGES/docs/*.po`（各册 msgid 集因 [site]
+条件剥离而不同，并集可服务所有册），删除分册副本；分册 locale
+只留分册特有目录。构建端零改动——`vehicle_conf.py` 的 locale_dirs
+本就是「分册目录优先、common 兜底」。
+
+**验证记录**：记账基线 33,846 对 (docpath, msgid) 迁移后零缺失、
+零空译文；msgfmt 642/642；全量 lint 干净；antennatracker 干净重建后
+27 个 common 页全部经回退渲染出中文。语料从 3,672 个 .po 瘦到 1,458 个。
+
+**后续规则**：上游同步后 `i18n_extract.sh` 会重新生成分册级 common
+.po（Sphinx 按册抽取），**必须紧跟着跑 `i18n_sync_common.py`**
+把新增条目归并回共享目录（脚本幂等），见 3.3 循环。
 
 ### 3.2 部署（.readthedocs.yaml 目前是摆设）
 
@@ -136,6 +145,7 @@ lint/构建时间等比例下降。
 git fetch upstream && git checkout original && git merge upstream/master
 git checkout master && git merge original          # 解决 RST 冲突
 ./scripts/i18n_extract.sh                          # 重新抽取 pot + msgmerge
+python3 scripts/i18n_sync_common.py                # 新增 common 条目归并回共享目录
 python3 scripts/i18n_ai_pretranslate.py locale/    # 只译新增/fuzzy
 python3 scripts/i18n_lint.py locale/               # 质量门
 python3 scripts/i18n_autofix.py locale/            # 机械修复
@@ -202,11 +212,12 @@ python3 scripts/i18n_autofix.py locale/            # 机械修复
 - ✅ `locale/common/` 共享目录已开张（sphinx.po 是第一块砖）
 
 未完成：
-1. **common-\*.po 去重**（3.1，最大的债）：626 个 common .po 仍 11 份拷贝;
-   locale/common/ 目录已就位,迁移方案见 3.1
-2. **上游同步自动化**（对标 PX4/Crowdin 的唯一 workflow 差距）：cron CI
-   fetch upstream → msgmerge → AI 译增量 → lint → PR
-3. **部署管线落地**（3.2）+ 每语言 sitemap 重生成（现 frontend/sitemap.xml
+- ✅ **common-\*.po 去重**（3.1）：2,857 份副本并集归一到 locale/common/，
+  记账零缺失，语料 3,672 → 1,458 个 .po（详见 3.1 验证记录）
+
+1. **上游同步自动化**（对标 PX4/Crowdin 的唯一 workflow 差距）：cron CI
+   fetch upstream → msgmerge → **i18n_sync_common** → AI 译增量 → lint → PR
+2. **部署管线落地**（3.2）+ 每语言 sitemap 重生成（现 frontend/sitemap.xml
    仍是 ardupilot.org 的,部署域名定了再做）+ intersphinx 逃逸修复（3.4）
-4. 全站翻译覆盖率汇总页（复用 coverage 扩展数据,构建时聚合）
-5. 清理：`common/source/_themes/` 未跟踪主题副本（无引用,确认后删）
+3. 全站翻译覆盖率汇总页（复用 coverage 扩展数据,构建时聚合）
+4. 清理：`common/source/_themes/` 未跟踪主题副本（无引用,确认后删）
