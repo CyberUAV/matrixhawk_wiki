@@ -72,11 +72,13 @@ def apply(g, project, shorttitle, favicon='favicon_default.ico',
     g['html_favicon'] = '../../images/%s' % favicon
     g['html_static_path'] = ['_static']
 
+    # NOTE: upstream ships a plausible.ardupilot.org analytics tag here.
+    # Removed for the matrixhawk deploy (rebrand debt: every page view was
+    # reported to upstream's analytics). Add our own instance here if/when
+    # self-hosted analytics exist.
     js = []
     if useralerts:
         js.append('./useralerts.js')
-    js.append(('https://plausible.ardupilot.org/js/script.outbound-links.js',
-               {'data-domain': 'ardupilot.org', 'defer': 'defer'}))
     g['html_js_files'] = js
 
     if copy_source is not None:

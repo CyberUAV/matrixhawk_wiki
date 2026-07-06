@@ -187,15 +187,26 @@ python3 scripts/i18n_autofix.py locale/            # 机械修复
 - 版本化（Espressif/PX4/ST 都做）**明确不做**——上游 ArduPilot wiki 即无版本,
   参数页已有 --paramversioning 兜底
 
-### 3.5 待办（按优先级）
+### 3.5 待办（按优先级，2026-07 状态刷新）
 
-1. common 目录去重（3.1）
-2. 部署管线落地（3.2）+ 构建产物冒烟检查（每语言抽 N 页断链/搜索索引存在性）
-3. SEO：`<link rel="alternate" hreflang>` 互指 + 每语言 sitemap
-   （主题模板已有语言切换所需的 `languages`/`current_language` 上下文，
-   hreflang 可在同一模板补）
-4. 术语表扩充：把本次重译沉淀的术语（陷波=notch、总距=collective、
-   尾桨=tailrotor、失控保护=failsafe、解锁=arm 等）补进
-   `i18n_glossary_zh_CN.yaml` 的 terms 段
-5. 清理：`locales/` 空目录已删；`common/source/_themes/` 是 11MB 未跟踪
-   主题副本（无 conf.py 引用，主题实际走 pip 安装）——确认无用后删除
+已完成（本轮）：
+- ✅ 文档 chrome A 方案：主题黑金换肤、顶栏双语化（`_()` + 共享 sphinx.po）、
+  语言切换胶囊逐页深链、跨册链接语言前缀（config-inited 钩子修 target 冻结 bug）
+- ✅ 配置去重：`vehicle_conf.py` 单一事实源，11 份 ~400 行 conf.py → 17 行薄壳
+  （dump 对比逐键等价证明）；中文搜索归一为 hook 单路径
+- ✅ 主页 mikroe 风格重构：单模板 + strings.json 双语生成（doctype/quirks 根因根治）
+- ✅ SEO hreflang：wiki 页（主题 layout.html fork 层）与主页均有双语互指
+- ✅ rebrand：plausible.ardupilot.org 统计已从主页与全部 wiki 页移除；
+  logo 全线 matrixhawk；术语表已扩充
+- ✅ RTD 双语试点（.readthedocs.yaml build.commands）
+- ✅ `locale/common/` 共享目录已开张（sphinx.po 是第一块砖）
+
+未完成：
+1. **common-\*.po 去重**（3.1，最大的债）：626 个 common .po 仍 11 份拷贝;
+   locale/common/ 目录已就位,迁移方案见 3.1
+2. **上游同步自动化**（对标 PX4/Crowdin 的唯一 workflow 差距）：cron CI
+   fetch upstream → msgmerge → AI 译增量 → lint → PR
+3. **部署管线落地**（3.2）+ 每语言 sitemap 重生成（现 frontend/sitemap.xml
+   仍是 ardupilot.org 的,部署域名定了再做）+ intersphinx 逃逸修复（3.4）
+4. 全站翻译覆盖率汇总页（复用 coverage 扩展数据,构建时聚合）
+5. 清理：`common/source/_themes/` 未跟踪主题副本（无引用,确认后删）
