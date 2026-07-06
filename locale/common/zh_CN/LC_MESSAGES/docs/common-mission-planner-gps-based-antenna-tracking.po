@@ -1,0 +1,722 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content ©
+# 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-19 03:48+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:5
+#: 43ec6e589bff4f6198d054b404a8310c
+msgid "Mission Planner GPS-based Antenna Tracking"
+msgstr "Mission Planner GPS 天线追踪"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:7
+#: 36d585f775d54118bcd60fa7ea3e6c01
+msgid ""
+"This article explains how to build a GPS-based :ref:`Antenna Tracker "
+"<common-antenna-tracking>` that uses the :ref:`Mission Planner "
+"<planner:install-mission-planner>` GCS to provide directional/tracking "
+"information for a servo-driven directional antenna."
+msgstr ""
+"本文介绍如何构建基于 GPS 的 :ref:`天线追踪器 <common-antenna-tracking>`，该追踪器使用 :ref:`Mission"
+" Planner <planner:install-mission-planner>` 地面站为舵机驱动的定向天线提供方向/追踪信息。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:12
+#: 8730f0c74f204b159398038f7a6eb4ac
+msgid ""
+"This approach requires that the GCS is running on a PC that has access to "
+"GPS information. See :ref:`Antenna Tracking <common-antenna-tracking>` for "
+"other options."
+msgstr ""
+"此方案要求地面站运行在可访问 GPS 信息的 PC 上。请参阅 :ref:`天线追踪 <common-antenna-tracking>` "
+"了解其他选项。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:16
+#: 607e511995bc4971b1c49ec0e4e7b4ca
+msgid "Overview"
+msgstr "概述"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:18
+#: 56202cfe141c429bb9e957b7f99960c6
+msgid ""
+"An *Antenna Tracker* is a system that tracks the location of a vehicle and "
+"uses this information to aim a directional antenna."
+msgstr "*天线追踪器* 是一种追踪飞行器位置并利用该信息来瞄准定向天线的系统。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:21
+#: 8539c118491047b2b7ff8bd28ce0d484
+msgid ""
+"The tracker described in this article uses the Mission Planner to determine "
+"the direction to aim the tracker using the position of the GCS and the "
+"current position information from the vehicle. The tracker requires that "
+"your vehicle is providing GPS telemetry, and you will also need a Servo "
+"Controller card in order to drive the servos from Mission Planner."
+msgstr ""
+"本文描述的追踪器使用 Mission Planner，根据地面站的位置和飞行器当前位置信息来确定追踪器的瞄准方向。追踪器要求飞行器提供 GPS "
+"数传数据，同时还需要舵机控制卡才能从 Mission Planner 驱动舵机。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:32
+#: b3922eec4821459d92dcbe3ee13fc66a
+msgid "Parts"
+msgstr "部件"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:34
+#: d3c0854c7e3d4f93b4bc4842943bede7
+msgid ""
+"This is a list of the main components needed to build this tracking system "
+"(it is not all inclusive with things like screws, glue etc.)"
+msgstr "以下是构建本追踪系统所需主要组件的列表（不包含螺丝、胶水等辅助材料）。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:37
+#: d3cff82cfa97471baff9f201c0202861
+msgid "Body frame, custom built or off the shelf"
+msgstr "机身框架，可自制或购买成品"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:38
+#: 6b64239402964e3587ff48e94d343785
+msgid "Antenna(s)"
+msgstr "天线"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:39
+#: 5937755a397348bb88be7e118ba536f3
+msgid "Two servos"
+msgstr "两个舵机"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:40
+#: 69b919794108468a8f1eadd043333386
+msgid ""
+"Servo controller card, like the `Maestro "
+"<https://www.pololu.com/product/1350>`__"
+msgstr "舵机控制卡，例如 `Maestro <https://www.pololu.com/product/1350>`__"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:42
+#: ebcb0ec771a743289bc051fbc2704e6c
+msgid "Tripod (or other mounting device)"
+msgstr "三脚架（或其他安装装置）"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:182
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:43
+#: 15c8ea1876694a23908ed7dcd82d0699 ec6f1aa6f9e84782aae913a3b78f00e9
+msgid "Battery"
+msgstr "电池"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:44
+#: 8681e1010334416fa3e685c1ec7cb0b7
+msgid ":ref:`Telemetry Radios <common-telemetry-landingpage>`"
+msgstr ":ref:`数传电台 <common-telemetry-landingpage>`"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:45
+#: 7b31267b23d241f2a32273c0621e24c0
+msgid "(Optional, recommended:) BEC, cooling fan, battery low voltage device."
+msgstr "（可选，推荐：）BEC、散热风扇、电池低电压报警装置。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:48
+#: d17cfd7c58d9421fb90bfd4303d7c812
+msgid "The function of the parts is described in the following sub-sections:"
+msgstr "各部件的功能在以下子章节中描述："
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:51
+#: ec772596e1114c6987d49db2b50c2004
+msgid "Body"
+msgstr "机身"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:53
+#: 9def32d395154eb78e5fec82d68b4cb6
+msgid ""
+"You will need a body that can support the tremendous weight of your "
+"antennas. 4 lbs is a \"tremendous\" amount of weight to throw around "
+"depending on what torque and what materials your servos are sporting. `This "
+"is the one I chose to use for this guide. "
+"<http://www.readymaderc.com/store/index.php?main_page=product_info&cPath=11_27&products_id=96>`__"
+" It currently is holding two patch antennas each weighing about 12oz. You "
+"can design your own body, but you should have a `CNC machine "
+"<https://en.wikipedia.org/wiki/Numerical_control>`__ as part of the solution"
+" as any inaccuracies could make it not track correctly and there goes your "
+"aircraft. All wood construction is fine for two antennas while metal bodies "
+"could be used to make minimal structures or to increase durability."
+msgstr ""
+"您需要一个能够支撑天线巨大重量的机身。4 磅对于您的舵机来说是「相当大」的重量，具体取决于舵机的扭矩和材质。`这是我在本指南中选用的机身。 "
+"<http://www.readymaderc.com/store/index.php?main_page=product_info&cPath=11_27&products_id=96>`__"
+" 目前它承载着两个贴片天线，每个约重 12 盎司。您可以自行设计机身，但需要 `CNC 机器 "
+"<https://en.wikipedia.org/wiki/Numerical_control>`__ "
+"作为解决方案的一部分，否则任何误差都可能导致追踪不准确，进而危及您的飞行器。全木制结构适合两个天线，金属机身可用于制作最简结构或提高耐久性。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:64
+#: a99189aef66f42d8a44acf6a90ad1ef3
+msgid ""
+"A special mention of gears needs to be addressed. The body I used has gears."
+" Gears do a couple of things that you might find useful. First they can "
+"\"convert\" torque into distance (even change the angle the force acts "
+"through) and second they can increase or decrease the speed of rotation. "
+"Sometimes you can use them to make your body semi detachable from the servo "
+"like the example one I gave above, which is very very useful. You can also "
+"get by without having one at all."
+msgstr ""
+"需要特别提到齿轮的问题。我使用的机身有齿轮。齿轮有几个用处，您可能会觉得有用。首先，它们可以将扭矩「转换」为距离（甚至可以改变力的作用角度），其次，它们可以增加或减小旋转速度。有时可以用它们使机身从舵机上半分离，就像我上面给出的例子，这非常非常有用。当然，您也可以完全不使用齿轮。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:72
+#: 5e5739e6a0a843ddaa1f0a74acb367ba
+msgid ""
+"When choosing a gear, keep in mind a few things. First, the further out you "
+"go from the center of your servo to the center axis of rotation of your AT "
+"the less torque will reach it. All servos have a rating like 10 kg-cm or 100"
+" oz-in, that means that that particular servo has 10kg of force when you "
+"measure that force at exactly 1 cm from the center of the servo, likewise "
+"for 100 oz-in, 100 ounces of pressure measured at 1 inch from the center of "
+"the servo shaft. So, the further out you go, say, 2 inches you drop the "
+"torque felt at that distance by half (because you doubled the distance "
+"through which the force acts) which would be 5 kg or 50 oz for our example."
+msgstr ""
+"选择齿轮时，请记住以下几点。首先，从舵机中心到您的天线追踪器旋转轴中心的距离越远，到达该处的扭矩越小。所有舵机都有类似「10 kg-cm」或「100 "
+"oz-in」的额定值，这意味着该舵机在距舵机中心恰好 1 cm 处提供 10 kg 的力，「100 oz-in」同理，即在距舵机轴中心 1 英寸处提供 "
+"100 盎司的压力。因此，距离越远，例如 2 英寸，该距离处感受到的扭矩就减半（因为力作用的距离翻倍），对于我们的例子来说就是 5 kg 或 50 "
+"oz。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:83
+#: f6d48c6bf6694048b67364774e4517f0
+msgid ""
+"The speed changes based on the diameter and number of teeth your gearing "
+"has. A rule of thumb is the bigger the gear the slower it will turn and the "
+"number of teeth it has is related to the size of the gear. So, a big gear "
+"with 44 teeth meshing with a gear half its diameter and having 22 teeth with"
+" make the smaller gear rotate at twice the speed that the big gear is "
+"rotating. You just converted torque into speed."
+msgstr ""
+"速度变化取决于您齿轮组的直径和齿数。经验法则是齿轮越大转速越慢，齿数与齿轮大小相关。因此，一个有 44 个齿的大齿轮与一个直径只有其一半、有 22 "
+"个齿的小齿轮啮合时，小齿轮的转速是大齿轮的两倍。这样您就将扭矩转换为了速度。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:91
+#: e11a4ca16ce4419389d9457f5bf02dc8
+msgid "Antenna"
+msgstr "天线"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:93
+#: a278d13388d746a4965830956e991a81
+msgid ""
+"You need to decide which antennas you are going to use. Frequency is "
+"**HUGE** on this. In fact, frequency selection is a guide in and of itself. "
+"Some antennas claim usability in a range of frequencies but that is NOT "
+"always legit. 915Mhz (aka 900Mhz) is very specific and your antenna could be"
+" \"tuned\" by the factory to \"best\" receive at 912Mhz and your screwed. "
+"Read READ READ the description on the antenna you are looking at. For this "
+"guide I choose 1280Mhz (aka 1.2 or 1.3 Ghz) and 915Mhz patch antennas from "
+"`L-COM <http://www.l-com.com/home.aspx>`__. You might be thinking \"what "
+"about frequency hopping\"? Your radio MIGHT try to go outside the "
+"\"effective\" bandwidth (frequency spread your antenna can use well) but if "
+"it does it notes the signal drop (aka `RSSI "
+"<https://en.wikipedia.org/wiki/Received_signal_strength_indication>`__, "
+"Received Signal Strength Indicator) and will compensate for it. Don't worry "
+"about this, just make sure your antenna is within the correct frequency "
+"range you will be using."
+msgstr ""
+"您需要决定使用哪种天线。频率在这里 **极为重要**。事实上，频率选择本身就是一个独立的指南。有些天线声称可在一定频率范围内使用，但这 **并不** "
+"总是可信的。915Mhz（即 900Mhz）非常特定，您的天线可能被工厂「调谐」为最佳接收频率 912Mhz，这样您就麻烦了。务必仔细 **阅读** "
+"您所看中天线的说明。在本指南中，我选择了来自 `L-COM <http://www.l-com.com/home.aspx>`__ 的 "
+"1280Mhz（即 1.2 或 1.3 GHz）和 915Mhz 贴片天线。您可能会想「跳频怎么办」？您的电台 **可能** "
+"会尝试超出天线有效带宽（天线可良好使用的频率范围），但如果这样做，它会注意到信号下降（即 `RSSI "
+"<https://en.wikipedia.org/wiki/Received_signal_strength_indication>`__，接收信号强度指示），并进行补偿。不必担心这个，只需确保您的天线在您将使用的正确频率范围内即可。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:110
+#: 0b42598f2f924cadb48bea2bc06c8e70
+msgid "Servo"
+msgstr "舵机"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:112
+#: b4142d10e89b44f9b0c6482de311b44f
+msgid ""
+"You will need two servos. One for the tilting action and one for the pan "
+"action. Tilt is the moving of the antennas only and the pan could move the "
+"whole AT or just the antennas depending on how you have yours designed. "
+"Servos are actually complicated little devices. I'll try to be precise as "
+"you can use the internet to find more details on servos if you wish. You "
+"want a servo that can do at least 110 oz-in of torque for two patch "
+"antennas, I'd recommend at least the `karbonite materials "
+"<https://en.wikipedia.org/wiki/Karbonite_gears>`__ to ensure it never strips"
+" out, but you can get by on the nylon versions."
+msgstr ""
+"您需要两个舵机，一个用于俯仰动作，一个用于偏航动作。俯仰是仅移动天线，而偏航则根据您的设计可以移动整个天线追踪器或只移动天线。舵机实际上是相当复杂的小型设备。我尽量说得精确，如果您想了解更多关于舵机的细节，可以上网查找。对于两个贴片天线，您需要一个至少能提供"
+" 110 oz-in 扭矩的舵机，我建议至少使用 `karbonite 材质 "
+"<https://en.wikipedia.org/wiki/Karbonite_gears>`__ 以确保永不打滑，但尼龙版本也可以凑合。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:121
+#: a3d4eeceeb664d059640027b1a9e4757
+msgid ""
+"For the tilt servo get a servo that does 90deg of rotation TOTAL. Different "
+"manufacturers explain the total amount of rotation a servo can do in "
+"different ways so you must really do your homework. 90deg rotation total is "
+"a \"standard\" servo."
+msgstr ""
+"对于俯仰舵机，选择总旋转角度为 90 度的舵机。不同制造商描述舵机总旋转量的方式不同，因此您必须认真做功课。总旋转 90 度是「标准」舵机。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:126
+#: b8f7db1d60c74f7d8345d17d0a2afa07
+msgid ""
+"For the pan (this AT in particular, your requirements will vary) I'd "
+"recommend at least 150+ oz-in of torque for two antennas and karbonite or "
+"better, as in all metal gears. If you can get one, go digital (highly "
+"recommend it) as the AT here is capable of small corrective actions and an "
+"analogue servo will probably not be able to keep up like a digital servo "
+"will. The reason for this overall beefiness is that when your panning range "
+"is at the limit of travel your AT will rapidly spin itself around 360deg in "
+"order to keep the antennas on target `(1:50 second mark as an example). "
+"<https://www.youtube.com/watch?feature=endscreen&v=_lxUd96-1tw&NR=1>`__ The "
+"faster it does this the less time you are out of communication with your "
+"aircraft. You can not avoid this behavior if you use the APM Mission Planner"
+" as the behavior is embedded in the software. Building an AT that does not "
+"care about the pan range is very expensive to do as it starts to involve "
+"what are known as slip rings. The military uses them and they are very nice,"
+" but very expensive due to the quality of slip ring involved. If you can do "
+"this then you avoid cable tangling issues and possibly servo range selection"
+" gets easier. For this build the pan action you want is a servo that can do "
+"360deg of rotation. You really don't need more than that."
+msgstr ""
+"对于偏航（针对此特定天线追踪器，您的需求可能不同），我建议两个天线至少使用 150+ oz-in 的扭矩，并使用 karbonite "
+"或更好的全金属齿轮。如果可能，选择数字舵机（强烈推荐），因为这里的天线追踪器能够进行小幅修正动作，模拟舵机可能跟不上数字舵机的响应速度。需要如此强力规格的原因是，当您的偏航范围达到行程极限时，天线追踪器会迅速自转"
+" 360 度以保持天线对准目标 `（视频 1:50 时间点示例）。 "
+"<https://www.youtube.com/watch?feature=endscreen&v=_lxUd96-1tw&NR=1>`__ "
+"转速越快，您与飞行器失联的时间越短。如果使用 APM Mission "
+"Planner，则无法避免此行为，因为该行为已嵌入软件中。构建不受偏航范围限制的天线追踪器非常昂贵，需要使用所谓的滑环。军方使用滑环，质量非常好，但价格非常高昂。如果能实现这一点，您就可以避免电缆缠绕问题，舵机行程选择也可能更容易。对于本构建，偏航动作需要一个能旋转"
+" 360 度的舵机，不需要更多。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:148
+#: 950a718f0377431ca51fcb94ec235c6c
+msgid "Servo Control"
+msgstr "舵机控制"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:150
+#: 4a1d3ce7913345618e6c3deb9aa9d3e8
+msgid ""
+"You will need something to take the information from your computer (again "
+"this build used the APM Mission Planner to drive the AT) and turn those into"
+" a signal (numbers really) that your servo can use. The APM MP has two "
+"options currently, one for `Maestro <https://www.pololu.com/product/1350>`__"
+" and one for `ArduPilot <https://www.sparkfun.com/products/retired/8785>`__."
+" The Maestro link is to a SERVO CONTROLLER card and the ArduPilot is both a "
+"servo controller and a stripped down autopilot (it is actually the original "
+"APM being used as a servo controller card). To be more clear, in some "
+"articles the ArduPilot is referred to as the ArduTracker. The Maestro can "
+"run up to 6 servos with the input provided by the micro USB cable but you "
+"will only use 2 of them plus the power pins. The ArduPilot version uses one "
+"of the early versions of the APM called ArduPilot. It is stripped down and "
+"cheap, you might have one from years ago, I don't know much about it, but "
+"`this is a build <https://code.google.com/archive/p/happykillmore-"
+"gcs/wikis/Tracking.wiki>`__ that HappyKilmore's GCS uses and `they "
+"<https://www.diydrones.com/profiles/blogs/antenna-tracking-"
+"in?xg_source=activity>`__ did a write up on both of them. I used it a lot "
+"and you can't go wrong reading it yourself either! No matter which "
+"controller type you use to drive your servos you WILL need to download and "
+"install the firmware for them. Maestro came preloaded and it looks like you "
+"need to find the firmware for the ArduPilot card from their website or this "
+"website's software library."
+msgstr ""
+"您需要某种东西来从计算机（同样，本构建使用 APM Mission Planner "
+"来驱动天线追踪器）获取信息，并将其转换为舵机可以使用的信号（实际上是数字）。APM Mission Planner 目前有两个选项，一个用于 "
+"`Maestro <https://www.pololu.com/product/1350>`__，一个用于 `ArduPilot "
+"<https://www.sparkfun.com/products/retired/8785>`__。Maestro "
+"链接是舵机控制卡，ArduPilot 既是舵机控制器也是精简版飞控（实际上是用作舵机控制卡的原始 APM）。更明确地说，在某些文章中，ArduPilot"
+" 被称为 ArduTracker。Maestro 可通过 Micro USB 电缆提供的输入驱动最多 6 个舵机，但您只需使用其中 2 "
+"个加上电源引脚。ArduPilot 版本使用早期版本的 APM，即 ArduPilot，它是精简版且价格低廉，您可能有几年前的旧货，我对它了解不多，但 "
+"`这是一个构建案例 <https://code.google.com/archive/p/happykillmore-"
+"gcs/wikis/Tracking.wiki>`__，是 HappyKilmore 的 GCS 使用的，`他们 "
+"<https://www.diydrones.com/profiles/blogs/antenna-tracking-"
+"in?xg_source=activity>`__ "
+"对两者都做了介绍。我经常使用它，您自己阅读也不会有什么损失！无论您使用哪种控制器类型来驱动舵机，都需要下载并安装对应固件。Maestro "
+"预装了固件，ArduPilot 卡的固件需要从其官网或本站软件库中查找。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:174
+#: eb5343fa56c74f3eaeb50e5d36440f0a
+msgid ""
+"Getting the right numbers for your servo controller is vital, `use this as a"
+" guide <http://vps.oborne.me/gcs/Tracker.html>`__. Basically you will find "
+"two numbers that bookend the total rotation your servo will do which could "
+"be less than what it can do but not more, then you will find the center of "
+"those bookends and then you will tell Maestro the \"8-bit\" range that it "
+"should use as commands to send to the servos. It's way critical to get these"
+" right, I lost hair doing it."
+msgstr ""
+"获取正确的舵机控制器参数至关重要，`请以此为参考 "
+"<http://vps.oborne.me/gcs/Tracker.html>`__。基本上，您需要找到两个数值作为舵机总旋转的书签（可以小于舵机实际能做到的，但不能超过），然后找到这两个书签的中点，再告诉"
+" Maestro 发送给舵机的命令应使用的「8 位」范围。这非常关键，务必搞对，我为此费了不少心思。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:184
+#: d8d86c5d38814acdb477246db9d97b89
+msgid ""
+"Ok, servos run off of 4.8, 6 or sometimes 7.2V or more. Most of them default"
+" to the RC standby voltage of \"5V\". This one is running off of 6V. This "
+"battery puts out 12.5V when charged fully. If you do not find a way to step "
+"down the voltage from your battery to the CORRECT usable voltage for your "
+"servo you will fry your servo. Your servo motor might smoke or the little "
+"tiny tiny circuit board in it might smoke, either way the reliability of it "
+"is gone and you should get a NEW SERVO. If you don't and it fails in flight,"
+" you could lose connection because your AT can not point properly! A BEC "
+"(Battery Eliminating Circuit) is what you are looking for here. This project"
+" used `this one <https://hobbyking.com/en_us/turnigy-3a-ubec-w-noise-"
+"reduction.html?___store=en_us>`__. If you do your homework, you can look up "
+"the idle and full load current consumption of your chosen servos and pick a "
+"BEC that will handle that load. If you fail to get a BEC that can handle the"
+" spontaneous most highest ever load your servo could possibly generate then "
+"it will fry and your power to point your AT will be gone, bye bye aircraft."
+msgstr ""
+"舵机使用 4.8V、6V 或有时 7.2V 及以上的电压运行。大多数默认使用 RC 待机电压「5V」。这个使用 6V 运行。这块电池充满时输出 "
+"12.5V。如果您不找方法将电池电压降到舵机正确可用的电压，您将烧毁舵机。舵机电机可能会冒烟，或其内部那块小小的电路板可能会冒烟，无论哪种情况，其可靠性都将丧失，您应该换一个新舵机。如果不这样做，它在飞行中失效，您的天线追踪器将无法正常指向，您的飞行器可能因此失联！BEC（电池消除电路）正是您需要的。本项目使用了"
+" `这款 <https://hobbyking.com/en_us/turnigy-3a-ubec-w-noise-"
+"reduction.html?___store=en_us>`__。如果您做好功课，查找所选舵机的空载和满载电流消耗，就可以选择能承受该负载的 "
+"BEC。如果选用的 BEC 无法承受舵机可能产生的最大瞬时负载，它将烧毁，您为天线追踪器供电的能力也将丧失，飞行器再见。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:201
+#: 28e0c82440d24761901d7010ab44fc03
+msgid "Battery low-voltage warning device"
+msgstr "电池低电压报警装置"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:203
+#: 14094c3c3f764adb8081cd8674899833
+msgid ""
+"You don't have to use this, but I would. It is cheap and could save not only"
+" your battery but it will tell you when your AT is about to quit. It is "
+"about as loud as a smoke detector going off! Buy a few of these and use "
+"them, don't be cheap like that, seriously."
+msgstr ""
+"您不必使用这个，但我会用。它价格低廉，不仅能保护您的电池，还会告诉您天线追踪器何时快要停止工作。它的声音大约和烟雾报警器一样响！多买几个使用，别舍不得那点钱，说真的。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:209
+#: 961f2af879704b149b5c1aa11f69d0b7
+msgid "Video Rx and Tx"
+msgstr "视频接收机和发射机"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:211
+#: e09b12c951f84784b2d2f98938da418e
+msgid ""
+"Rx and Tx is shorthand for Receiver and Transmitter respectively. It is not "
+"in the scope of the AT build guide here to tell you about these but instead "
+"it is just to tell you that whichever system you use make sure it can fit to"
+" your AT. Your AT is going to get crowded and messy and therefore it can "
+"bind on the smallest of things. Binding is bad, ok?"
+msgstr ""
+"Rx 和 Tx "
+"分别是接收机和发射机的缩写。本天线追踪器构建指南不涉及这些的详细说明，只是提醒您，无论使用哪种系统，确保它能安装到您的天线追踪器上。您的天线追踪器会变得拥挤而杂乱，因此可能被最小的东西卡住。卡住是不好的，明白了吗？"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:218
+#: 3b14567a41494d66828a5abcb67aef94
+msgid "Tripod"
+msgstr "三脚架"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:220
+#: 30424d904d674449a9b95e10f13047ae
+msgid ""
+"You could come up with another thing to use, but that would be tantamount to"
+" reinventing the wheel. The higher your AT is the further it can spread its "
+"signal. Try to get one that does not have a lot of protrusions like this one"
+" has. They will eventually entangle your wires. Pay attention to which type "
+"of connector the tripod uses so you can design your AT to link to it. Get "
+"one that is sturdy as a nice bit of wind could knock it over and your "
+"aircraft goes link dead. Your AT should weigh around 7 lbs max, probably "
+"less depending on what you use."
+msgstr ""
+"您可以想出其他替代方案，但那无异于重新发明轮子。天线追踪器安装得越高，信号传播距离越远。尽量选择没有太多突起的三脚架，否则会缠绕您的电线。注意三脚架使用的连接器类型，以便您可以设计天线追踪器与之适配。选择坚固的三脚架，一阵大风可能将其吹倒，您的飞行器就会失联。您的天线追踪器重量应不超过约"
+" 7 磅，具体取决于您使用的材料，可能更轻。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:230
+#: 444392b05ff944ac98a07b791e21c168
+msgid "Picture gallery"
+msgstr "图片集"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:254
+#: cadb4b27b6404591837a2653a0d215e2
+msgid "Connecting the parts"
+msgstr "连接各部件"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:256
+#: 48c8cdfef11e4c09aaf8ba3f90600f0b
+msgid "**VELCRO AND ZIP-TIES, you can use them to a very large degree here!**"
+msgstr "**魔术贴和扎带，在这里可以大量使用！**"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:258
+#: f24a23a55e334b50874879a5b0f7a67b
+msgid ""
+"1) Connect your servo controller board to your laptop, micro USB to USB for "
+"Maestro."
+msgstr "1) 将舵机控制板连接到笔记本电脑，Maestro 使用 Micro USB 转 USB。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:261
+#: 70763a904490454ca0d4ad9a1b3697a2
+msgid ""
+"2) Servos connect to the servo controller board. For Maestro it will be "
+"servo 0 pin set for pan and servo 1 pin set for tilt."
+msgstr "2) 舵机连接到舵机控制板。对于 Maestro，将 servo 0 引脚设为水平旋转，将 servo 1 引脚设为俯仰倾斜。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:264
+#: f0a5d4dc79314eb79723ba5b27685a4a
+msgid ""
+"3) Connect your battery to your BEC which is set at 5V or 6V or whatever "
+"your servos can handle (max it out). Connect the BEC to the servo controller"
+" board. For Maestro the pin set on the outermost is for the BATTERY power "
+"that will drive your servos (the USB cable powers the board). DON'T REVERSE "
+"THE POLARITY, buy new stuff if you did."
+msgstr ""
+"3) 将电池连接到设置为 5V 或 6V（或舵机所能承受的最大电压）的 BEC。将 BEC 连接到舵机控制板。对于 "
+"Maestro，最外侧的引脚用于连接驱动舵机的电池电源（USB 线为控制板供电）。切勿接反极性，否则请更换新配件。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:270
+#: dac641ace69843fb82c77e16da693518
+msgid ""
+"4) Connect your battery (assuming Li-Po here) to the Low Voltage detection "
+"device, pay attention to it."
+msgstr "4) 将电池（此处假设为锂聚合物电池）连接到低电压检测设备，注意观察其状态。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:273
+#: e784e0f820fd47a48b26b0bf7ce69eea
+msgid ""
+"5) Connect your antennas to your SiK Radio (NEVER TURN ON RADIOS WITHOUT "
+"ANTENNA ATTACHED, buy new stuff if you did). Connect antenna to the Video "
+"Rx."
+msgstr "5) 将天线连接到 SiK 数传（切勿在未连接天线的情况下开启数传，否则请更换新配件）。将天线连接到图传接收机。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:277
+#: 1f897b49eda04925abec81f7e43ef539
+msgid ""
+"6) You will need to splice off the power from the 12V side of the battery "
+"connection to feed 12V of power to your Video Rx, get some solder and a wet "
+"sponge, do a good job on the connection. Connect the power to your Video Rx."
+msgstr "6) 你需要从电池连接的 12V 端分出电源，为图传接收机提供 12V 电压，准备好焊锡和湿海绵，务必做好连接。将电源连接到图传接收机。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:282
+#: 20def485dcd84658b47a18b79f0a2b9f
+msgid ""
+"7) Connect your 3DR 900Mhz radio to the laptop (after you have antenna "
+"connected)."
+msgstr "7) 将 3DR 900MHz 数传连接到笔记本电脑（请先确保天线已连接）。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:285
+#: a0275263f6f442538978a0b37cb5c09f
+msgid ""
+"8) Use a bunch of zip-ties to secure and bundle all the wires. This is "
+"important. If you do a bad job here your AT will bind while its tracking and"
+" down goes aircraft."
+msgstr "8) 使用扎带固定并捆绑所有导线，这非常重要。如果处理不好，天线追踪器在追踪时可能会被卡住，导致飞机坠毁。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:289
+#: 8350f2c1a42347889ac5a0ae3265f632
+msgid "add VELCRO AND ZIP-TIES to hold everything together"
+msgstr "使用魔术贴和扎带将所有部件固定在一起"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:291
+#: fbf3a855218e4af79c02fbbc3c5d7574
+msgid ""
+"10) Remember to set your end points manually in the Mission Planner for the "
+"channels you will use to control pan and tilt, use a PWM value like 1100µs "
+"and 1900µs with a midpoint of 1500µs to start. Some 180 degree servo's can "
+"take 600-2400µs but you can damage some servo's so start conservatively."
+msgstr ""
+"10) 记得在 Mission Planner 中手动设置用于控制水平旋转和俯仰倾斜通道的端点，初始可使用 1100µs 和 1900µs 的 PWM "
+"值，中点为 1500µs。部分 180 度舵机可接受 600-2400µs，但某些舵机可能因此损坏，请从保守值开始设置。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:298
+#: f4ecd766f062457481102500c63262f8
+msgid "Basic use"
+msgstr "基本使用"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:300
+#: 345afe1d6ee74f769d68f62884b90c84
+msgid ""
+"1) When you get to the airfield you point your AT north, get as close as you"
+" can with your eyeball."
+msgstr "1) 到达飞行场地后，用肉眼尽量将天线追踪器朝向正北方。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:303
+#: 608a6491aa8c414a9763c5f49832679e
+msgid ""
+"2) Normal acceptable calibration for an AT is that you should be within "
+"10deg of North when you point it."
+msgstr "2) 天线追踪器的正常可接受校准误差是朝向偏差在 10 度以内。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:306
+#: f34426b1ca9142f59d5143606b4e3e55
+msgid ""
+"3) This particular body is able to be lifted, which separates the gear of "
+"the servo from the smaller gear of the body. This allows it to be oriented "
+"very easily. If you don't have that feature, just pick the thing up after it"
+" finishes booting (and therefore is pointing at the default PWM number YOU "
+"ASSIGNED when programming the servo controller)."
+msgstr ""
+"3) "
+"此机体可以被抬起，从而将舵机齿轮与机体上的小齿轮分离，使方向调整非常方便。如果没有这个功能，只需在完成启动后（此时已按照你在编程舵机控制器时指定的默认 "
+"PWM 值朝向预设方向）拿起设备重新放置即可。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:312
+#: e190767870a4401aac827d896b433d5b
+msgid ""
+"4) You want the tilt to default to the middle of the tilting servo's travel "
+"range, so for a 90deg servo, make it default to 45deg. When you actually USE"
+" the antenna for the first time pay attention to the behavior of the tilting"
+" and manually adjust it via the sliding bars in Mission Planner. If you're "
+"confident about where it should be you can manually tweak the servo horn. "
+"Either method will work but if you use the slider bar you will not "
+"overstress the servo when it tries to go PAST it naturally allowed traveling"
+" range."
+msgstr ""
+"4) 俯仰倾斜应默认设置在舵机行程范围的中间位置，例如对于 90 度舵机，应默认设为 45 度。第一次实际使用天线时，注意观察俯仰倾斜的动作，并通过 "
+"Mission Planner "
+"中的滑动条手动调整。如果对位置很有把握，也可以手动微调舵机摇臂。两种方法均可，但使用滑动条不会在舵机试图超出其允许行程时造成损伤。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:324
+#: 3bb22f8de1aa4af985aaf56efb56fc95
+msgid ""
+"While in flight you can use the slider bars to fine tune the direction the "
+"antenna tracker is pointing."
+msgstr "飞行过程中，可以使用滑动条微调天线追踪器的指向方向。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:327
+#: 739a45c1d94e4d0cbb5c2eec0ac4a1c6
+msgid ""
+"5) If the servos are going in the wrong direction. Try clicking the Rev "
+"checkbox to reverse travel direction. You may need to check off Rev before "
+"connecting to the servo controller."
+msgstr "5) 如果舵机方向不对，尝试勾选 Rev 复选框以反转行进方向。可能需要在连接舵机控制器之前先勾选 Rev。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:335
+#: c25477715673425193eabbea9bf7ecc4
+msgid "Advanced use"
+msgstr "高级使用"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:339
+#: 41fea609791747e4b467291789e1e06f
+msgid ""
+"This section is an excerpt from a post by Scott Fuller. The original post is"
+" here: `The expensive but attention grabbing Antenna Tracker "
+"<https://diydrones.com/profiles/blogs/the-expensive-but-attention-grabbing-"
+"antenna-tracker>`__)"
+msgstr ""
+"本节摘录自 Scott Fuller 的文章。原文链接：`昂贵但引人注目的天线追踪器 "
+"<https://diydrones.com/profiles/blogs/the-expensive-but-attention-grabbing-"
+"antenna-tracker>`__)"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:342
+#: 0dded0a0794040cab2de62e47d82a3c8
+msgid ""
+"Usually the first thing I do is power up everything and get a solid GPS lock"
+" on the APM. After that I'll set my plane in front of the antenna tracker "
+"and zoom in REALLY tightly in Mission Planner under the Flight Planner "
+"window. I'll then right click and say Tracker Home -> Set here."
+msgstr ""
+"通常我做的第一件事是给所有设备上电，并等待 APM 获得稳定的 GPS 定位。之后，我将飞机放在天线追踪器前面，在 Mission Planner "
+"的飞行规划窗口中非常紧密地放大地图，右键单击并选择 Tracker Home -> Set here。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:350
+#: e1142635fa4244f1865025a3b2cc1691
+msgid ""
+"*Then I'll drag the antenna tracker pin right on top of home and drop it. "
+"That should get me pretty close to where my antenna tracker is placed.*"
+msgstr "*然后我将天线追踪器图标直接拖放到 Home 点上。这样就能很接近天线追踪器的实际位置。*"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:357
+#: 152280f16ec84c578b44df8c13022332
+msgid ""
+"*After that I'll flip over to the Initial Setup tab under Antenna Tracker "
+"and pull down the COM port for the Pololu servo controller and go with 9600 "
+"baud. When that's set I hit connect. At that point the tracker should go "
+"into motion.*"
+msgstr ""
+"*之后切换到天线追踪器下的初始设置选项卡，在下拉菜单中选择 Pololu 舵机控制器的 COM 口，波特率设为 "
+"9600。设置完成后点击连接，此时追踪器应开始运动。*"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:365
+#: 8f00a924b3df4c3097ca5ac755940123
+msgid ""
+"*You should be able to move the plane a few meters in front of the antenna "
+"tracker should move with it. If you need to reverse the direction it's "
+"pretty self explanatory. The sliders allow you to trim where the antenna "
+"needs to be facing. When you start up the system will think you're facing "
+"north. If you're facing East or West you have to aim accordingly.*"
+msgstr ""
+"*你应该能够将飞机移动几米，天线追踪器也会随之运动。如果需要反转方向，操作相当直观。滑动条用于微调天线的朝向。系统启动时会认为你朝向正北方。如果你朝向东方或西方，需要相应调整。*"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:372
+#: 5fd5c6c844784fe6a7599a59d23a1f34
+msgid ""
+"*You can use Pololu Maestro Control Center to figure out your PWM settings "
+"and how far your servos an travel. Usually the PWM setting is (Large Number "
+"- Small Number) = PWM. In my case 2000 - 960 = 1040 for pan and 1904 - 1456 "
+"= 448 for my tilt. That'll give me a 45 degree angle for tilt and 360 for "
+"pan. You can get these numbers on the status tab in Maestro CC. Be careful "
+"NOT to go beyond the recommended travel! On the Servo City gear boxes you'll"
+" hear the POT start to click and the servo will just spin. At that point you"
+" get to play the servo centering game.*"
+msgstr ""
+"*你可以使用 Pololu Maestro Control Center 确定 PWM 设置及舵机的行程范围。通常 PWM 设置为（大数 - 小数）= "
+"PWM。我的例子中，水平旋转为 2000 - 960 = 1040，俯仰倾斜为 1904 - 1456 = 448。这给了我 45 度的俯仰角和 360"
+" 度的旋转范围。这些数值可以在 Maestro CC 的状态选项卡中获得。注意不要超出推荐行程！在 Servo City "
+"齿轮箱上，你会听到电位器开始卡嗒声，舵机会一直旋转。到那时你就需要重新进行舵机居中操作了。*"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:384
+#: 50f446336335441399a19f8718fd70fc
+msgid ""
+"*One thing to note with the Pololu board is you may have to set it into USB "
+"Dual Port under Serial Settings. This allows you to connect to the COM "
+"port.*"
+msgstr "*需要注意的是，Pololu 控制板可能需要在串口设置中设置为 USB 双端口模式，这样才能连接到 COM 口。*"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:389
+#: 0999c94bdfb54158b97545f6ded6b9df
+msgid "Miscellaneous notes"
+msgstr "其他注意事项"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:391
+#: be955ebd0b3f494f986b49620dd1ffeb
+msgid ""
+"I have included pictures from all angles of my AT (version 2). A few "
+"pointers here. Build your AT as light as you can. Get as beefy of servos as "
+"you can afford and fit. You can make a wireless version of this AT if you "
+"have telemetry radios like the :ref:`3DR or the Xbee <common-telemetry-"
+"landingpage>` kits. I don't know how to do that but it is not going to be "
+"anymore complicated than what I have shown here, just more expensive."
+msgstr ""
+"我已从各角度拍摄了我的天线追踪器（第 2 版）的照片。一些要点：尽量把天线追踪器做得轻巧。在能力范围内尽量选用扭力强的舵机。如果你有 :ref:`3DR"
+" 或 Xbee <common-telemetry-landingpage>` "
+"等数传套件，可以制作无线版天线追踪器。我不知道具体如何实现，但应该不会比我展示的更复杂，只是成本更高。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:398
+#: 0b52906681e04d8e84a6e04823217f5a
+msgid ""
+"Testing is done in two ways, first you setup your AT outside and point it "
+"north before you fire it up. Then walk around the AT with your plane with "
+"everything linked up as if it was in flight. You need to get at LEAST 60 "
+"feet away, try 100ft to make sure. Another way is to load a previously "
+"recorded flight from the APM2 logs, set your home position and watch your AT"
+" go at it as if it was there."
+msgstr ""
+"测试有两种方式：一是在户外将天线追踪器朝向正北后上电，然后携带飞机绕追踪器行走，一切连接如同在飞行中。需要至少走到 60 英尺以外，建议走到 100 "
+"英尺以确保效果。另一种方式是加载 APM2 日志中之前录制的飞行记录，设置 Home 点，观察追踪器的追踪效果。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:405
+#: fe5a28d1ef8441f48e98aa17b732e1cc
+msgid ""
+"Test this thing out as best as you can, it is now a critical point of "
+"failure for your entire system. I don't recommend attaching your RC signal "
+"(typically your 2.4Ghz) radio that you use to manually control your "
+"aircraft. Keep that one unmodified so you have a backup that you can rely "
+"on."
+msgstr ""
+"尽可能充分测试这个设备，因为它现在是整个系统的关键故障点。不建议将你用于手动控制飞机的 RC 信号（通常是 "
+"2.4GHz）接入其中，保留原样作为备份，以便随时可以依赖。"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:411
+#: ab76d8740b8d4c67b66f061f548e0f84
+msgid ""
+"Other bells and whistles might include weather vanes, barometers, "
+"anemometers, beer can holders, cameras etc. go wild!"
+msgstr "其他功能还可以包括风向标、气压计、风速仪、饮料杯架、摄像机等，尽情发挥创意！"
