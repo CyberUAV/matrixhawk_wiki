@@ -1133,9 +1133,22 @@ def create_features_pages(site):
     debug("Creating features pages")
 
     # grab build_options which allows us to map from define to name
-    # and description.  Create a convenience hash for it
+    # and description.  Create a convenience hash for it.
+    # Resilience: keep the previous copy as a fallback — GitHub raw rate
+    # limiting (HTTP 429) must not abort a whole site build when a cached
+    # copy from a previous run is available.
+    if os.path.exists("build_options.py"):
+        shutil.copy2("build_options.py", "build_options.py.cache")
     remove_if_exists("build_options.py")
-    fetch_url("https://raw.githubusercontent.com/ArduPilot/ardupilot/master/Tools/scripts/build_options.py")
+    try:
+        fetch_url("https://raw.githubusercontent.com/ArduPilot/ardupilot/master/Tools/scripts/build_options.py")
+    except Exception as e:
+        if os.path.exists("build_options.py.cache"):
+            warning(f"build_options.py fetch failed ({e}); reusing cached copy")
+            shutil.move("build_options.py.cache", "build_options.py")
+        else:
+            raise
+    remove_if_exists("build_options.py.cache")
     import build_options
     build_options_by_define = {}
     for feature in build_options.BUILD_OPTIONS:
