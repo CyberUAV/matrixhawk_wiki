@@ -23,7 +23,7 @@ If RC is enabled, then the pitch/roll/yaw/throttle/lateral/forward inputs are se
 
 Pilot Control Freedoms by Mode
 ==============================
-The following assumes the axis is controllable. Some frame configurations do not provide all axes. For example the SimpleROV-3 frame has three thrusters providing only yaw, forwad, and depth control. The pitch and roll attitude is uncontrolled and relies on CG/ballast trimming and has no lateral movement capability.
+The following assumes the axis is controllable. Some frame configurations do not provide all axes. For example the SimpleROV-3 frame has three thrusters providing only yaw, forward, and depth control. The pitch and roll attitude is uncontrolled and relies on CG/ballast trimming and has no lateral movement capability.
 
 ANG = Angle target. Stick deflection indicates desired axis angle.
 
@@ -73,13 +73,13 @@ Depending on vehicle design and pilot experience, it can be desirable to limit h
     - :ref:`JS_THR_GAIN<JS_THR_GAIN>` for an additional scaling applied to vertical inputs, to either reduce them further or boost them relative to horizontal/turning inputs
     - :ref:`JS_GAIN_STEPS<JS_GAIN_STEPS>` to determine how much the gain changes with each increment/decrement button press
 - When using radio channels for RC control of the vehicle, it is possible to ignore small RC stick adjustments and timing inconsistencies using :ref:`RCn_DZ<RC1_DZ>` to specify the deadzone for each RC channel
-- Attitude stabilisation limits the vehicle's maximum lean angle (roll/pitch away from level) to :ref:`ANGLE_MAX<ANGLE_MAX>`
+- Attitude stabilisation limits the vehicle's maximum lean angle (roll/pitch away from level) to :ref:`ATC_ANGLE_MAX<ATC_ANGLE_MAX>`
 - Automatic depth control (in modes like ALT_HOLD, SURFTRAK, POSHOLD, and CIRCLE) can be configured with the parameters
 
   - :ref:`THR_DZ<THR_DZ>` for the throttle deadzone, to avoid small joystick movements adjusting the current depth target
-  - :ref:`PILOT_SPEED_UP<PILOT_SPEED_UP>` and :ref:`PILOT_ACCEL_Z<PILOT_ACCEL_Z>`, for limiting maximum vertical speeds, and setting the vertical acceleration to reach those speeds
+  - :ref:`PILOT_SPD_UP<PILOT_SPD_UP>` and :ref:`PILOT_ACC_Z<PILOT_ACC_Z>`, for limiting maximum vertical speeds, and setting the vertical acceleration to reach those speeds
 
-    - :ref:`PILOT_SPEED_DN<PILOT_SPEED_DN>` can be optionally used to set the maximum descent rate independently, instead of defaulting to :ref:`PILOT_SPEED_UP<PILOT_SPEED_UP>`
+    - :ref:`PILOT_SPD_DN<PILOT_SPD_DN>` can be optionally used to set the maximum descent rate independently, instead of defaulting to :ref:`PILOT_SPD_UP<PILOT_SPD_UP>`
   - :ref:`SURFACE_MAX_THR<SURFACE_MAX_THR>` scales down upwards thrust when near the surface, to avoid pushing through the water surface and sucking air
 - Automatic horizontal velocity control in POSHOLD mode can be limited by :ref:`PILOT_SPEED<PILOT_SPEED>`
 - It is also possible to configure the outputs directly, using

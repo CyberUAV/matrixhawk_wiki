@@ -13,7 +13,7 @@ Vehicle Type/Configuration
 These are basic setup parameters that need to be set in all cases.
 
 - :ref:`FRAME_CLASS<FRAME_CLASS>`  Note: only Single Heli and Dual Heli are valid with TradHeli firmware
-- :ref:`H_FLYBAR_MODE<H_FLYBAR_MODE>`
+- ``H_FLYBAR_MODE``
 - :ref:`H_OPTIONS<H_OPTIONS>`
 
 General Swashplate/Collective Setup
@@ -64,7 +64,7 @@ If Dual Heli frame type is selected, these additional parameters for the second 
 - :ref:`H_SW2_H3_SV1_POS<H_SW2_H3_SV1_POS>`
 - :ref:`H_SW2_H3_SV2_POS<H_SW2_H3_SV2_POS>`
 - :ref:`H_SW2_H3_SV3_POS<H_SW2_H3_SV3_POS>`
-- :ref:`H_SW2_H3_PHANG<H_SW2_H3_PHANG>`
+- ``H_SW2_H3_PHANG``
 - :ref:`H_DCP_TRIM<H_DCP_TRIM>`
 - :ref:`H_YAW_REV_EXPO<H_YAW_REV_EXPO>`
 
@@ -76,14 +76,14 @@ ArduPilot allows custom swashplate servo placement for three servo swashplates. 
 - :ref:`H_SW_H3_SV1_POS<H_SW_H3_SV1_POS__AP_MotorsHeli_Single>`
 - :ref:`H_SW_H3_SV2_POS<H_SW_H3_SV2_POS__AP_MotorsHeli_Single>`
 - :ref:`H_SW_H3_SV3_POS<H_SW_H3_SV3_POS__AP_MotorsHeli_Single>`
-- :ref:`H_SW_H3_PHANG<H_SW_H3_PHANG__AP_MotorsHeli_Single>`
+- ``H_SW_H3_PHANG``
 
  and if :ref:`H_SW2_TYPE<H_SW2_TYPE>` = 0 (dual helis only):
 
 - :ref:`H_SW2_H3_SV1_POS<H_SW_H3_SV1_POS__AP_MotorsHeli_Dual>`
 - :ref:`H_SW2_H3_SV2_POS<H_SW_H3_SV2_POS__AP_MotorsHeli_Dual>`
 - :ref:`H_SW2_H3_SV3_POS<H_SW_H3_SV3_POS__AP_MotorsHeli_Dual>`
-- :ref:`H_SW2_H3_PHANG<H_SW_H3_PHANG__AP_MotorsHeli_Dual>`
+- ``H_SW2_H3_PHANG``
 
 Rotor Speed Control Setup
 =========================
@@ -146,6 +146,6 @@ External Tail Gyro
 
 Parameters are provided for external tail gyro, if used.
 
-- :ref:`H_GYR_GAIN<H_GYR_GAIN>`
-- :ref:`H_GYR_GAIN_ACRO<H_GYR_GAIN_ACRO>`
+- ``H_GYR_GAIN``
+- ``H_GYR_GAIN_ACRO``
 

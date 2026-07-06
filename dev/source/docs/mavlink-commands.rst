@@ -4,7 +4,7 @@
 MAVLink Interface
 =================
 
-ArduPilot supports the MAVLink protocol for communication with Ground Stations and :ref:`Companion Computers <companion-computers>`.  These pages explain the details of this interface and commonly used commands:
+ArduPilot supports the `MAVLink protocol <https://mavlink.io/en/>`__ for communication with Ground Stations and :ref:`Companion Computers <companion-computers>`.  These pages explain the details of this interface and commonly used commands:
 
 .. toctree::
     :maxdepth: 1
@@ -83,6 +83,6 @@ Vehicle Parameter References
 Software Integration Tools
 ==========================
 
--   MAVSDK <https://github.com/ArduPilot/ardupilot-mavsdk>
--   Pymavlink python script <https://github.com/ArduPilot/pymavlink>
+-   `MAVSDK <https://github.com/ArduPilot/ardupilot-mavsdk>`__
+-   `Pymavlink python script <https://github.com/ArduPilot/pymavlink>`__
 

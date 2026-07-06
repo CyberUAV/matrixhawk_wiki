@@ -1,8 +1,10 @@
 .. _reference-frames-arduroller:
 
-======================
-ArduRoller Balance Bot
-======================
+===============================
+ARCHIVED:ArduRoller Balance Bot
+===============================
+
+.. note:: This page is archived and is no longer maintained
 
 ..  youtube:: hbPzTOfn3EA
     :width: 100%
@@ -46,6 +48,6 @@ Connection and Setup
 
 Firmware used: Rover-3.5
 
-Parameter file: `ArduRoller BalanceBot <https://github.com/ArduPilot/ardupilot/blob/master/Tools/Frame_params/ArduRoller-balancebot.param>`__
+Parameter file: `ArduRoller BalanceBot <https://github.com/ArduPilot/ardupilot/blob/APMrover2-stable/Tools/Frame_params/ArduRoller-balancebot.param>`__
 
 This parameter file can also be loaded using the Mission Planner's Config/Tuning >> Full Parameter Tree page by selecting "ArduRoller-balancebot" from the drop down on the middle right and then push the "Load Presaved" button.

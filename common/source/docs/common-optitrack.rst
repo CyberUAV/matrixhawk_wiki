@@ -36,7 +36,7 @@ Please refer to OptiTrack `quick start guides <https://v20.wiki.optitrack.com/in
    Mark motion capture system coordinate system using tape
 
 
-Required softwares
+Required software
 ==================
 
 * `Motive 2 or 3 Tracker <https://optitrack.com/products/motive/tracker/>`__
@@ -47,11 +47,11 @@ Prepare the drone
 
 .. warning::
 
-   It is highly recommended that use small drone for indoor flight and deploy cage in your test flight enviorment.
+   It is highly recommended that use small drone for indoor flight and deploy cage in your test flight environment.
 
 .. tip::
 
-   If you are looking for a small drone for indoor flight test, Skyviper V2450 GPS drone or its successor journey GPS drone is a good choice. It is very affordable and running ArduPilot out-of-box. You can easily flash it wit custom build ArduPilot. If you perfer custom build small drone, there is a very good discuss `here <https://discuss.ardupilot.org/t/microarducopter-3-props-omnibus-nano-success/32568?u=chobitsfan>`__. The RTF quadcopter frame used in another example video is available from `sdmodel <https://goods.ruten.com.tw/item/show?21806678027603>`__.
+   If you are looking for a small drone for indoor flight test, Skyviper V2450 GPS drone or its successor journey GPS drone is a good choice. It is very affordable and running ArduPilot out-of-box. You can easily flash it with custom build ArduPilot. If you prefer custom build small drone, there is a very good discuss `here <https://discuss.ardupilot.org/t/microarducopter-3-props-omnibus-nano-success/32568?u=chobitsfan>`__. The RTF quadcopter frame used in another example video is available from `sdmodel <https://goods.ruten.com.tw/item/show?21806678027603>`__.
 
 First, you need to place markers on the drone. It is very important to place markers so that they form a stereoscopic, asymmetrical shape. Please refer to OptiTrack `rigid body marker placement <https://v20.wiki.optitrack.com/index.php?title=Rigid_Body_Tracking#Rigid_Body_Marker_Placement>`__ for details.
 
@@ -99,7 +99,7 @@ You need to set tracking rigid body id to match your setting in Motive:
 
     optitrack set obj_id RIGID_BODY_STREAMING_ID
 
-If you set Motive data streaming local interface to other than loopback , it is required to configuare optitrack module with:
+If you set Motive data streaming local interface to other than loopback , it is required to configure optitrack module with:
 
 .. code:: bash
 
@@ -122,8 +122,12 @@ Ground testing
 
 - Connect the drone to MAVProxy
 - Start Motive and make sure `data streaming <https://v20.wiki.optitrack.com/index.php?title=Data_Streaming>`__ is turned on.
-- load and start optitrack module.
-- If you see following message appearing (initial pos may vary), then the drone is receiving pose data from Optitrack system. 
+- Load and start optitrack module.
+- After starting the OptiTrack stream, verify that the position reported by ArduPilot closely matches the position shown in the OptiTrack (Motive) software.
+
+  Small offsets (a few centimeters) are acceptable. Large discrepancies indicate a configuration issue such as incorrect axis alignment, origin placement, or rigid body setup.
+
+- If you see the following message appearing (initial pos may vary), then the drone is receiving pose data from the Optitrack system.
 
 ``EKF3 IMU0 is using external nav data
 EKF3 IMU0 initial pos NED = 0.1,-0.2,0.0 (m)
@@ -136,7 +140,16 @@ Take off in AltHold mode and maintain a stable hover. Switch to Loiter but be re
 
 .. note::
 
-   In order to take off in guided or auto mode, you need to use `GPS_GLOBAL_ORIGIN <https://mavlink.io/en/messages/common.html#SET_GPS_GLOBAL_ORIGIN>`__ to set the GPS location of motion capture system origin. It is not need to be accurate, any valid lat/lng is ok.
+   In order to take off in Guided, Auto, or RTL modes, a valid GPS global origin must be set using
+   `GPS_GLOBAL_ORIGIN <https://mavlink.io/en/messages/common.html#SET_GPS_GLOBAL_ORIGIN>`__.
+
+   The latitude and longitude do not need to be highly accurate, but they must be valid coordinates.
+   It is recommended to use the approximate latitude and longitude of the building or test facility
+   where the motion capture system is installed (for example, obtained from Google Maps).
+   Altitude can be set to zero or an approximate value.
+
+   The GPS global origin is only used as a reference frame; all position information comes from the
+   OptiTrack system.
 
 .. youtube:: JKzuaVQZclI
    :width: 100%

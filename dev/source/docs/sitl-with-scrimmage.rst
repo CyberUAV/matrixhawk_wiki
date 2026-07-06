@@ -3,6 +3,11 @@
 ===================================
 Using SCRIMMAGE as a SITL simulator
 ===================================
+
+.. warning::
+
+    As for April 2026, this simulation connection hasn't been maintained for a while and may not work with the latest ArduPilot code.
+
 `Simulating Collaborative Robots in Massive Mulit-Agent Game Execution (SCRIMMAGE) <http://www.scrimmagesim.org/>`__
 provides a flexible simulation environment for the experimentation and testing of novel mobile robotics algorithms.
 SCRIMMAGE provides a three-dimensional robotics environment that can simulate varying levels of sensor and motion model
@@ -20,6 +25,7 @@ Starting an ArduPlane Simulation
 ================================
 
 To start an ArduPlane simulation use the ``-f`` argument in sim_vehicle.py:
+
 ::
 
     cd ArduPlane
@@ -29,6 +35,7 @@ Starting an ArduCopter Simulation
 =================================
 
 To start an ArduCopter simulation use the ``-f`` argument in sim_vehicle.py:
+
 ::
 
     cd ArduCopter
@@ -39,6 +46,7 @@ Additional SCRIMMAGE Parameters
 
 Additional parameters can be passed into SCRIMMAGE using the ``-A`` and ``--config`` arguments. These parameters can be used to
 overwrite the defaults in the SCRIMMAGE mission file such as the motion model, visual model, or terrain.
+
 ::
 
     cd ArduPlane

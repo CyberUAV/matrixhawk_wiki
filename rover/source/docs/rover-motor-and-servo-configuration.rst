@@ -50,9 +50,9 @@ Motor Driver Types
 At least three different Motor Driver (aka ESC) types are supported which allows using ArduPilot with most motor drivers.  The :ref:`MOT_PWM_TYPE <MOT_PWM_TYPE>` parameter should be used to ensure the output from the autopilot board matches the input required by the motor driver.
 
 - "Normal" is the most common and involves sending PWM values normally between 1000 and 2000 (1ms ~ 2ms) to an ESC. "OneShot and OneShot125" are variants of this (See :ref:`common-brushless-escs`).
-- "DShotxxxx" is for use with DShot ESCs and uses a serial digial control stream (see :ref:`common-dshot-escs`)
+- "DShotxxxx" is for use with DShot ESCs and uses a serial digital control stream (see :ref:`common-dshot-escs`)
 - ":ref:`Brushed With Relay <common-brushed-motors>`" is for brushed motor drivers that use a :ref:`relay pin <common-relay>` to indicate whether it should rotate forward or backward. Output is 0-100% duty cycle waveform.
-- "Brushed BiPolar" is for brushed motor drivers that, a bit like "Normal" PWM. These devices interpret a low PWM value for reverse, a high PWM value for forward. Output is q 0-100% duty cycle waveform.
+- "Brushed BiPolar" is for brushed motor drivers that use basic PWM duty cycle to control motor direction and speed. These devices interpret a low duty cycle PWM value for full-speed reverse, 50% duty cycle as stopped, and a 100% duty cycle for full-speed forward. (Contrast to "Normal servo control PWM" where pulse width range 1-2ms is used for servo output position, and is only a ~5-10% duty-cycle overall.)
 
 .. note:: Brushed motors are updated at the :ref:`MOT_PWM_FREQ<MOT_PWM_FREQ>` rate. Make sure that it is set at a value compatible with the brushed motor/esc you are using.
 
@@ -60,6 +60,8 @@ Reversing
 ---------
 
 Rover vehicles may/or may not use reversing motors depending on configuration. If an ESC is used, usually 1500us is used to indicate idle for PWM and DShot systems. Brushed drivers this point will be 50% duty cycle, if reversible, unless the BRUSHED_WITH_RELAY type is used.
+
+Some ESCs need a brief pause at idle as they change direction. :ref:`MOT_REV_DELAY <MOT_REV_DELAY>` can be used to provide that delay.
 
 ESC Configuration
 -----------------

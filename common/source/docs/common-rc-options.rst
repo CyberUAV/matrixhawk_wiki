@@ -22,9 +22,12 @@ RC Options
 8                                       Use Passthru extensions for CRSF telemetry (see :ref:`common-frsky-passthrough`)
 9                                       Suppress CRSF mode/rate messages for ELRS systems
 10                                      Enable multiple receiver support on autopilot
+11                                      Use Link Quality instead of RSSI for RX signal strength
+12                                      Annotate flight mode with * on disarm
+13                                      Use 420kbaud for ELRS protocol
 =================================       =========
 
-for example, to set this option to ignore receiver failsafe bits, you would set bit 2, or a value of "4" (2^2=4). This may be usefull when using ground station control beyond the range of the RC system which can set its receiver's outputs to trim values upon RC signal loss, but still has a failsafe bit in the protocol which would otherwise force an RC failsafe to occur.
+for example, to set this option to ignore receiver failsafe bits, you would set bit 2, or a value of "4" (2^2=4). This may be useful when using ground station control beyond the range of the RC system which can set its receiver's outputs to trim values upon RC signal loss, but still has a failsafe bit in the protocol which would otherwise force an RC failsafe to occur.
 
 
 There is also an :ref:`RC_PROTOCOLS<RC_PROTOCOLS>` bitmask that can be used to restrict which RC protocols are detected and used. This is useful in cases where the RC protocol autodetection fails and an incorrect RC protocol handler is chosen. This is rare, but if you do find it happens then you can lock in a single RC protocol that can be detected and used with this parameter.

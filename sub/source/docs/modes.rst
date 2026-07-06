@@ -19,7 +19,7 @@ GUIDED          Swim to location or velocity/direction using GCS    P/D
 CIRCLE          Circle swim with depth control                      P/D
 SURFACE         Return to surface, pilot directional control        \-
 POSHOLD         Loiter with depth control and pilot overrides       P/D
-MOTOR_DETECT    Automatically determine motor rotation and adjust   D
+MOTOR_DETECT    Automatically determine motor rotation and adjust   \-
 SURFTRAK        Hold distance above seafloor while stabilizing      R
 =============   =================================================  =========
 
@@ -39,7 +39,7 @@ ACRO Mode
 
 Stabilization Related
 ---------------------
-* :ref:`ANGLE_MAX<ANGLE_MAX>`
+* :ref:`ATC_ANGLE_MAX<ATC_ANGLE_MAX>`
 * :ref:`JS_GAIN_DEFAULT<JS_GAIN_DEFAULT>`
 
 ALT_HOLD Mode
@@ -49,24 +49,24 @@ ALT_HOLD Mode
 Depth Control Related
 ---------------------
 * :ref:`SURFACE_DEPTH<SURFACE_DEPTH>`
-* :ref:`PILOT_SPEED_UP<PILOT_SPEED_UP>`
-* :ref:`PILOT_SPEED_DN<PILOT_SPEED_DN>`
+* :ref:`PILOT_SPD_UP<PILOT_SPD_UP>`
+* :ref:`PILOT_SPD_DN<PILOT_SPD_DN>`
 * :ref:`PILOT_SPEED<PILOT_SPEED>`
 
 Auto/Guided Waypoint Navigation Related
 ---------------------------------------
-* :ref:`WPNAV_SPEED<WPNAV_SPEED>`
-* :ref:`WPNAV_RADIUS<WPNAV_RADIUS>`
-* :ref:`WPNAV_SPEED_UP<WPNAV_SPEED_UP>`
-* :ref:`WPNAV_SPEED_DN<WPNAV_SPEED_DN>`
-* :ref:`WPNAV_ACCEL<WPNAV_ACCEL>`
-* :ref:`WPNAV_ACCEL_Z<WPNAV_ACCEL_Z>`
-* :ref:`WPNAV_RFND_USE<WPNAV_RFND_USE>`
+* :ref:`WP_SPD<WP_SPD>`
+* :ref:`WP_RADIUS_M<WP_RADIUS_M>`
+* :ref:`WP_SPD_UP<WP_SPD_UP>`
+* :ref:`WP_SPD_DN<WP_SPD_DN>`
+* :ref:`WP_ACC<WP_ACC>`
+* :ref:`WP_ACC_Z<WP_ACC_Z>`
+* :ref:`WP_RFND_USE<WP_RFND_USE>`
 * :ref:`WP_YAW_BEHAVIOR<WP_YAW_BEHAVIOR>`
 
 CIRCLE Mode
 -----------
-* :ref:`CIRCLE_RADIUS<CIRCLE_RADIUS>`
+* :ref:`CIRCLE_RADIUS_M<CIRCLE_RADIUS_M>`
 * :ref:`CIRCLE_RATE<CIRCLE_RATE>`
 * :ref:`CIRCLE_OPTIONS<CIRCLE_OPTIONS>`
 

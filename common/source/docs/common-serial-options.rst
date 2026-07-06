@@ -228,7 +228,7 @@ RobotisServo, see :ref:`common-servo-robotis`
       <tr>
    <td>20</td>
    <td>
-	NMEA Output, NEMA Output stream from GPS
+    NMEA Output, NEMA Output stream from GPS
 
 .. raw:: html
 
@@ -535,8 +535,34 @@ Bitmask Options
 - if bit 7 is set, then the TX pin has a weak pull up resistor activated.
 - if bit 8 is set, then the RX has no DMA activated (assuming DMA is available on this UART)
 - if bit 9 is set, then the TX has no DMA activated (assuming DMA is available on this UART)
-- if bit 10 is set, then MAVLink forwarding will not be active on this UART port.
+- if bit 10 is set, then MAVLink forwarding will not be active on this UART port. (moved to MAVx_OPTIONS in 4.7 and later)
 - if bit 11 is set, then the hardware FIFO in H7 autopilots is disabled
-- if bit 12 is set, the GCS are prevented from changing the MAVLink message stream rates set by the ``SRx_...`` parameters.
+- if bit 12 is set, the GCS are prevented from changing the MAVLink message stream rates set by the ``SRx_...`` parameters.(moved to MAVx_OPTIONS in 4.7 and later)
 
 .. note:: HalfDuplex is supported on all ChiBiOS based autopilots, but inversion and swap are only supported on boards with F7 or H7 microprocessors.
+
+MAVLINK PROTOCOL OPTIONS
+========================
+
+If MAVLINK protocol is being used in any serial port, there are several options that can be selected to modify default behavior using parameters:
+
+:ref:`MAV_OPTIONS <MAV_OPTIONS>`
+--------------------------------
+
+Setting bit 0 of this parameter, will make the autopilot only accept MAVLink from system IDs given by :ref:`MAV_GCS_SYSID <MAV_GCS_SYSID>` and :ref:`MAV_GCS_SYSID_HI <MAV_GCS_SYSID_HI>`.
+
+
+Individual MAVLink Channel Options
+----------------------------------
+Each MAVLink channel can have its behavior modified by settings its channel option parameter bitmask. Channel 1 options are shown below:
+
+:ref:`MAV1_OPTIONS <MAV1_OPTIONS>`:
+
+=======    ======================
+Bit set    Description
+=======    ======================
+0          Accept unsigned MAVLink2 messages
+1          Don’t forward mavlink to/from this channel, from/to other channels
+2          Ignore Streamrate set by GCS
+3          forward mavlink packets that don’t pass CRC (bit 1 overrides this)
+=======    ======================

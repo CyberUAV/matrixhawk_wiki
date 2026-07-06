@@ -7,12 +7,12 @@ QuikTune
 ..  youtube:: K_T9ikEQmlc
     :width: 100%
 
-The `VTOL QuikTune <https://github.com/ArduPilot/ardupilot/blob/Copter-4.5/libraries/AP_Scripting/applets/VTOL-quicktune.md>`__ Lua script simplifies the process of finding a good tune for a multicopter's attitude control parameters.
+The `VTOL QuikTune <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/applets/VTOL-quicktune.md>`__ Lua script simplifies the process of finding a good tune for a multicopter's attitude control parameters.
 
 The script slowly increases the relevant gains until it detects an oscillation.  It then reduces the gains by 60% and moves onto the next gain.
 Once all the gains have been tuned the tune completes and the user can decide to save or discard the new gains.
 
-.. note:: be sure that you have prepared the vehicle for tuning by setting up parameters discussed here: :ref:`setting-up-for-tuning`. Also to assure the best tune, setup the noise notch filtering, see :ref:`common-imu-notch-filtering`. You may run QuickTune without this step to obtain initial fine tune, see :ref:`ac_rollpitchtuning` if the vehicle cant do an initial hover stably. Then setup the filters and retune for best results.
+.. note:: be sure that you have prepared the vehicle for tuning by setting up parameters discussed here: :ref:`setting-up-for-tuning`. Also to assure the best tune, setup the noise notch filtering, see :ref:`common-imu-notch-filtering`. You may run QuickTune without this step to obtain initial fine tune, see :ref:`ac_rollpitchtuning` if the vehicle can't do an initial hover stably. Then setup the filters and retune for best results.
 
 The script attempts to tune all these parameters (in the given order)
 
@@ -24,13 +24,13 @@ The script attempts to tune all these parameters (in the given order)
 - :ref:`ATC_RAT_YAW_P<ATC_RAT_YAW_P__AC_AttitudeControl_Multi>` and :ref:`ATC_RAT_YAW_I<ATC_RAT_YAW_I__AC_AttitudeControl_Multi>`
 
 The advantage over :ref:`AutoTune <autotune>` is that QuikTune is safer because the vehicle does not need to move or twitch.
-The disadvantage is that QuikTune cannot find the vehicle's maximum rotational accelerations (e.g. :ref:`ATC_ACCEL_R_MAX <ATC_ACCEL_R_MAX>`, :ref:`ATC_ACCEL_P_MAX <ATC_ACCEL_P_MAX>`, :ref:`ATC_ACCEL_Y_MAX <ATC_ACCEL_Y_MAX>`)
+The disadvantage is that QuikTune cannot find the vehicle's maximum rotational accelerations (e.g. :ref:`ATC_ACC_R_MAX<ATC_ACC_R_MAX>`, :ref:`ATC_ACC_P_MAX<ATC_ACC_P_MAX>`, :ref:`ATC_ACC_Y_MAX<ATC_ACC_Y_MAX>`)
 
 Installing the Script
 =====================
 
 - Set :ref:`SCR_ENABLE <SCR_ENABLE>` = 1 to enable scripting and then reboot the autopilot
-- Download `VTOL-quicktune.lua <https://raw.githubusercontent.com/ArduPilot/ardupilot/Copter-4.5/libraries/AP_Scripting/applets/VTOL-quicktune.lua>`__ to your PC
+- Download `VTOL-quicktune.lua <https://raw.githubusercontent.com/ArduPilot/ardupilot/master/libraries/AP_Scripting/applets/VTOL-quicktune.lua>`__ to your PC
 - Copy the script to your autopilot's SD card's APM/scripts directory.  If using MP it may be easiest to use the Config, MAVFtp screen
 
   .. image:: ../images/quiktune-mp-mavftp.png
@@ -61,4 +61,4 @@ Running QuikTune
 Advanced Configuration
 ======================
 
-The full list of available `parameter settings are here <https://github.com/ArduPilot/ardupilot/blob/Copter-4.5/libraries/AP_Scripting/applets/VTOL-quicktune.md>`__
+The full list of available `parameter settings are here <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/applets/VTOL-quicktune.md>`__

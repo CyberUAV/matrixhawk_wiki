@@ -40,11 +40,11 @@ Connect with a ground station and set the following parameters.  The params belo
 - :ref:`MNT1_PITCH_MAX <MNT1_PITCH_MAX>` to 45
 - :ref:`MNT1_YAW_MIN <MNT1_YAW_MIN>` to -180
 - :ref:`MNT1_YAW_MAX <MNT1_YAW_MAX>` to 180
-- :ref:`MNT1_RC_RATE <MNT1_RC_RATE>` to 60 (deg/s) to control speed of gimbal when using RC targetting
+- :ref:`MNT1_RC_RATE <MNT1_RC_RATE>` to 60 (deg/s) to control speed of gimbal when using RC targeting
 - :ref:`CAM1_TYPE<CAM1_TYPE>` to 4 / "Mount" to allow control of the camera
 - :ref:`RC6_OPTION <RC6_OPTION>` = 213 ("Mount Pitch") to control the gimbal's pitch angle with RC channel 6
 - :ref:`RC7_OPTION <RC7_OPTION>` = 214 ("Mount Yaw") to control the gimbal's yaw angle with RC channel 7
-- :ref:`RC8_OPTION <RC8_OPTION>` = 163 ("Mount Lock") to switch between "lock" and "follow" mode with RC channel 8
+- :ref:`RC8_OPTION <RC8_OPTION>` = 163 ("Mount Yaw Lock") to switch between normal yaw operation and locking mount heading with RC channel 8 (in RC Targeting mode only).
 
 - Optionally these auxiliary functions are also available
 

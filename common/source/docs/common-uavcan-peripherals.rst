@@ -32,7 +32,8 @@ GPS/Combos
     Holybro DroneCAN H-RTK F9P Rover <https://holybro.com/collections/gps-rtk-systems/products/dronecan-h-rtk-f9p-rover>
     Holybro DroneCAN H-RTK F9P Helical <https://holybro.com/collections/gps-rtk-systems/products/dronecan-h-rtk-f9p-helical>
     Holybro H-RTK ZED-F9P Rover (RM3100 Compass, Barometer, IP66 Waterproof) <https://holybro.com/collections/h-rtk-gps/products/h-rtk-zed-f9p-rover>
-    Holybro H-RTK NEO-F9P Family <https://holybro.com/collections/h-rtk-neo-f9p-series> 
+    Holybro H-RTK NEO-F9P Family <https://holybro.com/collections/h-rtk-neo-f9p-series>
+    MakeFlyEasy POS3 DroneCAN GPS/Compass <common-mfe-pos3>
     Matek M8Q-CAN/DroneCAN GPS+Compass+Baro+Airspeed I2C port <common-matek-m8q>
     Matek M10Q-3100 DroneCAN GPS+Compass <https://www.mateksys.com/?portfolio=m10q-3100>
     Matek DroneCAN GNSS M10-L4-3100 <https://www.mateksys.com/?portfolio=m10-l4-3100>
@@ -52,12 +53,14 @@ Adapter Nodes
     Matek DroneCAN Adapter Node <https://www.mateksys.com/?portfolio=can-l431>
     mRo KitCAN CAN/DroneCAN Adapter Node+Compass+Baro <common-mro-kitcan>
     mRo DroneCAN Adapter Node <common-mro-uavcan-adapter-node>
+    VimDrones <https://dev.vimdrones.com/products/vimdrones_ap_periph_pico/>
 
 Airspeed
 ========
 .. toctree::
     :maxdepth: 1
 
+    3DR ASUAV DroneCAN Airspeed/Barometer <https://store.3dr.com/slim-auav-can-airspeed-sensor/>
     Beyond Robotix Air Data Module (Amphenol AUAV) <https://www.beyondrobotix.com/products/air-data-module>
     Holybro High Precision DroneCAN Airspeed Sensor - DLVR <https://holybro.com/products/high-precision-dronecan-airspeed-sensor-dlvr>
     Avionics Anonymous Airspeed + Temp <common-avanon-adc>
@@ -66,6 +69,10 @@ Airspeed
     Matek DroneCAN AUAV Airspeed/Baro <https://www.mateksys.com/?portfolio=aspd-auav>
     Matek DroneCAN DLVR-10 Airspeed Sensor <common-matek-uavcan-dlvr>
     Qiotek DroneCAN Airspeed Sensor <https://www.qio-tek.com/index.php/product/qiotek-asp5033-dronecan-airspeed-and-compass-module>
+    TBS DLVR-10 <https://www.team-blacksheep.com/products/prod:lucid_dcassp>
+    TBS MS4525 <https://www.team-blacksheep.com/products/prod:lucid_dcass>
+    UAV-DEV GmbH DroneCAN Airspeed and Barometer Sensor - AUAV <https://wiki.uav-dev.com/en/product/airspeed/auav>
+
 
 External Barometer
 ==================
@@ -73,6 +80,7 @@ External Barometer
     :maxdepth: 1
 
     Beyond Robotix Air Data Module (Amphenol AUAV) <https://www.beyondrobotix.com/products/air-data-module>
+    UAV-DEV GmbH DroneCAN Airspeed and Barometer Sensor - AUAV <https://wiki.uav-dev.com/en/product/airspeed/auav>
 
 Smart Battery/Power Module
 ==========================
@@ -93,6 +101,7 @@ Rangefinder
     :maxdepth: 1
 
     Avionics Anonymous LIDAR Interface <common-avanon-mag>
+    Hexsoon Radar <common-rangefinder-hexsoon-radar>
     Nanoradar NRA24 <common-rangefinder-nra24>
     Nooploop TOF-Sense P <common-rangefinder-nooploop-tofsense-p>
 
@@ -111,6 +120,11 @@ Servos and Actuators
 
     DroneCAN Servos <common-dronecan-servos>
     Hitec DroneCAN Linear Actuators <common-hitec-dronecan-linear-actuator>
+    Himark CAN Servos <http://himarkuaveng.com/cate-21898-23052.html>
+    UltraMotion Can Servos* <https://www.ultramotion.com/servo-cylinder/>
+    VimDrones <https://dev.vimdrones.com/products/vimdrones_can_servo_hub/>
+
+    * requires `LUA Scripting <common-lua-scripts> be setup and `LUA driver <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/drivers/UltraMotion.lua>`__ used.
 
 ESCs/Output Expanders
 =====================
@@ -135,6 +149,7 @@ RC Receivers/Adapters
     :maxdepth: 1
 
     AnyLeaf ELRS RC + telemetry <https://www.anyleaf.org/elrs-rx-can>
+    Matek mLRS RC + MAVLink CAN receiver, mR900-30C <https://www.mateksys.com/?portfolio=mr900-30c>
     Matek CAN-L4-RC adapter <http://www.mateksys.com/?portfolio=can-l4-rc>
 
 Gimbals

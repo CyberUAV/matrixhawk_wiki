@@ -52,7 +52,7 @@ These are only needed for the forward swashplate if :ref:`H_SW_TYPE<H_SW_TYPE__A
 - :ref:`H_SW_H3_SV1_POS<H_SW_H3_SV1_POS__AP_MotorsHeli_Dual>`
 - :ref:`H_SW_H3_SV2_POS<H_SW_H3_SV2_POS__AP_MotorsHeli_Dual>`
 - :ref:`H_SW_H3_SV3_POS<H_SW_H3_SV3_POS__AP_MotorsHeli_Dual>`
-- :ref:`H_SW_H3_PHANG<H_SW_H3_PHANG__AP_MotorsHeli_Dual>`
+- ``H_SW_H3_PHANG``
 
 These are only needed for the aft swashplate if :ref:`H_SW2_TYPE<H_SW2_TYPE>` is set to H3 Generic.
 
@@ -60,7 +60,7 @@ These are only needed for the aft swashplate if :ref:`H_SW2_TYPE<H_SW2_TYPE>` is
 - :ref:`H_SW2_H3_SV1_POS<H_SW2_H3_SV1_POS>`
 - :ref:`H_SW2_H3_SV2_POS<H_SW2_H3_SV2_POS>`
 - :ref:`H_SW2_H3_SV3_POS<H_SW2_H3_SV3_POS>`
-- :ref:`H_SW2_H3_PHANG<H_SW2_H3_PHANG>`
+- ``H_SW2_H3_PHANG``
 
 This parameter is not used for the longitudinal configuration
 - :ref:`H_YAW_REV_EXPO<H_YAW_REV_EXPO>`
@@ -98,7 +98,7 @@ These are only needed for the left swashplate if :ref:`H_SW_TYPE<H_SW_TYPE__AP_M
 - :ref:`H_SW_H3_SV1_POS<H_SW_H3_SV1_POS__AP_MotorsHeli_Dual>`
 - :ref:`H_SW_H3_SV2_POS<H_SW_H3_SV2_POS__AP_MotorsHeli_Dual>`
 - :ref:`H_SW_H3_SV3_POS<H_SW_H3_SV3_POS__AP_MotorsHeli_Dual>`
-- :ref:`H_SW_H3_PHANG<H_SW_H3_PHANG__AP_MotorsHeli_Dual>`
+- ``H_SW_H3_PHANG``
 
 These are only needed for the right swashplate if :ref:`H_SW2_TYPE<H_SW2_TYPE>` is set to H3 Generic.
 
@@ -106,7 +106,7 @@ These are only needed for the right swashplate if :ref:`H_SW2_TYPE<H_SW2_TYPE>` 
 - :ref:`H_SW2_H3_SV1_POS<H_SW2_H3_SV1_POS>`
 - :ref:`H_SW2_H3_SV2_POS<H_SW2_H3_SV2_POS>`
 - :ref:`H_SW2_H3_SV3_POS<H_SW2_H3_SV3_POS>`
-- :ref:`H_SW2_H3_PHANG<H_SW2_H3_PHANG>`
+- ``H_SW2_H3_PHANG``
 
 This parameter is not used for the longitudinal configuration
 
@@ -143,7 +143,7 @@ These are only needed for the left swashplate if :ref:`H_SW_TYPE<H_SW_TYPE__AP_M
 - :ref:`H_SW_H3_SV1_POS<H_SW_H3_SV1_POS__AP_MotorsHeli_Dual>`
 - :ref:`H_SW_H3_SV2_POS<H_SW_H3_SV2_POS__AP_MotorsHeli_Dual>`
 - :ref:`H_SW_H3_SV3_POS<H_SW_H3_SV3_POS__AP_MotorsHeli_Dual>`
-- :ref:`H_SW_H3_PHANG<H_SW_H3_PHANG__AP_MotorsHeli_Dual>`
+- ``H_SW_H3_PHANG``
 
 These are only needed for the right swashplate if :ref:`H_SW2_TYPE<H_SW2_TYPE>` is set to H3 Generic.
 
@@ -151,7 +151,7 @@ These are only needed for the right swashplate if :ref:`H_SW2_TYPE<H_SW2_TYPE>` 
 - :ref:`H_SW2_H3_SV1_POS<H_SW2_H3_SV1_POS>`
 - :ref:`H_SW2_H3_SV2_POS<H_SW2_H3_SV2_POS>`
 - :ref:`H_SW2_H3_SV3_POS<H_SW2_H3_SV3_POS>`
-- :ref:`H_SW2_H3_PHANG<H_SW2_H3_PHANG>`
+- ``H_SW2_H3_PHANG``
 
 These parameters are not used for the intermeshing configuration
 
@@ -190,7 +190,7 @@ These are only needed for the counter clockwise swashplate if :ref:`H_SW_TYPE<H_
 - :ref:`H_SW_H3_SV1_POS<H_SW_H3_SV1_POS__AP_MotorsHeli_Dual>`
 - :ref:`H_SW_H3_SV2_POS<H_SW_H3_SV2_POS__AP_MotorsHeli_Dual>`
 - :ref:`H_SW_H3_SV3_POS<H_SW_H3_SV3_POS__AP_MotorsHeli_Dual>`
-- :ref:`H_SW_H3_PHANG<H_SW_H3_PHANG__AP_MotorsHeli_Dual>`
+- ``H_SW_H3_PHANG``
 
 These are only needed for the clockwise swashplate if :ref:`H_SW2_TYPE<H_SW2_TYPE>` is set to H3 Generic.
 
@@ -198,7 +198,7 @@ These are only needed for the clockwise swashplate if :ref:`H_SW2_TYPE<H_SW2_TYP
 - :ref:`H_SW2_H3_SV1_POS<H_SW2_H3_SV1_POS>`
 - :ref:`H_SW2_H3_SV2_POS<H_SW2_H3_SV2_POS>`
 - :ref:`H_SW2_H3_SV3_POS<H_SW2_H3_SV3_POS>`
-- :ref:`H_SW2_H3_PHANG<H_SW2_H3_PHANG>`
+- ``H_SW2_H3_PHANG``
 
 These parameters are not used for the coaxial configuration
 

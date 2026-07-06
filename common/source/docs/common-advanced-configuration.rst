@@ -16,6 +16,7 @@ tuning options for the vehicle.
     AutoTune <autotune>
     Auxiliary Function Switches <common-auxiliary-functions>
     Baro Temperature Compensation <common-baro-temp-comp>
+    Baro Thrust Compensation <common_baro_thrust_compensation>
     Boat mode <boat-mode>
     Bootloader Update <common-bootloader-update>
 [/site]
@@ -49,12 +50,16 @@ tuning options for the vehicle.
 [site wiki="plane"]
     Crash Detection <crash-detect>
 [/site]
+[site wiki="plane,copter"]
+    Damaged Motor/Prop RPM Checks <common-tkoff-rpm-min>
+[/site]
     DisplayPort <common-displayport>
     DroneCAN Setup <common-uavcan-setup-advanced>
     EKF (Extended Kalman Filter) <common-apm-navigation-extended-kalman-filter-overview>
     EKF Affinity & Lane Switching <common-ek3-affinity-lane-switching>
     EKF Sources and Selection <common-ekf-sources>
     Ethernet/Network Setup <common-network>
+    Network Capture <common-network-capture>
 [site wiki="copter,rover,sub"]
     Fence Failsafes  <common-geofencing-landing-page>
 [/site]
@@ -74,6 +79,8 @@ tuning options for the vehicle.
 [site wiki="plane,copter,rover"]
     GPS for Yaw (aka Moving Baseline) <common-gps-for-yaw>
     GPS for Altitude <common-gps-for-alt>
+[/site]
+[site wiki="copter,plane,rover,blimp,sub"]
     GPS/Non-GPS Transitions <common-non-gps-to-gps>
 [/site]
     Ground Control Station Only Operation <common-gcs-only-operation>
@@ -85,12 +92,18 @@ tuning options for the vehicle.
     Independent Watchdog <common-watchdog>
 [site wiki="plane"]
     In-Flight FTT and filter control <common-imu-fft>
+[/site]
+[site wiki="plane,rover"]
+    Limiting Maximum Power Draw <common-batt-watt-max>
+[/site]
+[site wiki="rover"]
     Limiting Maximum Power Draw <batt-watt-max>
 [/site]
     Limit Cycle Prevention <common-servo-limit-cycle-detection>
     LUA Scripting <common-lua-scripts>
     Magnetic Interference <common-magnetic-interference>
     Magnetometer GeoPhys Array <common-hires-mag-array>
+    MAVLink <common-mavlink-configuration>
     MAVLink2 Packet Signing (Security) <common-MAVLink2-signing>
 [site wiki="rover"]
     Motor Thrust Scaling <rover-motor-thrust-scaling>
@@ -100,7 +113,7 @@ tuning options for the vehicle.
 [/site]
     Moving Vehicle Initialization <common-moving-vehicle-initialization>
     Multiple Radio Control Receivers <common-multiple-rx>
-[site wiki="copter,rover"]
+[site wiki="copter,plane,rover,blimp,sub"]
     Non-GPS Navigation <common-non-gps-navigation-landing-page>
 [/site]
     Notification Devices (LEDs,Buzzer,etc.) <common-ntf-devices>
@@ -114,6 +127,7 @@ tuning options for the vehicle.
     On Screen Displays (OSD) <common-osd-overview>
     OSD Parameter Editor <common-paramosd>
     Parameter List (Full) <parameters>
+    Parameter Lockdown <common-parameter-lockdown>
     Parameter Reset <common-parameter-reset>
 [site wiki="copter"]
     Precision Landing and Loiter <precision-landing-and-loiter>

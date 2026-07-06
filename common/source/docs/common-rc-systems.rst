@@ -174,11 +174,11 @@ Note 2: See :ref:`common-frsky-yaapu`. The ability to change parameters over FRS
 
 Note 3: ArduPilot provides a means to send its telemetry data via CRSF such that it can be displayed on `OpenTX <https://www.open-tx.org/>`__ transmitters using the :ref:`Yaapu Telemetry LUA Script<common-frsky-yaapu>`. The ability to change parameters over CRSF telemetry from an Open TX compatible transmitter in addition to displaying the telemetry data is also possible. See :ref:`common-crsf-telemetry`
 
-Note 4: ELRS (ExpressLRS) is a flexible open-source system that can output CRSF, SBUS, or MAVLink (with embedded RC) protocols. Telemetry requires the use of CRSF or Mavlink, and the receiver must be wired to a full UART.  See `ExpressLRS site <https://www.expresslrs.org/>`  and :ref:`TBS CRSF/ ELRS <common-tbs-rc>` for more information.
+Note 4: ELRS (ExpressLRS) is a flexible open-source system that can output CRSF, SBUS, or MAVLink (with embedded RC) protocols. Telemetry requires the use of CRSF or Mavlink, and the receiver must be wired to a full UART.  See `ExpressLRS site <https://www.expresslrs.org/>__`  and :ref:`TBS CRSF/ ELRS <common-tbs-rc>` for more information.
 
 Note 5: The mLRS project is firmware designed specifically to carry both RC and MAVLink. The usable telemetry speed varies by the chosen mode and is managed via RADIO_STATUS flow control. It uses the CRSF (TBS Crossfire) RC protocol on both the receiver and Tx module.  It also integrates full MAVLink telemetry via serial connections on the Tx module and the receiver.
 
-Note 6: Vendor Specific Telem means that they accomodate sensor additions to the vehicle and can display the information on certain Vendor specific TXs but do not send ArduPilot telemetry from the vehicle to ArduPilot compatible GCS or OpenTX display scripts.
+Note 6: Vendor Specific Telem means that they accommodate sensor additions to the vehicle and can display the information on certain Vendor specific TXs but do not send ArduPilot telemetry from the vehicle to ArduPilot compatible GCS or OpenTX display scripts.
 
 Note 7: The receiver must support i-BUS telemetry (look for a SENS port on the receiver or check the product specifications).
 

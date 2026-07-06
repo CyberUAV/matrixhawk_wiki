@@ -46,7 +46,7 @@ Protocols
     PWM, OneShot and OneShot125 ESCs <common-brushless-escs>
     DShot ESCs <common-dshot-escs>
     DroneCAN ESCs <common-uavcan-escs>
-    Currawong Velocity PiccoloCAN ESCs <common-velocity-can-escs>
+    Currawong Velocity ESCs <common-velocity-can-escs>
     KDE CAN ESCs <common-kde-can-escs>
     FETtec OneWire ESCs <common-fettec-onewire>
 
@@ -64,6 +64,7 @@ ESCs using BLHeli32, AM32, or BLHeli-S Configuration Firmware
     :maxdepth: 1
 
     ARK 4IN1 ESC <common-ark-4in1-esc>
+    ARK 4IN1 ESC CONS <common-ark-4in1-esc_con>
     BLHeli/BLHeli32/AM32 Capable ESCs <common-blheli32-passthru>
 
 
@@ -74,7 +75,7 @@ Telemetry
     :maxdepth: 1
 
     ESC Telemetry <common-esc-telemetry>
-    Hobbywing Telemetry Hub (DatalinkV2)(uses LUA driver) <https://www.hobbywingdirect.com/products/data-link-v2>
+    Hobbywing DataLink V2 (Lua Driver) <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/drivers/Hobbywing_DataLink.md>
 
 .. note:: Currently ArduPilot only supports telemetry on BLHeli or DroneCAN/CAN ESCs, not throttle signal wire reported telemetry that some single unit ESCs report.
 

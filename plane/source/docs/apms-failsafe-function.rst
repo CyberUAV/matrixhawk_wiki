@@ -36,7 +36,7 @@ RC Failsafe
 Radio Signal Failure
 --------------------
 
-If the received signal is lost or the control information corrupted, or the receiver sets its "failsafe bit" in protocols which have this (like Sbus, FPort, etc.), or RC_OVERRIDES are lost if :ref:`using a GCS only <common-gcs-only-operation>` is being used, then an RC Failsafe condition occurs and the actions described in the :ref:`RC Failsafe Actions<fs_actions>` section below will be taken, if the :ref:`THR_FAILSAFE<THR_FAILSAFE>` parameter is 1.
+If the received signal is lost or the control information corrupted for greater than :ref:`RC_FS_TIMEOUT<RC_FS_TIMEOUT>` (default = 1 sec), or the receiver sets its "failsafe bit" in protocols which have this (like Sbus, FPort, etc.), or RC_OVERRIDES are lost if :ref:`using a GCS only <common-gcs-only-operation>` is being used, then an RC Failsafe condition occurs and the actions described in the :ref:`RC Failsafe Actions<fs_actions>` section below will be taken, if the :ref:`THR_FAILSAFE<THR_FAILSAFE>` parameter is 1.
 
 .. note:: by setting :ref:`RC_OPTIONS<RC_OPTIONS>` bit 2, you can force ArduPilot to ignore the "failsafe" bits in the protocol, and only initiate RC Failsafe due to missing or corrupted control information.
 
@@ -65,7 +65,7 @@ RC Failsafe Operation
 ---------------------
 
 -  When RC Failsafe is entered, all RC inputs (except throttle in the case of Throttle Failsafe), are ignored as the autopilot takes its failsafe actions.
--  First, the autopilot will go into Short Failsafe when it detects RC Failsafe for more than ``FS_SHORT_TIMEOUT`` seconds.
+-  First, the autopilot will go into Short Failsafe when it detects RC Failsafe for more than 0.5 seconds.
 -  A message will be displayed on your Ground Control Station(GCS), or OSD, if its message panel is enabled, that a Short Failsafe is active, and the autopilot will take the :ref:`FS_SHORT_ACTN<FS_SHORT_ACTN>`, if enabled.  The default is CIRCLE mode. This is intended to possibly allow the vehicle's changing orientation to re-acquire the signal, but other actions can be assigned. See :ref:`FS_SHORT_ACTN parameter below <failsafe-parameters>` for how each mode responds to the selected action value.
 -  If the condition causing the Short Failsafe is removed, the vehicle will return to the previous mode, and a message will be displayed that Short Failsafe is cleared. If it was a Throttle Failsafe that caused the RC Failsafe, and throttle was increased in order to exit, then an additional message will be sent stating that the Throttle Failsafe is OFF.
 -  If the condition causing the Short Failsafe persists longer than :ref:`FS_LONG_TIMEOUT<FS_LONG_TIMEOUT>` seconds the autopilot will go into Long Failsafe, send a message to the GCS that it has been entered, and execute the :ref:`FS_LONG_ACTN<FS_LONG_ACTN>` action, if enabled. The default setting for Long Failsafe action to take is RTL (Return to Launch). See :ref:`FS_LONG_ACTN parameter below <failsafe-parameters>` for how each mode responds to the selected action value.
@@ -76,8 +76,8 @@ RC Failsafe Operation
 Bench Testing RC Failsafe
 -------------------------
 
-#. Power up the system and verify that you are seeing RC control in the Mission Planner SETUP->Mandatory Hardware->Radio Calibration tab and in a non-auto mode (Manual, Stabilize, FBW are ok). Check that normal throttle movements to idle do NOT trigger a failsafe and normal control stick movements are observed.
-#. Switch to Mission Planners DATA View tab. Turn off the transmitter. After ``FS_SHORT_TIMEOUT`` seconds, if enabled, you should see the flight mode switch to :ref:`FS_SHORT_ACTN<FS_SHORT_ACTN>`. After :ref:`FS_LONG_TIMEOUT<FS_LONG_TIMEOUT>` sec, if enabled, the flight mode should then switch to :ref:`FS_LONG_ACTN<FS_LONG_ACTN>`. Turn the transmitter back on and change flight modes. The Long Failsafe flight mode should change to the selected mode.
+#. Power up the system and verify that you are seeing RC control in the Mission Planner SETUP->Mandatory Hardware->Radio Calibration tab and in a non-auto mode (Manual, Stabilize, FBW are ok). Check that normal throttle movements to idle do NOT trigger a failsafe and normal control stick movements are observed
+#. Switch to Mission Planners DATA View tab. Turn off the transmitter. You should see the flight mode switch to :ref:`FS_SHORT_ACTN<FS_SHORT_ACTN>`. After :ref:`FS_LONG_TIMEOUT<FS_LONG_TIMEOUT>` sec, if enabled, the flight mode should then switch to :ref:`FS_LONG_ACTN<FS_LONG_ACTN>`. Turn the transmitter back on and change flight modes. The Long Failsafe flight mode should change to the selected mode.
 #. If Throttle Failsafe is setup (ie via trim tab or transmitter switch). Check that it operates correctly by activating it and watching for Short and Long Failsafes to occur.
 
 If you observe this behavior, your RC Failsafe function has been set up correctly. If not, recheck that the parameters above have been set correctly.
@@ -170,7 +170,7 @@ Plane includes a two-layer battery failsafe.  This allows setting up a follow-up
 
 - :ref:`BATT_CRT_VOLT <BATT_CRT_VOLT>` - holds the secondary (lower) voltage threshold.  Set to zero to disable. Default is zero.
 - :ref:`BATT_CRT_MAH <BATT_CRT_MAH>` - holds the secondary (lower) capacity threshold.  Set to zero to disable. Default is zero.
-- :ref:`BATT_FS_CRT_ACT <BATT_FS_CRT_ACT>` - holds the secondary action to take.  A reasonable setup would be to have :ref:`BATT_FS_LOW_ACT <BATT_FS_LOW_ACT>` = 2 (RTL) and :ref:`BATT_FS_CRT_ACT <BATT_FS_CRT_ACT>` = 1 (Land)
+- :ref:`BATT_FS_CRT_ACT <BATT_FS_CRT_ACT>` - holds the secondary action to take.  A reasonable setup would be to have :ref:`BATT_FS_LOW_ACT <BATT_FS_LOW_ACT>` = 1 (RTL) and :ref:`BATT_FS_CRT_ACT <BATT_FS_CRT_ACT>` = 2 (Land)
 
 Advanced Battery Failsafe Settings
 ----------------------------------
@@ -187,7 +187,7 @@ The following is a description of the actions that can be taken for battery fail
 +-----+------------------+-----------------------------------------------------------------------------+
 +Value| Action           |     Description                                                             +
 +=====+==================+=============================================================================+
-+ 0   | None             | Do nothing except warn                                                      +
++ 0   | Warn Only        | Do nothing except warn                                                      +
 +-----+------------------+-----------------------------------------------------------------------------+
 + 1   | RTL              | Switch to :ref:`RTL<rtl-mode>` mode                                         +
 +-----+------------------+-----------------------------------------------------------------------------+
@@ -202,6 +202,9 @@ The following is a description of the actions that can be taken for battery fail
 + 6   | LOITER_TO_QLAND  | If QuadPlane, switch to LOITER_TO_QLAND mode,                               +
 +     |                  | otherwise do nothing                                                        +
 +-----+------------------+-----------------------------------------------------------------------------+
++ 7   | AUTOLAND or RTL  | If Fixed Wing, switch to AUTOLAND if available (see :ref:`mode_autoland`. If+
++     |                  | unavailable or QuadPlane switch to RTL                                      +
++-----+------------------+-----------------------------------------------------------------------------+
 
 .. _failsafe-parameters:
 
@@ -210,8 +213,7 @@ Failsafe Parameters and their Meanings
 
 Short failsafe action (:ref:`FS_SHORT_ACTN<FS_SHORT_ACTN>` )
 ------------------------------------------------------------
-
-The action to take on a short (``FS_SHORT_TIMEOUT`` seconds) RC failsafe event .
+The action to immediately take on a RC failsafe event .
 
 No Action is ever taken for Short FailSafe in these modes:
 
@@ -328,8 +330,7 @@ Otherwise:
 
 Long failsafe action (:ref:`FS_LONG_ACTN<FS_LONG_ACTN>` )
 ---------------------------------------------------------
-
-The action to take on a long (:ref:`FS_LONG_TIMEOUT<FS_LONG_TIMEOUT>` seconds) RC failsafe event. :ref:`FS_LONG_TIMEOUT<FS_LONG_TIMEOUT>` should be set longer than ``FS_SHORT_TIMEOUT``.
+The action to take on a long (:ref:`FS_LONG_TIMEOUT<FS_LONG_TIMEOUT>` seconds) RC failsafe event.
 
 No Action is ever taken for Long FailSafe in these modes:
 

@@ -119,7 +119,7 @@ The tests can be run under GDB to trace problems:
 
     Breakpoint 1, Vector2Test_angle_Test::TestBody (this=0x5555557c2b90)
         at ../../libraries/AP_Math/tests/test_vector2.cpp:20
-    20	    EXPECT_FLOAT_EQ(M_PI/2, Vector2f(0, 1).angle());
+    20      EXPECT_FLOAT_EQ(M_PI/2, Vector2f(0, 1).angle());
     (gdb) 
 
 
@@ -183,6 +183,7 @@ A directory in the ArduPilot source tree can contain a `wscript` file designatin
 Each .cpp file in that directory is then considered a valid test, and will be included in the tests compiled when `waf` is invoked for the `tests` target.
 
 Tests are present in the following directories at time if writing:
+
 ::
 
     libraries/AP_Common/tests

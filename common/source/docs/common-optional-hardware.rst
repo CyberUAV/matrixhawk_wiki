@@ -38,8 +38,8 @@ For guidance on cable design, colour coding, and EMI-compliant wiring, especiall
 [site wiki="copter,plane,rover,sub"]
     Companion Computers <common-companion-computers>
 [/site]
-[site wiki="copter"]
-    Crop Sprayer <sprayer>
+[site wiki="copter,plane"]
+    Crop Sprayer <common-sprayer>
 [/site]
     Display (Onboard) <common-display-onboard>
 [site wiki="plane"]
@@ -61,7 +61,7 @@ For guidance on cable design, colour coding, and EMI-compliant wiring, especiall
 [/site]
     LEDs (external) <common-external-leds>
 [site wiki="copter,rover"]
-	Non-GPS navigation <common-non-gps-navigation-landing-page>
+    Non-GPS navigation <common-non-gps-navigation-landing-page>
 [/site]
     On-Screen Display (OSD) <common-osd-boards-on-screen-display>
 [site wiki="copter,plane,rover"]

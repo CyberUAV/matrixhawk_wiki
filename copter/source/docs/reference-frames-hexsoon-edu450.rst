@@ -8,9 +8,9 @@ Hexsoon EDU-450
 
 The Hexsoon EDU-450 is a relatively low cost frame including motors, ESCs and propellers
 
-This frame is available from many `CubePilot retailers <https://www.cubepilot.com/#/reseller/list>`__
+This frame is available from many `CubePilot resellers <https://www.cubepilot.com/#/reseller/list>`__
 
-Hexsoon's `EDU-450 specfications can be found here <https://docs.cubepilot.org/user-guides/cubepilot-ecosystem/cubepilot-partners/hexsoon/multirotor-frame/edu-450>`__
+Hexsoon's `EDU-450 specifications can be found here <https://docs.cubepilot.org/user-guides/cubepilot-ecosystem/cubepilot-partners/hexsoon/multirotor-frame/edu-450>`__
 
 Box Contents
 ------------
@@ -36,7 +36,7 @@ Connection and Setup
 
 Connect the four ESC wires to the back of the autopilot as shown in the :ref:`QuadX configuration <connect-escs-and-motors>`
 
-Parameter file: `hexsoon-edu450.param <https://github.com/ArduPilot/ardupilot/blob/master/Tools/Frame_params/hexsoon-edu450.param>`__
+Parameter file: `hexsoon-edu450.param <https://github.com/ArduPilot/ardupilot/blob/ArduCopter-stable/Tools/Frame_params/hexsoon-edu450.param>`__
 
 This parameter file can also be loaded using the Mission Planner's Config/Tuning >> Full Parameter Tree page by selecting "hexsoon-edu450" from the drop down on the middle right and then push the "Load Presaved" button.
 

@@ -13,6 +13,17 @@ See :ref:`common-imu-notch-filtering`  for more information.
 
 Pure rate mode stabilization, utilizing only the gyros with no attitude feedback from the accelerometers, can be forced by setting bit 1 of :ref:`ACRO_OPTIONS<ACRO_OPTIONS>` to one. Attitude will still have an open loop correction applied in this mode, similar to "heading hold" tail gyros, but attitude can drift over time.
 
+Rate Loop Only with I-term Scaling
+===================================
+
+When the "Rate Loop Only" option is enabled (bit 1 of :ref:`ACRO_OPTIONS<ACRO_OPTIONS>`), the rate controller's I-term (integral term) is automatically scaled by the angle P gain for each axis. This makes the I-term contribution proportional to the attitude correction strength, mimicking the tuning approach used by Betaflight. Pilots transitioning from Betaflight should find that after ArduPilot tuning (:ref:`common-tuning`), the tune will feel more like Betaflight tuning with this option enabled.
+
+With I-term scaling enabled:
+
+-  The attitude controller bypasses angle-level stabilization and sends rate commands directly to the rate PID controller.
+-  The I-term on each axis (roll, pitch, yaw) is multiplied by that axis's angle P gain value (e.g. :ref:`ATC_ANG_RLL_P<ATC_ANG_RLL_P>`), providing a coupling between attitude correction and integral wind-up that gives a familiar feel for Betaflight pilots.
+-  Each axis is scaled independently, allowing asymmetric tuning if desired.
+
 
 Overview
 ========
@@ -70,7 +81,7 @@ The :ref:`ACRO_TRAINER <ACRO_TRAINER>` parameter can be set to:
 -  2 (Default) = automatic leveling and lean angle limited. Includes the
    automatic leveling as option #1 but in addition the vehicle will not
    lean more than 45 degrees (this angle can be configured with the
-   :ref:`ANGLE_MAX<ANGLE_MAX>` parameter).
+   :ref:`ATC_ANGLE_MAX<ATC_ANGLE_MAX>` parameter).
 
 The trainer can be enabled/disabled using the Ch7/Ch8 switches or a channel setup via its ``RCx_OPTION`` parameter.  With a
 3 position switch the off position (i.e. PWM < 1200) will disable the
@@ -121,8 +132,8 @@ maneuvers on a vehicle that you are confident is very well tuned. Note
 that these parameters are global parameters that apply to all flight
 modes, not just ACRO.
 
--  :ref:`ATC_ACCEL_R_MAX <ATC_ACCEL_R_MAX>` and
-   :ref:`ATC_ACCEL_P_MAX <ATC_ACCEL_P_MAX>`: Maximum
+-  :ref:`ATC_ACC_R_MAX<ATC_ACC_R_MAX>` and
+   :ref:`ATC_ACC_P_MAX<ATC_ACC_P_MAX>`: Maximum
    acceleration in roll/pitch axis measured in Centi-degres/sec/sec.
    Let's say you have a highly nimble quadcopter and you have your
    :ref:`ACRO_RP_RATE<ACRO_RP_RATE>` parameter set to 9, which translates to a roll request of
@@ -136,9 +147,10 @@ modes, not just ACRO.
    that this is completely different from tuning the Rate D terms for
    Pitch and Roll, and should come only after those terms are properly
    tuned.
--  :ref:`ATC_ACCEL_Y_MAX <ATC_ACCEL_Y_MAX>`: Maximum acceleration in Yaw axis measured in 
-   Centi-degress/sec/sec. Same principle as ``ATC_ACCEL_R_MAX`` and :ref:`ATC_ACCEL_P_MAX` 
-   but on the YAW axis based on the :ref:`ACRO_Y_RATE<ACRO_Y_RATE>` parameter value 
+
+-  :ref:`ATC_ACC_Y_MAX<ATC_ACC_Y_MAX>`: Maximum acceleration in Yaw axis measured in 
+   Centi-degress/sec/sec. Same principle as :ref:`ATC_ACC_R_MAX<ATC_ACC_R_MAX>` and :ref:`ATC_ACC_P_MAX <ATC_ACC_P_MAX>`
+   but on the YAW axis based on the :ref:`ACRO_Y_RATE<ACRO_Y_RATE>` parameter value
    (likely a much lower, more attainable value.)
 -  :ref:`ATC_THR_MIX_MAN <ATC_THR_MIX_MAN>`: Balance between attitude and throttle control. This 
    value can be increased to improve attitude control when the throttle is cut for better Airmode handling,

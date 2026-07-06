@@ -76,7 +76,7 @@ types)
    polarization.
 -  A Helical antenna (looks like a coil of wire wound in a screw
    fashion) wound clockwise when viewed from behind will radiate
-   clockwise circular polarization, and vise versa.
+   clockwise circular polarization, and vice versa.
 
 For reception of maximum energy, the transmitting and receiving antennae
 must be identically polarized.
@@ -375,4 +375,4 @@ Much of this antenna information has been provided by Joe Noci as an
 extension of this discussion: `433 UHF LRS Antenna "Turn Stile" <https://diydrones.com/forum/topics/433-uhf-lrs-antenna-turn-stile>`__.
 
 
-[copywiki destination="plane,copter,rover"]
+[copywiki destination="plane,copter,rover,antennatracker"]

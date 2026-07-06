@@ -92,6 +92,12 @@ Value    Description
 18       Input Lateral Velocity
 19       Input Longitudinal Velocity
 [/site]
+[site wiki="plane"]
+20       FW Input Roll Angle
+21       FW Input Pitch Angle
+22       FW Mixer Roll
+23       FW Mixer Pitch
+[/site]
 =====    ===========
 
 :ref:`SID_MAGNITUDE<SID_MAGNITUDE>`: System identification Chirp Magnitude. Depending on the injection point, units will be in either deg, deg/s, 0-1 for mixer outputs, m/s for velocity, and m for position. The magnitude can be changed in flight easily using :ref:`common-transmitter-tuning`, as explained previously.
@@ -112,6 +118,9 @@ Value    Description
 
 The logging rate is set by the ATTITUDE_FAST and ATTITUDE_MEDIUM bits in the :ref:`LOG_BITMASK<LOG_BITMASK>`. The rate of logging is the
 main loop frequency divided by a sub-sample factor.
+[site wiki="plane"]
+For plane, the main loop frequency default is 50 hz.  This is too low for most system ID applications. The minimum log sampling frequency should be 100hz.  The easiest way to achieve this is to set :ref:`SCHED_LOOP_RATE<SCHED_LOOP_RATE>` to 100 hz and set the :ref:`LOG_BITMASK<LOG_BITMASK>` parameter for a rate divider of 1 using the table below.
+[/site]
 
 +--------------+--------------+---------------+
 |ATTITUDE_FAST | ATTITUDE_MED | RATE DIVIDER  |

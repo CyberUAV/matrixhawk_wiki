@@ -9,7 +9,7 @@ ArduPilot on a flight controller using the MAVLink protocol.  By doing
 this your companion computer gets all the MAVLink data produced by the
 autopilot (including GPS data) and can use it to make intelligent
 decisions during flight. For example, "take a photo when the vehicle is
-at these GPS co-ordinates", gather and pre-process information from advanced
+at these GPS coordinates", gather and pre-process information from advanced
 sensors or actuate lights, auxiliary servos or any other interfaces.
 
 There are two major parts to Companion Computers - hardware and software.
@@ -21,21 +21,19 @@ popular Companion Computer hardware are listed below.
 .. toctree::
     :maxdepth: 1
 
-    Aerium Lumen - NVIDIA Jetson Baseboard <https://www.aerium.co.il/product-page/lumen>
-    Aerium Pascal - Raspberry Pi CM4/CM5 Baseboard <https://www.aerium.co.il/product-page/pascal-cm4-carrier>
+    Aerium Lumen - NVIDIA Jetson Baseboard <https://aerium.co.il/products/lumen>
+    Aerium Pascal - Raspberry Pi CM4/CM5 Baseboard <https://aerium.co.il/products/pascal-cm4-carrier>
     Arduino family <https://discuss.ardupilot.org/t/mavlink-and-arduino-step-by-step/25566/1>
     ARK Jetson PAB Carrier <companion-computer-ark-jetson-pab-carrier>
     LYCHEE (Cube Carrier Board for Raspberry Pi Compute Module) <https://dronee.aero/pages/lychee>
-    ModalAI VOXL <https://www.modalai.com/collections/voxl/products/voxl>
-    ModalAI VOXL2 <https://www.modalai.com/collections/blue-uas-framework-components/products/voxl-2>
+    ModalAI VOXL2 <common-modalai-voxl2>
     NVidia TX1 <companion-computer-nvidia-tx1>
     NVidia TX2 <companion-computer-nvidia-tx2>
     Ochin Tiny Carrier Board V2 for Raspberry Pi CM4 <https://www.seeedstudio.com/Ochin-Tiny-Carrier-Board-V2-for-Raspberry-Pi-CM4-p-5887.html>
     ODroid <odroid-via-mavlink>
-    Holybro Pixhawk Rasberry Pi CM4/CM5 Baseboard <https://holybro.com/products/pixhawk-rpi-cm4-baseboard>
+    Holybro Pixhawk Raspberry Pi CM4/CM5 Baseboard <https://holybro.com/products/pixhawk-rpi-cm4-baseboard>
     Holybro Pixhawk Jetson Baseboard <https://holybro.com/products/pixhawk-jetson-baseboard>
     Raspberry Pi <raspberry-pi-via-mavlink>
-    VoidRay <https://idrobots.com/product/void-ray>
 
 The Companion Computer software refers to the programs and tools that run on the Companion
 Computer. They will take in MAVLink telemetry from the Flight Controller and can route and 
@@ -51,8 +49,7 @@ tools/suites are listed below.
     Maverick <https://goodrobots.github.io/maverick/#/>
     MAVSDK <https://github.com/ArduPilot/ardupilot-mavsdk>
     Pymavlink <https://github.com/ArduPilot/pymavlink>
-    ROS <ros>
-    Rpanion-server <https://www.docs.rpanion.com/software/rpanion-server>
+    Rpanion-server <companion-computer-rpanion>
     Skyhub <https://idrobots.com/>
     APSync (deprecated) <apsync-intro>
 

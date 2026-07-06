@@ -11,6 +11,7 @@ ArduPilot provides several ways for an OEM to provide firmware on their products
 - Ability to change the firmware string displayed to the user.
 - Ability to include pictures and informational files in available free flash space.
 - Ability to change parameters and mark them as read-only so that users cannot change them using :ref:`APJ Tools<dev:apjtools-intro>`. (as of version 4.5 firmware, this is no longer available)
+- Ability to `install a LUA script to vet parameters <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/applets/param-lockdown.md>`__ before allowing them to be set via MAVLink.
 
 Customization Steps
 ===================
@@ -49,7 +50,7 @@ This section assumes that the OEM has set up the build environment (:ref:`buildi
 
 .. note:: a parameter can be made readonly (ie user cannot change its value) by marking it ``@READONLY`` in the file
 
-.. warning:: The ``defaults.parm`` file should be as small as possible. Some boards only allow 1024 bytes total for this file. Every ASCII byte in the file counts against this limit (except for comment lines). Use integer values where possible. Below is a simple example. Serial port protcols,baud rate,and options defaults can be set directly in the hwdef, as well as NTF_LED_TYPES, and battery monitor defaults, and should be done there instead of a defaults file.
+.. warning:: The ``defaults.parm`` file should be as small as possible. Some boards only allow 1024 bytes total for this file. Every ASCII byte in the file counts against this limit (except for comment lines). Use integer values where possible. Below is a simple example. Serial port protocols,baud rate,and options defaults can be set directly in the hwdef, as well as NTF_LED_TYPES, and battery monitor defaults, and should be done there instead of a defaults file.
 
     ::
 
@@ -59,9 +60,15 @@ This section assumes that the OEM has set up the build environment (:ref:`buildi
 
 #. You can also embed :ref:`Lua scripts<common-lua-scripts>` in the ROM of the chip that will automatically run. Since Lua is currently only run on autopilots with a lot of flash space, they are only restricted in total aggregate size to available free flash memory. Put the scripts in a sub-directory called ``scripts``, i.e. ``libraries/AP_HAL_ChibiOS/hwdef/OEM_CubeOrange/scripts``. Files must end in ``.lua``.
 
+Alternatively, you can specify the LUA applet or driver at compile by using the "--embed-<filename> command, for example:
+
+    ::
+
+       ./waf plane --embed-LTE_modem 
+
     .. warning:: The user may also run Lua scripts off the SD card, so care should be taken in naming the embedded script file names to not conflict with potential user file names. It is recommended that the file names of embedded Lua scripts be provided in the product documentation for the user.
 
-#. You can also imbed small pieces of documentation in the ROM of the chip that are readable when examining the @ROMFS folder via MAVFtp. These can be pictures or small informational documents. These must fit within the free flash space of the autopilot. These files can be located in sub-directories in ``libraries/AP_HAL_ChibiOS/hwdef/OEM_CubeOrange`` (e.g. ``libraries/AP_HAL_ChibiOS/hwdef/OEM_CubeOrange/AircraftManual``).
+#. You can also embed small pieces of documentation in the ROM of the chip that are readable when examining the @ROMFS folder via MAVFtp. These can be pictures or small informational documents. These must fit within the free flash space of the autopilot. These files can be located in sub-directories in ``libraries/AP_HAL_ChibiOS/hwdef/OEM_CubeOrange`` (e.g. ``libraries/AP_HAL_ChibiOS/hwdef/OEM_CubeOrange/AircraftManual``).
 
 #. Now build as normal with OEM-CubeOrange as the board name in the configuration. The default parameters, Lua scripts, and the custom firmware name will be embedded appropriately.
 

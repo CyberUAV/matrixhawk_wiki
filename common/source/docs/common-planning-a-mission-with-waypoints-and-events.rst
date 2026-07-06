@@ -92,7 +92,7 @@ Tips
    and a little one inside of that, the little one will not be excluded
    from the big one
    (see `this <http://wiki.openstreetmap.org/wiki/Relation:multipolygon>`__ for
-   more). Also, in the case of any polygon that partialy doubles backs
+   more). Also, in the case of any polygon that partially doubles backs
    on itself (like the letter U), the open area in the center will be
    included as part of the flyover.
 -  Setting your home location to the current location is easy, just
@@ -102,6 +102,9 @@ Tips
    one end and selecting Measure Distance. Then right-click on the other
    end and select **Measure Distance** again. A dialog box will open
    with the distance between the two points.
+-  The altitude change between waypoints is normally a linear ramp of target altitude as the
+   vehicle progresses unless the altitude starts below 25m above home to prevent slow climbs potentially 
+   close to home. This value can be controlled with the :ref:`CLIMB_SLOPE_HGT<CLIMB_SLOPE_HGT>` parameter.
 
 Auto grid
 =========
@@ -175,13 +178,13 @@ Also, the mission can be set to reset upon any entry into AUTO mode with the :re
 
 The :ref:`MIS_OPTIONS<MIS_OPTIONS>` parameter bits can be set to modify how missions function:
 
-==================================   ================================
-ref:`MIS_OPTIONS<MIS_OPTIONS>` bit   Option
-==================================   ================================
-0                                    Clears the loaded mission on boot. Must be loaded after each boot.
-1 (Plane only)                       Use distance to land calculation on battery failsafe. See :ref:`common-do-land-start`
-2                                    Continue after landing. Advances mission item pointer to next mission item after landing complete. If no item exists, RTL.
-==================================   ================================
+===================================   ================================
+:ref:`MIS_OPTIONS<MIS_OPTIONS>` bit   Option
+===================================   ================================
+0                                     Clears the loaded mission on boot. Must be loaded after each boot.
+1 (Plane only)                        Use distance to land calculation on battery failsafe. See :ref:`common-do-land-start`
+2                                     Continue after landing. Advances mission item pointer to next mission item after landing complete. If no item exists, RTL.
+===================================   ================================
 
 Mission Re-Wind
 ===============

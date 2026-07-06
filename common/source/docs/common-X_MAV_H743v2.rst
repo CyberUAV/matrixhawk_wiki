@@ -97,7 +97,7 @@ The default battery parameters are:
 Compass
 =======
 
-The AP-H743v2 has a built-in compass sensor (IST8310), and you can also attach an external compass using I2C on the SDA and SCL connector. Due to potential interference, the autopilot is usually used with an external I2C compass as part of a GPS/Compass combination.
+The AP-H743v2 has a built-in compass sensor (IST8310), and you can also attach an external compass using I2C on the SDA and SCL connectors. Due to potential interference, the autopilot is usually used with an external I2C compass as part of a GPS/Compass combination.
 
 Firmware
 ========

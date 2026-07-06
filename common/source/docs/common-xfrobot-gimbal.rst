@@ -16,12 +16,12 @@ XFRobot Gimbals
 Where and What to Buy
 ---------------------
 
-- XFRobot gimbals can be purchased directly from `allxianfei.com <https://www.allxianfei.com/en/uav-payloads/>`__
+- XFRobot gimbals can be purchased from `allxianfei.com <https://www.allxianfei.com/en/uav-payloads/>`__ or `AliExpress <https://www.aliexpress.com/store/1104563332>`__
 
 Install ArduPilot with XFRobot Support
 --------------------------------------
 
-Support for the XFRobot gimbals is available in ArduPilot 4.7 (and higher) and also requires the 'HAL_MOUNT_XFROBOT_ENABLED' build option to be enabled which can be done using the `Custom Build Server <https://custom.ardupilot.org/add_build>`__
+Support for the XFRobot gimbals is available in ArduPilot 4.7 (and higher) but some boards may require the 'HAL_MOUNT_XFROBOT_ENABLED' build option to be enabled which can be done using the `Custom Build Server <https://custom.ardupilot.org/add_build>`__
 
 .. image:: ../../../images/xfrobot-custom-build-server.png
     :target: ../_images/xfrobot-custom-build-server.png
@@ -32,11 +32,17 @@ More instructions on using the :ref:`Custom Build Server can be found here <comm
 Connecting to the Autopilot
 ---------------------------
 
+If using the XFRobot Z-1 mini, connect the gimbal's UART2 port to one of the autopilot's serial ports as shown below
+
 .. image:: ../../../images/xfrobot-autopilot-serial.png
     :target: ../_images/xfrobot-autopilot-serial.png
     :width: 450px
 
-Connect the gimbal's UART2 port to one of the autopilot's serial ports as shown above
+If using the XFRobot C-20T, connect the gimbal's serial port to one of the autopilot's serial ports as shown below
+
+.. image:: ../../../images/xfrobot-autopilot-serial-c20t.png
+    :target: ../_images/xfrobot-autopilot-serial-c20t.png
+    :width: 450px
 
 Connect with a ground station and set the following parameters.  The params below assume the autopilot's telem2 port is used
 
@@ -50,14 +56,13 @@ Connect with a ground station and set the following parameters.  The params belo
 - :ref:`MNT1_PITCH_MAX <MNT1_PITCH_MAX>` to 90 (up)
 - :ref:`MNT1_YAW_MIN <MNT1_YAW_MIN>` to -160
 - :ref:`MNT1_YAW_MAX <MNT1_YAW_MAX>` to 160
-- :ref:`MNT1_RC_RATE <MNT1_RC_RATE>` to 60 (deg/s) to control speed of gimbal when using RC targetting
+- :ref:`MNT1_RC_RATE <MNT1_RC_RATE>` to 60 (deg/s) to control speed of gimbal when using RC targeting
 - :ref:`RC6_OPTION <RC6_OPTION>` = 213 ("Mount Pitch") to control the gimbal's pitch angle with RC channel 6
 - :ref:`RC7_OPTION <RC7_OPTION>` = 214 ("Mount Yaw") to control the gimbal's yaw angle with RC channel 7
-- :ref:`RC8_OPTION <RC8_OPTION>` = 163 ("Mount Lock") to switch between "lock" and "follow" mode with RC channel 8
+- :ref:`RC8_OPTION <RC8_OPTION>` = 163 ("Mount Yaw Lock") to switch between normal yaw operation and locking mount heading with RC channel 8 (in RC Targeting mode only).
 
 Ethernet Connectivity
 ---------------------
-
 Instead of using a UART serial connection to control the gimbal, an Ethernet virtual serial connection may be used
 
 .. image:: ../../../images/xfrobot-autopilot-ethernet.png

@@ -24,11 +24,11 @@ Parts List
 
 Firmware used: Rover-3.3.1
 
-Parameter file: `HK-hydrotek-Rover331 <https://github.com/ArduPilot/ardupilot/blob/master/Tools/Frame_params/HK-hydrotek-Rover331.param>`__
+Parameter file: `HK-hydrotek-Rover331 <https://github.com/ArduPilot/ardupilot/blob/APMrover2-stable/Tools/Frame_params/HK-hydrotek-Rover331.param>`__
 
 This parameter file can also be loaded using the Mission Planner's Config/Tuning >> Full Parameter Tree page by selecting "HK-hydroteck-Rover331" from the drop down on the middle right and then push the "Load Presaved" button.
 
 .. warning::
 
-   The parameter file above includes setting the :ref:`COMPASS_ORIENT <COMPASS_ORIENT>` parameter "4" (Yaw 180) because the wiring was more convenient if the GPS arrow was pointin backwards
+   The parameter file above includes setting the :ref:`COMPASS_ORIENT <COMPASS_ORIENT>` parameter "4" (Yaw 180) because the wiring was more convenient if the GPS arrow was pointing backwards
 

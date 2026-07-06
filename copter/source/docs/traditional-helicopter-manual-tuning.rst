@@ -123,9 +123,9 @@ Tuning a Flybar Equipped Head
 =============================
 
 The setup of a helicopter with flybar equipped head does not require the 
-:ref:`H_FLYBAR_MODE<H_FLYBAR_MODE>` set to flybar mode.  This parameter only affects
+``H_FLYBAR_MODE`` set to flybar mode.  This parameter only affects
 the ACRO flight mode.  Unless there is a reason passthrough provided by the flybar 
-setting in ACRO mode is needed, then it is recommended that :ref:`H_FLYBAR_MODE<H_FLYBAR_MODE>` is 
+setting in ACRO mode is needed, then it is recommended that ``H_FLYBAR_MODE`` is 
 left at its default of no flybar.  If you choose to use the flybar mode then the FF gain 
 is set as described below.  Otherwise the FF is tuned just like an flybarless head.
 

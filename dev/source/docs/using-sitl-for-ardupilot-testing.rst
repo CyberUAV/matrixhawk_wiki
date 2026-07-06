@@ -37,10 +37,21 @@ Using sim_vehicle.py
 
 A startup script, ``sim_vehicle.py`` is provided to automatically build the SITL firmware version for the current code branch, load the simulation models, start the simulator, setup environment and vehicle parameters, and start the MAVProxy GCS. Many script start-up parameters can be specified, type this for a full list:
 
+Generally, you can run SITL from the root of your ArduPilot clone.
+
+::
+
+    cd /path/to/ardupilot
+    ./Tools/autotest/sim_vehicle.py --help
+
+
+Alternatively, when you initially configured your environment, if you elected to install ``Tools/autotest`` onto your path, you can run SITL from any directory like so:
+
 ::
 
     sim_vehicle.py --help
 
+If you work with multiple clones of ArduPilot in different workspaces, it's recommend to call SITL directly to avoid accidentally running the wrong simulator.
 
 Selecting a vehicle/frame type
 ------------------------------
@@ -383,7 +394,7 @@ The GCS would then connect to SITL by listening on that UDP port.
 Using Mission Planner Forwarding
 --------------------------------
 
-Mission Planner can forward to other GCS using it Mavlink Mirror. Under SETUP/Advanced/Mavlink Mirror set the connection type (usually UDP Client), baud rate (11520 for UDP),optional write access to allow the connecting GCS to changes things, and press connect. A listening GCS will automtically connect to SITL.
+Mission Planner can forward to other GCS using it Mavlink Mirror. Under SETUP/Advanced/Mavlink Mirror set the connection type (usually UDP Client), baud rate (11520 for UDP),optional write access to allow the connecting GCS to changes things, and press connect. A listening GCS will automatically connect to SITL.
 
 .. image:: ../../../images/mavlink-forwarding.jpg
   :target: ../_images/mavlink-forwarding.jpg

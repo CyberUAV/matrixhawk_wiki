@@ -197,6 +197,8 @@ This list of commands was inferred from the command handler in
 - :ref:`MAV_CMD_DO_DIGICAM_CONTROL <mav_cmd_do_digicam_control>` (Camera enabled only)
 - :ref:`MAV_CMD_DO_SET_CAM_TRIGG_DIST <mav_cmd_do_set_cam_trigg_dist>` (Camera enabled only)
 - :ref:`MAV_CMD_DO_SET_ROI <mav_cmd_do_set_roi>`
+- :ref:`MAV_CMD_DO_SET_ROI_LOCATION <mav_cmd_do_set_roi_location>`
+- :ref:`MAV_CMD_DO_SET_ROI_NONE <mav_cmd_do_set_roi_none>`
 - :ref:`MAV_CMD_DO_MOUNT_CONTROL <mav_cmd_do_mount_control>` (Gimbal/mount enabled only)
 - :ref:`MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW <mav_cmd_do_gimbal_manager_pitchyaw>` (Gimbal/mount enabled only)
 - :ref:`MAV_CMD_DO_PARACHUTE <mav_cmd_do_parachute>` (Parachute enabled only)
@@ -242,6 +244,8 @@ This list of commands was inferred from the command handler in
 - :ref:`MAV_CMD_DO_DIGICAM_CONTROL <mav_cmd_do_digicam_control>` (Camera enabled only)
 - :ref:`MAV_CMD_DO_SET_CAM_TRIGG_DIST <mav_cmd_do_set_cam_trigg_dist>` (Camera enabled only)
 - :ref:`MAV_CMD_DO_SET_ROI <mav_cmd_do_set_roi>`
+- :ref:`MAV_CMD_DO_SET_ROI_LOCATION <mav_cmd_do_set_roi_location>`
+- :ref:`MAV_CMD_DO_SET_ROI_NONE <mav_cmd_do_set_roi_none>`
 - :ref:`MAV_CMD_DO_MOUNT_CONTROL <mav_cmd_do_mount_control>` (Gimbal/mount enabled only)
 - :ref:`MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW <mav_cmd_do_gimbal_manager_pitchyaw>` (Gimbal/mount enabled only)
 - :ref:`MAV_CMD_DO_PARACHUTE <mav_cmd_do_parachute>` (Parachute enabled only)
@@ -289,6 +293,8 @@ This list of commands was inferred from the command handler in
 - :ref:`MAV_CMD_DO_DIGICAM_CONTROL <mav_cmd_do_digicam_control>` (Camera enabled only)
 - :ref:`MAV_CMD_DO_SET_CAM_TRIGG_DIST <mav_cmd_do_set_cam_trigg_dist>` (Camera enabled only)
 - :ref:`MAV_CMD_DO_SET_ROI <mav_cmd_do_set_roi>` (Gimbal/mount enabled only)
+- :ref:`MAV_CMD_DO_SET_ROI_LOCATION <mav_cmd_do_set_roi_location>` (Gimbal/mount enabled only)
+- :ref:`MAV_CMD_DO_SET_ROI_NONE <mav_cmd_do_set_roi_none>` (Gimbal/mount enabled only)
 - :ref:`MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW <mav_cmd_do_gimbal_manager_pitchyaw>` (Gimbal/mount enabled only)
 - :ref:`MAV_CMD_DO_JUMP <mav_cmd_do_jump>`
 - :ref:`MAV_CMD_JUMP_TAG <mav_cmd_jump_tag>`
@@ -316,6 +322,10 @@ This list of commands was inferred from the command handler in
 
 - :ref:`MAV_CMD_NAV_WAYPOINT <mav_cmd_nav_waypoint>`
 - :ref:`MAV_CMD_NAV_RETURN_TO_LAUNCH <mav_cmd_nav_return_to_launch>`
+- :ref:`MAV_CMD_NAV_LOITER_UNLIM <mav_cmd_nav_loiter_unlim>`
+- :ref:`MAV_CMD_NAV_LOITER_TURNS <mav_cmd_nav_loiter_turns>`
+- :ref:`MAV_CMD_NAV_LOITER_TIME <mav_cmd_nav_loiter_time>`
+- :ref:`MAV_CMD_NAV_GUIDED_ENABLE <mav_cmd_nav_guided_enable>` (NAV_GUIDED only)
 - :ref:`MAV_CMD_NAV_DELAY <mav_cmd_nav_delay>`
 - :ref:`MAV_CMD_DO_JUMP <mav_cmd_do_jump>`
 - :ref:`MAV_CMD_JUMP_TAG<mav_cmd_jump_tag>`
@@ -334,6 +344,8 @@ This list of commands was inferred from the command handler in
 - :ref:`MAV_CMD_DO_MOUNT_CONTROL <mav_cmd_do_mount_control>`
 - :ref:`MAV_CMD_DO_SET_CAM_TRIGG_DIST <mav_cmd_do_set_cam_trigg_dist>` (Camera enabled only)
 - :ref:`MAV_CMD_DO_SET_ROI <mav_cmd_do_set_roi>` (Gimbal/mount enabled only)
+- :ref:`MAV_CMD_DO_SET_ROI_LOCATION <mav_cmd_do_set_roi_location>` (Gimbal/mount enabled only)
+- :ref:`MAV_CMD_DO_SET_ROI_NONE <mav_cmd_do_set_roi_none>` (Gimbal/mount enabled only)
 - :ref:`MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW <mav_cmd_do_gimbal_manager_pitchyaw>` (Gimbal/mount enabled only)
 - :ref:`MAV_CMD_DO_SET_RESUME_REPEAT_DIST <mav_cmd_do_set_resume_repeat_dist>`
 - :ref:`MAV_CMD_DO_FENCE_ENABLE <mav_cmd_do_fence_enable>`
@@ -768,9 +780,9 @@ Supported by: All vehicles.
 
 Loiter at the specified location for an unlimited amount of time.
 
-[site wiki="copter" heading="off"]
+[site wiki="copter,rover" heading="off"]
 
-Fly to the specified location and then loiter there indefinitely — where
+Fly/Drive to the specified location and then loiter there indefinitely — where
 loiter means "wait in place" (rather than "circle"). If zero is
 specified for a latitude/longitude/altitude parameter then the current
 location value for the parameter will be used.
@@ -908,7 +920,7 @@ will restart).
 
 .. _mav_cmd_nav_loiter_turns:
 
-[site wiki="copter,plane"]
+[site wiki="copter,plane,rover"]
 MAV_CMD_NAV_LOITER_TURNS
 ------------------------
 
@@ -1212,7 +1224,7 @@ lock after arming if the vehicle configuration allows this).
 
 This is the mission equivalent of the :ref:`RTL flight mode <copter:rtl-mode>`.  The vehicle will
 first climb to the
-:ref:`RTL_ALT <copter:RTL_ALT>`
+:ref:`RTL_ALT_M<RTL_ALT_M>`
 parameter's specified altitude (default is 15m) before returning home.
 
 This command takes no parameters and generally should be the last
@@ -1761,15 +1773,15 @@ The Mission Planner screenshot shows the path the vehicle will take.
    #3 is parallel to an imaginary line drawn between waypoints #2 and #4
 -  Waypoint #5 is a straight line so the vehicle lines itself up to
    point towards waypoint #5 even before reaching waypoint #4.
-
-
+[/site]
 
 .. _mav_cmd_nav_guided_enable:
+[site wiki="copter,rover,sub"]
 
 MAV_CMD_NAV_GUIDED_ENABLE
 -------------------------
 
-Supported by: Copter (not Plane or Rover).
+Supported by: Copter, Rover, Sub (not Plane).
 
 Enable ``GUIDED`` mode to hand over control to an external controller/:ref:`common-companion-computers`. ee :ref:`Guided Mode <copter:ac2_guidedmode>` for more information. The :ref:`common-companion-computers`  would then send MAVLink commands to control the vehicle.
 
@@ -2200,7 +2212,7 @@ mission, or it can be repeated indefinitely.
    <td><strong>param2</strong></td>
    <td>Repeat#</td>
    <td>Number of times that the DO_JUMP command will execute before moving to
-   the next sequential command. If the value is zero the next command will
+   the next sequential command.  However, if MIS_OPTIONS bit 2 is not set, then the repeat count will be used again if the command is encountered again after the last repeat. If the value is zero the next command will
    execute immediately. A value of -1 will cause the command to repeat
    indefinitely.
    </td>
@@ -3503,11 +3515,15 @@ Mission command to change to/from VTOL and fixed wing mode of flight. The mode i
 [/site]
 
 .. _mav_cmd_do_set_roi:
+.. _mav_cmd_do_set_roi_location:
+.. _mav_cmd_do_set_roi_none:
 
-MAV_CMD_DO_SET_ROI
-------------------
+MAV_CMD_DO_SET_ROI, MAV_CMD_DOE_SET_ROI_LOOCATION, MAV_CMD_DO_SET_ROI_NONE
+--------------------------------------------------------------------------
 
-Supported by: Copter, Plane, Rover.
+Supported by: Copter, Plane, Rover,Sub.
+Currently, the DO_SET_ROI,DO_SET_ROI_LOCATION, and DO_SET_ROI_NONE commands all behave the same with DO_SET_ROI_NONE removing the ROI target, the same as setting the location to 0,0 in the other commands.
+
 [site wiki="copter" heading="off"]
 
 Points the :ref:`camera gimbal <common-cameras-and-gimbals>` at the "region

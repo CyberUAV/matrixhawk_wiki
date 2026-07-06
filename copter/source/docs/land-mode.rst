@@ -7,15 +7,15 @@ Land Mode
 LAND Mode attempts to bring the copter straight down and has these
 features:
 
--  descends at :ref:`LAND_SPEED_HIGH<LAND_SPEED_HIGH>`, if non-zero, (or :ref:`WPNAV_SPEED_DN<WPNAV_SPEED_DN>` if zero) using the regular Altitude Hold controller.
--  the pilot can reposition the vehicle using the pitch and roll sticks. The throttle stick has no effect.
--  if a rangefinder is being used, or :ref:`TERRAIN_ENABLE<TERRAIN_ENABLE>` =1 and terrain data is available, the descent speed will then switch to :ref:`LAND_SPEED<LAND_SPEED>` at 10m altitude above ground until landing occurs. If neither terrain data or rangefinder data is available, then altitude above HOME will be used for the speed switch point (if reached).
+-  descends at :ref:`LAND_SPD_HIGH_MS<LAND_SPD_HIGH_MS>`, if non-zero, (or :ref:`WP_SPD_DN <WP_SPD_DN>` if zero) using the regular Altitude Hold controller.
+-  the pilot can reposition the vehicle using the pitch and roll sticks unless the :ref:`LAND_REPOSITION <LAND_REPOSITION>` parameter is changed to "0". The throttle stick has no effect by default, although high throttle can cancel landing if enabled via :ref:`PILOT_THR_BHV<PILOT_THR_BHV>`.
+-  if a rangefinder is being used, or :ref:`TERRAIN_ENABLE<TERRAIN_ENABLE>` =1 and terrain data is available, the descent speed will then switch to :ref:`LAND_SPD_MS<LAND_SPD_MS>` at :ref:`LAND_ALT_LOW_M<LAND_ALT_LOW_M>` altitude (default is 10m) above ground until landing occurs. If neither terrain data or rangefinder data is available, then altitude above HOME will be used for the speed switch point (if reached).
 
    .. image:: ../images/Land_DescentSpeed1.png
        :target: ../_images/Land_DescentSpeed1.png
 
 -  below 10m the copter should descend at the rate specified in the
-   :ref:`LAND_SPEED<LAND_SPEED>` parameter which defaults to 50cm/s.
+   :ref:`LAND_SPD_MS<LAND_SPD_MS>` parameter which defaults to 50cm/s.
 
    .. image:: ../images/Land_DescentSpeed2.png
        :target: ../_images/Land_DescentSpeed2.png
@@ -25,14 +25,24 @@ features:
 
 .. note::
 
-    Copter will recognise that it has landed if the motors are being commanded to be at low
-    level by the vertical position controller, its climb rate remains between -20cm/s and +20cm/s, and
-    is not accelerating for one second.  It does not use the altitude to decide whether to shut off the
-    motors except that the copter must also be below 10m above the home
-    altitude, unless a rangefinder is being used, in which case it must be within 2m of the ground.
+   Copter will recognise that it has landed when ALL of the following are true for
+   approximately one second:
 
-.. note:: For Traditional Heli, the low motor check in the above landing detection algorithm is replaced with a check that Collective output is below
-   mid-position (controlled by the vertical position controller, ie in descent). The rotor still may be at governor speed up until Motor Interlock is removed and  disarming occurs.
+   - Motors are commanded to their lower limit by the vertical position controller
+   - Throttle is at minimum 
+   - No large angle is being requested (roll/pitch target < 15°)
+   - No large angle error exists (attitude error < 30°)
+   - The airframe is not accelerating downward > 1m/s/s ( >2 m/s/s if Weight on Wheels feature is enabled)
+   - Vertical speed is within 1 m/s of zero ( within 2 m/s if Weight on Wheels feature is enabled)
+   - If a healthy rangefinder is available, and rangefinder altitude is below 2m
+   - Weight-on-Wheels (WoW) sensor (if present) confirms contact or is unknown
+
+   Altitude above home is **not** used as a motor shutoff condition (except when a rangefinder is used,see above).
+   The ``LAND_ALT_LOW_M`` parameter (default 10m) only controls the
+   **descent speed transition** from :ref:`LAND_SPD_HIGH_MS<LAND_SPD_HIGH_MS>`
+   to :ref:`LAND_SPD_MS<LAND_SPD_MS>` — it has no role in landing detection or disarming.
+
+.. note:: For Traditional Heli, the low motor check in the above landing detection algorithm is replaced with a check that Collective output is below mid-position (controlled by the vertical position controller, ie in descent). The rotor still may be at governor speed up until Motor Interlock is removed and  disarming occurs.
 
 .. note:: Using a Weight on Wheels (WoW) switch will increase the descent rate and
     accelerometer ranges that are acceptable for landing detection. This
@@ -41,13 +51,14 @@ features:
 
 -  If the copter appears to bounce or balloon back up a couple of times
    before settling down and turning the props off, try lowering the
-   :ref:`LAND_SPEED<LAND_SPEED>` parameter a bit.
+   :ref:`LAND_SPD_MS<LAND_SPD_MS>` parameter a bit.
 -  If the vehicle has GPS lock the landing controller will attempt to
-   control its horizontal position but the pilot can adjust the target
-   horizontal position just as in Loiter mode.
+   control its horizontal position, but the pilot can adjust the target
+   horizontal position just as in Loiter mode, unless the 
+   :ref:`LAND_REPOSITION<LAND_REPOSITION>` parameter is set to 0.
 -  If the vehicle does not have GPS lock the horizontal control will be
-   as in stabilize mode so the pilot can control the roll and pitch lean
-   angle of the copter.
+   as in stabilize mode, so the pilot can control the roll and pitch lean
+   angle of the copter, unless the :ref:`LAND_REPOSITION<LAND_REPOSITION>` parameter is set to 0.
 
 
 .. warning::

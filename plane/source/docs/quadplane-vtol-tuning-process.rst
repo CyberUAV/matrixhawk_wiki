@@ -98,10 +98,10 @@ vehicle. These parameters are critical to the tuning process.
 
 - :ref:`INS_ACCEL_FILTER <INS_ACCEL_FILTER>`:  10Hz to 20Hz
 - :ref:`INS_GYRO_FILTER <INS_GYRO_FILTER>`: 80Hz for 5 inch props, 40Hz for 10 inch props, 20Hz for 20 inch props
-- :ref:`Q_A_ACCEL_P_MAX <Q_A_ACCEL_P_MAX>`: 110000 for 10 inch props, 50000 for 20 inch props, 20000 for 30 inch props
-- :ref:`Q_A_ACCEL_R_MAX <Q_A_ACCEL_R_MAX>`: 110000 for 10 inch props, 50000 for 20 inch props, 20000 for 30 inch props
-- :ref:`Q_A_ACCEL_Y_MAX <Q_A_ACCEL_Y_MAX>`: 7500 for 6 inch props,6750 for 10 inch props, 4500 for 20 inch props, 2250 for 30 inch props
-- :ref:`Q_A_RAT_YAW_P <Q_A_RAT_YAW_P>`: 0.5 x :ref:`Q_A_ACCEL_Y_MAX <Q_A_ACCEL_Y_MAX>` / 4500
+- :ref:`Q_A_ACC_P_MAX<Q_A_ACC_P_MAX>`: 1100 for 10 inch props, 500 for 20 inch props, 200 for 30 inch props
+- :ref:`Q_A_ACC_R_MAX<Q_A_ACC_R_MAX>`: 1100 for 10 inch props, 500 for 20 inch props, 200 for 30 inch props
+- :ref:`Q_A_ACC_Y_MAX<Q_A_ACC_Y_MAX>`: 75 for 6 inch props, 67.5 for 10 inch props, 45 for 20 inch props, 22.5 for 30 inch props
+- :ref:`Q_A_RAT_YAW_P <Q_A_RAT_YAW_P>`: 0.5 x :ref:`Q_A_ACC_Y_MAX<Q_A_ACC_Y_MAX>` / 45
 
 
 - :ref:`Q_A_RAT_PIT_FLTD <Q_A_RAT_PIT_FLTD>`: :ref:`INS_GYRO_FILTER <INS_GYRO_FILTER>` / 2
@@ -212,10 +212,15 @@ This test will allow to test the altitude controller and ensure the stability of
 
 3. Set these parameters on ground and preferably disarm  (A confident pilot could set them in flight with GCS):
 
-  - :ref:`Q_P_ACCZ_I <Q_P_ACCZ_I>` to 2 x :ref:`Q_M_THST_HOVER <Q_M_THST_HOVER>`
-  - :ref:`Q_P_ACCZ_P <Q_P_ACCZ_P>` to :ref:`Q_M_THST_HOVER <Q_M_THST_HOVER>`
+  - :ref:`Q_P_D_ACC_I<Q_P_D_ACC_I>` to 0.2 x :ref:`Q_M_THST_HOVER <Q_M_THST_HOVER>`
+  - :ref:`Q_P_D_ACC_P<Q_P_D_ACC_P>` to 0.1 x :ref:`Q_M_THST_HOVER <Q_M_THST_HOVER>`
 
- If the QuadPlane in QHOVER starts to move up and down, the vertical position and velocity controllers may need to be reduced by 50%. These values are: :ref:`Q_P_POSZ_P <Q_P_POSZ_P>` and :ref:`Q_P_VELZ_P <Q_P_POSZ_P>`.
+.. note:: In Plane 4.6 and earlier these parameters were named ``Q_P_ACCZ_I`` and ``Q_P_ACCZ_P`` and were scaled 10x larger:
+
+  - ``Q_P_ACCZ_I`` to 2 x :ref:`Q_M_THST_HOVER <Q_M_THST_HOVER>`
+  - ``Q_P_ACCZ_P`` to :ref:`Q_M_THST_HOVER <Q_M_THST_HOVER>`
+
+ If the QuadPlane in QHOVER starts to move up and down, the vertical position and velocity controllers may need to be reduced by 50%. These values are: :ref:`Q_P_D_POS_P<Q_P_D_POS_P>` and :ref:`Q_P_D_VEL_P<Q_P_D_VEL_P>`.
 
 .. note:: If the :ref:`Q_M_THST_HOVER<Q_M_THST_HOVER>` learned should be ~0.3-0.6. Higher values indicate that insufficient thrust is available, either due to motor system design, obstructed prop air flow by the fuselage or wings, or excessive yaw bias (see next section)
 
@@ -441,47 +446,46 @@ QuadPlane has a set of parameters that define the way the aircraft feels to fly.
 The most important of these parameters is:
 
 - :ref:`Q_A_RAT_YAW_P <Q_A_RAT_YAW_P>`: yaw rate x 45 degrees/s
-- :ref:`Q_ANGLE_MAX <Q_ANGLE_MAX>`:  maximum lean angle
-- :ref:`Q_A_ACCEL_P_MAX <Q_A_ACCEL_P_MAX>`: Pitch rate acceleration
-- :ref:`Q_A_ACCEL_R_MAX <Q_A_ACCEL_R_MAX>`: Roll rate acceleration
-- :ref:`Q_A_ACCEL_Y_MAX <Q_A_ACCEL_Y_MAX>`: Yaw rate acceleration
+- :ref:`Q_A_ANGLE_MAX <Q_A_ANGLE_MAX>`:  maximum lean angle
+- :ref:`Q_A_ACC_P_MAX <Q_A_ACC_P_MAX>`: Pitch rate acceleration
+- :ref:`Q_A_ACC_R_MAX <Q_A_ACC_R_MAX>`: Roll rate acceleration
+- :ref:`Q_A_ACC_Y_MAX <Q_A_ACC_Y_MAX>`: Yaw rate acceleration
 - :ref:`Q_A_ANG_LIM_TC <Q_A_ANG_LIM_TC>`: Aircraft smoothing time
 
-QAUTOTUNE mode tuning will set the :ref:`Q_A_ACCEL_P_MAX <Q_A_ACCEL_P_MAX>`, :ref:`Q_A_ACCEL_R_MAX <Q_A_ACCEL_R_MAX>` and :ref:`Q_A_ACCEL_Y_MAX <Q_A_ACCEL_Y_MAX>` parameters to their maximum based on measurements done during the QAUTOTUNE tests. These values should not be increased beyond what QAUTOTUNE suggests without careful testing. In most cases pilots will want to reduce these values significantly.
+QAUTOTUNE mode tuning will set the :ref:`Q_A_ACC_P_MAX<Q_A_ACC_P_MAX>`, :ref:`Q_A_ACC_R_MAX<Q_A_ACC_R_MAX>` and :ref:`Q_A_ACC_Y_MAX<Q_A_ACC_Y_MAX>` parameters to their maximum based on measurements done during the QAUTOTUNE tests. These values should not be increased beyond what QAUTOTUNE suggests without careful testing. In most cases pilots will want to reduce these values significantly.
 
 The Quick VTOL Tune LUA Applet will not adjust these from defaults and you may adjust them to get the feel you desire.
 
-For aircraft designed to carry large directly mounted payloads, the maximum values of :ref:`Q_A_ACCEL_P_MAX <Q_A_ACCEL_P_MAX>`, :ref:`Q_A_ACCEL_R_MAX <Q_A_ACCEL_R_MAX>` and :ref:`Q_A_ACCEL_Y_MAX <Q_A_ACCEL_Y_MAX>` should be reduced based on the minimum and maximum takeoff weight (TOW):
+For aircraft designed to carry large directly mounted payloads, the maximum values of :ref:`Q_A_ACC_P_MAX<Q_A_ACC_P_MAX>`, :ref:`Q_A_ACC_R_MAX<Q_A_ACC_R_MAX>` and :ref:`Q_A_ACC_Y_MAX<Q_A_ACC_Y_MAX>` should be reduced based on the minimum and maximum takeoff weight (TOW):
 
-- :ref:`Q_A_ACCEL_P_MAX <Q_A_ACCEL_P_MAX>`  x (min_TOW / max_TOW)
-- :ref:`Q_A_ACCEL_R_MAX <Q_A_ACCEL_R_MAX>`  x (min_TOW / max_TOW)
-- :ref:`Q_A_ACCEL_Y_MAX <Q_A_ACCEL_Y_MAX>`  x (min_TOW / max_TOW)
+- :ref:`Q_A_ACC_P_MAX<Q_A_ACC_P_MAX>`  x (min_TOW / max_TOW)
+- :ref:`Q_A_ACC_R_MAX<Q_A_ACC_R_MAX>`  x (min_TOW / max_TOW)
+- :ref:`Q_A_ACC_Y_MAX<Q_A_ACC_Y_MAX>`  x (min_TOW / max_TOW)
 
-:ref:`Q_A_RAT_YAW_P <Q_A_RAT_YAW_P>` should be set to be approximately 0.5 x :ref:`Q_A_ACCEL_Y_MAX <Q_A_ACCEL_Y_MAX>` / 4500 to ensure that the aircraft can achieve full yaw rate in approximately half a second.
+:ref:`Q_A_RAT_YAW_P <Q_A_RAT_YAW_P>` should be set to be approximately 0.5 x :ref:`Q_A_ACC_Y_MAX<Q_A_ACC_Y_MAX>` / 4500 to ensure that the aircraft can achieve full yaw rate in approximately half a second.
 
 :ref:`Q_A_ANG_LIM_TC <Q_A_ANG_LIM_TC>` may be increased to provide a very smooth feeling on the sticks at the expense of a slower reaction time.
 
-Aerobatic aircraft should keep the :ref:`Q_A_ACCEL_P_MAX <Q_A_ACCEL_P_MAX>`, :ref:`Q_A_ACCEL_R_MAX <Q_A_ACCEL_R_MAX>` and :ref:`Q_A_ACCEL_Y_MAX <Q_A_ACCEL_Y_MAX>` provided by QAUTOTUNE and reduce :ref:`Q_A_ANG_LIM_TC <Q_A_ANG_LIM_TC>` to achieve the stick feel desired by the pilot. 
+Aerobatic aircraft should keep the :ref:`Q_A_ACC_P_MAX<Q_A_ACC_P_MAX>`, :ref:`Q_A_ACC_R_MAX<Q_A_ACC_R_MAX>` and :ref:`Q_A_ACC_Y_MAX<Q_A_ACC_Y_MAX>` provided by QAUTOTUNE and reduce :ref:`Q_A_ANG_LIM_TC <Q_A_ANG_LIM_TC>` to achieve the stick feel desired by the pilot. 
 
 The full list of input shaping parameters are:
 
-
 - :ref:`Q_A_RAT_YAW_P <Q_A_RAT_YAW_P>`
-- :ref:`Q_ANGLE_MAX <Q_ANGLE_MAX>`
-- :ref:`Q_A_ACCEL_P_MAX <Q_A_ACCEL_P_MAX>`
-- :ref:`Q_A_ACCEL_R_MAX <Q_A_ACCEL_R_MAX>`
-- :ref:`Q_A_ACCEL_Y_MAX <Q_A_ACCEL_Y_MAX>`
+- :ref:`Q_A_ANGLE_MAX<Q_A_ANGLE_MAX>`
+- :ref:`Q_A_ACC_P_MAX<Q_A_ACC_P_MAX>`
+- :ref:`Q_A_ACC_R_MAX<Q_A_ACC_R_MAX>`
+- :ref:`Q_A_ACC_Y_MAX<Q_A_ACC_Y_MAX>`
 - :ref:`Q_A_ANG_LIM_TC <Q_A_ANG_LIM_TC>`
 - :ref:`Q_A_RATE_P_MAX <Q_A_RATE_P_MAX>`
 - :ref:`Q_A_RATE_R_MAX <Q_A_RATE_R_MAX>`
 - :ref:`Q_A_RATE_Y_MAX <Q_A_RATE_Y_MAX>`
-- :ref:`Q_A_SLEW_YAW <Q_A_SLEW_YAW>`
-- :ref:`Q_P_JERK_XY<Q_P_JERK_XY>`
-- :ref:`Q_P_JERK_Z<Q_P_JERK_Z>`
-- :ref:`Q_LOIT_ACC_MAX <Q_LOIT_ACC_MAX>`
+- :ref:`Q_A_RATE_WPY_MAX<Q_A_RATE_WPY_MAX>`
+- ``Q_P_JERK_XY``
+- ``Q_P_JERK_Z``
+- :ref:`Q_LOIT_ACC_MAX_M<Q_LOIT_ACC_MAX_M>`
 - :ref:`Q_LOIT_ANG_MAX <Q_LOIT_ANG_MAX>`
-- :ref:`Q_LOIT_BRK_ACCEL <Q_LOIT_BRK_ACCEL>`
+- :ref:`Q_LOIT_BRK_ACC_M<Q_LOIT_BRK_ACC_M>`
 - :ref:`Q_LOIT_BRK_DELAY <Q_LOIT_BRK_DELAY>`
-- :ref:`Q_LOIT_BRK_JERK <Q_LOIT_BRK_JERK>`
-- :ref:`Q_LOIT_SPEED <Q_LOIT_SPEED>`
+- :ref:`Q_LOIT_BRK_JRK_M<Q_LOIT_BRK_JRK_M>`
+- :ref:`Q_LOIT_SPEED_MS<Q_LOIT_SPEED_MS>`
 

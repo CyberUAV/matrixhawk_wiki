@@ -21,12 +21,12 @@ It injects an input signal, called a chirp, at various points in the control loo
 Enabling the System Identification Feature
 ==========================================
 
-This feature is not automatically compiled into the stable version of firmware.  Use the `custom firmware webtool <https://custom.ardupilot.org>`__ to compile a version for your board. Select the "system ID support for quadplanes" under the Plane category.
+This feature is not automatically compiled into the stable version of firmware.  Use the `custom firmware webtool <https://custom.ardupilot.org>`__ to compile a version for your board. Select the "system ID support" under the Plane category.
 
 Setup
 =====
 
-System ID feature in quadplane is different than copter.  The system ID feature in copter is a separate flight mode.  In quadplane, system ID is run on top of either qstabilize, qhover, or qloiter flight modes.  The system ID feature is started and stopped using an Aux Switch.
+System ID feature in plane and quadplane is different than copter.  The system ID feature in copter is a separate flight mode.  In quadplane VTOL, system ID is run on top of either qstabilize, qhover, or qloiter flight modes.  In quadplane fixed-wing and plane, system ID is run on top of either Guided, FBWA, Circle, Cruise, Loiter, or Auto flight modes. The system ID feature is started and stopped using an Aux Switch.
 
 Set an aux switch on the transmitter to have ``RCx_OPTION`` set to 184 to start/stop operation.
 

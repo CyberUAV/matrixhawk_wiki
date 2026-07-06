@@ -11,7 +11,7 @@ GLONASS, GALILEO, BEIDOU and QZSS. It acquires both L1 and L5 signals at a time 
 centimeter-level RTK positioning accuracy.
 
 .. image:: ../../../images/locosys/hawk-a1-LU23031-V2-7.png
-	:target: ../images/locosys/hawk-a1-LU23031-V2-7.png
+    :target: ../images/locosys/hawk-a1-LU23031-V2-7.png
 
 .. note:: HAWK R1 and R2 GNSS requires L1 and L5 RTCM GNSS correction data for a stable RTK fix
 
@@ -26,7 +26,7 @@ Key Features
 - Fast TTFF at low signal level
 - Free hybrid ephemeris prediction to achieve faster cold start
 - Default 5Hz, up to 10 Hz update rate, SBAS support 5Hz only
-- Build-in super capacitor to reserve system data for rapid satellite acquisition
+- Built-in super capacitor to reserve system data for rapid satellite acquisition
 - Three LED indicator for Power, Pulse per Second and Data transmit
 - HAWK R2 integrated with IST8310 compass via I2C bus
 - JST-GH cable (Dronecode standard) for direct connection to i.e. Cube Autopilot
@@ -59,7 +59,7 @@ Size and weight
    -  Weight: 26g, 40g with antenna
 
 .. image:: ../../../images/locosys/hawk-pinout-led.png
-	:target: ../images/locosys/hawk-pinout-led.png
+    :target: ../images/locosys/hawk-pinout-led.png
 
 LED
 ===
@@ -124,7 +124,7 @@ Where to buy
 ============
 
 You can buy it from `LOCOSYS <https://www.locosystech.com/en/index.html>`__.
-	
+    
 
 More information
 ================

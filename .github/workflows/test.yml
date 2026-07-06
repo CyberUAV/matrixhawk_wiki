@@ -8,6 +8,21 @@ env:
   TEST: "1"
 jobs:
 
+  pre-commit:
+    runs-on: ubuntu-slim
+    steps:
+    - uses: actions/checkout@v7
+    - uses: actions/setup-python@v6
+      with:
+        python-version: "3.10"
+    - uses: pre-commit/action@v3.0.1
+
+  shellcheck:
+    runs-on: ubuntu-slim
+    steps:
+    - uses: actions/checkout@v7
+    - run: find . -type f -name "*.sh" -exec shellcheck {} +
+
   build-linux:
 
     runs-on: ubuntu-22.04
@@ -17,9 +32,9 @@ jobs:
         python-version: ["3.10"]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
       - name: Setting environment
@@ -39,11 +54,18 @@ jobs:
                   exit 1
               fi
           done
-      - name: Check python3 flake8 formatting
-        run : |
-          set -eux -o pipefail
-          flake8 .
+      - name: Register Sphinx problem matcher
+        run: echo "::add-matcher::.github/problem-matchers/sphinx.json"
       - name: Test build
         run: |
           export AP_SPHINXOPTS=-W
-          ./update.py --parallel 4 --verbose --destdir=/tmp/web
+          ./update.py --parallel 4 --verbose --destdir=/tmp/web 2>&1 | tee build_errors.txt; exit ${PIPESTATUS[0]}
+      - name: Report build errors
+        if: failure()
+        run: |
+          if [ -s build_errors.txt ]; then
+            echo "## Build errors" >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+            cat build_errors.txt >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+          fi
