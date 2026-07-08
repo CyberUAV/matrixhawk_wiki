@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-18 12:49+0000\n"
+"POT-Creation-Date: 2026-07-07 01:30+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: zh_CN <LL@li.org>\n"
@@ -20,11 +20,11 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: ../../source/docs/rtl-mode.rst:5 1368025fe90c496faf2d3f66b82e3472
+#: ../../source/docs/rtl-mode.rst:5 98807f3544234e9facdacdb7391d79d7
 msgid "RTL Mode"
 msgstr "RTL模式"
 
-#: ../../source/docs/rtl-mode.rst:7 bfa9c888a6ce406380c5604853811263
+#: ../../source/docs/rtl-mode.rst:7 7133e7b4627344288f41404f8f9197dc
 msgid ""
 "RTL mode (Return To Launch mode) navigates Copter from its current position "
 "to hover above the home position. The behavior of RTL mode can be controlled"
@@ -33,37 +33,41 @@ msgid ""
 msgstr ""
 "RTL模式（返回起飞点模式）将飞行器从当前位置导航回起飞点上方悬停。RTL模式的行为可通过多个可调参数进行控制。本页面介绍如何使用和自定义RTL模式。"
 
-#: ../../source/docs/rtl-mode.rst:13 39dba11cd82d4452ab56912f3aa31c46
+#: ../../source/docs/rtl-mode.rst:13 69ff560864fb4fff93960951debc451a
 msgid "Overview"
 msgstr "概述"
 
-#: ../../source/docs/rtl-mode.rst:15 906cbefac24e43faa2729bfcb1e2b6b4
+#: ../../source/docs/rtl-mode.rst:15 c23d3997fd29484e879bd928d58a485e
+#, fuzzy
 msgid ""
 "When RTL mode is selected, the copter will return to the home location, or "
-"if rally points have been setup, the closet rally point."
+"if :ref:`rally points <common-rally-points>` have been setup, the closest "
+"rally point."
 msgstr "选择RTL模式后，飞行器将返回Home位置，或如果已设置集结点，则返回最近的集结点。"
 
-#: ../../source/docs/rtl-mode.rst:17 ef72435dbee44ef5877ec274be95f16d
+#: ../../source/docs/rtl-mode.rst:17 727d91a8908743488c6abb3ff7ddc3d5
+#, fuzzy
 msgid ""
 "The copter will first rise a minimum of :ref:`RTL_CLIMB_MIN<RTL_CLIMB_MIN>` "
-"or to  :ref:`RTL_ALT <RTL_ALT>`, whichever is higher, before returning home."
-"  The default value for :ref:`RTL_ALT <RTL_ALT>` is 15m. Under no "
+"or to  :ref:`RTL_ALT_M<RTL_ALT_M>`, whichever is higher, before returning "
+"home.  The default value for :ref:`RTL_ALT_M<RTL_ALT_M>` is 15m. Under no "
 "circumstances will this altitude be below 30cm."
 msgstr ""
 "飞行器将首先爬升至至少 :ref:`RTL_CLIMB_MIN<RTL_CLIMB_MIN>` 或 :ref:`RTL_ALT <RTL_ALT>` "
 "中较高的高度，然后再返回Home。:ref:`RTL_ALT <RTL_ALT>` 的默认值为15米。此高度在任何情况下均不会低于30厘米。"
 
-#: ../../source/docs/rtl-mode.rst:19 a6b9f7fac5084b64a7768877ae34ba9d
+#: ../../source/docs/rtl-mode.rst:19 3ca5d39584ba404cb15020583f6699c5
+#, fuzzy
 msgid ""
 "The altitude reference frame is set by either the rally point, if proceeding"
 " to one of those, or by :ref:`RTL_ALT_TYPE<RTL_ALT_TYPE>` to select relative"
-" to HOME, or Terrain. If :ref:`WPNAV_RFND_USE<WPNAV_RFND_USE>` = 1 and "
-"Terrain is selected, then rangefinder will be used."
+" to HOME, or Terrain. If :ref:`WP_RFND_USE<WP_RFND_USE>` = 1 and Terrain is "
+"selected, then rangefinder will be used."
 msgstr ""
 "高度参考系由集结点（如果前往集结点）或 :ref:`RTL_ALT_TYPE<RTL_ALT_TYPE>` 设置，可选择相对于Home或地形。如果 "
 ":ref:`WPNAV_RFND_USE<WPNAV_RFND_USE>` = 1 且选择了地形，则将使用测距仪。"
 
-#: ../../source/docs/rtl-mode.rst:24 eded04c008584e5ea3d26d1372b11986
+#: ../../source/docs/rtl-mode.rst:24 a2e0e429b6d8455dafb6106770b17e7b
 msgid ""
 "If RTL is entered close to its return point, the altitude Copter climbs to "
 "may be limited to avoid unneeded climbs and descents. The "
@@ -82,19 +86,31 @@ msgstr ""
 " 参数定义了以返航点为中心的倒锥斜率。该参数根据与返航点的距离乘以 :ref:`RTL_CONE_SLOPE<RTL_CONE_SLOPE>` "
 "来限制上述返航高度。例如，若在距返航点10米处进入该模式，默认斜率为\"3\"，则高度爬升最多限制为30米再返回。实际高度可能因其他参数而更低，但不会更高。若斜率设为\"0.5\"，则前往返航点前的初始爬升高度不超过5米。值\"0\"禁用此限制，\"0.5\"为最小斜率。同样，最小返航高度为2米。"
 
-#: ../../source/docs/rtl-mode.rst:26 226482b45689472b92c1a4af124a45fb
+#: ../../source/docs/rtl-mode.rst:26 8c1a701b1e7d4dae9e79843467bf1d10
+msgid ""
+"If an :ref:`altitude fence <common-geofencing-landing-page>` has been "
+"enabled, the RTL climb/return altitude will be limited to be below the "
+"fence's maximum altitude."
+msgstr ""
+"如果启用了 :ref:`高度围栏 <common-geofencing-landing-page>`，RTL "
+"的爬升/返航高度将被限制在围栏最大高度以下。"
+
+#: ../../source/docs/rtl-mode.rst:28 ed214df382544b35889f58ab8ea9c428
+#, fuzzy
 msgid ""
 "RTL mode requires a reliable position estimate to work properly, most "
 "commonly provided by GPS and compass. Default prearm checks will ensure a 3D"
 " GPS lock with sufficient HDOP is acquired and your mag is working as "
-"expected prior to arming. When using non-default arming checks, make sure "
-"you do have a sufficient GPS lock and / or a reliable position estimate for "
-"RTL to perform as expected."
+"expected prior to arming, if required by the selected mode and configuration"
+" during arming (ie STABILIZE could be armed without a reliable position and "
+"a switch into RTL would be refused without it). When using non-default "
+"arming checks, make sure you do have a sufficient GPS lock and / or a "
+"reliable position estimate for RTL to perform as expected."
 msgstr ""
 "RTL模式需要可靠的位置估计才能正常工作，通常由GPS和罗盘提供。默认预解锁检查将确保在解锁前已获取HDOP足够的3D "
 "GPS锁定，且罗盘工作正常。使用非默认解锁检查时，请确保具有足够的GPS锁定和/或可靠的位置估计，以便RTL按预期执行。"
 
-#: ../../source/docs/rtl-mode.rst:29 35711373018b4e45b429375f4d5b1980
+#: ../../source/docs/rtl-mode.rst:30 7ddfcbbe845f4082953496b7e75fdfc0
 msgid ""
 "RTL will command the copter to return to the home position, meaning that it "
 "will return to the location where it was armed. Therefore, the home position"
@@ -106,7 +122,7 @@ msgid ""
 msgstr ""
 "RTL将命令飞行器返回Home位置，即返回解锁时所在的位置。因此，Home位置应始终是飞行器实际的GPS起飞位置，且无遮挡、远离人群。对于Copter，如果已获得GPS锁定后解锁，Home位置即为解锁时飞行器所在位置。这意味着在Copter中执行RTL时，飞行器将返回解锁时所在的位置。"
 
-#: ../../source/docs/rtl-mode.rst:39 185af19c902742deaf832daefa3cacfc
+#: ../../source/docs/rtl-mode.rst:40 5550e666ed9149468607352125b09683
 msgid ""
 "In RTL mode the autopilot uses a barometer which measures air pressure as "
 "the primary means for determining altitude (\"Pressure Altitude\") and if "
@@ -116,98 +132,108 @@ msgid ""
 msgstr ""
 "在RTL模式下，飞控主要使用气压计（测量气压）来确定高度（\"气压高度\"）。如果您飞行区域的气压发生变化，飞行器将跟随气压变化而非实际高度飞行（除非您在距地面20英尺以内且已安装并启用声呐）。"
 
-#: ../../source/docs/rtl-mode.rst:47 bf97e16e233443e7813c3fc876cd78f0
+#: ../../source/docs/rtl-mode.rst:48 c886474589cd47059a4d11b37911a3d7
 msgid "Options (User Adjustable Parameters)"
 msgstr "选项（用户可调参数）"
 
-#: ../../source/docs/rtl-mode.rst:49 18fba5fef0da4538b89548cee885ed6a
+#: ../../source/docs/rtl-mode.rst:50 398680ed78f644cd898c209f3bfc4c70
+#, fuzzy
 msgid ""
-":ref:`RTL_ALT <RTL_ALT>`: The minimum altitude the copter will move to "
+":ref:`RTL_ALT_M<RTL_ALT_M>`: The minimum altitude the copter will move to "
 "before returning to launch."
 msgstr ":ref:`RTL_ALT <RTL_ALT>`：飞行器返回起飞点前爬升到的最低高度。"
 
-#: ../../source/docs/rtl-mode.rst:52 6f87a46d8ee74606aa269349d82a80e4
+#: ../../source/docs/rtl-mode.rst:53 b008a732eda346708c06b587846695b5
 msgid "Set to zero to return at the current altitude."
 msgstr "设为零则以当前高度返回。"
 
-#: ../../source/docs/rtl-mode.rst:53 c7d8d5e60d2d42b981276c9ad1f2b6b9
-msgid "The return altitude can be set from 1 to 8000 centimeters."
+#: ../../source/docs/rtl-mode.rst:54 5cb4f96c892243eaad1aac9a4c9f0f30
+#, fuzzy
+msgid "The return altitude can be set from 0.3 to 3000 meters."
 msgstr "返回高度可设置为1至8000厘米。"
 
-#: ../../source/docs/rtl-mode.rst:54 5a0cfbc7c20b42e194e9665b4d079574
-msgid "The default return altitude Default is 15 meters (1500)"
+#: ../../source/docs/rtl-mode.rst:55 824716a7237e4915939b7bfaff5abdff
+#, fuzzy
+msgid "The default return altitude Default is 15 meters."
 msgstr "默认返回高度为15米（1500）。"
 
-#: ../../source/docs/rtl-mode.rst:56 4afb48a01329461482097895ce601ba0
+#: ../../source/docs/rtl-mode.rst:57 0f4ffddd4e854125a1d625bd7d7fa3be
+#, fuzzy
 msgid ""
-":ref:`RTL_ALT_FINAL <RTL_ALT_FINAL>`: The altitude the copter will move to "
-"at the final stage of \"Returning to Launch\" or after completing a Mission."
+":ref:`RTL_ALT_FINAL_M<RTL_ALT_FINAL_M>`: The altitude the copter will move "
+"to at the final stage of \"Returning to Launch\" or after completing a "
+"Mission."
 msgstr ":ref:`RTL_ALT_FINAL <RTL_ALT_FINAL>`：飞行器在\"返回起飞点\"最终阶段或完成任务后移动到的高度。"
 
-#: ../../source/docs/rtl-mode.rst:60 89e68e76c1ac4eaab6d6a993cb4a4ec7
-msgid "Set to zero to automatically land the copter."
+#: ../../source/docs/rtl-mode.rst:61 aab52fae5a0a41a58fb0c0aaad5975b3
+#, fuzzy
+msgid "Set to zero to automatically land the copter. See :ref:`land-mode`."
 msgstr "设为零则自动降落。"
 
-#: ../../source/docs/rtl-mode.rst:61 d4b275b657aa4d2a83233070fc5f969a
-msgid "The final return altitude may be adjusted from 0 to 1000 centimeters."
+#: ../../source/docs/rtl-mode.rst:62 1f5afd42f13544019521e6c85cff4ee6
+#, fuzzy
+msgid "The final return altitude may be adjusted from 0 to 10 meters."
 msgstr "最终返回高度可在0至1000厘米之间调整。"
 
-#: ../../source/docs/rtl-mode.rst:64 6fe6041f24e3479ba2760cd68e83a09c
+#: ../../source/docs/rtl-mode.rst:65 1b4a09c370a545048d0381f11fa71568
 msgid ""
 ":ref:`RTL_LOIT_TIME <RTL_LOIT_TIME>`: Time in milliseconds to hover/pause "
 "above the \"Home\" position before beginning final descent."
 msgstr ":ref:`RTL_LOIT_TIME <RTL_LOIT_TIME>`：在开始最终下降之前，在\"Home\"位置上方悬停/暂停的时间（毫秒）。"
 
-#: ../../source/docs/rtl-mode.rst:68 c060ffa9b2614e4381d775a18602f48c
+#: ../../source/docs/rtl-mode.rst:69 3c8c6f51807047ce9f72e56fe46ad78d
 msgid "The \"Loiter\" time may be adjusted from 0 to 60,000 milliseconds."
 msgstr "\"悬停\"时间可在0至60,000毫秒之间调整。"
 
-#: ../../source/docs/rtl-mode.rst:70 47308f94e4fa4dc999ee4bbd6a4d0a24
+#: ../../source/docs/rtl-mode.rst:71 a3406b9438cf4e52957f40f6164e21dd
 msgid ""
 ":ref:`WP_YAW_BEHAVIOR <WP_YAW_BEHAVIOR>`: Sets how the autopilot controls "
 "the \"Yaw\" during Missions and RTL."
 msgstr ":ref:`WP_YAW_BEHAVIOR <WP_YAW_BEHAVIOR>`：设置飞控在任务和RTL期间如何控制\"偏航\"。"
 
-#: ../../source/docs/rtl-mode.rst:73 12c18215c72d4b0cbd519d31944aa346
+#: ../../source/docs/rtl-mode.rst:74 b7f35dc9356b4d14a816e6e91b401ac4
 msgid "0 = Never change Yaw."
 msgstr "0 = 从不改变偏航。"
 
-#: ../../source/docs/rtl-mode.rst:74 ab661e19370a451d93e8721a8362bd6b
+#: ../../source/docs/rtl-mode.rst:75 e8286ea024c3467e8bc565b086bbbb3f
 msgid "1 = Face Next Waypoint including facing home during RTL."
 msgstr "1 = 朝向下一个航点，包括RTL时朝向Home。"
 
-#: ../../source/docs/rtl-mode.rst:75 88a8b2870eff4a44b92c98e7044f6cf5
+#: ../../source/docs/rtl-mode.rst:76 d609400e9a9147aabc4d3e81a862a998
 msgid ""
 "2 = Face Next Waypoint except for RTL (i.e. during RTL vehicle will remain "
 "pointed at its last heading)"
 msgstr "2 = 朝向下一个航点，但RTL时除外（即RTL期间飞行器将保持最后的航向）。"
 
-#: ../../source/docs/rtl-mode.rst:78 596226df047c48f88a8e5c7e7ff5fbd4
+#: ../../source/docs/rtl-mode.rst:79 8d79c774aae244aab374c9fb482884ec
+#, fuzzy
 msgid ""
-":ref:`LAND_SPEED <LAND_SPEED>`: The descent speed for the final stage of "
+":ref:`LAND_SPD_MS<LAND_SPD_MS>`: The descent speed for the final stage of "
 "landing in centimeters per second."
 msgstr ":ref:`LAND_SPEED <LAND_SPEED>`：降落最终阶段的下降速度，单位为厘米/秒。"
 
-#: ../../source/docs/rtl-mode.rst:82 040282debe2c46e18dda78dbce4419f8
-msgid "The landing speed is adjustable from 20 to 200 centimeters per second."
+#: ../../source/docs/rtl-mode.rst:83 de57da6c50e141078209f6aa735d3140
+#, fuzzy
+msgid "The landing speed is adjustable from 0.3 to 2 meters per second."
 msgstr "降落速度可在20至200厘米/秒之间调整。"
 
-#: ../../source/docs/rtl-mode.rst:85 fb541fecb1f0436ca25b873e36b3c5b2
+#: ../../source/docs/rtl-mode.rst:86 f3e5d135d4414f61a3b370fa3b08cb54
 msgid ""
 ":ref:`RTL_CLIMB_MIN <RTL_CLIMB_MIN>`: The vehicle will climb at least this "
 "many meters at the first stage of the RTL.  By default this value is zero."
 msgstr ":ref:`RTL_CLIMB_MIN <RTL_CLIMB_MIN>`：飞行器在RTL第一阶段至少爬升的米数。默认值为零。"
 
-#: ../../source/docs/rtl-mode.rst:89 3498bc4f9e7742a79e864cb2430cb0b3
+#: ../../source/docs/rtl-mode.rst:90 80996f656a91439c9821e0fac10703a4
+#, fuzzy
 msgid ""
 ":ref:`RTL_SPEED <RTL_SPEED>`: The horizontal speed (in cm/s) at which the "
 "vehicle will return to home.  By default this value is zero meaning it will "
-"use :ref:`WPNAV_SPEED <WPNAV_SPEED>`."
+"use :ref:`WP_SPD<WP_SPD>`."
 msgstr ""
 ":ref:`RTL_SPEED <RTL_SPEED>`：飞行器返回Home的水平速度（厘米/秒）。默认值为零，即使用 "
 ":ref:`WPNAV_SPEED <WPNAV_SPEED>`。"
 
-#: ../../source/docs/rtl-mode.rst:94 bee5ac6e97644263af0ce0b4da7c7207
+#: ../../source/docs/rtl-mode.rst:95 7babf54d0a004f17a870bf6c1f697292
 msgid ""
 ":ref:`RTL_CONE_SLOPE <RTL_CONE_SLOPE>`: Defines the slope of an inverted "
 "cone above home which is used to limit the amount the vehicle climbs when "
@@ -217,57 +243,61 @@ msgstr ""
 ":ref:`RTL_CONE_SLOPE "
 "<RTL_CONE_SLOPE>`：定义Home上方倒锥的斜率，用于限制从近处RTL时的爬升量。低值导致锥体较宽（爬升较少），高值导致爬升较多。"
 
-#: ../../source/docs/rtl-mode.rst:101 3e36499556fc4a3387c5c5fe605633f3
+#: ../../source/docs/rtl-mode.rst:102 649fdafcc89e4973891a735631ae140b
 msgid "Notes"
 msgstr "注意事项"
 
-#: ../../source/docs/rtl-mode.rst:103 4542193f78084b7691738e60380eaeaf
+#: ../../source/docs/rtl-mode.rst:104 d5379faa52f04ae5a748126c1bf87985
 msgid "Other navigation settings also have an influence over RTL mode:"
 msgstr "其他导航设置也会影响RTL模式："
 
-#: ../../source/docs/rtl-mode.rst:105 913c0ead09394d02a7f9715864c3bfc3
-msgid ":ref:`WPNAV_ACCEL <WPNAV_ACCEL>`"
+#: ../../source/docs/rtl-mode.rst:106 4e77727d9c114cfcaa7036a4b3c49ec6
+#, fuzzy
+msgid ":ref:`WP_ACC<WP_ACC>`"
 msgstr ":ref:`WPNAV_ACCEL <WPNAV_ACCEL>`"
 
-#: ../../source/docs/rtl-mode.rst:106 c955ecec182b4315baafa6de35f0839b
-msgid ":ref:`WPNAV_SPEED_DN <WPNAV_SPEED_DN>`"
+#: ../../source/docs/rtl-mode.rst:107 ff21836d122d4298997d84b1f12b9003
+#, fuzzy
+msgid ":ref:`WP_SPD_DN<WP_SPD_DN>`"
 msgstr ":ref:`WPNAV_SPEED_DN <WPNAV_SPEED_DN>`"
 
-#: ../../source/docs/rtl-mode.rst:107 fc4b7e1d9cf14ff28b72600593b36761
-msgid ":ref:`WPNAV_SPEED_UP <WPNAV_SPEED_UP>`"
+#: ../../source/docs/rtl-mode.rst:108 8806684d19b642ddab95c75eec49ad25
+#, fuzzy
+msgid ":ref:`WP_SPD_UP<WP_SPD_UP>`"
 msgstr ":ref:`WPNAV_SPEED_UP <WPNAV_SPEED_UP>`"
 
-#: ../../source/docs/rtl-mode.rst:109 46dcb0065bb642f3a0c4e1fce12e58e3
+#: ../../source/docs/rtl-mode.rst:110 eaecc4611afb4abaa77ac51322ef3d0e
 msgid ""
 "To use RTL, GPS lock needs to be achieved (Blue GPS LED and Blue APM LED on "
 "solid not blinking) before arming and takeoff to establish the home or "
 "launch position."
 msgstr "使用RTL前，需要在解锁和起飞前获得GPS锁定（GPS蓝色LED和APM蓝色LED常亮不闪），以建立Home或起飞位置。"
 
-#: ../../source/docs/rtl-mode.rst:112 761f9d2d6b634a7b9a1c435a0ac54171
+#: ../../source/docs/rtl-mode.rst:113 6e7b77d3a2874f59a15b4e9a6c2faa7f
 msgid ""
 "Landing and re-arming the copter will reset home, which is a great feature "
 "for flying at airfields."
 msgstr "降落并重新解锁将重置Home位置，这对在机场飞行非常实用。"
 
-#: ../../source/docs/rtl-mode.rst:114 20bfa6c7b6e14aa0884a7263e4a0079d
+#: ../../source/docs/rtl-mode.rst:115 1cbbc5272221404e97ac89f3fcca37b2
 msgid ""
 "If you get lock for the first time while flying, your home will be set at "
 "the location of lock."
 msgstr "如果您在飞行中首次获得 GPS 锁定，Home 将被设置在锁定时的位置。"
 
-#: ../../source/docs/rtl-mode.rst:116 70859ac0b1ff43a69e2f68087a3aec51
+#: ../../source/docs/rtl-mode.rst:117 ec7fba5f17aa47ca9aed90b99c44c073
+#, fuzzy
 msgid ""
-"If you set the ``RTL_ALT`` to a number at other than 0 it will go to and "
-"maintain that altitude while returning."
+"If you set the :ref:`RTL_ALT_M<RTL_ALT_M>` to a number at other than 0 it "
+"will go to and maintain that altitude while returning."
 msgstr "如果将 ``RTL_ALT`` 设置为非0值，飞行器将前往并保持该高度返回。"
 
-#: ../../source/docs/rtl-mode.rst:118 a07ca8f019224355b22f4ba3e2517b04
-msgid ""
-"RTL uses :ref:`WPNAV_SPEED <WPNAV_SPEED>` to determine how fast it travels."
+#: ../../source/docs/rtl-mode.rst:119 93ec032f56eb48f8a522c5f589540964
+#, fuzzy
+msgid "RTL uses :ref:`WP_SPD<WP_SPD>` to determine how fast it travels."
 msgstr "RTL使用 :ref:`WPNAV_SPEED <WPNAV_SPEED>` 来确定飞行速度。"
 
-#: ../../source/docs/rtl-mode.rst:119 017868bbb8194ca7a1af2cf62656a2c5
+#: ../../source/docs/rtl-mode.rst:120 ac1e0e35e3d142488ea204a54a6e1638
 msgid ""
 "Once the copter arrives at the home location the copter will pause for "
 "``RTL_LOIT_TIME`` milliseconds, timeout (AUTO_LAND), then land."

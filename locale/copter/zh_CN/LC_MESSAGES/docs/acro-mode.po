@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Copter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-18 12:49+0000\n"
+"POT-Creation-Date: 2026-07-07 01:30+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: zh_CN <LL@li.org>\n"
@@ -20,11 +20,11 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: ../../source/docs/acro-mode.rst:5 660c85380d524ae3b76fa4455d52b401
+#: ../../source/docs/acro-mode.rst:5 032896832f3544739864e86f40cf7f75
 msgid "Acro Mode"
 msgstr "Acro 模式"
 
-#: ../../source/docs/acro-mode.rst:7 bbfdda2d98a84a8aaec999b230a35f1b
+#: ../../source/docs/acro-mode.rst:7 f9199f3add1840618b9e0a2d41e8dbf3
 msgid ""
 "Acro mode uses the RC sticks to control the angular velocity of the copter "
 "in each axis. Release the sticks and the vehicle will maintain its current "
@@ -40,7 +40,7 @@ msgstr ""
 "截止频率并重新调参可能提高响应速度，但必须在重新调参前设置适当的谐波陷波滤波器以防止噪声影响。详见 :ref:`common-imu-notch-"
 "filtering`。"
 
-#: ../../source/docs/acro-mode.rst:14 faff08aef6e048a5b7a0f658ccb6dc72
+#: ../../source/docs/acro-mode.rst:14 393fbd6af0c9450c9636099a2d6a9ac3
 msgid ""
 "Pure rate mode stabilization, utilizing only the gyros with no attitude "
 "feedback from the accelerometers, can be forced by setting bit 1 of "
@@ -51,11 +51,56 @@ msgstr ""
 "可通过将 :ref:`ACRO_OPTIONS<ACRO_OPTIONS>` 的位 1 设为 1 "
 "来强制使用纯速率模式稳定，该模式仅使用陀螺仪而不使用加速度计的姿态反馈。在此模式下仍会施加开环姿态修正（类似\"航向保持\"尾陀螺），但姿态会随时间漂移。"
 
-#: ../../source/docs/acro-mode.rst:18 ac43ed66a6b7493cba2c423328010ff1
+#: ../../source/docs/acro-mode.rst:17 69ebce88ca6f49c6b41083badf3b60d3
+msgid "Rate Loop Only with I-term Scaling"
+msgstr "仅速率环（Rate Loop Only）与 I 项缩放"
+
+#: ../../source/docs/acro-mode.rst:19 466511972cbd4944845de2d33587b358
+msgid ""
+"When the \"Rate Loop Only\" option is enabled (bit 1 of "
+":ref:`ACRO_OPTIONS<ACRO_OPTIONS>`), the rate controller's I-term (integral "
+"term) is automatically scaled by the angle P gain for each axis. This makes "
+"the I-term contribution proportional to the attitude correction strength, "
+"mimicking the tuning approach used by Betaflight. Pilots transitioning from "
+"Betaflight should find that after ArduPilot tuning (:ref:`common-tuning`), "
+"the tune will feel more like Betaflight tuning with this option enabled."
+msgstr ""
+"启用 \"Rate Loop Only\" 选项（:ref:`ACRO_OPTIONS<ACRO_OPTIONS>` 的位 1）后，速率控制器的 I "
+"项（积分项）会自动按各轴的角度 P 增益进行缩放。这使 I 项的贡献与姿态修正强度成正比，模仿 Betaflight 的调参方式。从 "
+"Betaflight 转来的飞手会发现，在完成 ArduPilot 调参（:ref:`common-tuning`）后，启用此选项时的手感更接近 "
+"Betaflight 的调参效果。"
+
+#: ../../source/docs/acro-mode.rst:21 e5b9b0c75d234923bc5d4e54d0fb8fc7
+msgid "With I-term scaling enabled:"
+msgstr "启用 I 项缩放后："
+
+#: ../../source/docs/acro-mode.rst:23 167d1f73c1d6407dac136d62ae189b08
+msgid ""
+"The attitude controller bypasses angle-level stabilization and sends rate "
+"commands directly to the rate PID controller."
+msgstr "姿态控制器绕过角度级增稳，直接向速率 PID 控制器发送速率指令。"
+
+#: ../../source/docs/acro-mode.rst:24 eabadcb2200346fe9ebc12bb641b0c0c
+msgid ""
+"The I-term on each axis (roll, pitch, yaw) is multiplied by that axis's "
+"angle P gain value (e.g. :ref:`ATC_ANG_RLL_P<ATC_ANG_RLL_P>`), providing a "
+"coupling between attitude correction and integral wind-up that gives a "
+"familiar feel for Betaflight pilots."
+msgstr ""
+"每个轴（横滚、俯仰、偏航）的 I 项会乘以该轴的角度 P 增益值（例如 "
+":ref:`ATC_ANG_RLL_P<ATC_ANG_RLL_P>`），在姿态修正与积分累积之间建立耦合，为 Betaflight "
+"飞手带来熟悉的手感。"
+
+#: ../../source/docs/acro-mode.rst:25 9cee17f5daaa41a286fc97d83338e5d7
+msgid ""
+"Each axis is scaled independently, allowing asymmetric tuning if desired."
+msgstr "各轴独立缩放，如有需要可进行非对称调参。"
+
+#: ../../source/docs/acro-mode.rst:29 d425aa6ef666486794e39c0603392482
 msgid "Overview"
 msgstr "概述"
 
-#: ../../source/docs/acro-mode.rst:20 7ded2470429c441eaf814a3f5eb899d6
+#: ../../source/docs/acro-mode.rst:31 ecc7ffbec37041049205cce5c467750c
 msgid ""
 "The throttle is completely manual with no compensation for tilt angle of the"
 " vehicle. If the pilot puts the throttle completely down the motors will go "
@@ -64,13 +109,13 @@ msgid ""
 msgstr ""
 "油门完全手动，不对飞行器倾斜角度进行补偿。若飞手将油门完全压下，电机将转至最低转速，稳定化将停止。但可通过启用 :ref:`airmode` 改变此行为"
 
-#: ../../source/docs/acro-mode.rst:24 17387fcae3ad41dea757803015c7bbe9
+#: ../../source/docs/acro-mode.rst:35 5dc32acc230d4db0b621c10925326a85
 msgid ""
 "Copter includes an Acro Trainer functionality that can be turned on/off to "
 "make learning to fly Acro easier."
 msgstr "Copter 包含 Acro 训练器功能，可开启/关闭以降低学习 Acro 飞行的难度。"
 
-#: ../../source/docs/acro-mode.rst:26 f77883a904b44628b133b271c39b0217
+#: ../../source/docs/acro-mode.rst:37 34bb719f3e5542c0a619c9db9de28882
 msgid ""
 "Stick inputs are interpreted in the \"body frame\" (as opposed to Sport mode"
 " in which they are \"earth frame\"). The difference between \"body frame\" "
@@ -87,7 +132,7 @@ msgstr ""
 "度时，若使用地球坐标系控制器（即 Sport 模式）施加左偏航，飞机将在改变航向时保持俯仰和横滚角度；而使用机体坐标系控制器（如 "
 "Acro），飞机将绕自身垂直轴旋转，即俯仰角变为横滚角，横滚角变为俯仰角。"
 
-#: ../../source/docs/acro-mode.rst:38 73d13177eeff4da1bb3f1b517ac6e186
+#: ../../source/docs/acro-mode.rst:49 73f5020a69074bca8cdfb7b9c59d7a91
 msgid ""
 "Acro is the most difficult flight mode to master and you can look forward to"
 " crashing multiple times before you get the hang of it. While Acro mode does"
@@ -98,37 +143,37 @@ msgstr ""
 "Acro 是最难掌握的飞行模式，在熟练之前可能会坠毁多次。虽然 Acro 模式不一定需要 GPS，但紧急情况下切换到 RTL 需要 "
 "GPS。请确保在解锁前有可靠的位置估计，通常需要具有足够 HDOP 的 3D GPS 定位。"
 
-#: ../../source/docs/acro-mode.rst:46 1ce6c66ddd674a4a9f5dac8a218e31bf
+#: ../../source/docs/acro-mode.rst:57 82d7f683ae694116911db87122b41553
 msgid ""
 "The above video was filmed in ACRO mode using :ref:`FPV goggles <common-fpv-"
 "first-person-view>`."
 msgstr "上述视频使用 :ref:`FPV 眼镜 <common-fpv-first-person-view>` 在 ACRO 模式下拍摄。"
 
-#: ../../source/docs/acro-mode.rst:51 bc08f61f49b74a2ea53d76f4122f3627
+#: ../../source/docs/acro-mode.rst:62 b1cc0d554a174d4e9c4c995faf81b91b
 msgid "AirMode"
 msgstr "AirMode"
 
-#: ../../source/docs/acro-mode.rst:53 763b0b93b8be4affa51db0badd059309
+#: ../../source/docs/acro-mode.rst:64 4e99017693954039a9757b0e3e774a47
 msgid ""
 "Acro mode can be setup to provide full stabilization at idle throttle. See "
 ":ref:`airmode`"
 msgstr "Acro 模式可设置为在空转油门下提供完整稳定化。参见 :ref:`airmode`"
 
-#: ../../source/docs/acro-mode.rst:58 c009a1afd91a43d4a805e26d8a17dbf6
+#: ../../source/docs/acro-mode.rst:69 8492ca28eef347ee86889c48998e96f3
 msgid "Acro Trainer"
 msgstr "Acro 训练器"
 
-#: ../../source/docs/acro-mode.rst:60 d8f17a41bed341e282ee2207551e6708
+#: ../../source/docs/acro-mode.rst:71 8465fc57ddd741679db742a5abcf3a7d
 msgid "The :ref:`ACRO_TRAINER <ACRO_TRAINER>` parameter can be set to:"
 msgstr ":ref:`ACRO_TRAINER <ACRO_TRAINER>` 参数可设置为："
 
-#: ../../source/docs/acro-mode.rst:62 5356a5a21e474b028cc5676fea7d96d6
+#: ../../source/docs/acro-mode.rst:73 e812796fea5f4a6d8684b4071953bc62
 msgid ""
 "0 = disabled. This means the pilot operates in full Rate control with no "
 "automatic leveling nor angle-limiting performed by the autopilot."
 msgstr "0 = 禁用。飞手以完整速率控制操作，飞控不进行自动调平或角度限制。"
 
-#: ../../source/docs/acro-mode.rst:64 5e718ed789d74b4b939d6200daa152c3
+#: ../../source/docs/acro-mode.rst:75 f09d84da96ff43b1adc710d76eb7ac16
 msgid ""
 "1 = automatic leveling. The vehicle will automatically return to the level "
 "when the pilot releases the sticks. The aggressiveness with which it returns"
@@ -141,17 +186,17 @@ msgstr ""
 " 和 :ref:`ACRO_BAL_PITCH<ACRO_BAL_PITCH>` 参数控制。默认值 1.0 将以最高 30 "
 "度/秒的速率恢复水平，较高值将使恢复更快。"
 
-#: ../../source/docs/acro-mode.rst:70 5537c09abbed4f048b9f0dea3d9b2b3a
+#: ../../source/docs/acro-mode.rst:81 ab78b9ad5d6246d59beaefff7e33e9e7
 msgid ""
 "2 (Default) = automatic leveling and lean angle limited. Includes the "
 "automatic leveling as option #1 but in addition the vehicle will not lean "
 "more than 45 degrees (this angle can be configured with the "
-":ref:`ANGLE_MAX<ANGLE_MAX>` parameter)."
+":ref:`ATC_ANGLE_MAX<ATC_ANGLE_MAX>` parameter)."
 msgstr ""
-"2（默认）= 自动调平且倾斜角受限。包含选项 #1 的自动调平功能，并额外限制飞行器倾斜不超过 45 度（此角度可通过 "
-":ref:`ANGLE_MAX<ANGLE_MAX>` 参数配置）。"
+"2（默认）= 自动调平且倾角受限。包含选项 #1 的自动调平功能，此外飞行器倾斜不会超过 45 度（此角度可通过 "
+":ref:`ATC_ANGLE_MAX<ATC_ANGLE_MAX>` 参数配置）。"
 
-#: ../../source/docs/acro-mode.rst:75 5b95998bafbe4e8bbf016bc8fb341964
+#: ../../source/docs/acro-mode.rst:86 cba82d4e54cc47c8b7269e639e26280c
 msgid ""
 "The trainer can be enabled/disabled using the Ch7/Ch8 switches or a channel "
 "setup via its ``RCx_OPTION`` parameter.  With a 3 position switch the off "
@@ -165,11 +210,11 @@ msgstr ""
 "1200）禁用训练器，中间位置启用选项 #1（自动调平），最高位置（即 PWM > 1800）启用选项 #2（调平并限制倾斜角）。两段开关时只有选项 "
 "#0（禁用）和选项 #2（调平+限制）可用。"
 
-#: ../../source/docs/acro-mode.rst:86 558360877cb241f4bb919c99e87c9358
+#: ../../source/docs/acro-mode.rst:97 be80866dedea40d88c42654ca426d41f
 msgid "Traditional Helicopters"
 msgstr "传统直升机"
 
-#: ../../source/docs/acro-mode.rst:88 c3c636c4f5344eb384fe6f8c850c2a6e
+#: ../../source/docs/acro-mode.rst:99 2a8ec057424f4136aeadf1f6daddc3b7
 msgid ""
 "For Traditional Helicopters, this modes operates the same. However, "
 "experienced pilots might find that this mode has a slightly robotic feel, "
@@ -185,7 +230,7 @@ msgstr ""
 ":ref:`ACRO_BAL_ROLL<ACRO_BAL_ROLL>` 和 :ref:`ACRO_BAL_PITCH<ACRO_BAL_PITCH>` "
 "参数设置为非零值即可激活此功能。"
 
-#: ../../source/docs/acro-mode.rst:90 f5da2b62845a4aba97e9bf878530eb1c
+#: ../../source/docs/acro-mode.rst:101 0856dc46e94f41b694365abdf841c3d5
 msgid ""
 "The Virtual Flybar will add decay term to the attitude controller to bleed "
 "off accumulated differences between the current attitude and accumulated "
@@ -196,7 +241,7 @@ msgid ""
 msgstr ""
 "虚拟飞杆会在姿态控制器中添加衰减项，以消除当前姿态与累积指令姿态之间的偏差——例如在地面上时仍给出摇杆输入却未能快速跟随的情况。否则，直升机离地时将跳变到累积的指令姿态，可能令人意外。这对多旋翼飞手来说是熟悉的体验。"
 
-#: ../../source/docs/acro-mode.rst:92 b257eb31e7ca4d4587921ca590b06ae1
+#: ../../source/docs/acro-mode.rst:103 b08ab8a389dc4b72bc5a2ada6b7c463a
 msgid ""
 "Values for :ref:`ACRO_BAL_ROLL<ACRO_BAL_ROLL>` and "
 ":ref:`ACRO_BAL_PITCH<ACRO_BAL_PITCH>` parameters ~ 2, will usually give good"
@@ -205,16 +250,16 @@ msgstr ""
 ":ref:`ACRO_BAL_ROLL<ACRO_BAL_ROLL>` 和 :ref:`ACRO_BAL_PITCH<ACRO_BAL_PITCH>` "
 "参数值约为 2 通常可获得良好效果。"
 
-#: ../../source/docs/acro-mode.rst:94 8ef5d2586758434babae88a2b5a2a2e8
+#: ../../source/docs/acro-mode.rst:105 1386b96336444e04bb353ac0f2ccfadb
 msgid ""
 "This feature is not active when :ref:`ACRO_TRAINER<ACRO_TRAINER>` is active"
 msgstr "当 :ref:`ACRO_TRAINER<ACRO_TRAINER>` 激活时，此功能不生效"
 
-#: ../../source/docs/acro-mode.rst:97 85812a346e3a425db5abf29dffa2b4bc
+#: ../../source/docs/acro-mode.rst:108 98f83fbad7974cbf8316876eda47cdaf
 msgid "Tuning Parameters"
 msgstr "调参参数"
 
-#: ../../source/docs/acro-mode.rst:99 37c458277ce345eebcfaba9e949d8ffd
+#: ../../source/docs/acro-mode.rst:110 ade8be3075bf431d88de41a8e8f81105
 msgid ""
 ":ref:`ACRO_RP_RATE<ACRO_RP_RATE>` controls the rotation rate for the roll "
 "and pitch axis. The default, 4.5, will command a 200deg/sec rotation rate. "
@@ -223,7 +268,7 @@ msgstr ""
 ":ref:`ACRO_RP_RATE<ACRO_RP_RATE>` 控制横滚和俯仰轴的旋转速率。默认值 4.5 将指令 200 "
 "度/秒的旋转速率。较高值对应较高旋转速率，较低值对应较低旋转速率。"
 
-#: ../../source/docs/acro-mode.rst:102 710cb07b93484ab1b5b5922fc9f113ac
+#: ../../source/docs/acro-mode.rst:113 055a5bb0f38146e9b59e9b1cff668249
 msgid ""
 ":ref:`ACRO_Y_RATE<ACRO_Y_RATE>` controls the rotation rate for the yaw axis."
 " The default, 4.5, like roll and pitch, will command a 200deg/sec rotation "
@@ -232,7 +277,7 @@ msgstr ""
 ":ref:`ACRO_Y_RATE<ACRO_Y_RATE>` 控制偏航轴的旋转速率。默认值 4.5 与横滚和俯仰相同，将指令 200 "
 "度/秒的旋转速率。"
 
-#: ../../source/docs/acro-mode.rst:104 c97cbf4f9d2f462d8e7dd25445eafec6
+#: ../../source/docs/acro-mode.rst:115 3afa3f8367294273838d58e375bef7fb
 #, no-python-format
 msgid ""
 ":ref:`ACRO_RP_EXPO <ACRO_RP_EXPO>` and :ref:`ACRO_Y_EXPO <ACRO_Y_EXPO>` are "
@@ -248,11 +293,11 @@ msgstr ""
 "ACRO 模式的摇杆输入指数量。默认情况下，ACRO 模式即使在摇杆中位时响应也比其他模式灵敏得多，因此此参数允许飞手微调摇杆响应，使其与 "
 "Stabilize、AltHold、PosHold 等模式的手感一致。默认值 0 对飞手的横滚和俯仰指令施加 30% 指数。"
 
-#: ../../source/docs/acro-mode.rst:114 c8121830a42a47b1af73fcdae091be1f
+#: ../../source/docs/acro-mode.rst:125 c0a53f91a71347b3a0ea79294040361a
 msgid "Advanced Tuning Parameters"
 msgstr "高级调参参数"
 
-#: ../../source/docs/acro-mode.rst:116 49b7efe724bd490ea0ab5be25dfd231c
+#: ../../source/docs/acro-mode.rst:127 15feab435e614e7a91a84fa1931d279b
 msgid ""
 "After you have become very confident with flying in ACRO mode, you may want "
 "to go deeper in to tuning it based on your vehicle's performance "
@@ -266,42 +311,42 @@ msgstr ""
 "模式飞行非常熟练之后，您可能希望根据飞行器性能特性进行更深入的调参。这些参数仅供高级用户调整，目的是消除经充分调参的飞行器在快速翻滚或横滚机动后的\"回弹\"现象。请注意，这些参数是全局参数，适用于所有飞行模式，而非仅限于"
 " ACRO。"
 
-#: ../../source/docs/acro-mode.rst:124 8edd941050734986a3952c44914a4975
+#: ../../source/docs/acro-mode.rst:135 74bb39bd7be14938afc36cc46ae0eb48
 msgid ""
-":ref:`ATC_ACCEL_R_MAX <ATC_ACCEL_R_MAX>` and :ref:`ATC_ACCEL_P_MAX "
-"<ATC_ACCEL_P_MAX>`: Maximum acceleration in roll/pitch axis measured in "
-"Centi-degres/sec/sec. Let's say you have a highly nimble quadcopter and you "
-"have your :ref:`ACRO_RP_RATE<ACRO_RP_RATE>` parameter set to 9, which "
-"translates to a roll request of ~400deg/sec. The copter is not physically "
-"capable of going from 0deg/sec to 400deg/sec without a brief moment of "
-"acceleration. During that time, error is building up in the controller in "
-"order to get you to 400deg/sec. When you let off the sticks, that error can "
-"still be present, resulting in an overshoot of desired attitude, followed by"
-" a bounce-back. This parameter can be tuned to help remove that error during"
-" the maneuver and soften if not remove the bounce-back. Note that this is "
-"completely different from tuning the Rate D terms for Pitch and Roll, and "
-"should come only after those terms are properly tuned."
+":ref:`ATC_ACC_R_MAX<ATC_ACC_R_MAX>` and :ref:`ATC_ACC_P_MAX<ATC_ACC_P_MAX>`:"
+" Maximum acceleration in roll/pitch axis measured in Centi-degres/sec/sec. "
+"Let's say you have a highly nimble quadcopter and you have your "
+":ref:`ACRO_RP_RATE<ACRO_RP_RATE>` parameter set to 9, which translates to a "
+"roll request of ~400deg/sec. The copter is not physically capable of going "
+"from 0deg/sec to 400deg/sec without a brief moment of acceleration. During "
+"that time, error is building up in the controller in order to get you to "
+"400deg/sec. When you let off the sticks, that error can still be present, "
+"resulting in an overshoot of desired attitude, followed by a bounce-back. "
+"This parameter can be tuned to help remove that error during the maneuver "
+"and soften if not remove the bounce-back. Note that this is completely "
+"different from tuning the Rate D terms for Pitch and Roll, and should come "
+"only after those terms are properly tuned."
 msgstr ""
-":ref:`ATC_ACCEL_R_MAX <ATC_ACCEL_R_MAX>` 和 :ref:`ATC_ACCEL_P_MAX "
-"<ATC_ACCEL_P_MAX>`：横滚/俯仰轴的最大角加速度，单位为百分度/秒/秒。假设您有一架极为灵活的四旋翼，:ref:`ACRO_RP_RATE<ACRO_RP_RATE>`"
-" 设为 9（对应约 400 度/秒的横滚请求）。飞行器物理上无法从 0 度/秒瞬间达到 400 "
-"度/秒，需要短暂加速过程。在此期间，控制器会积累误差以达到 400 "
-"度/秒。松开摇杆时，该误差仍可能存在，导致姿态超调并出现回弹。此参数可调整以消除机动过程中的误差并软化甚至消除回弹。请注意，这与调整横滚和俯仰的速率 D"
-" 项完全不同，应在正确调整 D 项之后再进行此调整。"
+":ref:`ATC_ACC_R_MAX<ATC_ACC_R_MAX>` 和 "
+":ref:`ATC_ACC_P_MAX<ATC_ACC_P_MAX>`：横滚/俯仰轴的最大角加速度，单位为百分度/秒/秒。假设你有一架极为灵活的四旋翼，:ref:`ACRO_RP_RATE<ACRO_RP_RATE>`"
+" 设为 9（对应约 400 度/秒的横滚请求）。飞行器物理上无法在没有短暂加速的情况下从 0 度/秒达到 400 "
+"度/秒。在此期间，控制器会积累误差以使你达到 400 "
+"度/秒。松开摇杆时，该误差可能仍存在，导致目标姿态超调，随后回弹。可调整此参数以帮助消除机动过程中的误差，并软化（如果不能消除）回弹。注意这与调整俯仰和横滚的速率"
+" D 项完全不同，应在这些项正确调整之后再进行。"
 
-#: ../../source/docs/acro-mode.rst:139 fc23d757efd34fbea3dc2f8896d273bc
+#: ../../source/docs/acro-mode.rst:151 b75026cabd584af487ffd4638eb6ff7d
 msgid ""
-":ref:`ATC_ACCEL_Y_MAX <ATC_ACCEL_Y_MAX>`: Maximum acceleration in Yaw axis "
-"measured in Centi-degress/sec/sec. Same principle as ``ATC_ACCEL_R_MAX`` and"
-" :ref:`ATC_ACCEL_P_MAX` but on the YAW axis based on the "
-":ref:`ACRO_Y_RATE<ACRO_Y_RATE>` parameter value (likely a much lower, more "
-"attainable value.)"
+":ref:`ATC_ACC_Y_MAX<ATC_ACC_Y_MAX>`: Maximum acceleration in Yaw axis "
+"measured in Centi-degress/sec/sec. Same principle as "
+":ref:`ATC_ACC_R_MAX<ATC_ACC_R_MAX>` and :ref:`ATC_ACC_P_MAX <ATC_ACC_P_MAX>`"
+" but on the YAW axis based on the :ref:`ACRO_Y_RATE<ACRO_Y_RATE>` parameter "
+"value (likely a much lower, more attainable value.)"
 msgstr ""
-":ref:`ATC_ACCEL_Y_MAX <ATC_ACCEL_Y_MAX>`：偏航轴的最大角加速度，单位为百分度/秒/秒。原理与 "
-"``ATC_ACCEL_R_MAX`` 和 :ref:`ATC_ACCEL_P_MAX` 相同，但基于 "
-":ref:`ACRO_Y_RATE<ACRO_Y_RATE>` 参数值（通常是更低、更易实现的值）作用于偏航轴。"
+":ref:`ATC_ACC_Y_MAX<ATC_ACC_Y_MAX>`：偏航轴的最大角加速度，单位为百分度/秒/秒。原理与 "
+":ref:`ATC_ACC_R_MAX<ATC_ACC_R_MAX>` 和 :ref:`ATC_ACC_P_MAX <ATC_ACC_P_MAX>` "
+"相同，但作用于偏航轴，基于 :ref:`ACRO_Y_RATE<ACRO_Y_RATE>` 参数值（通常是更低、更易达到的值）。"
 
-#: ../../source/docs/acro-mode.rst:143 275b89a69c87425ab0f5d4d46f3fce73
+#: ../../source/docs/acro-mode.rst:155 3c0e25dd40e743638e144e86536b82a1
 msgid ""
 ":ref:`ATC_THR_MIX_MAN <ATC_THR_MIX_MAN>`: Balance between attitude and "
 "throttle control. This value can be increased to improve attitude control "
@@ -312,6 +357,6 @@ msgstr ""
 "<ATC_THR_MIX_MAN>`：姿态控制与油门控制之间的平衡。可增大此值以改善油门切断时的姿态控制，从而更好地支持 "
 "Airmode，但必须在飞行器调参稳定之后才能增大。"
 
-#: ../../source/docs/acro-mode.rst:148 593bc7d1e3ae4bf6bad18db6b627a5b5
+#: ../../source/docs/acro-mode.rst:160 f8f1e7ad9f3e4703be7f15b89efeb750
 msgid "User Videos"
 msgstr "用户视频"

@@ -7,355 +7,371 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Dev\n"
+"Project-Id-Version:  Dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-23 03:06+0000\n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: zh_CN <LL@li.org>\n"
 "Language: zh_CN\n"
+"Language-Team: zh_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.18.0\n"
 
 #: ../../source/docs/rover-sitlmavproxy-tutorial.rst:5
-#: 943f36740e2a426f9c5142ab3bd62514
+#: 07ac3765134d48eab89e40f3180bebd7
 msgid "Rover SITL/MAVProxy Tutorial"
 msgstr "Rover SITL/MAVProxy 教程"
 
 #: ../../source/docs/rover-sitlmavproxy-tutorial.rst:7
-#: 2693a3b9bbc64b8b99999c4dab7678ac
+#: e5f9aaba358f4b53a4126521511ca593
 msgid ""
-"This tutorial provides a basic walk-through of how to use :ref:`SITL <sitl-"
-"simulator-software-in-the-loop>` and :ref:`MAVProxy<mavproxy:home>` for "
-"*Rover* testing."
+"This tutorial provides a basic walk-through of how to use :ref:`SITL "
+"<sitl-simulator-software-in-the-loop>` and :ref:`MAVProxy<mavproxy:home>`"
+" for *Rover* testing."
 msgstr ""
 "本教程提供了使用 :ref:`SITL <sitl-simulator-software-in-the-loop>` 和 "
 ":ref:`MAVProxy<mavproxy:home>` 进行 *Rover* 测试的基本演练。"
 
 #: ../../source/docs/rover-sitlmavproxy-tutorial.rst:12
-#: e75b561e987044f7802ac1bd341d3db3
+#: 9146ea14dd624cb7b567b7dbe7990f93
 msgid "Overview"
 msgstr "概述"
 
 #: ../../source/docs/rover-sitlmavproxy-tutorial.rst:14
-#: 8c06872001874ca298a13b240de785ce
+#: fcfa9839448645588fb51b85f4196571
 msgid ""
-"Rover is an easy platform to get started with. Unlike Copter or Plane there "
-"are no fast-moving propellers, so there is no need to arm motors. As "
-"movement is along the ground, there is no need to consider taking off or "
-"landing, and pausing/loitering/waiting is just \"stopping\". At the end of "
-"initialization the Rover is ready to go!"
+"Rover is an easy platform to get started with. Unlike Copter or Plane "
+"there are no fast-moving propellers, so there is no need to arm motors. "
+"As movement is along the ground, there is no need to consider taking off "
+"or landing, and pausing/loitering/waiting is just \"stopping\". At the "
+"end of initialization the Rover is ready to go!"
 msgstr ""
 "Rover 是一个入门容易的平台。与 Copter 或 Plane 不同，Rover "
 "没有高速旋转的螺旋桨，因此无需解锁电机。由于运动在地面进行，无需考虑起飞或降落，暂停/盘旋/等待就是「停车」。初始化完成后，Rover 即可出发！"
 
 #: ../../source/docs/rover-sitlmavproxy-tutorial.rst:20
-#: f96c9c621e0240ddae4d8128d7793891
+#: 218e28779c1c4be28bf21a9fb7c2f781
 msgid ""
-"The article is intended primarily for developers who want to test new Rover "
-"builds and bug fixes using SITL and *MAVProxy*. It shows how to use the "
-"different modes, run missions, set a geofence, and perform a number of other"
-" basic testing tasks."
+"The article is intended primarily for developers who want to test new "
+"Rover builds and bug fixes using SITL and *MAVProxy*. It shows how to use"
+" the different modes, run missions, set a geofence, and perform a number "
+"of other basic testing tasks."
 msgstr ""
 "本文主要面向希望使用 SITL 和 *MAVProxy* 测试 Rover 新构建版本及 bug "
 "修复的开发者，介绍如何使用不同模式、运行任务、设置地理围栏以及执行其他基本测试任务。"
 
 #: ../../source/docs/rover-sitlmavproxy-tutorial.rst:25
-#: 3f6eb4bd6c434773aa27eea24bcb8d5e
+#: 64daed24c60f4bc29c77bd5b2def05c0
 msgid ""
-"The tutorial is complementary to the topic :ref:`Using SITL for ArduPilot "
-"Testing <using-sitl-for-ardupilot-testing>`."
+"The tutorial is complementary to the topic :ref:`Using SITL for ArduPilot"
+" Testing <using-sitl-for-ardupilot-testing>`."
 msgstr ""
 "本教程是 :ref:`Using SITL for ArduPilot Testing <using-sitl-for-ardupilot-"
 "testing>` 主题的补充内容。"
 
 #: ../../source/docs/rover-sitlmavproxy-tutorial.rst:29
-#: ba740f10458a44e282f7c26cc25de1da
+#: 78c7b9810ffd49cda943a50eaab970ee
 msgid ""
-"We use *MAVProxy* here, but you can :ref:`attach another ground station to "
-"SITL <using-sitl-for-ardupilot-"
-"testing_connecting_otheradditional_ground_stations>` if you prefer (similar "
-"instructions can be used in any GCS)."
+"We use *MAVProxy* here, but you can :ref:`attach another ground station "
+"to SITL <using-sitl-for-ardupilot-"
+"testing_connecting_otheradditional_ground_stations>` if you prefer "
+"(similar instructions can be used in any GCS)."
 msgstr ""
-"我们在此使用 *MAVProxy*，但如果您更喜欢，也可以 :ref:`将其他地面站连接到 SITL（软件在环仿真） <using-sitl-for-"
-"ardupilot-testing_connecting_otheradditional_ground_stations>` "
+"我们在此使用 *MAVProxy*，但如果您更喜欢，也可以 :ref:`将其他地面站连接到 SITL（软件在环仿真） <using-sitl-"
+"for-ardupilot-testing_connecting_otheradditional_ground_stations>` "
 "（类似的说明适用于任何地面站）。"
 
 #: ../../source/docs/rover-sitlmavproxy-tutorial.rst:31
-#: ac8578de32ae4ede815a8fa1ac835590
+#: 79732637328547a6aecfef80a4848364
 msgid ""
 "This tutorial is for Rover - see :ref:`Copter <copter-sitl-mavproxy-"
 "tutorial>` and :ref:`Plane <plane-sitlmavproxy-tutorial>` for similar "
 "tutorials on the other vehicles."
 msgstr ""
-"本教程适用于 Rover——其他机型的类似教程请参见 :ref:`Copter <copter-sitl-mavproxy-tutorial>` 和 "
-":ref:`Plane <plane-sitlmavproxy-tutorial>`。"
+"本教程适用于 Rover——其他机型的类似教程请参见 :ref:`Copter <copter-sitl-mavproxy-tutorial>` "
+"和 :ref:`Plane <plane-sitlmavproxy-tutorial>`。"
 
 #: ../../source/docs/rover-sitlmavproxy-tutorial.rst:37
-#: ee790dae0a1047eeb3f5ef43663f7dac
+#: e3a0ddf3d5874ea8af289456af40b5ca
 msgid "Preconditions"
 msgstr "前提条件"
 
 #: ../../source/docs/rover-sitlmavproxy-tutorial.rst:39
-#: 0df70eac8f014c8f99ff9a210e304ea9
+#: 9efe3e86420f47dc8f7b4a3c1a89a0ad
 msgid ""
 "The tutorial assumes you have already set up :ref:`SITL on Windows <sitl-"
-"native-on-windows>` or :ref:`Linux <setting-up-sitl-on-linux>` and that you "
-"have started SITL using the ``--map`` and ``--console`` options:"
+"native-on-windows>` or :ref:`Linux <setting-up-sitl-on-linux>` and that "
+"you have started SITL using the ``--map`` and ``--console`` options:"
 msgstr ""
-"本教程假设您已经在 :ref:`Windows <sitl-native-on-windows>` 或 :ref:`Linux <setting-up-"
-"sitl-on-linux>` 上设置好 SITL（软件在环仿真），并且已使用 ``--map`` 和 ``--console`` 选项启动 "
-"SITL（软件在环仿真）："
+"本教程假设您已经在 :ref:`Windows <sitl-native-on-windows>` 或 :ref:`Linux <setting-"
+"up-sitl-on-linux>` 上设置好 SITL（软件在环仿真），并且已使用 ``--map`` 和 ``--console`` 选项启动"
+" SITL（软件在环仿真）："
 
 #: ../../source/docs/rover-sitlmavproxy-tutorial.rst:48
-#: 57ad8acb08d14fb79b0b36b0653c995b
+#: 1edb59cdabc0495db7fa97db2f107015
 msgid ""
-"Arrange the *MAVProxy Command Prompt*, *Console* and *Map* conveniently so "
-"you can observe the status and send commands at the same time."
+"Arrange the *MAVProxy Command Prompt*, *Console* and *Map* conveniently "
+"so you can observe the status and send commands at the same time."
 msgstr "合理排列 *MAVProxy 命令提示符*、*控制台* 和 *地图* 窗口，以便同时观察状态和发送命令。"
 
 #: ../../source/docs/rover-sitlmavproxy-tutorial.rst:55
-#: 2ff57e60ea3548b5af3ad3f2f88f9b9f
+#: 4563140e86eb484982c012f3a1256e71
 msgid "Starting"
 msgstr "开始"
 
 #: ../../source/docs/rover-sitlmavproxy-tutorial.rst:57
-#: 9e059447c9df42879222b4b710361943
+#: e429734afc5b4194965de3a47bdec15b
+#, fuzzy
 msgid ""
-"Change the rover into Guided mode and then arm it by entering the following "
-"on the mavproxy console ::"
+"Change the rover into Guided mode and then arm it by entering the "
+"following on the mavproxy console"
 msgstr "将 Rover 切换到 Guided 模式，然后在 mavproxy 控制台输入以下命令解锁：："
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:63
-#: 8c5e6a9dd20f4a229c14fd22b385f4f5
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:64
+#: af14897ed1e04c7e834617fc8c00848c
 msgid ""
-"**Right-click** on the map at your target destination, select **Fly to**, "
-"and enter an altitude (which is ignored). Rover should drive to the "
+"**Right-click** on the map at your target destination, select **Fly to**,"
+" and enter an altitude (which is ignored). Rover should drive to the "
 "location, and then pause (still in Guided mode)."
 msgstr ""
 "在地图上的目标位置 **右键单击**，选择 **飞往**，并输入一个高度（该值被忽略）。Rover 应前往该位置，然后停止（仍处于 Guided "
 "模式）。"
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:68
-#: e48945cc5d594a788e71da0dd8994595
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:69
+#: 145b6ceac70c47d18e543a8e331b241a
 msgid "MAVProxy: Rover go tolocation"
 msgstr "MAVProxy：Rover 前往指定位置"
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:70
-#: 2b133ed4d77b46d4bcd7822b8b1b5707
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:71
+#: d14a7b14f7e24ec2af65e46d0d5393a2
 msgid ""
-"If you have a mission loaded, you can also simply change to AUTO mode to run"
-" it:"
+"If you have a mission loaded, you can also simply change to AUTO mode to "
+"run it:"
 msgstr "如果已加载任务，也可以直接切换到 AUTO 模式运行："
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:79
-#: 8ae84195de08433fab86ab5a85ae09e8
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:80
+#: 7caba8a7adcb447f8549ee3e8a45d830
 msgid ""
 "Any commands or parameters that are not relevant to a Rover are ignored "
 "(e.g. TAKEOFF command and any altitude information)."
 msgstr "与 Rover 无关的任何命令或参数将被忽略（例如 TAKEOFF 命令和高度信息）。"
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:83
-#: 624c061b36ca46b4a1849024da841d35
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:84
+#: 36f0743798a742ef83b5ac20431b09d3
 msgid "Guiding the vehicle"
 msgstr "引导飞行器"
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:85
-#: 070d8eef79e64933bc6c8a561d289865
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:86
+#: 34ef74087fc246e2be7b68612ded89b2
 msgid ""
-"The previous section covered almost everything you need to know about moving"
-" the vehicle around the map in ``GUIDED`` mode."
+"The previous section covered almost everything you need to know about "
+"moving the vehicle around the map in ``GUIDED`` mode."
 msgstr "上一节几乎涵盖了在 ``GUIDED`` 模式下在地图上移动飞行器所需了解的所有内容。"
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:88
-#: 692fd795a9a741f3aa5cee53118c66d2
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:89
+#: b58b15e2f71a4ec19db30b2db212ccf3
 msgid ""
-"You can also enter the target position manually on the command line using "
-"the two formats below. If only the altitude is specified, the last specified"
-" LAT/LON will be used."
+"You can also enter the target position manually on the command line using"
+" the two formats below. If only the altitude is specified, the last "
+"specified LAT/LON will be used."
 msgstr "您也可以在命令行中使用以下两种格式手动输入目标位置。如果仅指定高度，将使用上次指定的经纬度。"
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:97
-#: b4305833a46c4a018b2e926d7b8e13db
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:98
+#: 9d7bba13ab9f45988e489db2f67ac3a3
 msgid ""
 "Just specifying the altitude (as 0) is useful if you need to pause then "
 "restart a guided path. The commands below set the mode to HOLD and then "
 "restart the vehicle travelling towards the previous point:"
 msgstr "仅指定高度（为 0）在需要暂停然后重新启动引导路径时很有用。以下命令将模式设为 HOLD，然后重新启动飞行器前往上一个目标点："
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:107
-#: 729a8a8810f8411dade9d44e58bec951
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:108
+#: 7ab56e08a2ed4820b7977c05fcef5a6e
 msgid ""
-"When you're finished you can return to the initial position by changing to "
-"``RTL`` mode (this also works in ``AUTO`` mode):"
+"When you're finished you can return to the initial position by changing "
+"to ``RTL`` mode (this also works in ``AUTO`` mode):"
 msgstr "完成后，可以切换到 ``RTL`` 模式返回初始位置（``AUTO`` 模式下同样适用）："
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:116
-#: 81ad6d3bf60a486382304c2a5790dae2
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:117
+#: ac7b1ceebff8443880ad0bfb61e01f83
 msgid "Running a mission"
 msgstr "运行任务"
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:118
-#: 4b6814bb314e46d3a84af167ca6e3152
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:119
+#: 33e1b1615d5940a985bc4c5ac2191972
 msgid ""
 "You can load a mission at any time using the ``wp load`` command. After "
 "you've taken off the current mission will start as soon as you change to "
 "``AUTO`` mode."
 msgstr "可随时使用 ``wp load`` 命令加载任务。起飞后，切换到 ``AUTO`` 模式后当前任务将立即开始执行。"
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:122
-#: ada09e35f201479390383732806f81f8
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:123
+#: 22091a59489c4d94bf8ad306587155d7
 msgid ""
-"The example below shows how to load and start one of the test missions, skip"
-" to the second waypoint, and *loop* the mission:"
+"The example below shows how to load and start one of the test missions, "
+"skip to the second waypoint, and *loop* the mission:"
 msgstr "以下示例演示如何加载并启动一个测试任务、跳转到第二个航点，以及*循环*执行任务："
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:134
-#: 64ca22b9351d418ba488ea4651fc6863
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:135
+#: 844abd2355bf4e30bb57a4eba7ed691b
 msgid ""
 "Rover will only run :ref:`commands it supports <rover:common-mavlink-"
-"mission-command-messages-mav_cmd_commands_supported_by_rover>` (others are "
-"ignored)."
+"mission-command-messages-mav_cmd_commands_supported_by_rover>` (others "
+"are ignored)."
 msgstr ""
 "Rover 只会执行 :ref:`其支持的命令 <rover:common-mavlink-mission-command-messages-"
 "mav_cmd_commands_supported_by_rover>` （其他命令将被忽略）。"
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:137
-#: 16cb1c1ebd2a42b9ab6ef4391fb49587
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:138
+#: 9617b84a4cfd440fa2353ead2378be3e
 msgid ""
-"The :ref:`MAVProxy Waypoints documentation <mavproxy:mavproxy-waypoints>` "
-"lists the full set of available commands (or you can get them using auto-"
-"completion by typing \"wp\" on the command line)."
+"The :ref:`MAVProxy Waypoints documentation <mavproxy:mavproxy-waypoints>`"
+" lists the full set of available commands (or you can get them using "
+"auto-completion by typing \"wp\" on the command line)."
 msgstr ""
 ":ref:`MAVProxy 航点文档 <mavproxy:mavproxy-waypoints>` "
 "列出了所有可用命令的完整集合（也可以在命令行输入「wp」通过自动补全获取）。"
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:141
-#: 253c8ff603694c1e908e942d1e8b9264
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:142
+#: 12298edf78d049bfbc8911d262245dc1
 msgid ""
-"If you want to create a waypoint mission, this is most easily done on the "
-"map:"
+"If you want to create a waypoint mission, this is most easily done on the"
+" map:"
 msgstr "如果要创建航点任务，最简便的方法是在地图上操作："
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:144
-#: 223e75ef8906435a95d0364d26a18604
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:145
+#: 0dcc4331a8d9476a9d89ab7bbd71acec
 msgid "Right-click on the map and then select **Mission \\| Draw**."
 msgstr "在地图上右键单击，然后选择 **任务 \\| 绘制**。"
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:149
-#: 1fe590d427114ead89994f49ef456bc8
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:150
+#: 9b1c4b0f41e8452fbbaf05f3bd6005e9
 msgid ""
-"MAVProxy: Draw Mission Menu (This image is for Copter, but the behaviour is "
-"the same)."
+"MAVProxy: Draw Mission Menu (This image is for Copter, but the behaviour "
+"is the same)."
 msgstr "MAVProxy：绘制任务菜单（此图示为 Copter，但操作相同）。"
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:151
-#: 4c30281cc735443b96fa45ea505a395e
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:152
+#: b6c53acbaa864ae6a16bd9b5ab98b890
 msgid "Left-click on the map where you want the points to appear."
 msgstr "在地图上左键单击您希望航点出现的位置。"
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:155
-#: 2843b005327d4a838b344fe6b059803e
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:156
+#: 4e45d293061e4acda5428431187d45a4
 msgid ""
-"Nothing visible will happen when you make the first click. After the second "
-"click, lines will join your points to show the path"
+"Nothing visible will happen when you make the first click. After the "
+"second click, lines will join your points to show the path"
 msgstr "第一次单击时不会有明显变化。第二次单击后，各点之间将出现连线以显示路径"
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:158
-#: 5fe7462105ad48e5ac754e796949e39d
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:159
+#: b7daa9f765784f8cb9c5b7cc448e4d88
 msgid ""
-"When you're done, you can loop the mission by right-clicking on the map and "
-"selecting **Mission \\| Loop**."
+"When you're done, you can loop the mission by right-clicking on the map "
+"and selecting **Mission \\| Loop**."
 msgstr "完成后，可在地图上右键单击并选择 **任务 \\| 循环** 来设置任务循环执行。"
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:161
-#: 204076b5121b47bda65d50ef208bc2cf
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:162
+#: a5cb0aa6b37b46d895d18f556412a5e6
 msgid ""
 "This approach only allows you to create :ref:`MAV_CMD_NAV_WAYPOINT "
-"<rover:mav_cmd_nav_waypoint>` commands. You can edit missions and use other "
-"commands on Linux using the *misseditor* module (``module load "
-"misseditor``). This is currently broken on Windows. It is also possible to "
-"load other types of commands from files."
+"<rover:mav_cmd_nav_waypoint>` commands. You can edit missions and use "
+"other commands on Linux using the *misseditor* module (``module load "
+"misseditor``). This is currently broken on Windows. It is also possible "
+"to load other types of commands from files."
 msgstr ""
-"此方法仅允许创建 :ref:`MAV_CMD_NAV_WAYPOINT <rover:mav_cmd_nav_waypoint>` 命令。在 Linux"
-" 上可以使用 *misseditor* 模块（``module load misseditor``）编辑任务和使用其他命令。该模块目前在 Windows"
-" 上无法使用。也可以从文件中加载其他类型的命令。"
+"此方法仅允许创建 :ref:`MAV_CMD_NAV_WAYPOINT <rover:mav_cmd_nav_waypoint>` 命令。在 "
+"Linux 上可以使用 *misseditor* 模块（``module load misseditor``）编辑任务和使用其他命令。该模块目前在"
+" Windows 上无法使用。也可以从文件中加载其他类型的命令。"
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:170
-#: 32f013c3ab2044cdb2ed32a6d8794ea6
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:171
+#: 797c3fe5352b48dc986ec5ceb7b75259
 msgid ""
-"At any point you can pause the mission by setting the mode to ``HOLD``, and "
-"restart by setting it back to ``AUTO``."
+"At any point you can pause the mission by setting the mode to ``HOLD``, "
+"and restart by setting it back to ``AUTO``."
 msgstr "您可以随时通过将模式设为 ``HOLD`` 来暂停任务，然后切换回 ``AUTO`` 重新启动。"
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:174
-#: 13e58cea9c1a4780b8fce9b4c256b37c
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:175
+#: 3876ba11278c4a5f81c86e773dacdbbe
 msgid "Changing mode"
 msgstr "切换模式"
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:176
-#: 996a1237bb454e5c8d1c31fbb69c8d4b
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:177
+#: c1a6311a9e1345ef9b009211ab29550f
 msgid ""
-"Rover supports a small number of modes which you can list in *MAVProxy* with"
-" the ``mode`` command:"
+"Rover supports a small number of modes which you can list in *MAVProxy* "
+"with the ``mode`` command:"
 msgstr "Rover 支持少量模式，可在 *MAVProxy* 中使用 ``mode`` 命令列出："
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:184
-#: aa6e036317234dcc8b9a5bacec42e43f
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:185
+#: 2b8dab62d83c46aebdb3bfc692cb8c3a
 msgid "The useful modes for simulation are:"
 msgstr "仿真中常用的模式有："
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:186
-#: 611afb3f46874bc2b02be83076494d6f
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:187
+#: 6f749bd964dc4e379d72cdc211d034f4
 msgid "``AUTO`` - Run a mission"
 msgstr "``AUTO`` - 执行任务"
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:187
-#: 7eae227eccde457caa8aa7170c671250
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:188
+#: c0c261f6b16541c7b4b2d90fdded51cc
 msgid "``GUIDED`` - Move where directed by GCS"
 msgstr "``GUIDED`` - 按地面站指令移动"
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:188
-#: 787e119c8bbe4d8c94773951f5b68bfc
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:189
+#: 112b154ea23540988b86a67ae8083afe
 msgid "``RTL`` - Return to launch"
 msgstr "``RTL`` - 返回起飞点"
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:189
-#: bca7617ca6ae4d95a2eba1c127635346
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:190
+#: f74a881f7b784939a826fd58a6fa54af
 msgid "``HOLD`` - WAIT - pause mission/stop moving."
 msgstr "``HOLD`` - 等待——暂停任务/停止移动。"
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:191
-#: 3d5dc26aa4484be0b722891e21144a39
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:192
+#: f481bfc9958c443c888898d94bb1f751
 msgid ""
 "As shown in the previous section, you can change the mode by specifying "
-"``mode modename``. Most of the modes can be set by just entering the mode "
-"name, e.g. ``rtl``, ``auto``, ``hold``."
+"``mode modename``. Most of the modes can be set by just entering the mode"
+" name, e.g. ``rtl``, ``auto``, ``hold``."
 msgstr ""
 "如上一节所示，可以通过 ``mode modename`` 切换模式。大多数模式可以直接输入模式名设置，例如 "
 "``rtl``、``auto``、``hold``。"
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:196
-#: ab7c7d5178a64fb2a0280d4f20f595fd
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:197
+#: 22b55e499f2e4c759316a3052bb72e97
 msgid "Testing the vehicle"
 msgstr "测试飞行器"
 
-#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:198
-#: fec530205ae0486bb6b97abd66642d75
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:199
+#: 0208df6a9e5341178cbe7811cb9854f8
+#, fuzzy
 msgid ""
-"*MAVProxy* allows you to list all the parameters affecting the vehicle and "
-"simulation using ``param show *``, and to set any parameter using: ``param "
-"set PARAM_NAME VALUE``. In addition to affecting the vehicle itself some "
-"parameters simulate the performance/failure of specific hardware components "
-"and the environment (for example, the wind). These can be listed using: "
-"`:ref:`param show sim*``. The topic `Using SITL for ArduPilot Testing "
-"<using-sitl-for-ardupilot-testing>` explains more about how you can test "
-"using SITL."
+"*MAVProxy* allows you to list all the parameters affecting the vehicle "
+"and simulation using ``param show *``, and to set any parameter using: "
+"``param set PARAM_NAME VALUE``. In addition to affecting the vehicle "
+"itself some parameters simulate the performance/failure of specific "
+"hardware components and the environment (for example, the wind). These "
+"can be listed using: .. code-block:: console"
 msgstr ""
-"*MAVProxy* 允许使用 ``param show *`` 列出影响飞行器和仿真的所有参数，并使用 ``param set PARAM_NAME "
-"VALUE`` 设置任意参数。除影响飞行器本身外，某些参数可以仿真特定硬件组件的性能/故障及环境（例如风）。可使用 ` :ref:`param show"
-" sim*` ` 列出这些参数。主题「使用 SITL 进行 ArduPilot 测试 <using-sitl-for-ardupilot-"
-"testing>」详细介绍了如何使用 SITL 进行测试。"
+"*MAVProxy* 允许使用 ``param show *`` 列出影响飞行器和仿真的所有参数，并使用 ``param set "
+"PARAM_NAME VALUE`` 设置任意参数。除影响飞行器本身外，某些参数可以仿真特定硬件组件的性能/故障及环境（例如风）。可使用 ` "
+":ref:`param show sim*` ` 列出这些参数。主题「使用 SITL 进行 ArduPilot 测试 <using-sitl-"
+"for-ardupilot-testing>」详细介绍了如何使用 SITL 进行测试。"
+
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:207
+#: e1334ab200d24468b70beb670a54a9cf
+msgid "param show sim*"
+msgstr ""
+
+#: ../../source/docs/rover-sitlmavproxy-tutorial.rst:209
+#: b47b2ca7baef43d2835f6016b2c4c105
+#, fuzzy
+msgid ""
+"The topic `Using SITL for ArduPilot Testing <using-sitl-for-ardupilot-"
+"testing>` explains more about how you can test using SITL."
+msgstr ""
+"本教程是 :ref:`Using SITL for ArduPilot Testing <using-sitl-for-ardupilot-"
+"testing>` 主题的补充内容。"
+
