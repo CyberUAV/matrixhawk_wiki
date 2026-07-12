@@ -62,6 +62,14 @@ def apply(g, project, shorttitle, favicon='favicon_default.ico',
     g['pygments_style'] = 'sphinx'
     g['todo_include_todos'] = True
 
+    # Translated named references (`构建 Wiki`_ for `Build the Wiki`_) are
+    # the CORRECT way to translate implicit-target refs; Sphinx remaps them
+    # positionally and the links resolve (verified on
+    # common-wiki-editing-setup zh_CN: all anchors present). The
+    # "inconsistent references" warning is informational noise for this
+    # legitimate pattern.
+    g['suppress_warnings'] = ['i18n.inconsistent_references']
+
     # -- HTML output ---------------------------------------------------------
     g['html_theme'] = 'matrixhawk_sphinx_rtd_theme'
     g['html_theme_path'] = [sphinx_rtd_theme.get_html_theme_path()]
