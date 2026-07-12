@@ -70,6 +70,7 @@ INLINE_SPAN_RES = [
     re.compile(r":[a-zA-Z][a-zA-Z0-9:._+-]*:`[^`]+`"),          # role
     re.compile(r"`[^`]+`__?"),                                  # named link
     re.compile(r"\*\*[^*\n]+\*\*"),                             # strong
+    re.compile(r"(?<!\*)\*[^*\n]+\*(?!\*)"),                    # emphasis
 ]
 CJK_LETTER_RE = re.compile(r"[一-鿿]")
 
@@ -87,35 +88,59 @@ except ImportError:                       # docutils absent: CJK approximation
 NAMEDLINK_NOSPACE_RE = re.compile(r"`[^`<\s][^`<]*?[^`\s<]<(?:https?|ftp)[^`>]*>`__?")
 
 
-def glued_spans(text: str) -> list[str]:
-    """Return markup spans docutils will not recognise in this context.
+_SPAN_KINDS = [
+    ("literal",   r"``[^`]+``"),
+    ("role",      r":[a-zA-Z][a-zA-Z0-9:._+-]*:`[^`]+`"),
+    ("namedlink", r"`[^`]+`__?"),
+    ("strong",    r"\*\*[^*\n]+\*\*"),
+    ("emphasis",  r"(?<![*\x00])\*[^*\n\x00]+\*(?![*\x00])"),  # \x01 allowed: may wrap containers
+]
 
-    Spans nested inside a role or literal body (e.g. the ``**bold**`` in
-    upstream's ``:ref:`**SERIAL0_BAUD** <SERIAL0_BAUD>```) are skipped:
-    docutils takes role/literal bodies verbatim, so top-level inline
-    recognition rules do not apply there — flagging them is a false
-    positive that rejects byte-faithful translations of upstream markup.
+
+def span_defects(text: str) -> list[tuple]:
+    """Return (kind, span, bad_before, bad_after) for markup spans docutils
+    will not recognise in this context.
+
+    Mirrors docutils tokenisation: each span kind is MASKED before the next
+    kind is searched, so a ``*`` inside a literal/role body can never seed
+    or terminate an emphasis match (that regex crossing container borders
+    used to produce monster false-positive spans). Boundary characters are
+    read from the ORIGINAL text at the same offsets.
     """
-    containers = []
-    for rx in (re.compile(r":[a-zA-Z][a-zA-Z0-9:._+-]*:`[^`]+`"),
-               re.compile(r"``[^`]+``")):
-        for m in rx.finditer(text):
-            containers.append((m.start(), m.end()))
-
-    def inside_container(s, e):
-        return any(cs < s and e <= ce for cs, ce in containers)
-
+    # escaped markup (\* \` \|) is literal to docutils — mask it with \x00 so
+    # it can neither seed nor terminate a span. Consumed spans are masked
+    # with \x01 (equal length, offsets preserved): later kinds may legally
+    # CROSS them (emphasis wrapping a ``literal``) but can never re-match
+    # markup characters inside them.
+    cur = re.sub(r"\\[*`|]", lambda m: "\x00" * len(m.group(0)), text)
     out = []
-    for rx in INLINE_SPAN_RES:
-        for m in rx.finditer(text):
-            if inside_container(m.start(), m.end()):
-                continue
+    _MARKER_LEN = {"literal": 2, "strong": 2, "emphasis": 1}
+    for kind, pat in _SPAN_KINDS:
+        rx = re.compile(pat)
+        for m in rx.finditer(cur):
             before = text[m.start() - 1: m.start()]
             after = text[m.end(): m.end() + 1]
-            if (before and not OK_BEFORE_RE.fullmatch(before)) or \
-               (after and not OK_AFTER_RE.fullmatch(after)):
-                out.append(m.group(0))
+            bad_b = bool(before) and not OK_BEFORE_RE.fullmatch(before)
+            bad_a = bool(after) and not OK_AFTER_RE.fullmatch(after)
+            # docutils inner rule: start-string must be followed by
+            # non-space, end-string preceded by non-space (`* text *` is
+            # not markup and leaves a dangling start elsewhere)
+            n = _MARKER_LEN.get(kind)
+            if n:
+                inner = m.group(0)[n:-n]
+                if inner[:1].isspace():
+                    bad_b = True
+                if inner[-1:].isspace():
+                    bad_a = True
+            if bad_b or bad_a:
+                out.append((kind, text[m.start():m.end()], bad_b, bad_a))
+        cur = rx.sub(lambda m: "\x01" * len(m.group(0)), cur)
     return out
+
+
+def glued_spans(text: str) -> list[str]:
+    """Back-compat wrapper: just the offending span texts."""
+    return [s for _, s, _, _ in span_defects(text)]
 
 # roles whose body is a link (label <target> or bare target)
 LINK_ROLES = {"ref", "doc", "term", "numref", "download", "any", "keyword"}
@@ -223,17 +248,49 @@ def check_entry(msgid: str, msgstr: str) -> list[dict]:
     if looks_misaligned(msgid, msgstr):
         defects.append({"cls": "H", "detail": ["suspect batch misalignment"]})
 
-    # Class I fires only for glued spans the TRANSLATION introduced: a span
-    # that is equally glued in the English msgid is upstream-broken markup,
-    # and a byte-faithful translation of it must not be rejected.
-    source_glued = set(glued_spans(msgid))
-    glued = [s for s in glued_spans(msgstr) if s not in source_glued]
+    # Class I fires only for glued spans the TRANSLATION introduced.
+    # Exemption is by defect SIGNATURE (span kind + which boundary is bad),
+    # not span text: a translated label changes the text but an inherited
+    # upstream quirk (e.g. ``**Type***`` -> ``**类型***``) keeps the same
+    # signature and must not be rejected.
+    src_sigs = Counter((k, bb, ba) for k, _, bb, ba in span_defects(msgid))
+    glued = []
+    for k, span, bb, ba in span_defects(msgstr):
+        sig = (k, bb, ba)
+        if src_sigs.get(sig, 0) > 0:
+            src_sigs[sig] -= 1
+            continue
+        glued.append(span)
     if glued:
         defects.append({"cls": "I", "detail": glued[:5]})
 
     nospace = NAMEDLINK_NOSPACE_RE.findall(msgstr)
     if nospace:
         defects.append({"cls": "J", "detail": nospace[:5]})
+
+    # Class K: unpaired inline start-strings introduced by the translation
+    # (docutils: "Inline emphasis/interpreted text start-string without
+    # end-string"). A lone ** or an odd number of single backticks renders
+    # as raw markup. Only flag imbalance ABSENT from the msgid.
+    def _imbalance(text):
+        out = []
+        # escaped markup (\* \`) is literal to docutils — never counts
+        text = re.sub(r"\\[*`]", "", text)
+        if text.count("**") % 2:
+            out.append("unpaired **")
+        # single backticks: remove double-backtick literals first
+        n_single = re.sub(r"``[^`]*``", "", text).count("`")
+        if n_single % 2:
+            out.append("unpaired `")
+        n_star = re.sub(r"\*\*", "", text)
+        if re.search(r"(?<![*\w])\*(?![*\s])[^*\n]*$", n_star) and n_star.count("*") % 2:
+            out.append("unpaired *")
+        return out
+    k_str = _imbalance(msgstr)
+    k_id = set(_imbalance(msgid))
+    k_new = [k for k in k_str if k not in k_id]
+    if k_new:
+        defects.append({"cls": "K", "detail": k_new})
     return defects
 
 
@@ -260,7 +317,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[1])
     ap.add_argument("targets", nargs="+", help=".po files or directories")
     ap.add_argument("--json", help="write full machine-readable report here")
-    ap.add_argument("--fail-on", default="A,B,C,D,E,F1,F2,H,I,J",
+    ap.add_argument("--fail-on", default="A,B,C,D,E,F1,F2,H,I,J,K",
                     help="comma-separated defect classes that fail the build "
                          "(default: all except G/fuzzy)")
     ap.add_argument("--max-examples", type=int, default=5)
@@ -285,7 +342,8 @@ def main():
              "F2": "``literal``/verbatim-role translated", "G": "fuzzy (draft)",
              "H": "suspect batch misalignment",
              "I": "inline markup in unrecognisable position (won't render)",
-             "J": "named link missing space before <url>"}
+             "J": "named link missing space before <url>",
+             "K": "unpaired inline start-string introduced by translation"}
     print(f"linted {len(po_files)} .po files")
     for cls in sorted(by_cls):
         rs = by_cls[cls]
