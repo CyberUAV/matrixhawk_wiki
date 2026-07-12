@@ -1,0 +1,364 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/soaring.rst:5
+#: b39a37c7133e4df7856e5521e9d1f6d5
+msgid "Refer to :ref:`this page <soaring-4_1>` if you're using version 4.1."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:9
+#: 1dc8265f2a2f491c82281a48f712250e
+msgid "Soaring"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:14
+#: 13dc937a90794cf18b276b2ecc1c146a
+msgid "The autonomous soaring functionality in ArduPilot allows the plane to respond to rising air current (thermals) in order to extend endurance and gain altitude with minimal use of the motor (soaring). Its full technical description is available in"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:18
+#: 296b459959754f72bb83d8ac91dc40b7
+msgid "*S. Tabor, I. Guilliard, A. Kolobov.* `ArduSoar: an Open-Source Thermalling Controller for Resource-Constrained Autopilots <https://arxiv.org/abs/1802.08215/>`_. *International Conference on Intelligent Robots and Systems (IROS), 2018.*"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:20
+#: 2308f2b9990845bd8505dfbd52e140e0
+msgid "Use of an airspeed sensor is strongly recommended in order to obtain optimum performance. Use without a sensor could yield unsatisfactory results. Consistent operation without an airspeed sensor is a pending future development."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:24
+#: 6cb76bbd770b4a3d895717b7c21b838a
+msgid "This picture shows the different phases of flight when using the soaring functionality:"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:27
+#: d532cb2b603b443696830348f544cfd8
+msgid "If modes AUTO, FBWB or CRUISE are entered, and Soaring is enabled, the throttle is set to zero provided the aircraft is above :ref:`SOAR_ALT_MIN<SOAR_ALT_MIN>` altitude and the aircraft then begins gliding."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:28
+#: 4022264e8b7e437aa1178608576cbea2
+msgid "In AUTO, if the aircraft descends to :ref:`SOAR_ALT_MIN<SOAR_ALT_MIN>` altitude, throttle is re-enabled and the aircraft will begin to climb to the altitude of the next waypoint. If that waypoint altitude is less than :ref:`SOAR_ALT_CUTOFF<SOAR_ALT_CUTOFF>` altitude, then Soaring can not begin before reaching the waypoint. If it is above :ref:`SOAR_ALT_CUTOFF<SOAR_ALT_CUTOFF>` altitude, then Soaring can occur once that altitude has been reached. In FBWB or CRUISE modes, if  :ref:`SOAR_ALT_MIN<SOAR_ALT_MIN>` altitude is reached, an RTL will be initiated, so the pilot must disable Soaring, or change to a mode other than FBWB or CRUISE to climb back above :ref:`SOAR_ALT_CUTOFF<SOAR_ALT_CUTOFF>` to begin gliding again and prevent an RTL beginning."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:29
+#: 2ac07cc6f02f400480ac4b398cb873dd
+msgid "When the aircraft reaches :ref:`SOAR_ALT_CUTOFF<SOAR_ALT_CUTOFF>` altitude, throttle is set to zero again."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:30
+#: fb246fb212d4472d9df8ca7883430026
+msgid "If, during gliding flight, the air is estimated to be rising at more than :ref:`SOAR_VSPEED<SOAR_VSPEED>` and the :ref:`RC switch position<soaring_rc-switch>` allows it, the aircraft will automatically enter LOITER mode. While in LOITER mode the aircraft will adjust the loiter position to better centre the thermal."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:32
+#: 24a1d0b6bfde4b91b4370b8017665d14
+msgid "LOITER mode is exited under the following conditions:"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:34
+#: 46d15572b7674dc38c699a8b0433f7e6
+msgid ":ref:`SOAR_ALT_MAX<SOAR_ALT_MAX>` is reached."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:35
+#: 2582e6e6580e40a1a9e3e428c30f8937
+msgid ":ref:`SOAR_ALT_MIN<SOAR_ALT_MIN>` is reached."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:36
+#: 82a6ad2a680a4707af0dd1c6aa8fd4ef
+msgid "Flight mode is changed by the pilot."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:37
+#: c12f83b81d6b421e81f7d4c7c42693d7
+msgid "The estimate of achievable climb rate falls below :ref:`SOAR_VSPEED<SOAR_VSPEED>`, and thermalling has lasted at least :ref:`SOAR_MIN_THML_S<SOAR_MIN_THML_S>` seconds."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:39
+#: 29e65eabd2d34d0093acb0c870f371ed
+msgid "The aircraft drifts more than :ref:`SOAR_MAX_DRIFT<SOAR_MAX_DRIFT>` - see :ref:`Limit maximum distance from home<soaring_maximum-distance-from-home>`"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:41
+#: 104c10e2790148b19a5b2158b12ca484
+msgid "The flight mode will be returned to whatever it was before LOITER was triggered. As an exception to this, if the previous mode was FBWB or CRUISE, and thermalling ended due to reaching :ref:`SOAR_ALT_MIN<SOAR_ALT_MIN>`, RTL will be triggered instead."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:47
+#: b04d8f3cd8eb4b31a407a7061502192b
+msgid "Hardware"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:49
+#: 60f4a1a2994d4e619b228b39c4014eb8
+msgid "To use your plane for soaring, it should ideally be a glider type aircraft with a good lift to drag ratio and be equipped with an airspeed sensor."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:52
+#: 5737d5f5443348a79af6fb14156bcee6
+msgid "Generally all boards support soaring, *except* those with firmware limitations referred to on :ref:`this page <common-limited_firmware>`. As of June 2020, non-supported boards include:"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:54
+#: a5f3921850b541aaa17ca6c5174c963d
+msgid "KakuteF7Mini"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:55
+#: 3b2ce819dd414e98b8953f58cb1e7b05
+msgid "KakuteF7"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:56
+#: e47d1f0c65c245d6bd8d8b453fe32a2e
+msgid "sparky2"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:57
+#: f7ec90cda2b8463b8354700c56ca9a89
+msgid "Pixhawk1-1M"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:58
+#: 31fa66c599f646cda9d7ae7fbf7548f3
+msgid "OMNIBUSF7V2"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:61
+#: cc8d344e22f94ad799044790795aafce
+msgid "Setup"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:64
+#: 1ff67f9312fd423ea66f65135b3381ba
+msgid "Mission"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:66
+#: 3959a574f59a489ca9ad51c21ba9dac8
+msgid "The main requirement for a mission is that it take the aircraft above :ref:`SOAR_ALT_CUTOFF<SOAR_ALT_CUTOFF>` so that gliding flight is initiated. To achieve this, set the waypoints' altitude(s) above :ref:`SOAR_ALT_CUTOFF<SOAR_ALT_CUTOFF>`."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:71
+#: e1c9c888bcac425295392204fb9a5a14
+msgid "TECS"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:73
+#: 4ca28440329c4686a3985ee4441a48f6
+msgid "Set :ref:`TECS_SPDWEIGHT<TECS_SPDWEIGHT>` to 2.0. This makes sure the aircraft will glide correctly with motor off."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:76
+#: f5a9582df62d474882a1806dbf0bf463
+msgid "Soaring Parameters"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:79
+#: 6b4184e9f0be436eab83535e117b233b
+msgid "Enable"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:81
+#: d344986945ee4397b447dd9aa91b39dc
+msgid "Set the parameter :ref:`SOAR_ENABLE<SOAR_ENABLE>` to 1 and refresh the parameters. This will allow the other SOAR parameters to appear in the GCS."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:85
+#: ../../source/docs/soaring.rst:158
+#: 97c147d152ae402e9a0fab6faab4fb17
+#: 12e3ce4915f540e78cec6c2714379ec5
+msgid "Drag Polar"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:87
+#: b5c0e8dba64b47bf895ecccd57de85ef
+msgid "To work out how fast the air is rising or sinking the autopilot needs to know the aircraft's sink rate for a given airspeed in still air. This is related to the drag polar of the plane and is specified using the SOAR_POLAR parameters. :ref:`SOAR_POLAR_K<SOAR_POLAR_K>` is the most important one to set initially and is calculated using the following formula:"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:93
+#: b2d5956a52104a768afb3b102f7260f3
+msgid ":ref:`SOAR_POLAR_K<SOAR_POLAR_K>` = 16*Weight/Area (weight in kg, area in metres squared)."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:96
+#: ffa077021cf34ba1b87d8b154eccdda6
+msgid ":ref:`SOAR_POLAR_K<SOAR_POLAR_K>` = 703*Weight/Area (weight in oz, area in inches squared)."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:99
+#: 624676fbf0bb45bd801a5f7e6cdf63d4
+msgid "Calculating the other parameters is explained under tuning."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:104
+#: 26cb85fac6814e8cb6eef5457ebf923c
+msgid "RC switch (Optional)"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:106
+#: 835d0d93199e4d76af0dea46f7ef67da
+msgid "You can use a 2-position RC switch to control when the autopilot can use soaring. Use any available RC Option with ``RCx_OPTION`` value 88. The 2 positions have the following effect."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:108
+#: 5b1c4798de4c486d9baafd6f9adda4ca
+msgid "Below 1700us. Soaring is disabled (equivalent to setting SOAR_ENABLE = 0). Throttle will be used as normal. Switching to this from either of the positions below, will disable Soaring and maintain the current flight mode."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:110
+#: ba506c0c9d4f40358ca222ff7958f217
+msgid "Above 1700us. Fully automatic mode changes to LOITER from AUTO, FBWB or CRUISE modes in response to detected rising air, and following of rising air currents."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:114
+#: ac35513b758b4ea5bf485445927a48c3
+msgid "Loiter radius"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:116
+#: 69684506bcc74016b3d2b440fa6fc0e3
+msgid "The parameter :ref:`WP_LOITER_RAD<WP_LOITER_RAD>` sets how tight the loiter circle is. For thermalling it is usually best to have the aircraft fly at a 30 - 45 degree bank angle. The corresponding loiter radius can be calculated as about airspeed squared over ~10 (for 45 degrees) or ~6 (for 30 degrees), from the equation"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:124
+#: da404c529e68415aa478770fc52a9c90
+msgid "The tangent is for the desired bank angle. The resulting radius will be in meters. Use g  = 9.81 m/s/s, and velocity (v) is in m/s. For example, if the airspeed in loiter is 20m/s, then the :ref:`WP_LOITER_RAD<WP_LOITER_RAD>` should be 40m for a 45 degree bank."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:126
+#: 94520873726c4596965e2d274bcb1dc5
+msgid "You should make sure that the limiting bank angle :ref:`ROLL_LIMIT_DEG<ROLL_LIMIT_DEG>` is set a bit larger than the desired bank angle to give some room for manoeuvring."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:130
+#: 95cd193edbf84804af4fe2f6fe53a80e
+msgid "Set limits"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:132
+#: d1650bd215c2476789e6d1ce8a2d8508
+msgid "Because the soaring feature can follow rising air as required to gain altitude, it is important to set limits to avoid it leaving the original flight area completely. This is especially important in windy conditions as the autopilot will try to follow thermals downwind."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:135
+#: 3b2aaac0c35e48d9acea7a607a128173
+msgid "Altitude limits"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:137
+#: 7be2ca5ae6d842448cd1f5c05f9c3a85
+msgid ":ref:`SOAR_ALT_MAX<SOAR_ALT_MAX>` sets the altitude you want the autopilot to stop thermalling. :ref:`SOAR_ALT_MIN<SOAR_ALT_MIN>` sets the minimum altitude you want the autopilot to descend to while gliding."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:142
+#: 71f3efe18f314d218820a76d99ecdb7c
+msgid "Spatial limits"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:144
+#: ef0385a2e6f540a8a26568aaff5e29e0
+msgid ":ref:`Geofence <geofencing>` can be used to constrain the physical flight area used. Set it up in the usual way."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:148
+#: 2e42bea1a3394f14b08b2a320048ab03
+msgid "Tuning"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:151
+#: 89944eacbe42482aaf14ba26e3f9a23e
+msgid "Triggering lift"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:153
+#: 57cdffb07b6c40b3aed2ba304e67fafb
+msgid ":ref:`SOAR_VSPEED<SOAR_VSPEED>` controls when the mode will be changed to LOITER to begin thermalling. The default of 0.7m/s may be too low if you fly in strong conditions. Increasing this value makes the aircraft more \"picky\" about the lift it will try to circle in."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:160
+#: 03363406f80b493dac56ae6065ffcd3e
+msgid "While the default settings for :ref:`SOAR_POLAR_B<SOAR_POLAR_B>` and :ref:`SOAR_POLAR_CD0<SOAR_POLAR_CD0>` should be OK for most foamie-style glider aircraft, improving the accuracy of these parameters will improve how your aircraft detects and centres lift. You can use `this spreadsheet <https://docs.google.com/spreadsheets/d/1WA9CXRSPBc6mFydhQ3O_2SeDrQoFH1UrdiXd0PJ-zE4/edit?usp=sharing>`__ to calculate better values from glide tests."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:166
+#: c64132839f18462bb34be1ac0012ee03
+msgid "Time hysteresis"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:168
+#: 4fc539cb5bac43489bf922be001f96f1
+msgid "Adding hysteresis can reduce the frequency of mode changes."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:170
+#: f8ceb0ee78c74044a300e16d9bbe5507
+msgid ":ref:`SOAR_MIN_THML_S<SOAR_MIN_THML_S>`: Minimum time to remain in LOITER once entered for a thermal before exiting due to low lift or altitude limits."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:172
+#: 3a93ca4e11da433da46e7b64d483f23c
+msgid ":ref:`SOAR_MIN_CRSE_S<SOAR_MIN_CRSE_S>`: Minimum time to remain in glide after exiting LOITER due to low lift or altitude limits before entering LOITER mode again, or when entering Soaring initially."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:175
+#: 2bfe262de7bc46cd9f4c8c2a7d6b5174
+msgid "TECS Tuning"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:176
+#: 5c21775cadf340ffb8ce843da23faf25
+msgid "For best results the TECS needs to be set up to fly the aircraft at a consistent airspeed when gliding."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:179
+#: e98439cf506e470db2a757083fa4eb10
+msgid "If your aircraft has trouble maintaining airspeed accurately you can tune it by confirming that :ref:`TECS_SPDWEIGHT<TECS_SPDWEIGHT>` is set to 2.0, :ref:`SOAR_ENABLE<SOAR_ENABLE>` to 1 and set :ref:`SOAR_VSPEED<SOAR_VSPEED>` to a large number, say 50.0, or use the :ref:`RC switch<soaring_rc-switch>` to inhibit mode changes. This means that the aircraft will glide but will never begin thermalling. Set :ref:`SOAR_ALT_CUTOFF<SOAR_ALT_CUTOFF>` to an altitude high enough to allow a good length of time to be spent gliding."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:186
+#: 57c6557dfc3a400d983f80fa2fc7ca75
+msgid "Launch the aircraft and put it in AUTO mode. It should climb to :ref:`SOAR_ALT_CUTOFF<SOAR_ALT_CUTOFF>` and then begin a gliding descent. Watch the telemetry graphs or look at the Dataflash logs after the flight. Is the aircraft maintaining the demanded airspeed? The actual and demanded airspeed can be seen in the onboard log as ``TECS.sp`` and ``TECS.spdem``, and via telemetry you can use ``NAV_CONTROLLER_OUTPUT.aspd_error``. Problems can usually be fixed by increasing ``PTCH2SRV_IMAX`` and :ref:`TECS_INTEG_GAIN<TECS_INTEG_GAIN>` to achieve good airspeed tracking in gliding flight."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:193
+#: 0ec98f688eef4e3dbd2a249fda797968
+msgid "Notes"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:196
+#: b537e6345304493fbf61fc52947a6599
+msgid "MAVLINK Telemetry"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:198
+#: 599fd927d82d4c7ca095759c2a261675
+msgid "Currently, the only effect on telemetry is that when soaring is active the climb rate item (VFR_HUD.climb) is altered. Rather that the estimated vertical speed of the aircraft, the estimated vertical speed of the air mass is sent. This field is used by Mission Planner and OpenTX radios to produce vario audio output."
+msgstr ""
+
+#: ../../source/docs/soaring.rst:201
+#: 58a0a9b4bdcf47f5be9f92f2fa59cb15
+msgid "Use of TECS synthetic airspeed"
+msgstr ""
+
+#: ../../source/docs/soaring.rst:203
+#: ff1c1a010d734aa0ab630f67e4cec66b
+msgid "If your plane can't accommodate an airspeed sensor, it is possible to use the TECS synthetic airspeed estimate :ref:`TECS_SYNAIRSPEED<TECS_SYNAIRSPEED>`. Make sure you read the warning regarding this feature before deciding to use it. To use this feature, set the parameter :ref:`TECS_SYNAIRSPEED<TECS_SYNAIRSPEED>` to 1."
+msgstr ""

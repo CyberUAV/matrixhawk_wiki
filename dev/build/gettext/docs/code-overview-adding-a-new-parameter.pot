@@ -1,0 +1,192 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:5
+#: 8379dc4ad90341479a8900fa23744ff5
+msgid "Adding a New Parameter to Copter"
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:7
+#: 579921ca6e734235ac38a1febb06c703
+msgid "Parameters can either be part of the main code or part of a library."
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:10
+#: 4541e5cb43fb43079db796157f66691e
+msgid "Adding a parameter to the main code"
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:12
+#: 51c04d2656d34a6cbc9760aba305615a
+msgid "**Step #1:** Find a spare slot in the Parameters class's enum in `Parameters.h <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Parameters.h>`__ and add your new parameter as shown below in red.  Some things to be careful of:"
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:17
+#: e20ef7cb56c241a1b46b2644f7858015
+msgid "Try to add the parameter close to parameters that share a similar function or worst case add to the end of the \"Misc\" section."
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:19
+#: c0d5cb38c7c14fdeac654b3bf1bb87c0
+msgid "Ensure that the section you are adding it to is not full.  You can check if the section is full by counting the number of parameters in the section and ensuring that the last element is less than the next sections first element.  I.e. the Misc section's first parameter is #20.  my_new_parameter is #36.  If the next section began at #36 we would not be able to add the new parameter here."
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:25
+#: d3c72f585d5349a094a3082d10bc2d75
+msgid "Do not add a parameter in the middle of a group thus causing the slots for existing parameters to change"
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:27
+#: 05c179d416164b0f83720e4cd3572f91
+msgid "Do not use slots with \"deprecated\" or \"remove\" comments beside them because some users may still have the defaults for these old parameters in their eeprom so your new parameter's default value could be set strangely."
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:61
+#: 108c9a48871c47c4a8563fcbb8aeeaa9
+msgid "**Step #2:** Declare the variable within the Parameters class somewhere below the enum.  Possible types include AP_Int8, AP_Int16, AP_Float, AP_Int32 and AP_Vector3 (Note: unsigned integers are not currently supported).  The name of the variable should be the same as the new enum but with the \"k_param\\_\" prefix removed."
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:99
+#: 0562146714d246c6bf955bf7ff2b99cb
+msgid "**Step #3:** Add the variable declaration to the var_info table in `Parameters.cpp <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Parameters.cpp>`__"
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:111
+#: 684ba9f9c15c4842bf4213d8827aa7e2
+msgid "The @Param ~ @User comments are used by the ground station (i.e. Mission Planner) to display advice to the user and limit the values that the user may set the parameter to."
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:115
+#: 47f42e18024a4156ad12ba5050fe04f8
+msgid "The parameter name (i.e. \"MY_NEW_PARAMETER\") is limited to 16 characters."
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:118
+#: f669f72fa98544caa4453143af68a0db
+msgid "**Step #4:** Add the parameters default to `config.h <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/config.h>`__"
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:127
+#: 8ca3b977148c4f9aaa533d0be84123b8
+msgid "You're done!  The new parameter can be access from the main code (not the libraries) as g.my_new_parameter."
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:130
+#: 004765f478fe46a49c368c3b10e5bae1
+msgid "ArduPilot vehicle's global parameter classes are crowded. To avoid exceeding the maximum number of parameters in a vehicle's Parameter class, another class for global parameters (named 'ParametersG2') has been introduced. Adding parameters to this class is similar to adding parameters in libraries. The parameters added to this class can similarly be accessed from within the vehicle's main code."
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:133
+#: 121054c084ab403685324ad1aed3b3c6
+msgid "Adding a parameter to a library"
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:135
+#: b472bbcdeaee4a16bf77e1d8318fd947
+msgid "Parameters can also be added to libraries by following these steps which use the `AP_Compass <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Compass>`__ library as an example."
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:139
+#: ac3af28c4e6e44f2a63d0bbce4518082
+msgid "**Step #1:** Add the new class variable to the top level .h file (i.e. `Compass.h <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Compass/AP_Compass.h>`__). Possible types include AP_Int8, AP_Int16, AP_Float, AP_Int32 and AP_Vector3f.  Also add the default value you'd like for the parameter (we will use this in step #2)"
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:172
+#: 7c9010e4507c434b9ddf172b60032088
+msgid "**Step #2:**\\ Add the variable to the var_info table in the .cpp file (i.e. `Compass.cpp <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Compass/AP_Compass.cpp>`__) including @Param ~ @Increment comments to allow the GCS to display the description to the user and to control the min and max values set from the ground station.  When adding the new parameter be careful that:"
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:178
+#: 55a50c1dd69041deae9777e137dcc9da
+msgid "The slot (i.e. \"9\" below) is one higher than the previous variable."
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:180
+#: dee3d17f89f541c29ae02b662a3af7a9
+msgid "the parameter's name (i.e. MY_NEW_P) length is less than 16 including the object's prefix that will be added.  I.e. the compass object's prefix is \"COMPASS\\_\"."
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:213
+#: 1f0e6e78696344aab3c4b4ede1c751dc
+msgid "The parameter can be accessed from within the library as \\_my_new_lib_parameter.  Note that we made the parameter \"protected\" so it cannot be access from outside the class.  If we'd made it public then it would have been accessible to the main code as well as \"compass._my_new_lib_parameter\"."
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:219
+#: 51ed432becb04f93949d09462ca464bb
+msgid "**Step #3:** Add a declaration for var_info to the public section of the .h file of new library class in addition to the definition in the .cpp file:"
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:225
+#: dde47dabed55480d8348a6db53d238e9
+msgid "**Step #4:** If the class is a completely new addition to the code (as opposed to an existing class like AP_Compass), it should be added to the main vehicle's var_info table in the `Parameters.cpp <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Parameters.cpp>`__ file (its order in the var_info table is not important).  Below in red where the Compass class appears."
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:254
+#: 5bb70653dc7c403d90fb6af83be18ebb
+msgid "**Step #5:** If the class is a completely new addition to the code, also add k_param_my_new_lib to the enum in `Parameters.h <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Parameters.h>`__, where my_new_lib is the first argument to the GOBJECT declaration in `Parameters.cpp <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Parameters.cpp>`__. Read the comments above the enum to understand where to place the new value, as order is important here."
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:259
+#: 0a3ee0ac4a6248a696922c6bb5e95428
+msgid "Changing the type of a parameter"
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:261
+#: 2f6728cc5d9c40d49f25926c69e51527
+msgid "From time to time parameters need to be altered or renamed. ArduPilot has capabilities that allow this to be managed from release to release so that upgrades always preserve user configured parameters. Parameters are keyed off slots in the eeprom, so if the occupied slot does not change then the parameter does not change - regardless of its name. If however the type needs to change then the parameter needs to be moved to a new slot and the existing slot be reserved to prevent unexpected configuration. In order for the configuration to be preserved it needs to be copied and converted from the old slot to the new slot."
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:263
+#: 3431ef41523147fe918a2407a7292c09
+msgid "**Step #1:** Change the index of the existing parameter to an unused index and add a comment to the effect that the old slot is reserved."
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:265
+#: d1b0d62b96654e2faccf5833f3849022
+msgid "**Step #2:** In order to figure out the keys for conversion:"
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:267
+#: 80cb759dd1b1409784b58d37475948ac
+msgid "Set the AP_PARAM_KEY_DUMP definition to \"1\" `here in AP_Param.h <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Param/AP_Param.h#L36>`__"
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:269
+#: d756e682a6d04a449648a61ccbeccfd8
+msgid "Start the old code in SITL and all the parameter names and their magic numbers will be displayed"
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:271
+#: 35d9e9dfee9041d6ba637f152c4458c5
+msgid "Copy-paste from Copter's Parameters.cpp file's `existing parameter conversion tables like the ones done for the attitude controller gains <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Parameters.cpp#L1247>`__."
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:274
+#: 6c37cc9ac2fb484e94abae7ee3271776
+msgid "Parameter Conversion Expiration"
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:276
+#: 833136c968464551be565b686d5a9165
+msgid "Parameter conversions are necessary to ensure continuity for users as they upgrade to newer versions of ArduPilot.  However, the conversion process does utilise some resources on boot and does add to the flash cost of the code. Therefore we don't keep the conversion code forever more. To make it easier to find and remove the conversions, please add the following as a comment above any parameter conversion that you add:"
+msgstr ""
+
+#: ../../source/docs/code-overview-adding-a-new-parameter.rst:283
+#: 200f5591f50b4e4f81b12ea4b4f4555c
+msgid "Please use the date format shown above to avoid ambiguity.  Please also keep the date on the same line as the key word \"PARAMETER_CONVERSION\" so that the date can be seen in the return, when grep-ing/searching the code.  When adding to an already existing AP_Param::ConversionInfo table, please add the conversions as a new block with the conversion comment above the new block.  For example:"
+msgstr ""

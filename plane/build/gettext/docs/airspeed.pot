@@ -1,0 +1,396 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/airspeed.rst:208
+#: 
+msgid "Calibrating an Airspeed Sensor"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:208
+#: 
+msgid "Pitot Tube Considerations"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:208
+#: 
+msgid "Mocking an Airspeed Sensor for Bench Testing"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:208
+#: 
+msgid "Analog Airspeed Sensors"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:5
+#: c3641e970617451f9996d08ab0006294
+msgid "Using an Airspeed Sensor"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:7
+#: 25987dec129043d7a28673df5b9ff127
+msgid "Plane supports the use of an airspeed sensor, which can help in windy conditions, slow flight and autonomous landings. It is not recommended for most new users, however, as it does require additional tuning and adds one more layer of control to set up."
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:12
+#: 69d8f4943a354413a2b459d8dee79d16
+msgid "The following sections explain how to wire sensors to the autopilot and set them up. After you install an airspeed sensor don't forget to :ref:`calibrate it <calibrating-an-airspeed-sensor>`!"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:20
+#: 78f41e84e34342fa830291d4b889a825
+msgid "ARSPD_USE"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:22
+#: bac0e336947940df97874315ee468f8d
+msgid ":ref:`ARSPD_USE<ARSPD_USE>` enables airspeed use for automatic throttle modes instead of :ref:`TRIM_THROTTLE<TRIM_THROTTLE>` as the target throttle setting (altered by :ref:`tecs-total-energy-control-system-for-speed-height-tuning-guide` as needed during altitude control) . The autopilot continues to display and log airspeed if set to 0, but only airspeed sensor readings are used for control if set to 1. It will only use airspeed sensor readings for control when throttle is idle, if set to 2 (useful for gliders with airspeed sensors behind propellers)."
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:24
+#: 8f245acb8de444dbba6309ea69520eb3
+msgid "If an airspeed sensor is used, the throttle stick will set the target airspeed in CRUISE and FBWB, while maintaining altitude target. In AUTO and GUIDED, it will use the :ref:`AIRSPEED_CRUISE<AIRSPEED_CRUISE>` value unless :ref:`THROTTLE_NUDGE<THROTTLE_NUDGE>` is enabled and throttle stick is used to alter it, or a MAVLink command to change speed is sent to the vehicle."
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:27
+#: 539d56b234494f89a003a1141e71bee9
+msgid "Airspeed Sensor Type"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:29
+#: 181f79a9b85f492e87a05ec1accedf9e
+msgid "Airspeed sensors can be either analog or digital. The analog sensors connect to an A/D converter input pin on the autopilot, while digital sensors connect to the autopilot's external I2C bus using the SDA and SCL external digital I/O pins or via DroneCAN. The type is set by the :ref:`ARSPD_TYPE<ARSPD_TYPE>` parameter. Analog sensors are type 2, DroneCAN sensors as type 8, and supported I2C bus digital sensors by other numbers."
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:31
+#: 81268fe234074620a5580cf4e0e12bc3
+msgid "If there is no sensor, be sure to set the :ref:`ARSPD_TYPE<ARSPD_TYPE>` to 0. ArduPilot calculates an sensor-less airspeed estimate that is used if no sensor is present or fails. :ref:`ARSPD_TYPE<ARSPD_TYPE>` must be set to zero in order to display this value if no sensor is present."
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:33
+#: 60f7cecc45c54cf398c8664d733fbe40
+msgid "Many airspeed sensors are sensitive to light. Unless you are certain that the particular sensor used is not light sensitive, in order to avoid measurement errors, the sensor should be shielded from light."
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:36
+#: 97d4684fe0a3417e99b0506c11f82dfe
+msgid "Autopilot Airspeed Connection"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:38
+#: 5a2da16846d741c38bce86695957d2a2
+msgid "A list of digital and DroneCAN airspeed sensors are listed :ref:`below<arspd-sensor-list>`."
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:42
+#: ../../source/docs/airspeed.rst:158
+#: f3f6ca6100c4439f8eafffa3744abb85
+#: 60e7df9dcdf348a9a961de8c7d8b0ba1
+msgid "I2C"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:43
+#: fce57868352a47aab9eedda86120a5fe
+msgid "Connect the airspeed sensor to autopilots's I2C port (or I2C splitter module). The :ref:`ARSPD_BUS<ARSPD_BUS>` parameter must be set for the bus used to connect the sensor. Normally this defaults to \"1\" , and corresponds to the I2C bus normally designated for connecting the sensor. But if it is attached to another I2C bus (eg. compass, or on some autopilots its been mistakenly assigned) it will need to be changed to \"0\". If the sensor fails to initialize (a GCS message will be sent if this is the case), then try changing the bus number and rebooting."
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:49
+#: ed6c221c91fe443a965c35073ebd8b61
+msgid "To enable the digital airspeed sensor, connect the autopilot to Mission Planner (or APM Planner for OS X), and select the Optional Hardware/Airspeed tab under the CONFIG menu. Using the drop-down box for Type, select your sensor's type. The Pin dropdown is not used and can be ignored. Check the \"Use Airpeed\" box to use it in control, or leave it unchecked during in-flight calibration discussed below to check its operation before use."
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:54
+#: ../../source/docs/airspeed.rst:176
+#: 4aafb6bb409746eaa2b293277afec7f4
+#: e40c8140353f49e9aaf79d50e8bd0aaa
+msgid "DroneCAN"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:56
+#: a8a6fcf91e1d43d28bd0667940f873c1
+msgid "Attach the sensor to the AutoPilot's DroneCAN port and select DroneCAN in the above mentioned Type dropdown box and check the \"Use Airspeed\" box as appropriate."
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:59
+#: cd5c9f5bb0c54817a208ec97f0a9682d
+msgid "Analog Airspeed sensor"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:61
+#: 460a567d563a4a918128527834532fb4
+msgid "Analog sensors are now largely discontinued. Digital sensors are much more accurate and consistent over temperature. ArduPilot still supports these analog sensors, but they are not preferred. See :ref:`Analog Airspeed Sensors<analog-airspeed-sensors>`."
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:66
+#: 917ac97a6736460eaf16996782808a88
+msgid "Installing the Pitot Tubes"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:68
+#: 3ef928185d724fec985906211c2e976a
+msgid "When you place the airspeed sensor in your aircraft, use the pitot tube set in the kit (the kit comes with a single tube to measure both static and total pressure). In the case of the *EasyStar*, you'll need to push it through the foam in the cockpit so it points straight into the airstream (drill or cut a small hole in the foam first). Make sure the holes in the side of the tube are not covered. They should be at least 1 centimeter out past the nose. First connect the two tubes coming out the back to the airspeed sensor. The tube coming straight out the back should go into the top port and the tube exiting at an angle should connect to the bottom port on the airspeed sensor."
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:83
+#: 3803a40dbd374c38930c9d83574961f4
+msgid "If you are using Plane in an aircraft with the propeller in the nose, the pitot tube must be mounted out on one wing, at least a foot from the fuselage to be outside the prop flow."
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:87
+#: d478816b879e44c49b6c4aa9b5144832
+msgid "See :ref:`common-pitot-considerations` for more information on pitot tubes and placement considerations."
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:90
+#: f826f96968084ff3988e91e79687e22d
+msgid "Checking operation"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:92
+#: 3ee472d23f8245b09ce9916720bbfd1b
+msgid "You can check the airspeed reading with Mission Planner or another ground station. Just blow on the pitot tube or press your finger over it and observe the response. In still air oscillation between zero and small values (2-3) is normal. The airspeed varies with the square root of the pressure, so for differential pressures near zero it varies quite a bit with very small pressure changes, while at flying speeds it takes much greater pressure changes to produce a similar change in speed. If you see mostly 0, 1, 2, with an occasional bounce to 3 or 4, consider it normal. You will not see that sort of variability at flying speeds."
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:103
+#: 331f536052da483f94b87177ed8c274a
+msgid "Calibration"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:105
+#: 93cc59ddf75b494b924d538f68399e6a
+msgid "The airspeed sensor reading is automatically zeroed by the autopilot during initialization and value set in the :ref:`ARSPD_OFFSET<ARSPD_OFFSET>` automatically, so it is good practice during windy conditions to placea loose fitting cover over the pitot tube that shields the front hole and the four small side holes from the wind. This cover should be fitted prior to power on and removed before flight. If you forget to do this, you can always place the cover and repeat the airspeed auto-zero using the Mission Planner's PREFLIGHT CALIBRATE => Do Action."
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:112
+#: fa0c334649774dbf9d60b8148cb0bc07
+msgid "the ``DLVR`` type airspeed sensors do not require calibration at initialization and allow :ref:`ARSPD_SKIP_CAL<ARSPD_SKIP_CAL>` to be set to \"1\", avoiding the need to cover the pitot during initialization."
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:114
+#: 0c39ca518489463680ccc3ac60002454
+msgid "The airspeed reading scale factor is adjusted using the :ref:`ARSPD_RATIO<ARSPD_RATIO>` parameter. Plane has an automatic calibration function that will adjust the value of :ref:`ARSPD_RATIO<ARSPD_RATIO>` automatically provided the plane is flown with frequent direction changes. A normal model flying field circuit pattern or loiter will achieve the required direction changes, cross-country flying will not. To enable automatic airspeed sensor calibration, set the value of :ref:`ARSPD_AUTOCAL<ARSPD_AUTOCAL>` to 1. See :ref:`calibrating-an-airspeed-sensor` for more details."
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:123
+#: 80d7b2984ac648938e1348bab56048cc
+msgid "Miscalibration Safeguards"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:125
+#: cfd5f226c9db46c2a37a71c0fb990592
+msgid "In order to help prevent Airspeed sensor use when its been miss-calibrated either during ground static calibration during the power up sequence, or by accidental parameter changes to offset or ratio, three parameters are available. If the ground speed is consistently lower than the reported airspeed for a few seconds by :ref:`ARSPD_WIND_MAX<ARSPD_WIND_MAX>`, i.e. the apparent wind speed is greater than that amount, the sensor can be disabled to avoid erroneous reporting. It can be allowed to re-enable if the apparent wind falls back below that value. These actions are controlled by :ref:`ARSPD_OPTIONS<ARSPD_OPTIONS>`."
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:127
+#: b8a6e574a454472192694be9a507f2ea
+msgid "You can also elect to have a GCS text message sent after the ground static calibration which reports the value of the calibration (:ref:`ARSPD_OFFSET<ARSPD_OFFSET>`). This value should not change significantly (10-20 points) from power-up to power-up significantly. If it does, then you may have forgotten to cover the pitot during power up and need to recalibrate. This option can be selected in the :ref:`ARSPD_OPTIONS<ARSPD_OPTIONS>` bitmask parameter."
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:129
+#: 4bfded46366f418982b34b82c883b9c9
+msgid "You can also send a warning to the Ground Control Station if the apparent wind exceeds :ref:`ARSPD_WIND_WARN<ARSPD_WIND_WARN>`. This can be used instead of, or together with the above"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:132
+#: 042a3f974c6c4a8ea6195fb91f3f0fc2
+msgid "Failure"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:134
+#: 24293e2a21244ba8ac69dc7d72e842e3
+msgid "A failing airspeed sensor can lead to the aircraft stalling or over-speeding, this is something that is hard for ArduPilot to detect. Likewise, accidentally miscalibrating the offset during ground initialization can occur if the pitot tube is not covered to prevent wind upsetting the calibration, and can result in wildly inaccurate readings. The parameters below can be used to help detect these conditions and warn of, and/or disable, a failed sensor."
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:136
+#: ae6e69692ddc44aab4200d7b4234280c
+msgid ":ref:`ARSPD_WIND_MAX<ARSPD_WIND_MAX>` can be used to set the maximum expected wind speed the vehicle should ever see. This is then be used in combination with the GPS ground speed to detect a airspeed sensor error. :ref:`ARSPD_WIND_WARN<ARSPD_WIND_WARN>` can be set to a lower speed to give some warning to the operator before the airspeed sensor is disabled. :ref:`ARSPD_OPTIONS<ARSPD_OPTIONS>` can be set to allow sensors to be disabled based on this wind speed metric, a second option bit allows then to be re-enabled if the speed error is resolved."
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:141
+#: 50682d29ae544fd882acb893bf7af8e1
+msgid ":ref:`AHRS_WIND_MAX<AHRS_WIND_MAX>` sets the maximum allowable airspeed and ground speed difference that will ever be used for navigation."
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:143
+#: 78d62fdce9e4464f9c181eec7d3c4dec
+msgid "By default, these functions are disabled."
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:145
+#: a0f86c136050445abf2a3ceb74a14408
+msgid ":ref:`EKF3 affinity and lane switching <common-ek3-affinity-lane-switching>` is another option for dealing with airspeed sensor failure."
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:148
+#: bc772acc7e804a72bbf9044bb5281539
+msgid "Balloon Drop"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:150
+#: 2220b858502646798af7cee8bdb8c65f
+msgid "In the special case of a high altitude balloon drop, the EKF will declare the airspeed sensor faulty since there is gps speed but no airspeed due to air density. This can result in TECS miss-applying pitch. In this special case , the :ref:`AHRS_OPTIONS<AHRS_OPTIONS>` bit 2 can be set to prevent EKF from declaring the airspeed sensor as faulty and continue to use it."
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:155
+#: 5e5bd242347f4e63a7a3eca66be4e6d9
+msgid "Airspeed sensors available from ArduPilot Partners:"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:160
+#: 9c45f978bdaf4a8f985702b69cd3f4c5
+msgid "4525DO"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:161
+#: 4baa4af128d1475b8dc30653991f923d
+msgid "`CUAV <https://store.cuav.net/shop/airspeed-sensor/>`_"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:162
+#: fd0ab998e543452a9f8de790d8389896
+msgid "`Holybro <https://shop.holybro.com/digital-air-speed-sensor_p1029.html>`_"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:163
+#: 30ea5756de6e4d7f8eb4537786f3de16
+msgid "`Matek 4525DO <http://www.mateksys.com/?portfolio=aspd-4525>`_"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:164
+#: 4c23b75d60d640babc5081e4350f18cc
+msgid "`mRobotics <https://store.mrobotics.io/mRo-I2C-Airspeed-Sensor-JST-GH-p/m10030a.htm>`_"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:165
+#: ../../source/docs/airspeed.rst:200
+#: 7fd92bacc4314158b25f9fcbb14cb760
+#: 28191c7bd4fa4c8c9d3a5c9b1095a8a9
+msgid "`TBS <https://www.team-blacksheep.com/products/prod:lucid_dcass>`__"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:167
+#: ../../source/docs/airspeed.rst:189
+#: ee7a7446d7454601857c1de86a07029a
+#: f241d74e1ec74c0c84c43b18997fc7f0
+msgid "ASP5033"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:168
+#: f39c50259c94425b80ab653ead6e1197
+msgid "`Qiotek ASP5033 <https://www.qio-tek.com/index.php/product/qiotek-asp5033-airspeed-sensor-and-pitot-tube>`_"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:170
+#: ../../source/docs/airspeed.rst:192
+#: aed12f22532e446c956e3e8fa223a0d3
+#: 1edd8e5fe1054c67b044333febd0d32c
+msgid "DLVR"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:171
+#: fd92040ebab949f1af284eee50b79bdc
+msgid "`Matek DLVR <http://www.mateksys.com/?portfolio=aspd-dlvr>`_"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:172
+#: ../../source/docs/airspeed.rst:196
+#: 2e7cb54bdbef4b3c927f114b7b86893e
+#: ba68da54db9d4b7fafc629536ebfd5b2
+msgid "`TBS <https://www.team-blacksheep.com/products/prod:lucid_dcassp>`__"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:178
+#: 95d9bc79658c43008785e731f9a64fc2
+msgid "3DR ASUAV"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:179
+#: 80224b22ea6149348f8bb50029a9ef7c
+msgid "`3DR ASUAV DroneCAN Airspeed/Barometer <https://store.3dr.com/slim-auav-can-airspeed-sensor/>`__"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:181
+#: aecb82ce14d44026a9210d26a217df17
+msgid "6897"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:182
+#: ../../source/docs/airspeed.rst:193
+#: 64acfae64d204982ac8efccb6242448e
+#: b8661dcdfbe44f2dafe017741f919782
+msgid "`Foxtech AEROFOX Airspeed/Compass <https://www.foxtechfpv.com/foxtech-aerofox-can-airspeed-compass.html>`__"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:184
+#: c0bcbc57fdeb460b8e376acb5207c893
+msgid "Amphenol AUAV (static and dynamic pressure)"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:185
+#: fccada60b20b4641a962eae6c752782d
+msgid "`Beyond Robotix Air Data Module <https://www.beyondrobotix.com/products/air-data-module>`_"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:186
+#: 3699fae2f4324a78bcb0602a325b1b6b
+msgid "`Matek DroneCAN AUAV Airspeed/Baro <https://www.mateksys.com/?portfolio=aspd-auav>`__"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:187
+#: 5d5a8bc8075a47169f5db628e33c63c2
+msgid "`UAV-DEV GmbH DroneCAN Airspeed and Barometer Sensor - AUAV <https://wiki.uav-dev.com/en/product/airspeed/auav>`__"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:190
+#: d05d0205443a404db5e894b4b1d7cde2
+msgid "`Qiotek DroneCAN 5033 <https://www.qio-tek.com/index.php/product/qiotek-asp5033-dronecan-airspeed-and-compass-module>`_"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:194
+#: 0b83801d5c08494b97a7c65dea4c10cf
+msgid "`Holybro DroneCAN DLVR <https://holybro.com/products/high-precision-dronecan-airspeed-sensor-dlvr>`__"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:195
+#: ecfac14497234174af1de2e4923cbaa4
+msgid ":ref:`Matek DroneCAN DLVR <common-matek-uavcan-dlvr>`"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:198
+#: 22d7aa7a3fbf4ff2b59b805fded8e669
+msgid "MS4525"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:199
+#: 3016f78fb6584d18aa14a850cda65404
+msgid "`MakeFlyEasy DroneCAN Airspeed <https://en.makeflyeasy.com/index.php/mfe-can-airspeed-meter/>`__"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:202
+#: db65a64bd9ed45f7b33ed352133dc432
+msgid "MS5611"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:203
+#: d8a2d684a2f04a02aee790c0c876b964
+msgid ":ref:`Avionics Anonymous Airspeed + Temp <common-avanon-adc>`"
+msgstr ""
+
+#: ../../source/docs/airspeed.rst:207
+#: a21b23c8117040c0981989c5e576b125
+msgid "Other Topics"
+msgstr ""

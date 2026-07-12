@@ -1,0 +1,267 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:30+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/auto-mode.rst:5
+#: df89745c3cda46be8401b4fb6d838bc8
+msgid "Auto Mode"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:7
+#: 464c9ac09cf84d0aa4ea9fe9b9dd6be1
+msgid "In Auto mode the copter will follow a pre-programmed mission script stored in the autopilot which is made up of navigation commands (i.e. waypoints) and \"do\" commands (i.e. commands that do not affect the location of the copter including triggering a camera shutter). This page provides an overview of  Auto mode."
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:13
+#: 06c47bb1168b452ab8232ce8e4583e87
+msgid "Information on creating a mission script, can be found on the :ref:`Planning a mission with waypoints and events <common-planning-a-mission-with-waypoints-and-events>` page. A full list of supported commands can be found on the :ref:`Mission Command List <mission-command-list>` page."
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:17
+#: 0a1644530c994d33abc57d12817f6e95
+msgid "AUTO mode incorporates the altitude control from :ref:`AltHold mode <altholdmode>` and position control from :ref:`Loiter mode <loiter-mode>` and should not be attempted before these modes are flying well.  All the same requirements apply including ensuring that :ref:`vibration levels <common-measuring-vibration>` and compass interference levels are acceptable and that the GPS is functioning well including returning an HDOP of under 1.4."
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:25
+#: 86a67b6a739e4504aaed66140ae81af4
+msgid "Overview"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:30
+#: d4462a0a6b6f49d4b62386fe45fc1d8c
+msgid "AUTO mode navigates between each waypoint in a straight line and as it approaches each waypoint follows a smooth curving path towards the next waypoint (S-Curve). It controls the path as it approaches a waypoint to be within the :ref:`WP_RADIUS_M<WP_RADIUS_M>` of each waypoint. The speed is lowered below :ref:`WP_SPD<WP_SPD>`, as necessary, to keep the vehicle within the configured acceleration limits (:ref:`WP_ACC<WP_ACC>` and :ref:`WP_ACC_CNR<WP_ACC_CNR>`)."
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:32
+#: 481e0d7e6a2f4a98af954b8cc27c1cd6
+msgid "This smooth curving path as it changes direction to the next waypoint will not occur if the next mission command after the waypoint is anything other than a normal waypoint (e.g LAND, LOITER_TURNS, RTL, etc). In these cases the copter will approach the waypoint, stop, and then proceed to the next navigation waypoint instead of smoothly curving in front of it and proceeding to that next navigation waypoint."
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:34
+#: 9668f15caf6e448c8659a0da2210cb84
+msgid "Also, small :ref:`WP_RADIUS_M<WP_RADIUS_M>` values will require that the curve be very small, effectively appearing like the non-S-Curve behavior explained above."
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:37
+#: 8a76aaebd2e9441f89268f219b59e1c0
+msgid "Starting a Mission"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:39
+#: 860e207aa6f54b9da8b0ae4729ea940e
+msgid "Missions can be entered and amended through the Mission Planner's Plan screen.  In general most missions begin with a Takeoff command, include a series of waypoints followed by a Return-To-Launch command.  Please refer to the :ref:`Mission Command List wiki page <mission-command-list>` for a list of supported commands along with a short description of each."
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:41
+#: 7b644d365bd4403e95f0a2a644a5ed5c
+msgid "AUTO should be set-up as one of the :ref:`Flight Modes <flight-modes>` on the flight mode switch."
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:43
+#: e404cd8dffb44004b288b861ea5782c2
+msgid "By default the vehicle cannot be armed in Auto mode meaning the pilot must first :ref:`arm the motors <arming_the_motors>` in another mode before switching to Auto mode.  The :ref:`AUTO_OPTIONS <AUTO_OPTIONS>` parameter can be used to alter this behaviour, allowing arming while in AUTO mode, and/or, allowing a mission takeoff command to start as soon as the vehicle enters AUTO mode, even if the throttle has not been raised."
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:45
+#: 0cdbd9c817c441a686b953f8b3883fc6
+msgid "If starting the mission while the copter is on the ground the pilot should ensure the throttle is down, then switch to the Auto flight mode, then raise the throttle.  The moment that the throttle is raised above zero, the copter will begin the mission."
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:50
+#: 5415509d8b3c4255a03c27cfa9abf6f7
+msgid "If starting the mission while the vehicle is already flying, the mission will begin from the first command as soon as the vehicle is switched into Auto mode. If the first command in the mission is a take-off command but the vehicle is already above the take-off command's altitude the take-off command will be considered completed and the vehicle will move onto the next waypoint."
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:57
+#: fea87373a29a4dad9fc7a1a279c76584
+msgid "At any time the pilot can retake control from the autopilot by returning the flight mode switch to another flight mode such as Stabilize or Loiter.  If the pilot then switches to AUTO again, by default the mission will resume from the last command unless :ref:`MIS_RESTART <MIS_RESTART>` has been set to \"1\" in which case the mission will restart from the first command."
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:62
+#: dc844891b36348f68062c665f5c12a50
+msgid "During the mission the pilot's roll, pitch and throttle inputs are ignored but the yaw can be overridden with the yaw stick.  This allows the pilot to, for example, aim the nose of the copter (which might have a hard mounted camera on it) as the copter flies the mission.  The autopilot will attempt to retake yaw control as the vehicle passes the next waypoint.  The :ref:`AUTO_OPTIONS <AUTO_OPTIONS>` param can be set to always ignore pilot yaw input."
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:70
+#: 1d3adee06c184d008d5a31ded1675ffc
+msgid "Ending a Mission"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:72
+#: 933c9b15ea8046968cd6f12c7d20b3cc
+msgid "Missions should normally have an RTL as their final command to ensure the copter will return after the mission completes.  Alternatively the final command could be a LAND with a different location.  Without a final RTL or LAND command the copter will simply stop at the final waypoint and the pilot will need to retake control with the transmitter."
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:78
+#: c5d9359ada28458bbf8072047f441443
+msgid "Remember that when using RTL, the copter will return to the \"home\" position which is the location where the copter was armed."
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:81
+#: 3527c4bfc9cc45fb8490501946962c7f
+msgid "As the copter touches down at the end of the mission the vehicle should automatically disarm but occasionally the vehicle may not sense the landing and the pilot may need to hold the throttle down and takeoff in another mode like Stabilize or Loiter and then manually disarm the vehicle."
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:83
+#: c88c51428a784336b360dc5a71699c2d
+msgid "for a NAV_LAND, the :ref:`LAND_SPD_MS<LAND_SPD_MS>` and the :ref:`LAND_SPD_HIGH_MS<LAND_SPD_HIGH_MS>` parameters affect descent speed just like in the :ref:`land-mode`. The :ref:`PILOT_THR_BHV<PILOT_THR_BHV>` option bit 1, when set, allows high throttle stick position to cancel the landing, switching the vehicle to :ref:`Loiter<loiter-mode>` or :ref:`AltHold<altholdmode>` if Loiter is unavailable. During landing the pilot can re-position the vehicle using the pitch and roll sticks to avoid obstacles unless the :ref:`LAND_REPOSITION <LAND_REPOSITION>` parameter is changed to \"0\"."
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:86
+#: b0afba13c12c4f258fc66ecd25743268
+msgid "Tuning"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:91
+#: a4e8aefddf594de4bdbd2290163bc934
+msgid "AUTO mode incorporates the altitude control from :ref:`AltHold mode <altholdmode>` and position control from :ref:`Loiter mode <loiter-mode>`."
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:93
+#: 1a3d2af240a7486785f65d2767a5f252
+msgid "Commonly adjusted settings are listed below.  Most of these can be adjusted from the Mission Planner's Config, Extended Tuning screen (see above)."
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:95
+#: c5618e44f14e4e0f8db3b3ad53e190af
+msgid ":ref:`WP_SPD<WP_SPD>` is the maximum horizontal speed (in m/s) during missions.  The default is 10 which is 10m/s.  A typical copter can reach top speeds of 10m/s ~ 20m/s before it becomes unable to maintain both altitude and horizontal speed"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:96
+#: 6b029cc235cb4e19ae0eb9644ac57acb
+msgid ":ref:`WP_ACC<WP_ACC>` determines how quickly the horizontal speed can change (in m/s/s).  Lower values result in smoother acceleration and deceleration and may also cause the vehicle to cut the corners more.  Higher values will lead to more aggressive movements and tighter cornering"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:97
+#: 7bcbd8d93644473a9e91b12190680fef
+msgid ":ref:`WP_SPD_UP<WP_SPD_UP>` determines the max speed up in m/s.  Low values may lead to the vehicle's horizontal speed slowing during diagonal climbing waypoint segments"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:98
+#: fb4e750b6d7d4470ad174762446dad14
+msgid ":ref:`WP_SPD_DN<WP_SPD_DN>` determines the max speed down in m/s.  Low values may lead to the vehicle's horizontal speed slowing during diagonal descending waypoint segments.  High values (above 150) may lead to unstable vertical descents as the vehicle passes through its own prop wash"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:99
+#: 965a44ec05ed4360bc25602aa8589d1c
+msgid ":ref:`WP_RADIUS_M<WP_RADIUS_M>` allows you to control how close the copter must come to the waypoint before it is considered \"complete\" and the copter moves onto the next waypoint.  Setting this to a larger value may cause the vehicle to cut the corners more leading to a smoother path"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:101
+#: ec8fc2f858c047fd8a985b377f65608e
+msgid "Less commonly adjusted parameters include:"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:103
+#: 5b7d921febc34bfd9df83e8ccb758d79
+msgid ":ref:`WP_ACC_CNR<WP_ACC_CNR>` determines the maximum cornering acceleration in m/s/s.  Higher values will cause the vehicle to make sharper corners meaning it will cut the corners less"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:104
+#: 0ec96dd6374d401db8a99886b9fa4add
+msgid ":ref:`WP_ACC_Z<WP_ACC_Z>` determines how quickly the vertical speed can change"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:105
+#: 36caf85971df4be8bc6c632c272b2c5e
+msgid ":ref:`WP_JERK<WP_JERK>` determines how quickly the horizontal acceleration can change (in m/s/s/s).  Lower values will lead to a smoother acceleration and deceleration but will also lead to the mission taking slightly longer to complete"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:108
+#: b892257049134e05ba5792660cec2b41
+msgid "Common Problems"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:110
+#: 0afbfe62fafa47e78570a88b029ae9e2
+msgid "Below are a list of commonly reported problems and recommendations"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:112
+#: d780dd3a98f647a78d5f1190ae10bea4
+msgid "The vehicle does not cut the corners as much as I would like and/or stops at each waypoint"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:114
+#: 00dd923d63394c53ab9a6498694e3872
+msgid "Increase :ref:`WP_RADIUS_M<WP_RADIUS_M>` to allow the vehicle to pass further from each waypoint"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:115
+#: d5691c5713bd427ea61a45ac829476f7
+msgid "Increase :ref:`WP_SPD<WP_SPD>` to cause the vehicle to start turning earlier in order that it not surpass the max acceleration"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:116
+#: 72cc1c8ba8c24ecebe850e8cd22fe2ff
+msgid "Decrease :ref:`WP_ACC<WP_ACC>` to cause the vehicle to start turning earlier and more gradually"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:117
+#: 0a02c5b337b246d2a6d5d99974b6d0cb
+msgid "Decrease :ref:`WP_ACC_CNR<WP_ACC_CNR>` or reset to the default of zero"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:118
+#: 77814d24ee8946f3bb63744e877460b1
+msgid "Ensure the waypoint command's Delay field is 0.  A delay of even 1 second will cause the vehicle to stop at the waypoint"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:119
+#: 7adff231b8b2490faada008768e31228
+msgid "If :ref:`Dijkstras object avoidance <common-oa-dijkstras>` is enabled, by default the vehicle will stop at each waypoint.  This can be avoided by setting the :ref:`OA_OPTIONS <OA_OPTIONS>` parameter"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:121
+#: 215273345e8e45428c1627e4302352c0
+msgid "The vehicle does not reach the configured maximum horizontal speed (e.g. :ref:`WP_SPD<WP_SPD>`)"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:123
+#: 773f42631eaf4c38b39e8cfe7741be66
+msgid "Increase :ref:`WP_ACCEL <WP_ACCEL>` to allow the vehicle to accelerate to its maximum speed more quickly"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:124
+#: 505b0ca1bb6e429f8a3336cdc6f9966f
+msgid "Increase :ref:`WP_JERK <WP_JERK>` to allow the vehicle to get to its maximum acceleration more quickly"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:125
+#: df1169291db047adb53591b59cf91644
+msgid "If the waypoint includes a climb or descent the vehicle's horizontal speed may be limited by :ref:`WP_SPD_UP <WP_SPD_UP>` or :ref:`WP_SPD_DN <WP_SPD_DN>`"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:126
+#: 03431e9f315b409683befa35f932ce14
+msgid "Ensure the vehicle's maximum lean angle (e.g. :ref:`ATC_ANGLE_MAX<ATC_ANGLE_MAX>`) is sufficient to reach the desired speed"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:127
+#: 9ebd5dbf0c484a819dd0173098f26b52
+msgid "Ensure the vehicle has enough power to maintain both altitude and the desired speed"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:128
+#: f07422fea6274f6d9710ca5349f75086
+msgid "If the mission command uses :ref:`terrain following <terrain-following>` the vehicle may need to slow horizontally to maintain the desired altitude above terrain"
+msgstr ""
+
+#: ../../source/docs/auto-mode.rst:129
+#: 7f931d5c388f49e2afda4de577dcab16
+msgid "Move the waypoints to be further apart.  S-Cruve navigation only looks forward two waypoints and plans a path that allows it to stop by the time it reaches the 2nd waypoints (`see this issue for more details <https://github.com/ArduPilot/ardupilot/issues/28953>`__)"
+msgstr ""

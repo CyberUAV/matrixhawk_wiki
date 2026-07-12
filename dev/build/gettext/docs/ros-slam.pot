@@ -1,0 +1,247 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/ros-slam.rst:5
+#: f8e4dfcc35cc40b9809d49d51aaffde9
+msgid "ROS and Hector SLAM for Non-GPS Navigation"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:7
+#: 96f5144c838b4a3597afae62cc20bfd6
+msgid "This page shows how to setup ROS and `Hector SLAM <http://wiki.ros.org/hector_slam>`__ using an `RPLidarA2 lidar <http://wiki.ros.org/rplidar>`__ to provided a local position estimate for ArduPilot so that it can operate without a GPS."
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:9
+#: 0dd45887163240dcb6155740725a726e
+msgid "These instructions were tested on an :ref:`NVidia TX2 <companion-computer-nvidia-tx2>` flashed with :ref:`APSync <apsync-intro>` and then ROS and MAVROS were :ref:`installed as described here <ros-install>`."
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:11
+#: 39ca76e7eaf6481c85973372e817e5a4
+msgid "They were also tested on an :ref:`RaspberryPi 3 B+ <raspberry-pi-via-mavlink>` with ROS and MAVROS installed :ref:`installed as described here <ros-install>`."
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:15
+#: 548d012d8c514acea54d51edbd17066d
+msgid "these pages are a work-in-progress"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:18
+#: 2b14a746468b46209562421d8a52bd37
+msgid "Mounting the RPLidar and Pixhawk"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:23
+#: 35e109e06f804266934c69f87d6bea23
+msgid "The RPLidar should be oriented so that its USB cable wire is pointing forward in the same direction as the arrow on the flight controller."
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:25
+#: 96b1f80c48f1477f9a944606638d4cdd
+msgid "The USB cable should be plugged into a USB port on the companion computer running ROS."
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:28
+#: 437fa0528b91449799ed50641673d4e4
+msgid "Check the RPLidar's serial port"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:30
+#: 0655364fc3c54d898309b8247904dbaa
+msgid "plug the RPLidarA2 into the companion computer.  If using a TX2 mounted on an AUVidea J120 board, ensure the lidar is plugged into the lower USB port."
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:36
+#: 739a9eecef0142e8abaa92969d17394b
+msgid "the lidar should appear as /dev/ttyUSB0 or /dev/ttyACM0."
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:37
+#: 383e91cb90f341cf9889afe5b58757d3
+msgid "if you type \"lsusb\" the device should also be listed as \"Cygnal Integrated Products, Inc. CP210x UART Bridge / myAVR mySmartUSB light\""
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:38
+#: 479710b7e9874b689f189db49567e576
+msgid "allow anyone to read from the device by entering just one of the following two commands depending upon which serial port was found above"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:45
+#: a1d1c7f3ffce428aa44b279594440269
+msgid "Install more packages"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:47
+#: 1ffd5a6c8ff74ef28f18bf1be425c629
+msgid "install the ROS desktop full:"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:53
+#: 0bfbf1d1346148599ab31657319fd2ed
+msgid "OR install each of these individual packages (this list is not yet complete):"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:63
+#: 081525635be147d880014f5e3753e86b
+msgid "Create a Catkin WorkSpace"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:65
+#: c02a22e4a9cf490d8c7d620eaddd5cfb
+msgid "In your home directory:"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:75
+#: 3ae55f0a15084a0fbaa2c7260de025c3
+msgid "Install RPLidar node and Hector SLAM"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:77
+#: 0a04a297aba54c65a7b84ffb2109ec5e
+msgid "Install the RPLidar node and Hector SLAM software in the workspace"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:85
+#: b46ac9b9731b4ee9a599dba21a5c6e92
+msgid "Using your favourite editor open Hector SLAM's launch file which can be found at `$HOME/catkin_ws/src/hector_slam/hector_mapping/launch/mapping_default.launch <https://github.com/tu-darmstadt-ros-pkg/hector_slam/blob/catkin/hector_mapping/launch/mapping_default.launch>`__ and modify the \"base_frame\", \"odom_frame\" and commented out \"tf\" lines to look like below:"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:94
+#: d76cb3a8928b40b5b0108e159aae6755
+msgid "Edit Hector SLAM's `hector_imu_attitude_to_tf/launch/example.launch <https://github.com/tu-darmstadt-ros-pkg/hector_slam/blob/catkin/hector_imu_attitude_to_tf/launch/example.launch>`__ file which can be found at `$HOME/catkin_ws/src/hector_slam/hector_imu_attitude_to_tf/launch/example.launch <https://github.com/tu-darmstadt-ros-pkg/hector_slam/blob/catkin/hector_imu_attitude_to_tf/launch/example.launch>`__ and change it to consume IMU data from the flight controller (via mavros) by replacing \"thumper_imu\" with \"/mavros/imu/data\" so that it looks like below:"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:100
+#: 449b4278ec15452194b359b6ce7ce022
+msgid "Edit Hector SLAM's tutorial.launch file which can be found at `$HOME/catkin_ws/src/hector_slam/hector_slam_launch/launch/tutorial.launch <https://github.com/tu-darmstadt-ros-pkg/hector_slam/blob/catkin/hector_slam_launch/launch/tutorial.launch>`__ and change the \"use_sim_time\" line to look like below:"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:106
+#: 6567eb2184fa4b8fa88966a3ee38cd06
+msgid "Continue editing the `tutorial.launch <https://github.com/tu-darmstadt-ros-pkg/hector_slam/blob/catkin/hector_slam_launch/launch/tutorial.launch>`__ and add a new line (just below the existing include line) so that the `example.launch <https://github.com/tu-darmstadt-ros-pkg/hector_slam/blob/catkin/hector_imu_attitude_to_tf/launch/example.launch>`__ file modified above is included:"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:112
+#: 6f109cc10aa345728401f8090349bec9
+msgid "By default, once started, Hector SLAM will pop-up a window to show the map in real-time but this can be disabled by commenting out one line of `tutorial.launch <https://github.com/tu-darmstadt-ros-pkg/hector_slam/blob/catkin/hector_slam_launch/launch/tutorial.launch>`__ file so that it looks like below:"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:120
+#: 7c25a56b5b7342c2a8c278d02f6c0c91
+msgid "Build the Packages"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:129
+#: 0b352af637594c48a5993f0a7800e52f
+msgid "Start Hector SLAM"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:131
+#: 55519cf81c8a48d18601dd8896c7f13a
+msgid "Plug the RPLidarA2 into the companion computer and then open up four terminals and in each terminal type:"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:138
+#: e8ae8a78e79c4f468398252b8405eb0b
+msgid "Then in Terminal1:"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:144
+#: 894e1413cf4d4ceda9c698a52bcfc13b
+msgid "In Terminal2:"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:150
+#: 8f504c9194e8401cb4c26e316b508ad0
+msgid "In Terminal3 (For RaspberryPi we recommend running this on another Machine explained `here <http://wiki.ros.org/ROS/Tutorials/MultipleMachines>`__):"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:156
+#: 146d82437eb845dea14af83438a5d080
+msgid "In Terminal4:"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:158
+#: f3de97858a5f4cbda490721250bb155f
+msgid "Start mavros as described on the :ref:`Connecting with ROS page <ros-connecting>` which involves running a command like below:"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:165
+#: 80aaab6524174fa78129a9f8c30fe6c2
+msgid "Configure ArduPilot"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:167
+#: b62c6cb672674a9086905227af9eda35
+msgid "Connect to the flight controller with a ground station (i.e. Mission Planner) and check that the following parameters are set as shown below:"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:169
+#: 0e4c18275fa543d68067604be5277553
+msgid ":ref:`AHRS_EKF_TYPE <copter:AHRS_EKF_TYPE>` = 2 (the default) to use EKF2 (at the time this page was written the EKF3 did not yet support external position estimates)"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:170
+#: 780daf187a964414a782617d7f1f3c49
+msgid ":ref:`EK2_ENABLE <copter:EK2_ENABLE>` = 1 (the default)"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:171
+#: 3b77e5b5cf7e443d8c8f0046539cc0c7
+msgid ":ref:`EK3_ENABLE <copter:EK3_ENABLE>` = 0 (the default)"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:172
+#: 321db73d63d3477fa10413a2e5db4e61
+msgid ":ref:`GPS1_TYPE <GPS1_TYPE>` = 0 to disable the GPS"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:173
+#: 3290c78173774730b6d53b39b0fa7658
+msgid ":ref:`EK2_GPS_TYPE <copter:EK2_GPS_TYPE>` = 3 to disable the EKF's use of the GPS"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:174
+#: a32e5f272e7248909763779c92adaa47
+msgid ":ref:`COMPASS_ENABLE<copter:COMPASS_ENABLE>` = 0, :ref:`COMPASS_USE <copter:COMPASS_USE>` = 0, :ref:`COMPASS_USE2 <copter:COMPASS_USE2>` = 0, :ref:`COMPASS_USE3 <copter:COMPASS_USE3>` = 0 to disable the EKF's use of the compass and instead rely on the heading from ROS and Hector SLAM"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:176
+#: f2197440376148c6a82918ee47445604
+msgid "After changing any of the values above, reboot the flight controller."
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:178
+#: 3a7588b4f3bf4d39b00518d6727639df
+msgid "If all is working, vision position estimates should begin flowing in from ROS to ArduPilot.  This can be confirmed by connecting to the flight controller using the Mission Planner (or similar) and check the Flight Data screen's Messages tab (bottom left) for messages from the EKF like below:"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:187
+#: 2afd1a2cf3df415889864aeb8765e5d8
+msgid "Using the Mission Planner (or similar) go to the Flight Data screen and right-mouse-button click on the map and select \"Set Home Here\" >> \"Set EKF Origin\".  The vehicle should appear immediately on the map where you clicked."
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:190
+#: db49341a7de541daade132f7b0a3cce2
+msgid "Video"
+msgstr ""
+
+#: ../../source/docs/ros-slam.rst:197
+#: cc76b019f4004383a849872f8b0439b0
+msgid "We are keen to improve ArduPilot's support of ROS so if you find issues (such as commands that do not seem to be supported), please report them in the `ArduPilot issues list <https://github.com/ArduPilot/ardupilot/issues>`__ with a title that includes \"ROS\" and we will attempt to resolve them as quickly as possible."
+msgstr ""

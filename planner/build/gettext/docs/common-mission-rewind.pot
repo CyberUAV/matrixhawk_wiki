@@ -1,0 +1,164 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Mission Planner package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Mission Planner \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:48+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-mission-rewind.rst:7
+#: 345db88f5b3e48e58321ba14b1693e45
+msgid "Mission Rewind on Resume"
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:9
+#: 05300e295ed84416bb132bb89ad44b0f
+msgid "This page explains what the mission rewind-on-resume feature is and how to use the feature."
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:11
+#: 492186ba32a14f22ba753340ce8a3ae0
+msgid "In certain applications or operating areas it can be common to interrupt a mission, for the purposes of deconfliction, by changing to another mode and manoeuvring the vehicle away from the planned mission path.  When ready to resume the mission, the normal behaviour of the vehicle is to fly/drive directly to the last 'active' waypoint that was loaded in the mission.  This behaviour is illustrated below:"
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:20
+#: 5e4c55b6422b459ba554080d33811631
+msgid "As it can be seen, this leaves a significant portion of the planned mission that is either covered with incorrect track and heading or is not covered at all.  This becomes an issue for data gathering missions such as surveys, resulting in legs of the mission needing to be repeated."
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:24
+#: 075a8ab8fc324d1295714f7a2b768d51
+msgid "The rewind-on-resume feature remedies this behaviour.  A rewind distance is defined by the operator.  When the mission is resumed the vehicle will return to the mission track at the desired distance behind the point that the mission was interrupted.  This gives the vehicle adequate time to achieve the desired track and heading before it achieves the position in which it was originally interrupted.  This behaviour can be seen below:"
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:36
+#: 12c2dfcbbd604b95ab7c5b2d8f736fc4
+msgid "Configuration"
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:38
+#: ddda0ebff08a46d195d210a0b560dba1
+msgid "The rewind-on-resume feature is enabled by setting a DO_SET_RESUME_REPEAT_DIST mission item.  This can be done in one of two ways:"
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:42
+#: 050a9cb5f10e4252bcf312ed9e98f587
+msgid "**1) Ground control station recognises the DO_SET_RESUME_REPEAT_DIST mission item**"
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:44
+#: 84643e2c10a24ce6a501b6694c0791e8
+msgid "Add a DO_SET_RESUME_REPEAT_DIST mission item from the point in the mission that you wish to enable the feature."
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:45
+#: ../../source/docs/common-mission-rewind.rst:51
+#: 1da13e7788dc46dfa10a2fc0bd23e3cc
+#: c924a08d2d17456abaec07632015adfc
+msgid "Set the first data column to be the distance in meters that you want the mission to be rewound to, on resume."
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:48
+#: 0ed537653f3a433ab127ebbc9a1a8f3f
+msgid "**2) Ground control station does not recognise the DO_SET_RESUME_REPEAT_DIST mission item**"
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:50
+#: da208608d25e47a497573648a221e3e9
+msgid "Add an UNKNOWN mission item from the point in the mission that you wish to enable the feature and set the MAVLink ID to 215."
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:55
+#: ae9df265e7834ef7b9543280e1c7a36e
+msgid "The MIS_RESTART parameter must be set to zero, to prevent the mission restarting, for this feature to work."
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:57
+#: 1607e2f90fcc4c0599b7e3f198cca022
+msgid "To check that the rewind distance has been correctly set in the mission, monitor the message output in the ground control station.  When the vehicle registers the command the following message will be displayed: \"Resume repeat dist set to <DISTANCE> m\"."
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:61
+#: 6e5c5abe6f5a4d0a9905045560809760
+msgid "Multiple DO_SET_RESUME_REPEAT_DIST commands can be set throughout the mission.  This provides the operator the ability to vary the rewind distance or switch the feature on/off throughout the mission, where extreme care and accuracy is required to manoeuvre the vehicle on certain mission legs."
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:65
+#: 49146e25f0ae41d28535f71d98ed0fd8
+msgid "This feature can be switched off by setting a DO_SET_RESUME_REPEAT_DIST mission item with a distance of zero."
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:68
+#: a4df721097ad4bc8b5b9e883b8db2da6
+msgid "When identifying the resume distance needed, a sensible value to try for most vehicles is twice the minimum turn radius.  The only exception is vehicles that can turn on the spot (multi-rotors and some rovers), in which a sensible distance would be twice the WP_RADIUS."
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:74
+#: e74ad23860b7416a960a48eced9a4317
+msgid "How it works"
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:76
+#: 44a4eb58b42f470882c400f5bc10711d
+msgid "Once enabled ArduPilot starts recording the waypoints that are successfully loaded as 'active'.  A history of up to seven waypoints are stored.  Upon a mission rewind-and-resume the mission history will be searched until either:"
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:79
+#: 6d48dceedf9c4998bc0a28cee40b276d
+msgid "A position in the mission track is found that satisfies the rewind distance requirement."
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:80
+#: 16ae9adde2014876a70d131f236614a8
+msgid "The end of stored mission history is found, in which case the resume position will be the last waypoint stored in the history."
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:82
+#: 1bf299c08ee14ce1b890d636572953df
+msgid "The vehicle will then resume to that location on the mission track and continue the mission as planned."
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:85
+#: 8f407b73420f476db85e420cfc549928
+msgid "Height is accounted for in the resuming position.  If the vehicle is resuming to a location along the mission track whereby the aircraft is changing altitude, the height of the resuming position will be linearly interpolated between the two neighbouring waypoints."
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:90
+#: 8a77e0de972144088d8d3789a7f05cf9
+msgid "To prevent the vehicle from storing an obscure history and resuming to an unexpected location, if the mission is altered by using the set waypoint feature in a ground control station or a script, the history is reset.  This prevents the vehicle from rewinding the mission back past the point that the history was reset."
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:95
+#: 9440b7b34d2741129956422a639f15bc
+msgid "This feature works with DO_JUMP commands and the jump count is not incremented whilst the vehicle is resuming the mission."
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:98
+#: a6da888248aa4a408a13c3ceabb09ef4
+msgid "Limitations"
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:100
+#: 4c86c73e475f483db3e29837faa1f33e
+msgid "**1) Short mission legs:** If the mission has closely spaced waypoints and the requested rewind distance is greater than the distance covered by the last six waypoints that have been passed, then the vehicle will resume on the 'oldest' waypoint stored."
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:104
+#: 9b2d06a25fb24ba4b04e4b2ed98267b4
+msgid "**2) Spline waypoints:**  This feature will work with spline waypoints.  However, the accuracy of the resume distance will be diminished as the distance calculation is based on a straight line between navigation command locations."
+msgstr ""
+
+#: ../../source/docs/common-mission-rewind.rst:107
+#: e585c89394bf4179b70cd395fe55aa10
+msgid "**3) Non-waypoint navigation commands:**  This feature works with non-waypoint navigations commands, for example LOITER_TURNS. However, the distance calculation does not account for the distance of the vehicle track in those commands.  Using the previous example, the distance calculation does not account for the distance flown in the loiter."
+msgstr ""

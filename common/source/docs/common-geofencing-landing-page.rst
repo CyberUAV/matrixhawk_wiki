@@ -22,7 +22,7 @@ General Setup
 
 -  Set :ref:`FENCE_ENABLE<FENCE_ENABLE>` = 1 to enable fences. This enables any fences that are setup, except the ALT_MIN fence, which must be enabled by using any fence enable means (GCS message, AUTOENABLE in plane, RC switch)
 -  Set :ref:`FENCE_ACTION<FENCE_ACTION>` = to whatever you wish for a breach action. These will vary depending on vehicle type. See :ref:`fence_breach_actions` above.
--  Set :ref:`FENCE_OPTIONS<FENCE_OPTIONS>` to "1" to prevent mode changes after a fence breach until the vehicle returns within the fence boundary (Plane only, Copter/Rover do not allow mode changes while in breach)
+-  Set :ref:`FENCE_OPTIONS<FENCE_OPTIONS>` Set bit 1 to prevent mode changes after a fence breach until the vehicle returns within the fence boundary (Plane only, Copter/Rover do not allow mode changes while in breach). Set bit 2 to use the Union of inclusion areas instead of just Intersects. Set bit 3 to provide GCS warning when vehicle is less than :ref:`FENCE_MARGIN<FENCE_MARGIN>` from a breach. This parameter is also used in avoidance and path planning.
 -  Set :ref:`FENCE_ALT_MAX<FENCE_ALT_MAX>` = to the altitude limit you want (in meters). This is unavailable in Rover.
 -  Set :ref:`FENCE_MARGIN<FENCE_MARGIN>` = to the distance from the fence horizontal boundary the vehicle must maintain in order to prevent a breach.
 -  Set the :ref:`FENCE_ALT_MIN<FENCE_ALT_MIN>` as a minimum altitude breach boundary.
@@ -142,6 +142,9 @@ If enabled, and  the fence boundaries or altitudes(:ref:`FENCE_ALT_MAX<FENCE_ALT
 +            |  point with pilot  +
 +            |  throttle control  +
 +------------+--------------------+
++     8      | AUTOLAND mode, or  +
++            | RTL                +
++------------+--------------------+
 
 The return (and loiter) point, unless :ref:`FENCE_RET_RALLY<FENCE_RET_RALLY>` is enabled, is the geometric center of the breached fence boundary. If :ref:`FENCE_ACTION<FENCE_ACTION>` is set to a guided return mode (6 or 7), the altitude at which it returns is determined by :ref:`FENCE_RET_ALT<FENCE_RET_ALT>` or if  :ref:`FENCE_RET_ALT<FENCE_RET_ALT>` is zero, midway between the altitude limits, if non-zero. If both altitude limits are zero, then it will return at current altitude.
 
@@ -165,7 +168,7 @@ An ``RCx_OPTION`` can be set via the Config/Tuning > Full Parameter List screen,
 -  setting the switch high (i.e. PWM > 1800) will enable all configured fences, low
    (under 1800) will disable all fences.
 
-.. note:: if the Minimun Altitude fence is enabled by the switch while on the ground and disarmed, a pre-arm failure will occur preventing arming.
+.. note:: if the Minimum Altitude fence is enabled by the switch while on the ground and disarmed, a pre-arm failure will occur preventing arming.
 
 Automatic Altitude Breach Avoidance
 ===================================

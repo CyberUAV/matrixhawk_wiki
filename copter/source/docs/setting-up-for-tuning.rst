@@ -26,7 +26,7 @@ Start with setting up the voltage range to cope with voltage sag.
 Parameters used to linearise your motor thrust curve.
 
 - :ref:`MOT_BAT_VOLT_MAX <MOT_BAT_VOLT_MAX>` should be set to the maximum voltage of your batteries, e.g. 4.2v x No. Cells for standard LiPos, or as appropriate if using a different battery type.
-- :ref:`MOT_BAT_VOLT_MIN <MOT_BAT_VOLT_MIN>` should be set to the minumum voltage of your batteries, e.g. 3.3v x No. Cells for standard LiPos, or as appropriate if using a different battery type .
+- :ref:`MOT_BAT_VOLT_MIN <MOT_BAT_VOLT_MIN>` should be set to the minimum voltage of your batteries, e.g. 3.3v x No. Cells for standard LiPos, or as appropriate if using a different battery type .
 - :ref:`MOT_OPTIONS<MOT_OPTIONS>` = 0 (default). The default is to use sag compensated voltage for the above and during tuning computations. It can be set to 1 to use raw voltage instead of sag compensated voltage, which may improve tuning results for light vehicles.
 
 Next setup the thrust expo. If you are setting up a professional
@@ -69,9 +69,9 @@ The PID controller default values for axis P/D/I values are usually safe for fir
 
 - :ref:`INS_ACCEL_FILTER <INS_ACCEL_FILTER>`:  10Hz
 - :ref:`INS_GYRO_FILTER <INS_GYRO_FILTER>`: 80Hz for 5 inch props, 40Hz for 10 inch props, 20Hz for 20 inch props (or larger)
-- :ref:`ATC_ACCEL_P_MAX <ATC_ACCEL_P_MAX>`: 110000 for 10 inch props, 50000 for 20 inch props, 20000 for 30 inch props
-- :ref:`ATC_ACCEL_R_MAX <ATC_ACCEL_R_MAX>`: 110000 for 10 inch props, 50000 for 20 inch props, 20000 for 30 inch props
-- :ref:`ATC_ACCEL_Y_MAX <ATC_ACCEL_Y_MAX>`: 27000 for 10 inch props, 18000 for 20 inch props, 9000 for 30 inch props
+- :ref:`ATC_ACC_P_MAX<ATC_ACC_P_MAX>`: 1100 for 10 inch props, 500 for 20 inch props, 200 for 30 inch props
+- :ref:`ATC_ACC_R_MAX<ATC_ACC_R_MAX>`: 1100 for 10 inch props, 500 for 20 inch props, 200 for 30 inch props
+- :ref:`ATC_ACC_Y_MAX<ATC_ACC_Y_MAX>`: 200 for 10 inch props, 100 for 20 inch props, 90 for 30 inch props
 - :ref:`ATC_RAT_PIT_FLTD <ATC_RAT_PIT_FLTD__AC_AttitudeControl_Multi>`: :ref:`INS_GYRO_FILTER <INS_GYRO_FILTER>` / 2
 - :ref:`ATC_RAT_PIT_FLTT <ATC_RAT_PIT_FLTT__AC_AttitudeControl_Multi>`: :ref:`INS_GYRO_FILTER <INS_GYRO_FILTER>` / 2
 - :ref:`ATC_RAT_RLL_FLTD <ATC_RAT_RLL_FLTD__AC_AttitudeControl_Multi>`: :ref:`INS_GYRO_FILTER <INS_GYRO_FILTER>` / 2

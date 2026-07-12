@@ -8,7 +8,7 @@ Archived: Intel Edison as a Companion Computer
 
     The Intel Edison has been discontinued
 
-This page explains how to setup and use the `Intel Edison <http://www.intel.com/content/www/us/en/do-it-yourself/edison.html>`__ as a companion computer primarily for use with the `The Cube <http://www.proficnc.com/content/13-pixhawk2>`__.
+This page explains how to setup and use the `Intel Edison <http://www.intel.com/content/www/us/en/do-it-yourself/edison.html>`__ as a companion computer primarily for use with the `The Cube <https://www.cubepilot.com>`__.
 
    .. image:: ../images/intel-edison-in-pixhawk2.jpg
        :width: 100%
@@ -24,7 +24,7 @@ Where to buy
 
 The Edison can be `purchased from Sparkfun here <https://www.sparkfun.com/products/13024>`__.
 
-The Cube with carrier board can be purchased from one of these `retailers <http://www.proficnc.com/stores>`__.  Be sure to purchase a Cube with the Intel Edison compatible carrier board.
+The Cube with carrier board can be purchased from one of these `retailers <https://www.cubepilot.org/#/reseller/list>`__.  Be sure to purchase a Cube with the Intel Edison compatible carrier board.
 
 Installing the Edison in The Cube
 =====================================
@@ -64,14 +64,14 @@ The easiest way to get started is to flash the Edison with the :ref:`APSync <aps
    - On Windows:
 
       - Download and extract `dfu-util-0.9.win64.zip <http://dfu-util.sourceforge.net/releases/dfu-util-0.9-win64.zip>`__ from `dfu-util.sourceforget.net/releases <http://dfu-util.sourceforge.net/releases/>`__
-      - Copy the ``dfu-util.exe`` and ``libusb-1.0.dll`` files into the ``toFlash`` directory created when extracing the image (see above)
+      - Copy the ``dfu-util.exe`` and ``libusb-1.0.dll`` files into the ``toFlash`` directory created when extracting the image (see above)
       - Download and install the latest `drivers from Intel <https://software.intel.com/edison-config/win/latest>`__.
    - On Ubuntu install with ``sudo apt-get install dfu-util``
 
    - On OS X:
 
       - Follow the instructions on the `Homebrew web page <http://brew.sh>`__. 
-      - Install dfu-util  ``brew install dfu-util``		
+      - Install dfu-util  ``brew install dfu-util``     
 
 -  Connect your PC to The Cube using the USB cables as shown below.  The USB cable connected to the Cube (the black cable shown below) provides power.  The two USB cables connected to the carrier board (shown as white cables) enable flashing the image to the edison.  If possible connect the "OTG port Flashing" using the flat USB cable that comes with The Cube because it provides the most reliable connection.
 
@@ -118,16 +118,19 @@ It is important to note this will only work under Linux Ubuntu 14.04
 Download the latest version of xFSTK onto your Ubuntu 14.04 32-bit system from `here <https://communities.intel.com/external-link.jspa?url=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fxfstk%2Ffiles%2F>`__. and extract.
 
     1. Unzip the downloaded file with
+
     ::
 
         tar xvfz xfstk-dldr-linux-source-1.7.2.tar.gz
 
     2. Navigate to the source folder
+
     ::
 
         cd xfstk-build/linux-source-package
 
     3. Install the required packages
+
     ::
 
         sudo apt-get install g++ qtcreator build-essential devscripts libxml2-dev alien doxygen graphviz libusb-dev libboost-all-dev  
@@ -135,22 +138,26 @@ Download the latest version of xFSTK onto your Ubuntu 14.04 32-bit system from `
         sudo apt-get install libusb-1.0-0-dev
 
     4. Create the following Symlink
+
     ::
 
         ln -s /usr/lib/x86_64-linux-gnu/libusb-1.0.a /usr/lib/libusb.a
 
     5. Configure the build parameters
+
     ::
 
         export DISTRIBUTION_NAME=ubuntu14.04  
         export BUILD_VERSION=0.0.0
 
     6. Build the xFSTK tools
+
     ::
 
         make --version -j 6
 
     7. Run cmake
+
     ::
 
         mkdir build
@@ -158,16 +165,19 @@ Download the latest version of xFSTK onto your Ubuntu 14.04 32-bit system from `
         cmake ..
 
     8. Build the package
+
     ::
 
         make package
 
     9. Install the package you just built
+
     ::
 
         dpkg -i [built package]
 
     10. May need to install:
+
     ::
 
         sudo apt-get install libboost-program-options1.55.0

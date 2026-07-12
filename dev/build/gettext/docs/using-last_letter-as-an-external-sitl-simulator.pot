@@ -1,0 +1,232 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:5
+#: a9a4c437e6a841c8906dc31ea691c724
+msgid "Using last_letter as an External SITL Simulator"
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:7
+#: 9c27de47dea14a8999ba95a8e39aa05b
+msgid "This article explains how to run :ref:`SITL <sitl-simulator-software-in-the-loop>` for Plane using `last_letter <https://github.com/Georacer/last_letter>`__ as the flight simulation engine (instead of *JSBSim*)."
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:14
+#: 04b19759e816409bb1960fbe8e41c441
+msgid "Currently the *last_letter* simulator is in early development stage and also only supports fixed-wing aircraft. Expect frequent updates and changes in its architecture. Up-to-date documentation on *last_letter* is always found at its Github page."
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:23
+#: 22f90cea13144eb097a2517341cf0ff0
+msgid "Overview"
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:25
+#: 1613fb05de4446838f23873abe6d1dda
+msgid "Currently, the default simulation software for Plane SITL is `JSBSim <http://jsbsim.sourceforge.net/>`__. While this is a renowned simulation solution for fixed-wing aircraft, it is primarily targeted towards full-scale vehicles and focuses on relevant features such as fuel management, variable pitch drives and oleos. After many years of life it is difficult to modify to cater for UAV-specific applications. Moreover it is paired with `FlightGear <http://www.flightgear.org/>`__ as the visualizer, which is a quite a demanding piece of software in terms of system resources."
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:35
+#: 36c76b47c2e644b3bc6009ff4cf48c6c
+msgid "In contrast, during the development of a robotic platform it is often more important to have easy access to the system states, be able to change simulator components easily, add new subsystems, and interface with other packages."
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:40
+#: b1c826072979491e8e4cc1c0a5a0cad5
+msgid "The `Robotics Operating System <http://www.ros.org/>`__ (ROS) framework is a potential answer to this need. It is a software framework which resides on top of the operating system, orchestrating the execution of multiple programs and the communication between them. It provides the tools to compile programs written in C++ and Python and monitor their execution. It is specifically targeted for development of modular robotics applications by providing standardized message headers, universally useful system tools, logging capabilities, execution across multiple machines and most importantly a large codebase of user-submitted, stand-alone packages, fit for diverse applications."
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:51
+#: d560cd9b9d7b485cb09c35adb61bf3fd
+msgid "*last_letter* is a flight simulator written mostly in C++ under the ROS framework. It incorporates a modular description of the airplane model, modeling aerodynamics, propeller and motor dynamics, ground reactions, wind and gust disturbances and much more. Its structure allows for relatively easy coding of additional functions, and offers the potential for a unified simulator for all platforms, compatibility with other ROS packages and a modular, detailed simulation solution."
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:60
+#: 8fd58aaf2e204cf48f55e6515460980b
+msgid "Preconditions"
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:63
+#: d5c194356c5644f78ed7d1a4f12dbe0f
+msgid "ROS version"
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:65
+#: 4f331a4e56a141b6b0169273174893a1
+msgid "*Last_letter* is being developed under *ROS Indigo*, and this is the only supported version."
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:70
+#: 6b6409b7f146477db7ad4de84a405b9d
+msgid "*Last_letter* was originally developed under ROS Hydro, and no code changes were required during the transition. While ROS Hydro is no longer supported, developers that need to use *last_letter* on this version may find it still works."
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:76
+#: 23e6f7a2a6f14d70b3dc1dbc70af14b3
+msgid "Operating System requirements"
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:78
+#: 9b83ea92fad14ef19ff4763c961024f8
+msgid "The selected operating system must be `compatible with ROS Indigo <http://wiki.ros.org/indigo/Installation>`__ in order to run *last_letter*."
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:81
+#: d7ea2c35cef94ad0bf7fe10efb70e443
+msgid "We recommend Ubuntu 14.04.2 as this is the platform used for developing *last_letter* and is also known to be compatible with SITL. Ubuntu Linux 13.10 and 14.04 are also supported by both *ROS Indigo* and SITL."
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:86
+#: b5c85af349b54e10b3d11746d0b0ee42
+msgid "Installation"
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:88
+#: 9edd1fc5734642bbafeaee3aea5d98c9
+msgid "First install the Plane SITL on your Linux machine, as described :ref:`Setting up SITL on Linux <setting-up-sitl-on-linux>`."
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:91
+#: 91442621c18f4cf1b36193c605a6e8fd
+msgid "Like any other set of ROS packages, *last_letter* and its companion library packages **last_letter_msgs**, **uav_utils**, **math_utils** and **rqt_dashboard** require ROS to be present on your system. If you have previous experience with ROS and have it on your system, installation of\\ *last_letter* is as simple as cloning the package files in your workspace. If not, the following instructions will guide you through the process."
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:100
+#: 5a959299ec404d9f852461b6d0101a69
+msgid "ROS installation"
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:102
+#: 8cb62b5446334e62bea230e19e41cfb4
+msgid "Follow the `instructions on the ROS website <http://wiki.ros.org/indigo/Installation/Ubuntu>`__ to install *ROS Indigo* in your machine."
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:106
+#: 597265f96e954c2e87ab8f340455291a
+msgid "Workspace creation"
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:108
+#: b55c16acb8bf4809b3fdd83beceb2f08
+msgid "After installing ROS you need to create a ROS Workspace. This is the directory where custom software packages (packages which are not part of the official ROS repository) are created, copied or edited. This is also where the ROS compiler (also known as *catkin*) looks for your code."
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:113
+#: b81e0479fbe44b02a8357acf5f0ad80b
+msgid "Follow these `instructions to create your workspace <http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment#Create_a_ROS_Workspace>`__. They instruct you to create your workspace under your home folder, but it can also be created elsewhere. Just be sure you have full rights to this folder, so a subfolder in your home folder is a good choice. Make sure ``$ROS_PACKAGE_PATH`` sees your **catkin_ws/src** folder."
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:121
+#: 4150d5d670bb43e8981df4d12d79dc83
+msgid "You probably don't want to source your workspace path every time you open a new console. To avoid this, add the following line to your **/home/<username>/.bashrc** file (assuming that you created your catkin workspace directly under your home folder)."
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:131
+#: 028a1987d2dd44948f381859d07663bb
+msgid "Cloning the last_letter simulator files"
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:133
+#: 15e79ad6612e4d1aaa23872d1899aff8
+msgid "Execute the following commands in your console to download and compile the simulator (without the comments):"
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:145
+#: 5a71990fb3b7417884f74b194ac24fdb
+msgid "Compilation may take a while."
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:148
+#: fa61ee0388f340ec9a65506d0583d3fc
+msgid "Testing everything is installed properly"
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:150
+#: 3e5f14f48d7245fcb49bfb3dffc2bb20
+msgid "In a console, run:"
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:156
+#: f5a9b479e630412e82606c37e4f4d697
+msgid "This should start the simulator and open a 3D simulation environment using an application called *RViz*. The *rqt_gui* application will start as well; this is where the avionics instruments are displayed."
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:160
+#: cd484a35d92b46ce9626e54111bf930b
+msgid "If everything went smoothly, you can close everything and proceed to interface *last_letter* with Plane SITL."
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:164
+#: 428ca84a447543c69d383c855016b7ad
+msgid "Using last_letter as the physics simulator for SITL"
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:166
+#: a2900c2198e8423d9823cb9bed4a9159
+msgid "Follow the :ref:`Plane SITL instructions <setting-up-sitl-on-linux>` to download and compile the Plane code. Make sure your local git branch is checked out on ``master``."
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:170
+#: ee209942f5fd4f6b9a485e3da2c9e34b
+msgid "When everything is done, enter the Plane directory and start the SITL simulation:"
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:178
+#: 8d448032856040c7981c1b2cce95049b
+msgid "This will run SITL, Plane, MAVProxy and *last_letter* along with *RViz* all in one go (the *RViz* visualizer may take several seconds to start). This procedure will automatically invoke the *last_letter* launch file and set the ``Plane`` parameter to ``true`` so that the communication nodes between *last_letter* and Plane are raised. If *last_letter* communicates with Plane correctly, the MAVProxy console should display 3D satellite fix and track 10 satellites."
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:186
+#: 202708dba3c4488db2acaf26ec2ff57b
+msgid "When you start sim_vehicle.py an xterm will be created which launches ArduPilot and last_letter. If you have troubles running the simulator then finding this (minimised) xterm and looking at the debug output there can be very helpful."
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:191
+#: 186099fc0ade439ab4282b5fc33b8be9
+msgid "You can issue commands or RC overrides using MAVProxy as normal."
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:194
+#: 67a7dbba9487490bafb4c1fd2af76c71
+msgid "Missing features"
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:196
+#: 7fa996ceda90404d8eb179577a6bbf4c
+msgid "At time of writing (17 March, 2015), *last_letter* does not support the common initialization arguments (such as starting location). Moreover, the MAVProxy commands which would control the JSBSim simulator (such as the wind and pause commands) are not supported."
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:201
+#: a88605fa6a9d4e9698178b8afd5fbe9f
+msgid "Currently, the only way to select the aircraft and alter its initial states is by editing the parameter files of the simulator, as described in `the corresponding manual page <https://github.com/Georacer/last_letter/blob/master/last_letter/doc/manual/parameterFiles.md>`__."
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:206
+#: ef91c4a682a84c73852babb735d67a89
+msgid "Running last_letter in a virtual machine"
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:208
+#: 2fa69fcb39d24d3280497f33b1dd0905
+msgid "*Last_letter* has been successfully run within virtual machines using the configurations described in its `compatibility information <https://github.com/Georacer/last_letter/blob/master/last_letter/doc/manual/compatibility.md>`__. To test the performance of the simulator in a particular environment, look at the xterm window assigned for the simulator output: There should be a framerate message, updating every 5 seconds."
+msgstr ""
+
+#: ../../source/docs/using-last_letter-as-an-external-sitl-simulator.rst:214
+#: 46cfbaed8c434d5b8f886f5df2756521
+msgid "Currently, Plane and SITL are set to run at a nominal 500Hz. A frequency of over 480Hz indicates that the simulator is running at an acceptable speed."
+msgstr ""

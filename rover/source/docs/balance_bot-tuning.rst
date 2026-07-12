@@ -41,6 +41,20 @@ It is best to connect the ground station (e.g. Mission Planner) to the vehicle u
 - The vehicle may drift off in either direction so be ready to catch it and return it to its original position.  Drifting is not necessarily a problem at this stage, the goal is for "pidachieved" to follow "piddesired" as closely as possible
 - Apply throttle stick inputs which should result in "piddesired" changing.  Continue to adjust the gains so "pidachieved" tracks well
 
+A good tuning methodology is to increase P and I in turn: Increase P until the vehicle starts to oscillate, then increase I until the vehicle starts to wobble back and forth.
+Once this gives a reasonably good response, D can be increased to increase responsiveness.
+
+Stable PID values for ATC_BAL_* can be quite large, particularly for small vehicles. Good starting values are:
+
+- :ref:`ATC_BAL_P <ATC_BAL_P>` = 3
+- :ref:`ATC_BAL_I <ATC_BAL_I>` = 8
+- :ref:`ATC_BAL_D <ATC_BAL_D>` = 0.1
+
+Motor Dead Zone and Expo
+------------------------
+
+:ref:`MOT_THST_EXPO <MOT_THST_EXPO>` is recommended to be -0.5, to give a stable pitch angle at both small and large pitch angles.
+
 .. _balance_bot-tuning-pitch-trim:
 
 Reducing Drift with Pitch Trim
@@ -57,7 +71,7 @@ Rover-4.3 (and higher) includes automatic pitch limiting to reduce the chance of
 
 The parameters below can be used to tune this features although normally they can be left at their default values
 
-- :ref:`ATC_BAL_LIM_THR<ATC_BAL_LIM_THR>`: pitch limit feature's throttle threshold (expressed as a value betwee 0 and 1).  If the vehicle's throttle climbs above this limit the vehicle's maximum pitch angle will be reduced.
+- :ref:`ATC_BAL_LIM_THR<ATC_BAL_LIM_THR>`: pitch limit feature's throttle threshold (expressed as a value between 0 and 1).  If the vehicle's throttle climbs above this limit the vehicle's maximum pitch angle will be reduced.
 - :ref:`ATC_BAL_LIM_TC<ATC_BAL_LIM_TC>`: pitch limit feature's time constant.  Lower values will cause the pitch limit to be reduced quickly.  Higher values will limit the pitch more slowly.
 
 ..  youtube:: 8EATOJRzBqs

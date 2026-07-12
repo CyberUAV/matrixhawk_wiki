@@ -1,0 +1,262 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Rover package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rover \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:39+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-imu-batchsampling.rst:5
+#: f3351f52fc1e49dd9804d4c8034e4a06
+msgid "Measuring Vibration with IMU Batch Sampler"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:7
+#: 945b69ab7eaa46faa351885fe5f3744e
+msgid "The IMU BatchSampler can be used to record high-frequency data from the IMU sensors to the dataflash log on the autopilot.  This data can be analysed post-flight to diagnose vibration issues using graphs created from Fast Fourier Transforms (FFT) of the data."
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:9
+#: 77fe986385a140f29d05793f4f82d40e
+msgid "FFT transforms data from the time domain into the frequency domain.  Put another way, accelerometer data recorded over time (i.e. a flight) can be converted into a graph showing the frequencies of the vibration.  A frequent feature of these graphs is a spike at the propeller's \"blade passage frequency\" (the frequency at which the blade crosses over the arms) which causes an acceleration in the aircraft body.  FFT has the following limitations:"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:11
+#: 116385d103e6492cae27188998aeeeff
+msgid "FFT cannot show you frequencies above half your sensor's sampling rate"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:12
+#: dc351a37dc6c4362a813c5b9cadc4805
+msgid "The smallest frequency that can be shown is half your sample size divided by your sample rate"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:14
+#: eedb7ac4accb46c19317e8b5a93b90f9
+msgid "Samples are typically taken at the same rate as gyro updates provided to the autopilot. For example if you are using :ref:`INS_FAST_SAMPLE <INS_FAST_SAMPLE>` on an MPU9250 sensor (fairly typical on modern Pixhawk class autopilots) then samples will be take at 8KHz, but averaged and downsampled to 1KHz. If you are not using an autopilot with fast sampling capability, then the sample rate is 1KHz"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:16
+#: 9a8d540ea59d49b992bdb55cd3b05143
+msgid "This 1KHz \"backend\" rate is the rate at which gyro filtering takes place, i.e. low-pass and notch filters, and on smaller copters 1Khz is not high enough to avoid aliasing from noise at higher frequencies. For example, a 3\" copter might have a full throttle motor frequency of 600Hz. Since filters can only apply at half the sample frequency (the Nyquist limit)it is not possible to filter 600Hz noise when sampling at 1Khz and the noise will be aliased down to lower frequencies."
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:18
+#: fce1a7526bb5457bb35a00b78fa278d8
+msgid "The backend rate has been made configurable for IMUs that support fast sampling (i.e. Invensense sensors) so that higher rates can be supported. The backend rate can be configured by setting :ref:`INS_GYRO_RATE<INS_GYRO_RATE>`. The default 0 gives the same behaviour as previous firmware versions. A rate of N gives a backend rate of 2^N Khz, so for instance a value of 1 gives a backend rate of 2Khz ,etc."
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:20
+#: 8c7c98ef91d14dbeb6a520e440c39908
+msgid "This raises the rate at which all gyro filters are run and can be computationally expensive depending on the number of notches configured. Values above 0 are only recommend on F7 or H7 platforms and values above 1 should only be used with careful tuning. This is automatically done for those platforms. This allows capturing frequencies at 1KHz and below on these autopilots."
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:23
+#: da5f5c84c7014d1f8cbc2e589b1310f2
+msgid "Pre-Flight Setup"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:25
+#: e0eca0d5d51045a3952e6c74e3412d09
+msgid "Set :ref:`INS_LOG_BAT_OPT<INS_LOG_BAT_OPT>` = 4 to do pre and post-filter 1KHz sampling"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:26
+#: 399e185916a54d8bbbd75b6deda5210f
+msgid "Set :ref:`INS_LOG_BAT_MASK <INS_LOG_BAT_MASK>` = 1 to collect data from the first IMU"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:27
+#: a880eb66dfeb4c0ba00d7da5f52f53ab
+msgid ":ref:`INS_LOG_BAT_LGIN<INS_LOG_BAT_LGIN>` is the gap between batch samples and normally does not need to be changed. It can be lowered to increase accuracy of resulting FFT, but may be ineffective depending on the systems logging speed."
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:28
+#: aa7905b4aee14d1d8ee24dd14b2eadfe
+msgid ":ref:`LOG_BITMASK <LOG_BITMASK>`'s IMU_RAW bit must **not** be checked.  The default :ref:`LOG_BITMASK<LOG_BITMASK>` value is fine. If it is checked the results can be confusing as you will get no samples if using post-filter or regular logging, you will however get samples if using sensor rate logging and your SD card is able to cope."
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:33
+#: aefce283b9c84d259a1ac4713eda6d6c
+msgid "Flight and Post-Flight Analysis"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:35
+#: e4f0482926cb4e528803e543caaa806f
+msgid "Perform a regular flight (not just a gentle hover) of at least 1 minute and :ref:`download the dataflash logs <common-downloading-and-analyzing-data-logs-in-mission-planner>`"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:36
+#: 61585224c8504af2899ee3360557c379
+msgid "Open Mission Planner, under SETUP/ADVANCED, press the FFT button, press \"IMU Batch Sample\" and select the .bin log file downloaded above"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:42
+#: 408e5bffb53042d7afbb3d86eae7bc51
+msgid "On the graph it should be possible to identify a significant peak in noise that corresponds to the motor rotational frequency. On a smaller Copter this is likely to be around 200Hz and on a larger Copter/QuadPlane 100Hz or so. There will usually be harmonics of the motor rotational frequency (2x,3x that frequency) also.Here is an example from a 5\" quad with no notches setup and a 20Hz lowpass setting for the gyro filter:"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:48
+#: e52d2b4a7d674cdf9217fe444372f44a
+msgid "Four graphs are shown: ACC0- Accelerometer spectrum before filtering, ACC1- Accelerometer spectrum after filtering, GYR0 -Gyro spectrum before filtering, and GYR1- Gyro spectrum after filtering.  Vibration at frequencies above 100Hz may lead to attitude or position control problems."
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:49
+#: 64d1718dbe4444b7b7a1b1eb297b360b
+msgid "A pronounced noise peak at 180Hz is evident from the motors in hover, with a smaller second harmonic showing."
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:50
+#: 853869f6502246c89211e99060e5e11a
+msgid "Notice that the noise has been dramatically reduced by the lowpass filters on the sensors, but at the cost of significant phase lag that will have reduced how tight the tune was made. It should be possible to \"notch\" out that 180Hz motor noise spike and increase the gyro low pass filter to 60 or 80Hz to allow a tighter tune to be done. The accelerometer path is not as critical since it forms an outer loop around the gyro based rate PID controllers. Leaving its lowpass filter at 10Hz does not affect the ability of the vehicle to reject disturbances quickly, which is the rate controller's main task."
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:51
+#: 72806b6b00b147a1b4b6ceb8b4dffd3c
+msgid "If we just increase the gyro lowpass filter to 60Hz from 20HZ , without adding notch filters to decrease the motor noise, this results, which is not acceptable:"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:58
+#: 75664ff452f94310a064c4aaf1984fea
+msgid "Harmonic Notch Filter Setup"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:60
+#: b24fde660a0f44b1b18bce5bc08b5ca8
+msgid "It is possible to filter some of this noise to increase performance and allow better tuning by activating the harmonic notch filter(s). See :ref:`common-imu-notch-filtering` for details."
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:62
+#: 545b1f2cde244d5ab3e7b90ea3be41b5
+msgid "For Throttle Based Dynamic Harmonic Notch(s) you will need some additional information from the logs if using a :ref:`common-throttle-based-notch`: - With the same log, open it in the regular way in mission planner and graph the throttle value: CTUN.ThO (Copter) or QTUN.ThO (QuadPlane). . From this identify an average hover throttle value which will be used for :ref:`INS_HNTCH_REF <INS_HNTCH_REF>`. - It's also possible to use :ref:`MOT_HOVER_LEARN <MOT_HOVER_LEARN>` = 2 in Copter and read off the value of :ref:`MOT_THST_HOVER <MOT_THST_HOVER>`, or :ref:`Q_M_HOVER_LEARN <Q_M_HOVER_LEARN>` = 2 in QuadPlane and read off the value of :ref:`Q_M_THST_HOVER <Q_M_THST_HOVER>` - This gives you a hover motor frequency *hover_freq* and thrust value *hover_thrust* . Note that learning of hover thrust only occurs while in an altitude controlled mode with no pitch or roll angle. Therefore, it should be done in calm wind conditions with no pilot stick input for at least 10 seconds."
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:71
+#: a6f0de26fe1443788a7e2dfd377e3a2e
+msgid "Post Configuration Confirmation Flight and Post-Flight Analysis"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:73
+#: ba188f711fbf46cbb65311d20196a231
+msgid "With :ref:`INS_LOG_BAT_MASK <INS_LOG_BAT_MASK>` still set to = 1 to collect data from the first IMU:"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:74
+#: 15c88534c5784c55992b1485f7a94978
+msgid "Set :ref:`INS_LOG_BAT_OPT <INS_LOG_BAT_OPT>` = 2 to capture post-filter gyro data"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:76
+#: 4ce1206ae6544ab0944526ff354302ef
+msgid "Perform a similar hover flight and analyze the dataflash logs in the same way. This time you should see significantly less noise and, more significantly, attenuation of the motor noise peak. If the peak does not seem well attenuated then you can experiment with increasing the bandwidth and attenuation of the notch. However, the wider the notch the more delay it will introduce into the control of the aircraft so doing this can be counter-productive."
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:78
+#: 6747be92e54e4187a4131fa8ab599135
+msgid "Here is an example from the same 5\" quad with the harmonic notch configured and 60Hz gyro lowpass filter:"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:84
+#: 9e9dc85532f5487ba19ed7b14d9c3f39
+msgid "be sure to reset the :ref:`INS_LOG_BAT_MASK<INS_LOG_BAT_MASK>` to \"0\" when finished with analysis flights to free up the RAM consumed by this feature. In some autopilots, you cannot do other memory intensive tasks like Compass Calibration or MAVftp if this batch logging is enabled."
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:87
+#: 033cac88eee9476286c493c998999db8
+msgid "Advanced Configuration and Analysis"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:89
+#: 7e8b5c6bfc2445b8a170823c0439bb0f
+msgid "Set :ref:`INS_LOG_BAT_OPT <INS_LOG_BAT_OPT>` = 1 to enable batch sampling at the sensor's highest rate which allows analysis above 500hz for very fast IMUs from InvenseSense"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:90
+#: 604437d73db146f189f02d3071b76c39
+msgid ":ref:`INS_LOG_BAT_MASK <INS_LOG_BAT_MASK>` can be used to sample just a single sensor.  This will increase the number of samples retrieved from a single sensor (e.g. the best on the platform), which may provide better data for analysis"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:91
+#: e9685b3cd37547b88efd58ea0474cb39
+msgid ":ref:`INS_LOG_BAT_CNT <INS_LOG_BAT_CNT>` specifies the number of samples which will be collected.  Increasing this will yield a more representative idea of problem frequencies.  When divided by the sample rate will give the lowest frequency which can be detected, so 1024 samples at 1024kHz sampling will (poorly) pick up 0.5Hz frequencies"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:92
+#: 7bee6577f6de45e5b93f11e54f202bdd
+msgid ":ref:`INS_LOG_BAT_LGIN <INS_LOG_BAT_LGIN>` interval between pushing samples to the dataflash log, in ms.  Increase this to reduce the time taken to flush data to the dataflash log, reducing cycle time.  This will be at the expense of increased system load and possibly choking up the dataflash log for other messages"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:93
+#: 88ba4040dc2848f9ba50f8a120ee97eb
+msgid ":ref:`INS_LOG_BAT_LGCT <INS_LOG_BAT_LGCT>` Number of samples to push to count every :ref:`INS_LOG_BAT_LGIN <INS_LOG_BAT_LGIN>` ms.  Increase this to push more samples each time they are sent to the dataflash log.  Increasing this may cause timing jitter, and possibly choke up the dataflash log for other messages"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:95
+#: fa80516348654f69b32e7d29489bba74
+msgid "On an H7 based autopilot such as the CubeOrange or Zealot H743, raw IMU logging can be used and will provide better data for analysis. Set :ref:`INS_LOG_BAT_MASK <INS_LOG_BAT_MASK>` = 0, set the raw IMU bit (bit 19) in :ref:`LOG_BITMASK <LOG_BITMASK>`, set :ref:`INS_LOG_BAT_OPT <INS_LOG_BAT_OPT>` = 0. Raw logging is very helpful when doing filter tuning, but will give you really large logs which generally means you don't want to leave it on."
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:97
+#: 5f40a0cfff6549c19a26158f44fc2ce2
+msgid "The web based `Notch Filter Review tool <https://firmware.ardupilot.org/Tools/WebTools/FilterReview/>`__ on the ArduPilot Firmware \"Web Tools\" page can be used to analyze notch filter logs generated with either batch sampling or raw IMU logging."
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:99
+#: 461e228f375943b8a7ae3ef370924d5e
+msgid "The following two graphs are from the same flight on a PixRacer autopilot.  Accel[0] on the right is the InvenseSense IMU and shows higher frequencies than the slower IMU on the left"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:105
+#: a54deb21f4da44c3a484a9cfea5dd11f
+msgid "Log Message Contents"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:107
+#: 5f73cc8394c8475c9d5089224c1c5ca7
+msgid "There are two types of dataflash log messages involved in batch sampling, `ISBH` and `ISBD`."
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:109
+#: 258fd43a3a7448479e0042f4847db9a1
+msgid "`ISBH` is a batch header; it includes a batch number and metadata about the batch."
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:110
+#: 488142ba186847c3ade3ff96d9702ef9
+msgid "`ISBD` messages contain the actual data for the batch, and reference a header by batch number."
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:113
+#: ef2f1856f10e4144b1d87dba80722135
+msgid "Analysis with pymavlink"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:115
+#: 624fd167f4834ea8afec15be77e43d70
+msgid "**pymavlink** is a developer focussed tool which supports graph FFT'd data"
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:139
+#: 7c7bb0a3ab06474cb163ddce2e2cc7a6
+msgid "This output shows `mavfft_isb.py` extracting data from a single-IMU multicopter log."
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:145
+#: 9d4a8c2a885e4d28a7aebe4a986b8d37
+msgid "This multicopter frame clearly shows vibrations in the 80Hz range."
+msgstr ""
+
+#: ../../source/docs/common-imu-batchsampling.rst:151
+#: cc46e65c8602401a8253111786d0f5c7
+msgid "This multicopter frame clearly shows rotational vibrations in the 80Hz range."
+msgstr ""

@@ -7,7 +7,8 @@ Long Commands
     module load cmdlong
     
 This module is a collection of ``command_long_send`` functions that may 
-be useful to the user.
+be useful to the user. It also adds the ``command_int`` function which 
+allows sending MAVLink COMMAND_INT messages.
 
 Control
 =======
@@ -113,7 +114,7 @@ Sends an action to the parachute. ``ACTION`` can be enable, disable or release.
     engine M1, M2, M3
     
 Sends an engine control command (MAV_CMD_DO_ENGINE_CONTROL). It can start or stop the engine. 
-Otherwise the full set of options can be specified, with M1=1 or 0 for engine start/stop, M2=	0: Warm start, 1:Cold start. Controls use of choke where applicable, M3=Height delay (meters). This is for commanding engine start only after the vehicle has gained the specified height.
+Otherwise the full set of options can be specified, with M1=1 or 0 for engine start/stop, M2=   0: Warm start, 1:Cold start. Controls use of choke where applicable, M3=Height delay (meters). This is for commanding engine start only after the vehicle has gained the specified height.
 
 .. code:: bash
 
@@ -121,5 +122,24 @@ Otherwise the full set of options can be specified, with M1=1 or 0 for engine st
     
 Send a general MAV_CMD_LONG message to the vehicle. ``COMMAND`` is the name of the command. The options
 follow in ``[arg1] [arg2] ...`` format.
+
+.. code:: bash
+
+    command_int FRAME COMMAND OPTIONS
+
+Send a general MAV_COMMAND_INT message to the vehicle ``COMMAND`` is the name of the command prefixed with ``MAV_``. 
+e.g. MAV_CMD_GUIDED_CHANGE_HEADING. The options follow separated by spaces. 
+
+* [arg1] target system 
+* [arg2] target component
+* [arg3] param1
+* [arg5] param2
+* [arg6] param3
+* [arg7] param4
+* [arg8] param5
+* [arg9] latitude
+* [arg10] longitude
+* [arg11] altitude (in the frame specified by FRAME)
+
 
 

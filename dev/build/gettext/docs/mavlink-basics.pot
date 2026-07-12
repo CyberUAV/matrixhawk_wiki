@@ -1,0 +1,112 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/mavlink-basics.rst:5
+#: 8972731cca7844439694caad25a0b5b2
+msgid "MAVLink Basics"
+msgstr ""
+
+#: ../../source/docs/mavlink-basics.rst:7
+#: 1adb867c3db4414886fc4fad2aa6eabb
+msgid "`MAVLink <https://mavlink.io/en/>`__ is a serial protocol most commonly used to send data and commands between vehicles and ground stations"
+msgstr ""
+
+#: ../../source/docs/mavlink-basics.rst:9
+#: fad1249b749e4f5b9d043db98d1c63a6
+msgid "The protocol defines a large set of messages which can be found in `common.xml <https://mavlink.io/en/messages/common.html>`__ and `ardupilot.xml <https://mavlink.io/en/messages/ardupilotmega.html>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-basics.rst:10
+#: a08039f9e5ca4382980d0c45fc86ba23
+msgid "MAVLink messages can be sent over almost any serial connection and does not depend upon the underlying technology (wifi, 900mhz radio, etc)"
+msgstr ""
+
+#: ../../source/docs/mavlink-basics.rst:11
+#: 598bb1e2ad4a44bfa098ebb5b500d0ce
+msgid "The messages are not guaranteed to be delivered which means ground stations or companion computers must often check the state of the vehicle to determine if a command has been executed"
+msgstr ""
+
+#: ../../source/docs/mavlink-basics.rst:14
+#: aca129886ac347d58aa08c904ca440d8
+msgid "Message Format"
+msgstr ""
+
+#: ../../source/docs/mavlink-basics.rst:20
+#: 72d9f93443c64cff9e4f77ade000cf29
+msgid "Messages are no more than 263 bytes (Mavlink version1.0) or 280 bytes (Mavlink version 2.0)."
+msgstr ""
+
+#: ../../source/docs/mavlink-basics.rst:21
+#: 313bf748fc89419b9196a0609a14579c
+msgid "The sender always fills in the ``System ID`` and ``Component ID`` fields so that the receiver knows where the packet came from.  The ``System ID`` is a unique ID for each vehicle or ground station.  Ground stations normally use a high system id like \"255\" and vehicles default to use \"1\" (this can be changed by setting the :ref:`MAV_SYSID <MAV_SYSID>` parameter, see also :ref:`MAV_GCS_SYSID<MAV_GCS_SYSID>` and :ref:`MAV_GCS_SYSID_HI<MAV_GCS_SYSID_HI>`).  The ``Component ID`` for the ground station or flight controller is normally \"1\".  Other MAVLink capable device on the vehicle (i.e. companion computer, gimbal) should use the same ``System ID`` as the flight controller but use a different ``Component ID``"
+msgstr ""
+
+#: ../../source/docs/mavlink-basics.rst:22
+#: f65b3cf769414aa48280f702049e5c78
+msgid "The ``Message ID`` field can be seen in the `common.xml <https://mavlink.io/en/messages/common.html>`__ and `ardupilot.xml <https://mavlink.io/en/messages/ardupilotmega.html>`__ next to the message name.  For example the `HEARTBEAT <https://mavlink.io/en/messages/common.html#HEARTBEAT>`__ message Id is \"0\""
+msgstr ""
+
+#: ../../source/docs/mavlink-basics.rst:23
+#: fceb0a4488b343869ac910659ff892a3
+msgid "The ``Data`` portion of the message holds the individual field values being sent"
+msgstr ""
+
+#: ../../source/docs/mavlink-basics.rst:24
+#: e7362298d1464ff0a0d33611bdfbcd88
+msgid "See this page for advice on how to :ref:`add support for a new MAVLink message <code-overview-adding-a-new-mavlink-message>`"
+msgstr ""
+
+#: ../../source/docs/mavlink-basics.rst:27
+#: b3fb4055fd74498d9aba309d7d50eacc
+msgid "High Level Message Flow"
+msgstr ""
+
+#: ../../source/docs/mavlink-basics.rst:33
+#: c658ad1878094d87b2f0577948f8bc15
+msgid "Once a connection is opened each device (aka \"System\") sends the `HEARTBEAT <https://mavlink.io/en/messages/common.html#HEARTBEAT>`__ message at 1hz"
+msgstr ""
+
+#: ../../source/docs/mavlink-basics.rst:34
+#: 1f4c8b56ebc14fba891757b96a94ce3e
+msgid "The ground station or companion computer :ref:`requests the data <mavlink-requesting-data>` it wants (and the rate) by sending messages of the following types"
+msgstr ""
+
+#: ../../source/docs/mavlink-basics.rst:36
+#: 6a28d32dafc44eb783345cfcbdf57f21
+msgid "`REQUEST_DATA_STREAM <https://mavlink.io/en/messages/common.html#REQUEST_DATA_STREAM>`__ supports setting the rate of groups of messages"
+msgstr ""
+
+#: ../../source/docs/mavlink-basics.rst:37
+#: 39d0f8dd2b144c198a88819911ea6aee
+msgid "`COMMAND_LONG <https://mavlink.io/en/messages/common.html#COMMAND_LONG>`__ containing a `SET_MESSAGE_INTERVAL <https://mavlink.io/en/messages/common.html#MAV_CMD_SET_MESSAGE_INTERVAL>`__ command provides precise control of which messages are sent (and their rate) but is only supported on ArduPilot 4.0 and higher"
+msgstr ""
+
+#: ../../source/docs/mavlink-basics.rst:39
+#: 09e95eee94834350887018d2048c70bc
+msgid "Ground station or companion computer send commands to the vehicle.  Details of the supported commands are :ref:`here for copter <copter-commands-in-guided-mode>` and :ref:`plane <plane-commands-in-guided-mode>`"
+msgstr ""
+
+#: ../../source/docs/mavlink-basics.rst:42
+#: 8d880f65f34344d9bac7134cd7884a00
+msgid "MAVLink1(v1) vs MAVLink2(v2)"
+msgstr ""
+
+#: ../../source/docs/mavlink-basics.rst:43
+#: d37be231e50241f5bac98a52621fdede
+msgid "In this document, MAVLink protocol versions v1 and v2 are referred to as MAVLink1 and MAVLink2 respectively. - MAVLink2 messages have a maximum of 280 bytes of length, as they implement compatibility flags and support for signature. - MAVLink2 extends MAVLink1 by allowing new fields to be added to existing MAVLink1 messages, supports new messages with ``Message ID`` over \"255\" and adds support for signing messages - MAVLink2 is backwards compatible with MAVLink1 meaning that if a device understands MAVLink2 messages it certainly understands MAVLink1 messages - If a device only capable of understanding MAVLink1 receives a message that includes additional fields (added under MAVLink2) the device will only see the original fields.  I.e. the device will be able to read the message but will not \"see\" the additional fields - A flight controller's serial port (presumably connected to a telemetry radio) can be set to use MAVLink2 by setting the ``SERIALx_PROTOCOL`` parameter to \"2\" (where \"x\" is the serial port number on the flight controller) -  See `Mavlink2 Documentation <https://mavlink.io/en/guide/mavlink_2.html>`__ for more information (especially on message extensions)"
+msgstr ""

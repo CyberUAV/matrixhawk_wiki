@@ -1,0 +1,567 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:5
+#: 67abcf6513004f598425de5c80daca37
+msgid "Using SITL"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:7
+#: cbff536daea949ce8cc9f7e841f039f8
+msgid "This article describes how :ref:`SITL <sitl-simulator-software-in-the-loop>` can be used to change the environment, simulate failure modes, and configure the vehicle with optional components."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:9
+#: 962ad6ad83224b2cb9e97780a197ab98
+msgid "SITL can be run under Linux using a tool named ``sim_vehicle.py`` from a Linux or WSL2 command line, or through :ref:`Mission Planner's Simulation feature <mission-planner-simulation>`. It can also be run in conjunction with a graphics visualization and/or physics modeling program like :ref:`Realflight<sitl-with-realflight>`."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:11
+#: 3a02791ba79343218df83ab7bfb1d92a
+msgid "In addition to running the simulation, a ground control station program will need to be run concurrently in order to control the simulation. With ``sim_vehicle.py``, `MAVProxy <https://ardupilot.org/mavproxy/index.html>`__ is automatically started. When using Mission Planner's simulation feature, it is used. You can also have more than one GCS attached, see :ref:`connect to different GCSs <using-sitl-for-ardupilot-testing_connecting_otheradditional_ground_stations>`."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:15
+#: ba56549c1f564fd799c1087aa9d6c752
+msgid "This page assumes you have already cloned the repository and set up the build environment if you wish to simulate your own code - see :ref:`Building the code <building-the-code>`, although this is not needed if using :ref:`Mission Planner's Simulation feature <mission-planner-simulation>` since it can easily run simulations on the current development code or stable code versions."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:19
+#: 727ca93dc35a40f6ab2030714eeb710e
+msgid "If you're just getting started with MAVProxy and SITL you may wish to start by reading the :ref:`Copter SITL/MAVProxy Tutorial <copter-sitl-mavproxy-tutorial>` (or equivalent tutorials for the other vehicles)."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:25
+#: 5b3d6b856c1d4c2db8e9e0df962b7837
+msgid "These instructions generally use :ref:`MAVProxy <mavproxy-developer-gcs>` to describe operations (e.g. setting parameters) because it presents a simple and consistent command-line interface (removing the need to describe a GCS-specific UI layout). Many of these operations can also be performed in *Mission Planner* (through the *Full Parameters List*) or any other GCS."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:36
+#: 8ca6af17fdb04ab49f566f88c8cf3782
+msgid "Using sim_vehicle.py"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:38
+#: afcd119165944be49e2cc6769ea1cfbe
+msgid "A startup script, ``sim_vehicle.py`` is provided to automatically build the SITL firmware version for the current code branch, load the simulation models, start the simulator, setup environment and vehicle parameters, and start the MAVProxy GCS. Many script start-up parameters can be specified, type this for a full list:"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:40
+#: c1f7d45616e74906b5341be6650018b2
+msgid "Generally, you can run SITL from the root of your ArduPilot clone."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:48
+#: a09a5d5811834ae097f61386a3db50ea
+msgid "Alternatively, when you initially configured your environment, if you elected to install ``Tools/autotest`` onto your path, you can run SITL from any directory like so:"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:54
+#: b37cb52560fb4e2e9aa7e366056b7882
+msgid "If you work with multiple clones of ArduPilot in different workspaces, it's recommend to call SITL directly to avoid accidentally running the wrong simulator."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:57
+#: e6206b55375e46d3b1098f44ab37caa4
+msgid "Selecting a vehicle/frame type"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:59
+#: c5ecf7c308d34fb7a521faacefb543cc
+msgid "The simulation will default to the vehicle type in the directory in which it is started. You can select the vehicle type if starting from any directory by starting the simulator calling **sim_vehicle.py** with the ``-v`` parameter."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:65
+#: 9a4af5f129cb4c4b978e39bd185c886f
+msgid "The frame type can also be changed with the ``-f`` parameter."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:73
+#: 9d2263c77a9745b7bfe0afade8a035bc
+msgid "Frame Types:"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:75
+#: 71b112bd5fc44c149371889683cdd269
+msgid "A partial listing of frame types is show below. For a current list, just type:"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:83
+#: d23a5aeb378c4e74a6a36bad0f5dcad8
+msgid "Vehicle"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:83
+#: d73808d2208c4afe923d39f59b4a75da
+msgid "Frame Type"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:88
+#: b767bb45166d4c579d3b6827599d81e1
+msgid "Plane"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:85
+#: f7068590d5d041c98b3c086a31624009
+msgid "plane (default if -f is not used)"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:88
+#: 7b9ac466f0ad4facbbe0363b45709e4f
+msgid "quadplane firefly plane-dspoilers plane-elevon plane-jet plane-tailsitter plane- vtail quadplane-cl84 quadplane-tilthvec quadplane-tilttri quadplane-tilttrivec quadplane-tri plane-3d"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:103
+#: 79dd0137cb134654a9a2140b44bfcb2a
+msgid "Copter"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:99
+#: 3713e22cce1f4ade972c1d9e6f6cf70e
+msgid "quad (default if -f is not used)"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:102
+#: 9dbfae56b5694866b8b74d61b6719fc1
+msgid "coaxcopter  dodeca-hexa heli heli-compound heli-dual hexa hexa-cwx hexa-dji octa octa-cwx octa-dji octa-quad octaquad-cwx  tri  cwx singlecopter  y6 djix"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:111
+#: 57c394c06b4f4ef38940b295ea307327
+msgid "Rover"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:110
+#: 23246052adc24fe89901d9200a6a27e4
+msgid "rover (default if -f is not used)"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:113
+#: 9e9434f4c5dc402287314f34c4f33daf
+msgid "balancebot rover-skid sailboat sailboat-motor"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:117
+#: 5cc66750688840a49644ff9bba1d2c74
+msgid "It is important to select the proper frame type. This not only loads the correct parameter set, but also selects the correct physics model. In real life, for example, you can configure and setup the ArduPlane firmware for any QuadPlane, but you cannot do that in SITL without having selected the exact QuadPlane frame type for the simulation to get the correct physics model. If a frame type is not selected, a default set for the vehicle type will be loaded, as indicated above."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:121
+#: 986cfe39646240d0ac3b4a37d9c8522b
+msgid "Setting vehicle start location"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:123
+#: e8eb0da5e0a14022b251476676f7840c
+msgid "You can start the simulator with the vehicle at a particular location by calling **sim_vehicle.py** with the ``-L`` parameter and a named location in the `ardupilot/Tools/autotest/locations.txt <https://github.com/ArduPilot/ardupilot/blob/master/Tools/autotest/locations.txt>`__ file."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:129
+#: d4cc64205a5043538be4e096e82260bf
+msgid "For example, to start Copter in *Ballarat* (a named location in **locations.txt**) call:"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:139
+#: 39f30dab06d143f292ad3f653d016ce3
+msgid "You can add your own locations to the file. The order is Lat,Lng,Alt,Heading where alt is MSL and in meters, and heading is degrees. If the flying location is well-used then consider adding it to the project via a pull request."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:144
+#: 0cf52b32d56d4e90bb0f7f0970bb7a3b
+msgid "You can add your own private locations to a local locations.txt file, in the same format as the main file.  On linux the file is located in ``$HOME/.config/ardupilot/locations.txt`` - you will need to create this file using your favourite text editor."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:152
+#: 6df23cff223a4fd691ff6a96d5568737
+msgid "Loading a different default parameter set"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:154
+#: 21eb9a68dfc748629ab38129fd08667f
+msgid "A set of default parameters are automatically selected by the frame type. However, you may select a different parameter file by using the ``--add-param-file=`` option, instead of manually loading them via the GCS after the simulation starts:"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:160
+#: d8c13f817b624b8690b92eb2ef5c89ed
+msgid "the default working directory will be the directory in which sim_vehicle.py was started."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:162
+#: 15b3d7321cb94184a54bcd91442c3ab3
+msgid "the \"default\" parameter set emulates the parameter default values contained in the firmware. These are used at startup for parameters, UNLESS the user has previously changed them for a parameter(s), in which case those changed values are used. In SITL, these changes are stored in a file in the simulation startup directory named ``eeprom.bin``. If you wish to startup with only the default values, either that file can be erased, or the ``-w`` options can be used."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:169
+#: c748fd3cb74940de9b0374bd8d22c00c
+msgid "Adding Simulated Peripherals into the Simulation"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:171
+#: f63105fec132451cad718ef03ba66a98
+msgid "See :ref:`adding_simulated_devices`"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:174
+#: 3228d0ea88374b61981cf5c89c814954
+msgid "Using real serial devices"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:176
+#: dabf3cbb437e490c88b8327be382206b
+msgid "Sometimes it is useful to use a real serial device in SITL. This makes it possible to connect SITL to a real GPS for GPS device driver development, or connect it to a real OSD device for testing an OSD."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:180
+#: 8994a919d60145fa88d6720b65f6e203
+msgid "To use a real serial device you can use a command like this:"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:186
+#: 532af222c5fc455a912ffef9bc91d894
+msgid "what that does it pass the --serial2 argument to the ardupilot code, telling it to use /dev/ttyUSB0 instead of the normal internal simulated GPS. You can find the SITL serial port mappings :ref:`here <learning-ardupilot-uarts-and-the-console>`"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:190
+#: 5de9a608f27446528f4c810ce5662985
+msgid "Any of the 8 UARTs can be configured in this way, using serial0 to serial7."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:192
+#: fccb69a57a714a8fa76ca82cd619538a
+msgid "Typically serial devices can be connected to a computer's USB port through an FTDI adapter, but note that these generally do not support half-duplex. In order to communicate with devices in this way you should make sure your user has appropriate access on linux-type systems to the dialout group. On WSL it is also usually necessary to setup the port once the device has been connected before trying to interact with it through SITL. For instance for COM22:"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:203
+#: 1d157c238c6349cab59fe8ad95d30d1f
+msgid "You can set additional parameters on the uart in the connection string, so for instance to use a device on SERIAL1 at 115k baud only, specify:"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:210
+#: bf34813e0f3d488d84589444d4987ba4
+msgid "Similar to this if you were running a vehicle in SITL via Cygwin on Microsoft Windows and you wanted to send the MAVLink output through a connected radio on COM16 to AntennaTracker you can use a command like this - note under Cygwin comm ports are ttyS and they start at 0 so 15 is equivalent to COM16:"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:221
+#: dce6173b3f074cd3961230dfaf73f207
+msgid "Swarming with SITL"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:223
+#: c2e53f61d19146df90bf9f8544ead85b
+msgid "SITL has support for launching multiple vehicles from a single command. With this method, SITL is restricted to launching vehicles of the same type."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:226
+#: 337b3deae96c4444b4f9565378930422
+msgid "When launching multiple vehicles, each one will need a unique SysId parameter: :ref:`MAV_SYSID<MAV_SYSID>`. The easiest method to avoid SysId conflicts is with the ``--auto-sysid`` option."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:229
+#: 0ac52771b32348e19c7b8e625f94ce64
+msgid "The number of vehicles is set with ``--count`` option."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:231
+#: befe898966134096a99e642d758642b5
+msgid "Up to this point, all the vehicles would spawn in the same default location and intersect."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:233
+#: d71f2f48f7d8473f86e93d1f1f00e596
+msgid "To avoid that, they must be spawned in unique locations. There are two primary approaches, using either a swarm offset line or a swarm configuration file. Both require a location to be set with ``--location``."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:237
+#: a7af5314fbb14044a0b2852af4f4c9ce
+msgid "When using a swarm offset line, the option ``--auto-offset-line 90,10`` will space the vehicles out at a line with heading of 90 degrees orientation. The vehicles will be spaced 10 meters apart. Thus, they will be spread out east-west."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:241
+#: 73b249838c204241bcffdfb7f56a39b2
+msgid "To send all mavlink data between the vehicles add ``--mcast``."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:243
+#: 83921bb89ef9422f999a3e5a0f6c0ffe
+msgid "Putting it all together for five Copter vehicles on an auto-offset-line at CMAC:"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:250
+#: 8ea00840b75d4da6ad4176fa39f6f089
+msgid "The other way to spawn the vehicles is the swarm configuration file. An example configuration is found in ``Tools/autotest/swarminit.txt``, with the file format described in the header. This allows configurable ENU offsets as well as an initial absolute heading for each vehicle."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:258
+#: dd93536ca62b4a8987328688a0aa2b38
+msgid ":ref:`MavProxy's Multiple Vehicle Guide <mavproxy:multi>` contains information to control the swarm."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:261
+#: 5fc7e0c5e3ab48339ac69dbdc25afbd5
+msgid "Replaying serial data from Saleae Logic data captures"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:263
+#: 6ec0c78059c949d0913989ce1305b20b
+msgid "Saleae Logic is often used when decoding and debugging protocols for the first time.  The \"async serial\" analyzers can export the data to a CSV, and this data can then be replayed through ArduPilot's simulated UARTDriver to test parsing of that data."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:265
+#: 0b0de1ca2662400a8f7b63a0752a6f6c
+msgid "Serial data is replayed into the simulation at the same rate it appeared on the wire when taking the trace, preserving frame-gaps and the like."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:267
+#: 2f220109996c4bed882e9fcc13b9c211
+msgid "After you have Logic decoding the serial stream, export the data using this interface element:"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:273
+#: 3e6ec70dbef947f0be009578a765498a
+msgid "That data should be in this format:"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:288
+#: bf7f028a4b3246d0a236faee3705c143
+msgid "Place this capture file into the root directory of your ArduPilot repository checkout."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:290
+#: 44011f82fa4041b59517aa4af83853a8
+msgid "Specify the schema and filename on the ``sim_vehicle.py`` command-line.  The following example inserts a breakpoint where the data is being read into the parser:"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:298
+#: 85d180de50fc44579fa9dfb90ba72a89
+msgid "Your ``SERIAL5_PROTOCOL`` must be set appropriately for this data to be read."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:302
+#: 2acca458e0e847e68637101a7bb4f35f
+msgid "There is a 5s simulated-time delay before data is fed into the simulation from the file."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:305
+#: db3d7b92c4b84dc098897826466d5446
+msgid "Using a different GCS instead of MAVProxy"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:307
+#: 5edbb573d388413c950ee8184dd6fabb
+msgid "Start ``sim_vehicle`` without starting MAVProxy using the ``--no-mavproxy`` option. SITL will be listening for any GGS station to connect via TCP port 5760."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:310
+#: 5d26be16fb224079bf6b9efa3859edcc
+msgid "Many GCS can only initiate the connection via TCP. For Mission Planner or QGC, select TCP, the host ip that sim_vehicle is running on or 127.0.0.1 if running locally, and connect."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:315
+#: 9ed63f1590b34988b936be749ff6acd4
+msgid "Mission Planner: Connecting toSITL using TCP"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:318
+#: 6466739856004d33b0c2a8ff5452d637
+msgid "Using a different GCS instead of MAVProxy (via UDP)"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:320
+#: 2d22900579994f3c98599b7539908308
+msgid "To connect another GCS using the ``--no-mavproxy`` option and UDP requires adding a startup option to have the simulation output heartbeats on UDP so the GCS can connect:"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:326
+#: d642393b1c5d43cbae69d1788db85966
+msgid "where <gcs ip> would be 127.0.0.1 if the GCS is on the same PC or the ip address of a remote PC running a GCS"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:328
+#: 48448ae814564b60a36a5a74c98b096a
+msgid "In Mission Planner, connect to the SITL UDP port by selecting **UDP** and then the **Connect** button. Enter the port to listen on (the default port number of 14550 should be correct if SITL is running on the same computer)."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:336
+#: 211a9fcdb03b4c4fa76b063396459ac9
+msgid "Mission Planner: Connecting to a UDPPort"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:339
+#: 9ae46439eb16454f8ef5c551e6b2f9eb
+msgid "Using Mission Planner's Simulation feature"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:341
+#: eefcaed869bc46f69a11e08d3e44c081
+msgid "Instead of using ``sim_vehicle.py`` under Linux or WSL, you can also simulate using Mission Planner's simulation feature."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:343
+#: 43d11fc04b274369a370e570447071c5
+msgid "See :ref:`mission-planner-simulation`"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:348
+#: 593a5689e4b942f5be2822e5682d1856
+msgid "Connecting other/additional ground stations"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:350
+#: 84b50d3c22034247bbfe47479a17eef3
+msgid "SITL can connect to multiple ground stations by using MAVProxy or Mission Planner to forward UDP packets to the GCSs network address."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:356
+#: 2c667a92bbbb4dec91a35d6ff88aef72
+msgid "Using MAVProxy (UDP) forwarding"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:358
+#: 277dab2e2a2e44899a81f1a5a969ced5
+msgid "Multiple ground stations can be connected to SITL by using MAVProxy to forward UDP packets to the GCSs network address (for example, forwarding to another Windows box or Android tablet on your local network). The simulated vehicle can then be controlled and viewed through any attached GCS."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:364
+#: 2db807e5306544b4902144971ea4024d
+msgid "First find the IP address of the machine running the GCS. How you get the address is platform dependent (on Windows you can use the 'ipconfig' command to find the computer's address)."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:368
+#: 501b7ae931494144b4a038d40dd95185
+msgid "Assuming the IP address of the GCS is 192.168.14.82, you would add this address/port as a MAVProxy output using:"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:375
+#: 8ee8f45925284685ac7b1fbd0a79c2a0
+msgid "The GCS would then connect to SITL by listening on that UDP port."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:379
+#: f17789e49e9d4aa59bee7360fb2abd86
+msgid "If you're running the GCS on the **same machine** as SITL then an appropriate output may already exist. Check this by calling ``output`` on the *MAVProxy command prompt*:"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:390
+#: 870e975915064a21a0e3cba1dae53522
+msgid "In this case we can connect a GCS running on the same machine to UDP port 14550 or 14551. We can choose to connect another GCS to the remaining port, and add more ports if needed."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:395
+#: cde8b41f9ef54e95bc79c993d15dbc67
+msgid "Using Mission Planner Forwarding"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:397
+#: a19a7f220b9c4d3bb4fbf3e433d325e7
+msgid "Mission Planner can forward to other GCS using it Mavlink Mirror. Under SETUP/Advanced/Mavlink Mirror set the connection type (usually UDP Client), baud rate (11520 for UDP),optional write access to allow the connecting GCS to changes things, and press connect. A listening GCS will automatically connect to SITL."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:403
+#: cdf0d321105843eeabaed31baad22da1
+msgid "SITL Simulation Parameters"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:411
+#: 60dbaf94b5b6485697a041bbd6aaa2a0
+msgid "Adding simulated devices to sim_vehicle"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:419
+#: 770e0d9f23f349d1819f5ea14e7522df
+msgid "Accessing log files"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:421
+#: 044b53d617604cc488fe6e6ea1d1d336
+msgid "SITL supports both Block Logging and SD card storage DataFlash logs (the same as used with physical autopilots). The SD card logs are stored in a \"logs\" subdirectory in the directory where you start sim_vehicle or in Mission Planner's sitl/logs directory in the its documents folder. The Block Flash logs are stored in the blackbox.bin file. You can also access the logs via MAVLink using a GCS, but directly accessing SD card emulated logs in the logs/ directory is usually more convenient."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:425
+#: ba53d81674594e5eaac8b24584057d5b
+msgid "To keep your logs organized it is recommended you start SITL using the \"--aircraft NAME\" option. That will create a subdirectory called NAME which will have flight logs organized by date. Each simulation run will get its own directory, and will include the parameters for the flight plus any downloaded waypoints and rally points."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:432
+#: 650e41ecd420483fb509b97e5da22b44
+msgid "Graphing vehicle state"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:434
+#: e8fc5afae04f4ffc9ac4d1bed02aede1
+msgid "MAVProxy allows you to create graphs of inputs, outputs, internal variables, etc. by loading the ``graph`` module."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:442
+#: 96bf81fc645f4003b6ae190c5399d546
+msgid "You can then create graphs of vehicle state using the graph command. For example, to graph the RC channel 3 input during the simulation:"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:448
+#: c3c8998c870c4665b902a88eb22a2568
+msgid "As with most commands, you can type ``graph`` and then double tab to see available completions. In the example above the `RC_CHANNELS` group contains the 16 rc channels, so typing ``graph RC_CHANNELS``, then double tab would show those."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:450
+#: f3db7d2d3185456bbdd25fb9c87625ed
+msgid "Since these are rather long to type, MAVProxy allows for the creation of shorter aliases.  There have been many aliases created in a file present in the ArduPilot source tree in the Tools/vagrant sub-directory called **mavinit.scr**. If this file is copied and placed in your home directory and renamed to **.mavinit.scr**, it will be used upon *MAVProxy's* initialization.  Common ones are: *g* for graph, *grc* to graph the RC inputs, *gservo8* to graph the first 8 output channels instead of typing long item names eight times, etc. Using this alias initialization file also has the advantage of automatically loading the graph module upon startup, so you will not have to load it."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:452
+#: c765b636cbf845e0bbc2749770fd97ab
+msgid "Mission Planner allows graphing using the \"tuning\" box in the DATA tab's map screen. Checking that box will open a graph screen. Double clicking it will present a selection dialog of what messages/data to graph."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:455
+#: 84a45ff2c7b540df84eb66b345e9c822
+msgid "Using a joystick"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:457
+#: 234a4bfdc2fd45cbb85be93729eb594d
+msgid "It can be useful to use a joystick for input in SITL. The joystick can be a real RC transmitter with a USB dongle for the trainer port, or something like the RealFlight interlink controller or a wide range of other joystick devices."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:462
+#: c7d6c2dff1cc4358a940330134c71479
+msgid "Before you use the joystick support you may need to remove debug statements from the python-pygame joystick driver on Linux. If you don't then you may see lots of debug output like this:"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:470
+#: ab9de5a53838413bb3fc1836781abd25
+msgid "To remove this debug line run this command:"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:476
+#: 5040a493fa8e486a8770d55212a45754
+msgid "note that this needs to be one long command line. Ignore the line wrapping in the wiki. If you have installed the joystick support using the instructions on setting up the ArduPilot code building environment, then this will probably NOT be required."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:479
+#: 1a5fe3dd9f0f4ce292a10101b497469c
+msgid "Then to use the joystick in MAVProxy run:"
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:485
+#: ba6ec36be4f34ab684e8386aab38eb71
+msgid "If you want to add support for a new joystick type then you need to add a file for it following these `instructions <https://github.com/ArduPilot/MAVProxy/blob/master/docs/JOYSTICKS.md>`__ . Note that you can also use this information to customize the operation of your joystick if it already supported. Just modify it file appropriately."
+msgstr ""
+
+#: ../../source/docs/using-sitl-for-ardupilot-testing.rst:487
+#: aa269265c2cd46659e0ce0a7d8078a9d
+msgid "To use a joystick in Mission Planner under Windows, be sure to setup the joystick using Window's Game Controller control panel, then under Mission Planners DATA screen Actions tab, click Joystick, then setup the axes and buttons, and enable it. See :ref:`common-joystick` for more information."
+msgstr ""

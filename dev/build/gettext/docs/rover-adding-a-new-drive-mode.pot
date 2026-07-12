@@ -1,0 +1,107 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/rover-adding-a-new-drive-mode.rst:5
+#: d377919932444ca28e22984d2ba884e8
+msgid "Rover: Adding a New Drive Mode"
+msgstr ""
+
+#: ../../source/docs/rover-adding-a-new-drive-mode.rst:7
+#: 53712d9029524d89bff4fe4736f78305
+msgid "This page covers the basics of how to create a new driving (i.e. the equivalent of Manual, Steering, etc).  A real example of adding a new flight mode can be found in `this commit <https://github.com/ArduPilot/ardupilot/commit/04e9228fa073c10ebe6f6f1f83f9d3c29a974315>`__ that first added the ACRO mode."
+msgstr ""
+
+#: ../../source/docs/rover-adding-a-new-drive-mode.rst:9
+#: a90d94e08f6b46dca7f522ac4f2815fe
+msgid "As a reference the diagram below provides a high level view of Rover's architecture."
+msgstr ""
+
+#: ../../source/docs/rover-adding-a-new-drive-mode.rst:14
+#: 4102d08d3fdd431b84283745cc7274f1
+msgid "Pick a name for the new mode (i.e. \"NEW_MODE\") and add it to the mode enum in `mode.h <https://github.com/ardupilot/ardupilot/blob/master/Rover/mode.h#L21>`__ as \"NEW_MODE\" has been added below."
+msgstr ""
+
+#: ../../source/docs/rover-adding-a-new-drive-mode.rst:32
+#: 3a7cbb93a9914e30975ebe08f3a8898a
+msgid "Define a new class for the mode in `mode.h <https://github.com/ArduPilot/ardupilot/blob/master/Rover/mode.h>`__. It is probably easiest to copy a similar existing mode's class definition and just change the class name (i.e. copy and rename \"class ModeAcro\" to \"class ModeNewMode\"). The new class must implement the ``mode_number()``, ``name4()`` and ``update()`` methods."
+msgstr ""
+
+#: ../../source/docs/rover-adding-a-new-drive-mode.rst:43
+#: d4fc310b15e44b84b447849e7df18128
+msgid "You may also want to implement the protected ``_enter()`` method to perform any initialisation required as the vehicle enters the mode (i.e. init position controllers as the user commands the vehicle to switch into the new mode) or ``_exit()`` to perform any cleanup as the vehicle leaves the mode:"
+msgstr ""
+
+#: ../../source/docs/rover-adding-a-new-drive-mode.rst:52
+#: e95be23b00b140ccb0ac9857d1ad4273
+msgid "Finally there are some simple methods returning true/false that you may want to override that control features such as whether the vehicle can be armed in the new mode:"
+msgstr ""
+
+#: ../../source/docs/rover-adding-a-new-drive-mode.rst:65
+#: e705f5b5466b491992bb8efbbd3bf0d2
+msgid "Create a new mode_<new flight mode>.cpp file based on a similar mode such as `mode_acro.cpp <https://github.com/ArduPilot/ardupilot/blob/master/Rover/mode_acro.cpp>`__ or `mode_steering.cpp <https://github.com/ArduPilot/ardupilot/blob/master/Rover/mode_steering.cpp>`__. This new file should implement the ``update()`` method which will be called 50 times per second.  This function's main responsibility is to decode the user's input, create new heading and steering targets and then call the steering and throttle controllers."
+msgstr ""
+
+#: ../../source/docs/rover-adding-a-new-drive-mode.rst:71
+#: a723a8daa3354ba8a29146bf6a189803
+msgid "Below is an excerpt from `mode_acro.cpp <https://github.com/ArduPilot/ardupilot/blob/master/Rover/mode_acro.cpp>`__ that demonstrates how the pilot's input is converted into target speed (in meters/second) and a target turn rate."
+msgstr ""
+
+#: ../../source/docs/rover-adding-a-new-drive-mode.rst:85
+#: cbfc63202b3d4adc81eb28c33853f257
+msgid "Near the bottom of `mode_acro.cpp <https://github.com/ArduPilot/ardupilot/blob/master/Rover/mode_acro.cpp>`__ you will see how these targets are sent to the steering and throttle controllers. The steering and throttle controller interfaces can be found in the `APM_Control/AR_AttitudeControl library <https://github.com/ArduPilot/ardupilot/blob/master/libraries/APM_Control/AR_AttitudeControl.h>`__.  The parent Mode class also provides some navigation methods that are defined in `mode.h <https://github.com/ArduPilot/ardupilot/blob/master/Rover/mode.h#L69>`__ (search for \"navigation methods\")."
+msgstr ""
+
+#: ../../source/docs/rover-adding-a-new-drive-mode.rst:95
+#: 177b12e4272e46e7820ad4740c06e9ac
+msgid "Instantiate the new mode class in `Rover.h <https://github.com/ArduPilot/ardupilot/blob/master/Rover/Rover.h#L382>`__ by searching for \"ModeAcro\" and then adding the new mode somewhere below."
+msgstr ""
+
+#: ../../source/docs/rover-adding-a-new-drive-mode.rst:108
+#: c53052e2cc3542a28f26b58444be9f37
+msgid "Also at the top of Rover.h add the new mode as a \"friend\" which allows the mode to access the Rover class's internal variables and functions."
+msgstr ""
+
+#: ../../source/docs/rover-adding-a-new-drive-mode.rst:124
+#: 08bb178fd42248fb969de46eecd16e49
+msgid "In `mode.cpp <https://github.com/ArduPilot/ardupilot/blob/master/Rover/mode.cpp>`__ add the new mode to the ``mode_from_mode_num()`` function to create the mapping between the mode's number and the instance of the class."
+msgstr ""
+
+#: ../../source/docs/rover-adding-a-new-drive-mode.rst:142
+#: ad44dabe8bab45a69058ed41ee9f6ff1
+msgid "Add the new flight mode to the list of valid ``@Values`` for the ``MODE1 ~ MODE6`` parameters in `Parameters.cpp <https://github.com/ArduPilot/ardupilot/blob/master/Rover/Parameters.cpp#L242>`__ (Search for \"MODE1\").  Once committed to master, this will cause the new mode to appear in the ground stations list of valid modes.  Note that even before being committed to master, a user can setup the new flight mode to be activated from the transmitter's flight mode switch by directly setting the MODE1 (or MODE2, etc) parameters to the number of the new mode."
+msgstr ""
+
+#: ../../source/docs/rover-adding-a-new-drive-mode.rst:160
+#: b2bbdd2f2581456bb3abc2806a29b6c8
+msgid "**As a side note, Rover has 3 high level controllers:**"
+msgstr ""
+
+#: ../../source/docs/rover-adding-a-new-drive-mode.rst:165
+#: 2c04bb86eb6a4b2ba5e32f0b80e4a6cc
+msgid "the L1 controller converts an origin and destination (each expressed as a latitude, longitude) into a lateral acceleration to make the vehicle travel along the path from the origin to the destination.  This lateral acceleration is then passed into the steering controller."
+msgstr ""
+
+#: ../../source/docs/rover-adding-a-new-drive-mode.rst:166
+#: d53620f533d9453f957e1788d280b9e5
+msgid "the steering controller can convert a desired lateral acceleration, a angle error or a desired turn rate into a steering output command (expressed as a number in the range -4500 to +4500) that should be fed into the motor library (see `AR_MotorsUGV.h <https://github.com/ArduPilot/ardupilot/blob/master/Rover/AP_MotorsUGV.h>`__)"
+msgstr ""
+
+#: ../../source/docs/rover-adding-a-new-drive-mode.rst:167
+#: d9c4e25c65564a2bba8d63cdb3fd98f1
+msgid "the throttle controller can convert a desired speed into a throttle command (expressed as a number from -100 to +100) that should be fed into the motor library (see `AR_MotorsUGV.h <https://github.com/ArduPilot/ardupilot/blob/master/Rover/AP_MotorsUGV.h>`__)"
+msgstr ""

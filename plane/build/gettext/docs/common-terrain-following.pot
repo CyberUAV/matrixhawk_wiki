@@ -1,0 +1,484 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-terrain-following.rst:5
+#: d52e20241f694c0d82c2e01915339d2f
+msgid "Terrain Following"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:7
+#: 22be302b26244f4393634c1e33de63d0
+msgid "You can use automatic terrain following for fixed wing aircraft. This page explains how terrain following works, how to enable it and what its limitations are."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:11
+#: b3ef3b0956f34978b257b5bb2e25b1de
+msgid "If using Copter, see :ref:`Copter specific terrain following instructions here <copter:terrain-following>`."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:17
+#: eb05da0ae2ef4ec5a4bca06c750da72f
+msgid "How it works"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:19
+#: 963638df945c4e7db454f8cde758092b
+msgid "Terrain following works by maintaining a terrain database on the autopilot which gives the terrain height in meters above sea level for a grid of geographic locations."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:22
+#: 3e86ae83856a40998d94d620ad021c78
+msgid "If the autopilot has a microSD card this database is stored in the APM/TERRAIN directory on the microSD card."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:23
+#: f6cb2d5a69d1444ea3b3114c80359d83
+msgid "If the autopilot does not have a microSD card, there is an option to enable data to be retrieved directly from the GCS into RAM on the autopilot"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:24
+#: 1c44b3725cfe49549a0cc776dac8694a
+msgid "On SITL the database is stored in the ./terrain folder relative to the directory where the SITL process is running"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:26
+#: 3da1faeae8744c2b85ae0f9ae47fc239
+msgid "The database is populated automatically by the autopilot requesting terrain data from the ground station over a MAVLink telemetry link. This can happen either during flight planning when the autopilot is connected over USB, or during flight when connected over a radio link."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:31
+#: 64d02045fb024e7abb6687cdcec9956c
+msgid "One can directly download terrain data via PC to the SD card using the this `web utility <https://terrain.ardupilot.org/>`__. See below."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:33
+#: 0b645d9a13c24afb8dc212f7c7c4ea74
+msgid "The data is only transferred if the autopilot has a GPS lock. So to make sure your missions have the terrain data prior to flight (in case the ground station is not connected during the flight and/or does not have internet connection to obtain the data), be sure that GPS lock is in effect when loading the mission to the autopilot."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:36
+#: 4e4238e71ebe48fca78be45e7f940ce4
+msgid "SD Card support for Terrain data"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:38
+#: 0a48a5c6d1594685a48eef3219d222f5
+msgid "Terrain following works best if the autopilot has an onboard SD card for storage."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:40
+#: 72890414ea4844e4a3566bea93629d4e
+msgid "Once the terrain data is sent from the GCS to the autopilot it is stored on the microSD card, so that it is available even when the GCS is not connected. This makes it possible for an autopilot with an SD card to use terrain data to perform a terrain following RTL (Return To Launch) even when it is not able to talk to the ground station."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:46
+#: de8d542c3b6144af9d45d31a28b529ce
+msgid "During flight the ArduPilot code automatically pages in the needed terrain data from the microSD card into memory as the aircraft approaches a new area. By default it maintains an area of about 7km by 8km in memory if the default terrain grid spacing (100m) is used. See below for options to change the default behaviour."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:52
+#: ca97b6d502584d988c9c205653cfdf36
+msgid "In addition to any terrain data for the immediate vicinity of the aircraft, ArduPilot also asks the ground station for terrain data for any mission waypoints which are loaded, and for any rally points which are loaded. This ensures that terrain data is available on the microSD card for a whole mission even if the GCS becomes unavailable."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:59
+#: cbadbabbfd92414ca48459d5f1d31626
+msgid "Terrain Following Flight Modes"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:61
+#: 18168e225c724778b03b403389ac6df9
+msgid "Use of terrain following in specific flight modes is controlled by the :ref:`TERRAIN_FOLLOW<TERRAIN_FOLLOW>` parameter. That parameter defaults to off, so no terrain following will be used in those modes. Setting the bitmask in :ref:`TERRAIN_FOLLOW<TERRAIN_FOLLOW>` determines which altitude controlled modes terrain following is active. For example, setting it to \"10\" enables following in FBWB and AUTO. Setting it to \"1\" enables it in all available modes."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:66
+#: 3e1e21c7b281456eb211459210ba73e0
+msgid "Terrain Following in non auto modes can be disabled with an RC switch assigned ``RCx_OPTION`` = 86. When enabling (<1200us) or disabling (>1800us) terrain following with the switch, the present altitude will be used as the target set point either above terrain, or home, respectively. The target altitude can be changed as normal with elevator whether the altitude reference being used is above home or above terrain."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:72
+#: 9fb81a6f39a14aa28796e33d88eff0cb
+msgid "Use of terrain following in AUTO missions is controlled on a waypoint by waypoint basis using the reference frame of the waypoint. Normal (non terrain following) waypoints have a \"Relative\" reference frame, and altitudes are specified relative to the home location, not by the :ref:`TERRAIN_FOLLOW<TERRAIN_FOLLOW>` parameter. Terrain following waypoints have a \"Terrain\" reference frame, and altitudes are relative to the ground level given in the terrain database."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:79
+#: f39ed3cf6e9b43719ae81c67241a88a5
+msgid "in AUTO mode autolandings, the :ref:`TERRAIN_FOLLOW<TERRAIN_FOLLOW>` parameter does have an impact, when a rangefinder is also used. See :ref:`rangefinder-autolanding`."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:82
+#: f98cf100046a45eab6c86a79ff3c837c
+msgid "See :ref:`common-understanding-altitude` for altitude definitions."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:86
+#: eb42830696494efeb2f0fb1d2149baf7
+msgid "Uses of Terrain Following"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:88
+#: cc58e900dd054cb7bd8913f2250241b1
+msgid "Terrain following is very useful when flying ArduPilot in areas where the terrain may vary significantly. Key uses are:"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:91
+#: aadcbb3b1c69495e81c352a6777edc6b
+msgid "**Safe RTL**. Being able to come over a hill rather than trying to fly through it when you enter RTL in a hilly area is very useful!"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:93
+#: ef89301c9e0e412bae4ed118453d9f24
+msgid "**Aerial Photography.** It is useful to be able to maintain a constant altitude over the ground when taking a sequence of aerial photos"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:96
+#: d0e8a9f63f1343cd80371844fff41694
+msgid "**FPV flying.** When flying FPV in CRUISE mode it is useful to maintain constant height above the ground so you can spend more time enjoying the scenary and less time avoiding hills"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:99
+#: f3c314cbcca143ea82f18acb6b8b002c
+msgid "**Regulatory Compliance.** Many countries have restrictions on the altitude drones must fly at or below, often 400' (about 120m). With terrain following enabled, missions items and other limits can be specified in AGL (terrain) frame."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:105
+#: a3bc85dd46884ba7b54be72f926e9b78
+msgid "Sources of Terrain Data"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:107
+#: c77ea957fe3145f4a13526bbb1935cf9
+msgid "The ground station is normally responsible for providing the raw terrain data which is sent to the aircraft via MAVLink. Mission Planner, QGroundControl, SiYi UniGCS and MAVProxy support the required TERRAIN_DATA and TERRAIN_REQUEST MAVLink messages needed for terrain following download support."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:111
+#: 7eff08daed9047bea122f0df88a0f88c
+msgid "Mission Planner and MAVProxy supply the ArduPilot JAXA ALOS sourced data for 100m and 30m spacing"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:112
+#: 7928366df4954ec3868682b0b478e6c3
+msgid "QGroundControl supplies COP30 (Copernicus DEM - Global and European Digital Elevation Model) sourced data for 100m and 30m spacing"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:113
+#: c3a89cde4feb46ebba46c2c644104b9d
+msgid "SiYi UniGCS supplies terrain data (NASA - SRTM Shuttle Radar Topography Mission Global 1 arc second V003) for 100m and 30m spacing"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:116
+#: 7bbaa84df1804a9aabc7365580b94e04
+msgid "SiYi terrain data: NASA JPL. (2013). *NASA Shuttle Radar Topography Mission Global 1 arc second V003* \\[Data set\\]. `NASA Earth Sciences Data Sets <https://www.earthdata.nasa.gov/data/catalog/lpcloud-srtmgl1-003>`__"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:118
+#: 1eba52b692264ca7b9a9fca0a9e37775
+msgid "If you are using a different ground station that doesn't support TERRAIN_REQUEST and TERRAIN_DATA, in order to download terrain data you will need to to either pre-load the data on your SD card or connect using one of the above stations in order to allow ArduPilot to load terrain data onto your board on the ground or in flight. Once terrain data is loaded, it is saved permanently on the microSD card."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:123
+#: f8d686ed9389490482acb1bbc5b21f48
+msgid "Unless the ground control station uses a different server with support for different spacing, setting the :ref:`TERRAIN_SPACING <TERRAIN_SPACING>` parameter other than 100m or 30m provides no better resolution, and only consumes more space on the SD card."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:126
+#: 461cfd0b6d3f42cfa3fecfe4204bda12
+msgid "Terrain Data is downloaded any time you save or connect with a loaded mission with these ground stations or, if flying, the autopilot will request data if it's flying into an area not already downloaded, assuming the ground station can provide it. The ground station may have it's own cache of previously requested data, but if if flying in an area where there is no cached data, an internet connection is required by the ground station for this to work."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:131
+#: 33857adc644b436fb30b232ee467398a
+msgid "If :ref:`TERRAIN_OPTIONS<TERRAIN_OPTIONS>` bit 0 (value +1) is set, the terrain data will not be downloaded from the ground station."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:133
+#: 60f73fbd3161455b832aa0c329edb4bc
+msgid "While the autopilot will request the terrain data around waypoints and home location, if it is not connected to a GCS that can supply enroute tiles, and if the relevant terrain data is not on the SD Card, the autopilot just interpolates between the terrain elevation of the waypoints. See below:"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:136
+#: ef6c25d3bee246f18489d545a402bf3a
+msgid "If you are not flying with a GCS that can fetch and supply terrain data as the vehicles flies between waypoints, then you may need to load terrain data covering the flight route and/or area for RTL paths manually."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:139
+#: 4ec7aa3d77be4264aae71ee366d97842
+msgid "You can download a set of terrain data tiles at either 100m (SRTM3) or 30m (SRTM1) for any anticipated flight area using this `web utility <https://terrain.ardupilot.org/>`__."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:144
+#: e71c5395e3a2416a85f9ee942aa75c39
+msgid "It will create tiles for the specified radius around a geographic location. Then you can download them, unzip and write in the APM/TERRAIN folder of the SD card."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:146
+#: 83e831bbbdff47b4bb02b5c5e9d5c0cd
+msgid "You can also download .zip files for entire continents, or individual tiles from `here <https://terrain.ardupilot.org/continentsdat3/>`__."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:148
+#: 962968343e294746986955c409c53c04
+msgid "You may also want to obtain higher resolution data, available from commercial sources online, if you have specialized requirements."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:150
+#: 7b6907f9edad4e5d953c40979263f186
+msgid "It's a very good idea to remove the SD card from the AutoPilot and copy large terrain data sets directly to the /APM/TERRAIN folder from your PC, as copying them via MAVFtp in Mission Planner using a USB or other MAVlink connection is likely to take many, many hours or even days."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:155
+#: 3297c2b0d1c845e6b882b3b90a3f60fc
+msgid "Terrain Spacing"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:157
+#: f863d14b05b0420eb18e25434e71f0cd
+msgid "The ArduPilot terrain code has a user settable parameter called :ref:`TERRAIN_SPACING<TERRAIN_SPACING>` which controls the grid spacing which is used for requests for terrain data from the aircraft to the ground station. The default :ref:`TERRAIN_SPACING<TERRAIN_SPACING>` is 100 meters but 30m spacing (SRTM1) data provides a good compromise between accuracy and bandwidth/storage space, and runtime memory requirements. Use ``TERRAIN_SPACING`` = 30 meters for most normal use cases."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:164
+#: efc312d12014470aa6cb9133a3344737
+msgid "Expert users who provide their own terrain data may set a different grid spacing for specialist applications."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:166
+#: f780de0523af47aaae43d2cd798b04ef
+msgid "Note that the amount of terrain data kept in memory is directly related to the grid spacing. If you decrease the ``TERRAIN_SPACING`` by a factor of 2 then the amount of terrain area kept in memory is reduced by a factor of 4. This may be an issue on older boards with less memory, but for a newer AutoPilot with 1M of RAM, the :ref:`TERRAIN_CACHE_SZ<TERRAIN_CACHE_SZ>` can be increased to make better use of available memory for caching terrain tiles. The default is 12 but a good value on an STM32-H7 processor would be 60 or higher."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:174
+#: 7538a99c4b674eb79b69874582707eb2
+msgid "If your AutoPilot has less memory, less storage space, or communication bandwidth might be an issue, it is recommended that you use a ``TERRAIN_SPACING`` of 100 meters to prevent the aircraft running off the side of a grid in flight and not having data available."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:179
+#: b043d47160a84e798d129c7b44112ba8
+msgid "If the ground station does not have terrain data available at the resolution requested by the aircraft then the ground station will interpolate as necessary to provide the requested grid size."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:184
+#: c2fbe26b20d140a9abd24623776fd1d0
+msgid "Terrain Data Issue - Old Terrain Data"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:185
+#: 9073d116aaaa41ce9f3cd23e6a2b04a8
+msgid "In early 2026 an issue was identified with terrain data available from terrain.ardupilot.org. The issue was resolved on 24th February 2026. From ArduPilot 4.7, ArduPilot will raise a pre-arm error if it finds older data on the SD Card, or it's served from a ground control station, perhaps from an older cache. It is risky to fly with this old data, but the risks do depend on where you are flying, so you might choose to accept the risk."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:191
+#: b156f7aad5d540fb9b8470aaa53b17c9
+msgid "If you are running a 4.6.x release or earlier you won’t get the above error message, but that doesn’t mean you are safe. You should:"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:194
+#: 5767848e9a3043ca8829b8ad3487c651
+msgid "Delete all the DAT files in the APM/TERRAIN directory on your microSD card then reboot the autopilot"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:195
+#: c226d19dc014455aad96aea1b44f186d
+msgid "If using Mission Planner or MAVProxy, delete the SRTM data from your Ground Station. If using Mission Planner delete the contents of C:\\\\ProgramData\\\\Mission Planner\\\\srtm"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:196
+#: 925d45c3052948b8a63d7891a544548f
+msgid "Then either download new data from terrain.ardupilot.org or let the normal automatic terrain download system download new terrain data via your GCS."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:198
+#: e3d9fb500e9244f5a031978f3ce32b2b
+msgid "If you are running the 4.7.x release or higher (or you are running the latest master branch) then you should get the above warning if you have old terrain data, but if you are uncertain then the safe thing to do is delete the old DAT files from APM/TERRAIN and download again."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:200
+#: f7bc24c356cf47d38a3c8ab8b814b56d
+msgid "In 4.7.x or higher you can set :ref:`TERRAIN_OPTIONS<TERRAIN_OPTIONS>` bit 2 (value=4) to override the check and allow you to use old terrain data. If you are confident you are not impacted by the bugs (most locations in the world are unaffected) then this new :ref:`TERRAIN_OPTIONS<TERRAIN_OPTIONS>` bit allows you to fly without the error messages.  We don’t recommend this, but for some vehicles where replacing the terrain data files is difficult this is provided as an option. For example, if you have created your own DAT files from geoTIFF or similar then this would be a way to avoid having to regenerate them. Remember to unset this option bit when you move to newer terrain data."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:206
+#: 33c841ba5ea647998edcb88c34e37ca8
+msgid "Terrain Accuracy"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:207
+#: 1de3e6a60919476b8fbdd969296146c9
+msgid "When the terrain data issue was resolved, the data sources for both 100m and 30m terrain were switched to JAXA's ALOS. There are 2 dataset versions available:"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:209
+#: 69985a00178d4e588589dbc85de1aa7a
+msgid "SRTM1: Based on JAXA's ALOS dataset and has 30m (1 arc-second) horizontal resolution. It covers all areas between 0 and 84 degrees North/South latitude."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:210
+#: 493bd58a19a34853825f4f29e5a8d5a8
+msgid "SRTM3: Downsampled version of SRTM1 with 100m (3 arc-second) horizontal resolution. It covers all areas between 0 and 84 degrees North/South latitude."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:212
+#: daacd57d72e94c23a3ffd18e19142377
+msgid "This does mean that although we use \"SRTM1\" and \"SRTM3\", to refer to the different data sets, neither of the data sets provided by ArduPilot is actually NASA SRTM (Shuttle Radar Topography Mission Global) data."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:215
+#: 4e19cf03ecf0404881ce6d9b72e40d94
+msgid "While the original NASA SRTM data had a target vertical accuracy of +/- 16 meters (see `SRTM Mission Specifications <https://www.earthdata.nasa.gov/data/catalog/lpcloud-srtmgl1n-003>`_), the ALOS AW3D30 data generally achieves an accuracy of +/- 5 meters (see `JAXA AW3D30 Validation Report <https://isprs-archives.copernicus.org/articles/XLI-B4/157/2016/isprs-archives-XLI-B4-157-2016.pdf>`_)."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:222
+#: afc14903cd8e460dba9f84ce5f31e311
+msgid "Impacts of Downsampling to SRTM3"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:224
+#: 2f601f52589b471c8e96bb147fea68bf
+msgid "While both datasets are derived from the high-accuracy JAXA ALOS mission, the process of downsampling from the native 30m resolution (SRTM1) to the 100m resolution (SRTM3) introduces several issues:"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:226
+#: 7ab1122483c04f099815a5fc0b42eaa1
+msgid "**Vertical Accuracy Loss:** Downsampling involves averaging multiple 30m data points into a single 100m cell. This mathematical smoothing increases the vertical error (RMSE), particularly in rugged or mountainous terrain, making the 100m dataset less precise than the 30m version."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:227
+#: 0b18bc95523f46d897e7b2e521a5bb7f
+msgid "**Loss of Sharp Features:** High-resolution details of valleys, ridges, and hills become \"flattened\" or smoothed out. The 30m (SRTM1) version is significantly more reliable at capturing sharp topographic changes that a drone might encounter."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:228
+#: ea68c4b9cfd14974ad3f3060af506fb9
+msgid "**Averaging Errors:** Each ~100m cell in the SRTM3 version represents the average height of an area roughly the size of a city block. Small but critical obstacles—such as a single sharp peak—may be averaged into the surrounding lower terrain, making them effectively \"invisible\" to the autopilot's terrain-following logic."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:231
+#: cd4f27f7bca3439ab3b4f468ec677134
+msgid "Regardless of which dataset is used, the terrain database represents a \"surface model\" (including trees/buildings) and can change over time. Always maintain a conservative safety altitude buffer."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:233
+#: 15d2014e6e1f4555a0f5a8013fa87fe9
+msgid "Using terrain data for low flights is not recommended, and if using automatic landing, a rangefinder is recommended for the final approach."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:236
+#: 56361ab0ca2c4965a04af0f93eeaf9b7
+msgid "Setting up for terrain following using Mission Planner"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:238
+#: 5faa0b349d4a4b3c8bc3ff9e64e08656
+msgid "To setup your fixed wing aircraft for terrain following if you are using Mission Planner, follow these steps:"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:240
+#: ce429d816a3c44a29409852ce5d1630c
+msgid "make sure you have the latest MissionPlanner installed"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:241
+#: ../../source/docs/common-terrain-following.rst:279
+#: 670ca8256aae4489bd768060d90661e8
+#: d90ee78258404af589a13444f271890c
+msgid "set :ref:`TERRAIN_ENABLE<TERRAIN_ENABLE>` to 1 and :ref:`TERRAIN_FOLLOW<TERRAIN_FOLLOW>` to 1"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:242
+#: 41f43b59d2304578b2132edbd21db392
+msgid "connect to your vehicle over USB when you have GPS lock"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:243
+#: 69e7e5724c534627a1f5299a0eedbe09
+msgid "check the FlightData->Status page in MissionPlanner and look for the terrain status data:"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:249
+#: 60d37470706946e79cede93436b49620
+msgid "When the autopilot has finished loading terrain data you should see \"ter_pend\" goes to zero and the current terrain altitude in meters showing up in \"ter_alt\". The \"ter_pend\" value is the number of terrain blocks that the autopilot is waiting to load from the ground station or from the SD Card."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:255
+#: 718c428676e84964974be26f28efddfe
+msgid "Terrain Options"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:256
+#: 13283904d8534238833a14e4caad77cf
+msgid "There are three optional behaviors which can be selected via the :ref:`TERRAIN_OPTIONS<TERRAIN_OPTIONS>` bitmask parameter:"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:258
+#: ed011b679c3a4a01addcdbc6848ff3db
+msgid "if bit 0 is set (value+1): downloading of terrain data is halted."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:259
+#: a2d775c8306e40da8ebea8b504efdd63
+msgid "if bit 1 is set (value+2): enables using terrain data (via GCS) when no SD card is present."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:260
+#: bca69fd8f7a84754b73042be5c8baf3e
+msgid "if bit 2 is set (value+4): will accept \"old\" terrain data (see below)"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:263
+#: 78830cd60f9f4051b5c53195f24206b2
+msgid "Terrain Look-ahead"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:265
+#: 1401e30175a240ebba08b28f76de48cc
+msgid "The terrain following code \"looks ahead\" of the current position along the flight path to try to ensure that the aircraft climbs soon enough to avoid upcoming terrain. The amount of look-ahead is controlled by the :ref:`TERRAIN_LOOKAHD<TERRAIN_LOOKAHD>` parameter, which defaults to 2000 meters. The look-ahead is also limited by the distance to the next waypoint in AUTO mode, so you need to ensure that you don't have any legs of your mission which include climb rates your aircraft cannot achieve."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:273
+#: 4db9ad22be9046ab9ccfc4c25e09ec76
+msgid "The climb rate used in the terrain look-ahead is based on the"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:274
+#: a93cbac898d74c45acf9dd54afbbb55c
+msgid ":ref:`TECS_CLMB_MAX<TECS_CLMB_MAX>` parameter, combined with your current ground speed."
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:277
+#: 4c90ec3e69fa41c7848b3b5c8a30de7f
+msgid "Recommended Settings"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:280
+#: 65d272ae67cc4205bc34908cd515377b
+msgid "set :ref:`TERRAIN_SPACING<TERRAIN_SPACING>` to 30 meters for more precise AGL calculations"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:281
+#: d3ae349b27834a09a7aa38b231f1b065
+msgid "set :ref:`TERRAIN_CACHE_SZ<TERRAIN_CACHE_SZ>` to 60 to load more tiles into memory (RAM)"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:282
+#: 0da6d661fa4942c290be80f972e3ba9c
+msgid "set :ref:`TERRAIN_LOOKAHD<TERRAIN_LOOKAHD>` to 1000 meters unless you have a reason to need more"
+msgstr ""
+
+#: ../../source/docs/common-terrain-following.rst:284
+#: 13fbd0d7bf264e79a1cc890b1d8eac42
+msgid "To avoid high bandwidth consumption due to terrain tiles being sent to the aircraft over your telemetry link, especially if you often fly in different locations, it's also highly recommended to download the terrain around your planned flight area in the /APM/TERRAIN folder on the SD Card on the AutoPilot."
+msgstr ""

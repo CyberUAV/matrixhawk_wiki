@@ -1,0 +1,136 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:5
+#: 27d84976c608466794aafc659313c42a
+msgid "MAVLink Routing in ArduPilot"
+msgstr ""
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:7
+#: dd2e4e57cacc4892bddc0dae5abbd24d
+msgid "ArduPilot (which runs on the flight controller) can route MAVLink messages received on one telemetry port to all other telemetry ports.  This is important in cases where there are multiple MAVLink enabled components on the vehicle (i.e. a flight controller and a companion computer) but only a single telemetry connection between the vehicle and the ground station.  This page describes how ArduPilot decides which messages should be routed and to which telemetry ports."
+msgstr ""
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:13
+#: 99ac4ef924604f359e39c334d475b380
+msgid "As described on the :ref:`MAVLink Basics <mavlink-basics>` page a MAVLink network is made up of *systems* (vehicles, GCS, antenna trackers, etc) which are themselves made up of *components* (flight controller, camera system, etc)."
+msgstr ""
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:15
+#: 652781302b06406daa54f2c73218a7d5
+msgid "Each message contains a ``System ID`` and ``Component ID`` field to specify where the message came from.  In addition *some messages* (including `SET_POSITION_TARGET_GLOBAL_INT <https://mavlink.io/en/messages/common.html#SET_POSITION_TARGET_GLOBAL_INT>`__) include ``target_system`` and ``target_component`` fields to allow specifying which system/component should execute the command."
+msgstr ""
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:17
+#: 84eb705dfdb447c198f842537e12e167
+msgid "A value of 0 for the ``target_system`` or ``target_component`` is considered a broadcast ID, and will be sent to all systems in the network/components on the target system."
+msgstr ""
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:21
+#: 259baa05b7a44f609c1d79587cb9e64d
+msgid "The routing on ArduPilot systems works in the following way:"
+msgstr ""
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:23
+#: 0e94456255c0476997eaf8792d07632f
+msgid "All received MAVLink messages are checked by the `MAVLink_routing <https://github.com/ArduPilot/ardupilot/blob/master/libraries/GCS_MAVLink/MAVLink_routing.h>`__ class."
+msgstr ""
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:24
+#: 0695a33f68f84972b7712fc68b73a447
+msgid "The class extracts the source system id (aka *sysid*) and component id (aka *compid*) and builds up a routing array which maps the channel (i.e. USB port, Telem1, Telem2) to the *<sysid,compid>* pair."
+msgstr ""
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:25
+#: cdc0227f0e124ab08db8417ee9d69d4d
+msgid "The class also extracts the target system id (``target_system``) and component id (``target_component``) and if these don’t match the vehicle’s *<sysid,compid>* the messages are forwarded to the appropriate channel using the array above."
+msgstr ""
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:26
+#: f1e0df87c9824c5191c8872da2d3f8a1
+msgid "Messages that don’t have a target *<sysid,compid>* are processed by the vehicle and then forwarded to each known system/component."
+msgstr ""
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:29
+#: 6e098c4215e14196971a1707abec5130
+msgid "Detailed theory of MAVLink routing"
+msgstr ""
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:31
+#: 04a68b596ee546cd940e6b2d5bf3b249
+msgid "This information below is reproduced from the routing code in-source comments (`/libraries/GCS_MAVLink/MAVLink_routing.cpp <https://github.com/ArduPilot/ardupilot/blob/master/libraries/GCS_MAVLink/MAVLink_routing.cpp>`__)"
+msgstr ""
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:35
+#: 3fbb7bf0d50b45ad9a9dba463f12d0c6
+msgid "When a flight controller receives a message it should process it locally if any of these conditions hold:"
+msgstr ""
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:38
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:52
+#: 359834a177884e438a0c1914b142d306
+#: 1c6442e2d1b2479cbe1383f28ececa9b
+msgid "It has no ``target_system`` field"
+msgstr ""
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:39
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:53
+#: 7f0d18de92364e4a85f54183a9245ce8
+#: 8023cfa0cb8a4feaac8c93f5c88c7bed
+msgid "It has a ``target_system`` of zero"
+msgstr ""
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:40
+#: 381093625e7b47fd9cf70ae374d32718
+msgid "It has the flight controllers target system and has no ``target_component`` field"
+msgstr ""
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:42
+#: 13c8bdb3d947469cbdcf426003d38f90
+msgid "It has the flight controllers target system and has the flight controllers ``target_component``"
+msgstr ""
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:44
+#: c36f29257ed742038b4f874677f233ab
+msgid "It has the flight controllers target system and the flight controller has not seen any messages on any of its links from a system that has the messages ``target_system``/``target_component`` combination"
+msgstr ""
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:49
+#: f737e303dc2d457484e4a9c92a6fabef
+msgid "When a flight controller receives a message it should forward it onto another different link if any of these conditions hold for that link:"
+msgstr ""
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:54
+#: afa6b2439445470894171813d8c279fd
+msgid "It does not have the flight controllers ``target_system`` and the flight controller has seen a message from the messages ``target_system`` on the link"
+msgstr ""
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:57
+#: f827aee324294afe99a45d119f780504
+msgid "It has the flight controllers ``target_system`` and has a ``target_component`` field and the flight controllers has seen a message from the ``target_system``/``target_component`` combination on the link"
+msgstr ""
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:64
+#: cf5b2f33c9464ab0acf559ad92e7e7fa
+msgid "This proposal assumes that ground stations will not send command packets to a non-broadcast destination (sysid/compid combination) until they have received at least one package from that destination over the link. This is essential to prevent a flight controller from acting on a message that is not meant for it. For example, a ``PARAM_SET`` cannot be sent to a specific *<sysid/compid>* combination until the GCS has seen a packet from that *<sysid/compid>* combination on the link."
+msgstr ""
+
+#: ../../source/docs/mavlink-routing-in-ardupilot.rst:72
+#: 78ebc31495dd42348d4ac718387d14a2
+msgid "The GCS must also reset what\\ *<sysid/compid>* combinations it has seen on a link when it sees a SYSTEM_TIME message with a decrease in time_boot_ms from a particular *<sysid/compid>*. That is essential to detect a reset of the flight controller, which implies a reset of its routing table."
+msgstr ""

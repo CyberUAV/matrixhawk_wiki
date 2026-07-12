@@ -1,0 +1,297 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:30+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-ie650-fuelcell.rst:5
+#: 7df05697618d4ee29bb44850afe87187
+msgid "Intelligent Energy Fuel Cell 650W/800W"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:11
+#: 41ae2ca7ea594da78648a646838b7491
+msgid "This page explains how to connect Intelligent Energy's 650W and 800W fuel cells to ArduPilot.  Telemetry from the fuel cell is transmitted via serial to ArduPilot.  This gives the following feedback:"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:13
+#: 4d4eb8b7a34f4a4483929f59c1d08324
+msgid "Hydrogen tank level as a percentage."
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:14
+#: 9e57305fe6304d4bb0f3783d17b98d63
+msgid "Battery remaining as a percentage."
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:15
+#: f31c04a3e9dd45a090d53a0da96461be
+msgid "Fuel cell state."
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:16
+#: a2fc987b330b4059bfc7195f842597ae
+msgid "Error codes."
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:20
+#: 8f4a70ea72214e6b9d22fba8170d5b4a
+msgid "Setup"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:23
+#: 3bd35f156a5d48a991cd4338b6eefbc9
+msgid "Connecting the Device"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:25
+#: 8f2d321933ce4c78aad039ea60ed63f7
+msgid "Connect the UART from the 'Customer Interface' port on the fuel cell to any serial port on your autopilot.  `See device user manual <https://www.intelligent-energy.com/our-products/support/>`__ for details on where to find the 'Customer Interface'.  Only the GND, UART TX, and UART RX connections are required.  See the diagram below:"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:33
+#: 5cd9163a057f43bcb3845e8ffb3de6ac
+msgid "Parameter Configuration"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:35
+#: 8461e80b707d490db11ffdd83b716f5b
+msgid "Enable the fuel cell driver by setting :ref:`GEN_TYPE <GEN_TYPE>` to 1."
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:37
+#: 9673861ecfff42e5aa5cebf9a4143f70
+msgid "Fuel cell telemetry is transmitted over serial.  The appropriate serial port needs to be configured to receive fuel cell data.  Set the :ref:`SERIALX_PROTOCOL <SERIAL1_PROTOCOL>` parameter to 30 for generator."
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:39
+#: 4c42967bd40944459687a131051461f4
+msgid "The generator library utilises the battery monitor mavlink message to display fuel cell telemetry on the ground station.  Two battery monitor instances are required for one fuel cell.  One for the fuel tank and another for the battery.  Set :ref:`BATTX_MONITOR <BATT_MONITOR>` parameter to 17 for the fuel cells electrical data.  Set another :ref:`BATTX_MONITOR <BATT_MONITOR>` parameter to 18 for the hydrogen tank telemetry."
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:41
+#: 99e80de1e5264085ac36b81f20a6b369
+msgid "This fuel cell unit only reports battery percentage remaining and tank percentage remaining.  As such, the following parameters must be set for both tank and battery:"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:43
+#: 188fabdde093490fbf47875ddab29918
+msgid ":ref:`BATTX_CAPACITY <BATT_CAPACITY>` = 100 must be set to give a sensible readout of a percentage on the GCS."
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:45
+#: 9339b87b89d24d4fa2525c994d4761e9
+msgid "Capacity related failsafes can be set using :ref:`BATTX_LOW_MAH <BATT_LOW_MAH>`, :ref:`BATTX_CRT_MAH <BATT_CRT_MAH>`, :ref:`BATTX_ARM_MAH <BATT_ARM_MAH>`."
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:47
+#: bff7e0a69ec546ddb8661d8fbea52108
+msgid "Reboot the autopilot after setting the parameters for the settings to take effect."
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:50
+#: 1d58787b417a44da8f52c5952ea0f343
+msgid "In this instance, ignore the units of these parameters.  The capacities are only reported as a percentage.  As such values should be entered in the range from 1 to 100."
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:53
+#: ea024205d8124bc3ad920cdee5501290
+msgid "No voltage data is available for these units and a fixed voltage of 1 V is always reported.  To avoid low voltage pre-arm warnings and failsafes :ref:`BATTX_ARM_VOLT <BATT_ARM_VOLT>` = 0, :ref:`BATTX_LOW_VOLT <BATT_LOW_VOLT>` = 0, and :ref:`BATTX_CRT_VOLT <BATT_CRT_VOLT>` = 0 must be set to disable voltage related failsafes on this model."
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:57
+#: 9bfd0f37727543a581d0e8e045b163e6
+msgid "Fuel Cell Status"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:59
+#: 83dbcefdcc3e4660b5da22e51c805fc2
+msgid "The fuel cell reports status over the telemetry.  The status levels are:"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:61
+#: d4f5aaf2516f4db98fb5abde68d50432
+msgid "Starting"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:62
+#: 9db28081916741488bf98ff535cef80b
+msgid "Ready"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:63
+#: 774445478136459fa4adfb0b524de7a9
+msgid "Running"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:64
+#: dc81acb2087e48f39bd40b39f5ca3ff7
+msgid "Fault"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:65
+#: ed38b954eed04d429f82deb49753c921
+msgid "Battery Only"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:67
+#: b4fec858043d40c5a961098034ba5cb8
+msgid "A message will be displayed on the GCS and in the flight log whenever the fuel cell status changes.  The vehicle can only be armed when the fuel cell is reporting a status of 'Running'."
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:71
+#: 51a8e8d725bf405da08df2a54d3ae2a7
+msgid "Failsafes and Pre-Arm Checks"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:73
+#: 565c11594dc8439b93df72cb4f5ce27a
+msgid "Failsafes and pre-arm checks are hard-coded and based on the error codes sent by the fuel cell.  Failsafes have been separated into two groups: Low and Critical.  The error code groups are listed below.  If an error code is received from the fuel cell, the resulting failsafe action will be set by the :ref:`BATTX_FS_LOW_ACT <BATT_FS_LOW_ACT>` and :ref:`BATTX_FS_CRT_ACT <BATT_FS_CRT_ACT>` respectively."
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:76
+#: ff832a7e2904435e90338e48bd4a1728
+msgid "Monitoring of the fuel cell's internal error codes for pre-arm checks and failsafes are only done on the battery monitor instance allocated for the electrical telemetry.  The electrical battery monitor instance must therefore be set to trigger failsafes based on error codes."
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:80
+#: c12d41014f0942678da087c86c319ac0
+msgid "Failsafe Low Action Error Code Group"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:152
+#: a41a5f9f92ed4ae1951634472296f700
+msgid "Failsafe Critical Action Error Code Group"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:259
+#: 3154fb099ec04ae9accc98454cf6556b
+msgid "Example"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:260
+#: 80967d2fad684f24b401730295ff4f57
+msgid "This example has been provided to make it clear how the failsafe actions are set."
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:262
+#: 30371efa30be4d109e95e1d4e051fe62
+msgid "The battery monitors have been configured so that electrical telemetry data is on battery monitor 1 and hydrogen tank telemetry is on battery monitor 2:"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:264
+#: 7aa582131d254d8482ba1b35ef6b0be6
+msgid ":ref:`BATT_MONITOR <BATT_MONITOR>` = 17 (electrical data)"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:265
+#: 9b6d8a2bfb2d4b50a3fd7504e633a9d1
+msgid ":ref:`BATT2_MONITOR <BATT2_MONITOR>` = 18 (tank data)"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:267
+#: 6b7ef6c801344cd3aaa7dd8aaffc698f
+msgid "The failsafe actions that correspond to the error code groups listed above are then set on battery monitor 1 as that is the one associated with the electrical telemetry data."
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:269
+#: 3ac00b384afe4823a22bbabe8d383762
+msgid ":ref:`BATT_FS_LOW_ACT <BATT_FS_LOW_ACT>` = 2 (RTL)"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:270
+#: b1a4dfb512244ee89e896fac7e6900aa
+msgid ":ref:`BATT_FS_CRT_ACT <BATT_FS_CRT_ACT>` = 1 (land)"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:272
+#: 2e770dc48ed041678502d2eef40cc234
+msgid "A tank level failsafe has been set on battery monitor 2 so that the vehicle will return to land when the fuel level gets below 25%.  This is done by setting:"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:274
+#: 2647cad1f5d2411aba06ea174676cce8
+msgid ":ref:`BATT2_FS_LOW_ACT <BATT2_FS_LOW_ACT>` = 2 (RTL)"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:275
+#: 3bcf43c1f777422681853c50b47f2909
+msgid ":ref:`BATT2_CAPACITY <BATT2_CAPACITY>` = 100"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:276
+#: 52b2625acd234e2e9aa8f5f837a31baf
+msgid ":ref:`BATTX_LOW_MAH <BATT_LOW_MAH>` = 25"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:278
+#: 57d163879e7548a49d6f8fcf439fceaf
+msgid "As previously mentioned, battery capacity failsafes can be used on this model.  Hence, as a final belt-and-braces approach a critical voltage failsafe has been set on the electrical generator monitor instance to initiate an immediate landing if battery remaining gets to 40%:"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:280
+#: 690c0210dd90439fb0a28c6556a11a6a
+msgid ":ref:`BATT_CRT_MAH <BATT_CRT_MAH>` = 40"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:281
+#: 02360cf3984049949a73a7e98c91e5f4
+msgid ":ref:`BATT_CAPACITY <BATT_CAPACITY>` = 100"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:285
+#: f6e3774c26f14d1385753eafac878c7c
+msgid "Driver Not Healthy"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:287
+#: 581bdcb9708d42e595563d8fc166aace
+msgid "If you see the `Generator: Not Healthy` message in the GCS then ArduPilot has not received any data packets from the fuel cell for at least 5 seconds.  Check the following for common causes to this issue:"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:289
+#: e9211f7d22dd41d8aba0f03fb0bf2cb8
+msgid "Fuel cell is powered on"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:290
+#: 665bef3a9f294e5ab0bcbb4d16d1e961
+msgid "Telemetry is connected to an autopilot serial port."
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:291
+#: 30e3d9e8df9b42d3ae372926f9db0e83
+msgid "The serial connection is wired correctly (TX->RX, RX->TX)."
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:292
+#: bf70808b35c74274bba9ae2b089f8776
+msgid "The :ref:`SERIALX_PROTOCOL <SERIAL1_PROTOCOL>` parameter is set to generator for the correct telemetry port."
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:296
+#: 72b2f96c2c414841b7633b463b459e27
+msgid "Flight Log Data"
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:298
+#: 927b03b7ad26466e8445599caf0bfc3f
+msgid "The fuel and battery levels are logged as percentage used.  They are logged under the 'BAT' data group.  Battery used will be displayed under 'CurrTot' for the electrical instance.  Fuel used will be displayed under 'CurrTot' for the fuel instance."
+msgstr ""
+
+#: ../../source/docs/common-ie650-fuelcell.rst:300
+#: df21a7150b7b4dbe8caddf3fc7d1b153
+msgid "Fuel cell state and error messages are stored under the 'MSG' data group."
+msgstr ""

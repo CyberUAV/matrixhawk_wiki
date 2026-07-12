@@ -1,0 +1,2029 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Rover package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rover \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:39+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:5
+#: 90227293fe094cdfa23068bdc696c901
+msgid "Downloading and Analyzing Data Logs in Mission Planner"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:7
+#: a6e154117d364f7e9e9be86ad29c6ee9
+msgid "Dataflash logs are stored on the autopilot and can be downloaded after a flight. By default, they are created after you first arm the vehicle. This topic explains how to configure and access Dataflash logs."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:12
+#: da97a9ddfc7b43e580057ff0e814cc2d
+msgid "Depending on the autopilot type and configuration, the dataflash logs may be saved on a SD card, dataflash chip or streamed over MAVLink telemetry ports. The MAVLink option does require a high-speed telemetry port, typically 921600 baud."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:14
+#: 730b2a17032f47558a1b0ed8d2932605
+msgid "In addition to using Mission Planner, many other tools are available to users for log analysis: :ref:`MAVExplorer(part of MAVProxy installation) <using-mavexplorer-for-log-analysis>` and :ref:`Web-based tools <common-webtools>`."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:18
+#: f2ef6434fb81468cb272bc0b9ad75223
+msgid ":ref:`Telemetry logs <planner:mission-planner-telemetry-logs>` (also known as \"tlogs\") collect similar information to dataflash logs (see :ref:`Diagnosing problems using Logs <common-diagnosing-problems-using-logs>` for more information)."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:20
+#: 5b81d2dfcbc84a12ae5d9c68925f40d7
+msgid "If your vehicle is having trouble producing dataflash logs - including the infamous \"No IO heartbeat\" diagnostic message - try a different SD card.  You may also choose to test the card using a dedicated tool, such as ``H2testw``.  Low board voltages are also known to cause logging issues."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:23
+#: 257843da02d44c139830a4116d66e6f0
+msgid "Logging Parameters"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:25
+#: b8f2511c2e444d9e8aa4d5e8ca3ccc78
+msgid "Some commonly used parameters are:"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:27
+#: 55606eae03c54d04b1599fda8d7fb6e8
+msgid ":ref:`LOG_BACKEND_TYPE<LOG_BACKEND_TYPE>`: Bitmask for where to save logs to. Common values are \"0\" to disable logging, \"1\" (bit 0 set) to log to SD card file, \"2\"(bit 1 set) to stream over MAVLink and \"4\"(bit 2 set) to log to board dataflash memory, if equipped."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:28
+#: e260ad99f5ce4439bbe91fbb79330230
+msgid ":ref:`LOG_BITMASK<LOG_BITMASK>`: Bitmask for what items are logged. Normally, use default value, or \"0\" to disable logging."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:29
+#: 9623a5ccf0d742aa94bc5a279fc2e6ad
+msgid ":ref:`LOG_DISARMED<LOG_DISARMED>`: Setting to 1 will start logging when power is applied, rather than at the first arming of the vehicle. Useful when debugging pre-arm failures. Setting to 2 will only log on power application other than USB power to prevent logging while setting up on the bench. Setting to 3 will also erase any log in which the vehicle does not proceed to the armed stated. This prevents accumulating numerous logs while configuring on the bench or at the field. See :ref:`LOG_DARM_RATEMAX<LOG_DARM_RATEMAX>` also for managing log file sizes while logging disarmed."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:30
+#: a2df5b32cbcc4606ad436d4d1fdb57cd
+msgid ":ref:`LOG_FILE_DSRMROT<LOG_FILE_DSRMROT>`: Setting this bit will force the creation of a new log file after disarming, waiting 15 seconds, and then re-arming. Normally, a log will be one file for every power cycle of the autopilot, beginning upon first arm."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:31
+#: 273ac709dfe94f99b4695b07261740fb
+msgid ":ref:`LOG_FILE_MB_FREE<LOG_FILE_MB_FREE>`: This parameter sets the minimum free space on the logging media before logging begins. If this is not available, then older logs will be deleted to provide it during initialization. Default is 500MB."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:32
+#: b20574b3652d46e88392a002378aa2e1
+msgid ":ref:`LOG_FILE_RATEMAX<LOG_FILE_RATEMAX>`: This sets the maximum rate that streaming log messages will be logged to the file backend to limit file sizes. A value of zero(default) means no limit is applied to normal logging, which depends on the :ref:`SCHED_LOOP_RATE<SCHED_LOOP_RATE>` value ( 50Hz: Plane, 300Hz: QuadPlane/Rover, 400Hz: Copter, normally). Note that similarly, :ref:`LOG_BLK_RATEMAX<LOG_BLK_RATEMAX>` and :ref:`LOG_MAV_RATEMAX<LOG_MAV_RATEMAX>` perform the same optional limiting for the BLOCK logging and MAVLink logging streams, respectively."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:33
+#: 2454e464afeb4134a27eac1824faa3e4
+msgid ":ref:`LOG_MAX_FILES<LOG_MAX_FILES>`: The maximum number of log file that will be written on dataflash or SD card before starting to rotate log number. Limit is a maximum of 500 logs."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:35
+#: bc1ce86b9d8d4505a44a223f620fe96b
+msgid "If you suspect that you are missing logging entries due to excessive logging speed, you can check the DSF.Dp log message for the amount of missed entries."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:37
+#: 4a724d0747974165b1dcf1bfeef61938
+msgid "Logging of the continuously streaming log messages, such as attitude, sensors, etc. can be paused by using the ``RCx_OPTION`` auxiliary function \"164\" on a transmitter channel. Switching this channel high will pause these messages, but not events, mode changes, warnings, etc. This allows autopilots with limited logging capabilities (ie using Block logging to chip memory and no SD card) to log only when desired during the flight, as during tuning phases or determination of TECs parameters, etc. You can also eliminate unneeded log messages using :ref:`LOG_BITMASK<LOG_BITMASK>` to reduce log size"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:40
+#: cc344dd84f4e420a8c1b8787f42362e8
+msgid "Replay Logging"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:42
+#: 06e4985670b648b7be6d9788862750a5
+msgid "ArduPilot has the ability to log in a fashion that solutions to EKF/AHRS issues can be more easily verified by actually re-playing a log against code changes to see if the solution results in the desired, corrected behavior. This requires that the logs showing the issue to be worked on be made with logging active during disarmed periods (with :ref:`LOG_DISARMED<LOG_DISARMED>` set to a non-zero value, preferably 3) and :ref:`LOG_REPLAY<LOG_REPLAY>` =1 , thereby logging more sensor data than normal."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:45
+#: 4918f36a46f5470192f108dc17fec2f6
+msgid "SD Card Logging Issues"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:47
+#: e3e71a7d8e1b4233b686551810c84017
+msgid "If you are running into problems with bad logging errors on SD cards, here are some things you can try."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:49
+#: c320c1c8baef4184bb11dc599b042904
+msgid "Format the card to FAT32 or vFAT (newer formats can work with new versions of Ardupilot and better hardware)."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:50
+#: cd054f114376431e9f45961e2645d5c3
+msgid "Perform a full format to check for bad sectors."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:51
+#: df6c19e84dd54190933f66d6ffca83cc
+msgid "Check that the card is not write protected."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:52
+#: e0dbfb010d43436290e70fcc88fbb6c7
+msgid "Check card contacts."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:53
+#: 6431a203b6bb42fe88781aa1b5ce8552
+msgid "Some cards are problematic, try using a different one."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:54
+#: 5fc19ca699db4a26a94460a5b208ce58
+msgid "Ensure that the card is fast enough to keep up with logging demands (Class 10 works for many, but lower speeds can work too)."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:55
+#: cd4362c1fb824d7781f31817bebbc12d
+msgid "Reduce the amount of data included with the logs in LOG_BITMASK."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:56
+#: 2b4f5775a71346a5a95c55e990b85340
+msgid "Incrementally increase BRD_SD_SLOWDOWN up to a maximum of 32 (default is 0)."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:59
+#: 78e543223e1643c686a98681f459ef11
+msgid "On-Board DataFlash Logging"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:61
+#: d1e6821bf1a74cb881721775521eb783
+msgid "Some boards do not have SD card interfaces for logging, but rather a limited amount of dataflash, typically 16MB. This saves log files in a manner like a circular buffer. Once the flash is filled, the oldest log file is overwritten with the current logging data. If there is only one file on the flash when space runs out, logging is stopped instead."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:63
+#: 7c9a073e03ed4b9fb3ada3cf2744e070
+msgid "A new log file will be started after boot, upon arming, or, immediately if :ref:`LOG_DISARMED<LOG_DISARMED>` is 1."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:65
+#: cd12e1404ee642238dd20bee41474e0f
+msgid "If :ref:`LOG_FILE_DSRMROT<LOG_FILE_DSRMROT>` is enabled, any disarm will stop logging and a new file started upon the next arm or immediately if :ref:`LOG_DISARMED<LOG_DISARMED>` is 1. Otherwise, logging to the current file will resume on a re-arm. Any reboot stops logging to the current file."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:67
+#: be0089c9a345476cb03ab4af2610667e
+msgid "In order to maximize the utility of the limited flash space several things can be done:"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:69
+#: 49c011f149d847faadfc65181c8de139
+msgid "Reduce the things logged using :ref:`LOG_BITMASK<LOG_BITMASK>`."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:70
+#: b0dc3d1ea582434bb45b7b2f87f5a2c8
+msgid "Eliminate logging the EKF3 messages which are voluminous and usually needed only for problem diagnosis using the :ref:`EK3_LOG_LEVEL<EK3_LOG_LEVEL>` parameter."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:71
+#: 24a18b2415844993acb7d168a1139e19
+msgid "Only log when needed during the flight, ie tuning, gathering data for TECS tuning, etc. using an RC Aux switch set to \"164\" to start and stop log writes."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:72
+#: fc4242ded8414e2b8e9e0346717345f4
+msgid "Reduce the logging rate to a slower rate (below 10Hz) by setting :ref:`LOG_BLK_RATEMAX<LOG_BLK_RATEMAX>` which is by default unrestricted."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:73
+#: 026f6290f5234bbe8d5f320d248c2489
+msgid "Download and erase the logs each flight and only log one file for a flight"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:75
+#: f620c925c46a4219aefcf5e3602c5fb8
+msgid "some dataflash chips are particularly slow, leading to gaps in the logs. Setting :ref:`LOG_BLK_RATEMAX<LOG_BLK_RATEMAX>` to a lower value can help eliminate these gaps."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:80
+#: a6e75851981f46e3b731071d33030015
+msgid "Downloading logs via MAVLink"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:82
+#: b3e404e274a043f099678b66cb443cba
+msgid "Connect your vehicle to the ground station using the micro USB cable"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:83
+#: bbfdf4e0888b4364a7b56c842bb6a953
+msgid "Open the Mission Planner's Flight Data screen"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:84
+#: ff9cfede3b7e40b4b4ebb9cc6cefef1b
+msgid "On the bottom left, select the \"DataFlash Logs\" tab and push the \"Download DataFlash Log Via Mavlink\" button"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:90
+#: 08289dea33fc49098b3696bd432a49a5
+msgid "Then, select the log you want to download. This will save that log to your MissionPlanner/logs directory, in a folder named after the vehicle type, such as QUADCOPTER."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:95
+#: 10294fb8afb140ba80e0503ee0dd2af4
+msgid "Review a log"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:97
+#: 7bdf4f4797e74203970c7845251800c1
+msgid "For more detailed analysis, click on \"Review a Log\" and select a log that you've already saved to the MissionPlanner/logs directory.  Once again, they will be in folders named after the vehicle type, such as QUADCOPTER or ROVER."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:103
+#: de5a469ff2aa4b849165f167b8cc33d5
+msgid "Steps to review a log downloaded from the internet, or your vehicle"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:104
+#: af18f97b637e49b9a745288093afaf64
+msgid "For DataFlash logs, with a .bin or .log extension:"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:106
+#: a0a252a3a7b34abab74b99a06926aa83
+msgid "Download the log file. Note the place on your computer to which it is downloaded. (For example, it might be C:\\\\Downloads)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:107
+#: 857e86cc62a84bd6986c12af3121341f
+msgid "Open Mission Planner"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:108
+#: e37b0f782da94a55b2461cd6af7d3a32
+msgid "Navigate to the “Flight Data” page (top left)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:109
+#: 9b46b8d95cce4d0cb605f339a20812c9
+msgid "Select the “Dataflash Logs” tab (mid-screen, left side)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:110
+#: ade83368da314a1bb31e4c5b142dd4e8
+msgid "Select the “Review a Log” button."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:111
+#: 4d93626339254da58f29b0123f0cd39e
+msgid "A standard Windows “select a file” box will let you go find the .bin file that you downloaded, at the place that you downloaded it. (Per the example above, it is in C:\\\\Downloads) Choose that file."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:112
+#: 8b489559c62a4ba6acb79d5b50f72a37
+msgid "After reading the log, a Manual Log Review window will be open, which allows you to plot data from the log for inspection. (see below)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:115
+#: 8ef343944dab4694af0404814e768f4e
+msgid "Reviewing the log data"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:116
+#: af4f18ece98a44269f04e8f276ccd54e
+msgid "Once you pick the log you want, you will get charts such as the below. The basic format of the dataflash is:"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:119
+#: 7472824fcb0741509b9b007e6d043550
+msgid "Line numbers appear on the very left side of the viewer"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:120
+#: a089a251da304e4a8b34f055b073ff50
+msgid "Software version and board type appear at the top"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:121
+#: 6fd0768d77ee466ca9ddfa51d076c091
+msgid "FMT messages are next which tell the mission planner the column headers for each message type"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:123
+#: 342ccad9f53e461e9f4971cb40a24000
+msgid "PARM rows which show each parameter (in the order in which they appear in the eeprom) along with their value at the beginning of the flight"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:126
+#: a578d1657b874ab7809ebd65a44d94de
+msgid "Flight data messages including GPS, IMU, etc."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:131
+#: 02771e66c47048c5b9ee2a9b050bba77
+msgid "Graph any flight data by first clicking on the appropriate row, you should see the column headers update appropriately. Next find the column you wish to graph, click on it and then push the \"Graph this data\" button. In the example above the ATT's Roll-In and Roll data have been graphed. The mouse's scroll wheel can be used to zoom in or out. You may also select an area of the graph to zoom in on it. Zoom out by right-mouse-button clicking and selecting \"Set Scale to Default\". `Here's <https://www.diydrones.com/profiles/blog/show?id=705844%3ABlogPost%3A801607>`__ a mini tutorial on using this feature. You may also filter on just the first column (the flight data message type) by clicking on the first column and selecting the message type from the drop-down. This is very useful especially for viewing the different flight modes (called \"MODE\" messages) used during the mission. Click the first column again but press \"Cancel\" to clear the filter."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:150
+#: fe3289a5b7ac4948bb16d5e573b72c85
+msgid "Setting what data you want recorded"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:152
+#: f1894ed2d0724d5a8659e05ccdc09648
+msgid "The :ref:`LOG_BITMASK <LOG_BITMASK>` parameter controls what messages are recorded in the logs. The bits differ between vehicles. The image above is for Copter."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:161
+#: 90c8faa2fa6a46dca7cf0284fe1beae3
+msgid "Bitmask Table (Rover)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:164
+#: 23ec996715dd461d8347dac688014bc3
+msgid "Bit"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:164
+#: d38621e038c6461a881d00c27934ebf2
+msgid "BitMask Name"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:164
+#: af7fd26f3d8542e9a32e0ec75b4cd233
+msgid "What is logged if bit is set"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:166
+#: db317acca64b4dcca1c3e1d978cd31fc
+msgid "0"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:166
+#: e5a4ca7ca1bc4fffba014d2baca873f3
+msgid "Fast Attitude"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:166
+#: 77b8e9a21ab249dd8ffe3f072874cc32
+msgid "Attitude @ 400Hz"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:167
+#: 2c4a530e332a459683210dc6a8c498b6
+msgid "1"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:167
+#: e977a76ff82741b9b83ac3e744630190
+msgid "Medium Attitude"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:167
+#: 0d40c749aab64a1eb7bd0451e33501f3
+msgid "Attitude @ 10Hz"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:168
+#: e439b1db35564735be6379e34d4d1e59
+msgid "2"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:168
+#: 9a675377ff9a40bb8bb2d1e330b17b24
+#: cccd35bdb4cc4187bb938cdf254dbd02
+msgid "GPS"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:169
+#: ba62a8c002db4b6b98ba60db7834832c
+msgid "3"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:169
+#: 8cf36b1230524ed1990e5a49e27c5943
+msgid "System Performance"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:169
+#: 75cf4592a26e47ef93f6c53eb757c2c0
+msgid "CPU,etc. Performance monitoring"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:170
+#: 697aef888f424dfc84e73688b25015f5
+msgid "4"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:170
+#: d68cc9dd851e4501840fe828253e30f9
+msgid "Throttle"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:170
+#: 47c573c2d4e146c19c9cb14f3e448a2b
+msgid "Throttle/Speed Control Data"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:171
+#: a74a844ac8064e20917e82edcdcfe8dc
+msgid "5"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:171
+#: 5a7f79cd4e5c4d94897fa297f36c2fcb
+msgid "Navigation Tuning"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:171
+#: ca5052693d604bccb08ea2fac8a5aaf4
+msgid "Navigation Data"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:172
+#: 8a0ebf21851746d6a5b0b0d304c4b559
+msgid "7"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:172
+#: 28882f57e69644789892d998a95e72c9
+msgid "IMU"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:172
+#: e250c409589c4e0a9539d6d0ff69009f
+msgid "IMU (ACC/Gyro) Data"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:173
+#: e1d4174aeb024670bd68d67343fc14fb
+msgid "8"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:173
+#: 54284cbc50004d3f9b947b30482e61cf
+msgid "Mission Commands"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:173
+#: bbfcc64aaebe4f29ac0df18a7414059e
+msgid "Mission/GCS Commands"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:174
+#: cb83d54b5abd4ffab895cf566db67275
+msgid "9"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:174
+#: 0d9ca8ff55364a2189c6ba308eae6406
+msgid "Battery Monitor"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:174
+#: 1d30ef555e6b4801b6c20d2ed06a6353
+msgid "Battery Monitors Data"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:175
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:697
+#: 4d24922ec99d43ac88a93d0f8bb9d421
+#: 07011f937a86497fb3b626bac4de62f9
+msgid "10"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:175
+#: 9a30074b211c427a90c989dca337d02c
+msgid "Rangefinder"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:175
+#: 529f591e9555496ebf95f92764e249c3
+msgid "Rangefinder Data (if present)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:176
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:699
+#: 75fe684182ee42fe8b2639fe39d9f010
+#: 7f5478f8111a440abd8065d8c6edfd59
+msgid "11"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:176
+#: e3901b9db63b47249ea258cf02d975e6
+msgid "Compass"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:176
+#: dede60595a994327b583c93d98f17fff
+msgid "Compasses Data"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:177
+#: 6b9bed31a36f4d55b55f9e137ea45a5b
+msgid "12"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:177
+#: 0cd9255d1b7143b09aceb4106171f876
+msgid "Camera"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:177
+#: bb1dac265c804f8cbf624af3af3d5b21
+msgid "Camera Data (if present)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:178
+#: ece1a5be20dd431faee7a67ac2431e2e
+msgid "13"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:178
+#: dd5930e5be3948bbb1084f184911dd7d
+msgid "Steering"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:178
+#: 909b64d462b541eba66f4a8419d98cd2
+msgid "Steering rates and targets"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:179
+#: cadfdd7898d04b7f8ee884f706e1b12c
+msgid "14"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:179
+#: 2d2cbce57b514eecabbfbbf3bc032d78
+msgid "RC Input & Output"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:179
+#: c966128ad28246079c77bdaba0b91666
+msgid "RC input/Servo output data"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:180
+#: 6573ce90e08a4453b8a8b955d08c03ab
+msgid "19"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:180
+#: 6320a6dce4f54ee8b7778dcbcfd755c1
+msgid "Raw IMU"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:180
+#: e1a487fa052e40aa84e4638fc9630687
+msgid "Raw IMU data, unprocessed"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:181
+#: 8a6208f10a7a487199b508a69b0b52d2
+msgid "20"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:181
+#: d36fec7baf1f414498e7c351ee951e76
+msgid "Video Stabilization"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:181
+#: 0397c970d61c499682b660bfba65328f
+msgid "GyroFlow Data logs"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:184
+#: c871d1877e4d480c8f34dfdd78b32f8b
+msgid "ATTITUDE logging will occur at highest rate of the selections."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:186
+#: 60c518847f544548b858e6754756ed2d
+msgid "the logging of EKF3 data is controlled by the :ref:`EK3_LOG_LEVEL<EK3_LOG_LEVEL>` parameter."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:193
+#: 361091aac45d4bdd954353c8aed2a1d0
+msgid "Message Details (Copter specific)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:195
+#: fa748df2430d42d4b3d503a2c66a61b0
+msgid "Many messages are detailed in the :ref:`logmessages` page in each vehicle's wiki section."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:198
+#: 9b9f83b2259642b9b157b6c9076289f6
+msgid "**ATT (attitude information):**"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:201
+#: deb86a4b0283454ca854b15e2ac909dd
+msgid "DesRoll"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:201
+#: 8b74feea087f40829cc208f9bff3fbdb
+msgid "The pilot's desired roll angle in degrees (roll left is negative, right is positive)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:203
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:262
+#: 9f3e19268bb249999685fa6ee635feac
+#: da0e0dd514fb4500842be14541b9a90c
+msgid "Roll"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:203
+#: 1c94debbdd2e431f9aa30804471a5b22
+msgid "The vehicle's actual roll in degrees (roll left is negative, right is positive)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:205
+#: dcfe9220d60c4432951fb394b10b9fd6
+msgid "DesPitch"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:205
+#: 8ffdba45a05742e78b4e9c3076664d4f
+msgid "The pilot's desired pitch angle in degrees (pitch forward is negative, pitch back is positive)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:207
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:264
+#: 9a779cd5f6de4aaa863453269b44a5fd
+#: 5b3323308d6746d183610e030988ac67
+msgid "Pitch"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:207
+#: def6f422b2e94c16b5c85c2479b369a4
+msgid "The vehicle's actual pitch angle in degrees (pitch forward is negative, pitch back is positive)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:209
+#: bc1afad85dbc491a8f307fbde0606e06
+msgid "DesYaw"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:209
+#: bd0849dfb1cc43539225ff630feb5951
+msgid "The pilot's desired heading in degrees with 0 = north"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:211
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:266
+#: a44adc6277c94b1fbd78b61560986564
+#: 9caee6c8d99c46bfbfb70b1e7ffdf0b2
+msgid "Yaw"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:211
+#: ce258c74275447fdbb0e452f2a8ba0a2
+msgid "The vehicle's actual heading in degrees with 0 = north"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:213
+#: 491d970f82e147cebde8d1a48abf177f
+msgid "ErrRP"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:213
+#: 04d892211aba45429c6824a0eb3b3dc5
+msgid "The average size of the roll/pitch error estimate (values between 0 and 1)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:215
+#: a8ddaa955dcf4f488b236a866e0952b5
+msgid "ErrYaw"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:215
+#: a5077a1d78134ec98e13a1ecfae85225
+msgid "The average size of the yaw error estimate (values between 0 and 1)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:218
+#: 4730eb9961c04279877c8a544f2ae6d2
+msgid "**ATUN (auto tune overview):**"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:221
+#: a58849fb9fee4b9d9e4d1ed175b02379
+msgid "Axis: 0 = Roll, 1 = Pitch"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:223
+#: 4740daa2d55f4a5da325bf735749abfc
+msgid "TuneStep"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:223
+#: 6e2d1d328f0742afb039a78fa549c6f2
+msgid "0 = Returning towards Level (before or after a test), 1 = Testing (i.e. performing a twitch to test response), 2 = Updating gains (twitch completed and gains adjusted)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:230
+#: 96e8abb3e1a7493ea0369ae0e566dd69
+msgid "RateMin"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:230
+#: 66eb9e972aae4cc88857d1fae5093dae
+msgid "Minimum recorded rate during this test"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:233
+#: 34e0200a316b4aa09f6b58c774221df9
+msgid "RateMax"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:233
+#: 3586b3362c764cd68949c9c512cbade3
+msgid "Maximum recorded rate during this test"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:236
+#: a13a748ea95e4fc8a20d2cedf86b3556
+msgid "RPGain"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:236
+#: 3226623335a64cf08b78b3d3bc2d2906
+msgid "Rate P gain value being tested"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:238
+#: 7916613d29bf43d2af55e9454f1fe737
+msgid "RDGain"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:238
+#: 6e1dbd5e94d04121a2509f614c5cc270
+msgid "Rate D gain value being tested"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:240
+#: 39e4e3ac2d9745a3a8b26953ae792546
+msgid "SPGain"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:240
+#: 03a69d79a4af4d59a9afc076185768c2
+msgid "Stabilize P gain being tested"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:243
+#: c8fdf47f0dd64d57a4ef4c28eb3b59c6
+msgid "**ATDE (auto tune step details):**"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:246
+#: 9c4adeddc014403f8d2a89743c15895e
+msgid "Angle"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:246
+#: a6d64e1c0b9f4a42a3deffb3c7d6bf6d
+msgid "Angle of the copter in centi-degrees for the axis being testedx"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:248
+#: 86a3c872be6943e287b9123850cc334d
+msgid "Rate"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:248
+#: 33ebbf06a7ef43ab86dbdefb86ab4ca4
+msgid "Rate of rotation of the copter for the axis being tested"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:251
+#: e62bdb155d3f4cd9b578812b64c283c6
+msgid "**CAM (time and position when camera shutter was activated):**"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:254
+#: ed7ccdf068fe4433981f123e0b97a0b0
+msgid "GPSTime"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:254
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:744
+#: 61d20e15e0bf46b8a8db47cc9bc93890
+#: 73a430dd8615415fa937d76acd40334f
+msgid "The GPS reported time since epoch in milliseconds"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:256
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:285
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:751
+#: ae4d98f42ce1494badd8efbce0eeae32
+#: fcb33fd524b148beb3ec8f22cc428cd6
+#: d10cc3ee5194494194e5577ace875f3d
+msgid "Lat"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:256
+#: 612e1514457d4945b3fad21122b1b532
+msgid "The accelerometer + GPS latitude estimate"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:258
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:287
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:753
+#: cdd75f0e70194d78a215a22f1cab233a
+#: 91aec68c2247453a958c40031b31aa9c
+#: 6ade62cb9b954cf88cf84891eab15834
+msgid "Lng"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:258
+#: 809835aba1fe412bb87d5e43107451a6
+msgid "The accelerometer + GPS longitude estimate"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:260
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:283
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:343
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:757
+#: 26858ca5cba14f31a19d4f60064418a9
+#: 43443eb4e2284aa5b4c536883eb5625d
+#: f8cf80e48bd84ffaa0c972b2783d025d
+#: 6c18d02b1e9848d9b49fd07ce55459d2
+msgid "Alt"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:260
+#: ddd5ca210a07471f88c0d27e6ad8f5df
+msgid "The accelerometer + barometer estimated altitude in cm above ground"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:262
+#: 9e83f03181bb4fb5bec84555947ff7d6
+msgid "The vehicle roll angle in centi-degrees"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:264
+#: fc174575a7a947e28560fac2f9352420
+msgid "The vehicle pitch angle in centi-degrees"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:266
+#: 0afc3445b28041479fc53afc8b8cc870
+msgid "The vehicle's heading in centi-degrees"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:269
+#: 3e1784ed629f4714a7cd1b9d57368ae0
+msgid "**CMD (commands received from the ground station or executed as part of a mission):**"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:273
+#: 797783f23ea649d980a5badd460a59b0
+msgid "CTot"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:273
+#: 36710a7691314a1cbccf0a0c17eb967c
+msgid "The total number of commands in the mission"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:275
+#: 2a73587f2c17420d87a59bc43108b0e1
+msgid "CNum"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:275
+#: d84c10cec5d543fa8bd62d180ef3c364
+msgid "This command's number in the mission (0 is always home, 1 is the first command, etc)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:277
+#: 36f72d9a2c5f4194a326a3eec88d544b
+msgid "CId"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:277
+#: 258ea478455c41c2921152c6f3706026
+msgid "The `MAVLink message id <https://mavlink.io/en/messages/common.html>`__"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:279
+#: 7e8641d96df841abb14875f573077f84
+msgid "Copt"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:279
+#: 9f2759082aae47549d11158e8e4f558e
+msgid "The option parameter (used for many different purposes)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:281
+#: 84cee87fc80a4a939311617a5bdf2a6e
+msgid "Prm1"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:281
+#: 600cca18330d4b2aa51e81d0e8e50e23
+msgid "The command's parameter (used for many different purposes)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:283
+#: 0de6f89992f146c1a61fc8a8cd0cbca0
+msgid "The command's altitude in meters"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:285
+#: b626b3dbf5604d6dba80692a9084d616
+msgid "The command's latitude position"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:287
+#: e5523658c5334bfabd23244ba338c49d
+msgid "The command's longitude position"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:290
+#: 09665656e4444765b2319b486f8a9056
+msgid "**COMPASS (raw compass, offset and compassmot compensation values):**"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:293
+#: 829569304c1943d38ecdd2d63351d2a5
+msgid "Field"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:293
+#: 832be6937bca42f0a5e1b1705c16237b
+msgid "Description"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:295
+#: 5992b94836e946948bf01803602c659f
+msgid "MagX, MagY, MagZ"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:295
+#: 6eb28c38c9e54b42956a92c0ca0c5d32
+msgid "Raw magnetic field values for x, y, and z axis. These are magnetometer readings with calibration applied, not raw magnetometer readings."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:298
+#: eecf0f477212413497e21951abe2cf52
+msgid "OfsX, OfsY, OfsZ"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:298
+#: c4a046d71a6446d8aae0ecdb410df8ad
+msgid "Raw magnetic offsets (will only change if COMPASS_LEARN parameter is 1)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:300
+#: f180441ec19d4f7fa8bc2b0f6671e2f9
+msgid "MOfsX, MOfsY, MOfsZ"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:300
+#: a0cf555e126342f3be18487331b69704
+msgid "Compassmot compensation for throttle or current"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:303
+#: 35ce4e30aa694034976d33ece18cbbfe
+msgid "**CURRENT (battery voltage, current and board voltage information):**"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:306
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:325
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:365
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:714
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:740
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:767
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:777
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:791
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:821
+#: 2fb17849ac174f9b936573f7309e93fd
+#: 7231327b94ba4eaaa8b7dd7c80b38c55
+#: b573e189f3334532a3317144d68ad203
+#: 5aefe56f09d64d2b969851ceda3fcc71
+#: 166c37640bdf48828c5d998ace55be43
+#: 8279ebf2edc349f296713dbc3d316e84
+#: 2656792a9c3c47eba936c71165a1eb30
+#: 3aeb6f459b99405a89d1a86266ad2242
+#: 221ab37ed3244b2d88a2941fac347604
+msgid "FIELD"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:306
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:325
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:365
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:695
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:714
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:740
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:767
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:777
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:791
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:821
+#: 3944ece185a74b3e932e9ae927655206
+#: fbf6dacc39a94d65af48464c5e0a8d17
+#: d6a394c5e17f4da1861c6983cca277d7
+#: 2ad6de1130c44ea094fd4efce7f624bd
+#: 10861f89d7a7479a92486aedff029107
+#: 3ec7c6135e2448e2ac2c2edd7ca92d79
+#: c060bd80f8fd45cd969ff168b56f787c
+#: ee03c02c15e24597b52f5adf10f6c892
+#: 47ee462e17da4273856d45d356c56d38
+#: d304fbb260944f1ab002e02bb4ecd51e
+msgid "DESCRIPTION"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:308
+#: 7daf59e97e2949c5a52ec221c997f1ef
+msgid "Thr"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:308
+#: 34d7aa5093f849c9aa59f3f257e448c0
+msgid "Pilot input throttle from 0 ~ 1000"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:310
+#: 6daa43b67a8f4388882596cd6af3cc84
+msgid "ThrInt"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:310
+#: f4e328e5952f4ff09970b97b5ea2c917
+msgid "Integrated throttle (i.e. sum of total throttle output for this flight)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:312
+#: 2686a1eeb37e4f7ab53882ed5a3ea011
+msgid "Volt"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:312
+#: 64488863f453440cb62efdca44922832
+msgid "Battery voltage in volts \\* 100"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:314
+#: 6bd62978e8914d7e8dfce022d1b34b62
+msgid "Curr"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:314
+#: 06c17e18bdcf426f95fe6f6a607758f7
+msgid "Current drawn from the battery in amps \\* 100"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:316
+#: 7c9905cd661642dd89fd4eaa3527f69f
+msgid "Vcc"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:316
+#: 7d88a922eb344bc3be666677a17e599a
+msgid "Board voltage"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:318
+#: 05aca25801484378aa3f322919aed4cc
+msgid "CurrTot"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:318
+#: 7c482224367146148b6d1909e7d1eb62
+msgid "Total current drawn from battery"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:322
+#: 9d64bec4a1684b149fb8b4d562e91cc0
+msgid "**CTUN (Control, Throttle and altitude information):**"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:327
+#: 0b7d4d1800fd40478cc265d94f663875
+msgid "TimeUS"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:327
+#: 648b22cb4b434d3db27ee5673121f420
+msgid "Time stamp for messages in microseconds (can be ignored)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:329
+#: f1723462f6674994bd594d4b37118de6
+msgid "ThI"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:329
+#: 41cb91bba0394559af4e8e0c7d395ef0
+msgid "The pilot's throttle in as a number from 0 to 1000"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:331
+#: 90af16a2af7d42e6b0009d3cc55b001d
+msgid "ABst"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:331
+#: 5aeb23cd266f44129d17a9a422d8e73c
+msgid "Angle Boost: throttle increase (from 0 ~ 1000) as a result of the copter leaning over (automatically added to all pilot and autopilot throttle to reduce altitude loss while leaning)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:334
+#: f4ea8b0ebc7c423d930024504b2be2a8
+msgid "ThO"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:334
+#: 8d65d7fc559a4d20817f6b9b4596b28d
+msgid "Final throttle output sent to the motors (from 0 ~ 1000). Normally equal to ThrI+ABst while in stabilize mode."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:337
+#: 7e604f7d452144faa1e5e35b8100910d
+msgid "ThH"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:337
+#: d783c02964a64caaa84be587eac3ab88
+msgid "Estimated throttle required to hover throttle in the range 0 ~ 1"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:339
+#: ed17b068041f42abb13223fb65cab101
+msgid "DAlt"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:339
+#: 279c6dd7283349a0bf2480f597245b16
+msgid "The Desired Altitude while in AltHold, Loiter, RTL or Auto flight modes. It is influenced by EKF origin, which in 3.5.X is corrected by GPS altitude. This behaviour is turned off in 3.6.X and can be turned on with EKF_OGN_HGT_MASK."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:343
+#: 3160394651254d5fa5d59dc313b90d38
+msgid "The current EKF Altitude"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:345
+#: ae75f26ce2f24df0a23fd620c16592f2
+msgid "BAlt"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:345
+#: e9831e3b81544e44b5cd388ce02dbe93
+msgid "Barometer Altitude: The altitude above ground according to the barometer"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:347
+#: 3c826ad978d549808f1889813270399c
+msgid "DSAlt"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:347
+#: a018f81eb6544020986fe4fba29a76cf
+msgid "Desired distance in cm from ground or ceiling (only visible if Sonar is available)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:349
+#: 57489a1a78844df6b6cbe202133a28cb
+msgid "SAlt"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:349
+#: c22498619f604b0a8429d428bb78b9fb
+msgid "Sonar Altitude: the altitude above ground according to the sonar (Only visible of Sonar is available)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:352
+#: 8a71d29394224d2686c0d02eac51d9e2
+msgid "TAlt"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:352
+#: e9cf2eca9af84208b140447176219335
+msgid "Terrain altitude (not used by default)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:354
+#: 180bc26dc4024ae7a385e64c07f6a032
+msgid "DCRt"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:354
+#: d0976d0961cd49f7a685cf6279ad766f
+msgid "Desired Climb Rate in cm/s"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:356
+#: 6988ce1e49e84a9c9be313af33f841a0
+msgid "CRt"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:356
+#: eba2f81a3218441aabff93391b6e5824
+msgid "Climb Rate in cm/s"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:358
+#: c6a67a58c715442b8a144ae58ec0a639
+msgid "N"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:358
+#: f9d3524202e344ae8be7a368e6c7fc92
+msgid "Harmonic notch current center frequency for gyro in Hz"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:361
+#: 4d60425f44034680a3495901fe073e41
+msgid "**D32, DU32 (single data values which are either signed 32bit integers or unsigned 32bit integers):**"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:367
+#: defef1b151924f1f9ab54a8162a26a9b
+msgid "id"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:367
+#: 2e15f67503c8472e90a0421acad5a5ad
+msgid "Identification number for the variable. There are only two possible values:"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:369
+#: fc56c5afd01840ec8b81f54e8017eeab
+msgid "7 = bit mask of internal state (The meaning of individual bits can be found in the def'n of the `ap structure <https://github.com/ardupilot/ardupilot/blob/master/ArduCopter/Copter.h#L296>`__"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:372
+#: eae0d86677064f64b6d961d5997d32c9
+msgid "9 = simple mode's initial heading in centi-degrees"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:375
+#: 3cee7cc74e704c6dad9b53629e6fc7bb
+msgid "**EKF (Extended Kalman Filter**):"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:377
+#: dc0fcddda60246f59bc5ed5f045c0d17
+msgid ":ref:`Log information here <dev:extended-kalman-filter_interpreting_log_data>` (Dev Wiki). Overview :ref:`here <common-apm-navigation-extended-kalman-filter-overview>`."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:380
+#: 755f7ad95a7c46de87d4c6f023b0e53b
+msgid "**ERR (an error message):**"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:382
+#: d05d81d84fbe4dd4b7d344635e8f6b0f
+msgid "SubSystem and Error codes listed below"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:396
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:407
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:548
+#: 6620515b22af4485ba1c80fb2146b8ee
+#: 2bd3d64ba1b64d8e9285b82aa43cc52e
+#: c88b1536923840b3ac1f9b96ba79870c
+msgid "0 = Errors Resolved"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:397
+#: 8d9cc525e27047bba91bf92ac184107b
+msgid "2 = Late Frame : no updates received from receiver for two seconds"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:408
+#: e4df22c164b544c29356ae3fee658d6d
+msgid "1 = Failed to initialise (probably a hardware issue)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:409
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:549
+#: 1238f52895a8483c8cdeaf3cb20091be
+#: 88c434fd4edf46f8a6f45285d58e1684
+msgid "4 = Unhealthy : failed to read from the sensor"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:420
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:432
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:444
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:456
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:536
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:560
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:572
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:607
+#: 8fc39d15ec6e4a5181afbf7d2d927d8c
+#: 2c8e45b585b549e192b5e65a3734af05
+#: 6e056409a50c454a9662b8a7ca112238
+#: 359b5aa6d2b14754a2fa23029e4534b1
+#: 16e30cc148b849c7bdeeb28907e230c9
+#: a1cef47f03b7455aa9f7b211b9be330f
+#: 548836d60c5643e78fc750ae7ae3eb6f
+#: de8bc471828a4119ae69079f3c1f3fb7
+msgid "0 = Failsafe Resolved"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:421
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:433
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:445
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:537
+#: 49616507e6894c9f9e88843739310bdc
+#: af2069e34c3e4ce898119b5dfd00d82c
+#: 9bfd0cbcd015442bbc7f1cfa153d3a37
+#: 04f40ce23e174b749ba36eefec5a0698
+msgid "1 = Failsafe Triggered"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:457
+#: 98a9e757c1a14b078916eb13a2c47a46
+msgid "1 = Altitude fence breach, Failsafe Triggered"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:458
+#: 8afffec9f89b4b108f60ed76d3abc04f
+msgid "2 = Circular fence breach, Failsafe Triggered"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:459
+#: 4bc484adc9824eae8a624775821161a3
+msgid "3 = Both Alt and Circular fence breached, Failsafe Triggered"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:460
+#: 763ce470f120429099c7510728de0439
+msgid "4 = Polygon fence breached, Failsafe Triggered"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:471
+#: fe22614498684d7e87dda940f2a069fe
+msgid "Vehicle was unable to enter the desired flight mode normally because of a bad position estimate"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:473
+#: b28fbe1013a2453eb0a52b28c6283689
+msgid "See `flight mode numbers here <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/mode.h#L77>`__"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:484
+#: 5351d2871f2a4684a016d23add0cf7f5
+msgid "0 = Glitch cleared"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:485
+#: 373ed3fc955045f5b088fd4f5437a94d
+msgid "2 = GPS Glitch occurred"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:496
+#: b5aa487e13cc4cccb16262d2cc069831
+msgid "1 = Crash into ground detected.  Normally vehicle is disarmed soon after"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:497
+#: b42f8f20614c4ba99e763739a7265143
+msgid "2 = Loss of control detected.  Normally parachute is released soon after"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:512
+#: 440b2ae157ab4033a1c8dab3776960be
+msgid "2 = Not Deployed, vehicle too low"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:513
+#: 410bdbab1e2845f2907ed7996062e629
+msgid "3 = Not Deployed, vehicle landed"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:524
+#: ae6fc255d6e4411ca6b678de5eebc7e8
+msgid "0 = Variance cleared (position estimate OK)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:525
+#: 145636df47a94716a215d310ba0be818
+msgid "2 = Bad Variance (position estimate bad)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:561
+#: 78f5553cbba24a7b9dd8bcdcf4bac26a
+msgid "1 = Failsafe Triggered (normally vehicle disarms)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:573
+#: ac2724ed09a94f88a98f356ef8fb675c
+msgid "1 = No action just report to Pilot"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:574
+#: 49b581777f1f4c638409cf57546a91e7
+msgid "2 = Vehicle avoids by climbing or descending"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:575
+#: 1c30e21fb0ea4685acb5e2542727037e
+msgid "3 = Vehicle avoids by moving horizontally"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:576
+#: 2ae05c5e5a7c43459c127feb97538a9d
+msgid "4 = Vehicle avoids by moving perpendicular to other vehicle"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:577
+#: dc4d2190f67148e18a4a0bc5378e037d
+msgid "5 = RTL invoked"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:593
+#: 059806b1295f4bf0832ac8a3f0120edd
+msgid "2 = Failed to set destination"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:594
+#: 21a1ce65ce6b4391a3752e9181c4e9c8
+msgid "3 = RTL restarted"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:595
+#: b839ecca8a76460c8cdc575dd4a4b4a0
+msgid "4 = Circle initialisation failed"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:596
+#: 6a6e20f7b38d47689c0db20a7ffb4ce5
+msgid "5 = Destination outside fence"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:608
+#: 48109da0e8d94166812876f763ce3e14
+msgid "1 = Failsafe Triggered (normally vehicle RTLs)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:619
+#: 7653302d1cdb445998706fdbd0e1aec7
+msgid "0 = 1st EKF has become primary"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:620
+#: ec5688fd93264712b22dbeeb8dc62496
+msgid "1 = 2nd EKF has become primary"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:631
+#: 115c461a407d47ec9c709ecbde1a1f15
+msgid "0 = Thrust Restored"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:632
+#: 34a77bbaf12b4d19b734d2a7eae9cdc9
+msgid "1 = Thrust Loss Detected (altitude may be prioritised over yaw control)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:643
+#: 8095211895124eab98cb2e561ec3b872
+msgid "0 = Sensor Failsafe Cleared"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:644
+#: 7cbcfb9daab341dda83ad0225a809dea
+msgid "1 = Sensor Failsafe Triggered"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:655
+#: ea4fc41cfbb64ee8a653aa204244aa34
+msgid "0 = Leak Failsafe Cleared"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:656
+#: 8c688cdfd1a54f31a40e2d94cd8b7358
+msgid "1 = Leak Detector Failsafe Triggered"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:667
+#: 764cce8d4bc349bd949124d296c1e8e0
+msgid "0 = Pilot Input Failsafe Cleared"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:668
+#: f7063d70c631438ca8da2b4221bf7781
+msgid "1 = Pilot Input Failsafe Triggered"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:679
+#: 11fdc432e8c54d618f8502bf8c434847
+msgid "0 = Excessive Vibration Compensation De-activated"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:680
+#: fc370a3c5fc94ab2b41f5f03ef0027ae
+msgid "1 = Excessive Vibration Compenstaion Activated"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:690
+#: b109b3fd80cf491baaf486fcde1f9be2
+msgid "**EV: (an event number)**. The full list of possible events can be found in `AP_Logger.h <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Logger/AP_Logger.h#L94>`__ but the most common are:"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:695
+#: c068600baba544e6befc076c9b75b41a
+msgid "Event No"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:697
+#: ee7ebd81339c4f608a672e9023f97a47
+msgid "Armed"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:699
+#: a33b90d385a44317bf5147a92736c1c6
+msgid "Disarmed"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:701
+#: 46b372d41cc440cb9093e8f60604f948
+msgid "15"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:701
+#: 05a8a2aa755940e9bca7d1a31fabfe47
+msgid "Auto Armed (pilot has raised throttle above zero and autopilot is free to take control of throttle)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:703
+#: 2b0fd08ea1a1436ebd905e5d11b9b282
+msgid "18"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:703
+#: eff28a052ae54ff99c85be8ebe8553db
+msgid "Land Complete"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:705
+#: 8b5dede0a370441aa0ad3b10911b7384
+msgid "25"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:705
+#: 43b0de1170274c718334558e6d81dcf3
+msgid "Set Home (home location coordinates have been capture)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:707
+#: b356987c2afb421b92288bad2b1744af
+msgid "28"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:707
+#: 6f84ece7fa9748cabc2663e66cdc5f7f
+msgid "Not Landed (aka Takeoff complete)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:711
+#: a50f8a21ebcb4fb2b609955d1185de5e
+msgid "**GPA: (Global Position Accuracy)**"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:716
+#: c5b39d40fc9145e9aea19d38903b3aeb
+msgid "VDop"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:716
+#: 0bf54f4c4c86454e817ed558b14b1169
+msgid "Vertical dilution of precision, a unitless measure of precision https://en.wikipedia.org/wiki/Dilution_of_precision"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:719
+#: 51b0f91bbe1645eebb8743be67103b67
+msgid "HAcc"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:719
+#: 7ac76de49ccd47a793877eb5dad19b4b
+msgid "Horizontal Accuracy as reported by the GPS module, in meters"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:721
+#: 08b37e1b15d64622a3723dda6c3da8cf
+msgid "VAcc"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:721
+#: 27c6a6a03cb44601bcc813f8890351f5
+msgid "Vertical Accuracy as reported by the GPS module, in meters"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:723
+#: 900f6d084e334bf7ba972c5178732cae
+msgid "SAcc"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:723
+#: c999e2da10be4818b9a69575ba33b764
+msgid "Speed accuracy as reported by the GPS, in m/s/s"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:725
+#: d533b444c87c4586875831bd43c8e13a
+msgid "VV"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:725
+#: 5427336e53a24a98808cc62ec479cad6
+msgid "Flag to indicate if the GPS is reporting vertical velocity"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:726
+#: 43c1692699c84b398bd68fe3bf5b5583
+msgid "0 No vertical velocity data 1 GPS has vertical velocity data"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:729
+#: 959282632cbe4b5cabf6709504080441
+msgid "SMS"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:729
+#: 3644615c3d274814abb3e630ee213807
+msgid "The autopilot time in milliseconds that the accuracy/GPS position data is associated with."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:731
+#: 143ebad3fb68427f9e0916b2f985bf6d
+msgid "Delta"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:731
+#: 9d3906cdcda743e1b41a8e975f6faa69
+msgid "The time between when the previous GPS message and the current GPS message was parsed by the autopilot, in milliseconds"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:737
+#: 5b4852535c624e308d6c3e896d9d6fc3
+msgid "**GPS:**"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:742
+#: f084fae2ab6f49c9abc341c4177a5dc2
+msgid "Status"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:742
+#: a6f44c5e11ee46eb92969dfd05f96506
+msgid "0 = no GPS, 1 = GPS but no fix, 2 = GPS with 2D fix, 3 = GPS with 3D fix"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:744
+#: 79b9ccd5905143b5803dfaa733392cef
+msgid "Time"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:746
+#: 482d6f1d21c6482c908ade92e6baad11
+msgid "NSats"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:746
+#: 552083d5a0bf497595d9fba01813f0b8
+msgid "The number of satellites current being used"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:748
+#: b83311c1c5524656a426df977410b602
+msgid "HDop"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:748
+#: 1a5f57b7a06b426ab865e59cab9b6f49
+msgid "A measure of gps precision (1.5 is good, >2.0 is not so good) https://en.wikipedia.org/wiki/Dilution_of_precision"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:751
+#: 743674f3d7c945a6920721cab4380325
+msgid "Latitude according to the GPS"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:753
+#: 351f560378de447abdd419efa1c3d3cb
+msgid "Longitude according to the GPS"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:755
+#: 555244716b4f4130b64f15a002fc96ba
+msgid "RelAlt"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:755
+#: 5995e7eb615a4b6880105d79ae83d25d
+msgid "Accelerometer + Baro altitude in meters"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:757
+#: 50c02a4af86b4d7395c6917f0801fa34
+msgid "GPS reported altitude (not used by the autopilot)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:759
+#: 55cdeafda24340e2a936a7de36d21b09
+msgid "SPD"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:759
+#: 8ca0bb488541418fa9786395a5f501fd
+msgid "Horizontal ground speed in m/s"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:761
+#: 5fb8fa5b10ee415b8892fc709021a740
+msgid "GCrs"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:761
+#: 6e3de8f5da634e3fb70c03e1ab941b79
+msgid "Ground course in degrees (0 = north)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:764
+#: 6410a4e1ac7d4229b2fb004c3bca0217
+msgid "**IMU (accelerometer and gyro information):**"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:769
+#: 44bc7f7dce06409783c233ebb43904ad
+msgid "GyrX, GyrY, GyrZ"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:769
+#: 0e862e1404d449a4b3b561ecd945c110
+msgid "The raw gyro rotation rates in radians/second"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:771
+#: 94df9c9930f3492987d074edef753d54
+msgid "AccX, AccY, AccZ"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:771
+#: 4e62a88d8489415787ead32751ba21bc
+msgid "The raw accelerometer values in m/s/s"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:774
+#: f05b85c83694490097e59921904a8d65
+msgid "**Mode (flight mode):**"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:779
+#: f178248ecc1b4b9e95d326d8e1c5b2ad
+msgid "Mode"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:779
+#: dfc033abc1c34a67ae04b60c9ebc5962
+msgid "The flight mode displayed as a string (i.e. STABILIZE, LOITER, etc)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:781
+#: ebfacb8b8427426395eae71f77f36e23
+msgid "ThrCrs"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:781
+#: f651326b9d594813a6cb2a1ffb9e8831
+msgid "Throttle cruise (from 0 ~ 1000) which is the autopilot's best guess as to what throttle is required to maintain a stable hover"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:784
+#: 6a475014cd9e4c248e289c612ee4b769
+msgid "Rsn"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:784
+#: 485429ae0a804d09a2ce10d9b28d5bb3
+msgid "Reason for mode change (TX command, failsafe, etc) . The meaning of code values can be found in `ModeReason <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Vehicle/ModeReason.h>`__"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:788
+#: 55d3ce8dcbb94ff9b180a41d2bc2d1ec
+msgid "**NTUN (navigation information):**"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:793
+#: 80442045d9e1425ca33aa37fde20ba4f
+msgid "WPDst"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:793
+#: b8ab077bc05a4567b9012c9087c80f1d
+msgid "Distance to the next waypoint (or loiter target) in cm. Only updated while in Loiter, RTL, Auto."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:795
+#: 9355d806d58949d8b30b2d015fce4676
+msgid "WPBrg"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:795
+#: 6e4715b66f494de78c3d8b96841417eb
+msgid "Bearing to the next waypoint in degrees"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:797
+#: 8d65792041ef4ea8a232343cd98b3cd5
+msgid "PErX"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:797
+#: 1c41956596ba4a2a81c8f5b47e3178b0
+msgid "Distance to intermediate target between copter and the next waypoint in the latitude direction"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:799
+#: 6668292d361546b096177a7ce2035b07
+msgid "PErY"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:799
+#: ba830882414b476387418bf5a2782599
+msgid "Distance to intermediate target between copter and the next waypoint in the longitude direction"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:801
+#: 2e34b55bf5974871abae0fcbb85688f2
+msgid "DVelX"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:801
+#: 71cc2c5cf3b040b8b29f312eb427cc54
+msgid "Desired velocity in cm/s in the latitude direction"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:803
+#: 5e72e359600e4063a264a9d5ea8c1c1f
+msgid "DVelY"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:803
+#: 9d17555ed47042f4bc15ccc524338da4
+msgid "Desired velocity in cm/s in the longitude direction"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:805
+#: 27da9c1401404b9382787ac32763b395
+msgid "VelX"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:805
+#: 31fdbd201ca74c978fd8b7175f1715af
+msgid "Actual accelerometer + gps velocity estimate in the latitude direction"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:807
+#: 2ad9991736504665a8cfa86ba171669f
+msgid "VelY"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:807
+#: 9521233ab28649a99aea06253d39a78c
+msgid "Actual accelerometer + gps velocity estimate in the longitude direction"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:809
+#: 2821d0387a184ed3bd89d68421d668d8
+msgid "DAcX"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:809
+#: dd70d6bb2897471dba4752addc9e75b6
+msgid "Desired acceleration in cm/s/s in the latitude direction"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:811
+#: 98338f4deb4e474d86bb82f602d22834
+msgid "DAcY"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:811
+#: f74ae14a2e3e42e6a4171e40c3e33a32
+msgid "Desired acceleration in cm/s/s in the longitude direction"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:813
+#: 97e115b4ae734491a82b546eaa7205d1
+msgid "DRol"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:813
+#: 07bcccb4079842a7a70265c82c7e8570
+msgid "Desired roll angle in centi-degrees"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:815
+#: e0139a2d953543d3a99543f98150a931
+msgid "DPit"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:815
+#: 1513152971e246ed9fff0d659249e6bc
+msgid "Desired pitch angle in centi-degrees"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:818
+#: 5167f9cef5404b02ab4b52c320fc4d6c
+msgid "**PM (performance monitoring):**"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:823
+#: daa565cddbfb489996c29fba9879e674
+msgid "NLon"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:823
+#: 4cc28fa0b3ab4a12864b4537c47e94c5
+msgid "Number of long running main loops (i.e. loops that take more than 20% longer than they should according to :ref:`SCHED_LOOP_RATE<SCHED_LOOP_RATE>` - ex. 3ms for 400Hz rate)"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:826
+#: 400b8c35a7744d3886f4fae798e129e8
+msgid "NLoop"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:826
+#: dd5d123e7c4a42fdaf3c475ab540d653
+msgid "The total number of loops since the last PM message was displayed. This allows you to calculate the percentage of slow running loops (which should never be higher than 15%). Note that the value will depend on the autopilot clock speed"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:830
+#: 5bd015a42dd747b09f2b1e1dd7deb4f9
+msgid "MaxT"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:830
+#: 64e9a9e9261044bb9369745322930ad7
+msgid "The maximum time that any loop took since the last PM message. This shouldn't exceed 120% of scheduler loop period, but will be much higher during the interval where the motors are armed"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:833
+#: d87ccfa8486a419bb4e3716203f2d4d6
+msgid "Mem"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:833
+#: b6c0a90fe52b4c49a9b894af2396ac4a
+msgid "Available memory, in bytes"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:835
+#: 856512ed45bf41d9872f512f75e57021
+msgid "Load"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:835
+#: a64956a8904f4dd9b80fa6bdc078cd05
+msgid "Percentage (times 10) of the scheduler loop period when CPU is used"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:839
+#: c9b110e56f3c4bc8982a1985fe6267c1
+msgid "**RCOUT (pwm output to individual RC outputs):**"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:841
+#: 50fb95a1d4434f8dbd74a1e83e4c7956
+msgid "RC1, RC2, etc : pwm command sent from autopilot to the esc/motor/RC output"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:845
+#: 1cf00524486047279d2ca4b9e8328821
+msgid "Viewing KMZ FILES"
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:847
+#: d3778a86dd5d44d9ad7d1e2802c949eb
+msgid "When you download the dataflash log files from the autopilot it will automatically create a KMZ file (file with extension .kmz). This file can be opened with Google Earth (just double click the file) to view your flight in Google Earth. Please see the instructions on the :ref:`Telemetry Logs Page <planner:mission-planner-telemetry-logs-creating-3d-images-of-the-flight-path>` for additional details."
+msgstr ""
+
+#: ../../source/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.rst:855
+#: 6da7ab7b4d0d49eea57a1be0ef5f0045
+msgid "Video tutorials"
+msgstr ""

@@ -1,0 +1,132 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:30+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:6
+#: 2eea41d7ed2946ecb7488ad94ae5fbe9
+msgid "EKF3 Affinity and Lane Switching"
+msgstr ""
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:8
+#: 8a66ffa6b1614594a2e1a189b20c306e
+msgid "The :ref:`EKF <dev:extended-kalman-filter>` instantiates multiple instances of the filter called 'lanes'. The \"primary\" lane is the one currently providing state estimates, other lanes are updated in the background and available for switching to."
+msgstr ""
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:13
+#: e2f85cbaad0546c3ab3cd9f8a9793603
+msgid "This page attempts to clarify an advanced configuration topic. The source code is the truth."
+msgstr ""
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:15
+#: 7f71a2968e6b46c8b1b6dacb9f723098
+msgid "The number of possible lanes is the number of IMUs enabled for use (see :ref:`EK3_IMU_MASK <EK3_IMU_MASK>`). Furthermore, the lanes are 1-1 bound to the (used) IMUs: lane 1 for IMU 1, lane 2 for IMU 2, etc."
+msgstr ""
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:18
+#: f52c9908cf4b4ec58c2ce13b1688f561
+msgid "Now, consider the other sensor types {Airspeed, Barometer, GPS, and Magnetometer (aka Compass)}. First, it is important to define the system's notion of the \"primary\" sensor instance of each type. The primary sensor instance is the instance being actively relied upon. The initial primary sensor instance is selected by a user-modifiable parameter. The system may change which sensor instance is its primary, even in-flight, for example in case of a sensor fault. Thus \"changing the primary instance\" is one mechanism the system can use to switch which sensor instance is being relied upon."
+msgstr ""
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:25
+#: ca86f44e102244ae97f4cd42f5e0e3b3
+msgid "A second mechanism for selecting which sensor instance to rely on is provided by \"affinity\" & lane-switching. Because modern-day vehicles may have redundant good quality sensors installed, affinity provides a way to force some EKF lanes to prefer sensor instances which are not the system-wide primary. If affinity for a sensor-type is disabled, each lane uses the system's primary instance of the sensor. (Affinity being disabled is the conventional/default choice.) If affinity for a sensor-type is enabled, the sensor instances are distributed to lanes in a similar way as IMUs. Now with affinity enabled, lane-switching becomes a mechanism for sensor-switching. Each lane's error score---used by the system to make a switching decision---takes into account innovations from all sensors used by that lane. Consider a noisy but not faulted sensor for which affinity is enabled: it makes the error-score for its lane bad. The system responds to the bad error score by lane-switching away from relying on it. Thus a mishap may be avoided by simply EKF lane-switching to a less-noisy IMU+sensor combination."
+msgstr ""
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:36
+#: b454d81f53c049faa998d0e6a0065eef
+msgid "**Example: Vehicle uses 4 IMUs, 2 Airspeeds, 3 Barometers, 2 GPS, and 3 Magnetometers. Affinity is disabled for airspeed & barometers, enabled for GPS & magnetometers.**"
+msgstr ""
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:50
+#: 28a9157704b147caa2f43c9c63bdb7cc
+msgid "*Numbers indicate the lane's initial primary sensor instance.*"
+msgstr ""
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:53
+#: 91c91be8cf654966b0fb20f773eafea4
+msgid "Configuration Parameters"
+msgstr ""
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:57
+#: 631b945034254f669185e36b578776bc
+msgid "Affinity is only available with EKF3, so make sure you are using it by ensuring :ref:`EK3_ENABLE <EK3_ENABLE>` is set to \"1\" and :ref:`AHRS_EKF_TYPE <AHRS_EKF_TYPE>` is set to \"3\""
+msgstr ""
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:59
+#: 51524c496b7e4d40a2870276fc738d8d
+msgid "The :ref:`EK3_AFFINITY <EK3_AFFINITY>` parameter is a bitmask which gives you the option to choose the sensors you want to enable affinity for. In every EKF lane, sensors for which affinity is not enabled will follow the system's \"primary\" selection logic. For a sensor-type with affinity enabled, lane 1's primary sensor is 1, lane 2's primary sensor is 2, etc."
+msgstr ""
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:63
+#: 86c915199ede42e5b2dc6ce2ccb28c1a
+msgid "The :ref:`EK3_ERR_THRESH <EK3_ERR_THRESH>` parameter controls the sensitivity of lane switching. Lane errors are accumulated over time relative to the active primary lane. This threshold controls how much of an error difference between a non-primary and primary lane is required to consider the former performing better. Lowering this parameter makes lane switching more responsive to smaller 'relative' errors, and in practical you will see a more aggressive lane switching, and, vice-versa."
+msgstr ""
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:67
+#: b250fd3d72734f7d9b9b16e58b65e94b
+msgid "Misconfiguring the :ref:`EK3_ERR_THRESH <EK3_ERR_THRESH>` parameter could adversely affect the lane switching mechanism and have serious consequences which could lead to the loss of your vehicle. Please tune carefully."
+msgstr ""
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:71
+#: c7a334da55b74ef9834b1f1f26b052f8
+msgid "Test Results"
+msgstr ""
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:73
+#: c807d4b75d8643c2b2299c84ff75ff81
+msgid "Following graphs are from SITL testing that show Affinity enabled lane changing when the primary lane's sensor is subjected to noise/malfunctioning."
+msgstr ""
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:76
+#: 8f9b481615734a81b373b87fd766072f
+msgid "AIRSPEED"
+msgstr ""
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:77
+#: c974bae8919547dd8de2dde2a1fa5b42
+msgid "An example of lane switching for a plane with 2 airspeed sensors and airspeed affinity enabled. There are 2 IMUs, hence 2 active lanes. The primary lane's airspeed sensor has failed to show changes in pressure, hence reporting a constant value. The speed of the plane is increased and a lane switch occurs. Similarly, the second airspeed sensor of the second lane (now the primary lane) is failed and the plane's speed is decreased which again triggers a lane switch."
+msgstr ""
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:82
+#: 21bf56713e774090b807922d959bd152
+msgid "BAROMETER"
+msgstr ""
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:83
+#: c59047b38f3648f6be494847b46d3a44
+msgid "An example of lane switching for a plane with 2 barometers and barometer affinity enabled. There are 2 IMUs, hence 2 active lanes. The primary lane's barometer has failed to show changes in pressure, hence reporting a constant value. The altitude of the plane is increased and a lane switch occurs. Similarly, the second barometer of the second lane (now the primary lane) is failed and the plane's altitude is decreased which again triggers a lane switch."
+msgstr ""
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:88
+#: ad64508b282648d099a52bc4526e34c4
+msgid "GPS"
+msgstr ""
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:89
+#: 5f80a27f15274229a902c6ea6b3d3ecb
+msgid "An example of lane switching for a plane with 2 GPS and GPS affinity enabled. There are 2 IMUs, hence 2 active lanes. The primary lane's GPS is simulated with a random GPS Velocity Noise of range ±2m in all 3-axis. The actual speed can be tracked with the 2nd GPS. Subsequently, the EKF primary lane starts reporting a consistently high error and a lane switch occurs when the error crosses the set threshold."
+msgstr ""
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:95
+#: 93c2a4ed7d694c849697f4f621b81fce
+msgid "MAGNETOMETER"
+msgstr ""
+
+#: ../../source/docs/common-ek3-affinity-lane-switching.rst:96
+#: 123b9b58dea8494b88ec6514afdfbce0
+msgid "An example of lane switching for a plane with 2 Magnetometers and magnetometer affinity enabled. There are 2 IMUs, hence 2 active lanes. An error is simulated in the primary lane's magnetometer by changing the offset of the z-axis while flying. The offset change can be tracked with the 2nd magnetometer. Subsequently, the EKF primary lane starts reporting a consistently high error and a lane switch occurs when the error crosses the set threshold."
+msgstr ""

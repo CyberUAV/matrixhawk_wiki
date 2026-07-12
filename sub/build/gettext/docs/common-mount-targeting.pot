@@ -1,0 +1,543 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Sub package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Sub \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:43+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-mount-targeting.rst:5
+#: c4074ea5e00c43f5921b054aff5f3089
+msgid "Gimbal / Mount Controls"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:6
+#: 7d2cc50e182043dda8327fef6df7ec42
+msgid "ArduPilot provides mechanisms to control the pointing direction (aka targeting) automatically for camera mounts (know hereafter as ``mounts``), as well as by pilot commands/controls. Mounts can be commanded point in at least six different ways (``targeting modes``) by ArduPilot.  This page provides an overview of these controls and their setup."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:8
+#: b35cab1fe5554fabaecc5efe59e9ba00
+msgid "ArduPilot supports up to two mounts. Each mount has parameters associated with it, e.g.  :ref:`MNT1_TYPE<MNT1_TYPE>`, :ref:`MNT2_TYPE<MNT2_TYPE>`, :ref:`MNT1_RC_RATE<MNT1_RC_RATE>`, :ref:`MNT2_RC_RATE<MNT2_RC_RATE>`, etc. For the remainder of the article, we will use MNT1 for examples of setups and parameters."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:10
+#: 43941f691d9c4a659c453ead194aa279
+msgid "The mount's \"targeting mode\" defines how it is controlled.  Each ground station (GCS) is different but Mission Planner, for example, has a \"Set Mount\" button that allows changing the mode.  In many cases the user does not need to directly set the mode, instead this is done automatically as part of responding to a command from the user."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:16
+#: bed7ce0a5e36467fa1c16b71bc71d0c3
+msgid "In order to enable the mount, a :ref:`MNT1_TYPE<MNT1_TYPE>` must be selected corresponding to the mount type. This will allow its mount parameters to be seen."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:19
+#: 100881d57a144c99be451a950e093f87
+msgid "Targeting Modes"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:20
+#: bad79da591364287b6dee40b4f79b562
+msgid "Below are the 6 supported targeting modes."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:22
+#: 0a3788e85d5d43ea825d0049efcaf934
+msgid "**Retract Mode:** the mount will move to the roll, pitch and yaw angles held in the :ref:`MNT1_RETRACT_X<MNT1_RETRACT_X>`, :ref:`MNT1_RETRACT_Y<MNT1_RETRACT_Y>`, :ref:`MNT1_RETRACT_Z<MNT1_RETRACT_Z>` parameters respectively.  Some special mount specific behaviours:"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:24
+#: 41e8811704904954b4935249af60442a
+msgid ":ref:`Gremsy mounts <common-gremsy-pixyu-gimbal>` will immediately stop stabilising"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:25
+#: be2d0e3d7c804863aba18e4fe7f545a8
+msgid ":ref:`Servo mount <common-camera-gimbal>` will move to the specified angles and stop stabilising."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:26
+#: 089559d06cd94656896988b6bcf439df
+msgid ":ref:`Siyi mounts <common-siyi-zr10-gimbal>` do not provide roll control so the roll angle (:ref:`MNT1_RETRACT_X<MNT1_RETRACT_X>`) is ignored."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:28
+#: a36c35b5b1a6412d965f2e768044a59f
+msgid "If a servo has been setup to mechanically deploy/retract the mount (``SERVOx_FUNCTION`` = 9 for MNT1, \"15\" for MNT2) it will be commanded to retract the mount. Changing to another mode will command the servo to deploy the mount."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:30
+#: 686dbc952cef4f009f04c9e66030050c
+msgid "**Neutral Mode:** the mount will move to the roll, pitch and yaw angles held in the :ref:`MNT1_NEUTRAL_X<MNT1_NEUTRAL_X>`, :ref:`MNT1_NEUTRAL_Y<MNT1_NEUTRAL_Y>`, :ref:`MNT1_NEUTRAL_Z<MNT1_NEUTRAL_Z>`, respectively."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:32
+#: c0263e51083d41c1804864f9100ffd98
+msgid "**MAVLink Targeting:** the mount will move according to real-time commands received from the ground stations, companion computers or other MAVLink command source, and/or Auto mode mission commands. See :ref:`mav_cmd_do_gimbal_manager_pitchyaw`."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:34
+#: bfd2f6c87fc54d69b401fce25f2e28df
+msgid "**RC Targeting:** the pilot controls the mount in real-time using the RC transmitter. See section below for more information."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:36
+#: 9dc765797ce54dd68f6b3afc7a826cb7
+msgid "**GPS Point:** same as MAVLink targeting but ArduPilot forces the mount to point at a specific location.  Users never need to actively set the mount to this mode. The user usually selects a point and altitude on the GCS map and selects a right click menu item to \"Point the camera here\"."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:38
+#: 20c1abb934774170adf0cfd81b27898c
+msgid "**SysId Target:** the mount points at another vehicle with the MAVLink system id specified.  Users never need to actively set the mount to this mode and there are no known GCSs that support setting the system id, but the parameter can be set by updating the value of :ref:`MNT1_SYSID_DFLT<MNT1_SYSID_DFLT>` directly."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:40
+#: 74d8752937d946f8ab5f7b412505858e
+msgid "**Home Location:** the mount points at Home (normally its location when armed, unless changed by the user in the GCS)"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:42
+#: 2e6b4c43cde141a796f33c32c3a96f8d
+msgid "The mount's default mode on startup can be set with the :ref:`MNT1_DEFLT_MODE<MNT1_DEFLT_MODE>` parameter."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:44
+#: bf09864da88d404fb32e23f392ff0bb5
+msgid "ArduPilot 4.5 (and higher) automatically switches the mount to RC Targeting Mode if the pilot moves any configured Roll/Pitch/Yaw RC targeting inputs (see below) by the larger of 10uS or ``RCx_DZ``.  The only exception is if the mounts is in RETRACT mode in which case the mount mode will not be automatically changed."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:47
+#: f341fdfc9c8e42919aa3a7fe9eae0595
+msgid "Mount Internal Axis Locks"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:48
+#: ee198df82b124fa895c6ab984c21697d
+msgid "The above modes concern how pitch, roll, and yaw axis *TARGETs* are sent to the mount. But many mounts have internal controls for how those targets for pitch, roll, and yaw are interpreted. Those positioning commands can be interpreted by the mount as being with respect to Earth frame reference or Body frame. Body frame are angle targets on each axis measured with respect to the mount itself, while Earth frame is interpreted to be with respect the horizon and compass heading."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:50
+#: 4be236df95ca4b66b6bedd6e16e091f9
+msgid "For example, at 30 deg negative pitch target would be 30 deg down from the mount's zero point with respect to its mounting in Body frame, but 30 deg below the earth's horizon in Earth frame."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:52
+#: 0b396632f8c24575ad3cec782c5bf7af
+msgid "Most mounts have internal controls for each axis to determine how to interpret the targets. ArduPilot sets the mount's pitch and roll axis frame (if configurable) to Earth frame interpretations for all Mount types via its driver."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:54
+#: a62b9cdc748c4a15a1bf483a68e87914
+msgid "The yaw axis is forced to Earth frame for the GPS Point, Home, and SysID modes, and is otherwise body frame controlled."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:57
+#: 8fd8b7a7373944b78a2c8691e76ec264
+msgid "Mount RC failsafe position"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:58
+#: 1cae36bb058d436ea400360fcae90f9f
+msgid "In the event of an RC failsafe, the mount can be moved to the Neutral mode position if the ``MNTx_OPTIONS`` bit 1 is set."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:61
+#: c6054514991f46d4a364c26c12fcf059
+msgid "Control with an RC transmitter (aka RC Targeting)"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:62
+#: de9fcea4995f47d09db1e081dd49e9c3
+msgid "While the mount is in \"RC Targeting\" mode (see above for how to change modes), the pilot can control the mount's target roll, pitch and yaw angles using an RC transmitter channel for each axis. For example (RC channels shown are for example only, and can be any channel not otherwise used):"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:64
+#: 12d50d0521d5484cb81b1a31d7027b94
+msgid "set :ref:`RC6_OPTION <RC6_OPTION>` = 212 (\"Mount1 Roll\") to control the mount's roll angle with RC channel 6"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:65
+#: 87b602431f11462da1acd339a34c51f2
+msgid "set :ref:`RC7_OPTION <RC7_OPTION>` = 213 (\"Mount1 Pitch\") to control the mount's pitch angle with RC channel 7"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:66
+#: 627f5c61496a4518bf0b85eb7023965c
+msgid "set :ref:`RC8_OPTION <RC8_OPTION>` = 214 (\"Mount1 Yaw\") to control the mount's yaw angle with RC channel 8"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:67
+#: e1e21077b9eb439abf7587e8352af280
+msgid "ensure the RCx_TRIM parameter for each RC input channel used is half way between RCx_MIN and RCx_MAX"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:69
+#: 7ff1c0d0d1af412696a586ec8598f50c
+msgid "By default the RC input specifies the **angle** but this can be changed to **rate** control by setting :ref:`MNT1_RC_RATE <MNT1_RC_RATE>` to a **non-zero** desired rotation rate in deg/sec."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:71
+#: f5a2b0081d8f4ffd9d2900a24fb75491
+msgid "The pilot can retract the mount with the \"Retract Mount1\" or \"Retract Mount2\" auxiliary switch (using RC 10 in the below example.)"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:73
+#: ad2502b0553547c2af2271ecd9489f57
+msgid ":ref:`RC10_OPTION <RC10_OPTION>` = 27 (\"Retract Mount1\") to change the mount to Retract mode"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:74
+#: 34cca7aacb43417989c55a6e364ca4b9
+msgid ":ref:`RC10_OPTION <RC10_OPTION>` = 113 (\"Retract Mount2\") to change the mount to Retract mode"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:77
+#: 398cd47d7e7f4910970ac7528d2cda0b
+msgid "Axis Lock Auxiliary Switches and Options"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:79
+#: 23b14642121d4733a4a0ac14f8b734b7
+msgid "If the mount is capable, the roll and pitch axes can be controlled in the RC Targeting mode with an auxiliary switch on an RC channel, if you use ANGLE, not RATE controls (eg. :ref:`MNT1_RC_RATE <MNT1_RC_RATE>` = 0. In the future this will be expanded to RATE control also). For example using RC channel 9, set :ref:`RC9_OPTION <RC9_OPTION>` = 185 to enable this switch. Switching its position will force roll and/or pitch angles of the mount to be stabilized ('locked\") in earth frame (ie with respect to the horizon) or body frame (with respect to the gimbals base)"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:82
+#: ../../source/docs/common-mount-targeting.rst:102
+#: bac09fb2b23b434ba670833a83db7cc7
+#: 8a6023f7292840438e368498f599c01c
+msgid "AUX FUNC"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:82
+#: c4c4ff6e184b4b2dbf3359e98be3d023
+msgid "Roll"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:82
+#: 0bbf82b1b9f94240beebb0d58e26d9da
+msgid "Pitch"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:82
+#: 09842deb17d44bf29cafaa0705a4758c
+msgid "Name"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:82
+#: ../../source/docs/common-mount-targeting.rst:102
+#: 1a9de23071b34bc2a89fab40e75a10e4
+#: 45310f6459294d139a325ec14a3fb2e4
+msgid "Description"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:84
+#: ../../source/docs/common-mount-targeting.rst:104
+#: a182101f5dd64fcd9224b624585d68f7
+#: 343367f387294e2f91422f8d022f44e9
+msgid "High"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:84
+#: ../../source/docs/common-mount-targeting.rst:85
+#: 39bda902aa424b96bdf3cc67706c3360
+#: caf2a711d9984558b2572b992bfba4cb
+#: 802ab27147a54f3f92caa58c162a7202
+msgid "Earth Frame"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:84
+#: be788110d6364dc691f2b4d26f5d3baa
+msgid "HORIZON"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:84
+#: 4343d6cd8fe848ae88ba829834eb6111
+msgid "Gimbal's pilot-set roll and pitch angles stabilized with respect to the horizon. Horizon does not move in video."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:85
+#: ../../source/docs/common-mount-targeting.rst:105
+#: b0b7c05f67d84325b5e15564e8d5412f
+#: a3221daab7ae486ca76a98728b01dbab
+msgid "Middle"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:85
+#: ../../source/docs/common-mount-targeting.rst:86
+#: 74571d3d4c3140ba992bd3d489d130c9
+#: 0a7756c05ffd4c70925cecaadcc41548
+#: 3f75cb1cd8d3461e8f1155e0d2849321
+msgid "Body Frame"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:85
+#: 2590a52b00614c829cfb8b3d85fd55d2
+msgid "PITCH"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:85
+#: deb5bdb928244b0d9a5ff560b2dbdc9f
+msgid "Like HORIZON but vehicle banks are seen in video."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:86
+#: ../../source/docs/common-mount-targeting.rst:106
+#: 5440b34bd83d492ea067cb1cf968336c
+#: 4b5f7a162e2f4a75b28e87f49a2e9173
+msgid "Low"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:86
+#: 9d44151251bd466994dd539b7915c579
+msgid "FPV"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:86
+#: d407c3da5cc340e588d52afb10aa3b39
+msgid "Gimbal angles maintained with respect to its base. This is good for FPV flying since horizon moves normally with respect to vehicle attitude."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:89
+#: 80e2fd173a2742a9922b92cf42f1b971
+msgid "Currently only the CADDX, Storm32, SimpleBGC, Brushless, and Servo type mounts have the above capability."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:91
+#: f6af48e3305a4bc0a52d39007f1e3ba5
+msgid "If the Aux switch above is not used, HORIZON mode is the normal mode of gimbal operation"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:93
+#: 12e0c75bc32c449281546f27928d25d1
+msgid "``MOUNTx_OPTION`` bit 3 (+4 in value) provides the ability to obtain FPV lock above (on gimbals that are capable), without the need for the switch,"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:95
+#: 0b944ea446444be592c414deeeac980b
+msgid "Also in RC Targeting, an Auxiliary Switch function \"163\" (Mount Yaw Lock) can be used on an RC channel to switch from normal yaw operation, to capturing the heading that the gimbal is currently pointing and \"locking\" it to maintain that direction. RC yaw target controls can shift that heading point. Switching it low, or changing mount modes, returns normal operation."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:98
+#: 3a65e06ff22341d3b2ce28bd4a83b5d1
+msgid "POI(aka ROI) Auxiliary Function"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:99
+#: 06dfa5ec8e9d4bb99c5a833a56d55115
+msgid "If Terrain is enabled and data available, you can lock the gimbal target to a POI that it is pointing at and track it with the gimbal as the vehicle moves using a transmitter Aux Function switch (eg. :ref:`RC10_OPTION<RC10_OPTION>` = \"186\") or via GCS Aux Function activation. The AUX FUNC values:"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:104
+#: 6ac9c116c2e04df7b9947c6647cc0ed3
+msgid "The ground location that the gimbal is pointing at is recorded (POI location) if it is currently clear and gimbal is switched to GPS Point targeting mode. The gimbal's entry mode is recorded also. If the POI location has already been recorded, then the mode is just switched back to GPS Point to track the POI target."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:105
+#: 575d9ff8b8a74a07ae4c8c6bec3c2fb4
+msgid "If the POI location is set, then gimbal mode is reverted to the above saved mode to allow navigation, etc. but POI location is retained. Otherwise, no action."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:106
+#: 3150cddf5f9249e097c706df88c0e080
+msgid "POI location is cleared and gimbal targeting mode set to its default mode (eg. :ref:`MNT1_DEFLT_MODE<MNT1_DEFLT_MODE>`)"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:109
+#: b96034233ccd4023a0af2139ecfa81a4
+msgid "in order for this to be accurate, the mount's :ref:`MNT1_PITCH_MAX<MNT1_PITCH_MAX>`, :ref:`MNT1_PITCH_MIN<MNT1_PITCH_MIN>`, :ref:`MNT1_YAW_MAX<MNT1_YAW_MAX>`, and :ref:`MNT1_YAW_MIN<MNT1_YAW_MIN>` must accurately reflect the gimbal's EARTH FRAME angle extremes while in the vehicle's normal attitude when function is activated (usually Plane in cruise, Copter in hover, etc.)"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:111
+#: 1e2d35ce890e434995faef787d82222f
+msgid "This feature and gimbal drivers are NOT normally included on standard firmware for smaller flash (F4) boards. Use the `Custom Firmware Build Server <https://firmware.ardupilot.org/>`__ to create firmware that includes it."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:114
+#: 1c4304dcda034e7d955483899c990094
+msgid "POI Altitude"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:115
+#: 6d80041937cb4f5f868cfdb143825c9b
+msgid "If Terrain data is enabled and available, the gimbal's \"boresight\" POI will be set to whatever terrain elevation it is pointing. If not, the HOME altitude will be used for the POI point."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:118
+#: 3b55eb0a79fe49519b31e350f923e2bb
+msgid "Mission Planner Mount Controls"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:119
+#: f6c86d1ba0524020a25998f471411eac
+msgid "Mission Planner uses MAVLink commands to control the mount.  The mount's angles can be controlled as follows"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:121
+#: 7d1e898d23f44f30a1c791a13014c97d
+msgid "Set the mode to \"MAVLink Targeting\" using the Data screen's Actions tab's bottom left drop-down and then push the \"Set Mount\" button (see image above)"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:122
+#: 9251bb0c0cbe49b8a90831d173156f27
+msgid "Use the Payload Control tab to adjust the mount's roll, pitch or yaw angles"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:128
+#: 7cac6922432341acaabde9c0055aad52
+msgid "Use the Aux Function tab to switch the yaw between \"follow\" and \"lock\" modes"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:133
+#: 1103d0167b0b4ce8b4517e859b1aa008
+msgid "To point the mount at a particular location (e.g. lat, lon, alt), on the Data screen, right-mouse-button click on the map and select, \"Point Camera Here\" and enter an altitude above home"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:139
+#: a9fb59205d7a421f9aff1bc53852ef55
+msgid "QGC Mount Controls"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:140
+#: 0591e163612c4e16baf26efaee72b556
+msgid "`QGC-4.4 (and higher) <https://github.com/mavlink/qgroundcontrol/releases>`__ supports controlling the mount from a Toolbar or by directly clicking on the real-time video.  The vehicle must be using ArduPilot 4.5 (or higher)"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:142
+#: c92acf1a096c4227983fa76dc6aa5eeb
+msgid "The mount control toolbar should appear at the top once a mount is detected.  Click on the toolbar to display the mount control buttons"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:147
+#: d998a481a3e7452a9753b6b92b021522
+msgid "\"Yaw Lock\" / \"Yaw Follow\" controls whether the mount maintains an earth-frame yaw target (aka \"lock\") or moves with the vehicle's yaw (aka \"follow\")"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:148
+#: 54cfb546dd1943f4aa997259cc68712a
+msgid "\"Center\" centers the mount (or more precisely moves it to the roll, pitch and yaw angles held in :ref:`MNT1_NEUTRAL_X<MNT1_NEUTRAL_X>`, :ref:`MNT1_NEUTRAL_Y<MNT1_NEUTRAL_Y>`, :ref:`MNT1_NEUTRAL_Z<MNT1_NEUTRAL_Z>`)"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:149
+#: 5451b81ddcf14d9d9d0cd3e011dfc7a3
+msgid "\"Tilt 90\" points the mount directly downwards"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:150
+#: 342b9a9914954393b250ff8d2cffed41
+msgid "\"Point Home\" points the mount at the home location"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:151
+#: 0e2f8956cf6f4f618ea73b41782cefd0
+msgid "\"Retract\" retracts the mount (or more precisely moves it to the roll, pitch and yaw angles held in :ref:`MNT1_RETRACT_X<MNT1_RETRACT_X>`, :ref:`MNT1_RETRACT_Y<MNT1_RETRACT_Y>`, :ref:`MNT1_RETRACT_Z<MNT1_RETRACT_Z>`)"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:153
+#: 0958d2fac3b74803ae3fff53c33fc5bc
+msgid "The mount may also be controlled by clicking on the real-time video screen"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:155
+#: 9184bc500ea54e5aac8dfb6a491c084f
+msgid "Push the \"Setting\" button"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:156
+#: 1f426adeb14c4dd6b8baa138111b80b3
+msgid "Check \"Enable on Screen Camera Control\" and set \"Control type\" to \"Click to point\""
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:157
+#: 05b425a1c6fb4879b3f79de5edf6c913
+msgid "Enter the camera's Horizontal FOV and Vertical FOV"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:158
+#: 3f60a150594841a687728b6ad7a6deca
+msgid "Maximise the real-time video and click anywhere on the screen and the mount should move appropriately"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:163
+#: 1c080f5ecae74027afb455bfdfdab181
+msgid "To point the mount at a Location"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:165
+#: 3e71f04069b84b94a701b086ccf44974
+msgid "While the vehicle is flying, maximise the map"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:166
+#: 710656b57fcc4404869a04c4dd806b37
+msgid "Click anywhere on the map and select \"ROI at location\""
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:167
+#: cd164570aa5a44529c5217b9b1cd36a3
+msgid "To stop pointing at the location, click on the \"ROI here\" icon and select \"Cancel ROI\".  The mount will return to the mode held in the :ref:`MNT1_DEFLT_MODE<MNT1_DEFLT_MODE>` parameter"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:173
+#: 7869676ba776466d8ad958ad072a7aa0
+msgid "Companion Computer mount Controls"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:174
+#: 404bfc53d3c047d682269605b0f2fe50
+msgid "MAVLink mount commands can also be sent from other sources, such as companion computers. See :ref:`mavlink-gimbal-mount` for a commands list and more information."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:176
+#: 62f53424d6cb4a6dab08817d4de6caac
+msgid "Cameras may also be controlled via MAVLink commands from a companion computer or other source. See :ref:`dev:mavlink-camera` documentation."
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:180
+#: 7fdc89534ffe41308742eaafcf4ccb39
+msgid "Control during Auto mode missions"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:181
+#: 9a7096128d8945fdb964cd67626ecaad
+msgid "Commands to control the mount are listed on the  :ref:`Camera Control in Auto Missions <common-camera-control-and-auto-missions-in-mission-planner>`, :ref:`Copter Mission Command List <mission-command-list>` and :ref:`Mission Commands <common-mavlink-mission-command-messages-mav_cmd>` pages"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:184
+#: 76c1d301c452403b81796cd1b00a04c4
+msgid "Other Mount Parameters"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:185
+#: f1b3e25fa41341dbad2c315675e6050e
+msgid ":ref:`MNT1_ROLL_MAX<MNT1_ROLL_MAX>` and :ref:`MNT1_ROLL_MIN<MNT1_ROLL_MIN>` control the mount's roll axis movement range in degrees"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:186
+#: cb1025d9d7da4b94ba33d6abe75d55ce
+msgid ":ref:`MNT1_PITCH_MAX<MNT1_PITCH_MAX>` and :ref:`MNT1_PITCH_MIN<MNT1_PITCH_MIN>` control the mount's pitch axis movement range in degrees"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:187
+#: 854b77dd9142443683deee2f65def18a
+msgid ":ref:`MNT1_YAW_MAX<MNT1_YAW_MAX>` and :ref:`MNT1_YAW_MIN<MNT1_YAW_MIN>` control the mount's yaw axis movement range in degrees"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:188
+#: 808d3f8de552428889adb73af5c0bcd7
+msgid ":ref:`MNT1_OPTIONS<MNT1_OPTIONS>` bit 0 set will recover the yaw lock state of the previous mode. For example if the mount's yaw lock was body frame in RC Targeting mode and the mount mode switched to GPS Point (which forces earth frame yaw) and then switched back to RC Targeting, the yaw would be still earth frame unless this bit is set. Bit 1 set will force Neutral mode in RC failsafe to possibly re-center the camera in failsafe when user control has been lost. Bit 2 , in RC Targeting mode, force the roll and pitch axes to lock to the gimbal's body frame for FPV operation (ie horizon moves with vehicle roll and pitch in camera view)"
+msgstr ""
+
+#: ../../source/docs/common-mount-targeting.rst:190
+#: 8fcf3f8c29dd4c018c18b1ea19faaf51
+msgid "For MAVLink controlled mounts,the mount supplies its axes max and min angles. The user can override these to limit the gimbal, but this alters the defaults for those parameters and using a different MAVLink gimbal will NOT use its communicated limits unless the entire autopilot parameters are reset."
+msgstr ""

@@ -1,0 +1,192 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-scripting-aerobatics.rst:128
+#: 
+msgid "Aerobatic Tuning"
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:6
+#: 245ebf2372514a9caec8e28a603f6d0c
+msgid "Scripted Aerobatics"
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:9
+#: 161cd743e64644149e89a8f9d987a4bc
+msgid "this capability is in ArduPlane 4.2 and higher. It is rapidly evolving. Its suggested that users uses load the current \"Latest\" firmware and refer to its matching documentation ( :ref:`common-scripted-aerobatics-4.4` ) for best performance."
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:11
+#: 57d87a020b0845738c71996812cfb8fe
+msgid "ArduPilot has the capability of executing aerobatics from a LUA script. Either via AUTO mode mission items, or via scripts executed in many normal plane flight modes, usually controlled via a transmitter switch and selection RC channels."
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:13
+#: 73478313b3504f63b393ec378d2cb2a2
+msgid "this requires a vehicle capable of aerobatic flight, properly tuned pitch,roll, and yaw rate controllers, and the pilot should be capable of safely taking over control (by switch or mode change) the vehicle while in an unusual attitude, if the need arises. The ``ACRO_x_RATE`` parameters limit the maximum commanded rate for each axis, as in ACRO mode."
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:16
+#: 1e2606b156924b97b8831838e3410d8a
+msgid "Mission NAV_SCRIPT_TIME"
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:18
+#: b1c174268b404e0cb307734e78a4ee4d
+msgid "The SCRIPT_TIME waypoint type allows for a :ref:`LUA<common-lua-scripts>` script to take control of the roll/pitch/yaw rates of the vehicle for a time. For protection against lack of an appropriate script being active (ie was not loaded in the APM/Scripts directory of the SD card) to assume control, or LUA script crash due to error, there is a mandatory parameter which provides a maximum time the script can takeover, before the next mission item is executed."
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:20
+#: 88bba8377d4e4b42b49b03aec36ae0cd
+msgid "The format of the SCRIPT_TIME item is:"
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:70
+#: 643f5964e1d642b6aa2eac4f5364184d
+msgid "A LUA script would need to be running when the above mission command is encountered to recognize that it needs to take control, and start sending pitch/roll/yaw rate inputs into the autopilot to control its attitude and/or trajectory. It can use the two variable input parameters of the command to control aspects of the maneuver, such as rate of rolls/loops, repeat counts, time for certain segments of the maneuver, etc. An example is provided in the LUA Scripting examples directory called `plane_aerobatics.lua <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/applets/Aerobatics/FixedWing/plane_aerobatics.lua>`__ for several types of tricks."
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:72
+#: bf6da58c4b474e5693dc75f1aabdebc6
+msgid "The execution of a script running during the NAV_SCRIPT_TIME item can easily be interrupted by switching modes out of AUTO."
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:74
+#: 41bb6566cd604a619796e7a9affb8628
+msgid "returning to AUTO mode would resume the AUTO mission at the last item before switching modes. If this was a NAV_SCRIPT_TIME command it would re-start from the beginning."
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:76
+#: 0c7026d375fe422cb0480664dccd3079
+msgid "be sure to have valid waypoints before and after a NAV_SCRIPT_TIME sequence of commands in order to establish path for the scripts to use (optionally) and to have sufficient altitude before trying this feature."
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:78
+#: 0be88df28e6249299e12140201cc34ad
+msgid "if you create your mission, and place the LUA script you intend to use in the /scripts subdirectory of a SITL simulation, you can test the script and the mission without risking your vehicle."
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:80
+#: 11dc7772d51e4a3882cc8c096f96551b
+msgid "Here is a video of a SITL simulation of the above mentioned example script:"
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:85
+#: 2c76cbd0b5b0418e95cefe1a8e33d55e
+msgid "Tricks on a Switch"
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:87
+#: 78531badfda745aeb1bc177dc13d8bf5
+msgid "In addition to allowing LUA scripts to take over the vehicles rate controllers during AUTO missions as described above, they can also take control in normal modes like CRUISE or FBWA. This requires that the script:"
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:89
+#: da243669749a4a89ae072475af24300a
+msgid "Enable the  feature with a specific call \"vehicle:nav_scripting_enable(..)\" which returns a boolean indicating  success or failure."
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:91
+#: c891426957ad421a834d2a2358f2b083
+msgid "Call the \"vehicle:set_target_throttle_rpy(....)\" function regularly (at least every 50ms) to set the roll/pitch/yaw rates and throttle percentage. Failure to do so, will disable the control override and return control to the original flight mode. Changing flight modes also disables script control."
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:93
+#: 2ad171a26136444094c212a973f46600
+msgid "This allows the implementation of \"Tricks on a Switch\" where an activation switch driving an RC channel is used to enable an aerobatics trick script, which is selected by another RC channel. An example system is given `here <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/examples/Aerobatics/Via_Switch>`_."
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:95
+#: d79f2772d63f40078d6600a99aec4157
+msgid "This consists of a small control script to read the RC channels for trick selection and activation, and individual trick maneuver scripts for up to 10 different tricks. This allows the exchange of tricks between users, with, at most, the change in a text editor of a given trick's ID number to fit into the new user's list of trick scripts loaded on his SD card."
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:97
+#: 26145a0add084a278e60df7940778568
+msgid "In order to create new tricks, a user needs to have some LUA script creation knowledge, but the task is simplified since they can use existing tricks as templates for the creation of new tricks."
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:99
+#: 4c6b41fb21a64d879e7f1a85265076b3
+msgid "As above, using SITL, especially in conjunction with :ref:`RealFlight<dev:sitl-with-realflight>` and a RealFlight model like the `AddictionX <https://github.com/ArduPilot/SITL_Models/tree/master/RealFlight/Released_Models/Planes/Addiction_3D>`__, makes development and debugging much easier without risking a real vehicle."
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:101
+#: a0f00be02c7443d08477648458cb2ecc
+msgid "Below is an introductory video to \"Trick on a Switch\":"
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:106
+#: 470c72f427f84e7582642350fc441ee6
+msgid "Here is a video on showing the development of a new trick for Tricks on a Switch:"
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:111
+#: 718d74db3e8845bf8da6078528ce6456
+msgid "Setup Instructions for Example Tricks on a Switch Scripts"
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:113
+#: b5e4774dbc9e43d08747aaf6e60b5221
+msgid "Make sure you have Autotuned your plane and that its capable of doing aerobatics in ACRO mode well (Bixlers and flying wings only can do rolls and loops, generally....no yaw authority...ie should be able to knife edge for full capability). This includes Autotuning the new YAW rate controller. Enable :ref:`YAW_RATE_ENABLE<YAW_RATE_ENABLE>` and set :ref:`ACRO_YAW_RATE<ACRO_YAW_RATE>` appropriately (90deg/s is a good start). When you Autotune, not only do pitch and roll, but also yaw by exercising the rudder, like pitch and roll."
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:114
+#: 65f909f14d9a42f1bb5d45494f77efae
+msgid "Enable scripting, on an autopilot that is capable (F7 or H7) with :ref:`SCR_ENABLE<SCR_ENABLE>` =1 and :ref:`SCR_HEAP_SIZE<SCR_HEAP_SIZE>` = 200000 (which will allow four trick scripts + AUTO mission scripting in the future)."
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:115
+#: 5606c7034b7b433c96ec39ddf71b34fb
+msgid "Copy the https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/examples/Aerobatics/Via_Switch scripts into your SD card APM/scripts directory. Use the RAW view and copy to files on the SD card using the same names."
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:116
+#: 9b59af1a5c804882bd8a045fca88ba73
+msgid "Assign an RC channel to ``RCx_OPTION`` = 300 for the trick activation switch (low=disable,mid=show trick number selected, high= do it) and one for 301 which is trick selection. You can use a three position for 0/5/10 trick id selection setup to ``RCx_OPTION`` = 301. 0 is disable, 5 is the knife edge, 10 is the loop/immelman example using the above scripts."
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:117
+#: abe958537caf4ea7a27fa8bd6c0a12c3
+msgid "Upon boot you should see messages that show the trick 5(knife-edge) and 10(loop/immelman) are loaded. Setting the activation switch to mid position will identify the trick number selected by the selection channel on the ground station or TX, if running :ref:`Yaapu <common-frsky-yaapu>` telemetry."
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:118
+#: a4f655283588405ca73f9c1715ee78d6
+msgid "In the Ground Control Station's parameter lists, you should see a set of \"AERO\" params....the ``AERO_TRICK_RAT`` sets the loop pitch rate, try 90deg/s, ``AERO_RPT_COUNT`` sets the number of loops or if 0, an immelman. ``AERO_TRICK_ANG`` set the knife-edge trick angle 0 to 180 or -180 deg that will be executed as long as you have the activation switch high. Using the GCS or :ref:`Yaapu GCS<common-yaapu-gcs>` or :ref:`CRSF parameter editor<common-crsf-telemetry>`, you can change these in air to vary the trick characteristics, if you wish"
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:119
+#: 0d939f2c64304842a2ea005ee3f9a7f3
+msgid "You can bail out of the trick by putting activation switch low, change modes, or set selector to 0"
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:121
+#: 25db77cc35c74d4d8e6efb3ec7c5cfbf
+msgid "Remember: ALTITUDE IS YOUR FRIEND! dont attempt your first one below 200feet! and FPV is a good way to try it out first, if you have trouble with seeing the vehicle at that altitude."
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:124
+#: dfb2b55993ce486082983f7d38afed01
+msgid "Tuning for Aerobatics"
+msgstr ""
+
+#: ../../source/docs/common-scripting-aerobatics.rst:126
+#: ecf854585b014692930ebf0ccf306f3d
+msgid "Normal ArduPilot Autotune provides a safe, stable PID tune for most vehicles. As such, its not optimized for precision aerobatics which require a tight tune. See below:"
+msgstr ""

@@ -30,14 +30,14 @@ Since the Solo uses a Pixhawk autopilot, it is capable of running variations of 
 
 Hardware Requirements
 ^^^^^^^^^^^^^^^^^^^^^
-The Pixhawk 2.1 Green Cube (or a traditional Cube with the internal jumper set for 5 volts) is currently required for safe and reliable use of ArduCopter 3.5.0 and higher on a 3DR Solo. You can purchase the Green Cube from `Jesters Drones <http://www.jestersdrones.org/store/index.php?rt=product/category&path=68>`_ or directly from  `ProfiCNC <http://www.proficnc.com/3dr-solo-accessories/79-the-cube.html>`_.  The Cube has significantly more advanced components.  This includes 3 temperature controlled IMUs and the 5 volt signalling the Solo needs to operate safely. If you already have a Cube, you can set an internal solder jumper to 5 volt signalling and use it in your Solo.  The Green Cube comes with this jumper pre-set for 5 volts.
+The Pixhawk 2.1 (CubePilot CubeGreen/CubeBlack) (or a traditional Cube with the internal jumper set for 5 volts) is currently required for safe and reliable use of ArduCopter 3.5.0 and higher on a 3DR Solo. You can purchase the Green Cube from `Jesters Drones <http://www.jestersdrones.org/store/index.php?rt=product/category&path=68>`_ or directly from  `CubePilot <https://www.cubepilot.com>`_.  The Cube has significantly more advanced components.  This includes 3 temperature controlled IMUs and the 5 volt signalling the Solo needs to operate safely. If you already have a Cube, you can set an internal solder jumper to 5 volt signalling and use it in your Solo.  The Green Cube comes with this jumper pre-set for 5 volts.
 
 .. image:: ../images/solo_greencube.jpg
     :width: 45 %
 .. image:: ../images/solo_cube_installed.jpg
     :width: 45 %
 
-You *can* install ArduCopter master on the stock Pixhawk 2.0, but it is highly discouraged. It will install, and it will fly.  But you are at fairly high risk for motors shutting down in flight, leading to a serious crash. This is because of an electrical hardware flaw in the Solo's motor pods.  The old stock firmware has a software patch to *mostly* mitigate this flaw. This is what you may hear referred to as "slew rate protection". You can view the code for the slew rate protection in the stock 3DR firmware `here on their GitHub site <https://github.com/3drobotics/ardupilot-solo/blob/master/libraries/AP_Motors/AP_MotorsMatrix.cpp#L388>`_.  The production versions of ArduCopter, including ArduCopter 3.5 do not have this slew rate protection. It is severely handicapping and difficult to manage for a world of vehicles that use ArduCopter besides the Solo.  The 5 volt signalling used in the Pixhawk 2.1 Green Cube effectively solves the electrical problem on the motor pods.
+You *can* install ArduCopter master on the stock Pixhawk 2.0, but it is highly discouraged. It will install, and it will fly.  But you are at fairly high risk for motors shutting down in flight, leading to a serious crash. This is because of an electrical hardware flaw in the Solo's motor pods.  The old stock firmware has a software patch to *mostly* mitigate this flaw. This is what you may hear referred to as "slew rate protection". You can view the code for the slew rate protection in the stock 3DR firmware `here on their GitHub site <https://github.com/3drobotics/ardupilot-solo/blob/master/libraries/AP_Motors/AP_MotorsMatrix.cpp#L388>`_.  The production versions of ArduCopter, including ArduCopter 3.5 do not have this slew rate protection. It is severely handicapping and difficult to manage for a world of vehicles that use ArduCopter besides the Solo.  The 5 volt signalling used in the Pixhawk 2.1 (CubePilot CubeGreen/CubeBlack) effectively solves the electrical problem on the motor pods.
 
 There are other potential ways to mitigate the electrical problem with the motor pods without buying a new Cube.  You could use conventional DIY ESCs and bypass the ones built into the motor pods.  Or you could build a level converter that steps the signalling voltage up from 3v to 5v.  None of these solutions are commercially available as a kit, but can be done on a DIY basis if you are creative. You would not have the benefit of enhanced hardware in The Cube, but it would be just as safe and reliable to fly.
 
@@ -70,12 +70,12 @@ Upgrade Process
 
 Preparation
 ^^^^^^^^^^^
-Before beginning the upgrade to ArduCopter 3.5 with the Pixhawk 2.1 Green Cube on your Solo, you need to complete some important requisites.
+Before beginning the upgrade to ArduCopter 3.5 with the Pixhawk 2.1 (CubePilot CubeGreen/CubeBlack) on your Solo, you need to complete some important requisites.
 
 - Complete Solo and controller in good working order, paired, flyable, and fully charged.
 - Solo and controller both up to date with current 3DR Solo firmware from the initial pre-flight update. The current 3DR firmware is 2.4.2.
 - Flight tested, working properly in all respects. An untested or malfunctioning Solo should not be used for this process. It won't fix it.
-- Pixhawk 2.1 Green Cube
+- Pixhawk 2.1 (CubePilot CubeGreen/CubeBlack)
 - Philips and flat head screwdrivers
 - Solex App for Android or a Windows PC for Mission Planner and WinSCP
 
@@ -130,7 +130,7 @@ With all of the above complete, it is time to take your first flight on ArduCopt
 
 ArduCopter Parameters
 ---------------------
-There are over 700 parameters in ArduCopter. For everyday use of the Solo, you still do not need to worry about any of them. They're all pre-set for you in the above processes and by way of defaults.  All the configuration parameters for the Solo that require a value different from the ArduCopter defaults can be found in the `ArduPilot GitHub repository /tools/frame_params/ directory <https://github.com/ArduPilot/ardupilot/blob/master/Tools/Frame_params/Solo_AC35.param>`_. These are the parameters that are loaded during the upgrade process. If you are not familiar with editting parameters and have no special use case to warrant changing them, altering them is not recommended. 
+There are over 700 parameters in ArduCopter. For everyday use of the Solo, you still do not need to worry about any of them. They're all pre-set for you in the above processes and by way of defaults.  All the configuration parameters for the Solo that require a value different from the ArduCopter defaults can be found in the `ArduPilot GitHub repository /tools/frame_params/ directory <https://github.com/ArduPilot/ardupilot/blob/master/Tools/Frame_params/Solo_AC35.param>`_. These are the parameters that are loaded during the upgrade process. If you are not familiar with editing parameters and have no special use case to warrant changing them, altering them is not recommended. 
 
 However, there are some advanced and special use cases that may require changing some parameters. Some key parameters for advanced users are detailed below. This list will likely grow as new use cases and modifications develop.
 
@@ -216,7 +216,7 @@ Value   Meaning
 =====   =======
 
 =====   =======
-:ref:`LOG_DISARMED <LOG_DISARMED>` enables and disables dataflash (\*.bin) logging when the Solo is disarmed.  It is currently enabled by default since it can be very useful for testing and troubleshooting. But it does result in large and often unneccessary logs.  If you are comfortable and confident in your Solo, you disable logging while disarmed.  The dataflash logs be much cleaner and volumnous.
+:ref:`LOG_DISARMED <LOG_DISARMED>` enables and disables dataflash (\*.bin) logging when the Solo is disarmed.  It is currently enabled by default since it can be very useful for testing and troubleshooting. But it does result in large and often unnecessary logs.  If you are comfortable and confident in your Solo, you disable logging while disarmed.  The dataflash logs be much cleaner and volumnous.
 ---------------
 Value   Meaning
 =====   =======

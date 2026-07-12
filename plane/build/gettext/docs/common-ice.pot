@@ -1,0 +1,672 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-ice.rst:5
+#: dd9b948655bd4942b9f0e5663a0b008b
+msgid "Internal Combustion Engines (ICE)"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:6
+#: 1808141d70274713949d7bfa5cd1198b
+msgid "ArduPilot can manage ignition, starter, and throttle for internal combustion engines (ICE) in planes and quadplanes. It allows engines to be started and stopped (manually, or automatically in a mission), and optional min/max RPM governors. It can also be configured to allow the throttle to be controlled in Manual mode while disarmed, which is useful for ground testing and preflight run-up for quadplanes without needing to arm the vehicle (which risks a failsafe turning on the VTOL motors)."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:9
+#: 36b666e282e8497ab20ab61df24637a2
+msgid "What to Buy"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:11
+#: 60e51feedbe947cbb65428f3eb163df4
+msgid "The only required hardware is an engine (gas, glow, etc.) and a servo to control the throttle."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:13
+#: 1bc28639c13c4a618ec9328c162ed78d
+msgid "Optional:"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:15
+#: 20b211a9a7fa4e8b83859b904f0b1c59
+msgid "An RPM sensor. This can be a simple hall-effect sensor connected to a GPIO pin, or an ignition module with a tach output. This is needed for the RPM governors and the auto-restart feature if using an onboard starter."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:16
+#: 8056337dd5544788ba2b934f503d13d0
+msgid "Ignition module and an RC Switch for controlling power to it like `this one from milehighrc.com <http://milehighrc.com/switch.html>`__"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:17
+#: 4faa0b96bb0948ed98bbcbb3672a4cad
+msgid "An electric starter like `this one from milehighrc.com <http://milehighrc.com/EME_E_Start.html>`__"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:20
+#: 702df6de8d174ec0992645c1ecd046fa
+msgid "Setup"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:22
+#: b40f00a95b7e49e797cb8e67397059d4
+msgid "Set :ref:`ICE_ENABLE <ICE_ENABLE>` = 1 to enable the ICE feature (you may need to reload parameters after setting this in order to see below parameters)."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:25
+#: 77996fe35bd64c7c9f99800144d79ae8
+msgid "Throttle Servo"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:26
+#: e90be5fd552745fc8e640289f3d0c219
+msgid "Throttle control for an IC engine is similar to controlling a standard brushless ESC. The throttle servo can be connected to any servo output with a :ref:`SERVOx_FUNCTION<SERVO3_FUNCTION>` set to 70 (Channel 3 is configured this way by default). It is important to set the Min and Max PWM values on this servo output to be within the mechanical limits of your throttle assembly (using :ref:`SERVOx_MIN<SERVO3_MIN>` and :ref:`SERVOx_MAX<SERVO3_MAX>`). While doing this, also verify that the servo moves in the correct direction with respect to manual throttle input."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:28
+#: e645321164b340959d1a51b39377c488
+msgid "Note that, by default, the throttle servo will not move unless the vehicle is"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:30
+#: 2fdd62af541e48e2bf9d9e36c58b5827
+msgid "Armed, and"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:31
+#: 5432d307f9214a4fbda6074b7651a09b
+msgid "The engine is considered \"running\" (start command received and RPM above threshold, or no RPM sensor configured)."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:33
+#: a3ca3ccd106e484d9fda03ebacf60e50
+msgid "To test your throttle servo limits safely, you can set :ref:`ICE_OPTIONS<ICE_OPTIONS>` bit 2 (Value +4) to allow throttle control while disarmed in Manual mode, and it does not require the engine to be considered \"running\". If you do not want this option long-term, be sure to disable it after testing."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:35
+#: 42e9924d745f46f5852afbf91b560f4c
+msgid "For setting :ref:`SERVOx_MIN<SERVO3_MIN>`, you can either set it to the PWM value that corresponds to idle throttle, or set it to the PWM value that corresponds to fully closed throttle, allowing you to cut the engine even if you do not have and ignition switch. If you set it to the fully closed throttle, be sure to set :ref:`ICE_IDLE_PCT<ICE_IDLE_PCT>` to an appropriate value so that the engine does not stall after starting."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:37
+#: c6924be1f52144db8c4a9ffa2a29a22d
+msgid "If you set :ref:`ICE_IDLE_PCT<ICE_IDLE_PCT>` to a value greater than zero, the engine will be allowed to start while disarmed. If you do not want this, set :ref:`ICE_OPTIONS<ICE_OPTIONS>` bit 3 (value +8) to prevent starting while disarmed. See `Controlling the Engine`_ below for more information."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:39
+#: 0334389421294229be6ab59e8ce9c10b
+msgid "After configuring the limits of your throttle servo, the following parameters must be set:"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:41
+#: a70ada5a5a0c4fd292af4c463ef340cc
+msgid "Set :ref:`THR_MIN <THR_MIN>` to the desired setting at idle. This will be found empirically during engine testing."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:42
+#: ab478dc0493347e4acef5b1e3b802cc6
+msgid "Set :ref:`THR_SLEWRATE <THR_SLEWRATE>` to a value appropriate for your engine. 20%/s is a good starting point."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:43
+#: 166c3f17d64c463bbba343131901379b
+msgid "Set :ref:`THR_MAX <THR_MAX>` if you would like to prevent your engine from reaching full throttle."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:46
+#: 321207716962448291731dc64fb09376
+msgid "Engine Control States"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:47
+#: 9aaf83bf8fd140a3a8743725f3ac478f
+msgid "The engine control logic has the following states:"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:50
+#: 98c7538837ae44c6b7764fe140ace059
+msgid "Name"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:50
+#: c8a81234579c4c1db15c70182ddc8d27
+msgid "Throttle %"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:50
+#: 2737a97ee6e94a308a9210a83ec4ccf1
+msgid "Ignition"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:50
+#: 7b830a0cd81e476b970067ec9e52fcd8
+msgid "Starter"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:50
+#: c58e44f9e509421aabe07af23eec8340
+msgid "Duration/Condition"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:50
+#: bd4754880a83492c8c0cbf9fd24f0caf
+msgid "Next State"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:52
+#: ../../source/docs/common-ice.rst:54
+#: ../../source/docs/common-ice.rst:55
+#: 76600de32eca42cf8af95fd65640d890
+#: 805b6c749a9a4b4f8a2c77f2e809ff65
+#: 3c831aabbb9f4882b1d5112e424c7932
+#: 5a4fc0c729a8429aa8432995b81b838e
+#: bf6c575101de41b8b98946cd9f038d85
+msgid "Off"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:52
+#: 80c6e45ace7d46619b47ee08c8fd3626
+msgid "0 [1]_"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:52
+#: 0d0081b820424e48afbaf67ccc4445e9
+msgid "Until commanded to start"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:52
+#: ../../source/docs/common-ice.rst:53
+#: ../../source/docs/common-ice.rst:55
+#: 8e7a77430c6845d8a9fb2aad09384026
+#: 5cfa6d708df748728907bdd352e5c963
+#: dc8df17990254c79ae04031decabe468
+msgid "Starting"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:53
+#: ../../source/docs/common-ice.rst:55
+#: f274e7846e6c4ddf875b78fce100ae6b
+#: 089788bf7fd74de1bc13e7201ac9fe71
+msgid ":ref:`ICE_START_PCT<ICE_START_PCT>`"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:53
+#: ../../source/docs/common-ice.rst:54
+#: ../../source/docs/common-ice.rst:55
+#: 1adca092d22b451b8a863dbabf24d745
+#: dd76430f30684c53a63c9df4bc94da23
+#: 201cf7e7749443aa8c899c6c3a74e2fb
+#: 191689808fa340dc91890b76dc865500
+msgid "On"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:53
+#: b8a3eddbc288432ca93860dfe830d76c
+msgid ":ref:`ICE_STARTER_TIME<ICE_STARTER_TIME>` seconds"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:53
+#: ../../source/docs/common-ice.rst:54
+#: 4744bf77864f49fd87cc041ed2305631
+#: 787524c29ba34a33a83c87205acd4605
+msgid "Running"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:54
+#: 5a2168caec6542e8bf9de183b3b7ec62
+msgid ":ref:`ICE_IDLE_PCT<ICE_IDLE_PCT>` (min)"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:54
+#: c9e873c0b60d49a4ba25655065983743
+msgid "Until RPM drops below :ref:`ICE_RPM_THRESH<ICE_RPM_THRESH>`"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:54
+#: ../../source/docs/common-ice.rst:55
+#: 886dd2e0d10244988e2f397e6d8c2576
+#: 8db90ae970b04068aeeae291e23162ec
+msgid "Start Delay"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:55
+#: 5ef56bd29cd14636b558a5afa804b22a
+msgid "Until :ref:`ICE_START_DELAY<ICE_START_DELAY>` seconds since last start attempt"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:58
+#: e594de92282540c198ff2dc04e3ebb14
+msgid "When the engine is commanded to stop, it will immediately go to the \"Off\" state."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:60
+#: ca907f2db85649fe8f1bf97350a8e37a
+msgid "If enabled via :ref:`ICE_OPTIONS<ICE_OPTIONS>` bit 2, the throttle can be moved in Manual mode (only while disarmed)"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:63
+#: 2441dd775157485a877206b172054298
+msgid "Controlling the Engine"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:64
+#: 564564ba77ea4d08a037626aa6ad7a00
+msgid "The engine can be commanded in two ways:"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:66
+#: 7e3ed78257f04c7ab234b629e73e7651
+msgid "Assigning an RC switch (see `RC Switch Setup`_ below)"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:67
+#: 3bda1a32d6c24894ba1cf1b4ce0ed05e
+msgid "Sending a :ref:`DO_ENGINE_CONTROL<mav_cmd_do_engine_control>` command via MAVLink (which can be done on the Actions tab in Mission Planner)"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:69
+#: bfb5185250164ed0bb9961e61a4b6ed3
+msgid "The engine is also automatically stopped or started in some situations:"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:71
+#: 3520219a4c1642a2a76ccbaf9cd1785a
+msgid "In auto missions, the engine can be started and stopped using the :ref:`DO_ENGINE_CONTROL<mav_cmd_do_engine_control>` mission command."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:72
+#: 15c1bbccbed14a5790b652e48c5ec758
+msgid "On quadplanes, the engine will be automatically disabled during the final stage of a VTOL landing if :ref:`Q_LAND_ICE_CUT<Q_LAND_ICE_CUT>` is set to 1. This is useful to reduce dust ingestion and the risk of prop strikes while landing."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:73
+#: fc8f7e56245d42a2aea32db9c6bf793e
+msgid "If :ref:`ICE_OPTIONS<ICE_OPTIONS>` bit 0 is set (value +1), the engine will automatically disable during RC failsafe."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:74
+#: 7ef6afb2bfcd44a5be8af19946a0faee
+msgid "The engine will automatically disable during an emergency stop AUX function, if configured. See :ref:`common-auxiliary-functions`."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:75
+#: a122ef9002314031ab61aab3b92afa10
+msgid "The engine will automatically disable during parachute deployment, if used. See :ref:`common-parachute`."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:77
+#: db4de56f690c4a6d9495fc79454e02d0
+msgid "By default, the engine cannot be started while disarmed. If you want to allow it to start while disarmed, either set :ref:`ICE_IDLE_PCT<ICE_IDLE_PCT>` to a value greater than zero, or set :ref:`ICE_OPTIONS<ICE_OPTIONS>` bit 2 (value +4) to allow throttle control while disarmed in Manual mode."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:79
+#: 6a06464eb6854a058b7e04e8c16f9869
+msgid "If you would like to use :ref:`ICE_IDLE_PCT<ICE_IDLE_PCT>`, but *don't* want to allow starting while disarmed, set :ref:`ICE_OPTIONS<ICE_OPTIONS>` bit 3 (value +8)."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:82
+#: 081a692fc00342a99ad3c390f9235243
+msgid "Even with :ref:`ICE_OPTIONS<ICE_OPTIONS>` bit 3 set, the engine can still be started while disarmed with a :ref:`DO_ENGINE_CONTROL<mav_cmd_do_engine_control>` command if param4 is set to 1, though in this case it will only start once and won't attempt to restart if it stalls while still disarmed."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:85
+#: 6bcaf924f274448c943bb7c0ae8e9731
+msgid "Ignition and Starter Outputs"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:87
+#: 0bce2dda44234259a17ca0f212d0d952
+msgid "The optional ignition power switch and starter outputs can be each be controlled using a servo output (connected to a PWM switch) or a GPIO pin (connected to a relay, or to the enable pin of an engine control unit). See :ref:`common-rcoutput-mapping` and :ref:`common-relay` for information on how to configure servo outputs as relays for ignition and starter control."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:89
+#: 7d84f744ebe54500bc87a27ae8881d7a
+msgid "If using PWM outputs,"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:92
+#: ../../source/docs/common-ice.rst:120
+#: 4441df4838334fb68f61586dc9af654e
+#: 3e794f4130104938b244b19309e1b81a
+msgid "ArduPilot 4.6 and later"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:94
+#: 13412b2d7a054130b471ec7f4a9207f6
+msgid "the PWM value sent to the ignition power switch when the engine should be running or stopped is set by the  :ref:`SERVOx_MIN<SERVO10_MIN>` and :ref:`SERVOx_MAX<SERVO10_MIN>` value of the output used for the `Ignition` function."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:95
+#: 0bfa6a1dc4ae4d03b5125568e30b8eba
+msgid "the PWM value sent to the starter switch when it should be cranking is set by the :ref:`SERVOx_MIN<SERVO10_MIN>` and :ref:`SERVOx_MAX<SERVO10_MIN>` value of the output used for the `Starter` function."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:97
+#: ../../source/docs/common-ice.rst:124
+#: 9f6f7261d87f48ef8e6a4923811530a2
+#: 3b170c22d7024cf2a56105518edacaed
+msgid "ArduPilot prior to 4.6"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:99
+#: 2f1fc8cb5bbc4bf0a03bef1f12aaa2b7
+msgid "``ICE_PWM_STRT_ON`` is the PWM value sent to the starter to start the engine"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:100
+#: d7f3862837934685a2a8b9f4001fbd73
+msgid "``ICE_PWM_STRT_OFF`` is the PWM value sent to the starter when not trying to start the engine"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:101
+#: 4b953d97f4a3450886f3ee9111895eae
+msgid "``ICE_PWM_IGN_ON`` is the PWM value sent to the ignition power switch when the engine should be running"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:102
+#: c536171c8801423aa44b0f78f81ee468
+msgid "``ICE_PWM_IGN_OFF`` is the PWM value sent to the ignition power switch when the engine should be stopped"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:105
+#: 637e0582580a4e6badef36c3522e93c3
+msgid "RC Switch Setup"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:107
+#: 35314c0221f845588e201d443e753f1e
+msgid "It is common to use a 3 position switch on an RC transmitter is used to control the engine. This switch has the following three positions:"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:109
+#: 72e4ef3bce2c48ca9c052e959a084687
+msgid "Low: Force the engine to be disabled. This ignores MAVLink commands and mission items that attempt to control the engine's state."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:110
+#: e6e33794f89a4cad9d3ca342b2a577a4
+msgid "Mid: Keep the current state of the engine, but allow MAVLink commands and mission items to change the state of the engine."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:111
+#: 22c9b639994d4c069b31b0012531db65
+msgid "High: Force the engine to be enabled. This ignores MAVLink commands and mission items that attempt to control the engine's state."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:113
+#: 7b87e5c550244a969ce5c1a156efaabd
+msgid "To start the engine, raise the switch to the high position. If you want the automatic engine-cut features to work, be sure to lower the switch to the middle position after the engine has started."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:115
+#: 8453e64e38e743078f8a31c8d807face
+msgid "To stop the engine, lower the switch to the low position. If you want the engine to be automatically start with a mission, or want to use a MAVLink command to start the engine, be sure to raise the switch to the middle position after the engine has stopped."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:117
+#: 22d27435278f4ef3afd2f8444382ef6b
+msgid "To configure the RC switch,"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:122
+#: 2d523aa5e53f49da8157613379ffee81
+msgid "Set an RC auxiliary switch (:ref:`RCx_OPTION<RC6_OPTION>` = 179) be used to start the engine. This channel can start the engine or stop the engine via the ``Ignition`` and ``Starter`` motor/servo outputs (see :ref:`common-rcoutput-mapping`). Normally, the \"kill\" PWM value is anything below 1300us, but this can be changed using the :ref:`ICE_STARTCHN_MIN<ICE_STARTCHN_MIN>` parameter. Setting up this channel and its RC control is required for operation in order to provide a \"kill\" function on the throttle, even if there is no ignition or starter control."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:126
+#: 3ee6b0b8695b46edb43da8090e13f4ac
+msgid "Set ``ICE_START_CHAN`` to the channel number corresponding to a switch on the transmitter which will be used to start the engine. This channel can start the engine or stop the engine via the ``Ignition`` and ``Starter`` outputs. Normally, the \"kill\" PWM value is anything below 1300us, but this can be changed using the :ref:`ICE_STARTCHN_MIN<ICE_STARTCHN_MIN>` parameter. Setting up this channel and its RC control is required for operation in order to provide a \"kill\" function on the throttle, even if there is no ignition or starter control."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:128
+#: 0824afbb84f84e419272c6901edca5a7
+msgid "These parameters may also need to be adjusted:"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:130
+#: 6ea587109e004cc6b9e40064c18146fc
+msgid ":ref:`ICE_STARTCHN_MIN<ICE_STARTCHN_MIN>` is the minimum PWM below which the start channel input will be ignored. This is a safety feature to prevent bad RC input from stopping the motor while the aircraft is beyond line of sight, if the RC protocol is incorrectly configured. Default is zero, meaning disabled."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:133
+#: 89d8514976b643819e76d3e36890d423
+msgid "Starting with an Onboard Starter"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:134
+#: cb2bd9d14c664f46bf4fca7d6458c6b0
+msgid "If using an onboard starter, it is strongly recommended to configure an RPM sensor for the engine, since the primary benefit of an onboard starter is to automatically attempt to restart the engine if it fails in flight. See `RPM Configuration`_ below for more information."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:136
+#: d277637595f142aa9176abaa066eba09
+msgid "The auto-start functionality will attempt to start the engine any time the vehicle is armed, the engine is enabled, and the measured RPM is below the :ref:`ICE_RPM_THRESH <ICE_RPM_THRESH>`. If the engine is not successfully started within a configurable amount of time, the program will wait for a configurable delay before attempting to start again. It is important to remember that the starter will run in pulses. DO NOT approach the engine between failed start attempts as the starter will attempt to start again if the engine is still enabled."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:138
+#: 5fe3d3b30ffd4c2c9b66a89d31f60d7a
+msgid ":ref:`ICE_START_PCT <ICE_START_PCT>` overrides the throttle setting during start."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:139
+#: a99b7c2dfa004c8da1ab21b1458a80e6
+msgid ":ref:`ICE_STARTER_TIME <ICE_STARTER_TIME>` controls the maximum amount of time the starter will run in each start attempt."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:140
+#: 06dead5157784ae09e75d6943fbaacdc
+msgid ":ref:`ICE_START_DELAY <ICE_START_DELAY>` sets a delay between start attempts. This can be useful when your starter has a limited duty cycle."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:141
+#: 91cec17f5e694d2e939c483ecdd39e86
+msgid ":ref:`ICE_RPM_THRESH <ICE_RPM_THRESH>` sets the minimum RPM reading for the engine to be considered running. This should be set to a value below your idle RPM."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:142
+#: 9ef0e03d829b403e85cd13eb2f4deb6a
+msgid ":ref:`ICE_STRT_MX_RTRY<ICE_STRT_MX_RTRY>` if set to a value greater than 0 then the engine will retry starting the engine this many times before giving up."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:146
+#: 158fe1e290c6460184d5855574e9c397
+msgid "Starting without an Onboard Starter"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:147
+#: bfff551a7ff84dc0a4f406e367d86e76
+msgid "If using a hand-held starter motor to start the engine, set :ref:`ICE_STARTER_TIME <ICE_STARTER_TIME>` to a relatively high value (at least 10 seconds). This will give you time between hitting the switch and starting the engine with the hand-held starter. After this time period has elapsed, the throttle will drop from :ref:`ICE_START_PCT <ICE_START_PCT>` to :ref:`ICE_IDLE_PCT <ICE_IDLE_PCT>` regardless of whether the engine has started or not. *After* this point, if you are using an optional RPM sensor, the engine start logic may begin again if the engine has not started, or if it stalls after starting and the RPM drops below the :ref:`ICE_RPM_THRESH <ICE_RPM_THRESH>`. Because of this, it is not recommended to set a short time period for the starter cycle, since it will periodically dip the throttle as you are trying to start the engine, which might make it harder to start."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:149
+#: ab2a53bc73de43f993a74dc1abed90d3
+msgid "If the engine stalls after startup, toggle the engine control off and on, then try to start again."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:152
+#: e5c7a50569284181ad8048b4e0cf086c
+msgid "RPM Configuration"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:153
+#: 90ed6e745a7f46a3bbcde11b9f829f44
+msgid "ArduPilot supports generic pulse tachometers connected to GPIO pins (such as the Aux servo pins on a PixHawk or Cube). A tachometer may be made using a simple hall effect switch IC. Some ignition modules support a tachometer output that can be connected directly to the GPIO pins. Desert Aircraft Electronic Ignition V2 modules support tachometer output on the signal pin of the power input connector. Note that when connecting an RPM sensor to an AUX pin, it is important to make sure that this pin is not configured to output a PWM value and, instead, be a GPIO pin. See :ref:`common-gpios` and :ref:`common-rpm` for more information."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:155
+#: bdc07a66b5ad43c394dbe2a14157814a
+msgid "Alternatively, many electronic fuel injection (EFI) systems transmit engine RPM via their own telemetry system. If you have configured an EFI system, and it supports RPM telemetry, then ArduPilot can use this RPM value directly without needing a separate RPM sensor. See :ref:`Electronic Fuel Injection <common-efi>`."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:157
+#: ec17a49d9425477a81caab2391d074b7
+msgid "In order to configure an RPM sensor, the following parameters must be set:"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:159
+#: e50a3332a7644d8797c8a4743509606f
+msgid "Set :ref:`RPM1_TYPE <RPM1_TYPE>` for whichever RPM source you are using."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:160
+#: 351c68046e79453983b8d3f43fbaceb4
+msgid "Set the remaining 'RPM_*' parameters as appropriate for your system."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:161
+#: be29e9612edd4518b93060b1eae16be9
+msgid "Set :ref:`ICE_RPM_CHAN <ICE_RPM_CHAN>` to 1."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:164
+#: 864f81f0062f44d3945ff670aa37da76
+msgid "Idle and redline governors"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:166
+#: 53fb96b5ad434458acca80e7c0d7c224
+msgid "These features rely on having a source for engine RPM. See `RPM Configuration`_ above for more information."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:168
+#: 567097f6077740eebe64421f5b788274
+msgid "The idle governor allows the autopilot to adjust the throttle to maintain an RPM value when the commanded throttle is low. This can be useful when the engine is waiting for takeoff and reduces the workload on the pilot during that time. Increasing the throttle command will give the expected throttle response."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:170
+#: e855fd8b420d4dce8ab484d672edd982
+msgid "Prior to ArduPilot 4.7, while the aircraft is disarmed, the idle governor only works in Manual mode (and only if :ref:`ICE_OPTIONS<ICE_OPTIONS>` bit 2 is set). If your engine cannot run reliably without the idle governor, you will need to arm in Manual mode before switching to another mode to take off. Once armed, the idle governor will work in all modes."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:172
+#: eac8f1e68c7c4a9c923422fcd448cefe
+msgid ":ref:`ICE_IDLE_PCT<ICE_IDLE_PCT>` This is the minimum percentage throttle output while running, this includes being disarmed, but not while outputs are disabled by the safety switch."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:173
+#: b067e1a066ba42b889e3ba1e8db8b28d
+msgid ":ref:`ICE_IDLE_RPM<ICE_IDLE_RPM>` This configures the RPM that will be commanded by the idle governor. Set to -1 to disable."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:174
+#: befe74a247ba4cd7bc508dcf389f56c2
+msgid ":ref:`ICE_IDLE_DB<ICE_IDLE_DB>` This configures the RPM deadband that is tolerated before adjusting the idle setpoint."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:175
+#: ce61e69771474586980b321ece66cc06
+msgid ":ref:`ICE_IDLE_SLEW<ICE_IDLE_SLEW>` This configures the slewrate used to adjust the idle setpoint in percentage points per second."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:177
+#: 95f68b8fe40f40509145a1d37fee9e1e
+msgid "The redline governor will slowly reduce the throttle if the RPM remains above the given RPM value. Generally, this RPM value is provided by the manufacturer of the engine. If the commanded throttle drops faster or lower than the point the governor started, then the governor will be released and normal control of the throttle will return to normal throttle response. A warning message will appear on the GCS. Setting :ref:`ICE_OPTIONS<ICE_OPTIONS>` bit 1 allows disabling the throttle actions of the redline governor, but still displays the GCS warning message."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:179
+#: 20e21cd1d5a942d4b9346bd5ca1c2fae
+msgid ":ref:`ICE_REDLINE_RPM<ICE_REDLINE_RPM>` Maximum RPM for the engine provided by the manufacturer. A value of 0 disables this feature."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:182
+#: 517dc71551214fd48c70805ad934a4c9
+msgid "Options"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:184
+#: 0968d42cf7b24d49bed5559a4ab16a3b
+msgid "Several options are provided using the :ref:`ICE_OPTIONS<ICE_OPTIONS>` bitmask parameter:"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:187
+#: d1066484518349348404cdf9b1753d21
+msgid "Bit (Set to enable)"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:187
+#: 4bb2981a753044d6a05de93617963617
+msgid "Function"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:189
+#: 3626127cccfd4cb3beaffd45df5734a5
+msgid "0"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:189
+#: 993e7c91d80540fe92955698830d1e3d
+msgid "Disable ignition during RC failsafe"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:190
+#: 92e3fbc702f14aa7906dcf3e8be325fc
+msgid "1"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:190
+#: a5dec74d34784f33b35cdc8862dae6aa
+msgid "Disable the Redline Governor feature (but still display GCS warnings)"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:191
+#: 33575c15a7854cc6b44a44e5d598e0f2
+msgid "2"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:191
+#: 241ff34bbeac4d64a00a67af4a2deb07
+msgid "Allows throttle servo output while disarmed in MANUAL mode"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:192
+#: 896ef3a9096f4cae939b310ed9814a5b
+msgid "3"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:192
+#: f4ba2af10ed94d18abb9d2d03c27502a
+msgid "Prevent starting while disarmed"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:193
+#: ba1f323973eb4617bed7f8a1b27be2c2
+msgid "4"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:193
+#: fa81b4c3a65c4cd8880ecc774efd6894
+msgid "Reverse engine cranking direction on starters which support this"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:197
+#: a73c98f5abb041dd99a3898a57e874f5
+msgid "Vibration isolation"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:199
+#: 9df47605844a40f28bcd0cf4699ac18e
+msgid "The high vibration from internal combustion engines means that :ref:`vibration dampening <common-vibration-damping>` is critical.  It is often necessary to mount the autopilot on a plate with `self-adhesive lead weights <https://www.amazon.com/Great-Planes-Segmented-Weights-6-Ounce/dp/B0015KLJE0>`__ added to increase its mass."
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:203
+#: 43e723d2dd5e438f831a0d286608badd
+msgid "When using Internal Combustion Engine (ICE) motors, vibration during engine run-up can cause the IMU consistency checks to fail, preventing arming. In ArduPilot 4.7 and later an option has been added to :ref:`ARMING_OPTIONS<ARMING_OPTIONS>`: bit 2 (Skip IMU consistency checks when ICE motor running)"
+msgstr ""
+
+#: ../../source/docs/common-ice.rst:208
+#: bbdacd3f74b74ece96bacb8e972fcbd1
+msgid "When this bit is set (value +4), ArduPilot will bypass the IMU consistency check if an ICE motor is running. This is intended for setups where ICE engines are typically started before arming, and their vibration may otherwise trigger false failures."
+msgstr ""

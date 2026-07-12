@@ -19,7 +19,7 @@ control from :ref:`Loiter mode <loiter-mode>` and should not
 be attempted before these modes are flying well.  All the same
 requirements apply including ensuring that :ref:`vibration levels <common-measuring-vibration>` and compass
 interference levels are acceptable and that the GPS is functioning well
-including returning an HDOP of under 2.0.
+including returning an HDOP of under 1.4.
 
 Overview
 ========
@@ -27,11 +27,11 @@ Overview
 .. image:: ../images/auto.jpg
     :target: ../_images/auto.jpg
 
-AUTO mode navigates between each waypoint in a straight line and as it approaches each waypoint follows a smooth curving path towards the next waypoint (S-Curve). It controls the path as it approaches a waypoint to be within the :ref:`WPNAV_RADIUS <WPNAV_RADIUS>` of each waypoint. The speed is lowered below :ref:`WPNAV_SPEED<WPNAV_SPEED>`, as necessary, to keep the vehicle within the configured acceleration limits (:ref:`WPNAV_ACCEL <WPNAV_ACCEL>` and :ref:`WPNAV_ACCEL_C <WPNAV_ACCEL_C>`).
+AUTO mode navigates between each waypoint in a straight line and as it approaches each waypoint follows a smooth curving path towards the next waypoint (S-Curve). It controls the path as it approaches a waypoint to be within the :ref:`WP_RADIUS_M<WP_RADIUS_M>` of each waypoint. The speed is lowered below :ref:`WP_SPD<WP_SPD>`, as necessary, to keep the vehicle within the configured acceleration limits (:ref:`WP_ACC<WP_ACC>` and :ref:`WP_ACC_CNR<WP_ACC_CNR>`).
 
 This smooth curving path as it changes direction to the next waypoint will not occur if the next mission command after the waypoint is anything other than a normal waypoint (e.g LAND, LOITER_TURNS, RTL, etc). In these cases the copter will approach the waypoint, stop, and then proceed to the next navigation waypoint instead of smoothly curving in front of it and proceeding to that next navigation waypoint.
 
-Also, small :ref:`WPNAV_RADIUS<WPNAV_RADIUS>` values will require that the curve be very small, effectively appearing like the non-S-Curve behavior explained above.
+Also, small :ref:`WP_RADIUS_M<WP_RADIUS_M>` values will require that the curve be very small, effectively appearing like the non-S-Curve behavior explained above.
 
 Starting a Mission
 ==================
@@ -80,7 +80,7 @@ position which is the location where the copter was armed.
 
 As the copter touches down at the end of the mission the vehicle should automatically disarm but occasionally the vehicle may not sense the landing and the pilot may need to hold the throttle down and takeoff in another mode like Stabilize or Loiter and then manually disarm the vehicle.
 
-.. note:: for a NAV_LAND, the :ref:`LAND_SPEED<LAND_SPEED>` and the :ref:`LAND_SPEED_HIGH<LAND_SPEED_HIGH>` parameters affect descent speed just like in the :ref:`land-mode`. The :ref:`PILOT_THR_BHV<PILOT_THR_BHV>` option bit 1, when set, allows high throttle stick position to cancel the landing, and the mission will move to the next mission item, or just hover in place until the mode is changed or mission restarted. During landing the pilot can re-position the vehicle using the pitch and roll sticks to avoid obstacles.
+.. note:: for a NAV_LAND, the :ref:`LAND_SPD_MS<LAND_SPD_MS>` and the :ref:`LAND_SPD_HIGH_MS<LAND_SPD_HIGH_MS>` parameters affect descent speed just like in the :ref:`land-mode`. The :ref:`PILOT_THR_BHV<PILOT_THR_BHV>` option bit 1, when set, allows high throttle stick position to cancel the landing, switching the vehicle to :ref:`Loiter<loiter-mode>` or :ref:`AltHold<altholdmode>` if Loiter is unavailable. During landing the pilot can re-position the vehicle using the pitch and roll sticks to avoid obstacles unless the :ref:`LAND_REPOSITION <LAND_REPOSITION>` parameter is changed to "0".
 
 Tuning
 ======
@@ -92,17 +92,17 @@ AUTO mode incorporates the altitude control from :ref:`AltHold mode <altholdmode
 
 Commonly adjusted settings are listed below.  Most of these can be adjusted from the Mission Planner's Config, Extended Tuning screen (see above).
 
-- :ref:`WPNAV_SPEED <WPNAV_SPEED>` is the maximum horizontal speed (in cm/s) during missions.  The default is 1000 which is 10m/s.  A typical copter can reach top speeds of 10m/s ~ 20m/s (e.g. 1000 ~ 2000) before it becomes unable to maintain both altitude and horizontal speed
-- :ref:`WPNAV_ACCEL <WPNAV_ACCEL>` determines how quickly the horizontal speed can change (in cm/s/s).  Lower values result in smoother acceleration and deceleration and may also cause the vehicle to cut the corners more.  Higher values will lead to more aggressive movements and tighter cornering
-- :ref:`WPNAV_SPEED_UP <WPNAV_SPEED_UP>` determines the max speed up in cm/s.  Low values may lead to the vehicle's horizontal speed slowing during diagonal climbing waypoint segments
-- :ref:`WPNAV_SPEED_DN <WPNAV_SPEED_DN>` determines the max speed down in cm/s.  Low values may lead to the vehicle's horizontal speed slowing during diagonal descending waypoint segments.  High values (above 150) may lead to unstable vertical descents as the vehicle passes through its own prop wash
-- :ref:`WPNAV_RADIUS <WPNAV_RADIUS>` allows you to control how close the copter must come to the waypoint before it is considered "complete" and the copter moves onto the next waypoint.  Setting this to a larger value may cause the vehicle to cut the corners more leading to a smoother path
+- :ref:`WP_SPD<WP_SPD>` is the maximum horizontal speed (in m/s) during missions.  The default is 10 which is 10m/s.  A typical copter can reach top speeds of 10m/s ~ 20m/s before it becomes unable to maintain both altitude and horizontal speed
+- :ref:`WP_ACC<WP_ACC>` determines how quickly the horizontal speed can change (in m/s/s).  Lower values result in smoother acceleration and deceleration and may also cause the vehicle to cut the corners more.  Higher values will lead to more aggressive movements and tighter cornering
+- :ref:`WP_SPD_UP<WP_SPD_UP>` determines the max speed up in m/s.  Low values may lead to the vehicle's horizontal speed slowing during diagonal climbing waypoint segments
+- :ref:`WP_SPD_DN<WP_SPD_DN>` determines the max speed down in m/s.  Low values may lead to the vehicle's horizontal speed slowing during diagonal descending waypoint segments.  High values (above 150) may lead to unstable vertical descents as the vehicle passes through its own prop wash
+- :ref:`WP_RADIUS_M<WP_RADIUS_M>` allows you to control how close the copter must come to the waypoint before it is considered "complete" and the copter moves onto the next waypoint.  Setting this to a larger value may cause the vehicle to cut the corners more leading to a smoother path
 
 Less commonly adjusted parameters include:
 
-- :ref:`WPNAV_ACCEL_C <WPNAV_ACCEL_C>` determines the maximum cornering acceleration in cm/s/s.  Higher values will cause the vehicle to make sharper corners meaning it will cut the corners less
-- :ref:`WPNAV_ACCEL_Z <WPNAV_ACCEL_Z>` determines how quickly the vertical speed can change
-- :ref:`WPNAV_JERK <WPNAV_JERK>` determines how quickly the horizontal acceleration can change (in m/s/s/s).  Lower values will lead to a smoother acceleration and deceleration but will also lead to the mission taking slightly longer to complete
+- :ref:`WP_ACC_CNR<WP_ACC_CNR>` determines the maximum cornering acceleration in m/s/s.  Higher values will cause the vehicle to make sharper corners meaning it will cut the corners less
+- :ref:`WP_ACC_Z<WP_ACC_Z>` determines how quickly the vertical speed can change
+- :ref:`WP_JERK<WP_JERK>` determines how quickly the horizontal acceleration can change (in m/s/s/s).  Lower values will lead to a smoother acceleration and deceleration but will also lead to the mission taking slightly longer to complete
 
 Common Problems
 ===============
@@ -111,19 +111,19 @@ Below are a list of commonly reported problems and recommendations
 
 1. The vehicle does not cut the corners as much as I would like and/or stops at each waypoint
 
-   - Increase :ref:`WPNAV_RADIUS <WPNAV_RADIUS>` to allow the vehicle to pass further from each waypoint
-   - Increase :ref:`WPNAV_SPEED <WPNAV_SPEED>` to cause the vehicle to start turning earlier in order that it not surpass the max acceleration
-   - Decrease :ref:`WPNAV_ACCEL <WPNAV_ACCEL>` to cause the vehicle to start turning earlier and more gradually
-   - Decrease :ref:`WPNAV_ACCEL_C <WPNAV_ACCEL_C>` or reset to the default of zero
+   - Increase :ref:`WP_RADIUS_M<WP_RADIUS_M>` to allow the vehicle to pass further from each waypoint
+   - Increase :ref:`WP_SPD<WP_SPD>` to cause the vehicle to start turning earlier in order that it not surpass the max acceleration
+   - Decrease :ref:`WP_ACC<WP_ACC>` to cause the vehicle to start turning earlier and more gradually
+   - Decrease :ref:`WP_ACC_CNR<WP_ACC_CNR>` or reset to the default of zero
    - Ensure the waypoint command's Delay field is 0.  A delay of even 1 second will cause the vehicle to stop at the waypoint
    - If :ref:`Dijkstras object avoidance <common-oa-dijkstras>` is enabled, by default the vehicle will stop at each waypoint.  This can be avoided by setting the :ref:`OA_OPTIONS <OA_OPTIONS>` parameter
 
-2. The vehicle does not reach the configured maximum horizontal speed (e.g. :ref:`WPNAV_SPEED <WPNAV_SPEED>`)
+2. The vehicle does not reach the configured maximum horizontal speed (e.g. :ref:`WP_SPD<WP_SPD>`)
 
-   - Increase :ref:`WPNAV_ACCEL <WPNAV_ACCEL>` to allow the vehicle to accelerate to its maximum speed more quickly
-   - Increase :ref:`WPNAV_JERK <WPNAV_JERK>` to allow the vehicle to get to its maximum acceleration more quickly
-   - If the waypoint includes a climb or descent the vehicle's horizontal speed may be limited by :ref:`WPNAV_SPEED_UP <WPNAV_SPEED_UP>` or :ref:`WPNAV_SPEED_DN <WPNAV_SPEED_DN>`
-   - Ensure the vehicle's maximum lean angle (e.g. :ref:`ANGLE_MAX <ANGLE_MAX>`) is sufficient to reach the desired speed
+   - Increase :ref:`WP_ACCEL <WP_ACCEL>` to allow the vehicle to accelerate to its maximum speed more quickly
+   - Increase :ref:`WP_JERK <WP_JERK>` to allow the vehicle to get to its maximum acceleration more quickly
+   - If the waypoint includes a climb or descent the vehicle's horizontal speed may be limited by :ref:`WP_SPD_UP <WP_SPD_UP>` or :ref:`WP_SPD_DN <WP_SPD_DN>`
+   - Ensure the vehicle's maximum lean angle (e.g. :ref:`ATC_ANGLE_MAX<ATC_ANGLE_MAX>`) is sufficient to reach the desired speed
    - Ensure the vehicle has enough power to maintain both altitude and the desired speed
    - If the mission command uses :ref:`terrain following <terrain-following>` the vehicle may need to slow horizontally to maintain the desired altitude above terrain
    - Move the waypoints to be further apart.  S-Cruve navigation only looks forward two waypoints and plans a path that allows it to stop by the time it reaches the 2nd waypoints (`see this issue for more details <https://github.com/ArduPilot/ardupilot/issues/28953>`__)

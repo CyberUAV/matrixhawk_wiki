@@ -25,11 +25,11 @@ recommended for use with ArduPilot (in alphabetical order).  You may also want t
 * `DATAGNSS <https://www.datagnss.com>`__
 * `DH Research <https://dh-research.com/>`__
 * `Drone Engr <https://www.droneassemble.com/>`__
-* `Drotek <https://drotek.com/>`__
 * `Emlid <https://store.emlid.com/>`__
 * `EAMS Robotics <https://store.shopping.yahoo.co.jp/elab-store/>`__
 * `Event38 <https://event38.com/shop/>`__
 * `Foxtech <https://www.foxtechfpv.com>`__
+* `GNSS.store <https://gnss.store/>`__
 * `Harris Aerial <https://www.harrisaerial.com/shop/>`__
 * `Holybro <https://shop.holybro.com/>`__
 * `JapanDrones <http://japandrones.com/>`__

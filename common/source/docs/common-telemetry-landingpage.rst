@@ -24,8 +24,8 @@ Short Range (<10KM)
 
     Bluetooth <common-mission-planner-bluetooth-connectivity>
     CUAV PW-Link <common-cuav-pwlink>
+    DroneBridge for ESP32 <common-esp32-telemetry>
     ESP8266 wifi telemetry <common-esp8266-telemetry>
-    ESP32 wifi telemetry <common-esp32-telemetry>
     FrSky telemetry <common-frsky-telemetry>
     i-BUS telemetry <common-ibus-telemetry>
     Yaapu Bi-Directional Telemetry GCS <common-yaapu-gcs>
@@ -35,6 +35,7 @@ Short Range (<10KM)
     SiK Radio v2 <common-sik-telemetry-radio>
     SiK Radio configuration <common-configuring-a-telemetry-radio-using-mission-planner>
     SiK Radio advanced configuration <common-3dr-radio-advanced-configuration-and-technical-information>
+    Teravolt AeroTel-24 <common-AeroTel-24>
     XBee <common-telemetry-xbee>
 
 Long Range
@@ -51,8 +52,11 @@ Long Range
     CUAV P9 Radio <common-cuav-p9>
     DragonLink <common-dragonlink-rc>
     Herelink <common-herelink>
+    Holybro SiK Telemetry Radio - Long Range <https://holybro.com/collections/telemetry-radios/products/sik-telemetry-radio-1w>
     Holybro 900Mhz XBP9X Telemetry Radio <https://shop.holybro.com/xbp9x-radio_p1268.html>
     Holybro Microhard Radio Telemetry Radio (P900/P840/P400-C1S) <https://holybro.com/products/microhard-radio>
+    Holybro Microhard Radio Telemetry Radio V2 (P400/P900) <https://holybro.com/collections/telemetry-radios/products/microhard-telemetry-radio-v2>
+    LTE Modems using Lua driver <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/drivers/LTE_modem.md>
     LTM telemetry <common-ltm-telemetry>
     mLRS <common-mlrs-rc.rst>
     RFD900 <common-rfd900>

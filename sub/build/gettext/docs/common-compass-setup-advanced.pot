@@ -1,0 +1,307 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Sub package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Sub \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:43+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-compass-setup-advanced.rst:147
+#: 
+msgid "Magfit WebTools Utility"
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:5
+#: 651b74d116364326acd53b2a2388aa07
+msgid "Advanced Compass Setup"
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:7
+#: f19c1981b60c4793aa8f52d72c9b6a3d
+msgid "This article provides advanced guidance for how to setup the system compass(es) and advanced compass related features."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:11
+#: 2eb12bd680f94a1d85095fe3fe8e91d4
+msgid "Users who have only internal compasses or an external compass using a UBlox GPS + compass combination,such as :ref:`UBlox GPS + Compass Module <common-installing-3dr-ublox-gps-compass-module>`, and have mounted it in the default orientation can usually perform a simple \"Onboard Calibration\" as described in :ref:`Compass Calibration <common-compass-calibration-in-mission-planner>`)."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:14
+#: e4a3e39781e9468cac757312df61f835
+msgid "Overview"
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:16
+#: 28266ff551a84b6a8d14479f2f8979b9
+msgid "Accurately setting up the compass is critical because it is the primary source of heading information. Without an accurate heading the vehicle will not move in the correct direction in autopilot modes (i.e. AUTO, LOITER, PosHold, RTL, etc). This can lead to circling (aka \"toiletbowling\") or fly-aways."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:22
+#: 9a8e85f0bd2546f6939f792d4e47eebe
+msgid "ArduPilot allows multiple compasses to be connected, but only three are used at one time. And usually, only the primary compass is used, unless there are consistency problems with its readings versus other compasses and/or other sensors. In this case, the autopilot will automatically determine which of the first three compasses to use."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:24
+#: 687d853b109445709fa79ff4db195ce5
+msgid "While many autopilots have an internal compass or compasses, many applications will instead use an external compass. This provides more reliable data than an internal compass because of the separation from other electronics. See :ref:`common-autopilots` for details about the specific autopilot to determine how many built-in compasses the autopilot may have, if any."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:28
+#: d7f5585445e648a5a659159c90911fde
+msgid "Most users will only need to  perform the normal :ref:`Compass Calibration<common-compass-calibration-in-mission-planner>` but details are also given on the less-used  :ref:`CompassMot <common-compass-setup-advanced_compassmot_compensation_for_interference_from_the_power_wires_escs_and_motors>`"
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:32
+#: 5948199e0aa0428d89e1a290fd5992c7
+msgid "Compass Settings"
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:34
+#: ad9e54b8f57642e784ee9dd31b53bdaa
+msgid "The *Mission Planner Compass Setup screen* can be found in menu **Setup \\| Mandatory Hardware \\| Compass** in the sidebar. This screen is used for setting compass ordering, priority, calibration, and use. No other settings are required for normal use."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:41
+#: eb30efd68ee1418798d7fa98a0e82572
+msgid "Mission Planner: Advanced Compass Setup and Calibration"
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:45
+#: 40af2e028336470eb0ebfb58e46a7ee4
+msgid "Compass Ordering and Priority"
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:47
+#: 3b009cd672af477cb844fcadd0aaa58b
+msgid "During boot, ArduPilot automatically detects the compasses present in the system, adds them to a list, and assigns the first three a priority (1-3) linked to their DEV ID (``COMPASS_PRIOx_ID``), according to the order in which they are discovered. This priority determines which compass is used by the EKF lanes. The primary compass (highest priority, 1) will be used by all lanes, and fallback to the next viable compass in the first three priorities, if the primary becomes unhealthy."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:49
+#: 771e84a735724c71b67a97fea5cde4be
+msgid "The list of discovered compasses and their priority is maintained across boots."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:51
+#: ed06a6f4903642d782ccb762d499d3c0
+msgid "If a user wishes to change to a different compass for one of the three priorities, he can change the ``COMPASS_PRIOx_ID`` to that compass's ``COMPASS_DEV_IDx`` ID value. If a ``COMPASS_PRIOx_ID`` is set to zero, the compasses will be moved up contiguously, in order, to fill that priority slot on the next reboot. This is easily done in Mission Planner with the arrows on the right side."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:53
+#: c857f731497e4c4f9cc9b92444ce6890
+msgid "never change a compass's ``COMPASS_DEV_IDx`` ID value manually and then reboot!"
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:55
+#: aa205b60b52b4f5fa1ddd1bb152abf0d
+msgid "If a previously discovered compass is missing or not detected on boot, and is in one of the three priority positions, a pre-arm failure will occur warning the user. The user will need to either remove the compass from the priority position, or correct the problem in order to prevent the pre-arm failure. Mission Planner provides a button to remove an undetected compass on the above screen."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:57
+#: b8d3d5f311ff42e9b74dd9ad50fbb92b
+msgid "Compasses not present or detected during a calibration will automatically be removed."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:60
+#: e3b205a9bb3846afa4a63ccbc81050c7
+msgid "Compass Enables"
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:62
+#: 0cb422f7df9143868b736f8711841c52
+msgid "Any one of the first three compasses can be disabled. This would leave only the remaining ones to be used by the autopilot. You may wish to disable any internal compasses if you are consistently seeing the “inconsistent compasses” pre-arm message often and you are sure that the external compass is calibrated."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:66
+#: 7ce20ffb0ce649ee94c445e93bffa5c0
+msgid "Compasses should always be enabled for Copter/Rover, but may be disabled (not recommended, if one is available) for Plane."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:69
+#: 51293397c7604f51a6753128503f6d3d
+msgid "Orientation"
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:71
+#: 5e104b3b353945a7a366d8e485da11c2
+msgid "The :ref:`AHRS_ORIENTATION<AHRS_ORIENTATION>` must be set correctly for the compass calibration to be successful. In addition,the :ref:`common-accelerometer-calibration` should be completed before the Compass Calibration."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:73
+#: 53adde813885451d95cc4d01f37bf53d
+msgid "The setting of the orientation of external compasses is no longer required. It's determined automatically during :ref:`common-compass-calibration-in-mission-planner` now. This can be disabled, or only report the orientation determined during Compass Calibration, using the :ref:`COMPASS_AUTO_ROT<COMPASS_AUTO_ROT>` parameter. The orientation determination CAN fail if the magnetic fields are compromised by nearby metal or other interference, especially on 45 deg offset orientations. If the compass is known to be mounted on a 45 degree bias to the accelerometers, and fails to determine orientation during the Compass Calibration, then setting :ref:`COMPASS_AUTO_ROT<COMPASS_AUTO_ROT>` to \"3\" and repeating the calibration, may yield a successful completion."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:75
+#: e496eb3cb70d45d298df7f014afad241
+msgid "automatic determination of compass orientation ONLY occurs using normal Compass Calibration. :ref:`In-flight Calibration<automatic-compass-offset-calibration>` and :ref:`Large Vehicle Mag Calibration <large-vehicle-mag-cal>` require that the orientation be properly set BEFORE attempting these types of calibration."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:77
+#: 5e1fc688dbc84afc9f862012d046e685
+msgid "However, if the need to double-check the orientation of a compass should arise:"
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:79
+#: 743544078b794f45a3bfce3468e86bd8
+msgid "When rotating your aircraft through all axes each of the compasses should move in the same direction, and should be of approximately the same values:"
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:81
+#: 3d4e0261b37e4d239aee804c8ab6f813
+msgid "Northern Hemisphere:"
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:82
+#: 1538ef53ca2c43a49ea9844f51db809d
+msgid "Z-component should be *positive*"
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:83
+#: 3bf562954b88465498a39be4ffb189a1
+msgid "when pitching the vehicle down, the X component should *increase* in value"
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:84
+#: 41fb57bd20124783b012a484c599d42b
+msgid "when rolling the vehicle right, the Y component should *increase* in value"
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:86
+#: 5032d143a44f4a078ded27bdbaf2c43d
+msgid "Southern Hemisphere:"
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:87
+#: 5226e542b0174eaaa7fa0977983c1ef2
+msgid "Z-component should be *negative*"
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:88
+#: 455f803aecbb4eaf9e61de377248f995
+msgid "when pitching the vehicle down, the X component should *decrease* in value"
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:89
+#: 36ee20c2e1304ac4b38f32b7e805e46e
+msgid "when rolling the vehicle right, the Y component should *decrease* in value"
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:92
+#: 4ab6b6948d09425185493a3d2982e144
+msgid "Other parameters"
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:94
+#: 31e846caee0f4ba79e6f87ff291a4585
+msgid "Earlier versions of ArduPilot did not incorporate the world magnetic model database, and a locations magnetic declination might need to manually entered, or learned through flight. This is not necessary now. In addition, this allows the declination to be continuously updated on long distance flights."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:96
+#: 55f1533e8b82446a8d3c0f3c786f4a5d
+msgid "Also, learning the compass offsets in flight, instead of ground calibration, is an option for vehicles difficult to move in order to calibrate. But is not recommended, since the Large Vehicle MagCal option is now available. See :ref:`common-compass-calibration-in-mission-planner` page for details."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:104
+#: a0a8c687ac714eea91f3c82e8a7da4f5
+msgid "Automatic Offset Calibration"
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:106
+#: 879e79defbfc42e285530dc1940f5031
+msgid "DO NOT USE THIS WITH GPS-DERIVED YAW! ie :ref:`common-gps-for-yaw` in  firmware versions before 4.5.2!"
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:108
+#: 05fc7f2b059243ba95721f79663d6e4d
+msgid "In the 4.0 and later releases of ArduPilot, an automatic offset learning feature is available. The :ref:`COMPASS_LEARN<COMPASS_LEARN>` parameter determines how this feature works. This is for advanced users and not recommended."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:110
+#: ad9118564d634476a748d291b7a778ca
+msgid "If set to 3, the offsets will be learned automatically during flight, be saved, and this parameter reset to 0. Position control modes (Loiter, Auto, etc.) should not be used while the offsets are being learned."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:112
+#: 6c65a7301eef434dbac2bbc18d0e0fe6
+msgid "Setting :ref:`COMPASS_LEARN<COMPASS_LEARN>` to 1 or 2 is not recommended. These modes are deprecated and are either non-functional, or still in development."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:114
+#: 37ffafc81f1b4362b08dd455ca48bc32
+msgid "The procedure for :ref:`COMPASS_LEARN<COMPASS_LEARN>` = 3 is:"
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:116
+#: 7988ca321fdf4d519b9291d203de51d7
+msgid "set :ref:`COMPASS_LEARN<COMPASS_LEARN>` = 3. The message “CompassLearn: Initialised” will appear on the MP’s message tab (it does not appear in red letters on the HUD)."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:117
+#: d626ac69ceb44cb5b00c5c6daf9a6351
+msgid "“Bad Compass” will appear but this is nothing to be worried about. We will hopefully make this disappear before the final release."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:118
+#: 59b882ea276349d5a73baa3781459e70
+msgid "Arm and drive/fly the vehicle around in whatever mode you like, do some turns “CompassLearn: have earth field” should appear on MP’s message tab and then eventually “CompassLearn: finished”."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:120
+#: 6cc3f282b52c4931955d06c0ea07d530
+msgid "You MUST have a GPS lock and signal for this to be successful. Be sure the GPS has a clear \"view\" of the sky and there are no obstructions blocking the GPS signals."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:122
+#: 6ec433e7150a443cb289c45254e36155
+msgid "If you want you can check the :ref:`COMPASS_LEARN<COMPASS_LEARN>` parameter has been set back to zero (you may need to refresh parameters to see this) and the COMPASS_OFS_X/Y/Z values will have changed."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:123
+#: c672f33b42f940f38977a4044bfd834e
+msgid "This method can also be evoked using the RCxOPTION for \"Compass Learn\". It will activate when the channel goes above 1800uS and automatically complete and save."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:128
+#: 872c49979dd34977803c177c5680f746
+msgid "Compass error messages"
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:130
+#: cb3cbc846acc4224b5333cecd7be125d
+msgid "**Compass Health**: The compass has not sent a signal for at least half a second."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:132
+#: da1da7d0891440b991de3f9b63fd4710
+msgid "**Compass Variance**: In the EKF solution, compass heading disagrees with the heading estimate from other inertial sensors. Clicking the EKF button on the Mission Planner HUD will show the magnitude of the error."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:136
+#: ab9105735b854223b14b214f9fde4005
+msgid "**Compass Not Calibrated**: The compass needs to be calibrated."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:137
+#: 48a1834b367249a19c8163a556a37c89
+msgid "**Compass Offsets High**: One of your compass offsets exceeds 600, indicating likely magnetic interference. Check for sources of interference and try calibrating again."
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:142
+#: 125bd18d875247daa93db11522a41ded
+msgid "Refining Calibration Parameters using a Flight Log"
+msgstr ""
+
+#: ../../source/docs/common-compass-setup-advanced.rst:144
+#: 4ac885691f4440e082193fbcad5aa1be
+msgid "The compass offsets, scales, diagonals, and even motor compensation can be determined from a flight dataflash log of the vehicle using an analysis utility."
+msgstr ""

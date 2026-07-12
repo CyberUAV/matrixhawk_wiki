@@ -1,0 +1,592 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Rover package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rover \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:39+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-realsense-depth-camera.rst:5
+#: 286cc97615f04ccd87b16a655207b4e4
+msgid "Intel RealSense Depth Camera"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:13
+#: 7a8db783c1bf4d69969c9ad784080eb5
+msgid "This article explains how to setup an `Intel Realsense Depth Camera <https://www.intelrealsense.com/stereo-depth/>`__ to be used with ArduPilot for :ref:`obstacle avoidance <common-object-avoidance-landing-page>`. This method uses a Python script (non `ROS <https://www.ros.org/>`__) running on a companion computer to send distance information to ArduPilot."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:16
+#: 199eecd72bfd41218f8471ecf0313c90
+msgid "What to Buy"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:18
+#: 2d701c6eee584d5ab1505443ee45ed99
+msgid "`Intel RealSense 435 <https://www.intelrealsense.com/depth-camera-d435/>`__ or `D435i <https://www.intelrealsense.com/depth-camera-d435i/>`__ depth camera.  Other `Intel depth cameras <https://www.intelrealsense.com/stereo-depth/>`__ may also work"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:19
+#: 4b1145b23da947848709818af88a433a
+msgid "`UP Squared companion computer <https://up-shop.org/up-squared-series.html>`__ (Celeron 2GB and ATOM are known to work). Other companion computers including the `RPi4 <https://www.raspberrypi.org/products/raspberry-pi-4-model-b/>`__ are not supported although it may be possible to manually set them up (see Configure Companion Computer section below)"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:20
+#: f5085c01a1244495a9b99ba0285260d4
+msgid "Two USB flash drives (8GB or more)"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:23
+#: 9e75a38603e14cc9bc353b93cdfd253d
+msgid "Hardware Connections"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:25
+#: a011202d9f654a2590efcf5f0b992e77
+msgid "Mount the camera on the vehicle facing **forward** (other orientation are not yet supported) and provide isolation from vibrations if possible. Connect the camera USB cable to one of the UP2 board's blue USB3 ports"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:26
+#: 3ce22c41742545a7b399ced5c4583132
+msgid "Connect the UP Squared's serial port to one of the autopilot's telemetry ports (i.e. Telem1, Telem2) as shown below"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:33
+#: 17c84157c4ed463db178f48bf62aa441
+msgid "Setup the UP Squared"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:35
+#: d348afa0562040e3a7fac2727b554161
+msgid "Install APSync to the UP Squared:"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:37
+#: 706a2b0755cb43a3bddc853988bbfd2f
+msgid "Download the latest APSync image (`look for apsync-up2-d435i-yyyymmdd.tar.xz here <https://firmware.ardupilot.org/Companion/apsync/beta/>`__) and copy to one of the USB flash drives"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:38
+#: 05bd9780e7f847f6858605efd7cf6225
+msgid "`Download Tuxboot <https://tuxboot.org/download/>`__"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:39
+#: 4ee982d419d3495da7260c43b6b5cf7f
+msgid "Format a second USB flash drive and use Tuxboot to install `Clonezilla <https://clonezilla.org/>`__ onto it"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:40
+#: c44bff029b0343838ffffd764ef0d637
+msgid "Insert this second USB flash drive into the UP Squared's USB port and then power up the UP Squared board"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:41
+#: 0f82d31cce71407c8f1179f9396828f2
+msgid "The CloneZilla boot menu should appear, Press enter to select the first option"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:42
+#: ed7ce3961bf3408896dc1b038224a10e
+msgid "In CloneZilla:"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:44
+#: f3224e85598248ebb6fb5852859d0788
+msgid "Press enter to accept default keyboard layout"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:45
+#: 745e7377b3c34541a75dfc8d8137b5c7
+msgid "Press enter to start clonezilla"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:46
+#: 07188d8eedf1447aabd4515f04a0ac25
+msgid "Press enter to select device-image"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:47
+#: a3e58400ed86487cb07ff189b13aecc4
+msgid "Press enter for local_dev"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:48
+#: c4a4e4f7edb0494fbc8cdff6a89d96b3
+msgid "Insert the second USB stick which has the APSync image copied onto it"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:49
+#: edc675a9d307400cbc10618229cb2cbb
+msgid "Press enter to continue and detect USB devices"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:50
+#: a4396348121642bcb6c4610fbb0a4aff
+msgid "When device is detected, use ctrl-c to exit detection screen"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:51
+#: 80fc62aa1b0d46c2a27063ed0369a2b5
+msgid "Use the cursor keys to select the device that contains the APSync image"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:52
+#: bfebabb02dfc47188ad51a1333f1a543
+msgid "Select the apsync directory which contains the image"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:53
+#: 82ea981e9538454e86df876d2fcba079
+msgid "Use tab to move the “cursor” over “Done” and press enter"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:54
+#: ff17e7076a7f47d38368ada9805fcc4c
+msgid "Press enter to acknowledge disk space usage"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:55
+#: 7e7c22df8e7a416ca017557d4661aa10
+msgid "Press enter to select Beginner mode"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:56
+#: 963ec56e0a064a2fb6805ee3f29084a2
+msgid "Use the cursor keys to select \"restoredisk\" and press enter"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:57
+#: 522a408d7c5d4afabecc27e4c3130273
+msgid "Select the image file to restore and again press enter"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:58
+#: 5581f375bc0f4ea9a789cc717976ce7a
+msgid "Choose the target disk to be overwritten. Any data on that disk will be overwritten with the APSync image. Press enter"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:59
+#: 12ff6966327c4aebbbdcb7db120f9d93
+msgid "Select \"Yes check the image before restoring\" and press enter. This will ensure the image you copied onto USB is healthy."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:60
+#: e9c255d025fb445b9ae08296a3f24e52
+msgid "Select \"-p choose\" . Press enter to any prompt till restoration begins"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:61
+#: 77479dd33a824815a741f3b8897fc0bd
+msgid "Installation progress should be visible now, wait a few minutes"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:62
+#: c15bf81e7e2d4d9d8c8a75fc96891ca1
+msgid "Enter \"Y\" when prompted for overwriting all data to selected disk"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:63
+#: 676ed9cca02a4517bc11d0c522fff17c
+msgid "After the cloning process is finished, there will be a prompt declaring success, press enter to continue."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:64
+#: 5c71a43a4beb421bb31b71344381b589
+msgid "Press enter on \"power off\""
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:65
+#: f78669780cfc405e83359441352a03a3
+msgid "Remove all USB sticks from the board. You can also remove your monitor input."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:66
+#: 665fb1431e254e868328e4451f8b501b
+msgid "Reboot"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:69
+#: 0df1d8f674d44154abf0608c25fed39b
+msgid "Upgrade the Camera's Firmware"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:71
+#: 9b19093564ff473aa2675c0ac738eadb
+msgid "Check the camera's firmware is version 5.12.8.200 or later.  This can be done using the `Firmware Update Tool (Windows only) <https://dev.intelrealsense.com/docs/firmware-update-tool>`__ or the `Intel Realsense Viewer <https://www.intelrealsense.com/sdk-2/>`__"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:73
+#: 015eda54541144ddbe69151356e59781
+msgid "If using the `Firmware Update Tool <https://dev.intelrealsense.com/docs/firmware-update-tool>`__ the `latest camera firmware can be found here <https://downloadcenter.intel.com/product/128255/Intel-RealSense-Depth-Camera-D435>`__"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:74
+#: e81b20dfdacc44008d21c00ff2217148
+msgid "If using the `Intel RealSense Viewer <https://www.intelrealsense.com/sdk-2/>`__ after downloading and installing, connect the camera to your PC with a USB3 cable.  The firmware upgrade can be triggered via a pop-up on the top right of the application or from the \"More\" menu as shown below"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:81
+#: 34908c177896405f84ffeaf8c0a53e2e
+msgid "Configure ArduPilot"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:83
+#: ea462b98b83a4b2f94599cb770e517fd
+msgid "Connect to the autopilot with a ground station (i.e. Mission Planner) and check that the following parameters are set:"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:85
+#: 61abf42da19947509c2d83ad20326932
+msgid ":ref:`SERIAL2_PROTOCOL <SERIAL2_PROTOCOL>` = 2 (MAVLink2).  Note this assumes the companion computer is connected to AutoPilot \"Telem2\" port."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:86
+#: 9b32ce1dd6b84c3a9d4109d2b36454ef
+msgid ":ref:`SERIAL2_BAUD <SERIAL2_BAUD>` = 921 (921600 baud)"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:88
+#: b8b6e5d37bd44eba9e0d522c19207181
+msgid "Enable any of the :ref:`obstacle avoidance <common-object-avoidance-landing-page>` of your own choosing. :ref:`Simple avoidance behavior <common-simple-object-avoidance>` (Stop/Slide) will be used as the example for this wiki:"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:90
+#: 98e950c83efc4d43b22155afa7c2195c
+msgid "Example setup below shown for first proximity sensor:"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:92
+#: 506053806d7647f792792b12d23d6454
+msgid ":ref:`PRX1_TYPE <PRX1_TYPE>` = 2: for MAVLink"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:93
+#: c739d0b8faec4052b028489c13f5f1e6
+msgid ":ref:`AVOID_ENABLE <AVOID_ENABLE>` = 7: “All” to use all sources of barrier information including “Proximity” sensors"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:95
+#: 6ea04e6dd60840d3857e504cf5146281
+msgid "Example of specifics for ``Loiter`` and ``AltHold`` mode:"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:97
+#: 0157862f4bba4751bc523c4369523d5a
+msgid ":ref:`AVOID_MARGIN <AVOID_MARGIN>` = 1.5: How many meters from the barrier the vehicle will attempt to stop or try to slide along it"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:98
+#: 011e516cc8204213b0660bfb52ffac8d
+msgid ":ref:`AVOID_BEHAVE <AVOID_BEHAVE>` = 1: Whether the vehicle should simply Stop (1) in front of the barrier or Slide (0) around it"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:99
+#: f37b19dd4e5e433ab048be43ad0af753
+msgid ":ref:`AVOID_DIST_MAX <AVOID_DIST_MAX>` = 1.5: How far from a barrier the vehicle starts leaning away from the barrier in AltHold"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:100
+#: 0a935c9ed9ad4070ac6b8726b2ab930a
+msgid ":ref:`AVOID_ANG_MAX <AVOID_ANG_MAX>` = 30: How far the vehicle will try to lean away from the barrier in"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:102
+#: 83e32c298c62479d942041f3e0ddeffd
+msgid "**Optional**: You can assign an RC switch to enable Avoidance instead of always on by default. Example of setting RC7 to switch Avoidance on in Mission Planner:"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:108
+#: 9f9161fdad7e446da09024d6c8f67147
+msgid "After the parameters are modified, reboot the autopilot."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:112
+#: dde82fdd6a0c42f1a6a6d517f39952b9
+msgid "Ground Test: Pre-Flight Verification"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:114
+#: e4da3034d04f4b2088fa1ccfd7bbe4fb
+msgid "To verify that the APSync image is working and everything has been correctly configured ensure ArduPilot is receiving ``OBSTACLE_DISTANCE`` messages, on Mission Planner: press ``Ctrl+F`` and click on “Mavlink Inspector”, you should be able to see data coming in:"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:120
+#: 8515ae39b9194d978c6f7eaf10aa6c52
+msgid "If you have a stable telemetry connection, the data frequency for ``OBSTACLE_DISTANCE`` message should be close to ``15 hz``. If not, use a USB cable to connect AP and GCS to make sure that the obstacle avoidance data is being received as intended by AP before moving on."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:122
+#: 213ad9a05f4b4c71aae902e210d6c66c
+msgid "Within Mission Planner, open the ``Proximity view`` (``Ctrl-F`` > ``Proximity``):"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:124
+#: ec2dc7144c724410b0670457156343ab
+msgid "Put the vehicle/depth camera in front of some obstacles, check that the distance to the nearest obstacle is accurate is shown in the Proximity view."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:130
+#: 8c6cad4539e04a12b642275e430f88b7
+msgid "The proximity view will group every distances within 45-degrees arc together (in total 8 quadrants around the vehicle), so at most only 3 **nearest** obstacles will be shown at any one time on the Proximity window (since the camera's FOV is less then 90 degrees)."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:133
+#: f56483c3746a40aa92f51e57509e570c
+msgid "Flight Test"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:135
+#: ee9843d84d044d71afcb9de255453cba
+msgid "For your first flight:"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:137
+#: e4b7831faac04aee8f369e14a0adbe52
+msgid "Test process: Take-off -> AltHold / Loiter -> Move toward the obstacle."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:139
+#: 4bd5ae83ff6745d0a50ebd795b9cd764
+msgid "Only push the vehicle gently and observe the reactions."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:141
+#: cd42bf641369476f84dad6ea86703111
+msgid "Expected behavior: The vehicle should stop/slide (set by ``AVOID_BEHAVE``) at a certain distance away from the obstacle (set by ``AVOID_MARGIN/AVOID_DIST_MAX`` depending on the flight mode)."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:144
+#: 514b34b8d9eb4efc91b67ac1974f6f21
+msgid "If everything works as expected, the next step is to test out the safety margins for your specific sensor/vehicle/environment:"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:146
+#: c517cdd25bc641748e8b76877e960649
+msgid "Since the camera has limited FOV and min/max depth range, it is important to test the limits to ensure safety for your vehicle in the actual environment."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:148
+#: 558b8b6971304d299152a4fa5189c9ce
+msgid "The pilot should have a rough guess of these margins and put some overheads into the planning of mission."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:152
+#: 170beb2d66e54151a82324f2065c6c1f
+msgid "Experiments"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:154
+#: 5ffdc43c466e41d9b09f24e00f1bc148
+msgid "First manual tests: confirm the expected behavior when obstacle is present, as well as the FOV and safety margins for my vehicle + camera. The flights were conducted in Loiter:"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:159
+#: fa90b9184a8942d8a026658c98da1a25
+msgid "Autonomous flight tests: Here is a short video summarizes the main steps during actual experiments and how a working system should behave. In this example, the vehicle will attempt to follow a square pattern but will stop before any obstacle."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:166
+#: 178909db6a864e1998f59455a2379e77
+msgid "DataFlash logging"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:168
+#: ef88208d92a64d83b098236a06bbc664
+msgid "The relevant messages for the depth camera are ``PRX.CAn`` and ``PRX.CDist``, which stand for angle and distance of the closest object, respectively."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:170
+#: 9dc71ac8f386436687f2da8c24518955
+msgid "You can also view the distance data in each quadrant (D0, D45, and D315 - or 0 degree, 45 degree and 315 degree). Note that the range of value for CAn is 360 degrees while for CDist and the other Dangle only a few meters, so you might need to view them separately."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:173
+#: c4e51c2380fb4760bdb5e66acfc0eb1a
+msgid "System Overview"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:175
+#: 4ebe2bd8393648b69f6a461d6f027d8d
+msgid "In a nutshell, the script will convert the depth image provided by the Realsense depth camera into distances to obstacles in front. AP supports `DISTANCE_SENSOR <https://mavlink.io/en/messages/common.html#DISTANCE_SENSOR>`__ and `OBSTACLE_DISTANCE <https://mavlink.io/en/messages/common.html#OBSTACLE_DISTANCE>`__ MAVLink messages, with the former carries a single distance and the latter carries an array of distances. ``OBSTACLE_DISTANCE`` allows us to send up to 72 distances at once, so it will be used."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:177
+#: 087f55dc4e024f04a747e32c1408bdac
+msgid "Firstly, it is important to apply some form of filters on the **raw** depth image to avoid black holes, noises and generally improve the data to obtain more stable results. Here is full `list of filters <https://github.com/IntelRealSense/librealsense/blob/master/doc/post-processing-filters.md>`__ that are included in the script, which you can enable individually. To test the settings for different filters, you can use the `rs-depth-quality <https://github.com/IntelRealSense/librealsense/tree/master/tools/depth-quality>`__ example provided by ``librealsense`` or run the example ``opencv_depth_filtering.py`` script. The following picture demonstrates the raw (left) and filtered (right) depth image, with the horizontal line as the position where we compute the distances to the obstacles."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:183
+#: f5d9d9f09c8f44cf9bad15f793353ef2
+msgid "Next, from the input/processed depth image, the distances need to be on the same **horizontal** line (depicted in the right image) since the message contains no field to distinguish different pitch angles. We divide the horizontal field of view of the camera into 72 evenly spaced rays. Along each ray, we select the pixel corresponding to the end of the ray and pick out the depth value."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:185
+#: 34db28270fef4c5c9b35fc1285359efa
+msgid "Subsequently, the obstacle line will be kept \"fixed\" when the vehicle pitches up and down by compensating for the current pitch of the vehicle which is provided by the `ATTITUDE <https://mavlink.io/en/messages/common.html#ATTITUDE>`__  MAVLink message."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:187
+#: 8eff02abccc54463bf967c11f8de14bb
+msgid "Finally, the message should be sent at 10Hz or higher, depends on how fast the vehicle is moving."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:191
+#: d6869825240844fea6add0721c057a66
+msgid "Manually Setup the Companion Computer"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:193
+#: 3afcc11b6b0e4a2fb3e3ef19275df3e0
+msgid "These steps are only required if you have not already installed APSync to the companion computer."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:195
+#: e9517ed13016430382b48243364d76d5
+msgid "For the companion computer:"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:197
+#: 47b5cbbb6b5c4fdc9ea374d6f80e1eac
+msgid "**OS**: **Ubuntu 18.04** (highly recommended as this release is the most up-to-date with the required libraries)."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:198
+#: fb652c474d7542ac8a1711a5d4dcee59
+msgid "**Python 3.6** and above, which is also the standard for Ubuntu 18.04. Check the version with ``$ python3 -V``, you should see ``Python 3.6.9`` or higher."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:199
+#: 37d4e10d80ef473b9fc2f4492151e314
+msgid "`librealsense <https://github.com/IntelRealSense/librealsense>`__: download or install from the `official source <https://github.com/IntelRealSense/librealsense/blob/master/doc/distribution_linux.md>`__."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:200
+#: e2ca6db96a20405886cf11863e46ca42
+msgid "``pyrealsense2`` is also required"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:202
+#: fb8d4805f01947dc88c57252e3bcd0f3
+msgid "The installation process varies widely for different systems, hence refer to `the official github page <https://github.com/IntelRealSense/librealsense>`__ for instructions for your specific system:"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:204
+#: fe53f2ae26954808a082a599d2235e69
+msgid "`Ubuntu <https://github.com/IntelRealSense/librealsense/blob/master/doc/installation.md>`__"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:205
+#: 94162982e6634c399a12896e8e8e4aff
+msgid "`Jetson <https://github.com/IntelRealSense/librealsense/blob/master/doc/installation_jetson.md>`__"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:206
+#: 9641d18b6cf44274ab3374d6579b405f
+msgid "`Odroid <https://github.com/IntelRealSense/librealsense/blob/master/doc/installation_odroid.md>`__"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:207
+#: 25328af0cb8d4be1b0084df1b2ebf911
+msgid "`Windows <https://github.com/IntelRealSense/librealsense/blob/master/doc/installation_windows.md>`__"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:208
+#: d7a3949c03954e2d9aa71c9808b0a18f
+msgid "`Raspbian <https://github.com/IntelRealSense/librealsense/blob/master/doc/installation_raspbian.md>`__"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:211
+#: f5e71d24185d481184f0f576b92795d8
+msgid "Install supporting packages"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:213
+#: 3f6ce12ad4674b02b2eb3ca2782895f2
+msgid "First install `Python3 for Ubuntu <https://realpython.com/installing-python/#ubuntu>`__ (not necessary for Ubuntu 18.04 and above). You should be able to then run the examples provided by Intel can be found in the folder ``~/librealsense/wrappers/python/examples`` with Python3 command."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:225
+#: 8765ee309f3c4f69a83ce37af13e7b60
+msgid "Install pip for Python3 `(pip3) <https://linuxize.com/post/how-to-install-pip-on-ubuntu-18.04/#installing-pip-for-python-3>`__ and other supporting packages:"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:242
+#: c761e152d5d54277bd4f6e90ede5d6f5
+msgid "Download the main script `d4xx_to_mavlink.py <https://github.com/thien94/vision_to_mavros/blob/master/scripts/d4xx_to_mavlink.py>`__ or clone the `vision_to_mavros <https://github.com/thien94/vision_to_mavros>`__ repository and find the script folder."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:253
+#: 2746ef67cdea444ab4d7c47992689636
+msgid "The main script to be used with AP is ``d4xx_to_mavlink.py``. The second script ``opencv_depth_filtering.py`` can be used to test out different filtering options at your own leisure."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:256
+#: 8159d36e20894e23ab7b0f082b887c9d
+msgid "Making Changes to the Script"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:258
+#: f644316a2dfd4fd4b3dad3757e7bdc06
+msgid "If you don't have a monitor plugged in, disable the debug option in the script ``d4xx_to_mavlink.py`` by setting ``debug_enable_default = False`` or add the argument ``--debug_enable 0`` when running the script:"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:260
+#: 645cf4d3cbd04e7fab16e0d843dec602
+msgid "Run the script with:"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:267
+#: ea08cd4ba0f94c948a95a74ba7bc4432
+msgid "If the debugging option is enabled, wait until the input and processed depth images are shown. The processing speed (fps) can be seen in the top right corner. The horizontal line on the output image (right) indicates the line on which we find the distances to the obstacles in front of the camera."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:269
+#: e86524c9edce46e885ccfbd10b9efe5a
+msgid "Setup video feed of the RGB image from the camera:"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:271
+#: 10c1f11a7b084a9e8137f762ee779727
+msgid "The script ``d4xx_to_mavlink.py`` has an option ``RTSP_STREAMING_ENABLE``. If enabled (``True``), a video stream of the RGB image from the Realsense camera will be available at ``rtsp://<ip-address>:8554/d4xx`` with ``<ip-address>`` of the UP2 / companion computer."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:273
+#: 5ae49780ec144191afde96067e16a67f
+msgid "In Mission Planner: right-click the HUD > Video > Set GStreamer Source, which will open the Gstreamer url window. Pass the following example pipeline into the Gstreamer url window. Change the ``<ip-address>`` accordingly:"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:279
+#: b711f8cc2e1043d4bcb88f5c3ff39e74
+msgid "The latency of the video feed depends on the network as well as pipeline configuration, so feel free to tune/modify the parameters."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:281
+#: 0e55048034d34ad998a25e5588fb86f2
+msgid "As the performance of the depth camera varies in different setting/environment, it is recommended to further tune the settings of the script before actual flight. Below are some improvements based on real experiments with the system:"
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:283
+#: f14cbc4818e34503b5cb69ccdca8928a
+msgid "When the vehicle is on the ground, it is possible that a large portion of the depth image will see the ground. In such cases, within the ``d4xx_to_mavlink.py`` script, reduce the ``obstacle_line_height_ratio`` parameter (closer to zero) to move the obstacle detection line up."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:285
+#: f6179e67f943414f9a33c9d0adc91ddf
+msgid "If the depth data is noisy, increase the thickness of the obstacle line by modify the ``obstacle_line_thickness_pixel`` param in the script. At the time of this writing, the idea is to process a group of pixels within a certain boundary (defined by this parameter) and find the lowest value to use as indicator to the object. This can change in the future if a better scheme is developed."
+msgstr ""
+
+#: ../../source/docs/common-realsense-depth-camera.rst:290
+#: 391bea236b8c462188616a17f5ab84f6
+msgid "The depth camera can be used together with the :ref:`Realsense T265 Tracking camera for non-GPS navigation <common-vio-tracking-camera>`. There are supporting `scripts <https://github.com/thien94/vision_to_mavros/tree/master/scripts>`__ available to simplify the usage of multiple cameras simultaneously."
+msgstr ""

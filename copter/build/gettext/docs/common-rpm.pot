@@ -1,0 +1,247 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:30+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-rpm.rst:5
+#: f9c208f7c35a408dbddcdef296311bdd
+msgid "RPM Measurement"
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:7
+#: 3426bc98f7f74c30a23b765f2ea8835c
+msgid "ArduPilot supports the use of numerous types of RPM sensors.  They are commonly used in traditional helicopters to measure main rotor speed and motor/engine RPM. RPM sensors are mandatory for those who wish to use the closed-loop throttle governor functionality available to helicopters.  Additionally, vehicles that employ 2-stroke and 4-stroke Internal Combustion Engines (ICE) use RPM sensors are for ignition timing.  The same rpm sensor can be used to log engine RPM in ArduPilot."
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:11
+#: 46b8b0394aac446393dcab9a0ad05d67
+msgid "Common types of RPM sensor that can be used in ArduPilot:"
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:13
+#: 6b80f6ae597c4ee98b189e26ffebc11c
+msgid "Hall effect"
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:14
+#: 9f790262c48041d4800c8c0c02151dbd
+msgid "ESC Telemetry"
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:15
+#: bf8ca73bdc4542aca48c796c3972005c
+msgid "Electrical commutation"
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:16
+#: 43bb549ab9d14021ad6623b98e49f6ea
+msgid "Optical"
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:18
+#: 8ee56bd4241f474bac149f71a0c872f1
+msgid "in addition, a pseudo RPM sensor which reports the center frequency of the dynamic harmonic notch filter is also an option."
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:20
+#: 78277ef3f0cf45118c923611a4ccbed3
+msgid "Any RPM sensor that outputs a step-change in voltage as a function of RPM can be used with ArduPilot.  A brief explanation of how the RPM library works is given.  This is followed by instructions for how to setup the different types of RPM sensor.  Up to two RPM sensors can be used."
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:24
+#: f2a5ed2c21ed4f3ab7bd3f92a015ad26
+msgid "How the RPM Library Works (TYPE = AUXPIN)"
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:26
+#: e7cd4cf77a3d4b919f96aff38e4f955d
+msgid "The RPM library in ArduPilot monitors the voltage of the designated signal pin. The image below shows a typical output voltage of an RPM sensor:"
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:32
+#: 1692e7766814477f8a4fdf5f6b787fa3
+msgid "As it can be seen the voltage oscillates between 0V and 5V.  The voltage drops are either caused by a magnet passing a hall effect sensor, or are the output of a different type of sensor(eg. optical).  When a 'falling edge' is detected the time is stored.  When the voltage drops again the time difference between the falling edges can be calculated.  The time between the voltage drops is proportional to the RPM.  The scaling value that correlates the time between the falling edges and the RPM is dependent upon the setup and device being used.  Device-specific advice on scaling parameters is given later in this guide."
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:37
+#: ede7c27dbaf8445280dec4255f24f1e0
+msgid "In this example, the output is from an electrical commutation sensor, connected to a motor with 4 poles.  The RPM can be calculated as follows:"
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:43
+#: 6849795873844dfe92c2e77f8ba4ca16
+msgid "Where dt is the time between falling edges (in seconds) and S is the scaling factor.  In this example, 4 poles means that there will be 4 wave periods per revolution. Hence, the scaling factor would be 0.25 and the resulting RPM would be 5282.  This is a somewhat simplistic view of how ArduPilot calculates the RPM, but it illustrates the key underlying concepts."
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:48
+#: 44a7dd796e3e434d9536b4ad5403b3a5
+msgid "Hall Effect Sensors"
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:50
+#: 1ed3e4915cff4834911d224967549e18
+msgid "**Hardware Setup**"
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:52
+#: 2c1ba1b841a549c4ae745c564fc31057
+msgid "Perhaps the most often used, hall effect sensors change their output voltage in the presence of a sufficiently strong magnetic field.  A magnet needs to be fixed to the rotating component that is to be measured.  For helicopters, this requires that a hole or recess is made in the autorotation tail drive wheel and the magnet glued in place (as in the image below).  For ICE the magnet will be mounted in the output shaft."
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:60
+#: caf5c626a3114fcc9ddba413712f755a
+msgid "The polarity of the magnet matters.  Only one pole will create the change in voltage required.  To ensure that the magnet is affixed in the correct orientation either an oscilloscope or the `Arduino sketch found here <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_RPM/examples/ArduinoHallEffectDebug.ino>`__ can be used.  If using an oscilloscope, this guide assumes that you have sufficient knowledge to be able to set up this test.  If using the Arduino sketch method in the link provided, a comprehensive set of instructions are commented at the beginning of the sketch.  An Arduino Uno was used when writing and testing the sketch and is recommended."
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:68
+#: a78786405ba7499793165987278034e3
+msgid "Most hall effect sensors that are intended for use with radio control vehicles will require some additional modification.  Often, they will need an additional pull-up resistor to be added between the Vcc and signal lines.  In some cases, their Vcc, gnd, and signal lines won't match the colour coding of the wire.  Hence, it is advisable to experiment with the provided Arduino sketch and a bread board to be sure of the sensor pin orientation."
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:72
+#: 3efc816244794170b228e0a45392bcd3
+msgid "For a reliable RPM signal the hall effect pick-up should be mounted very close to the magnet.  The image below shows an example mounting on a helicopter."
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:78
+#: fc97c06d63154977a39e5c375f409d16
+msgid "The three wires should then be plugged into the autopilot.  This is commonly done using a standard servo plug.  Ground to Gnd, Vcc to 5V, and the signal line needs to be attached to a GPIO pin.  On most smaller boards this will be any one of the PWM pins on the servo rail.  On a Pixhawk this must be one of the AUX ports. For reasons explained later it is recommended to use the highest number pin first.  E.g. AUX 6 on a Pixhawk/Cube or PWM 9 on a MatekF405-Wing."
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:82
+#: 4a8db3cac7a84d18a3a866db9136c076
+msgid "**Parameter Setup**"
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:84
+#: 8f78816873dd495a8df1efd10663701a
+msgid "First the board needs to be configured to allow PWM pins to be set for GPIO.  This is done using the parameter ``BRD_PWM_COUNT`` .  Reduce the PWM count to free up a pin to be used for GPIO.  On non-Pixhawk boards the PWM count will include all PWM outputs.  On Pixhawk boards this parameter only affects AUX pins.  Write the parameter and reboot the autopilot."
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:86
+#: c0800e6c3c6e415aa78727b88a7eb042
+msgid "in firmware versions 4.2 and later, the method for setting a PWM/SERVO/MOTOR output to be a GPIO function is changed. Instead of ``BRD_PWM_COUNT`` being used, the individual ``SERVOx_FUNCTION`` parameter is merely set to \"-1\". If set to \"0\", it remains a PWM output, unassigned to a function, and outputs that output's trim value when board safety is not active. If the servo function is being \"mirrored\" to a remote device, as in the case of a DroneCAN or KDECAN ESC, then in order to change the autopilot board's corresponding output pin to be a GPIO, but allow the ``SERVOx_FUNCTION`` to still be assigned to the remote device, the :ref:`SERVO_GPIO_MASK<SERVO_GPIO_MASK>` parameter can be used to assign the board pin to be a GPIO without affecting the ``SERVOx_FUNCTION`` assignment for the remote device."
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:88
+#: 45b4b8217571429cb488c913ac680ce8
+msgid "Now the RPM library must be enabled. In the following sections, we will use the second instance of RPM sensor for parameter examples. Up to four different sensors(instances) can be used."
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:90
+#: eb53c228859842bc9cf710d75c939908
+msgid "Set the parameter :ref:`RPM2_TYPE<RPM2_TYPE>` to 2 for a GPIO pin based sensor.  Write the parameter to ArduPilot then refresh/fetch the parameters.  You will now find that the instance of RPM (e.g. RPM2) has a number of other parameters available for editing, allowing you to complete your setup."
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:93
+#: d138641bc7f7438a892cc5d56877b44a
+msgid "Now the autopilot needs to be told which pin to find the RPM signal on.  To do this you will need to find the pin number in the hwdef.dat file for your board.  These can be found `here <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_HAL_ChibiOS/hwdef>`__.  Within the file for your board you will need to find where the GPIO(*) definition is.  The pin must have a timer assigned. Normally, these will be PWM servo/motor outputs that have been designated as a GPIO instead of PWM output. See :ref:`common-gpios`, for more information."
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:97
+#: ae8ad8aadb71408083df355891208ee7
+msgid "for example, if we have set AUX port 5 to a GPIO and its GPIO numbering corresponds to pin 54, 54 must be entered into the parameter :ref:`RPM2_PIN<RPM2_PIN>` for the RPM sensor."
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:99
+#: 62f5871e0e4c44d3a86dab08d4b46910
+msgid "The parameter :ref:`RPM2SCALING<RPM2_SCALING>` will correspond to the number magnets used.  Most commonly only one magnet is used and this parameter is set to 1.  Some installations use 2 magnets, 180 degrees out of phase.  In this case this parameter should be set to 0.5."
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:102
+#: 0ed620993ed24a4ba8f1a7aba196ea04
+msgid "Initially, it is recommended to leave the parameters :ref:`RPM2_MIN<RPM2_MIN>`, :ref:`RPM2_MAX<RPM2_MAX>`, and :ref:`RPM2_MIN_QUAL<RPM2_MIN_QUAL>` as their defaults.  If an RPM signal exceeds any of these limits then the value reported in the ground station and the logs is zero.  Therefore, only adjust these values once you have confirmed that your RPM sensor is working as expected, otherwise it can make it more difficult to debug if nothing is getting reported."
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:104
+#: 7a49f88dab5744098e60b48d542686ef
+msgid "Finally, to test that everything is working, you can use the rpm1/rpm2 live feeds in the quick tab in mission planner or the live tuning window.  Alternatively the RPM history can be reviewed in the logs."
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:108
+#: 0af0a2293ce540408a79d0d7507ca0be
+msgid "ESC Telemetry - Average Motor RPM"
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:110
+#: 98d7d3aab19c4049a8292b1b6c07541b
+msgid "The RPM library can also be used to setup an 'RPM sensor' that computes and logs the average RPM for selected motors on the vehicle that are controlled by BLHeli_32 or BLHeli_S capable ESCs.  First the ESC telemetry will need to be setup.  See :ref:`BLHeli Telemetry<blheli32-esc-telemetry>` for details on how to do this.  Once complete set ``RPMx_TYPE`` to 5 and write the parameters to ArduPilot.  Then refresh/fetch the parameters.  You will find a number of additional parameters are now available for that instance.  Find and set ``RPMx_ESC_MASK`` to add which ESC channels you want to be included in the average. For example for the second RPM instance:"
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:112
+#: 51890ced7edf46c5b57967a1709fc1e7
+msgid ":ref:`RPM2_ESC_MASK<RPM2_ESC_MASK>` is a bitmask, with each bit corresponding to a channel. If you wanted the average RPM for motors 1 to 4 you would set :ref:`RPM2_ESC_MASK<RPM2_ESC_MASK>` = 1 + 2 + 4 + 8 = 15."
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:115
+#: d3704b283ffa44fa87dc96f9be5eec19
+msgid "Electrical Commutation Sensors"
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:117
+#: 2831f8c996134b418233034292319975
+msgid "Electrical commutation RPM sensors can be added retrospectively using something like the Hobbywing brushless RPM sensor.  Some ESCs, such as the Castle Creations Edge series, that have an auxiliary output, can be configured to output a pulse per commutation."
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:120
+#: 0581717a66e24b0cadcf14626120a596
+msgid "For clarification, this is not the same as the RPM that can be passed via serial telemetry with ESCs.  For information on how to set up RPM reporting with capable ESCs, see the :ref:`ESC Telemetry<blheli32-esc-telemetry>`."
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:123
+#: 519ba7b776ad458cad34b88cea14d8c0
+msgid "The setup for electrical commutation RPM sensors is much the same as hall effect sensors, so the steps above are applicable.  The only difference is the scaling value to be entered in the :ref:`RPMN2_SCALING<RPM2_SCALING>` parameter.  Now, the scaling value is a function of the number of poles in the motor and should be the reciprocal of the number of pole pairs.  E.g. A motor with 20 poles, therefore 10 pole pairs, needs a scaling value of 1/10 = 0.1."
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:128
+#: e145d384b6aa4420bcb6402d0bdc23be
+msgid "Optical Sensors"
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:130
+#: b7fa9422b4b046ee93e27a7b01f702c6
+msgid "Again, the setup of optical sensors is much the same as the hall effect sensor.  The only difference is the scaling value.  :ref:`RPM2_SCALING<RPM2_SCALING>` should be set to be the reciprocal of the number of reflective obstacles that pass the sensor in a single rotation."
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:134
+#: 4ef17a9a7e5f44289c1cb9b1aa87d747
+msgid "Harmonic Notch Center Frequency"
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:136
+#: 4d89ef8a07e54463bc719d33da9a2735
+msgid "If ``RPMx_TYPE`` = 4, then the center frequency of the harmonic notch is reported.  See :ref:`common-imu-notch-filtering` for how this value is obtained."
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:139
+#: 3339c4f02f684628bc75387ce63dc98a
+msgid "Heli Magnetic Sensors Known to Work with ArduPilot"
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:141
+#: 2222827e7a784f13ab22a6b4207d0538
+msgid "`Align Magenetic Sensor <https://modelhelicopters.co.uk/products/align-beastx-governor-sensor-hegbp002t?variant=42819003220168>`__"
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:142
+#: 756d73dbae814b4c86902d91d686e800
+msgid "`HoTT RPM Magnetic Sensor <https://www.controlhobbies.com/Telemetry-magnetic-sensor-to-measure-RPM-33616.html>`__"
+msgstr ""
+
+#: ../../source/docs/common-rpm.rst:143
+#: 61a1ada8cf6c4f70bf881aff47b57f12
+msgid "`SMModelBau Magnetic Sensor <https://www.sm-modellbau.de/magnetischer-Drehzahlsensor-fuer-UniTest-2-UniLog-1-2>`__"
+msgstr ""

@@ -3,7 +3,7 @@
 IMU Temperature Calibration
 ===========================
 
-ArduPilot supports IMU temperature calibration. Calibrating the IMU for temperature changes can greatly reduce the amount of variation in the IMU and helps with flying in conditions where the temperature varies a lot between bootup and flight.
+ArduPilot supports IMU temperature calibration. Calibrating the IMU for temperature changes can greatly reduce the amount of variation in the IMU and helps with flying in conditions where the temperature varies a lot between boot-up and flight.
 
 .. note:: this feature is only available currently on 2MB autopilots.
 
@@ -71,7 +71,7 @@ temperature. A value of 70 can be good for calibration. Make sure you
 change it back to a normal flight value (normally 45) when the
 calibration process is complete. A value is 70 is likely to be above
 what can be reached, so for boards with heaters a reasonable value for
-TMAX is 65 degrees C. Note that on some boards (notably the Hex
+TMAX is 65 degrees C. Note that on some boards (notably the CubePilot
 CubeBlack and CubeOrange) the 3rd IMU is not close to the heater, so
 it's maximum temperature needs to be about 10 degrees below the first
 two IMUs.

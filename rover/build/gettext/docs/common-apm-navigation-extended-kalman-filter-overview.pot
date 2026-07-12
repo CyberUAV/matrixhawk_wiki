@@ -1,0 +1,177 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Rover package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rover \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:39+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:5
+#: 2a3508eadcc94cedae6e219fdd1c4658
+msgid "Extended Kalman Filter (EKF)"
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:9
+#: 9cbc9fc903ba47f7a0e9cce00ca22dc9
+msgid "An Extended Kalman Filter (EKF) algorithm is used to estimate vehicle position, velocity and angular orientation based on rate gyroscopes, accelerometer, compass, GPS, airspeed and barometric pressure measurements."
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:14
+#: 288e40f7e4dc45f99688d680382dc2ac
+msgid "The advantage of the EKF over the simpler complementary filter algorithms (i.e. \"Inertial Nav\" or DCM), is that by fusing all available measurements it is better able to reject measurements with significant errors. This makes the vehicle less susceptible to faults that affect a single sensor. An EKF also enables measurements from optional sensors such as optical flow and laser range finders to be used to assist navigation."
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:21
+#: 1d2ff46a10a44bdb9a8affd30500862e
+msgid "Current stable versions of ArduPilot use EKF3 as their primary attitude and position estimation source with DCM running quietly in the background. If the autopilot has two (or more) IMUs available, two EKF \"cores\" (i.e. two instances of the EKF) will run in parallel, each using a different IMU. At any one time, only the output from a single EKF core is ever used, that core being the one that reports the best health which is determined by the consistency of its sensor data."
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:25
+#: 875e2ca1c7a8487786acd2563886ecfe
+msgid "Most users should not need to modify any EKF parameters, but the information below provides some information on those parameters that are most commonly changed. More detailed information can be found on the :ref:`developer EKF wiki page <dev:extended-kalman-filter>`."
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:29
+#: 04081d8ac1ae425ab4973789ed7f9fcc
+msgid "Should the EKF2 or EKF3 be used?"
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:31
+#: fa097f800c914969ba4bc0517c05320b
+msgid "In general, we recommend users stick with the EKF3, which is now the default. In addition, 1MB autopilots only have this option due to space limitations. EKF2 can still be used but does not have many of the enhancements of EKF3 such as newer sensor sources including Beacons, Wheel Encoders and Visual Odometry."
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:35
+#: 64d96dd4f44d44a8b2484a22fe963508
+msgid "Choosing the EKF and number of cores"
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:37
+#: e2f5b0bf113a4eaf92a538a4cf0ea3e0
+msgid ":ref:`AHRS_EKF_USE <dev:extended-kalman-filter_ahrs_ekf_use>`: set to \"1\" to use the EKF, \"0\" to use DCM for attitude control and ahrs dead reckoning (Plane) for position control.  In Copter this parameter is forced to \"1\" and cannot be changed."
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:39
+#: d46c54188fb54f83993f842fc59d0653
+msgid ":ref:`AHRS_EKF_TYPE <AHRS_EKF_TYPE>`: set to \"2\" to use EKF2 for attitude and position estimation, \"3\" for EKF3."
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:41
+#: 66752894a21b451888155c6d64889d7a
+msgid ":ref:`EK2_ENABLE <EK2_ENABLE>`, :ref:`EK3_ENABLE <EK3_ENABLE>`: set to \"1\" to enable the EKF2 and/or EKF3 respectively."
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:43
+#: 71332da79924436cad6eaf4c80137f58
+msgid ":ref:`EK2_IMU_MASK <EK2_IMU_MASK>`, :ref:`EK3_IMU_MASK <EK3_IMU_MASK>`: a bitmask specifying which IMUs (i.e. accelerometer/gyro) to use.  An EKF \"core\" (i.e. a single EKF instance) will be started for each IMU specified."
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:45
+#: 493616ccce154f3dbb1597a6b7136316
+msgid "1: starts a single EKF core using the first IMU"
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:46
+#: 1be48433d2b84cd9bfeac630f12336c2
+msgid "2: starts a single EKF core using only the second IMU"
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:47
+#: e61fc42ce90a4b30a5a23943a81bac0e
+msgid "3: starts two separate EKF cores using the first and second IMUs respectively"
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:49
+#: ff8c347b6629433eb90703c082c25669
+msgid ":ref:`EK3_PRIMARY<EK3_PRIMARY>`: selects which \"core\" or \"lane\" is used as the primary. A value of 0 selects the first IMU lane in the :ref:`EK3_IMU_MASK <EK3_IMU_MASK>`, 1 the second, etc. Be sure that the selected primary lane exists. See Affinity and Lane Switching below."
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:53
+#: 3eac08f0b9d64b1fb0dedb5c369a28ee
+msgid "Plane and Rover will fall back from EKF2 or EKF3 to DCM if the EKF becomes unhealthy or the EKF is not fusing GPS data despite the GPS having 3D Lock. There is no fallback from EKF3 to EKF2 (or EKF2 to EKF1)"
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:58
+#: 30581d1fe7a144d6ac9d58af8ed60d74
+msgid "Using the parameters above it is possible to run up to 5 AHRSs in parallel at the same time (DCMx1, EKF2x2, EKF3x2) but this can result in performance problems so if running EKF2 and EKF3 in parallel, set the IMU_MASK to reduce the total number of cores."
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:61
+#: 8c21071a1030494fbf003d7548ad64be
+msgid "Affinity and Lane Switching"
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:63
+#: 798598d2053c45b780e0bd8a6f4d3eb1
+msgid "EKF3 provides the feature of sensor affinity which allows the EKF cores to also use non-primary instances of sensors, specifically, Airspeed, Barometer, Compass (Magnetometer) and GPS. This allows the vehicle to better manage good quality sensors and be able to switch lanes accordingly to use the best-performing one for state estimation. For more details and configuration, refer :ref:`EKF3 Affinity and Lane Switching <common-ek3-affinity-lane-switching>`."
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:66
+#: 54ad2dd3da6940579ef25321bf663608
+msgid "GPS / Non-GPS Transitions"
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:68
+#: 78f4cda8cf774c5aa9de3518b327d330
+msgid "EKF3 supports in-flight switching of sensors which can be useful for transitioning between GPS and Non-GPS environments.  See :ref:`GPS / Non-GPS Transitions <common-non-gps-to-gps>` for more details."
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:71
+#: 00aa8ed4f41d4ef6b71a1be81a07f78d
+msgid "Commonly modified parameters"
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:73
+#: 8c6f92f7d8814dc385ae52c65877d4d6
+msgid "EKF sensor sources, see :ref:`common-ekf-sources`."
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:75
+#: 990860db32ba48b8be2ddc71953caa0e
+msgid ":ref:`EK3_ALT_M_NSE <dev:extended-kalman-filter_ekf_alt_noise>`: Default is \"1.0\".  Lower number reduces reliance on accelerometers, increases reliance on barometer."
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:77
+#: 4e26adfe26f34c79ad669bd626471e6e
+msgid ":ref:`EK3_GPS_TYPE <dev:extended-kalman-filter_ekf_gps_type>`: Controls how GPS is used."
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:80
+#: 27b3ed2bbd8a498289652c9d6b073b2a
+msgid "0 : use 3D velocity & 2D position from GPS"
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:81
+#: 42725a0858454fada79a7e0f736f871f
+msgid "1 : use 2D velocity & 2D position (GPS velocity does not contribute to altitude estimate)"
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:83
+#: c95235deea9642749a76e6181d63a208
+msgid "2: use 2D position"
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:84
+#: 6ff9bd06b757461886554fcea20efc71
+msgid "3 : no GPS (will use :ref:`optical flow <copter:common-optical-flow-sensors-landingpage>` only if available)"
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:86
+#: 0b92d4fd86af43ed80d2a16e18295dc6
+msgid ":ref:`EK3_YAW_M_NSE <EK3_YAW_M_NSE>`: Controls the weighting between GPS and Compass when calculating the heading.  Default is \"0.5\", lower values will cause the compass to be trusted more (i.e. higher weighting to the compass)"
+msgstr ""
+
+#: ../../source/docs/common-apm-navigation-extended-kalman-filter-overview.rst:88
+#: f63a2790d4e94afea1cca18fd21239e9
+msgid "As mentioned above, a more detailed overview of EKF theory and tuning parameters is available on the developer wiki's :ref:`Extended Kalman Filter Navigation Overview and Tuning <dev:extended-kalman-filter>`."
+msgstr ""

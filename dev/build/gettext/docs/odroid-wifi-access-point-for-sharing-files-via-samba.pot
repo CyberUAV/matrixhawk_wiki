@@ -1,0 +1,217 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:5
+#: 287d582350b042898b4307e103bcfe52
+msgid "ODroid Wifi Access Point for sharing files via Samba"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:8
+#: c18ceb515b9148c9800046012d4af47e
+msgid "Overview"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:10
+#: d1b7ca983c4b41499c4169283a4362ed
+msgid "This page will show you how to setup an Odroid with a Wifi AccessPoint so that the Odroid's hard drive can be accessed and modified from another computer.  This is primarily aimed at allowing access to images, videos and log files on the Odroid.  The procedure makes use of `hostapd <http://wireless.kernel.org/en/users/Documentation/hostapd>`__, `Samba <https://www.samba.org/>`__ and `dhcp <https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol>`__."
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:18
+#: b504981e06424cc29104b009fa5c4d72
+msgid "To accomplish this you will need:"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:20
+#: ff890d28e8184b83a15c9400bb3295df
+msgid "Odroid U3 running Ubuntu 14.04 as described on :ref:`this page <odroid-via-mavlink>`."
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:21
+#: f5d78ded7ed5413fa77cd7d685f85493
+msgid "A Wifi dongle capable of \"master\" mode (aka \"AP\" or access point). These exact instructions were performed with an $8 `Buffalo Airstation 11n 11g/b USB2 wireless LAN terminal purchased in Japan <http://www.yamada-denkiweb.com/1265136015>`__."
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:24
+#: 0775a9837a3f472693002961a4f0a8d9
+msgid "All the instructions below can be implemented by connecting a keyboard, mouse and screen to the Odroid or using ssh (via Putty)."
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:28
+#: 561d4303e0874ddb8049d2c03740ba7d
+msgid "Install all the required packages"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:30
+#: 3dfcaad1c8e84b87a4272280ab09f706
+msgid "Becomes super user:"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:36
+#: bd8e9b2ecb1b4689ab2defbe86cfd2f0
+msgid "Install hostapd, samba and all the other required packages:"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:43
+#: cb282b86ccc54cfc921d850d1a656805
+msgid "Setting up the Access Point"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:45
+#: cea6c156f30449c4a18e5ceebd4927a6
+msgid "After first ensuring the wifi dongle is plugged into the Odroid,"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:47
+#: b4f5588c82cb450aa4d758e9e7af39ae
+msgid "Find the name of your wifi dongle by typing ``ifconfig`` (normally it will be \"**wlan0**\\ \" or \"**wlan2**\\ \")"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:53
+#: 5971061a939848ee825ec18d303fe196
+msgid "Check the wifi dongle supports \"AP\" mode:"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:59
+#: e32aec36c744402197ac093e686aedeb
+msgid "A huge list of information will be displayed, you are looking for a section called \"Supported interface modes:\" followed by \"\\* AP\".  If you cannot find this then these instructions will not work and you should try with another dongle."
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:71
+#: 9392cec100104c869965fb5394031d25
+msgid "Use your favourite editor (nano or vi perhaps) to edit the ``/etc/network/interfaces`` file and add an entry for your wifi dongle. Note you should replace \"wlan2\" if your dongle has a different name:"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:75
+#: 53fd3b5b083d42f091f072d73ecb2e95
+msgid "``auto wlan2``"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:77
+#: 75aeb32b1ee9456990a36b96cc80cac1
+msgid "iface **wlan2** inet static"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:79
+#: 12f87dd788fa4859934e8fa7fc42c037
+msgid "address 192.168.100.1"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:81
+#: a8f046ec88d4428a8817d460853439ba
+msgid "netmask 255.255.255.0"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:83
+#: 387202a0bc814b72959c38e51ea7a40c
+msgid "Edit the ``/etc/hostapd/hostapd.conf`` file and ensure it looks like below"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:106
+#: b2a25442f9364d8d93ff228b0706a2f4
+msgid "Try starting hostapd:"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:112
+#: 919738fbd85e4334964ecf17d61c8382
+msgid "If this fails try replacing the /usr/sbin/hostapd and hostapd_cli files with the version found in `the downloads area <https://download.ardupilot.org/downloads/wiki/developer_tools/hostapd_OdroidU3_Ubuntu1404.zip>`__."
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:115
+#: 7c0de4e0b832414eb75744eb60933a8f
+msgid "You will also need to install the libnl-dev package:"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:121
+#: b697210810654c329a5f76506d8ca953
+msgid "To make the hostapd service run whenever the odroid is started edit the /etc/init.d/hostapd file and ensure the line below appears:"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:129
+#: f895e89d2cbf4b39b2be99938ece969b
+msgid "Setting up Samba"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:131
+#: b8f31254b356412fb1b4975de3d01ca2
+msgid "Create directories you wish to share:"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:138
+#: 089feeb6874a4207bf84f81bd35f7b73
+msgid "Edit the samba config file (if not present create a new file):"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:161
+#: f04d4f2f84fc4a43ba5f0504980bff2b
+msgid "The this config will create a \"images\" share with no restriction on clients adding or deleting files."
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:165
+#: 24fa7c03bbb3460eba7cb5a3404c29f9
+msgid "Setting up DHCP"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:167
+#: b33bb024da194aa298fa79e941e638db
+msgid "Edit the /etc/dhcp/dhcpd.conf file and ensure it has all the lines listed below added/uncommented:"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:187
+#: 5c85665370f545cc910c33ccc0c0b01c
+msgid "Add all possible client IP addresses to the ``/etc/hosts`` file:"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:203
+#: c161c3db76ef4e53a093f789440896d6
+msgid "Adding all the client IP address can be accomplished more quickly with the following command:"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:210
+#: 55446fff31414da28b9a7427a2ab170f
+msgid "Restart the Odroid and with any luck an AP will be created and you will be able to connect as shown below."
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:214
+#: 09853d49670f426cb6701935619a0ae1
+msgid "Connecting from a Windows PC"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:216
+#: 3652204aab814ad9ad941f82dde6f71c
+msgid "To connect from a Windows 8.1 machine click on the network icon near the clock and then click on \"MyDrone\", \"Connect\" and after 30seconds or so it should connect with a message \"The connection is limited\" because the Odroid likely does not have access to the internet (this is ok)."
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:224
+#: e17455508d2547f4abc6e5b971cdcbdf
+msgid "Open a File Explorer and type \\\\\\\\mydrone into the address bar and the contents of the Odroid images directory should appear."
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:231
+#: d70a00e1b2ca49dd8d75a9db01664de3
+msgid "References"
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:233
+#: 18f79441635d44328ebca2a828becbc8
+msgid "These pages were referenced during the creation of this document."
+msgstr ""
+
+#: ../../source/docs/odroid-wifi-access-point-for-sharing-files-via-samba.rst:235
+#: 41c1830866604a31afa8badc76698c31
+msgid "`wireless.kernel.org's hostapd documentation <http://wireless.kernel.org/en/users/Documentation/hostapd>`__."
+msgstr ""

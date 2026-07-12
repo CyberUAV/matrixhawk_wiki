@@ -1,0 +1,865 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:3
+#: 52173fef1dbc467caccaf9453a9091ac
+msgid "**ARCHIVED: page considered obsolete**"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:7
+#: fe7739015f1e4ee781e4b3d345b7b16a
+msgid "CHDK Camera Control Tutorial"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:10
+#: 1b34ea4e9da4459cb510083ea1e8e5b5
+msgid "Taking Pictures Automatically during Missions with the Canon Hacker Development Kit"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:12
+#: a114b68dda134fdcafe5d92ce46d86d1
+msgid "Looking for an easy and inexpensive way to take high quality pictures during your missions? The Canon Hacker Development Kit (CHDK) allows you to turn a Canon point-and-shoot camera into a dynamic payload through some simple scripting. This tutorial will guide you through the process of implementing this solution for automatic camera control."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:18
+#: ece2896f380e4a209bf16f060e3706d7
+msgid "First we'll introduce CHDK: what you'll need to get started and tips for installing it. The first section will cover adding scripts, running scripts, and securing the camera to your fixed-wing plane. This straightforward method is great for basic automatic camera control."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:23
+#: 7c3b89a7cc894f99a1c36eb89bc34a8b
+msgid "Next we'll describe how to coordinate camera controls with autonomous missions by integrating CHDK with ArduPilot. Although more complex, this implementation provides excellent functionality for taking pictures automatically at waypoints. Finally, we'll show a fun application where you can map an area by creating a composite image of still photos."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:30
+#: 0a73de218c2d48c89bd592fa530d2a47
+msgid "Taking pictures automatically: What is CHDK?"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:32
+#: 1ee1fa62c3f849c7979c83f5a2cdbd5c
+msgid "`Canon Hacker Development Kit (CHDK) <http://chdk.wikia.com/wiki/CHDK>`__ is a free, experimental development tool that allows you to temporarily hack a Canon camera. With all the features of a DSLR unlocked to your control, a hacked camera is a smart payload that can read scripted functions such as shoot, zoom, and (importantly for later on) read the power applied to its USB port."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:39
+#: 6d8b73ded04b4d26ba17652d7b2a7fec
+msgid "To use CHDK, you will need:"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:41
+#: 53abd7002b534211bbbef3413e18ef1b
+msgid "**A supported Canon camera**"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:43
+#: 16c456ad4b4342aca6b26467cada5654
+msgid "CHDK is made possible by the ability of Canon point-and-shoot cameras to read software off an SD flash memory card. A team of developers has created Canon Hacker Development Kit to take advantage of this capability on *only certain Canon cameras*. For this tutorial, you will need one of the Canon point-and-shoot cameras listed on the `CHDK wiki <http://chdk.wikia.com/wiki/Template:Supported_Cameras>`__ as officially supported by CHDK."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:53
+#: 84e34ca52d1f4dddb5738e1ff576e486
+msgid "**An SD card**"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:55
+#: 9db25ea7706c458eb081e85aeb38ce44
+msgid "We recommend an SD card that can be written to every two seconds and can store the amount of pictures you plan to take during your mission. You'll also need an SD card reader for your computer."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:62
+#: 20951590bc2e4d7c8522d7436a07a55a
+msgid "**A CHDK USB cable**"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:64
+#: 2899bfe6a12d48c4a8854049dfca5cc8
+msgid "We use the gentWIRE USB with two channels, available `here <http://www.brooxes.com/newsite/BBKK/BBKK-PARTS.html>`__ (half way down page). This cable is necessary for integrating CHDK with ArduPilot and is not required to use the intervalometer script function."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:73
+#: a789397efa214ef9be7c1c855449a847
+msgid "Hacking your camera"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:75
+#: ee0474e0ddd24834a2a87d9e9772bfaf
+msgid "First you'll need to install CHDK onto your camera, so naturally, you'll need `STICK: Simple Tool for Installing CHDK <http://zenoshrdlu.com/stick/stick.html>`__ (available for Windows, Mac, and Linux). (You'll also need to have `Java <http://www.java.com/en/download/manual.jsp>`__ installed on your computer.)"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:81
+#: 6856f8526b9446afb6f759d564bdbc42
+msgid "Follow this link to the `STICK instructions page <http://zenoshrdlu.com/stick/stick.html>`__, click on “STICK zip file” under the **Downloading and Installing** section to download STICK. Once installed onto your computer, STICK is easy to use: take a picture with your camera, connect the SD card to your computer, and drag the picture into the STICK window. This nifty tool will download the appropriate CHDK build and prepare your SD card automatically. The `STICK instructions page <http://zenoshrdlu.com/stick/stick.html>`__ has some helpful tips for issues caused by certain operating systems."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:91
+#: 3d0f08b070ad4d88a661edddc3001f39
+msgid "Adding a script to the SD card"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:93
+#: 49562029b2b243e284e2ea2331a21e1c
+msgid "CHDK allows you to automate your camera's functionality by running scripts off an SD card. CHDK scripts can be written in both \\ `UBASIC <https://en.wikipedia.org/wiki/UBASIC>`__\\ and \\ `Lua <https://en.wikipedia.org/wiki/Lua_(programming_language)>`__: simple, easy-to-use programming languages. For this tutorial, we'll use UBASIC scripts with file extension **.bas**."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:101
+#: 6cc4d7989a644458b00bcec4fb568cd2
+msgid "UBASIC script files must carry the extension **.bas** to function."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:103
+#: a628673d02fd48c98024da94a6bc0fe2
+msgid "One of the easiest and most useful ways to apply CHDK to your mission is to take pictures automatically at intervals during flight. We'll do this by adding an `intervalometer <https://en.wikipedia.org/wiki/Intervalometer>`__ script to the SD card. Our friends at `Drone Mapper <https://dronemapper.com/>`__ have created a great CHDK intervalometer script that can be found in Drone Mapper's \\ `CHDK documentation <https://s3.amazonaws.com/DroneMapper_US/documentation/DroneMapper_CHDK.pdf>`__ or `viewed by clicking here <https://download.ardupilot.org/downloads/wiki/other_files/DM-Intervalometer.txt>`__. Copy the intervalometer script into a text editor and save the file as **DM_interval.bas**."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:111
+#: 8c2e5a14eb3446d5a6f5546388a340f1
+msgid "This script will measure time intervals for five minutes and trigger the camera shutter every two seconds. These default parameters work well for us (results in about 150 pictures), but if you would like to modify them (for example, to take a pictures every five seconds), see \\ `CHDK Wiki's page <http://chdk.wikia.com/wiki/CHDK_scripting>`__ regarding scripting parameters for UBASIC."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:117
+#: 8bb236530d504241aaf2999177e74dc4
+msgid "To load the script onto the camera, unlock your SD card (by sliding the switch on the slide of the SD card to the unlock position), connect it to your computer, and open the SD card's file structure. Select the **CHDK** folder followed by the **Scripts** folder. Copy the script file (**DM_interval.bas**) into the **Scripts** folder."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:124
+#: e3cf629f98bb45039c25abb815a77909
+msgid "3. Flying with your camera"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:126
+#: afb4f5e5b67940769ab1d8a7519f7aa9
+msgid "Before you're ready for takeoff, you'll need to pack the camera into your vehicle. For best results using plane, position the camera with the lens pointing down in the center of the plane. You may need to modify your plane's body to create a space for the camera. Be sure to set the plane's center of gravity with the camera in place, and keep in mind the safety of the camera in case of failure. Check out our setup for inspiration; we used velcro strips to secure the camera in place."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:138
+#: 3ce8ccea3ac4416f87d2523e4296b9a2
+msgid "Activating scripts before flight"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:140
+#: d1a89bd5c1004d938add3b92b451aecb
+msgid "Prior to launching your plane, it is necessary to activate the intervalometer script on the camera. Make sure the SD card is locked and loaded into the camera and the camera is turned on. When you're ready to launch your plane, enter ALT mode by pressing the **Print** or **Play** button on the camera (for more information consult the `CHDK wiki <http://chdk.wikia.com/wiki/CHDK>`__). Press the **Menu** button to access the main CHDK menu. Select **Load Script from File**; select \\ **DM_interval.bas**. Press the **shutter** button to run the script. (You can also use the shutter button to stop the script.) Once you start the script, the camera will automatically begin taking pictures after a delay of five seconds, so be sure to take that into account when launching your plane."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:153
+#: 58e2af19768144529ab28dbda4e9f3bf
+msgid "Integrating CHDK with ArduPilot"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:158
+#: aa894651e9024d4ca4ce8da532f6936d
+msgid "To integrate your CHDK setup with ArduPilot, you will need a CHDK cable (pictured across) that connects the autopilot's output signal pins with the camera's USB port. We used \\ `Gentles' gentWIRE-USB2 cable <http://gentles.ltd.uk/gentwire/usb.htm>`__. (Stay tuned for a 3DR CHDK cable.)"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:163
+#: 47e81fb5305b4723be7e5737f35c69f2
+msgid "CHDK cables work by translating pulse width modulation (PWM) output by the autopilot into USB power pulses that can be read by the camera. It does this by establishing a range of how long power is applied to the USB port (ex: 40-80 ms) and assigning that range to a PWM value corresponding to a channel switch position (ex: channel 1 middle). The table below shows the corresponding values between the switch position on the RC transmitter, the autopilot's PWM output, and the camera's USB power."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:172
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:566
+#: 320ce2b701244dc4b8b7e1326d08a03f
+#: 2cb643dbe161408681c87ba2d4bd9ccb
+msgid "Switch position"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:172
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:566
+#: a9c1fbe9100441638870edd8c503d31a
+#: 27c7fdd8e00c4aa0a9a291bfde764872
+msgid "PWM (µs)"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:172
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:566
+#: fed82ec8e9c148e5b8714e2c05ee0772
+#: c41fc2191b024fb3a9cdcab0b7ba43a6
+msgid "USB power (ms)"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:174
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:568
+#: cd7dfd875f0048ce88e22697e88c5c0b
+#: a585e9bc4cfe4b5ea4aeca52254f26a4
+msgid "Channel 1 up"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:174
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:180
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:572
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:578
+#: 774b159306754f6aa9e0667fa4431a28
+#: 65763ce0475843cd8e1f55145166af9d
+#: d69419da10a743a0b1d4780b02fa1480
+#: 931770a090d74bba9361903101604d5b
+msgid "1,900"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:174
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:568
+#: 5d791c00bd904ac7bc6d0491bd6116cf
+#: 0aaff44c409345c3b9413c2c31ffdd89
+msgid "<50"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:176
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:570
+#: e3cd17a052fa40d3884e935a6eadd997
+#: 23c8860c6ffd483f9427ee36b1a81abc
+msgid "Channel 1 mid"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:176
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:182
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:570
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:576
+#: 21475e52c05547f0b4cec3695b2a1f60
+#: 63ba5007cd50465394b970f1fe0d3d10
+#: 2e5da8983cfa4efbb7e0965e9b4e5376
+#: 005eee5b3dac442e91cafbb801069abe
+msgid "1,500"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:176
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:570
+#: 3184d32d2d39440fa97a701b6197691f
+#: b804c2ccec1a4f0b8ec531261ef5cccb
+msgid ">40 and <80"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:178
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:572
+#: f0da5a5ed8914b2bad638a5ef43981e5
+#: 785df45abb234c54a293ef19cfdc97ea
+msgid "Channel 1 down"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:178
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:184
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:568
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:574
+#: e2283852ebc54c73a71c8ff1a8352f5d
+#: b62f44d3f6e84df98330bcadc8e5a983
+#: 0b1814578d164690a04d09a75627be3b
+#: cc26654b00da49c09af20a17ee1f3a54
+msgid "1,100"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:178
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:572
+#: 5f3c26043ff6462d95d9a652ef282aef
+#: 5bd5cb0905904f659971fec740df659e
+msgid ">70 and <110"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:180
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:574
+#: d2d5da1598c24abe88713d485a8f9f6b
+#: a71c5c9b577e42e1bc814b894d198b2b
+msgid "Channel 2 up"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:180
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:574
+#: b165656af15f42a8ab49388b6856ecf5
+#: 8a9804308c8f48ab94dc586697da7039
+msgid ">100 and <140"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:182
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:576
+#: 396f62dd3bd64070885dff85ff2fddd5
+#: d12dec4d3b7b4cb38131751122ddcf9a
+msgid "Channel 2 mid"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:182
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:576
+#: f22da8f59dd248f09d4a6e1afef9b112
+#: b15c2154b08e4cf591a078b2d4594a86
+msgid ">130 and <170"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:184
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:578
+#: 5149eaa567e743aea593d587f2425b07
+#: 6a65741bfffe4c35aeccef729d1a4005
+msgid "Channel 2 down"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:184
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:578
+#: b64f6619cd594917a00dd4af9359fc36
+#: f89dfd0405e94112a7d6e33594e1a5da
+msgid ">160 and <120"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:187
+#: bbfe4e1abe4848b996cdbdeda90d4bd6
+msgid "Each switch position can be assigned to a script function. This means that you can script up to six different camera controls such as triggering the shutter and setting different levels of zoom. For this tutorial, we'll show you how to set up three functions using only the first channel, but this process can be followed to utilize the full six options if you choose to."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:195
+#: 54fed9ca6486466c9c297dcef669fbfe
+msgid "Configuring the CHDK cable for use with ArduPilot"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:197
+#: 6b971665435740f8ad0ce05073e52779
+msgid "First we need to select an RC channel to assign to CHDK's channel 1. Connect your plane's autopilot to Mission Planner. Go to **Configuration \\| Radio Calibration** to locate an available channel and its corresponding three-position switch on your RC transmitter. For this tutorial, we'll use channel 7. (If you decide to use a different channel, substitute your channel wherever we input channel 7.) Don't disconnect your autopilot yet."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:205
+#: c0c5a054138e4618a238d03e12ff13af
+msgid "Before we fly, we'll need to test the integration between this channel and the CHDK cable by manually changing the switch position and observing the result. In order to allow manual control of this channel, we need to change an important parameter in Mission Planner. Under **Configuration \\| Standard Parameters**, scroll about 4/5 of the way down to find the **Servo out function** parameters for each channel. Find the parameter that corresponds to your camera control channel. For us, it's **Servo out function (SERVO7_FUNCTION or RC7_FUNCTION)**."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:216
+#: b43ec01456934e39a8b3bb254790f85c
+msgid "Set this parameter to **Manual** whenever you want to control your camera using your RC transmitter; set to **Disabled** when you want the autopilot to control the camera automatically."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:220
+#: 64d12aebca8047fdb752879f34906817
+msgid "Since we're using the RC transmitter to test the CHDK cable, set **Servo out function** to **Manual**. Select **Write Params** before disconnecting your autopilot."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:224
+#: 8fd027cf4a204ac48418fd5f3eb6d4b7
+msgid "Once you've chosen your camera control channel, you'll need to connect your CHDK cable to the autopilot's output pins. Connect either of the pin connectors on the CHDK cable to the autopilot output pins corresponding to your camera control channel (black cable on the outside). For example, we connected our CHDK cable to the channel 7 output pins on the autopilot. Make sure no input pins are connected to the autopilot for that channel."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:231
+#: ec1588db798843999bc691bd210b5185
+msgid "For **Pixhawk**, connect the CHDK cable to aux out pin 5. However, this pin outputs only 3.3V, and 5V are required to trigger CHDK. To convert to 5V, you'll need to integrate a step-up converter (`like the one here from Sparkfun <https://www.sparkfun.com/products/10968>`__) in-line with the cable to trigger CHDK."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:237
+#: 7a35291dd32e4f67b3e3a801d1b5aab0
+msgid "Adding a script"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:239
+#: c4118538119c4426ae076eb553db5033
+msgid "Now that you've configured your CHDK cable, we'll add a script to control the camera when commanded by the autopilot. Let's break down a CHDK cable UBASIC script into its main parts."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:252
+#: 65814bef0c904447a6158589eba00351
+msgid "This section defines the parameters that will be used later by the functions. **@param** names the parameter with a variable and a phrase; **@default** specifies its value. These three parameters specify zoom levels, so if you wanted to change a zoom level, you could easily do so by entering a new value after the variable following **@default**."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:274
+#: 56b399c2430242ab8ec730182c556b71
+msgid "This is the main body of the script. It tells CHDK to read the power pulse from the USB port (**get_usb_power**) and, according to what range it falls under, execute a specific function. The values here are listed in centiseconds, which is why they differ from the table shown above (5 centiseconds = 50 milliseconds)."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:310
+#: be71223c0153418b9f6ca21a626c56bb
+msgid "This is where the script defines what each function will do. Since we aren't utilizing the channel 2 options, **ch2up**, **ch2mid**, and **ch2down** functions are empty. The **ch1up** function will set the zoom to the value specified by the variable **s** using the **set_zoom** command and take a picture using the **shoot** command. The **ch1mid** function uses **set_zoom** to set the lens to its stowed position, and the **ch1down** function fully extends the lens. The **print** command will output the specified text to the camera's display along with the actual output value of the USB power pulse (**k**)."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:320
+#: ce53a360cff44020b0a384ef7b2679e9
+msgid "In short, the above script will cause the following behaviors:"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:322
+#: 1a9a34e3c029483c80633c4c4b40f381
+msgid "When channel 7 is set to the up position, CHDK will set zoom to 10 and take a picture."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:325
+#: 10d764d794f8427b9d1e2d903adbfa3a
+msgid "When channel 7 is set to the mid position, CHDK will set zoom to 30 (stowed position)."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:328
+#: 5888a4651a014284aef6e7a591bf1bb8
+msgid "When channel 7 is set to the down position, CHDK will set zoom to 100 (extended position)."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:331
+#: 91a427ed1a104ca8bfa5cb6bbf225449
+msgid "`Click here to view the above script <https://download.ardupilot.org/downloads/wiki/other_files/3DR_Shoot.txt>`__, copy into a text editor, and save as \\ **3DR_Shoot.bas**. Now that you're familiar with how the script works, you can easily change the commands of each function. For example, you can add a **shoot** command to **ch1down** or change one of the zoom level parameters. If you're utilizing the channel two functions, you can easily add commands to those functions in the same format shown above."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:339
+#: f956290d2d68417a8eec134e2bf94e68
+msgid "Add the script file to the SD card as described in the previous section."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:342
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:622
+#: 0d3e4a35db8b43a89c09ea40dd5a2533
+#: ec7f9578f471491bbd26801abe528c14
+msgid "Testing the CHDK cable"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:344
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:624
+#: 6283e0f5af4a4361ab5ae0b5a101be6c
+#: d610bb6d0f7c4de3b8ce68ea932b7a7c
+msgid "Testing the CHDK cable will ensure that our camera controls execute as expected and is a great opportunity to test for potential noise created by your equipment setup."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:351
+#: 5a81f6376fcc4a66b3a858764241303d
+msgid "To tell CHDK to listen to the cable, we need to set the Enable Remote parameter. On the camera, access the CHDK menu, select **Remote Parameters,** and select **Enable Remote** as shown. This setting must be enabled to allow communication with the CHDK cable."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:356
+#: 333421034b654513a7e63524440404ef
+msgid "Connect the CHDK cable to the camera's USB port, and run \\ **3DR_Shoot.bas**. Test the result of each switch position. The resulting behaviors should reflect those listed in the previous step. Observe the USB pulse values output to the camera display, and compare them with the ranges show in the code. If you encounter problems, see the **Advanced Topics**\\ section below for additional testing and troubleshooting information."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:365
+#: b394afc005054f3e80f0d8c834211e06
+msgid "Programming camera controls in Mission Planner"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:367
+#: 281a6afff07e4f8b8e3641af6a185438
+msgid "Mission Planner allows you to program servo outputs as events at waypoints. By using this feature, we can add a command to output a PWM value (corresponding to a switch position and function) after the plane achieves each waypoint."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:372
+#: 9c53df32d9f444fab473fdacc04c0471
+msgid "Once you have your waypoints configured in Mission Planner as shown below, select your first waypoint and click “Add Below”."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:378
+#: d9d9fdd43af44db3a3809bfee640a1c6
+msgid "For your new command, set **Command** type to **DO_SET_SERVO**. (This tells the autopilot that this command means output to a servo.) Set **Ser No**\\ (servo number) to the number of your camera control channel (ex:**7**). (This tells the autopilot where to output: for us, servo channel 7 is the CHDK cable.) And set **PWM** to **1900**. (This value tells the autopilot what to output: 1,900 microseconds of pulse width modulation corresponds to the high position under which the shoot command is located). Repeat this process for each waypoint at which you would like to take a picture. The screen below shows a shutter command correctly applied at each of three waypoints."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:394
+#: 197cb95ed24848419a0263feb5b1c8a3
+msgid "Columns in the Waypoints table accrue different meanings based on the type of command currently selected. These column definitions only become visible when the command is selected as different parameters apply to different types of commands.*"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:399
+#: 72d896fb47d74eca9513841cf61422bf
+msgid "Since we're using the autopilot to control the camera, we need to set the \\ **Servo out function (RC7_FUNCTION or SERVO7_FUNCTION)** parameter to **Disabled** (under **Standard Parameters**). Write waypoints and parameters to the autopilot."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:404
+#: a2fe0a8c5d454a3c9894e56247fe6412
+msgid "Ensure that your camera and autopilot are connected correctly. Run \\ **3DR_Shoot.bas** prior to launch. Fly your mission according to standard practices and safety procedures."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:409
+#: 52efedb9c8da483e90f79629d818283e
+msgid "Creating a composite image"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:411
+#: ad18c339410a4a2bac1618d04d661dcc
+msgid "One of our favorite applications of CHDK is creating a map of an area by stitching automatically-captured pictures into a composite image. We'll use the same `3DR_Shoot.bas <https://download.ardupilot.org/downloads/wiki/other_files/3DR_Shoot.txt>`__\\ script that we used in the previous section. The process is similar to setting shutter triggers at waypoints, only to make sure we capture the entire area we need more frequent, more regular waypoints. We’ll do this automatically using Mission Planner’s **Grid V2** automatic waypoint function."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:422
+#: 8734c6100af04286b38b050a4b6a009a
+msgid "Setting waypoints with GridV2"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:424
+#: 0996abf71b3b4f1090a52289dcef77c6
+msgid "First locate the area you wish to map in Mission Planner. Right-click and select \\ **Draw Polygon\\| Add Polygon Point**. Add polygon points until you have created a polygon around the area you wish to map. Once you are satisfied with your polygon, right-click and select **Auto WP \\| GridV2** as shown below."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:433
+#: 4d36734b82ab4ff0ac4cf86d2f1496cc
+msgid "Input a relative altitude (100 feet is fine if you are unsure). Input a distance between lines; the larger the number, the fewer waypoints you’ll end up with. When prompted, enter a distance between each waypoint; the same rationale applies here. Enter line direction; the waypoints below show a line direction of 70. When prompted to add camera triggers, input “Yes”; *this will create a command after each waypoint, it will not automatically set up your CHDK commands*. We recommend experimenting with these settings until you find the waypoint configuration that is right for your mission. You should now have a grid of waypoints mapped onto your polygon as shown below."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:447
+#: f6b670e2624643fdb113c54aea0d073b
+msgid "Here is where we have to switch our automatic functionality for some manual labor. GridV2 has created a command after each waypoint with command type DO_DIGICAM_CONTROL. However, for our CHDK setup, we need command type **DO_SET_SERVO**. For each DO_DIGICAM_CONTROL command, change command type to \\ **DO_SET_SERVO**, set **Ser No** to **7** (or whichever channel you're using), and set **PWM** to **1,100** (to call the 3DR_Shoot.bas function that takes a picture)."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:455
+#: c0847357612d42ed809b4f81e8d70e73
+msgid "When run, this mission returns a set of images that can be stitched together to create a map of the selected polygon."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:459
+#: 1045ef1092c94665923097ecebf6dd67
+msgid "Stitching images"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:461
+#: 36beab1806474910b2cdde639d30f526
+msgid "`Microsoft Image Composite Editor (ICE) <http://research.microsoft.com/en-us/um/redmond/projects/ice/>`__ is a great, free tool for automatically stitching images together into a composite. Just upload your images, and ICE will stitch them together. Here's an example of one of our composites:"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:469
+#: a4b711679ce04c7da00e368f873892d1
+msgid "We hope this solution provides some enhanced functionality to your missions and expands your autonomous imaging capabilities. For more information, check out the Advanced Topics section below."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:474
+#: b4b226750d5d4a5c928295d1b8deb9fa
+msgid "Appendix"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:477
+#: 04df918d9f5b4aa2be51ff336eeb4080
+msgid "Camera Settings"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:479
+#: f8c9e23de2384efc84bcd68b0081b4b4
+msgid "The following settings will help ensure that you get the best results from your aerial imagery.  The picture settings should can be adjusted based on your environment, but the listed values are a good place to start. Both the Canon settings and CHDK settings will vary from camera to camera."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:485
+#: 48b2af94b2394303898260383e89a322
+msgid "CHDK settings have a tendency to be unintuitive and to reset themselves at random, so be sure to understand what each setting does and check to make sure they have not changed before you fly!"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:490
+#: cc999a1e427f4839a8b0efd3cf5aea8a
+msgid "Canon Settings"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:492
+#: 67da05195bf948a6bdbc7fae5ffe6a6c
+msgid "Flash: Off"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:493
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:528
+#: 38ffc823ceff4297aec5d586ae9e342d
+#: 8e96c28eccc747069bfd9783b9e9191e
+msgid "Function"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:495
+#: 179c4c06ada6445398638e33ce57cb11
+msgid "ISO: **Auto**"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:496
+#: 0238c63f0cab4d9a85a84e44def2ae58
+msgid "AWB: **Daylight**"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:497
+#: affdd0dea26c43f998431a7d6380795a
+msgid "Image Size: **L**"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:498
+#: e928240cdf154390a35f1001cadbd5e9
+msgid "Image Quality: **Fine/Superfine**"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:500
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:534
+#: 2377155227364b8d88410ef791fe0198
+#: b658d3ad469644d0ab7e08bfc5cac2f8
+msgid "Menu"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:502
+#: 818a8fd671f946cc98b32b06dfdb56b5
+msgid "AF Frame: **Center**"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:503
+#: 68cce191802845a6981dff8735d58f27
+msgid "Digital Zoom: **Off**"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:504
+#: 438aea616f474d97bc686db829f0583e
+msgid "AF-Point Zoom: **Off**"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:505
+#: 056f1090ada046ecb686aec4f29223cb
+msgid "Servo AF: **Off**"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:506
+#: 35a6b7d67cc846b599774703da560f1b
+msgid "AF assist beam: **Off**"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:507
+#: 879acf69fc274ceeaff794da5397859e
+msgid "Flash Settings"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:509
+#: 84edc11b26554bb6910e6b2add185ffa
+msgid "Red Eye correction: **Off**"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:510
+#: 50a1f1a480af4847ae6b6499a4155819
+msgid "Red-Eye Lamp: **Off**"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:512
+#: f1eb80f6f8b64055a3544b510e78e741
+msgid "Date Stamp: **Date & Time**"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:513
+#: e8a41d9a526949a298fb17eb8ebff30e
+msgid "Power Saving..."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:515
+#: f642147c377944d0b19bf311ba1518d0
+msgid "Auto Power Down: **Off**"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:516
+#: 2c3bd8affcbd407aaa5b8ee8aea184f1
+msgid "Display Off: **1 min**"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:518
+#: 64a788c3fe5b44f6a90de7f628413c19
+msgid "IS Settings..."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:520
+#: 1b074a54fe804229ad752346a0b9a053
+msgid "IS Mode: **Shoot Only**"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:521
+#: 9047d22c8c3f4e4ea5bf615e29ecfaba
+msgid "Powered IS: **Off**"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:523
+#: e7c62165679c4a3db6ef75a65c3b7f2a
+msgid "GPS: **On**"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:526
+#: c34425089be0405a882f9338364dc656
+msgid "CHDK Settings"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:530
+#: 1ba00f64d475470b8138f68922c25ad8
+msgid "Autostart: On"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:531
+#: 43d41d74cde64261aa9a3e623f78c7ea
+msgid "Save Params: ON"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:532
+#: 53dbe2e839f44a2f8b2206abfbbaf483
+msgid "Remote Parameters: Enable Remote"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:536
+#: 34833625071c48a1b4edd1a56619bc8e
+msgid "Extra Photo Operations..."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:538
+#: ddc8ca3058b74abc9179d856f2cca989
+msgid "Disable Overrides: **Disable**"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:539
+#: 296f28dcd7d14298b34d699cbcc4cf5b
+msgid "Override Shutter Speed: **1/1600**"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:540
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:542
+#: 2e7f06ff8578401cadcc86242d034a48
+#: c0c6c901926a43edabed5d7c42294acb
+msgid "Value Factor: **1**"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:541
+#: 93581ff60dd24629956ec63c2be9aa56
+msgid "Override Subj. Dist V: **65535**"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:543
+#: 3b37bf0c24f74124aa2286416a14f939
+msgid "Custom Auto ISO..."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:545
+#: 7a80e7a5419944abb1c4c5ba17627aaf
+msgid "Enable custom auto ISO"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:546
+#: 381e53cec0244393ba505bc66fec9911
+msgid "Minimal: **1/1000**"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:547
+#: 664209e49fb546d28eafb675461556eb
+msgid "Clear override values @start: Disable"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:550
+#: 12aeae755a104e32b79ed318b08c51e0
+msgid "Advanced Topics"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:553
+#: 24b66cabdf1e4e11965b7f8de78c5b3c
+msgid "CHDK Cable Troubleshooting and Testing"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:555
+#: 43e8bdb7ea7b4cbab29d5518dd087bf3
+msgid "CHDK cables work by translating pulse width modulation (PWM) output by the autopilot into USB power pulses that can be read by the camera. It does this by establishing a range of how long power is applied to the USB port (ex: 40-80 ms) and assigning that range to a PWM value corresponding to a channel switch position (ex: Channel middle).The table below shows the corresponding output values between the switch position on the RC transmitter, the autopilot's PWM output, and the camera's USB power. In practice, our Spektrum DX 8 outputs the values shown in the rightmost column."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:566
+#: 88a8b967ce11485e813b6028b0969c2b
+msgid "Spektrum DX8 USB power readings (ms)"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:568
+#: c2ef41da97e649c7b517ad879e7103bc
+msgid "30"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:570
+#: c79bcf0a9efa4a2bac9e05520c790834
+msgid "50 or 60"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:572
+#: c70a49e2972047ff85b447c746941f2e
+msgid "90"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:574
+#: f055777c631b4675bf307758c80d7788
+msgid "130"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:576
+#: f0d099055a1e470a942f0d06dd02c9a3
+msgid "150 or 160"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:578
+#: a791383654cc4cb0923cbef64b5b983b
+msgid "190"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:581
+#: af3fdf3bf6e544a391f8101bf06ec045
+msgid "To verify that your transmitter behaves similarly, you may want to perform a test to ensure that a valid USB power value is returned for each switch position. View the `3DR CHDK Tester script here <https://download.ardupilot.org/downloads/wiki/other_files/3DRCHDKTester.txt>`__. Copy the contents into a text editor and save as **3DRCHDKTester.bas**. Load into your (unlocked) SD card by copying the file into the **Scripts** folder (in the **CHDK** folder)."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:589
+#: 639e5eb4c1c4476bb87ce5eb78e5d9c4
+msgid "Configuring CHDK cable for Testing"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:591
+#: 268f858674104b818567bffc97f3552c
+msgid "Before we can test the CHDK cable, we'll need to choose a channel for camera control and configure the corresponding inputs. Connect your plane's autopilot to Mission Planner. Go to **Configuration \\| Radio Calibration** to locate an available channel and its corresponding switch on your RC transmitter. (We'll use channel 7.) Check the PWM outputs for the up, mid, and down positions of the channel. Compare them with the table shown above."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:599
+#: 5aaffe6a2a5140b68533d9a2ae93dd09
+msgid "Before we disconnect the autopilot, we need to change an important parameter that you'll be using often. Under **Configuration** -> **Standard Parameters**, scroll about 4/5 of the way down to find the **Servo out function** parameters for each channel. Find the parameter that corresponds to your camera control channel. For us, it's **Servo out function (SERVO7_FUNCTION or RC7_FUNCTION)**."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:606
+#: eb3571ac0ec54911af6d224ee4fd93d0
+msgid "***Set this parameter to Manual whenever you want to control your camera using your RC transmitter; set to Disabled when you want the autopilot to control the camera automatically.***"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:610
+#: 868b03b7609d4913a56639cf4ae2b614
+msgid "Since we're using the RC transmitter to test the CHDK cable, set **Servo out function** to **Manual**. Select Write Params before disconnecting your autopilot."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:614
+#: dc483f80902942f8aac80f5466823e4b
+msgid "Once you've chosen your camera control channel, you'll need to connect your CHDK cable to the autopilot's output pins. Connect either of the pin connectors on the CHDK cable to the autopilot output pins corresponding to your camera control channel (black cable on the outside). For example, we connected our CHDK cable to the channel 7 output pins on the autopilot. Make sure no input pins are connected for that channel."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:628
+#: 16f059b1520e48b18c89c2101ddd1a65
+msgid "Connect the CHDK cable to the camera's USB port. Turn the camera on, load the \\ **3DRCHDKTester.bas** script (by selecting **Load Script from File** from the main CHDK menu), and press the shutter button to run the test script."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:633
+#: 4f9b00d30af04f3eb004feca21675cb7
+msgid "To perform the test, set each camera control channel position on your RC transmitter and observe the outputs on the display. Verify that these outputs are within the acceptable USB power ranges in the table above. If you encounter problems, you may need to shield your cable to prevent noise."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:640
+#: 965a36e8b54742f5bf8f46a5ea016da8
+msgid "Shielding the cable"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:642
+#: 833a62fa381e4480aeb59e9e0d9b36c2
+msgid "Coming soon."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:645
+#: 39a84242fdb1473dbe33a8a57e16531e
+msgid "GeoTagging Images"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:647
+#: ea9bc7b410a445a6a6045d5904f30d87
+msgid "For information regarding geotagging images, more information can be found on `Sandro Beningo's step-by-step guide. <https://www.diydrones.com/profiles/blogs/geotagging-images-with-mission-planner>`__"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:651
+#: c84b6e9d8c8142459d9eed1fe03db1cc
+msgid "Troubleshooting"
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:653
+#: a383216139904f7fbe09b81864219ffb
+msgid "**Problem**: The tester script runs but does not display any output on the camera screen."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:656
+#: 3ea9af6f53a347e996127bc104d19e5b
+msgid "Cause 1: Do you have the parameter SERVOx_FUNCTION=1 ir RCx_FUNCTION=1 for manual override of the RC channel you are using? You can see both the PWM input and output on the **Configuration \\| Failsafes** screen in the Mission Planner."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:661
+#: 68871ec4646240da98c48a5aef21899f
+msgid "Cause 2: Is your output rail powered? Even if you are getting the correct PWM signal out on your camera control channel, the output needs 5V DC. You can power the output rail with a jumper on JP1 as shown, which bridges the input power to the output, or by directly running power to the output."
+msgstr ""
+
+#: ../../source/docs/common-chdk-camera-control-tutorial.rst:667
+#: 64b577027d774d4cb33bfd8011463ad0
+msgid "Cause 3: Do you have the remote enabled in CHDK? In the CHDK menus: Remote parameters > enable remote. Leave the other remote settings as is."
+msgstr ""

@@ -1,0 +1,1106 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/apms-failsafe-function.rst:5
+#: 28fd7007c8bc445b84a011dc6351dd5a
+msgid "Plane Failsafe Function"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:7
+#: 1e0059755b334800b97c844cfc429d67
+msgid "Plane has a limited failsafe function which is designed to do four things:"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:10
+#: 43ae19af56ea422d8b0aef82d41b8ae6
+msgid "Detects a RC Failsafe condition and then initiating a defined response, such as returning to home. Detection of an RC Failsafe is either a complete loss, or corruption, of RC signals, or the receiver sets a FS bit in its data stream for those protocols supporting it (SBUS, etc.), or that the throttle channel PWM value falls below a certain point set by :ref:`THR_FS_VALUE<THR_FS_VALUE>`. This RC failsafe must be enabled by setting :ref:`THR_FAILSAFE<THR_FAILSAFE>` = 1."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:11
+#: f8c9ee58a82f4f2dae007fcc8e48618a
+msgid "Optionally, detect loss of telemetry (GCS Failsafe) and take an programmable action, such as switching to return to launch (RTL) mode."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:13
+#: 1f523ba38d974183b2b35388b64cfde4
+msgid "Either of the above have two phases: Short Failsafe which occurs a programmable time after loss of RC or telemetry, which allows optionally circling to try to recover the signals, and if the loss persists longer, a Long Failsafe which determines what long term action is to be taken."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:15
+#: 192286e43fc549d4b1ee0b020cf41d15
+msgid "Detect loss of GPS for more than 20 seconds and switch into Dead Reckoning mode until GPS signal is regained. See https://youtu.be/0VMx2u8MlUU for a demo."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:16
+#: 79bd92cff2234ec5ae4157a2c06c28f9
+msgid "Optionally, detect low battery conditions (low voltage/remaining capacity) and initiate a programmable response, such as returning to home. ArduPilot supports this on multiple batteries."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:18
+#: 37854ea077fc48d0b5ccecaad3f54353
+msgid "Here's what the failsafe **will not do**:"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:20
+#: 5767221b087d4f8d8dabb19ce92ce44f
+msgid "Detect if one or more individual RC channel has failed or become disconnected"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:21
+#: ae8fb7420f5c4f68ab17108fad4ed9cf
+msgid "Detect if you're flying too far away or are about to hit the ground"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:22
+#: aa5a39f042d845f58d6456eab790fcf2
+msgid "Detect autopilot hardware failures, such as low-power brownouts or in-air reboots"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:23
+#: 0ca5349951ba4e1684fde0ad6016cd33
+msgid "Detect if the Plane software is not operating correctly"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:24
+#: 5eacc4d2663043c384ed8994ef38448a
+msgid "Detect other problems with the aircraft, such as motor failures"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:25
+#: 90edd31f7bf9436cadbb399064c19580
+msgid "Otherwise stop you from making setup or flight mistakes"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:28
+#: f9223ab24ce9480e82020d046cacb5e3
+msgid "See :ref:`advanced-failsafe-configuration` for extended failsafe configurations."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:32
+#: 9fd845f809c541888d9e3e84b04979b3
+msgid "RC Failsafe"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:37
+#: c9521f4d94294298aae241555a847f81
+msgid "Radio Signal Failure"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:39
+#: 0ffb25cab7c043a694ca4d60b7f8e785
+msgid "If the received signal is lost or the control information corrupted for greater than :ref:`RC_FS_TIMEOUT<RC_FS_TIMEOUT>` (default = 1 sec), or the receiver sets its \"failsafe bit\" in protocols which have this (like Sbus, FPort, etc.), or RC_OVERRIDES are lost if :ref:`using a GCS only <common-gcs-only-operation>` is being used, then an RC Failsafe condition occurs and the actions described in the :ref:`RC Failsafe Actions<fs_actions>` section below will be taken, if the :ref:`THR_FAILSAFE<THR_FAILSAFE>` parameter is 1."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:41
+#: be831d9ffe9f424cad8ef3ae348042e3
+msgid "by setting :ref:`RC_OPTIONS<RC_OPTIONS>` bit 2, you can force ArduPilot to ignore the \"failsafe\" bits in the protocol, and only initiate RC Failsafe due to missing or corrupted control information."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:44
+#: b2e4681a7cee4105ba1e63b9e1fd587a
+msgid "Throttle Failsafe"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:46
+#: 7ef4d6c4508d4a48a09bc140e84bc6b4
+msgid "In addition, if the throttle signal falls below a threshold set by :ref:`THR_FS_VALUE<THR_FS_VALUE>` and the :ref:`THR_FAILSAFE<THR_FAILSAFE>` is = 1, an RC Failsafe condition will be entered, a Ground Control Station text message (\"Throttle Failsafe On\") will be sent (to differentiate from a Radio Signal Failure Failsafe), and the actions described in the RC Failsafe Actions section below will be taken."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:49
+#: 91f4669ad9e44d8c871b85e02410a7e6
+msgid "Throttle Failsafe Setup"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:51
+#: 4c51d6984d564efdabfee62e2fa7f2b3
+msgid "Throttle Failsafe is not required. If you wish to have failsafe protection against RC signal loss, but not setup a throttle signal controlled failsafe, then set :ref:`THR_FS_VALUE<THR_FS_VALUE>` lower than the lowest RC throttle signal that can be sent to the autopilot from the receiver."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:53
+#: 34805ef4f9764e138f0adeb11538cbbe
+msgid "In order to activate the Throttle Failsafe, the throttle signal received by the autopilot must be below :ref:`THR_FS_VALUE<THR_FS_VALUE>`. Once setup, this can be controlled by the pilot to initiate Throttle failsafe intentionally (for testing, or instead of setting up an RTL position on the flight mode switch), or by having the receiver, itself, send that value when it loses RC signal."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:55
+#: 9792478d14dd4385a6d0a87c1c7a2f1c
+msgid "having the receiver send a pre-set failsafe throttle value upon signal loss is NOT recommended and can lead to issues if a battery level failsafe is setup in QuadPlanes. Setting the receiver to send \"no pulses\" is much preferred. However, some very old receivers will only send a low throttle level in failsafe, see the section below, :ref:`Old Receivers <old_RX>`."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:57
+#: 60ba930c409e40a2b1e74910212dac62
+msgid "The system must be setup such that the throttle channel's signal can go below :ref:`THR_FS_VALUE<THR_FS_VALUE>` (Default is 950), but still be above it for normal low throttle stick operation. Before doing the :ref:`RC Calibration<common-radio-control-calibration>` setup step which determines normal operating ranges for the throttle channel and others, make sure that the low throttle stick position on your transmitter is above :ref:`THR_FS_VALUE<THR_FS_VALUE>`. This can be done several ways:"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:59
+#: f9bb241a2a98433ca61bfbd788b4bbbf
+msgid "When you do the :ref:`RC Calibration <common-radio-control-calibration>` setup step, change the trim tab for the throttle channel to adjust its signal 40-50us above :ref:`THR_FS_VALUE<THR_FS_VALUE>` at low throttle stick. This will be the normal operating position. Lowering the trim tab and setting the :ref:`THR_FS_VALUE<THR_FS_VALUE>` to that value allows initiating a failsafe at low trim."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:60
+#: 7cbf1249896f4fb0ae356fe46b58ef26
+msgid "Setup a transmitter switch that you will use to force failsafe such that it forces the throttle channel signal, using a mix, to below :ref:`THR_FS_VALUE<THR_FS_VALUE>` when activated, allowing normal operation otherwise."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:65
+#: f1c94677aebd4285af0aac80292e8638
+msgid "RC Failsafe Operation"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:67
+#: de69758a616045759c2c32ec9fa2eba3
+msgid "When RC Failsafe is entered, all RC inputs (except throttle in the case of Throttle Failsafe), are ignored as the autopilot takes its failsafe actions."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:68
+#: f6e8366697d7445b892305a597f494a6
+msgid "First, the autopilot will go into Short Failsafe when it detects RC Failsafe for more than 0.5 seconds."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:69
+#: 2e6280991fe3423ab830b0b38b8db247
+msgid "A message will be displayed on your Ground Control Station(GCS), or OSD, if its message panel is enabled, that a Short Failsafe is active, and the autopilot will take the :ref:`FS_SHORT_ACTN<FS_SHORT_ACTN>`, if enabled.  The default is CIRCLE mode. This is intended to possibly allow the vehicle's changing orientation to re-acquire the signal, but other actions can be assigned. See :ref:`FS_SHORT_ACTN parameter below <failsafe-parameters>` for how each mode responds to the selected action value."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:70
+#: 1e73104fe65040de9f4fbbc112e7ca2d
+msgid "If the condition causing the Short Failsafe is removed, the vehicle will return to the previous mode, and a message will be displayed that Short Failsafe is cleared. If it was a Throttle Failsafe that caused the RC Failsafe, and throttle was increased in order to exit, then an additional message will be sent stating that the Throttle Failsafe is OFF."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:71
+#: 43612fc5fb6749268574447ab6b1428e
+msgid "If the condition causing the Short Failsafe persists longer than :ref:`FS_LONG_TIMEOUT<FS_LONG_TIMEOUT>` seconds the autopilot will go into Long Failsafe, send a message to the GCS that it has been entered, and execute the :ref:`FS_LONG_ACTN<FS_LONG_ACTN>` action, if enabled. The default setting for Long Failsafe action to take is RTL (Return to Launch). See :ref:`FS_LONG_ACTN parameter below <failsafe-parameters>` for how each mode responds to the selected action value."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:72
+#: 02be598ef948409f82d4f0de358124b4
+msgid "If the RC Failsafe condition is later exited, a message will be displayed that the Long Failsafe is cleared, but the flight mode will not revert. If it was a Throttle Failsafe that caused the RC Failsafe, and throttle was increased in order to exit, then an additional message will be sent stating that the Throttle Failsafe is OFF."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:74
+#: 1bef52a42f8d4104817176603c1f490b
+msgid "The action set by :ref:`FS_LONG_ACTN<FS_LONG_ACTN>` will continue even if your RC signal is reacquired, if the flight mode is the same as it was before the failsafe action began. Once RC signal is reacquired, the :ref:`FS_LONG_ACTN<FS_LONG_ACTN>` can be exited via a mode change on the :ref:`FLTMODE_CH<FLTMODE_CH>`. If the mode on the RC transmitter was changed during the failsafe period, then this changed mode is entered after the RC signal is restored. In addition, other failsafes, such as battery failsafe, can also change the mode, if they occur subsequently to the RC signal loss."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:77
+#: be318295aab545e896dddd5383eeca97
+msgid "Bench Testing RC Failsafe"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:79
+#: fb2b8025255f427ea89662a99ba33827
+msgid "Power up the system and verify that you are seeing RC control in the Mission Planner SETUP->Mandatory Hardware->Radio Calibration tab and in a non-auto mode (Manual, Stabilize, FBW are ok). Check that normal throttle movements to idle do NOT trigger a failsafe and normal control stick movements are observed"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:80
+#: 738e368310ad4befb4fd24c3b70cd6c5
+msgid "Switch to Mission Planners DATA View tab. Turn off the transmitter. You should see the flight mode switch to :ref:`FS_SHORT_ACTN<FS_SHORT_ACTN>`. After :ref:`FS_LONG_TIMEOUT<FS_LONG_TIMEOUT>` sec, if enabled, the flight mode should then switch to :ref:`FS_LONG_ACTN<FS_LONG_ACTN>`. Turn the transmitter back on and change flight modes. The Long Failsafe flight mode should change to the selected mode."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:81
+#: 39f45cf809b346c7a1cf277e1822478b
+msgid "If Throttle Failsafe is setup (ie via trim tab or transmitter switch). Check that it operates correctly by activating it and watching for Short and Long Failsafes to occur."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:83
+#: e5a80cd196a044c4ad3be29f2a33002c
+msgid "If you observe this behavior, your RC Failsafe function has been set up correctly. If not, recheck that the parameters above have been set correctly."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:88
+#: 5c664595d06d46a099b2eca312a415b4
+msgid "Older Receivers"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:90
+#: 1ef8dd4615b34a54a24770cf3b83289c
+msgid "Some very old RC receivers cannot be set to send \"no pulses\" when losing RC signal and simple hold the ROLL/PITCH/YAW RC channels at their last value and set the throttle channel to its minimum PWM value (low throttle). For those, the only way to setup an RC failsafe is to set the :ref:`THR_FS_VALUE<THR_FS_VALUE>` to slightly above that value and use the transmitters trim tab to raise the idle stick value 40-50us above that for normal operation."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:92
+#: a5c05baebeaa4cf58467986b35be17bc
+msgid "be sure to do :ref:`ESC calibration<common-esc-calibration>` after you have setup the failsafes and throttle ranges."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:94
+#: 99ec86e340cc4f2ca5213ddb125dbebd
+msgid "**Transmitter Tutorials:**"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:96
+#: 3c94e1d34bd5402bb4d61dc00f37b09b
+msgid "`Spektrum Setup <https://diydrones.com/profiles/blogs/spektrum-dx8-and-ar8000-failsafe-setup>`__"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:100
+#: f01a7e2be1f64b3e9d10fc1c38321c61
+msgid "GCS Failsafe"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:102
+#: e1fc4675d68e4374ab799e720ca88265
+msgid "**How it works.** When flying while using telemetry on the GCS, the autopilot can be programmed to trigger into failsafe mode if it loses telemetry from its primary GCS (set by :ref:`MAV_GCS_SYSID <MAV_GCS_SYSID>`). In the event that the autopilot stops receiving MAVlink (telemetry protocol) heartbeat messages from it, :ref:`FS_LONG_ACTN<FS_LONG_ACTN>` applies just as in the case of a long Throttle Failsafe. See :ref:`FS_LONG_ACTN parameter below <failsafe-parameters>` for how each mode responds to the selected action value."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:107
+#: de7e76847ea84948aacc37cb1f965269
+msgid "**Setup.**"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:109
+#: cb3483d919b04059a39b33ee877c6021
+msgid "Set :ref:`FS_GCS_ENABL<FS_GCS_ENABL>` to 1 to enable it."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:110
+#: 3548dd9166224538bcf37e147e97ac37
+msgid "Connect to the Mission Planner via telemetry. Verify on the bottom right corner of the HUD that you are armed and “flying” in a non auto mode (Manual, Stabilize, FBW are ok). Be sure you have the GCS connected or failsafe will occur immediately, possibly starting the motors!"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:113
+#: 1006b83ddfc741f0bc2e3d11604d94ac
+msgid "Unplug the telemetry radio getting telemetry from the primary GCS. After a few minutes power off your autopilot. (Remember the autopilot will not go fully into failsafe until :ref:`FS_LONG_TIMEOUT<FS_LONG_TIMEOUT>` seconds of MAVLink inactivity have passed)."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:116
+#: d3ef004d14344c088ef28a09df1a9aa5
+msgid "Connect your autopilot to the mission planner and pull the logs. Verify on the log that the autopilot went into RTL after :ref:`FS_LONG_TIMEOUT<FS_LONG_TIMEOUT>` sec of MAVLink inactivity."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:120
+#: bc94a65a55c14ed3a066cda9accd8ea6
+msgid "Configuring for Ground Control Station Control beyond RC range"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:122
+#: a6b775c2e76f40318941968f039d4c74
+msgid "If the telemetry range exceeds the RC transmitter range, then it may be desired to prevent loss of RC signal from initiating a failsafe. Reliance on the above GCS failsafe would be then be used to provide failsafe protection. In order to prevent the RC system from interfering with GCS operation, set :ref:`THR_FAILSAFE<THR_FAILSAFE>` = 2. This prevents the RC failsafe action from being taken, but still detects the failsafe condition and ignores the RC inputs, preventing possible interference to Ground Control Station control of the vehicle. Control via the RC system can be resumed once back into its range."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:125
+#: 7f4e76a593954b1ab5cf5aff6b7758c3
+msgid "Configuring for valid RC outputs while in RC Failsafe"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:127
+#: 6d792e15b7644ff78ac84c75981aed3c
+msgid "Normally, the RC channels are ignored when in RC Failsafe (except the throttle channel, but for failsafe detection exit only). Sometimes it is desirable to allow the preset signal loss values( for receivers capable of this ), to be used in the event of an RC failsafe. For example, parachute activation, or other controls via RC passthrough (see :ref:`common-auxiliary-functions`) could be desired when in RC failsafe. For receivers with this capability and which use a FS data bit, setting :ref:`RC_OPTIONS<RC_OPTIONS>` bit 2 to \"1\", can accomplish this. In this case, the FS bit is ignored. Upon RC signal loss the receiver would go to its pre-set channel outputs values, but a failsafe action would not be taken by ArduPilot, since the receiver is still outputting valid data as far as ArduPilot can detect. The fixed RC channel values would processed as normal by ArduPilot."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:130
+#: 62acd193825141c0961d47612842193a
+msgid "In this setup, it is usually necessary to make sure that the flight mode channel will force an RTL or AUTO mission to return the vehicle when the receiver loses RC signal, since no failsafe action will be taken, otherwise. The values of the flight control channels for Roll, Pitch, Yaw and Throttle need to be appropriately set also (usually neutral positions)."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:132
+#: 5680f50243f8414b8e7485baf94bb6f5
+msgid "Since the autopilot cannot know if the RC link is lost in this configuration, it is possible to get into dangerous situations, especially with QuadPlanes. For example, you are low on battery and far away, and the battery failsafe is active and attempting a VTOL land to prevent a crash. As it drops out of RC range, it will switch to the RC failsafe mode set in the receiver, and attempt to execute that, canceling the battery failsafe action, and ultimately resulting in a crash."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:137
+#: d3c4d9737e70499f94fe8e933847b4c0
+msgid "Battery Failsafe"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:141
+#: bfcdcb5419554b5eb2d32d30b0750e9e
+msgid "This failsafe requires the vehicle have a working :ref:`Power Module <common-powermodule-landingpage>`."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:143
+#: 24c77ebff3ee4c998167ba5bd547260f
+msgid "ArduPilot supports up to 10 batteries/power monitors. All the  discussion below applies to those optional batteries also. Each can trigger a failsafe and each can have different actions and setup values. In addition, a group of batteries can be treated as a single unit, see ``BATTx_MONITOR`` = 10."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:145
+#: 376b4fea7f434c3094060930a89ed4b7
+msgid "the battery low failsafe voltage must be higher than the battery critical failsafe voltage or a pre-arm error will occur."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:149
+#: e9871b0855034800856afaddbdc99939
+msgid "When the failsafe will trigger"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:151
+#: 823f4d2f2bd4447db4487c117e4d5d6e
+msgid "If enabled and set-up correctly the battery failsafe will trigger if the main battery's"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:153
+#: 690cb6de6cef4f8a827d1387459b6d7a
+msgid "voltage drops below the voltage held in the :ref:`BATT_LOW_VOLT <BATT_LOW_VOLT>` parameter (or FS_BATT_VOLTAGE in older versions) for more than 10 seconds. If set to zero (the Plane default value) the voltage based trigger will be disabled."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:154
+#: c475177b95c042c090e2feedfc2ccade
+msgid "remaining capacity falls below the :ref:`BATT_LOW_MAH <BATT_LOW_MAH>` parameter (or FS_BATT_MAH in older versions) 20% of the battery's full capacity is a good choice (i.e. \"1000\" for a 5000mAh battery).  If set to zero the capacity based trigger will be disabled (i.e. only voltage will be used)"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:157
+#: 6069f5a8f2424e8f99aa6bfc601b3f64
+msgid "What will happen"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:159
+#: a856cb8ea81c45979a8d41d6ddee2e7d
+msgid "When the failsafe is triggered:"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:161
+#: da9729479b754150aa8075977bf302bf
+msgid "Buzzer will play a loud low-battery alarm"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:162
+#: 99aae927e31241258761e482db1161ea
+msgid "LEDs will flash yellow"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:163
+#: 1016b29e553a4f148d8054f08f4e8936
+msgid "A warning message will be displayed on the ground station's HUD (if telemetry is connected)"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:164
+#: 87ff4ea5182648b7a427a86ae295e54f
+msgid ":ref:`BATT_FS_LOW_ACT<BATT_FS_LOW_ACT>`  will be executed"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:167
+#: 888bd88e5a554eafa233dcc428a1756e
+msgid "Two-Stage Battery Failsafe"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:169
+#: 35010803d5f04b909bc2595b07f64984
+msgid "Plane includes a two-layer battery failsafe.  This allows setting up a follow-up action if the battery voltage or remaining capacity falls below an even lower threshold."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:171
+#: 87a49ad365234ffeae0ee27d25825c4d
+msgid ":ref:`BATT_CRT_VOLT <BATT_CRT_VOLT>` - holds the secondary (lower) voltage threshold.  Set to zero to disable. Default is zero."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:172
+#: 9e522cbcdb884585867e335439545b48
+msgid ":ref:`BATT_CRT_MAH <BATT_CRT_MAH>` - holds the secondary (lower) capacity threshold.  Set to zero to disable. Default is zero."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:173
+#: 1dae6a9dd23d41b9aace034350ea9534
+msgid ":ref:`BATT_FS_CRT_ACT <BATT_FS_CRT_ACT>` - holds the secondary action to take.  A reasonable setup would be to have :ref:`BATT_FS_LOW_ACT <BATT_FS_LOW_ACT>` = 1 (RTL) and :ref:`BATT_FS_CRT_ACT <BATT_FS_CRT_ACT>` = 2 (Land)"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:176
+#: 275bfda4711e49c18f037e036f7f8029
+msgid "Advanced Battery Failsafe Settings"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:178
+#: 0cd708d72b7c40d997adb4d34fe4ba72
+msgid ":ref:`BATT_FS_VOLTSRC <BATT_FS_VOLTSRC>` allows configuring whether the raw battery voltage or a sag corrected voltage is used"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:179
+#: 521094153bbe4f23a3d2abf12fd72c60
+msgid ":ref:`BATT_LOW_TIMER <BATT_LOW_TIMER>` can configure how long the voltage must be below the threshold for the failsafe to trigger"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:180
+#: ad517fae24124dc6a6f2d37c34149505
+msgid "``BATTx_`` parameters can be setup to trigger the failsafe on other batteries"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:183
+#: 6966109e86ee4604a989405596e62bbd
+msgid "Battery Failsafe Actions"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:185
+#: 646d6cd7006944a799699b7b92f55236
+msgid "The following is a description of the actions that can be taken for battery failsafes:"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:188
+#: 7b2530209d484f7e815a36a3098e71df
+msgid "Value"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:188
+#: 578ad85bade74702af26a5975f374e1b
+msgid "Action"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:188
+#: bec29c7f10ca4731bc0b50895862eefc
+msgid "Description"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:190
+#: 00672b2293cb476d8c470e489f218db9
+msgid "0"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:190
+#: 538f43bc13244b6588d9136228d816b7
+msgid "Warn Only"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:190
+#: 7075ded4ff8e49bd899cc94e6d53c92e
+msgid "Do nothing except warn"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:192
+#: a3e3b2a8bed84005afe0e538b44fe22e
+msgid "1"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:192
+#: ../../source/docs/apms-failsafe-function.rst:221
+#: ../../source/docs/apms-failsafe-function.rst:337
+#: ../../source/docs/apms-failsafe-function.rst:415
+#: e525bbf8aa3a4242812a0095c09d591a
+#: 7d5bab67b43d40c0b644c4fb4c8902d0
+#: 13548d59bbe54a45baf4f5d93e8798b9
+#: 624f52409d7d42ce99057f804bff252d
+msgid "RTL"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:192
+#: e3ac7b7d949f4df798d9f589288758ac
+msgid "Switch to :ref:`RTL<rtl-mode>` mode"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:194
+#: 7335b4ee312840f394b247d76508bf1e
+msgid "2"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:194
+#: e2da2b65bef84e529bffd236737da014
+msgid "Land"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:194
+#: 1d45f92bb378455c835aebd894ba5a37
+msgid "Switch to AUTO mode and execute nearest DO_LAND sequence, if in mission"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:196
+#: 5f74bc5add6940ca9e398f611b4b2cc8
+msgid "3"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:196
+#: 3e9aa242dfb047df93df3462be0013f0
+msgid "Terminate"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:196
+#: 43e353bc74354b54bf78577bb82190d5
+msgid "Disarm"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:198
+#: e1355b97eb1b438ab52aa482d7fcfd4a
+msgid "4"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:198
+#: ../../source/docs/apms-failsafe-function.rst:224
+#: ../../source/docs/apms-failsafe-function.rst:339
+#: 638235526fcf4ddfb95f8e43e48ecd0b
+#: e5572fe6574444f8bd5d19b624b5239d
+#: 6327bbfc922341568ca0904c3a793f39
+msgid "QLAND"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:198
+#: df1030983f4c4f0eab1d3a9d61c5b0c7
+msgid "If QuadPlane, switch to :ref:`qland-mode`, otherwise do nothing"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:200
+#: 3cee275dc03f46c983c52cbd11d66922
+msgid "5"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:200
+#: 6fba174227b24f519ccaf9754a67be89
+msgid "Parachute"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:200
+#: 37932b935c374b638489c11b1ac3a7c4
+msgid "Trigger Parachute (Critical action only)"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:202
+#: cf850dfbf0cd4cd4b118c5816ab8152f
+msgid "6"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:202
+#: b19e8ef3be27469bbc50fcd030ba935b
+msgid "LOITER_TO_QLAND"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:202
+#: c89dcf8875304bb09d40e6d8c11ba32a
+msgid "If QuadPlane, switch to LOITER_TO_QLAND mode, otherwise do nothing"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:205
+#: fc3b134797cb427aad78e30b7cd468c0
+msgid "7"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:205
+#: 01ae0d25e59348e3a3fe91f431bf0c9c
+msgid "AUTOLAND or RTL"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:205
+#: fbd4a4aaee314b949fcc23d5d3a23d1f
+msgid "If Fixed Wing, switch to AUTOLAND if available (see :ref:`mode_autoland`. If unavailable or QuadPlane switch to RTL"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:212
+#: 332036a1fd7f4cb191222284ff8e5ec8
+msgid "Failsafe Parameters and their Meanings"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:215
+#: 53340379af864aeaa52d2481b5bb95d0
+msgid "Short failsafe action (:ref:`FS_SHORT_ACTN<FS_SHORT_ACTN>` )"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:216
+#: 3cc8d8ee44a64859b930c072827067d4
+msgid "The action to immediately take on a RC failsafe event ."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:218
+#: 6140a4faf8644c9ba4ddfccb6aa48f34
+msgid "No Action is ever taken for Short FailSafe in these modes:"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:220
+#: ../../source/docs/apms-failsafe-function.rst:290
+#: ../../source/docs/apms-failsafe-function.rst:375
+#: ../../source/docs/apms-failsafe-function.rst:409
+#: ../../source/docs/apms-failsafe-function.rst:443
+#: 6199d6fa0fca44bb891b3b04492c8622
+#: e614f61925fc467596cbea248581fb42
+#: 50e7b3d2fd244524bc32b5c5e3e05614
+#: 3323c1a800854bb6aa77043e8321300f
+#: b2db079698da44a68ddd2398bd4d3f67
+msgid "CIRCLE"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:222
+#: ../../source/docs/apms-failsafe-function.rst:377
+#: ../../source/docs/apms-failsafe-function.rst:411
+#: ../../source/docs/apms-failsafe-function.rst:445
+#: 3a44f948278146c58b9ad45b58bd6729
+#: e512bb6b80ed4a3e8a2a4181f38e0094
+#: a02328c380cc45c39a2babda868a049f
+#: 935fc410d17d428199e9d161481a54c3
+msgid "TAKEOFF"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:223
+#: ../../source/docs/apms-failsafe-function.rst:338
+#: 987682a1d5474672b2ee0ec1faa29789
+#: 49b6e187d5b24ff191d7e176bed3cba2
+msgid "QRTL"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:225
+#: ../../source/docs/apms-failsafe-function.rst:340
+#: 897dec3077e84e70b10ec25f3c90167e
+#: bb5598c782074dca8a89f3d405e6216a
+msgid "LOITER to Alt and QLAND"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:227
+#: 0ff191a12edf44618c1b015d1edfdedb
+msgid ":ref:`FS_SHORT_ACTN<FS_SHORT_ACTN>` = 3 disables taking action in ANY mode"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:229
+#: d185428baf8e4dbca9efeab9fb19d060
+msgid "if in AutoLanding in AUTO or AUTOLAND, it will always continue to the landing"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:231
+#: e7556e5c8cae4d989b7d36504428c875
+msgid "In QuadPlanes, Short FailSafe will force QLAND by default, RTL if bit 20 of :ref:`Q_OPTIONS<Q_OPTIONS>` is set, or QRTL if bit 5 of :ref:`Q_OPTIONS<Q_OPTIONS>` is set, if entered from these modes:"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:233
+#: ../../source/docs/apms-failsafe-function.rst:344
+#: bc134eb67bde4453bf7938e6e42a50d3
+#: 6b9b62dcf6ce46ab951c243c024e736e
+msgid "QSTABILIZE"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:234
+#: ../../source/docs/apms-failsafe-function.rst:345
+#: 7125a22640194eaabe74e0ea42f01fd2
+#: 753fc2b7112b42fd8f7bd02e750d62c4
+msgid "QHOVER"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:235
+#: ../../source/docs/apms-failsafe-function.rst:346
+#: dab74d33cb044b3cba075c2a9376a53e
+#: bb8abec2269346c6bb1f5beca7513a32
+msgid "QLOITER"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:236
+#: ../../source/docs/apms-failsafe-function.rst:347
+#: a3345ddfdc2b49bf855aaabce65c111e
+#: ca360b53ed3444da9d62470914bcc716
+msgid "QACRO"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:237
+#: ../../source/docs/apms-failsafe-function.rst:348
+#: f3b417dec444400ca6210d5580a9f827
+#: 2b6e01328d8349b78c901dc80019d2a5
+msgid "QAUTOTUNE"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:239
+#: ../../source/docs/apms-failsafe-function.rst:350
+#: c5951e805e2b485898b225b164bfbd9c
+#: 8dd47a66178840fa964ab4578b5a0f88
+msgid "Otherwise:"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:242
+#: ../../source/docs/apms-failsafe-function.rst:272
+#: ../../source/docs/apms-failsafe-function.rst:302
+#: bd6548ab3970460891b5d262ade5348a
+#: 6cc79ff59f4d4f0eb1af74e7e64adb09
+#: c1332c7077734152b0b1f76f34c54d1a
+msgid "FS_SHORT_ACTN"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:242
+#: ../../source/docs/apms-failsafe-function.rst:272
+#: ../../source/docs/apms-failsafe-function.rst:302
+#: ../../source/docs/apms-failsafe-function.rst:353
+#: ../../source/docs/apms-failsafe-function.rst:387
+#: ../../source/docs/apms-failsafe-function.rst:421
+#: 98cf562415574391be7b77030565b1b5
+#: 01759ef633bd4f9985d7d50998b8334d
+#: 60147b29a6f04748aa9b9561856b6da0
+#: 0b0bb2447fcc4b9083a0058e6fcc0316
+#: ed6e95bad5af4d93a227197e8a42745b
+#: 2468b2036ee2463fadc0a07d227ea5fa
+msgid "Mode"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:242
+#: ../../source/docs/apms-failsafe-function.rst:272
+#: ../../source/docs/apms-failsafe-function.rst:302
+#: ../../source/docs/apms-failsafe-function.rst:353
+#: ../../source/docs/apms-failsafe-function.rst:387
+#: ../../source/docs/apms-failsafe-function.rst:421
+#: 24de15f42a28443091be75d008a165e3
+#: b3ce250d68a04e63886e1c058de45581
+#: 97f90243f7e34303982bdebaf9ac221f
+#: 0d47f4fd631f4fe0942db38f6fb92e95
+#: ef02a2f25acd4c07bb521ea48b0d21df
+#: 78c9ce1ae34f48caa723f8577909ecb2
+msgid "Action Taken"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:244
+#: ../../source/docs/apms-failsafe-function.rst:355
+#: 637cee911495449e8a31f1694d45900d
+#: b6b71e0c2ecd43b6a0b779a7b64132ff
+msgid "0 - CONTINUE if in"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:245
+#: de8e271df0264b758e684f3322528036
+msgid "AUTO, or CIRCLE"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:244
+#: ../../source/docs/apms-failsafe-function.rst:274
+#: ../../source/docs/apms-failsafe-function.rst:304
+#: ../../source/docs/apms-failsafe-function.rst:355
+#: ../../source/docs/apms-failsafe-function.rst:389
+#: ../../source/docs/apms-failsafe-function.rst:423
+#: 18e1cb90d14c41029f2f8fa19d11c7e3
+#: f79d8ca68d174555bae3aeada4a5ea16
+#: 2382cbdb1b014066a629894ff83c7bf2
+#: 3c8789ec5e3147f3903b3b08414a0b4d
+#: 90f04a21757042e694b8e153754fdc52
+#: b04cd6fc01ec4a48be3276e7e707bf77
+msgid "MANUAL"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:244
+#: ../../source/docs/apms-failsafe-function.rst:274
+#: d9d6845c9f4a4bd49aa23b3242321c2f
+#: 81a38fc0cab54468ac27fb4514c4551b
+msgid "CIRCLE unless"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:245
+#: ../../source/docs/apms-failsafe-function.rst:275
+#: c1b707b47b81478e96e71a63adb5d509
+#: 054faf8d04614b43bb445c23217cb2cd
+msgid "emergency landing switch is active, then FBWA"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:246
+#: ../../source/docs/apms-failsafe-function.rst:276
+#: ../../source/docs/apms-failsafe-function.rst:306
+#: ../../source/docs/apms-failsafe-function.rst:357
+#: ../../source/docs/apms-failsafe-function.rst:391
+#: ../../source/docs/apms-failsafe-function.rst:425
+#: b847cf0def3c418db162ebdae00ea54a
+#: 7ae2e7aee8ec4be1a00ee29004b81035
+#: 6c189afdd3334bf6bd7a0c879a4eef96
+#: e90661b6a4f9443a85c04437574c5687
+#: 612fe60dae4f439d9caa0794e544ba89
+#: c566b78e21e8441f8d045d68bf1d11f7
+msgid "ACRO"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:248
+#: ../../source/docs/apms-failsafe-function.rst:278
+#: ../../source/docs/apms-failsafe-function.rst:308
+#: ../../source/docs/apms-failsafe-function.rst:359
+#: ../../source/docs/apms-failsafe-function.rst:393
+#: ../../source/docs/apms-failsafe-function.rst:427
+#: 6d20eee091174466ad9c7840a7c701e5
+#: 60909f8533aa4fd9800cb3fa14abb7a1
+#: a8cb676f3a134de4a314993cbd075946
+#: 8140d94f3e5b41d38fa6c08d35d3095a
+#: defe3b0633da48cfbb0fee9de4d9be8f
+#: b06535fb9d3d4e56ad00fcfb10104034
+msgid "STABILIZE"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:250
+#: ../../source/docs/apms-failsafe-function.rst:280
+#: ../../source/docs/apms-failsafe-function.rst:310
+#: ../../source/docs/apms-failsafe-function.rst:361
+#: ../../source/docs/apms-failsafe-function.rst:395
+#: ../../source/docs/apms-failsafe-function.rst:429
+#: cf42d91e9ad746f98466e0891a45a9ba
+#: da84538d6c8a479b815c998437eef029
+#: 93239ca7ce8b4fdb98a777de582ab478
+#: 70afd25c671b4750930fa7e69ca127a0
+#: 59c5d6544b0946e28ea36c32768851c9
+#: 82560c5418bf4a8fb940afdbc9579837
+msgid "FBWA"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:252
+#: ../../source/docs/apms-failsafe-function.rst:282
+#: ../../source/docs/apms-failsafe-function.rst:312
+#: ../../source/docs/apms-failsafe-function.rst:363
+#: ../../source/docs/apms-failsafe-function.rst:397
+#: ../../source/docs/apms-failsafe-function.rst:431
+#: f37aa3d45dae4d6baf101adfa6ff5b9c
+#: 1a2fb225c7864443894ab82ec511c25c
+#: ca2f9580df104376871118b03258e354
+#: f2080d62107546abae7d3e85ddb7f52a
+#: 44e462469579401dbe98d1005e639ff1
+#: 0278a0c2c1894917a8b5bfe47a68b10e
+msgid "FBWB"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:254
+#: ../../source/docs/apms-failsafe-function.rst:284
+#: ../../source/docs/apms-failsafe-function.rst:314
+#: ../../source/docs/apms-failsafe-function.rst:365
+#: ../../source/docs/apms-failsafe-function.rst:399
+#: ../../source/docs/apms-failsafe-function.rst:433
+#: 641bb0b82cff416a8780d0e332dc672d
+#: 8eec5cc805b7446f92d4bc01bfbcb485
+#: 0249ee74b83d49708ba83a4586f929fb
+#: bf97602e883e4ee4beb069c154985f61
+#: 98f3545836e64599a96ecb8591690e1f
+#: 2da019f274c8494d8986f243ea419135
+msgid "CRUISE"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:256
+#: ../../source/docs/apms-failsafe-function.rst:286
+#: ../../source/docs/apms-failsafe-function.rst:316
+#: ../../source/docs/apms-failsafe-function.rst:367
+#: ../../source/docs/apms-failsafe-function.rst:401
+#: ../../source/docs/apms-failsafe-function.rst:435
+#: abf2117ebd7a4396a30fd39b4f8d96a2
+#: abecab8cba4741a680f9c3626b46a2eb
+#: 5e649ba7a1d94c34885a583407022a95
+#: 0956c3d542114429953dcc868b3d893e
+#: 50fafc8ff0694b058fbe4bc60b28358c
+#: ebc8cb4be13c4c07a9a899f12382d132
+msgid "AUTOTUNE"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:258
+#: ../../source/docs/apms-failsafe-function.rst:288
+#: ../../source/docs/apms-failsafe-function.rst:318
+#: ../../source/docs/apms-failsafe-function.rst:369
+#: ../../source/docs/apms-failsafe-function.rst:403
+#: ../../source/docs/apms-failsafe-function.rst:437
+#: 04af6ccc8c654b78976dca0da52b5d88
+#: 2f448706317448f59e5782ca521fd0b8
+#: 1c63b74164a244caac9e297d92df3c74
+#: 782358f93d214a25b02d6e4b65134ddf
+#: dfc1234513e44265aeaacd6a4cc9cffd
+#: bf096ffa29bd46c3b1416b8c7541f92d
+msgid "TRAINING"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:260
+#: ../../source/docs/apms-failsafe-function.rst:290
+#: ../../source/docs/apms-failsafe-function.rst:320
+#: ../../source/docs/apms-failsafe-function.rst:371
+#: ../../source/docs/apms-failsafe-function.rst:405
+#: ../../source/docs/apms-failsafe-function.rst:439
+#: ada25e609d184dc49441e861064eacd2
+#: df0e8e1c8ee14d46ac6a41408f79832b
+#: 977d716751404a88a19ee5d81a40e478
+#: 5e8e92db896544179c03e8eb7e4dc02c
+#: b73752d824924244b35c905e7537e8ec
+#: 485ef2874f994a18bad1ab300c55c6c7
+msgid "LOITER"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:260
+#: ../../source/docs/apms-failsafe-function.rst:379
+#: 7aee1770049149ed833abf0327b2c594
+#: 86e66ac97bae4e75b3b5e1e239fe4052
+msgid "No Change"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:262
+#: ../../source/docs/apms-failsafe-function.rst:292
+#: ../../source/docs/apms-failsafe-function.rst:322
+#: ../../source/docs/apms-failsafe-function.rst:379
+#: ../../source/docs/apms-failsafe-function.rst:413
+#: ../../source/docs/apms-failsafe-function.rst:447
+#: 2302c52bdce9484398ed762f1d133b91
+#: 50d0a04b856f4a609b38a629ecc8ca7e
+#: 0fbc1c4751ce4ad09f99fa41b350611a
+#: 7c47fa6e30ff47d782452aeea4216cbc
+#: e11a6d0b3c9b4e49a4ed3576a816ec73
+#: 758e5a4ca354492a9eb4ef83f67e8e76
+msgid "AUTO"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:264
+#: ../../source/docs/apms-failsafe-function.rst:294
+#: ../../source/docs/apms-failsafe-function.rst:324
+#: ../../source/docs/apms-failsafe-function.rst:373
+#: ../../source/docs/apms-failsafe-function.rst:407
+#: ../../source/docs/apms-failsafe-function.rst:441
+#: e69478a05184434f99165a1239094d83
+#: f08894b3d726448092b709453d46f041
+#: a5b0822804b2460d9ff4685cea5655cd
+#: 50a2991d75b3402d80dd30d39c190c40
+#: eb93382c50b04ca08865fe311d45e0b2
+#: f0cc2a99ff484eae82f89fd5d375c806
+msgid "THERMAL"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:266
+#: ../../source/docs/apms-failsafe-function.rst:296
+#: ../../source/docs/apms-failsafe-function.rst:326
+#: ../../source/docs/apms-failsafe-function.rst:381
+#: ../../source/docs/apms-failsafe-function.rst:415
+#: ../../source/docs/apms-failsafe-function.rst:449
+#: 2b3956bc241a4170ab7d9e5f700e6112
+#: ab3bbbfe5a864fdaa767cb981dd3f17b
+#: 1eeb128ead144c85a49905c2099560d7
+#: 332a3a59ecce4b38b5e6031c709e863a
+#: 5bc3cf934ca146e8a2ba2c3bd465c277
+#: e6c049fda5e54dd382712bfd4aa36851
+msgid "AVOID_ADSB"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:268
+#: ../../source/docs/apms-failsafe-function.rst:298
+#: ../../source/docs/apms-failsafe-function.rst:328
+#: ../../source/docs/apms-failsafe-function.rst:383
+#: ../../source/docs/apms-failsafe-function.rst:417
+#: ../../source/docs/apms-failsafe-function.rst:451
+#: f9c91ea2d8044b9fbc000e2228be029f
+#: 63e8a78241404b4abddddb3d20c6397d
+#: e21b03d7a37648bcbaf2c0c74a1a05a7
+#: fefdc4297a674ab88e74828b475840a4
+#: a138989f8699434299d1ef3148675b05
+#: d2224971e68941d68264aaad480158aa
+msgid "GUIDED"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:274
+#: 9f656154a8514730a28a6a35a726c42c
+msgid "1 -CIRCLE"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:304
+#: 06daf32a53d84c4da6a86b61e1f5e3a6
+msgid "2 -GLIDE"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:305
+#: bd5e98848d5045b5a18f2ff991efd484
+msgid "or 4 - FBWB(ALT HOLD)"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:304
+#: 3ed94b1bbfc5476f8452fb1dcf4fec7f
+msgid "GLIDE/FBWB unless"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:305
+#: ../../source/docs/apms-failsafe-function.rst:356
+#: ../../source/docs/apms-failsafe-function.rst:390
+#: 563aabaa71ab4eadab85a1e0330ee503
+#: 53b3a28f2ca1434db8750e6e4acb35aa
+#: 18d455d193bd4cffa79f4f5b9fe753fe
+msgid "emergency landing switch is active, then GLIDE"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:320
+#: 58cc16f6f3c84a1488ee464c3edcafd4
+msgid "GLIDE/FBWB"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:332
+#: ed109b0b586344ff9f69861193d208b2
+msgid "Long failsafe action (:ref:`FS_LONG_ACTN<FS_LONG_ACTN>` )"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:333
+#: 80ef82f3809346038165c35f7e88526c
+msgid "The action to take on a long (:ref:`FS_LONG_TIMEOUT<FS_LONG_TIMEOUT>` seconds) RC failsafe event."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:335
+#: f1c331d73d07430e85f4e9ada6e3cde9
+msgid "No Action is ever taken for Long FailSafe in these modes:"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:342
+#: 72e528c7177542e984646151db2f8698
+msgid "In QuadPlanes, Long FailSafe will force QLAND by default, RTL if bit 20 of :ref:`Q_OPTIONS<Q_OPTIONS>` is set, or QRTL if bit 5 of :ref:`Q_OPTIONS<Q_OPTIONS>` is set, if entered from these modes:"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:353
+#: ../../source/docs/apms-failsafe-function.rst:387
+#: ../../source/docs/apms-failsafe-function.rst:421
+#: 378bd1c3b8d34bc2aa6d297c586defd6
+#: 5702cb66d00143ecacdbbf0cd5f0f1d2
+#: 884c7c41ca824716ae3e7d4709e5c7ec
+msgid "FS_LONG_ACTN"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:356
+#: 5d132430c1d549668f142492920c8868
+msgid "AUTO, or RTL"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:355
+#: ../../source/docs/apms-failsafe-function.rst:389
+#: 4402c7cc90d245ed8ff1586a489f940b
+#: eb86bf471849467ca3fdef42f6d3dfad
+msgid "RTL unless"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:389
+#: e574ee38982e402eb02393b85caef252
+msgid "1 - RTL"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:423
+#: 26927827def74aeeb3c8fb323d397d3b
+msgid "2 - GLIDE or"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:424
+#: a3cc9527ce1c4c8f8eccf32ba09997b1
+msgid "4- AUTO or 3- PARACHUTE"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:423
+#: ../../source/docs/apms-failsafe-function.rst:449
+#: e92f60b4d9d94ef984929c0922149403
+#: 822c9bfad2c94610a35f2c96aa7e95c6
+msgid "GLIDE,AUTO or PARACHUTE"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:424
+#: 52486ec21e6b42a8a37ce0d3e6258a4a
+msgid "unless emergency landing switch is active, then GLIDE"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:457
+#: 2b030bc0499046fabea4970d3244dda4
+msgid "GCS failsafe enable (:ref:`FS_GCS_ENABL<FS_GCS_ENABL>` )"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:459
+#: bb99166fa8df4a818cea147481f33d96
+msgid "Enable ground control station telemetry failsafe. Failsafe will trigger after :ref:`FS_LONG_TIMEOUT<FS_LONG_TIMEOUT>` seconds of no MAVLink heartbeat or RC Override messages."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:462
+#: ca673d9a322f42158b7025fe27aa5a74
+msgid "Enabling this option opens up the possibility of your plane going into failsafe mode and running the motor on the ground if it loses contact with your ground station. While the code attempts to verify that the plane is indeed flying and not on the ground before entering this failsafe, it is safer if this option is enabled on an electric plane, to either use a separate motor arming switch or remove the propeller in any ground testing, if possible."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:464
+#: f5d6d8d2aee343128be7fb69bb8af433
+msgid "There are three possible enabled settings. Seeing :ref:`FS_GCS_ENABL<FS_GCS_ENABL>` to 1 means that GCS failsafe will be triggered when the aircraft has not received a MAVLink HEARTBEAT message. Setting :ref:`FS_GCS_ENABL<FS_GCS_ENABL>` to 2 means that GCS failsafe will be triggered on either a loss of HEARTBEAT messages, or a RADIO_STATUS message from a MAVLink enabled telemetry radio indicating that the ground station is not receiving status updates from the aircraft, which is indicated by the RADIO_STATUS.remrssi field being zero (this may happen if you have a one way link due to asymmetric noise on the ground station and aircraft radios).Setting :ref:`FS_GCS_ENABL<FS_GCS_ENABL>` to 3 means that GCS failsafe will be triggered by Heartbeat(like option one), but only in AUTO mode. WARNING: Enabling this option opens up the possibility of your plane going into failsafe mode and running the motor on the ground it it loses contact with your ground station. If this option is enabled on an electric plane then you should enable :ref:`ARMING_REQUIRE<ARMING_REQUIRE>`."
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:494
+#: 2512d75fbff74857ba58a350690f1340
+msgid "Failsafe Diagnosis in Logs or GCS"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:496
+#: 00b1ddb37a2a40f282d9e74823a0ea78
+msgid "GCSs will often display text indicating the type of failsafe encountered, such as \"Failsafe Short event on: type=1/reason=3\". Type and Reason can be determined using the table below:"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:587
+#: ac8a123c3824488c9b1b789b18eb7a67
+msgid "Independent Watchdog"
+msgstr ""
+
+#: ../../source/docs/apms-failsafe-function.rst:589
+#: 8a5e3799363644fc92155c98091dcbc6
+msgid "See :ref:`common-watchdog` for details."
+msgstr ""

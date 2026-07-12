@@ -1,0 +1,97 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/yaw-in-plane.rst:5
+#: 8ea26b4ea46849f8be6dd180019507de
+msgid "Yaw and Yaw Control in Plane"
+msgstr ""
+
+#: ../../source/docs/yaw-in-plane.rst:7
+#: e8bc7d5149fd4d8bbdafdaa83ce97a5d
+msgid "The control of yaw in plane is mainly via the RUDDER output function (``SERVOx_FUNCTION`` = 21). Of course, flying wings do not have that function and yaw occurs naturally as the wings are banked and elevator applied to eliminate altitude loss. The fact the most flying wings are swept provides an amount of natural turn coordination that rudder normally provides for turns."
+msgstr ""
+
+#: ../../source/docs/yaw-in-plane.rst:9
+#: 4ea2649b4ead4539a7ec36430811447b
+msgid "ArduPilot, in fixed wing modes (except ACRO mode, if yaw rate controller is enabled), provides NO direct rate stabilization or heading angle hold for yaw, as it does for pitch and roll. In manual fixed wing modes (MANUAL,ACRO, and TRAINING), the pilot will need to control the rudder, if present, in order to make coordinated turns (turns where there is no lateral acceleration, ie slip or skid)."
+msgstr ""
+
+#: ../../source/docs/yaw-in-plane.rst:11
+#: c1243979ca694ad5ad47d4b3e814fe8b
+msgid "However, in all other modes, ArduPilot can provide reasonable turn coordination via the :ref:`KFF_RDDRMIX<KFF_RDDRMIX>` parameter which will feed rudder in as ailerons move. See the section below, :ref:`coordinated-turn-setup`. In all other modes, besides MANUAL, ACRO, or TRAINING, no rudder input from the pilot is needed."
+msgstr ""
+
+#: ../../source/docs/yaw-in-plane.rst:13
+#: 6459e296144846febd3013f4bd6440e5
+msgid "rudder demand can be applied by pilot input in all modes, including AUTO, which is usually undesirable."
+msgstr ""
+
+#: ../../source/docs/yaw-in-plane.rst:15
+#: a734c9d1003e407b9da8ec07a0838620
+msgid "In addition, ArduPilot produced yaw control can also occur:"
+msgstr ""
+
+#: ../../source/docs/yaw-in-plane.rst:17
+#: ddd7c5e00e2e414196ee907215082663
+msgid "If :ref:`Ground Steering<tuning-ground-steering-for-a-plane>` is enabled, and no GroundSteering output(``SERVOx_FUNCTION`` =26) is being used to control a nose or tail wheel, then the steering controller will command the rudder deflection while taxiing instead of there being direct control from the rudder stick."
+msgstr ""
+
+#: ../../source/docs/yaw-in-plane.rst:18
+#: f18726efe1b44476aa6722c6df055b2f
+msgid "If differential spoilers are used and the  :ref:`DSPOILR_RUD_RATE<DSPOILR_RUD_RATE>` parameter is non-zero. See :ref:`differential-spoilers`."
+msgstr ""
+
+#: ../../source/docs/yaw-in-plane.rst:19
+#: 03dfd6eced8049b097512aef52e99616
+msgid "If the YAW Damper or Side-Slip Controllers are enabled and active. (See :ref:`Yaw Damper<yaw-controller-tuning>`). These controllers do not directly take pilot input, but rather help stabilize yaw and control side-slip in turns. The Yaw Damper can be used to provide yaw stability in fin-less flying wings using split spoilers/elevons."
+msgstr ""
+
+#: ../../source/docs/yaw-in-plane.rst:20
+#: 4be4cc22764c41e4a2ae6300afa6ae2e
+msgid "In ACRO mode, if enabled, a yaw rate controller can be used to stabilize body frame yaw. See :ref:`acro-mode` page for details and tuning."
+msgstr ""
+
+#: ../../source/docs/yaw-in-plane.rst:25
+#: 2eb2be9a48c84a13a205f24754fccbfd
+msgid "Other YAW mechanisms"
+msgstr ""
+
+#: ../../source/docs/yaw-in-plane.rst:27
+#: d98f24e82ab645dab8bebb2d8308fe22
+msgid "If twin engines are used (THROTTLE LEFT and THROTTLE RIGHT output functions), then the pilot and ArduPilot can use differential thrust to produce yaw in Plane, or in QuadPlanes when in fixed wing modes, if using twin/quad forward motors for fixed wing flight modes. This is enabled by setting :ref:`RUDD_DT_GAIN<RUDD_DT_GAIN>` to a non-zero value."
+msgstr ""
+
+#: ../../source/docs/yaw-in-plane.rst:30
+#: b3787c7076e44fcc80aa5bc54040c2b8
+msgid "Yaw Trim"
+msgstr ""
+
+#: ../../source/docs/yaw-in-plane.rst:32
+#: 36c08200eed744ea85354184b09842e3
+msgid "The easiest way to adjust yaw trim is to monitor heading, either thru an FPV camera, or Ground Control Station, and adjust the yaw servo's ``SERVOx_TRIM`` to stop heading creep when flying with wings level."
+msgstr ""
+
+#: ../../source/docs/yaw-in-plane.rst:37
+#: 432ed7a0c3884c98a4164c6b262564e4
+msgid "Setting up :ref:`KFF_RDDRMIX<KFF_RDDRMIX>` for Coordinated Turns"
+msgstr ""
+
+#: ../../source/docs/yaw-in-plane.rst:39
+#: dabca97d8db3483897e4b60c5633f9a1
+msgid "Rapidly roll the model from maximum bank angle in one direction to maximum bank angle in the opposite direction in FBWA. Do this several times going in each direction and observe the yawing motion of the model. If as the wings pass through level the nose is yawed in the opposite direction to the roll (for example when rolling from left to right bank, the nose points left) then increase the value of :ref:`KFF_RDDRMIX<KFF_RDDRMIX>` gain until the yaw goes away. Do not use a value larger than 1. Conversely, lower it if the nose is yawing into the turn. The default value for :ref:`KFF_RDDRMIX<KFF_RDDRMIX>` is usually close"
+msgstr ""

@@ -22,7 +22,7 @@ The DroneCAN network is a decentralized peer network, where each peer
 (node) has a unique numeric identifier - node ID and that is only one
 parameter needs to be set for basic setup.
 
-Detailed description of protocol can be found at https://uavcan.org/
+Detailed description of protocol can be found at https://dronecan.github.io/
 
 
 DroneCAN Peripheral Types Supported
@@ -128,6 +128,7 @@ CAN_Dx_UC_OPTION bit      Function when set
 7                         HobbyWingESC, enable command set for this esc
 8                         EnableStats, enable peripheral to send bus stats
 9                         EnableFlexDebug, enable flexible debugging via LUA, see `this example <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/examples/FlexDebug.lua>`__
+10                        SecondaryAllowExtendedFrames, see https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/applets/CAN_playback.lua
 ====================      =================
 
 .. _dronecan_node_conflicts:
@@ -142,7 +143,7 @@ When a device is attached and recognized, it's node ID and hardware ID are enter
 CAN FD (Flexible Data rate)
 ===========================
 
-If the DroneCAN port is attached to CAN FD peripherials, setting :ref:`CAN_D1_UC_OPTION<CAN_D1_UC_OPTION>` bit 2 (+ value 4) will enable this mode. 
+If the DroneCAN port is attached to CAN FD peripherals, setting :ref:`CAN_D1_UC_OPTION<CAN_D1_UC_OPTION>` bit 2 (+ value 4) will enable this mode. 
 
 .. note:: CAN FD requires a larger memory pool allocation than normal. Default is 24KB instead of the normal 12KB.
 

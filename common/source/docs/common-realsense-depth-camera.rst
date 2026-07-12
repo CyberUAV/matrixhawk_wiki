@@ -97,7 +97,7 @@ Example of specifics for ``Loiter`` and ``AltHold`` mode:
 - :ref:`AVOID_MARGIN <AVOID_MARGIN>` = 1.5: How many meters from the barrier the vehicle will attempt to stop or try to slide along it
 - :ref:`AVOID_BEHAVE <AVOID_BEHAVE>` = 1: Whether the vehicle should simply Stop (1) in front of the barrier or Slide (0) around it
 - :ref:`AVOID_DIST_MAX <AVOID_DIST_MAX>` = 1.5: How far from a barrier the vehicle starts leaning away from the barrier in AltHold
-- :ref:`AVOID_ANGLE_MAX <AVOID_ANGLE_MAX>` = 3000: How far the vehicle will try to lean away from the barrier in centidegrees.
+- :ref:`AVOID_ANG_MAX <AVOID_ANG_MAX>` = 30: How far the vehicle will try to lean away from the barrier in 
 
 **Optional**: You can assign an RC switch to enable Avoidance instead of always on by default. Example of setting RC7 to switch Avoidance on in Mission Planner:
 
@@ -180,7 +180,7 @@ In a nutshell, the script will convert the depth image provided by the Realsense
     :target: ../_images/example-depth-camera-filtered-image.png
     :width: 500px
 
-- Next, from the input/processed depth image, the distances need to be on the same **horizontal** line (depicted in the right image) since the message contains no field to distinguish different pitch angles. We devide the horizontal field of view of the camera into 72 evenly spaced rays. Along each ray, we select the pixel corresponding to the end of the ray and pick out the depth value.
+- Next, from the input/processed depth image, the distances need to be on the same **horizontal** line (depicted in the right image) since the message contains no field to distinguish different pitch angles. We divide the horizontal field of view of the camera into 72 evenly spaced rays. Along each ray, we select the pixel corresponding to the end of the ray and pick out the depth value.
 
 - Subsequently, the obstacle line will be kept "fixed" when the vehicle pitches up and down by compensating for the current pitch of the vehicle which is provided by the `ATTITUDE <https://mavlink.io/en/messages/common.html#ATTITUDE>`__  MAVLink message.
 

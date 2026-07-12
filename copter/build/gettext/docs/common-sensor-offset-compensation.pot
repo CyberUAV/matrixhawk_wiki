@@ -1,0 +1,152 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:30+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-sensor-offset-compensation.rst:7
+#: 09c99b9b5ed34ac189a2d5f647cc2964
+msgid "Sensor Position Offset Compensation"
+msgstr ""
+
+#: ../../source/docs/common-sensor-offset-compensation.rst:9
+#: 5063336920364e3eb3cd956dd71d9cdf
+msgid "ArduPilot includes compensation for sensor placement on the vehicle.  This page clarifies what parameters can be set and how they should be set."
+msgstr ""
+
+#: ../../source/docs/common-sensor-offset-compensation.rst:13
+#: f3b3f4a01e8148b09a1e294f953ed915
+msgid "In most vehicles which have all their sensors (IMU, GPS, optical flow, etc) within 15cm of each other, it is unlikely that providing the offsets will provide a noticeable performance improvement."
+msgstr ""
+
+#: ../../source/docs/common-sensor-offset-compensation.rst:17
+#: f456fedb90ed4377b3289dbc87513ab4
+msgid "The sensor's position offsets are specified as 3 values (X, Y and Z) which are distances in meters from the IMU (which can be assumed to be in the middle of the autopilot board) or the vehicle's center of gravity."
+msgstr ""
+
+#: ../../source/docs/common-sensor-offset-compensation.rst:19
+#: c39332d31a554f9aa5df651bcb1a2dc4
+msgid "X : distance forward of the IMU or center of gravity.  Positive values are towards the front of the vehicle, negative values are towards the back."
+msgstr ""
+
+#: ../../source/docs/common-sensor-offset-compensation.rst:20
+#: 9cab47f074e04f6a9e596e3e9d00048b
+msgid "Y : distance to the right of the IMU or center of gravity.  Positive values are towards the right side of the vehicle, negative values are towards the left."
+msgstr ""
+
+#: ../../source/docs/common-sensor-offset-compensation.rst:21
+#: e003e146191a4e718b9c0ff940335707
+msgid "Z : distance *below* the IMU or center of gravity.  Positive values are *lower*, negative values are *higher*."
+msgstr ""
+
+#: ../../source/docs/common-sensor-offset-compensation.rst:23
+#: 4d0892a0266942518678ee38cf08cade
+msgid "In practice the distance to the sensor can be measured from the center of the autopilot unless the autopilot itself is placed a significant distance from the vehicle's center of gravity in which case the IMU position offsets can be specified and then the other sensor's position offsets can be specified from the vehicle's center of gravity."
+msgstr ""
+
+#: ../../source/docs/common-sensor-offset-compensation.rst:27
+#: 1544f04d6e854b009a1162148decabfc
+msgid "Parameter Details"
+msgstr ""
+
+#: ../../source/docs/common-sensor-offset-compensation.rst:29
+#: 9eea3edd329f4f8d806e1d069b39fca0
+msgid "**IMU (aka INS):**"
+msgstr ""
+
+#: ../../source/docs/common-sensor-offset-compensation.rst:31
+#: 3827c6a0fc64466e88a249b46f9f248d
+msgid "For the best results the autopilot (and thus the IMUs) should be placed at the center-of-gravity of the vehicle but if this is physically impossible the offset can be partially compensated for by setting the following parameters."
+msgstr ""
+
+#: ../../source/docs/common-sensor-offset-compensation.rst:33
+#: 84236b4bc7d44dfea606258165f14c6a
+msgid ":ref:`INS_POS1_X <INS_POS1_X>`, :ref:`INS_POS1_Y <INS_POS1_Y>`, :ref:`INS_POS1_Z <INS_POS1_Z>` the first IMU's position from the vehicle's center-of-gravity"
+msgstr ""
+
+#: ../../source/docs/common-sensor-offset-compensation.rst:34
+#: 8280f268a8224b2dace9c93a014896e1
+msgid ":ref:`INS_POS2_X <INS_POS2_X>`, :ref:`INS_POS2_Y <INS_POS2_Y>`, :ref:`INS_POS2_Z <INS_POS2_Z>` the second IMU's position from the vehicle's center-of-gravity"
+msgstr ""
+
+#: ../../source/docs/common-sensor-offset-compensation.rst:35
+#: 90a60fc01c7844549d2df1a5a00d0a83
+msgid ":ref:`INS_POS3_X <INS_POS3_X>`, :ref:`INS_POS3_Y <INS_POS3_Y>`, :ref:`INS_POS3_Z <INS_POS3_Z>` the third IMU's position from the vehicle's center-of-gravity"
+msgstr ""
+
+#: ../../source/docs/common-sensor-offset-compensation.rst:37
+#: 9731e356c7db464daa4e653166a91613
+msgid "The compensation is only *partial* because ArduPilot can correct the vehicle's velocity and position estimate but it does not correct the acceleration estimate. For example if the autopilot was placed on the nose of a vehicle and the vehicle suddenly leans back (i.e. rotates so that its nose points up) with no offset compensation the vehicle velocity estimate would momentarily show the vehicle is climbing when it's not.  With the position offsets added the velocity would not show this momentary climb.  The EKF would still show a momentary vertical acceleration and because we use the acceleration in our altitude hold controllers this could still lead to the vehicle momentary reducing throttle."
+msgstr ""
+
+#: ../../source/docs/common-sensor-offset-compensation.rst:42
+#: 9cd159fc88fc42c6a4664210e0495bfe
+msgid "Although individual position offsets can be set for each IMU, the difference between the placement of IMUs on most autopilot boards is so small that the same values can be used for all IMUs"
+msgstr ""
+
+#: ../../source/docs/common-sensor-offset-compensation.rst:44
+#: 3a2baef0a8f6466ea239f6c6578bf371
+msgid "if the IMU offset is specified, then all the following offsets are relative to **Center of Gravity** rather than the IMU."
+msgstr ""
+
+#: ../../source/docs/common-sensor-offset-compensation.rst:46
+#: b6338697a275491f88a99d6e637d9822
+msgid "**GPS:**"
+msgstr ""
+
+#: ../../source/docs/common-sensor-offset-compensation.rst:48
+#: ba8e3d04639d4aa191e6a4d21c90b11c
+msgid ":ref:`GPS1_POS_X <GPS1_POS_X>`, :ref:`GPS1_POS_Y <GPS1_POS_Y>`, :ref:`GPS1_POS_Z <GPS1_POS_Z>` the first GPS's position from the vehicle's IMU or center-of-gravity"
+msgstr ""
+
+#: ../../source/docs/common-sensor-offset-compensation.rst:49
+#: 055485af006c4f89b5ebee115bd768cb
+msgid ":ref:`GPS2_POS_X <GPS2_POS_X>`, :ref:`GPS2_POS_Y <GPS2_POS_Y>`, :ref:`GPS2_POS_Z <GPS2_POS_Z>` the second GPS's position from the vehicle's IMU or center-of-gravity"
+msgstr ""
+
+#: ../../source/docs/common-sensor-offset-compensation.rst:51
+#: bc3c91e9baa844fbb353031496855e8b
+msgid "**Range Finder (Sonar or Lidar):**"
+msgstr ""
+
+#: ../../source/docs/common-sensor-offset-compensation.rst:53
+#: 3543c6d06dbf425f954c82e5903290fa
+msgid ":ref:`RNGFND1_POS_X <RNGFND1_POS_X>`, :ref:`RNGFND1_POS_Y <RNGFND1_POS_Y>`, :ref:`RNGFND1_POS_Z <RNGFND1_POS_Z>` the first RangeFinder's position from the vehicle's IMU or center of gravity"
+msgstr ""
+
+#: ../../source/docs/common-sensor-offset-compensation.rst:54
+#: 4986faf730b946b3ac437e23f92f8920
+msgid ":ref:`RNGFND2_POS_X <RNGFND2_POS_X>`, :ref:`RNGFND2_POS_Y <RNGFND2_POS_Y>`, :ref:`RNGFND2_POS_Z <RNGFND2_POS_Z>` the second RangeFinder's position from the vehicle's IMU or center of gravity"
+msgstr ""
+
+#: ../../source/docs/common-sensor-offset-compensation.rst:56
+#: 432584d7fa204734967f77eac6f11027
+msgid "**Optical Flow:**"
+msgstr ""
+
+#: ../../source/docs/common-sensor-offset-compensation.rst:58
+#: 1e5d9fd6061b4263873ba73ee674f74a
+msgid ":ref:`FLOW_POS_X <FLOW_POS_X>`, :ref:`FLOW_POS_Y <FLOW_POS_Y>`, :ref:`FLOW_POS_Z <FLOW_POS_Z>` distance from the IMU or center of gravity"
+msgstr ""
+
+#: ../../source/docs/common-sensor-offset-compensation.rst:60
+#: caf5197963cc45dbbb726beb1a0d9337
+msgid "**Visual Odometry:**"
+msgstr ""
+
+#: ../../source/docs/common-sensor-offset-compensation.rst:62
+#: 86740dca389f4b3ca5afbaf041b52558
+msgid ":ref:`VISO_POS_X <VISO_POS_X>`, :ref:`VISO_POS_Y <VISO_POS_Y>`, :ref:`VISO_POS_Z <VISO_POS_Z>` distance from the IMU or center of gravity"
+msgstr ""

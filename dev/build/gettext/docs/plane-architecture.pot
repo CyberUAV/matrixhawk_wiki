@@ -1,0 +1,87 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/plane-architecture.rst:5
+#: 020c834026a94e5e893ce484fcf10d3e
+msgid "Plane Architecture Overview"
+msgstr ""
+
+#: ../../source/docs/plane-architecture.rst:7
+#: d401185acd544b24a4856f81bac34eb1
+msgid "This page attempts to roughly show the ArduPlane architecture.  Please note it was not written by Plane experts so there may be some inaccuraies."
+msgstr ""
+
+#: ../../source/docs/plane-architecture.rst:12
+#: 79928a3566b3433d893be1f54b5b0634
+msgid "Above is a high level diagram of ArduPlane's architecture.  One large difference between Plane vs Copter and Rover is flight modes are not organised into a single file (:ref:`like they are in Copter <apmcopter-adding-a-new-flight-mode>`) or class (:ref:`like they are in Rover <rover-adding-a-new-drive-mode>`).  Instead the code path goes through stages.  Each stage then decides what it should do based on the flight mode."
+msgstr ""
+
+#: ../../source/docs/plane-architecture.rst:14
+#: 8db07a5697254839be45420392d3948a
+msgid "These stages can be seen in the diagram above and include:"
+msgstr ""
+
+#: ../../source/docs/plane-architecture.rst:16
+#: e0ae9cd2671e43be9e969436832c28b1
+msgid "``ahrs_update`` calls the EKF to consume the latest sensor data and produce a attitude and position estimate."
+msgstr ""
+
+#: ../../source/docs/plane-architecture.rst:17
+#: 5d24d685004c4d2cb4a0f66b241c8f55
+msgid "``read_radio`` reads in the pilot's input and calculates the appropriate attitude or position targets"
+msgstr ""
+
+#: ../../source/docs/plane-architecture.rst:18
+#: 2dab7db741684cde8b13b15f9a6c67c1
+msgid "``navigate`` calls the L1 and TECS controllers (see below) to convert position targets for the roll, pitch and throttle controllers"
+msgstr ""
+
+#: ../../source/docs/plane-architecture.rst:19
+#: 7e1681a261b44b7192c1aa9fcc7a85a3
+msgid "``update_control_mode`` copies the L1 controller's roll and pitch targets to nav_roll_cd and nav_pitch_cd global variables"
+msgstr ""
+
+#: ../../source/docs/plane-architecture.rst:20
+#: 0bc384edd9fa4ae09ad6ec0d198a44c8
+msgid "``stabilize`` executes the lower level roll, pitch and throttle controllers"
+msgstr ""
+
+#: ../../source/docs/plane-architecture.rst:21
+#: bfb51b817bfb4f81899af7a6b6210958
+msgid "``set_servos`` sends the output from the roll, pitch and throttle controllers to the appropriate servo outputs"
+msgstr ""
+
+#: ../../source/docs/plane-architecture.rst:24
+#: 2d3c58ab7cc74fbaad80283ecbbb6f6f
+msgid "Plane Controllers"
+msgstr ""
+
+#: ../../source/docs/plane-architecture.rst:26
+#: 957c7c1a6b4547eba88c10c98f8cb3ff
+msgid "Plane has 2 high level controllers and at least 3 lower level controllers shown below."
+msgstr ""
+
+#: ../../source/docs/plane-architecture.rst:31
+#: 220dd4ea580c4865a26b294f9eda6061
+msgid "the L1 controller converts a origin and destination (each expressed as a latitude, longitude) into a lateral acceleration to make the vehicle travel horizontally along the path from the origin to the destination."
+msgstr ""
+
+#: ../../source/docs/plane-architecture.rst:32
+#: bbe98289eb7a4b479d64c33a2356f55d
+msgid "the TECS (Total Energy Conservation System) controls the exchange between the vehicle's kinetic energy (i.e. speed) and its potential energy (i.e. altitude).  Its inputs are a target speed and height and it attempts to reach these targets by calculating target throttle and pitch values which are then passed to the lower level pitch and throttle controllers."
+msgstr ""

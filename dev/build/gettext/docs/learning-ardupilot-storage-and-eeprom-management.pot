@@ -1,0 +1,282 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:5
+#: 19e5f7301c324d828ef911acb321bde6
+msgid "Storage and EEPROM management"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:7
+#: 1ab72060453c4daca7e8dd64a641c1d9
+msgid "Every board that ArduPilot supports has some form of persistent storage available. This is used to hold user parameters, waypoints, rally points, terrain data and many other useful things. To provide access to this storage ArduPilot has 4 basic mechanisms:"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:12
+#: e78e0bd7a7174245aac1fff56aac6eaa
+msgid "the AP_HAL::Storage object, accessed as hal.storage"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:13
+#: 3cd22adf0032442b811a4b9905db3a2e
+msgid "the StorageManager library to give a higher level abstraction layer on hal.storage"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:15
+#: 8ec56f43a74945b7b49151c7d0348e56
+msgid "DataFlash for storing to an on-board logging area"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:16
+#: 4becc62fe7ef449e84a7cac8e0e03ff7
+msgid "Posix IO functions to traditional filesystems (for example VFAT on a microSD card), on boards that support it"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:19
+#: 4cbde89d8d8a4230892ccdc565136624
+msgid "The other libraries and functions that need persistent storage are built on these basic systems. For example, the AP_Param library (which handles user settable parameters) is built on top of StorageManager, which in turn is built on top of AP_HAL::Storage. The AP_Terrain library (which handles terrain data) is built on top of Posix IO functions for holding the terrain database."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:27
+#: 50c3346570c7495c8946c58bf093c772
+msgid "The AP_HAL::Storage library"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:29
+#: 544dcb57ff3048fcac63cee194d10119
+msgid "The AP_HAL::Storage object is available on all platforms. The minimum size of storage available via this interface on boards that ArduPilot supports is 4096 bytes. Some boards provide more space - for example the PX4v1 has 8k of EEPROM and the Pixhawk has 16k of FRAM. All of that is hidden behind the AP_HAL::Storage API."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:35
+#: dbbebfd8813348cda65519a00396396a
+msgid "The hal.storage API is extremely simple. It has just 3 functions"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:37
+#: 5af86752289a4e2d814b6f66a9b7792d
+msgid "init() to start up the storage subsystem"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:38
+#: 1f936d46c7c349e99a0ec4fc89751d51
+msgid "read_block() to read a block of bytes"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:39
+#: 440d1158876f44999bd920cde3548319
+msgid "write_block() to write a block of bytes"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:41
+#: 74128391c947408f9a70a40cd77cba47
+msgid "The reason for this very simple API is that developers are encouraged to use the StorageManager API instead of hal.storage. You should only be delving into hal.storage when doing bringup of a new board, or when debugging."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:46
+#: 9244f8b4114e4e79b099ebefb6487804
+msgid "The size of storage available is set inside `AP_HAL/AP_HAL_Boards.h <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL/AP_HAL_Boards.h>`__ in the macro HAL_STORAGE_SIZE. This means we don't yet support dynamically determining the size of storage available for this interface. If you want dynamically sized storage you need to use Posix IO for now."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:53
+#: 0bc5b2f698f541099dc5531cd49dfa27
+msgid "We don't have an example sketch for the AP_HAL::Storage API, so this is your chance to write one. If you have gotten this far into the ArduPilot tutorial you should have seen enough example sketches to know how to write one from scratch. So write a libraries/AP_HAL/examples/Storage example that calculates an 8 bit XOR of the full contents of the hal.storage data, and prints it to the console. Then :ref:`submit the example as a patch <submitting-patches-back-to-master>` to the ArduPilot github, being careful to follow the patch submission guidelines."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:62
+#: ee2c0e4086664606a98bf8fbd5dcd3d2
+msgid "I will be quite interested to see how long after I add this exercise to the tutorial before we get a submission ...."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:66
+#: 8b7b2a5549a140f0ad67a78017db81a2
+msgid "The StorageManager library"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:68
+#: f3b031c06047418bb428c9c054210b9f
+msgid "The simple hal.storage API makes it nice and easy to port ArduPilot to a new board, but isn't convenient for actually using the available storage. For that we have StorageManager. The StorageManager library provides an API which abstracts the storage into pseudo-contiguous blocks of data that have an assigned purpose. So we chop up the available storage into areas that provide:"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:75
+#: b618a61c073b459b8f95c7cd71d5c015
+msgid "parameters"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:76
+#: 8b2e64baab8a4b09aa29a783bb93de67
+msgid "fence points"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:77
+#: 1988231892724c0f9dfd0d3faf1eb540
+msgid "waypoints"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:78
+#: 69806819dccc4f2dbd6f4ee6487ec3a3
+msgid "rally points"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:79
+#: 29bc36c904af438cbd372d9e8d34587c
+msgid "signing key"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:80
+#: c46a92a9548d45579f72093beb393220
+msgid "RC bind info"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:82
+#: efd901abb0d34e8f9c1c1f0f668f5ea7
+msgid "Go and have a read of `libraries/StorageManager/StorageManager.cpp <https://github.com/ArduPilot/ardupilot/blob/master/libraries/StorageManager/StorageManager.cpp>`__. In particular look at the tables at the top. Notice how multiple areas of each type are defined for systems with have larger amounts of storage. This ability to combine multiple non-contiguous areas of storage into a single logical storage area was the main motivation for adding StorageManager. It allowed us to grow from using 4k of storage on all boards to using the full storage available on each board without asking users to reload all their parameters or reload their waypoints."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:92
+#: 38fc4112b34c4f58a025ececea4df817
+msgid "This theme of trying to avoid making users reconfigure their autopilot boards is a common one in ArduPilot. We like it when users can update to the latest firmware and everything they previously setup still works, while gaining new features. Sometimes that means we have to do a bit more work as developers to make that possible - such as happened with StorageManager."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:99
+#: 7fdcfddf90144bfaa3c6c1645c5b697c
+msgid "The StorageManager API also provides convenient functions for reading and writing variables like integers. This is the API that libraries like AP_Mission use to save and restore waypoints."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:103
+#: 37bd7aae7a9d4ae19e2be2f782a37a92
+msgid "Now go and have a look at `libraries/StorageManager/examples/StorageTest.cpp <https://github.com/ArduPilot/ardupilot/blob/master/libraries/StorageManager/examples/StorageTest/StorageTest.cpp>`__. This is a stress test for the StoageManager layer, and as a result is also a stress test for the AP_HAL::Storage object. It does random IO at random offsets of random lengths. That means it does IOs that cross boundaries where a single parameter value may be non-contiguous in FRAM or EEPROM. This test sketch was designed to stress test the StorageManager API, but it is also terribly useful when porting ArduPilot to a new board, as it stresses the EEPROM access functions very nicely."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:114
+#: 044460143b36449797f8bd6b19df6fbc
+msgid "Go and try StorageTest on your board, but be warned that it is a destructive test. It won't destroy your board, but it will wipe all your parameters and waypoints. So backup your configuration if you are testing on the board in your favourite aircraft."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:119
+#: eb69c50d7c554091a14f090565896af4
+msgid "As an exercise, add some profiling to StorageTest so it prints the total IO rate in kbytes/sec along with the IO rate for reads and writes. Do you notice something about the difference between the read and write rates? Do you notice anything about the speed of writing values which are already set at that address in storage? See if you can find the code in StorageManager that explains your observations. Then :ref:`submit a patch <submitting-patches-back-to-master>` adding the profiling output to the ArduPilot github."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:127
+#: c896d554ffbe4943be1012e2e52845d0
+msgid "Next go and search through the ArduPilot libraries to fine all the places that use the StorageManager. What you are looking for is StorageAccess handles, like this:"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:135
+#: f8f07a27df784c69ac421f24fab61e57
+msgid "that declares a variable called AP_Param::_storage which provides access to the StorageParam area of the storage on this board. What libraries use StorageAccess?"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:140
+#: 415cd21cf4ff436db493261119126270
+msgid "The DataFlash library"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:142
+#: 2b0a06bd89ca4aea9458a5312e0f9e62
+msgid "Another type of storage that autopilots need is for on-board logs. For ArduPilot that is provided by the DataFlash library. It is quite an odd library in many ways. For a start the name is weird and comes from the fact that it was originally designed around the DataFlash chip for the APM1. It was a hardware device driver library which morphed over time into a general logging system. Internally the structure of the library shows this history in several ways (and not good ways!)."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:150
+#: 06845d75a80d4a9abafa140881031523
+msgid "These days the DataFlash API is designed around a logging infrastructure model. It allows you to define self-describing data structures for individual log messages - such as a \"GPS\" message to log data from a GPS sensor. It handles logging that data to persistent storage in an efficient manner and also provides APIs for other libraries to use to get the data back out when the user wants to download their log files after a flight."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:158
+#: 5b4bd56e14ca4439bb590ae9d856f10d
+msgid "If you have seen the '\\*.bin' files that ArduPilot uses these days when you download a log then you have seen the format that ArduPilot uses to store log messages. It is \"self describing\", meaning that the ground station can work out the format of the messages in the log file without having to have some common scheme. At the front of each log file is a set of FMT messages which have a well known format and which describe the format of the messages that follow."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:166
+#: dd86e5856016412fbe35d3b02c1d91aa
+msgid "Go and have a look at `libraries/AP_FlashStorage/examples/FlashTest/FlashTest.cpp <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_FlashStorage/examples/FlashTest/FlashTest.cpp>`__. You'll see a little table at the top that defines the log messages we will be writing, in this case a 'TEST' message which contains 4 unsigned 16 bit integers and two signed 32 bit integers (that is what \"HHHHii\" means). It also gives names for those 6 variables (cunningly labelled V1 to V4 and L1 and L2)."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:174
+#: e3d437c6199148298c914e8d2e5595df
+msgid "In the loop() function you will see a rather strange call like this:"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:180
+#: 1156e83084194ac5beaf961fc5468463
+msgid "This is the public API for the way that the DataFlash library hides how the board actually stores log files. On a system that has Posix IO (such as Pixhawk or Linux) log files are stored as separate files in a \"LOGS\" directory on the microSD card. These files can be directly copied by a user by pulling out the microSD card and putting it into their PC."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:186
+#: 22c55fe0f7b7490594e0349399ab4b5d
+msgid "On a board like the APM2 things aren't quite that simple. The APM2 has 4 megabytes of storage on a DataFlash chip, accessible across an SPI interface. The interface itself is page oriented, so you need to fill one 512 byte (or possibly 528 byte!) page, then tell the chip to copy that page to persistent storage while you fill the next page. Doing random IO on this DataFlash is not good - it is designed for use by code that needs to write continuously, which is what happens when logging. The 4 megabyte size is really not very large compared to the amount of data an autopilot likes to log, so we need to handle wrapping when it fills up as well."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:197
+#: 8796d04ca8f24d35adcb0729749caa88
+msgid "All of that complexity is hidden behind an API that presents the concept of a \"log number\", which is just a bunch of bytes that were written in one flight of the autopilot. The DataFlash implementation on APM1 and APM2 uses little marker bytes at the front of each page to say which log number is being written. These log numbers correspond to the log numbers that are downloaded when the user asks to retrieve their logs."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:205
+#: ca0a05727b4a4a5db4ccfd7c1b168e7d
+msgid "Posix IO"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:207
+#: e8873fa774d14c8cae1f5a1c3849de67
+msgid "Some of the autopilot boards that ArduPilot supports are based on an operating system that has a Posix-like API. For example the Linux ports have a very good Posix subsystems, and the NuttX operating system used for PX4 (such as on Pixhawk) have a pretty reasonable Posix layer. You can take advantage of this in libraries for ArduPilot as long as you don't rely on it for anything that has to work on all boards."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:214
+#: bf5a892756164dfca5a1fdf5cc7e8340
+msgid "A good example of this is the AP_Terrain library, which holds terrain data. Terrain data is much too large to fit in EEPROM, and it is random access, so it isn't suitable for DataFlash. It is also not essential for the basic functionality of an autopilot, so it is a great candidate for implementing using Posix IO."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:220
+#: 7e9eeeef16ab4c62bca79e0c4f55c18e
+msgid "The way we use Posix IO is that you first check if the board has Posix IO support by checking the HAVE_OS_POSIX_IO macro from `AP_HAL_Boards.h <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL/AP_HAL_Boards.h>`__. Then to know where on the filesystem you should store the data you add a data specific macro in AP_HAL_Boards.h which gives the directory path where that sort of data should be placed. For example, the macro HAL_BOARD_TERRAIN_DIRECTORY is used to define the directory where terrain data should go."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:229
+#: 843b5970d01341b8aa9bebf1a5da54bf
+msgid "Once you have those two things you should just use normal Posix IO functions (ie. open, close, read, write etc), although there are some caveats:"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:233
+#: 4188fc4da41b42dab1e8305e34bab3a4
+msgid "you must only call IO functions from either the IO timer or from your own low priority thread."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:235
+#: 561c9add62014242abe31e9e48ce1c6d
+msgid "Never call any IO functions from APIs directly accessible in your library. Not even a simple one like stat()."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:237
+#: cf35f9759ce848bb9e062030d4befade
+msgid "try to be friendly to slow storage cards, do IO in reasonably sized chunks, and avoid seeks where possible"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:240
+#: 24d4b23bedb845e58a1883d9dd19b09a
+msgid "These rules really matter. A simple IO on a microSD card on Pixhawk could take up to a second. That is enough time for your precious quadcopter to be flying upside down and heading for its final meeting with the ground. The average time for an IO on a Pixhawk microSD card is quite low (a few milliseconds), but just occasionally you will get a slow one when the microSD card decides it need to spend some quality time re-reading the SD card specification and calculating Pi. Don't be tempted to sneak a little operation in just because it seems fast most of the time."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:250
+#: f2aaa4fbb9454ff780589870b363b8db
+msgid "The one exception to this is initialization functions that you know for certain can only be called when the vehicle is starting up or is disarmed. A bit of delay at that time is fine."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-storage-and-eeprom-management.rst:254
+#: 8fe50d7111534f8caa228a62fd3756e6
+msgid "Now go and have a read of `libraries/AP_Terrain/TerrainIO.cpp <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Terrain/TerrainIO.cpp>`__ and look at how it uses Posix IO. Notice the little state machine it uses to handle all the IO, which is all called from the ``AP_Terrain::io_timer`` function. See if you can spot any bugs, and report them if you can!"
+msgstr ""

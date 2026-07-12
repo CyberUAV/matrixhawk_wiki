@@ -1,0 +1,299 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:30+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/airspeed-estimation.rst:5
+#: 0059afd5a0ee40e79ed7664e92609ff3
+msgid "Windspeed Estimation and Baro Compensation"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:7
+#: 6700b576c38d4550a07804474101b88e
+msgid "ArduPilot's :ref:`EKF<common-apm-navigation-extended-kalman-filter-overview>` can estimate the windspeed a multicopter is flying in without requiring an airspeed sensor.  This can be useful information for the pilot but it can also be used to compensate for wind related barometer interference.  This interference can occur on vehicles where the autopilot is exposed to the open air and can lead to the vehicle climbing or descending a few meters especially after slowing down from fast-forward flight."
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:12
+#: 719fd790afa046a696004bee4a68385f
+msgid "Calculate the Body Drag Coefficient"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:14
+#: 595c5c172d87453db9d77bdc20b9da66
+msgid "Weigh the vehicle including the battery.  The weight should be expressed in kg."
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:16
+#: 6777a0993cec4554b3f0484bdf0b4084
+msgid "Measure the front and side area of the vehicle in m^2 using one of the methods below"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:18
+#: 8afdc29ad04c4236bd0905050796063c
+msgid "Take two pictures of the vehicle (one of the front, one of the side) from a few meters away"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:19
+#: 2ad97aa65b194c428c3cae08fe5b8de9
+msgid "Measure the surface area in cm^2 using one of these online tools:"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:21
+#: 4539a70d8d214c52bd84105e64d948fa
+msgid "Use `this free online tool <https://yomotherboard.com/add-grid-to-image/>`__ to overlay a grid on the image.  Scale the size of the grid squares to match the known width or length of the vehicle (in cm).  Count the total number of squares which include parts of the vehicle (do not including propeller blades).  This is the area in cm^2"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:27
+#: 3d1bc8d362f94d3d9e9470584a805c9c
+msgid "`SketchAndCalc <https://www.sketchandcalc.com/>`__ offers a free trial (1hr only) and makes it relatively easy to scale and then measure the area (in cm^2) of a polygon drawn over the vehicle"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:33
+#: 496927678dbe4635ac4af806c4df0b10
+msgid "Divide the area by 10,000 to convert from cm^2 to m^2"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:35
+#: c22d51862b4e4ccea6637ce4dfa44821
+msgid "Update the drag coefficient parameters"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:37
+#: 66e0dd46f04a429faa8e6da6e4744d95
+msgid ":ref:`EK3_DRAG_BCOEF_X <EK3_DRAG_BCOEF_X>` = mass in kg / frontal area in m^2"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:38
+#: 60e8c758a74241e4b8397b9d45c4e10b
+msgid ":ref:`EK3_DRAG_BCOEF_Y <EK3_DRAG_BCOEF_Y>` = mass in kg / side area in m^2"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:40
+#: 32097d7470c94c2b9beb4c2fccb62e5d
+msgid "For the IRIS shown above:"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:42
+#: fb8120b4edb041d2a8f5b03bb01f865c
+msgid "Weight: 1.45kg"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:43
+#: c9f43b73a96646ad97b17b37701145a6
+msgid "Frontal area: 203 cm^2 = 0.0203 m^2"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:44
+#: 0c7ef3ff769b430eb9de8ca3a1dae923
+msgid "Side area: 217 cm^2 = 0.0217 m^2"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:45
+#: 98e9eff991884a849a37c936f90e9f94
+msgid ":ref:`EK3_DRAG_BCOEF_X <EK3_DRAG_BCOEF_X>` = 1.45kg / 0.0203 m^2 = 71.4"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:46
+#: c97da441c15b4bc0abd8d27ea0b0ff12
+msgid ":ref:`EK3_DRAG_BCOEF_Y <EK3_DRAG_BCOEF_Y>` = 1.45kg / 0.0217 m^2 = 66.8"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:49
+#: dce364c8a5444e3f8d31b3221ee79afe
+msgid "Calculate the Propeller Drag Coefficient"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:51
+#: 4396b9304ebd4b86be868e3e2b23d3d2
+msgid "The :ref:`EK3_DRAG_MCOEF <EK3_DRAG_MCOEF>` should be calculated after performing a flight test as described `here in the video <https://youtu.be/xVVtvVuZGQE&t=1421s>`__."
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:53
+#: 5e2c51748a5a4a9993a6822001ef98fb
+msgid "Fly in a low wind conditions in a wide open space"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:54
+#: 7c1d0dcaf8a542c5bd074eb5a650306b
+msgid "Optionally set :ref:`LOG_DISARMED <LOG_DISARMED>` = 1 and :ref:`LOG_REPLAY <LOG_REPLAY>` = 1 to allow post flight tuning with :ref:`Replay <dev:testing-with-replay>`"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:55
+#: ff6ed849969642938db57cf68a39f9f2
+msgid "Arm and takeoff in :ref:`Loiter <loiter-mode>` mode (this ensures the EKF has a good position estimate) and fly to the middle of the testing area"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:56
+#: 8a97fc3d466e4ca2950048bfba6cc3bd
+msgid "Switch to :ref:`AltHold <altholdmode>` and let the vehicle drift downwind to establish the wind direction and speed"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:57
+#: 955f390a6ecb45c9a069b216924d127d
+msgid "Yaw the vehicle so the nose faces into the wind and apply full forward pitch until the vehicle has finished accelerating upwind"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:58
+#: 4d3901480d1e4fff9be8f5ff7278c1e1
+msgid "Release the pitch stick and allow the vehicle to decelerate and then drift back to the starting line"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:59
+#: ../../source/docs/airspeed-estimation.rst:61
+#: 71283b62634d4be9a06e362fbbb2f807
+#: 12fdbaa22981492e9219bc7b07977575
+msgid "Reposition the vehicle to a comfortable position"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:60
+#: 7959b47166724c12bfdb1161f7db5892
+msgid "Yaw the vehicle 90 deg (e.g. clockwise) to the wind and apply full left roll stick until the quad has finished accelerating.  Release the stick and allow the vehicle to again decelerate and drift back downwind to the starting line"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:62
+#: 8a10e9ba8d584024b1762c61cf508a39
+msgid "Repeat step 8 but with the vehicle facing backwards into the wind (pilot should pull back on the pitch stick to accelerate into the wind)"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:63
+#: fe1bea94322342afa4bb87054dfba107
+msgid "Repeat step 8 but with the vehicle's right side facing into the wind (pilot should apply full right roll to accelerate into the wind)"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:64
+#: 0fe69891f52d436c92bb4a8b2e20b21f
+msgid "Download the :ref:`onboard logs <common-downloading-and-analyzing-data-logs-in-mission-planner>` for analysis as described in the video"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:66
+#: 5f052bab32414332a18ee7c4590b6ad4
+msgid "The final value for :ref:`EK3_DRAG_MCOEF <EK3_DRAG_MCOEF>` is normally between 0.1 and 1.0."
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:69
+#: aa477e0c23be487db6a94e059b024a06
+msgid "Viewing Windspeed and Direction in Real-Time"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:71
+#: 6447198a6f024347b0b5908a8cf8aca3
+msgid "Once enabled, the estimated wind speed is sent to the ground station in real-time via the `WIND <https://mavlink.io/en/messages/ardupilotmega.html#WIND>`__ mavlink message.  If using Mission Planner, on the Data page, select the \"Quick\" tab, double-click on any number shown and select \"wind_dir\" or \"wind_vel\"."
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:78
+#: cf9ed01f0ebf4c8a9ffca22e90d0a6c5
+msgid "Viewing Windspeed recorded in the Onboard Logs"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:80
+#: c2450e6520f7422f8bf8f86a688bc2f9
+msgid "The EKF's wind speed estimate is recorded in the onboard log XKF2 message's VWN and VWE fields"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:87
+#: 815d661cbf63409b9cda5f55e773c4dc
+msgid "Barometer Position Error Compensation"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:89
+#: bd9a82aa3c1d4bf1adc914b3e95d6817
+msgid "Once wind estimation has been enabled, it can be used to compensate for the wind's effect on each barometer in each of four directions (forward, back, left right).  The method to calculate each parameter's value is discussed `here in the video <https://youtu.be/xVVtvVuZGQE&t=3486s>`__."
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:91
+#: 5256d714988845099c40dcc5def5439f
+msgid "Perform a test flight"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:93
+#: c7ce7db8450b41f481c91261e3e30769
+msgid "Fly the vehicle nose-first into the wind, then tail-first, then right-side first, then left-side first"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:94
+#: b218457011924a73b5996c50a7ddf752
+msgid "Land and download the :ref:`onboard logs <common-downloading-and-analyzing-data-logs-in-mission-planner>`"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:96
+#: cdb1762777c14d76a5ab3839064605c6
+msgid "Calculate the position error coefficient for each direction"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:98
+#: ded87751aa444618a10ef3ad01df4dfe
+msgid "Calculate the air density (in kg/m^3) using an online calculator (`like this one <https://www.density.co.uk/calculators/density-of-air>`__)"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:99
+#: 5aab155af11342208a38914bd4c11148
+msgid "Calculate the static pressure error (in Pa) = -height * gravity * air density"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:100
+#: 7f896df3b7be4477830ad53425cc8ba5
+msgid "Calculate the dynamic pressure = 0.5 * air density * airspeed^2"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:101
+#: c48d94703acd43d1903f441aff96670a
+msgid "Position error coefficient = static pressure error / dynamic pressure.  This value should be between -1 and +1"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:103
+#: e0430aa328014fa9a4a563257d2213ac
+msgid "Enable the compensation and copy the calculated position error coefficients into the appropriate parameters.  Below are the parameters for the first barometer."
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:105
+#: 7685b0ef4b5741819acf75dd95baa3f0
+msgid "Set :ref:`BARO1_WCF_ENABLE <BARO1_WCF_ENABLE>` = 1 to enable and then reboot the autopilot"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:106
+#: 4e0986eb150e4ea097d25204af686b26
+msgid ":ref:`BARO1_WCF_FWD <BARO1_WCF_FWD>`: Pressure error coefficient in positive X direction (forwards)"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:107
+#: df6262d11303443095c630b8fd8564b2
+msgid ":ref:`BARO1_WCF_BCK <BARO1_WCF_BCK>`: Pressure error coefficient in negative X direction (backwards)"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:108
+#: 93c4e540b1864bbfb5b1dbba6d41a97b
+msgid ":ref:`BARO1_WCF_RGT <BARO1_WCF_RGT>`: Pressure error coefficient in positive Y direction (right)"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:109
+#: d71c38eeb6924a68a02f1fdde43108e5
+msgid ":ref:`BARO1_WCF_LFT <BARO1_WCF_LFT>`: Pressure error coefficient in positive Y direction (left)"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:110
+#: eb29c394024d4a528d0f47e37a201359
+msgid ":ref:`BARO1_WCF_UP<BARO1_WCF_UP>`: Pressure error coefficient in positive Z direction (climbing)"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:111
+#: 476b1af37de64dd4838cfd728011174d
+msgid ":ref:`BARO1_WCF_DN<BARO1_WCF_DN>`: Pressure error coefficient in negative Z direction (descending)"
+msgstr ""
+
+#: ../../source/docs/airspeed-estimation.rst:113
+#: 61d224d57a1e4766a48d827579d89e8d
+msgid "The mechanism and setup are explained below."
+msgstr ""

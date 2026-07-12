@@ -1,0 +1,532 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:5
+#: 3ee003541f7b48a4b85f2c80cf898fcf
+msgid "Roll, Pitch and Yaw Controller Tuning"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:6
+#: ded8748acf6743bab23fd5f08c6d7707
+msgid "Except for very heavy, slow, or extremely nimble vehicles, Autotune should produce very acceptable results. Manual tuning should be reserved for vehicles that do not fly well after Autotune has been done."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:10
+#: efdb372d82c449448f9f81787aadc44e
+msgid "The default values for the roll and pitch controllers in Plane prior to Autotuning are quite deliberately a bit small for most aircraft. This is because small values may cause ArduPilot to not navigate as well and be sluggish, but are less likely to cause the aircraft to crash."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:12
+#: bf26d7e7192144a7a8303c92e66ae267
+msgid "There is a new YAW controller which can be used in ACRO mode (previous versions had no YAW rate stabilization in ACRO mode). This controller can be AutoTuned just like roll and pitch during an AutoTuning session using AUTOTUNE mode or RCx_OPTION = 107 on a switch. This is independent of the yaw dampner and side-slip controller used in other angle stabilized modes such as CRUISE or AUTO (see :ref:`yaw-controller-tuning`) below."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:16
+#: 62d73749f90d4c0aa730c493fe80f972
+msgid "Preconditions"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:18
+#: 76808bb7ea09407ca4a5c9dd095dc54a
+msgid "The following instruction assume that:"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:20
+#: 7151fccb987a4d87b038eab58661f940
+msgid "Your model is trimmed appropriately on the bench, usually neutral on ailerons and neutral or a bit of up elevator"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:21
+#: bb87dfb653c8424dad84858c6222d1a2
+msgid "You have done your radio calibration"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:22
+#: ff4093923d7d48c9b3cf7376f6d4a2bc
+msgid "You have calibrated your airspeed sensor, if present."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:23
+#: a25a094ec97241fab80740a4e2c06a3e
+msgid "You have set the airspeed parameters (See :ref:`airspeed-parameters-setup`), even if not using an airspeed sensor."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:24
+#: 4f10e03349b8455b9fd3e225287cce33
+msgid "You have leveled the autopilot"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:25
+#: 4fc884e0c72b408b87df6aaaa6356b76
+msgid "You have set your autopilot and transmitter to be able to select :ref:`FBWA mode <fbwa-mode>`"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:26
+#: 824287a4cf4d44269eec7a8e43cf9aea
+msgid "You have checked your pitch roll and yaw angle on the HUD and verified that they match the rotation of the model and that the surfaces move to oppose movement when in FBWA mode as described below."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:31
+#: 53dbd7abdb19421ba79aeb30309dee7b
+msgid "Ground Checks"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:33
+#: 7df63c48e28e466d84b36c228a1d9066
+msgid "On the ground select FBWA mode"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:34
+#: 2a6a694d74df4587aae6a2b13a27b4f7
+msgid "Rotate your model nose up - you should see the elevators/elevons deflect down"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:36
+#: 145d4b0e1547426f8e3f41b6ae0b6b7f
+msgid "Rotate your model nose down - you should see the elevators/elevons deflect up"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:38
+#: 2d4002d25deb4a02ae286f7900b74e96
+msgid "Roll the model to the right - you should see the left aileron/elevon go up and the right aileron/elevon go down."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:40
+#: 32026e223e124202bc3e68b0dfbec06d
+msgid "Roll the model to the left - you should see the left aileron/elevon go down and the right aileron/elevon go up."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:42
+#: 0538fdd66d484db7a44724f232014b23
+msgid "Level the model - the control surfaces should be close to neutral. There will be a little bit of displacement, but any more than 10% of your maximum throw indicates that the autopilot has not been leveled or the radio calibration needs to be repeated."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:46
+#: 4106d45db1a54132935940f0e3f17a07
+msgid "With the model level apply left and right roll stick inputs on your transmitter - the controls should deflect in the same direction that they would in manual mode."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:49
+#: a16305ce13184377923b4ed94aa6cc3d
+msgid "With the model level apply up and down pitch stick inputs on your transmitter the controls should deflect in the same direction that they would in manual mode."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:52
+#: 0b909c9bfbcc4acd928621c1f63e2d5b
+msgid "If you have an airspeed sensor enabled then blow air towards the front of the pitot tube and watch the HUD. You should see the airspeed reading increase"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:57
+#: df3d6c22d08c45a29107c08c2c675be5
+msgid "Tuning Overview"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:59
+#: 1976f68da4cd4fc7ae57b42d50784e6a
+msgid "ArduPilot maintains attitude stability by detecting the difference between demanded attitude angle in either pitch or roll, turning whatever error is present in that into a demanded axial rate change, and then using a PID-FF (Proportional/Integral/Derivative-FeedForward) control loop to attain and control that rate to ultimately attain the desired attitude."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:61
+#: 47ece94863314d1ab9e1e8ec5dc0fb99
+msgid "Normally, most the demanded rate is attained using the FF, or feedforward, term. Much like the human pilot deflects the control surface directly from the transmitter in MANUAL mode to obtain the desired roll or pitch rate. Then the other PID terms act on any errors in demanded axis rate to reduce errors from external (turbulence) or internal (noise,miss-trim, CG) sources to obtain the desired attitude."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:63
+#: 1f7f722ff2ea48c08a2cabb122851d8d
+msgid "The P term acts on any short term error, the I term integrates over time any long term errors, while the D term acts as a speed-up/damping action to get to the desired attitude more quickly, yet eliminate overshoot and ringing as the desired attitude is obtained and maintained."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:67
+#: 82d8a95e50c44a30b16371e420934388
+msgid "Tuning Process"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:69
+#: ba465725d9b348838d91e43293bccdd3
+msgid "Do this for each axis (pitch and roll), one at a time."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:72
+#: 41b216e13c5040b0994502b6052aa54a
+msgid "Determining the FF gain"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:74
+#: bd456f54fed14731b1588ebf9fc089fb
+msgid ":ref:`PTCH_RATE_FF<PTCH_RATE_FF>`"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:75
+#: c441031f8f6147cdb53ef95231ec2444
+msgid ":ref:`RLL_RATE_FF<RLL_RATE_FF>`"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:77
+#: f94713585a08460791413cf952cbcc79
+msgid "First the amount of FF term can be determined by analyzing the data log after the initial flight in which the axis is exercised with the sticks in FBWA to obtain transitions resulting from several fast, full stick deflections in both directions. Using the log of that flight (See :ref:`common-logs`), create the following graph for the axis you are tuning (roll in the following examples):"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:79
+#: 8bd03fb962bc4851b2a4de48e0993f87
+msgid "ATT.Roll (as a reference on when the hard stick transitions occur)"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:80
+#: 55b50b79bdd5444ab4a45eee3929187e
+msgid ".345\\*PIDR.Act\\*AETR.SS  (this uses 0.345, the default, for the proposed :ref:`RLL_RATE_FF<RLL_RATE_FF>` term as a starting point). This is taking the total output from the PID controller, which results in the surface deflection in the next graph, as a proposed feedforward."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:81
+#: 80e678e6809448bd937efd521dd97e52
+msgid "AETR.Ail*0.01"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:83
+#: 00bf419033ab4f40aa200a5b715deb4c
+msgid "here is an example plot using `UAV LogViwer online <https://ardupilot.org/plane/docs/common-uavlogviewer.html>`__."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:88
+#: e483742a8b954e4a82e9a8f3edcc4db9
+msgid "you can see that the second curve exceeds the third, indicating that the FF term (0.345 used in the first curve) is too high....re-plotting the same data with the first curve multiplied by a lower FF proposal of 0.11:"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:90
+#: dbdee894989e4fc8998a4243f89d9954
+msgid ".11*PIDR.Act*AETR.SS (.11 was the actual FF gain result of an Autotune done later)"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:95
+#: fd596fe02bdd42a887fdec24072de6e3
+msgid "you can see that the two curves match in magnitude, indicating that the FF term should be .11."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:97
+#: bab6256f4d60412d8fcb04e9857d0755
+msgid "This technique works in all cases since FF is an open loop gain and we are just determining how much surface deflection results from how much output in the PID controller. This is then used to make the FF gain basically create the baseline control surface deflection."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:99
+#: 6193d4a0233740a795ba2607e972f521
+msgid "For the pitch axis the plots are:"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:101
+#: 84c3d431a79a4ea2a3f5fd83c90d9f4e
+msgid "ATT.Pitch (as a reference on when the hard stick transitions occur)"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:102
+#: 15aa5421685449308b2b47d98c3dcc46
+msgid "(proposed FF)\\*PIDP.Act\\*AETR.SS  (proposed FF is the proposed :ref:`PTCH_RATE_FF<PTCH_RATE_FF>` term as a starting point). This is taking the total output from the PID controller, which results in the surface deflection in the next graph, as a proposed feedforward."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:103
+#: 5b6cf856818046daaecc5e073e215868
+msgid "AETR.Elev*0.01"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:105
+#: 2e80b6bbd67f4a71b771a2946e4a87be
+msgid "Now we can tune the other PID gains to take care of disturbances and miss-trims."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:108
+#: b1f5a3ffa8fe491e8fb12c2ac4c48ab6
+msgid "I term"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:110
+#: cb1fb23cfcbf45bd84b3f7d4baf19ba2
+msgid ":ref:`PTCH_RATE_I<PTCH_RATE_I>`"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:111
+#: e4c8620d164b462db23d865feb67f405
+msgid ":ref:`RLL_RATE_I<RLL_RATE_I>`"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:113
+#: 0deff457a1c14ed199db0695f38c40db
+msgid "For Plane we recommend setting the I gain to be equal to the FF gain. This gives about a 1 sec control loop response timeframe for CG or surface trim during takeoffs."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:116
+#: 3bc5dbb123e74d6c85e19d055c374558
+msgid "P and D term"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:118
+#: 74e49358e2c94f2ca634256d6be42cf4
+msgid ":ref:`PTCH_RATE_P<PTCH_RATE_P>`"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:119
+#: 8f61d0a01d4a4b16b42e6b4cad697acc
+msgid ":ref:`RLL_RATE_P<RLL_RATE_P>`"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:120
+#: e4bfb1629cf340229dee02055f1c18c9
+msgid ":ref:`PTCH_RATE_D<PTCH_RATE_D>`"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:121
+#: 4cdbf1846a3b48328965cef1ed1aebea
+msgid ":ref:`RLL_RATE_D<RLL_RATE_D>`"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:123
+#: 0701967ac6084061b8dc1988919ba9c1
+msgid "Now, the vehicle can be flown again to start trimming P and D. Starting with D and P at 0:"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:125
+#: f9af1b44c0aa42449e87bb62e0a4b39c
+msgid "With the model in FBWA mode, increase P in 0.01 increments. Check each change by putting in a rapid angle demand, hold it and release. Do the same in the other direction. You want the model to move quickly and smoothly to the new angle and back again without overshoot or any porpoising."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:129
+#: 8d3e6e9fed8b46d7a8a4fa1925a0e664
+msgid "When you get pitch angle oscillation or overshoot, then you need to reduce P by 25-50%."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:131
+#: 82bdd1c5ebe2466cad640c32316c9ea8
+msgid "Increase the D gain in increments of 0.001 until it it starts to oscillate, then halve it. Be sure to check the temperature of your servos when you land as in extreme cases turning up this gain can cause rapid servo movement and overheat the servos leading to premature failure."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:135
+#: 96c81819787a4688afa0a154780d10ce
+msgid "You can sometimes then go back and increase P gain a bit more."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:138
+#: 975adca3a7de41aca96b1d4cdd4b28ae
+msgid "ACRO YAW Rate Controller Tuning"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:140
+#: deb768b1c15541ec8ccb56108e766477
+msgid "As of version 4.2, a full YAW rate controller for use in ACRO mode is also provided. ``YAW_RATE_x`` parameters exist and can be adjusted after :ref:`YAW_RATE_ENABLE<YAW_RATE_ENABLE>` is set to 1. When enabled, the :ref:`ACRO_YAW_RATE<ACRO_YAW_RATE>` parameter can be used to adjust maximum yaw rate demanded at rudder stick full deflections in ACRO mode."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:142
+#: cfb17ead8dc34e759a02b3bafe59a514
+msgid "Manual tuning adjustment follows the same methodology as explained above for the pitch and roll axes. PID parameters can also be AutoTuned in the same manner as those for the pitch and roll axes."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:144
+#: ab8e3b6955f84bd298af623121e287c7
+msgid "this is different than the YAW damper/sideslip controller provided for stabilized flight modes. See :ref:`yaw-controller-tuning` below."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:147
+#: 35f7cc27d75b4d4ebabdb1fed9cbf88d
+msgid "Roll to Pitch Compensation"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:149
+#: feee38b9104c43d3b15ded325bd7260a
+msgid "Another tuning parameter is :ref:`PTCH2SRV_RLL<PTCH2SRV_RLL>` which compensates pitch in turns to avoid altitude loss due to loss of lift caused by the roll. To set this:"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:151
+#: 3b2a754cbe5943229e50c5093e30ea8d
+msgid "Roll the model to maximum bank in each direction. The nose should stay fairly level during the turns without significant gain or loss of altitude. Some loss of altitude during sustained turns at constant throttle is expected, because the extra drag of turning slows the model down which will cause a mild descent. If the model gains height during the turns then you need to reduce the :ref:`PTCH2SRV_RLL<PTCH2SRV_RLL>` by small increments of 0.05 from the default value of 1.0. If the model descends immediately when the model banks (a mild descent later in the turn when the model slows down is normal as explained earlier) default value of 1.0. If you need to change the :ref:`PTCH2SRV_RLL<PTCH2SRV_RLL>` parameter outside the range from 0.7 to 1.4 then something is likely wrong with either the earlier tuning of your pitch loop, your airspeed calibration or your autopilot's bank angle estimate."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:167
+#: e9eb601a8fd2476899b1d52ff10fd67e
+msgid "Tuning tips"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:169
+#: 814f52593a0a4d2f87834e1a1640aa25
+msgid "Select the tuning box on the bottom of the Mission Planners Flight Data page. You should get a scrolling black window above the map. Double click in the black window and you should get a list of parameters to plot. Change the selection until you have the pitch and nav_pitch plotted. Nav_pitch is the demand and pitch is the response. You can use this to look for overshoot and other behaviour that isn't so obvious from the ground looking at the model."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:176
+#: 2b69bea196134e6e9b2e92004644800c
+msgid "Although the autopilot will prevent the integrator from increasing if the maximum elevator is exceeded, there is additional protection provided by the :ref:`PTCH_RATE_IMAX<PTCH_RATE_IMAX>` parameter. This parameter sets the maximum amount of elevator that the integrator can control. The default value of 0.666 allows the integrator to trim up to 2/3 of the total elevator travel. This should be enough to allow for the trim offset and variation in trim with speed for most models."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:183
+#: 840a314a18bc4d80b4aec09dd2bc2681
+msgid "WARNING : If :ref:`PTCH_RATE_IMAX<PTCH_RATE_IMAX>` is set too high, then there is a danger that in FBWA, if the model has been leveled so that zero pitch is too nose-up to glide at a safe speed, that the integrator will continue to keep increasing the elevator to maintain the demanded pitch angle until the model stalls. :ref:`PTCH_RATE_IMAX<PTCH_RATE_IMAX>` should be set to a value that is big enough to allow from trim changes, but small enough so that it cannot stall the plane. The default for Plane is 2/3 of total throw, which could produce this problem."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:191
+#: 55c7f29efaac40d59f6fa22560d8a032
+msgid "Be sure that :ref:`STAB_PITCH_DOWN<STAB_PITCH_DOWN>` is setup to add negative pitch at low throttle in stabilized modes."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:193
+#: 6779941c84d04af6baa56643b2a096c0
+msgid "The rate of pitch (and therefore the reduce the number of g's) used to correct pitch angle errors can be limited setting the pitch rate limit :ref:`PTCH2SRV_RMAX_DN<PTCH2SRV_RMAX_DN>` and :ref:`PTCH2SRV_RMAX_UP<PTCH2SRV_RMAX_UP>` parameters to non-zero values. Setting these values to 560 divided by the airspeed (in metres/second) gives a limit equivalent to approximately +- 1g."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:198
+#: b412a42a39594aeb966157916da2d114
+msgid "The time constant parameter :ref:`PTCH2SRV_TCONST<PTCH2SRV_TCONST>` can also be used to adjust how rapidly the pitch angle reaches the demanded value. The effect of this parameter will be seen mostly in the response to small step changes in demanded pitch. For larger pitch demands, the pitch rate limits :ref:`PTCH2SRV_RMAX_DN<PTCH2SRV_RMAX_DN>` and :ref:`PTCH2SRV_RMAX_UP<PTCH2SRV_RMAX_UP>` tend to mask its effect. Making this parameter smaller will cause the aircraft to reach its demanded pitch angle in less time, but only if the aircraft is capable. A very slow responding airframe may require a slightly larger setting for this parameter."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:207
+#: e21a47fbdd9e4643804b143cf74cf4a8
+msgid "Plot the pitch_speed in the tuning window. This shows the rate of pitch in radians/second. A value of 1 radian/second is approximately equal to 60 degrees/second (57 to be more precise), so if for example you had \\ :ref:`PTCH2SRV_RMAX_DN<PTCH2SRV_RMAX_DN>`/UP set to 30, the maximum pitch_speed when responding to a large pitch angle demand (eg full pitch one way to full pitch the other way) should be just above 0.5."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:215
+#: a05b78c64bc04824a8ca42960b316441
+msgid "Filtering"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:217
+#: 533f054476524e6581710d04c858b521
+msgid "The new PID-FF controller in Plane also has a number of lowpass filters whose frequencies can be adjusted. The defaults should be satisfactory, however, experimentation on these may yield better response to external disturbances in certain situations, or when special requirements, such as video filming would suggest lowering the responsiveness as a trade-off for increased smoothness. These are:"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:219
+#: c1fb4dfe121248d3b090666f54419e08
+msgid ":ref:`PTCH_RATE_FLTT<PTCH_RATE_FLTT>`: filter on target demanded pitch rate"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:220
+#: 8ed824af318441908623959016cf3ce7
+msgid ":ref:`PTCH_RATE_FLTE<PTCH_RATE_FLTE>`: filter on pitch rate error"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:221
+#: cb7c11e99482458988dc269b11947f1d
+msgid ":ref:`PTCH_RATE_FLTD<PTCH_RATE_FLTD>`: filter on D term (tends to be noisy)"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:222
+#: 8deda7b77547419db5b9f2046cc97f4c
+msgid ":ref:`RLL_RATE_FLTT<RLL_RATE_FLTT>`: filter on target demanded roll rate"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:223
+#: c4c0657b546744fd917335e8e4beba0f
+msgid ":ref:`RLL_RATE_FLTE<RLL_RATE_FLTE>`: filter on roll rate error"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:224
+#: 930460a6ca8d48ed9deb9fe6b58c942b
+msgid ":ref:`RLL_RATE_FLTD<RLL_RATE_FLTD>`: filter on D term (tends to be noisy)"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:227
+#: f43ddf22a6d04ab0b66d8f92898a2f79
+msgid "Speed Scaling (SS)"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:229
+#: 3ab961fb1b4c446c8233827e941230a2
+msgid "ArduPilot automatically adjusts the stabilization gains in the PID-FF loops based on the airspeed. This helps avoid oscillations when flying fast and ensures effective stabilization during slower flight, even if the aircraft doesn't have an airspeed sensor. This parameter is :ref:`SCALING_SPEED<SCALING_SPEED>`. This should be set close to the normal cruising speed of the aircraft. The loop gains are scaled above and below this value with a multiplier determined base on the above min  and max flying speeds. These parameters are :ref:`AIRSPEED_MIN<AIRSPEED_MIN>` and :ref:`AIRSPEED_MAX<AIRSPEED_MAX>`, respectively. See :ref:`airspeed-parameters-setup` for more details."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:238
+#: 83d05363f0c74b6f999190c4283e27bc
+msgid "Changing this parameter after tuning will affect your controller settings, and can cause poor performance of your aircraft. If you change the SCALING_SPEED after completing a tune, you must re-run AUTOTUNE or manually retune the controller gains."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:242
+#: 8a14113eb54143e0977ab280762f9135
+msgid "Slew Rate Limiter"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:244
+#: 90636046a012425090cb855f8538fc3b
+msgid "ArduPilot includes an algorithm that monitors the actuator slew rates. If the rates exceed the thresholds defined by the _SMAX parameters, it automatically reduces the control loop gains to help stop the oscillations. One can set the slew rate limits for the pitch and roll control surfaces using the following parameters: :ref:`PTCH_RATE_SMAX<PTCH_RATE_SMAX>` for pitch and :ref:`RLL_RATE_SMAX<RLL_RATE_SMAX>` for roll. See :ref:`common-servo-limit-cycle-detection` for more details."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:250
+#: da0816cf95bd49d792ded3d392e40cf2
+msgid "PID Controller Flow Diagram"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:257
+#: ec0a9346a31143eb9cdcb56c2f4db60e
+msgid "Yaw Damper/SideSlip Tuning"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:259
+#: d9c95ab2fbb442bead53c4401e9a79ae
+msgid "The yaw control loop can be configured either as a simple yaw damper (good for models with inadequate fin area) or as a combined yaw damper and side-slip controller. Because control of side-slip uses measured lateral acceleration, it will only work for those models that have enough fuselage side area to produce a measurable lateral acceleration when they side-slip (an extreme example of this is an aerobatic model flying a knife-edge maneuver where all of the lift is produced by the fuselage). Gliders with slender fuselages and flying wings cannot use this feature, but can still benefit from the yaw damper provided they have a yaw control (rudder, differential airbrakes, etc)"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:271
+#: c65ab7e2646741baa98327c883e044d2
+msgid "Tuning the yaw damper"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:273
+#: 1952e714857c4323b8f63c2c53242a34
+msgid "Verify that the :ref:`YAW2SRV_SLIP<YAW2SRV_SLIP>` and :ref:`YAW2SRV_INT<YAW2SRV_INT>` gain terms are set to zero, the ``YAW2SRV_RLL`` gain term is set to 1.0 and the :ref:`YAW2SRV_DAMP<YAW2SRV_DAMP>` gain term is set to zero"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:276
+#: 7d4f564096b143adb24737f72eb6c362
+msgid "Now rapidly roll the model from maximum bank angle in one direction to maximum bank angle in the opposite direction. Do this several times going in each direction and observe the yawing motion of the model. If as the wings pass through level the nose is yawed in the opposite direction to the roll (for example when rolling from left to right bank, the nose points left) then increase the value of :ref:`KFF_RDDRMIX<KFF_RDDRMIX>` gain until the yaw goes away. Do not use a value larger than 1."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:284
+#: 182625778152464fbf00b5e11fa77b71
+msgid "Increase :ref:`YAW2SRV_DAMP<YAW2SRV_DAMP>` in small increments of 0.05 until the yaw angle starts to oscillate. When this happens, the tail will appear to 'wag'. Halve the gain from the value that caused the oscillation."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:287
+#: 1694533880c64da0982806b67fbbc2f9
+msgid "Now roll the model into and out of turns in both directions. If the model has a tendency to yaw the nose to the outside of the turn, then increase the :ref:`YAW2SRV_RLL<YAW2SRV_RLL>` gain term in increments of 0.05 from its default value of 1.0. Conversely if the model has a tendency to yaw the nose to the inside of the turn on turn entry, then reduce the :ref:`YAW2SRV_RLL<YAW2SRV_RLL>` gain term in increments of 0.01 from its default value of 1.0. If you have to go outside the range from 0.7 to 1.4, then there is something else that needs to be sorted and you should check that you have performed step 2) correctly and check your airspeed calibration if airspeed is being used."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:299
+#: d50d6cdc94dd4ca79d233dc680c37f92
+msgid "Tuning the sideslip controller"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:301
+#: ebebf7079a5542168bf159a6b73c1013
+msgid "Tune the yaw damper first"
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:302
+#: 836b6ca85cad44d28e9b1168652d38f1
+msgid "Bring up the tuning graph window in the mission planner and plot the lateral acceleration ay."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:304
+#: 0b46eaea6107448694cdad9d68f0eb25
+msgid "Roll the model rapidly from full bank in each direction and observe the lateral acceleration ay. If the lateral acceleration sits around zero and doesn't change when you roll into or out of turns then no side-slip control is necessary. You can finish at this point."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:308
+#: 4602b205f7784a47869cb4cdd601b9d8
+msgid "Set the :ref:`YAW2SRV_INT<YAW2SRV_INT>` gain term to 1.0. If this causes the yaw angle to oscillate then halve the gain from the smallest value that causes oscillation."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:311
+#: f7c2f3b8e94f445391a41da076d044a2
+msgid "If you see that the y acceleration is offset or spikes up during turns, then progressively increase the :ref:`YAW2SRV_SLIP<YAW2SRV_SLIP>` gain in steps of 0.5 until the error goes away or the yaw angle starts to oscillate. If yaw oscillation occurs, then halve the gain from the value at which caused the oscillation."
+msgstr ""
+
+#: ../../source/docs/new-roll-and-pitch-tuning.rst:318
+#: f5dfbe51f9854d8ca4cd504fd47072c2
+msgid "Yaw Controller Diagram"
+msgstr ""

@@ -1,0 +1,197 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/code-overview-object-avoidance.rst:5
+#: c8e14f5e29094398a1942b7ac9cf0a93
+msgid "Copter Object Avoidance"
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:7
+#: efdbf46f1cef48ed8d84ff810f4bec38
+msgid "ArduCopter, from release 3.5, supports object avoidance using a :ref:`Lightware SF40C <copter:common-lightware-sf40c-objectavoidance>`, :ref:`TeraRanger Tower <copter:common-teraranger-tower-objectavoidance>`  or with any sensor capable of providing distances using the MAVLink `DISTANCE_SENSOR <https://mavlink.io/en/messages/common.html#DISTANCE_SENSOR>`__ message. This page describes how the object avoidance feature works and how \"proximity sensors\" should provide data into ArduPilot."
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:11
+#: 4ec1042147cd4c7cb39cdc6a7272dc16
+msgid "Avoidance in Loiter"
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:16
+#: f6bd4a1c353f47f38d38d1f7c2aed7b1
+msgid "The video above shows a test of an EnRoute EX700 copter fitted with a :ref:`Lightware SF40C 360degree lidar<common-lightware-sf40c-objectavoidance>`. The vehicle stops 2m from the fence regardless of the speed of the vehicle towards the fence. This is possible because ArduPilot knows the speed of the vehicle (using the GPS and accelerometers), the distance to the barrier and the maximum acceleration/deceleration of the vehicle."
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:20
+#: ffd81b7335d54a09ac2f763a928257a1
+msgid "The `AP_Proximity library <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Proximity>`__ collects the raw distance measurements from the sensor. These raw distance measurements are consolidated so that only the closest distance and angle within 8 sectors is stored and used."
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:23
+#: 1f78a8ed73d146a7a694f73c708fdbe4
+msgid "Each sector is 45 degrees wide with sector 0 pointing forward of the vehicle, sector 1 is forward-right, etc. From these distances and angles a fence (an array of 2D Vectors) is built up around the vehicle.  The fence points fall on the lines between sectors at a conservative distance."
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:28
+#: fd85f3fb4b2643789295fef9a6a722c8
+msgid "The default is to divide the area around the vehicle into 8 sectors but each proximity sensor driver can override this and use a different number of sectors."
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:33
+#: 744d4daa1b774be68a340c2383f27300
+msgid "The `AC_Avoidance library <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AC_Avoidance>`__ consumes the above fence and uses it to adjust (mostly shortens) desired velocity vectors sent to it by the `Loiter controller <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AC_WPNav/AC_Loiter.cpp#L310>`__ (search for \"avoid->adjust_velocity\").  Loiter's desired velocity vectors come from the pilot's inputs."
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:38
+#: e4154005c0674b4f832db4afd900a7bd
+msgid "Object avoidance also works for Guided mode's velocity controller"
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:41
+#: 596c1226f5fb4206ae9d71b5cc38f19b
+msgid "Avoidance in AltHold"
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:43
+#: 279ddd8ed29b414bbf51872fec880714
+msgid "The `AP_Proximity <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Proximity>`__ and `AC_Avoidance libraries <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AC_Avoidance>`__ are also used for object avoidance in AltHold.  Because AltHold does not rely upon the GPS, the vehicle's velocity towards the barriers is not known and a much simpler version of object avoidance is used in which the distance to the barrier is converted into a lean angle."
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:47
+#: 021e36132dce4dc6b5f623abc860975d
+msgid "The image below shows the method by which the distances to various objects are combined together to result in a final roll/pitch lean angle. Each sensed object's distance and angle from the vehicle is turned into a roll/pitch angle.  The largest positive and negative roll and pitch angles are found and combined together resulting in a final roll/pitch angle."
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:53
+#: eac0efee976a4c9abda07fcdc7e225f9
+msgid "This final roll/pitch angle is combined with the pilot's input meaning the vehicle tends to fly away from objects but the pilot always maintains the ability to override the object avoidance. This is quite different from Loiter mode in which the pilot cannot force the vehicle to fly into an object."
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:58
+#: 359e5add01c448cc8730c127b7a7b94d
+msgid "The vehicle will also stop before hitting barriers above it if there is an upward facing range finder. Currently this range finder's distance must be sent to ardupilot using the `DISTANCE_SENSOR <https://mavlink.io/en/messages/common.html#DISTANCE_SENSOR>`__ message with the orientation field set to 24 (upwards)."
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:62
+#: c668e48411a047f58fadac3acabc7cdd
+msgid "Reporting to the Ground Station"
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:64
+#: 4e944cb1d1e44b6d936080f726ea79fb
+msgid "MissionPlanner, from v1.3.48 onwards (and hopefully other ground stations in the future), shows the distance to nearby objects in a RADAR type window."
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:69
+#: 589b91869fd64e4fbff6298799e29971
+msgid "This window can be opened by going to the Flight Data screen, press Ctrl-F and push the Proximity button.  Values will will appear if the `PRX_TYPE <https://ardupilot.org/copter/docs/parameters.html#prx-type>`__ parameter is set to enable a sensor, and messages are being received."
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:75
+#: d10a1a1b8f684f3ab1efc03e009e14ff
+msgid "This is accomplished by the vehicle sending DISTANCE_SENSOR messages to the ground station at regular intervals. The method that does this can be seen in the `GCS_Common.cpp file <https://github.com/ArduPilot/ardupilot/blob/master/libraries/GCS_MAVLink/GCS_Common.cpp#L408>`__ (search for \"send_proximity\"). Note that this means that it is possible that DISTANCE_SENSOR messages can be used both to send distances into the vehicle code, and then similar DISTANCE_SENSOR messages might be sent out from the vehicle to the ground station. These are separate messages though and are likely transferred at a different rate."
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:81
+#: ad663a5e8d2f4eac8c17cbe1e5256627
+msgid "Providing Distance Sensor messages to ArduPilot"
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:83
+#: 1ab463231c8b43f6950aa14dfe967e51
+msgid "For developers of new \"proximity\" sensors (i.e. sensors that can somehow provide the distance to nearby objects) the easiest method to get your distance measurements into ardupilot is to send `DISTANCE_SENSOR <https://mavlink.io/en/messages/common.html#DISTANCE_SENSOR>`__ message for each direction the sensor is capable of. The system id of the message should match the system id of the vehicle (default is \"1\" but can be changed using the SYSID_THISMAV parameter). The component id can be anything but MAV_COMP_ID_PATHPLANNER (195) or MAV_COMP_ID_PERIPHERAL (158) are probably good choices."
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:87
+#: 1f94493c7aae459587dfd5db27f37818
+msgid "These messages should be sent at between 10hz and 50hz (the faster the better).  The fields should be filled in as shown below:"
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:89
+#: f7d82dba8a2f402bbf5a5039e8ff4edd
+msgid "time_boost_ms : 0 (ignored)"
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:90
+#: bc9c46009aac4ca9abfb85eb83d37108
+msgid "min_distance : the minimum distance that the sensor can measure in centimeters (i.e. 100 = 1m).  This number should generally not change and should be the same regardless of the orientation field."
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:91
+#: 8f17c4e481eb416286507beab01c7989
+msgid "max_distance : the maximum distance that the sensor can measure in centimeters (i.e. 1500 = 15m).  This number should generally not change and should be the same regardless of the orientation field."
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:92
+#: a6a5ee6c06eb4dbe9cdc9af46d76c1cc
+msgid "current_distance : the shortest distance in cm to the object"
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:93
+#: b29a561a553e4937b879b67ad5e2e24b
+msgid "type : 0 (ignored)"
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:94
+#: 84906a5336804a93a78f1333e220b126
+msgid "id : 0 (ignored)"
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:95
+#: e47b7849f6d54c388dd15bd699ca8f57
+msgid "orientation : 0 to 7 (0=forward, each increment is 45degrees more in clockwise direction), 24 (upwards) or 25 (downwards).  search for MAV_SENSOR_ORIENTATION on the `mavlink/common page <https://mavlink.io/en/messages/common.html>`__."
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:96
+#: 1251e0d3a54d4fe89b873c19cdd4592f
+msgid "covariance : 0 (ignored)"
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:98
+#: ecad725345554351b5bce7db9c4b871b
+msgid "When DISTANCE_SENSOR messages are not received for all 8 sectors, empty sectors are filled in with the distance from an adjacent sector (if available).  This conveniently leads to a \"cup\" shaped fence which is more likely to protect the vehicle from hitting the object. It is likely this will be changed in future releases especially if the \"stop\" behaviour (instead of \"slide\" behaviour) is configured."
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:104
+#: dc1b004bbaa44503b0df88aa7ce8204a
+msgid "These two videos shows a `ZED 3D camera <https://www.stereolabs.com/>`__ connected to an :ref:`NVidia TX1 <companion-computer-nvidia-tx1>` running `OpenKai <https://github.com/yankailab/OpenKAI>`__ and providing forward facing distance measurements to ArduPilot using the method described above."
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:113
+#: d3eb85f097204965bc51eb4c3dd8d94b
+msgid "Future Steps"
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:115
+#: 90fa1346549d4c1dac18d20821c9f8d8
+msgid "add avoidance to other modes including RTL, AUTO (`issue here <https://github.com/ArduPilot/ardupilot/issues/5607>`__)"
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:116
+#: 7680316d1f944bc884f007197c9ed663
+msgid "improve integration with ROS (`issue here <https://github.com/ArduPilot/ardupilot/issues/5608>`__)"
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:117
+#: 0958cec5c56c40a4b118c642b97993ba
+msgid "implement a simple occupancy grid for cases where we cannot (or do not want to) implement ROS on the vehicle (`issue here <https://github.com/ArduPilot/ardupilot/issues/5609>`__)"
+msgstr ""
+
+#: ../../source/docs/code-overview-object-avoidance.rst:119
+#: 266b7ec4aa764829be61f3356ebdc4ab
+msgid "If you would like to get involved with the development of this area, please consider posting in the issues listed above or chatting with the developers on `ArduPilot Discord <https://ardupilot.org/discord>`__."
+msgstr ""

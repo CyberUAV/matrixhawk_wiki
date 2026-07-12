@@ -1,0 +1,267 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Sub package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Sub \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:43+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/radio-failsafe.rst:5
+#: d77847940b6b4162ad81a8a8951f605d
+msgid "Radio Failsafe"
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:7
+#: a743519dedfc410e89a429210f5beeb8
+msgid "RC control is not enabled by default so items in this section would not be applicable. See :ref:`Sub Defaults<sub-defaults>` section to enable."
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:9
+#: 0c2a1cf082894010be37ee22471c9065
+msgid "Sub supports several configurable failsafe options in cases where contact between the Pilot's RC transmitter and the autopilot's receiver is lost.  This page explains this failsafe's setup and testing.  Note the \"Radio failsafe\" was previously called \"Throttle failsafe\" because of the way in which some receivers use the throttle channel to signal the loss of contact."
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:13
+#: 421fbe88d18d4b0ba45c3c3d0f654ae0
+msgid "Sub also supports other failsafes, see the :ref:`failsafe-landing-page`."
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:16
+#: cb51d9f8d3c24e39b921e10fea37871f
+msgid "When the failsafe will trigger"
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:17
+#: 69e94e5c16f84227a498196ceb5c1427
+msgid "If enabled and set-up correctly the radio failsafe will trigger if any of these conditions occur for more than :ref:`RC_FS_TIMEOUT<RC_FS_TIMEOUT>` seconds:"
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:19
+#: 6003712c9c3f45019f1f64244f33f5a6
+msgid "The pilot turns off the RC transmitter."
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:20
+#: 753b0efb5e64473399d236d1f298a71c
+msgid "The vehicle travels outside of RC range and signal is lost."
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:21
+#: 0c18549dca0d4fec851db5baf3d0f3a9
+msgid "The pilot forces the throttle channel below :ref:`FS_THR_VALUE<FS_THR_VALUE>` from the transmitter."
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:22
+#: aa019f08d8474c0499650d4e1dc7c792
+msgid "The receiver loses power (unlikely)."
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:23
+#: c58c0dd98c92405ab74ba5818adba0d5
+msgid "The wires connecting the receiver to the autopilot are broken (unlikely)."
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:27
+#: d7f0d0432a6540b6be0cc93527ac91a2
+msgid "What will happen"
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:28
+#: 1f9e240f91e74b27a53559b72253d9f4
+msgid "When a radio failsafe is triggered, the vehicle can be configured via parameters to do nothing, warn the GCS, or switch mode to SURFACE."
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:30
+#: a7148521ac7046219bf21b057180045a
+msgid "If the rc failsafe clears (i.e. transmitter and receiver regain contact) the vehicle will remain in its failsafe mode. It will **not** automatically return to the flight mode that was active before the failsafe was triggered. If the pilot wished to re-take control he/she would need to change the RC flight mode switch to another position."
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:33
+#: 7f75f98f706e4205a4c5ccaca9515af8
+msgid "Receiver Configuration"
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:34
+#: c63139bc5c0c42e794610928dbc4fea9
+msgid "By default, most newly purchased receivers will simply not output pulses if contact with the transmitter is lost. However, some older low end receivers will be set-up to simply hold all channels at their last known position.  This is not good because the autopilot has no way to know that the Pilot has lost control of the vehicle.  Instead the receiver must be set-up to signal to the autopilot it has lost contact and there are two ways that it can do this (the method depends upon the receiver). Each brand of Transmitter/Receiver is slightly different so please refer to your transmitter's user manual to determine which method is available and how to set it up."
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:37
+#: a30ef565ffd94b8c92cde7c93959e9de
+msgid "Receiver configuration for low-throttle method"
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:38
+#: 76334b13c03645fa9b8760ba3bc0a882
+msgid "The **\"Low-Throttle\" method** pulls the throttle channel (normally channel 3) to a value below the bottom of its normal range (normally below 1000us).  This method is used by Futaba systems and many older systems.  Below is the setup method for a Futaba T7C Transmitter with R617FS or TFR4-B receiver which uses the \"low throttle\" method."
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:43
+#: d3ac6c60cc634deabd7ebf9857369c9f
+msgid "Many receivers allow for the failsafe positions to be set either by simply pressing a button on the receiver, or directly from the transmitter. In this case, the transmitter is temporarily adjusted to output a throttle signal below the normal low idle position (for example,if low idle is 1000us, then 990uS would be sent) setting this as the failsafe value for the receiver, then adjusting low stick back to normal idle position. This below throttle idle value is then set for :ref:`FS_THR_VALUE<FS_THR_VALUE>`, as discussed below."
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:46
+#: 6096fdbe0a424ad3a33d761490f9b9a1
+msgid "Receiver configuration for No-Signal method"
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:47
+#: 6eebfad2ea3a43a4828dbcaac9df372a
+msgid "**\"No Signal\" method** - the receiver stops sending signals to the autopilot.  This is the preferred method and is how most modern receivers operate. Below is the setup method for a FlySky 9 channel transmitter with FrSky D4R-II receiver which uses the \"No Signal\" method."
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:53
+#: 1565353cb6e24a928d042c74faa5e563
+msgid "Parameter Configuration"
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:54
+#: 5f5fd88b2f3d43a7bb81c9084504eedb
+msgid "The :ref:`FS_THR_ENABLE<FS_THR_ENABLE>` parameter can be set in the Mission Planner full parameter list or full parameter tree, or can also be set using the Mission Planner *failsafe options* dropdown in the Initial Setup >> Mandatory Hardware >> Failsafe menu."
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:56
+#: 9d3686515bd244b68914fe4496b65496
+msgid "**Disabled** (Value 0) will disable the radio failsafe entirely."
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:57
+#: 1e201d32931d4a04a0dccdef0930a376
+msgid "**Warn only, prevent arming** (Value 1) Send a GCS message and prevent arming if unarmed."
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:58
+#: 20c397e401e241ebb330f9358335454c
+msgid "**Surface** (Value 2) change mode to SURFACE."
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:60
+#: 3ff15ffd9bb7455581aa3281fc21be72
+msgid "The :ref:`FS_THR_VALUE<FS_THR_VALUE>`  parameter can be set in the Mission Planner full parameter list or full parameter tree, or can also be set using the Mission Planner *FS PWM* value in the Initial Setup >> Mandatory Hardware >> Failsafe menu. It should be set:"
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:62
+#: d2bc8d0a359c44a5a126fdd76e1c71f0
+msgid "At least 10 us higher than your Throttle Input Channel (usually 3) PWM value when the throttle stick is fully down and the transmitter is **off**"
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:63
+#: 1ea97488e8234570a3c89e2b963a1405
+msgid "At least 10 us lower than your Throttle Input Channel (usually 3) PWM value when the throttle stick is fully down and the transmitter is **on**"
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:64
+#: eca9cf88ce07471db5dcba82a98392fc
+msgid "Above 910 PWM"
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:67
+#: 0dfa4dcce93142b791ec45a822300208
+msgid "Testing"
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:68
+#: 95d6433d469e4707aa79ab96e534b0af
+msgid "You can check your failsafe by performing the following tests with the autopilot connected to the Mission Planner either via a USB cable or telemetry link. You can complete these tests without plugging in your LiPo battery but if you do connect a battery you should first be sure if the thrusters run, it will be safe."
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:73
+#: 9db1e4777f3045b583578660e2bd081f
+msgid "**Test #1** : if using the \"Low-Throttle\" method, ensure the throttle channel drops with loss of radio contact"
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:75
+#: 5a250657f4584148815f9f891d40af03
+msgid "Ensure your RC transmitter is on and connected with the throttle all"
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:76
+#: 3df7160a881b4cb8ad7d004e17b698c1
+msgid "the way down and flight mode set to MANUAL."
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:77
+#: 6c86750091d34b8286d7f29d79235b00
+msgid "The throttle (channel 3) PWM value should be approximately as in"
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:78
+#: 6cda8f116a5f4f05af00c2f670aa6406
+msgid "first illustration below.  Its value may be higher or lower but it should definitely be at least 10us higher than the value held in the FS PWM field"
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:81
+#: dbc48797680749c7aaf4477324bf3a5f
+msgid "Turn the transmitter off and the throttle PWM value should drop to be"
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:82
+#: 4b4c8cfa5bf04763952cb7e15c5845a8
+msgid "at least 10us below the FS PWM field value (as in the second illustration below) below"
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:88
+#: d8cdc6e70e9c40cba4638cce6d65243b
+msgid "A GCS message noting the failure will occur and the mode switch to SURFACE if that action has been selected with :ref:`FS_THR_ENABLE<FS_THR_ENABLE>`."
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:90
+#: ace1477dc402431399c360568cadd9d1
+msgid "If disarmed, a pre-arm message will be sent and arming prevented."
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:93
+#: d057c4865b0742678c982941a985088e
+msgid "**Test #2** : retaking control after the failsafe has cleared"
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:95
+#: e3fe023d0bc345b69a82d70dab8790e0
+msgid "Continuing on from test #1, turn your transmitter back on"
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:96
+#: b889dcb2c3ca4e97b1fd36f3842b96b6
+msgid "While the flight mode is still SURFACE, the pre-arm warnings should disappear(assuming nothing else is preventing arming) and a notice that RC has been reacquired sent to the GCS."
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:97
+#: 8565c28c918645179730ea5e8227cb37
+msgid "You should be able to arm the vechicle now and change modes via the RC flight mode control channel."
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:99
+#: 4ad3925939834b30a187511eb5af5029
+msgid "**Test #3** (optional) : removing power from the receiver"
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:101
+#: 66cd1dc82c564ba4957fbd0f5ca2b55a
+msgid "Switch to STABILIZE mode, arm your motors and keep your throttle above zero."
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:103
+#: 44975af896ef4ee4a1a257b34b25a707
+msgid "Carefully disconnect the power wires connecting the receiver to the autopilot"
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:105
+#: 8c262c77dca14fcd8e77799220b3d750
+msgid "The autopilot should failsafe as described in Test #1"
+msgstr ""
+
+#: ../../source/docs/radio-failsafe.rst:107
+#: 52e7fbf14f454571b272eb5d6ce5ba31
+msgid "Unplug the autopilot so that it is powered down before reattaching the receiver's power to assure the receiver is detected during autopilot initialization."
+msgstr ""

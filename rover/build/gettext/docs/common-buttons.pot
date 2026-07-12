@@ -1,0 +1,131 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Rover package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rover \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:39+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-buttons.rst:5
+#: a3c9d1d957344ecc9e104ac9005d1ded
+msgid "Buttons"
+msgstr ""
+
+#: ../../source/docs/common-buttons.rst:7
+#: 6c50d77798624d15a553cca451bbba6c
+msgid "Up to four external buttons or switches connected to the autopilot can be configured to trigger :ref:`Auxiliary Functions <common-auxiliary-functions>` similar to how RC channel switches can trigger them. These button inputs can be configured to use either digital logic level voltage inputs (pull-to-ground or pull-to-high) or PWM signal inputs."
+msgstr ""
+
+#: ../../source/docs/common-buttons.rst:11
+#: 10accc57ce244bf1a7d5a9f046ebca2a
+msgid "Some :ref:`auxiliary function <common-auxiliary-functions>` have a middle position (e.g \"Parachute 3 Pos Switch\") but the middle position cannot be triggered from a button"
+msgstr ""
+
+#: ../../source/docs/common-buttons.rst:14
+#: 1df2ce2b94a34a31b2a1a06626997690
+msgid "Basic Setup"
+msgstr ""
+
+#: ../../source/docs/common-buttons.rst:16
+#: bd32722bf7514b88859e0c354407a6e5
+msgid "In order to use a button, an autopilot pin must be configured as a GPIO. Many autopilots have dedicated pins for this, but some do not. In those cases, a normal SERVO/MOTOR output must be configured as a GPIO pin instead of an :ref:`common-rcoutput-mapping`."
+msgstr ""
+
+#: ../../source/docs/common-buttons.rst:18
+#: df7df08aefc74f0899d446879071b814
+msgid "For autopilots with an IOMCU (e.g. Pixhawk, CubeOrange) the external button or switch should be connected to the autopilot's AUX outputs (not the MAIN outputs).  To ease configuration and avoid timer conflicts it may be best to use AUX outputs at the high end (e.g. AUX5 or AUX6) far from outputs used for motors and servos.  For autopilots without an IOMCU (e.g. pixracer, etc) the normal SERVO/MOTOR outputs may be used."
+msgstr ""
+
+#: ../../source/docs/common-buttons.rst:20
+#: c1dba1f001a945b1bcfd2ca08af397f7
+msgid "Set :ref:`BTN_ENABLE<BTN_ENABLE>` = 1 (Enable) and refresh parameters"
+msgstr ""
+
+#: ../../source/docs/common-buttons.rst:21
+#: d13eb478e6634eac907e7332e187ee58
+msgid "Set the ``SERVOx_FUNCTION`` = -1 (GPIO) where \"x\" is the servo output channel connected to the button . For example, if the AUX6 output on an autopilot with an IOMCU is to be used as a GPIO, set :ref:`SERVO14_FUNCTION<SERVO14_FUNCTION>` = -1."
+msgstr ""
+
+#: ../../source/docs/common-buttons.rst:24
+#: 56dd8f9c3424481cab83a0336d3fd9bd
+msgid "Digital Logic/Analog Voltage Setup"
+msgstr ""
+
+#: ../../source/docs/common-buttons.rst:26
+#: bf9d489f7fc34721b42d3f09b5963a09
+msgid "Digital logic level analog voltages can be used for the button input.  The parameter changes listed below are for the 1st button but the 2nd, 3rd and 4th buttons can be setup similarly, simply replace the \"1\" in the parameter names with \"2\", \"3\" or \"4\". In order to determine which GPIO pin number corresponds to which autopilot SERVO/MOTOR output pin or dedicated GPIO pin, the autopilot's hwdef.dat file must be consulted. See :ref:`common-gpios` for how to determine this."
+msgstr ""
+
+#: ../../source/docs/common-buttons.rst:28
+#: ../../source/docs/common-buttons.rst:43
+#: cd3c96e98639480395303149e0a11a3b
+#: 64f094f65f9d400fa88db62b1a5f2398
+msgid "Set :ref:`BTN_PIN1<BTN_PIN1>` to the number of the GPIO connected to the button/switch (e.g. \"55\" = \"AUXOUT6\")"
+msgstr ""
+
+#: ../../source/docs/common-buttons.rst:29
+#: 7e184b4cfefb4e168a319e4de3bf83eb
+msgid "Set :ref:`BTN_OPTIONS1<BTN_OPTIONS1>` = set to zero (no bits set in bitmask) to trigger on high logic level voltage (>2.4V) and  be interpreted as a \"HIGH\" position by the Auxiliary function. Setting bit 1 (PWM input) detects PWM above or below 1800/1200us instead of logic level. If PWM is not detected or is less than 800us or above 2200us the button will interpreted as low. Setting bit 2 (Invert) changes HIGH state to be logic low voltage on pin, or below 1200us, if PWM input."
+msgstr ""
+
+#: ../../source/docs/common-buttons.rst:30
+#: ../../source/docs/common-buttons.rst:46
+#: 47c5fa7e7d04437fa3efc5c0687e416a
+#: 692e46972d164eda826c6eb4c9070c8e
+msgid "Set :ref:`BTN_FUNC1<BTN_FUNC1>` to the :ref:`Auxiliary Function <common-auxiliary-functions>` to be triggered.  If set to 0, no function is to be triggered."
+msgstr ""
+
+#: ../../source/docs/common-buttons.rst:32
+#: c0bd0f76e37740ae81d3aa9fe1dbbf2d
+msgid "The pin is automatically configured with an internal pullup meaning the button or switch is only required to pull the voltage low."
+msgstr ""
+
+#: ../../source/docs/common-buttons.rst:36
+#: 449fc08824b7403ca5f48801a810a446
+msgid "Some autopilots pull pins high or low during startup and this may lead to the auxiliary function triggering soon after startup"
+msgstr ""
+
+#: ../../source/docs/common-buttons.rst:39
+#: 95c2fe892bf14ac087875d80dbbbf82c
+msgid "PWM Input Setup"
+msgstr ""
+
+#: ../../source/docs/common-buttons.rst:41
+#: 8619cf704a7d4454ae1432c5154f93c6
+msgid "PWM signals can be used as button inputs.  PWM values >1800us or <1200us can be used to trigger the Auxiliary Function. The parameter changes listed below are for the 1st button, but the 2nd, 3rd and 4th buttons can be setup similarly. As above, to determine which GPIO pin number corresponds to which autopilot SERVO/MOTOR output pin or dedicated GPIO pin, the autopilot's hwdef.dat file must be consulted. See :ref:`common-gpios` for how to determine this."
+msgstr ""
+
+#: ../../source/docs/common-buttons.rst:44
+#: c3f1e5edbc244a76b1c1052bd66e6630
+msgid "Set :ref:`BTN_OPTIONS1<BTN_OPTIONS1>` = to \"1\" to be interpreted as a \"HIGH\" position by the auxiliary function with a PWM > 1800us"
+msgstr ""
+
+#: ../../source/docs/common-buttons.rst:45
+#: 6bde4bb9be1e41118ad406e52aaac4bf
+msgid "Set :ref:`BTN_OPTIONS1<BTN_OPTIONS1>` = to \"3\" to be interpreted as a \"HIGH\" position by the auxiliary function with a PWM < 1200us, or missing a signal input. PWM >1800us will be interpreted as the \"LOW\" position."
+msgstr ""
+
+#: ../../source/docs/common-buttons.rst:50
+#: c8d8dd59756a4e148a1778a7da96008f
+msgid "The valid PWM input range is 800us to 2200us.  If the PWM value falls outside this range, or is missing, it is equivalent applying <1200us.  Normally this means the auxiliary function will not be triggered unless the invert option of ``BTN_OPTIONSx`` is set."
+msgstr ""
+
+#: ../../source/docs/common-buttons.rst:53
+#: c126001cf3554dcf883f5492d548aa1d
+msgid "Additional Setup"
+msgstr ""
+
+#: ../../source/docs/common-buttons.rst:55
+#: c7a9991a8e8842d9950fe09fc6afa0b8
+msgid ":ref:`BTN_REPORT_SEND<BTN_REPORT_SEND>` sets the length of time that a `BUTTON_CHANGE <https://mavlink.io/en/messages/common.html#BUTTON_CHANGE>`__ mavlink2 message is sent to the ground control station each time the button state changes.  At the time of this writing we do not know of any GCS that makes use of this message."
+msgstr ""

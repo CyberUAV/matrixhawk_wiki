@@ -12,7 +12,7 @@ In addition to digital input and output pins, autopilots have analog input pins 
 - Analog Sonar/Rangefinder Input
 - Analog Temperature Sensor Input
 
-.. note:: all pins can accept 0-3.3v inputs. Unless the documentation (OEM or Wiki) specifically specifies 6.6V input range, only apply 3.3 maximum!
+.. Note:: All pins can accept 0-3.3v inputs. Unless the documentation (OEM or Wiki) specifically specifies 6.6V input range, only apply 3.3 maximum!
 
 When any of these inputs are enabled by the appropriate sensor type selection, a ``_PIN`` parameter will need to be entered to designate which "pin" on the autopilot is to be used. Often, the correct pin number for the autopilot's analog inputs will be documented either on its Wiki page here, or the OEM's documentation.
 
@@ -50,23 +50,23 @@ The last three lines define inputs used internally on the board to monitor vario
     ADC1_map = {
     # format is PIN : ADC1_CHAN
     "PF11"  :   2,
-    "PA6"	:	3,
-    "PC4"	:	4,
-    "PB1"	:	5,
+    "PA6"   :   3,
+    "PC4"   :   4,
+    "PB1"   :   5,
     "PF12"  :   6,
-    "PA7"	:	7,
-    "PC5"	:	8,
-    "PB0"	:	9,
-	"PC0"	:	10,
-	"PC1"	:	11,
-	"PC2"	:	12,
-    "PC3"	:	13,
-    "PA2"	:	14,
-    "PA3"	:	15,
-    "PA0"	:	16,
-    "PA1"	:	17,
-    "PA4"	:	18,
-    "PA5"	:	19,
+    "PA7"   :   7,
+    "PC5"   :   8,
+    "PB0"   :   9,
+    "PC0"   :   10,
+    "PC1"   :   11,
+    "PC2"   :   12,
+    "PC3"   :   13,
+    "PA2"   :   14,
+    "PA3"   :   15,
+    "PA0"   :   16,
+    "PA1"   :   17,
+    "PA4"   :   18,
+    "PA5"   :   19,
     }
 
 

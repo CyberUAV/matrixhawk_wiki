@@ -1,0 +1,152 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/autotest-tests.rst:5
+#: 608e263d01284145a642b526cc451c77
+msgid "Autotest Tests"
+msgstr ""
+
+#: ../../source/docs/autotest-tests.rst:7
+#: bed47858402f4c7ca0d8772beb27f387
+msgid "The autotest suite is constantly evolving.  There are a lot of predefined convenience functions available (see `Vehicle tests <https://github.com/ArduPilot/ardupilot/blob/master/Tools/autotest/vehicle_test_suite.py>`__ .  There are also many convenience functions within individual vehicle test suites like the `Plane tests <https://github.com/ArduPilot/ardupilot/blob/master/Tools/autotest/arduplane.py>`__).  These functions can make writing tests fast, and there are a lot of things your test can assume when it starts and stops"
+msgstr ""
+
+#: ../../source/docs/autotest-tests.rst:9
+#: 57dcd9d049fd462c8324aa6fc577a60d
+msgid "This document outlines some of the assumptions you can make and some of the utilities you can take advantage of."
+msgstr ""
+
+#: ../../source/docs/autotest-tests.rst:12
+#: 62026bb0919e4da0a84ac500b90a8a6d
+msgid "Assumptions Your test Can Make"
+msgstr ""
+
+#: ../../source/docs/autotest-tests.rst:15
+#: 731458e128f2443a99a04f85c69e29e8
+msgid "Location"
+msgstr ""
+
+#: ../../source/docs/autotest-tests.rst:16
+#: 0711a2dc4361482aae61848285de5686
+msgid "For the Copter test suite you can assume the vehicle starts and the same location each time."
+msgstr ""
+
+#: ../../source/docs/autotest-tests.rst:18
+#: 530a8e7dd1c74ffbb5de7575b54fcff6
+msgid "Plane starts roughly in the CMAC location."
+msgstr ""
+
+#: ../../source/docs/autotest-tests.rst:20
+#: 479a960529bf433d9a3bb6a4a30c714c
+msgid "QuadPlane always starts in the same location in Dalby."
+msgstr ""
+
+#: ../../source/docs/autotest-tests.rst:22
+#: 3a56668d285c4b6bafb5831fb565a0c8
+msgid "All other tests do not guarantee a starting location or rotation."
+msgstr ""
+
+#: ../../source/docs/autotest-tests.rst:25
+#: 83b6a82a1b8b49a58fb547031a1c2604
+msgid "Disarmed"
+msgstr ""
+
+#: ../../source/docs/autotest-tests.rst:27
+#: 2fdee85c4f7946d2a7bf35d0f5c1adaa
+msgid "You can assume your vehicle starts disarmed (except for AntennaTracker, which is always armed)."
+msgstr ""
+
+#: ../../source/docs/autotest-tests.rst:30
+#: 6e63966b903745d89a4fdb8017364513
+msgid "RC Inputs"
+msgstr ""
+
+#: ../../source/docs/autotest-tests.rst:32
+#: e22cdff9985545238b444ee30d7fc80a
+msgid "RC inputs are zeroed before your test starts"
+msgstr ""
+
+#: ../../source/docs/autotest-tests.rst:35
+#: 1e5d5df8db0a40ab898c68885f1944c8
+msgid "Contexts"
+msgstr ""
+
+#: ../../source/docs/autotest-tests.rst:37
+#: a24b354af1fb4b2d9ba1eb82ca894e00
+msgid "Contexts allow test suite state changes to be rolled back conveniently."
+msgstr ""
+
+#: ../../source/docs/autotest-tests.rst:39
+#: e4131d6b4dda45aea595476e398a84d5
+msgid "Each test gets an implicit context, and you can push any number of contexts onto the stack.  You do not need to wrap your test in a context - you get one for free from the harness."
+msgstr ""
+
+#: ../../source/docs/autotest-tests.rst:41
+#: 7b847a76ba194e61ad8c40d26c2ea8a5
+msgid "When you pop a context, various state change are reverted to the way they were before the context was pushed.  Notably:"
+msgstr ""
+
+#: ../../source/docs/autotest-tests.rst:43
+#: 2a64f703865f4818b439d15219684cad
+msgid "parameters are reverted to their values before the context change"
+msgstr ""
+
+#: ../../source/docs/autotest-tests.rst:44
+#: b8865fdecac54facbbdb7d5bf1026dca
+msgid "message rates set via ``context_set_message_rate_hz`` are reverted"
+msgstr ""
+
+#: ../../source/docs/autotest-tests.rst:45
+#: 43d2cbb5b932446397cd1bf50c7e44ed
+msgid "filesystem files backed up with ``context_backup_file`` get their original contents back"
+msgstr ""
+
+#: ../../source/docs/autotest-tests.rst:46
+#: 59f98336b00a41d8b2b953616ea47c89
+msgid "Lua scripts installed with ``install_script_content_context`` are removed"
+msgstr ""
+
+#: ../../source/docs/autotest-tests.rst:48
+#: 9d6f1fac7a684d819531119a6be23959
+msgid "Popping a context may involve rebooting the simulation.  We reboot SITL:"
+msgstr ""
+
+#: ../../source/docs/autotest-tests.rst:49
+#: 22b5eca4bb4f4629bb2250a5c76017eb
+msgid "if your test reboots the simulation (after resetting parameters to their pre-test values, in case there are reboot-required parameters)"
+msgstr ""
+
+#: ../../source/docs/autotest-tests.rst:50
+#: ed8197909f814a0eb41d587302abe080
+msgid "if your test set the vehicle home via ``self.set_home(loc)``"
+msgstr ""
+
+#: ../../source/docs/autotest-tests.rst:53
+#: de5cf74424f347429773464b7524ad19
+msgid "Methods"
+msgstr ""
+
+#: ../../source/docs/autotest-tests.rst:56
+#: 016ee6de7f0a4ddda4d3e125a9f71e04
+msgid "self.reboot_sitl()"
+msgstr ""
+
+#: ../../source/docs/autotest-tests.rst:58
+#: 129b3b6753cd40d3969a36c02bf3fc39
+msgid "Reboots not just the vehicle but the entire simulation.  Useful for reboot-required parameters."
+msgstr ""

@@ -1,0 +1,332 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/ros2-pi.rst:5
+#: 0552fd97c6dd48e8af7d9d54a38ef335
+msgid "ROS 2 on Raspberry Pi"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:7
+#: a093e8bcf4a345c6a94a2a8fc76173fc
+msgid "ROS2 (via DDS) is not part of the standard ArduPilot build. Use the `Custom Build Server <https://custom.ardupilot.org/add_build>`__ and ensure \"MicroXRCE DDS support for ROS 2\" is checked."
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:10
+#: 1be3c424a4db43079445b492eecaf783
+msgid "Purpose"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:12
+#: 517ee4055ea344e99cbb23ae9a594fc9
+msgid "Learn how to install the ROS onto a companion computer and run a sample ROS 2 application that communicated with ArduPilot over Micro XRCE DDS. For this demonstration, a Raspberry Pi Zero 2W will be used, however other Linux computers are also capable."
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:16
+#: 3e94b469b4de48a68b17fd4ae8d9ba2a
+msgid "Required Hardware"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:18
+#: 668e94627f754a01b0860a7322e82f81
+msgid "`Raspberry Pi Zero 2W <https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/>`__"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:19
+#: a3d0bbdbc9d84234875ec4eb0d282407
+msgid "A Linux computer to flash an SD card and configure the Pi"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:22
+#: fe81e56691f84c4fa2206c7e3c63c709
+msgid "Initial Configuration"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:24
+#: d30f274341b74eb8a5b8b0e3ec04f55d
+msgid "For the first section, we will follow `Ubuntu's tutorial <https://ubuntu.com/tutorials/how-to-install-ubuntu-on-your-raspberry-pi#1-overview>`__ , with specifics noted below."
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:26
+#: 5d38ced69ad14c5cb89558f398998a69
+msgid "Use ``rpi-imager``."
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:28
+#: 0c6ce7ea57064017966863984a948ac2
+msgid "When selecting the operating system, we will install Ubuntu 22 Server. Find it in \"Other general-purpose OS -> Ubuntu -> Ubuntu Server 22.04.5 LTS (64-bit) which is supported by `ROS 2 humble <https://www.ros.org/reps/rep-2000.html#humble-hawksbill-may-2022-may-2027>`__. When prompted to do \"OS Customisation\", select that."
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:33
+#: 463b8bf3ca8a445d873397ba3ce4dc32
+msgid "In \"General\", Configure wireless LAN"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:34
+#: d3ac9e14cec84340b189fc44c829bd98
+msgid "In \"Services\", enable SSH"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:35
+#: 367d24fd0f254da59f868a29115513ba
+msgid "Save and flash the image onto the device"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:37
+#: ed0dd3c2bbf64165a542e23739196e97
+msgid "Install the SD card, let it boot for 2 minutes, then either through a HDMI display and keyboard, or by plugging the Pi's SD card back into your computer, edit the file: ``/etc/avahi/avahi-daemon.conf`` and change the line that has ``publish-workstation`` to ``publish-workstation=yes``."
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:40
+#: 7a3a8491c22543918b674df86b0f85ca
+msgid "Now, put the SD card back into the Pi, boot it up with the USB, and you can now connect."
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:50
+#: 83f46d3834004a8f80ed439deec43f0a
+msgid "Once you SSH, create your username and password, and test you can still login, it's time to set up ROS 2. We'll install all the packages before it's wired into the drone."
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:54
+#: 2b7968543df346b2b592d251c86c0ed0
+msgid "ROS 2 Install"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:56
+#: ceee2b1be8fd498da36ca540e6130921
+msgid "When using Ubuntu 22.04, it's easiest to install ROS 2 through `binaries <https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html>`_."
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:59
+#: 3cef7dcd38ad48b18d9be8248798aa3e
+msgid "First off, if you can't use ``apt update`` due to \"Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 912 (unattended-upgr)\", try removing unattended upgrades"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:67
+#: f2408978d7954411a748c77cffed3e74
+msgid "When installing ROS 2, install ``ros-humble-ros-base`` and ``ros-dev-tools``."
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:69
+#: 84089ed06f8f4ac7abbc8396a734dda2
+msgid "Finally, source the ROS environment automatically by adding it to your ``.bashrc``:"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:78
+#: 69188aa4a4254aa8acb100506927fb82
+msgid "Finally, check you have the ROS 2 CLI:"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:85
+#: c9a3a3cee1a44bb6a104e1e88ab4d936
+msgid "Serial Connection"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:87
+#: e4f034959f5744d690e89ef54c66ef8d
+msgid "Now, wire a serial connection to your flight controller. Ensure your power supply is capable of powering the Pi Zero 2W. The simplest solution is to wire an open telemetry port."
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:92
+#: 1378d05415a0437389ac6276b105920e
+msgid "Do not abuse the power supply for the flight controller. For robust applications, it is recommended to power non-flight-critical devices, such as a Raspberry Pi, with a separate 5V power supply. Although many flight controller power supplies may support the power draw of a Raspberry Pi Zero 2W, a problem on the PI can bring down the entire vehicle."
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:104
+#: 908fd2e2bfeb4a79a5ec6f48a7ed4bc6
+msgid "This allow GPIO14 and GPIO15 (/dev/ttySO) to communicate with ArduPilot."
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:107
+#: 6a615ffcd761479e8a6deff003f81fa0
+msgid "Cross Compile an application with Docker"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:112
+#: fa93fc9c94b64ce18b8a9d225c530b4f
+msgid "In order to run applications on a Raspberry Pi, we can cross compile them for the ARM architecture. `Docker <https://www.docker.com/>`_ allows an easy way to cross compile. Because of the Pi's limited memory, it is not recommended to attempt compiling on target hardware. If you have a more powerful computer, see the next section for direct compilation on ARM64."
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:117
+#: d65425a1f86646398c01d9b38b1439a3
+msgid "First, create a dockerfile like so on your laptop called ``Dockerfile``"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:140
+#: b7743c5ed86b4feabbaa8a5296376d5a
+msgid "Next, use Docker's multi-platform build support to set up a cross compile in an ARM64v8 environment: https://docs.docker.com/build/building/multi-platform/#install-qemu-manually"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:147
+#: 4b4221f74f8c4327be275d855b99f038
+msgid "Now, the following steps build the docker image and copy the ROS 2 install directory to the target."
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:164
+#: 6264c11a6d9549c7bb1b6ef66e091788
+msgid "Installing Dependencies"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:166
+#: 08a7d7bd132042e5bec1cbc9c7708549
+msgid "Although we have copied the executable(s) over, the runtime dependencies are not installed. Let's use rosdep to install those. The target only needs runtime dependencies, which are denoted with tag ``exec``."
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:170
+#: 03247ed521c04672b43b7555900ee679
+msgid "After SSH'ing into the target, run:"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:181
+#: b02627596ef8404cb818d6568304c08e
+msgid "Compiling the Micro ROS agent directly on ARM64"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:183
+#: 8eb8fb445dee4a2ea12d9472de86f54b
+msgid "Instead of cross compiling, some more powerful companion computers can support local compilation."
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:187
+#: 41a37745d3e945b3a5bac40f8bcc275a
+msgid "Instructions coming soon"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:190
+#: 4164d6b16a0e4cc98de1375527339f9e
+msgid "Test the Micro ROS Agent"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:192
+#: 8388fb997e5c45f7bfecfaf1dd3fbe6c
+msgid "Now that you have a cross-compiled installation of the Micro ROS Agent along with its dependencies, let's check we can run it."
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:200
+#: 5b19ace1032e493aa3e246c786fa8287
+msgid "Starting the Micro ROS Agent automatically"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:202
+#: dd32e0ca6f6d4ec48eb73afc470bb120
+msgid "Rather than having to SSH into the companion computer and manually start all ROS 2 nodes in terminal, let's use systemd to start the service automatically on boot. For this tutorial, we will use systemd user services because they do not require root to run."
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:206
+#: 5abb513f60a24820a6260de0ee8f1afd
+msgid "First, create a script on the companion computer that sources the ROS 2 workspace and runs the Micro ROS Agent."
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:213
+#: 5fa78cbb1a8d4cc1825880c0b1daa9b7
+msgid "Place the following contents inside:"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:235
+#: 6ed0473dd52146d8841865868652770f
+msgid "If you are not using ``ubuntu`` as your username, be sure to change the ``WorkingDirectory`` and ``ExecStart`` fields above!"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:237
+#: dc24d52566db49b3a05b3a8e22603889
+msgid "Also, create the start script:"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:244
+#: 86a6f279e08b44178e9cc948a398eb33
+msgid "And, place the following script inside:"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:253
+#: bff15e516fcb4363b6f815b20f177bea
+msgid "Finally, make it executable, reload services, and start the new Micro ROS Agent systemd service."
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:263
+#: 6dff9973971847c6bb688a83a586c1d3
+msgid "The MicroROS agent should show it has started. It is now waiting on a connection from the autopilot. Once the autopilot is configured for the same baud rate as the Micro ROS Agent, it should connect."
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:266
+#: 3b576bbd5180401d8d992f8b7c29df10
+msgid "Because systemctl user services won't start until someone logs in, enable linger for login."
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:272
+#: d41b3134bfee41a1a501edd071d81f76
+msgid "Once you start adding more service, you can check status like so:"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:278
+#: dd011f2b7cc74923a6f80f68e1c2987e
+msgid "Now, reboot, and verify your systemd service is up."
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:281
+#: 000a0882c3504f6598bbf8800fe80a69
+msgid "Coming Soon"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:283
+#: 6a373c175c934cec9d9c7c34a146d929
+msgid "Building and installing your own nodes alongside the Micro ROS Agent"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:284
+#: 13b69241fa144ee0af8583c1b2eaf8d2
+msgid "Using DroneBridge as an alternative DHCP Server"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:285
+#: 6210d86617b34fa7829d05e06ee992f5
+msgid "Compiling ArduPilot with DDS, applying a custom hwdef to tune rates, and configuring parameters"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:286
+#: 78bb0e412a694c0b8b672248b6ffb7b7
+msgid "Using the CLI to subscribe to topics on the remote laptop and ARM64 target"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:289
+#: f07d0079a4a844ac9712b8e5569e24cc
+msgid "References"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:291
+#: 020987807b954d3998d815120a654be9
+msgid "For more information on any of the above content, see the following references:"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:293
+#: 7f63f4e754ec42b99231aac292acd093
+msgid "`Systemd user services <https://docs.oracle.com/en/operating-systems/oracle-linux/9/systemd/CreatingasystemdUserBasedService.html>`_"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:294
+#: fc9ce89c3cdc49fb9ce8df2489aacf40
+msgid "`Docker Create for Copying to Host <https://stackoverflow.com/a/51186557>`_"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:295
+#: 6ac8786eba8c478885340636b936c76c
+msgid "`Docker MultiPlatform Images <https://docs.docker.com/build/building/multi-platform/#build-multi-platform-images>`_"
+msgstr ""
+
+#: ../../source/docs/ros2-pi.rst:296
+#: eaaf075f124343428edf440fee537089
+msgid "`Login Linger <https://www.baeldung.com/linux/systemd-session-dbus-headless-setup#1-enabling-systemd-user-lingering>`_"
+msgstr ""

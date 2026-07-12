@@ -16,7 +16,7 @@ Overview
 You can easily program your UAV to do anything, from robotic acrobatics
 to just script-driven missions. Python 2.x is currently supported, up to
 2.7 (Mission Planner uses an implementation of
-`IronPython <http://ironpython.codeplex.com/>`__ internally)
+`IronPython <https://ironpython.net/>`__ internally)
 
 Aside from the regular Python commands, these are the special Mission
 Planner commands you can use:
@@ -47,7 +47,7 @@ Here's an example, which tells a multicopter to do a roll in the air!
 
 .. code-block:: python
 
-    print 'Start Script'
+    print('Start Script')
     for chan in range(1,9):
         Script.SendRC(chan,1500,False)
         Script.SendRC(3,Script.GetParam('RC3_MIN'),True)
@@ -55,18 +55,18 @@ Here's an example, which tells a multicopter to do a roll in the air!
     Script.Sleep(5000) 
 
     while cs.lat == 0:
-        print 'Waiting for GPS' 
+        print('Waiting for GPS')
         Script.Sleep(1000) 
         
-    print 'Got GPS' 
+    print('Got GPS')
     jo = 10 * 13 
-    print jo 
+    print(jo)
     Script.SendRC(3,1000,False) 
     Script.SendRC(4,2000,True) 
     cs.messages.Clear() 
     Script.WaitFor('ARMING MOTORS',30000) 
     Script.SendRC(4,1500,True) 
-    print 'Motors Armed!'
+    print('Motors Armed!')
     Script.SendRC(3,1700,True) 
 
     while cs.alt < 50:   
@@ -96,7 +96,7 @@ Here's an example, which tells a multicopter to do a roll in the air!
     Script.WaitFor('DISARMING MOTORS',30000) 
     Script.SendRC(4,1500,True)
 
-    print 'Roll complete'
+    print('Roll complete')
 
 Classes Exposed by Mission Planner to Python
 ============================================

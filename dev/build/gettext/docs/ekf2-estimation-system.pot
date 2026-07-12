@@ -1,0 +1,1255 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/ekf2-estimation-system.rst:5
+#: ea9b49f80cbf47c1914a8f27a8d7f313
+msgid "EKF2 Estimation System"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:8
+#: 7d03a32c2b5f4202a98f8e212b728bd6
+msgid "**What is the EKF2 Estimation System?**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:10
+#: 25333488f9a94df5aa2dac18114be5bc
+msgid "It is a 24 state extended Kalman filter in the AP_NavEKF2 library that estimates the following states"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:13
+#: 9c1b75f2d21c41a2b60c4f35b413ccaf
+msgid "Attitude (Quaternions)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:14
+#: 5f157d9a1bc649f48e0e94d2e9fe98ab
+msgid "Velocity (North,East,Down)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:15
+#: 179468ea9f6e4b6fa38f4cc2c96e7800
+msgid "Position (North,East,Down)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:16
+#: 8a42790130e749cf8b2a1390487e85ab
+msgid "Gyro bias offsets (X,Y,Z)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:17
+#: 22db7741962c4e15bbd64c552fcc4b19
+msgid "Gyro scale factors (X,Y,Z)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:18
+#: 26b1d4facda040319f133a551d60d5da
+msgid "Z accel bias"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:19
+#: d02fc74a4c974f5391409cf1aac71881
+msgid "Earth magnetic field (North,East,Down)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:20
+#: f9db699726ba44618b40737b6be46dd0
+msgid "Body magnetic field (X,Y,Z)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:21
+#: 19fad7134dbc449d8c71fbb96d009db4
+msgid "Wind Velocity (North,East)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:23
+#: 99a47c8c3dbb4c59b3f1d1b81a6e9420
+msgid "It is based on the filter equations derived `here <https://github.com/priseborough/InertialNav/blob/master/derivations/RotationVectorAttitudeParameterisation/GenerateNavFilterEquations.m>`__."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:26
+#: 8be53ec468304eaf8fe4b6532aaf9f6a
+msgid "EKF2 Advantages"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:28
+#: 20e7b5f55b2a441984b8ce44051705c8
+msgid "It can run a separate EKF2 for each IMU making recovery from an IMU fault much more likely"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:29
+#: 55e24591a1ca421880317bcd2f583697
+msgid "It can switch between magnetometers if there is fault"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:30
+#: 76a22053ce654278a1ca81940e368e1b
+msgid "It can estimate gyro scale factors which can improve accuracy during high rate manoeuvres."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:31
+#: 6c975968d1a24f5497720451145894e9
+msgid "It can simultaneously estimate both gyro offsets and orientation on startup whilst moving and doesn't rely on the DCM algorithm for its initial orientation. This makes it ideal for flying from moving platforms when the gyro has not been calibrated."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:32
+#: 8a3b1adbfb9c41b5858d710ef58f4126
+msgid "It can handle larger gyro bias changes in flight"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:33
+#: 1566d897c2d144cab6bd3b4741736d68
+msgid "It is able to recover faster from bad sensor data"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:34
+#: 2305c1fd2c324c5f9e0a69ed2c8cab24
+msgid "It provides a slightly smoother output."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:35
+#: bdecb1e4dbfc4ed5ac000ae60f56a7e4
+msgid "It is slightly more accurate"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:36
+#: f0903e45cb8042f9995f6ae13751ec9d
+msgid "It uses slightly less computing power"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:37
+#: 007b83a37af64346b365b3f51d099159
+msgid "It starts using GPS when checks pass rather than waiting for the vehicle motors to arm."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:41
+#: 445575b8dae54189917f718dd20a5775
+msgid "How does it achieve this?"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:43
+#: 62888b7fc3af4f65ac742aa36664bf8e
+msgid "Instead of trying to estimate the quaternion orientation directly, it estimates an error rotation vector and applies the correction to the quaternion from the inertial navigation equations. This is better when there are large angle errors as it avoids errors associated with linearising quaternions across large angle changes."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:49
+#: 25c5570e9a6345349c372c1ba2a72d44
+msgid "See \"Rotation Vector in Attitude Estimation\", Mark E. Pittelkau, Journal of Guidance, Control, and Dynamics, 2003” for details on this approach."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:53
+#: 544830a9f51648c8a46182dbb7134f6b
+msgid "The new EKF runs on a delayed time horizon so that when measurements are fused, they are done so using the measurement, filter states and covariance matrix from the same point in time. The legacy EKF uses a simpler method where delayed measurements are fused using delayed states but the covariance matrix is from the current time which reduces accuracy."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:60
+#: b49c581a93dd476d8e4237c926f7325b
+msgid "The delayed filter states are then predicted forward into the current time horizon using a complementary filter that removes the time delay and also filters out the sudden changes in the states that occur when measurements are fused."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:64
+#: 5ed184a5bee94999a2b1e45803cc3184
+msgid "This approach was inspired by the output predictor work done by Ali Khosravian from ANU. \"Recursive Attitude Estimation in the Presence of Multi-rate and Multi-delay Vector Measurements,” A Khosravian, J Trumpf, R Mahony, T Hamel - American Control Conference, vol.-, 2015."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:69
+#: 88aa56fd36bc4ff798c5036a7aa6dc76
+msgid "This is computationally much cheaper than winding the states forward using buffered IMU data at each update, but slightly less accurate. The legacy EKF smooths the state corrections by applying them incrementally across the time to the next measurement which reduces stability of the filter."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:75
+#: e1dfad3a04b848f5b66f0e97df8a939e
+msgid "Further optimisation of mathematics and code to improve speed have been introduced."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:77
+#: 3d993c2e08a64eed866203c2c079fabd
+msgid "A simple compass yaw angle fusion method with fixed declination has been added which is used on the ground or when magnetic interference prevents use of the more accurate 3-axis 6-state magnetometer fusion technique."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:83
+#: d7b009f7e2e0417db1c03f10bb2bd0ca
+msgid "Using EKF2"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:85
+#: d3598941c8ce4108965827ccd7e327c7
+msgid "Enable the new EKF by setting EK2_ENABLE = 1.  EKF2 will now be running in parallel and logging, etc but it will not be used by the control loops."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:88
+#: fe97086318364a75bb007f0a9841fce0
+msgid "To use it in the control loops, set AHRS_EKF_TYPE = 2"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:89
+#: 7847a77b325048dda548e29440c53763
+msgid "The use of multiple IMU's, is controlled by the EK2_IMU_MASK parameter:"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:92
+#: 56161ce504b14f0fbc9a52d80e2cedca
+msgid "To use only IMU1, set EK2_IMU_MASK = 1 (this is the default)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:93
+#: 6436da2e3ea04244add4f13ed8aa2d69
+msgid "To use only IMU2, set EK2_IMU_MASK = 2"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:94
+#: 4d4f9acae571402c9763d2033c5ee7f4
+msgid "To run dual EKF2 using IMU1 and IMU2,  set :ref:`EK2_IMU_MASK<EK2_IMU_MASK>` = 3"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:96
+#: 937c81b4b3bd4699b76d4d7a1c13847f
+msgid "After setting the parameters you will need to reboot."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:99
+#: f504f8d2c930429688debdab10da1ec7
+msgid "EKF2 Log Data"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:101
+#: 4fa2e1c7882f43dcacdcee8e1ce294f1
+msgid "The data for EKF2 can be found in the NKF1 to NKF5 log packets."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:103
+#: 02d23d02b5ad41d0a79b9cc100cfa876
+msgid "Packets NKF1 to NKF4 contain information for each EKF instance with the instance number given by the value of field PI. The number of instances enabled is set by the EK2_IMU_MASK parameter. Packet NKF5 contains optical flow information for the EKF instance that is the primary for flight control."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:109
+#: 164323b72bbc4c0f9e89b1bd580141bf
+msgid "The available EKF2 log data is listed below.  Some plots showing example flight data have been included. This data was logged using a Pixhawk on a 3DR Iris+ quadcopter with the following parameter changes followed by a reboot:"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:114
+#: be21871f5a3d4fbf954a5cbbb43c2459
+msgid "EK2_ENABLE = 1 (turns on EKF2)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:115
+#: 2952991d25a84332a002c5a2032e2427
+msgid "EK2_IMU_MASK = 3 (Instructs EKF2 to run two instances, one for IMU1 (MPU6000) and one for IMU2 (LDG20H + LSM303D)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:117
+#: f9af0bd889ab47eebe76ba44d8c99df9
+msgid "AHRS_EKF_TYPE = 2 (tells the flight control system to use EKF2"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:118
+#: 56b0e5669c0e48d5ad6c8abe3ce616ce
+msgid "LOG_BITMASK = 131071 (logs 50Hz data from startup)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:120
+#: a0bebb024f0e46859c0e0a2efa868d79
+msgid "***Note: Plots can be viewed in full size by left clicking them***"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:123
+#: b81bdd5b81274072acbda7fcc9361715
+msgid "Filter State Estimates"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:125
+#: b04b4b4826a24d30a42ef2cac93c6d2e
+msgid "**NKF1[0]** (and **NKF1[1]** if a second IMU is being used) contain the outputs used by the flight control system"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:128
+#: ../../source/docs/ekf2-estimation-system.rst:157
+#: ../../source/docs/ekf2-estimation-system.rst:191
+#: ../../source/docs/ekf2-estimation-system.rst:232
+#: ../../source/docs/ekf2-estimation-system.rst:262
+#: c06e4590804647829ea753decce9428c
+#: b8e1bb32c9ca4a728dbe1bd2e34b8f45
+#: d7a840644c19472a85d06beeb73745c9
+#: 469b2ac15e914da8be5ab7f3f0720926
+#: 6a327ebb78964d13b536018f8b67797e
+msgid "TimeUS - time stamp (uSec)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:130
+#: 81a80f1ef67348e594b8cf8bcb0946ed
+msgid "Roll,Pitch - Euler roll and pitch angle (deg)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:132
+#: 9066a8d9deba4172a3df9f83d04d1184
+msgid "|EKF2 - roll pitch|"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:649
+#: eb28150d83cd43c989ae1b733ce9cd74
+msgid "EKF2 - roll pitch"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:134
+#: b9e728f18a7e4bddbcd45574b993e695
+msgid "Yaw - Euler yaw angle (deg)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:136
+#: 0b3dc555964a47f4b77bdb3ea814d877
+msgid "|EKF2 - yaw|"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:613
+#: 30da9657c45844aaa15ac7dc7cf9e07a
+msgid "EKF2 - yaw"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:138
+#: f30271c0dd724cd9a1e2d0c0d8bf10e7
+msgid "VN,VE - Velocity North,East direction (m/s)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:140
+#: 22c72da4422a451eb3c9bcadd0565bd8
+msgid "|EKF2 - velocity NE|"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:610
+#: bef500e7fb5f4efa8a21f800b04f6760
+msgid "EKF2 - velocity NE"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:142
+#: c8b9f56ddb0e48a1bc82ecda244f2587
+msgid "VD, dPD - Velocity and Position Derivative Down (m/s)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:144
+#: c8a5101bc13348149c7ec5037d4fceb8
+msgid "|EKF2 - velocity D|"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:670
+#: b264a4a6dde94ec6abd2b88fbbc0b3c9
+msgid "EKF2 - velocity D"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:146
+#: 5b8db1c2624348bbb415d6b9b4c93d7f
+msgid "PN,PE,PD - Position North,East,Down (m)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:148
+#: db4ac61dbbd4477d983ad5f7366e0cc9
+msgid "|EKF2 - position NED|"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:637
+#: 7143a9bcda1a463e857a6c94f8cdc935
+msgid "EKF2 - position NED"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:150
+#: 10ad6e0be60a4f46bf8ea56f13a96cfb
+msgid "GX,GY,GZ - X,Y,Z rate gyro bias (deg/sec)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:152
+#: 8a997ee58904460ebc0e8dbe2f80cc39
+msgid "|EKF2 - gyro rate bias|"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:652
+#: a7e013dc1262459494b7d2f4a432c697
+msgid "EKF2 - gyro rate bias"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:154
+#: 282ffef2ee794d08ae29c2454b75a520
+msgid "**NKF2[0]** (and **NKF2[1]** if a second IMU is being used) contains additional state information"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:159
+#: 0c10f295a1fd44a792eae07deee0bd80
+msgid "AZbias - Z accelerometer bias (cm/s/s)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:161
+#: 72e7b75eae3243b292df300b4c4a41d1
+msgid "|EKF2 - accel Z bias|"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:619
+#: 42e1b3dccf4d4c1e9f941bd978e9138f
+msgid "EKF2 - accel Z bias"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:163
+#: 71f32e51a62e4f43b236352bf138157b
+msgid "GSX,GSY,GSZ - X,Y,Z rate gyro scale factor (%)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:165
+#: e94b32cc67b54601a081af47186a2680
+msgid "Eg, a log value of 0.5 would be equivalent to a scale factor of 1.005 for that sensor"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:167
+#: 95576de989f645729d5b361354cab0eb
+msgid "|EKF2 - gyro rate scale factor|"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:631
+#: 02bbd50d06cd47ce92a47265763ce91e
+msgid "EKF2 - gyro rate scale factor"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:169
+#: c25eb623bd98455f94ba57c2c05a556c
+msgid "VWN,VWE - Wind velocity North,East (m/s)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:171
+#: 176b25cece68414983e15541140f74a6
+msgid "MN,ME,MD - Earth magnetic field North,East,Down (mGauss)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:173
+#: 73a9eed623904c5bbc110a6ab7757df0
+msgid "|EKF2 - earth magnetic field NED|"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:616
+#: a650e0cd90334cadb379c8c3d92ec0ac
+msgid "EKF2 - earth magnetic field NED"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:175
+#: a6758b8fa7484ec4bc499f251a26d9c9
+msgid "MX,MY,MZ - Body fixed magnetic field X,Y,Z (mGauss)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:177
+#: a2c784ee07ea411db134b18073e6ad5b
+msgid "|EKF2 - body magnetic field XYZ|"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:658
+#: d2d90fcc981a4318ae05562031981df7
+msgid "EKF2 - body magnetic field XYZ"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:179
+#: 7c52eac148034f8eb5544f40304bcf80
+msgid "MI - Index of the magnetometer being used by EKF2"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:182
+#: caf9c67b12bf44879c8fc92ddc39c4ed
+msgid "Filter Innovations"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:184
+#: dd5f5740312f41b8944430ad99b8105a
+msgid "**NKF3[0]** (and **NKF3[1]** if a second IMU is being used) contain information on the filter innovations. An innovation is the difference between the measurement value predicted byEKF2 and the value returned by the sensor. Smaller innovations indicate smaller sensor errors. Because the IMU data is used to do the prediction, bad IMU data can result in large innovations for all measurements."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:193
+#: 3c6044fdd16a409ca29ceedd32eb84a5
+msgid "IVN,IVE - GPS velocity innovations North, East (m/s)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:195
+#: 7ab86530db90434a80b6f5729d37138f
+msgid "|EKF2 - velocity innovation NE|"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:643
+#: ec6fd33ef06c442e9bc69bf5fdff704c
+msgid "EKF2 - velocity innovation NE"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:197
+#: bb6a68dfe1dc44068e12e56fa4ada1a7
+msgid "IVD - GPS velocity innovation Down (m/s)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:199
+#: 8db14f0a9c6343eba00a4d41c27cb05b
+msgid "|EKF2 - velocity innovation D|"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:628
+#: cfa23c18928b4b28be17f82d62cc3c45
+msgid "EKF2 - velocity innovation D"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:201
+#: 840694f0f6f546aeaf095f5ec32e1b10
+msgid "IPN,IPE - GPS position innovations North,East (m)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:203
+#: e084631640f64559bd6d90b469fb9356
+msgid "|EKF2 - position innovation NE|"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:655
+#: 089a8e79fd2e475685d2a39ce9eecaba
+msgid "EKF2 - position innovation NE"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:205
+#: cc67d3e590454d3e8f8a969ad8beadad
+msgid "IPD - Barometer position innovation Down (m)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:207
+#: d4aab820a2b84e798a4997715528651a
+msgid "|EKF2 - position innovation D|"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:646
+#: 2707d101e5094eda932705e46cb99ddb
+msgid "EKF2 - position innovation D"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:209
+#: bc9364c6d8124424a4631877a0da9c02
+msgid "IMX,IMY,IMZ - Magnetometer innovations X,Y,Z (mGauss)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:211
+#: 3427c7d41acb4da7b89753fe9b8db253
+msgid "|EKF2 - magnetometer innovation XYZ|"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:667
+#: 26fe92ce635447f68498a2ccc060edb2
+msgid "EKF2 - magnetometer innovation XYZ"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:213
+#: a586e042b3604fbeb80a092308568317
+msgid "IYAW - Compass yaw innovation (deg)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:215
+#: 72c9ef6eb3824186a2eeac7f2464798d
+msgid "|EKF2 - compass yaw innovation|"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:625
+#: 0e19b9a2a1c145c18a493b2c008bbe18
+msgid "EKF2 - compass yaw innovation"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:217
+#: dde67d4c9ac54b28b84a0c10f15ed25e
+msgid "IVT - True airspeed innovation (m/s)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:220
+#: 9a889483d9994c0e93dc6775977df21a
+msgid "Filter Health and Status"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:222
+#: f00aecb841f44a2a8ceca342bfb7d938
+msgid "**NKF4[0]** (and **NKF4[1]** if a second IMU is being used) contain information on the innovation variance test ratios. A value of less than 1 indicates that that measurement has passed its checks and is being used by the EKF2. A value of more than 1 indicates that the innovations for that measurement are so high that the EKF2 will be rejecting the data from that sensor. Values of less than 0.3 in flight are typical for a setup with good quality sensor data."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:230
+#: 8a54ecca21084a858272661d1a5a60ab
+msgid "They also contain other information relevant to filter health"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:233
+#: 7aaf91ca3f6141f187db3246831bd6e4
+msgid "SV - GPS velocity test ratio"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:234
+#: 34c0c913fdd64b84aef6d5e4660da12b
+msgid "SP - GPS position test ratio"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:235
+#: 329a0f758ad6453aa2e21ef743974801
+msgid "SH - Barometer test ratio"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:236
+#: f92079ca744e49c19e49688e0e5ecb3b
+msgid "SM - Magnetometer test ratio"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:237
+#: 63c5b4421d05485196f2027eb97c406d
+msgid "SVT - Airspeed sensor Test ratio"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:239
+#: a4b1947710b94445a585e1b15db7f39d
+msgid "|EKF2 - variance test ratios|"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:661
+#: 9d1ae3a59c9a49d6943597e18749bbb0
+msgid "EKF2 - variance test ratios"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:241
+#: 91655b2dc74046ad941a82523e0e5255
+msgid "errRP - Estimated attitude roll/pitch error (rad)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:243
+#: c84f1c9b862e41e99b2140026c7f3aeb
+msgid "|EKF2 - error roll pitch|"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:664
+#: 2029604e18b14fbbab367b0eeefce5f3
+msgid "EKF2 - error roll pitch"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:245
+#: 7c14f2826caa4da9be2b140bb08ee617
+msgid "OFN - Position jump North due to the last reset of the filter states (m)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:247
+#: efb0ea6aa8704e038b22cfcd3bf0d5b9
+msgid "OFE - Position jump East due to the last reset of the filter states (m)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:249
+#: 3abde4efcd054d85be19fa0fe8cc10e0
+msgid "FS - Integer bitmask of filter numerical faults"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:250
+#: a764ee9ba5a54e17aa34042ec476d9e1
+msgid "TS - Integer bitmask of filter measurement timeout"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:251
+#: e5244d503ceb4339aeece1c92a2c7072
+msgid "SS - Integer bitmask of filer solution status"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:252
+#: e821a1e2bb784624885600ff8b496aec
+msgid "GPS - Integer bitmask of filter GPS quality checks"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:253
+#: e0ce415d5e2845289299a92ce27a87de
+msgid "PI - Index showing which instance of EKF2 has been selected for flight control"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:257
+#: 1c405faf39b9407d8db5a6660a980727
+msgid "Optical Flow and Range Finder Fusion"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:259
+#: a62b28612797485e86ba10a86c541f2f
+msgid "**NKF5** contains information on the optical flow fusion for the EK2 instance bing used for flight control"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:264
+#: 9addb52ab5a243a79797834cf7c7b9d8
+msgid "normInnov - optical flow innovation variance test ratio"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:266
+#: 079c4f98af58497db457091f529aa6fb
+msgid "FIX,FIY - optical flow X and Y axis innovations (mrad/s)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:268
+#: f6755fb2e69b4dc09e2366feb88cac9a
+msgid "|EKF2 - optical flow rate innovations|"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:622
+#: fa3d04bbe8e141a6b239eb0e35845314
+msgid "EKF2 - optical flow rate innovations"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:270
+#: a4506e09af9b4a4c9100e095b04b0f42
+msgid "AFI - optical flow terrain height estimator innovation (mrad/s)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:272
+#: 12b54ba5f4f5457d8d5dbf8b2c27d37e
+msgid "HAGL - estimated height above ground level (m)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:273
+#: 1eea19492076472b93b411285ff9d996
+msgid "meaRng - Range measured by the range finder (m)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:275
+#: 078d1e99c8134734ae9b0fac7a8387e9
+msgid "|EKF2 - hagl and range|"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:673
+#: 3d429b5db220478da07efc09567d2aa9
+msgid "EKF2 - hagl and range"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:277
+#: 31af3418c2954e309f6ed73695a4f20b
+msgid "offset - estimated terrain offset relative to the pressure height origin"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:280
+#: 35225ca2850e489ca5fd935fcf2f7b97
+msgid "|EKF2 - offset|"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:640
+#: d55832c8fc2d4ef796b9b724137e8305
+msgid "EKF2 - offset"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:282
+#: 8c20b01dc9b845b8887f978ad516b80b
+msgid "RI - Range finder innovation (m)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:284
+#: 261bf7ee95e048c295a274755d47555e
+msgid "|EKF2 - range finder innovations|"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:634
+#: fa7b5f1fdb614e54bd0d5efd556f9403
+msgid "EKF2 - range finder innovations"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:286
+#: 0c0db48ee5e04f6295ba71ced1da9cfe
+msgid "errHAGL - 1-Sigma uncertainty in the terrain height offset estimate (m)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:289
+#: 8a801daff35c4039b79b46ba67da8ad7
+msgid "|EKF2 - offset uncertainty|"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:676
+#: 277490ce393140169412dc2a3414f6e0
+msgid "EKF2 - offset uncertainty"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:292
+#: 5b75264f678a4f61a53064ce551bf091
+msgid "Tuning Parameters"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:294
+#: 4db5cbdc12bc49d7af3a74f403fbe263
+msgid "The EKF2 parameters have been tuned to provide a compromise between accuracy and robustness to sensor errors. it is likely that further improvements in performance are available with further tuning."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:298
+#: d8c154de9b694e8e8f32cd8a139471a8
+msgid "If you have a question regarding tuning of the filer, please post `on the forums <https://discuss.ardupilot.org/>`__ along with your log file and mention the term EKF2 in your post title."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:301
+#: a406df8951954182bea681095a532ca9
+msgid "The parameters for the new EKF start with the prefix EK2\\_ and are listed below"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:304
+#: 580a69af9b1544afa1c33ce03813c377
+msgid "**EK2_ENABLE**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:306
+#: 6241e25b56704b759e61f3ccefee4daa
+msgid "This turns the EKF 2 on and off. Set to 1 to turn on and 0 to turn off. Turning EKF2 on only makes the calculations run, it does not mean it will be used for flight control. To use it for flight control set AHRS_EKF_TYPE=2. A reboot or restart will need to be performed after changing the value of EK2_ENABLE for it to take effect."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:312
+#: 9e49fe67ce434792b781687a95e52b7f
+msgid "**EK2_GPS_TYPE**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:314
+#: f20aa7aa89db49568ef07e5699835e2d
+msgid "This controls the use of GPS measurements :"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:316
+#: e3cd7f2b307e487c9e0c2634062b6083
+msgid "0 = use 3D velocity & 2D position"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:317
+#: fbfc70a5d1b140b89e5ffd4e69d87e10
+msgid "1 = use 2D velocity and 2D position"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:318
+#: 656848f7ef174435baac70a8a05f32ad
+msgid "2 = use 2D position"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:319
+#: 5721ccd217c5436098da80ba70839d1c
+msgid "3 = use no GPS (optical flow will be used if available)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:321
+#: acc172cbddeb40f1a4da2a482061b77a
+msgid "**EK2_VELNE_NOISE**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:323
+#: 7b14980fc441455c98905b55f7598b06
+msgid "This sets a lower limit on the speed accuracy reported by the GPS receiver that is used to set horizontal velocity observation noise. If the model of receiver used does not provide a speed accuracy estimate, then the parameter value will be used. Increasing it reduces the weighting of the GPS horizontal velocity measurements. It has units of metres/sec"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:330
+#: aec6ba0e7c08436899ef1f969078baeb
+msgid "**EK2_VELD_NOISE**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:332
+#: 4199050cb9de4acfb247d91784a15ad3
+msgid "This sets a lower limit on the speed accuracy reported by the GPS receiver that is used to set vertical velocity observation noise in. If the model of receiver used does not provide a speed accuracy estimate, then the parameter value will be used. Increasing it reduces the weighting of the GPS vertical velocity measurements. It has units of metres/sec."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:339
+#: d005ca286b5f4c67917ecacd6a7bdf0c
+msgid "**EK2_VEL_GATE**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:341
+#: 980e9d8d0a1140c6885c8eae9d1e8c4b
+msgid "This sets the number of standard deviations applied to the GPS velocity measurement innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:346
+#: 5def2c3fbee24ab59c9d857efe9ea5b3
+msgid "**EK2_POSNE_NOISE**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:348
+#: ab21254effb1493682944ddc30e853c9
+msgid "This sets the GPS horizontal position observation noise. Increasing it reduces the weighting of GPS horizontal position measurements. It has units of metres"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:352
+#: 9cc06b04f0b84cdda0d9f486ca6bd635
+msgid "**EK2_POS_GATE**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:354
+#: 12a093b9c9334a63a93933925cf64a26
+msgid "This sets the number of standard deviations applied to the GPS position measurement innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:359
+#: ff997f00caae401695580d64501eb40d
+msgid "**EK2_GLITCH_RAD**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:361
+#: 1974e90928bd42ce9ebd207ce2e01d9c
+msgid "This controls the maximum radial uncertainty in position between the value predicted by the filter and the value measured by the GPS before the filter position and velocity states are reset to the GPS. Making this value larger allows the filter to ignore larger GPS glitches but also means that non-GPS errors such as IMU and compass can create a larger error in position before the filter is forced back to the GPS position. It has units of metres."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:369
+#: 069227971a434defa0a21791a0178472
+msgid "**EK2_GPS_DELAY**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:371
+#: 87d7e8fdd46245c4b4e53e2e9a81455f
+msgid "This is the number of msec that the GPS measurements lag behind the inertial measurements. The maximum delay that can be compensated by the filter is 250 msec."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:375
+#: 5d748858d1714b95817b2b0f3d7e3b9c
+msgid "**EK2_ALT_SOURCE**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:377
+#: 443af12283f942c48fd56ff9fd891a0d
+msgid "This parameter controls which height sensor is used by the EKF. If the selected option cannot be used, it will default to Baro as the primary height source. Setting 0 will use the baro altitude at all times. Setting 1 uses the range finder and is only available in combination with optical flow navigation (EK2_GPS_TYPE = 3). Setting 2 uses GPS. When height sources other than Baro are in use, the offset between the Baro height and EKF height estimate is continually updated. If a switch to Baro height needs to be made when the filter is operating, then the  Baro height is corrected for the learned offset to prevent a sudden step in height estimate."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:388
+#: c86a47ef86224c8ba8ebce2610c45464
+msgid "**EK2_ALT_NOISE**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:390
+#: b6a447e9569f414db5377387189584cb
+msgid "This is the RMS value of noise in the altitude measurement. Increasing it reduces the weighting of the baro measurement and will make the filter respond more slowly to baro measurement errors, but will make it more sensitive to GPS and accelerometer errors.  It has units of metres."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:395
+#: cb19335f9d984f9b829df6e41057aafe
+msgid "**EK2_HGT_I_GATE**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:397
+#: fcc81856c0c747dba811306465f650bd
+msgid "This sets the number of standard deviations applied to the height measurement innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:402
+#: a424f44293174e30a60ad4dcbc70c301
+msgid "**EK2_HGT_DELAY**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:404
+#: 841a3ce7d06d401fbc4e654995bd4217
+msgid "This is the number of msec that the height measurements lag behind the inertial measurements. The maximum delay that can be compensated by the filter is 250 msec."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:408
+#: 9e02aa9529324597b066345cb9771401
+msgid "**EK2_MAG_NOISE**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:410
+#: 65135bf1b8d949578195c9fa8ff115c3
+msgid "This is the RMS value of noise in magnetometer measurements. Increasing it reduces the weighting on these measurements. It has units of mGauss."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:413
+#: e68a940107ab4585a2db14e194a2e4f6
+msgid "**EK2_MAG_CAL**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:415
+#: de5f13a57b004d9fa6d1a0c0beb2c5dd
+msgid "This determines when the filter will use the 3-axis magnetometer fusion model that estimates both earth and body fixed magnetic field states. This model is only suitable for use when the external magnetic field environment is stable."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:420
+#: 5310a0aa40494de6acc74387da3308e9
+msgid "EKF_MAG_CAL = 0 enables calibration when airborne and is the default setting for Plane users."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:422
+#: 6f1ba064d5f142a0b3fa48afc841a502
+msgid "EKF_MAG_CAL = 1 enables calibration when manoeuvreing."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:423
+#: c5a2f3b401304705a1a4c28d3d086bd4
+msgid "EKF_MAG_CAL = 2 prevents magnetometer calibration regardless of flight condition, is recommended if the external magnetic field is varying and is the default for rovers."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:426
+#: 5c6505f067d64efa8fd9ba3c0f1bde3e
+msgid "EKF_MAG_CAL = 3 enables calibration when the first in-air field and yaw reset has completed and is the default for copters."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:428
+#: 1e50a346c69748d383ef2f40dd45328b
+msgid "EKF_MAG_CAL = 4 enables calibration all the time."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:430
+#: ab59239738d6496db75b0935daa47f06
+msgid "**EK2_MAG_GATE**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:432
+#: a158bb8a248e4b31a7e49a65c980dcfd
+msgid "This parameter sets the number of standard deviations applied to the magnetometer measurement innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:437
+#: 75027fe1c6764cc2857bed46d9ca1470
+msgid "**EK2_EAS_NOISE**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:439
+#: 6dd5a3de6fb94cf1b905460c867076cc
+msgid "This is the RMS value of noise in equivalent airspeed measurements used by planes. Increasing it reduces the weighting of airspeed measurements and will make wind speed estimates less noisy and slower to converge. Increasing also increases navigation errors when dead-reckoning without GPS measurements. It has units of metres/sec."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:445
+#: 37c01f201cf24dc482244621a16be227
+msgid "**EK2_EAS_GATE**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:447
+#: 68dde351c75f4360a16e8fa8f01faa5e
+msgid "This sets the number of standard deviations applied to the airspeed measurement innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:452
+#: ae016e198fe5441c8b1b02631f6b4847
+msgid "**EK2_RNG_NOISE**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:454
+#: 544bb6ceca9b4c949769fcffe3721565
+msgid "This is the RMS value of noise in the range finder measurement. Increasing it reduces the weighting on this measurement. It has units of metres."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:458
+#: 0d445594608c4a1aa8805c27684952f6
+msgid "**EK2_RNG_GATE**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:460
+#: 50418eb942724b4794c2e7403fa53648
+msgid "This sets the number of standard deviations applied to the range finder innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:465
+#: 039039100b07411086db519e22d8a5ed
+msgid "**EK2_MAX_FLOW**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:467
+#: 8060c37848624529a7ccf3afe184bac4
+msgid "This parameter sets the magnitude maximum optical flow rate in that will be accepted by the filter. It has units of rad/sec."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:470
+#: 22f02df0275a4391ac6616071db8de42
+msgid "**EK2_FLOW_NOISE**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:472
+#: c1bc620a599745e78e9b37eafd70e959
+msgid "This is the RMS value of noise and errors in optical flow measurements. Increasing it reduces the weighting on these measurements. It has units of rad/sec."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:476
+#: 111b7ca00a7c4741bbdfa16ae1025c11
+msgid "**EK2_FLOW_GATE**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:478
+#: d0aa7828319742b6a2beb0d55b9f372c
+msgid "This sets the number of standard deviations applied to the optical flow innovation consistency check. Decreasing it makes it more likely that good measurements will be rejected. Increasing it makes it more likely that bad measurements will be accepted."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:483
+#: e92a415a7e08446c82639f6af54a817d
+msgid "**EK2_FLOW_DELAY**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:485
+#: 1dc02e8ab0bd4ad38674d664bb5d6580
+msgid "This is the number of msec that the optical flow measurements lag behind the inertial measurements. It is the time from the end of the optical flow averaging period and does not include the time delay due to the 100msec of averaging within the flow sensor."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:490
+#: c35288f9b9b743129aaa408e5825073e
+msgid "**EK2_GYRO_PNOISE**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:492
+#: 29bfce1a65c94a0cb815215bbb0472db
+msgid "This control disturbance noise controls the growth of estimated error due to gyro measurement errors excluding bias. Increasing it makes the filter trust the gyro measurements less and other measurements more. It has units of rad/sec."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:497
+#: cb207a6a0bc043c9bd187b554ccddf73
+msgid "**EK2_ACC_PNOISE**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:499
+#: d55f15c063374e49b4b32ce7dec995e2
+msgid "This control disturbance noise controls the growth of estimated error due to accelerometer measurement errors excluding bias. Increasing it makes the filter trust the accelerometer measurements less and other measurements more. It has units of metres/sec/sec."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:504
+#: 639bc7c643ff4129a8135e0881631890
+msgid "**EK2_GBIAS_PNOISE**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:506
+#: d8f15211f88c41f3833a9e6682dc35ea
+msgid "This state process noise controls the growth of the gyro delta angle bias state error estimates. Increasing it makes rate gyro bias estimation faster and noisier. It has units of rad/sec."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:510
+#: 4845cf5e41de424dbc182914cfb08d56
+msgid "**EKF2_GSCL_PNOISE**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:512
+#: a95569b29e284b298e289e3b5fbc0cf3
+msgid "This state process noise controls the rate of gyro scale factor learning. Increasing it makes rate gyro scale factor estimation faster and noisier."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:516
+#: 7d66fab09de84689ac26ad62c13c1a80
+msgid "**EK2_ABIAS_PNOISE**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:518
+#: c0062a684ec7460a9b7e2798beb2f95e
+msgid "This state process noise controls the growth of the vertical accelerometer delta velocity bias state error estimate. Increasing it makes accelerometer bias estimation faster and noisier. It has units of metres/sec/sec."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:523
+#: 8401d2f583e74e2988254a9e2bc5bf32
+msgid "**EK2_MAG_PNOISE**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:525
+#: 2c402fdc136a4e33b55c371056e2fcae
+msgid "This state process noise controls the growth of magnetic field state error estimates. Increasing it makes magnetic field bias estimation faster and noisier. It has units of Gauss/sec."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:529
+#: 2a9aee2d29e74474bbc199b8398a2f4e
+msgid "**EK2_WIND_PNOISE**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:531
+#: b8c75da6c4244304bd1ef520edecc40f
+msgid "This state process noise controls the growth of wind state error estimates. Increasing it makes wind estimation faster and noisier. It has units of metres/sec/sec"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:535
+#: 6ea122c4016841be8da0b241bf5a69e1
+msgid "**EK2_WIND_PSCALE**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:537
+#: bcca790718124c128557ab0e2a4a859d
+msgid "This controls how much the process noise on the wind states is increased when gaining or losing altitude to take into account changes in wind speed and direction with altitude. Increasing this parameter increases how rapidly the wind states adapt when changing altitude, but does make wind velocity estimates noisier."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:543
+#: 1cc331069ad94aa8b64bf1877218542d
+msgid "**EK2_GPS_CHECK**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:545
+#: 34ea65fc0b07481b80ebbd1f7c17c479
+msgid "This is a 1 byte bitmap controlling which GPS preflight checks are performed. Set to 0 to bypass all checks. Set to 255 perform all checks. Set to 3 to check just the number of satellites and HDoP. Set to 31 for the most rigorous checks that will still allow checks to pass when the copter is moving, eg launch from a boat. Setting a 1 in the following bit locations causes the corresponding checks to be performed."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:552
+#: c977990dd5064f539ba3350c556806f9
+msgid "0: The receivers reported number of satellites must be >= 6"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:554
+#: 9eb54ac3a4dc41d5b2015f2e434fe8f2
+msgid "1: The receivers reported HDoP must be >=2.5"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:556
+#: 886aa36e422a46fc8c0adbeb8a30b759
+msgid "2: The receivers reported speed accuracy must be less than1.0 metres/sec (if available)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:559
+#: c03b5f843d41475b860516a3fa3c2ad1
+msgid "3: The receivers reported horizontal position accuracy must be less than 5.0 metres (if available)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:562
+#: ec0a9959563641b5acb49be8106a10f7
+msgid "4: The EKF2 magnetometer or compass innovation consistency checks must be passing. If these checks are failing, then the yaw estimate is unreliable"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:566
+#: a263b3becb834071a2c77dae989a41e0
+msgid "5: The rate of drift in the receivers reported horizontal position must be less than 0.3 metres/sec"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:569
+#: 4a9870e64d1646c9829de7a76d5ba50e
+msgid "6: The receivers reported vertical speed after filtering must be less than 0.3 metres/sec"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:572
+#: 9472d6f936a3448f9230cd73237d8319
+msgid "7: The receivers reported horizontal speed after filtering must be less than 0.3 metres/sec."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:575
+#: d22cc9f6f07244989dc6897b975be5f6
+msgid "Note: An unbroken pass on all selected checks for 10 seconds is required for the EKF2 to set its origin and start using GPS."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:578
+#: ea28855f3412467a9cc08173b6cf35a8
+msgid "Note: The accuracy required for checks 2, 3, 5, 6 and 7 can be adjusted using the EK2_CHECK_SCALE parameter."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:581
+#: 1e43ad8b4f924e778a882fcdddd87504
+msgid "**EK2_CHECK_SCALE**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:583
+#: 79566aa36e9240a7b175cd28fdbd5457
+msgid "This is a percentage scaler applied to the thresholds that are used to check GPS accuracy before it is used by the EKF. Values greater than 100 increase and values less than 100 reduce the maximum GPS error the EKF will accept. This modifies the checks enabled by bits 2, 3, 5, 6 and 7 in the EK2_GPS_CHECK parameter."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:589
+#: 455fae0c2d8340819538b64be442bc68
+msgid "**EK2_IMU_MASK**"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:591
+#: 166905c9234a4e3292db47073416068d
+msgid "This is a 1 byte bitmap controlling which IMUs will be used by EKF2. A separate instance of EKF2 will be started for each IMU selected."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:594
+#: 64b0d6daf27d4082a001224d56d47f46
+msgid "Set to 1 to use the first IMU only (default)"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:595
+#: 44a6310a0d0642ffb3ed0b03ba49b667
+msgid "Set to 2 to use the second IMU only"
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:596
+#: 61fa78241dff4290914e0cca66183e85
+msgid "Set to 3 to use the first and second IMU."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:598
+#: 08e40f3a916d4892b4414f92d37de323
+msgid "Additional IMU's up to a maximum of 6 can be used if memory and processing resources permit. There may be insufficient memory and processing resources to run multiple instances. If this occurs EKF2 will fail to start and the following message will be sent to the GCS console."
+msgstr ""
+
+#: ../../source/docs/ekf2-estimation-system.rst:607
+#: 0a89b8988fe941b9ac847d2a9d3be9d0
+msgid "If terrain data is not being used, some additional memory can be released by setting TERRAIN_ENABLE=0 and rebooting."
+msgstr ""

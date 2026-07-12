@@ -1,0 +1,522 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-vio-tracking-camera.rst:5
+#: ef80bbea79054e2180b6b43bc5544ea9
+msgid "Intel RealSense T265"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:12
+#: 5ae4d4202abd45709cd41fb29614ff7c
+msgid "This article explains how to setup an `Intel Realsense T265 <https://store.intelrealsense.com/buy-intel-realsense-tracking-camera-t265.html?_ga=2.225595998.511560227.1566178471-459370638.1562639781>`__ for use with ArduPilot as a substitute for a GPS allowing position control modes like Loiter, PosHold, RTL, Auto to work. This method uses a python script running on an RPI companion computer to send position information to ArduPilot without the use of `ROS <https://www.ros.org/>`__.  The `setup using ROS is here <https://ardupilot.org/dev/docs/ros-vio-tracking-camera.html>`__."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:15
+#: a42bc0ed478e423ab7f5ee9445a39231
+msgid "What to Buy"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:17
+#: 7967675a6102434cbaecc4c901bb3c05
+msgid "`Intel RealSense Tracking Camera T265 <https://www.intelrealsense.com/tracking-camera-t265/>`__"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:18
+#: 948172fd12e6414ab684f4ed49900bd8
+msgid "`Raspberry Pi 4 <https://www.raspberrypi.org/products/raspberry-pi-4-model-b/>`__ (2GB or 4GB recommended, 8GB has issues) or `Raspberry Pi 3 <https://www.raspberrypi.org/products/raspberry-pi-3-model-b/>`__"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:19
+#: 0209002d2aa94aa8827a73dd3d091e37
+msgid "16GB (or larger) SD card"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:20
+#: 6ec9e98a9c66473180472eef66297d81
+msgid "`PiConnectLite <https://www.rpanion.com/product/pi-connect-lite-v2/>`__ to connect the RPI to the autopilot (optional)"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:24
+#: 6db61149ca9b4bcfb1cf47d5066e378e
+msgid "The RPI4 supports USB3 which allows both **pose** + **image** data to be captured from the camera.  The slower RPI3 only has USB2 meaning only **pose** data can be captured although this is sufficient for most users."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:27
+#: 1612f7d8172e467eb6ac214953cbe564
+msgid "Hardware Setup"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:33
+#: f525364b7d2b4e189bae79a52a6f7ac9
+msgid "Download the latest APSync Ubuntu image (`found here <https://firmware.ardupilot.org/Companion/apsync/apsync-rpi-ubuntu-t265-latest.img.xz>`__) to your PC and then flash it to the 16GB (or larger) SD card using a tool such as `Etcher <https://www.balena.io/etcher/>`__ or `Win32DiskImager <https://sourceforge.net/projects/win32diskimager/>`__ and then insert it into the RPI's SD Card slot"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:34
+#: c18a3e10599c433db1ea4461591ba215
+msgid "Mount the Intel RealSense T265 on the vehicle facing forward (see below for information other orientations) using thick double sided tape or `David Sastre's T265 mount <https://www.dropbox.com/s/e3ias30czsn2q4t/Intel_RealSense_Tracking_Camera_T265_holder.STL?dl=0>`__ to better isolate the camera from vibrations"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:35
+#: 6634df6337694d89b5c916b7e387e78e
+msgid "Connect the Intel RealSense T265's USB cable to one of the RPI4's blue USB3 ports"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:36
+#: b592a99040994204a099eadd7e57206e
+msgid "Connect the PiConnectLite's power cable to the battery (7V to 30V)"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:37
+#: 6d9a3c8189f041d8a1cb152aca4165f7
+msgid "Connect the PiConnectLite's serial cable to one of the autopilot's telemetry ports (i.e. Telem1, Telem2). The only signals used in this cable are TX, RX and GND. The other signals are NC."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:43
+#: 4bfe3f11f9044d08b29e968315d31117
+msgid "`David Sastre's T265 mount <https://www.dropbox.com/s/e3ias30czsn2q4t/Intel_RealSense_Tracking_Camera_T265_holder.STL?dl=0>`__"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:46
+#: d4820f6416ce47e399d68a16335101ee
+msgid "Configure ArduPilot"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:48
+#: 7ac9f31bee344d90b10b63c8f6dbf24d
+msgid "Connect to the autopilot with a ground station (i.e. Mission Planner) and check that the following parameters are set:"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:50
+#: 25bf16645f654b35902bbf2a1bf08a9e
+msgid ":ref:`SERIAL2_PROTOCOL <SERIAL2_PROTOCOL>` = 2 (MAVLink2).  Note this assumes the RPI4 is connected to AutoPilot \"Telem2\" port."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:51
+#: 4a4dd1d2007c41a6beac184c06e71255
+msgid ":ref:`SERIAL2_BAUD <SERIAL2_BAUD>` = 921 (921600 baud)"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:52
+#: 6f515d8327974696830d7455a3b4097e
+msgid "Optionally set :ref:`SERIAL2_OPTIONS <SERIAL2_OPTIONS>` = 1024 (Don't forward mavlink to/from) to block the RPI4/T265 mavlink messages from reaaching the ground station"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:53
+#: 97a4027eb5f84e43bcd862733d97dee4
+msgid ":ref:`VISO_TYPE <VISO_TYPE>` = 2 (IntelT265)"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:55
+#: 0298d1e2417b413fbfb47827e9108028
+msgid "Next setup the EKF3 to use the ExternalNav for position and velocity:"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:57
+#: d66afd4cba934c9a8366906e63542ec6
+msgid ":ref:`EK3_SRC1_POSXY <EK3_SRC1_POSXY>` = 6 (ExternalNav)"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:58
+#: 8501fc0d3d7546538af1d2c892c3559d
+msgid ":ref:`EK3_SRC1_VELXY <EK3_SRC1_VELXY>` = 6 (ExternalNav)"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:59
+#: 8263db8c49624942b5796d9edef35431
+msgid ":ref:`EK3_SRC1_POSZ <EK3_SRC1_POSZ>` = 1 (Baro which is safer because of the camera's weakness to high vibrations)"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:60
+#: 9a5fe55c17504a649564d24b0c182006
+msgid ":ref:`EK3_SRC1_VELZ <EK3_SRC1_VELZ>` = 6 (ExternalNav)"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:61
+#: 00dd8ad6aed44333ae761044d51c543a
+msgid "Optionally set :ref:`GPS1_TYPE <GPS1_TYPE>`  = 0 to disable the GPS"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:63
+#: 0e1a3a99503a489191228039266e9fe0
+msgid "If you wish to use the camera's heading:"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:65
+#: 3c336c683fbb4fb289117a8b124122ff
+msgid ":ref:`COMPASS_USE <COMPASS_USE>` = 0, :ref:`COMPASS_USE2 <COMPASS_USE2>` = 0, :ref:`COMPASS_USE3<COMPASS_USE3>` = 0 to disable all compasses"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:66
+#: 425766ea78194a32bb5f6fd206f684ef
+msgid ":ref:`EK3_SRC1_YAW <EK3_SRC1_YAW>` = 6 (ExternalNav)"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:68
+#: 5e585e91c7554e75889ecee7bdc696b4
+msgid "If you wish to use the autopilot's compass for heading:"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:70
+#: 9a0b724572534940915dff92dd0dd02a
+msgid ":ref:`COMPASS_USE <COMPASS_USE>` = 1 (the default)"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:71
+#: d94e0fe236ab430d8194ae198b7929d2
+msgid ":ref:`EK3_SRC1_YAW <EK3_SRC1_YAW>` = 1 (Compass)"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:72
+#: c501a6b00a4347ae96fb4322207843f1
+msgid ":ref:`RC7_OPTION <RC7_OPTION>` = 80 (Viso Align) to allow the pilot to re-align the camera's yaw with the AHRS/EKF yaw before flight with auxiliary switch 7.  Re-aligning yaw before takeoff is a good idea or loss of position control (aka \"toilet bowling\") may occur."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:74
+#: e0102876652b4c0c88ab6a51f789b6af
+msgid "After the parameters are modified, reboot the autopilot.  Connect with the ground station and (if using Mission Planner) right-mouse-button-click on the map, select \"Set Home Here\", \"Set EKF Origin Here\" to tell ArduPilot where the vehicle is and it should instantly appear on the map."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:76
+#: cf887679eff84fa6abf454d796b86005
+msgid "Just before flying, pick up the vehicle to a height of 1m and then put it down again.  This allows the camera to calibrate its vertical scaling."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:78
+#: 1ff24d80da16478b8d818219462f9203
+msgid "If you wish to switch between GPS and T265 see the :ref:`GPS/Non-GPS Transitions <common-non-gps-to-gps>` wiki page"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:81
+#: a03d9be1389c48f8b7cd4a9fa9af9acd
+msgid "System Overview"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:86
+#: 4b7b4c99ffa242f6b496e7beaface1b7
+msgid "In a nutshell, the 6-DOF pose data (**position** and **orientation**) and **confidence level** obtained from the Realsense T265 will be processed by our python script and send to ArduPilot through MAVLink. Overall, the script will do the following tasks:"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:88
+#: 47bc62efb46a4d539d6b7f2215ea2e66
+msgid "Obtain 6-DOF pose data and tracking confidence level data using relevant APIs from ``pyrealsense2``, which is the Python wrapper for ``librealsense``."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:89
+#: 6c3b5327b0294a23a6d09c20539049b6
+msgid "Perform necessary matrix transformation to align the frames of the Realsense T265 and NED frame as well as other processing steps."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:90
+#: 7f82658a88b449579f635bb67028a668
+msgid "Pack pose data into MAVLink message `VISION_POSITION_ESTIMATE <https://mavlink.io/en/messages/common.html#VISION_POSITION_ESTIMATE>`__ and confidence level data into a dummy message, then send them to ArduPilot at a predetermined frequency so as to not `flood` the Autopilot with incoming data."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:91
+#: 2381a971df5d4663b094a004b63dfc02
+msgid "Automatically set EKF home for simple setup and flying."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:95
+#: f6a548d5dc8a406897d31cb03696f30e
+msgid "The choice of Python is optional, and you can use any `other wrappers supported by librealsense <https://github.com/IntelRealSense/librealsense/tree/master/wrappers#wrappers-for-intel-realsense-technology>`__. ROS users can find the equivalent article :ref:`here <ros-vio-tracking-camera>`."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:100
+#: 8d1f934727084949940a0e9af4ee1a7a
+msgid "For the sake of brevity, explanation of the system will be kept short. More in-depth discussion can be found in the following blog posts: `part 4 <https://discuss.ardupilot.org/t/integration-of-ardupilot-and-vio-tracking-camera-part-4-non-ros-bridge-to-mavlink-in-python/44001>`__, `part 5 <https://discuss.ardupilot.org/t/integration-of-ardupilot-and-vio-tracking-camera-part-5-camera-position-offsets-compensation-scale-calibration-and-compass-north-alignment-beta/44984>`__."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:103
+#: 554051a90cfa49a2903b7d018117fdbe
+msgid "Install ``librealsense`` and ``pyrealsense2``"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:105
+#: cbb9baf0206f439ca1dfb80796505430
+msgid "The Realsense T265 is supported via `librealsense <https://github.com/IntelRealSense/librealsense>`__ on Windows and Linux. Installation process varies widely for different systems, hence refer to `the official github page <https://github.com/IntelRealSense/librealsense>`__ for instructions for your specific system:"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:107
+#: 35eb158a767942f7acbcca18cb81ebb9
+msgid "`Ubuntu <https://github.com/IntelRealSense/librealsense/blob/master/doc/installation.md>`__"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:108
+#: 38b5ee3b45494b4fa1cafc0cc96862e3
+msgid "`Jetson <https://github.com/IntelRealSense/librealsense/blob/master/wrappers/python/readme.md>`__ (Compiling from source is needed to get the Python wrapper ``pyrealsense2``)"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:109
+#: b9d14fcbf3c043d0acc0321d1b9ed09e
+msgid "`Odroid <https://github.com/IntelRealSense/librealsense/blob/master/doc/installation_odroid.md>`__"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:110
+#: 8021e9f445fd4c79bba7a3e1d7cc28a3
+msgid "`Windows <https://github.com/IntelRealSense/librealsense/blob/master/doc/installation_windows.md>`__"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:111
+#: 5e76de7541b0412b8532a6cf265e1a49
+msgid "`Raspbian <https://github.com/IntelRealSense/librealsense/blob/master/doc/installation_raspbian.md>`__"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:113
+#: c76d05828bc446dbaaebf7dd1b165610
+msgid "For RPi running Ubuntu, the installation process for ``librealsense`` has been detailed in :ref:`this wiki <ros-vio-tracking-camera>`. Follow the instructions to install ``librealsense`` and ``pyrealsense2``. Since we are **not** using ROS, ``realsense-ros`` is not required."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:117
+#: 1407cf81de444bc9ae34073af13c657c
+msgid "Python Packages Installation"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:119
+#: 920ec1746b4a4938a299ca9524677fc6
+msgid "Establish serial connection: :ref:`Connect RPi to ArduPilot with MAVLink <raspberry-pi-via-mavlink>`."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:121
+#: 77a1649b733a4b0ea21ef80c30f389d2
+msgid "If the connection between RPi-ArduPilot is established via the UART serial port, also `change the setting in /boot/config.txt <https://discuss.ardupilot.org/t/communicating-with-raspberry-pi-3b/39269/8>`__."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:123
+#: 5deb9fd62a2a492e94df690212eb8563
+msgid "`Install Python3 <https://realpython.com/installing-python/#ubuntu>`__."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:125
+#: b88fa2c0be5c4e5784b8d4b6eaaa3208
+msgid "You should be able to run the examples provided by Intel can be found in the folder ``~/librealsense/wrappers/python/example`` with Python3 command."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:137
+#: c185986381a64923abd7953efb2dfc72
+msgid "`Install pip for Python3 (pip3) <https://linuxize.com/post/how-to-install-pip-on-ubuntu-18.04/#installing-pip-for-python-3>`__."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:139
+#: b28df26f9dde456294ec03662889fc9e
+msgid "Install Python packages:"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:152
+#: 7c0da963416e49d3a59798eac211005a
+msgid "Download the script `t265_to_mavlink.py <https://github.com/thien94/vision_to_mavros/blob/master/scripts/t265_to_mavlink.py>`__. In case you have downloaded the `vision_to_mavros <https://github.com/thien94/vision_to_mavros>`__ package, it can be found in the script folder."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:165
+#: 89dd7485410d4e14b3e880ba70925184
+msgid "How to run"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:167
+#: dbae595927194448a42c72d0ebb7ff69
+msgid "Before the script can be run, the ``PYTHONPATH`` environment variable needs to be added with the path to the ``pyrealsense2`` library. Alternatively, copy the build output (``librealsense2.so`` and ``pyrealsense2.so`` in ``~/librealsense/build/``) next to the script. First, run the test script ``t265_test_streams.py`` to verify installation of ``pyrealsense2`` and the T265 is connected."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:182
+#: 042283a5154642adaaca047301a48d6e
+msgid "Modify parameters in the ``t265_to_mavlink.py`` script for your system configuration. Most importantly, find and change the following parameters in the script:"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:199
+#: 9700cc7ff6594bddbc44a2dfcb8cf9f4
+msgid "The parameters can also be passed as input arguments from the command line. Now let's run the main script:"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:210
+#: a328b2071e9e42bb868d34543bf65062
+msgid "View all available input arguments: ``python3 t265_to_mavlink.py --help``"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:213
+#: 0a2863cae1b34f69a591403d00f18459
+msgid "Verification before testing"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:215
+#: a2ee2ea532264c8495cf98c358c69d6d
+msgid "To verify that ArduPilot is receiving ``VISION_POSITION_ESTIMATE`` messages, on Mission Planner: press ``Ctrl+F`` and click on “Mavlink Inspector”, you should be able to see data coming in. The confidence level can be viewed in message ``VISION_POSITION_DELTA``, field ``confidence``."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:220
+#: 40ea1ee7cf634ed8aa9299c8cc2661de
+msgid "Changes in value of the tracking confidence level can also be notified on Mission Planner’s message panel, HUD and by speech. These notifications will pop up when the system starts and when confidence level changes to a new state, for example from ``Medium`` to ``High``."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:222
+#: 2dff8fcd776a4bb2898e3ef99095af72
+msgid "To enable speech in Mission Planner: Tab Config/Tuning > Planner > Speech > tick on \"Enable speech\"."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:223
+#: acc44c99e9bc448387e1ebbcff141e7d
+msgid "If there are some messages constantly displayed on the HUD, you might not be able to see / hear the confidence level notification."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:224
+#: f73fc911f0d44d5297dea2ab16df6ac9
+msgid "If telemetry is slow, notification might be dropped. You can still see the latest message in MAVLink Inspector, message ``STATUSTEXT``."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:225
+#: 44b487a753e447b2b5cc5feb015f531d
+msgid "If telemetry is very slow, it may be flooded by VISION_POSITION_ESTIMATE messages. You can disable message forwarding by setting bit 10 in ``SERIALx_OPTIONS``. Be aware you will not receive VISION_POSITION_ESTIMATE in GCS anymore."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:229
+#: 832b92388bfd40a084de223b0b46f5ae
+msgid "Ground Test"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:231
+#: cbb5f5e456c248f9be0c89de51b61bb6
+msgid "After power on, ssh into the companion computer, navigate to the script and run: ``python3 t265_to_mavlink.py``."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:233
+#: b939c4ba36a748e2b6ba5828e9050891
+msgid "Wait until the quadcopter icon appears on the map of Mission Planner."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:235
+#: 0fc25dece2dc420b9a565b1e0fb5d321
+msgid "Pick-up the vehicle and walk it around, check that the vehicle’s position movements are shown on the map. The trajectory of the vehicle on the map should reflect the real movements without too much distortion or overshoot. Below is an example of walking in a 2m x 2m square."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:240
+#: 27dfab687d2745b3a28e5d82b55e4094
+msgid "During the test, view the confidence level and verify tracking performance. For most applications you should trust the full 6dof pose only in **high** confidence. If you only need the rotation (3dof), lower confidence poses can be used."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:242
+#: 1dc7e43aec724e4f84df36eecf8910f3
+msgid "If the external navigation data is lost for any reason (tracking lost, script is interrupted etc.), reboot the Autopilot."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:246
+#: fe24b0f28ef84e7a9cce5c290d68fc4a
+msgid "If you are flying in a confined environment, it might be best to go around the safety perimeter of flying, view the trajectory on the map, then remember not to fly/setup mission beyond that perimeter."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:249
+#: df8ae06133644bd49f71fed8716c0845
+msgid "Flight Test"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:251
+#: 107ea2e20223417fb13fac885da2ce6d
+msgid "For your first flight:"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:253
+#: 52d088840b3a4c84b0cdd190685801b6
+msgid "Takeoff in Stabilize or Alt-Hold, check that the vehicle is stable."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:255
+#: a48a5e7217c3425a94a7d4485777e3e3
+msgid "Move the vehicle around and observe the position on Mission Planner to see if tracking is stable."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:257
+#: f96e8b8e803b4230b82da84c66ba13cc
+msgid "Switch to Loiter, but always ready to switch back to Stabilize/Alt-Hold if anything goes awry."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:259
+#: 308d9d675b014386a92487abb6ec2bfb
+msgid "Otherwise, the vehicle should hover stably and able to keep its position."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:261
+#: a08a301176304e83a4204d16a8ae7089
+msgid "Move the vehicle around (translate, rotate) at varying speed, always ready to switch back to Stabilize/Alt-Hold."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:263
+#: d8698e6e083d4f2f8cad10f74234d221
+msgid "If everything works as expected, next time you can arm and takeoff in Loiter mode."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:267
+#: 380f13e98dd8469e8efd85ca859f07c1
+msgid "Always confirm that position feedback is running ok before switching to Loiter mode. Also look out for the safety boundary in your environment, i.e. where tracking might get lost due to lack of features, fast or rotation movement."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:270
+#: 87e14682e0cc4f7eaaa06981a07d116b
+msgid "Indoor and Outdoor Experiments"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:279
+#: 1b2dbb5abba944918263ab175ccd0462
+msgid "DataFlash logging"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:281
+#: dcce6dcb4965401e9460df41a1ba086a
+msgid "The visual odometry information will appear in the ``VISO`` dataflash log messages."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:282
+#: b2c09a37262b4d5c9a900c85f8764ce3
+msgid "EKF's visual odometry information will appear in XKFD messages"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:285
+#: a47fd1b4b86f4bef9e93f2e6af45ffff
+msgid "Autorun at boot"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:287
+#: 84a0b16ec5f14543ae0e59eb78f173ef
+msgid "The script can be run automatically at boot time."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:289
+#: cc6d9b211e7f41d3aa5bbb01e6903937
+msgid "Download or create a shell file ``t265.sh``, modify the path to `t265_to_mavlink.py` script in this shell file, then make it executable:"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:305
+#: 49b5b4fd81b34131a6573c3a8d1895a9
+msgid "Depends on your system, use `any method <https://blog.frd.mn/how-to-set-up-proper-startstop-services-ubuntu-debian-mac-windows/>`__ to make the script autorun at boot. In the steps below, we will use ``systemd`` to turn it into a service."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:307
+#: 39a54a4663da4b7cb5ea36dd4ec55c87
+msgid "Let’s create a file ``/etc/systemd/system/t265.service`` with the following content. Set your actual username after ``User=`` and set the proper path to your ``t265.sh`` in ``ExecStart=``."
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:329
+#: 53e796336c204ef1a235ed48262e9d5b
+msgid "That’s it. We can now start the service and automatically get it to start on boot:"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:338
+#: b7a76ad1168b4a06b7486e918c607621
+msgid "EKF3 Source Transitions with OpticalFlow"
+msgstr ""
+
+#: ../../source/docs/common-vio-tracking-camera.rst:340
+#: 92aa6b6eb6b147bf8b505f85bcfb1100
+msgid "If switching between this and OpticalFlow is desired, see :ref:`extnav-optiflow-transitions`"
+msgstr ""

@@ -1,0 +1,241 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Sub package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Sub \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:43+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-fuel-sensors.rst:5
+#: e542e9060ade470786884e06ef306de6
+msgid "Fuel Flow and Level Sensors"
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:7
+#: d7c689764a9e49709e5d0392492f6898
+msgid "In firmware versions 4.0 and later, ArduPilot provides the ability to use fuel flow and level sensors, in addition to battery monitors. Pulse output fuel flow sensors, PWM output fuel level sensors, and analog output fuel level sensors are supported. Just as an analog battery monitor provides current flow measurements with the capacity status being computed by the autopilot, these sensors provide fuel use or level status measurements to enable the same reporting and monitoring for liquid fuel systems."
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:10
+#: db000560306446c0a80d1bc5419f3851
+msgid "Fuel Flow Sensors"
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:12
+#: 9481c4e0310d49309e6ad72013c79ced
+msgid "Fuel flow sensors that provide a pulse for each unit of consumed fuel, such as `this <https://www.btflowmeter.com/en/flow-meter-products/flow-meters-lowflow-flowmeters-low-flow-turbine-flow-meter-fuel-flow-meters-diesel-fuel-flow-meter-watermeters-paddlewheel-flow-meter-oil-flow-meter-oilflowmeter-waterflowmeter-water-meters-turbineflowmeter-oilflowmeter/mini-flowmeter-fch-mini-pp-series-chemical/fch-m-pp-30-lpm-97478169-lc.html>`__, shown below, can be used just like a battery would be in ArduPilot, with monitoring, display, failsafes, etc."
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:17
+#: d0a5be7d91754f82b22b7f3702030adc
+msgid "image courtesy `BIO-TECH <https://www.btflowmeter.com/home.html>`__"
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:19
+#: 96e4d711e2e84558bc66b0aa95ea1634
+msgid "The displays/logs/limits for amps and mAh consumed are now actually the liters/hour and milliliters consumed. The voltage will always report as 1.0V."
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:22
+#: 5eba4a75a7a843699298655e3cf63957
+msgid "Connecting to the Autopilot"
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:24
+#: 62b1074ff38e44b6b863aa297d0afded
+msgid "Any GPIO capable pin on the :ref:`autopilot<common-autopilots>` can be used to connect to the sensor's output. If it is an open-collector output, a 10kOhm external resistor pull-up to 3.3V will be required. For Pixhawk-style autopilots, any AUX pin can be used. For most other autopilots, an upper PWM output can be used. In either case, it must be freed up from use as a PWM output by setting the ``BRD_PWM_COUNT`` lower than the total number of outputs available for PWM use."
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:27
+#: bf1b692c22424f7d97a70b4ea1e2f2bf
+msgid "in firmware versions 4.2 and later, the method for setting a PWM/SERVO/MOTOR output to be a GPIO function is changed. Instead of ``BRD_PWM_COUNT`` being used, the individual ``SERVOx_FUNCTION`` parameter is merely set to \"-1\". If set to \"0\", it remains a PWM output, unassigned to a function, and outputs that output's trim value when board safety is not active. If the servo function is being \"mirrored\" to a remote device, as in the case of a DroneCAN or KDECAN ESC, then in order to change the autopilot board's corresponding output pin to be a GPIO, but allow the ``SERVOx_FUNCTION`` to still be assigned to the remote device, the :ref:`SERVO_GPIO_MASK<SERVO_GPIO_MASK>` parameter can be used to assign the board pin to be a GPIO without affecting the ``SERVOx_FUNCTION`` assignment for the remote device."
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:29
+#: b00090ba86404ff9aee00b83b5f63b7f
+msgid "For example, if the board provides 6 outputs normally, setting ``BRD_PWM_COUNT`` to 5 would make PWM output 6 available for use as a GPIO. The pin number assigned to that output when used as a GPIO needs to be determined from its hwdef.dat file, located `here <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_HAL_ChibiOS/hwdef>`__ as shown below, where PWM6 is assigned as GPIO pin 55 when used as such:"
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:35
+#: 788da5ba67fe45b8bda7657b3d6f3f9e
+msgid "These sensors can sometimes provide erroneous data due to vibrations. This will cause the autopilot to assume that a higher amount of fuel has passed through the sensor than has been consumed from the tank."
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:38
+#: c74d45ecb339433791a17939e5022360
+msgid "Fuel Level Sensors"
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:41
+#: 0e0aef53e08b4241a671a08c956159c2
+msgid "PWM Fuel Level Sensors"
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:43
+#: 51be5607cd2d4c368350827c2c5298d8
+msgid "Fuel level sensors that output a PWM signal proportional to the level of fuel remaining in the tank such as the one supplied by `Foxtech <https://www.foxtechfpv.com/pwm-output-liquid-level-senser.html>`__ shown below are supported."
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:48
+#: e5ea05e144fd459795e4b6192332d25d
+msgid "The displays/logs/limits for mAh consumed are now actually the milliliters consumed with 1100 us PWM input indicating empty, and 1900 us PWM indicating full. The voltage will always report as 1.0V. The current is undefined."
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:50
+#: 0f4b95b1ed3f48f489a3dc7bf73bbdf7
+msgid "Any GPIO-capable pin can be used as the PWM input from the sensor."
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:53
+#: ../../source/docs/common-fuel-sensors.rst:80
+#: 889bcfbd2bc246ff9c92b98caf5ba611
+#: a67bac32e0404fd5a094ea764b0c5459
+msgid "Parameter Setup"
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:55
+#: d295ccbf96bd4a7f94cda2e4fc4933c3
+msgid "Like analog battery current and capacity monitoring, the key parameters are:"
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:57
+#: 52fe0a28e82644acb591385eaa724a9d
+msgid ":ref:`BATT_MONITOR<BATT_MONITOR>` This sets the type of sensor. In this case, type 11 for pulse fuel flow sensors, and 12 for PWM fuel level sensors."
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:58
+#: 83fa1ec652374915b0edb6469da7fdb6
+msgid ":ref:`BATT_CURR_PIN<BATT_CURR_PIN__AP_BattMonitor_Analog>` This is the GPIO pin where the sensor is attached."
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:59
+#: cc5c12a3459747d0a4837de181ce0835
+msgid ":ref:`BATT_AMP_PERVLT<BATT_AMP_PERVLT__AP_BattMonitor_Analog>` This is set in milliliters per pulse for fuel flow sensors."
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:60
+#: ../../source/docs/common-fuel-sensors.rst:83
+#: 337a30de0b444cd2b35f09c5b5194dfb
+#: 454c7d1d1d164f9bb9845558da086fcf
+msgid ":ref:`BATT_CAPACITY<BATT_CAPACITY>` This is the capacity in milliliters."
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:61
+#: c75438f567624c6fa592bb04c420a1fd
+msgid ":ref:`BATT_LOW_MAH<BATT_LOW_MAH>` This is set in milliliters instead of mAh."
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:62
+#: 1363c265b9a1415c9f6bfd22084f10a3
+msgid ":ref:`BATT_CRT_MAH<BATT_CRT_MAH>` This is set in milliliters instead of mAh."
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:66
+#: df7164fdc42d488d9ecfea105e80eb9b
+msgid "Analog Fuel Level Sensors"
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:68
+#: d48f056b2dfa491ead2734d22a9ea92c
+msgid "Fuel level sensors that output voltage are supported in ArduPilot version 4.3 and later. These types of sensors are also sometimes called fuel senders and are widely available from many manufacturers. Just as with the PWM type sensors, the estimated volume of fluid in the tank is shown as mAh when it is now actually milliliters."
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:70
+#: 7186f33746d7463481051eb694f0e103
+msgid "Any analog-capable pin can be used as the input from the sensor. Carefully consider the maximum voltage that the chosen ADC pin can measure and tolerate. Adding an external voltage divider might be necessary. To assist with calibrating these types of sensors, the voltage ArduPilot sees on the analog pin is shown in the battery voltage field."
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:72
+#: fffda67b6f6e461c866f1bb3a60dbd2a
+msgid "A low-pass filter feature is available to reduce the impact of tank slosh on the measured fuel level. The battery current field shows the voltage through the low-pass filter. The suggested range for the low-pass filter is between 0.2 Hz and 0.5 Hz. Setting the filter to a value of -1 will disable it and unfiltered voltage from the analog pin will be used. The filtered voltage value will be logged with a cutoff frequency of 0.3 Hz even when the filter is disabled."
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:77
+#: 9c89548fdfa74ba2bbcdd9fe6c71b363
+msgid "This feature assumes linear fuel tank shapes and even distribution of fuel in the tank. It will not take into account non-uniform-shaped tanks or sloped fuel levels. This should be taken into consideration when setting failsafe values."
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:82
+#: 1df0026497e742e9bcde0a768f02d81f
+msgid ":ref:`BATT_MONITOR<BATT_MONITOR>` The sets the type of sensor. In this case, use type 24 for analog fuel level sensors."
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:84
+#: 277de512c3174733aef52d1d69719c7f
+msgid ":ref:`BATT_FL_VLT_MIN<BATT_FL_VLT_MIN>` This is the minimum voltage seen on the analog pin when the fuel tank is empty."
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:85
+#: 7517ff4a9f3b461bb4c356ce496de766
+msgid ":ref:`BATT_FL_V_MULT<BATT_FL_V_MULT>` The is a multiplier calculated using the minimum and maximum voltage measured on the analog pin. This is calculated as 1 / (Voltage_Full - Voltage_Empty)."
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:86
+#: 3f37a4278b0b4850b33617224f0d54f5
+msgid ":ref:`BATT_FL_FLTR<BATT_FL_FLTR>` This is the frequency of the low pass filter in Hertz. A value of -1 disables the filter and unfiltered voltage is used to determine the fuel level."
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:87
+#: d4cade0654af4944a5eaffe4d24f5ee6
+msgid ":ref:`BATT_FL_PIN<BATT_FL_PIN>` This is the analog pin where the sensor is attached."
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:90
+#: 9b2d95d335664755b4e1c4a7cbca65c9
+msgid "Advanced Parameter Setup"
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:92
+#: 825df9d8b20b4637b45cad2cd05319c2
+msgid "Fuel level is normally calculated using a linear relationship between fuel level and reported analog voltage from the sensor. However, some sensors have a non-linear output versus fuel level. ArduPilot provides up to a third order polynomial curve fit by changing the following parameters from their default values (which is a linear fit):"
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:94
+#: d954b1f6987d41ad842c24a5304fd7f6
+msgid "example shown for first battery monitor - :ref:`BATT_FL_FF<BATT_FL_FF>` First order polynomial fit term - :ref:`BATT_FL_FS<BATT_FL_FS>` Second order polynomial fit term - :ref:`BATT_FL_FT<BATT_FL_FT>` Third order polynomial fit term - :ref:`BATT_FL_OFF<BATT_FL_OFF>` Offset term"
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:100
+#: 1228ed6ed32844dca40e4f2f6d57c74e
+msgid "every voltage sample from the sensor is modified as:"
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:102
+#: 7ee0f335c6a04240b3abbc62642451ba
+msgid "measured sensor voltage = vm"
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:104
+#: e1e2fd8a947f4515a58dde92a1f71d5e
+msgid "modified voltage = (BATT_FL_FT * vm^3 + BATT_FL_FS * vm^2 + BATT_FL_FF * vm) + BATT_FL_OFF"
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:106
+#: 483517bf99e542edb77175399cfd3112
+msgid "This allows the non-linearity to be compensated. The values for these parameters should be obtained from the sensor manufacturer, if applicable."
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:109
+#: 925f5f5fa9e449ee9a8f28c4c59323fe
+msgid "Serial Port Sensor"
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:111
+#: ecfdb3d7fc71404eabb9acc25db72f14
+msgid "These send information about fuel flow via connection to a Serial port on the autopilot."
+msgstr ""
+
+#: ../../source/docs/common-fuel-sensors.rst:113
+#: 201b8483d25e4e099ab5877ae66079b0
+msgid "Currently, the `VSPeak flow meter <https://www.vspeak-modell.de/en/flow-meter>`__ is supported via a LUA script driver, `here <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/drivers/VSPeak_flow_meter.lua>`__. Setup information is contained it the script's `.md  file <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/drivers/VSPeak_flow_meter.md>`__."
+msgstr ""

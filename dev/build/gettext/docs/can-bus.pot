@@ -1,0 +1,142 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/can-bus.rst:70
+#: 
+msgid "CAN bus driver implementation roadmap"
+msgstr ""
+
+#: ../../source/docs/can-bus.rst:5
+#: 908e3942c5404cd084113463cb7d9af4
+msgid "CAN bus and UAVCAN/DroneCAN protocol"
+msgstr ""
+
+#: ../../source/docs/can-bus.rst:7
+#: 79b4441f3924471886b87503e71c4ed8
+msgid "Support for CAN bus messaging in ArduPilot relies on two parts:"
+msgstr ""
+
+#: ../../source/docs/can-bus.rst:9
+#: f449b8eea1f94498afa1b49b989f4711
+msgid "Hardware CAN bus support that is done with HAL drivers"
+msgstr ""
+
+#: ../../source/docs/can-bus.rst:10
+#: e4831f6ea5ab4a5c8e45e48a1d59fbf8
+msgid "UAVCAN/DroneCAN protocol which is responsible for handling all high level work"
+msgstr ""
+
+#: ../../source/docs/can-bus.rst:13
+#: e661711f318d446bb2f2f95d91634f66
+msgid "CAN bus support in ArduPilot"
+msgstr ""
+
+#: ../../source/docs/can-bus.rst:15
+#: 7d66a330d8674c8491d47be35428aea0
+msgid "The base for hardware CAN bus support is located in AP_HAL library and consist of two classes:"
+msgstr ""
+
+#: ../../source/docs/can-bus.rst:18
+#: 00e6b8e646194c3a87d1b4666d5eacc2
+msgid "CAN class that is responsible for representation of one physical interface on board. This class manages opening, setup and operation of the interface and is a main connection point between software and hardware"
+msgstr ""
+
+#: ../../source/docs/can-bus.rst:22
+#: 777085fa783b40c1a77da7f832f94592
+msgid "CANManager class is wrapping all physical interfaces. It does enumeration of interfaces, provides access to them and also holds connection point for accessing UAVCAN managing class."
+msgstr ""
+
+#: ../../source/docs/can-bus.rst:26
+#: bacbe1c715194761be607ce269123151
+msgid "As a guide for implementing CAN bus support for new hardware, following :ref:`roadmap <can-bus-driver-roadmap>` can be used."
+msgstr ""
+
+#: ../../source/docs/can-bus.rst:29
+#: fbda9b221cac43f495752ff5ef584843
+msgid "UAVCAN/DroneCAN protocol"
+msgstr ""
+
+#: ../../source/docs/can-bus.rst:31
+#: 4e0e128b087b425894d0fff1350f1285
+msgid "The support for UAVCAN protocol is based on AP_UAVCAN class that is wrapping interaction with Libuavcan and provides access points for other libraries present in ArduPilot. It is responsible for sending the messages over CAN bus with UAVCAN protocol, receiving the messages, translation of messages to form that is acceptable to other libraries and provide cyclic update of Libuavcan."
+msgstr ""
+
+#: ../../source/docs/can-bus.rst:37
+#: b469355326594593953ff19e2f100a82
+msgid "UAVCAN has evolved into DroneCAN. The terms are sometimes used interchangeably, but ArduPilot uses the DroneCAN specification now, while UAVCAN is evolving separately."
+msgstr ""
+
+#: ../../source/docs/can-bus.rst:39
+#: 068c183906db485c870bb4675cac9b5f
+msgid "The AP_UAVCAN class supports following messages:"
+msgstr ""
+
+#: ../../source/docs/can-bus.rst:41
+#: 0347ca6398634ce79467d263944a783f
+msgid "Transmission of 1010.ArrayCommand to servos"
+msgstr ""
+
+#: ../../source/docs/can-bus.rst:43
+#: 8f3d73fa2c8b4eeab3129bfa4b6d415b
+msgid "Receiving of 1001.MagneticFieldStrength"
+msgstr ""
+
+#: ../../source/docs/can-bus.rst:45
+#: efb5912813074b2fa5f7e2703760dc82
+msgid "Receiving of 1028.StaticPressure"
+msgstr ""
+
+#: ../../source/docs/can-bus.rst:47
+#: bb27be84071143e89d100823eaf84dbe
+msgid "Receiving of 1029.StaticTemperature"
+msgstr ""
+
+#: ../../source/docs/can-bus.rst:49
+#: 274e5344b3844a96a71933b0f6541eee
+msgid "Transmission of 1030.RawCommand to ESCs"
+msgstr ""
+
+#: ../../source/docs/can-bus.rst:51
+#: 8d3276ba63a84507a28d017f59fb67d1
+msgid "Receiving of 1060.Fix from GNSS"
+msgstr ""
+
+#: ../../source/docs/can-bus.rst:53
+#: b958853c739c4f9997f91183fbc15046
+msgid "Receiving of 1061.Auxiliary from GNSS"
+msgstr ""
+
+#: ../../source/docs/can-bus.rst:55
+#: af3835c8949441e6a7af001265e4b743
+msgid "Processing of all incoming messages is made in the AP_UAVCAN class and the messages are translated into the form that is best suited for other libraries. The libraries that consume or transmit data should not include the UAVCAN header files from UAVCAN module, but instead should send all data to AP_UAVCAN class in their own preferable way."
+msgstr ""
+
+#: ../../source/docs/can-bus.rst:61
+#: e777bce12cfc4175b3744fc61c5db658
+msgid "Initialization description"
+msgstr ""
+
+#: ../../source/docs/can-bus.rst:63
+#: 4adecca661244796be637042364fd9e3
+msgid "The following initialization is based on Pixhawk hardware and is provided as example."
+msgstr ""
+
+#: ../../source/docs/can-bus.rst:67
+#: 3ad1e7da11df47f5a06533e9a6d705bf
+msgid "Depending on type of board and underlying hardware, other actions may need to be taken for creation of CAN driver and UAVCAN interface class."
+msgstr ""

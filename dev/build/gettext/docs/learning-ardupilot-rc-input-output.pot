@@ -1,0 +1,102 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/learning-ardupilot-rc-input-output.rst:5
+#: bf95cd622a864cacad83bf69cfcd8948
+msgid "RC Input and Output"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-rc-input-output.rst:7
+#: 401515c8bf6942aaa7550b84a6ae1229
+msgid "RC input is a key part of any autopilot, giving the pilot control of the airframe, allowing them to change modes and also giving them control of auxiliary equipment such as camera mounts."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-rc-input-output.rst:11
+#: 4e90060e0e994c2facedd8830b4d4df5
+msgid "The number of channels available depends on the hardware of the particular board. Note that SBUS and Spektrum/DSM are serial protocols. SBUS is a 100kbaud inverted UART protocol and Spektrum/DSM is a 115200 baud UART protocol. Some boards implement these using hardware UARTs (such as on PX4) and some implement them as bit-banged software UARTs (on Linux)."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-rc-input-output.rst:18
+#: a09a2ce314324facaf008c1d4f8ee10f
+msgid "RC Output is how ArduPilot controls servos and motors. The number of available output channels depends on the type of board, and can even depend on the vehicle type and configuration parameters. RC Output defaults to 50Hz PWM values, but can be configured for a wide range of update rates. For example, the Copter code sets up its motor outputs to drive the ESCs at a much higher rate - typically over 400Hz."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-rc-input-output.rst:26
+#: becb686d5b724303a6a0da357af518d2
+msgid "AP_HAL RCInput object"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-rc-input-output.rst:28
+#: fca50d3eabd840a883ae63f281b961c7
+msgid "The first object to understand is the AP_HAL RCInput object which is available as hal.rcin. That provides low level access to the channel values currently being received on the board. The returned values are PWM values in microseconds."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-rc-input-output.rst:33
+#: 9ebee2414b864df8aa5672f8eaa60f54
+msgid "Go and have a look at the `libraries/AP_HAL/examples/RCInput/RCInput.cpp <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL/examples/RCInput/RCInput.cpp>`__ sketch and try it on your board. Try moving the sticks on your transmitter and check that the values change correctly in the output."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-rc-input-output.rst:39
+#: 06a97c97221145ffab7133941357adc2
+msgid "AP_HAL RCOutput object"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-rc-input-output.rst:41
+#: e4b28e51ae054edd9237ba3dc7efbeb4
+msgid "The AP_HAL RCOutput object (available as hal.rcout) gives low level control of all output channels. How this is implemented is very board specific, and may involve programming of on-chip timers, or an I2C peripheral, or output via a co-processor (such as the PX4IO microcontroller)."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-rc-input-output.rst:47
+#: 5a8d5658ace74611a67778cc413c41a6
+msgid "Go and have a look at the `libraries/AP_HAL/examples/RCOutput/RCOutput.cpp <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL/examples/RCOutput/RCOutput.cpp>`__ example sketch. You'll see that it just sets up all the channels to wave the servos from minimum to maximum over a few second period. Hook up some servos to your board and then test to make sure it works for you."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-rc-input-output.rst:54
+#: 66815f3af225454caa3d5d3a0687a773
+msgid "The RC_Channel object"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-rc-input-output.rst:56
+#: 04c074f7b4bf4cefb3a4452280ff45b0
+msgid "The hal.rcin and hal.rcout objects discussed above are low level functions. The usual way of handling RC input and output in ArduPilot is via a higher level object called RC_Channel. That object has user configurable parameters for the min/max/trim of each channel, as well as support for auxiliary channel function, scaling of inputs and outputs and many other features."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-rc-input-output.rst:63
+#: 78a3e311c3304b5eb5c549011d72f201
+msgid "Go and have a look at `libraries/RC_Channel/examples/RC_Channel/RC_Channel.cpp <https://github.com/ArduPilot/ardupilot/blob/master/libraries/RC_Channel/examples/RC_Channel/RC_Channel.cpp>`__. That example shows how to setup RC channels, read input and copy input to output values. Run that on your board and check that transmitter input is passed through to a servo. Try changing it to reverse a channel, and change the min/max/trim on a channel. Have a look through RC_Channel.h to see what API functions are available."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-rc-input-output.rst:72
+#: 5add6841a31343638de76212d055dd9d
+msgid "The RC_Channel_aux object"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-rc-input-output.rst:74
+#: 11766d8126504e45851e88d36af236b0
+msgid "Along with RC_Channel there is another important class in libraries/RC_Channel. It is the RC_Channel_aux class, which is a subclass of RC_Channel."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-rc-input-output.rst:78
+#: 9d7f2faa25454863845d7d4adb69826d
+msgid "An RC_Channel_aux object is a type of RC_Channel but with additional properties that allow its purpose to be specified by a user. Say for example a user wants channel 6 to be a roll stabilization for a camera mount. They would set a parameter RC6_FUNCTION to be 21, which means \"rudder\". Then another library could say:"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-rc-input-output.rst:88
+#: 9573b204961a47f2ae634814b8341f2e
+msgid "and any channel which has its FUNCTION set to 21 will move to full deflection (as k_rudder is setup scaled as an angle in centi-degrees with 4500 being the maximum). Note that this is a one to many arrangement. The user can setup multiple channels to have FUNCTION 21 if they want to, and all of those channels will move, each using their own min/max/trim values."
+msgstr ""

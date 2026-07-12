@@ -1,0 +1,197 @@
+/* Copyright (c) 2025 BZUAV Technology Co., Ltd. */ /* 版权声明 */
+/* Licensed under the MIT License. */ /* MIT开源协议 */
+
+@import url("ardupilot.css"); /* 导入 ardupilot.css，继续导入 theme.css */
+
+/* ==========================================================================
+   1. 顶部菜单设置
+   ========================================================================== */
+#cssmenu {
+  height: 60px !important; /* 顶部菜单高度设置为60px */
+}
+
+/* 新增：让菜单列表容器居中，并与下方布局对齐 */
+#cssmenu > ul {
+  max-width: 1200px !important; /* 菜单最大宽度1200px */
+  margin-left: auto !important; /* 菜单水平居中 */
+  margin-right: auto !important; /* 菜单水平居中 */
+  padding-left: 0 !important; /* 去除左侧内边距 */
+  /* ✅ 关键修改：启用 Flexbox 布局，将菜单项推向右侧 */
+  display: flex !important; /* 使用flex布局 */
+  justify-content: flex-end !important; /* 菜单项整体靠右 */
+  align-items: center !important; /* 菜单项垂直居中 */
+  position: relative !important; /* 让伪元素绝对定位参照此容器 */
+  height: 100%; /* 菜单高度占满父容器 */
+}
+
+#cssmenu > ul > li > a {
+  padding: 20px 16px !important; /* 设置菜单链接的上下内边距为20px，左右为16px，让点击区域更大 */
+  line-height: 20px !important; /* 设置菜单文字的行高为20px，使文字垂直居中 */
+}
+
+/* ==========================================================================
+   2. 布局容器 (父容器) - 负责整体居中
+   逻辑：侧栏(300) + 内容(900) = 总宽(1200)
+   ========================================================================== */
+.wy-grid-for-nav {
+  position: relative !important; /* 父容器相对定位 */
+  top: 60px !important; /* 顶部偏移60px，避开菜单 */
+  width: 100%; /* 宽度100% */
+  max-width: 1200px !important; /* 最大宽度1200px */
+  margin-left: auto !important; /* 水平居中 */
+  margin-right: auto !important; /* 水平居中 */
+  min-height: calc(100vh - 60px); /* 最小高度为视口高度减去菜单高度 */
+}
+
+/* ==========================================================================
+   3. 大屏幕布局 (>= 1200px)
+   只有屏幕够宽时，才执行严格的 300+900 布局
+   ========================================================================== */
+@media screen and (min-width: 1200px) {
+  
+  /* --- 左侧：侧边栏 (300px) --- */
+  .wy-nav-side {
+    position: sticky !important; /* 侧栏吸顶 */
+    top: 60px; /* 距离顶部60px */
+    width: 300px; /* 侧栏宽度300px */
+    height: calc(100vh - 60px); /* 侧栏高度自适应 */
+    float: left; /* 左浮动 */
+    left: 0 !important; /* 靠左 */
+    z-index: 200; /* 层级 */
+    overflow-y: auto; /* 侧栏可滚动 */
+  }
+
+  /* --- 右侧：内容包裹器 --- */
+  .wy-nav-content-wrap {
+    margin-left: 300px !important; /* 内容区左边距300px，避开侧栏 */
+    background: rgba(0, 0, 0, .05); /* 内容区灰色背景 */
+    min-height: calc(100vh - 60px); /* 内容区最小高度 */
+  }
+
+/* ==========================================================================
+   4. 平板/中等屏幕 (768px - 1199px)
+   屏幕不够 1200px 时，容器占满全屏，内容自适应
+   ========================================================================== */
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .wy-grid-for-nav {
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .wy-nav-side {
+    position: sticky !important;
+    top: 60px;
+    width: 300px;
+    float: left;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+  }
+
+  .wy-nav-content-wrap {
+    margin-left: 300px !important;
+  }
+
+  .wy-nav-content {
+    max-width: 100% !important; /* 内容区宽度自适应 */
+  }
+}
+
+/* ==========================================================================
+   5. 移动端 (<= 768px)
+   隐藏侧栏，内容全宽
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+  .wy-grid-for-nav {
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .wy-nav-side {
+    position: fixed !important; /* 侧栏固定定位 */
+    left: -300px !important; /* 侧栏移出屏幕 */
+    top: 60px !important; /* 顶部偏移 */
+    transition: left .2s; /* 左移动画 */
+  }
+
+  /* 当点击菜单展开侧栏时 (通常会有 .shift 类) */
+  .wy-nav-side.shift {
+    left: 0 !important; /* 菜单展开时侧栏归位 */
+  }
+
+  .wy-nav-content-wrap {
+    margin-left: 0 !important; /* 内容区左边距归零 */
+  }
+
+  .wy-nav-content {
+    padding: 1.618em !important; /* 内容区内边距 */
+    margin-left: 0 !important; /* 内容区左边距归零 */
+    max-width: 100% !important; /* 内容区宽度自适应 */
+  }
+}
+
+/* ==========================================================================
+   临时调试：隐藏面包屑区域
+   ========================================================================== */
+
+/* 1. 隐藏面包屑列表 */
+.wy-breadcrumbs {
+    display: none !important; /* 隐藏面包屑导航 */
+}
+
+/* 2. 隐藏面包屑下方的分割线 (HR) */
+/* 通常面包屑和正文之间有一条横线，也需要隐藏，否则顶部会有奇怪的线条 */
+.wy-nav-content hr {
+    display: none !important; /* 隐藏面包屑下方分割线 */
+}
+
+/* 3. 调整内容区顶部间距 */
+/* 隐藏面包屑后，内容可能会贴顶，加一点 padding 让视觉舒适 */
+.wy-nav-content {
+    padding-top: 40px !important; /* 内容区顶部间距，避免贴顶 */
+}
+
+/* ==========================================================================
+   Logo 测试代码 (CSS 方式) - 靠右布局版
+   ========================================================================== */
+
+/* 2. 使用伪元素添加 Logo */
+#cssmenu > ul:before {
+  content: ""; /* 伪元素内容为空，用于显示logo */
+  display: block; /* 块级显示 */
+  position: absolute; /* 绝对定位 */
+  left: 0 !important; /* logo始终紧贴菜单栏左侧 */
+  top: 50%; /* 垂直居中 */
+  transform: translateY(-50%); /* 垂直居中修正 */
+  width: 220px; /* logo宽度 */
+  height: 60px; /* logo高度 */
+  background-image: url("../images/matrixhawk-HTML-1.0.svg"); /* logo图片路径 */
+  background-size: contain; /* 图片自适应容器 */
+  background-repeat: no-repeat; /* 不重复 */
+  background-position: left center; /* 图片左侧居中 */
+  z-index: 10; /* 层级 */
+  cursor: pointer; /* 鼠标悬停变手型 */
+}
+
+/* 3. 将第一个菜单项 (Home) 的间距重置 */
+#cssmenu > ul > li:first-child {
+  margin-left: 220px !important; /* 第一个菜单项左边距，避让logo宽度 */
+}
+
+/* 4. 移动端适配 */
+@media screen and (max-width: 768px) {
+  /* 移动端通常不需要 Flex 靠右，或者需要特殊处理 */
+  #cssmenu > ul {
+    display: block !important; /* 移动端菜单恢复块级显示 */
+  }
+  
+  #cssmenu > ul:before {
+    left: 10px !important; /* 移动端logo左边距 */
+    width: 120px; /* 移动端logo宽度 */
+  }
+  
+  /* 移动端恢复避让间距 */
+  #cssmenu > ul > li:first-child {
+    margin-left: 130px !important; /* 移动端第一个菜单项左边距，避让logo宽度 */
+  }
+}
+

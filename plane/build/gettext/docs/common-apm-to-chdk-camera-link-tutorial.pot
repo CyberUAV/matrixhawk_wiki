@@ -1,0 +1,347 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:3
+#: 681a4cc3bdad40d09249f97a116e68be
+msgid "**ARCHIVED: page considered obsolete**"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:7
+#: 264af3f31bb84c50882b557dcdc6e3d0
+msgid "Camera Shutter Triggering using CHDK"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:9
+#: d73ed070c2a84c17857a8624fc2826e9
+msgid "This article explains how to set up camera shutter triggering for Canon Cameras that support the `Canon Hacker Development Kit <http://chdk.wikia.com/wiki/CHDK>`__ (CHDK)."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:13
+#: fb7f90b7fd4048bfbb5b4a5c41592b86
+msgid "Overview"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:15
+#: 806210336b244b4eafab7eb4ccaf435a
+msgid "ArduPilot allows you to :ref:`configure a servo or relay output as the control signal for the camera shutter <common-camera-shutter-with-servo>` so that it can be used in :ref:`Camera Missions <common-camera-control-and-auto-missions-in-mission-planner>`. Additional hardware is required to convert the shutter activation signal to the format expected by the particular camera."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:22
+#: eb4faaf65dec4743ab222b806637340f
+msgid "This article explains how to set up the shutter-trigger for Canon Cameras that support the *Canon Hacker Development Kit* (CHDK). The method connects the ArduPilot output to the camera using a \\*custom cable\\*, and causes a script running on the camera to take pictures when the *relay* output voltage goes high."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:28
+#: 75aee5c4a99b47399c9b1a2092aff3a7
+msgid "At the end of the article is a :ref:`list of cables that you can purchase <common-apm-to-chdk-camera-link-tutorial_chdk_cables_for_purchase>` instead of using the custom cable (please extend this list if you find another appropriate cable)."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:32
+#: 31f8102a85a9428c9c187b985d21c129
+msgid "The article covers both Pixhawk and APM2.x."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:39
+#: 4eb4340f514848018c7d7057d2b5a371
+msgid "APM Connected to a Canon SX260 HS using a custom cable"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:43
+#: d03844a172c642c6b17f0c87b55bc40b
+msgid "It is also possible to use a :ref:`servo output instead of a relay <common-apm-to-chdk-camera-link-tutorial_using_a_servo_instead_of_a_relay>`."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:47
+#: c02fa846fdfd4bf288e7c37617e9e7e0
+msgid "CHKD and ArduPilot integration"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:49
+#: 308c430e5c9d4729a388a572213f1ab7
+msgid "CHDK is an experimental (and free) development tool, which temporarily patches (supported) *Canon cameras* so that they can be controlled using scripts. The scripts are able to take pictures, control the camera zoom, set the focus, and access many other camera features."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:54
+#: e9e45f5f15ad4b19ab4546c6fe0020f5
+msgid "Scripts can also read the camera USB port voltage and execute different instructions/functions based on the signal pulse-length. When using a relay, the script can be very simple — all it needs to do is check the voltage (in a loop), and take a picture when it detects the relay voltage go high. More complicated scripts might first set the focus, zoom, or perform any other default behaviour."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:61
+#: b974a62be5f94543a60bfefa744132eb
+msgid "The `CHDK Wiki <http://chdk.wikia.com/wiki/CHDK>`__ documentation explains which cameras are supported, how you install CHDK on you camera, and how to install and run scripts."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:66
+#: b4d96af80b87495a8a28ef32499c073f
+msgid "Cable for connecting to Pixhawk"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:70
+#: f8154cef864b4b02b9c4d8e99e824bec
+msgid "See :ref:`CHDK cables for purchase <common-apm-to-chdk-camera-link-tutorial_chdk_cables_for_purchase>` if you just want to buy a cable. This section is useful if you want to create your own cable or understand what the cable needs to do."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:74
+#: b8b93e454296460980e07194f640c7c6
+msgid "For Pixhawk you have to modify the APM cable in the following section, adding a circuit step the output pin signal voltage from 3.3 to 5 volts. This is required because the relay/servo output voltage is approximately 3.3V while CHDK needs 5V to trigger."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:79
+#: f84a883c586b49d18c3d457da55696d7
+msgid "A circuit and PCB you can use are shown below. 5V should be supplied from a BEC (or from a BEC powering the central pin on the AUX output rail) because the servo rail itself is not powered."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:83
+#: ab8561f3a59d4d029564bfda150b013e
+msgid "1 x BC547 or 2N3904"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:85
+#: 6d9855e193b0415c9112504c9810bc47
+msgid "1 x BC557 or 2N3906"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:87
+#: a75ecaed1d924da2ae7939ef5cb2937d
+msgid "2 x 1 K"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:89
+#: e1a941944174403fb06afb7c065e54e8
+msgid "1 x 220 ohm"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:96
+#: 5fb1151545404b4195fdcf4c58b2d0a4
+msgid "3Vto 5V Shifter Circuit"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:101
+#: fc48e09f3c8b42f6b6fd1ea676769169
+msgid "3V to5V Shifter (PCB)"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:105
+#: 6d6cd80834894e0db35d186c1d13ebfe
+msgid "The voltage stepper circuit and PCB above are `from the community discussion boards <https://diydrones.com/forum/topics/using-aux-pins-as-relays-for-chdk?commentId=705844%3AComment%3A1581209>`__."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:107
+#: b1cd5581f0324a31ab1f6700bed24dac
+msgid "It is also possible to find pre-built stepper circuits like the `SparkFun 5V Step-Up Breakout - NCP1402 <https://www.sparkfun.com/products/10968>`__ (not tested)."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:111
+#: 14e357db706740eab8287028dd6f67f9
+msgid "Cable for connecting to APM"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:113
+#: b7c930421e5d4a6b8b90f39b8530599c
+msgid "A cable is needed to connect the APM board to the camera USB port. This section shows how to modify the USB cable that is supplied with the camera, replacing the standard USB connector with a 3-position header that can connect to the AMP output port."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:120
+#: ba45bc304408432388cce0f603c5f5e5
+msgid "This example uses the USB Mini-B connector that comes with the SX260 HS camera. The same approach should work equally well using the supplied cable on any CHDK-supported Canon Powershot camera."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:124
+#: dc9da4c5caf2403ea414771733459545
+msgid "The components used to attach the servo connector to the wire are shown below. If you don’t have a crimp tool you can just solder a spare servo wire connector instead."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:131
+#: 05ab681f34634b5bb8fa7d305829df5b
+msgid "APM CHDK Camera Control Cable: Parts needed"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:133
+#: 0a2febbdfc6c4f23acfa66499fa142e1
+msgid "We’ll only be using the Mini-B side of this cable, so measure whatever length you need from that end depending on how your camera and autopilot mount in your airframe. I’ve measured out about 14″ and cut the cable completely through. Inside are four wires, we only need the red and black wire so cut away the green and white wires. Strip the ends of the red and black wires."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:143
+#: 6185bc7e8a8549e79db18be31f9efa84
+msgid "CHDK Camera Control Cable:Stripped Wires"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:145
+#: 8b4be0cf2b55454da25c5ef98c40c065
+msgid "If you have the crimp tool, crimp and insert the wires into the first and third positions of a 3-position header. If you don’t have the crimp tool, solder these two wires to the ground and signal wires of a spare servo wire. Insert the ground wire into the side with an arrow so you can tell which wire is which later on."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:154
+#: fdb5629b18884e9e9d695e3c818d87a3
+msgid "CHDK Camera Cable:Attaching the 3-Position Header"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:156
+#: 2993f1c0281141a09aa16f8ccae1a950
+msgid "Cover the connector with heatshrink. Be careful with the hot air near the connector as it can cause the locking plastic pieces in the receptacle to deform."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:163
+#: 4397464b71d54da8be5b8a3c91c8f69e
+msgid "ACHDK Camera Cable: Connector covered withHeatshrink"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:166
+#: 24910b31bb24499bb97e091e37357f73
+msgid "Camera shutter configuration in Mission Planner"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:168
+#: 526a1b8d6cef4000a17c5ddd8eb60602
+msgid ":ref:`Camera Shutter Configuration in Mission Planner <common-camera-shutter-with-servo>` explains how to configure a Pixhawk AUX output or the APM2.x A9 pin as a relay camera trigger. Connect the cable to the appropriate port as described, and to the camera."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:173
+#: ce3fa4ec4a2f49e68a9fe69341fb4731
+msgid "The specific Mission Planner settings required for this CHDK hardware are listed below. Note that duration required may be different on some cameras:"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:177
+#: aeeee4d756f5447e8892161fddbb8f6a
+msgid "Pixhawk:"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:179
+#: 49346dc6db8741a8b0a3b03f70d309b7
+msgid "``CAM_TRIG_TYPE``: 1 (Relay)."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:180
+#: fe8cc710b96044bca04f29efdce9224e
+msgid "``Shutter (Port)``: RC10 (Name of connected port, in this example we use RC10 = AUX2)."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:183
+#: ed899b93c26444a1956ab85bb952d507
+msgid "APM2.x:"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:185
+#: 3db3f2cf8e6543a0a41ac546a8180c90
+msgid "``Shutter (Port)``: Relay (A9 Pin)."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:187
+#: 60a256d507dd4e2f893390eb94cce14f
+msgid "``Shutter Duration``: 1 (1/10 second)"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:188
+#: 256a367143c54462a3574eb579ab2c33
+msgid "``CH7_OPT`` : 9 (Optional - enables manual shutter triggering on Copter only)."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:191
+#: 52b1268400fa4e888b5f484c2d4b142f
+msgid "The servo settings are not used for the relay configuration, and can be ignored."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:195
+#: 3ddf02ba269344d29854fcd4d4979354
+msgid "Creating and installing the CHDK script"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:197
+#: da82e4a99fb842aab8a6145143f1f5a8
+msgid "One of the simplest scripts you can use is **E38_APM.bas**, which simply waits on the relay signal and then takes a picture (originally from www.event38.com):"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:223
+#: b1889365743f4797bf927c492b0a2bbd
+msgid "Alternatively you can use a more advanced script to set up the camera focus, exposure or other settings before taking the picture. A good starting point is the open source `KAP UAV Exposure Control Script <http://chdk.wikia.com/wiki/KAP_UAV_Exposure_Control_Script>`__ (v3.1). This was used as the basis for the `3DR Aero Plane <https://3dr.com/kb/aero-m/>`__ *3DR EAI (Exposure-Aperture-ISO)* script described in the `Aero-M Operation Manual <https://3dr.com/kb/aero-m/>`__."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:229
+#: 8451131e444c4f968544d272c1674874
+msgid "The `CHDK Wiki <http://chdk.wikia.com/wiki/CHDK>`__ explains how you set up CHDK and install and activate scripts for your particular camera. Installing scripts is usually as simple as copying them into the \"scripts\" directory on your SD card. You can then activate them by navigating to the menu **Miscellaneous Stuff \\| Remote Parameters** and making sure the **Enable Remote** setting is checked."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:239
+#: 3f27310b04f94dbb88dee0afc6d09045
+msgid "CHDK: Camera Menu to EnableRemote"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:242
+#: 35bedc0da9b443c09a7055ed4700525c
+msgid "Testing"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:244
+#: 054c539f99dd4f9db6b5dcb17ae3e41a
+msgid "Load and run your CHDK script. On Copter you should be able to trigger the shutter using the CH7 switch."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:247
+#: c1f5ea18b6864c3caec192220ba11d82
+msgid "On other vehicles set the ``CAM_TRIGG_DIST`` to 1 or 2 meters. Small changes in the GPS readings will cause the distance value to count up slowly and it should trigger the shutter every few seconds. If nothing happens at all, take your vehicle outside and walk around to make sure that some distance is detected. If your camera lens closes and opens instead of taking a picture, make sure the CHDK *remote enable* setting is activated on the camera."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:258
+#: 1e9cae08c0714f8288365ef3a2931cc9
+msgid "Using a servo instead of a relay"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:260
+#: 8849effb34e646ff95eb8bec0d0dc1c7
+msgid "It is also possible to trigger the camera shutter using a servo output, but that requires additional (and often more expensive) hardware to decode the servo's PWM signal. The :ref:`CHDK Camera Control Tutorial <common-chdk-camera-control-tutorial>` describes a suitable PWM-to-voltage pulse cable, and information from which the servo settings can be inferred."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:269
+#: bad608155652474e92eba08cd76ba657
+msgid "The :ref:`CHDK Camera Control Tutorial <common-chdk-camera-control-tutorial>` integrates with the camera as a \"generic servo\" rather than as a shutter trigger. This approach means that camera triggering is not as well integrated with mission planning, but more camera commands can be called."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:278
+#: 60ad8ca3c7ef4eeabb7ce3f585efc0f2
+msgid "CHDK Cables for purchase"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:280
+#: f2f5a35d4d044aa9875d48ac90a04725
+msgid "This section is for listing CHDK cables that you can purchase (rather than creating your own, as described in this article). Please extend the list if you discover more."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:285
+#: 2b3c8dc76eb04a2a9f85dda04f94293f
+msgid "Tuffwing camera trigger cable for Pixhawk"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:287
+#: befbccaffc34475c9343984842ffc3f9
+msgid "Tuffwing camera trigger cable for connecting Pixhawk to a CHDK Canon PowerShot. This includes circuitry to upscale the Pixhawk 3.3 volt signal to 5 volts from the + pin. You'll need to have an ESC with an BEC or UBEC plugged into any of the open AUX or MAIN OUTs on the Pixhawk."
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:292
+#: 6d8537b62b3d4811b13ac907ba23d1bb
+msgid "`Purchase from Tuffwing store <http://www.tuffwing.com/store/store.html#PixHawk_Camera_Trigger_Cable>`__"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:293
+#: dd5fbf137a074b6285d5bbc3da155e15
+msgid "`Pixhawk Camera Trigger Cable <http://www.tuffwing.com/support/pixhawk_camera_trigger_cable.html>`__ (User Guide)"
+msgstr ""
+
+#: ../../source/docs/common-apm-to-chdk-camera-link-tutorial.rst:299
+#: 1f77344c9f694c68a10685908090abf4
+msgid "Tuffwing Pixhawk CHDK Camera Trigger Cable"
+msgstr ""

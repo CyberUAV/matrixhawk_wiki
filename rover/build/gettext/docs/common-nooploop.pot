@@ -1,0 +1,237 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Rover package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rover \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:39+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-nooploop.rst:5
+#: 7ab75d9d4daf4ef2a2d40f2ffee1809a
+msgid "Nooploop for Non-GPS Navigation"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:9
+#: aab62595b6104dfd91eee29738865e4f
+msgid "This article explains how a `Nooploop <https://www.nooploop.com/en/>`__ system based on UWB(Ultra Wide Band) technology can be used as a short-range substitute for a GPS allowing position control modes like Loiter, PosHold, RTL, Auto indoors."
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:12
+#: 2ce275e502c14728ae40cc33c05e701a
+msgid "Required Hardware"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:14
+#: 5d54e5d6180547e8aedc42cd2306ac4a
+msgid "5 Nooploop LinkTrack nodes."
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:15
+#: 924a8f74ad384babb2f056f4ff23781d
+msgid "one `Arduino Nano Every <https://store.arduino.cc/usa/nano-every>`__ (optional)"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:16
+#: f3c37512eab9472194f51d16b50afcbd
+msgid "4 `portable chargers <https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=portable+charger&rh=i%3Aaps%2Ck%3Aportable+charger>`__ with type A USB ports to power the anchors (optional)"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:17
+#: a2846e088d9042329f66488208389818
+msgid "4 `tripods <https://www.amazon.com/s/ref=nb_sb_noss_1?url=search-alias%3Daps&field-keywords=tripod&rh=i%3Aaps%2Ck%3Atripod>`__ to mount the anchors (optional)"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:20
+#: 998dcf894281461c8f0ac9c5dc2dc8a2
+msgid "Preparing the anchors"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:22
+#: c7da0d7f892a423b9339b3ad33f75073
+msgid "4 Nooploop nodes need to be configured to act as anchors. Follow Nooploop `LinkTrack user manual <https://www.nooploop.com/en/download/>`__ to setup and calibrate them."
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:25
+#: 1b7381c93afc4791a23519f72c0b09bf
+msgid "Placing the anchors"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:27
+#: 1bd652ad00614563bc5c9c20faaa386a
+msgid "The anchors should be placed in a rectangular shape. Anchor 0 will act as \"origin\" and Y axis of Nooploop system will act as \"North\". The configuration is slightly simpler if the line from anchor 0 to anchor 1 is due North but it is not required as the :ref:`BCN_ORIENT_YAW <BCN_ORIENT_YAW>` parameter can be used to account this difference."
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:33
+#: 0cce483fea3543e8b13c8395590e86af
+msgid "Preparing the tag"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:35
+#: d7ec45d279994193b1805ffa7f2ed879
+msgid "Use Nooploop NAssistant tool to configure one node to act as a tag."
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:37
+#: 9f71762057a64002a5ef4fc210f26b53
+msgid "set Protocol to Node_Frame2"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:38
+#: b65ac0a37ab4472ead05aba8707000d8
+msgid "set Baudrate to 921600"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:39
+#: 56a2ff11fdd0451fbe9165c455e682b9
+msgid "set Update Rate to 25"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:40
+#: a13d631bdcba4fdeacc89fab69700af9
+msgid "set Filter Factor to 0"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:46
+#: 52c50dc9eb55419faa37cbd253241db1
+msgid "Connecting the tag to the Flight Controller"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:48
+#: 4ad5cda6adbc4a3a93f072b6a162ec08
+msgid "It is possible to directly connect UART port of the tag to the FC. However, UART Tx of certain FCs is not compatible with Nooploop UART Rx (According to developers at Nooploop, it seems to be caused by a CP2012 inside Nooploop nodes. It is possible that this problem can be solved by removing this CP2012). It causes the FC to be unable to communicate with the tag. Pixhawk 4 mini and Kakute F7 are confirmed to have this issue. In this case, an Arduino Nano Every can be used as a work-around. Use Ardnio IDE to upload `Nooploop work-around sketch <https://github.com/chobitsfan/nooploop_workaround.git>`__ to a Arduino Nano Every and connect its UART Tx to UART Rx of the tag. For the following we assume that the tag is connected to the FC's UART port corresponding to SERIAL1."
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:54
+#: 15fd918fba5a426aa61ba46cbec9b381
+msgid "Configuration through the Ground Station"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:56
+#: 21c49beb940b441d8b53aee7ad3af70c
+msgid "Ensure that Copter is loaded onto the autopilot and connect with a Ground Station (i.e. Mission Planner)."
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:58
+#: 8bc0b2ae06b94e4fa247411674618f70
+msgid "set :ref:`BCN_TYPE <BCN_TYPE>` to 3 (means using Nooploop system)"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:59
+#: 1675295f6b994fd58558a497a63ad911
+msgid "set :ref:`BCN_LATITUDE <BCN_LATITUDE>`, :ref:`BCN_LONGITUDE <BCN_LONGITUDE>` and :ref:`BCN_ALT <BCN_ALT>` to match your actual location.  Getting these values exactly correct is not particularly important although getting them close is required in order for the compass's declination to be correctly looked up from the database held within ArduPilot."
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:60
+#: dcc60eed52794cb18d68b21621650a95
+msgid "set :ref:`BCN_ORIENT_YAW <BCN_ORIENT_YAW>` to the heading from the origin anchor to the 2nd anchor.  One way to capture this value is to stand at the origin holding the vehicle so that its nose points towards the second beacon.  Read the vehicle's heading from the HUD and enter this value into :ref:`BCN_ORIENT_YAW <BCN_ORIENT_YAW>`"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:61
+#: 8431d85ff8244531b30dde5a25dc1c3e
+msgid "set :ref:`EK3_BCN_DELAY <EK3_BCN_DELAY>` to 20"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:62
+#: 6c559cf4f30a48ba81148bbd7750326c
+msgid "set :ref:`EK3_SRC1_POSXY <EK3_SRC1_POSXY>` to 4 (\"Beacon\")"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:63
+#: 7037afc350f64a689e32fc995269f56f
+msgid "set :ref:`EK3_SRC1_POSZ <EK3_SRC1_POSZ>` to 4 (\"Beacon\") to use NoopLoop for altitude or leave at \"1\" to use the barometer"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:64
+#: 625ca26e20374c398fc1b41177e60452
+msgid "set :ref:`EK3_SRC1_VELXY <EK3_SRC1_VELXY>` to 0 (\"None\")"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:65
+#: 7d578905395e46d784dc24259c1f39a9
+msgid "set :ref:`EK3_SRC1_VELZ <EK3_SRC1_VELZ>` to 0 (\"None\")"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:66
+#: 4cfe892b144e4568845e7a4d1c641475
+msgid "set :ref:`EK3_SRC1_YAW<EK3_SRC1_YAW>` to 1 (\"Compass\") since a compass must be used in conjunction with this device."
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:67
+#: 6bba0e411bb24613ae8ff4f7f6a4091d
+msgid "set :ref:`GPS1_TYPE <GPS1_TYPE>` to 0 to disable the GPS"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:68
+#: b37ae61a98864d418aac9ce6e66b0e47
+msgid "set :ref:`ARMING_SKIPCHK <ARMING_SKIPCHK>` to 8 to disable the GPS arming check"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:69
+#: 78da76a28f6942458446322359a960b8
+msgid "set :ref:`SERIAL1_BAUD <SERIAL1_BAUD>` to 921 to set SERIAL1's baud rate to 921600"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:70
+#: 13e59efb9f354e8a930f355188e24079
+msgid "set :ref:`SERIAL1_PROTOCOL <SERIAL1_PROTOCOL>` to 13 to enable reading the IndoorLoiter2 protocol"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:71
+#: da55a9ccb6da45b5b867b4529158f8a9
+msgid "set :ref:`BRD_SER1_RTSCTS <BRD_SER1_RTSCTS>` to 0 to ensure SERIAL1 does not use flow control, assuming it has this capability."
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:74
+#: b92289b6b2d74a39a045ccf34d46cba6
+msgid "Ground Testing"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:76
+#: fdde39b40f8d49718fb7205c0bbe19d0
+msgid "Connect the Autopilot to a ground station."
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:77
+#: d04e0a31368f470cb3e64bc0bd44a678
+msgid "After about 1 minute the vehicle's position should jump to the latitude, longitude you input during the configuration step (above)."
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:78
+#: 63e0db6943c347a0999de0b4adfe4504
+msgid "Check that the vehicle's position is relatively stable (i.e. moving around less than one meter)"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:79
+#: 6281f0e87dbb4351b7c690e8ccbea8cf
+msgid "Walk the vehicle around between the anchors and ensure that its position on the map updates correctly"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:82
+#: 4892d20a5129440eb6c6d0ac9bf39641
+msgid "Flight testing"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:84
+#: bcf5fe3056c7484792641c1943560fd5
+msgid "Setup the transmitter with Stabilize, AltHold and Loiter flight modes. Take off in AltHold mode and maintain a stable hover. Switch to Loiter but be ready to switch back to AltHold or Stabilize if the vehicle's position or altitude becomes unstable."
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:89
+#: b0228738af504abda111db5077488ba3
+msgid "DataFlash logging"
+msgstr ""
+
+#: ../../source/docs/common-nooploop.rst:91
+#: 4272542b01e840a2830bf83aef1315e4
+msgid "The distance to the beacons can be found in the dataflash log's BCN message's D0, D1, D2, D3 fields."
+msgstr ""

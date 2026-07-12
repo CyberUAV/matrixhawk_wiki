@@ -18,7 +18,7 @@ When SITL is started, it has a standard set of peripherals (ie GPS, ESCs, Servos
 Simulating On-Board OSD
 =======================
 
-When starting SITL, you can have it display a simulation of the integated OSD, if the autopilot includes one. Add the ``--osd`` option when starting SITL:
+When starting SITL, you can have it display a simulation of the integrated OSD, if the autopilot includes one. Add the ``--osd`` option when starting SITL:
 
 ::
 
@@ -218,7 +218,7 @@ You can test two virtual wheel encoders like this:
     param set WENC_POS_Y 0.075
     param set WENC2_TYPE 10
     param set WENC2_POS_Y -0.075
-    param set ARMING_CHECK 60918 (to disable GPS checks)
+    param set ARMING_SKIPCHK 8 (to disable GPS checks)
 
 The restart SITL and right mouse button click on the map and select "Set Origin (with height)" and the vehicle should appear on the map.  It may also be useful to enter "map set showsimpos 1" to make the vehicle's actual position visible.
 
@@ -314,7 +314,7 @@ Enable EKF3, disable GPS and set Serial5 protocol to mavlink so as to accept vis
     param set VISO_TYPE 2
     param set SERIAL5_PROTOCOL 2
     param set GPS_TYPE 0 (optional)
-    param set ARMING_CHECK 388598 (optional, to disable GPS checks)
+    param set ARMING_SKIPCHK 8 (optional, to disable GPS checks)
     param fetch
 
 Restart the simulation, attaching a simulated Vicon system to ``SERIAL5``:
@@ -357,7 +357,7 @@ Arm in loiter, takeoff and fly somewhere:
    rc 3 1800
    rc 2 1400
 
-Other SITL vicon settings are hel in SIM_VICON_xx parameters:
+Other SITL vicon settings are held in SIM_VICON_xx parameters:
 
 ::
 

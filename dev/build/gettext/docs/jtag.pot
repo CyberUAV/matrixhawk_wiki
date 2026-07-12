@@ -1,0 +1,517 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/jtag.rst:5
+#: 439db8c39c554a29a3e5d825ef60c52a
+msgid "Archived: Debugging using JTAG"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:8
+#: ba6a030b70464b26accdff4122dfcdf7
+msgid "Overview"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:10
+#: 18411d274ee64f7eadd436f37c9b7b58
+msgid "The JTAG interface on APM provides additional debugging features that can be useful when working on certain kinds of problems. This page describes how to configure your APM setup so that you can use JTAG to debug it."
+msgstr ""
+
+#: ../../source/docs/jtag.rst:15
+#: bdeafe488c204ba1835292df7818c6d9
+msgid "Note that enabling JTAG disables the ADC4, ADC5, ADC6 and ADC7 pins. These aren't normally used by APM, but if your application requires more than the low four ADC inputs, you won't be able to use JTAG."
+msgstr ""
+
+#: ../../source/docs/jtag.rst:20
+#: 096506553c554042a35abcee93debeed
+msgid "Hardware Required"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:22
+#: c6535491d298400a826249cdbadf1b00
+msgid "Obviously you will need an APM board. The JTAG signals are available on the oilpan, so we will assume you are using one as well. For other boards (e.g. Arduino Mega) see your board's documentation for the location of the relevant pins."
+msgstr ""
+
+#: ../../source/docs/jtag.rst:27
+#: ed7a9495e8bf4ed28534ce6a7417e52c
+msgid "To program the JTAG and OCD fuses in the ATMega1280 an ISP programmer of some sort is required. This article describes using the cheap and effective !BusPirate, but another programmer (e.g. STK500, GoodFET, etc.) could also be used."
+msgstr ""
+
+#: ../../source/docs/jtag.rst:32
+#: 2a15d5ab2c2641c2a62b3bbae3c0b429
+msgid "Last but not least, you will need an AVR JTAG unit. The Atmel JTAGICE mkii works well, but is expensive. This article was developed using the much cheaper JTAGICE mkii-CN from"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:36
+#: 954f44f5f93c421ab4366e64bddff9b2
+msgid "`http://www.mcuzone.com <http://www.mcuzone.com/>`__"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:38
+#: 88948f1f5de24a0a83a1dbf84cfa0527
+msgid "obtained via eBay for about 1/3 the price of the Atmel unit. The JTAGICE can be used as a programmer as well."
+msgstr ""
+
+#: ../../source/docs/jtag.rst:41
+#: 48c6cf69981749b2a56cded601c109fe
+msgid "Note that the mkii-CN unit seems very sensitive to USB setup. If it misbehaves when connected to a hub, try connecting it directly to a port on your system."
+msgstr ""
+
+#: ../../source/docs/jtag.rst:46
+#: ef79686ae7b448a886730d00a965e4a8
+msgid "Software Required"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:48
+#: 0e769934db0c4f4082996ee068c4d959
+msgid "The AVRDUDE and AVaRICE tools are required, as well as avr-gdb."
+msgstr ""
+
+#: ../../source/docs/jtag.rst:50
+#: 368212b22c004d9689bbfc345cd1085c
+msgid "On Windows, all of the required tools should be installed by WinAVR. (TBD: verify whether AVaRICE comes with WinAVR)"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:53
+#: e565d5b1e55a4f9c95e580a94d56452c
+msgid "On Mac OS the use the MacPorts tool to install the tools. Fetch and install the MacPorts package, then use the following commands:"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:63
+#: 016dd9cde983425b9d89dcb39fe65959
+msgid "You can omit avr-gdb if you already have the AVR CrossPack installed."
+msgstr ""
+
+#: ../../source/docs/jtag.rst:65
+#: 6de0fbb1fae640b49496064c544fc26d
+msgid "Most Linux systems have packages available for avrdude, avarice and avr-gdb. See your system management documentation for details on installing these, or ask a friend."
+msgstr ""
+
+#: ../../source/docs/jtag.rst:70
+#: 445dc5f097da435d9707c98f79702e8d
+msgid "Initial Setup"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:72
+#: 0cbdf649fd45428091bc95c4b1405dc4
+msgid "Before debugging, the JTAG Enable and On Chip Debug Enable fuses must be programmed in the ATMega1280. By default both are disabled, and despite offering a tempting option in the boards.txt file, Arduino does not seem to provide a way to change them."
+msgstr ""
+
+#: ../../source/docs/jtag.rst:77
+#: 8cf50e385dfb46b185fa00db97403e00
+msgid "Separate the APM and oilpan boards, and connect your ISP programmer to the AT1280 SPI header on the APM board. In the illustration here, the BusPirate breakout cable is being used. Note that the wire colours shown are for the cable supplied by !SparkFun; other vendors may use different colour-coding. Use the following table as a guide:"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:84
+#: a4a3b6d81ec74659a30d98d3db2f1f67
+msgid "!BusPirate Pin"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:84
+#: ../../source/docs/jtag.rst:105
+#: 38ed84751dd941a78d11ac4c8cad8190
+#: 349241627209495ba9b76a074b6cd3f8
+msgid "ISP Pin"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:84
+#: ../../source/docs/jtag.rst:174
+#: fa98e032e98a4a43a36ffc2ae0ae1107
+#: 663ce37b3b7a41f981f6cbc24e085290
+msgid "Wire Colour"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:86
+#: f31489fc8c284282b55f04d17b90c2de
+msgid "1 (GND)"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:86
+#: ../../source/docs/jtag.rst:117
+#: eec41b38cfc94a0398cd23c809463ade
+#: 62f71041d7a74f0b88098e4158d46025
+msgid "6"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:86
+#: 1b609d02db6a49a28d1d809bfc2eb83d
+msgid "black"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:88
+#: 39b1b1a3053d4e3ca188931f6aae0313
+msgid "3 (+5)"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:88
+#: ../../source/docs/jtag.rst:109
+#: 60292a25cf2f459ab0d8860bb3ae4c56
+#: 1acc5ed9c4b743be898a4fe0c3349c2b
+msgid "2"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:88
+#: 1b23bcdb7a6a49e3876b8bf822067271
+msgid "grey"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:90
+#: cf883824dc3948f58ffb0ee517e1647e
+msgid "7 (CLK)"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:90
+#: ../../source/docs/jtag.rst:111
+#: de57de129aea46b88323c9782b6abe53
+#: 8a6a40f4f4dd4b27a32b7d6579477d93
+msgid "3"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:90
+#: ../../source/docs/jtag.rst:186
+#: 7290cdacbef74f9993ea91e2e41a7b12
+#: 3cc82bb5b9f24630bf0bf809bf9264c7
+msgid "yellow"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:92
+#: 3f981b602573420ab1839da6828b0f6f
+msgid "8 (MOSI)"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:92
+#: ../../source/docs/jtag.rst:113
+#: 654c59ce07c14e7fa4087845338a85f4
+#: a3ce385099d442dc80d46a0973fa638b
+msgid "4"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:92
+#: ../../source/docs/jtag.rst:180
+#: 7556f67a687b48d1a638b07c872042f9
+#: 2fa51073eb404e1c8397470d171416fe
+msgid "orange"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:94
+#: 0e67e2da17c042bfa9a92bd720832136
+msgid "9 (CS)"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:94
+#: ../../source/docs/jtag.rst:115
+#: 87c2a1ac00854b4983f5a7fac98aba09
+#: d32b508eb9924bfe9e7eaf98971ef3f6
+msgid "5"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:94
+#: 8df71ae1c3714bcbb8c5a73c154540e1
+msgid "red"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:96
+#: cab43fc611cb417eb06dc809eaa00539
+msgid "10 (MISO)"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:96
+#: ../../source/docs/jtag.rst:107
+#: 3c48b909c4f04a738abe29d4fa8582b0
+#: 562442890c1c4bab813718c370026b9f
+msgid "1"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:96
+#: ../../source/docs/jtag.rst:176
+#: 5aaeaefcf5df46c9bf88a93f717decc9
+#: d15d04b4d7b8474e8700c0c3eee9fe7e
+msgid "brown"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:99
+#: 8035acd41aa847be8a2c4c44b1a1b140
+msgid "Programmer type should be BusPirate."
+msgstr ""
+
+#: ../../source/docs/jtag.rst:101
+#: 7fe8a5babd3e46ec92a13f9f19805d7c
+msgid "Here is a table of connections if you are using the JTAGICE mkII-CN debugger as an ISP programmer:"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:105
+#: 5ec84fc4c54e42eb8636fd635f22c4ec
+msgid "JTAGICE Pin"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:107
+#: ../../source/docs/jtag.rst:180
+#: ee77b3663d2740eda0b9902f1dcaaffa
+#: 66e4c3417fb1425eb3d4ca3aa65726f4
+msgid "TDO"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:109
+#: ../../source/docs/jtag.rst:186
+#: 733aeb77df174464953335e67aaeef1a
+#: 9a2d66c9498347bd8b80ab9584a57cf4
+msgid "Vref"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:111
+#: ../../source/docs/jtag.rst:176
+#: 30fa8aaf325a434e90068c08e0d3969f
+#: d19d8310436c4e43b92d958de6818515
+msgid "TCK"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:113
+#: ../../source/docs/jtag.rst:182
+#: dd7cc891465f4cff9a7fe7d4c24e3ecc
+#: 080221dded2f403ba996b4236e711e33
+msgid "TDI"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:115
+#: ../../source/docs/jtag.rst:188
+#: e009a85ed11548c8908c3fa5c79696ec
+#: 678de63df389453691f2a5cd2b580767
+msgid "SRST"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:117
+#: ../../source/docs/jtag.rst:184
+#: 507617de2ad242199599925d65cb5e25
+#: a6013778c6fa4f3899a83b834b34cd0b
+#: 2b756700ddeb4b9397b0826c186ace27
+msgid "GND"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:120
+#: 86180f6a566a4ca29b872662d56d0a68
+msgid "Programmer type should be jtagmkii. NOTE: this configuration has not been verified to work."
+msgstr ""
+
+#: ../../source/docs/jtag.rst:123
+#: a76008383a97451c876a4b2c1e7db063
+msgid "Use this AVRDUDE command to program the fuses on the ATMega1280 to enable OCD and JTAG:"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:134
+#: 9f260bc348b74850af1e128b85afcda2
+msgid "Replace"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:136
+#: 303c3570f66b494a96be72ca266e10cf
+msgid "with the port to which your programmer is connected, and"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:138
+#: 71e227aa97f34519a06347b23a0de3f9
+msgid "with the programmer type."
+msgstr ""
+
+#: ../../source/docs/jtag.rst:140
+#: a4993ee5bdf94f1b806688b79b8786ae
+msgid "This should only take a few seconds, and you should see towards the end the following lines output:"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:150
+#: 546f3cd28a2445c890814d4548e27afd
+msgid "These settings are persistent; unless you reflash the bootloader on your APM JTAG will remain permanently enabled."
+msgstr ""
+
+#: ../../source/docs/jtag.rst:153
+#: 990fee89b1154d198d394c77c756dc42
+msgid "To revert to the default fuse settings, use:"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:164
+#: 0b794d06a91a438f9842da2047c37103
+msgid "JTAG Hardware Setup"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:166
+#: d555f4c9801c4b5a96c4fc19a58ad32f
+msgid "On the oilpan, add a 2x3 header to the Expansion Ports pads, and a 1x7 header to the analog pads (GND-AN5)."
+msgstr ""
+
+#: ../../source/docs/jtag.rst:169
+#: 2f9f34fc213f49ecad6f60721ddbd50a
+msgid "Connect your JTAG debugger as follows. Note that in the example here a SparkFun !BusPirate breakout cable is being connected to a JTAGICE mkii-CN. Your wire colours may vary; use the following table as a guide:"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:174
+#: 130b3b8c8b2346ceb56334b6cc420670
+msgid "JTAG Pin"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:174
+#: a607fd239c664d329f45d4c4d08f7a6a
+msgid "Oilpan Pin"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:176
+#: 0b21fcc1d3ef4e98aec996645aea1b21
+msgid "ADC4"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:178
+#: 45a19a5c9d2744bc83320c29738294ac
+msgid "TMS"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:178
+#: 2e1a22a1fbff48c0a2cdf4d198c4d8ce
+msgid "ADC5"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:178
+#: 6d17e3a69e3d4927b480f953226eb732
+msgid "green"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:180
+#: b421901cd2e945ceb6c9bb31f507303c
+msgid "ADC6"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:182
+#: 507af2f492ec42a9bd48a756a86dc72b
+msgid "ADC7"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:182
+#: 5cddb29938884df5b9dd8c3c92372c8f
+msgid "white"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:184
+#: e36fcf88fea746698ff1f10f57f488c1
+msgid "black, red"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:186
+#: 4581c4e1016e4e92945d77f9c2e3ea9f
+msgid "+5"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:188
+#: b3f092fe512a46358e00698cafa8640b
+msgid "Reset"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:188
+#: 1c9ecdecb77f4745a2e8785a2b10bd9a
+msgid "blue"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:192
+#: 66727cf63a86435e8e7937f0fd1b6e1f
+msgid "Software Setup"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:194
+#: 7e5e2a2603a449b38dc4cfc5f80b90bf
+msgid "Once the hardware setup is done, there are a variety of ways to debug using JTAG. The following steps cover just the basics."
+msgstr ""
+
+#: ../../source/docs/jtag.rst:197
+#: e297886cb64c4536a17b2cdeaa08362f
+msgid "The bridge between the JTAG unit and your debugger is AVaRICE. Some setups will automatically launch the tool when the debugger starts, others require that you launch it manually. It is critical for successful APM debugging that the --capture argument is passed to AVaRICE, rather than attempting to download a new program."
+msgstr ""
+
+#: ../../source/docs/jtag.rst:203
+#: abd40f6683264dd99ab2edb2032058b7
+msgid "To start AVaRICE manually, assuming a JTAGICE mkii (or clone) connected via USB, use:"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:210
+#: 11bc52db82ba45a8926ac727ccdb81ab
+msgid "You should see output like:"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:216
+#: 6b4298082432429986a003cfa62e2270
+msgid "Defaulting JTAG bitrate to 250 kHz."
+msgstr ""
+
+#: ../../source/docs/jtag.rst:218
+#: cd4e113247fd46e08447ee67d34a89f1
+msgid "JTAG config starting. Found a device: JTAGICEmkII Serial number: 00:a0:00:40:26:63 Reported JTAG device ID: 0x9703 Configured for device ID: 0x9703 atmega1280 JTAG config complete. Waiting for connection on port 4242."
+msgstr ""
+
+#: ../../source/docs/jtag.rst:223
+#: 887a10a7473440ffb8bde33b4a13f172
+msgid "Note that AVaRICE will exit every time the debugger disconnects, so be prepared to restart it regularly if your debugger doesn't manage it already. Once the \"Waiting for connection\" message is displayed, you are ready to connect with your debugger."
+msgstr ""
+
+#: ../../source/docs/jtag.rst:229
+#: 25b86cde42ef4c2db03a999ef726e5cc
+msgid "Debugging Code Built by Arduino"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:231
+#: a1c09043a1b8436d8f85c4f80e485060
+msgid "Arduino does its best to hide the dirty parts of the build process from the user. This can make it slightly difficult to find the files that you need for debugging. Hold down the SHIFT key while clicking the Verify button in the Arduino IDE, and you will see the commands executed by Arduino as it builds your sketch. Assuming that the build is successful, the last command listed (before the \"Binary sketch…\" line) will look something like this example taken from a Mac OS system:"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:245
+#: 235aed89da4c40109bdfac198b0ce311
+msgid "The file that your debugger will want to load is the .elf file, in this case"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:248
+#: 360929bcd0614e49ad7a7065ab6230b0
+msgid "/var/folders/Bu/Burcn-0aFa4N+++0Me1I2U++1dw/-Tmp-/build159308262941509457.tmp/GPS_AUTO_test.cpp.elf"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:250
+#: bc6ee6f7add04b278f21cfb8c244476b
+msgid "The name of the file will depend on your sketch name, and the location will vary depending on your system, but it will remain the same for a given sketch until you quit and restart Arduino. Note that the directory containing the file is deleted and re-created every time you compile the sketch."
+msgstr ""
+
+#: ../../source/docs/jtag.rst:256
+#: 9ceac90e2b3e4c27952c7af1ae60021f
+msgid "To debug this file with avr-gdb, use Arduino to compile and upload the sketch to APM. Start AVaRICE as described above, then start GDB:"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:263
+#: cfc17b9ced3c48a79e6fae4367eef8db
+msgid "You should see GDB start up:"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:277
+#: 9cbeccc85acc4782818f8bbc072276cc
+msgid "At the (gdb) prompt, tell GDB to connect to AVaRICE:"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:283
+#: ad09f2dcc62f4356b0e23caa42129633
+msgid "This will stop the program running on the APM and tell you where it stopped:"
+msgstr ""
+
+#: ../../source/docs/jtag.rst:295
+#: da6bef43fe9048d3bb9753edc195813d
+msgid "Use the 'continue' command to start the program running again, and hit control-C to stop it once more."
+msgstr ""
+
+#: ../../source/docs/jtag.rst:298
+#: 1ae7e4899b694ddda9fe6ad672d8292e
+msgid "At this point, GDB can be used normally. Other debuggers that are compatible with or build on GDB such as DDD or Insight can be used instead, as can plugins for various IDEs like Eclipse."
+msgstr ""

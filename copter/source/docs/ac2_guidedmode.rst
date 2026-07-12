@@ -71,13 +71,13 @@ Speed Control
 =============
 
 The maximum horizontal speed of the copter can be adjusted with the
-**Speed** (:ref:`WPNAV_SPEED<WPNAV_SPEED>`) parameter from the Mission Planner's
+**Speed** (:ref:`WP_SPD<WP_SPD>`) parameter from the Mission Planner's
 Config/Tuning >> Copter Pids screen (see blue box above).  The default
-is 1000 meaning 10m/s.  A typical copter can reach top speeds of 10m/s ~
-13m/s (i.e. 1000 ~ 1300) before it becomes unable to both maintain
+is 10 meaning 10m/s.  A typical copter can reach top speeds of 10m/s ~
+13m/s before it becomes unable to both maintain
 altitude and horizontal speed.
 
-The vertical speeds up and down can similar be adjusted with the **Speed Up** (:ref:`WPNAV_SPEED_UP<WPNAV_SPEED_UP>`) and **Speed Dn** (:ref:`WPNAV_SPEED_DN<WPNAV_SPEED_DN>`) parameters. :ref:`WPNAV_ACCEL_Z<WPNAV_ACCEL_Z>` determines how fast the speed can change.
+The vertical speeds up and down can similar be adjusted with the **Speed Up** (:ref:`WP_SPD_UP<WP_SPD_UP>`) and **Speed Dn** (:ref:`WP_SPD_DN<WP_SPD_DN>`) parameters. :ref:`WP_ACC_Z<WP_ACC_Z>` determines how fast the speed can change.
 
 Speed can also be controlled while in GUIDED mode with :ref:`MAVLink commands <common-mavlink-mission-command-messages-mav_cmd>` like :ref:`DO_CHANGE_SPEED<mav_cmd_do_change_speed>`.
 
@@ -87,11 +87,11 @@ Guided Mode Options
 The :ref:`GUID_OPTIONS<GUID_OPTIONS>` parameter allows several guided mode behavior changes:
 
 ===    ==========
-Bit 	Meaning
+Bit     Meaning
 ===    ==========
-0 	   Allow Arming from Transmitter
-2 	   Ignore pilot yaw input
-3 	   SetAttitudeTarget interprets Thrust As Thrust
+0      Allow Arming from Transmitter
+2      Ignore pilot yaw input
+3      SetAttitudeTarget interprets Thrust As Thrust
 4      Do not stabilize PositionXY
 5      Do not stabilize VelocityXY
 6      Waypoint navigation used for position targets

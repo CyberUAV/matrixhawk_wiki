@@ -1,0 +1,502 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:5
+#: 025788bed5ac44e089e73d0ef68e4286
+msgid "Automatic Tuning with AUTOTUNE"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:7
+#: 01d530364a9f4b5aaa3c5820c54e9645
+msgid "Getting a good set of roll/pitch tuning parameters for your aircraft is essential for stable, accurate flight. To help with this it is highly recommended that you use the AUTOTUNE system described below."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:12
+#: 08b7633227e747cbbbe283b5f0eda245
+msgid "What AUTOTUNE does"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:14
+#: f0200e109d2847cd916b9e1ed61fc0bc
+msgid "The AUTOTUNE mode is a flight mode that flies in the same way as FBWA, but uses changes in flight attitude input by the pilot to learn the key values for roll and pitch tuning. So the pilot uses their transmitter mode switch to switch to AUTOTUNE mode and then flies the plane for a few minutes. While flying the pilot needs to input as many sharp attitude changes as possible so that the autotune code can learn how the aircraft responds."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:23
+#: 30d87bc41d9244a3a0689e0cd345c147
+msgid "Setting up for AUTOTUNE"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:25
+#: 7d37016215414261a278eb86c6647fa6
+msgid "To setup your aircraft for AUTOTUNE you need to select AUTOTUNE mode as one of the flight modes selectable with the flight mode switch on your transmitter."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:29
+#: 8e39d232727944eb82e84af83eba8806
+msgid "You can also autotune the yaw axis during AUTOTUNE for yaw rate control in :ref:`ACRO mode <acro-mode>` by setting :ref:`YAW_RATE_ENABLE<YAW_RATE_ENABLE>` = 1 and :ref:`ACRO_YAW_RATE<ACRO_YAW_RATE>` to a value equal or less than the yaw rate capability of the vehicle(90 deg/s is a typical value). This of course assumes that the vehicle has yaw control surfaces(an elevon only flying wing does not, for example)."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:31
+#: 0d7be1aa21214d568cc4f4e673c48115
+msgid "you can AutoTune in most stabilized flight modes, such as CRUISE or FBWA/B, LOITER, or even during an AUTO mission segment (if :ref:`STICK_MIXING<STICK_MIXING>` is enabled), via an ``RCx_OPTION`` switch set to 107."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:33
+#: 3621e32a460d4cafb6406e3e39a2e1f4
+msgid "Large QuadPlanes can be difficult to fly manually while monitoring the GCS for tune progress messages or if you are not experienced in flying in pilot guided modes. In these cases, it is safer to do the tuning while in a repeating fixed course mission (ie. a rectangular loop for example) in AUTO or while LOITERing, using the the above RC Aux Switch to enable autotuning while not having to constantly guide the vehicle on course."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:35
+#: bb931d9cbd344825a02492bb0564abe4
+msgid "The :ref:`AUTOTUNE_AXES<AUTOTUNE_AXES>` bitmask selects which axes will be tuned while in Autotune. Default is roll, pitch and yaw."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:37
+#: 2655e3103485478b9bb7d33ecc76cf86
+msgid "AUTOTUNE is not designed to work well with :ref:`RUDDER_ONLY<RUDDER_ONLY>` vehicles for tuning roll. :ref:`Manually tune the roll <new-roll-and-pitch-tuning>` axis instead."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:39
+#: 629fa4dbf3cf4a69be77cffc64974245
+msgid "You also should choose a tuning level by setting the :ref:`AUTOTUNE_LEVEL<AUTOTUNE_LEVEL>` parameter in the advanced parameter screen of your ground station. The :ref:`AUTOTUNE_LEVEL<AUTOTUNE_LEVEL>` parameter controls how aggressive you want the tune to be. The default is level 6, which produces a medium tune, suitable for beginner to intermediate pilots. If you are a more experienced pilot then you could choose level 7, which will result in a bit sharper tune (faster attitude changes). Levels above 7 are not recommended until you have done an initial tune with a lower level. Levels above 8 should only be used by very experienced pilots."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:49
+#: 78d34a562e7449ae96480d65cd81ab39
+msgid "with Yaw rate controller active, turning in AUTOTUNE mode will require the use of rudder, not just aileron input. Do not enable :ref:`YAW_RATE_ENABLE<YAW_RATE_ENABLE>` if you do not have a rudder."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:51
+#: 443bcac009db4d9aa35f105513391760
+msgid "Autotune tunes the FF (feedforward), P, I, and D terms at each :ref:`AUTOTUNE_LEVEL<AUTOTUNE_LEVEL>`, which determines the maximum/target slew rates used for the tuning process and the gain from desired attitude angle to demanded angular rate ( :ref:`PTCH2SRV_TCONST<PTCH2SRV_TCONST>` and :ref:`RLL2SRV_TCONST<RLL2SRV_TCONST>`)."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:53
+#: b39ec7c4bf87499c9789ffa64af93404
+msgid "It is important to set a level appropriate for the rates that the aircraft can physically achieve. In particular, the level 6 roll rates can be too large for slow aircraft with large wing spans, like gliders. These often have a maximum roll rate of 30 - 40 degrees per second and should use level 2 or 3. See :ref:`automatic-tuning-with-autotune_level-settings` for the rates. But level 8 may be appropriate for light foam planes in the under 2kg class."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:58
+#: 2ab5287367514d55a11c608a8dfca385
+msgid "the :ref:`PTCH2SRV_RMAX_UP<PTCH2SRV_RMAX_UP>`, :ref:`PTCH2SRV_RMAX_DN<PTCH2SRV_RMAX_DN>`, and :ref:`RLL2SRV_RMAX<RLL2SRV_RMAX>` rates should be set appropriately for normal flight also according to the vehicle's capabilities."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:60
+#: ea762a55120f46289ca5f9ce334fbdd3
+msgid "You also need to make sure that all of the basic settings for your airframe are correct. In particular, ensure that all surface reversals are correct and that you have a reasonable value set for the minimum airspeed. Autotune won't do anything until you are above the minimum airspeed you have set in the :ref:`AIRSPEED_MIN<AIRSPEED_MIN>` parameter. If you don't have an airspeed sensor then that value is still used, along with an airspeed estimate from other sensors. Also make sure you have done RC calibration, as AUTOTUNE will only work if you have full control movements with your transmitter sticks."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:70
+#: 0a5c76ff38314069a5471870df911298
+msgid "In addition, ArduPilot will automatically scale the tuning gains versus airspeed, either measured or estimated (if no airspeed sensor is used), to compensate for the control surface effectiveness vs speed. The nominal center speed for this is :ref:`SCALING_SPEED<SCALING_SPEED>` and should be set to the approximate speed that will be used for tuning, ie the typical cruising speed. Once tuning is done with this speed set, do not change it since it directly scales the gains and will corrupt the tune."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:72
+#: 17d1af30a4e74c579306336d7e7a3eb4
+msgid "Other things to check:"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:74
+#: 8cb668d2a5cd4dc985a01d757095544c
+msgid "if you have an airspeed sensor fitted then make sure it is working and you have calibrated it. See the section on :ref:`airspeed calibration <calibrating-an-airspeed-sensor>`."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:75
+#: 656653692b6a48b9bbb626597c35f704
+msgid "check your center of gravity, making sure it is correct according to the manual for your aircraft. In general it is safer to be a bit more nose heavy than tail heavy."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:76
+#: 914d4a64d1854f90bc7f1266b19331f9
+msgid "check your surface trims. It is recommended to use the :ref:`SERVO_AUTO_TRIM<SERVO_AUTO_TRIM>` option after reading the documentation for that option."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:77
+#: 79211da4f68e4a5a8791ca9b1f23a895
+msgid "make sure your failsafe settings are setup correctly. Try turning off your transmitter with your plane on the ground (and propeller removed or made safe) and check how the plane reacts"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:78
+#: 385500e319cd4b34b5e196ba3e8ba193
+msgid "setup a rally point for a safe place to RTL if needed other than home"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:79
+#: d09969fe7e7f4c6d882274e731218b9d
+msgid "make sure that the :ref:`PTCH_RATE_SMAX<PTCH_RATE_SMAX>` and :ref:`RLL_RATE_SMAX<RLL_RATE_SMAX>` parameters are appropriately set for your servos speeds. See :ref:`common-servo-limit-cycle-detection`. If these are set too low, then the tune will be impacted."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:80
+#: 15bc7a7002214e89992e1053fa0a8ced
+msgid "if this is a **QuadPlane**, and the :ref:`INS_GYRO_FILTER<INS_GYRO_FILTER>` has been raised significantly from 20Hz to facilitate better VTOL tuning and notch filter use, then AUTOTUNE may set its fixed wing control loop filters too high resulting in a poorer Fixed Wing tune. In this case, :ref:`AUTOTUNE_OPTIONS<AUTOTUNE_OPTIONS>` can be used to prevent AUTOTUNE from changing them as part of the tune."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:83
+#: 5ec78002f6c14e7e951e765dc5115be2
+msgid "Flying in AUTOTUNE"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:85
+#: 9a2b6949e86c41deb03872e566e225b1
+msgid "Once you are all setup you can start flying in AUTOTUNE mode. You can either takeoff in AUTOTUNE mode, or takeoff in another mode and switch to AUTOTUNE once you have gained altitude."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:89
+#: 28738278f9e54ce88c63010605676059
+msgid "When you engage AUTOTUNE mode a few things will happen:"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:91
+#: 66bf2a43695148c7a194d4b7b7f67406
+msgid "the autotune system will immediately setup some values for your roll and pitch maximum rates and angle error to demanded rate gain. These values depend on the :ref:`AUTOTUNE_LEVEL<AUTOTUNE_LEVEL>`"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:94
+#: de32110ebe2c477ba624f5664c03de78
+msgid "the autotune system will monitor your demanded roll and pitch rates (as determined by your transmitter stick movements). When the demanded roll or pitch rate (or yaw rate if :ref:`YAW_RATE_ENABLE<YAW_RATE_ENABLE>` = 1) exceeds 40% of the maximum tuning target axis rate set by the :ref:`AUTOTUNE_LEVEL<AUTOTUNE_LEVEL>`,(not stick deflection) the autotune system will use the response of the aircraft to learn the tuning values. So sharp stick movements are required with a slight pause at moderate to maximum stick deflections in each direction."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:97
+#: 480f80bafa7c4ad488dac5ce15357222
+msgid "the autotune system will save the P and D parameters once the tune has been completed for an axis.  When you switch out of AUTOTUNE mode the FF and I values will be saved. Switching out of AUTOTUNE in the midst of tuning an axis will revert the PID values to their original values."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:98
+#: 6ea656e5379a4670bb917ea535efb2fb
+msgid "If you are starting with the default parameters for roll and pitch you may find the plane is quite sluggish when you first enter AUTOTUNE. You will find that as the tune progresses this will get better. Make sure your flight area has plenty of room for long slow turns."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:104
+#: 40f7a52ea9e7498db6404daf5b059cec
+msgid "The key to a successful Autotune is to input rapid roll or pitch movements with the transmitter sticks. It is best only do one axis at a time, although tuning is occurring simultaneously on all axes being tuned, so tuning messages may be interleaved occasionally."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:107
+#: ead220f741cc4a55b11cc75fb81662e1
+msgid "So rapid stick movements with short pauses at each deflection is used for each axis in turn until the tuning finished message is reported on GCS or OSD."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:109
+#: c5cc6f54025c4f45a1b176fd1af9cf27
+msgid "If your initial tuning values were too low then you should notice the aircraft becomes progressively more responsive as you fly in AUTOTUNE mode."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:113
+#: b9fd1ccd9b9c4b80a471ceb79f93353e
+msgid "Stop increasing the :ref:`AUTOTUNE_LEVEL<AUTOTUNE_LEVEL>` on successive autotune sessions when the desired feel and responsiveness is obtained, oscillations occur, or it becomes \"twitchy\" in an axis."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:117
+#: cd5abd95ddfe401cb712d8dc60845e27
+msgid "Don't stop too early"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:119
+#: d422e25a987247adbbef6619ee5b06b7
+msgid "If you cannot monitor the tune progress with a GCS or OSD, it is recommended that you do at least 20 rapid movements in each axis, preferably  more. Stopping before all axes are finished tuning will result in a poorly flying aircraft. Keep flying and exercising the sticks in AUTOTUNE mode well past the point where you think the plane is flying well."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:123
+#: 7db5ebf3533f4f0384bd5979ce046072
+msgid "Tuning light, agile aircraft"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:125
+#: a55eca66274447c9a5f13a9e8db3b494
+msgid "Very light, agile aircraft may fail to complete the tune, or result in a tune that has small oscillations, often in the pitch axis since it has low inertia. In these cases, it may be beneficial to do the following and re-attempt the Autotune:"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:127
+#: c841508235d44392ac65856ecb9f9cd9
+msgid "Increase the main loop rate, :ref:`SCHED_LOOP_RATE<SCHED_LOOP_RATE>` to \"200\" (Hz) and set the :ref:`ONESHOT_MASK<ONESHOT_MASK>` to those outputs controlling flight surface control servos (if they are capable of doing 200Hz updates...most digital servos are capable of this...check to see that they are not overheating as you move them). This increases the control update rate and decreases delay, increasing phase margin to attempt to eliminate small oscillations and increase accuracy."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:129
+#: 75bd8a389b5143359c58afe1aafb47a8
+msgid "Set the :ref:`INS_GYRO_FILTER<INS_GYRO_FILTER>` to \"40\" (Hz) cutoff and increase the :ref:`PTCH_RATE_FLTT<PTCH_RATE_FLTT>` and :ref:`RLL_RATE_FLTT<RLL_RATE_FLTT>` to \"20\" (Hz) to reduce delay and increase phase margin."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:131
+#: 69f28b2c7e074b51980ad5eb3816e2bf
+msgid "increasing the gyro filter cutof may allow more system noise into the control loops and setting up a :ref:`dynamic throttle notch filter<common-throttle-based-notch>` or :ref:`in-flight FFT<common-imu-fft>` is recommended (if your autopilot firmware includes this feature.. see: :ref:`Firmware Limitations<common-limited_firmware>` )."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:134
+#: 7d9e1db7246f4c7485715caecaaadc4f
+msgid "Testing Tune in Other Modes"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:136
+#: 36cc713a898649c08bda53df18f817ba
+msgid "The completed suceesfull tune obtained can be tested in any mode, not just the one (QHOVER or QLOITER) used for entry. A switch can be setup,``RCx_OPTION`` = 180 (AUTOTUNE_TEST_GAINS) that will allow switching between original and autotuned gains in any mode, after autotune has completed. If this switch is setup, but not changed after the auotune has completed, it has no effect. Otherwise if switched high the tuned gains are in effect, if low the original gains. Then they apply to any flight mode and will be made permanent upon the next disarm, based on  switch position."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:139
+#: 4068d77949bc430aa4a82f00b6915ee2
+msgid "ACRO Mode YAW Rate Controller"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:141
+#: 46325d71a27148748ac77b898ac0db08
+msgid "As of version 4.2, ArduPilot provides the option for utilization of a rate controller for YAW, which behaves in the same manner as the pitch and roll controllers, but for the YAW axis controlled by the Rudder stick, assuming the vehicle has a rudder control surface."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:143
+#: 52f282148e684435b51ad415f8cce771
+msgid "To enable this functionality, set :ref:`YAW_RATE_ENABLE<YAW_RATE_ENABLE>` to 1. When enabled, the :ref:`ACRO_YAW_RATE<ACRO_YAW_RATE>` parameter can be used to adjust maximum yaw rate demanded at rudder stick full deflections in ACRO mode."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:145
+#: de91affe29f24024a7851a058dbecff4
+msgid "This controller can be AutoTuned in the same manner as the pitch and roll axes, and in the same session using the Rudder control stick to produce the rapid yaw demands used by AUTOTUNE."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:147
+#: 3c7fa327d2234ecbb638ba65a26c2b48
+msgid "while AutoTuning with this controller enabled, roll inputs will result in yaw outputs also, allowing more coordinated turns with the yaw controller active. This will normally result in simultaneously tuning the yaw controller with the roll controller, but not necessarily completing the yaw tune when the roll tune finishes. Also, there may be seemingly excessive rudder applied initially in the roll tune on vehicles with large yaw authority, until the tune progresses."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:150
+#: 94ba76b61ad1464aa7803c70c0c5994c
+msgid "Autotune Level 0"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:152
+#: 688e41cd180a463aa11c1f8d161ab980
+msgid "This is a special level that does not change the rates or time constant (ie like :ref:`RLL2SRV_RMAX<RLL2SRV_RMAX>` or :ref:`PTCH2SRV_TCONST<PTCH2SRV_TCONST>`) but tunes FF/P/I/D for the current values of those parameters. This may be useful when pitch is unstable at a lower :ref:`AUTOTUNE_LEVEL<AUTOTUNE_LEVEL>` level than roll, for example. You can set the ROLL axis values at more aggressive values than the pitch axis and proceed with a tune to re-optimize the FF/P/I/D values for that configuration."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:156
+#: f56c1a041a12403da5460f34435d2efe
+msgid "Completing the tune"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:160
+#: d2ce0bd9614a4fceb134143154703669
+msgid "Once you have learned reasonable tuning parameters with autotune you should complete the tune by manually tuning some other key parameters."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:164
+#: 1477984872a7438289e91b404926550f
+msgid "The parameters that are needed for most airframes are:"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:166
+#: dbe409e7ea5b4080a2e327d3a8fb6690
+msgid ":ref:`NAVL1_PERIOD<NAVL1_PERIOD>`: This default is a very conservative value designed to cope with badly tuned airframes. It controls how sharply the aircraft will turn in automatic modes (such as AUTO, RTL and LOITER). Most aircraft should use a significantly lower value. To tune it, you should fly a rectangular mission in AUTO mode and adjust :ref:`NAVL1_PERIOD<NAVL1_PERIOD>` down by 1 at a time until the aircraft turns at a rate you are happy with, and does not \"wag its tail\" in flight."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:174
+#: d258f7cd9acf46fea95b5c46026dc8c7
+msgid ":ref:`PTCH2SRV_RLL<PTCH2SRV_RLL>`: This parameter controls how much elevator to add in turns to keep the nose level. Many aircraft require a small change to this parameter from the default of 1.0. To see if you need to tune this value you should hold a tight circle in FBWA mode by holding the aileron stick hard over while not giving any elevator input. If the plane gains altitude then you should lower :ref:`PTCH2SRV_RLL<PTCH2SRV_RLL>` by a small amount (try lowering to 0.95 initially). If the plane loses altitude while circling then try raising :ref:`PTCH2SRV_RLL<PTCH2SRV_RLL>` by a small amount (try 1.05 initially). If you need to go above 1.3 or below 0.8 then there is probably a problem with your setup (such as incorrect center of gravity, poor thrust line, poor airspeed calibration, too soft a tune on the pitch loop, or bad compass errors). You should try and fix the setup."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:189
+#: 4d35f35d751d41729f7d8a4f8a8e2d0c
+msgid "If you have successfully tuned your plane with Autotune and see slow oscillations on the pitch axis (around ~1-2 Hz), lower :ref:`PTCH_RATE_I<PTCH_RATE_I>` to half of it's value. And test fly again. Also, if you do not use an airspeed sensor, and get oscillations on full throttle takeoffs, you might try setting the :ref:`FLIGHT_OPTIONS <FLIGHT_OPTIONS>` bit 6 (+64 in value) to avoid increased PIDs due to takeoff climb speed being lower than the speed at which the vehicle was autotuned."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:191
+#: 6f24021f04bb4f8d846381f512921af4
+msgid "There are many other parameters which can improve the performance of your aircraft, but these are the ones that most people need. Please read the normal manual tuning documentation for more information."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:196
+#: f68b7757805c4b9188548f53a497416c
+msgid "AUTOTUNE Logging"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:198
+#: d4135c138b3f43e3ad48f24d26ffb73f
+msgid "The progress of the autotune is recorded in the dataflash log. If you are trying to debug autotune or are posting about autotune on the forums then please include the dataflash log."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:202
+#: a3a7a475692348d39b85fdb570315032
+msgid "Here is a typical log file from an autotune session:"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:207
+#: 09a20409661e4b2d8d56e39dffac1b64
+msgid "The ATRP message has a \"Type\" field that shows what type of autotune is being recorded. A Type value of 0 is for roll tuning, and a value of 1 is for pitch tuning. When graphing ATRP results you should choose data with a Type of either 0 or 1 (not both)."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:212
+#: 22caa0f6406448598ea3c19d6873443a
+msgid "The ATRP.Demanded field is the demanded rate of attitude change (roll rate or pitch rate) in degrees per second. The ATRP.Achieved field is what the aircraft actually achieved in attitude change rate. As you can see in the above graph, at the start of the autotune the demanded values were much higher than the achieved, because the tuning gains were too low. As the tune progressed the demanded and achieved started to converge. The blue line in the above graph is the ATRP.P value, which is the P gain for the controller. You can see it rose from 0.8 up to a high of 2.2, then dropped back slightly to around 1.85."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:222
+#: 7867d66a3e264466ac6d4062715f67e2
+msgid "You will also notice that the graph has gaps in it. This is for periods where the pilot was not demanding a high rate of attitude change. The autotune system only works while the pilot is demanding a rapid attitude change (above 80% of the maximum rate)."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:228
+#: 913737c2df9440d19f5246725fef0185
+msgid "Manual tuning versus AUTOTUNE"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:230
+#: 530cbbe536d843cba24e5c7ce99db3fb
+msgid "For the very best performance with Plane you can perform a manual tune, perhaps starting with the values from Autotune. The Autotune system is designed as a conservative system to get reasonable values for most aircraft, it is not a \"perfect tuner\", and manual tuning can result in better performance if you put the time and effort in. But it requires using and analyzing log file results."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:237
+#: 687d9ce3a1c84d978ba6a28a01e4487a
+msgid "It is still recommended that everyone start out with AUTOTUNE however. Correctly tuning an aircraft is not easy, and AUTOTUNE does better than the vast majority of users can do. So start with an AUTOTUNE and then explore the manual tuning guide starting from what AUTOTUNE produces if you want to push things further."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:243
+#: 0835cca49e7b481f97485b6e4f21f9ae
+msgid "Manually increasing the D gain can improve the accuracy of the roll and pitch response and make the plane less affected by gusts and turbulence. The optimum value for D gain for a high performance tune can be found by increasing the gain in small increments until the aircraft starts to oscillate. The gain should then be halved from the value that caused it to oscillate. The oscillations that are generated using this method can be large, so do not perform this step unless you are prepared to take manual control. It is recommended that D gain tuning is performed at lower throttle settings and airspeeds."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:253
+#: ce26f774c73a4e7cbfd266ddc449ec75
+msgid "If you adjust the I gain manually, then this also changes the value for P that is required to maintain the correct response, so adjusting the I gain is only recommended for advanced users."
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:260
+#: bfd57b4701dc4237b8e04790adda75eb
+msgid "AUTOTUNE_LEVEL settings"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:263
+#: ac004b4530f84172af159413cb5ec852
+msgid "Level"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:263
+#: 90fedef4c1f94a3ea3cb98305033abf9
+msgid "Rate [deg/s]"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:266
+#: 192280915a2f4f509b10143762f86ced
+msgid "1"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:266
+#: ef2ae2af69db47e7bc5a33d460b0b1d4
+msgid "20"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:268
+#: e0ad0016cdb24988a9aa19cebe717fc4
+msgid "2"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:268
+#: 744237fb69e745aeb23d75661eb9165f
+msgid "30"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:270
+#: 5fdd45fe32134d8bb9e0a9232243e33f
+msgid "3"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:270
+#: b010871c1dde4c529733e7be50fd2863
+msgid "40"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:272
+#: 253e69288a094bbbaf6ddd3b2091107e
+msgid "4"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:272
+#: 4d92a3f91bc34773b255d2f2ca429837
+msgid "50"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:274
+#: e8eeaa1b84dc4ab3aab7ec2d77afcd61
+msgid "5"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:274
+#: 8d232b1f740942bcb94e8d01dbd1286d
+msgid "60"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:276
+#: 500c105f671b40eb88d0cf6d75bfd29d
+msgid "6 (default)"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:276
+#: 6e33166c6ba44dfa9e562e7968c2a8d3
+msgid "75"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:278
+#: 0432beb95fd7458dbb7701e86b88a2fd
+msgid "7"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:278
+#: 60343ef6114c4d8d8b168a463d6f3ef4
+msgid "90"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:280
+#: 860040d7d661459d967674e38b323d36
+msgid "8"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:280
+#: 5a75d228099646fb8797a94c49a7ebf1
+msgid "120"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:282
+#: a921f6d6bd7244138b203a42c851bba4
+msgid "9"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:282
+#: 95dda42713404a87b5dadbdc62a15436
+msgid "160"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:284
+#: 00b98156674b48f99b5582cde4984668
+msgid "10"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:284
+#: 852841bda9144c6a88ae17178b1c17f6
+msgid "210"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:286
+#: 9577a801ee7647ffa343f9c02a4c20d0
+msgid "11"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:286
+#: 96177e8b23564a22a41eaaf0436117a3
+msgid "300"
+msgstr ""
+
+#: ../../source/docs/automatic-tuning-with-autotune.rst:289
+#: 2db9d466e05848fda509bfadee59c589
+msgid "Yaw rate target, if being tuned, is always 90 deg/sec"
+msgstr ""

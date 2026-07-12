@@ -1,0 +1,217 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/SITL_simulation_parameters.rst:4
+#: 86b6c95327434752a91cf824747667eb
+msgid "Using Simulation Parameters to Control the Simulation"
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:6
+#: d05fc4c8e85f460d854911ea2230c0f4
+msgid "SITL has a large set of parameters to control the simulation. Wind speed/direction, Sensor malfunctions and parameters, RC failures, etc. can be emulated and controlled. They are visible and present when a simulation is running and prefixed by ``SIM_``. A few are detailed below."
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:9
+#: bb1e829f5f6b49ae9bb979f739bc2d66
+msgid "Setting parameters"
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:11
+#: 12fead2e266d437aaf6d8efbdef444af
+msgid "If the attached GCS is Mission Planner, you would use the CONFIG/Full Parameter List or Tree to change the parameters. The following gives examples using MAVProxy commands to change the parameter values."
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:13
+#: 8e0c1e1c60e545e7ad1f63eb131622c4
+msgid "Many of the following tasks involve setting parameter values over MAVLink, which you do using the ``param set`` command as shown:"
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:20
+#: ca62b60da26b4d358701ea5aa7b573bf
+msgid "All available parameters can be listed using ``param show``. The SITL-specific parameters start with ``SIM_``, and can be obtained using:"
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:29
+#: 7c3a14179802478780dfb5e03079b57c
+msgid "A table of user settable SITL-specific parameters can be found in `SITL.cpp <https://github.com/ArduPilot/ardupilot/blob/master/libraries/SITL/SITL.cpp>`__ When you change a parameter the value remains in the virtual EEPROM after you restart SITL. Remember to change it back if you don't want it any more (or :ref:`reload/reset the parameters <using-sitl-for-ardupilot-testing_loading_a_parameter_set>`)."
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:36
+#: 061d603f5a2846aa94d90f7ad24c8aa0
+msgid "Changing the speed of the simulation"
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:38
+#: e8ef1ab4f9b64e069742c8883ab3a67a
+msgid "Most of the simulator backends (native, X-plane, etc.) support changing the speed while running (NOT Realflight). Just set the ``SIM_SPEEDUP`` parameter as needed. A value of 1 means normal wall-clock time. A value of 5 means 5x realtime. A value of 0.1 means 1/10th of real time."
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:43
+#: 0d3b7af3ce3445af9d4a6a7f47c85c42
+msgid "Running with high-levels of speedup can result in enough network traffic that MAVProxy can’t keep up. An error such as “Set RC override timeout” or the vehicle entering GCS failsafe are typical of these failures. Reducing the ``SIM_SPEEDUP`` factor is typically sufficient to avoid this problem. Also, using the ``--udp`` options will use UDP instead of the slower TCP communication protocol and can help avoid this issue at higher speedups."
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:46
+#: d4f4e952f78943b2bdda79da6bb28746
+msgid "Loading a parameter set"
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:48
+#: f211ef37556e427db309e201a427d3ef
+msgid "When starting SITL the first time, the device will be configured with default parameters for the vehicle/frame type. Typically, you will want to replace these with values that simulate the desired vehicle and environment conditions."
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:56
+#: e3939097ca77434f98e67a04a48604a3
+msgid "the working directory is the directory in which MAVProxy starts, not the simulation"
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:58
+#: 7578b50d38d54f16b108e73d669636dd
+msgid "You can re-load the parameters later if you choose, or revert to the default parameters by starting SITL (**sim_vehicle.py**) with the ``-w`` flag."
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:62
+#: 8fec2b480b3d4b33befa7e0b2b3c5270
+msgid "You may have to load them again, after typing ``param fetch``, in order to load parameters that require enabling before presenting their parameter set.  And, in some cases, you may even need to restart SITL in order for some new parameters, such as output function changes, to take effect. This can be avoided if you add the parameter file during the start of SITL with the \"--add-param-file=*pathtofile* \"....ie: sim_vehicle.py -f flightaxis:192.168.x.x - -map - -console --add-param-file=*pathtofile* -w. This adds the param file as a default and then wipes any previous param changes that may exist back to the defaults."
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:64
+#: 9fa784b82c3846c1bc76d63f3467b732
+msgid "Parameters can also be saved. For example, to save the parameters in a file in the present working directory:"
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:70
+#: 507ec83fda67467896e977c97c911074
+msgid "the \"default\" parameter set emulates the parameter default values contained in the firmware. These are used at startup for parameters, UNLESS the user has previously changed a parameter(s) which are stored in the autopilot's flash, in which case those changed values are used for those changed parameters. In SITL, these changes are stored in a file in the simulation startup directory named ``eeprom.bin``. The above param load and save commands deal with these user set values for the parameters, not the firmware default values created at simulation start, which can be changed using the ``--add-param-file`` startup option."
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:72
+#: a025e296a2c942a3a7b4c0d36a2c6c89
+msgid "Other options can be listed using:"
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:80
+#: 2efd7acb556c4df383cc3891f6067d50
+msgid "Testing RC failsafe"
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:82
+#: 6c5bbfd244df41058febe9d2e8366381
+msgid "To test the behaviour of ArduPilot when you lose remote control (RC), set the parameter ``SIM_RC_FAIL=1``, as shown:"
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:89
+#: e940c06622024e088c1c4e6083e074a8
+msgid "This simulates the complete loss of RC input. If you just want to simulate low throttle (below throttle failsafe level) then you can do that with the RC command:"
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:97
+#: 944b465ef51f462bb2b7ed506d7531be
+msgid "or use ``SIM_RC_FAIL=2`` which sets all channels at neutral  (1500us) and the throttle channel at 950us."
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:100
+#: c7b1959cfff24439bfff950c946d07e7
+msgid "Testing the effects of vibration"
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:102
+#: f56debb83ef44a91b1874f29bbd1cf76
+msgid "To test the vehicle's reaction to vibration, use ``SIM_ACC_RND``. The example below adds 3 m/s/s acceleration noise:"
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:110
+#: 36149a5bc2c64d41b8445e1f316f5d28
+msgid "Testing the effects of wind"
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:112
+#: 2a3c7f57ce484ea49caae4ffb85529de
+msgid "The wind direction, speed and turbulence can be changed to test their effect on flight behaviour. The following settings changes the wind so that it blows from the South at a speed of 10 m/s."
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:121
+#: a9b97e56b43742daadb202c15cdf5d48
+msgid "To see other wind parameters do:"
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:128
+#: 6ff658a15a5040fb9ca2414ada27d18b
+msgid "Testing GPS failure"
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:130
+#: 759f607e535846cc872df30123afa180
+msgid "To test losing GPS lock, use ``SIM_GPS_DISABLE``:"
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:136
+#: d2f3a378590a46b5ab79a16dff9a99b3
+msgid "You can also enable/disable a 2nd GPS using ``SIM_GPS2_DISABLE``."
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:139
+#: 569b3ba721af4600838db6040b74e542
+msgid "Testing GPS-for-Yaw"
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:141
+#: 83792a92e6e2425c923bda1cd51e859c
+msgid "To test GPS-for-Yaw using two simulated UBlox GPSs:"
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:156
+#: 53948b94c3154c1a8a4d3debd1562d54
+msgid "Reboot SITL and the heading should be visible in the GPS2_RAW message's yaw field:"
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:162
+#: 5ef8a62fee30441ca3d77bb5b31c9f69
+msgid "To test using a single NMEA GPS:"
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:171
+#: f0bcc796d4a547c58c577f075d5f9324
+msgid "Reboot SITL and the heading should be visible in the GPS_RAW_INT message's yaw field:"
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:178
+#: ed09ec5b614946eab91499f691d515c0
+msgid "Testing Compass Calibration"
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:180
+#: 7b984cb2921748528691f7b41bb9ced7
+msgid "A quick way to test compass calibration in SITL is with the \"calibration\" vehicle model. To use this with plane do this:"
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:187
+#: 1b125207e1d2426fa4570e5d350769d3
+msgid "then do:"
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:193
+#: 525ea931a3d24b85b6d5a7b729c94492
+msgid "This will start the vehicle moving through a \"compass dance\". You can start a compass calibration to test changes to the calibrator code. Using this in combination with the SIM_SPEEDUP parameter can be useful."
+msgstr ""
+
+#: ../../source/docs/SITL_simulation_parameters.rst:197
+#: fee9e041a7bd4c5d8a30bb3ed7e09d97
+msgid "The calibration vehicle module has a lot of other features too. See `http://guludo.me/posts/2016/05/27/compass-calibration-progress-with-geodesic-sections-in-ardupilot/ <http://guludo.me/posts/2016/05/27/compass-calibration-progress-with-geodesic-sections-in-ardupilot/>`__ for details."
+msgstr ""

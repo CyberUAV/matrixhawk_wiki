@@ -21,6 +21,8 @@ Please refer to the `STorM32-BGC wiki pages <http://www.olliw.eu/storm32bgc-wiki
     Some v1.3x boards has been found to cause significant RF interference on the 433mhz and 915mhz band.
     Use with caution, if you are using either 433/915mhz control or telemetry.
 
+.. note:: Most available Storm32 gimbals do NOT have boards which support the latest MAVLink Gimbal Manage V2 protocols. `Here is one that does <https://gordiansystems.nl/products/3-axis-gimbal-storm32-v4-1-bgc?variant=53204117291341>`__.
+
 Connecting the gimbal to the autopilot
 ======================================
 
@@ -76,6 +78,30 @@ To use the serial protocol use all the same settings as above except:
 -  When :ref:`Configuring the Gimbal <common-storm32-gimbal_configuring_the_gimbal>` controller set the "MAVLink configuration" parameter to "no heartbeat"
 -  :ref:`SERIAL2_PROTOCOL <SERIAL2_PROTOCOL>` = 8 (SToRM32 Gimbal Serial).  If another serial port is connected to the gimbal replace "2" with the serial port number
 -  :ref:`MNT1_TYPE <MNT1_TYPE>` = 5 (SToRM32 Serial)
+
+Optional
+~~~~~~~~
+To allow pilot RC transmitter control of the gimbal in RC targeting mode:
+
+- :ref:`RC6_OPTION <RC6_OPTION>` = 213 ("Mount Pitch") to control the gimbal's pitch angle with RC channel 6
+- :ref:`RC7_OPTION <RC7_OPTION>` = 214 ("Mount Yaw") to control the gimbal's yaw angle with RC channel 7
+- :ref:`RC8_OPTION <RC8_OPTION>` = 163 ("Mount Yaw Lock") to switch between normal yaw operation and locking mount heading with RC channel 8 (in RC Targeting mode only).
+- :ref:`RC9_OPTION <RC9_OPTION>` = 185 ("Mount RP Lock") to switch between three modes of earth frame/body frame locks for the roll and pitch axis in RC targeting mode.
+
+=============================    ==========   ===========   ===================================================================
+Mount RP Lock Switch Position    Roll EF/BF   Pitch EF/BF   Description
+=============================    ==========   ===========   ===================================================================
+LOW                                BF            BF         FPV lock: pitch/roll RC sets locked angle with respect to mount;useful when flying via gimbal camera
+MID                                BF            EF         Pitch lock: roll RC sets locked angle with respect to mount
+HIGH                               EF            EF         Horizon lock:  pitch/roll RC sets locked angle with respect to horizon
+=============================    ==========   ===========   ===================================================================
+
+BF = Body frame, EF = Earth Frame
+
+.. note :: for full FPV lock the yaw axis should not be forced to Earth frame by a Mount Yaw Lock switch. See :ref:`common-mount-targeting` for more information on mount modes, pilot/autopilot targeting controls, and axes locks.
+
+- setting :ref:`MNT1_OPTIONS<MNT1_OPTIONS>` bit 2 (value +4) can be used to for force FPV lock as given in the above table without the need for RC switches when in RC Targeting Mount Mode.
+
 
 Control and Testing
 ===================

@@ -1,0 +1,247 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:30+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-pozyx.rst:5
+#: 0d937a9f7f2442c3aaf6908bab86d01e
+msgid "Pozyx for Non-GPS Navigation"
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:9
+#: 0dd0612c5a3f4ce8b88f4b5b97852194
+msgid "This article explains how a `Pozyx <https://www.pozyx.io/>`__ system based on the `DWM1000 <http://www.decawave.com/products/dwm1000-module>`__ can be used as a short-range substitute for a GPS allowing position control modes like Loiter, PosHold, RTL, Auto indoors."
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:15
+#: fa425923357b44e1b1c0e57fe5ba4753
+msgid "Required Hardware"
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:17
+#: 582bebd589584d158693d7035f9cfa96
+msgid "4 `Pozyx anchors <https://www.pozyx.io/store/detail/5>`__ and 1 `Pozyx tag <https://www.pozyx.io/store/detail/4>`__.  Note the `Ready to Localize <https://www.pozyx.io/store/detail/2>`__ or `Developer Kits <https://www.pozyx.io/store/detail/3>`__ are more economical than buying individual tags and anchors."
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:18
+#: 8905888e7e2d42478bba2cb728d48ac0
+msgid "one `Arduino Uno R2 or R3 <https://www.arduino.cc/en/Main/ArduinoBoardUno>`__"
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:19
+#: 4c0aa077624e4378a712787fa06a5222
+msgid "4 `portable chargers <https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=portable+charger&rh=i%3Aaps%2Ck%3Aportable+charger>`__ with type A USB ports to power the anchors (optional)"
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:20
+#: 1645eb444cb5427fbe07c75a9a1e1e9d
+msgid "4 `tripods <https://www.amazon.com/s/ref=nb_sb_noss_1?url=search-alias%3Daps&field-keywords=tripod&rh=i%3Aaps%2Ck%3Atripod>`__ to mount the anchors (optional)"
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:23
+#: e701df1d71cf4666b3996b6a275d5604
+msgid "Placing the anchors"
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:25
+#: 7196b40c281d4188a7ece23d1568f71f
+msgid "The anchors should be placed in a rectangular shape.  The anchor with the lowest ID (IDs are printed in hexadecimal on each device) will act as the \"origin\" and should be placed at the lower-left corner of the rectangle.  Each of the remaining three anchors should be placed in a corner so that the anchor IDs increase as you travel an \"N\" pattern within the rectangle.  The configuration is slightly simpler if the line from the origin anchor to the 2nd anchor is due North but it is not required as the :ref:`BCN_ORIENT_YAW <BCN_ORIENT_YAW>` parameter can be used to account this difference."
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:31
+#: 294189c311a746659f62a3c6426436ca
+msgid "Preparing the tag"
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:36
+#: 0937e9e92d994c98b0c2c5c99d0bb5a9
+msgid "connect one of the autopilot's telemetry connections to the UNO.  Telem1 is shown above but any SERIAL port will work equally well."
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:37
+#: daa90b7069954235acf6baddf2f59510
+msgid "autopilot's UART port GND should be connected to one of the UNO's GND pins."
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:38
+#: bf4f5026e157477cbb6c8cdcfed44db8
+msgid "autopilot's UART port TX should be connected to the UNO's pin 10."
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:39
+#: 91c27043cc274cc5a113b27d7c928e70
+msgid "autopilot's UART port RX should be connected to the UNO's pin 11."
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:40
+#: dd32e20a91b6471caa2ffa51ea123858
+msgid "autopilot's UART port VCC may be connected to the UNO's 5V connector to provide power to the Uno/Pozyx from the autopilot."
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:42
+#: d9f385287e22477db607b32468dcd6de
+msgid "The Arduino IDE should be used to load `IndoorLoiter sketch <https://github.com/ArduPilot/ardupilot/blob/master/Tools/Pozyx/IndoorLoiter/IndoorLoiter.ino>`__ onto the Uno after first changing the anchor tags `found here <https://github.com/ArduPilot/ardupilot/blob/master/Tools/Pozyx/IndoorLoiter/IndoorLoiter.ino#L12>`__ to match the IDs of the tags in your setup."
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:44
+#: b7a0e422f3ad4806990d33874a7c85f2
+msgid "At this point you may wish to test the tag's ability to communicate with the tags by:"
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:46
+#: 879eddd9fef54f9882b939c5b9aa6dda
+msgid "powering on all the anchors."
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:47
+#: 840f1aaad3c4436ab5ae2f7675efc364
+msgid "connect the UNO's Type B USB to your PC."
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:48
+#: dfa1045a48054be0a1727915f6352694
+msgid "connect with the Arduino IDE's serial monitor (set to baud 115200) and check no \"Beacon Configuration failed\" messages appear.  If they do, check that the IDs have been set correctly in the IndoorLoiter2.ino sketch (above)."
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:50
+#: 06ef310cfc2d43d5ac77cd1477a99737
+msgid "Mount the Pozyx tag on the top of the Arduino Uno and then mount on the vehicle."
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:53
+#: 6fcbf60c154d4141ba24449b5ed400a3
+msgid "Configuration through the Ground Station"
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:55
+#: 16e0be4bc76d42da8bcdd27f2fcf9e20
+msgid "Connect with a Ground Station and set the following parameters:"
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:57
+#: 1b151c20628d4e88aa3ec4182c0b37b5
+msgid "set :ref:`BCN_TYPE <BCN_TYPE>` to 1 (means using Pozyx system)"
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:58
+#: 588bdf28e5de41cca95876ad14e57816
+msgid "set :ref:`BCN_LATITUDE <BCN_LATITUDE>`, :ref:`BCN_LONGITUDE <BCN_LONGITUDE>` and :ref:`BCN_ALT <BCN_ALT>` to match your actual location.  Getting these values exactly correct is not particularly important although getting it close is required in order for the compass's declination to be correctly looked up from the small database held within ArduPilot."
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:59
+#: aaa4fad59f1649c59c7c47ffa5e58a89
+msgid "set :ref:`BCN_ORIENT_YAW <BCN_ORIENT_YAW>` to the heading from the origin anchor to the 2nd anchor.  One way to capture this value is to stand at the origin holding the vehicle so that its nose points towards the second beacon.  Read the vehicle's heading from the HUD and enter this value into :ref:`BCN_ORIENT_YAW <BCN_ORIENT_YAW>`"
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:60
+#: 5d401a0c53644e3cbfcd1529be7815c3
+msgid "set :ref:`EK3_SRC1_POSXY <EK3_SRC1_POSXY>` to 4 (Beacon)"
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:61
+#: ce03865c68b74327b6463f643384072d
+msgid "set :ref:`EK3_SRC1_VELXY <EK3_SRC1_VELXY>` to 0 (None)"
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:62
+#: ec51c0744074467d82812364fb82cd86
+msgid "set :ref:`EK3_SRC1_VELZ <EK3_SRC1_VELZ>` to 0 (None)"
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:63
+#: 8f27567e71ef4a95933204029369c712
+msgid "set :ref:`EK3_SRC1_POSZ<EK3_SRC1_POSZ>` to  4 (Beacon)"
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:64
+#: 72ddca2d1615457bbe16baadaa26b83d
+msgid "set :ref:`EK3_SRC1_YAW<EK3_SRC1_YAW>` to 1 (Compass) since a compass is required for use with this device."
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:65
+#: b534e896c4e548cc9a4ccb9c6ae2a693
+msgid "set :ref:`ARMING_SKIPCHK <ARMING_SKIPCHK>` to 8 to disable the GPS arming check"
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:66
+#: fc35d8be4a8c461cbed90557932009c0
+msgid "set :ref:`SERIAL1_BAUD <SERIAL1_BAUD>` to 115 to set SERIAL1 port's baud rate to 115200 (if using a different SERIAL port set its baud rate to 115, instead)"
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:67
+#: 0b9350ea51714bb98da3321d451bde4e
+msgid "set :ref:`SERIAL1_PROTOCOL <SERIAL1_PROTOCOL>` to 13 (Beacon) to enable reading the IndoorLoiter2 protocol (If using a different port, set its protocol to 13 instead)"
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:68
+#: cee5326cee2e471690e1c4ffafa5bd3a
+msgid "set :ref:`BRD_SER1_RTSCTS <BRD_SER1_RTSCTS>` to 0 to ensure telem1 does not use flow control (If using Telem2 set :ref:`BRD_SER2_RTSCTS <BRD_SER2_RTSCTS>` instead, not required if using a SERIAL port without flow control)"
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:71
+#: 7fab7a5946414a868e0dab5f9ea8455f
+msgid "Ground Testing"
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:73
+#: b5dc00e5c8e4469799894b189e15b507
+msgid "Connect the Autopilot to a ground station.  You may need to connect the Lipo battery as well because some computers are unable to provide enough power through their USB port for the combined autopilot+Pozyx+Uno."
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:74
+#: a057bb44093f4da7bcec45dba8965182
+msgid "Press the UNO's white or red reset button which can be found next to the USB port (see image above)"
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:75
+#: e7c16941278543c88e033658143fb624
+msgid "After about 1 minute the vehicle's position should jump to the latitude, longitude you input during the configuration step (above).  If it does not, connect a USB cable to the UNO's USB port and open the Arduino IDE's serial monitor and look for errors."
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:76
+#: 2342d0b0dba24acbac1a8ec88f9df446
+msgid "Check that the vehicle's position is relatively stable (i.e. moving around less than one meter)"
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:77
+#: c64bb29ec56e4e0da7fe3ec98a8cb22b
+msgid "Walk the vehicle around between the anchors and ensure that its position on the map updates correctly"
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:80
+#: dfb3c922e9594c248725dc8dd3943ce4
+msgid "Flight testing"
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:82
+#: d3eea5c713e042b0ab239f29186d7233
+msgid "Setup the transmitter with Stabilize, AltHold and Loiter flight modes. Take off in AltHold mode and maintain a stable hover. Switch to Loiter but be ready to switch back to AltHold or Stabilize if the vehicle's position or altitude becomes unstable."
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:87
+#: 5fd89a95698346679a6e4429bdf73188
+msgid "DataFlash logging"
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:89
+#: dd499dfe08f04812ab7736a052866550
+msgid "The distance to the beacons can be found in the dataflash log's BCN message's D0, D1, D2, D3 fields."
+msgstr ""
+
+#: ../../source/docs/common-pozyx.rst:92
+#: 29b0e9341a454fa694ad18d05a78a9b9
+msgid "User videos"
+msgstr ""

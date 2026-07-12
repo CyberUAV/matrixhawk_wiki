@@ -22,9 +22,9 @@ The way it works is:
    :target: ../_images/zigzag-mode.png
    :width: 450px
 
-When flown manually ZigZag uses :ref:`Loiter mode's <loiter-mode>`  parameters.  For example the top speed can be configured with :ref:`LOIT_SPEED <LOIT_SPEED>`.
+When flown manually ZigZag uses :ref:`Loiter mode's <loiter-mode>`  parameters.  For example the top speed can be configured with :ref:`LOIT_SPEED_MS<LOIT_SPEED_MS>`.
 
-When autonomously flying from one side of the field to the other, the :ref:`Auto mode <auto-mode>` parameters are used.  For example the top speed can be configured with :ref:`WPNAV_SPEED <WPNAV_SPEED>`..
+When autonomously flying from one side of the field to the other, the :ref:`Auto mode <auto-mode>` parameters are used.  For example the top speed can be configured with :ref:`WP_SPD<WP_SPD>`..
 
 .. _zigzag-auto:
 

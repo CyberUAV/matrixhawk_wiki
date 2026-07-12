@@ -1,0 +1,231 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/ros-aruco-detection.rst:5
+#: f52b1c540ca14cbd9d8517367b145795
+msgid "Indoor autonomous flight with ArduCopter, ROS and Aruco Boards Detection"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:11
+#: 32f27397c9394fc7a90005f164e920f5
+msgid "This wiki page describes how to setup a system capable to realize indoor autonomous flight. The system is based on a quadcopter with a Raspberry Pi 3 and a Raspberry Pi Camera Module v2. Images from camera are used to calculate poses estimation on the Raspberry Pi and the result are sent as MAVLink messages to the Flight Controller. The camera is downward looking and on the floor there is an Aruco Boards like this:"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:18
+#: d7efeb9ff6854dd89fc1cd6a72386b88
+msgid "The system uses `ROS <http://www.ros.org/>`__ for all the tasks it has to do. The images from Raspberry Pi Camera are captured by `raspicam_node <https://github.com/UbiquityRobotics/raspicam_node>`__, the poses estimation are calculated by a modified version of `aruco_gridboard <https://github.com/anbello/aruco_gridboard>`__ and the relevant messages are sent to the Flight Controller using `mavros <http://wiki.ros.org/mavros>`__. All this ROS packages, and other we will see later, runs on the Raspberry Pi 3."
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:20
+#: 524dfff4f4514b5bb2e54f9eb8d35f36
+msgid "The ROS node raspicam_node publish camera/image and camera/camera_info topics, the node aruco_gridboard subscribes to these topics and publish a camera_pose message to the mavros/vision_pose/pose topic, mavros translates ROS messages in MAVLink messages and send it to the Flight Controller."
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:22
+#: 93556c0534394fca97467fd9618a6cc9
+msgid "The messages SET_GPS_GLOBAL_ORIGIN and a SET_HOME_POSITION are sent with a `script <https://github.com/anbello/aruco_gridboard/blob/master/script/set_origin.py>`__ before starting to use the system."
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:24
+#: 39a471dba5ae487ca234362f1831df20
+msgid "The Flight Controller and the Raspberry Pi 3 on the quadcopter are connected via serial port whereas the Raspberry Pi 3 and the desktop PC are connected via WiFi. The desktop PC is used only for configuration and visualization purposes. `rviz <http://wiki.ros.org/rviz>`__ from ROS is used for visualization on PC."
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:27
+#: 18205d890f084e21925b1bae0a5705fc
+msgid "Components of the system"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:29
+#: bee6354b48a14f19b9cef61a355ac06a
+msgid "A little quadcopter (160mm) with Revolution Flight Controller with ArduCopter 3.7-dev and the following relevant parameters:"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:51
+#: a65555f4bd4b4725b81356b4dba9fe65
+msgid "On the quadcopter there is a Raspberry Pi 3 (connected to Flight Controller with serial port) and a Raspberry Pi Camera"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:52
+#: 1fd3394036c049789e77cf3b0f1c2470
+msgid "On the Raspberry Pi there is ROS Kinetic with raspicam_node, aruco_gridboard and mavros packages."
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:55
+#: ab8fa67416e44060a23929bd23665287
+msgid "Instructions to reproduce the system"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:58
+#: 4aa6c83385c443d38be8bd949c734a1a
+msgid "On the Raspberry Pi 3 on quadcopter"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:59
+#: b8af13cbb8a6429cb5fc89748d91041b
+msgid "Install Ubuntu 16.04 and ROS Kinetic with Ubiquity Robotics `Raspberry Pi images <https://downloads.ubiquityrobotics.com/pi.html>`__"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:60
+#: b9d05b79f9664eb7a491e6bc4e6ec235
+msgid "Edit /boot/config.txt to have higher serial speed on /dev/ttyAMA0 (connection at 921600 baud)"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:72
+#: aeb094b5bce8483e954815a1635cbad6
+msgid "Connect the serial port with one telemetry port on the Flight Controller"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:73
+#: ded3f5e32d70403f9fe66ee0e1b4fb60
+msgid "Connect to the PC using WiFi following the `instructions <https://learn.ubiquityrobotics.com/connect_network>`__ on Ubiquity Robotics site"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:74
+#: 46aefd84b83843ca84c9e37ebea7ce83
+msgid "Edit mavros configuration file apm_config.yaml to synchronize the flight controller and companion computer (Raspberry Pi) clocks using MAVLink’s SYSTEM_TIME and TIMESYNC messages as in this `wiki <https://ardupilot.org/dev/docs/ros-timesync.html>`__"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:75
+#: 7706d8d1dbcd4ff2943cb475854ccf22
+msgid "Calibrate the camera following the instructions in this `wiki <http://wiki.ros.org/camera_calibration/Tutorials/MonocularCalibration>`__"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:76
+#: ../../source/docs/ros-aruco-detection.rst:107
+#: 3e422783892c4049afe79b493fd6e35b
+#: 5e7386ac198b41f9ae6fdae7f7b14eac
+msgid "Clone this fork of `aruco_gridboard <https://github.com/anbello/aruco_gridboard>`__ in ~/catkin_ws/src"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:77
+#: ../../source/docs/ros-aruco-detection.rst:108
+#: 2e7fa4634f82423bb3675565e2668219
+#: 46b678a2702a47b8b86025e956f04b8f
+msgid "Build all"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:86
+#: 86daa51a73304ab189dbdaef260b95f3
+msgid "On the desktop PC"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:87
+#: 01813b8307d14bc2b62095baf7f7c476
+msgid "Install `ROS Kinetic <http://wiki.ros.org/kinetic/Installation/Ubuntu>`__ on Ubuntu 16.04 (maybe newer version work the same but was not tested)"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:88
+#: 1118f6880e6f4f68a076133a6455153b
+msgid "Install ros-kinetic-joy-teleop (sudo apt install ros-kinetic-joy-teleop) and configure for your Joystick - We use a Joystick instead of RC because using 2.4GHz RC disturb the WiFi video streaming. In mavros there is a configuration file for Logitech F710 Joystick, In the aruco_gridboard package we added a configuration file for the Xbox one Joystick."
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:90
+#: 4b001c449fa3405f9d58d268d3c1df75
+msgid "Install mavros (sudo apt install ros-kinetic-mavros*)"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:91
+#: e5dac7725ac54a7c842e362a83bf8469
+msgid "If you are not familiar with ROS follow the `tutorials <http://wiki.ros.org/ROS/Tutorials>`__"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:92
+#: 4df441ad70494638a2f540308181dbba
+msgid "Edit ~/.bashrc and append the following line:"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:98
+#: c1be4cbb73644a14bdac16e090aae0bd
+msgid "Create a Catkin WorkSpace (on Raspberry Pi this is not necessary because it is already in Ubiquity Robotics image)"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:115
+#: 3a02b7f705b84192bfdde2de533ef9ee
+msgid "On PC you also have to run a GCS of your choice to configure the quadcopter, see telemetry data, see MAVLink inspector, set flight modes and give commands. All of this things can be done also via ROS messages and services but in this way could be easier."
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:118
+#: e1a977d1d1c74dc39b184cc9e6c96eb6
+msgid "Starting all ROS node"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:119
+#: 8fb6ad759d3f429986e3f6a38e4a4544
+msgid "Now to start all the node needed by the system to work give the following command on different term (or tab with CTRL+SHIFT+T) (in this example 192.168.10.16 is the PC and 192.168.10.10 is the Raspberry Pi on the quadcopter)"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:122
+#: ada12100344c4ca381fea60c13af023f
+msgid "tab1"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:130
+#: 41ed790e646b481b9c325f321776ffe3
+msgid "tab2"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:138
+#: 2714a7b66292453e83c93b80a4644819
+msgid "tab3"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:146
+#: 48518c7e3aaf4a0ca227ff370132887b
+msgid "tab4"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:153
+#: b02230f4644946149fa5f39f922bd8f2
+msgid "tab5"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:159
+#: 627c66ffdc1743718d0afe94ad6f13c3
+msgid "At this point it should be possible to see /mavros/vision_pose/pose and /mavros/local_position/pose, represented as 3 Axes, on rviz and moving the quadcopter with the camera towards the Aruco Board, you should see the two poses moving close to each other. Connecting the GCS to the quadcopter (tcp 192.168.10.10 2000) it should be possible to see the quadcopter on the map, set flight mode and give commands."
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:165
+#: 80bd1147df704ef79e8d2d5f7681c060
+msgid "If this last point is OK the first test could be done arming the quadcopter in Loiter mode, takeoff and hover over the Aruco Board with the Joystick, then land."
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:167
+#: 55997b007a7a4f149783e0fbde0cbc4a
+msgid "The last step (for now) is to test an all autonomous flight using one of the script included, to do this open another term or tab"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:175
+#: 8380509458b5424eac8943a82b9faabe
+msgid "You should see the quadcopter arm, takeoff, flight along the square and land as showed in the video at the beginning of this page."
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:178
+#: 68e20827bb32481cb83dd4fd9cd33459
+msgid "Some Useful links"
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:180
+#: 4591bfeef5094a788eb7be007d758c08
+msgid "Blog post `Indoor autonomous flight with ArduCopter, ROS and Aruco Boards Detection <https://discuss.ardupilot.org/t/indoor-autonomous-flight-with-arducopter-ros-and-aruco-boards-detection/34699>`__: A similar system to the one described here but on the quadcopter there is a Raspberry Pi 0 (instead of Raspberry Pi 3), due to the limited computing resources the aruco_gridboard node run on desktop PC and the relevant data (mainly images and pose estimation) are exchanged with the quadcopter using ROS messages."
+msgstr ""
+
+#: ../../source/docs/ros-aruco-detection.rst:183
+#: 1596067fbfb34fb1b317be97bf2dcaf3
+msgid "Blog post `Vision Positioning Experiments using SKYVIPER <https://discuss.ardupilot.org/t/vision-positionning-experiments-using-skyviper/38348>`__: Here is described a system similar to the previous one, in place of the DIY quadcopter a Skyviper one is used, because of this it should be easier to replicate."
+msgstr ""

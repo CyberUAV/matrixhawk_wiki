@@ -1,0 +1,678 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:30+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/mission-command-list.rst:5
+#: 61fbc327e7c243fa9fc99d40aa1cf7fc
+msgid "Copter Mission Command List"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:7
+#: caa01f638b1d4924b24e45b53e70b7ff
+msgid "This page provides details of all the mission commands (i.e. `MAVLink commands <https://mavlink.io/en/messages/common.html#MAV_CMD_NAV_WAYPOINT>`__) supported by Copter that can be run as part of a mission (see :ref:`AUTO flight mode <auto-mode>`)."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:10
+#: 7a43970d80364f0cbd9552a08e415eb6
+msgid "Each of the commands below is either a \"Navigation\" command or a \"Do\" command.  Navigation commands (e.g. \"TakeOff\" and \"Waypoint\") affect the location of the vehicle while \"Do\" commands (e.g. \"Do-Set-Servo\" and \"Do-Cam-Trigg-Dist\") are for auxiliary functions and do not affect the vehicle's position."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:14
+#: c9d5cb04810a44099b324aba521534ef
+msgid "During a mission at most one \"Navigation\" command and one \"Do\" command can be running at one time.  The \"Do\" commands will be run in order as soon as the preceding navigation command before them completes.  For more information on setting up missions please refer to the :ref:`Planning a Mission with Waypoints and Events <common-planning-a-mission-with-waypoints-and-events>` page."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:19
+#: 2727234a8465435e9d990e87b575c32d
+msgid "Takeoff"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:24
+#: b596ec0f3db548f89b92454b0882d083
+msgid "The vehicle will climb straight up from its current location to the altitude specified (in meters). This should be the first command of nearly all missions."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:28
+#: b025ff51dc31413db9f9774a1d5e63e6
+msgid "If the mission is begun while the copter is already flying, the vehicle will climb straight up to the specified altitude, if the vehicle is already above the specified altitude the takeoff command will be ignored and the mission will move onto the next command immediately.  In this case any \"DO\" commands immediately following the TAKEOFF will also be ignored."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:35
+#: 50c8dde482264ed5af1123222f99feaa
+msgid "Waypoint"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:40
+#: e9dccc2f923e4d5d99fbc0b8fce01f1c
+msgid "The vehicle will fly a straight line to the location specified as a lat, lon and altitude (in meters)."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:43
+#: 9f620b9eef49492b9a77c596374cf639
+msgid "**Delay** - the amount of time to wait (in seconds) at the waypoint before proceeding to the next command"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:46
+#: 450d1caa9ca241fc979a5661f9b6aeec
+msgid "**Hit Rad** - not supported - meant to hold the distance (in meters) from the target point that will qualify the waypoint as complete. This command is not supported. Instead, the :ref:`WP_RADIUS_M<WP_RADIUS_M>` parameter should be used (see \"WP Radius\" field in the above screenshot or adjust through the Standard Parameters List).  Even the :ref:`WP_RADIUS_M<WP_RADIUS_M>` is only used when the waypoint has a Delay. With no delay specified the waypoint will be considered complete when the virtual point that the vehicle is chasing reaches the waypoint. This can be 10m (or more) ahead of the vehicle meaning that the vehicle will turn towards the following waypoint long before it actually reaches the current waypoint"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:57
+#: e42e83d3b5af45c4a91eee52dca30686
+msgid "**Yaw Ang** - not supported - meant to hold the resulting yaw angle in degrees (0=north, 90 = east). Instead use a :ref:`CONDITION_YAW <mission-command-list_condition-yaw>` command."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:61
+#: a758a326f2474b92bb66ed256fa66df3
+msgid "**Lat, Lon** - the latitude and longitude targets.  If left as zero, current location will be substituted for waypoint location, making it appear as if the waypoint is simply skipped."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:63
+#: 081f015ab4d140faaa76c2571598f2ae
+msgid "**Alt** - the target altitude above home in meters.  If left as zero it will hold the current altitude."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:67
+#: 119c6871af424feeb98508f841f8ded2
+msgid "Spline Waypoint"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:72
+#: 43408c9090f94a4e90f2976ec49ab83e
+msgid "`Spline <https://en.wikipedia.org/wiki/Spline_%28mathematics%29>`__ waypoints take all the same arguments as regular waypoints (lat, lon, alt, delay) but when executed the vehicle will fly smooth paths (both vertically and horizontally) instead of straight lines.  Spline waypoints can be mixed with regular straight line waypoints as shown in the image above."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:74
+#: c1948da2a6a94d9ba90f72f3533e2773
+msgid "The Mission Planner shows the path the vehicle will take.  The image above shows some characteristics of the spline"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:77
+#: 4230d3e4503149768346b774f4d24874
+msgid "The 1 second delay at the end of Waypoint #1 causes the vehicle to stop so Spline command #2 begins by taking a sharp 90degree turn"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:79
+#: 575f6249b8a2448880a9134ce6c7a98a
+msgid "The direction of travel as the vehicle passes through Spline Waypoint #3 is parallel to an imaginary line drawn between waypoints #2 and #4"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:81
+#: b8d79b9dd4cc407883fcc890be4c8ec4
+msgid "Waypoint #5 is a straight line so the vehicle lines itself up to point towards waypoint #5 even before reaching waypoint #4."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:85
+#: 0e3e73bbb3714d92af277dfbf118c55d
+msgid "Loiter_Time"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:90
+#: 687fef68f1104614a04f094ae6497ca2
+msgid "The vehicle will fly to and then wait at the specified location for the specified number of seconds.  This is the same as a Waypoint command."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:93
+#: 488845d569eb44d0a50a60fafe360625
+msgid "**Times** - the number of seconds to remain at the location."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:95
+#: 44aa898d9c09461ca3199fc8684bf009
+msgid "**Lat, Lon** - the latitude and longitude targets. If left as zero it will hold at the current location."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:98
+#: 00383f3852e04c638df0d9899ab3130f
+msgid "**Alt** - the target altitude above home in meters. If left as zero it will hold at the current altitude."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:102
+#: 279f550153c14a6c9429d644afdd5214
+msgid "Loiter_Turns"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:107
+#: 87bee03d75da458298a3a6a35bed9e2c
+msgid "The mission equivalent of the :ref:`Circle flight mode <circle-mode>`.  Loiter (circle) the specified location for at least the specified number of complete turns, and then proceed to the next command upon intersection of the course to it with the circle's perimeter. If zero is specified for a latitude/longitude/altitude parameter then the current location value for the parameter will be used. Fractional turns between 0 and 1 are supported, while turns greater than 1 must be integers."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:111
+#: 5c209a4bda7946e7829ac1dfec9e4ecd
+msgid "The radius of the circle is controlled by the command parameter. A radius of 0 will result in the copter loitering at the location and pirouetting the specified number of turns. Negative radius values result in counter-clockwise turns instead of clockwise turns. Radius values over 255 meters will be rounded down to the nearest 10 meter mark ."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:114
+#: 43717bb2de4d4109950527914560b024
+msgid "**Turn** - the number of full rotations to complete around the point."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:116
+#: 809935df830d473f9d46d596fe351d34
+msgid "Fractional turns between 0 and 1 are supported, while turns greater than 1 must be integers."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:118
+#: e92d1f2d653a4842bf79a4dcb7aaa365
+msgid "**Radius** - Loiter radius around waypoint. Units are in meters."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:120
+#: ff376cfde704470da712182a9cd67667
+msgid "**Lat, Lon** - the latitude and longitude targets.  If left as zero it will circle around the current location."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:123
+#: c2e8e216a47d43ee8ee91aba9a081dc5
+msgid "**Alt** - the target altitude above home in meters.  If left as zero it will circle at the current altitude."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:127
+#: 4020c0fb79ed4796a29430a673961836
+msgid "Loiter_Unlimited"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:132
+#: c1ac65a166434d79ac41c53faaad58b4
+msgid "The vehicle will fly to and then wait at the specified location indefinitely.  The mission will not proceed past this command."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:135
+#: 29e6aa8668114580a1d6a2698501be29
+msgid "**Lat, Lon** - the latitude and longitude targets. If left as zero it will wait at the current location."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:138
+#: 42a5267f7fd348da97c095637e3bb560
+msgid "**Alt** - the target altitude above home in meters. If left as zero it will wait at the current altitude."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:142
+#: e619f67c9d0e49079ee237a54fe3a0e1
+msgid "Return-To-Launch"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:147
+#: 20b1febf749347a5b57dd5a513290608
+msgid "Mission equivalent of the :ref:`RTL flight mode <rtl-mode>`.  As described on the RTL flight mode wiki page, the vehicle will first climb to the :ref:`RTL_ALT_M<RTL_ALT_M>` parameter's specified altitude (default is 15m) before returning home.  The home location is where the vehicle was last armed."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:152
+#: 6fa45ef52c134a01a6583f2a9c01ebe6
+msgid "This command takes no parameters and generally should be the last command in the mission."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:156
+#: 234656d41a4e48379c28deeead531d82
+msgid "Land"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:161
+#: a56a6aadbbbf467da7b6fdf58b146bfa
+msgid "The vehicle will land at its current location or at the lat/lon coordinates provided.  This is the mission equivalent of the :ref:`LAND flight mode <land-mode>`."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:164
+#: 69d49641429141759b8c463ba609b4bf
+msgid "**Lat, Lon** - the latitude and longitude targets. If left as zero it will land at the current location."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:168
+#: 04c5441b53734c618d10b5405054a982
+msgid "Delay"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:173
+#: 8ea4e5ca8a6b484596f9b68907504435
+msgid "The vehicle will remain at its current location until the specified number of seconds has passed or the absolute time is reached. The first column (\"Seconds\") holds the number of seconds to delay.  Set to -1 if this field should be ignored. The \"hour UTC\", \"minute UTC\" and \"second UTC\" fields can be used to specify an absolute time (`UTC <https://en.wikipedia.org/wiki/Coordinated_Universal_Time>`__).  The example above will cause the vehicle to take-off at 1:30pm UTC.  Note that the hour and/or minute field can also be ignored by setting them to -1."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:177
+#: 9afdbf37f05a40a9ba5fec4e496b1c44
+msgid "This is a video made during the development of this feature.  Note in the video CONDITION_DELAY command is used but in its final version, this DELAY command should be used."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:183
+#: fb8a9fe2b3cc4d0c88e180e3d9b8dbea
+msgid "Payload Place"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:188
+#: 81924330ce5b46e7814e88db5a7a874d
+msgid "The vehicle flies to the specified location and descends until it senses (using motor output) that the package has reached the ground.  The gripper is then released to unload the package and ascend back to the waypoint altitude. The first column (\"Max Desc\") holds the maximum descent (in meters) that the vehicle should descend.  If the package has still not reached the ground despite this descent, the package will not be released and the vehicle will return to  the waypoint altitude and advance to the next mission command. Parameters controlling this operation (besides :ref:`Gripper parameters <common-gripper-landingpage>`) are:"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:192
+#: 839c99ef7080448ba5c44d12fae05b88
+msgid ":ref:`PLDP_SPEED_DN<PLDP_SPEED_DN>`: Descent speed, once the waypoint is reached, is either :ref:`LAND_SPD_MS<LAND_SPD_MS>` or this value, if non-zero."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:193
+#: b50f2511125e490ca2dd01801e05cff3
+msgid ":ref:`PLDP_THRESH<PLDP_THRESH>`: The percentage of thrust decrease that indicates payload touch-down. The reference thrust is measured over the first two seconds of descent."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:194
+#: 1d57a29d1cf249a9a08056275e69d0c2
+msgid ":ref:`PLDP_RNG_MAX<PLDP_RNG_MAX>`: If non-zero, the maximum release height over ground obtained from a downward facing rangerfinder. Automatic gripper release can occur only if below this altitude above ground in addition to thrust reduction being obtained. If this value is non zero and no rangefinder is present, the place will be aborted and the vehicle will ascend and proceed to the next waypoint."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:195
+#: 86f90e54f85f4fc0a99c24d73cc9de4e
+msgid ":ref:`PLDP_DELAY<PLDP_DELAY>`: Delay in seconds after release the vehicle will remain in position after release before ascending. This allows payload replacement if the gripper is set to re-engage after a delay (see :ref:`GRIP_AUTOCLOSE<GRIP_AUTOCLOSE>`)"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:201
+#: 8801347924ae490897fa9b739ec98c7d
+msgid "Attitude Time"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:206
+#: d9e2c266bd7f4adbac9a4bdfcfff2244
+msgid "Vehicle maintains the specified roll, pitch, yaw angle and climb rate for the specified time.  GPS is not required while this command is being executed"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:208
+#: 142c99404feb42f29e3fb02baa26a51e
+msgid "**Roll**: positive is lean right, negative is lean left"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:209
+#: b2f1e3811326419b9ff91a93ba1573e1
+msgid "**Pitch**: positive is lean back, negative is lean forward"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:210
+#: 7cb2410c003a4265abc584d2e8a8a0b4
+msgid "**Yaw**: 0 is North, 90 is East, 180 is South, 270 is West"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:211
+#: 725f1582ff894d938ee52e70c164f61d
+msgid "**ClimbRate**: in m/s but most ground stations incorrectly scale this parameter so it is best to leave at 0m/s"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:217
+#: 275988d3e527471aabfec332a0ea47a1
+msgid "Script Time"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:222
+#: 60f614b51fee4083a452f9ead74245ce
+msgid "Lua script runs for the specified time after which it will move onto the next command.  \"command\", \"arg1\" and \"arg2\" arguments are interpreted by the script. The demonstration below used this SCRIPT_TIME command to execute the \"fast descent\" script from within Auto mode."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:231
+#: dcf3efac48e849be8b852bf88e9f9b4f
+msgid "Do-Set-ROI"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:236
+#: fd8dc169eeaf4480b71373995eee4302
+msgid "Points the nose of the vehicle or :ref:`camera gimbal <common-cameras-and-gimbals>` at the \"region of interest\".  In the example above the nose or camera would be pointed at the red marker."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:238
+#: b7ece5e282af4e9fb1937d7799070417
+msgid "The nose will continue to point at the red marker until the end of the mission OR \"clear\" the do-set-roi and cause the vehicle to return to its default behaviour (i.e. pointing at the next waypoint) by adding a second DO_SET_ROI command later in the mission with all zero for Lat, Lon, and Alt."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:240
+#: ../../source/docs/mission-command-list.rst:359
+#: 5e0ac254b8304227ba6b71fba51a7fc3
+#: 1be15fa8e0b04e63aedd8f07beda0355
+msgid "**Lat, Lon** - the latitude and longitude targets."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:242
+#: c13ea2cffe51471b8c3c60c11e7b207f
+msgid "**Alt** - the target altitude above home in meters."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:248
+#: 4c8c31566bd0470bb069124c9246924d
+msgid "Condition-Delay"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:253
+#: 653bbad0aab340cb839442bd1be64a6d
+msgid "Delays the start of the next \"Do\" command for the specified number of seconds. In the example above, Command #4 (Do-Set-Roi) is delayed so that it only starts 5 seconds after the vehicle has passed Waypoint #2. Note: this command does not stop the vehicle. Also note that the delay timer is only active until the next waypoint is reached, so if the \"Do\" command hasn't been triggered by then it never will be."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:260
+#: 59cc059c0dda446a9189cca8daeaeebc
+msgid "**Time (sec)** - the time to delay the next \"Do\" command in seconds."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:263
+#: 375451d8d5d74fe4a3a3d294f72a1568
+msgid "Condition-Distance"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:268
+#: 58764a080e174d5c87c4e55b46e8a2fe
+msgid "Delays the start of the next \"Do\" command until the vehicle is within the specified number of meters of the next waypoint. In the example above, Command #4 (Do-Set-Roi) is delayed so that it only starts once the vehicle is within 50m of waypoint #5. Note: this command does not cause the vehicle to stop or pause during the mission, it only affects \"Do\" commands."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:275
+#: 3608706730c64f6baa41628926b48c1d
+msgid "**Dist (m)** - how close the vehicle should be to the next waypoint (in meters) before beginning the next \"Do\" command."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:282
+#: f2c7791c329e4631945c64bcfec6f159
+msgid "Condition-Yaw"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:287
+#: 28bb8616741a4fdca1477788db755419
+msgid "Point the nose of the vehicle to the specified heading by a specified amount."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:290
+#: 9aece6ea473440b49bf88a74493eacda
+msgid "**Deg** - the desired heading in degrees (0 = North, 90 = East, etc) when \"rel/abs\" field is \"0\" (meaning absolute)"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:293
+#: 1d62ec672d4944e88e44c38e46ec022f
+msgid "OR the change in heading (in degrees) when \"rel/abs\" field is \"1\" (meaning relative)"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:296
+#: d0dbcb1330584ed09a9c30f2c3cf1dad
+msgid "**Speed deg/s** - the rotation speed (in deg/sec) as the vehicle turns to the desired heading"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:299
+#: f39cc8737b854b18b5ab0d1e1888ef2c
+msgid "**Dir 1=CW** - Used to denote the direction of rotation to achieve the target angle (1=CW, -1=CCW, 0= the vehicle will always turn in direction that most quickly gets it to the new target heading, but only when \"rel/abs\" = \"0\",)."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:301
+#: d6de81278e374547abadaef0d3c67629
+msgid "**rel/abs (0=Abs, 1=Rel)** - allows specifying the heading (i.e \"Deg\" field) as an absolute heading (if \"0\") or relative to the current heading (if \"1\")"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:305
+#: 3929ff079fef4fabbd7193e4073a2f22
+msgid "Do-Jump"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:310
+#: 9034459004784033ba4bb5c324898c72
+msgid "Jump to the specified mission command the specified number of times before continuing with the mission.  In the example above the vehicle would fly back-and-forth between waypoints #1 and #2 a total of 3 times before flying on to waypoint #4."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:315
+#: c2ee603dcc19468db033604e8f7be859
+msgid "**WP #** - the mission command to jump to."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:317
+#: 8347efd29df840ecb0cc03b8faaddd81
+msgid "**Repeat** - the maximum number of times we should perform the jump. -1 means always jump"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:320
+#: 119fde7c68574f49b09e38ca4a43c746
+msgid "Despite the name, Do-Jump is really a \"Nav\" command rather than a \"Do\" command, so conditional commands like CONDITION_DELAY won't affect Do-Jump, it will always perform the jump as soon as it hits that command."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:327
+#: a61cb1002e65477f95426d9c44377884
+msgid "No more that one hundred (100) Do-Jump commands can be used in a mission. This value is further reduced to fifteen (15) Do-Jump commands for boards with less than 500kb of ram. Subsequent Do-Jumps will be ignored."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:330
+#: dc449dfe0ce54dcab4766982e0adfc42
+msgid "Do-Aux-Function"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:335
+#: 1caaf0e49fc84d488a46995075240246
+msgid "Allows any :ref:`auxiliary function <common-auxiliary-functions>` to be executed from within a mission without setting up an auxiliary switch.  The \"AuxFunction\" field should be set to the \"RCx_OPTION value\" from the linked page.  The \"Switch\" fields corresponds to the auxiliary function switch position with \"0\" meaning \"low\", \"1\" meaning \"middle\" and \"2\" meaning high."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:338
+#: c14ff6407c1642b9991e177e53f832b6
+msgid "Do-Change-Speed"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:343
+#: 5c79cf530177450d889400169d72713c
+msgid "Change the desired maximum speed (in meters/sec) of the vehicle.  Normally the \"Type\" field is left at 0 meaning the horizontal speed is set."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:345
+#: 85ba916d22a84542a9851b6833f4b0da
+msgid "**Type** - 0,1:ground speed, 2:climb rate, 3:descent rate"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:347
+#: f5a8f44b49ea4301bd482cc9f0665b4a
+msgid "**Speed m/s** - the desired maximum speed in meters/second."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:350
+#: 2efae77cc8224dba81b1dcc2bb5920e7
+msgid "Do-Set-Home"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:355
+#: d12b60718043474c810487c8907b5e85
+msgid "This command should be avoided if possible and instead use :ref:`Rally Points <common-rally-points>` which can also control the position used for Return-To-Launch."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:357
+#: 3fb595e1c76e42ef9214dff8921895a4
+msgid "**Current(1)/Spec(0)** - if \"1\" use the current location as the new home, if \"0\" use the specified Lat and Lon coordinate (not labelled yet!)"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:362
+#: 41f5f695ad6c4b1586386518680507b3
+msgid "Do-Set-Cam-Trigg-Dist"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:367
+#: 4643ab9fc0b84ae5ba1061a5af4c9ca0
+msgid "Trigger the :ref:`camera shutter <common-camera-shutter-with-servo>` at regular distance intervals. For example the command above will cause the camera shutter to trigger after every 5m that the vehicle travels."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:371
+#: 6716ab547cdd464fa474a2bdc1724b15
+msgid "**Dist (m)** - distance interval in meters."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:373
+#: e74c59d4e3bb44edb3fbaca9e94cf3ad
+msgid "To stop the camera from triggering, add a DO_SET_CAM_TRIGG_DIST later in the mission with Dist = 0"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:378
+#: b96fa3243b01434798341310c452128a
+msgid "Do-Set-Relay"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:383
+#: 68061bd3b49b437c990f54c32ef0578a
+msgid "Set a :ref:`Relay <common-relay>` pin's voltage high or low."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:385
+#: 0dba6885f7f747c099fe6ecdcb985880
+msgid "**Relay No** : 0 = First Relay, 1 = Second Relay"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:387
+#: 3a00384a027d45148eb737f6082d3c47
+msgid "**off(0)/On(1)** : 0 = Off (i.e. 0V), 1 = On (i.e. 3.3V on most autopilots)"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:391
+#: 4db1ecf852e34a889d1be08bafd23f21
+msgid "Do-Repeat-Relay"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:396
+#: 46ab64e49fcd4d0ab4170603367ced1f
+msgid "Toggle the :ref:`Relay <common-relay>` pin's voltage a specified number of times. In the example above, assuming the relay was off to begin with, it would be set high and then after 3 seconds it would be toggled low again."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:401
+#: 1262c66799404eeb8f2257831a2adc85
+msgid "**First column is Relay number** : 0 = First Relay, 1 = Second Relay"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:403
+#: 1884da05d8914af7a7971df8bc133c52
+msgid "**Repeat #** : how many times the relay should be toggled"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:405
+#: 369a43c288994065bf2fff9ad75bcac2
+msgid "**Delay(s)** - Number of seconds between each toggle."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:408
+#: 980bb82dd3d543e8a9eb4a817e61b0a1
+msgid "Do-Set-Servo"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:413
+#: 4b10d3af0b364ad6888d462ce57778c7
+msgid "Move a :ref:`servo <common-servo>` to a particular PWM value. In the example above, the servo attached to output channel 8 would be moved to PWM 1700 (servo's generally accept PWM values between 1000 and 2000)."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:417
+#: ../../source/docs/mission-command-list.rst:434
+#: 8893406a981042069b091e28e063b1b2
+#: 62ce293aff5542a59a0a19df4c853ead
+msgid "**Ser No** : the output channel the servo is attached to"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:419
+#: ../../source/docs/mission-command-list.rst:436
+#: 153d1984003346879ba387fef1733462
+#: b36ad1853b7f47d38fc0a67116882344
+msgid "**PWM** : PWM value to output to the servo"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:422
+#: 874de53f7fef4c7aad39a43ddbd516cd
+msgid "Do-Repeat-Servo"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:427
+#: 9f04b41dc0c345dd8bf295ed02b6dea4
+msgid "Repeatedly move a :ref:`servo <common-servo>` back and forth between its mid position and a specified PWM value. In the example above, the servo attached to output channel 8 would be moved to PWM 1700, then after 4 seconds, back to mid (default is 1500 which is held in the :ref:`RC8_TRIM<RC8_TRIM>` parameter), after another 4 seconds it would be moved to 1700 again, then finally after 4 more seconds it would be moved back to mid."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:438
+#: 5ec92044e6514b108226574e921ded0f
+msgid "**Repeat #** : Number of times to move the servo to the specified PWM value"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:441
+#: 8b9fab2832e74719983e6198d1de992c
+msgid "**Delay (s)** : the delay in seconds between each servo movement"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:444
+#: e21a768c0cf14cf0b3c4fc4a4bfbccb7
+msgid "Do-Digicam-Control"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:449
+#: cdff990a60d24ef4a92115878509bee3
+msgid "Trigger the :ref:`camera shutter <common-camera-shutter-with-servo>` once.  The \"Shutter Cmd\" field should be set to \"1\"."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:452
+#: 6fc93afc1b5a4af1b58d502458cbeb92
+msgid "Do-Fence-Enable"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:457
+#: 116e04eb96c645d2bc438a2960491056
+msgid "Enable(1) or Disable(0) the Copter :ref:`common-ac2_simple_geofence` and/or Copter :ref:`common-polygon_fence`. This command takes no additional arguments."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:460
+#: 78712cd3a9c94930a7bf2ef98d64e8ec
+msgid "Do-Gimbal-Manager-PitchYaw"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:465
+#: 2564ee9829354cab9f35e878c49c2795
+msgid "Moves the :ref:`camera gimbal <common-cameras-and-gimbals>` to the desired pitch and yaw angles (in degrees).  Positive pitch angles are up, Negative are down.  Positive yaw angles are clockwise, negative are counter clockwise.   If the \"Flags\" field is \"0\" the yaw angle is in \"body frame\" (e.g. 0 is forward).  If \"Flags\" is \"16\" the yaw angle is in \"earth frame\" (e.g. 0 is North)."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:467
+#: 9c412163618e459fb8afeea0cb7f26ed
+msgid "Alternatively Pitch Rate and Yaw Rate fields can be used to move the gimbal at a specified rate in deg/sec.  A Condition-Delay for a few seconds followed by another Do-Gimbal-Manager-PitchYaw should be used to eventually stop the gimbal from rotating."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:470
+#: 0a65b174c65e4c7eae11356aeb175acf
+msgid "Do-Mount-Control"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:475
+#: a1a5f3145298464da439258b982ae3d2
+msgid "Controls the roll, pitch and yaw angle of the :ref:`camera gimbal <common-cameras-and-gimbals>`. This can be used to point the camera in specific directions at various times in the mission."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:478
+#: c445d17d6c17448bbfa0eec809796530
+msgid "Do-Gripper"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:483
+#: 8ef16b1f79384086a4a7884fc34ce578
+msgid "This command allows opening and closing a :ref:`servo gripper <common-gripper-servo>` or :ref:`EPM gripper <common-cameras-and-gimbals>`. Set the \"drop/grab\" column to 0 to close the gripper, 1 to open the gripper.  The first column, \"Gripper No\" is ignored because we currently only support a single gripper per vehicle."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:487
+#: 5aa4e494ae89417aa878e6c81f6d5b13
+msgid "Do-Winch"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:492
+#: 1d62c4bc09e549838936245220a2c59d
+msgid "This command allows controlling a :ref:`winch <common-daiwa-winch>` to raise or lower a package."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:494
+#: a78801b4c07443d7a4678ac84152d265
+msgid "\"winch no\" is not used"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:495
+#: fdf0f8a68cdc4d1f848de2f6e6fa7d51
+msgid "\"action\" should be 0 to relax the winch, 1 for Length control, 2 for Rate control"
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:496
+#: 615d00ea43254e1e83be1d7890964363
+msgid "\"length\" should be filled in with the meters of line to release.  Positive numbers release the line, negative retract the line.  Note \"action\" should be \"1\"."
+msgstr ""
+
+#: ../../source/docs/mission-command-list.rst:497
+#: 743e477e87074a4e9ba0e3ad1c81b9d0
+msgid "\"rate\" should be filled in with the speed (in m/s) to release the line.  Positive numbers release the line, negative retract the line.  Note \"action\" should be \"2\"."
+msgstr ""

@@ -1,0 +1,304 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/ros-cartographer-slam.rst:5
+#: db8e18bd73e14b64bc7b046a11e5bde3
+msgid "Cartographer SLAM for Non-GPS Navigation"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:7
+#: 72f2bf3994a44a22ae2c44880ad06c2c
+msgid "This page shows how to setup ROS and `Google Cartographer SLAM <https://google-cartographer.readthedocs.io/en/latest>`__ using an `RPLidarA2 lidar <http://wiki.ros.org/rplidar>`__ to provided a local position estimate for ArduPilot so that it can operate without a GPS."
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:9
+#: bcd3ae44d6ae47588d54815ba6846756
+msgid "These instructions were tested on an :ref:`NVidia TX2 <companion-computer-nvidia-tx2>` flashed with :ref:`APSync <apsync-intro>` and then ROS and MAVROS were :ref:`installed as described here <ros-install>`."
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:13
+#: d88a2cb8aef34b378ce16207024ad2c3
+msgid "these pages are a work-in-progress"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:16
+#: 1671a18b55da46c79b91bb51dca0dd03
+msgid "Mounting the RPLidar and Pixhawk"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:21
+#: e7a4ff6f7e354fbe883107f1e2382a75
+msgid "The RPLidar should be oriented so that its USB cable wire is pointing forward in the same direction as the arrow on the flight controller."
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:23
+#: 155ce0826bfd4d9ea13834e674b088e7
+msgid "The USB cable should be plugged into a USB port on the companion computer running ROS."
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:26
+#: 4ed2ddcf3925421984b7f6163273acd4
+msgid "Check the RPLidar's serial port"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:28
+#: a5c96d4a1d7c441e9f4d4e0f73605852
+msgid "plug the RPLidarA2 into the companion computer.  If using a TX2 mounted on an AUVidea J120 board, ensure the lidar is plugged into the lower USB port."
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:34
+#: e63762f3cfb54dffb8e2d37bfdd83280
+msgid "the lidar should appear as /dev/ttyUSB0 or /dev/ttyACM0."
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:35
+#: cbc664ac84d0403ca18174c597acdce8
+msgid "if you type \"lsusb\" the device should also be listed as \"Cygnal Integrated Products, Inc. CP210x UART Bridge / myAVR mySmartUSB light\""
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:36
+#: 88f399015516431b9760337d08ba87d7
+msgid "allow anyone to read from the device by entering just one of the following two commands depending upon which serial port was found above"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:43
+#: f7c49ce34e1340cbb9bcae16c8b035b4
+msgid "Install more packages"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:45
+#: 28d2fb5e80e94c4c90b0073d59bdf5cb
+msgid "install the ROS desktop full:"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:51
+#: 643ab93a83624b60b4168e075cf22e11
+msgid "OR install each of these individual packages (this list is not yet complete):"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:61
+#: 04d0e87d5853441285cf5efe01444816
+msgid "Create a Catkin WorkSpace"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:63
+#: 88a8b6bf3fda4d38931194dcad1dafda
+msgid "In your home directory:"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:73
+#: 1694c15558dc4bb39eb06bc04c65f80a
+msgid "Install RPLidar node"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:75
+#: b9e3c66fe6d04047adb537e5d24438fe
+msgid "Install the RPLidar node in the workspace"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:83
+#: 90d932a1acf34fe69416727840b34190
+msgid "Install Google Cartographer"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:85
+#: a39cfbd3482744eea4d37ab29b02fad5
+msgid "Install some more packages"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:91
+#: 5e91cf4d59ec47de859f9d6390848ced
+msgid "Re-initialise the workspace with `wstool <http://wiki.ros.org/wstool>`__ then merge the cartographer_ros.rosinstall file and fetch code for dependencies."
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:100
+#: 4251bbc9cc574356823eb612651146f6
+msgid "Install proto3 and deb dependencies"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:109
+#: 7ba611651c1a4d7f833c53c6cb2c3bcd
+msgid "Clone the `Robot Pose Publisher <http://wiki.ros.org/robot_pose_publisher>`__ package into the workspace"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:116
+#: 2b9144bd67864ea9acfe9dc0f7b235ab
+msgid "Create the cartographer_ros launch file using your favourite editor (like \"gedit\")"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:123
+#: ../../source/docs/ros-cartographer-slam.rst:158
+#: 5f6255408a3a4142ae82294728906dd6
+#: bc9746cb6dfd43579d984436835a2cc3
+msgid "Copy-paste the contents below into the file"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:151
+#: 20b0eae143ff4370b36e1d9a6ce98ffd
+msgid "Create the cartographer.lua script using our favourite editor (like \"gedit\")"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:220
+#: acc511cc99194bd59a4cffdd7f1c2c51
+msgid "Instead of manually modifying the above packages, clone `this <https://github.com/ArduPilot/ardupilot_ros>`__ repository and install the dependencies."
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:224
+#: 8ab0d7bc2a7c4128a382b30bbba38ac2
+msgid "Build the Packages"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:233
+#: a6d48cba2cca4d5181356091e13c69c9
+msgid "Start Cartographer"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:235
+#: 813298db6e354a269aa87dc53095fab2
+msgid "Plug the RPLidarA2 into the companion computer and then open up four terminals and in each terminal type:"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:242
+#: 7445c2a97d3544e9bbf84046b6993189
+msgid "Then in Terminal1:"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:248
+#: f79e2490db364e6793ccc24a6501153c
+msgid "In Terminal2:"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:254
+#: 815ff12390024cca86d61ab067b9784f
+msgid "In Terminal3:"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:260
+#: cbcec3c247ec4a9380217a60fba4a316
+msgid "In Terminal4:"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:262
+#: bd80fa7913d6475c86dd093994f5f2c2
+msgid "Start mavros as described on the :ref:`Connecting with ROS page <ros-connecting>` which involves running a command like below:"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:270
+#: ca656eaf7ced4101b9feebd96ac1d9af
+msgid "Configure ArduPilot"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:272
+#: 8c6895a6c65447379d6e7fa8f14c327b
+msgid "Connect to the flight controller with a ground station (i.e. Mission Planner) and check that the following parameters are set as shown below:"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:274
+#: aa9be9e8c8524e5691191d87877d4d3e
+msgid ":ref:`AHRS_EKF_TYPE <copter:AHRS_EKF_TYPE>` = 3 to use EKF3"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:275
+#: 0765019d58df407d91575fc95130c66e
+msgid ":ref:`EK2_ENABLE <copter:EK2_ENABLE>` = 0 to disable EKF2"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:276
+#: 55eb0fe9a4494f69b28d8815529e1f46
+msgid ":ref:`EK3_ENABLE <copter:EK3_ENABLE>` = 1 to enable EKF3"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:277
+#: e3ded6e1f03b4d6e91e97347e19bcebf
+msgid ":ref:`EK3_SRC1_POSXY <copter:EK3_SRC1_POSXY>` = 6 to set position horizontal source to ExternalNAV"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:278
+#: c841e5572ba1475dac38817bd58f8279
+msgid ":ref:`EK3_SRC1_POSZ <copter:EK3_SRC1_POSZ>` = 1 to set position vertical source to Baro"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:279
+#: 317f86e3458c4423ab0c2d33c56eb787
+msgid ":ref:`EK3_SRC1_VELXY <copter:EK3_SRC1_VELXY>` = 6 to set velocity horizontal source to ExternalNAV"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:280
+#: 2f02dfc1eabe4ae0b15812def08a79a1
+msgid ":ref:`EK3_SRC1_VELZ <copter:EK3_SRC1_VELZ>` = 6 to set vertical velocity source to ExternalNAV"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:281
+#: d47e3506602c4d8cb923121660718e30
+msgid ":ref:`EK3_SRC1_YAW <copter:EK3_SRC1_YAW>` = 6 to set yaw source to ExternalNAV"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:282
+#: d16ecf0a18cd45ffab124929ae82892f
+msgid ":ref:`GPS1_TYPE <GPS1_TYPE>` = 0 to disable the GPS"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:283
+#: f08e7314dae44123a5b59da695a7b919
+msgid ":ref:`VISO_TYPE <copter:VISO_TYPE>` = 1 to enable visual odometry"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:284
+#: a462d85602ee427f8979b46fe95cf64f
+msgid ":ref:`ARMING_SKIPCHK <copter:ARMING_SKIPCHK>` = 8 (optional, to disable GPS checks)"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:286
+#: 3e245ec1850d48bd829486e20ec7ffb1
+msgid "After changing any of the values above, reboot the flight controller."
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:288
+#: 2b99478e7f1f48eeb1910beb0297df39
+msgid "If all is working, vision position estimates should begin flowing in from ROS to ArduPilot.  This can be confirmed by connecting to the flight controller using the Mission Planner (or similar) and check the Flight Data screen's Messages tab (bottom left) for messages from the EKF like below:"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:297
+#: d390f2be861d43efaf9bd280c485f175
+msgid "Using the Mission Planner (or similar) go to the Flight Data screen and right-mouse-button click on the map and select \"Set Home Here\" >> \"Set EKF Origin\".  The vehicle should appear immediately on the map where you clicked."
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:300
+#: 14fa27f125f640f8a522362b4238c64c
+msgid "Testing"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:302
+#: d4f10dc723f0438aaefda6814186a26b
+msgid "To confirm the ROS side is working correctly type the command below and live updates of position estimates from cartographer should be displayed"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:312
+#: 3a038d644f784a3c844215b6bc1e9145
+msgid "Mission Planner's MAVLink Inspector (press Ctrl-F and then press the \"MAVLink Inspector\" button) can be used to check if VISION_POSITION_ESTIMATE messages are being successfully sent to the flight controller"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:319
+#: 7fc12a766b78439c88a5a5f7556e8000
+msgid "Video"
+msgstr ""
+
+#: ../../source/docs/ros-cartographer-slam.rst:326
+#: 5ae0356f67a54f799f6e35a24ca4b294
+msgid "We are keen to improve ArduPilot's support of ROS so if you find issues (such as commands that do not seem to be supported), please report them in the `ArduPilot issues list <https://github.com/ArduPilot/ardupilot/issues>`__ with a title that includes \"ROS\" and we will attempt to resolve them as quickly as possible."
+msgstr ""

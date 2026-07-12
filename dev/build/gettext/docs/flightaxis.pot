@@ -1,0 +1,109 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/flightaxis.rst:5
+#: 8a2e6264587944dfa478586b3d55138b
+msgid "Understanding SITL with RealFlight"
+msgstr ""
+
+#: ../../source/docs/flightaxis.rst:7
+#: dbe83a4c7949449e8e0d1fc4656c77c5
+msgid "This document will explain how SITL communicates with RealFlight for graphical simulations. In order to do any simulation you need several elements:"
+msgstr ""
+
+#: ../../source/docs/flightaxis.rst:9
+#: c899c59f20894a9baafd409a3d924b5e
+msgid "A model of the vehicle, including its physical characteristics and their impacts on the physics model, control mechanisms, and a graphical data base of its appearance."
+msgstr ""
+
+#: ../../source/docs/flightaxis.rst:11
+#: f30fee8d40c14014b5da478cd05029ea
+msgid "Physics models that will predict vehicle dynamics (attitude, velocity, positions,etc.) based on control inputs into the vehicle model"
+msgstr ""
+
+#: ../../source/docs/flightaxis.rst:13
+#: 24393c2d478f4119b3ae16441952c0e2
+msgid "Graphics interpreter and display that takes the physics model's output and produces the graphics display of vehicle movement"
+msgstr ""
+
+#: ../../source/docs/flightaxis.rst:15
+#: 14c5207aed654c6aa415fd559b455372
+msgid "A controller mechanism to produce control inputs into the physics model to command vehicle behavior"
+msgstr ""
+
+#: ../../source/docs/flightaxis.rst:18
+#: c0f285217588435d9da0bc5ddd68f6f9
+msgid "In a normal RealFlight (RF) simulation, RF has built-in models, physics modeling, and graphic interpreter/display. Control is input via a simulation controller, such as the Interlink controller, joystick, or OpenTX transmitter in joystick mode."
+msgstr ""
+
+#: ../../source/docs/flightaxis.rst:20
+#: ../../source/docs/flightaxis.rst:48
+#: 31a49a1d32314ef3a4fdaf2a7e56ae61
+#: 057a9343edb14b1d9df6d0247e200850
+msgid "This is illustrated below:"
+msgstr ""
+
+#: ../../source/docs/flightaxis.rst:26
+#: 3556aa5e97aa4acc9e05404203b3c726
+msgid "The simulation controller outputs are mapped to \"TX channels\" by the RF controller editor to produce mapped RC outputs. For the InterLink controller these are fixed and read-only."
+msgstr ""
+
+#: ../../source/docs/flightaxis.rst:28
+#: 3d43d9a2c7f144d499d48626947fc521
+msgid "They are input into the RealFlight vehicle model which is described by its .RFX file(archive actually). Most models have a \"software radio\" which take these \"TX channels\" and convert them into \"RX channels\", like a receiver. This \"software radio\" can also create dual rates, adjust trim, throw and reverses, etc. These received channels then drive motors, servos, or flight controller/mixers setup in the model files which drive the vehicle's actuators."
+msgstr ""
+
+#: ../../source/docs/flightaxis.rst:30
+#: 3eb357a40f7d4e198b589a323472047f
+msgid "The Physics models takes these inputs, including the vehicles described physical characteristics from the model's files and predicts the vehicle's motion which is then graphically displayed."
+msgstr ""
+
+#: ../../source/docs/flightaxis.rst:32
+#: 36408b4e7ce044d4a650942eab030ed9
+msgid "The pilot provides the \"autopilot\" function of inputing stick/switch control via the simulator controller to direct vehicle desired behavior."
+msgstr ""
+
+#: ../../source/docs/flightaxis.rst:34
+#: c8ba0b1e040841a287fd95944f71854c
+msgid "An illustration of what constitutes a RealFlight model is show below:"
+msgstr ""
+
+#: ../../source/docs/flightaxis.rst:41
+#: 181cbae4c413430aa5bd20201c41177f
+msgid "SITL Using the FlightAxis Interface"
+msgstr ""
+
+#: ../../source/docs/flightaxis.rst:44
+#: 27ec86e065ff4e838c7d7ef784acbd41
+msgid "Using SITL to run the ArduPilot software basically is inserting an autopilot between the simulation controller and the vehicle, just like in real flight. This is done by tying a running SITL simulation  into RealFlight and using its Physics models and Graphics for the simulation. The interface between SITL and RealFlight is called FlightAxis."
+msgstr ""
+
+#: ../../source/docs/flightaxis.rst:46
+#: f751e4b247c94cc9b4236fe8e651a312
+msgid "When enabled in RealFlight, it exports the vehicle's predicted attitude, velocities, position to SITL, as well as the outputs of the software radio of the vehicle model its using. SITL uses these as RC and sensor inputs in its sim and outputs servo functions  to RealFlight which it now interprets as the RX channel radio outputs used by the model for its actuator inputs."
+msgstr ""
+
+#: ../../source/docs/flightaxis.rst:53
+#: d7c4b22723ee400088367bafcba78cb5
+msgid "This basically inserts ArduPilot SITL simulation of the firmware between the pilot and RealFlights inputs."
+msgstr ""
+
+#: ../../source/docs/flightaxis.rst:55
+#: 0b37b3fdfd5a4264925f42b19ec22f89
+msgid "Presently, FlightAxis can transfer the first 12 RX channels from RealFlight to SITL RC inputs, and the first 12 SERVO outputs from SITL to RealFlights RX channel inputs."
+msgstr ""

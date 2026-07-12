@@ -1,0 +1,202 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:30+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:5
+#: 3379439cb2dd46e6b39c740f7f712d03
+msgid "Rotor Speed Control Setup"
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:7
+#: 03d1a8badb61413c90946f4398f0bfac
+msgid "Unlike other vehicles, more specifically multicopters, the throttle RC input channel does not directly control the throttle in any mode, even in modes designated in Multicopter as \"non altitude controlled modes\" or \"non throttle controlled modes\", like STABILIZE or ACRO. Instead it only directly controls the Collective for the helicopter in non altitude controlled modes."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:9
+#: f5df9f3735434904b26654357478efd2
+msgid "the exception to this is the RC Passthrough RSC mode. This is NOT recommended usually."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:11
+#: ab12e3afed0a4a109e342195ef4fe26a
+msgid "This means that some method must be used to control the throttle or esc for maintaining constant rotor speed through out the flight envelope."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:13
+#: 4889423403914b9eab810f0f76c313bc
+msgid "The Rotor Speed Control (RSC) uses the heliRSC output (``SERVOx_FUNCTION`` = 31) to the engine throttle or speed control/governor to control rotor speed. This can be derived in a few different ways:"
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:15
+#: 381959dc5a2d44be90b33808841ac12f
+msgid "Through an open loop control via either an RC transmitter passthrough or an internal throttle curve which takes collective demand and creates a corresponding throttle demand."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:16
+#: 7c859dd430504d8e87b6efac4b592de9
+msgid "Using a set point signal to an external governor, or electronic speed controller"
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:17
+#: 6dae619bc8574bd1b742e0bd51cd2216
+msgid "Using a closed loop governor in the ArduPilot firmware."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:19
+#: 3ecee1ab0afe407b9559ab6a44b2c576
+msgid "When Motor Interlock is disengaged,the state is sometimes called Throttle Hold and throttle is driven to :ref:`H_RSC_IDLE <H_RSC_IDLE>`"
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:21
+#: afd022ee32be4a799cb5b0ed82b76c47
+msgid "The RSC also controls the heliRSC output for ground idle, rotor run up and shut down. This wiki covers the set up of each of the parameters in the RSC."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:24
+#: 528ed996e14b4e6da333f821a992f317
+msgid "RSC mode"
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:26
+#: f81125ce932c4e609df406b726170d20
+msgid "First, set the RSC Mode parameter (:ref:`H_RSC_MODE <H_RSC_MODE>`). The RSC modes are listed below with a short description."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:28
+#: 1235023bcd184a0bb01b99052a566464
+msgid "RC Passthrough (:ref:`H_RSC_MODE <H_RSC_MODE>` = 1) - this mode passes through the RC channel input on which the Motor Interlock (``RCx_OPTION`` =32) is assigned. The channel must be over 1200us in order for the heliRSC output to follow the RC input. Otherwise, heliRSC will be :ref:`H_RSC_IDLE <H_RSC_IDLE>`."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:29
+#: 7aa1d9e924374b1d8eca4348003cbc27
+msgid "RSC setpoint (:ref:`H_RSC_MODE <H_RSC_MODE>` = 2) - this mode is used for helicopters utilizing either an electronic speed controller or an external governor for internal combustion engines. The PWM passed to the HeliRSC output is determined from the External Motor Governor Setpoint (:ref:`H_RSC_SETPOINT <H_RSC_SETPOINT>`) parameter. The output PWM is calculated by the following equation: PWM output = ``RSC_SETPOINT`` * 0.01 * (``SERVOx_MAX`` - ``SERVOx_MIN``) + ``SERVOx_MIN`` where SERVOx is the output assigned to Throttle"
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:30
+#: 7785b2bbaf44462d9cce62cf6b73f480
+msgid "Throttle curve (:ref:`H_RSC_MODE <H_RSC_MODE>` = 3) - This mode is an open loop control of the HeliRSC servo output. Users will need to fine-tune the throttle curve to maintain the desired rotor speed throughout the flight envelope. The throttle curve is a five point spline curve fit set by the ``H_RSC_THRCRV_x`` parameters. It is used to determine the HeliRSC servo output based on the collective (throttle stick) on the RC transmitter."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:31
+#: 3091a6b480df454fb476d2d26bae39c4
+msgid "Governor (:ref:`H_RSC_MODE <H_RSC_MODE>` = 4) - The governor is designed to maintain a user specified rotor speed using the throttle curve as the feedforward control. This feature requires a rotor speed sensor. The ``H_RSC_GOV_x``. The parameters needed to set  the Throttle Curve mode above, also should be set correctly for this mode since it uses them as a basis for feed-forward control in the Governor."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:34
+#: 4b8b845fd25c44dfa5bafe51d71504d3
+msgid "Setting the RSC mode to RC Passthrough requires configuring the RC receiver to hold last value for the Motor Interlock channel (default is channel 8). If the receiver loses connection to the transmitter and receiver is not configured correctly, the motor will shutdown and the helicopter will crash! It also means that the pilot has to be in control of throttle during any altitude holding or autonomous modes. This can be very difficult, can lead to a crash, and is strongly discouraged. This mode is provided only for some very specialized, advanced users."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:37
+#: b85050991ad14e5e8060e0c0438fe5f2
+msgid ":ref:`H_RSC_MODE <H_RSC_MODE>` =2 will be the most commonly used mode for electric helis having an ESC with governor mode built in."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:38
+#: 428639ff7f7c402a90612a75fba51d42
+msgid ":ref:`H_RSC_MODE <H_RSC_MODE>` =3 can be used for open loop control of the heli motor, providing no constant head speed feedback control, but is usually used to setup the feed-forward throttle curve baseline for the Governor mode below. Having a RSC governor is highly desirable in order to maintain a steady tune point for the stabilization parameters."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:39
+#: 0d913326ae634d44a42923619deab198
+msgid ":ref:`H_RSC_MODE <H_RSC_MODE>` =4 can be used if no external RSC governor is present. Primarily for ICE and Turbine engines."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:42
+#: 34a09813c92345f5b9ab2b2f53854815
+msgid "Typical Throttle Curves for :ref:`H_RSC_MODE<H_RSC_MODE>` = 3"
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:44
+#: 6bae5d83999b49eca451257eb05b13d9
+msgid "These are also used in :ref:`H_RSC_MODE<H_RSC_MODE>` = 4 as a basis for its feedforward."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:46
+#: c79a7de77c4c4e74ac08808cf40a5e07
+msgid "If the collective range is set for conventional (non-aerobatic) setups, ie ~-2deg to +12deg, then the ``H_RSC_THRCRV_X`` parameters would be set to drive the Throttle Servo similarly to:"
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:51
+#: 2ff342359630455b8c986a3ed901bb51
+msgid "If setup with an aerobatic, symmetrical collective range, ie ~ -12deg to +12deg, then they should be set drive the Throttle Servo similarly to this:"
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:56
+#: 5ea1c8e66a9c49dab75b885017de2a28
+msgid "ArduPilot will spline curve fit between the ``H_RSC_THRCRV_X`` setpoints to produce smooth throttle servo output versus collective points."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:59
+#: dd8ffdf385594f2d8c5e6febae8260dc
+msgid "Rotor Speed Ramp and Idle Settings"
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:61
+#: 754671f5358b4addbb508f56026b16b0
+msgid "The rotor speed control features an idle setting and start up and shut down logic for throttle control. The throttle output at :ref:`H_RSC_IDLE <H_RSC_IDLE>` parameter determines the output to heliRSC servo output after the aircraft is armed, but before the motor interlock is enabled."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:63
+#: 42ddb998d652457da0f1598da2946ced
+msgid "When the motor interlock is enabled the rotor speed control will ramp the throttle from the idle setting (:ref:`H_RSC_IDLE <H_RSC_IDLE>`) to flight setting (this depends on the :ref:`H_RSC_MODE <H_RSC_MODE>` chosen) based on the :ref:`H_RSC_RAMP_TIME <H_RSC_RAMP_TIME>` parameter . The RSC will prevent take off in non-manual throttle modes and auto mode until the timer has reached :ref:`H_RSC_RUNUP_TIME <H_RSC_RUNUP_TIME>`. It is very important to set :ref:`H_RSC_RUNUP_TIME <H_RSC_RUNUP_TIME>` to the amount of time it takes for the rotor to spin up to the flight rotor speed.  This parameter has to be equal to or greater than the Throttle Ramp Time parameter (:ref:`H_RSC_RAMP_TIME <H_RSC_RAMP_TIME>`)."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:65
+#: 6dee9b73d99d4a0cb4bdf2fee97d69fc
+msgid "When the motor interlock is disabled with the rotor at flight rotor speed, the rotor speed control will count down the same amount of time as specified by the :ref:`H_RSC_RUNUP_TIME <H_RSC_RUNUP_TIME>`. The RSC will declare rotor speed below critical based on the Critical Rotor Speed parameter (:ref:`H_RSC_CRITICAL <H_RSC_CRITICAL>`) and will reset the runup complete flag. It is best to set the Critical Rotor Speed parameter (:ref:`H_RSC_CRITICAL <H_RSC_CRITICAL>`) for a percentage of the runup timer that equates to about three seconds. For example if you had a 10 second runup timer, setting the Critical Rotor Speed parameter (:ref:`H_RSC_CRITICAL <H_RSC_CRITICAL>`) to 70% will cause the RSC to declare rotor speed below critical three seconds from when Motor interlock is disabled.  For versions 4.0 and earlier, the autopilot is able to disarm the aircraft during auto landings after the RSC declares the rotor speed below critical.  For versions 4.1 and later, the autopilot waits the length of time of the :ref:`H_RSC_RUNUP_TIME <H_RSC_RUNUP_TIME>` to disarm the aircraft during auto landings."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:68
+#: 331585a740d34a7db705435db6659ace
+msgid "ArduPilot Internal Governor Setup"
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:70
+#: 065d4e0fa87d41728197d381feb745cd
+msgid "ArduPilot provides an internal rotor speed control primarily for use with ICE or Turbine engines without a speed governor, but can also be used with electric ESCs that do not provide a governor mode. This mode requires that the ``H_RSC_THRCRV_x`` parameters be set such that the helicopter can be flown in :ref:`H_RSC_MODE <H_RSC_MODE>` =3 safely, since they are used as the baseline control curve for the RSC governor, providing the feed-forward portion of the control loop."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:73
+#: b8ba77f7719249d29044a3a971bd95f6
+msgid "See :ref:`traditional-helicopter-internal-rsc-governor` for setup details."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:76
+#: f1547206812a42f1ac96f103d301b735
+msgid "Turbine Engine Start"
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:78
+#: fbfe07069a0044e09e69cba69c1fc2cc
+msgid "A special RC Auxiliary Function (\"159\") is implemented to provide the start signal RC switch for turbine engines. When armed and RSC is idle, the high position signals the helicopter rotor speed governor to ramp the throttle to full and back to idle, which signals the turbine engine ECU to initiate the start sequence. The switch must be set back low and aircraft has to be disarmed to re-enable this feature."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:81
+#: f771f736461a45a39711da921973acdc
+msgid "Practice (Manual) Autorotation Setup"
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:83
+#: ede28317977d40dc8ee57acddc812356
+msgid "In versions 4.4 and later, the ability to conduct power re-engagement from an autorotation has been added.  This feature will work with ESC's when using their internal governor, the ArduPilot throttle curve or the ArduPilot built-in RSC governor."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-rsc-setup.rst:85
+#: b6c4347dfa6546139a36a644039a0900
+msgid "See :ref:`traditional-helicopter-autorotation` page."
+msgstr ""

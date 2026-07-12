@@ -1,0 +1,517 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:30+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/autotune.rst:5
+#: 969c9335218e478c9e05a27bab3ab351
+msgid "AutoTune"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:7
+#: 508457c94d2e467d8ff2159b24fb09c3
+msgid "AutoTune attempts to automatically tune the Stabilize P, Rate P and D, and maximum rotational accelerations to provide the highest response without significant overshoot. Copter needs to be \"basically\" flyable in :ref:`AltHold mode <altholdmode>` before attempting to use AutoTune as the feature needs to be able to \"twitch\" the copter in the roll and pitch axis."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:11
+#: c297d05e83804a40bed9ec85c1937b5e
+msgid "AutoTune is not always able to determine a good tune for the vehicle and may result in gains that lead to an unflyable vehicle that may crash.  Please follow the :ref:`Tuning Process Instructions <tuning-process-instructions>` before attempting to use AutoTune. After following those instructions, and have :ref:`evaluated your initial tune <evaluating-the-aircraft-tune>`, should to try AutoTune."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:13
+#: bcf791fded354fdeaca3ecfabb599491
+msgid "using :ref:`quiktune` before AUTOTUNE, AND setting up the noise notch filtering, see :ref:`common-imu-notch-filtering`, is highly recommended in order to get the best tune and avoid possible crashes when using AUTOTUNE."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:19
+#: d649c1c4f39e488ba51e8c04b2a81607
+msgid "There are number of problems that can prevent AutoTune from providing a good tune including:"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:21
+#: c17c7398385449b5ae4da1e1f05f8947
+msgid "Strong wind"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:22
+#: 1a00e52f63d7467e95a3f8885ebabd26
+msgid "High levels of gyro noise"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:23
+#: 22006181f0324be99b978d94fc90187c
+msgid "Non-linear ESC response caused by the incorrect value of :ref:`MOT_THST_EXPO <MOT_THST_EXPO>`"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:24
+#: 6af20f79653d4e3eb9cc1626fd8d95d8
+msgid "Flexible frame or payload mount"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:25
+#: 69c00d907300432c8de2b92b9d6cc99d
+msgid "Overly flexible vibration isolation mount"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:26
+#: 72cd3825ee784eafa0bc8a3f778f5500
+msgid "Very low setting for :ref:`MOT_SPIN_MIN <MOT_SPIN_MIN>`"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:27
+#: 5813658b2d084b50b3da6df1fd80c8a1
+msgid "Overloaded propellers or motors"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:30
+#: 2f48bbe0c31f4bc5878cf41f728e5086
+msgid "Setup before flying in AutoTune mode"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:32
+#: 11935df18fc04b1b90c2bdcfc5e26874
+msgid "Set up one flight mode switch position to be AltHold."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:33
+#: 2d747ab9031841369a21d54d95cf21ea
+msgid "Set an RC channel :ref:`Auxiliary Function <common-auxiliary-functions>` switch to AutoTune to allow you to turn the auto tuning on/off with a switch."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:35
+#: 3fe842b540664fc8bf71049184218eea
+msgid "you can also set the AUTOTUNE flight mode as a mode on your flight mode switch to activate AutoTune"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:37
+#: b90061e6d56543c7966556fd01b1fecf
+msgid "Remove the camera gimbal or any other parts of the frame that could wobble in flight"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:38
+#: 8601d0b882bc404b9c080996a6977c83
+msgid "Select which combination of axes (roll, pitch, yaw) you wish to tune using the :ref:`AUTOTUNE_AXES <AUTOTUNE_AXES__AC_AutoTune_Multi>` parameter"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:39
+#: 65223c1e02a743c5b2fbbd3fd4411b38
+msgid "Set the autotune's aggressiveness using the :ref:`AUTOTUNE_AGGR <AUTOTUNE_AGGR>` parameter (0.1=aggressive, 0.075=medium, 0.050=weak), normally start with the default 0.1."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:40
+#: 53f22db6d88d44fba10e540af50798ee
+msgid "For large copters (with props at least 13inch or 33cm diameter) set the Rate Roll and Pitch filters to 10hz, these are: :ref:`ATC_RAT_RLL_FLTT <ATC_RAT_RLL_FLTT__AC_AttitudeControl_Multi>`, :ref:`ATC_RAT_RLL_FLTD<ATC_RAT_RLL_FLTD__AC_AttitudeControl_Multi>`, :ref:`ATC_RAT_PIT_FLTT <ATC_RAT_PIT_FLTT__AC_AttitudeControl_Multi>`, :ref:`ATC_RAT_PIT_FLTD <ATC_RAT_PIT_FLTD__AC_AttitudeControl_Multi>`"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:41
+#: f3dd25e7e66b41378d6e7c092c2557e5
+msgid "It is recommended to enable :ref:`battery voltage scaling of PID gains <current-limiting-and-voltage-scaling>`"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:44
+#: 3fd1ea60ff3644d49e4c7a0c4361559a
+msgid "How to invoke AutoTune"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:46
+#: c7d1bc1725c94984a25f260344b940a6
+msgid "Wait for a calm day and go to a large open area."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:47
+#: 17e49cd6b542442295b47e1978d7e416
+msgid "Ensure the Aux AUTOTUNE switch, if used, is in the LOW position."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:48
+#: ba27f49ff5cd4033b258c4640f290ff0
+msgid "Take off and put the copter into AltHold mode at a comfortable altitude."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:50
+#: 713f00ed1dc547b9a8642fcb11d8c458
+msgid "Face the vehicle so that it will twitch at 90degrees from the direction the wind is blowing (i.e. if tuning Roll first, point the vehicle into the wind)"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:55
+#: ae4c1035b62643d68f255caccefe4e8a
+msgid "Set the AUX switch to the HIGH position, or switch to AUTOTUNE mode, to engage auto tuning:"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:57
+#: 15479f8da8df4fbab4f33881b5850d42
+msgid "You will see it twitch about 20 degrees left and right for a few minutes, then it will repeat forward and back."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:59
+#: 0c8c3fcf54c041dd96e5ed012d66f361
+msgid "Use the roll and pitch stick at any time to reposition the copter if it drifts away (it will use the original PID gains during repositioning and between tests).  When you release the sticks it will continue auto tuning where it left off."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:63
+#: 16c061bd6a1d49b7bec4687bca601e45
+msgid "Move the AUX switch into the LOW position, or change flight mode if using AUTOTUNE flight mode, at any time to abandon the autotuning and return to the origin PIDs."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:65
+#: 7ab30709d416490880d8e2cb0d486f57
+msgid "Make sure that you do not have any trim set on your transmitter or the autotune may not get the signal that the sticks are centered."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:68
+#: 5aaf6e68191e45b6b99d461aca93fc07
+msgid "When the tune completes the copter will change back to the original PID gains."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:70
+#: f2a753bdd4f1499e8192615f667c2c2b
+msgid "Put the AUX switch into the LOW position and then back to the HIGH position to test the tuned PID gains, or if using the AUTOTUNE flight mode, switch out and then back into that mode."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:72
+#: e47d785923214310b53c3bbec60d0d3a
+msgid "Put the AUXswitch into the LOW position, or switch out of AUTOTUNE flight mode, to fly using the original PID gains."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:73
+#: dd66baeba843458e980edc3b79fd1875
+msgid "If you are happy with the autotuned PID gains, leave the AUX switch in the HIGH position, or switch back into AUTOTUNE flight mode and land and disarm to save the PIDs permanently."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:76
+#: 90f1957d165d41a5b88bd7627f406357
+msgid "If you DO NOT like the new PIDS, switch the AUX switch LOW or out of AUTOTUNE flight mode, to return to the original PIDs. The gains will not be saved when you disarm."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:78
+#: 09bbacbd2fdb4c85b6ae5710d24d22da
+msgid "If you find after performing an AutoTune that the vehicle feels overly twitchy when flying Stabilize, AltHold or PosHold (but ok in more autonomous modes like Loiter, RTL, Auto) try increasing the :ref:`ATC_INPUT_TC<ATC_INPUT_TC>` parameter to 0.25.  This smooths out the pilot's input. Alternatively try reducing the :ref:`AUTOTUNE_AGGR <AUTOTUNE_AGGR>` parameter (it should always be in the range 0.05 to 0.10) and try again."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:82
+#: f9ede0a889744d3cbe17f91ec3702601
+msgid "If the vehicle feels sloppy after the AutoTune, try increasing the :ref:`AUTOTUNE_AGGR <AUTOTUNE_AGGR>` parameter as high as 0.10 and attempt the autotune again."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:85
+#: 046fecf32a424265aaa622ad577da8a2
+msgid "Invoke AutoTune with Position Hold"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:89
+#: 29988ad8d2f14ac8b4fdf5fdf76e4ce9
+msgid "A better tune can often be achieved by invoking AutoTune from AltHold as described above instead of from Loiter or PosHold as described below. Using AUTOTUNE flight mode also has this possible disadvantage."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:91
+#: 9a5358a8beea4440953750f9f5435d33
+msgid "AutoTune performs a weak position hold if invoked from Loiter or PosHold flight modes (as opposed to AltHold) while doing an autotune. If using the AUTOTUNE flight mode, this weak position hold is also used."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:97
+#: c92f4fe7bd31485ea2ed29a9a1e6dbeb
+msgid "The vehicle will gently lean (up to 10 degrees) towards a \"target point\" which is initially set to the vehicle's location at the moment AutoTune was invoked."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:98
+#: 6c3f7dd240f044ce97486c50de756daa
+msgid "The pilot can reposition the vehicle using the roll, pitch, yaw or throttle sticks.  The target position will be reset to the vehicle's location at the moment the pilot releases the roll and pitch sticks."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:99
+#: 90a77ba0696540f49b326f38056e703f
+msgid "The altitude is maintained with the altitude hold controller so the vehicle will attempt to hold its current altitude when the sticks are placed with 10% of mid-throttle. It will climb or descend at up to 2.5m/s (this speed is adjustable with the :ref:`PILOT_SPD_UP<PILOT_SPD_UP>` and :ref:`PILOT_SPD_DN<PILOT_SPD_DN>` parameters). The acceleration used to establish these speeds is set by :ref:`PILOT_ACC_Z<PILOT_ACC_Z>`."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:104
+#: 29716c9c0e324bb087a4e6ce2c7b4ce5
+msgid "To twitch perpendicular to the wind direction, the vehicle may suddenly rotate in either direction up to 90 degrees as it drifts 5m (or more) from the target location."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:105
+#: 80dbb80ece5144c28477ae0842327dcb
+msgid "If there is little or no wind, the vehicle's gentle position control may mean it moves back and forth, ping-ponging around the target point changing yaw each time it strays more than 5m from the target.  In these cases, it may be more comfortable to revert to the simpler AltHold-based AutoTune."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:108
+#: 9ccb3a78fef840be952a2e9143e246c8
+msgid "Testing Tune in Other Modes"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:110
+#: 898351e2c940497da3641687dfec2b3d
+msgid "The completed suceesfull tune obtained can be tested in any mode, not just the one (ALTHOLD or LOITER) used for entry. A switch can be setup,``RCx_OPTION`` = 180 (AUTOTUNE_TEST_GAINS) that will allow switching between original and autotuned gains in any mode, after autotune has completed. If this switch is setup, but not changed after the auotune has completed, it has no effect. Otherwise if switched high the tuned gains are in effect, if low the original gains. Then they apply to any flight mode and will be made permanent upon the next disarm, based on  switch position."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:113
+#: 6f0277bfc4fc4ddaa0d4538592930238
+msgid "If AutoTune fails"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:115
+#: bb603dfa04574d0dbb5c3d41345560e1
+msgid "If AutoTune has failed you will need to do a manual tune."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:117
+#: a9b6077c69ae4e048a74c15fe8447551
+msgid "Some signs that AutoTune has been successful are (besides DataFlash logs and Ground Control Station messages):"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:119
+#: 0f5a1afff38640ba9cba68ae342b83ce
+msgid "An increase in the values of :ref:`ATC_ANG_PIT_P <ATC_ANG_PIT_P>` and :ref:`ATC_ANG_RLL_P <ATC_ANG_RLL_P>`."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:120
+#: 1dda6ae5857e4d38a0695931663914b9
+msgid ":ref:`ATC_RAT_PIT_D <ATC_RAT_PIT_D__AC_AttitudeControl_Multi>` and :ref:`ATC_RAT_RLL_D <ATC_RAT_RLL_D__AC_AttitudeControl_Multi>` are larger than :ref:`AUTOTUNE_MIN_D <AUTOTUNE_MIN_D>`."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:122
+#: dd1b8ee7903f427bb8e099a5d42f28e9
+msgid "AutoTune will attempt to tune each axis as tight as the aircraft can tolerate. In some aircraft, this can be unnecessarily responsive. A guide for most aircraft:"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:124
+#: 927afef4b93746f4ac85fd12ce362ac4
+msgid ":ref:`ATC_ANG_PIT_P <ATC_ANG_PIT_P>` should be reduced from 10 to 6"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:125
+#: 3a2447ea8f094e1daddad3d8b759932f
+msgid ":ref:`ATC_ANG_RLL_P <ATC_ANG_RLL_P>` should be reduced from 10 to 6"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:126
+#: 7090104fe9684044a1fea48ced35eaeb
+msgid ":ref:`ATC_ANG_YAW_P <ATC_ANG_YAW_P>` should be reduced from 10 to 6"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:127
+#: 757ec514156540bab2131593135e43fe
+msgid ":ref:`ATC_RAT_YAW_P <ATC_RAT_YAW_P__AC_AttitudeControl_Multi>` should be reduced from 1 to 0.5"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:128
+#: ebd5b34dbc1747afa0d8df6cb7325123
+msgid ":ref:`ATC_RAT_YAW_I <ATC_RAT_YAW_I__AC_AttitudeControl_Multi>`: :ref:`ATC_RAT_YAW_P <ATC_RAT_YAW_P__AC_AttitudeControl_Multi>` x 0.1"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:130
+#: 3c4f1d5b7479402c8c0a4b9c2e2beef0
+msgid "These values should only be changed if AutoTune produces higher values. Small aerobatic aircraft may prefer to keep these values as high as possible."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:133
+#: 3624a9a46cc84537a22eda5dd1d9ec40
+msgid "Additional Notes"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:135
+#: 3850829847f149b98ac5ec952ee6b926
+msgid "AutoTune can be setup as a flight mode.  Switching into or out of the AutoTune flight mode responds in the same way as raising or lowering the aux switch high assigned to the AutoTune function."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:136
+#: cb1639b9512e4fb0ae0abbd90aa65d49
+msgid "In Copter-4.4 (and higher) AutoTune can tune the yaw D axis."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:137
+#: 51d3453968f94377bcf8b3c765fff961
+msgid ":ref:`AUTOTUNE_AXES <AUTOTUNE_AXES__AC_AutoTune_Multi>` allows control of which axes are to be tuned.  This is useful if the vehicle's battery life is not long enough to complete all 4-axis.  \"1\" = tune roll, \"2\" = tune pitch, \"4\" = tune yaw, \"8\" = tune yaw D.  Add these numbers together to tune multiple axes in a single session (i.e. \"15\" = tune all axes)"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:138
+#: 5ae10cecaea94cb5b6b6b4f155d5f61d
+msgid ":ref:`AUTOTUNE_AGGR <AUTOTUNE_AGGR>`: Should be in the range of 0.05 to 0.10.  Higher values will produce a more aggressive tune but sometimes results in gains that are too high.  More specifically this parameter controls the threshold for D-term bounce back and P-term overshoot. This affects the tuning noise immunity (a higher value is more tolerant to flex in the frame or other disturbances that could trick the tuning algorithm).  High values also leads to a tune that rejects external disturbances better.  Lower values result in a tune that is more responsive to pilot input."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:140
+#: 9fa7b15ca2eb454aa3e72d5df072893c
+msgid "The full list of parameters that may be updated by AutoTune"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:142
+#: 33f274fe61544c3db6540554825b8aff
+msgid "Roll angular P gain :ref:`ATC_ANG_RLL_P <ATC_ANG_RLL_P>`"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:143
+#: b35bdd972d814c36b6f38668a4a86035
+msgid "Roll rate P, I and D gains :ref:`ATC_RAT_RLL_P <ATC_RAT_RLL_P__AC_AttitudeControl_Multi>`, :ref:`ATC_RAT_RLL_I <ATC_RAT_RLL_I__AC_AttitudeControl_Multi>`, :ref:`ATC_RAT_RLL_D <ATC_RAT_RLL_D__AC_AttitudeControl_Multi>`"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:144
+#: 1e86ecfc889e4402a2fd57020f4cecba
+msgid "Roll max acceleration :ref:`ATC_ACC_R_MAX<ATC_ACC_R_MAX>`"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:145
+#: e7b71d6b72e243aa8e4a1c8e6a66396c
+msgid "Pitch angular P gain :ref:`ATC_ANG_PIT_P <ATC_ANG_PIT_P>`"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:146
+#: d9931c9aa8b7423d8430fb58436228de
+msgid "Pitch rate P, I and D gains :ref:`ATC_RAT_PIT_P <ATC_RAT_PIT_P__AC_AttitudeControl_Multi>`, :ref:`ATC_RAT_PIT_I <ATC_RAT_PIT_I__AC_AttitudeControl_Multi>`, :ref:`ATC_RAT_PIT_D <ATC_RAT_PIT_D__AC_AttitudeControl_Multi>`"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:147
+#: dc8e2daff6e2402ba659e0013f040384
+msgid "Pitch max acceleration :ref:`ATC_ACC_P_MAX<ATC_ACC_P_MAX>`"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:148
+#: 52908b51764f47c09960c81cb5bef1c7
+msgid "Yaw angular P gain :ref:`ATC_ANG_YAW_P <ATC_ANG_YAW_P>`"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:149
+#: 2594ba036bdf4bc2bf601afef3f08c3a
+msgid "Yaw rate P, I gain :ref:`ATC_RAT_YAW_P <ATC_RAT_YAW_P__AC_AttitudeControl_Multi>`, :ref:`ATC_RAT_YAW_I <ATC_RAT_YAW_I__AC_AttitudeControl_Multi>`, :ref:`ATC_RAT_YAW_D <ATC_RAT_YAW_D__AC_AttitudeControl_Multi>`"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:150
+#: d1ecebfb77e142439745d5035f579759
+msgid "Yaw rate D gain :ref:`ATC_RAT_YAW_D <ATC_RAT_YAW_D__AC_AttitudeControl_Multi>` (in AC4.4 and higher)"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:151
+#: d07985c625c04ec19c3dd65812a387d7
+msgid "Yaw rate filter :ref:`ATC_RAT_YAW_FLTT <ATC_RAT_YAW_FLTT__AC_AttitudeControl_Multi>`, :ref:`ATC_RAT_YAW_FLTE <ATC_RAT_YAW_FLTE__AC_AttitudeControl_Multi>` (in AC3.6: ATC_RAT_YAW_FLT)"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:152
+#: 5517737da44d4c37bcb05c998d591326
+msgid "Yaw max acceleration :ref:`ATC_ACC_Y_MAX<ATC_ACC_Y_MAX>`"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:153
+#: c54dca8181c649228ff17ed2f39d4421
+msgid "Roll and pitch axis rate feed-forward is enabled (:ref:`ATC_RATE_FF_ENAB <ATC_RATE_FF_ENAB>`)"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:154
+#: b52eb20785a64ca4906c15b616670768
+msgid "The AUTOTUNE algorithm tries to tune until instability is noted and then backs off the final PID values to provide a margin of stability. This back-off percentage can be manipulated with the :ref:`AUTOTUNE_GMBK <AUTOTUNE_GMBK>` parameter and changed from its default value of 25% reduction in gains, in order to get a tune with more, or less, stability margin."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:155
+#: a8a213794aa24346b98c91b57743158e
+msgid "After you have a good tune, you may wish to increase :ref:`ATC_THR_MIX_MAX <ATC_THR_MIX_MAX>`  to 0.9 (default is 0.5) to increase prioritization of attitude control over throttle.  This can reduce the pitch overshoot sometimes seen (especially on copters with large propellers) in AltHold if the vehicle suddenly slows after performing a fast forward flight.  In this situation, wind catches under the propellers providing lift but also disturbs the vehicle's attitude leading to a conflict between throttle and attitude control.  The danger in increasing this parameter's value is that if the rate gains are later raised so high that the vehicle oscillates badly it may be difficult for the vehicle to descend (because it will prioritize trying to correct the attitude oscillations and never reduce throttle sufficiently)."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:156
+#: ad307889fabe409b8865d50018562328
+msgid "AutoTune can **request very large and fast changes in output**\\ s to the motors which can cause ESC sync issues especially when using SimonK firmware and/or low KV motors (under 500KV). See this `video showing a test <https://www.youtube.com/watch?v=hBUBbeyLe0Q>`__ which recreates a sync problem."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:157
+#: ae470934042e42068255b4fca0a8e4af
+msgid "For best results, the copter shouldn't be allowed to build up too much horizontal speed. This can be prevented by applying a quick correction between tests (twitches) to stop the vehicle from flying too fast."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:158
+#: 9222e9156c6545cc999bdf933cc94421
+msgid "Be advised that AutoTune will engage from Stabilize, so don't accidentally flip your AutoTune switch until you are in AltHold and ready to begin the procedure."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:159
+#: 2b2700a7251b44a7b3d67a492d7e0b76
+msgid "As a general rule, for Pitch and Roll, P and I should be equal, and D should be 1/10th P. For Yaw, I should be 1/10th P and D = 0, in most cases."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:162
+#: 7d866ff21a6e427da230c66bfbffed7e
+msgid "Common Problems"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:164
+#: 9067e80f466543f980e061e031c01cd8
+msgid "If the vehicle will not start tuning (i.e. it won't twitch) even though it is in AutoTune mode then the problem is likely that the roll, pitch, yaw or throttle sticks are not exactly in the middle. It may help to increase the deadzone on the RC input by increasing :ref:`RC1_DZ <RC1_DZ>`, :ref:`RC2_DZ <RC2_DZ>`, :ref:`RC3_DZ <RC3_DZ>` and :ref:`RC4_DZ <RC4_DZ>` to 50 (or higher)."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:165
+#: 563572f91bfe40e5a4f6ad812fab84b2
+msgid "If the AutoTune produces an overly twitchy vehicle try reducing the :ref:`AUTOTUNE_AGGR <AUTOTUNE_AGGR>` parameter (should never be below 0.05) and perform the AutoTune again."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:166
+#: 86a123e0347c41fab69a0fdefadeebd2
+msgid "If the AutoTune produces a sloppy vehicle, try increasing the :ref:`AUTOTUNE_AGGR <AUTOTUNE_AGGR>` parameter (should never be above 0.1) and perform the AutoTune again."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:170
+#: 8b1d89b157014b0f8ab0a7cb6ad27cbf
+msgid "When reporting issues with AutoTune please include a description of your frame and a ``.bin`` dataflash log of the flight."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:173
+#: 76abb1eb60f84b2a8871363f94e1f360
+msgid "Dataflash logging"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:175
+#: 9265c28c88ab4e50b17424d9774c55da
+msgid "ATUN (auto tune overview) and ATDE (auto tune details) messages are written to the dataflash logs. Some details of the contents of those messages can be found on the :ref:`Downloading and Analyzing Data Logs in Mission Planner <common-downloading-and-analyzing-data-logs-in-mission-planner_message_details_copter_specific>` wiki page."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:180
+#: ea7aadbad67a4028a078f31fbbef5917
+msgid "Ground Control Station Messages"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:182
+#: 6f2fa1e5907f4251a547de43879216dd
+msgid "For each axis, there are several phases to the tune. Rate PIDs are adjusted first, then ANGLE parameters. Progress messages during these phases are sent to the GCS (and recorded in the Dataflash logs)."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:184
+#: 41d4fd6761e84ba298074c2cca779d55
+msgid "The typical sequence during tuning might be:"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:194
+#: d47047a60bdc49e18dc48821a936b364
+msgid "This is during Pitch Rate P adjustment, indicating a twitch is about to happen as the P is being tried at an increased value of 0.052298, but first, it is waiting until it gets back to level from the last twitch (WFL= Waiting for level), and then it reports that the result of this twitch is within targets and successful. But this has to occur 4 times in a row, before moving on to the next phase."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:196
+#: bcdd773b3950476593607362ef069169
+msgid "During the YAW rate phase of tuning, the messages will show a value for \"d\" that is not ATC_RAT_YAW_D, which is usually 0, but rather it's the value of ATC_RAT_YAW_FLTE, that is being changed."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:198
+#: 535fa652d51f4083a86103ad2861677d
+msgid "Anytime the process is interrupted by pilot stick movements, the"
+msgstr ""
+
+#: ../../source/docs/autotune.rst:204
+#: a4abba94662541779c701aa3e36d8064
+msgid "message appears."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:206
+#: cc4be6818ef04a699b7b457e45e06f31
+msgid "If you stopped the tune and dis-armed while still in AUTOTUNE, and an axis tune has been completed, you will get a message showing that the new gains have been saved for that axis. If there is not a message to this effect, but think you finished at least one axis, then you probably dis-armed while not in AUTOTUNE mode, and did not actually save them."
+msgstr ""
+
+#: ../../source/docs/autotune.rst:212
+#: 6c2e1152658f4cabbaa87623e0d5de4c
+msgid "If you do happen to accidentally discard a session's AUTOTUNE values by disarming when not in AUTOTUNE, you can examine the dataflash log for the GCS messages it sent during the tune and manually set them on the bench."
+msgstr ""

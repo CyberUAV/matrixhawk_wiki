@@ -1,0 +1,137 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:30+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/ekf-inav-failsafe.rst:61
+#: 
+msgid "GPS Failsafe and Glitch Protection"
+msgstr ""
+
+#: ../../source/docs/ekf-inav-failsafe.rst:5
+#: 99d09404cc314a1da481f48a86d6c7a3
+msgid "EKF Failsafe"
+msgstr ""
+
+#: ../../source/docs/ekf-inav-failsafe.rst:7
+#: fb0fc0314cb542809ec56529d785470f
+msgid "The EKF failsafe monitors the health of EKF (the position and attitude estimation system) to catch problems with the vehicle's position estimate (often caused by GPS glitches or compass errors) and prevent \"flyaways\"."
+msgstr ""
+
+#: ../../source/docs/ekf-inav-failsafe.rst:10
+#: e1dd309f7e0749f2a860fd0fa6de553e
+msgid "When will it trigger?"
+msgstr ""
+
+#: ../../source/docs/ekf-inav-failsafe.rst:12
+#: a318a8ab8f994e7db1eb7a6a732d73e3
+msgid "The EKF failsafe will trigger when any two of the EKF \"variances\" for compass, position or velocity are higher than the :ref:`FS_EKF_THRESH <FS_EKF_THRESH>` parameter value for 1 second."
+msgstr ""
+
+#: ../../source/docs/ekf-inav-failsafe.rst:14
+#: 33b15e1b4889442a8e5298b4d00b2b0e
+msgid "These \"variances\" come from the EKF itself and are numbers indicating the EKF's confidence in its estimates.  The values are between 0 and 1 with 0 meaning the estimate is very trustworthy and 1.0 is very untrustworthy."
+msgstr ""
+
+#: ../../source/docs/ekf-inav-failsafe.rst:16
+#: 600f5682e2434ab292613a5aaff838e7
+msgid "The EKF calculates these \"variances\" by comparing the results from multiple sensors.  So for example, if the GPS position suddenly jumps but the accelerometers do not show a sudden acceleration, the EKF variance for position would climb (i.e become less trustworthy)"
+msgstr ""
+
+#: ../../source/docs/ekf-inav-failsafe.rst:18
+#: 8106cf2355684f2cb3e62cf461b2d847
+msgid "The variances can be viewed in real-time on the ground station.  If using Mission Planner click on the \"EKF\" label on the HUD."
+msgstr ""
+
+#: ../../source/docs/ekf-inav-failsafe.rst:25
+#: db0b5ee89cbf4f04ab191ca8cbaab334
+msgid "What will happen when the failsafe triggers?"
+msgstr ""
+
+#: ../../source/docs/ekf-inav-failsafe.rst:27
+#: 23be5b2e6e2844da9c20547ca772031d
+msgid "The autopilot's `LED will flash red-yellow or blue-yellow and the tone-alarm will sound <https://www.youtube.com/watch?v=j-CMLrAwlco&feature=player_detailpage&t=60s>`__"
+msgstr ""
+
+#: ../../source/docs/ekf-inav-failsafe.rst:28
+#: 2a5e17bfa3c442fa92439e53c3d08f13
+msgid "\"EKF variance\" will appear on the ground station's HUD if telemetry is connected"
+msgstr ""
+
+#: ../../source/docs/ekf-inav-failsafe.rst:29
+#: 32c06a77101e496085e8f28c9e072188
+msgid "In manual flight modes that do not require GPS (i.e. Stabilize, Acro, AltHold) nothing further will happen but the pilot will be unable to switch into autonomous flight modes (Loiter, PosHold, RTL, Guided, Auto) until the failure clears"
+msgstr ""
+
+#: ../../source/docs/ekf-inav-failsafe.rst:30
+#: ec479cfef75f4fbfad39d5396191b39d
+msgid "In autonomous modes that require GPS (i.e. Loiter, PosHold, RTL, Guided, Auto, etc) the :ref:`FS_EKF_ACTION <FS_EKF_ACTION>` controls the behaviour.  By default this is \"1\" meaning the vehicle will switch to :ref:`Land <land-mode>` mode.  This is a \"pilot controlled\" land meaning the pilot will have control of the roll and pitch angle but the vehicle will descend at the :ref:`LAND_SPD_MS <LAND_SPD_MS>`.  It will land and finally disarm its motors. Other options are to report only (\"0\"), hover (ALTHOLD) (\"2\") or LAND (\"3\") even if in STABILIZE mode if the EKF failsafe occurs."
+msgstr ""
+
+#: ../../source/docs/ekf-inav-failsafe.rst:31
+#: 7636ec3ea80a42b5adcbb69314eb848e
+msgid "An EKF failsafe error will be written to the dataflash logs"
+msgstr ""
+
+#: ../../source/docs/ekf-inav-failsafe.rst:33
+#: df8ae659a13e4db88dcd042153715783
+msgid "After an EKF failsafe occurs, the pilot can re-take control (using the flight mode switch) in a manual flight mode such as :ref:`AltHold <altholdmode>` to bring the vehicle home."
+msgstr ""
+
+#: ../../source/docs/ekf-inav-failsafe.rst:36
+#: 4183f9508b9348bf8758b1e8222b1442
+msgid "Adjusting the Sensitivity of the failsafe"
+msgstr ""
+
+#: ../../source/docs/ekf-inav-failsafe.rst:38
+#: 6976f2c4e27d45aab62b38255a846ec0
+msgid "The :ref:`FS_EKF_THRESH <FS_EKF_THRESH>` parameter can be adjusted to control the sensitivity of the failsafe"
+msgstr ""
+
+#: ../../source/docs/ekf-inav-failsafe.rst:40
+#: 7e1edf4860a34e7b92f1fb7d48c0213a
+msgid "Set :ref:`FS_EKF_THRESH <FS_EKF_THRESH>` = 0 to disable the EKF failsafe"
+msgstr ""
+
+#: ../../source/docs/ekf-inav-failsafe.rst:41
+#: 9c5b7a44e0934554a380cb5aa4575df3
+msgid "Increase :ref:`FS_EKF_THRESH <FS_EKF_THRESH>` to values between 0.8 and 1.0 to reduce the chance of an EKF failsafe.  The downside of increasing this parameter value is that during a flyaway caused by a bad compass or GPS glitch, the vehicle will fly further away before the vehicle is automatically switched to LAND mode"
+msgstr ""
+
+#: ../../source/docs/ekf-inav-failsafe.rst:42
+#: 594284ac3e0f4d94b69e2a63e1fac820
+msgid "Decrease :ref:`FS_EKF_THRESH <FS_EKF_THRESH>` to values as low as 0.6 to increase the chance of an EKF failsafe triggering quickly.  The downside of lowering this value is the EKF failsafe could trigger a LAND during aggressive maneuvers"
+msgstr ""
+
+#: ../../source/docs/ekf-inav-failsafe.rst:45
+#: ac95a8c4061a407ca439b16601fac581
+msgid "Dataflash Log example"
+msgstr ""
+
+#: ../../source/docs/ekf-inav-failsafe.rst:47
+#: 8bbb0791a5024fab82394ff536815231
+msgid "The EKF's innovations can be viewed by graphing a dataflash log's NKF4.SP (position innovation), NKF4.SV (velocity innovation) and NKF4.SM (compass innovation) values"
+msgstr ""
+
+#: ../../source/docs/ekf-inav-failsafe.rst:49
+#: 9628a2a7e0a5454e95d7247bfe6cfedf
+msgid "The graph below show the EKF's innovations for position (green), velocity (red) and compass (yellow) during an actual EKF failsafe event.  During this incident external interference (probably from a high-powered radio tower nearby) caused the GPS to report inaccurate positions and velocities.  The vehicle switches to Land mode soon after both velocity and position innovations climb over the :ref:`FS_EKF_THRESH<FS_EKF_THRESH>` value of 0.8"
+msgstr ""
+
+#: ../../source/docs/ekf-inav-failsafe.rst:56
+#: ff7773b7650a4fe5900d35d5b6a76ec1
+msgid "Video"
+msgstr ""

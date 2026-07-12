@@ -1,0 +1,339 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:5
+#: 923abab5248940c8be08ead82cbfa0ba
+msgid "Plane SITL/MAVProxy Tutorial"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:7
+#: a7d6d973d0764322bb8702879652b9ff
+msgid "This tutorial provides a basic walk-through of how to use :ref:`SITL <sitl-simulator-software-in-the-loop>` and :ref:`MAVProxy<mavproxy:home>` for *Plane* testing."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:12
+#: 0e8ce3c71bcd4d06a1110f40958a5788
+msgid "Overview"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:14
+#: 52fa7b7c276a4e0295974a09b8b4a714
+msgid "The article is intended primarily for developers who want to test new Plane builds and bug fixes using SITL and *MAVProxy*. It shows how to take off, run missions, fly in ``GUIDED`` mode, set a geofence, and perform a number of other basic testing tasks."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:19
+#: 7c2ed5e162aa4c99a0a850716af7c93f
+msgid "The tutorial is complementary to the topic :ref:`Using SITL for ArduPilot Testing <using-sitl-for-ardupilot-testing>`."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:23
+#: 82cacca491f34b5bab835a99d7c06e0f
+msgid "We use *MAVProxy* here, but you can :ref:`attach another ground station to SITL <using-sitl-for-ardupilot-testing_connecting_otheradditional_ground_stations>` if you prefer (similar instructions can be used in any GCS)."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:25
+#: 3f6245d2e57e4b48a1258c4f42d9df55
+msgid "This tutorial is for Plane - see :ref:`Copter <copter-sitl-mavproxy-tutorial>` and :ref:`Rover <rover-sitlmavproxy-tutorial>` for similar tutorials on the other vehicles."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:30
+#: 8f571d4143e94b91bd5ca19badb30f0a
+msgid "Preconditions"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:32
+#: 26a8acc525b6407591a50fff030e8ca7
+msgid "The tutorial assumes you have already set up :ref:`SITL on Windows <sitl-native-on-windows>` or :ref:`Linux <setting-up-sitl-on-linux>` and that you have started SITL using the ``--map`` and ``--console`` options:"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:43
+#: 5930a9fc5cc943098dcdc6b2782a896c
+msgid "If you wish to start the simulation at a different map location or use a different frame type (-f option for quadplane,firefly,etc.) than a standard aileron/elevator/rudder/throttle plane, see :ref:`SITL Advance Testing <using-sitl-for-ardupilot-testing>`. A complete list of startup options for the simulator can be found using the --help option:"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:53
+#: a066b8cf7847480ca30b185f36640a1f
+msgid "The *MAVProxy Command Prompt*, *Console* and *Map* should be arranged conveniently so you can observe the status and send commands at the same time."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:61
+#: bbea787d87904eb7b25357496fe748b0
+msgid "Taking off"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:63
+#: bc7b907445334571b18b74991cb207cb
+msgid "To take off with Plane you can use a mission (AUTO mode) that contains the :ref:`MAV_CMD_NAV_TAKEOFF <plane:mav_cmd_nav_takeoff>` command, or use the TAKEOFF mode. If it's a quadplane, you can also takeoff in a VTOL mode such as QLOITER, QHOVER, or QSTABILIZE, by raising the throttle above mid-stick (using normal defaults, RC 3 1600 command for example). Once you are airborne you can switch to other :ref:`flight modes <plane:flight-modes>` (be sure your throttle is set at an appropriate value for that mode)."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:69
+#: 11806197613b439fa57a9999a314d9c9
+msgid "First load the **CMAC-circuit.txt** test mission using the ``wp load`` command as shown below (this mission contains the takeoff command):"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:77
+#: a615568190b74615865d30d1575b2733
+msgid "Once the mission is loaded you can take off by arming the throttle and setting the mode to ``AUTO`` (the order of these operations does not matter):"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:86
+#: c5f1093333be4b88a412dd852f94bb32
+msgid "The plane should take off to an altitude of 40 metres and then proceed through the other mission waypoints (most of which have an altitude of 100m). You can stop/pause the mission at any time by changing the mode."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:91
+#: 1fa1be8447ad41748656af8db7dd8c7d
+msgid "Monitoring"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:93
+#: 234609fd277d404f9fb6d4efc2d9d057
+msgid "During takeoff you can watch the altitude increase on the console in the *Alt* field."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:96
+#: 531341648fbb4f4bb773a96c395bcdf5
+msgid "Developers may find it useful to **graph** the takeoff by first entering the ``gtakeoff`` command."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:102
+#: 76e55f71371144db8b8d1d48881aeaaa
+msgid "MAVProxy: PlaneTakeoff Graph (gtakeoff)"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:105
+#: 0e7807ca1a0447dc8f790fd9e1636d1c
+msgid "Troubleshooting"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:107
+#: 3b9cc19b152d4ecc863cb6bc36e4fbfb
+msgid "The most common sources of difficulty taking off are:"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:109
+#: 643e6dcc367b495299f33a179fce29e8
+msgid "Using a mission that does not contain a takeoff command!"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:110
+#: 3d6d4af5148a498cb6538dbe939e2f74
+msgid "Attempting to takeoff when the vehicle is not armed. This can happen if the vehicle fails pre-arm checks."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:113
+#: 8b4bf1a809ff42bda3fba9b9ac5520f4
+msgid "You can list all *enabled* checks using the command ``arm list``:"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:128
+#: 5fa40a007f8c4150adc507116fb262a1
+msgid "You can enable and disable checks using ``arm check n`` and ``arm uncheck n`` respectively, where n is the name of the check. Use ``n`` value of ``all`` to enables/disable all checks."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:133
+#: 87c9127512a4402db478454903fc8967
+msgid "Flying a mission"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:135
+#: 0cc6e225dc724093aec6ac0539e70341
+msgid "You can load a mission at any time using the ``wp load`` command. The mission will start as soon as the vehicle is armed and you're in ``AUTO`` mode."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:139
+#: 14a3c4d8a8f64f368d44e86f296cd920
+msgid "The example below shows how to load and start one of the test missions, skip to the second waypoint using ``wp set n``, and *loop* the mission:"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:149
+#: 74f74b364a66414fa0d1263960084f75
+msgid "The :ref:`MAVProxy Waypoints documentation <mavproxy:mavproxy-waypoints>` lists the full set of available commands (or you can get them using auto-completion by typing \"wp\" on the command line)."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:153
+#: cfc90b9f068e4d40870b046238e00c96
+msgid "If you want to create a waypoint mission, this is most easily done on the map:"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:156
+#: 3c17a43f1cc3416498dfc5dc3fa1ec29
+msgid "Right-click on the map and then select **Mission \\| Draw**."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:161
+#: 83714e02720d41a3946cb949dc54de8e
+msgid "MAVProxy: Draw Mission Menu"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:163
+#: 0aabd1e2ea7f45c298ad492d42e318b7
+msgid "Left-click on the map where you want the points to appear."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:167
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:278
+#: 6778abc5066d41d6a0ec5b844b2cd76e
+#: 21d522af5576414d9437a35139cf673c
+msgid "Nothing visible will happen when you make the first click. After the second click, lines will join your points to show the path."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:170
+#: 53e83975ad1945128bec4e652682bf09
+msgid "When you're done, you can loop the mission by right-clicking on the map and selecting **Mission \\| Loop**."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:173
+#: 8fda71355f084351a61a013a4c6cd882
+msgid "This approach only allows you to create :ref:`MAV_CMD_NAV_WAYPOINT <plane:mav_cmd_nav_waypoint>` commands. You can edit missions and use other commands on Linux using the *misseditor* module (``module load misseditor``). This is currently broken on Windows. It is also possible to load other types of commands from files."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:181
+#: 21350cf2ff5a48f6a285ff83365bdcab
+msgid "Changing flight modes"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:183
+#: a7d6bcc3359e4455a1abb5409a197add
+msgid "Plane supports a :ref:`number of flight modes <plane:flight-modes>`, which you can list in *MAVProxy* using the ``mode`` command:"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:191
+#: fe374678940343ae986c5dabdfb3f14e
+msgid "You can set the mode by entering ``mode MODENAME`` on the *MAVProxy command prompt*."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:194
+#: 01bbe9742e3e4c1ba77ce2b262612e65
+msgid "For example, the command below shows how to put Plane into :ref:`CIRCLE mode <plane:circle-mode>` (this is like Loiter, except that the plane does not attempt to hold position)."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:203
+#: c28d4ab2e53246cbb089cd476e28a272
+msgid "Guiding the vehicle"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:205
+#: 19323dffcd704b74a7dd85ccee048d4b
+msgid "Once you've taken off you can move the vehicle around the map in ``GUIDED`` mode. Plane will fly to a specified point, and then circle it."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:209
+#: 27150813e84140f3a99163db279adfed
+msgid "First change the mode:"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:215
+#: eb2bda02c5154d38a2c08adb7f3483ca
+msgid "The easiest way to set a target point is to right-click on the map where you want to go, select **Fly to**, and then enter the target altitude."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:221
+#: 5f94132895624474a81e335a7456d75f
+msgid "MAVProxy: Fly toLocation"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:223
+#: 02dc777f651f4b1fb04c4f52f4837ccf
+msgid "You can also enter the target position manually on the command line using the two formats below. If only the altitude is specified, the last specified LAT/LON will be used."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:234
+#: 1627a9a679eb4188829b04dc9110f99f
+msgid "Unlike with Copter, you can't do much with Plane in ``GUIDED`` mode because the mode does not support many commands. This mode is primarily useful for simply flying to a point."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:239
+#: 328ea8097d154059bb0867b2ccc3653b
+msgid "Setting a GeoFence"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:241
+#: dec3852171f44209a07b5d0b98d8c076
+msgid "A GeoFence is is a virtual barrier that Plane uses to constrain the movement of the vehicle (and move it to a safe location if control is lost). Plane allows you to specify an arbitrarily shaped region on the map for the fence, and an upper and lower altitude. If the fence is breached, Plane will fly to the centre of the fence and circle (or a rally point). :ref:`Geo-Fencing in Plane <plane:geofencing>` describes the fence in more detail."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:249
+#: 1fb2daf24a064c3ab8ba55a5565ee472
+msgid "The fence behaviour is set using the :ref:`Plane Fence Parameters <plane:FENCE_ACTION>`. You can list these with ``param show``:"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:264
+#: a147f4c075984e4ca5da60844b4a6f8b
+msgid "Creating the fence is very similar to creating a waypoint mission:"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:266
+#: dd6dee436df1458eb47eba965693614f
+msgid "Right-click on the map and then select **Fence \\| Draw**."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:271
+#: 7bc73493f66d4dad89fc1b0ddfc6c5de
+msgid "MAVProxy: Draw Fence Menu"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:273
+#: 22937a51366e45c39a032ef3da669761
+msgid "Left-click on the map at points where you want the fence \"posts\" to appear."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:281
+#: afd77069169149b6b7d95f346c6df97b
+msgid "When you're done, you can loop the fence by right-clicking on the map."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:287
+#: b25f5a1ae4494ac69142410788101cb5
+msgid "MAVProxy: Draw Fence Points"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:289
+#: aeab31f9c8144a92aa188511c430f239
+msgid "The fence is initially disabled. To turn it on set the value to one:"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:295
+#: 0140c3e96bc745c594781c441ff25903
+msgid "Now lets make the plane cross the barrier. Assuming you are already flying you can use the following to make it fly straight ahead into the fence:"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:303
+#: df79f9f721054e57886c692fe5045316
+msgid "When the fence is crossed, the plane will fly to the centre of the fence region and then circle. The console shows that the breach has occurred."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:310
+#: 37df640c6cff4c84aeac520ff2c091e7
+msgid "MAVProxy: Fence Breach shown on Console and Map"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:312
+#: acb056b4a6f8469c92fead95a840e66b
+msgid "Instead of flying to the centre of the fence you can instead add a :ref:`rally point <plane:common-rally-points>` to the map and fly to it by enabling the parameter ``FENCE_RET_RALLY``."
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:317
+#: 0e5f3351d2554d7ea5e70eff4f648649
+msgid "Testing the vehicle"
+msgstr ""
+
+#: ../../source/docs/plane-sitlmavproxy-tutorial.rst:319
+#: fe75f992876d41518bc45d859da17b92
+msgid "*MAVProxy* allows you to list all the parameters affecting the vehicle and simulation using ``param show *``, and to set any parameter using: ``param set PARAM_NAME VALUE``. In addition to affecting the vehicle itself some parameters simulate the performance/failure of specific hardware components and the environment (for example, the wind). These can be listed using: ``param show sim*``. The topic :ref:`Using SITL for ArduPilot Testing <using-sitl-for-ardupilot-testing>` explains more about how you can test using SITL."
+msgstr ""

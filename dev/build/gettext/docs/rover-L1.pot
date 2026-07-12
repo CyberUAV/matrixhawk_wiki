@@ -1,0 +1,72 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/rover-L1.rst:5
+#: c10710d236ab403784cba25f9e002ac7
+msgid "Rover: L1 navigation overview"
+msgstr ""
+
+#: ../../source/docs/rover-L1.rst:7
+#: 10c21a44ffd44087968918d08266b38a
+msgid "This page provides an overview of Rover's navigation feature including the `L1 controller <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_L1_Control>`__ which is also used in Plane. The L1 controller is based on `this paper by Sanghyuk Park, John Deyst and Jonathan P How of MIT <http://mercury.kau.ac.kr/park/Archive/PCUAV/gnc_park_deyst_how.pdf>`__."
+msgstr ""
+
+#: ../../source/docs/rover-L1.rst:11
+#: 1eda30f4b2df460b89ad398c50722f90
+msgid "Overview"
+msgstr ""
+
+#: ../../source/docs/rover-L1.rst:16
+#: d64602391920443eaddb136b8347c5c9
+msgid "on every iteration of the main loop (50hz) a call is made to the active mode's update method (`here is RTL's update function <https://github.com/ArduPilot/ardupilot/blob/master/Rover/mode_rtl.cpp#L37>`__). While in Auto, Guide, RTL and SmartRTL mode, the update calls into the Mode class's `calc_steering_to_waypoint <https://github.com/ArduPilot/ardupilot/blob/master/Rover/mode.cpp#L303>`__ method."
+msgstr ""
+
+#: ../../source/docs/rover-L1.rst:19
+#: ed1372e51cbf4fecaf8ba71e9f70d2ec
+msgid "Mode's `calc_steering_to_waypoint <https://github.com/ArduPilot/ardupilot/blob/master/Rover/mode.cpp#L303>`__ then call's the AP_L1_controller library's `update_waypoint method <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_L1_Control/AP_L1_Control.cpp#L198>`__ providing it the location that the rover should drive towards."
+msgstr ""
+
+#: ../../source/docs/rover-L1.rst:21
+#: d9f8d694e466405f8fa89dc1386498d9
+msgid "The AP_L1_controller's `update_waypoint method <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_L1_Control/AP_L1_Control.cpp#L198>`__ returns a desired lateral acceleration which is passed into Mode's `calc_steering_from_lateral_acceleration <https://github.com/ArduPilot/ardupilot/blob/master/Rover/mode.cpp#L331>`__"
+msgstr ""
+
+#: ../../source/docs/rover-L1.rst:23
+#: 0c3b5a7f402d4baa90fa2400eb3c65a3
+msgid "Mode's `calc_steering_from_lateral_acceleration <https://github.com/ArduPilot/ardupilot/blob/master/Rover/mode.cpp#L331>`__ sends the desired acceleration to `APM_Control/AR_AttitudeControl's get_steering_out_lat_accel <https://github.com/ArduPilot/ardupilot/blob/master/libraries/APM_Control/AR_AttitudeControl.cpp#L158>`__ which uses a PID controller to calculate a steering output"
+msgstr ""
+
+#: ../../source/docs/rover-L1.rst:25
+#: 875953885ae348619e2812f96d5ea523
+msgid "The steering output is sent into the AP_MotorsUGV library using the `set_steering  <https://github.com/ArduPilot/ardupilot/blob/master/Rover/AP_MotorsUGV.cpp#L146>`__ method"
+msgstr ""
+
+#: ../../source/docs/rover-L1.rst:28
+#: b9accc460d3348bc87b8b00d81587674
+msgid "L1 Controller"
+msgstr ""
+
+#: ../../source/docs/rover-L1.rst:30
+#: 34d265200c854ee29109c3bea89b015f
+msgid "The final output of the L1 controller's `update_waypoint method <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_L1_Control/AP_L1_Control.cpp#L198>`__ is a desired lateral acceleration (shown as \"latAccDem\" in red below) which should bring the vehicle back to the line between the origin and destination."
+msgstr ""
+
+#: ../../source/docs/rover-L1.rst:32
+#: 2175cef9e4e64d2a85a08a7ac4ded990
+msgid "The formulas used are also shown below.  *damping* is from the :ref:`NAVL1_DAMPING <NAVL1_DAMPING>` parameter. *period* is from the :ref:`NAVL1_PERIOD <NAVL1_PERIOD>` parameter."
+msgstr ""

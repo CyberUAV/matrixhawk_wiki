@@ -1,0 +1,117 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:30+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/gps-failsafe-glitch-protection.rst:5
+#: c9fb1664a11444acb1930a4557ffc62d
+msgid "GPS Failsafe and Glitch Protection"
+msgstr ""
+
+#: ../../source/docs/gps-failsafe-glitch-protection.rst:7
+#: 070b5a058a424e8c810b1b8883e0ce4f
+msgid "This article describes the glitch protection mechanisms used to trigger GPS Failsafe."
+msgstr ""
+
+#: ../../source/docs/gps-failsafe-glitch-protection.rst:11
+#: 844590b8bac54953bddc509bdd962e42
+msgid "Overview"
+msgstr ""
+
+#: ../../source/docs/gps-failsafe-glitch-protection.rst:13
+#: 49559b53038c4b52aa4d362c14b04b9d
+msgid "GPS Systems can occasionally drop the signal or provide significantly inaccurate position information (aka \"glitches\"). While errors are more likely in conditions where the GPS signal can bounce off multiple paths before reaching the receiver (multipathing), errors can occasionally occur even with clear sky."
+msgstr ""
+
+#: ../../source/docs/gps-failsafe-glitch-protection.rst:19
+#: 858af50731964261a4b4a5529f42c24a
+msgid "A *GPS failsafe* event will occur if GPS 3D lock or the position \"Glitches\" for at least 5 seconds while Copter is in a mode that requires the GPS (RTL, Auto, Loiter, Circle, Position, Guided or Drift).  The GPS failsafe response can be set to Land or switch to AltHold mode so that you can retake manual control."
+msgstr ""
+
+#: ../../source/docs/gps-failsafe-glitch-protection.rst:26
+#: a069f3a3152741b1b346eceb582ca3bd
+msgid "Without GPS updates, the inertial sensors allow approximately 10 seconds of accurate position information but after this the horizontal position drift becomes so large that the horizontal position cannot be maintained at all.  At this point if you still have RC radio control it is recommended to take back control using Stabilize, Acro or AltHold as soon as possible."
+msgstr ""
+
+#: ../../source/docs/gps-failsafe-glitch-protection.rst:34
+#: 1afcc27fb90f4d59a7830f1873a3c845
+msgid "Glitch Protection - Default"
+msgstr ""
+
+#: ../../source/docs/gps-failsafe-glitch-protection.rst:36
+#: d87fae77a4424c66b22cad20c1c5e727
+msgid "GPS glitch protection is provided which can help alert the pilot to a bad GPS position, trigger a failsafe and reduce the incidents of fly-aways.  Glitches are detected by comparing the each new position update received from the GPS with a position projected out from the previous update's position and velocity."
+msgstr ""
+
+#: ../../source/docs/gps-failsafe-glitch-protection.rst:45
+#: 4ca952c74e0f45c69bf1ba94618a901e
+msgid "The new position is accepted as \"good\" if:"
+msgstr ""
+
+#: ../../source/docs/gps-failsafe-glitch-protection.rst:47
+#: 2c3d13aed9314dd3b3351d2653df3cab
+msgid "the two positions are within the ``GPSGLITCH_RADIUS`` (defaults to 5m)."
+msgstr ""
+
+#: ../../source/docs/gps-failsafe-glitch-protection.rst:49
+#: 6a80dbcb7273475d865d971124a6d4b0
+msgid "the new position is within a radius that is 10m/s/s (``GPSGLITCH_ACCEL``) \\* dt \\* dt.  Where \"dt\" is the time difference between the two samples."
+msgstr ""
+
+#: ../../source/docs/gps-failsafe-glitch-protection.rst:53
+#: 517ce30d24e4455abef16270b79ad96b
+msgid "During a glitch, \"Bad Position\" will be written on the ground station's HUD"
+msgstr ""
+
+#: ../../source/docs/gps-failsafe-glitch-protection.rst:57
+#: 5b14715ed76d4fbd85af6db7ab3b4155
+msgid "Glitch Protection - EKF"
+msgstr ""
+
+#: ../../source/docs/gps-failsafe-glitch-protection.rst:59
+#: f4f1610f33ad47e79e5abdf0bf665da0
+msgid ":ref:`ArduPilot Extended Kalman Filter (EKF) <common-apm-navigation-extended-kalman-filter-overview>`)provided glitch protection."
+msgstr ""
+
+#: ../../source/docs/gps-failsafe-glitch-protection.rst:62
+#: 9a1e69c8a7864fddb52c7220e084b6d7
+msgid "Glitch protection using the EKF works as follows:"
+msgstr ""
+
+#: ../../source/docs/gps-failsafe-glitch-protection.rst:64
+#: 131a550cf48545fbbb1eb330eae2a2cc
+msgid "When new GPS position measurements are received, they are compared to a position predicted using IMU measurements."
+msgstr ""
+
+#: ../../source/docs/gps-failsafe-glitch-protection.rst:66
+#: 2ab6a2ea3a1b45379929900854bb5081
+msgid "If the difference exceeds a statistical confidence level set by ``EKF_POS_GATE``, then the measurement won't be used."
+msgstr ""
+
+#: ../../source/docs/gps-failsafe-glitch-protection.rst:68
+#: c7860159e02f4859ac2080683e65be74
+msgid "While GPS measurements aren't being used, a circle defined by an uncertainty radius grows around the predicted position. The rate at which this radius grows is controlled by ``EKF_GLITCH_ACCEL``. This is similar to the circle defined by ``GPSGLITCH_ACCEL``, the difference being it is centered around the trajectory predicted by the IMU rather than previous GPS measurements. Because this allows for deviations in trajectory due to maneuvers, the default value for ``EKF_GLTCH_ACCEL`` is smaller at 1.5 m/s/s. The acceleration growth of the circle is also increased when the vehicle is accelerating or turning to allow for the increase in IMU errors during maneuvers."
+msgstr ""
+
+#: ../../source/docs/gps-failsafe-glitch-protection.rst:78
+#: 640655d963704f69820c964f13d2631a
+msgid "If subsequent GPS measurements fall inside the circle, they will be accepted and the circle is reset back to the minimum radius controlled by ``EKF_POS_GATE``."
+msgstr ""
+
+#: ../../source/docs/gps-failsafe-glitch-protection.rst:81
+#: bac03ad253d246e58f944aad32f6d5b0
+msgid "If the GPS glitch is large enough and lasts long enough, the GPS measurements will continue to be rejected until the circle radius exceeds a value set by ``EKF_GLITCH_RAD``. When this happens, an offset is applied to the GPS position so that it matches the estimated vehicle position and the GPS positions are used again. The GPS offset is then reduced to zero at 1 m/s. This means that large long duration glitches will cause the vehicle to drift at a 1 m/s rate. This is slow enough to give the operator plenty of time to react."
+msgstr ""

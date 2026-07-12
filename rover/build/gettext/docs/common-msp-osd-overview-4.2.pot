@@ -1,0 +1,525 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Rover package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rover \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:39+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:5
+#: ad22477ff04842f5beee53dd9ba21880
+msgid "MSP OSD"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:6
+#: a99e312746bf4a9984e8e034185d3d0e
+msgid "ArduPilot supports several types of On Screen Displays (OSD) using MSP (MultiWii Serial Protocol) based protocols:"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:8
+#: b38e3c4a85cb46df93b5ac429be27c72
+msgid "MSP Telemetry based OSDs such as DJI FPV Goggles V1/V2, DJI Goggles RE, FatShark ByteFrost, FatShark SharkByte (before fw 09042021), older `MWOSD <http://www.mwosd.com/>`__ (newer versions support MAVLink, see :ref:`common-minim-osd-quick-installation-guide`) , etc."
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:9
+#: 505cc0f778c84f8980387572eff79542
+msgid ":ref:`DisplayPort <common-displayport>` based OSDs such as HDZero (previously known as FatShark SharkByte (fw 09042021 and later)), Walksnail, DJI goggles using the `wtf-os <https://github.com/fpv-wtf/wtfos>`__ firmware and `msdp-osd module <https://github.com/fpv-wtf/msp-osd>`__, and MWOSD's DisplayPort mode/firmware."
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:11
+#: d1f6a60e7515407e9b315b66aa2c5fc2
+msgid "Telemetry only based OSDs will render OSD panel items on screen with their own engine based on the standard MSP telemetry sensor messages sent using Serial port protocol \"32\", so ArduPilot has no control of how the items look."
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:13
+#: 4d444e1afde948d49dcff9a352767876
+msgid "DJI 2/V1/V2 goggles also have an extended protocol which is sent using Serial port protocol \"33\" that allows position information for each OSD panel when using their extended Custom OSD feature. This also allows the display of any ArduPilot OSD panel."
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:15
+#: d855c020b6ff4676a00451837243e6df
+msgid "DisplayPort, on the other hand, is an MSP protocol extension that allows ArduPilot to specify text characters/icons and their positions to be drawn on external OSD displays like it does on internal integrated analog OSDs using Serial port protocol \"42\". DisplayPort is also known (incorrectly) as CANVAS MODE. Basically it’s a remote text only frame buffer that uses local fonts (local to the rendering engine i.e. the OSD hardware) to render strings sent via MSP."
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:18
+#: 9c8a34e0ad24495ea87ec6ebe4493cac
+msgid "Telemetry based OSD"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:19
+#: 6abb01a6202d498ca5f70d81f00c713e
+msgid "Telemetry based OSDs will render OSD panel items on screen with their own engine, so ArduPilot has no control of how the items look. Another limitation of telemetry based OSDs is that there's no way for ArduPilot to add new panel items at will, it's the vendor's responsibility to add new features by rolling out new firmware releases."
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:21
+#: 4467ac616c2244c3bc2fdd3e2bd5d34d
+msgid "If an on-board integrated analog OSD is present and the user wishes to have both OSDs , it can be activated as well. For example, on vehicles using the DJI goggles/air system for medium range, but still running a long range analog VTX using the internal OSD, for when the vehicle exceeds the range of the HD DJI Goggles. This configuration could use one OSD screen optimized for DJI Goggles, and another for the integrated OSD and the user can switch between them depending on which video system is being viewed."
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:24
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:122
+#: 9a9e7b5d9735458681914aeca9a6789c
+#: b0ebd64654144de08683974a135e32fc
+msgid "Configuration"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:25
+#: 40565da4314044d486a1d953f1728386
+msgid "Example assumes connection of air unit to SERIAL2 of the flight controller."
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:27
+#: feb2cfc4763c40bfb79875ca6c8af563
+msgid ":ref:`OSD_TYPE<OSD_TYPE>` = 3 if no integrated OSD is being used, or = 1 if an integrated OSD is present and the user wishes to have both OSDs."
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:28
+#: 4d9b46c833044d3db0dfeee7d035d9e3
+msgid ":ref:`SERIAL2_PROTOCOL<SERIAL2_PROTOCOL>` = 32 (MSP)"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:29
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:127
+#: 5793f757274543e6b25f4d08f3555e51
+#: 1ee2ed3867954815a16f66ab5b609b73
+msgid ":ref:`SERIAL2_BAUD<SERIAL2_BAUD>` = 115"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:30
+#: afeec8df9e184a3797831e3c5b14da2c
+msgid ":ref:`MSP_OPTIONS<MSP_OPTIONS>` bit 0 = 0 (Do not EnableTelemetryMode) if the Air Unit is to be connected by both RX and TX input to the AutoPilot Serial port TX/RX. Set bit 0 = 1 (EnableTelemetryMode) if a standalone OSD unit connected only via a single wire from its RX input to the Serial ports' TX. This is known as \"push\" mode."
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:33
+#: b31dce1272b34e949daf93133c4023e9
+msgid "OSD Panels Available with MSP telemetry OSDs"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:34
+#: 2f74a79439f843ec8a559e201bff873a
+msgid "These are the MSP only OSD elements supported on telemetry based OSDs (assuming the OSD has the capability itself to display these telemetry values):"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:37
+#: fbacf5d99bf94deba4c7c1ace4d53802
+msgid "OSD Parameter"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:37
+#: 0af8bdf137dd408cbd5fe753e1cbe305
+msgid "Notes"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:39
+#: 1dd73e387a33429c9eb221e14fbd6f90
+msgid "OSDn_ALTITUDE"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:39
+#: 6f9b3288579e4af9bb8e9a7ceec95559
+msgid "Home relative altitude"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:41
+#: d3014b11decf44bf98ec3dcd71dda11d
+msgid "OSDn_ARMING"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:41
+#: fb521dbc88514793ba8602d92c031b91
+msgid "Arming status, hidden when armed otherwise showing DISARMED"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:43
+#: a35a0097cee1455a8644c5b25306a731
+msgid "OSDn_ASPEED"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:43
+#: d48bfac5a5894cc699db6c53905ccf9d
+msgid "Please refer to OSDn_GSPEED for more info on enabling airspeed display"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:45
+#: c3a93331743c44239fe053d8d63e4d3c
+msgid "OSDn_BAT_VOLT"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:45
+#: c7837bc7693e4d3fbdd7a1be8a07722c
+msgid "First battery voltage"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:47
+#: 7481ae999122481caa0b387d10e2dbfc
+msgid "OSDn_BATBAR"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:47
+#: 436cb5d9b6c24c848d322de618f3cd6d
+msgid "First battery remaining percentage rendered as a bar based on declared capacity and consumed mAh"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:49
+#: f2cd1b45fdce4e7ea43e27c90c5141af
+msgid "OSDn_BATUSED"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:49
+#: 39c21ac85efc4c638740d7149bb979d1
+msgid "First battery consumed mAh"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:51
+#: 79ceacc46fd34acaac6e59eedf5b54ba
+msgid "OSDn_CELLVOLT"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:51
+#: a87f914a102a4bdab7d6bbeb9300eaae
+msgid "First battery average cell voltage, if automatic cell detection fails please override with MSP_OSD_NCELLS"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:53
+#: 30677c55f3d742f288b5f77927146d1a
+msgid "OSDn_CLK"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:53
+#: da30f6f3e92b43c6a14c6a3ad2ca381c
+msgid "Realtime clock (requires GPX fix)"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:55
+#: c1efd485f72e4e73bd64181136444115
+msgid "OSDn_CRSSHAIR"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:55
+#: 0600320a27524cb8a9b2ca613dbcc85e
+msgid "Artificial horizon is not supported so crosshair is often kept hidden"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:57
+#: c4a99aeb65ce4fb194c62de39c4f0a20
+msgid "OSDn_CURRENT"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:57
+#: 530273c5cedb414db81e03481d4a80bd
+msgid "First battery current"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:59
+#: 9c4ff0c130664776a4ef53669f06a42b
+msgid "OSDn_ESCTEMP"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:59
+#: 9361f3fe20cc45fcb1c7500a0f7f7807
+msgid "On DJI V1/V2 Goggles this will report the highest ESC temperature"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:61
+#: ddcc0dea0ab348daa89e041c1f1a852c
+msgid "OSDn_FLTMODE"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:61
+#: 8deb1acd5eda4ccd86e8b4b4cf837d2a
+msgid "DJI hardware does not support ArduPilot's flight modes! This item will generally be blank and only show !FS! while in failsafe!"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:63
+#: 599549680321465a84bd40c553abe5ba
+msgid "OSDn_GPSLAT"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:63
+#: c7b544bbb4ad4bbd9620b86f6ffb18f2
+msgid "GPS Latitude in decimal format"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:65
+#: 129a0b0892a74e3a996df54c053b1986
+msgid "OSDn_GPSLONG"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:65
+#: 8049cd50207c43fdb74015c05f04806e
+msgid "GPS Longitude in decimal format"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:67
+#: 6a976d4564b1481cacb00a671eec7d49
+msgid "OSDn_GSPEED"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:67
+#: 4df7fef2a42b4211be9eba4e1cb5ab04
+msgid "This item shows ground speed unless ``OSDn_ASPEED_EN`` = 1 in which case it will show true airspeed if an airspeed sensor is present or estimated airspeed otherwise. The position on screen is set by ``OSDn_GSPEED_X`` and ``OSDn_GSPEED_Y`` regardless of the value of ``OSDn_ASPEED_EN``"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:69
+#: 514f6d562406448484560fa177c4d1b2
+msgid "OSDn_HEADING"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:69
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:75
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:89
+#: 039202a9bf264f0f8abea2a110480269
+#: bda4e29fdacd4459942038ecf82a1155
+#: 53d6eba0a5634efa85fbcbdb50445412
+msgid "Not supported by DJI V1/V2 Goggles"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:71
+#: cd9347be4fc842f292e2abf837f2dda4
+msgid "OSDn_HOMEDIR"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:71
+#: 61b431b60ef4424e95452415d4b7c348
+msgid "Rotating arrow pointing to home"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:73
+#: 40c2ea99b3344fefb08c73f4d33ff4c5
+msgid "OSDn_HOMEDIST"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:73
+#: 1c5c822c099d45f5941ea63c128ba3bd
+msgid "Distance from home"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:75
+#: d6d295fecf514fc99a96fe0306f36842
+msgid "OSDn_HORIZON"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:77
+#: cdad0dd2ab6c46ce940db437df248569
+msgid "OSDn_MESSAGE"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:77
+#: 362cad81f7ae4f55a831b7dfd89c6550
+msgid "This will display status text messages as rolling text. Status text messages will be hidden after a couple seconds and the panel will show the current flightmode. If ``OSDn_WIND_EN`` is set to 1, this item also displays wind info next to the current flight mode as a rotating arrow and speed."
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:79
+#: fd90169286514afdb25eb412a94a0fc5
+msgid "OSDn_PITCH"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:79
+#: 0a94d4e12c0e4e79a6f27e3445124c2f
+msgid "Pitch angle"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:81
+#: 52073ca269f840499a812785fcaeee50
+msgid "OSDn_POWER"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:81
+#: 474a3333ad0348e28d95d551c4ef2f80
+msgid "Instant power calculated as voltage * current"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:83
+#: 93ff7570e9a74ce0b9860d729eb74920
+msgid "OSDn_ROLL"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:83
+#: e78bec4e7f764141b1e4f8cc02218dc3
+msgid "Roll angle"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:85
+#: 3ba6bc27db9b4ea1986b366556199112
+msgid "OSDn_RSSI"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:85
+#: 7e6330531ada4ba8a470aeec34cf96cd
+msgid "Rssi as configured in :ref:`RSSI_TYPE`"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:87
+#: 2352c505a525415ba685e911bb730b6d
+msgid "OSDn_SATS"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:87
+#: afa7a9c3ca6c44ce88da79b5e0300f40
+msgid "On DJI V1/V2 Goggles when there's no telemetry based MSP OSDfix it will report 14 sats, this is a known DJI bug"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:89
+#: 96c470514fa34216b9fc2b2dd4baaa24
+msgid "OSDn_SIDEBARS"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:91
+#: b0a1c0f751304e0192a3fd6f246d2a8e
+msgid "OSDn_VSPEED"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:91
+#: c7e51e16863b4d06b1b574656f346c01
+msgid "Vertical speed"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:93
+#: 71e5972816e5423cbb9ba00f11934183
+msgid "OSDn_WIND"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:93
+#: 969e15be168640b0b5f030ee83506c87
+msgid "Please refer to OSDn_MESSAGE for wind speed and direction rendering"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:97
+#: c4c95f12230741b682d154ab0a91dab5
+msgid "DJI goggles in their default OSD display mode support MSP telemetry display with the following notes:"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:99
+#: 1142bafa39bc4f21b44316f336269b43
+msgid "ArduPilot currently supports all of the OSD panel items provided by the V1 and V2 DJI FPV Goggles, as given in the table above ."
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:100
+#: 0c2999faf6f14dd4b13bfd784c1d8f6b
+msgid "Changing display units other than metric and imperial are not currently supported."
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:101
+#: 3ee6024223a3463da712212c0687085c
+msgid "Multiple screens and remote switching of those screens is supported."
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:102
+#: c1685cf848e34bdb990782c7c0d47cdf
+msgid "Displaying statistics on a dedicated screen is supported, see below for details."
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:103
+#: 4d0a29352ec14f7ab9a842755d17d49a
+msgid "Warning levels for RSSI, Voltage, etc. currently not supported"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:105
+#: 9bd195c013eb448c8b22cec4bb1dd039
+msgid "DJI V1 FPV Goggles"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:111
+#: 0750c3f1ea644987818358baf36fb8e8
+msgid "DJI Goggles RE"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:118
+#: afc5b2a39d3c4b60b2a6ac8fb2cfc47f
+msgid "DJI 2/V1/V2 Goggles without the WTFOS modifications"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:119
+#: 2b6cfcef91a2425db5c90b83c0de071a
+msgid "In addition to native MSP telemetry only based OSD display, a \"Custom OSD\" facility was added in later models that allows any or all the OSD information panels provided by ArduPilot, and warnings, units, etc. to be displayed and positioned."
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:123
+#: 02e1834ec17e4283bb39c2f269420a7b
+msgid "To enable this, set the following parameters (example using SERIAL port 2 as the port to attach to the DJI Air unit using both TX and RX lines):"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:125
+#: cdcf90fe94804d02b863dd0f00eda16e
+msgid ":ref:`OSD_TYPE<OSD_TYPE>` = 3 if no integrated OSD is being used in order to activate the OSD code. If an integrated OSD is present and the user wishes to have both OSDs , then :ref:`OSD_TYPE<OSD_TYPE>` = 1 will activate the on-board OSD as well as providing screens for the MSP OSD function. For example, on vehicles using the DJI goggles/air system for medium range, but still running a long range VTX using the internal OSD for when the vehicle exceeds the range of the HD DJI Goggles. This configuration could use one OSD screen optimized for DJI Goggles, and another for the integrated OSD and the user can switch between them depending on which video system is being viewed."
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:126
+#: 778ca00082be415f839c89cb307e7ded
+msgid ":ref:`SERIAL2_PROTOCOL<SERIAL2_PROTOCOL>` = 33 (DJI FPV)"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:128
+#: 2853089413f445a0a26846efe6874f0d
+msgid ":ref:`MSP_OPTIONS<MSP_OPTIONS>` bit 0 = 0 (Do not EnableTelemetryMode)"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:129
+#: f79bdc9a8a3741d481647799d3982b7c
+msgid ":ref:`MSP_OPTIONS<MSP_OPTIONS>` bit 2 = 1 (EnableBTFLFonts) forces ArduPilot to impersonate Betaflight and use a Betaflight compatible font index for the font table integrated in the remote OSD system. This is required since the goggles do not have an ArduPilot compatible fonts table."
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:130
+#: 0d86e0abbc2d4bf0a1beafc86945310b
+msgid ":ref:`OSD_OPTIONS<OSD_OPTIONS>` bit 5 = 1 (TranslateArrows) use corrected direction arrows when using the Betaflight fonts."
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:132
+#: 0c2dde20215a4219b94c008b788c2e1e
+msgid "Serial port baud rate default is changed to 115.2Kbaud automatically when setting the above protocol type. However, if the user has previously or subsequently changes the baud, this default will not be used. 115.2Kbaud is required by most video goggle systems."
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:134
+#: 515d22b12c2641668f13bdf55998aa2c
+msgid "DJI Custom OSD must be enabled: in SETTINGS->DISPLAY->CUSTOM OSD menu of goggles."
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:137
+#: c4dd74a8399047309609a23725561567
+msgid "Using Mission Planner to Configure the Layout"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:138
+#: 4b9c76fcae974aa49784fbda38c68981
+msgid "Mission Planner(MP) has a tab in its CONFIG menu to configure the on-board OSD many autopilots integrate, as well as setup layouts for Displayport OSDs. This same configuration tab can be used to configure the OSD panels."
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:140
+#: 4e8e460dc18946dd9822e4f69442ec25
+msgid "Mission Planners' OSD setup screen now supports HD OSD configuration. To enable it check \"HD Layout\" in Editor Options at the top right of the OSD screen you want to change."
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:146
+#: 07c150eb03c6492abeee46886ecbb734
+msgid "You can change the MSP OSD display configuration by connecting Mission Planner to SITL while the MSP OSD emulation window is active. By doing this, you can adjust and tweak your OSD configuration using SITL without having to worry about overheating your VTX. Once you are done you can take the OSD parameters you have settled on and move them to your vehicle."
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:148
+#: f0a446d47b4741579be4aeddc3b10bee
+msgid "Mission Planner can be connected running on the same computer, or networked computer, to MAVProxy, using this command in MAVProxy:"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:154
+#: aafda10008c745968049cc58ef2059b7
+msgid "if MP is running on the same PC, the ip address would be 127.0.0.1 (local host address)"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:156
+#: 11113b752e524b4b946f4baffe1ce424
+msgid "For more information about using Mission Planner with SITL Please refer to the `onboard OSD with SITL documentation <common-osd-overview.html#testing-osd-with-sitl>`_"
+msgstr ""
+
+#: ../../source/docs/common-msp-osd-overview-4.2.rst:159
+#: b5f1b2cd3e50460ca49361fa76fa4ee9
+msgid "Video"
+msgstr ""

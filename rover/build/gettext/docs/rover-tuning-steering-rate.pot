@@ -1,0 +1,127 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Rover package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rover \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:39+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/rover-tuning-steering-rate.rst:5
+#: 4a36313382fa4dcfb3888b798107d0df
+msgid "Tuning Turn Rate"
+msgstr ""
+
+#: ../../source/docs/rover-tuning-steering-rate.rst:7
+#: ee4d53b3f909401dbfd3bbdae6d2e924
+msgid "This page describes how a Rover's Turn Rate controller (aka steering rate controller) can be tuned.  This is the most important controller to tune in order to achieve good steering control."
+msgstr ""
+
+#: ../../source/docs/rover-tuning-steering-rate.rst:13
+#: 487d8b40efd040298f593bd2522abd7c
+msgid "Turn Rate PID Tuning"
+msgstr ""
+
+#: ../../source/docs/rover-tuning-steering-rate.rst:15
+#: 99297e009c3f4a3ab110784dc80fb7a6
+msgid "The Turn Rate controller attempts to achieve the desired turn rate (set by the pilot or autopilot) using a PID controller.  All modes except :ref:`Hold <hold-mode>` and :ref:`Manual <manual-mode>` use this controller."
+msgstr ""
+
+#: ../../source/docs/rover-tuning-steering-rate.rst:17
+#: 900f29fc959e4e0399652186aabf643e
+msgid "The FF, P, I and D gains for this controller are held in the :ref:`ATC_STR_RAT_FF <ATC_STR_RAT_FF>`, :ref:`ATC_STR_RAT_P <ATC_STR_RAT_P>`, :ref:`ATC_STR_RAT_I <ATC_STR_RAT_I>` and :ref:`ATC_STR_RAT_D <ATC_STR_RAT_D>` parameters respectively."
+msgstr ""
+
+#: ../../source/docs/rover-tuning-steering-rate.rst:19
+#: 1c478ce65d4d408880805c7d7febd3ae
+msgid "Recommended steps for tuning this controller are:"
+msgstr ""
+
+#: ../../source/docs/rover-tuning-steering-rate.rst:21
+#: 7e323cc137e14d3b83a332d25692e077
+msgid "Connect the ground station to the vehicle using a telemetry radio"
+msgstr ""
+
+#: ../../source/docs/rover-tuning-steering-rate.rst:22
+#: 803e910627ad4f2bbd0966887d02b2c6
+msgid "Set the :ref:`ACRO_TURN_RATE <ACRO_TURN_RATE>` parameter to be roughly what the vehicle's maximum turn rate is in deg/sec.  For a more precise measurement:"
+msgstr ""
+
+#: ../../source/docs/rover-tuning-steering-rate.rst:24
+#: dc39b7d158ac43f6bd8fec377c81ad44
+msgid "On Mission Planner's Flight Data screen, check the \"Tuning\" checkbox (bottom middle), double click on the graph and select \"gz\" (Gyro Z-axis)"
+msgstr ""
+
+#: ../../source/docs/rover-tuning-steering-rate.rst:25
+#: 52cc88cb70ee4ba092670cd30fb860f3
+msgid "Drive the vehicle in Manual mode at a medium speed making very sharp turns"
+msgstr ""
+
+#: ../../source/docs/rover-tuning-steering-rate.rst:26
+#: e2b5fe68a612420d81ad135a51ef3400
+msgid "Set :ref:`ACRO_TURN_RATE <ACRO_TURN_RATE>` to a bit lower than the highest values seen.  Note the value shown may be in centi-degrees/sec so its value should be divided by 100 to match the parameter's deg/sec"
+msgstr ""
+
+#: ../../source/docs/rover-tuning-steering-rate.rst:28
+#: ad83da028e8549b6bb84c153dcbc4f64
+msgid "Set the :ref:`GCS_PID_MASK <GCS_PID_MASK>` to 1 (Steering)"
+msgstr ""
+
+#: ../../source/docs/rover-tuning-steering-rate.rst:29
+#: a4c002dff89546168eeba8ad1e6f91b7
+msgid "On Mission Planner's Flight Data screen, check the \"Tuning\" checkbox (bottom middle), double click on the graph and select \"pidachieved\", \"piddesired\""
+msgstr ""
+
+#: ../../source/docs/rover-tuning-steering-rate.rst:34
+#: 52bff47e8b3c407e94ce679f1aeb5ffc
+msgid "Drive the vehicle in :ref:`Acro <acro-mode>` at a medium speed making various wide and tight turns and compare how well pidachieved follows piddesired"
+msgstr ""
+
+#: ../../source/docs/rover-tuning-steering-rate.rst:35
+#: a16b829fcaff4c98ab1dca849188cbf4
+msgid "Tune the :ref:`FF gain <ATC_STR_RAT_FF>` first.  This gain converts the desired turn rate directly into a steering servo or motor output.  If the vehicle's turn rate response is sluggish then this parameter should be increased.  If the vehicle is constantly overshooting its desired turn rate then this parameter should be reduced."
+msgstr ""
+
+#: ../../source/docs/rover-tuning-steering-rate.rst:36
+#: 3986a9abce3c4a7eb55b41fc375b7ebe
+msgid "The :ref:`P gain <ATC_STR_RAT_P>` corrects for short-term error.  It can often be set to a low value (e.g. 20% of FF) if the FF value is set well.  If set too high the turn rate may oscillate.  This :ref:`P gain <ATC_STR_RAT_P>` should always be lower than the :ref:`FF gain <ATC_STR_RAT_FF>`."
+msgstr ""
+
+#: ../../source/docs/rover-tuning-steering-rate.rst:37
+#: a30d9e9880384c73bf720ed0ed1be982
+msgid "The :ref:`I gain <ATC_STR_RAT_I>` corrects for long-term error.  It can often be set to the same value as P.  If the vehicle never achieves the desired turn rate, then this parameter should be increased.  If the vehicle's turn rate slowly oscillates then this parameter should be reduced.  This :ref:`I gain <ATC_STR_RAT_I>` should always be lower than then :ref:`FF gain <ATC_STR_RAT_FF>`."
+msgstr ""
+
+#: ../../source/docs/rover-tuning-steering-rate.rst:38
+#: 4c9fd5b6b6c74fb5a120608fd1a72bd7
+msgid "The :ref:`D gain <ATC_STR_RAT_D>` is meant to stabilize the output by fighting against short-term changes in turn rate.  This gain can normally be left at zero."
+msgstr ""
+
+#: ../../source/docs/rover-tuning-steering-rate.rst:40
+#: b5d56b04205b40a8b2c4134da3ad17ac
+msgid "Finally set :ref:`ATC_STR_RAT_MAX <ATC_STR_RAT_MAX>` to the :ref:`ACRO_TURN_RATE <ACRO_TURN_RATE>` value and optionally reduce :ref:`ACRO_TURN_RATE <ACRO_TURN_RATE>`.  The difference between these two parameters is:"
+msgstr ""
+
+#: ../../source/docs/rover-tuning-steering-rate.rst:42
+#: 3316cbbcd2c749e889741cb775708738
+msgid ":ref:`ACRO_TURN_RATE <ACRO_TURN_RATE>` controls how the pilot's input is converted to a desired turn rate in Acro mode.  This parameter can be reduced to make turns in Acro mode more docile for the driver"
+msgstr ""
+
+#: ../../source/docs/rover-tuning-steering-rate.rst:43
+#: 0c13134a4b9a49e099ae54fcf78bc5b5
+msgid ":ref:`ATC_STR_RAT_MAX <ATC_STR_RAT_MAX>` is the maximum turn rate that the vehicle will ever attempt in any mode.  This should normally be kept close to the vehicle's performance limits so the vehicle remains agile"
+msgstr ""
+
+#: ../../source/docs/rover-tuning-steering-rate.rst:46
+#: ef6e181cd29c4d7b9d0da8ee993f31a4
+msgid "Video"
+msgstr ""

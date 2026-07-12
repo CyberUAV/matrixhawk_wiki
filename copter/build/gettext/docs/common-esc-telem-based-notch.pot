@@ -1,0 +1,117 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:30+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-esc-telem-based-notch.rst:6
+#: 667f83b7ff9a4a4a8f00a8f1e0d03b48
+msgid "ESC Telemetry Based Harmonic Notch Setup"
+msgstr ""
+
+#: ../../source/docs/common-esc-telem-based-notch.rst:11
+#: 8112f399b02b48aeb32a43fe4588188e
+msgid "If ESCs with telemetry are used (either via a separate telemety wire or bi-directional dshot) then the harmonic notch reference frequency can be set dynamically using ESC telemetry.  The harmonic notch reference frequency parameter, :ref:`INS_HNTCH_FREQ <INS_HNTCH_FREQ>` and/or :ref:`INS_HNTC2_FREQ <INS_HNTC2_FREQ>`, is used to indicate the lowest motor speed for which the ESC telemetry should be used to dynamically set the harmonic notch reference frequency.  It is recommended that this be set to below the hover frequency but above the :ref:`INS_GYRO_FILTER<INS_GYRO_FILTER>` frequency. The bandwidth of the notch (and any enabled harmonic notches :ref:`INS_HNTCH_HMNCS<INS_HNTCH_HMNCS>` or :ref:`INS_HNTC2_HMNCS<INS_HNTC2_HMNCS>`) will maintain a ratio set by the _FREQ/_BW params as the center frequency moves."
+msgstr ""
+
+#: ../../source/docs/common-esc-telem-based-notch.rst:13
+#: f5bf4c7e4370429ab97466901f79bc2f
+msgid "Set the :ref:`INS_HNTCH_REF <INS_HNTCH_REF>` and/or :ref:`INS_HNTC2_REF <INS_HNTC2_REF>` parameter to 1, which will disable scaling of the harmonic notch, and set :ref:`INS_HNTCH_MODE <INS_HNTCH_MODE>` and/or :ref:`INS_HNTC2_MODE <INS_HNTC2_MODE>` to 3 to select ESC telemetry."
+msgstr ""
+
+#: ../../source/docs/common-esc-telem-based-notch.rst:14
+#: fc93d465e9c84dce9758a202c145f340
+msgid "Set :ref:`INS_HNTCH_MODE <INS_HNTCH_MODE>` and/or :ref:`INS_HNTC2_MODE <INS_HNTC2_MODE>` = 3 to use BLHeli ESC telemetry support to set the harmonic notch frequency. This requires that your ESCs are configured correctly to support BLHeli telemetry via :ref:`a serial port<blheli32-esc-telemetry>` or are Bi-directional DShot capable and using Ardupilot autopilot and firmware which supports that capability."
+msgstr ""
+
+#: ../../source/docs/common-esc-telem-based-notch.rst:15
+#: b5d79e0e8ea64ffaad8739fed7b6aac3
+msgid "Set :ref:`INS_HNTCH_ENABLE <INS_HNTCH_ENABLE>` and/or :ref:`INS_HNTC2_ENABLE <INS_HNTC2_ENABLE>` = 1 to enable the harmonic notch"
+msgstr ""
+
+#: ../../source/docs/common-esc-telem-based-notch.rst:16
+#: 004115d4b27940758ddeeeabc0760c4d
+msgid "Set :ref:`INS_HNTCH_FREQ <INS_HNTCH_FREQ>` and/or :ref:`INS_HNTC2_FREQ <INS_HNTC2_FREQ>` = below the hover frequency - you can easily determine this by performing a gentle hover and looking at the ESC telemetry data"
+msgstr ""
+
+#: ../../source/docs/common-esc-telem-based-notch.rst:17
+#: 27f6901d03e94febb724cd900248e39b
+msgid "Set :ref:`INS_HNTCH_BW <INS_HNTCH_BW>` and/or :ref:`INS_HNTC2_BW <INS_HNTC2_BW>` = half of INS_HNTCH_FREQ"
+msgstr ""
+
+#: ../../source/docs/common-esc-telem-based-notch.rst:19
+#: b37ca8a3c0464dacb712afd87500ca86
+msgid "If you set the multi-source option (i.e. a notch per motor) mentioned below, the bandwidth should not be half the frequency. It should be greatly reduced as more notches cause more phase lag (i.e. latency), thus the bandwidth needs to be reduced to maintain a reasonable phase lag, else oscillation and a poorer tune will result despite the more accurate filtering compared to throttle-based filtering. The suggested starting point is setting the _FREQ/_BW params to 4/1 ratio instead of the default 2/1. This is because for notch filters, a wider bandwidth causes a greater phase lag per notch. You can also use the `Filter Tool <https://firmware.ardupilot.org/Tools/FilterTool/>`__ to check the phase lag for your chosen filtering settings. If your phase lag is higher than it was with the throttle-based notch, then you can try reducing the bandwidth even further, balancing the phase lag and the amount of noise in the system."
+msgstr ""
+
+#: ../../source/docs/common-esc-telem-based-notch.rst:24
+#: f11554af06a9441e8c95cc7932b7bc73
+msgid "Center Frequency Slewing"
+msgstr ""
+
+#: ../../source/docs/common-esc-telem-based-notch.rst:26
+#: 7c7e5db613c64b1d9a6878b6d007e7c7
+msgid "The rate at which the harmonic notch frequency is updated has a big impact on noise in the PID loops. Slower update rates mean that the frequency has larger step changes which result in what is called shot noise. Faster update rates reduce this and is the primary reason why using bi-directional dshot with ESC Telemetry reporting of RPM benefits the system overall."
+msgstr ""
+
+#: ../../source/docs/common-esc-telem-based-notch.rst:28
+#: 6d3e82341ea74f0e833903c3c66af01d
+msgid "By default the update rate is 200Hz and where the source of frequency information is slower than that - for instance when using ESC telemetry where the maximum rate that can be sustained is about 100Hz - ArduPilot will slew the frequency changes at 200Hz to avoid large steps. The slewed rate is the rate that is reported by ESC telemetry, although the raw rate can be seen in the logs as well."
+msgstr ""
+
+#: ../../source/docs/common-esc-telem-based-notch.rst:30
+#: 78980e5318f34391b90e15c995c24c35
+msgid "On systems with faster CPUs (H7 based autopilots) it is possible to update the harmonic notch at the main loop rates used for VTOL aircraft (typically 300-400Hz set by :ref:`SCHED_LOOP_RATE<SCHED_LOOP_RATE>`) by setting bit 3 of the notch options, i.e."
+msgstr ""
+
+#: ../../source/docs/common-esc-telem-based-notch.rst:32
+#: ee8c464e6b7e4c399b14c91bf8d9b7ec
+msgid ":ref:`INS_HNTCH_OPTS<INS_HNTCH_OPTS>` and/or :ref:`INS_HNTC2_OPTS<INS_HNTC2_OPTS>` = 4"
+msgstr ""
+
+#: ../../source/docs/common-esc-telem-based-notch.rst:34
+#: 8813c4efefc044b7a68530ab1000ce31
+msgid "Slewing ensures that the step changes at each update tick are smooth, but for optimum system performance you can use bi-directional Dshot ESCs which can deliver frequency updates at 400Hz, using the above option, if possible ."
+msgstr ""
+
+#: ../../source/docs/common-esc-telem-based-notch.rst:37
+#: af6043c4fdd043f281d32022cac83189
+msgid "Checking Harmonic Notch Effectiveness"
+msgstr ""
+
+#: ../../source/docs/common-esc-telem-based-notch.rst:38
+#: 394639626c3444a4a51f5f6a0c07c548
+msgid "Once the notch filter(s) are setup, the effectiveness of them can be checked by again measuring the  frequency spectrum of the output of the filters. Refer back to the :ref:`common-imu-batchsampling`  or :ref:`common-raw-imu-logging` page for this."
+msgstr ""
+
+#: ../../source/docs/common-esc-telem-based-notch.rst:41
+#: 64c2ec514ce74661bfda2071ffe7ca91
+msgid "While the log analysis of noise frequencies is not absolutely required prior to notch setup for RPM based mode, the logging and analysis done for the Confirmation flight using that method can be done in order to confirm the noise elimination, if desired."
+msgstr ""
+
+#: ../../source/docs/common-esc-telem-based-notch.rst:44
+#: 308477cc7e6b4fe888eece5f7a0a3bef
+msgid "Multi-Source"
+msgstr ""
+
+#: ../../source/docs/common-esc-telem-based-notch.rst:46
+#: eff55456e4c5476ab525769370e87f2e
+msgid "By default the ESC based harmonic notch will use an average of the individual motor frequencies in order to drive the center frequency of the notch, this average is then used as the first harmonic and other harmonic notches are added at higher frequency multiples of the first harmonic. It is possible to configure the harmonics to instead be first harmonics per motor. This gives four notches - one for each motor - that exactly tracks the motor speed. In dynamic flight this can give much better noise attenuation."
+msgstr ""
+
+#: ../../source/docs/common-esc-telem-based-notch.rst:48
+#: 087c9c0ed4a642958da32162d83107f7
+msgid "To configure this option set :ref:`INS_HNTCH_OPTS <INS_HNTCH_OPTS>` and/or :ref:`INS_HNTC2_OPTS <INS_HNTC2_OPTS>` to \"2\". You also need to reduce the bandwidth of the notch filter to around :ref:`INS_HNTCH_FREQ<INS_HNTCH_FREQ>` / number of motors, otherwise you will likely have too high phase lag leading to worse PID performance. See the note above for more details."
+msgstr ""

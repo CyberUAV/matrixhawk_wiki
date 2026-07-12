@@ -1,0 +1,187 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/quadplane-auto-mode.rst:4
+#: f1058a31fabc419cadc49e4e9d87dc9e
+msgid "QuadPlane AUTO Missions"
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:6
+#: c32d3acbefe24774b37342a7f399fce2
+msgid "You can ask the QuadPlane code to fly :ref:`AUTO <auto-mode>` missions, with everything from automatic vertical takeoff, to mixtures of fixed wing and VTOL waypoints and automated VTOL landings. The result is an extremely versatile aircraft capable of long range missions with vertical takeoff and landing."
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:16
+#: 22b2ff883a2147f5be6a8a7af1db419f
+msgid "AUTO VTOL Takeoff"
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:18
+#: efe709b724d442e6af2c03f430422408
+msgid "The most common use of VTOL mission commands in a QuadPlane is an automatic VTOL takeoff. To use a VTOL takeoff you plan your auto mission as usual with your ground stations mission editor, but instead of a NAV_TAKEOFF command for a fixed wing takeoff you instead use a NAV_VTOL_TAKEOFF command for a VTOL takeoff."
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:24
+#: bbcc2785d8474c0f90446420fe84147a
+msgid "The only parameter to a NAV_VTOL_TAKEOFF is the altitude above the takeoff point where the takeoff is complete. When executed, the aircraft will start climbing at :ref:`Q_WP_SPD_UP<Q_WP_SPD_UP>`. Once that altitude is reached the aircraft will move to the next waypoint, transitioning to fixed wing flight as needed. The latitude and longitude of the NAV_VTOL_TAKEOFF command is ignored."
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:31
+#: 4bb3ce9486ba4b78a9d2eb31ca892bd9
+msgid "If a NAV_VTOL_TAKEOFF is executed when already flying, the vehicle will enter VTOL mode and climb the amount given in the altitude parameter, above its current altitude. This behavior can be modified by using the \"respect takeoff frames\" bit of the :ref:`Q_OPTIONS<Q_OPTIONS>` bitmask which will skip to the next command if already at or above the altitude set in the parameter, or climb to it."
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:33
+#: 66df94e5bf0048b084bab33cdda5f713
+msgid "In order to prevent the landing gear from dragging due to GPS noise at the beginning of the takeoff, you can set :ref:`Q_NAVALT_MIN<Q_NAVALT_MIN>` to a non zero value which will force the roll and pitch to be zero until that altitude is reached. At which point, navigation (ie loiter in position during the takeoff climb) will become active."
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:36
+#: 6468d129f34f41889681e7fd2549dc82
+msgid "AUTO VTOL Landing"
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:38
+#: 7576df9dda134807b791398031198019
+msgid "There are several ways to perform an automatic VTOL landing. The simplest is to include a NAV_VTOL_LAND command in your mission. That command should use an altitude of zero, and have a latitude and longitude of the landing position."
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:44
+#: d84b05338bdf45499e21c2bddc2fcd8f
+msgid "Versions prior to 4.1"
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:46
+#: f5bcd6af87c144e0b003d0492bf7523c
+msgid "In firmware version prior to 4.1 ,when using NAV_VTOL_LAND it is important to have the right horizontal spacing between that waypoint and the previous one. As soon as the aircraft starts on the NAV_VTOL_LAND waypoint it will transition to VTOL flight, which means it will start flying much more slowly than it does in fixed wing flight. So you need to put the previous waypoint the right distance from the landing point. If it is too far from the landing point then the aircraft will spend a lot of time in VTOL flight which will waste battery. If it is too close to the landing point then it will have to stop very abruptly in order to land."
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:56
+#: 4a6fa8860c344911aa22fe97fb160d59
+msgid "For most small QuadPlanes a distance of between 60 and 80 meters from the last waypoint to the landing point is good. For larger faster flying QuadPlanes you will need a larger distance."
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:60
+#: 9da73a699f4146009443b2d824b412d6
+msgid "Also make sure the altitude of the last waypoint is chosen to be within a reasonable height of the landing. The VTOL landing approach will be done at whatever height the aircraft is at when it starts on the NAV_VTOL_LAND waypoint. So you would typically want the previous waypoint to have an altitude of about 20 meters above the ground."
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:66
+#: 8dda0acc7a714ad59b9dd9e379958d0d
+msgid "If :ref:`Q_OPTIONS<Q_OPTIONS>` is set for \"Use a fixed wing approach\" (bit 4), then instead of transitioning to VTOL flight and doing a VTOL landing, it will remain in plane mode , and proceed to the landing position, climbing or descending to the altitude set in the NAV_VTOL_LAND waypoint. When it reaches within :ref:`Q_FW_LND_APR_RAD<Q_FW_LND_APR_RAD>` of the landing location, it will perform a LOITER_TO_ALT to finish the climb or descent to that altitude set in the waypoint and using :ref:`Q_FW_LND_APR_RAD<Q_FW_LND_APR_RAD>` for the loiter radius , then, turning into the wind, transition to VTOL mode and proceed to the landing location and land."
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:68
+#: 636bc6f973c54bf1b8458b9023055e28
+msgid "Note that if :ref:`Q_FW_LND_APR_RAD<Q_FW_LND_APR_RAD>` = 0, the waypoint loiter radius will be used. Be sure to set the VTOL_LAND waypoint altitude and :ref:`Q_FW_LND_APR_RAD<Q_FW_LND_APR_RAD>` distance to avoid obstacles. Note also, that if this waypoint is reached while in VTOL mode, it will proceed as a normal VTOL_LAND command, even if the option is set."
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:70
+#: 121020b2d0724adb9aac10667293cfd5
+msgid "Be sure that the NAV_VTOL_LAND is placed with enough distance to reach the :ref:`Q_FW_LND_APR_RAD<Q_FW_LND_APR_RAD>`, plus at least a 90 degree turn, plus distance required to de-transition to VTOL mode."
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:75
+#: fe5b84db7f684ae287a9aef89934bdde
+msgid "(figure courtesy of SRP AERO   https://srp.aero/)"
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:78
+#: e903ba2b81804e5d87f3209fab275fb9
+msgid "Versions 4.1 and later"
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:80
+#: f5c474c47c8549fda0ccefcce45fabe5
+msgid "By default a NAV_VTOL_LAND will remain in fixed mode at the current altitude, until close to the landing point, execute an \"airbraking\" maneuver to reduce speed, then transition to VTOL, navigate precisely to the landing point, and descend as in QLAND to a landing. This allows setting the NAV_VTOL_LAND point any distant away from the last waypoint without having to worry about excessive time in VTOL mode."
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:82
+#: 7a7031a90f8344b5a70c11150bd17249
+msgid "If :ref:`Q_OPTIONS<Q_OPTIONS>` bit 16 is set to disable the fixed wing approach phase, then it will immediately transition to VTOL when the command is executed and navigate to the landing point in VTOL mode. This requires the careful setup of the last waypoint before this command to avoid a long path to the landing point while in VTOL mode."
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:84
+#: f6da2e7f56c24e17bda2a3889ff362a9
+msgid "If :ref:`Q_OPTIONS<Q_OPTIONS>` bit 4 is set, then even if bit 16 is set, the vehicle will execute the fixed wing approach and loiter to altitude, described above in the previous section, before changing to VTOL mode. If bit 16 is also set, then when the vehicle switches to VTOL mode, it will attempt to do the airbrake maneuver and QLAND for that final segment."
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:87
+#: 3264c070b72245fba5dcc91908844484
+msgid "Return to Launch"
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:89
+#: 6a2cdde1e86e486abfae03dee92c0a7b
+msgid "An alternative to using a NAV_VTOL_LAND command is to use a RETURN_TO_LAUNCH command, and to set the :ref:`Q_RTL_MODE<Q_RTL_MODE>` parameter to 1."
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:92
+#: 960fccfd594d473bb8e07890479a940b
+msgid "The advantage of using a RETURN_TO_LAUNCH with :ref:`Q_RTL_MODE<Q_RTL_MODE>` set is that the aircraft will automatically use fixed wing flight until it gets within :ref:`RTL_RADIUS <RTL_RADIUS>` of the return point. That makes it easier to plan missions with a VTOL landing from anywhere in the flying area."
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:102
+#: cf6857c97f1340ada1c79fef64c03cd9
+msgid "Mixing VTOL and Fixed Wing Flight"
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:104
+#: aa44a947a8e94b2aa4f57216a18daeb5
+msgid "To mix fixed wing and VTOL flight in one mission you can use the DO_VTOL_TRANSITION command in your mission. A DO_VTOL_TRANSITION command takes a single parameter. If the parameter is set to 3 then the aircraft will change to VTOL mode. If the parameter is set to 4 then it will change to fixed wing mode."
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:113
+#: fbd564bf9f5144549e1e61f6643f16a9
+msgid "In the above example the aircraft will do a VTOL takeoff, then it will fly to waypoint 1 as a fixed wing aircraft. It will then switch to VTOL mode and fly as a VTOL aircraft through waypoints 4 and 5, then it will switch back to fixed wing flight to reach waypoint 7, before finally flying home and landing as a VTOL aircraft (assuming Q_RTL_MODE is set to 1)."
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:121
+#: e38c98c3f78a4a73b7e1b17f67d542c7
+msgid "Hovering in a Mission"
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:123
+#: b59459643e224d24977798b8adfebf54
+msgid "By setting the :ref:`Q_GUIDED_MODE <Q_GUIDED_MODE>` parameter to 1 your quadplane will handle loiter commands in :ref:`GUIDED mode <guided-mode>` and in AUTO missions as a VTOL aircraft. For example, the following mission:"
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:131
+#: e5d8c9f8c0804df7bf063b5d8e553053
+msgid "the aircraft will pause while hovering for 10 seconds at waypoint 3. It will fly the rest of the mission as a fixed wing aircraft. This can be very useful for getting good photographs of a number of locations in a mission while flying most of the mission as an efficient fixed wing aircraft."
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:138
+#: 0995268c01c943ea83314117d2000097
+msgid "Guided Mode"
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:140
+#: 35a78d6b592343398be2ced59e9b80f7
+msgid "In addition to AUTO mode, you can also use a QuadPlane in :ref:`GUIDED mode <guided-mode>`. To use VTOL support in GUIDED mode you need to set the :ref:`Q_GUIDED_MODE <Q_GUIDED_MODE>` parameter to 1. When set, GUIDED mode behaviour will change so that the position hold at the destination will be done as a VTOL hover rather than a fixed wing circle."
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:147
+#: f38f905438ec45cfb22692aeed0dc973
+msgid "The approach to the guided waypoint will be done as a fixed wing aircraft. The transition to VTOL flight will begin at the :ref:`WP_LOITER_RAD <WP_LOITER_RAD>` radius in meters. This should be set appropriately for your aircraft. A value of 80 meters is good for a wide range of QuadPlanes."
+msgstr ""
+
+#: ../../source/docs/quadplane-auto-mode.rst:153
+#: 1d1fa18005684729b2746abf1233dc9b
+msgid "When hovering at the destination in GUIDED mode if a new GUIDED destination is given then the aircraft will transition back to fixed wing flight, fly to the new location and then hover again in VTOL mode."
+msgstr ""

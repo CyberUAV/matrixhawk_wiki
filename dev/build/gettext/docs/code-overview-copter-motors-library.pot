@@ -1,0 +1,162 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:5
+#: b384dfc99c6a41d1906c9863a46f6356
+msgid "Copter Motors Library"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:7
+#: 684bb2c40b7440508e8e4ca808af5a42
+msgid "This page covers the basics of the `Copter motors library <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Motors>`__"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:9
+#: a56629b7eb034872a090225b0191ec10
+msgid "As a reference the diagram below provides a high level view of Copter's architecture.  The motors library can be seen near the bottom right just above the \"Hardware Abstraction Layer\""
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:15
+#: b16becf6ff1e4f0e9a8da49252bc379c
+msgid "ArduPilot supports over 22 different multicopter frames.  The Motors library is designed to consolidate the majority of the differences in these frame types from the higher level code including the attitude controllers and vehicle specific code.  In other words the library provides a common interface so that all vehicles can be controlled in the same way without special handling being required in higher level code."
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:17
+#: ad33154ecba54d14aee1bae467716660
+msgid "The image below shows a categorisation of these frames which is consistent with the class structure"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:23
+#: d463808873e8498897fc2b2d63fbef82
+msgid "Multicopter Matrix : vehicles with mostly downward facing propellers and no servos.  These are the most commonly used frames and the code can be found in the `AP_MotorsMatrix <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Motors/AP_MotorsMatrix.h>`__ class"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:24
+#: aea965d89e9543f086e9b2dbd7260acd
+msgid "Multicopter Tri and Single: vehicles with a combination of motors and servos.  These are peers of each other and Multicopter Matrix and can be found in the `AP_MotorsTri <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Motors/AP_MotorsTri.h>`__ and `AP_MotorsSingle <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Motors/AP_MotorsSingle.h>`__ classes"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:25
+#: a1711f5b20bd4f08b236ad68c99b2ba8
+msgid "Helicopter Single, Quad: vehicles with swashplates that can provide reverse thrust.  These are peers of each other and children of the `AP_MotorsHeli <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Motors/AP_MotorsHeli.h>`__ class."
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:27
+#: b695d8e74a264ae9af2f74950583708f
+msgid "Below is a diagram of the Motors library's class hierarchy"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:34
+#: 2e8271dc4550492e81388f91e7fbb90c
+msgid "Inputs to the Motors Library"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:36
+#: b57e6eebffcb4a2cb177e975d31bf973
+msgid "The Attitude Controller provides high level roll, pitch, yaw and throttle commands to the Motors library in the range of -1 to +1 (for roll, pitch and yaw) or 0 to +1 (for throttle).  The exact point where the attitude controller issues these commands can be found in AC_AttitudeControl_Multi's `rate_controller_run() <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AC_AttitudeControl/AC_AttitudeControl_Multi.cpp#L253>`__ method"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:48
+#: 356785d2a59941058b3f064deb0225e9
+msgid "and the definitions of the methods used can be seen in `AP_Motors_Class.h <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Motors/AP_Motors_Class.h#L78>`__"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:59
+#: 28115743e55d4e30bac60fff16a09da5
+msgid "Outputs and Responsibilities"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:61
+#: 15b9015aa889438a889f617485735b5e
+msgid "All motors libraries must do two things:"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:63
+#: 98549abfabb34b22b7537e46f16486f8
+msgid "Convert the high level inputs from the attitude controller to individual motor and servo outputs"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:65
+#: 3675d05c10b54ad891119b7c93974a82
+msgid "Roll input of +1.0 should cause motor and servo outputs that provide maximum roll rotation to the right"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:66
+#: f6a7960a2cdb460899a68d2435d8dd1a
+msgid "Pitch input of +1.0 should result in maximum pitch back"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:67
+#: eec852af1a0e4b698723ffc126e2d51a
+msgid "Yaw input of +1.0 should result in maximum yaw in the clockwise direction"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:68
+#: dee4ff6b1a8f40a89a5d77b540bdef1d
+msgid "Throttle input of +1.0 should result in maximum acceleration upwards (in the vehicle's body frame).  Throttle of zero should result in minimum acceleration upwards (or maximum acceleration downwards in the case of helicopters)"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:70
+#: fbf1d24dd9564380ac7ecb05df697e28
+msgid "Set the limit flags to avoid \"I-term build-up\" in the attitude and throttle controllers.  Although a vehicle will be flyable without setting these flags, they are important for protecting against overshoot in lean angle control and also for automatic landing detection.  The limits are held in the `AP_Motors_Class::limit <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Motors/AP_Motors_Class.h#L118>`__ variable."
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:83
+#: a6dada62122d40a593374f84436faac1
+msgid "Adding support for a new \"Multicopter Matrix\" frame"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:85
+#: 8cf978f2c9f24f03bd9be72d15cf2887
+msgid "To add support for a new Multicopter Matrix frame type (i.e. a frame with downward facing propellers and no servos):"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:87
+#: 00720670b56948549229aefd22cbd629
+msgid "Decide on a name for the frame and add a new entry into either the motor_frame_class and/or motor_frame_type enums found in `AP_Motors/AP_Motors_Class.h <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Motors/AP_Motors_Class.h#L32>`__"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:88
+#: c578e59fe97c4b8db8489df82c187d59
+msgid "Add the same number(s) from the above step to the `FRAME_CLASS <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Parameters.cpp#L848>`__ and/or `FRAME_TYPE <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Parameters.cpp#L361>`__ parameters descriptions"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:89
+#: b814ae7be5764dee901e74a45c8b6848
+msgid "Add a new case to the `AP_MotorsMatrix::setup_motors() <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Motors/AP_MotorsMatrix.cpp#L466>`__ for the new frame class and/or frame type"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:91
+#: 133a65b5f5d7430ebecd30b7ae8ad5de
+msgid "Use AP_MotorsMatrix::add_motor() or `AP_MotorsMatrix::add_motor_raw() <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Motors/AP_MotorsMatrix.h#L62>`__ functions to set the roll, pitch and yaw factors for each motor on the vehicle.  These factors are multiplied by the high level roll, pitch and yaw input from the attitude controllers and the result is then output to the motors."
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:92
+#: 00417bed9d8c4738b5bb10de779f8f53
+msgid "The above add_motor function's testing_order argument specifies the order in which the motors should spin when the user initiates a motor test.  Normally each motor's testing order should be relative to its position on the frame in a clockwise direction."
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:93
+#: bc9c8afd6e3e484bb5232732440cf9fb
+msgid "set success = true at the bottom of the case to alert the AP_Motors initialisation code that the frame has been setup"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-motors-library.rst:95
+#: 1a66542ee24347038d3ff462ccc6461e
+msgid "Detailed instructions are not yet available for adding more complex frame types (sorry!)"
+msgstr ""

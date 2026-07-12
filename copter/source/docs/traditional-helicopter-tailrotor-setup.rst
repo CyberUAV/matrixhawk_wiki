@@ -28,9 +28,9 @@ Servo with External Gyro :ref:`H_TAIL_TYPE <H_TAIL_TYPE>` = 1
 
 Instead of ArduPilot controlling both the desired yaw rate and stability, this option relies on an external gyro for stabilization. A servo is still used to input yaw rate demands to the tail and its setup as above, for the Servo Only case.
 
-The external gyro gain can be set by the :ref:`H_GYR_GAIN<H_GYR_GAIN>` parameter using the autopilot's "Motor7" output function,``SERVOx_FUNCTION``.
+The external gyro gain can be set by the ``H_GYR_GAIN`` parameter using the autopilot's "Motor7" output function,``SERVOx_FUNCTION``.
 
-In ACRO mode, this gain can be changed to the value of the :ref:`H_GYR_GAIN_ACRO<H_GYR_GAIN_ACRO>` parameter, if non-zero.
+In ACRO mode, this gain can be changed to the value of the ``H_GYR_GAIN_ACRO`` parameter, if non-zero.
 
 Direct Drive Variable Pitch :ref:`H_TAIL_TYPE <H_TAIL_TYPE>` = 2
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -42,11 +42,11 @@ The range of the motor ESC is controlled by its output's ``SERVOx_MIN/MAX`` para
 Direct Drive Fixed Pitch :ref:`H_TAIL_TYPE <H_TAIL_TYPE>` = 3 or 4
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-The Direct Drive Fixed Pitch (DDFP) tail type uses a fixed pitch tail rotor and separate motor. The stabilization and yaw is controlled by the speed of this motor. It has two options: one where the main rotor rotates clockwise when viewed from above and the other where the main rotor rotates counter-clockwise when viewed from above.  Be sure to select the DDFP tail type for the main rotor rotation.  In this case, the control of tailrotor thrust is accomplished through tailrotor speed since it is a fixed pitch propeller. The ``SERVOx_FUNCTION`` of "36" (Motor4) should be assigned to the servo channel to which the tailrotor ESC is physically connected.
+The Direct Drive Fixed Pitch (DDFP) tail type uses a fixed pitch tail rotor and separate motor. The stabilization and yaw is controlled by the speed of this motor. It has two options: one where the main rotor rotates clockwise when viewed from above and the other where the main rotor rotates counter-clockwise when viewed from above.  Be sure to select the DDFP tail type for the main rotor rotation.  In this case, the control of tailrotor thrust is accomplished through tailrotor speed since it is a fixed pitch propeller. The ``SERVOx_FUNCTION`` of "36" (Motor4) should be assigned to the servo channel to which the tailrotor ESC is physically connected.  On new DDFP setups it is suggested to set ``H_DDFP_THST_EXPO`` to .65 as a starting point.  This will be a good enough thrust expo for most aircraft.
 
 There are several parameters that provide the ability to linearize the thrust produced by the tail rotor motor and therefore provide better control:
 
-- :ref:`H_DDFP_THST_EXPO<H_DDFP_THST_EXPO>` - Tail rotor DDFP motor thrust curve exponent (0.0 for linear to 1.0 for second order curve). Default = 0
+- :ref:`H_DDFP_THST_EXPO<H_DDFP_THST_EXPO>` - Tail rotor DDFP motor thrust curve exponent (0.0 for linear to 1.0 for second order curve). A suggested starting point for tuning this parameter is .65 and will often give better better results than the default. Default = 0 (for legacy compatibility reason)
 - :ref:`H_DDFP_SPIN_MIN<H_DDFP_SPIN_MIN>` - Point at which the DDFP motor thrust starts expressed as a number from 0 to 1 in the entire output range.  Default = 0
 - :ref:`H_DDFP_SPIN_MAX<H_DDFP_SPIN_MAX>` - Point at which the DDFP motor thrust saturates expressed as a number from 0 to 1 in the entire output range. Default = 1
 - :ref:`H_DDFP_BAT_IDX<H_DDFP_BAT_IDX>` - Index of battery to be used for voltage compensation. Default = 0.

@@ -130,17 +130,11 @@ RPi type:
     python3 mavproxy.py --master=/dev/serial0 --baudrate 921600 --aircraft MyCopter
     
 
-Once MAVProxy has started you should be able to type in the following
-command to display the ``ARMING_CHECK`` parameters value
+Once MAVProxy has started you should be able to use the following command to arm (ensure propellers are removed!):
 
 ::
 
-    param show ARMING_CHECK
-    param set ARMING_CHECK 0
-    arm throttle
-
-.. figure:: ../images/RaspberryPi_ArmTestThroughPutty.png
-    :target: ../_images/RaspberryPi_ArmTestThroughPutty.png
+    arm throttle force
 
 .. note::
 
@@ -157,7 +151,7 @@ To run MAVProxy as a telemetry router on the Pi, set it up to run as a service a
 
 .. note::
 
-    If the Raspberry PI is heavily loaded, mavproxy.py might not provide a reliable connecton for telemetry routing. This is more likely on older/slower
+    If the Raspberry PI is heavily loaded, mavproxy.py might not provide a reliable connection for telemetry routing. This is more likely on older/slower
     devices like the Raspberry PI Zero. If this happens, consider using mavlink-routerd. See this post on the ArduPilot forum for a detailed discussion: `MavLink Routing with Router software <https://discuss.ardupilot.org/t/mavlink-routing-with-a-router-software/82138#solution-1-3>`__.
 
 Mavlink-router

@@ -1,0 +1,237 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:5
+#: e6d3a96416104ed28f288f34317031dd
+msgid "Camera Control in Auto Missions"
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:7
+#: 5cba3e18d8b74bfbbcacb021213b497f
+msgid "This article describes ArduPilot's camera and gimbal commands, and explains how these can be used in Mission Planner to define camera survey missions.  These instructions assume a :ref:`camera trigger and gimbal have already been connected and configured <common-cameras-and-gimbals>`."
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:12
+#: f375b02f364642fa835e1d357e9a2146
+msgid "Overview"
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:14
+#: eee1b2c4426741bca93f0f98a197f007
+msgid "Planning a camera mission is almost exactly the same as :ref:`planning any other mission with waypoints and events <common-planning-a-mission-with-waypoints-and-events>`. The only difference is that in a camera mission you specify commands to trigger the camera shutter at waypoints or at regular intervals as the vehicle moves. If the camera is mounted on a gimbal, you can also set the gimbal orientation, or make it track a particular point of interest."
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:20
+#: 347431220b0c4e01981aa009f52f0a9d
+msgid "For simple missions you can manually specify the required waypoints and camera commands. For more complex paths and grid surveys Mission Planner makes things easy by providing tools to automatically generating the required mission for arbitrary regions."
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:26
+#: 430486967c8a4925813c08e3474666b1
+msgid "Camera commands"
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:28
+#: 7bbe09b70852419995e2ee31eecea603
+msgid "``DO_SET_CAM_TRIGG_DIST`` — Trigger the camera shutter at regular intervals. This is most commonly used for supporting area surveys."
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:30
+#: 093178f0d8234707bac47b91ac93b30d
+msgid "``DO_DIGICAM_CONTROL`` — Trigger the camera shutter once every time this command is called."
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:32
+#: 6c2e1cf825884476ba166a3c82749c00
+msgid "``DO_AUX_FUNCTION`` — allows any :ref:`auxiliary function <common-auxiliary-functions>` to be executed from within a mission without setting up an auxiliary switch.  This includes camera start recording, camera zoom, camera manual focus and camera auto focus."
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:35
+#: b137fe3435ed4c6abf8f6d6a07c08ca3
+msgid "Camera gimbal commands"
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:37
+#: 904096d073b34d9c8b5f391424f7bd7f
+msgid "If a camera gimbal is used, you can set the camera position (yaw, tilt, roll) or aim it at a specific region of interest (ROI):"
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:40
+#: 79412bd79ab64ef788dda26e374cc969
+msgid "``DO_SET_ROI`` — Target the camera towards a specified region of interest (position, including altitude)."
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:42
+#: d1de47c9afd54277a993ba15cfc68aa0
+msgid "``DO_GIMBAL_MANAGER_PITCHYAW`` — Move the gimbal to the desired pitch and yaw angles (in degrees).  Positive pitch angles are up, Negative are down.  Positive yaw angles are clockwise, negative are counter clockwise.   If the \"Flags\" field is \"0\" the yaw angle is in \"body frame\" (e.g. 0 is forward).  If \"Flags\" is \"16\" the yaw angle is in \"earth frame\" (e.g. 0 is North)."
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:43
+#: a72187b19628428c9cb4de0954c181ec
+msgid "``DO_MOUNT_CONTROL`` — Position the gimbal with the specified roll, pitch and yaw."
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:47
+#: 3d6746f8b1bf42c182bd979f454af9ab
+msgid "Servo and Relay commands"
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:49
+#: 77dc44dfc72242a5a936b3ffcc327b81
+msgid "Servos and relay outputs can be connected to hardware and activated during missions using the ``DO_SET_SERVO`` or ``DO_SET_RELAY`` commands, respectively."
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:53
+#: 47a6eab608044a5c9c467a4f1dc8a848
+msgid "One possible use for these outputs is to control camera features other than the shutter (for example, to set the zoom level or switch capture from still to video)."
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:59
+#: df874ca493804216962009086e0a2f8e
+msgid "The method used to connect your servo or relay to the camera, and what features are accessible, will depend the camera and its supported remote-control mechanism(s) (see the :ref:`Camera Control and GeoTagging section of the Cameras and Gimbals wiki page <common-cameras-and-gimbals>`)"
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:64
+#: 96072fbc7ac84604b73454ea78263c04
+msgid "Auto-mission types"
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:66
+#: baf7d48d8e70453187d2831ccf7c85b9
+msgid "Mission Planner supports the following *Auto Waypoint* options. To access these open the *Flight Plan* screen, right-click on the map and select the option from under the *Auto WP* menu:"
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:70
+#: 490f96077b73403ea6623cd5f5a176ff
+msgid "**Create WP Circle** — Create a circle of waypoints."
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:71
+#: 1dbfd8f40ee943d69ad5b29360152f23
+msgid "**Area** — Displays the area of the current polygon (if defined)."
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:72
+#: 124afdec0db34223908b49e5f70021b6
+msgid "**Create Spline Circle** — A circle where the altitude of waypoints follows a rising spline (relevant to flying vehicles)."
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:74
+#: 3b7f207f593c4e3b8423676558160663
+msgid "**Survey (Grid)** — Automatically create waypoints and camera control commands to survey a specified polygon."
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:76
+#: c0fc5cf2067a45d3befaaafc725622e7
+msgid "**Survey (Gridv2)** — *Under construction!* This is a simpler grid control for creating a rectangular survey area."
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:78
+#: 02d7f4cd272e48f1a0ad44b3ccf7f0a9
+msgid "**SimpleGrid** — A simple auto-created survey grid. No camera control is defined, so this must be added separately."
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:81
+#: 2db5adb62fc44ee78c8638e2fc44913d
+msgid "The following sections include community-provided examples of automatic survey missions."
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:87
+#: f1ead8aa25f84c1f89baedabc5dd418f
+msgid "Survey (Grid) Example"
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:89
+#: 81b790eb874542939e2b9b7aeb47e107
+msgid "Mission Planner's *Survey (Grid)* option automatically defines the waypoints required to cover an arbitrary polygon, and sets ``DO_SET_CAM_TRIGG_DIST`` on relevant waypoints to ensure that pictures are captured at regular intervals in the vehicle's path."
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:94
+#: c2358cbb869d4f96ae0c07dce258f2bf
+msgid "Open the *Flight Plan* tab"
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:95
+#: 6dffa214ba2f4f708d6e6ebd57bacc9a
+msgid "**Right click** on the map, and select **Draw Polygon \\| Add PolyGon Point**. Create points surrounding the area to be photographed."
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:97
+#: 63f19b6731d14341b65cad54b4e7584c
+msgid "**Right click** on the map and select **Auto WP \\| Survey(Grid)**:"
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:99
+#: e281a2470a314714acacf5a4bf42ca14
+msgid "|surveyexample|"
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:143
+#: d6d7eeeec2e349188251c8708eeda4b1
+msgid "surveyexample"
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:101
+#: 282105436995466ea17f54db7c81aeab
+msgid "*Mission Planner* will then display a configuration screen where you can define the camera make/model and other parameters including the overlap you want between pictures, lens size, etc. ``DO_SET_CAM_TRIGG_DIST`` is automatically calculated based on this information!"
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:107
+#: c7a7f9e262d94db8995d633e81289b34
+msgid "|surveyexample2|"
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:140
+#: cbb9b2dfba62463991c8afcba2927933
+msgid "surveyexample2"
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:109
+#: f0c78b9047424dbfa27d140755ee43f0
+msgid "After clicking on **Accept**, *Mission Planner* will generate a list of waypoints covering the specified area, and including take-off and landing waypoints. The ``DO_SET_CAM_TRIGG_DIST`` command is called to set the distance in meters between two camera triggers during your mission. At the end of the mission ``DO_SET_CAM_TRIGG_DIST`` is called again to set the parameter back to zero (stops capturing images)."
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:116
+#: 8faba61cf51c4c9abd0522245e9a3bb1
+msgid "The final mission with waypoints and camera triggers looks like this:"
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:122
+#: 1c868a10b522493e86bc3cbe5f1ae7d5
+msgid "The test mission shown above was run. It generated 15 images, which have been stitched together. A thumbnail of the composite image is shown below (because the full size image is too large at about 107 MBytes)."
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:131
+#: ee777ac1b7e149a99b0d6ba014795942
+msgid "Creating composite images"
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:133
+#: 888724a14cae45499070719cc2255de1
+msgid "There are a number of good free and paid tools for creating composite images:"
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:136
+#: 4a9c2bd8703848a2b5cf616184815746
+msgid "`Pix4Dmapper <https://www.pix4d.com/>`__ - The free \"discovery\" version supports image merging."
+msgstr ""
+
+#: ../../source/docs/common-camera-control-and-auto-missions-in-mission-planner.rst:138
+#: 0e0ce117f29c4e2786423a83c109be6a
+msgid "`Microsoft Image Composite Editor (ICE) <http://research.microsoft.com/en-us/um/redmond/projects/ice/>`__"
+msgstr ""

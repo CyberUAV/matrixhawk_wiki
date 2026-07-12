@@ -30,7 +30,7 @@ Specifications
    -  13x PWM outputs (12 motor outputs and 1 LED output)
    -  1x RC input pre-configured on a UART
    -  7x total UARTs/serial for GPS and other peripherals
-   -  microSD Card
+   -  integrated microSD chip for logging
    -  2x I2C port for external compass,airspeed,etc.
    -  1x CAN port
    -  USB-C port
@@ -84,7 +84,7 @@ RC input is configured on the R2 (UART2_RX) pin. It supports all RC protocols ex
 
 - CRSF also requires a T2 connection, in addition to R2, and automatically provides telemetry. Set :ref:`SERIAL2_OPTIONS<SERIAL2_OPTIONS>` to "0".
 
-- SRXL2 requires a connecton to T2 and automatically provides telemetry.  Set :ref:`SERIAL2_OPTIONS<SERIAL2_OPTIONS>` to "4".
+- SRXL2 requires a connection to T2 and automatically provides telemetry.  Set :ref:`SERIAL2_OPTIONS<SERIAL2_OPTIONS>` to "4".
 
 Any UART can be used for RC system connections in ArduPilot also, and is compatible with all protocols except PPM. See :ref:`common-rc-systems` for details.
 

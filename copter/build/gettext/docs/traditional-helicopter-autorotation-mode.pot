@@ -1,0 +1,222 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:30+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:5
+#: 8596646b962a4b9c9cd405cf0bb13100
+msgid "Autonomous Autorotation"
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:7
+#: 618c9fc5773249e18fd2d228efa74e9f
+msgid "This page introduces the helicopter autorotation flight mode.  To assist in understanding how the mode works a basic overview of the theory is first given.  This will be followed by instructions on how to setup and tune the flight mode.  However, as this mode is still in development, a link to the forum thread is provided.  This thread contains all the latest information on the mode, as it is created."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:14
+#: c570ab90300b4f359e98e8a47fa7be9b
+msgid "This flight mode is available for traditional helicopters only.  It is currently limited to single rotor helicopters."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:18
+#: 7e8053c9815d492eb79316c47ba80c9b
+msgid "This is an ongoing development project.  This is only enabled for use with SITL.  Do not attempt to use this flight mode in real life."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:23
+#: 4651b446eef643f89ce8a77af556995b
+msgid "Overview of the Autorotation Manoeuvre"
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:25
+#: 65675a1259a64b07807a6d95b269ad2b
+msgid "Traditional helicopters are capable of landing safely after losing propulsive power.  This is achieved through the autorotation manoeuvre, in which the descending aircraft can use the airflow being forced up through the main blades to drive the rotor and still produce some upwards thrust.  The primary goal of the manoeuvre is to use the aircraft's remaining energy to bring the aircraft safely to the ground, landing softly."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:30
+#: ced45a722bf4412698d971517b195197
+msgid "The manoeuvre can be broken down into phases.  The breakdown and description of those phases differs across the literature that is available on the topic.  The description that is given here matches the approach taken in the implementation with ArduCopter."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:33
+#: c73fbb93803c4e8a8eaadc8c261361f2
+msgid "There are four phases of the autorotation:"
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:35
+#: c07c2f871bfc432cab82896c9b4be265
+msgid "**1. Entry** - The initial actions of the vehicle in which collective is used to minimize head speed loss and cyclic is used for attitude control to either maintain or begin building forward airspeed."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:38
+#: 36ecf7336be243c2a8aaeb08de8425a9
+msgid "**2. Glide** - The continuation of the entry phase in which collective is used to manage head speed and cyclic is used to manage airspeed. In this phase the aircraft can be gently navigated to attain the most suitable landing area, within its gliding range."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:41
+#: 75329cd9b2c24d3fbd33a18e56df15f8
+msgid "**3. Flare** - Performed close to the ground this phase of the manoeuvre looks to convert airspeed into lift, reducing descent speed and, where necessary, building head speed.  This is achieved through a complex coupling of both collective and cyclic."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:44
+#: db09bee05a8b499f9fd449244900bbf6
+msgid "**4. Touch-Down** - The vehicle is gently landed using the energy remaining in the rotor head.  Head speed is converted into thrust through collective management and cyclic is used to maintain a landing attitude."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:47
+#: ce1563218ba64ced97dc08a5998bace8
+msgid "The diagram below illustrates the four phases.  Each phase will now be explained in more detail."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:54
+#: 2af1337f2b5e493694f467eaa4813fa7
+msgid "Entry Phase"
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:56
+#: 431993b18726443b9f887c2faee11ac0
+msgid "Without sufficient power to maintain flight a helicopter will descend.  The descending aircraft can utilise the relative upward flowing air to drive the main rotor.  This is the essence of the autorotation.  This is illustrated in the image below, in which the left-hand images show a simplified view of how the rotor forces are generated in normal powered flight.  This can then be compared with the images on the right which show the forces generated whilst gliding in an autorotation."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:63
+#: 45d65acf0669469fba4268cf8300bb81
+msgid "A key difference to note between the two scenarios is the reversal of the vertical velocity component.  It is this reversal of the vertical velocity that necessitates careful collective management when entering the autorotation.  The objective is to reduce the blade collective angle reducing the risk of blade stall.  It is key that the collective is moved proportionally to the direction of the resultant velocity vector to minimize the blade drag generated, preventing excessive loss of head speed.  As the descent velocity increases the lift vector will naturally rotate towards the leading edge of the blade, providing the driving force to maintain rotor RPM."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:69
+#: 3dd3b407771a404a9109df84428a64f5
+msgid "In addition to this, the forward airspeed must be either maintained or increased (if the failure is initiated from a low airspeed state).  This is done through cyclic controls."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:74
+#: 4c58178e6eed49118273a264970d6a12
+msgid "Glide Phase"
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:76
+#: 15bbbe0647404c6c8812d7c12f2287b5
+msgid "This phase of the manoeuvre is analogous to gliding flight for fixed-wing aircraft.  Forward airspeed is necessary for efficient flight and will improve the range of the helicopter, increasing the likelihood of finding a suitable landing area.  It is important to maintain aircraft energy as efficiently as possible in the glide phase so that the maximum amount of energy is available for the flare and touch-down phase."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:80
+#: 3a751f974a1b4100984ca1cb63eeccfc
+msgid "It is during this phase of flight that small angles of bank and low yaw rates can be applied to navigate the aircraft towards a suitable landing area, and where possible, turn to land into wind."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:85
+#: b0a1e05f6b12448abd11c97e0b884f82
+msgid "Flare Phase"
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:87
+#: b4d941cd70f241eeb9283c400caa0597
+msgid "This is the most critical phase for achieving a good landing during autorotation.  The objectives here are to:"
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:89
+#: 5c15c58bc94e410dad031f965e78a30f
+msgid "Reduce vertical descent speed."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:90
+#: 9f91291b65df4d42a9b6b66cb89d6522
+msgid "Convert forward airspeed into main rotor lift."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:91
+#: 76597360cf9b428f9cb6520bb8ab5f90
+msgid "Perform the manoeuvre close to the ground so as to minimize the height loss required during the touch-down phase."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:93
+#: 5e413529bb524113b967dfc05865a3cf
+msgid "Cyclic is used to pitch the aircraft nose up.  Doing so changes the effective angle of attack seen by the main rotor blades.  This has the effects of both increasing the lift force and rotating the lift vector towards the leading edge of the blade.  Hence, a greater component of the blade lift is available for driving the main rotor, providing more energy for use in the touch-down phase.  In addition, the larger lift and drag forces generated in the flare contribute to the deceleration of the aircraft ready for landing.  Collective is subsequently used to manage the head speed, preventing overspeed and blade stall as required.  It is during this phase of flight, toward the transition to touch-down, that the flow direction is once again reversed and the rotor begins generating a downward induced flow once more."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:100
+#: 26bd59489cb849aebc5f5988ce03236d
+msgid "As this manoeuvre is flown close to the ground it requires a reliable height estimate that can account for the local terrain.  Downward facing LiDaR is therefore highly recommended."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:105
+#: 9f22a2c56c2842449f14d9f489cee8c8
+msgid "Touch-Down Phase"
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:107
+#: f9b4c0aac2764528a9512e60cd9a0e8d
+msgid "Finally, with the aircraft now close to the ground, with low forward and descent speeds, it can be gently lowered to the ground.  This is achieved using the energy remaining in the main rotor to produce/maintain an induced flow.  As energy in the main rotor is used it will slow, meaning more and more positive collective is applied to maintain the thrust force being generated.  The aircraft must therefore be landed before the head speed slows too much, resulting in blade stall.  This phase of the autorotation is highly dependent on the amount of energy that can be stored in the main rotor head.  Main rotors with higher inertia are therefore comparatively easier to autorotate due to their greater capacity to store energy.  This is one reason why larger RC helicopters are deemed easier to autorotate than their smaller counterparts."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:116
+#: dc2e1db4752c486d86176e8b71e32468
+msgid "Bail-Out Phase"
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:118
+#: 1d5878ed763c41bc93194822cfe35e7a
+msgid "Not a part of the \"standard\" autorotation, the bail-out phase has been created for the purposes of recovering the aircraft when tuning the flight mode or for when power is restored after a temporary power failure clears (e.g. a kinked fuel line becomes straight again).  When exiting the autonomous autorotation flight mode the aircraft will be returned to a \"non-manual collective mode\".  It is therefore necessary to gently reintroduce the z position controller to prevent aggressive collective angles being applied, resulting in blade stall or even rotor stop."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:123
+#: f5b85dbca40f4e20b124028a65b90d31
+msgid "When initiated, the bail-out phase will read the requested climb or descent rate from the operators throttle stick position.  The aircraft will then be decelerated over a set period of time (see parameter AROT_BAIL_TIME).  At the end of which, the requested vertical speed will match the magnitude requested on the stick. The time spent in this phase is typically of the order of two seconds.  Smaller helicopters (550 size and below) may require this time to be extended to three or four seconds.  When deciding/tuning, it is conservative to opt for a longer time and initiate a practice bail-out with a large height margin for recovery."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:130
+#: 158398b8f0e84904b6c80cdb5b256eb7
+msgid "The motor ramp time defined by H_RSC_RAMP_TIME is ignored during bail-out, and a hard-coded ramp time of one second is used."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:135
+#: e7182f946b0443ee8b8be42e6a13f506
+msgid "The ramp time defined by H_RSC_RAMP_TIME is now only observed when the aircraft is on ground and the \"landed flag\" is set true.  It often takes ArduCopter a second to register that the aircraft has landed once on the ground.  Therefore, if the interlock is re-engaged immediately after the aircraft touches down the one second ramp time of the bail-out phase can be initiated on the ground.  Caution is therefore required when running autorotations in quick succession to prevent rapid rotor spool up on ground."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:142
+#: ad3f126e028c4e3bac832903353ec2ef
+msgid "Mode Setup"
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:144
+#: b00d713ec7204056b0d02bbad08ba0f2
+msgid "This flight mode is currently under development.  It is available in Copter 4.0 as SITL only, for those that want to test the entry, glide, and bail-out phases. For the most up-to-date information please see this `Discourse Topic <https://discuss.ardupilot.org/t/autonomous-autorotation-gsoc-project-blog/42139>`__ . Once the mode has been sufficiently tested the final instructions will be published and maintained on this wiki page."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:151
+#: 22a1df7a1dbc4336a4f70976546f4b34
+msgid "Mode Entry"
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:153
+#: 93925690f29447bc9e429ef5812929eb
+msgid "The autonomous autorotation flight mode cannot be entered via a mode switch, as is done with other flight modes.  In an attempt to mimic the autorotation procedure followed when flying a manual autorotation, the mode is entered and exited using the motor interlock switch.  The autonomous flight mode can only be entered if the interlock is disengaged whilst flying in a non-manual collective mode.  When exiting the autorotation the flight mode is returned to the mode from which it came (e.g. Altitude Hold -> Autonomous Autorotation -> Altitude Hold).  The only exception to this is when the aircraft enters the autorotation from an auto mission. In which case, the mode is exited into Altitude Hold.  This is done to prevent the aircraft from potentially resuming its auto mission and flying further away from home, whereby in the scenario it has autonomously recovered from a power failure and is therefore high risk for another power failure."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:160
+#: f3c1a1fe44e94b17a96d3071b9b3eb57
+msgid "The diagram below illustrates the mode switchology:"
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:166
+#: deff09dc525342c489344ddd2ea9bf9e
+msgid "Setup Support"
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-autorotation-mode.rst:168
+#: 6eb4333ae8f249d88842c41f75b2930b
+msgid "For any setup advice please post in this `forum thread <https://discuss.ardupilot.org/t/autonomous-autorotation-gsoc-project-blog/42139>`__."
+msgstr ""

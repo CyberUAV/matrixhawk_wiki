@@ -82,7 +82,7 @@ individual tunable parameters whereas values of 101 or higher
 correspond to sets of related parameters that can be tuned one after
 the other in a flight.
 
-.. note:: Most of the tuneable parameters apply to the VTOL operation of QuadPlanes. Only :ref:`TUNE_PARAM<TUNE_PARAM>` values in the 50-57 range are for fixed wing operation.
+.. note:: Most of the tuneable parameters apply to the VTOL operation of QuadPlanes. Only :ref:`TUNE_PARAM<TUNE_PARAM>` values in the 50-57 and 111-113 range are for fixed wing operation.
 
 Use your ground stations parameter interface to see see the full list
 of tunable parameters and parameter sets available for :ref:`TUNE_PARAM<TUNE_PARAM>`. For
@@ -176,30 +176,39 @@ When you have cycled through all of the parameters in the tuning set
 you have chosen it will wrap back around to the first parameter in the
 set.
 
-+-----------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
-+:ref:`TUNE_PARAM<TUNE_PARAM>`+  Set Name         +       Params Tuned                                                                                                  +
-+-----------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
-+    101                      + Set_RateRollPitch +     :ref:`Q_A_RAT_RLL_D<Q_A_RAT_RLL_D>`/:ref:`Q_A_RAT_RLL_P<Q_A_RAT_RLL_P>` & :ref:`Q_A_RAT_RLL_I<Q_A_RAT_RLL_I>`/  +
-+                             +                   +     :ref:`Q_A_RAT_PIT_D<Q_A_RAT_PIT_D>`/:ref:`Q_A_RAT_PIT_P<Q_A_RAT_PIT_P>` & :ref:`Q_A_RAT_PIT_I<Q_A_RAT_PIT_I>`   +
-+-----------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
-+    102                      + Set_RateRoll      +     :ref:`Q_A_RAT_RLL_D<Q_A_RAT_RLL_D>` / :ref:`Q_A_RAT_RLL_P<Q_A_RAT_RLL_P>` & :ref:`Q_A_RAT_RLL_I<Q_A_RAT_RLL_I>` +
-+-----------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
-+    103                      + Set_RatePitch     +     :ref:`Q_A_RAT_PIT_D<Q_A_RAT_PIT_D>` / :ref:`Q_A_RAT_PIT_P<Q_A_RAT_PIT_P>` & :ref:`Q_A_RAT_PIT_I<Q_A_RAT_PIT_I>` +
-+-----------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
-+    104                      + Set_RateYaw       +     :ref:`Q_A_RAT_YAW_P<Q_A_RAT_YAW_P>` / :ref:`Q_A_RAT_YAW_I<Q_A_RAT_YAW_I>` / :ref:`Q_A_RAT_YAW_D<Q_A_RAT_YAW_D>` +
-+-----------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
-+    105                      + Set_AngleRollPitch+     :ref:`Q_A_ANG_RLL_P<Q_A_ANG_RLL_P>` / :ref:`Q_A_ANG_PIT_P<Q_A_ANG_PIT_P>`                                       +
-+-----------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
-+    106                      + Set_VelXY         +     :ref:`Q_P_VELXY_P<Q_P_VELXY_P>`  / :ref:`Q_P_VELXY_I<Q_P_VELXY_I>`                                              +
-+-----------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
-+    107                      + Set_AccelZ        +     :ref:`Q_P_ACCZ_P<Q_P_ACCZ_P>` /  :ref:`Q_P_ACCZ_I<Q_P_ACCZ_I>` / :ref:`Q_P_ACCZ_D<Q_P_ACCZ_D>`                  +
-+-----------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
-+    108                      + Set_RatePitchDP   +     :ref:`Q_A_RAT_PIT_D<Q_A_RAT_PIT_D>` / :ref:`Q_A_RAT_PIT_P<Q_A_RAT_PIT_P>`                                       +
-+-----------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
-+    109                      + Set_RateRollDP    +     :ref:`Q_A_RAT_RLL_D<Q_A_RAT_RLL_D>` / :ref:`Q_A_RAT_RLL_P<Q_A_RAT_RLL_P>`                                       +
-+-----------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
-+    110                      + Set_RateYawDP     +     :ref:`Q_A_RAT_YAW_D<Q_A_RAT_YAW_D>` /  :ref:`Q_A_RAT_YAW_P<Q_A_RAT_YAW_P>`                                      +
-+-----------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
++------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
++:ref:`TUNE_PARAM<TUNE_PARAM>` +  Set Name         +       Params Tuned                                                                                                  +
++------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
++    101                       + Set_RateRollPitch +     :ref:`Q_A_RAT_RLL_D<Q_A_RAT_RLL_D>`/:ref:`Q_A_RAT_RLL_P<Q_A_RAT_RLL_P>` & :ref:`Q_A_RAT_RLL_I<Q_A_RAT_RLL_I>`/  +
++                              +                   +     :ref:`Q_A_RAT_PIT_D<Q_A_RAT_PIT_D>`/:ref:`Q_A_RAT_PIT_P<Q_A_RAT_PIT_P>` & :ref:`Q_A_RAT_PIT_I<Q_A_RAT_PIT_I>`   +
++------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
++    102                       + Set_RateRoll      +     :ref:`Q_A_RAT_RLL_D<Q_A_RAT_RLL_D>` / :ref:`Q_A_RAT_RLL_P<Q_A_RAT_RLL_P>` & :ref:`Q_A_RAT_RLL_I<Q_A_RAT_RLL_I>` +
++------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
++    103                       + Set_RatePitch     +     :ref:`Q_A_RAT_PIT_D<Q_A_RAT_PIT_D>` / :ref:`Q_A_RAT_PIT_P<Q_A_RAT_PIT_P>` & :ref:`Q_A_RAT_PIT_I<Q_A_RAT_PIT_I>` +
++------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
++    104                       + Set_RateYaw       +     :ref:`Q_A_RAT_YAW_P<Q_A_RAT_YAW_P>` / :ref:`Q_A_RAT_YAW_I<Q_A_RAT_YAW_I>` / :ref:`Q_A_RAT_YAW_D<Q_A_RAT_YAW_D>` +
++------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
++    105                       + Set_AngleRollPitch+     :ref:`Q_A_ANG_RLL_P<Q_A_ANG_RLL_P>` / :ref:`Q_A_ANG_PIT_P<Q_A_ANG_PIT_P>`                                       +
++------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
++    106                       + Set_VelXY         +     :ref:`Q_P_NE_VEL_P<Q_P_NE_VEL_P>`  / :ref:`Q_P_NE_VEL_I<Q_P_NE_VEL_I>`                                          +
++------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
++    107                       + Set_AccelZ        +     :ref:`Q_P_D_ACC_P<Q_P_D_ACC_P>` /  :ref:`Q_P_D_ACC_I<Q_P_D_ACC_I>` / :ref:`Q_P_D_ACC_D<Q_P_D_ACC_D>`            +
++------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
++    108                       + Set_RatePitchDP   +     :ref:`Q_A_RAT_PIT_D<Q_A_RAT_PIT_D>` / :ref:`Q_A_RAT_PIT_P<Q_A_RAT_PIT_P>`                                       +
++------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
++    109                       + Set_RateRollDP    +     :ref:`Q_A_RAT_RLL_D<Q_A_RAT_RLL_D>` / :ref:`Q_A_RAT_RLL_P<Q_A_RAT_RLL_P>`                                       +
++------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
++    110                       + Set_RateYawDP     +     :ref:`Q_A_RAT_YAW_D<Q_A_RAT_YAW_D>` /  :ref:`Q_A_RAT_YAW_P<Q_A_RAT_YAW_P>`                                      +
++------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
++    111                       + Set_FW_RllPtch_DP +     :ref:`RLL_RATE_D<RLL_RATE_D>`/:ref:`RLL_RATE_P<RLL_RATE_P>`/                                                    +
++                              +                   +     :ref:`PTCH_RATE_D<PTCH_RATE_D>`/:ref:`PTCH_RATE_P<Q_A_RAT_PIT_P>`                                               +
++------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
++    112                       + Set_FW_Roll_PIDFF +     :ref:`RLL_RATE_P<RLL_RATE_P>`/:ref:`RLL_RATE_I<RLL_RATE_I>`/                                                    +
++                              +                   +     :ref:`RLL_RATE_D<RLL_RATE_D>`/:ref:`RLL_RATE_FF<RLL_RATE_FF>`                                                   +
++------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
++    113                       + Set_FW_Pitch_PIDFF+     :ref:`PTCH_RATE_P<PTCH_RATE_P>`/:ref:`PTCH_RATE_I<PTCH_RATE_I>`/                                                +
++                              +                   +     :ref:`PTCH_RATE_D<PTCH_RATE_D>`/:ref:`PTCH_RATE_FF<PTCH_RATE_FF>`                                               +
++------------------------------+-------------------+---------------------------------------------------------------------------------------------------------------------+
 
 
 Saving the tuning results
@@ -288,7 +297,9 @@ can do a full tune in a bit over a minute.
 
 First you should set ``RCx_OPTION`` = 219, where ``x`` is a free RC channel that will be used for transmitter tuning.
 
-.. note: prior to version 4.6, Channel 6 was hard coded to be the "tuning" channel and setting ``RCx_OPTION`` = 219 was not required to be set.
+.. note:: prior to version 4.6, Channel 6 was hard coded to be the "tuning" channel and setting ``RCx_OPTION`` = 219 was not required to be set.
+
+.. note:: a second tuning channel can also be setup using ``RCx_OPTION`` = 220, and the ``TUNE2_xx`` parameters to allow two sets of tuning parameters to be adjusted in the same flight session.
 
 The :ref:`TUNE<TUNE>` parameter determines which parameter is being tuned.
 
@@ -298,7 +309,7 @@ The :ref:`TUNE_MAX<TUNE_MAX>` parameter determines the maximum value of the para
 ========================
 
 +--------+-------------------------+----------------------------------------------------------------------+
-|Value	 |Meaning                  | Parameter                                                            |
+|Value   |Meaning                  | Parameter                                                            |
 +========+=========================+======================================================================+
 |0       |         None            |                                                                      |
 +--------+-------------------------+----------------------------------------------------------------------+
@@ -324,60 +335,62 @@ The :ref:`TUNE_MAX<TUNE_MAX>` parameter determines the maximum value of the para
 +--------+-------------------------+----------------------------------------------------------------------+
 |55      |Motor Yaw Headroom       |  :ref:`MOT_YAW_HEADROOM<MOT_YAW_HEADROOM>`                           |
 +--------+-------------------------+----------------------------------------------------------------------+
-|14      |AltHold kP               |  :ref:`PSC_POSZ_P<PSC_POSZ_P>`                                       |
+|14      |Vertical Position kP     |  :ref:`PSC_D_POS_P<PSC_D_POS_P>`                                     |
 +--------+-------------------------+----------------------------------------------------------------------+
-|7       |Throttle Rate kP         |  :ref:`PSC_VELZ_P<PSC_VELZ_P>`                                       |
+|7       |Throttle Rate kP         |  :ref:`PSC_D_VEL_P<PSC_D_VEL_P>`                                     |
 +--------+-------------------------+----------------------------------------------------------------------+
-|34      |Throttle Accel kP        |  :ref:`PSC_ACCZ_P<PSC_ACCZ_P>`                                       |
+|34      |Throttle Accel kP        |  :ref:`PSC_D_ACC_P<PSC_D_ACC_P>`                                     |
 +--------+-------------------------+----------------------------------------------------------------------+
-|35      |Throttle Accel kI        |  :ref:`PSC_ACCZ_I<PSC_ACCZ_I>`                                       |
+|35      |Throttle Accel kI        |  :ref:`PSC_D_ACC_I<PSC_D_ACC_I>`                                     |
 +--------+-------------------------+----------------------------------------------------------------------+
-|36      |Throttle Accel kD        |  :ref:`PSC_ACCZ_D<PSC_ACCZ_D>`                                       |
+|36      |Throttle Accel kD        |  :ref:`PSC_D_ACC_D<PSC_D_ACC_D>`                                     |
 +--------+-------------------------+----------------------------------------------------------------------+
-|12      |Loiter Pos kP            |  :ref:`PSC_POSXY_P<PSC_POSXY_P>`                                     |
+|12      |Horizontal Position kP   |  :ref:`PSC_NE_POS_P<PSC_NE_POS_P>`                                   |
 +--------+-------------------------+----------------------------------------------------------------------+
-|22      |Velocity XY kP           |  :ref:`PSC_VELXY_P<PSC_VELXY_P>`                                     |
+|22      |Horizontal Velocity kP   |  :ref:`PSC_NE_VEL_P<PSC_NE_VEL_P>`                                   |
 +--------+-------------------------+----------------------------------------------------------------------+
-|28      |Velocity XY kI           |  :ref:`PSC_VELXY_I<PSC_VELXY_I>`                                     |
+|28      |Horizontal Velocity kI   |  :ref:`PSC_NE_VEL_I<PSC_NE_VEL_I>`                                   |
 +--------+-------------------------+----------------------------------------------------------------------+
-|10      |WP Speed                 |  :ref:`WPNAV_SPEED<WPNAV_SPEED>`                                     |
+|10      |WP Speed                 |  :ref:`WP_SPD<WP_SPD>`                                               |
 +--------+-------------------------+----------------------------------------------------------------------+
-|25      |Acro RollPitch kP        | :ref:`ACRO_RP_RATE<ACRO_RP_RATE>`                                    |
+|25      |Acro RollPitch kP        |  :ref:`ACRO_RP_RATE<ACRO_RP_RATE>`                                   |
 +--------+-------------------------+----------------------------------------------------------------------+
-|40      |Acro Yaw kP              | :ref:`ACRO_Y_RATE<ACRO_Y_RATE>`                                      |
+|40      |Acro Yaw kP              |  :ref:`ACRO_Y_RATE<ACRO_Y_RATE>`                                     |
 +--------+-------------------------+----------------------------------------------------------------------+
-|45      |RC Feel                  | :ref:`ATC_INPUT_TC<ATC_INPUT_TC>`                                    |
+|45      |RC Feel                  |  :ref:`ATC_INPUT_TC<ATC_INPUT_TC>`                                   |
 +--------+-------------------------+----------------------------------------------------------------------+
-|13      |Heli Ext Gyro            | :ref:`H_GYR_GAIN<H_GYR_GAIN>`                                        |
+|13      |Heli Ext Gyro            |      ``H_GYR_GAIN``                                                  |
 +--------+-------------------------+----------------------------------------------------------------------+
-|38      |Declination              | :ref:`COMPASS_DEC<COMPASS_DEC>`                                      |
+|38      |Declination              |  :ref:`COMPASS_DEC<COMPASS_DEC>`                                     |
 +--------+-------------------------+----------------------------------------------------------------------+
-|39      |Circle Rate              | :ref:`CIRCLE_RATE<CIRCLE_RATE>`                                      |
+|39      |Circle Rate              |  :ref:`CIRCLE_RATE<CIRCLE_RATE>`                                     |
 +--------+-------------------------+----------------------------------------------------------------------+
-|46      |Rate Pitch kP            | :ref:`ATC_RAT_PIT_P<ATC_RAT_PIT_P__AC_AttitudeControl_Multi>`        |
+|46      |Rate Pitch kP            |  :ref:`ATC_RAT_PIT_P<ATC_RAT_PIT_P__AC_AttitudeControl_Multi>`       |
 +--------+-------------------------+----------------------------------------------------------------------+
-|47      |Rate Pitch kI            | :ref:`ATC_RAT_PIT_I<ATC_RAT_PIT_I__AC_AttitudeControl_Multi>`        |
+|47      |Rate Pitch kI            |  :ref:`ATC_RAT_PIT_I<ATC_RAT_PIT_I__AC_AttitudeControl_Multi>`       |
 +--------+-------------------------+----------------------------------------------------------------------+
-|48      |Rate Pitch kD            | :ref:`ATC_RAT_PIT_D<ATC_RAT_PIT_D__AC_AttitudeControl_Multi>`        |
+|48      |Rate Pitch kD            |  :ref:`ATC_RAT_PIT_D<ATC_RAT_PIT_D__AC_AttitudeControl_Multi>`       |
 +--------+-------------------------+----------------------------------------------------------------------+
-|49      |Rate Roll kP             | :ref:`ATC_RAT_RLL_P<ATC_RAT_RLL_P__AC_AttitudeControl_Multi>`        |
+|49      |Rate Roll kP             |  :ref:`ATC_RAT_RLL_P<ATC_RAT_RLL_P__AC_AttitudeControl_Multi>`       |
 +--------+-------------------------+----------------------------------------------------------------------+
-|50      |Rate Roll kI             | :ref:`ATC_RAT_RLL_I<ATC_RAT_RLL_I__AC_AttitudeControl_Multi>`        |
+|50      |Rate Roll kI             |  :ref:`ATC_RAT_RLL_I<ATC_RAT_RLL_I__AC_AttitudeControl_Multi>`       |
 +--------+-------------------------+----------------------------------------------------------------------+
-|51      |Rate Roll kD             | :ref:`ATC_RAT_RLL_D<ATC_RAT_RLL_D__AC_AttitudeControl_Multi>`        |
+|51      |Rate Roll kD             |  :ref:`ATC_RAT_RLL_D<ATC_RAT_RLL_D__AC_AttitudeControl_Multi>`       |
 +--------+-------------------------+----------------------------------------------------------------------+
-|52      |Rate Pitch FF            | :ref:`ATC_RAT_PIT_FF<ATC_RAT_PIT_FF__AC_AttitudeControl_Heli>` **    |
+|52      |Rate Pitch FF            |  :ref:`ATC_RAT_PIT_FF<ATC_RAT_PIT_FF__AC_AttitudeControl_Heli>` **   |
 +--------+-------------------------+----------------------------------------------------------------------+
-|53      |Rate Roll FF             | :ref:`ATC_RAT_RLL_FF<ATC_RAT_RLL_FF__AC_AttitudeControl_Heli>` **    |
+|53      |Rate Roll FF             |  :ref:`ATC_RAT_RLL_FF<ATC_RAT_RLL_FF__AC_AttitudeControl_Heli>` **   |
 +--------+-------------------------+----------------------------------------------------------------------+
-|54      |Rate Yaw FF              | :ref:`ATC_RAT_YAW_FF<ATC_RAT_YAW_FF__AC_AttitudeControl_Heli>` **    |
+|54      |Rate Yaw FF              |  :ref:`ATC_RAT_YAW_FF<ATC_RAT_YAW_FF__AC_AttitudeControl_Heli>` **   |
 +--------+-------------------------+----------------------------------------------------------------------+
-|57      |Winch                    | :ref:`WINCH_RATE_MAX<WINCH_RATE_MAX>`                                |
+|57      |Winch                    |  :ref:`WINCH_RATE_MAX<WINCH_RATE_MAX>`                               |
 +--------+-------------------------+----------------------------------------------------------------------+
-|58      |SysID Magnitude          | :ref:`SID_MAGNITUDE<SID_MAGNITUDE>`                                  |
+|58      |SysID Magnitude          |  :ref:`SID_MAGNITUDE<SID_MAGNITUDE>`                                 |
 +--------+-------------------------+----------------------------------------------------------------------+
 |59      |Position Control Max     |  :ref:`PSC_ANGLE_MAX<PSC_ANGLE_MAX>`                                 |
 |        | Lean Angle              |                                                                      |
++--------+-------------------------+----------------------------------------------------------------------+
+|60      |Loiter Max X/Y Speed     |  :ref:`loiter-mode`                                                  |
 +--------+-------------------------+----------------------------------------------------------------------+
 
 

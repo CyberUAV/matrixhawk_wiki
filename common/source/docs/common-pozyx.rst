@@ -4,7 +4,7 @@
 Pozyx for Non-GPS Navigation
 ============================
 
-[copywiki destination="copter,rover,blimp"]
+[copywiki destination="copter,plane,rover,blimp"]
 
 This article explains how a `Pozyx <https://www.pozyx.io/>`__ system based on the `DWM1000 <http://www.decawave.com/products/dwm1000-module>`__ can be used as a short-range substitute for a GPS allowing position control modes like Loiter, PosHold, RTL, Auto indoors.
 
@@ -22,7 +22,7 @@ Required Hardware
 Placing the anchors
 ===================
 
-The anchors should be placed in a rectangular shape.  The anchor with the lowest ID (IDs are printed in hexidecimal on each device) will act as the "origin" and should be placed at the lower-left corner of the rectangle.  Each of the remaining three anchors should be placed in a corner so that the anchor IDs increase as you travel an "N" pattern within the rectangle.  The configuration is slightly simpler if the line from the origin anchor to the 2nd anchor is due North but it is not required as the :ref:`BCN_ORIENT_YAW <BCN_ORIENT_YAW>` parameter can be used to account this difference.
+The anchors should be placed in a rectangular shape.  The anchor with the lowest ID (IDs are printed in hexadecimal on each device) will act as the "origin" and should be placed at the lower-left corner of the rectangle.  Each of the remaining three anchors should be placed in a corner so that the anchor IDs increase as you travel an "N" pattern within the rectangle.  The configuration is slightly simpler if the line from the origin anchor to the 2nd anchor is due North but it is not required as the :ref:`BCN_ORIENT_YAW <BCN_ORIENT_YAW>` parameter can be used to account this difference.
 
 .. image:: ../../../images/pozyx-anchor-layout.png
     :target: ../_images/pozyx-anchor-layout.png
@@ -62,7 +62,7 @@ Connect with a Ground Station and set the following parameters:
 - set :ref:`EK3_SRC1_VELZ <EK3_SRC1_VELZ>` to 0 (None)
 - set :ref:`EK3_SRC1_POSZ<EK3_SRC1_POSZ>` to  4 (Beacon)
 - set :ref:`EK3_SRC1_YAW<EK3_SRC1_YAW>` to 1 (Compass) since a compass is required for use with this device.
-- set :ref:`ARMING_CHECK <ARMING_CHECK>` to -9 to disable the GPS arming check
+- set :ref:`ARMING_SKIPCHK <ARMING_SKIPCHK>` to 8 to disable the GPS arming check
 - set :ref:`SERIAL1_BAUD <SERIAL1_BAUD>` to 115 to set SERIAL1 port's baud rate to 115200 (if using a different SERIAL port set its baud rate to 115, instead)
 - set :ref:`SERIAL1_PROTOCOL <SERIAL1_PROTOCOL>` to 13 (Beacon) to enable reading the IndoorLoiter2 protocol (If using a different port, set its protocol to 13 instead)
 - set :ref:`BRD_SER1_RTSCTS <BRD_SER1_RTSCTS>` to 0 to ensure telem1 does not use flow control (If using Telem2 set :ref:`BRD_SER2_RTSCTS <BRD_SER2_RTSCTS>` instead, not required if using a SERIAL port without flow control)
@@ -72,7 +72,7 @@ Ground Testing
 
 - Connect the Autopilot to a ground station.  You may need to connect the Lipo battery as well because some computers are unable to provide enough power through their USB port for the combined autopilot+Pozyx+Uno.
 - Press the UNO's white or red reset button which can be found next to the USB port (see image above)
-- After about 1 minute the vehicle's position should jump to the lattitude, longitude you input during the configuration step (above).  If it does not, connect a USB cable to the UNO's USB port and open the Arduino IDE's serial monitor and look for errors.
+- After about 1 minute the vehicle's position should jump to the latitude, longitude you input during the configuration step (above).  If it does not, connect a USB cable to the UNO's USB port and open the Arduino IDE's serial monitor and look for errors.
 - Check that the vehicle's position is relatively stable (i.e. moving around less than one meter)
 - Walk the vehicle around between the anchors and ensure that its position on the map updates correctly
 

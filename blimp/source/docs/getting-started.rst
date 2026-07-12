@@ -36,7 +36,7 @@ Blimp requires an autopilot for control and autonomous flight.
 Building an indoor blimp such as this, weight will usually be the primary consideration,
 thus the "single board" type of autopilots are likely to be most suitable, especially the "mini" (20x20mm or 16x16mm) versions.
 
-For more options, see the topic :ref:`Chosing an autopilot <common-autopilots>`.
+For more options, see the topic :ref:`Choosing an autopilot <common-autopilots>`.
 
 Four outputs are required for the actuators. Autopilot inputs for RC, telemetry, GPS or Position Sensor, and Compass are also required. Main battery voltage, and perhaps current sensing, are very useful also.
 
@@ -112,7 +112,7 @@ MHz (Europe).
 Actuators
 =========
 
-For control and propulsion, the Flapping Fin Blimp uses micro servos, such as`these <https://usa.banggood.com/search/1.7g-servo.html>`__ . Larger versions could scale their size, accordingly.
+For control and propulsion, the Flapping Fin Blimp uses micro servos, such as `these <https://usa.banggood.com/search/1.7g-servo.html>`__ . Larger versions could scale their size, accordingly.
 
 .. toctree::
     :hidden:

@@ -1,0 +1,342 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:5
+#: 5da1876350554b34909c4350e18c9eec
+msgid "Porting to a new flight controller board"
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:7
+#: edadbc8105a34bfd8e116ba25ca32422
+msgid "This section is for topics related to running ArduPilot directly on Linux boards. See this :ref:`page for porting to boards running ChibiOS <porting>`."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:10
+#: b5dcf31b62c54b50a8e6da6ba02f03b6
+msgid "Any firmware customization of ArduPilot code must abide by the terms of the GPL3.0+ open source code license. ArduPilot also reminds developers and manufacturers to adhere to the appropriate trademark and copyright laws when developing new autopilots"
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:15
+#: 92240ff2b1da48948283a32a457bda97
+msgid "Consider joining the `ArduPilot Discord Chat <https://ardupilot.org/discord>`__, to speak with other developers about this topic under the HAL-DEV, #Linux channel."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:18
+#: 1a28f187443c448ea28e4b7e743a52ae
+msgid "Step 1 - getting started"
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:20
+#: bedc6ec646cb4773bde3ae6b390a0da2
+msgid "Determine which microprocessor the new flight controllers uses. If it is used in a board we already support, for example BCM283x used in Raspberry Pi or TI Sitara/OMAP used in BeagleBones, then the port should be relatively straight forward."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:21
+#: 0214997afde8427696fd2ffcd44b8e0e
+msgid "Choose a new board name."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:22
+#: 3e3d0793d5d44c5ea7dbefb40157b738
+msgid "Reserve a new HAL_BOARD_SUBTYPE_LINUX_$(NEW_BOARD_NAME) in libraries/AP_HAL/AP_HAL_Boards.h"
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:23
+#: 42be4d656c0e41e4a3af4f94c842ab18
+msgid "Ensure the spidev and i2cdev kernel modules are built if ArduPilot will be using them."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:25
+#: ff51b0aad8a84c08a3f6468a67a61698
+msgid "Choose your board name carefully! Use 13 characters or less for your board name, otherwise it may be truncated when the board name is sent from the flight controller to a ground station such as Mission Planner."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:28
+#: a3b78552cb8a4fba81d3d27822f43d7a
+msgid "Step 2 - Toolchain Configuration"
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:30
+#: 0e5205298fbb411baaaa19c53e756934
+msgid "In Tools/ardupilotwaf/boards.py:"
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:32
+#: d26e32c1e28d41448caaefbdab372340
+msgid "Create a new class and select the appropriate toolchain, usually arm-linux-gnueabihf. For an example see \"class pxfmini(linux) as an example\""
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:33
+#: 04d4dd7ff298494e81891875ca30fffc
+msgid "Update CONFIG_HAL_BOARD_SUBTYPE with the newly reserved board subtype."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:35
+#: b1a49d72051048fca45e024d1f7c5970
+msgid "In Tools/scripts/board_list.py:"
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:37
+#: ad576302a6814abea2ccc09716de15e4
+msgid "Add new board name to self.boards[] list."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:40
+#: 28a9002b52974d459d0d0651d413df89
+msgid "Step 3 - configure and build examples and firmware for the board"
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:42
+#: 1f46c3aca4294b58aeeb9ed3eb8d8ea1
+msgid "Follow the :ref:`Building the code <building-the-code>` instructions or take a shortcut and read the `BUILD.md <https://github.com/ArduPilot/ardupilot/blob/master/BUILD.md>`__ file which includes doing the following:"
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:44
+#: d516b3eb00a04864a175e27aa354bfe0
+msgid "``cd ardupilot`` (or wherever you have :ref:`cloned <git-clone>` ArduPilot to)"
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:45
+#: 1771eb98a8af4938b89aa57cd7dce8a5
+msgid "``./waf configure --board new-board``"
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:46
+#: 531fd3b4730a4288a235b2b6c9f6b9df
+msgid "``./waf copter``"
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:48
+#: 0267fed0afb446a9a3ac1c7e740c2742
+msgid "Work through any issues highlighted by '#error' messages in the codebase, which will require per-board configuration."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:50
+#: 60ab9d6161d2406598e06977a434a0a6
+msgid "This is also a good time to build any relevant :ref:`Library Example Sketches <learning-ardupilot-the-example-sketches>`."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:53
+#: 2fe60a162ba34aa793bd2d1d99408975
+msgid "Step 4 - upload and run the examples and firmware"
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:55
+#: c797632280744e37b3c352aa06b3af30
+msgid "If building natively, executables are already loaded on the target system, and can be executed directly."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:57
+#: 0dcbb199f88548f0b710d7cb4f453308
+msgid "If using waf to upload (Linux, MacOSX only), see configuration commands in `BUILD.md <https://github.com/ArduPilot/ardupilot/blob/master/BUILD.md>`__ to set up waf's --upload flag. Other options for cross-compiled builds include SCP or NFS."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:60
+#: 3a4d54ddd4a440c2a66dd448bc7dd698
+msgid "See :ref:`Startup options <ardupilot-on-linux-starting>` for command-line options, configuring at least one port for MavLink, and launching ArduPilot."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:63
+#: 6f010a8de5fe41c2a9d1a0791c7ab69a
+msgid "Step 5 - peripheral functions and drivers"
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:65
+#: f0945f7e80734b95bb5c8223f21c511a
+msgid "Many boards will use the Linux userspace APIs for I2C, UART, and SPI and only need configuration and associated kernel modules. See your CPU, BSP, and board's documentation for pin muxing and device tree configuration. The following peripherals tend to be more complicated."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:69
+#: 125b547b4b124fe4adfbeac0f5f1ea3f
+msgid "SPI Support"
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:70
+#: b2b6d8262b06428d983a9cf0d96d2412
+msgid "To configure SPI-based devices, the Linux userspace SPI APIs are used, needing only the per-board configuration(bus ID, chip select ID, mode, rates) in SPIDeviceManager::_device[] in libraries/AP_HAL_Linux/SPIDevice.cpp."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:73
+#: 672b4ed8a92a4182907804d626e18e17
+msgid "GPIO Support"
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:74
+#: dff2df9b7984425998fcb85eb03d2bcd
+msgid "Most ArduPilot Linux boards use one of two methods for GPIO access: sysfs or mmap."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:76
+#: 0ebd46139cd347448e4d25032766d664
+msgid "For sysfs:"
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:78
+#: 0be1670e004b4fcba44e71718c32cec6
+msgid "GPIO access through sysfs is deprecated."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:79
+#: 16587a974d7c4035b03c27b9012f8034
+msgid "Create new libraries/AP_HAL_Linux/GPIO_$(NEW_BOARD_NAME).cpp and .h, filled out with the needed _$(NEW_BOARD_NAME)_GPIO_MAX and pin_table."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:81
+#: 3df8e794db7647d78716152819df9e42
+msgid "For libgpiod(Todo):"
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:83
+#: 361f66b9e4e745e28f3fdb7645c4b1f0
+msgid "port ardupilot to support a libgpiod backend of pinMode(), read(), write()."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:84
+#: b15f108ba3b34bf3a873e56c902dc1bf
+msgid "Implement the per-board configuration"
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:86
+#: 7324657ec2304b519fef24b0f2d124f0
+msgid "For mmap():"
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:88
+#: 3aa1ff87584e45358aadc07c03f1ab52
+msgid "See GPIO_BBB.cpp and GPIO_RPI.cpp as examples"
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:89
+#: 08958a19fd1e43d38f4dba075ad5f018
+msgid "Create new libraries/AP_HAL_Linux/GPIO_$(NEW_BOARD_NAME).cpp and .h"
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:90
+#: d164dd1404b24871ab4db4c29bf2076a
+msgid "Locate the memory file, either /dev/mem or /dev/gpiomem, and open() it."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:91
+#: c19b0d3b3264402d8a988f56bd595d7b
+msgid "Locate the offset of the GPIO memory region in the file. If using /dev/mem, check the processor reference manual or Linux device-tree files. For /dev/gpiomem, use zero."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:92
+#: 8e25e3ce80984349ab457dc335113569
+msgid "mmap() the GPIO registers into ArduPilot using the above offset."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:93
+#: 1db482cff56e478e8b7a6940a2f4407f
+msgid "Implement pinMode(), read(), write() functions using the memory mapped GPIO registers."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:95
+#: f6090ea6496145ea878b094d7b686f97
+msgid "CPUs with multiple GPIOs per bank with only a DATA or OUT register without SET and CLEAR registers may need to avoid the mmap backend, as read-modify-write accesses to a GPIO DATA register may not be threadsafe when the kernel or other userspace programs use GPIOs in the same bank."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:97
+#: 24bc1cfe7226455b90555d7d9f121bd0
+msgid "For either approach, edit libraries/AP_HAL_Linux/GPIO.h to include the appropriate GPIO_$(NEW_BOARD_NAME) header for the board."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:100
+#: 937f69086a8149fdad0751a0058ee1b7
+msgid "RCInput"
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:101
+#: 188b4c5afea44256a748723f0f0f968d
+msgid "Several different RCInput mechanisms are supported by different boards, including PPM, SBUS, UART, and UDP."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:103
+#: 4aa0b22c812c4d2aa23581f952e9117f
+msgid "PPM input is handled per-CPU, usually with either a DMA or utility microcontroller like the PRU on TI chips."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:105
+#: e9e48d68bf57495a8bebde0b26b91f8a
+msgid "Examine the libraries/AP_HAL_Linux/RCInput_* files to see if a suitable one exists, or create one."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:107
+#: 4f34bc96be144b52872544d40ff8e690
+msgid "Configure rcinDriver in libraries/AP_HAL_Linux/HAL_Linux_Class.cpp using CONFIG_HAL_BOARD_SUBTYPE."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:110
+#: 76d4e5ca4f18453595baa81dd95b52c3
+msgid "RCOutput"
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:111
+#: 42aab3356bf3403ab03337b3fa21d73c
+msgid "Similar to RCInput, examine the libraries/AP_HAL_Linux/RCOutput_* files to see if a suitable one exists, or create one."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:113
+#: e8fa86b592fc4bcf94c02619d7af52be
+msgid "For CPUs without corresponding hardware to generate RCOutput signals, additional hardware may be used, like NXP's PCA9685 for PWM generation."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:115
+#: c5744a950e834bee994f9c9abb8702a5
+msgid "Configure the rcoutDriver in libraries/AP_HAL_Linux/HAL_Linux_Class.cpp using CONFIG_HAL_BOARD_SUBTYPE."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:118
+#: 9d5b0dcfb8f7497aafb61cfc893061ce
+msgid "Step 7 - bring up the sensors"
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:120
+#: 8ae73e5d8ac54629b5464f1a73df3e91
+msgid "Add sensor related configuration to libraries/AP_HAL/board/linux.h."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:122
+#: 23512c2cd3fa4ad1a5890b721be8f4f5
+msgid "Start with the baro first, then IMU, then compass and finally any other sensors the default sensor orientation should also be filled in along with other things."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:125
+#: 016030079e0f4550b1616b85d431542c
+msgid "Upload the examples and firmware and test the sensors are working."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:128
+#: 0c1e568940ec472db5893aa3ce675c39
+msgid "Step 8 - configure parameter, log, and terrain storage"
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:130
+#: b6d930b7e572418fa7cb8e12775cf817
+msgid "Configure HAL_BOARD_LOG_DIRECTORY, HAL_BOARD_TERRAIN_DIRECTORY, HAL_BOARD_STORAGE_DIRECTORY in libraries/AP_HAL/board/linux.h."
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:133
+#: ec1c21e05e70457b9247e951e32b1767
+msgid "Next Steps"
+msgstr ""
+
+#: ../../source/docs/ardupilot-on-linux-porting.rst:135
+#: b1a89983f8ac4589af1cc54c596d153e
+msgid "If you have gotten this far, congratulations you have ported ArduPilot to a new board!  Please reach out to the other developers on the `ArduPilot Discord Chat <https://ardupilot.org/discord>`__ to announce your success."
+msgstr ""

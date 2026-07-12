@@ -1,0 +1,132 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:30+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/high-loop-rate-tuning.rst:5
+#: a217dd95ce9548b49b2663c45ceabd78
+msgid "Aggressive Rate Loop Tuning"
+msgstr ""
+
+#: ../../source/docs/high-loop-rate-tuning.rst:7
+#: de8364835fed484db5a38acb49b28183
+msgid "Normally, the attitude rate PID controllers update at the :ref:`SCHED_LOOP_RATE<SCHED_LOOP_RATE>`, the main loop speed and noise filtering at half the loop rate. This means that PID rate error corrections can happen only at 1/loop rate. For 400hz, this is 2.5ms. In ArduCopter 4.7 and later, it is possible to run the PID attitude rates closer to the rate at which the gyros provide measurements, which can be up to 4KHz, resulting in 2.5uS rate corrections. Tuning is more sensitive and complex, but for aerobatic applications on vehicles with large thrust to inertia ratios (ie very agile) could yield much more precise and responsive control."
+msgstr ""
+
+#: ../../source/docs/high-loop-rate-tuning.rst:9
+#: 308ab66d5699461d8e7f9224d5327d77
+msgid "this is much more computationally intensive, resulting in higher CPU loads. On H7 based autopilots it is acceptable, but F4 based autopilots might not be able to sustain this increased load."
+msgstr ""
+
+#: ../../source/docs/high-loop-rate-tuning.rst:11
+#: e3c22c08d8f3481e9d80642a193ee579
+msgid "To setup running the PID rate loops closer to the higher gyro sampling rates, rather than the :ref:`SCHED_LOOP_RATE<SCHED_LOOP_RATE>`:"
+msgstr ""
+
+#: ../../source/docs/high-loop-rate-tuning.rst:14
+#: f7ac91ee57bf4c73ac68d1d94b7c333d
+msgid "Configuration"
+msgstr ""
+
+#: ../../source/docs/high-loop-rate-tuning.rst:15
+#: c015c15d8bd24d83892ed44474ea2981
+msgid "There are only two new settings for enabling fast rate attitude, but these have an effect on several other settings:"
+msgstr ""
+
+#: ../../source/docs/high-loop-rate-tuning.rst:17
+#: 092b5f80293943fa8b6db956e95072a2
+msgid ":ref:`FSTRATE_ENABLE<FSTRATE_ENABLE>`:"
+msgstr ""
+
+#: ../../source/docs/high-loop-rate-tuning.rst:18
+#: 489fb5e83f164f9380f67a987a0a52f0
+msgid "0: Disables this feature."
+msgstr ""
+
+#: ../../source/docs/high-loop-rate-tuning.rst:19
+#: 6df6d326b3da4a1a9b6d245e2f9ee6b7
+msgid "1: Enable dynamic fast rate. On high CPU loading (as determined by either the main loop being slow or the gyro sample queue filling up) the rate will be reduced to an integer divisor of the gyro data rate until the CPU stabilizes. This is the safest way of trying the support."
+msgstr ""
+
+#: ../../source/docs/high-loop-rate-tuning.rst:20
+#: 3f1c5089fbbe45b483ed63e8580df446
+msgid "2: Enable dynamic fast rate, but fix to the requested rate on arming. This allows un-armed operations such as log download to proceed effectively. Note that you must be sure that you have sufficient CPU to enable this option or control can be compromised."
+msgstr ""
+
+#: ../../source/docs/high-loop-rate-tuning.rst:21
+#: 0c60e7792eba4680ba278ba078defa8b
+msgid "3: Enable fixed fast rate. This is useful for testing but not usually used."
+msgstr ""
+
+#: ../../source/docs/high-loop-rate-tuning.rst:23
+#: 1701feaa7c12481c8d9c86137d4b9b07
+msgid ":ref:`FSTRATE_DIV<FSTRATE_DIV>`: this defaults to 1 and represents the minimum fast rate gyro divisor. So a value of 2 will yield a rate loop of gyro rate / 2 (:ref:`INS_GYRO_RATE<INS_GYRO_RATE>` / 2). This allows a fixed fast rate that is lower than the gyro rate. This parameter is can be modified in-flight."
+msgstr ""
+
+#: ../../source/docs/high-loop-rate-tuning.rst:25
+#: 6c9a2de145b14bf39cb49a5336e3e328
+msgid "The easiest way to try this feature is to set :ref:`FSTRATE_ENABLE<FSTRATE_ENABLE>` = 1 (Dynamic rate). If your flight controller is struggling it will reduce the attitude loop rate until normality is restored. :ref:`FSTRATE_ENABLE<FSTRATE_ENABLE>` = 2 (Fixed Rate) is not recommended until you have seen reasonable performance with dynamic rates."
+msgstr ""
+
+#: ../../source/docs/high-loop-rate-tuning.rst:27
+#: 083a5021ce8240a5bd225ae2caef0388
+msgid "One way to gain more CPU is to switch off additional IMUs using :ref:`INS_ENABLE_MASK<INS_ENABLE_MASK>` or reduce :ref:`INS_GYRO_RATE<INS_GYRO_RATE>`. The main CPU load is from the INS and attitude control threads."
+msgstr ""
+
+#: ../../source/docs/high-loop-rate-tuning.rst:29
+#: 2c30cf52dbf346a4ab469a9baa7078be
+msgid "When this feature is enabled, several other settings are affected:"
+msgstr ""
+
+#: ../../source/docs/high-loop-rate-tuning.rst:31
+#: a7f37181c907459297528f08c5463c2f
+msgid ":ref:`SERVO_DSHOT_RATE<SERVO_DSHOT_RATE>` - this represents a multiplier of the main loop rate to output to the motors. When the fast rate loop is enabled this is normally set to 1, however if the calculated rate will not exceed the gyro rate, higher values are allowed. For instance if :ref:`INS_GYRO_RATE<INS_GYRO_RATE>` = 2(4KHz) and :ref:`FSTRATE_DIV<FSTRATE_DIV>` = 4 (1KHz)then values of :ref:`SERVO_DSHOT_RATE<SERVO_DSHOT_RATE>` up to 4(4x loop rate) are allowed."
+msgstr ""
+
+#: ../../source/docs/high-loop-rate-tuning.rst:32
+#: 985a30087fee416db6c0e3d493485931
+msgid "Fast attitude and PID logging enabled in :ref:`LOG_BITMASK<LOG_BITMASK>` - setting these bits usually logs at the main loop rate, however if fast attitude is enabled these will be logged at the minimum of the fast attitude rate and 1kHz"
+msgstr ""
+
+#: ../../source/docs/high-loop-rate-tuning.rst:33
+#: b6c2f7559ca04fbd8a84d2a2f65a3bdd
+msgid ":ref:`SCHED_LOOP_RATE<SCHED_LOOP_RATE>` - since all the heavy lifting of attitude control is being done in a separate thread, :ref:`SCHED_LOOP_RATE<SCHED_LOOP_RATE>` can be run at normal values - for instance 400Hz or even less."
+msgstr ""
+
+#: ../../source/docs/high-loop-rate-tuning.rst:36
+#: 095681aae56e45e39602b4bc4aacfdc0
+msgid "Tuning Setup"
+msgstr ""
+
+#: ../../source/docs/high-loop-rate-tuning.rst:37
+#: 52ae995a8cb3481a89eadded22a0a19e
+msgid "Its extremely important that the :ref:`Notch filtering <common-imu-notch-filtering>` be setup as well as the :ref:`tuning-process-instructions` be followed before tuning with this feature enabled."
+msgstr ""
+
+#: ../../source/docs/high-loop-rate-tuning.rst:39
+#: 16f3f5bda87c4133b3f11727f7bcad56
+msgid ":ref:`INS_GYRO_FILTER<INS_GYRO_FILTER>` - as high as you can get without cooking your motors. Often copters have resonance around 120Hz so it is hard to get higher than this without notching out frame resonance."
+msgstr ""
+
+#: ../../source/docs/high-loop-rate-tuning.rst:40
+#: 4ca46cfa334f49c69c69ad181fc99f24
+msgid "each axis' ``ATC_RAT_xxx_FLTD`` should be :ref:`INS_GYRO_FILTER<INS_GYRO_FILTER>`/2 on roll and pitch and :ref:`INS_GYRO_FILTER<INS_GYRO_FILTER>`/4 on yaw. This is because D is more active, lets more noise through and is more likely to cook your motors. Setting it above 0.75 * :ref:`INS_GYRO_FILTER<INS_GYRO_FILTER>` is not recommended."
+msgstr ""
+
+#: ../../source/docs/high-loop-rate-tuning.rst:41
+#: f6b9ea8f28fd4ac181b81a6153819f26
+msgid "each axis' ``ATC_RAT_xxx_FLTT`` should be at the highest rate you want the EKF or your fingers to control the copter. Values of 30Hz should be fine, but higher has diminishing returns but does not affect the tune."
+msgstr ""

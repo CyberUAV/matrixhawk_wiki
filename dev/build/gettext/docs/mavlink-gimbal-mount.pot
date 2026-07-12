@@ -1,0 +1,495 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:5
+#: 95fbe871301749b1b6538b15abd4212f
+msgid "Control a Gimbal / Camera Mount"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:7
+#: 7e12396ba6e34e17a1c9915acc5b45b5
+msgid "This page explains how MAVLink can be used to control a gimbal (aka camera mount).  In particular this page describes how to"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:9
+#: e4282c9bb53a468aabf161a91bbc5547
+msgid "use MAV_CMD_DO_MOUNT_CONTROL to set the gimbal's mode (aka mount mode)"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:10
+#: 9b68c51cc7c2400386afd1bc4a132ea1
+msgid "use MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW to move to a desired angle or at a desired rate"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:11
+#: 5a71148a7e2d48efba91165e436b197d
+msgid "use MAV_CMD_DO_SET_ROI_LOCATION to point at a Location"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:12
+#: 98e0831936c14ad99c39f7dc7b822080
+msgid "use MAV_CMD_DO_SET_ROI_NONE to stop point at a Location or vehicle"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:13
+#: 13a4717f70da461792c75a8baeebf7c6
+msgid "use MAV_CMD_DO_SET_ROI_SYSID to point at another vehicle"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:14
+#: 7ea4234c654e49ab935a78c03fae7b72
+msgid "use MAV_CMD_DO_GIMBAL_MANAGER_CONFIGURE to take control of the gimbal (optional)"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:16
+#: 528a8b8a7e7d4e14812c89d54e370df8
+msgid "The gimbal's attitude (in body-frame Quaternion form) can be monitored by decoding the `GIMBAL_DEVICE_ATTITUDE_STATUS <https://mavlink.io/en/messages/common.html#GIMBAL_DEVICE_ATTITUDE_STATUS>`__ message."
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:20
+#: 6c5845cd84b6493285d24b89d994e3bb
+msgid "ArduPilot's MAVLink interface for controlling gimbals was significantly upgraded for 4.3 compared with earlier versions. This page primarily discusses the interface for 4.3 (and higher) which aims to comply with the `MAVLink Gimbalv2 protocol <https://mavlink.io/en/services/gimbal_v2.html>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:24
+#: 1376ee40c10d4045ba3c64acfd7f92d3
+msgid "The :ref:`user wiki pages for gimbals is here <copter:common-cameras-and-gimbals>`."
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:27
+#: f89e148ec229470eb7009f7ed0795564
+msgid "Set the mode with MAV_CMD_DO_MOUNT_CONTROL"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:29
+#: a1c8519d78964355a123515a47a85bfb
+msgid "The gimbal/mount's mode can be set by sending a `COMMAND_LONG <https://mavlink.io/en/messages/common.html#COMMAND_LONG>`__ with the command and param7 fields set as specified for the `MAV_CMD_DO_MOUNT_CONTROL <https://mavlink.io/en/messages/common.html#MAV_CMD_DO_MOUNT_CONTROL>`__ command. The supported modes are:"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:32
+#: c5811134071545e7b3fd6f6c6923acf6
+msgid "Retract : gimbal will move to a retracted position (see MNT1_RETRACT_X, Y, Z) or relax"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:33
+#: b46659d0f7f843d1a59a61ba61ab8da3
+msgid "Neutral : gimbal will move to a neutral position (see MNT1_NEUTRAL_X, Y, Z)"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:34
+#: 674b901b3591461488e1c089c98aff89
+msgid "MAVLink Targeting : gimbal's angle or rate targets are controlled via mavlink messages (see MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW).  It is not necessary to specifically change to this mode, this will happen automatically if MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW is sent"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:35
+#: 7cafcfcb82824a559d531642df484b9a
+msgid "RC Targeting : pilot controls the gimbal angle or rate using RC input (see MNT_RC_IN_PAN/ROLL/TILT and MNT_RC_RATE parameters)"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:36
+#: 9ec5cd23001944358591a1963771b4a4
+msgid "GPS Point: gimbal points towards a Location (Lat, Lon, Alt) (see MAV_CMD_DO_SET_ROI).  It is not necessary to specifically change to this mode, this will happen automatically if MAV_CMD_DO_SET_ROI is sent"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:37
+#: b6fa72b016744af59318ee8bdd217b4a
+msgid "SysId Target: gimbal points towards another vehicle (see MAV_CMD_DO_SET_ROI_SYSID).  It is not necessary to specifically change to this mode, this will happen automatically if MAV_CMD_DO_SET_ROI_SYSID is sent"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:38
+#: 2aaa2594d38e4f7aa5b3ce8af73d3068
+msgid "Home Location: gimbal points towards home"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:107
+#: 9b79f10659d34f8eb475110d5c998b2d
+msgid "**Example**"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:109
+#: c2720cbab2ac4e84a6f134f4b572ab0b
+msgid "The example commands below can be copy-pasted into MAVProxy (aka SITL) to test this command.  Before running these commands enter"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:111
+#: ../../source/docs/mavlink-gimbal-mount.rst:210
+#: ../../source/docs/mavlink-gimbal-mount.rst:326
+#: ../../source/docs/mavlink-gimbal-mount.rst:423
+#: ../../source/docs/mavlink-gimbal-mount.rst:509
+#: ../../source/docs/mavlink-gimbal-mount.rst:594
+#: 2bbc0d122332474bb898e85ccdf58663
+#: 1a309394111b485bb88e6e4b247fdd49
+#: 7060aba046114352a9293b86d5cb20ed
+#: dab1a15628b849edaf0ce333ea5db881
+#: ff71e66fb05b416cbe69689bcc91e8ed
+#: 3935d063f60340eaa8fd16325fd7ccf3
+msgid "module load message"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:114
+#: ../../source/docs/mavlink-gimbal-mount.rst:213
+#: ../../source/docs/mavlink-gimbal-mount.rst:329
+#: ../../source/docs/mavlink-gimbal-mount.rst:426
+#: ../../source/docs/mavlink-gimbal-mount.rst:512
+#: ../../source/docs/mavlink-gimbal-mount.rst:597
+#: f9aed0a1dc56491fab7f11b97649627e
+#: 9e8ab4658b2545f18016c4cfea5a6aef
+#: 5ef6bf168e10416ebda96c2d09bfcd4e
+#: ea8949ed46ed452488f5021790e6a34c
+#: 20f0419db0db4256919b9a0dfad8a9fb
+#: 08ac7e9c35cd4ac4ac177a63bab335b5
+msgid "Example MAVProxy/SITL Command"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:114
+#: ../../source/docs/mavlink-gimbal-mount.rst:213
+#: ../../source/docs/mavlink-gimbal-mount.rst:329
+#: ../../source/docs/mavlink-gimbal-mount.rst:426
+#: ../../source/docs/mavlink-gimbal-mount.rst:512
+#: ../../source/docs/mavlink-gimbal-mount.rst:597
+#: e52a585960d14221ad421dfe73196147
+#: 69b57a0dad9742339fd9ab7e44fbadf7
+#: c9e6a308a19843bfb2a04dfe76aa9dcb
+#: d724061d678e44bc88c39124d6dc8fe2
+#: a651d13851404b5e8ca674594989b483
+#: 2107c9bcaa914bbe8e0e065059752b52
+msgid "Description"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:116
+#: a1ce2b7c3b5743969d0b1d3cb7211cd0
+msgid "``message COMMAND_LONG 0 0 205 0 0 0 0 0 0 0 0``"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:116
+#: 7aa848f2f05042ac8ebd6efd30bf97cf
+msgid "Retract Gimbal"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:118
+#: 4b423fa983af47e29e8554fc63943b79
+msgid "``message COMMAND_LONG 0 0 205 0 0 0 0 0 0 0 2``"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:118
+#: 4e27b24ed9bf44c995b6021424da53cd
+msgid "Switch to MAVLink Targeting (MAVLink messages control gimbal)"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:121
+#: 7fe0eb56471b4caf8f77542c4bb01caf
+msgid "``message COMMAND_LONG 0 0 205 0 0 0 0 0 0 0 3``"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:121
+#: c14bf0ac1e7c4b738d9e2bfda04e0308
+msgid "Switch to RC Targeting (Pilot controls gimbal from RC)"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:124
+#: a7fce12c71f74b57bba48e326640c1e8
+msgid "``message COMMAND_LONG 0 0 205 0 0 0 0 0 0 0 5``"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:124
+#: 4e60a8dcb4554099a6dd73a9af6edb57
+msgid "Point gimbal at another vehicle see MAV_CMD_DO_SET_ROI_SYSID"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:127
+#: 1708e5597f4a46c0bce08e55a811aece
+msgid "``message COMMAND_LONG 0 0 205 0 0 0 0 0 0 0 6``"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:127
+#: 136b5438b6f74b41b50c764f7d1c638d
+msgid "Point gimbal at home"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:131
+#: ccc5263a5ed848ea9ca3ff4b7f231239
+msgid "MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW to move to a desired angle or at a desired rate"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:133
+#: 9b96b769d1f1433dbd662aa5e9a53bc1
+msgid "The gimbal's attitude can be changed to a desired pitch and yaw angle or changed at a desired rate by sending a `COMMAND_LONG <https://mavlink.io/en/messages/common.html#COMMAND_LONG>`__ with the command and param1 through param7 fields set as specified for the `MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW <https://mavlink.io/en/messages/common.html#MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW>`__ command."
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:136
+#: df641c5bfca4496fb2228c09c7d115ab
+msgid "The gimbal's yaw behaviour as the vehicle rotates can also be controlled.  The two behaviour are:"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:138
+#: bc5df68cfbd14110b21d2c63a7788b93
+msgid "body-frame/follow means the gimbal's yaw will rotate with the vehicle"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:139
+#: 2deb04a028b54ef3afa0a922742b4144
+msgid "earth-frame / lock means the gimbal's yaw will remain fixed and will not rotate with the vehicle"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:208
+#: ../../source/docs/mavlink-gimbal-mount.rst:324
+#: ../../source/docs/mavlink-gimbal-mount.rst:421
+#: ../../source/docs/mavlink-gimbal-mount.rst:507
+#: ../../source/docs/mavlink-gimbal-mount.rst:592
+#: f72517577a9a43b8915d4890176c615f
+#: 36651a402e0c49c0a72eaf9ed8f59bc9
+#: 3b65f72bafb3415290dc3120325bcfa8
+#: 27f213607e294ffcab80668187db72bc
+#: ccd103af91f746739df7d2463a31ea09
+msgid "The example commands below can be copy-pasted into MAVProxy (aka SITL) to test this command.  Before running these commands enter:"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:215
+#: ece71aca3c1c40b8b0f2627ab10cacdf
+msgid "``message COMMAND_LONG 0 0 1000 0 -20 90 float(\"NaN\") float(\"NaN\") 0 0 0``"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:215
+#: d073dc0894cd4c4ca3188c3856f21094
+msgid "Pitch down 20deg, yaw right 90 deg, body-frame / follow"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:217
+#: 0cac5ae84cfb4b7aab75db2071e63789
+msgid "``message COMMAND_LONG 0 0 1000 0 -20 90 float(\"NaN\") float(\"NaN\") 16 0 0``"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:217
+#: 498306abc6544479967aa89b1fd026e9
+msgid "Pitch down 20deg, yaw East, earth-frame / lock"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:219
+#: 10c8a8e0d7054bb48310c0beead90a87
+msgid "``message COMMAND_LONG 0 0 1000 0 float(\"NaN\") float(\"NaN\") 5 0 0 0 0``"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:219
+#: f86d9d7adf85414e8623cfc492758df3
+msgid "Pitch down at 5deg/sec, yaw hold, body-frame / follow"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:221
+#: 6540a3c845ec4b87971e55fa86cbbf2e
+msgid "``message COMMAND_LONG 0 0 1000 0 float(\"NaN\") float(\"NaN\") 0 5 0 0 0``"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:221
+#: 11ccfc8abeed4750aaa8b70da2399161
+msgid "Pitch hold, yaw clockwise at 5deg/sec in body-frame"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:223
+#: bc1236297aca4114bfdb9b7892341e1b
+msgid "``message COMMAND_LONG 0 0 1000 0 float(\"NaN\") float(\"NaN\") 0 5 16 0 0``"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:223
+#: c36016acd95f4c5f8df96d7347266907
+msgid "Pitch hold, yaw clockwise at 5deg/sec in eartj-frame"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:227
+#: 27c779b8d26845cfab6d6813200d7e5a
+msgid "MAV_CMD_DO_SET_ROI_LOCATION to point at a Location"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:229
+#: 8a55622cddf14674baf942e9bad2174c
+msgid "The gimbal can be pointed at a Location (Lat, Lon, Alt) by sending a `COMMAND_INT <https://mavlink.io/en/messages/common.html#COMMAND_INT>`__ with the command and param1 through param6 fields set as specified for the `MAV_CMD_DO_SET_ROI_LOCATION <https://mavlink.io/en/messages/common.html#MAV_CMD_DO_SET_ROI_LOCATION>`__ command."
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:256
+#: b5ff7ac7dd79422e886c546719e89c27
+msgid "Valid options are:"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:258
+#: e1e28d4d26224a30a2d0f538c6868956
+msgid "MAV_FRAME_GLOBAL (0): alt is meters above sea level"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:259
+#: c272408bcd174e8885ba3e912675292b
+msgid "MAV_FRAME_GLOBAL_INT (5): alt is meters above sea level"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:260
+#: ed36a9109a414c22ad5d57b162953ea8
+msgid "MAV_FRAME_GLOBAL_RELATIVE_ALT (3): alt is meters above home"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:261
+#: ef967aa812f442b4a049ce491db3eac9
+msgid "MAV_FRAME_GLOBAL_RELATIVE_ALT_INT (6): alt is meters above home"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:262
+#: e2f5c13e525f44d0afaaf7c148a214e9
+msgid "MAV_FRAME_GLOBAL_TERRAIN_ALT (10): alt is meters above terrain"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:263
+#: c6b179d04c9d48ada9752086bb189347
+msgid "MAV_FRAME_GLOBAL_TERRAIN_ALT_INT (11): alt is meters above terrain"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:331
+#: 7b6d5dbb2f9c4c7989e25bceb378220c
+msgid "``message COMMAND_INT 0 0 6 195 0 0 0 0 0 0 -353632632 1491663846 10``"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:331
+#: 1db1819f158e4f27bd7ad58912836275
+msgid "Point at Lat:-35.3632632 Lon:149.1663846 Alt:10m above home"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:333
+#: 8d9c5623117546ed80f985d3e475dbfc
+msgid "``message COMMAND_INT 0 0 0 195 0 0 0 0 0 0 -353632632 1491663846 10``"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:333
+#: 0e2db95b7a404dfcb0b6e3d0da77c083
+msgid "Point at Lat:-35.3632632 Lon:149.1663846 Alt:10m above sea level"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:335
+#: 8313d84ff5de4b8ebe54e0f9bd532764
+msgid "``message COMMAND_INT 0 0 11 195 0 0 0 0 0 0 -353632632 1491663846 10``"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:335
+#: 3df2a91341bf4d8ab6b16e69f5d56c04
+msgid "Point at Lat:-35.3632632 Lon:149.1663846 Alt:10m above terrain"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:339
+#: 5e2bdbb762fe4b409d265c9ef0b1ee67
+msgid "MAV_CMD_DO_SET_ROI_NONE to stop pointing at a Location"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:341
+#: 2e9c5aeff47c40a9ba8a0cf1f4a65ea3
+msgid "The gimbal ROI can be stopped (e.g. the gimbal will switch to its default mode held in the MNT1_DEFLT_MODE param)) by sending a `COMMAND_INT <https://mavlink.io/en/messages/common.html#COMMAND_INT>`__ with the command and param1 specified for the `MAV_CMD_DO_SET_ROI_NONE <https://mavlink.io/en/messages/common.html#MAV_CMD_DO_SET_ROI_NONE>`__ command."
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:428
+#: b5d5b141e4184133b38e432e8f99888a
+msgid "``message COMMAND_INT 0 0 0 197 0 0 0 0 0 0 0 0 0``"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:428
+#: 177f6bdb4e8648b5a1f9bda4b73d6b8e
+msgid "Stop pointing at a Location or another vehicle (gimbal will return to its default mode)"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:433
+#: 2ef35a7a66bb468bb9af3179d7b208dd
+msgid "MAV_CMD_DO_SET_ROI_SYSID to point at another vehicle"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:435
+#: f3d00b2cde054d6bb8558487c298d8cc
+msgid "The gimbal can be pointed at another vehicle by sending a `COMMAND_LONG <https://mavlink.io/en/messages/common.html#COMMAND_LONG>`__ with the command and param1 fields set as specified for the `MAV_CMD_DO_SET_ROI_SYSID <https://mavlink.io/en/messages/common.html#MAV_CMD_DO_SET_ROI_SYSID>`__ command."
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:438
+#: 370e978c7208440d93567651f6f691ce
+msgid "This feature relies on the main vehicle receiving the other vehicle's position at regular intervals via the `GLOBAL_POSITION_INT <https://mavlink.io/en/messages/common.html#GLOBAL_POSITION_INT>`__ message."
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:514
+#: f67f44fdf8174f26b4e96f4046f9f872
+msgid "``message COMMAND_LONG 0 0 198 0 2 0 0 0 0 0 0``"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:514
+#: 936d00d1daed4488aaf7fd98aca115f1
+msgid "Point at vehicle with SysId=2"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:518
+#: 3129d5f006784f578e3f941672ff99c5
+msgid "MAV_CMD_DO_GIMBAL_MANAGER_CONFIGURE to take control of the gimbal (optional)"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:520
+#: 78a2a7dcf3c641129c880f6cfe2d6b77
+msgid "The `MAVLink Gimbalv2 protocol <https://mavlink.io/en/services/gimbal_v2.html#starting--configuring-gimbal-control>`__ includes support for deconflicting commands received simultaneously from multiple MAVLink enabled ground stations using the DO_GIMBAL_MANAGER_CONFIGURE command.  ArduPilot consumes these commands and reports who is in control using the GIMBAL_MANAGER_STATUS message but does not actually enforce their use due to concerns around backwards compatibility and the number of support calls this would generate."
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:522
+#: b58a45283b7549ea8794fa8175cb82ea
+msgid "A ground station (or other MAVLink enabled device) can take control of the gimbal by sending a `COMMAND_LONG <https://mavlink.io/en/messages/common.html#COMMAND_LONG>`__ with the command and param1 fields set as specified for the `MAV_CMD_DO_GIMBAL_MANAGER_CONFIGURE <https://mavlink.io/en/messages/common.html#MAV_CMD_DO_GIMBAL_MANAGER_CONFIGURE>`__ command."
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:599
+#: 1e92ec86177042a0a1e46b5227980f7d
+msgid "``message COMMAND_LONG 0 0 511 0 281 1000000 0 0 0 0 0``"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:599
+#: baa2a520654543bb9d8cd69986f8a9cf
+msgid "request GIMBAL_MANAGER_STATUS at 1hz"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:601
+#: 91f7deafeb5b4856935bf8245ad00d06
+msgid "``message COMMAND_LONG 0 0 1001 0 -2 0 0 0 0 0 0``"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:601
+#: 9351d059c5de4baabed641217e86e708
+msgid "set self in control"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:603
+#: 27e06cfd9918437c988573b4522f8977
+msgid "``message COMMAND_LONG 0 0 1001 0 -3 0 0 0 0 0 0``"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:603
+#: 3f9d8280227c4afb91433f19ffd291ec
+msgid "release control"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:605
+#: a43bd5ff42cc4813b3d7cf732dc855f9
+msgid "``message COMMAND_LONG 0 0 1001 0 123 1 0 0 0 0 0``"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:605
+#: 12611fb4c21044e4a0f0a569b3a10f86
+msgid "set sysid:123 / compid:1 in control"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:608
+#: 884bf685e0e64e88b59ae720b6c7ca43
+msgid "You can see the results of by monitoring the GIMBAL_MANAGER_STATUS message"
+msgstr ""
+
+#: ../../source/docs/mavlink-gimbal-mount.rst:610
+#: aad8744a4c43451b9c3144b4687140e8
+msgid "status GIMBAL_MANAGER_STATUS"
+msgstr ""

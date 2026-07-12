@@ -1,0 +1,132 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/sitl-i2c-devices.rst:5
+#: 901125ec167742299e081f6515288811
+msgid "SITL I2C Devices"
+msgstr ""
+
+#: ../../source/docs/sitl-i2c-devices.rst:7
+#: 4bc7a1abdb4b4807a154825176995d71
+msgid "The SITL (software in the loop) simulates many different i2c devices, including:"
+msgstr ""
+
+#: ../../source/docs/sitl-i2c-devices.rst:9
+#: ce03fb2b820946dc83296474972aa2cf
+msgid "MaxSonar i2c-connected sonar"
+msgstr ""
+
+#: ../../source/docs/sitl-i2c-devices.rst:10
+#: e9d70f50ded942b0a8854a72b7a2d795
+msgid "various SMBus battery monitors"
+msgstr ""
+
+#: ../../source/docs/sitl-i2c-devices.rst:11
+#: bf1c58561b7c436ab8a1a5aa0a9c2cda
+msgid "LED devices"
+msgstr ""
+
+#: ../../source/docs/sitl-i2c-devices.rst:12
+#: a663363d76e44b88a98f52d66a67ce40
+msgid "temperature sensors"
+msgstr ""
+
+#: ../../source/docs/sitl-i2c-devices.rst:13
+#: d41855b394244c08b76395ef7783638d
+msgid "airspeed sensors"
+msgstr ""
+
+#: ../../source/docs/sitl-i2c-devices.rst:14
+#: 6fa5e68b79f94e5bbda82cb422233a4e
+msgid "IMU drivers"
+msgstr ""
+
+#: ../../source/docs/sitl-i2c-devices.rst:17
+#: 6d8fc99152874985aa8666000c1e1f0a
+msgid "Overview"
+msgstr ""
+
+#: ../../source/docs/sitl-i2c-devices.rst:19
+#: 74a625e2abef4d16ab3f9a0fb88433a2
+msgid "``SITL/SIM_I2C.cpp`` contains the instantitions and initialisation of the buses and drivers.  It also contains the hook used by the SITL HAL to make simulated i2c bus transactions with the device, ``I2C::ioctl``"
+msgstr ""
+
+#: ../../source/docs/sitl-i2c-devices.rst:21
+#: 92f3dc3f86f54f8fa5abdf54dc9bfa24
+msgid "``SITL/SIM/I2CDevice.h`` declares the I2CDevice class from which all simulated I2C drivers inherit from.  The general structure of an I2CDevice is:"
+msgstr ""
+
+#: ../../source/docs/sitl-i2c-devices.rst:23
+#: 15b939fdc1db417b8837be32ec30a894
+msgid "an init() method"
+msgstr ""
+
+#: ../../source/docs/sitl-i2c-devices.rst:24
+#: 434a0f4440a14cbab886b12218f2a7e3
+msgid "an ``update`` method called periodically to simulate whatever the device accomplishes on its own internal clock"
+msgstr ""
+
+#: ../../source/docs/sitl-i2c-devices.rst:25
+#: cadd40afe0864a18935f2cfab50aed3a
+msgid "a ``rdwr`` call which is called when ArduPilot attempts an i2c transaction"
+msgstr ""
+
+#: ../../source/docs/sitl-i2c-devices.rst:27
+#: c07b88d29e5f47ebab139e4d1488073f
+msgid "i2c devices vary in the structure of the on-wire protocol.  Some examples of protocol shapes include:"
+msgstr ""
+
+#: ../../source/docs/sitl-i2c-devices.rst:29
+#: 8c85d479f1e04997a1a347eb52e69e09
+msgid "simply stream bytes onto the i2c bus; when a read is attempted from one of these devices a response is received with bytes filled in, regardless of what transfer is made to the device.  SIM_Airspeed_DLVR is an example of an implementation of this sort of device, never allowing i2c writes to the device and always returning 4 bytes of data."
+msgstr ""
+
+#: ../../source/docs/sitl-i2c-devices.rst:31
+#: 7b6896b648f647548b0fcb8bac747f48
+msgid "respond to a simple i2c \"take reading command\" by making available a reading on a subsequent i2c read transaction.  The SIM_MaxSonarI2CXL is an example of this sort of device, responding to a command of 0x51 by taking a measurement and allowing a subsequent read of 2 bytes to return that measurement."
+msgstr ""
+
+#: ../../source/docs/sitl-i2c-devices.rst:33
+#: 04b6fa9c631542c193f78cf3579f237e
+msgid "a register-based interface where the ArduPilot driver writes to registers at specific offsets to configure the device and reads data back via the same interface.  i2c transactions are usually a pair of couple transactions, one to specify the registers to read and the other for the simulated device to return the data.  The simulated IS31FL3195 LED driver is an example of this, presenting a number of control registers used for setting the LED patterns and device behaviour.  These i2c devices often have a \"WHOAMI\" register to determine the device type.  SMBus devices also often speak this protocol, but using 16-bit registers rather than the usual 8-bit."
+msgstr ""
+
+#: ../../source/docs/sitl-i2c-devices.rst:36
+#: 0d3701edd31e41e89642f3ed77642808
+msgid "Choosing a Device Style"
+msgstr ""
+
+#: ../../source/docs/sitl-i2c-devices.rst:38
+#: ee42242ed8044140a40b3e68bf68da13
+msgid "When implementing a new simulator, care must be taken to choose the correct \"style\" of simulator to implement.  Several base classes can be inherited from to prevent warrantless duplication.  As always, find a good example of something similar to the device you wish to simulate and \"do what that thing does\".  Working out what the protocol is requires study of the datasheet for the device."
+msgstr ""
+
+#: ../../source/docs/sitl-i2c-devices.rst:40
+#: 2eb16e7721b74fac8731c6ff07f9dd98
+msgid "For devices which are strictly register-based, the ``I2CRegisters_8Bit`` (or ``I2CRegisters_16Bit``) base class should be inherited from.  This allows your new simulator to describe the registers present on the device, and simply fill the register values in based on how ArduPilot manipulates other registers.  It is also possible to create simulates devices with both 8 and 16 bit registers - see ``I2CRegisters_ConfigurableLength``"
+msgstr ""
+
+#: ../../source/docs/sitl-i2c-devices.rst:42
+#: f0b70c20db17483587704254679503c6
+msgid "For devices which are polled to start some sort of measurement and subsequently make available a 16-bit quantity for reading ``I2CCommandResponseDevice`` may be used to write a simple driver."
+msgstr ""
+
+#: ../../source/docs/sitl-i2c-devices.rst:44
+#: 55ad0356086f4780bdd4362dea994974
+msgid "For devices which simply return fixed-length readings when an i2c \"read\" is made - and for any other protocol which doesn't yet have an abstraction - your simulation will need to implement the virtual method ``rdwr(I2C::i2c_rdwr_ioctl_data *&data)`` inherited from SITL::I2CDevice."
+msgstr ""

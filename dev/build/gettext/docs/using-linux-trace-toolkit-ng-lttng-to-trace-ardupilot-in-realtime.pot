@@ -1,0 +1,277 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:5
+#: c45af45283284936b26825939fdc357f
+msgid "Using Linux Trace Toolkit ng (LTTng) to Create Realtime ArduPilot Traces"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:7
+#: ecf8c5ba60604474a8b3935ddda89caf
+msgid "This article explains how to use `LTTng <https://lttng.org>`__ for creating runtime traces for ArduPilot running on Linux boards (only)."
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:11
+#: 6ba7c06cc51d4326b10334ee1f231ba7
+msgid "Overview"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:13
+#: 4590ef29cc12470f91be6d49e187ac73
+msgid "Tracing is a technique used to record the real-time behaviour of a software in memory and analyze the execution of the code off-line. It can be very useful to understand the interaction between threads, processes, the duration of certain events and the sequencing of some operations."
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:19
+#: 0d8c5f06c85244339af8938d2c672fdb
+msgid "*LTTng* is a Linux tool that can be used to trace either a userspace application, or the Linux kernel itself. It produces trace files that can be analyzed later, mostly off-board. Lttng's implementation in ArduPilot uses userspace tracing but you can at the same time monitor what's going on inside the kernel, provided the kernel has tracepoints enabled (in its config)."
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:26
+#: 606f34a04fe44e9488d826280515227a
+msgid "*LTTng* has been integrated using the `Perf_Lttng <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_Linux/Perf_Lttng.cpp>`__ class, which handles 3 operations: ``Begin``, ``End``, ``Count``. You add tracing to your code by calling the performance utility methods in `Perf.cpp <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_Linux/Perf.cpp>`__."
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:33
+#: 2f580b109867459d84e5da5c6d19a36c
+msgid "Monitoring APM with LTTng"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:35
+#: dd18047e0bd24412be61f301283889ef
+msgid "In order to monitor ArduPilot with *LTTng*, the first thing to do is to install LTTng on your board. The *LTTng* documentation explains how to install it on your Linux distribution `here <https://lttng.org/docs/#doc-installing-lttng>`__. If there is no official package for your Linux distribution, you can also build it from the sources as explained `here <http://lttng.org/download/#build-from-source>`__"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:44
+#: 2f1e924b92f64038a325dbdb4e592f03
+msgid "You can't build statically with *LTTng* enabled because it calls dlopen. On bebop I had to build the whole system with armhf toolchain, which is not the one used by default."
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:49
+#: 7ee7ae9c85c84c8fa87c2dffb5df728c
+msgid "Putting trace events inside the code"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:51
+#: d20b4220efe94839b1e6a45a5b63be25
+msgid "In order to trace ArduPilot, you call the following performance utility methods:"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:62
+#: ce6f8081e2c54cc28441a64b92778b05
+msgid "Before calling these functions, ``my_perf`` needs to be allocated"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:68
+#: 44623236a96446478c9a99bf8861dbb2
+msgid "An example of adding multiple perf events can be seen in `this patch <https://github.com/jberaud/ardupilot/commit/4bd763d58a6b529630629ad581de198f9d6e6731>`__."
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:71
+#: fc550e07c9364129896ba965ee7220c2
+msgid "Trace capture"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:74
+#: ab26d3b6e4f94b9889334e4ec53d8311
+msgid "Enable trace events in ArduPilot"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:76
+#: 6c1d483647764de699698153fbc7726a
+msgid "Once you have the modified version of ArduPilot launched on your board and *LTTng* tools installed, you can check that ArduPilot *LTTng* events are available on your board's console terminal using the following command:"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:85
+#: 3982a551b1c84a59a80e9db57e22d7aa
+msgid "This should output a list of events including:"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:95
+#: ccd677c4995f48ce8f7ac903718cd7f4
+msgid "Refer to the `LTTng documentation <https://lttng.org/docs/#doc-tracing-the-linux-kernel>`__ for information on how to list kernel events."
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:99
+#: 108e43f866f64ceeb1a836f12142822b
+msgid "Capturing a trace session"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:101
+#: 6354a57ee6854e3ab9e3c99ecc22e35a
+msgid "A trace session can be started, stopped, re-started and destroyed."
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:103
+#: 9e412720d5c34d27ab121997d2bea012
+msgid "Destroying a trace session doesn't delete the traces from permanent storage but means that you have to restart a new session if you want to continue capturing."
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:107
+#: 684afbdc44e74287b7fbbdf14466e425
+msgid "Create session:"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:113
+#: 27ffa3c7d61b459089bee0741ae53151
+msgid "Enable ArduPilot events:"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:121
+#: e180c1fff20c4ccfb4c71a7cda103302
+msgid "To enable kernel events, see `these instructions <https://lttng.org/docs/#doc-tracing-the-linux-kernel>`__."
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:123
+#: f569a97f6c634055909d572d1749360a
+msgid "Start capturing:"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:129
+#: be2199a3771e483fba18e6134a155560
+msgid "To stop capturing:"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:135
+#: ee0fc86d6a8d47e98b71994d9e3562ec
+msgid "If you have *babeltrace* installed on board, you can view the result in text:"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:142
+#: 49378a5bca674f27b5cbd1dab1ec5719
+msgid "Restart or destroy your session:"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:149
+#: 0fdf5f0fae2b499d8f87e80a0f6e233d
+msgid "Analyzing the trace"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:151
+#: 081dd1ffaa0143edad32feee3cd9b547
+msgid "In order to analyze your trace, first copy the trace directory you indicated at session creation to your computer."
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:155
+#: f600fcfbee09424eb2de266732c40236
+msgid "Babeltrace"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:157
+#: 37c90bea02c143bf923817990da72786
+msgid "You can analyze the trace using *babeltrace*. This is a command line tool that is able to translate the trace into text format:"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:164
+#: f69632c440454c9cbbc0edad2336ff95
+msgid "The result is a series of events with the according timestamps and the number of the CPU they have been running on."
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:167
+#: beea714cd4e549ff9b659fbdae545d08
+msgid "To go further with that, you can use `babeltrace's python bindings <http://diamon.org/babeltrace/docs/python/>`__ to write a python program analyzing the trace you have captured."
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:171
+#: fd59c4a4b54d49a4a8755f65319ba4b8
+msgid "Trace compass"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:173
+#: a33dc6a68bd64e4e86a75f72e294954d
+msgid "`Trace compass <https://projects.eclipse.org/projects/tools.tracecompass>`__ is an Eclipse plugin that can read *LTTng* traces and display them in a UI that is adapted to some analyzes."
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:178
+#: c24f072f038b4a51af00b23b7060c2f5
+msgid "Lttng2lxt"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:180
+#: 9b7895a4488148818f17338f2dcab5f3
+msgid "Trace compass is very powerful but up to now, I haven't been able to analyze userspace traces in a convenient way."
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:183
+#: 0ac5d482755c4c148ed7619e5840d18a
+msgid "*Lttng2lxt* is an open source tool written by Ivan Djelic from Parrot. It is a very simple command line tool that generate waveforms readable by `gtkwave <http://gtkwave.sourceforge.net/>`__. I have added support for ArduPilot events to *lttng2lxt*."
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:188
+#: 48ed887e89484bfe8e32733bb6dd6231
+msgid "In order to use it, get the sources from my github repository:"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:194
+#: 0391a0ff5060427fb8213e576a2d6397
+msgid "You will have to install \\ *libbabeltrace-ctf-dev* and \\ *libbabeltrace*. On Debian or Ubuntu do this with the following command:"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:202
+#: fd531afbd56745a8bc19447672f39f45
+msgid "Compile it:"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:208
+#: 1c943b1f07d34adab6478177652ed75b
+msgid "Use it to generate a *gtkwave* waveform file:"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:214
+#: bd1f444a129545d3a3a3630f3b06174a
+msgid "This will produce a file called **my_trace_directory.lxt**."
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:217
+#: 5aa1f51773a04837a189c3e3be526d47
+msgid "Analyzing your trace using gtkwave"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:219
+#: 91098758003f4da5aec5ab7eeadc82c6
+msgid "First install *gtkwave*. On Debian or Ubuntu you can do this with the command:"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:226
+#: fbfcc60ba8314e2eb9c4f9b3cdb9d7c8
+msgid "Then open your trace using *gtkwave*:"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:232
+#: a73706b55bb745e18c03c62c69f7337a
+msgid "Use the **Zoom fit** button |zoom_fit|."
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:248
+#: 6d389483c73044d3b5982b7e00459389
+msgid "zoom_fit"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:234
+#: 639f1b6920d145fa92c3269af0ddd73a
+msgid "The result should look like this:"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:239
+#: 006d75aea1554ed184ab933ca47ed97c
+msgid "You can then zoom in or out and see the exact execution sequence, with the associated timings"
+msgstr ""
+
+#: ../../source/docs/using-linux-trace-toolkit-ng-lttng-to-trace-ardupilot-in-realtime.rst:245
+#: 40b6e80e1e2e41f3ba90fc760654520a
+msgid "You can therefore measure the duration of an event with the cursors (use the mouse middle button to set the first cursor)"
+msgstr ""

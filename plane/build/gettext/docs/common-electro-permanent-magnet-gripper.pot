@@ -1,0 +1,257 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:5
+#: 8bc481c7c0ee44d094cdbb9258f218df
+msgid "Electro Permanent Magnet Gripper (EPM688)"
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:7
+#: f2d0f1f8d9664d6fbd0c8d50a69c7c0a
+msgid "This article shows how to use the `Electro Permanent Magnet Gripper (EPM688) <http://nicadrone.com/index.php?id_product=13&controller=product>`__ with ArduPilot."
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:11
+#: 96ca4dcdb37249ff98f17ed9cfb691d6
+msgid "Overview"
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:13
+#: 4aa65ba2e2754ae4902c51626adf317f
+msgid "The *EPM688* (from NicaDrone.com) is a small (less than 4cm x 4cm x 2cm) Electro Permanent Magnet gripper capable of 7kg of force meaning it can hold about 1kg of cargo.  The gripping and releasing of the cargo if accomplished by delivering a short pulse to an electromagnet which reverses its field.  Objects that it grips onto should be metal or have the included `thin steel target square <http://nicadrone.com/index.php?id_product=15&controller=product>`__ attached to them."
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:21
+#: 8e18017ca1f24eebb80be001d74a17a7
+msgid "The device accepts a standard PWM servo input and uses a 5V power supply.  Significant amounts of power are only required for less than 1 second when it first grips or releases the cargo."
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:25
+#: a24e3e11e993452db9fe3c0ed8f5bd4f
+msgid "`See Kickstarter **Video** of the product here <https://www.kickstarter.com/projects/412473553/opengrab-open-hardware-electro-permanent-cargo-gri/widget/video.html>`__!"
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:28
+#: 58e84f65160549f2827c180c7df3f451
+msgid "Connecting to a Pixhawk"
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:33
+#: 5e941be6573542758a6ce951ae3ef5b7
+msgid "The EPM is connected to the Pixhawk in the same way as a :ref:`servo <common-servo>`."
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:36
+#: 4db98de0f59145b39ec7ee4ec11baf92
+msgid "If using Copter, Connect the EPM to AUX OUT 1, 2, 3 or 4.  MAIN OUT 1 ~ 8 cannot be used because the EPM does not accept the 400hz update rate.  AUX OUT 5 an 6 cannot be used because they are reserved for :ref:`Relays <common-relay>`."
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:40
+#: 1293638243ec4ae3b903ac0b09c8e9fa
+msgid "If using Plane or Rover where all pwm pins update at 50hz, any unused MAIN OUT or AUX OUT 1 ~ 4 may be used."
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:42
+#: 28aba15b37934fceba8fcc30a574c856
+msgid "A BEC or ESC should be used that can provide 600milliamps of current at 5V for the short period that the gripper is first activated to latch onto the cargo."
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:47
+#: 907ec8b88de1492cacb4ddbd649fd6c8
+msgid "Controlling from a transmitter using servo pass-through"
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:49
+#: aa8c159325544e5283a8897f705cd6f6
+msgid "Unfortunately with the latest versions of Copter, Plane and Rover the EPM can be controlled either from the transmitter OR during missions. Either is possible but parameter changes are required meaning both methods are not available during a single flight.  Below are instructions for setting up manual control through a transmitter."
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:58
+#: 90e8963cbffc4edca04e2438ea377d45
+msgid "Control using the transmitter is accomplished by setting up \"RC Pass Through\" which means the \"input\" channel from the transmitter is passed through to the autopilot's \"output\" channel of the same number.  For Copter this means you must have a transmitter capable of 9 or more channels because the EPM is connected to output ch9 (or higher)."
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:64
+#: afb50981a3fd4219b0cb72983ba46722
+msgid "Assuming the above is possible for your set-up, connect with the mission planner.  Go to the Config/Tuning >> Full Parameters List and set the :ref:`SERVO9_FUNCTION<SERVO9_FUNCTION>` (or RC9_FUNCTION) to \"1\" (i.e. \"RCPassThru\").  Note that if the EPM is connected to AUX OUT 2 then :ref:`SERVO10_FUNCTION<SERVO10_FUNCTION>` should be set instead, etc."
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:69
+#: 453cf89873d840a486604ba6be81cc30
+msgid "On the transmitter set CH9 to be controlled from a 3-position switch and the positions set as follows:"
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:72
+#: 9b5763c99bdd470593d74a411ec64f1f
+msgid "*low position set to about **1100 pwm**.  This will release the cargo*"
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:74
+#: 75ee6e6e386544658c388a6e0d6d52f7
+msgid "*mid position set to about **1500 pwm**.  This is the neutral position, after pulling the switch high or low to grab or release, the switch should be returned to this position*"
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:77
+#: 4bba484ffecb4dfe9616b623477df523
+msgid "*high position set to about **1900 pwm**.  This will activate the EPM so it grips onto the cargo.*"
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:80
+#: f9e57b75021f4e98a2e4ced50b6a2391
+msgid "To grab onto the cargo, bring the cargo close to the EPM and momentarily bring the switch high and then return the switch to neutral."
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:83
+#: a33bf38a6db5470eb087f1cd3de47e44
+msgid "To release the cargo, momentarily bring the switch low and then return it to neutral."
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:86
+#: 7c26fccb4c7a45628845314d3ecf6946
+msgid "Note: the :ref:`Copter Ch7/Ch8 switch <copter:channel-7-and-8-options>` includes options for the EPM but these unfortunately do not function properly."
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:90
+#: 1c86377a3e20438cbd0dc79767ab5185
+msgid "Note: it is also possible (if using an older style, non ppm-sum receiver) to directly connect one signal wire from the receiver to the EPM's PWM pin thus bypassing the autopilot completely.  The image below shows the power line between the receiver and EPM connected but this is not correct and is quite dangerous because power spikes could pass through the receiver to the autopilot.  Only PWM and Ground should be connected.  The EPM should be powered from a BEC (not shown below)."
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:104
+#: ca1f2e61b0c74768b5277d80af05ea78
+msgid "Controlling during missions and from GCS"
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:106
+#: fe050c2ae03e4b318c50cf59277b817f
+msgid "As mentioned above, the EPM can be controlled either through a transmitter or from the ground station (including during missions, aka \\ :ref:`AUTO mode <copter:auto-mode>`) but not both during the same flight. Below are instructions for setting up control through the ground station."
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:115
+#: b8e90a74e20a4f588538ac32632e9914
+msgid "Connect with the mission planner. Go to the Config/Tuning >> Full Parameters List and set the :ref:`SERVO9_FUNCTION<SERVO9_FUNCTION>` (or RC9_FUNCTION) to \"0\" (its default value). Note that if the EPM is connected to Pixhawk's AUX OUT 2 then :ref:`SERVO10_FUNCTION<SERVO10_FUNCTION>` (or RC10_FUNCTION) should be set instead, etc."
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:120
+#: 99503f6e6be24b73a8bc86073e6fa440
+msgid "Create the mission you wish to fly and add pairs of ``DO_GRIPPER`` commands to grip or release the cargo .The EPM is returned to neutral after each command."
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:123
+#: 956d9d716c8f46279ef28d074937cbaa
+msgid "\"Ser No\" should be set according to which output the EPM is connected to (i.e. \"9\" = Pixhawk's AUX OUT 1, \"10\" = APM2's RC10)."
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:125
+#: 54a11874163a41e792bb3d11cc8cc186
+msgid "\"PWM\" should be set to **1100ms** to release the cargo, **1500ms** to return to neutral, and \\ **1900ms** to grip the cargo."
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:131
+#: a76d5b592f244ef6b6470f9b587c0bc4
+msgid "In the example above the vehicle takes off to 20ft, flies west 548ft where it delays for 5 seconds, releases the cargo, delays another 5 seconds and then returns home."
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:135
+#: 10290263c31b4d82a01f61d175b15f72
+msgid "In order to pick up the cargo before the mission begins, push the round black button on the EPM to momentarily turn it on.  A cumbersome alternative is to use the Mission Planner’s Flight Data screen's Servo tab to momentarily set the output to 1900 pwm (i.e. \"High\" in the image below) and then back to neutral (i.e. 1500 or \"Low\" in the image below)."
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:145
+#: f0c3b0e9beaf438fb434da136be16c1a
+msgid "Specifications and more info"
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:151
+#: 5c53bc14a46d439b8cf35221636691ac
+msgid "The EPM has an onboard PIC12F MCU with an in circuit programming header to allow easy reflashing."
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:154
+#: 7ce0a7fe1ca64d6bbb1714ea8fc792a6
+msgid "When first gripping or releasing the cargo it consumes 400mA for 0.4 seconds.  The majority of the energy is consumed to move the target into place and the rest realigns the magnets.  The on-board LED will blink rapidly 4 times when a switching cycle is being executed"
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:159
+#: 5e49f3bdbe4543039e57963dc30f7bac
+msgid "On-board tactile push button: Allows toggle testing the EPM on/off having only the power connected"
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:162
+#: 0d36ca91214f4c7b9ed3d7b493fd1e31
+msgid "Full bridge Thyrisotor drive circuit increases efficiency and reduces capacitor size ."
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:165
+#: d7141fc834b742a6a5d6afd7a7ed5038
+msgid "Reduced magnetic interference allows mounting within 5cm of a compass (please test it with your application)"
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:168
+#: 69790fe68cab4bf4995e1dc660a4c352
+msgid "`Paper by Ara Nerses Knaian <http://www.hizook.com/files/users/3/Electropermanent_Magnets_Knaian.pdf>`__"
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:169
+#: 2e518569934a44e780a0357f8c03ab41
+msgid "`Datasheet <http://nicadrone.com/img/Datasheet%20EPM688-V2.0.pdf>`__"
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:170
+#: 4fd027c3ee7c40699f157963e7ffa099
+msgid "`Schematics and PCB files <https://upverter.com/eda/#tool=schematic,designId=5466622af0d942e4>`__"
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:171
+#: 1094180f71d2416493f5e9d46c3f0875
+msgid "`Git repository for Parts Drawing PCB Masks Pic12F source code <https://github.com/ctech4285/EPM_688_V2>`__"
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:172
+#: 3299edd35be543f88ee898cc497f6f77
+msgid "`User Group (Help) <https://groups.google.com/forum/#%21forum/opengrab>`__"
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:175
+#: b9979a2049084396b70e18c1e194eae0
+msgid "Magnetic interference and Board Voltage check"
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:177
+#: 82116349ce864968adc4fb2f18b01722
+msgid "The EPM can cause magnetic interference especially while gripping or releasing the cargo or if left in the \"on\" state with no cargo attached.  Make sure to mount the EPM at least 10cm from the flight controller's compass."
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:182
+#: 34083669f4ce49838bd6327dc87117de
+msgid "The EPM's impact on the compass can be tested in real-time by connecting with the Mission Planner, go to the Flight Data screen and click on the \"Tuning\" checkbox at the bottom, middle.  Double click on the graph that appears on the top right and when the \"Graph This\" window appears select \"magfield\"."
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:188
+#: 6b46dfca2f9645e0a3dbde112c08c4da
+msgid "Turning the EPM on and off and ensure the magfield length does not change by more than 10%."
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:194
+#: 2eb32af482a840db84207b57454ee0e5
+msgid "In addition to magnetic interference, if a weak BEC is used a voltage drop may be noticed.  For example the BEC in a 3DR ESC leads to a drop of 0.4V when the EPM is activated.  This is normally not a concern because the BEC should only be powering the servo rail of the autopilot, so the CPU's voltage should be unaffected.  This can be tested by graphing the \"hwvoltage\" field in the same way the \"magfield\" was checked above.  Ideally this test should be performed when connected via :ref:`Telemetry <common-telemetry-landingpage>`\\ because a USB cable will also provide power the CPU and may hide any voltage disturbance."
+msgstr ""
+
+#: ../../source/docs/common-electro-permanent-magnet-gripper.rst:205
+#: 19d2c343a106478a96266229fbe111a0
+msgid "User Video"
+msgstr ""

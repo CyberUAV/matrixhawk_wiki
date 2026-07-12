@@ -1,0 +1,112 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:5
+#: 2eef8fbf994343d2abdf46ec9cf98c14
+msgid "Copter Position Control and Navigation"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:7
+#: 96a04b053d244a56b883c38aed6c2fe7
+msgid "This page covers the basics of Copter's `Position Control  <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AC_AttitudeControl/AC_PosControl.h>`__ and `Waypoint Navigation <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AC_WPNav>`__ libraries"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:9
+#: 5677bc390bc745889db2bd2b49374f3a
+msgid "As a reference the diagram below provides a high level code flow view of Copter's RTL mode"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:16
+#: bd819803ff864f368af48588c8def225
+msgid "Class Hierarchy and Description"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:22
+#: 746174df76ca4bf29e557ad9468620e6
+msgid "At the highest level, AC_WPNav, AC_Circle and AC_Loiter libraries are peers and all make use of the AC_PosControl library"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:24
+#: 0c018b58537b444a86a22eceb9eb2233
+msgid "AC_WPNav is made up of three independent controllers (these may be separated into individual libraries in the future):"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:26
+#: bbf5bd9937f64b1f9a9e46b9d997c7e8
+msgid "Waypoint attempts to fly the vehicle in a straight line to a target waypoints.  This interface accepts a 3D target destination specified as a latitude, longitude and altitude or as an offset from the EKF origin"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:27
+#: bb097c7d4ad542b68e4355c0b2e49092
+msgid "Spline flies the vehile in a smooth curved path to a 3D target waypoint with a final velocity that will allow it to continue smoothly towards a subsequent waypoint.  Its interface is very similar to the Waypoint controller above"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:28
+#: d0d5e4f254254277ab379a0d327c201a
+msgid "Brake tries to slow the vehicle to a stop as quickly as possible"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:29
+#: e223d451acdf4dab885a8c4d19c7e475
+msgid "Waypoint, Spline and Brake controllers do not use PIDs directly.  Instead they update target positions or velocities which are then passed to the Position Controller"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:35
+#: 3bb4b96c35e94d98a37b811719904244
+msgid "AC_PosControl:"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:37
+#: 3ddca3cd8fcc4adea808ceccadda6959
+msgid "Separate interfaces for horizontal (X and Y axis) control and vertical (Z-axis) control.  These interfaces are separated because some flight modes (like AltHold mode) only require the Z-axis controller"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:38
+#: abb773dc1d71434098cb99b059426a29
+msgid "Layered PID controllers are used"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:40
+#: fcde89adbc144c77b2ce2bdfbe7be562
+msgid "XY axis uses a Position P to convert position error to a target velocity.  A velocity PID converts velocity error into a desired acceleration which is then converted to a desired lean angle which is then sent into the attitude control library."
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:46
+#: 236bbf0d25ca4f4bbdae36f740c6c77f
+msgid "The Z axis uses a Position P controller to convert position error to a target vertical velocity (aka climb rate).  A Velocity P controller converts velocity error to a desired acceleration.  An Acceleration PID converts acceleration error into a desired throttle which is then sent into the attitude control library (which mostly just passes it through to the low level motors library)"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:48
+#: e4a777a112044ad4b2d4b4e98b8e4c23
+msgid "AC_PosControl also includes a 3D velocity controller and a 3D Position+Velocity controller"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:51
+#: 89c06e071e7845c5858077fc0e229393
+msgid "Should I use PosControl or WPNav?"
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:53
+#: a793e47f3b6d46e2845f9573c2dbac8e
+msgid "Because both AC_PosControl and AC_WPNav allow the caller to move a vehicle to a 3D target point it may not be clear which should be used."
+msgstr ""
+
+#: ../../source/docs/code-overview-copter-poscontrol-and-navigation.rst:55
+#: 13af18dd374044ed9f0659006523311e
+msgid "In general the vehicle code (i.e. flight mode code) should use the AC_WPNav library because it will ensure the vehicle flies a straight path to the target.  AC_PosControl should normally only be used by other higher level navigation libraries.  The exception to this rule is simpler flight modes that simply want Z-axis control - these make direct use of AC_PosControl."
+msgstr ""

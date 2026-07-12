@@ -1,0 +1,142 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/case-study-turn-rate.rst:5
+#: 9d44ac399cae457fae07634e3f13ea63
+msgid "Log Analysis Case Study: Turn Rate Adjustment"
+msgstr ""
+
+#: ../../source/docs/case-study-turn-rate.rst:7
+#: a2bb94b5d17d4f8fbdc2ecfce2c3fd54
+msgid "Analyzing flight logs can help you diagnose problems with your missions. This case study brings you an example of a flight where, by analyzing the log data, our resident expert, Andrew Tridgell, suggested adjusting the turn rate and increasing the maximum roll angle to correct the plane's failure to reach a waypoint as a result of turning too slowly. The original forum posts can be found `**here** <https://diydrones.com/forum/topics/arduplane-2-73-released?commentId=705844%3AComment%3A1264198>`__."
+msgstr ""
+
+#: ../../source/docs/case-study-turn-rate.rst:15
+#: 07afd6bd48494ffc8abf1112727bce49
+msgid "DIY Drones member Vishnu posted these logs of his X8 plane using APM code 2.73. He described an issue with auto take off where his throttle was maintaining 100% despite being set to 75%."
+msgstr ""
+
+#: ../../source/docs/case-study-turn-rate.rst:19
+#: bc89ee16946e483c9612a51ebfd350d4
+msgid "5/26/2013 tlog file (803 KB) - Downloaded from original blog post \\ `**here** <https://diydrones.com/forum/topics/arduplane-2-73-released?commentId=705844%3AComment%3A1264198>`__. - `x8 throttle slew rate 100 param file <https://download.ardupilot.org/downloads/wiki/other_files/x8throttleslewrate100.param>`__"
+msgstr ""
+
+#: ../../source/docs/case-study-turn-rate.rst:21
+#: ce64d751ef834f1db392648258ad3634
+msgid "`Jakkur Auto take off and land text file <https://download.ardupilot.org/downloads/wiki/other_files/Jakkur-Auto-take-off-and-land.txt>`__"
+msgstr ""
+
+#: ../../source/docs/case-study-turn-rate.rst:23
+#: a073ffdca9754afbbb93ee90aae237f2
+msgid "By analyzing this data using :ref:`Mavgraph <mavproxy:mavproxy-mavgraph>`, Tridge was able to provide the following insight."
+msgstr ""
+
+#: ../../source/docs/case-study-turn-rate.rst:26
+#: 6aa061c74e82432bb4b50d32bb0d8ab1
+msgid "***May 29, 2013 DIYDrones; posted to Plane 2.x Software forum:***"
+msgstr ""
+
+#: ../../source/docs/case-study-turn-rate.rst:28
+#: 8db0c9c9bd1443debba1d3b3de04ee0c
+msgid "\"I've taken a look at your logs, and the biggest problem is that the RLL2SRV_P is not large enough and you have not given Plane enough authority over the turn rate."
+msgstr ""
+
+#: ../../source/docs/case-study-turn-rate.rst:32
+#: 3ec6b185435f4b7b802bb04f06135269
+msgid "This is what your flight looked like:"
+msgstr ""
+
+#: ../../source/docs/case-study-turn-rate.rst:37
+#: 723092d4edce4f34bf817a5f0caa78a6
+msgid "You can see it did make the first waypoint, but then was turning much too slowly for the second waypoint."
+msgstr ""
+
+#: ../../source/docs/case-study-turn-rate.rst:40
+#: 366044c54a504f6fbde959523a7e8d9b
+msgid "Let's look at a graph of the nav_roll (the roll the plane wants to achieve) and the actual roll. The red line represents the mission sequence number."
+msgstr ""
+
+#: ../../source/docs/case-study-turn-rate.rst:47
+#: 2103ada407b54a029354a3014a7f7b84
+msgid "In the takeoff nav_roll is small, as its flight is straight ahead. It then goes to -30 degrees, as that is the ROLL_LIMIT_DEG you have specified. The problem is that the actual roll only goes to around -10 degrees. So the plane is not achieving the roll that APM is asking for."
+msgstr ""
+
+#: ../../source/docs/case-study-turn-rate.rst:52
+#: 2c0f35a2eff145718ba45864b444525e
+msgid "The reason for this is the RLL2SRV\\_\\* parameters you have chosen:"
+msgstr ""
+
+#: ../../source/docs/case-study-turn-rate.rst:61
+#: 1dd7e52d01b646a7be2647149b1e1fd9
+msgid "You have specified zero I term and a quite small P term for an aircraft like the X8. Let's have a look at the servo values that APM ended up using with those settings:"
+msgstr ""
+
+#: ../../source/docs/case-study-turn-rate.rst:68
+#: 34dbb15e1839438da4778c3c789a3c10
+msgid "You can see that the APM was moving the first elevon only a small amount, and the second elevon by about 150. Now let's compare that to what happened when you switched to manual flight:"
+msgstr ""
+
+#: ../../source/docs/case-study-turn-rate.rst:75
+#: 286b8ccdfb6e496d8bbdf5340972d522
+msgid "When you took manual control you rolled the plane left by 65 degrees. That compares to a maximum roll angle that you have allowed the APM to use of 30 degrees."
+msgstr ""
+
+#: ../../source/docs/case-study-turn-rate.rst:79
+#: bd20027b98964e36b0c6902849474443
+msgid "You also used a lot more aileron movement than you have allowed the APM to use. To roll the plane over you used almost full left aileron, whereas the RLL2SRV_P gain of 0.4 with a 20 degree roll error only allowed the APM to move the aileron by 0.4\\*(20/45)\\*500 which is 89. So you moved the aileron more than 3 times as much as the APM did."
+msgstr ""
+
+#: ../../source/docs/case-study-turn-rate.rst:85
+#: a29cf51ecf3f4ce7a72c14ed4cf57b3a
+msgid "The X8 has quite a lot of natural stability, which also means it needs quite a lot of elevon movement to get it to roll. If you only move the elevons a small way it will not be able to overcome its natural stability, and also won't overcome any wind, or slight trim errors."
+msgstr ""
+
+#: ../../source/docs/case-study-turn-rate.rst:90
+#: 1472aa1b35fe45369c576e022ba24c40
+msgid "To fix it you need to make the following changes:"
+msgstr ""
+
+#: ../../source/docs/case-study-turn-rate.rst:92
+#: 97e5c110a94f4386a83637398b1b0d25
+msgid "Double your RLL2SRV_P to 0.8, perhaps higher based on testing"
+msgstr ""
+
+#: ../../source/docs/case-study-turn-rate.rst:93
+#: 60ca6c967b894fee9800c7dfc3401abd
+msgid "Change RLL2SRV_I to 0.1"
+msgstr ""
+
+#: ../../source/docs/case-study-turn-rate.rst:94
+#: 5cc383bdee1c45328c45e8a7ececbfc8
+msgid "Change RLL2SRV_IMAX to 1500"
+msgstr ""
+
+#: ../../source/docs/case-study-turn-rate.rst:95
+#: c8ef0843d98f40a2ad443678a0c4a384
+msgid "You also have a value for NAVL1_PERIOD which is too high for an X8. Change it to 18."
+msgstr ""
+
+#: ../../source/docs/case-study-turn-rate.rst:98
+#: 82891a94997f42c09ca1e49792c450ca
+msgid "Your airspeed also doesn't look well calibrated:"
+msgstr ""
+
+#: ../../source/docs/case-study-turn-rate.rst:103
+#: fd4b97c4d43043459b039831f9f31e54
+msgid "Have you checked your sensor for leaks? It is aligned correctly and clear of the airframe? The airspeed and ground speed should match on average when you loiter. You may need to adjust ARSPD_RATIO to be a bit larger."
+msgstr ""

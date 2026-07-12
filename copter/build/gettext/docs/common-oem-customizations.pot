@@ -1,0 +1,142 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:30+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-oem-customizations.rst:5
+#: f8989d7c3f5d4564abf34b2cca834fb1
+msgid "OEM Customization"
+msgstr ""
+
+#: ../../source/docs/common-oem-customizations.rst:7
+#: 7afe9b348b69443cb6cebe7d106e9814
+msgid "ArduPilot provides several ways for an OEM to provide firmware on their products that has been customized to their specific system configuration:"
+msgstr ""
+
+#: ../../source/docs/common-oem-customizations.rst:9
+#: aec3454be77240b3848468526d31ef83
+msgid "Ability to have specific defaults for parameters to match included system components, such as gimbals, or entire systems' peripherals, such as in ready-to-fly vehicles. This allows the user to \"reset to defaults\" using Mission Planner or MAVProxy in case of a problem with parameters having been accidentally changed, and only have to re-calibrate compass/IMU/and RC, at most, to be ready to fly."
+msgstr ""
+
+#: ../../source/docs/common-oem-customizations.rst:10
+#: b81295dd99374b64b8df4a13d7e2d3ff
+msgid "Ability to provide Lua scripts in ROM for special functions without the end-user having to load them on the SD card. Read more about Lua scripting in ArduPilot :ref:`here<common-lua-scripts>`."
+msgstr ""
+
+#: ../../source/docs/common-oem-customizations.rst:11
+#: 6bc1a8d78f2f47b29eb066ad9e36c046
+msgid "Ability to change the firmware string displayed to the user."
+msgstr ""
+
+#: ../../source/docs/common-oem-customizations.rst:12
+#: 51cd2af8247f4bce818f25ed7750c481
+msgid "Ability to include pictures and informational files in available free flash space."
+msgstr ""
+
+#: ../../source/docs/common-oem-customizations.rst:13
+#: eb80f3da8aa440eba3fac3360799fc03
+msgid "Ability to change parameters and mark them as read-only so that users cannot change them using :ref:`APJ Tools<dev:apjtools-intro>`. (as of version 4.5 firmware, this is no longer available)"
+msgstr ""
+
+#: ../../source/docs/common-oem-customizations.rst:14
+#: ad92b442946345eebc0179e9a92aa120
+msgid "Ability to `install a LUA script to vet parameters <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/applets/param-lockdown.md>`__ before allowing them to be set via MAVLink."
+msgstr ""
+
+#: ../../source/docs/common-oem-customizations.rst:17
+#: 13fd8604508f4a9d9eff9c8d54c719b0
+msgid "Customization Steps"
+msgstr ""
+
+#: ../../source/docs/common-oem-customizations.rst:19
+#: 931130067f5c49b8a12b9247663a0af4
+msgid "This section assumes that the OEM has set up the build environment (:ref:`building-the-code`) and cloned the ArduPilot GitHub repo locally (:ref:`where-to-get-the-code`), to build its customized version of the firmware."
+msgstr ""
+
+#: ../../source/docs/common-oem-customizations.rst:21
+#: 7020ee9f22ac4ae98c4cca13277efbd0
+msgid "Create a branch with the version of firmware you wish to base the customization upon. This will usually be the current stable version. To do this for ArduPlane Stable, for example, assuming you are already in the ArduPilot directory on your PC:"
+msgstr ""
+
+#: ../../source/docs/common-oem-customizations.rst:33
+#: f14197ea3dc14d7ea0757188d46d2a64
+msgid "In the ``libraries/AP_HAL_ChibiOS/hwdef`` directory, create a new subdirectory for your customized board definitions. In this example, the directory will be named ``OEM_CubeOrange`` to create a derivative for that board."
+msgstr ""
+
+#: ../../source/docs/common-oem-customizations.rst:35
+#: f9e96c5618234bd7a3eef35e1c9bba6d
+msgid "Create a new ``hwdef.dat`` file in this format. In this case, our ready-to-fly plane will be using a CubeOrange autopilot and only requires a single line:"
+msgstr ""
+
+#: ../../source/docs/common-oem-customizations.rst:41
+#: fa0de802b9924ed2b9ddb2dd27254032
+msgid "The firmware name can be customized by adding one line to the ``hwdef.dat`` file."
+msgstr ""
+
+#: ../../source/docs/common-oem-customizations.rst:47
+#: d051cd9f69e64fb895ca88f085e73fb8
+msgid "Custom frame type strings can be created through Lua the scripting method ``motors:set_frame_string(\"Custom frame name\")``."
+msgstr ""
+
+#: ../../source/docs/common-oem-customizations.rst:49
+#: 53fed1baf98b4c448b37c3f3b5d7dbca
+msgid "Now in that same directory, copy the base board's ``hwdef-bl.dat`` bootloader file, and then include a file named ``defaults.parm``. This file will be the parameter overrides of the standard defaults to match your system's configuration. Things like output function assignments, auxiliary RC switches, flight and tuning parameters, etc."
+msgstr ""
+
+#: ../../source/docs/common-oem-customizations.rst:51
+#: 41451444ed684f83a2dae3afa18328a8
+msgid "a parameter can be made readonly (ie user cannot change its value) by marking it ``@READONLY`` in the file"
+msgstr ""
+
+#: ../../source/docs/common-oem-customizations.rst:53
+#: 88b024478262432bab0baed0de1242cf
+msgid "The ``defaults.parm`` file should be as small as possible. Some boards only allow 1024 bytes total for this file. Every ASCII byte in the file counts against this limit (except for comment lines). Use integer values where possible. Below is a simple example. Serial port protocols,baud rate,and options defaults can be set directly in the hwdef, as well as NTF_LED_TYPES, and battery monitor defaults, and should be done there instead of a defaults file."
+msgstr ""
+
+#: ../../source/docs/common-oem-customizations.rst:61
+#: 665a669c56894137a3fb4cbee12750e9
+msgid "You can also embed :ref:`Lua scripts<common-lua-scripts>` in the ROM of the chip that will automatically run. Since Lua is currently only run on autopilots with a lot of flash space, they are only restricted in total aggregate size to available free flash memory. Put the scripts in a sub-directory called ``scripts``, i.e. ``libraries/AP_HAL_ChibiOS/hwdef/OEM_CubeOrange/scripts``. Files must end in ``.lua``."
+msgstr ""
+
+#: ../../source/docs/common-oem-customizations.rst:63
+#: a5b3c7d61e9441759f1a9b6bcddef7b2
+msgid "Alternatively, you can specify the LUA applet or driver at compile by using the \"--embed-<filename> command, for example:"
+msgstr ""
+
+#: ../../source/docs/common-oem-customizations.rst:69
+#: 7b9251f4993347668b45a2b1743e009f
+msgid "The user may also run Lua scripts off the SD card, so care should be taken in naming the embedded script file names to not conflict with potential user file names. It is recommended that the file names of embedded Lua scripts be provided in the product documentation for the user."
+msgstr ""
+
+#: ../../source/docs/common-oem-customizations.rst:71
+#: 76d19bb99df44d3d8f628e825a04e35d
+msgid "You can also embed small pieces of documentation in the ROM of the chip that are readable when examining the @ROMFS folder via MAVFtp. These can be pictures or small informational documents. These must fit within the free flash space of the autopilot. These files can be located in sub-directories in ``libraries/AP_HAL_ChibiOS/hwdef/OEM_CubeOrange`` (e.g. ``libraries/AP_HAL_ChibiOS/hwdef/OEM_CubeOrange/AircraftManual``)."
+msgstr ""
+
+#: ../../source/docs/common-oem-customizations.rst:73
+#: e2ecb29e039945bcac0bd90cdc3fd4d8
+msgid "Now build as normal with OEM-CubeOrange as the board name in the configuration. The default parameters, Lua scripts, and the custom firmware name will be embedded appropriately."
+msgstr ""
+
+#: ../../source/docs/common-oem-customizations.rst:76
+#: c1961b79b8a64d8c9bd082738582e13d
+msgid "Alternative To Customizing hwdef.dat"
+msgstr ""
+
+#: ../../source/docs/common-oem-customizations.rst:78
+#: a1dbcd837b514a86acdc835d267f04c0
+msgid "Instead of creating a separate branch and modifying the hwdef file, you can also insert Lua scripts or even informational files into the ROMFS of the build. Simply go to the top level of your ArduPilot git checkout and create a sub-folder named \"ROMFS_custom\" in the root of the source tree. Place your LUA scripts in a sub-folder in this directory, named \"scripts\" (i.e. the path ``ardupilot/ROMFS_custom/scripts``). You can have other sub-folders for informational files and these will be included and viewable when examining the @ROMFS folder with MAVFtp."
+msgstr ""

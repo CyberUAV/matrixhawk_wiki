@@ -1,0 +1,407 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:30+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:7
+#: ea4047748389416a8bba4d4c143eab3d
+msgid "Using a Vicon indoor positioning system"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:9
+#: cffeb78241b446ee865027cbe5d6d9d4
+msgid "Robotics labs commonly have an indoor flying facility using a Vicon indoor positioning system. These systems use infra-red cameras to give a high rate (200Hz) position and attitude via a network connection. ArduPilot can use this positioning information for precise indoor flight."
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:19
+#: 5aa14f9834c243239474273163c6dfbd
+msgid "Overview"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:21
+#: df75990b436d442da3189ad126a60636
+msgid "The Vicon system comes with a SDK that provides APIs for accessing the Vicon positioning data. To use the Vicon data with ArduPilot you need a tool which can use this API and map it onto MAVLink packets to send to ArduPilot."
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:26
+#: 59b661d7acff4f42894918b0414882a6
+msgid "There are two types of MAVLink packets that can be used:"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:28
+#: 6c31013af4814ac6bf9a79bfd28fde1b
+msgid "the GLOBAL_VISION_POSITION_ESTIMATE packet, which provides position (NED) and attitude (euler angles)."
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:31
+#: 802e960afa9249b2ba37b2cccbcec491
+msgid "the GPS_INPUT packet which provides position as latitude/longitude, altitude, velocity (3D) and yaw data."
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:34
+#: 9e4225e877b842dba966e0771a45edb4
+msgid "Right now the best approach is to use GPS_INPUT with the GPS yaw extension as the velocity data provided by the GPS packet is more valuable for good positioning than the attitude information in the GLOBAL_VISION_POSITION_ESTIMATE packet. In the future we will support a combined VISION MAVLink message which will provide position, velocity and attitude in one packet."
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:42
+#: 538267413e934be79428758b64cd11cf
+msgid "Hardware Setup"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:44
+#: eafd6b00c1bc44d89c40ad314466312d
+msgid "You will need a low-latency network link from your GCS computer to the copter, and from the GCS to your Vicon server. The recommended method is to use ethernet to the Vicon server and use a ESP8266 WiFi link running :ref:`mavest8266 <common-esp8266-telemetry>` on the copter."
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:50
+#: de6a98bc1a4c4d5499d7286b584e5931
+msgid "Vicon System Setup"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:52
+#: 036d59f23ea747488c58efa89ecd64c5
+msgid "The Vicon system should be correctly calibrated. The origin should be set using the calibration wand. In the Vicon Tracker software, the Z-axis (shown in blue) of the Vicon system world frame should point up. We will call the X-axis (red) as North, and the Y-axis (green) as West."
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:53
+#: da1342d90bfc41e9971ceddeb65cf160
+msgid "The UAV should have a minimum of 4 reflective markers to ensure an accurate fix. Any reflective surfaces on the UAV should be covered with masking tape to avoid spurious detections."
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:54
+#: 9aefc57655084fa5ab9efc711fb59561
+msgid "Place the UAV in the Vicon space so that the forward direction of the autopilot is facing 'North'. (Figure 1)"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:55
+#: 49261d96158d4cf0b2efa35c46208458
+msgid "In the Vicon Tracker, select all of the markers and create a new object for the UAV. The coordinate frame of the UAV should then be aligned with the Vicon world frame, so that X is forward, Y is Left and Z is up. (Figure 2)"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:60
+#: c346925ab09b40edb9434bbf5482b7a7
+msgid "Figure 1: Example of how UAV should be positioned when creating the Vicon Object. The forward direction is aligned with the X-axis."
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:65
+#: 17732b533b684e36a4898fd2031abb55
+msgid "Figure 2: Screenshot from Vicon Tracker software, showing world coordinate frame (bottom left) aligned with UAV coordinate frame. The origin of the object frame should be approximately where the autopilot is located."
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:70
+#: fd7b44e73c954f18be31fb76ed379317
+msgid "These coordinate frame conventions apply to MAVProxy version 1.8.36 and above. Ensure you are using an up-to-date version."
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:73
+#: a133b0f2b02c40f9b0480e5179b616c0
+msgid "Software Setup"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:75
+#: e27f8a46093b43dd832f6198d1b2b471
+msgid "You will need a recent version of ArduPilot on your copter. As of September 2019 it is recommended that you use ArduPilot master. The recent version is needed to give support for yaw data in the GPS_INPUT MAVLink message."
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:80
+#: 186985c3fd124b14b9a459c2e6ac3394
+msgid "The setup described below uses the vicon module in MAVProxy to feed the Vicon data to your vehicle over MAVLink."
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:84
+#: af61f3f319cb48d783b9d12a32768a2c
+msgid "pyvicon"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:86
+#: eca28a683b504aa69e87aa680403e2ef
+msgid "You will need to install the `pyvicon <https://github.com/tridge/pyvicon>`_ python package, using a python version of at least 3.6. To install pyvicon you will need to also install the Vicon SDK, version 1.10 or later, from `ViconDataStream SDK <https://www.vicon.com/products/software/datastream-sdk>`_"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:92
+#: d97313a9f36a4d7d81c635f86e535aee
+msgid "Note that pyvicon does not build with python2."
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:94
+#: d2c1101272f4429c94e95a365a88abd7
+msgid "Once you have the SDK setup, you should install pyvicon like this:"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:100
+#: c35be2551c6b46d586635264c1af2ec6
+msgid "You will also need to add $HOME/.local/bin to your $PATH."
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:103
+#: e3af0a346d4d42be8fb22c925ae9818b
+msgid "pymavlink"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:105
+#: 07e5520c247c4981bddcdde11dfccd5f
+msgid "You will need a pymavlink version of at least 2.3.8. Install with:"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:112
+#: f736919051bb4c95a594a9427bda3186
+msgid "MAVProxy Setup"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:114
+#: bf2c2736aa1e496ba9790a9843d56775
+msgid "You will need MAVProxy version of at least 1.8.36. Install with:"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:120
+#: dd74f47c82b449e2ac68063b8f3ad724
+msgid "You will also need some other python3 libraries, install with:"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:127
+#: 066c0b9e361946b0bd593a19b1bb5a9d
+msgid "Next you should put the IP address of your vicon server in your /etc/hosts file, so that you can do \"ping vicon\". The name 'vicon' is used as the default hostname in the MAVProxy vicon module."
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:132
+#: e4b3840487d941e692fa383d943c962c
+msgid "Connecting"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:134
+#: d0c5cb4aac35406eb45b635b5eafdfc3
+msgid "Setup your copter with the WiFi link running at baudrate 921600 and with MAVLink2 enabled. If your WiFi adapter is on Telem1, then you will need to set:"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:138
+#: 8d8d8facf63a4a01be76488df6b70fbb
+msgid ":ref:`SERIAL1_PROTOCOL <SERIAL1_PROTOCOL>` = 2"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:139
+#: 9d9fee679d4d458e8da93c82c51a30a3
+msgid ":ref:`SERIAL1_BAUD <SERIAL1_BAUD>` = 921600"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:141
+#: 31680309423246549e74dc7a84fafcb3
+msgid "Next start MAVProxy like this:"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:147
+#: d03844d5e4db49afbe5d841e9911ca4f
+msgid "For more details see the :ref:`MAVProxy documentation <mavproxy:home>`"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:150
+#: 35411b1aa3b847e79b9215b621fee743
+msgid "Key Parameters"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:152
+#: 3bb1d7f4717f424ca8a725abd02217e4
+msgid "You should set the following key parameters:"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:154
+#: 967373fb84384cc5b45cf7fa0e86de50
+msgid ":ref:`EK3_ENABLE <EK3_ENABLE>` = 1"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:155
+#: 67b37cd5792c45458af64c296ebe4152
+msgid ":ref:`EK2_ENABLE <EK2_ENABLE>` = 0"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:156
+#: 87abf0a99c2347d69476b35e6ac34b67
+msgid ":ref:`AHRS_EKF_TYPE <AHRS_EKF_TYPE>` = 3"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:157
+#: 3674f63f737743faab88d36471e9a103
+msgid ":ref:`EK3_SRC1_POSXY <EK3_SRC1_POSXY>` = 3"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:158
+#: a8b819febee54bf0885d0bc03b046c13
+msgid ":ref:`EK3_SRC1_POSZ <EK3_SRC1_POSZ>` = 3"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:159
+#: 6257e39967e440f1bb2d9d5dd60ec864
+msgid ":ref:`EK3_SRC1_VELXY <EK3_SRC1_VELXY>` = 3"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:160
+#: c6f18d3a7e5c4d27ac963504430add08
+msgid ":ref:`EK3_SRC1_VELZ <EK3_SRC1_VELZ>` = 3"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:161
+#: b94bfe1ad1464ba984b7e20dbe372db3
+msgid ":ref:`EK3_SRC1_YAW <EK3_SRC1_YAW>` = 2"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:162
+#: 2d2f2ed74d914c0ca177461c73be52f3
+msgid ":ref:`GPS1_TYPE <GPS1_TYPE>` = 14"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:163
+#: 41494543d1f74cd8b3775a3a90004c4d
+msgid ":ref:`GPS1_DELAY_MS <GPS1_DELAY_MS>` = 50"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:164
+#: a4ba31f386ce41d2b6853d9b7daea965
+msgid ":ref:`COMPASS_USE <COMPASS_USE>` = 0"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:165
+#: 5c712db0e3c34ea98d9bd2e5e438a058
+msgid ":ref:`COMPASS_USE2 <COMPASS_USE2>` = 0"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:166
+#: 25f257fb0fe04635bd82c0e00fb4d694
+msgid ":ref:`COMPASS_USE3 <COMPASS_USE3>` = 0"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:168
+#: f899379a206f465cb31c0408ec827b81
+msgid "After setting these parameters you should reboot your copter."
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:171
+#: fcf24b4e29764272b0419ffaede2f8f0
+msgid "Starting Vicon"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:173
+#: 45eb151813d74ebdb2da8e5432ccd411
+msgid "Inside MAVProxy load the vicon module with:"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:179
+#: 386a505197c64db1abadb7efd9c31bb5
+msgid "If it doesn't load correctly then enable debugging with \"set moddebug 3\" then try to load the module again."
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:182
+#: a9ab5ecbebc84c4e9abaee1488860847
+msgid "Once loaded you set set vicon parameters with \"vicon set\". Once you are happy with the parameters then do \"vicon start\""
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:185
+#: bcb1968251cb4293876cce45c4163773
+msgid "The MAVProxy console will then give status information for the Vicon, showing position, attitude and messages rates. The vehicle should also get GPS lock. It will show up at the GPS coordinates in the vicon module settings."
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:191
+#: f163b2448b3b4e94b0e018b5146e6ccd
+msgid "Checking Orientations"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:193
+#: ba238569aaff4edc92d3a62d0ae249a0
+msgid "Use the Vicon status line in the MAVProxy console to check that you have the right orientation in the data coming from the Vicon. The VPos data is in NED format in meters. The VATT data is euler angles of roll, pitch yaw. Carefully check that these values are consistent while you rotate and move the vehicle before proceeding."
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:200
+#: 50d395e593f5474e9cf29efeb59373aa
+msgid "Test Flight"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:202
+#: 3debc61d5c994b6ba4907c95a64e2511
+msgid "You should see ArduPilot first report that EKF3 gets yaw alignment, and then that it is using the GPS. After that you should be able to arm and fly."
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:206
+#: 8d09c1cdc3514e44b66a53b817d09a82
+msgid "For a first test flight :ref:`Stabilize mode <stabilize-mode>` or :ref:`Alt Hold mode <altholdmode>` mode is recommended. Then get the flight log from the microSD card and check that the EKF3 innovations are low. The position, velocity and yaw normalised innovations should all be low (below 0.1)."
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:211
+#: 1b1d475b177f4843a38cb7d651fd5b53
+msgid "Once you have confirmed low innovations you can try a flight in :ref:`Loiter mode <loiter-mode>` mode."
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:215
+#: ed084237013b40a7a8be8801a64994f0
+msgid "Tuning"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:217
+#: 81627d2bb5384f47a12707ed3aab3aef
+msgid "If you have significant vibration then you will likely want to de-weight the accelerometers and instead tell the EKF to use the vicon data more. Try setting :ref:`EK3_ACC_P_NSE <EK3_ACC_P_NSE>` to 2.0 to de-weight the accelerometer data. You may find this helps with position and height hold."
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:223
+#: 572f6d0f08024c4393365a9466bbaa84
+msgid "For indoor flight with a Vicon setup and a small quad you can push up the accelerations and yaw rate to much higher value than are used in a normal quad. Some suggestions for a small racing quad are:"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:227
+#: 5a42cf10efb94f16a0215611ba1c3bd9
+msgid ":ref:`INS_GYRO_FILTER <INS_GYRO_FILTER>` = 60"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:228
+#: 68fd0b8b99e44708b86f2b6ce640ef68
+msgid ":ref:`INS_ACCEL_FILTER <INS_ACCEL_FILTER>` = 30"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:229
+#: 687d2e0a944e421ba2904b8eeaa58b53
+msgid ":ref:`ATC_ACC_Y_MAX <ATC_ACC_Y_MAX>` = 100000"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:230
+#: b9f16bdaca274d769d93641cb141f069
+msgid ":ref:`ATC_RATE_WPY_MAX <ATC_RATE_WPY_MAX>` = 15000"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:233
+#: 1ba03ba4727c491ba4b8ef8edcc4ce8f
+msgid "Circle Mode"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:235
+#: e95ef9af1f9a419bb9fb91d19062669c
+msgid "A very useful mode for testing accuracy of flight is :ref:`Circle mode <circle-mode>`. To use it indoors try:"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:238
+#: dd44170e8e9d4a7fa95281222e276cb3
+msgid ":ref:`CIRCLE_RADIUS_M <CIRCLE_RADIUS_M>` = 100"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:239
+#: 8904bed873c843688a7d83566aa05792
+msgid ":ref:`CIRCLE_RATE <CIRCLE_RATE>` = 40"
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:241
+#: e2b801d1529a46abae5fdaa65f7d5cde
+msgid "You should also set your :ref:`RTL_ALT_M <RTL_ALT_M>` nice and low in case you hit a failsafe, or configure a instant disarm switch on your transmitter for when things go wrong."
+msgstr ""
+
+#: ../../source/docs/common-vicon-for-nongps-navigation.rst:245
+#: 153e7349b63e440487d0af77178363d5
+msgid "To fly in :ref:`Circle mode <circle-mode>` take off in :ref:`Loiter mode <loiter-mode>` and then move so you are 1m from the center of the room, pointing towards the middle of the room. Then switch to Circle mode and the vehicle should start circling, keeping its nose pointed at the center of the circle. You can try pushing up :ref:`CIRCLE_RATE <CIRCLE_RATE>` to higher values (in degrees/second) as you get more confident. The video at the top of this page has :ref:`CIRCLE_RATE <CIRCLE_RATE>` = 150 for a 150 degree/second circle."
+msgstr ""

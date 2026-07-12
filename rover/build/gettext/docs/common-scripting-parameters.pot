@@ -1,0 +1,172 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Rover package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rover \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:39+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-scripting-parameters.rst:5
+#: 6e6e7ed58eea4c3ab4385fe700dbc4a7
+msgid "Accessing/Adding Parameters via Scripts"
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:7
+#: 37f1afa7750742c0b7d1bc704d1af56c
+msgid "LUA scripts have the ability to access and change ArduPilot parameters setup by the firmware."
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:9
+#: 5694ce21debb463c8532b23b53c300cd
+msgid "for example: ::"
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:13
+#: f63cb752dee84a45b83d388c1fab471e
+msgid "will retrieve the SCR_ENABLE parameter and assign it to the variable \"parameter\""
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:15
+#: f3553b32e6d0460b9b7fe9b8700090d3
+msgid "However, looking up parameters with a name search, as the above code does, is slow.  You can create a local variable using the Parameter user data method which avoids a name search every use and is much faster: ::"
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:21
+#: d0856fce871f4cbf939868a63ed93fa4
+msgid "the current parameter access/modify methods, using the name searching param: methods:"
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:23
+#: 8c2553666f744825813844f9a52f2060
+msgid "get(name)                  -retrieves the value"
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:24
+#: cc44f49d2d684e06a5e7bb05e5328ae6
+msgid "set(name, value)           -sets the value but does not store in non-volatile"
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:25
+#: 11b81d3dc08a4d489120ebc069ba4a09
+msgid "set_and_save(name, value)  -sets value and saves in non-volatile"
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:26
+#: 59c5c89d29554b8ba485f2d1b7299550
+msgid "set_default(name, value)   -changes the default value"
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:28
+#: 15ce9f7eccd94498ba853b2b851870cf
+msgid "For Parameter objects the above access methods apply also, but without the name arguments since the Parameter object should already be initialized and no slow name search is required, and the following methods are applicable:"
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:30
+#: 0373bba5ed1a4e4f83b09f90a3e99073
+msgid "init(name)                          -initializes a parameter object"
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:31
+#: 8f49f26d619048f584f07b95b344739a
+msgid "configured()                        -check to see if a Parameter object has been initialized"
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:34
+#: 3e44a87edb3b4c4ebd10b37e1a0ad020
+msgid "Adding Parameters"
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:36
+#: 514cc49b2efc4e01bf9ec4c31a5a0e82
+msgid "In addition to accessing/modifying existing parameters created by the firmware, LUA scripts can add new parameters for use by any LUA script. These parameters behave the same as those created and used by the firmware in that they can be read/written and saved into non-volatile memory that persists across reboots and power cycles."
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:38
+#: 41f03b57770c446087e5e5294de53fa9
+msgid "However, unlike firmware parameters they behave slightly differently. Firmware parameters are reset to their default values upon a parameter reset or when changing firmware to a different vehicle type. Scripting created parameters do not. In fact, scripting created parameters are invisible unless a script actually \"re-creates\" them within a script."
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:40
+#: 140a4217d57640ce84fafaff298da674
+msgid "This is explained below in the section :ref:`How Parameters Work in ArduPilot <how-params-work>`. Suffice it to say that there must a script running that \"creates\" the new parameters as discussed below on any given boot-up, in order to use them and for ground control stations like Mission Planer to list them."
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:43
+#: 8029f921c1de44798fff5bf5727b2ed7
+msgid "Creating a Parameter Group"
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:45
+#: fe7bccd42657489794779d9952b3d7e8
+msgid "Groups of up to 63 parameters can created within a script using the \"add_table\" command. ::"
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:50
+#: 54ce7d2d7f4e41b4a6786e2dfa886d72
+msgid "This defines a unique table key (0 - 200) to identify the parameter storage area in memory, so that different scripts can have different parameters, if desired. The next command creates a 30 slot table for parameters with names beginning \"AERO\\_\" and uses the LUA assert error command to halt the script if it cannot be created for some reason (like lack of memory space or conflicts with another script trying to add a table with the same key)"
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:52
+#: fccb1ea8c15e4b09ac2e5c2a0148a54d
+msgid "Next, individual parameters can be added. ::"
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:57
+#: fee7490a93f245b995b6c704c174b420
+msgid "This adds two parameters, AERO_TRICK_ID and AERO_RPT_COUNT, with indexes 1 and 2, and initial values of 0 to that table. Other concurrently running scripts could also add other parameters as long as they do not overlap index numbers. Those scripts would use the \"param:add_table\" method with the same prefix (\"AERO\" in the above example) and key, and then add parameters with \"param\"add_param\" methods as above. Calling the \"param:add_table\" with the same key and prefix in two concurrently running scripts does not create an error."
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:59
+#: f30a06eb2c0b4761810fef9fe96bf14f
+msgid "if there are other con-currently running scripts that will try to access these parameters, be sure to delay their first updates until the script adding the parameters has time to complete the setup process since each script is run independently in its own thread"
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:61
+#: 314e3229265b4e76a001106b2a1ca934
+msgid "These may now be accessed just like any other parameter. ::"
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:67
+#: f563eee8a9a3439f96ac946de1f53e22
+msgid "all scripting defined parameters are of type FLOAT, ie floating point numbers"
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:72
+#: af10e166d77e42b8a5ec653716191e01
+msgid "How Parameters Work in ArduPilot"
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:74
+#: ffc0c3e59d0c4a539e8b6a64fb3d194c
+msgid "Parameters are defined in the firmware. Each parameter has a name, a default value, and value type(boolean,float, integer 8,etc). Upon boot up, the firmware creates RAM variables for each parameter and initializes them with a value. That value is the default if the parameter has never been changed by a user, or a value that has been stored in EEPROM of the autopilot, if it has been changed from default. If the parameters have been \"reset\" by the user (see :ref:`common-parameter-reset`) then the EEPROM storage for changes is blank and all default values are used."
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:77
+#: f4979cb5e90543608b2a5f7df1ad5a1a
+msgid "The string names of the parameters are only used by the Ground Control Stations and LUA scripts. Access from within the C++ code is directly to addresses of the initialized parameter variables in RAM while executing, not by name strings."
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:79
+#: 82aecca5da52478e8d527b3c0c858cd9
+msgid "LUA created parameters exist in the same manner as firmware created parameters. User/Script changes are stored in non-volatile memory. But their names only exist for a lookup if a \"param:add_table\" and \"param:add_param\" has been executed after boot-up by a script. Then they will appear in the GCS parameter list and can be accessed by name from LUA scripts. Without this, the data would still exist in non-volatile memory, but is invisible and non-existent for all intents and purposes."
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:81
+#: 81df9ae6f2094d3e9fb510b3f6c5c3d6
+msgid "This also means that parameters created by one script, which are modified by a user or script, are still in storage. If that script is removed, another script with different parameters is run, then removed, and the original script re-run, those changed parameters will re-appear in the GCS with their last values and can be accessed again by the script. Resetting all the parameters to defaults will erase those changes, just like the firmware created parameters."
+msgstr ""
+
+#: ../../source/docs/common-scripting-parameters.rst:83
+#: f839027d99fb41b6904bc4e04b79322a
+msgid "From LUA scripts you can access any parameter (created by firmware or by LUA script) by name. However, that is slow since the LUA interpreter must do a long string name search each time. Instead, using a Parameter() object and initializing it, gives the address pointers to that named parameter's location for direct accessing it quickly."
+msgstr ""

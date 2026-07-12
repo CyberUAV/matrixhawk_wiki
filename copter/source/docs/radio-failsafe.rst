@@ -20,15 +20,16 @@ Copter supports several configurable failsafe options in cases where contact bet
 When the failsafe will trigger
 ==============================
 
-If enabled and set-up correctly the radio failsafe will trigger if any of these conditions occur for more than :ref:`RC_FS_TIMEOUT<RC_FS_TIMEOUT>` seconds:
+If enabled and set-up correctly the radio failsafe will trigger if any of these conditions occur for more than :ref:`RC_FS_TIMEOUT<RC_FS_TIMEOUT>` seconds (default = 1 sec):
 
 -  The pilot turns off the RC transmitter.
 -  The vehicle travels outside of RC range and signal is lost.
--  The pilot forces the throttle channel below :ref:`FS_THR_VALUE<FS_THR_VALUE>` from the transmitter.
 -  RC_OVERRIDES are lost if :ref:`using a GCS only <common-gcs-only-operation>` is being used.
 -  The receiver loses power (unlikely).
 -  The wires connecting the receiver to the autopilot are broken
    (unlikely).
+
+The radio failsafe will also trigger if the pilot forces the throttle channel below :ref:`FS_THR_VALUE<FS_THR_VALUE>` from the transmitter.
 
 What will happen
 ================
@@ -37,7 +38,7 @@ When a radio failsafe is triggered, the copter can be configured via parameters 
 
 - If the copter is disarmed, no failsafe will take place.
 - If the copter is armed but has landed, the copter will immediately disarm.
-- If the copter is armed in Stabilize or Acro modes, and the throttle input is at minimum, the copter will immediately disarm.
+- If the copter is armed in Stabilize or Acro modes, and the throttle input is at minimum, and the vehicle is not in :ref:`AirMode<airmode>` then the copter will immediately disarm. 
 - Otherwise, the copter will take the actions as configured in the parameters described below.
 
 If the failsafe clears (i.e. transmitter and receiver regain contact) the copter will remain in its failsafe mode. It will **not** automatically return to the flight mode that was active before the failsafe was triggered. This means that if, for example, the vehicle was in Loiter when the failsafe occurred and the flight mode was automatically changed to RTL, even after the transmitter and receiver regained contact, the vehicle would remain in RTL.  If the pilot wished to re-take control in Loiter he/she would need to change your flight mode switch to another position and then back to Loiter.
@@ -78,7 +79,7 @@ The :ref:`FS_THR_ENABLE<FS_THR_ENABLE>` parameter can be set in the Mission Plan
 -  **Enabled SmartRTL or Land** (Value 5) will switch the copter to SmartRTL mode. If SmartRTL is not available, the copter will switch to Land Mode instead.
 -  **Enabled Auto DO_LAND_START or RTL** (value 6) will jump to the nearest "DO_LAND_START" mission item or RTL if no "DO_LAND_START" mission item has been programmed(see :ref:`common-do-land-start`).
 -  **Enabled always Brake or Land** will BRAKE or LAND if GPS position is not available.
--  Any invaild value (Such as accidentally enter 99 as a parameter value) will will behave the same as **Enabled Always LAND**
+-  Any invalid value (Such as accidentally enter 99 as a parameter value) will will behave the same as **Enabled Always LAND**
 
 The :ref:`FS_THR_VALUE<FS_THR_VALUE>`  parameter can be set in the Mission Planner full parameter list or full parameter tree, or can also be set using the Mission Planner *FS PWM* value in the Initial Setup >> Mandatory Hardware >> Failsafe menu.
 -  At least 10 PWM higher than your Channel 3's PWM value when the throttle stick is fully down and the transmitter is **off**
@@ -92,9 +93,10 @@ The :ref:`FS_OPTIONS<FS_OPTIONS>`  parameter (Copter 4.0 and later) is a bitmask
 - bit 2 set: Continue if in guided mode :ref:`Radio Failsafe <radio-failsafe>`
 - bit 3 set: Continue if landing on any failsafe
 - bit 4 set: Continue in pilot control on :ref:`Ground Control Station Failsafe<gcs-failsafe>`
+- bit 5 set: Release gripper during failsafe handling
 - if none of the above are set, then execute the :ref:`FS_THR_ENABLE<FS_THR_ENABLE>` option as configured.
 
-.. note:: Only bitmask bits 0, 2, & 3 affect actions taken during radio failsafe. This parameter also works in conjunction with the battery and GCS failsafe, so ensure you are taking all options into account when setting this parameter.
+.. note:: Only bitmask bits 0, 2, 3 & 5 affect actions taken during radio failsafe. This parameter also works in conjunction with the battery and GCS failsafe, so ensure you are taking all options into account when setting this parameter.
 
 Below is a screenshot of the Mission Planner Initial Setup >> Mandatory Hardware >> Failsafe menu.
 

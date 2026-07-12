@@ -1,0 +1,217 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Sub package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Sub \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:43+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-esc-telemetry.rst:5
+#: 353859705bd54c82b4cce9f50d47828c
+msgid "ESC Telemetry"
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:9
+#: 3a6f79730aeb47f8a82f7ae68e461a9d
+msgid "If the ESC has this capability, it allows monitoring and logging of performance data that previously required additional sensors (like power modules and RPM sensors). The detailed data provided by every ESC allows real-time decisions and individual ESC or motor performance tuning and failure analysis. Note that a given ESC may or may not have a specific sensor type's data transmitted via telemetry. It is common for 4 in 1 escs to provide voltage and current sensors but not transmit the data via telemetry, but rather by direct connection to the autopilot. Check the ESC data sheet and connection information for details."
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:11
+#: 85b6a650f1e249fd84a1e428d97e11ce
+msgid "Telemetry data may be conveyed to the autopilot either by a separate wire connection to an autopilot's UART RX pin or across the signal wire used to convey motor speed information (Bi-Directional DShot) or CAN messages for CAN based ESCs. For non-CAN ESCs, this capability is available primarily in selected BLHeli ESCs running stock or BlueJay firmware. But it is possible for an ESC not to implement the BLHeli firmware and still provide this capability. Currently, ArduPilot only supports this for BLHeli/BlueJay telemetry compatible ESCs."
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:13
+#: 963b1ad87c264a329687798d2013eefd
+msgid "ESC telemetry of motor RPM is especially useful for controlling the center frequency of harmonic notch filters to control noise. See :ref:`common-esc-telem-based-notch` for more information."
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:15
+#: 5471ace506a445b69b2c87e3a3d85a42
+msgid "ArduPilot does not currently support the polling of the ESCs for telemetry data via throttle idle messages over the signal line in non DShot protocols."
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:18
+#: fe41e7a0f4a8499d97647574232f8fb4
+msgid "Connecting the ESCs Telemetry wire"
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:24
+#: 13e81df3d3604e329cb514c61308641d
+msgid "Connect all ESC telemetry wires to a single serial port's RX pin on the autopilot (above diagram uses Serial5 as an example).  A pin or wire for ESC telemetry is pre-soldered on most BLHeli32 ESCs. If the wire isn't pre-soldered you will need to solder it yourself. CubePilot serial port pinsouts can be found :ref:`here <common-thecube-overview>`."
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:26
+#: 85cf76d9b394429092fe0f769f703b95
+msgid "Set the following parameters to enable BLHeli32/AM32 telemetry feedback to the autopilot's serial port:"
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:28
+#: b0a4095eb8604fce942f2bc370e0fefa
+msgid ":ref:`SERIALx_PROTOCOL <SERIAL5_PROTOCOL>` 16 (= ESC telemetry) where \"x\" is the autopilot serial port number connected to the ESCs telemetry wire.  The mapping between serial port numbering and UART physical ports for you autopilot should be documented in its description page linked :ref:`here <common-autopilots>`."
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:30
+#: b326949bc5ac4ee9931de89f550fbbb5
+msgid ":ref:`SERVO_BLH_TRATE <SERVO_BLH_TRATE>` defaults to 10 and normally does not need to be changed. this enables telemetry at a 10Hz update rate from the ESC.  If using the :ref:`harmonic notch feature <common-imu-notch-filtering>` this can be raised to 100."
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:32
+#: 51754a1a961e40ffbc3fdbede2d983a7
+msgid ":ref:`SERVO_BLH_POLES <SERVO_BLH_POLES>` defaults to 14 which applies to the majority of brushless motors and normally does not need to be changed.  Adjust as required if you're using motors with a pole count other than 14 to calculate true motor shaft RPM from ESC's e-field RPM."
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:34
+#: a06472fce180410b8e7ddbc78385036a
+msgid "using the RPM value reported using single wire telemetry for the center frequency adjustment of the :ref:`harmonic notch feature <common-imu-notch-filtering>`  works well, but the responsiveness is slower than using telemetry provided by bi-directional DShot. See next section."
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:39
+#: dcc2349553af4d99b0f39c0d577d3d8a
+msgid "Bi-directional DShot"
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:41
+#: 183b3024b02249918656f6b77c041e15
+msgid "Newer versions of AM32, BLHeli32 (32.7 and higher), and BLHeli_S (16.73 and higher) support returning motor RPM values over the DShot signal line. Supporting bi-directional DShot requires exclusive use of one or more DMA channels and thus not all autopilots support it. Versions that support bi-directional DShot have this stated in their wiki pages, see :ref:`common-autopilots` for your autopilot."
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:43
+#: 070399b2f03e4938a14c3a54a62364d0
+msgid "Some autopilots with IOMCUs can not only support Dshot on their \"Main\" outputs (see :ref:`common-dshot-escs` for setup and more information), but also bi-directional DShot on their first four outputs. Currently, this is limited only to Pixhawk6X/C autopilots."
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:46
+#: 12d5127c3b044f05b34974d85f8c3c51
+msgid "Setup"
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:48
+#: b51300b0ebe14d16b537894c1ce2035b
+msgid "First ensure that you have an appropriate version of BLHeli32 or BLHeli_S installed on your ESCs. The majority of ESCs do not come pre-installed with these versions. The official 32.7 version of BLHeli32 supports bi-directional DShot. Official versions of BLHeli_S do not support bi-directional DShot, you will need to either buy a version from `BLHeli_S JESC <https://jflight.net/index.php?route=common/home&language=en-gb>`__ or use `BLHeli_S BlueJay <https://github.com/bird-sanctuary/bluejay/>`__ . If you try and enable bi-directional DShot with the wrong firmware version then unpredictable motor operation can occur. ESC RPM telemetry is especially useful for controlling the center frequencies of harmonic notch noise filters, see :ref:`common-esc-telem-based-notch`"
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:54
+#: 008da63612bb4fc4bfd5e7eb9eb5dccf
+msgid "Set the following parameters to enable BLHeli32 and BLHeli_S bi-directional DShot:"
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:56
+#: b3fdf50307c74c138ba0d3f889bfec33
+msgid ":ref:`SERVO_BLH_BDMASK <SERVO_BLH_BDMASK>`: a bitmap used to enable BLHeli32, AM32, or BLHeli_S bi-directional DShot support. On autopilots without IOMCU this would normally be set to 15 to indicate four active channels. On autopilots with an IOMCU this can be set to 3840 to indicate four active AUX channels (bi-directional DShot will only work on the AUX outputs)."
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:58
+#: 5b0e316356d84cb1b118c5920b8906fc
+msgid ":ref:`SERVO_BLH_POLES <SERVO_BLH_POLES>` defaults to 14 which applies to the majority of brushless motors and normally does not need to be changed. Adjust as required if you're using motors with a pole count other than 14 to calculate true motor shaft RPM from ESC's e-field RPM (small motors might have 12 poles)."
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:60
+#: 5d3a22b753f440ce9fdbadc96aa32f69
+msgid ":ref:`SERVO_DSHOT_ESC<SERVO_DSHOT_ESC>` must be set to the type of Dshot ESC you are using."
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:63
+#: ed50bb295be045d7be601e9f20512535
+msgid "ESC Telemetry Logging and Reporting"
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:65
+#: 89a43cb42a004966ba90fb1b751fdb2c
+msgid "The autopilot requests status information from one ESC at a time, cycling between them. This information is logged to the onboard log's ESCn messages and can be viewed in any :ref:`ArduPilot compatible log viewer <common-logs>`."
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:67
+#: 882d840115024a98b029728a1bce196c
+msgid "RPM"
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:68
+#: 03b7a4874608437f868fc0f18e69548d
+msgid "Voltage"
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:69
+#: ada6c16d97ca4d1ea6793f4fa77edba8
+msgid "Current"
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:70
+#: 88e6447b7ee84098aff900d0d2907d63
+msgid "Temperature"
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:71
+#: 1bf01d9585244794b88a62669b24850d
+msgid "Total Current"
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:73
+#: fefc924f55d549d482ba4eecbbf582ae
+msgid "The RCOU messages are also written to the onboard logs which hold the requested output level sent to the ESCs expressed as a number from 1000 (meaning stopped) to 2000 (meaning full output)."
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:75
+#: d5e7e047330a44a8951ba37b79da2484
+msgid "This data can also be viewed in real-time using a ground station.  If using the Mission Planner go to the Flight Data screen's status tab and look for esc1_rpm."
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:83
+#: 0a02db85956a4cfda80fcbbaf572c42e
+msgid "Sending BLHeli32 telemetry data to the GCS requires the telemetry connection use MAVLink2.  ArduPilot uses MAVLink2 by default on the USB port but if another port is used it may be necessary to set the SERIALx_PROTOCOL parameter to 2 (where \"x\" is the serial port number used for the telemetry connection)."
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:85
+#: a83abd61fb89459795ee7e11ad33d04c
+msgid "In addition, some telemetry values can be displayed on the integrated :ref:`on-board OSD <common-osd-overview>`, if your autopilot has one."
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:87
+#: 803aa945ac84429ea9749bc8e8a2a49c
+msgid "Newer firmware versions (such as BlHeli32 starting at version 32.10, and Bluejay starting at version 0.19) report some of the information above also via bi-directional DShot, using a protocol extension known as `Extended DShot Telemetry <https://github.com/bird-sanctuary/extended-dshot-telemetry>`__. The version 2 of this protocol, EDTv2, also specifies the following information that can be reported by an ESC:"
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:89
+#: b132aea40fa34811a9fb66520ad5efd4
+msgid "Commutation stress"
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:90
+#: bad49cb9582f49ad9b4cf9e5954d5d22
+msgid "Error events (such as propeller stalls)"
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:91
+#: c458d1f2bd104d939266d8a3ef834ac4
+msgid "Warning events (such as desyncs)"
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:92
+#: ea9dc3ac26e34c6398e9bcd70aec6945
+msgid "Alert events (such as demagnetization events)"
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:94
+#: 49b926f03ae24caebba307c43556410d
+msgid "If an ESC connected via bidirectional DShot supports this extension, this information is automatically sent to the flight controller, where it is logged as EDT2 messages. This information is typically sent on a best-efforts basis, and is intended mainly for post-flight analysis."
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:99
+#: aac49fb505bd478eaf31523c20b4d155
+msgid "Use as Battery Monitor"
+msgstr ""
+
+#: ../../source/docs/common-esc-telemetry.rst:101
+#: 29b704c2e68f4d7aaf95296fd7237034
+msgid "By setting a battery monitor instance to BLHeli32 ESC type (for example :ref:`BATT2_MONITOR<BATT2_MONITOR>` = 9), all connected BLHeli32 ESCs with connected telemetry wiring to the configured autopilot serial port, will be aggregated as a single source. Normally all the ESC's reported voltages and temperatures reported will be averaged, their currents totaled, and the consumed current accumulated. However, an individual monitor may select which ESC's values will be used, instead of all, by setting (Battery Monitor 3 will used for example here) :ref:`BATT3_ESC_MASK<BATT3_ESC_MASK>` bits for the indexes of which ESC's values will be used. Default is to use all ESCs setup to report power telemetry."
+msgstr ""

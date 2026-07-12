@@ -105,11 +105,11 @@ Set up the Vagrant and the virtual machine
 
     .. note::
 
-       On older Ubuntu versions the CA cetificate store shipped with Vagrant may be out of date.  You may need to set an environment variable before running vagrant:
+       On older Ubuntu versions the CA certificate store shipped with Vagrant may be out of date.  You may need to set an environment variable before running vagrant:
 
        ::
 
-	  export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+         export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 
 #. Initialise git submodules
 
@@ -119,10 +119,10 @@ Set up the Vagrant and the virtual machine
 
       ::
 
-	 vagrant ssh
-	 cd /vagrant
-	 git submodule update --init --recursive
-	 exit
+        vagrant ssh
+        cd /vagrant
+        git submodule update --init --recursive
+        exit
 
 Start running SITL
 ==================

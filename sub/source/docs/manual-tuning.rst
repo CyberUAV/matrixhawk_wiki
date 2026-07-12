@@ -46,25 +46,25 @@ Maximum Attitude Angle Limits
 =============================
 These can be changed with:
 
-- :ref:`ANGLE_MAX<ANGLE_MAX>`
+- :ref:`ATC_ANGLE_MAX<ATC_ANGLE_MAX>`
 - :ref:`XTRACK_ANG_LIM<XTRACK_ANG_LIM>`
 
 Speeds
 ======
 Several parameters impact speed or speed limits:
 
-- :ref:`WPNAV_SPEED<WPNAV_SPEED>`
-- :ref:`WPNAV_SPEED_UP<WPNAV_SPEED_UP>`
-- :ref:`WPNAV_SPEED_DN<WPNAV_SPEED_DN>`
+- :ref:`WP_SPD<WP_SPD>`
+- :ref:`WP_SPD_UP<WP_SPD_UP>`
+- :ref:`WP_SPD_DN<WP_SPD_DN>`
 
 - :ref:`PILOT_SPEED<PILOT_SPEED>`
-- :ref:`PILOT_SPEED_UP<PILOT_SPEED_UP>`
-- :ref:`PILOT_SPEED_DN<PILOT_SPEED_DN>`
+- :ref:`PILOT_SPD_UP<PILOT_SPD_UP>`
+- :ref:`PILOT_SPD_DN<PILOT_SPD_DN>`
 
 Depth Control
 =============
 
 Vertical position holding modes (ALT_HOLD,etc.) have these primary tuning parameters, which can be lowered if depth oscillation occurs:
 
-- :ref:`PSC_POSZ_P<PSC_POSZ_P>`
-- :ref:`PSC_VELZ_P<PSC_VELZ_P>`
+- ``PSC_POSZ_P``
+- :ref:`PSC_D_VEL_P<PSC_D_VEL_P>`

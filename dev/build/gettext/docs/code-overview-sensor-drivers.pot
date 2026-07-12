@@ -1,0 +1,289 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:5
+#: 8c534882ae634f228af6244a6d1c574e
+msgid "Sensor Drivers"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:7
+#: 77e6e84b80304fceb1817be970597673
+msgid "ArduPilot supports a wide variety of sensors from many different manufacturers.  One clear example of this can be seen in the :ref:`list of range finders <copter:common-rangefinder-landingpage>` (aka sonars, lidars). This page attempts to explain how sensor drivers are written and integrated into the vehicle code."
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:11
+#: e036d6c7b2ff40019cff54aecaff9821
+msgid "Supported Protocols"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:13
+#: c0b82b321d944943a49c903946a5d04b
+msgid "`I2C <https://en.wikipedia.org/wiki/I%C2%B2C>`__, `SPI <https://en.wikipedia.org/wiki/Serial_Peripheral_Interface_Bus>`__, `UART (aka Serial) <https://en.wikipedia.org/wiki/Universal_asynchronous_receiver/transmitter>`__ and `CANBUS <https://en.wikipedia.org/wiki/CAN_bus>`__ (in particular UAVCAN/DroneCAN) protocols are supported."
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:16
+#: 5ef8cd224d3741889ef53bcf22e3d10c
+msgid "If you plan to write a new driver, you will likely need to refer to the sensor's datasheet in order to determine which protocol it uses. Alternatively, you could utilize an intermediary node to move the necessary data back to the autopilot."
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:19
+#: 9e2ac15612d74b3da644590a288703af
+msgid "I2C"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:21
+#: c520959cce9448089d501cffdeb0315e
+msgid "one master, many slaves possible"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:22
+#: 45c3c5ea36334eeb81b45e53fd3b5f8d
+msgid "a relatively simple protocol which is good for communicating over short-distances (i.e. less than 1m)."
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:23
+#: 75fd80af2f134669985b837c2fe7bca9
+msgid "bus runs at 100kHz or 400kHz but the data rate is relatively low compared to other protocols."
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:24
+#: 94054fb80d6d4aacb235c337027d26f1
+msgid "only 4 pins are required (VCC, GND, SDA, SCL)"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:30
+#: 19cfa529e0bc4066acf3fd72c23935aa
+msgid "SPI"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:32
+#: ../../source/docs/code-overview-sensor-drivers.rst:43
+#: 7bb10a3820644ed9ae077680700e1c3f
+#: a5aef80e5b0d4c4ca3c6eee41a945502
+msgid "one master, one slave"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:33
+#: 77638ca249d9415e905421710a956781
+msgid "20Mhz+ speed meaning it is very fast especially compared to I2C"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:34
+#: 35bf683468c44243bb2630753708f6db
+msgid "only works over short distances (10cm)"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:35
+#: 4aea2b00ee22488f8295865e1a58848c
+msgid "requires at least 5 pins (VCC, GND, SCLK, Master-Out-Slave-In, Master-In-Slave-Out) + 1 slave select pin per slave"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:41
+#: 1aebfba427944d30bb77f461d2d7af46
+msgid "Serial / UART"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:44
+#: 48468c0ab9224ec9a3aa5b74bf41ff0e
+msgid "character based protocol good for communicating over longer distances compared to I2C and SPI (i.e. 1m)"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:45
+#: 20e33904e05c4d0eb8191e480d5f0c79
+msgid "relatively fast at 57Kbps ~ 1.5Mbps"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:46
+#: 695efdae1b214ec1a657c0177631cdca
+msgid "at least 4 pins required (VCC, GND, TX, RX), plus 2 optional pins (Clear-To-Send, Clear-To-Receive)"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:49
+#: 473a7fd7027543baa226385bf53918ed
+msgid "CAN bus with UAVCAN"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:51
+#: bcdda6644380431691b3f67076070872
+msgid "multimaster bus, any node can initiate transmission of data when they need to"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:52
+#: aead31b9eb4546afb1f55cacead4ff22
+msgid "packet based protocol for very long distances"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:53
+#: 112f3bb47aed4ac8b6ecb52d2a3aeb72
+msgid "high speed, typically 1 Mb (however only 50% of the bus bitrate can really be used without major collisions)"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:54
+#: dd35a9970bf44ed9bd80169456198f60
+msgid "at least 3 pins required (GND, CAN HI, CAN LO). Optionally VCC can be used to power nodes"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:55
+#: 394ae1dcdcfc45cc9842b11b05123352
+msgid "point-to-point topology. Star or stubs topolgy is not advised"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:56
+#: be865c86ddff43c99855c8beb5b07ef1
+msgid "termination is required at each end of the bus"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:61
+#: 40076ded2474413b869b925651596f49
+msgid "FrontEnd / BackEnd Split"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:63
+#: cb902a46a56343dc89270f1eae815b40
+msgid "An important concept within the sensor driver architecture is the front-end / back-end split."
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:67
+#: c491a22daaf2421fa25b8aa0ce9492f4
+msgid "The vehicle code only ever calls into the Library's (aka sensor driver's) front-end."
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:69
+#: bed5c8a2c410444da29111ad54cf8f18
+msgid "On start-up the front-end creates one or more back-ends based either on automatic detection of the sensor (i.e. probing for a response on a known I2C address) or by using the user defined _TYPE params (i.e. RNGFND_TYPE, RNGFND_TYPE2).  The front-end maintains pointers to each back-end which are normally held within an array named _drivers[]."
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:72
+#: a2157083dbff4aa59686bfc9f39f8792
+msgid "User settable parameters are always held within the front-end."
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:75
+#: c830a8c66c8d4836b0d0e8d3de22804c
+msgid "How and When the driver code is run"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:79
+#: cede19ab5f1c43ceb32e4c7a11107d2c
+msgid "The image above shows a zoomed in view of the ardupilot architecture.  The top-left blue box illustrates how the sensor driver's back-ends are run in a background thread. Raw data from the sensors is collected, converted into standard units and then held within buffers within the driver."
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:82
+#: 6ae05b52b7e34735be2eb9102ee29bb1
+msgid "The vehicle code's main thread runs regularly (i.e. 400hz for copter) and accesses the latest data available through methods in the driver's front-end. For example in order to calculate the latest attitude estimate, the AHRS/EKF would pull the latest accelerometer, gyro and compass information from the sensor drivers' front-ends."
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:85
+#: a36651dc1ffd4420a136c5ebc5b34d07
+msgid "The image is a slight generalization, for drivers using I2C or SPI, they must run in the background thread so that the highrate communication with the sensor does not affect the main loop's performance but for driver's using a serial (aka UART) interface, it is safe to run in the main thread because the underlying serial driver itself collects data in the background and includes a buffer."
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:90
+#: 0add7903541a4e5f9f830617875b0633
+msgid "Vehicle Code and Front-End Example"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:92
+#: 79abcb4901944ebf9d260f872b16c59c
+msgid "The example below shows how the Copter vehicle code pulls data from range finder (aka sonar, lidar) drivers. The Copter code's `scheduler <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L107>`__ calls the vehicle's read_rangefinder() method at 20Hz. Below is a picture of this method, the latest version can be seen in the `sensors.cpp <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/sensors.cpp>`__ file. The rangefinder.update() method is a call into the driver's front-end."
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:99
+#: 6b22979363054c64849d74f0427f23bf
+msgid "Below is the range finder driver's front-end `update method <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_RangeFinder/AP_RangeFinder.cpp#L289>`__. This gives the driver a chance to do any general processing it might want to within the main thread. Each back-end's update method is called in turn."
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:106
+#: b99c76f7f1994083b441e4ecff814f57
+msgid "UART/Serial Back-End Example"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:108
+#: 817cd76c5be84873aed577692266119c
+msgid "Next is the update method of the `LightWare back-end <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_RangeFinder/AP_RangeFinder_LightWareSerial.cpp>`__ using the serial protocol. As described on the `user wiki <https://ardupilot.org/copter/docs/common-lightware-sf10-lidar.html#serial-connection>`__ the serial range finder can be connected to any of the flight controller's serial ports but the user must specify which serial port, and what baud rate is used by setting the SERIALX_BAUD and SERIALX_PROTOCOL parameters."
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:113
+#: 1793da540387471b903f1d8059f84a5e
+msgid "Within the serial driver's `backend code <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_RangeFinder/AP_RangeFinder_Backend_Serial.cpp>`__, it first finds which UART the user would like to use via the serial_manager class which looks for the parameters settings described above."
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:117
+#: 0ef77ace541e4e1caf3dc9788d246fd1
+msgid "Each time the driver's back-end update() method is called it calls the get_reading method which checks if new characters have arrived from the sensor and then decodes them."
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:119
+#: 31ae632add844e5d898fe81163321f66
+msgid "As mentioned above, because the serial protocol implements its own buffering, the processing of any data (see get_reading method) from the sensor is run here in the main thread. I.e. there is no \"register_periodic_callback\" like you will see in I2C and SPI drivers."
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:126
+#: 5d5c99f5544b47a299ee894b39e16168
+msgid "I2C Back-End Example"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:128
+#: a4d036dd606748369930cad319108586
+msgid "This example shows the back-end for the Lightware I2C driver. In this case, the front-end gets the I2C bus and passes it to the back-end during initialisation."
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:133
+#: 44cacde7e1c94fa2b9b6308345bddfe1
+msgid "The back-end's init method then registers its \"timer\" method to be called at 20hz.  Within the timer method (not shown) the get_reading() method is called which reads bytes from the sensor and converts the distance to centimeters."
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:136
+#: 541f149f85a246c7a16b8b73eb2c9dd0
+msgid "SPI Back-End Example"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:138
+#: 32077556a8bb464d8b4ded8e55ce0938
+msgid "This example shows the back-end for the MPU9250 IMU which includes a gyro, accelerometer and compass. The front-end gets the SPI bus and passes it to the back-end during initialisation."
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:143
+#: a32c1b19f88c4b9e8726d4058151c6cd
+msgid "the start() method is called during initialisation and configures the sensor. It uses semaphores to ensure no interference with other SPI devices on the same bus."
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:146
+#: c29f635d031046ebbe1d981b18fe1966
+msgid "The _read_sample method is registered so that it is called at 1000hz.  Note there is no need to take/give semaphores within the _read_sample method because that is done as part of the periodic callback code."
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:148
+#: 974285aa1a1d453486c1f8d78fef69a4
+msgid "the _block_read method shows how data can be read from the sensor's registers."
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:153
+#: 0048c47faf9f4921bcbdfd129de587b6
+msgid "Additional Advice"
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:155
+#: 0954eeebdf264798a521358553bd781f
+msgid "When writing a sensor driver, never include any wait or sleep code because this will either delay the main thread or the background thread associated with the bus being used."
+msgstr ""
+
+#: ../../source/docs/code-overview-sensor-drivers.rst:157
+#: 8863fddb87e54e2da693895625266eee
+msgid "If a new library is written, it must be added to the wscript file in the vehicle directory (i.e. /ardupilot/ArduCopter/wscript) in order for it to be linked into the final binary"
+msgstr ""

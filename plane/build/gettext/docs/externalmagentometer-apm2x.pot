@@ -1,0 +1,122 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/externalmagentometer-apm2x.rst:5
+#: 60948b02e42046118ba1cee289cd858a
+msgid "Using an External Compass with APM 2.x"
+msgstr ""
+
+#: ../../source/docs/externalmagentometer-apm2x.rst:9
+#: 6cdb061a818b402ab8f74706767677d2
+msgid "**ARCHIVED**"
+msgstr ""
+
+#: ../../source/docs/externalmagentometer-apm2x.rst:11
+#: b9c97ad1cce148bf951cf9c90477bbec
+msgid "The APM2.x is end of life for use with ArduPilot. This article is made available for existing users."
+msgstr ""
+
+#: ../../source/docs/externalmagentometer-apm2x.rst:14
+#: 6f5c9a75406d4ea085103ff539cce525
+msgid "If you're having trouble with magnetic noise affecting your compass onboard the APM 2.5 board, you may want to switch to an external compass that you can mount further away from noise sources such as motors. This article explains how."
+msgstr ""
+
+#: ../../source/docs/externalmagentometer-apm2x.rst:23
+#: efaafec3c6a14e82a5d90930b6b9673b
+msgid "Step-by-step instructions"
+msgstr ""
+
+#: ../../source/docs/externalmagentometer-apm2x.rst:25
+#: 8e817e6130d145c29d52b9c938436623
+msgid "Purchase a `HMC5883L magnetometer breakout board <http://store.jdrones.com/APM2_6_Compass_HMC5883_p/jdmagnet001.htm>`__. Make sure the 3DR board is set to use 3.3volts (the APM 2.5’s I2C port uses 3.3 volts, not 5 volts). You will have to modify the 3DR board because it is shipped from 3DR with the 5 volt jumper set, as shown below."
+msgstr ""
+
+#: ../../source/docs/externalmagentometer-apm2x.rst:34
+#: 6d8798649565450d9f87df0c152a1304
+msgid "Looking at the below picture, cut the jumper trace in the middle of the APM 2.5 board. This disables the SDA line to the board’s internal compass, rendering it inert."
+msgstr ""
+
+#: ../../source/docs/externalmagentometer-apm2x.rst:41
+#: 1ea497a0bbb247339c44ca481840830a
+msgid "The APM 2.5 I2C connector needs a 4 pin DF13 connector (like `this one <http://store.jdrones.com/cable_df13_4pin_15cm_p/cbldf13p4c15.htm>`__). Cut off one and and strip and tin the four wires."
+msgstr ""
+
+#: ../../source/docs/externalmagentometer-apm2x.rst:43
+#: 06a098070c334e0f97d8300ad6e46dda
+msgid "Connect the DF13’s 4 wires to the compass breakout board. Note that the wires will not be one to one. Pin 1 on the DF13 connector will not go to pin 1 of the compass board. The standard 3DR cable has one red wire and three black wires. Substitute your wire colors accordingly. Solder the wires as follows:"
+msgstr ""
+
+#: ../../source/docs/externalmagentometer-apm2x.rst:49
+#: 1d3157ec3e52478484eb76407e8252dd
+msgid "Red wire on end of connector (+3.3v) goes to the VCC (or +3.3v) pad on the compass board (see labels on board for location). This is the wire closest to the interior on the APM 2.5 board."
+msgstr ""
+
+#: ../../source/docs/externalmagentometer-apm2x.rst:52
+#: 3fb175fb2e7b41d9b0fb40ea5652fbf3
+msgid "Wire next to red wire (SCL) goes to the SCL pad on the compass board."
+msgstr ""
+
+#: ../../source/docs/externalmagentometer-apm2x.rst:54
+#: f59daf276d83424aac2c784f7258b531
+msgid "Wire next to wire next to red wire (SDA) goes to the SDA pad on compass board."
+msgstr ""
+
+#: ../../source/docs/externalmagentometer-apm2x.rst:56
+#: e5cdeae76a77420abce807f720d23c40
+msgid "Black wire on end of connector (ground) goes to ground pad on compass board. This is the wire closest to the edge of the APM 2.5 board."
+msgstr ""
+
+#: ../../source/docs/externalmagentometer-apm2x.rst:60
+#: 765599d7439442b4985cc9e975b3a26f
+msgid "Mount the compass board on the top plate of your quad. Double-sided foam tape works well for this. The orientation of the board matters. In the picture below, we've mounted the board “components up with pins forward”. Note which direction you mount the board – you will need to modify the software with this orientation, as explained in the next step."
+msgstr ""
+
+#: ../../source/docs/externalmagentometer-apm2x.rst:70
+#: 59f4d527a14c4d04b910646193f11f74
+msgid "Modify, compile and load the software for your compass board orientation. You must be able to load software from the Arduino IDE to complete this step. In “APM_Config.h”, you will find a commented out statement like:"
+msgstr ""
+
+#: ../../source/docs/externalmagentometer-apm2x.rst:79
+#: 85a303bbca59494f954337981e5b507b
+msgid "For the orientation shown in the picture above, for example, you would add the following statement just below the commented out statement above as follows:"
+msgstr ""
+
+#: ../../source/docs/externalmagentometer-apm2x.rst:88
+#: 27437f60eaa44d41ad96994533ed0f90
+msgid "You can find a list of all possible orientations for the ``MAG_ORIENTATION`` flag in the **AP_Compass_HMC5843.h** library, including orientations for both the 3DR and Sparkfun boards."
+msgstr ""
+
+#: ../../source/docs/externalmagentometer-apm2x.rst:92
+#: 54585712d8e745b7aab95aa472be81ea
+msgid "If this is the first time loading software from the IDE, make sure the following statement is uncommented:"
+msgstr ""
+
+#: ../../source/docs/externalmagentometer-apm2x.rst:99
+#: 812803ae2c4b457bba0e6155a4898455
+msgid "Save, Compile and Upload the modified software"
+msgstr ""
+
+#: ../../source/docs/externalmagentometer-apm2x.rst:100
+#: b0dfef13a4244f2c92902194c9eab880
+msgid "Test the compass board and have fun flying with a now stable compass!"
+msgstr ""
+
+#: ../../source/docs/externalmagentometer-apm2x.rst:102
+#: 38715a88571b4e4e9efbfa38bfdca290
+msgid "(This entry contributed by Lloyd DeForrest)"
+msgstr ""

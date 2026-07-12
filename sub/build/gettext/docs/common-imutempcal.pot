@@ -1,0 +1,252 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Sub package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Sub \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:43+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-imutempcal.rst:4
+#: 2abed923c0e64bd8ad9a36afd131a742
+msgid "IMU Temperature Calibration"
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:6
+#: 2fc3aec639994e38aa4b81c34f2d6484
+msgid "ArduPilot supports IMU temperature calibration. Calibrating the IMU for temperature changes can greatly reduce the amount of variation in the IMU and helps with flying in conditions where the temperature varies a lot between boot-up and flight."
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:8
+#: ef9ea0a7d7f745ae858837fc02eca685
+msgid "this feature is only available currently on 2MB autopilots."
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:10
+#: d19120ae0cff4aaaba9fcd5a0fa44a86
+msgid "Temperature calibration is done by first setting up some parameters to establish the start of a calibration routine on the next boot-up, then taking the autopilot and placing it in a cold environment for several minutes to establish a lower calibration temperature. Then, quickly re-powering (and, optionally connecting to a GCS to monitor the process) in an environment at the hotter, upper calibration point."
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:12
+#: 51f936250bca446484e71acb74f580ba
+msgid "You must not allow the autopilot to move, once re-powered, until the calibration is completed!"
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:14
+#: a07ce1a38914473ea6b37107e09865d4
+msgid "After the calibration is complete, you can also run an Offline calibration tool, to verify the calibration improvement."
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:16
+#: 8a101f63d25d4bb4873f9f87fadc1f39
+msgid "The temperature calibration is stored in ArduPilot parameters, just like other types of calibration parameters. There is also the option to store the parameters in a way that persists across a full parameter reset, which allows support for factory calibration for vendors selling ArduPilot compatible autopilots."
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:23
+#: 0b4f5ca836974a52b732f85de430f016
+msgid "Temperature Calibration Procedure"
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:25
+#: f76e87d49074400a914cb6ec9db6d5ec
+msgid "The key factors to a good temperature calibration are:"
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:27
+#: 5685d0f3fdb5455fb14d6dc1fe4c7004
+msgid "letting the autopilot cool to a temperature below the minimum operating temperature before starting the calibration"
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:30
+#: 58a8afcffd2049358a6ee357afba54cd
+msgid "ensuring the IMU temperature that is reached during the calibration run is high enough to cover all flight conditions"
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:33
+#: 4796fff77b824be6a3f8f3b2f6ba0276
+msgid "ensuring that there is no movement during the calibration. Note that the autopilot does not need to be level, but it must not move."
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:37
+#: ceccf91f8ab54d5daa64290641d1a37d
+msgid "Before you start the calibration process you need to setup some key parameters:"
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:40
+#: b76e5c973b7048839d157dcb5e1ea725
+msgid "make sure the :ref:`INS_ACCn_CALTEMP <INS_ACC1_CALTEMP>` and :ref:`INS_GYRn_CALTEMP <INS_GYR1_CALTEMP>` parameters are already set (there is one parameter per IMU, make sure you set all of them). These are set automatically when you calibrate the accelerometers and gyroscopes. They record the temperature of the IMU at the time the offsets were calibrated, which is key information for the calibration process. If they are not already set (they default to -300 which is an invalid value) then you need to perform a 6-axis accel calibration."
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:50
+#: 99724ca029c042a59b3cf13e5210b80c
+msgid "set :ref:`INS_TCALn_ENABLE <INS_TCAL1_ENABLE>` to 2 for each IMU to enable IMU temperature calibration learning on the each IMU you want to calibrate. A value of 2 enables temperature calibration learning. The ENABLE parameter value of 2 takes effect on the next boot."
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:56
+#: 3999142b4a1f414f92bc7f1685aca79e
+msgid "set :ref:`INS_TCALn_TMAX <INS_TCAL1_TMAX>` to the temperature in degrees centigrade that you want to stop the calibration. This should be the high temperature that you expect to reach in your calibration run."
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:61
+#: 7eeb8dbf1e254b468f03444201b28a77
+msgid "it is recommended that you ensure a microSD card is inserted and you have :ref:`LOG_DISARMED <LOG_DISARMED>` set to 1 to log the IMU data used in the calibration process. While this is only required for the offline calibration check below, using it for the initial calibration is recommended in case you wish to inspect the raw data and to check for any movement that may have disturbed the calibration process."
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:68
+#: 7760980520044d03a0580fa28637b43a
+msgid "For boards with a builtin IMU heater you may wish to raise :ref:`BRD_HEAT_TARG<BRD_HEAT_TARG>` to a higher than usual temperature. A value of 70 can be good for calibration. Make sure you change it back to a normal flight value (normally 45) when the calibration process is complete. A value is 70 is likely to be above what can be reached, so for boards with heaters a reasonable value for TMAX is 65 degrees C. Note that on some boards (notably the CubePilot CubeBlack and CubeOrange) the 3rd IMU is not close to the heater, so it's maximum temperature needs to be about 10 degrees below the first two IMUs."
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:79
+#: d434fcbd34174e7c84869cf2441a9c6b
+msgid "Once the parameters are setup, and the autopilot cooled to the minimum temperature, you should power on the flight controller in a warm environment, ensuring that it will not move throughout the calibration process."
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:83
+#: dfa324c956d94805859893fb11e9f9e8
+msgid "The calibration process has a 10 minute timeout. If an IMU doesn't increase it's temperature by at least 0.5 degrees C over a 10 minute period then the calibration will complete and the parameters will be saved up to the point the temperature reached."
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:88
+#: 33dd987db2ca4798a52cf29597a46ffb
+msgid "The parameters are also saved for intermediate temperatures throughout the calibration process. So if you run out of time (or patience) waiting for the calibration then you can stop it at any time by powering off the board. If you do this then you will need to manually change the :ref:`INS_TCALn_ENABLE <INS_TCAL1_ENABLE>` parameters from 2 to 1 to enable the new calibration data to be used. Otherwise it will start the calibration again on each boot. If you do interrupt the calibration process then you should power off the vehicle with a minimum of movement or you could invalidate the calibration. Stopping the calibration process by using a telemetry link to change the :ref:`INS_TCALn_ENABLE <INS_TCAL1_ENABLE>` parameters to 1 before powering off can also be done and is a good idea."
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:101
+#: 92644f3dd07e4efdb75d5d9995646956
+msgid "Note that the calibration process requires a minimum of 10 degrees C change in temperature between the starting and ending temperature. A range of at least 25 degrees C is recommended, ie from the kitchen freezer to your desk."
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:106
+#: 0d6e3c5a81a04ac28b1aed48779fbd11
+msgid "Monitoring the Calibration Process"
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:108
+#: abc171cc0a944f7ab2fec002c2252fce
+msgid "If you have a buzzer connected then you will here a short periodic beep while the calibration is in progress. When the calibration is complete a completion tune will play. If you have a mavlink telemetry link to the vehicle then you can also monitor the progress via that link, graphing the IMU temperatures (which are in the RAW_IMU, SCALED_IMU2 and SCALED_IMU3 messages if you have mavlink2 enabled)."
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:115
+#: b71601c2863a45479a29e0fc72ac037d
+msgid "On completion the :ref:`INS_TCALn_ENABLE <INS_TCAL1_ENABLE>` parameters will change to 1 for \"enable\" for each IMU. Once all your IMUs have completed calibration you can reboot the vehicle. You should also:"
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:120
+#: b406053da21a40be96879ee30634dec6
+msgid "reset the :ref:`BRD_HEAT_TARG<BRD_HEAT_TARG>` back to its normal value (usually 45) if you changed it"
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:123
+#: 23c5de228d174f5e9ad79bee02f11bce
+msgid "disable :ref:`LOG_DISARMED <LOG_DISARMED>` if you had enabled it and want it disabled for normal usage"
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:126
+#: 021221a45df24804a928ffa319768e06
+msgid "You may also wish to refresh your parameters and save all the parameters that start with the INS_TCAL prefix. You can restore these parameters to avoid needing a new temperature calibration if you ever do a complete reset of your parameters."
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:132
+#: d006510a658b485d99a717a18da78290
+msgid "Offline Calibration Tool"
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:134
+#: 6a0197de20904480ac237da9acc0514a
+msgid "The procedure outlined above will have completed an automatic online temperature calibration. If you had :ref:`LOG_DISARMED <LOG_DISARMED>` set to 1 then the onboard log file allows you to do an offline calibration check. Doing an offline calibration has the advantage that you can inspect the improvements to the calibration by graphing the uncorrected and corrected calibration for the accelerometers and gyroscopes."
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:142
+#: e43e65b07b534fa0a92f215aa075d300
+msgid "To perform an offline calibration you need to use the script in the ArduPilot git repository in Tools/scripts/tempcal_IMU.py. When you run this script on a log file from a calibration you will get two sets of graphs. One set is for the gyroscopes the other is for the accelerometers."
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:147
+#: 41ae4b41d1ab406391bc021270d51df6
+msgid "The image below shows the results of a run on a log file for 3 IMU board:"
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:155
+#: 54f1091828394fac8432a42485ea8727
+msgid "The key features of the graphs are:"
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:157
+#: 60d5858149a64a98ba843192eb5b988c
+msgid "the first 3 lines on each graph (blue, orange and green) show the uncorrected IMU data. This allows you to see how much drift you have without temperature correction"
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:161
+#: 1528c3e3faf54bebb214e26410f447f1
+msgid "the next 3 graphs show the corrected IMU data, showing how much the temperature calibration will help. For a good calibration these lines will all be close to zero"
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:165
+#: 346a17d5e3b9445cb1ff8b76b386d219
+msgid "the IMU temperature is shown on the right hand scale"
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:167
+#: 3dc0b70476a346fca72fef41a3ca3b17
+msgid "you should check for any sudden changes in the data, which indicates that the board was not kept still when calibrating"
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:170
+#: 2b959e5656404f9685d011f269d00049
+msgid "with multiple IMUs the graphs may span different temperature ranges and times. This happens as the IMUs reach their target calibration temperatures at different times"
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:174
+#: ce002590bbe2457dbbe595305c1e249e
+msgid "The calibration script will also save a copy of the new calibration parameters to the file tcal.parm, or a filename chosen with the --outfile command line option. You should load these parameters to enable the new calibration on the autopilot."
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:179
+#: fc13e4f623074705b6d513c2e0b7a8e8
+msgid "Other command line options are:"
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:181
+#: 9fb3dae6f0dd4e0db7152ca6442a3859
+msgid "the --no-graph option disables the graphing, allowing for batch processing of log files"
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:184
+#: 3f8c392562b64aca938a0df65cf3dd83
+msgid "the --online option changes the calibration process to use the same algorithm as the online calibration method used inside the flight controller. This is useful for debugging"
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:188
+#: 4c65e7f1eec34dcca27ac5fc7d83c94b
+msgid "the --tclr option enables the use of the TCLR messages from the log instead of the IMU log messages. The TCLR messages record the exact filtered data used in the online calibration process. This is useful for debugging"
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:193
+#: 4929047f4ef54692b7b4d982c5a97d8e
+msgid "the --log-parm option enables an additional set of graphs showing the IMU data with corrections applied using existing INS_TCAL parameters from your log file. This allows you to compare the new calibration against a previous temperature calibration"
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:199
+#: 0444a553e3af4b5099a382bebe709031
+msgid "Factory Temperature Calibration"
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:201
+#: 8d6b30afe51d426784e75fe263724c1b
+msgid "On autopilots based on the STM32F7 and STM32H7 microcontrollers we support storing temperature calibration parameters in persistent storage in the boards bootloader sector. This allows the calibration parameters to persist even with a complete parameter reset, including changing firmware type. This allows a vendor to ship autopilots pre-calibrated from the factory which is a great convenience for users."
+msgstr ""
+
+#: ../../source/docs/common-imutempcal.rst:209
+#: b6fcc776c7a44902b7f623ac7efd6288
+msgid "To save parameters persistently, you should set the desired bits in :ref:`INS_TCAL_OPTIONS <INS_TCAL_OPTIONS>` to indicate persistence of Temperature Calibration and Accel Calibrations. As a final step send a \"flash bootloader\" mavlink command to the autopilot. This will re-flash the bootloader with calibration parameters embedded in the final part of the bootloader sector in flash. You can inspect these parameters using the @SYS/persistent.parm sysfs file using a mavftp client."
+msgstr ""

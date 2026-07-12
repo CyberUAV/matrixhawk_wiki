@@ -1,0 +1,182 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Sub package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Sub \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:43+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-watchdog.rst:5
+#: f5c8498a182b46d9b5747704229409d9
+msgid "Independent Watchdog and Crash Dump"
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:7
+#: e024c01c08d745a785dfb1d7e3052e38
+msgid "ArduPilot enables the autopilot CPU's internal independent watchdog which causes the CPU to be reset and restarted if a peripheral or some piece of code takes too long to complete or \"hangs\" the CPU.  This may or may not save the vehicle if in flight or motion."
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:9
+#: 76c0780796b945cea5ba9d6398b81725
+msgid "While not recommended, this feature can be disabled by setting :ref:`BRD_OPTIONS<BRD_OPTIONS>` = 0."
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:11
+#: 745b427569c0420eb35140c969dd7f98
+msgid "In the case of a \"HARD FAULT\" (e.g an illegal instruction, out of bounds memory access, etc.) before resetting, the watchdog handler code will log a \"WDG\" message to the onboard log, send a \"WDG\" text message to the GCS and attempt to write a crash_dump.bin file to the \"@SYS\" flash area.  This crash_dump.bin file contains the cpu state and registers for later analysis (See section below for more details). A \"HARD FAULT\" is extremely serious and should be reported to ArduPilot. The vehicle is probably not safe to fly until the cause is resolved."
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:13
+#: a7e82ba8caa8432988685a1ab6a183d5
+msgid "In ArduPilot-4.5.1 (and higher), if a crash_dump.bin file has been created, a pre-arm failure will warn the user and prevent arming.  The crash_dump.bin file can be erased by re-flashing the ArduPilot firmware to the autopilot or it can be ignored by setting the :ref:`ARMING_CRSDP_IGN<ARMING_CRSDP_IGN>` param to 1 (not recommended)."
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:20
+#: 0cbf5721b24a4f7d9a09d6c67149d997
+msgid "Reporting a Watchdog / Crash Dump"
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:22
+#: a1e5b073443a4bb2abe0ae78de71cd20
+msgid "Use Mission Planner or another GCS to download the crash_dump.bin file from the \"@SYS\" flash area."
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:27
+#: 656e5b2dc72c4ebfa6f59568832889d7
+msgid "Download the dataflash log from the flight or operation that caused the crash dump to be created.  Information on downloading logs can be found :ref:`here <common-downloading-and-analyzing-data-logs-in-mission-planner>`."
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:29
+#: 081e55027afe439fa999a965ca02a9fb
+msgid "If the dataflash log cannot be found, find the git-hash of the firmware.  This appears in the GCS's messages tab soon after startup."
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:34
+#: a2c8b368a86749f78e647cb08d9e7600
+msgid "Open `ArduPilot's support forum <https://discuss.ardupilot.org/>`__, find the category for your vehicle and software version (e.g. `Copter-4.6 <https://discuss.ardupilot.org/c/arducopter/copter-46/179>`__, `Plane-4.6 <https://discuss.ardupilot.org/c/arduplane/plane-4-6/182>`__, `Rover-4.6 <https://discuss.ardupilot.org/c/ardurover/rover-46/180>`__), create a \"New Topic\", include \"watchdog\" in the title and attach the crash_dump.bin file, log file and/or git-hash as described above.  If the files cannot be uploaded directly, please include a link to where they can be downloaded from."
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:38
+#: c500632d96364f399d9780854d1e0a2c
+msgid "Determining that a Watchdog Reset Occurred"
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:40
+#: f8bcd429c66043219427db77699ef03b
+msgid "One way is by looking at the dataflash logs. If the log is filtered to show only the \"MSG\" messages it can be seen that some include the word, \"watchdog\". This is a clear indication that the previous log or flight ended with a watchdog reset."
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:45
+#: 67e7a002f2d2447e9d0ec5f2f2ee3f6b
+msgid "A WDOG log message should also appear with the following columns that may be useful for developers investigating the cause of the watchdog"
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:47
+#: 5aacb07b423a4ed48aa58287415a4ce3
+msgid "Task: The scheduler task number OR"
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:49
+#: 65ecf8f5bd45409ea1bc7a07f14ab699
+msgid "-1 if the main loop just received the next IMU sample"
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:50
+#: a2ee0ad7504a4b3081e7862b7fa5aa1e
+msgid "-2 if the fast loop had started"
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:51
+#: 314c14841bbc49ff83bdc7deaf82bfc3
+msgid "-3 if the main loop was waiting for the next IMU sample"
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:53
+#: 508d061838184adb87abb7d5022a513d
+msgid "IErr : Mask of Internal Errors"
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:54
+#: a0611d152aeb465c9e246a066c26ce3a
+msgid "IErrCnt : Internal Error Count"
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:55
+#: 5f21a2e21fb74f189414511531266f32
+msgid "MavMsg : MAVLink message id of last processed message"
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:56
+#: 93173892c688466cbb4b0a20f58c61e2
+msgid "MavCmd : MAVLink COMMAND_LONG or COMMAND_LONG_INT message's command field from last processed message"
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:57
+#: 9b764173ef1b4ecbba941c970d2dc173
+msgid "SemLine : Source code line number if program is waiting for a semaphore or 0 if not waiting"
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:58
+#: f07cd20aeb37471a8b6224b22765bbc9
+msgid "FL : Fault Line, the source code line number where the fault occurred.  Note this does not specify the filename but it can still be useful"
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:59
+#: eae14da87de742758cfbfefcdf483001
+msgid "FT : Fault Type (see `FaultType enum in AP_HAL_ChibiOS/system.cpp <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_ChibiOS/hwdef/common/stm32_util.h#L144-L151>`__)"
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:61
+#: c94744151a044f458cfab171ccf4e715
+msgid "1 = Reset"
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:62
+#: 22fb4f6684c24be58ab1477dfd0384f7
+msgid "2 = Non-Maskable Interrupt (aka NMI)"
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:63
+#: df56850405744c63936986b6f60dea7e
+msgid "3 = Hard Fault (the most common)"
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:64
+#: f79cbbbdbfc94ed88dbdd3444158d716
+msgid "4 = Memory Management Fault"
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:65
+#: a4ff7bb2f6c44506b17d07b124138a43
+msgid "5 = Bus Fault"
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:66
+#: 154aceb183a8428d8c728ea87f615c38
+msgid "6 = Usage Fault"
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:68
+#: 5ef70d233968471186d70a0ef8ba2386
+msgid "FA : Fault Address (in memory).  For example this would be 0 in case an attempt was made to read a byte using a nullptr"
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:69
+#: 39c1655f68574c81844088c1e850986e
+msgid "FP : Thread Priority (see list of priorities starting with APM_MONITOR_PRIORITY in `AP_HAL_ChibiOS/Scheduler.h <https://github.com/ardupilot/ardupilot/blob/master/libraries/AP_HAL_ChibiOS/Scheduler.h#L25>`__)"
+msgstr ""
+
+#: ../../source/docs/common-watchdog.rst:70
+#: 0951db8b1af84322839ed8d9e1b019fb
+msgid "ICSR : Interrupt Control and State Register (see \"ICSR bit assignments\" in ST datasheets)"
+msgstr ""

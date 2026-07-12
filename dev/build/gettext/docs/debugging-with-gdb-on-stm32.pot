@@ -1,0 +1,237 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:5
+#: d32eff66027841b6af5bc59018f507aa
+msgid "Debugging with GDB on STM32"
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:7
+#: 7af79ab8c2c04b28bf289f3d215c49e9
+msgid "This page describes how to setup GDB on Linux to debug issues on STM32. The specific commands were tested on Ubuntu 18.10."
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:10
+#: 2849dbb50b0d41139a205f145b497087
+msgid "Introduction"
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:12
+#: fda8bf16899a4aa2bb1bf29d8d346b3a
+msgid "GDB (the GNU Debugger) allows you to see what is going on inside another program while it executes or what another program was doing at the moment it crashed which can be useful when investigating very low-level failures with the STM32"
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:17
+#: 4c0f5c26b1d54683a8bfecc3e7af5c32
+msgid "This guide assumes that you have already successfully built the firmware on your machine following the instructions for :ref:`Windows <building-setup-windows>`, :ref:`Mac <building-setup-mac>` or :ref:`Linux <building-setup-linux>`."
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:20
+#: a772fdffd475494897485ea6d6a6c887
+msgid "One the the following debuggers is required:"
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:22
+#: 08bf68c383274639aed569dc27ded829
+msgid "`BlackMagic probe <http://www.blacksphere.co.nz/main/index.php/blackmagic>`__ (available from `1 Bit Squared <http://1bitsquared.com/collections/frontpage/products/black-magic-probe>`__)"
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:23
+#: 1fdc2be9dc1d499da070982ce6533932
+msgid "`ST-Link V2 JST debugger <https://www.ebay.com/sch/i.html?_nkw=ST-Link-V2-Stlink-Emulator-Downloader-Programming-Mini-Unit-STM8-STM32>`__"
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:24
+#: efb43c418edb457b8d080cd0e6eb83a3
+msgid "`VM Probe <https://dev.vimdrones.com/products/vimdrones_stlinkv3_probe/>`__"
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:26
+#: 404dde524e0b42fcaf6391c87df4e0d0
+msgid "A small plug (`FTSH-105-04-L-DV <https://au.element14.com/samtec/ftsh-105-04-l-dv/connector-header-1-27mm-smt-10way/dp/2308438?scope=partnumberlookahead&ost=FTSH-105-04-L-DV&searchref=searchlookahead&exaMfpn=true&ddkey=https%3Aen-AU%2FElement14_Australia%2Fw%2Fsearch>`__) may be required to solder on to the JTAG port of the flight controller."
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:30
+#: 44b923e745c64964b464f9df4ace90f2
+msgid "Compiling the Firmware"
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:32
+#: b47d51051b554976b26211b5a0a27ec1
+msgid "Build and upload the debug variant of the firmware:"
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:34
+#: 1bb30bdf831a4f4cb02f8f342683ddc1
+msgid "``` ./waf configure --board=Pixhawk1-1M --debug --enable-asserts ./waf --target=examples/UART_test --upload ```"
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:40
+#: a7569732e8de4ed5a0d1aef40083b7ae
+msgid "Connecting the BlackMagic probe to the Pixhawk"
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:45
+#: d8df2a9c122b4117a5d716aa1d489d44
+msgid "The BlackMagic probe should be connected to the Pixhawk's JTAG connector using the grey 10wire cable that came with the probe. Note that most Pixhawk come with no headers soldered onto the JTAG connector because it interferes with the case."
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:51
+#: 01188039fa92490f935716cad952b91c
+msgid "Connecting the ST-Link V2 JTAG debugger to the STM32"
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:56
+#: dfa98a82604447d0b1d4da33406cf7b4
+msgid "The ST-Link debugger should be connected to the STM32's JTAG connector using the JTAG breakout cable. Connect the SWDIO and SWCLK (see `Debug port pinout <https://ardupilot.org/copter/docs/common-pixracer-overview.html#debug-port-jst-sm06b-connector>`__ for reference) to the corresponding SWDIO and SWCLK pins on the ST-Link debugger."
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:61
+#: 56575d85c08140ae9c1404e573537de7
+msgid "Ensure :ref:`BRD_OPTIONS<BRD_OPTIONS>` sets the \"Enable Debug Pins\" bit if bit 3 is present in the vehicle software being used. It is also advised to disable the watchdog by ensuring bit 0 is not set."
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:66
+#: 6e3d8a04f5ca4ab9886ff76da96ae936
+msgid "Installing GDB"
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:68
+#: 1101ecfba24849dd8a66abd8e527e6c9
+msgid "If using Ubuntu, GDB is likely already installed on your machine and it will likely work although we recommend using the version available for download here `https://firmware.ardupilot.org/Tools/STM32-tools <https://firmware.ardupilot.org/Tools/STM32-tools>`__"
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:72
+#: aa3b4f7a9964444d98866ff8b57cedc3
+msgid "The gcc-arm-none-eabi*-linux.tar.bz2 file contains both the recommended compiler and the recommended version of gdb."
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:75
+#: 1046d0c36c5042888abbb2eebd5beaa1
+msgid "If you will be using the ST-Link debugger, please install the gdb version found in the gcc-arm-none-eabi-6-2017-q2-update-linux.tar.bz2 file."
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:78
+#: b87f25b2a7234401be445a851e7fcd8e
+msgid "After installation you should find you have a tool called arm-none-eabi-gdb."
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:82
+#: 0b4dfcdebdea4eb0b5b5f76df826294f
+msgid "Installing OpenOCD"
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:84
+#: fa7b96721c6c49329b758867f40df63c
+msgid "You will need to install OpenOCD if you are using the ST-Link debugger:"
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:86
+#: 3432c0928c6d45ea90e9aa5a95902337
+msgid "``sudo apt-get install openocd``."
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:88
+#: 6a656e896ddc4a4f8eb1ce51f801939d
+msgid "Before OpenOCD and GDB are run, their configuration files need to be copied to the build folder. Note that the build folder name is the same at the board name."
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:90
+#: 95fe31199e7648babca97b8af736e9af
+msgid "Go to the ``./Tools/debug`` folder and copy ``openocd.cfg`` to ``./build/<boardname>/bin``, if not done so previously"
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:93
+#: 21fa98ed04a842c6a40e333d7a48b79c
+msgid "Type ``openocd`` in your terminal in the ``bin`` directory above."
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:98
+#: 394b136806d54812aeae5881f14af120
+msgid "Note: there are 2 versions of the ST-link debugger on eBay, so if the command does not work, change the first line to ``source [find interface/stlink-v2-1.cfg]``."
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:103
+#: 83ea2923fbb24442b65815c3d732b11c
+msgid "Starting GDB and running some commands"
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:105
+#: 333fbc58479a4bb5b492421e45270bf6
+msgid "Copy ``.gdbinit`` to ``./build/<boardname>/bin`` and edit ``~/.gdbinit`` to have the following text: ``set auto-load safe-path /``, if not done so previously."
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:109
+#: d3d30e84017d4b4baa8bdb732e54e54a
+msgid "In another window, type ``arm-none-eabi-gdb arducopter`` in the ``./build/<boardname>/bin`` folder. Now you have connected to the gdb debugging session and can use the commands from the next section."
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:117
+#: aae49a54c4c64372bc787908736e737a
+msgid "Some useful commands:"
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:119
+#: b95a4e31d08c4145ac6585e7e209c74d
+msgid "``r`` -- restarts the process"
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:121
+#: a59239f5a4014c9fbb6155c63a76aef8
+msgid "``b function-name`` -- i.e. b setup -- sets a breakpoint at the start of the \"setup\" function. Note a class name can be prepended such as ``b AC_AttitudeControl::init``"
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:126
+#: e78ebed5bcee4a9e905f8bce74747170
+msgid "If you are debugging a board using external flash and you receive \"Failed to read memory at 0x.....\", try \"set mem inaccessible-by-default off\""
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:128
+#: e4758b71d40c4aecb390fd6fe1d02cfa
+msgid "``Ctrl-C`` -- stops the code from executing so you can set breakpoints, etc"
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:131
+#: 99721342a35b47aa9cf98c16acd26973
+msgid "``continue`` -- continues the code from wherever it was stopped"
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:133
+#: bade8dad1c4346a8a0d83807e9448a3b
+msgid "``show interrupted-thread`` -- shows address where execution has stopped (see below)"
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:136
+#: 900b9188e770477f90b23a3945b38b40
+msgid "``info line * <address>`` -- shows c++ line for a given address (i.e. from show interrupted-thread)"
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:139
+#: ff9cfa096bc44899833aeba7e7682de9
+msgid "``info threads`` -- show status of all threads"
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:141
+#: 0160b16bb42c496e9ea8b550578173e0
+msgid "``disassemble <address>`` -- converts given address into assembler code"
+msgstr ""
+
+#: ../../source/docs/debugging-with-gdb-on-stm32.rst:143
+#: cefbc32363774b86a599e034e6cd478d
+msgid "``exit`` -- exits from the GDB"
+msgstr ""

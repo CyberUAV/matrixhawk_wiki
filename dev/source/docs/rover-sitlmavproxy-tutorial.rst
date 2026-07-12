@@ -40,7 +40,7 @@ The tutorial assumes you have already set up :ref:`SITL on Windows <sitl-native-
 :ref:`Linux <setting-up-sitl-on-linux>` and that you have started SITL
 using the ``--map`` and ``--console`` options:
 
-::
+.. code-block:: bash
 
     cd ~/ardupilot/Rover
     sim_vehicle.py --map --console
@@ -55,6 +55,7 @@ Starting
 ========
 
 Change the rover into Guided mode and then arm it by entering the following on the mavproxy console
+
 ::
 
     GUIDED
@@ -200,5 +201,10 @@ and simulation using ``param show *``, and to set any parameter using:
 ``param set PARAM_NAME VALUE``. In addition to affecting the vehicle
 itself some parameters simulate the performance/failure of specific
 hardware components and the environment (for example, the wind). These
-can be listed using: `:ref:`param show sim*``. The topic `Using SITL for ArduPilot Testing <using-sitl-for-ardupilot-testing>` explains more about how
+can be listed using:
+.. code-block:: console
+
+   param show sim*
+   
+The topic `Using SITL for ArduPilot Testing <using-sitl-for-ardupilot-testing>` explains more about how
 you can test using SITL.

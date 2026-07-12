@@ -26,8 +26,7 @@ precision.
     :target: ../_images/ag_GPS_Segments_low_res.jpg
 
 Some even more advanced GNSS receivers can combine DGPS and RTK
-corrections and can receive other GNSS satellite constellations (GLONASS
-and GALILEO) and other channels (L2C, L5...) at the same time to enhance
+corrections and can receive other GNSS satellite constellations (GLONASS, GALILEO, SBAS, Galileo, Beidou, IMES, QZSS, and/or NAVIC) and other channels (L2C, L5...) at the same time to enhance
 precision and fix reliability.
 
 Military GPS receivers are able to decode the P(Y) code available on L1
@@ -116,7 +115,7 @@ precision (paying services)
 RTK corrections
 ===============
 
-RTK corrections are using carrier phase informations and needs costly
+RTK corrections are using carrier phase information and needs costly
 advanced GPS as well as a RTK base station or a Network of RTK base
 stations broadcasting corrections over a modem or Internet through the
 RTCM protocol.

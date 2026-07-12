@@ -1,0 +1,506 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/learning-ardupilot-threading.rst:5
+#: 754c2741d46d4d92ad7a82d3e3a53fe7
+msgid "Threading"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:8
+#: 7d423d7dbf7e4996ab4ac15bf9b23e99
+msgid "Understanding ArduPilot threading"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:10
+#: f11b3d9599354b3b91567be7ff827fb2
+msgid "Once you have learned the basic of the ArduPilot libraries it is time for you to understand how ArduPilot deals with threading. The setup()/loop() structure that was inherited from arduino may make it seem that ArduPilot is a single threaded system, but in fact it isn't."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:15
+#: e4f660fac6ef4c97a2ad12442bfd1e2b
+msgid "The threading approach in ArduPilot depends on the board it is built for. Some boards (such as the APM1 and APM2) don't support threads, so make do with a simple timer and callbacks. Some boards (PX4 and Linux) support a rich Posix threading model with realtime priorities, and these are used extensively by ArduPilot."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:21
+#: dbf9d817ca3a4c3babb688ffbed8a9dd
+msgid "There are a number of key concepts related to threading that you need to understand in ArduPilot:"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:24
+#: ../../source/docs/learning-ardupilot-threading.rst:34
+#: 95d0ff8a88694ab1b024d5e1afa7df30
+#: 531b60a93e1348a6b501a7e6cd108594
+msgid "The timer callbacks"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:25
+#: ../../source/docs/learning-ardupilot-threading.rst:65
+#: d3df7161206e46e78caa29a17c3bad99
+#: 08493eb6e0684f0ea537026a30c60749
+msgid "HAL specific threads"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:26
+#: 81b4bd8135a54243b9a184c0d85c7e94
+msgid "driver specific threads"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:27
+#: f31f3c76aeb5484ab550081b9eabf2d7
+msgid "ardupilot drivers versus platform drivers"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:28
+#: 1faa874ae9bb4d2f988ff2e87a74777c
+msgid "platform specific threads and tasks"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:29
+#: 32178fdd520249938107cc61c011206e
+msgid "the AP_Scheduler system"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:30
+#: fee5a3b4443c4df8b192790ffe276934
+msgid "semaphores"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:31
+#: bcb5f5072eb74877917b242df3e72158
+msgid "lockless data structures"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:36
+#: 134b33c1a31a443781a9133e94e79821
+msgid "Every platform provides a 1kHz timer in the AP_HAL. Any code in ArduPilot can register a timer function which is then called at 1kHz. All registered timer functions are called sequentially. This very primitive mechanism is used as it is extremely portable, and yet very useful. You register a timer callback by calling the hal.scheduler->register_timer_process() like this:"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:47
+#: a8e9b36b4d474b8fa96816a33393f821
+msgid "that particular example is from the MS5611 barometer driver. The AP_HAL_MEMBERPROC() macro provides a way to encapsulate a C++ member function as a callback argument (bundling up the object context with the function pointer)."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:52
+#: 8c0bcac90f3441e79404582c2d5ab48d
+msgid "When a piece of code wants something to happen at less than 1kHz then it should maintain its own \"last_called\" variable and return immediately if not enough time has passed. You can use the hal.scheduler->millis() and hal.scheduler->micros() functions to get the time since boot in milliseconds and microseconds to support this."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:58
+#: 3f6eec34fdb14cc3b5d6dcb1f217273a
+msgid "You should now go and modify an existing example sketch (or create a new one) and add a timer callback. Make the timer increment a counter then print the value of the counter every second in the loop() function. Modify your function so that it increments the counter  every 25 milliseconds."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:67
+#: b9da0973b9c74c3c9af75452da68ffe4
+msgid "On platforms that support real threads the AP_HAL for that platform will create a number of threads to support basic operations. For example, on Pixhawk the following HAL specific threads are created:"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:71
+#: 229dbcca255b4eada1b4c4e179ddc26b
+msgid "The UART thread, for reading and writing UARTs (and USB)"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:72
+#: 827a5021903a4b5ead047ef6944568ac
+msgid "The timer thread, which supports the 1kHz timer functionality described above"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:74
+#: 72a3be5df4cc47f3be26e1965a8de2c7
+msgid "The IO thread, which supports writing to the microSD card, EEPROM and FRAM"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:77
+#: 8bd571c8b96a49d1a6a95a66657aa444
+msgid "Have a look in Scheduler.cpp inside each AP_HAL implementation to see what threads are created and what the realtime priority of each thread is."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:81
+#: 1a7d6e7c5e644207ad6d8e6265b76afe
+msgid "If you have a Pixhawk then you should also now setup a debug console cable and attach it to the nsh console (the serial5 port). Connect at 57600. When you have connected, try the \"ps\" command and you will get something like this:"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:101
+#: 87ce196f766545a78a8e54ae84d2b822
+msgid "In this example you can see the \"AHRS_Test\" thread, which is running the example sketch from libraries/AP_AHRS/examples/AHRS_Test. You can also see the timer thread (priority 181), the UART thread (priority 60) and the IO thread (priority 59)."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:106
+#: 36aaedb0676e485f9a9d35eef261a1d4
+msgid "Additionally you can see the px4io, fmuservo, uavcan, lpwork, hpwork and idle tasks. More about those later."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:109
+#: 19cad977e0644855bd70937f28a9b643
+msgid "Other AP_HAL ports have more or less threads depending on what is needed."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:112
+#: fa1b4fa0f3a8460a9b6aa15ed261b839
+msgid "One common use of threads is to provide drivers a way to schedule slow tasks without interrupting the main autopilot flight code. For example, the AP_Terrain library needs to be able to do file IO to the microSD card (to store and retrieve terrain data). The way it does this is it calls the function hal.scheduler->register_io_process() like this:"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:122
+#: a545322d75fc470b9b6528f89f0a20ce
+msgid "The sets up the AP_Terrain::io_timer function to be called regularly. That is called within the boards IO thread, meaning it is a low realtime priority and is suitable for storage IO tasks. It is important that slow IO tasks like this not be called on the timer thread as they would cause delays in the more important processing of high speed sensor data."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:129
+#: e7623843104b457f9e0c630b7d826a19
+msgid "Driver specific threads"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:131
+#: 28a36b955ba343079c6d09ad2367e97e
+msgid "It is also possible to create driver specific threads, to support asynchronous processing in a manner specific to one driver. Currently you can only create driver specific threads in a manner that is platform dependent, so this is only appropriate if your driver is intended to run only on one type of autopilot board. If you want it to run on multiple AP_HAL targets then you have two choices:"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:138
+#: c72dd6ea65f34cdbb5e25cc8b8f43686
+msgid "you can use the register_io_process() and register_timer_process() scheduler calls to use the existing timer or IO threads"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:141
+#: 6747779300674a27b77f5a6eb8a3f439
+msgid "you can add a new HAL interface that provides a generic way to create threads on multiple AP_HAL targets (please contribute patches back)"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:144
+#: 1b90001b4f3c48ff9f2d471db9bd1358
+msgid "An example of a driver specific thread is the ToneAlarm thread in the Linux port. See AP_HAL_Linux/ToneAlarmDriver.cpp"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:148
+#: a51ba325baeb42a2beaa6cba5e0dbae7
+msgid "ArduPilot drivers versus platform drivers"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:150
+#: 5e3fd65d6e754834aa33de3a0ee2b08e
+msgid "You may notice some driver duplication in ArduPilot. For example, we have a MPU6000 driver in libraries/AP_InertalSensor/AP_InertialSensor_MPU6000.cpp, and another MPU6000 driver in PX4Firmware/src/drivers/mpu6000."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:155
+#: 0b810aa5a5064a0eb2596e86ef7547d6
+msgid "The reason for this duplication is that the PX4 project already provides a set of well tested drivers for hardware that comes with Pixhawk boards, and we enjoy a good collaborative relationship with the PX4 team on developing and enhancing these drivers. So when we build ArduPilot for PX4 we take advantage of the PX4 drivers by writing small \"shim\" drivers which present the PX4 drivers with the standard ArduPilot library interface. If you look at libraries/AP_InertialSensor/AP_InertialSensor_PX4.cpp you will see a small shim driver that asks the PX4 what IMU drivers are available on this board and automatically makes all of them available as part of the ArduPilot AP_InertialSensor library."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:167
+#: 6bfbb4b737fc4a488c8a398612ea717f
+msgid "So if we have an MPU6000 on the board we use the AP_InertialSensor_MPU6000.cpp driver on non-Pixhawk/NuttX platforms, and the AP_InertialSensor_PX4.cpp driver on NuttX based platforms."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:171
+#: b91289d0a83949278550bf43b8291be2
+msgid "The same type of split can also happen for other AP_HAL ports. For example, we could use Linux kernel drivers for some sensors on Linux boards. For other sensors we use the generic AP_HAL I2C and SPI interfaces to use the ArduPilot \"in-tree\" drivers which work across a wide range of boards."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:178
+#: 2e6916f531ac49c0a2ee36b3563ea1b6
+msgid "Platform specific threads and tasks"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:180
+#: 6cbfead10ca748b4b7a5f4a293486ef9
+msgid "On some platforms there will be a number of base tasks and threads that will be created by the startup process. These are very platform specific so for the sake of this tutorial I will concentrate on the tasks used on PX4 based boards."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:185
+#: ff82eefd600c47c18cf7b5857c8284f1
+msgid "In the \"ps\" output above we saw a number of tasks and threads that were not started by the AP_HAL_PX4 Scheduler code. Specifically they are:"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:188
+#: b3de0678becf4402924601ebab6485bf
+msgid "idle task - called when there is nothing else to run"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:189
+#: be324077629e4c85829e309b3a40e1bc
+msgid "init - used to start up the system"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:190
+#: 3bcfb5fa44114ebca2f80a484e6450e1
+msgid "px4io - handle the communication with the PX4IO co-processor"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:191
+#: 3419fd47b46944b8a46d1989a4cc6d38
+msgid "hpwork - handle thread based PX4 drivers (mainly I2C drivers)"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:192
+#: 1555f2bf9a2146ddaba0687d60133215
+msgid "lpwork - handle thread based low priority work (eg. IO)"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:193
+#: 68d03a10bc7e4c6aa6db5807d4fc2835
+msgid "fmuservo - handle talking to the auxiliary PWM outputs on the FMU"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:194
+#: 7fb48fca7bbc43b3a59b8cd3eb8a5f95
+msgid "uavcan - handle the uavcan CANBUS protocol"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:196
+#: ed0678d5c9864329917721943b5d01d8
+msgid "The startup of all of these tasks is controlled by the PX4 specific `rc.APM script <https://github.com/ArduPilot/ardupilot/blob/master/mk/PX4/ROMFS/init.d/rc.APM>`__. That script is run when the PX4 boots, and is responsible for detecting what sort of PX4 board we are using then loading the right tasks and drivers for that board. It is a \"nsh\" script, which is similar to a bourne shell script (though nsh is much more primitive)."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:203
+#: 8d71faf07800442584427591aa15d755
+msgid "As an exercise, try editing the rc.APM script and adding some sleep and echo commands. Then upload a new firmware and connect to the debug console while the board is booting. Your echo commands should show up on the console."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:208
+#: 5b0f20db4f244e33acb518675b9ad93a
+msgid "Another very useful way of exploring the startup of the PX4 is to boot without a microSD card in the slot. The `rcS script <https://github.com/ArduPilot/ardupilot/blob/master/mk/PX4/ROMFS/init.d/rcS>`__, which runs just before rc.APM, detects if a microSD is inserted and gives you a bare nsh console on the USB port if it isn't. You can then manually run all the steps of rc.APM yourself on the USB console to learn how it works."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:215
+#: 87b0f9b6abfd41728f456c87d2463c08
+msgid "Try the following exercise after booting a Pixhawk without a microSD card and connecting to the USB console:"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:229
+#: 4d53fc10cf2046e2a36d30e2ddc6edb0
+msgid "Try playing with the other drivers. Have a look in /bin to see what is available. The source code for most of these commands is in `PX4Firmware/src/drivers <https://github.com/ArduPilot/PX4Firmware/tree/master/src/drivers>`__. Have a look through the mpu6000 driver to get an idea of what is involved."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:235
+#: bd2c0d8ff59f433ab632e234d3c412f4
+msgid "Given we are on the topic of threads and tasks, a brief description of threads in the PX4Firmware git tree is worth mentioning. If you look in the mpu6000 driver you will see a line like this:"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:243
+#: bbdf98a169e54767a0a7264d929f5a17
+msgid "that is the equivalent of the hal.scheduler->register_timer_process() function in the AP_HAL, but is PX4 specific and is also much more flexible. It says that it wants the HRT (high resolution timer) subsystem of the PX4 to call the MPU6000::measure_trampoline function every 1000 microseconds."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:249
+#: 5775d7b6090e4502b3882dbf0d67097d
+msgid "Using hrt_call_every() is the common method used for regular events in drivers where the operations are very fast, such as SPI device drivers. The operations are typically run with interrupts disabled, and should take only a few tens of microseconds at most."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:254
+#: 522b7be42824444fb648fb61b62b14d7
+msgid "If you compare this to the hmc5883 driver, you will instead see a line like this:"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:261
+#: e66f9a7ea7084ff380bb580e06857558
+msgid "that uses an alternative mechanism for regular events which is suitable for slower devices, such as I2C devices. What this does is add the cycle_trampoline function to a work queue within the hpwork thread that you saw above. Calls made within HPWORK workers should run with interrupts enabled and may take up to a few hundred microseconds. For tasks which will take longer than that the LPWORK work queue should be used, which runs them in the lower priority lpwork thread."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:270
+#: 73d5ea37bbda4b10a072211e5ba39e03
+msgid "The AP_Scheduler system"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:272
+#: d0f28255445e40708a3a84e362018f7d
+msgid "The next aspect of ArduPilot threading and tasks to understand is the AP_Scheduler system. The AP_Scheduler library is used to divide up time within the main vehicle thread, while providing some simple mechanisms to control how much time is used for each operation (called a 'task' in AP_Scheduler)."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:278
+#: 62dfcc5031ae4e4d8cd8359efea05c97
+msgid "The way it works is that the loop() function for each vehicle implementation contains some code that does this:"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:281
+#: ba31045dde2e4e15a25e4a650f7643fc
+msgid "wait for a new IMU sample to arrive"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:282
+#: 999728fff3f64983a661648301277028
+msgid "call a set of tasks between each IMU sample"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:284
+#: ce29737f49ae47738aed9f84b17f7d18
+msgid "It is a table driven scheduler, and each vehicle type has a AP_Scheduler::Task table. To learn how it works have a look at the `AP_Scheduler/examples/Scheduler_test.cpp <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scheduler/examples/Scheduler_test/Scheduler_test.cpp>`__ sketch."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:289
+#: b221257aa0d74904a3ade41cfed40b4a
+msgid "If you look inside that file you will see a small table with a set of 3 scheduling tasks. Associated with each task are two numbers. The table looks like this:"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:301
+#: 21c374b612464b24935b000917d26146
+msgid "The first number after each function name is the call frequency, in units controlled by the ins.init() call. For this example sketch the ins.init() uses RATE_50HZ, so each scheduling step is 20ms. That means the ins_update() call is made every 20ms, the one_hz_print() function is called every 50 times (ie. once a second) and the five_second_call() is called every 250 times (ie. once every 5 seconds)."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:309
+#: 9ff10ac086cd48c4be44b9e7af475ee6
+msgid "The second number is the maximum time that the function is expected to take. This is used to avoid making the call unless there is enough time left in this scheduling run to run the function. When scheduler.run() is called it is passed the amount of time (in microseconds) available for running tasks, and if the worst case time for this task would mean it wouldn't fit before that time runs out then it won't be called."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:316
+#: e974fd4387a743b698ef34f81ff96668
+msgid "Another point to look at closely is the ins.wait_for_sample() call. That is the \"metronome\" that drives the scheduling in ArduPilot. It blocks execution of the main vehicle thread until a new IMU sample is available. The time between IMU samples is controlled by the arguments to the ins.init() call."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:322
+#: aaa0f4efd3634815a68f24e8470c129e
+msgid "Note that tasks in AP_Scheduler tables must have the following attributes:"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:325
+#: b59e49d4dfee49afa0267cd04c99d387
+msgid "they should never block (except for the ins.update() call)"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:326
+#: cda14c953e0f4618a3ff76542b1c0571
+msgid "they should never call sleep functions when flying (an autopilot, like a real pilot, should never sleep while flying)"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:328
+#: edf193cbc98c4c55b1a6f3149503103f
+msgid "they should have predictable worst case timing"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:330
+#: 598ccff1af7a4645bf0837de9c964669
+msgid "You should now go and modify the Scheduler_test example and add in your own tasks to run. Try adding tasks that do the following:"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:333
+#: 591de8b3d0e641dca6915ec46a67c1be
+msgid "read the barometer"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:334
+#: 6e17e00e9d5b4614bbd74b7918c246b3
+msgid "read the compass"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:335
+#: 0460d2e85d24435b93ba66d760918b83
+msgid "read the GPS"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:336
+#: 23e66b51b29a44df9c37ff6e407ca783
+msgid "update the AHRS and print the roll/pitch"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:338
+#: 5a3db3a90bd34f7cb7a59d5ca8d92421
+msgid "Look at the example sketches for each library that you worked with earlier in this tutorial to understand how to use each sensor library."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:342
+#: 02c42e42e6164c46b407cd87739404a7
+msgid "Semaphores"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:344
+#: 4bc376cd1cbe4f528878d345195eed3d
+msgid "When you have multiple threads (or timer callbacks) you need to ensure that data structures shared by the two logical threads of execution are updated in a way that prevents corruption. There are 3 principle ways of doing this in ArduPilot - semaphores, lockless data structures and the PX4 ORB."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:350
+#: ef8eed6ff97e4a928e83a081f438fa2c
+msgid "AP_HAL Semaphores are just wrappers around whatever semaphore system is available on the specific platform, and provide a simple mechanism for mutual exclusion. For example, I2C drivers can ask for the I2C bus semaphore to ensure that only one I2C device is used at a time."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:355
+#: bafe547472e34d399ef2a47a606e39cb
+msgid "Go and have a look at the hmc5843 driver in libraries/AP_Compass/AP_Compass_HMC5843.cpp and look for the \\get_semaphore() call. Look at all the places it is used, and see if you can work out why it is needed."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:361
+#: 49dba6f5b5c84c60b2bd3123ec71ed5e
+msgid "Lockless Data Structures"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:363
+#: 2014a94ea1eb4a8482794db68a943705
+msgid "The ArduPilot code also contains examples of using lockless data structures to avoid the need for a semaphore. This can be a lot more efficient than semaphores."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:367
+#: ba32d30884b94402985995954c665379
+msgid "Two examples of lockless data structures in ArduPilot are:"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:369
+#: 88b6cf0566ac49c3953fea315b03df42
+msgid "the \\_shared_data structure in libraries/AP_InertialSensor/AP_InertialSensor_MPU9250.cpp"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:371
+#: 9d6b3b153be14e8b80be5faefb62cfba
+msgid "the ring buffers used in numerous places. A good example is libraries/DataFlash/DataFlash_File.cpp"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:374
+#: b8aaa996e0d54670a799beeff1bd1a74
+msgid "Go and have a look at these two examples, and prove to yourself that they are safe for concurrent access. For DataFlash_File look at the use of the \\_writebuf_head and \\_writebuf_tail variables."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:378
+#: 1393891eeeb0462fa53af4787c1e7a08
+msgid "It would be nice to create a generic ring buffer class which could be used instead of the separate ringbuffer implementations in several places in ArduPilot. If you want to contribute that then please do a pull request!"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:384
+#: cf79cc01c2bf4fa0ac17ce784221fc3a
+msgid "The PX4 ORB"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:386
+#: 7457a4968d084397a8554be629248559
+msgid "Another example of this type of mechanism is the PX4 ORB. The ORB (Object Request Broker) is a way of providing data from one part of the system to another (eg. device driver -> vehicle code) using a publish/subscribe model that is safe in a multi-threaded environment."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:391
+#: 5bba076862b946128d360425e9c6e935
+msgid "The ORB provides a nice mechanism for declaring structures which will be shared in this way (all defined in `PX4Firmware/src/modules/uORB/ <https://github.com/ArduPilot/PX4Firmware/tree/master/src/modules/uORB>`__). Code can then \"publish\" data to one of these topics, which is picked up by other pieces of code."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:397
+#: a86ceab266bc427db1f1282134143c5e
+msgid "An example is the publication of actuator values so the uavcan ESCs can be used on Pixhawk. Have a look at the \\_publish_actuators() function in AP_HAL_PX4/RCOutput.cpp. You will see that it advertises a \"actuator_direct\" topic, which contains the speed desired for each ESC. The uavcan code these watches for changes to this topic in `PX4Firmware/src/modules/uavcan/uavcan_main.cpp <https://github.com/ArduPilot/PX4Firmware/blob/master/src/modules/uavcan/uavcan_main.cpp>`__\\ and outputs the new values to the uavcan ESCs."
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:405
+#: 1822e3905d0f4d5389c0338323e4bb10
+msgid "Two other common mechanisms for communicating with PX4 drivers are:"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:407
+#: 803c9505e22c406fb24fe7ebcf043e45
+msgid "ioctl calls (see the examples in AP_HAL_PX4/RCOutput.cpp)"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:408
+#: 3404c45341544af2998d183c1126b8f5
+msgid "/dev/xxx read/write calls (see \\_timer_tick in AP_HAL_PX4/RCOutput.cpp)"
+msgstr ""
+
+#: ../../source/docs/learning-ardupilot-threading.rst:411
+#: 5237b16862764277a7b0702cb196b6e7
+msgid "Please talk to the ardupilot development team on the `ArduPilot Developers Discord <https://ardupilot.org/discord>`__ if you are not sure which mechanism to use for new code."
+msgstr ""

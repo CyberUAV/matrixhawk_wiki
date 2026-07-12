@@ -1,0 +1,82 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-raw-imu-logging.rst:5
+#: a314d4b0fcf64192a991c8665e05a220
+msgid "Raw IMU Logging for FFT Analysis"
+msgstr ""
+
+#: ../../source/docs/common-raw-imu-logging.rst:7
+#: 5feb45d974f54d88a31f72393040b95a
+msgid "Using the :ref:`IMU Batch Sampler<common-imu-batchsampling>` to gather data for spectral analysis of noise to setup notch filtering is the historical method and still valid but with firmware 4.5 and later, and if using an H7-based autopilot, a simpler and better method is to enable Raw IMU Logging combined with the `Filter Review tool <https://firmware.ardupilot.org/Tools/WebTools/FilterReview/>`__."
+msgstr ""
+
+#: ../../source/docs/common-raw-imu-logging.rst:9
+#: c55d28f09b764862abdfa219d8527ebd
+msgid "The downside to this method is that it produces very large logs and unless the data gathering is restricted to a single gyro, some slower autopilots (F4-based, for example), may not be able to keep up resulting in logging drop-outs. Also the data produced can only be analyzed by the `Filter Review tool <https://firmware.ardupilot.org/Tools/WebTools/FilterReview/>`__ on the `ArduPilot Firmware \"Web Tools\" page <https://firmware.ardupilot.org/Tools/WebTools/>`__."
+msgstr ""
+
+#: ../../source/docs/common-raw-imu-logging.rst:11
+#: 815f240dbd7c4efb9e579ec39bd122db
+msgid "Using this new method greatly simplifies the notch filtering setup.  The required data can be gathered in a single test flight and the filters can then be setup interactively with the `Filter Review tool <https://firmware.ardupilot.org/Tools/WebTools/FilterReview/>`__."
+msgstr ""
+
+#: ../../source/docs/common-raw-imu-logging.rst:14
+#: 044068dc094749819eb097541adfa909
+msgid "Filter Setup Process"
+msgstr ""
+
+#: ../../source/docs/common-raw-imu-logging.rst:16
+#: 5071338cb299463b97d5a59a258df53f
+msgid "Select the method that will be used for dynamically adjusting the notch(s) center frequency and do any required setup, ie if :ref:`ESC telemetry<common-esc-telemetry>` will be used make sure its setup, if Throttle based make sure your motor voltage compensation is setup (see ``Q_M_BATT_x`` params for QuadPlane or ``MOT_BAT_x`` params for Copter)."
+msgstr ""
+
+#: ../../source/docs/common-raw-imu-logging.rst:17
+#: d62c051ee8614ee3a8707a96bd994668
+msgid ":ref:`INS_RAW_LOG_OPT<INS_RAW_LOG_OPT>`: any bits set will enable raw IMU logging.  To prevent overloading the logging, especially on slower autopilot CPUs, set :ref:`INS_RAW_LOG_OPT<INS_RAW_LOG_OPT>` bit 0 and bit 3 (value = \"9\"). This will restrict logging to the primary gyro and log both pre and post filtering."
+msgstr ""
+
+#: ../../source/docs/common-raw-imu-logging.rst:18
+#: a33ecf4ada9c46149a9247949b090cf3
+msgid "Perform a regular flight (not just a gentle hover) of at least 30sec and :ref:`download the dataflash logs <common-downloading-and-analyzing-data-logs-in-mission-planner>`."
+msgstr ""
+
+#: ../../source/docs/common-raw-imu-logging.rst:19
+#: 10abc35cb22c40f698935b6577399574
+msgid "Using the `Filter Review tool <https://firmware.ardupilot.org/Tools/WebTools/FilterReview/>`__ load the log. Select a steady hover portion of the log and press \"Calculate\". Then you can enable one or both of the filters in the tool and experiment with the parameters(refer back to the :ref:`common-imu-notch-filtering` page for details of what each parameter means) to get the lowest noise in the estimated post-filter spectrum, especially in the lower frequencies of the control band (0-40Hz). Remember that each additional harmonic filter adds cpu computational load. Usually only two or three per filter will be sufficient."
+msgstr ""
+
+#: ../../source/docs/common-raw-imu-logging.rst:21
+#: 1a49f10355a1430184468ea2545dca09
+msgid "if the FilterReview tool complains that not enough data is in the log, this usually means that logging has not been able to keep up and has dropped some packets. Either reduce the FFT window size to 512 from 1024, or, preferably, try just clearing the pre and post logging option in :ref:`INS_RAW_LOG_OPT<INS_RAW_LOG_OPT>` and retry the test flight to log only the input noise and use the estimated post-filter trace to setup the filters."
+msgstr ""
+
+#: ../../source/docs/common-raw-imu-logging.rst:23
+#: a6457547c5924da2836b764c8e9cf032
+msgid "Save those parameters and load them into the autopilot."
+msgstr ""
+
+#: ../../source/docs/common-raw-imu-logging.rst:24
+#: ed8cb014999f4a55b95da7d0a53917f8
+msgid "Do another flight to confirm the filter setup. This this flight more normal flight maneuvers can be done."
+msgstr ""
+
+#: ../../source/docs/common-raw-imu-logging.rst:25
+#: 287a24b2db8c4ee5b28cc2c0c41c6dc3
+msgid "Once verified, clear the :ref:`INS_RAW_LOG_OPT<INS_RAW_LOG_OPT>` parameter to avoid large logs from being saved unnecessarily."
+msgstr ""

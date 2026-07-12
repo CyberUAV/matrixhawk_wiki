@@ -4,6 +4,8 @@
 Cameras and Gimbals
 ===================
 
+.. note:: This feature and gimbal drivers are NOT normally included on standard firmware for smaller flash (F4) boards. Use the `Custom Firmware Build Server <https://firmware.ardupilot.org/>`__ to create firmware that includes it.
+
 Copter, Plane and Rover support up to 3-axis gimbals, including advance
 features like automated aiming of the camera at a Region of Interest
 (ROI), and automatic triggering of a camera shutter.  Follow the links below
@@ -20,6 +22,7 @@ that have their own self-stabilization controllers and the simpler servo-driven
 gimbals in which ArduPilot controls the stabilisation. Some gimbals also integrate still or video cameras.
 
 -  :ref:`ADTi cameras and gimbals <common-adti-cameras-and-gimbals>`
+-  :ref:`AVT CM41/CM62 Gimbal/Cameras <common-avt-gimbal>`
 -  :ref:`Brushless PWM <common-brushless-pwm-gimbal>` - brushless gimbals that accept PWM or SBUS input for angle control
 -  :ref:`CADDX GM1, GM2, GM3 gimbals <common-caddx-gimbal>`
 -  :ref:`DJI RS2 and RS3-Pro gimbals <common-djirs2-gimbal>`
@@ -31,6 +34,7 @@ gimbals in which ArduPilot controls the stabilisation. Some gimbals also integra
 -  :ref:`Topotek Gimbal <common-topotek-gimbal>`
 -  :ref:`ViewPro gimbals <common-viewpro-gimbal>`
 -  :ref:`Xacti gimbals <common-xacti-gimbal>`
+-  :ref:`XFRobot gimbals <common-xfrobot-gimbal>`
 
 Gimbals may be attached to retractable mounts to prevent ground contact or to reduce air resistant in flight. Mount control is covered on the :ref:`common-mount-targeting` page.
 
@@ -101,6 +105,7 @@ more scenic photos. ArduPilot will stabilize the gimbal to whatever position you
     :hidden:
 
     ADTi Cameras and Gimbals <common-adti-cameras-and-gimbals>
+    AVT Gimbals <common-avt-gimbal>
     Brushless PWM <common-brushless-pwm-gimbal>
     CADDXFPV GM1, GM2, GM3 gimbals <common-caddx-gimbal>
     DJI RS2 and RS3-Pro gimbals <common-djirs2-gimbal>
@@ -111,6 +116,7 @@ more scenic photos. ArduPilot will stabilize the gimbal to whatever position you
     SToRM32 Gimbal Controller <common-storm32-gimbal>
     ViewPro gimbals <common-viewpro-gimbal>
     Xacti gimbals <common-xacti-gimbal>
+    XFRobot gimbals <common-xfrobot-gimbal>
     FLIR Vue Pro Thermal Camera <common-flir-vue-pro>
     Airpixel ENTIRE Geotagger <common-geotagging-airpixel-entire>
     Airpixel TAG-E Geotagger <common-geotagging-airpixel-tag-e>

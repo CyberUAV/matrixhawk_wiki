@@ -1,0 +1,77 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:30+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/traditional-helicopter-control-system.rst:5
+#: 48af9d4ade1d40b88bc1c4a015ee840e
+msgid "General ArduCopter Attitude Controller Description"
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-control-system.rst:7
+#: 197182a8c4f0450fba8b8cff62670a71
+msgid "Users should generally understand the flight control laws before tuning. At a high level, the ArduCopter control laws are designed as a model following architecture where the software converts the pilot or autopilot's input into a demanded attitude (Stabilized Modes) or a pilot demanded axial rate (Acro mode) and controls the aircraft to achieve that demanded value."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-control-system.rst:13
+#: 2ad37fba28bf43329e44c03c3c1cf81d
+msgid "It has two controllers (attitude and rate) that work together to ensure the actual aircraft is following the demanded pitch and roll rates and attitudes."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-control-system.rst:16
+#: 305a465d6cbc471e8ed6144e47b82bda
+msgid "The pilot’s commands are limited by the amount of acceleration that can be commanded through the :ref:`ATC_ACC_P_MAX<ATC_ACC_P_MAX>` for pitch and :ref:`ATC_ACC_R_MAX<ATC_ACC_R_MAX>` for roll."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-control-system.rst:19
+#: 2805a7c14d664f1383590eec6070a060
+msgid "The initial responsiveness (crispness/sluggishness) of the aircraft to the pilot input can be adjusted through the :ref:`ATC_INPUT_TC<ATC_INPUT_TC>` parameter. The pilot input and these parameters are used to determine the rate required to achieve the demanded response that is fed to the rate controller."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-control-system.rst:23
+#: 84a2484dcfba4b24baa6f5939d279e97
+msgid "The attitude controller is used to ensure the actual attitude of the aircraft matches the demanded attitude of the autopilot. It uses the :ref:`ATC_ANG_PIT_P<ATC_ANG_PIT_P>` in pitch and the :ref:`ATC_ANG_RLL_P<ATC_ANG_RLL_P>` in roll to determine a rate proportional to the difference between demanded and current attitude that is fed to the rate controller to drive the aircraft to the demanded attitude."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-control-system.rst:28
+#: 27a4ca11305d4e1d9ca1acc0176f7a18
+msgid "The rate controller receives the demanded rate resulting from the pilot input and/or the rate from the attitude controller and determines the swashplate commands required to achieve that rate. The rate controller uses a PID control algorithm with a feed forward path to control the aircraft and achieve the demanded rate."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-control-system.rst:34
+#: ad2f0d6b34574fc586bdffe9085f4d74
+msgid "The feed forward path uses the input rate and applies the :ref:`ATC_RAT_PIT_FF<ATC_RAT_PIT_FF__AC_AttitudeControl_Heli>` gain for pitch and :ref:`ATC_RAT_RLL_FF<ATC_RAT_RLL_FF__AC_AttitudeControl_Heli>` gain for roll to determine its portion of the swashplate command. The PID algorithm uses the error between the measured rate and input demanded rate to determine its portion of the swashplate command. These are summed and sent to the mixing unit where the servo positions are determined."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-control-system.rst:42
+#: 795823a37e2c4c619188421fd530a648
+msgid "So this tuning method uses the FF gain initially to ensure the requested rates match the actual rates.  However the rates can vary from the requested due to disturbances and inaccuracies. The P, I, and D gains (``ATC_RAT_x_P/I/D``) are then used to correct any disturbances that cause the actual rates to deviate from the requested rates."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-control-system.rst:46
+#: d8019feafe43428690dbdb384d8c53cb
+msgid "Error between demanded and measured rates is multiplied by the P term. The D term determines the rate of error change and adds a correction based on that, providing faster response to quickly occurring errors and providing dampening to control overshoots, like shock absorbers on a car."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-control-system.rst:48
+#: ffba528cbf5249b28e26f59dee89e00e
+msgid "Since there may be systemic offsets (like CG errors or mechanical trim imperfections) resulting in some long term errors to achieving the demanded rates, an integrator accumulates all errors over time, and provides an additional correction via the I gain. I gain is multiplied by the integrator and summed with the other outputs of the rate controller to form the input to the swashplate."
+msgstr ""
+
+#: ../../source/docs/traditional-helicopter-control-system.rst:53
+#: 2ba6cd56d2ab43e593d534cadc91ed8a
+msgid "The integrator maximum I path contribution is limited by the :ref:`ATC_RAT_RLL_IMAX<ATC_RAT_RLL_IMAX__AC_AttitudeControl_Heli>` in roll and :ref:`ATC_RAT_PIT_IMAX<ATC_RAT_PIT_IMAX__AC_AttitudeControl_Heli>` in pitch."
+msgstr ""

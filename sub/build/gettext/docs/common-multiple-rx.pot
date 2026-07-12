@@ -1,0 +1,112 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Sub package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Sub \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:43+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-multiple-rx.rst:5
+#: 73b166118bd14a64a6490d39b926acdc
+msgid "Multiple Radio Control Receivers"
+msgstr ""
+
+#: ../../source/docs/common-multiple-rx.rst:7
+#: b3211d2f35784b868eb0fae0231f5537
+msgid "It is possible to use multiple radio control receivers in ArduPilot for redundancy or hand-off between multiple transmitters."
+msgstr ""
+
+#: ../../source/docs/common-multiple-rx.rst:10
+#: 37bd7775957c40a09257fa17cdf676c8
+msgid "Configuration"
+msgstr ""
+
+#: ../../source/docs/common-multiple-rx.rst:12
+#: 071732487fe24e8b8ac1456f012681fb
+msgid "This configuration only is valid for autopilots that use an IOMCU co-processor. Check the product description to be sure that the autopilot includes either an STMF100 or STMF103 co-processor. Usually these outputs have servo/motor outputs labeled as MAIN (the co-processor) and AUX (from the main cpu)."
+msgstr ""
+
+#: ../../source/docs/common-multiple-rx.rst:14
+#: 90641ad95c464debbd957fcd51467cd0
+msgid "The additional receivers can be attached to any Serial Port's RX input as long as they use a serial protocol. These are: SBUS, FPort, DSM, DSM2, DSM-X, IBus, SUMD, and SRXL (and CRSF if the TX output of the UART is also used)."
+msgstr ""
+
+#: ../../source/docs/common-multiple-rx.rst:17
+#: babdc7f33cf347ddbdb014113da25ff0
+msgid "For whichever Serial Port the receiver is attached, the ``SERIALx_PROTOCOL`` should be set to 23. The baud rate is ignored and auto-detected, as well as the type of the receiver."
+msgstr ""
+
+#: ../../source/docs/common-multiple-rx.rst:19
+#: 20aaec6d7db840e9aeb113f192111a27
+msgid "SBUS and FPort must either be externally inverted or the SERIALx_OPTIONS be set for inversion (F and H processor types only are capable of this)."
+msgstr ""
+
+#: ../../source/docs/common-multiple-rx.rst:21
+#: 58b4928c845b4eb6a2ca7f67afb50b93
+msgid "The :ref:`RC_OPTIONS<RC_OPTIONS>` bit 10 must be set."
+msgstr ""
+
+#: ../../source/docs/common-multiple-rx.rst:26
+#: 03a9789877b6408b90abce491a3c86dd
+msgid "Failsafe and Changeover"
+msgstr ""
+
+#: ../../source/docs/common-multiple-rx.rst:28
+#: dae75b8613ab4f88bc7eec4b7db0461c
+msgid "The autopilot will always use the receiver attached to the IOMCU's RCin, if providing valid RC signals. If that receiver fails to provide valid RC signals, it will then switch to the other receiver if it is outputting valid RC signals. It will reverted to the first if it restarts outputting valid RC signals."
+msgstr ""
+
+#: ../../source/docs/common-multiple-rx.rst:30
+#: 908e8993b69f4ddd8f210c72bcac7f8f
+msgid "Note that the previously calibrated ``RCx_MAX`` , ``RCx_MIN``, ``RCx_REVERSED``, ``RCx_DZ`` and ``RCx_TRIM`` parameters for each channel will be used by the active receiver and could vary between receivers, especially if different types are mixed. It is recommended that all receivers be of the same manufacture and type."
+msgstr ""
+
+#: ../../source/docs/common-multiple-rx.rst:32
+#: f0e1aebc7fbc441b85d73c6d72bd7b65
+msgid "lowering throttle to below :ref:`FS_THR_VALUE<FS_THR_VALUE>`  on the first receiver will not force a changeover, but rather force a normal radio failsafe. Only loss of RC signals from the first receiver will cause a changeover."
+msgstr ""
+
+#: ../../source/docs/common-multiple-rx.rst:34
+#: 3a90a173708946d68e9aa12adb6dfbe2
+msgid "If all receivers become inactive (no pulses), then the normal radio failsafe handling will begin."
+msgstr ""
+
+#: ../../source/docs/common-multiple-rx.rst:36
+#: a40967884f2b4d10b0c668106d6b5cfd
+msgid "It is important that all receivers be configured for no pulses for radio loss failsafe for the changeovers to work properly."
+msgstr ""
+
+#: ../../source/docs/common-multiple-rx.rst:39
+#: bbfa795e0f78428dbda5d1f5c385842a
+msgid "Inversion"
+msgstr ""
+
+#: ../../source/docs/common-multiple-rx.rst:41
+#: a5a194cbd10d418aa70e2db4069397b5
+msgid "Some protocols, like SBus, require that the signal be inverted . Autopilots using F7/H7 cpus have the ability to invert the RX input via its ``SERIALx_OPTIONS`` bitmask. Otherwise an external inverter must be used between the receiver data output and the Serial Port's RX input."
+msgstr ""
+
+#: ../../source/docs/common-multiple-rx.rst:44
+#: 300d28370a874ec1978dfda91481c021
+msgid "Receivers Having Telemetry/Video Transmitters Integrated"
+msgstr ""
+
+#: ../../source/docs/common-multiple-rx.rst:46
+#: 5d716735fd074ce98a78893d6a770c51
+msgid "Some receivers have telemetry and/or video transmitters integrated. Having multiple units, operating on the same band, in the same vehicle, can cause reduction of range in both units, even if using spread-spectrum techniques. CRSF, FrSky, DragonLink, etc. are some examples of these types of receivers. Having the antennas as widely separated as possible will help, but not eliminate some range reduction. Best case is to have the units operating in different radio bands."
+msgstr ""
+
+#: ../../source/docs/common-multiple-rx.rst:48
+#: 9ff01028a73941fdbf0edd29b0f3ea72
+msgid "Be sure to do range checks on the ground using the transmitter's range check mode before flight testing."
+msgstr ""

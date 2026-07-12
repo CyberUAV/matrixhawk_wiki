@@ -4,6 +4,10 @@
 Using SITL with AirSim
 ======================
 
+.. warning::
+
+  This page is archived and is not being maintained anymore. AirSim integration with ArduPilot is still available and supported, but the instructions on this page might be outdated.
+
 .. youtube:: -WfTr1-OBGQ
    :width: 100%
 
@@ -22,7 +26,7 @@ A demo of AirSim running with ArduPilot SITL
 .. youtube:: ElFAqtpEfKo
     :width: 100%
 
-A list of topics for easier navigation in the page-
+A list of topics for easier navigation in the page:
 
 #. :ref:`Install AirSim <sitl-with-airsim-install>`
 
@@ -92,13 +96,13 @@ AirSim's page on Linux & MacOS Setup is `here <https://github.com/microsoft/AirS
 
   #. Clone the repository
 
-        ::
+        .. code-block:: bash
 
             git clone https://github.com/Microsoft/AirSim.git
 
   #. Build it
 
-        ::
+        .. code-block:: bash
 
             cd AirSim
             ./setup.sh
@@ -144,30 +148,30 @@ The file is in usual JSON format. On the first startup, AirSim would create ``se
 Launch Copter SITL
 ++++++++++++++++++
 
-For using ArduCopter, the settings are as follows-
+For using ArduCopter, the settings are as follows:
 
-::
+.. code-block:: json
 
-    {
-      "SettingsVersion": 1.2,
-      "LogMessagesVisible": true,
-      "SimMode": "Multirotor",
-      "OriginGeopoint": {
-        "Latitude": -35.363261,
-        "Longitude": 149.165230,
-        "Altitude": 583
-      },
-      "Vehicles": {
-        "Copter": {
-          "VehicleType": "ArduCopter",
-          "UseSerial": false,
-          "LocalHostIp": "127.0.0.1",
-          "UdpIp": "127.0.0.1",
-          "UdpPort": 9003,
-          "ControlPort": 9002
-        }
+  {
+    "SettingsVersion": 1.2,
+    "LogMessagesVisible": true,
+    "SimMode": "Multirotor",
+    "OriginGeopoint": {
+      "Latitude": -35.363261,
+      "Longitude": 149.165230,
+      "Altitude": 583
+    },
+    "Vehicles": {
+      "Copter": {
+        "VehicleType": "ArduCopter",
+        "UseSerial": false,
+        "LocalHostIp": "127.0.0.1",
+        "UdpIp": "127.0.0.1",
+        "UdpPort": 9003,
+        "ControlPort": 9002
       }
     }
+  }
 
 .. note::
 
@@ -175,7 +179,7 @@ For using ArduCopter, the settings are as follows-
 
 First launch AirSim, after that launch the ArduPilot SITL using
 
-::
+.. code-block:: bash
 
     sim_vehicle.py -v ArduCopter -f airsim-copter --console --map
 
@@ -193,9 +197,9 @@ You can restart by just pressing the Play button and then start the ArduPilot si
 Launch Rover SITL
 +++++++++++++++++
 
-``settings.json`` for using ArduRover-
+``settings.json`` for using ArduRover:
 
-::
+.. code-block:: json
 
     {
       "SettingsVersion": 1.2,
@@ -230,11 +234,11 @@ Launch Rover SITL
 
 First launch AirSim, after that launch the ArduPilot SITL using
 
-::
+.. code-block:: bash
 
     sim_vehicle.py -v Rover -f airsim-rover --console --map
 
-The other features, etc. described in this page have settings, commands and files specific for Copter, but can be used for Rover as well. Certain files such as scripts and ``settings.json`` will need to be modified for Rover, separate settings for Rover have not been added so as to keep the page managable and navigatable.
+The other features, etc. described in this page have settings, commands and files specific for Copter, but can be used for Rover as well. Certain files such as scripts and ``settings.json`` will need to be modified for Rover, separate settings for Rover have not been added so as to keep the page manageable and navigatable.
 
 You might need to tune the vehicle for proper usage, the param files for AirSim vehicles in `Tools/autotest/default_params <https://github.com/ArduPilot/ardupilot/tree/master/Tools/autotest/default_params>`__ can be modified directly, or you can create a new param file and pass its location to SITL using ``--add-param-file`` option in ``sim_vehicle.py``.
 
@@ -247,7 +251,7 @@ See `Lidar Settings <https://github.com/Microsoft/AirSim/blob/master/docs/lidar.
 
 Current `settings.json` file for launching ArduCopter with Lidar
 
-::
+.. code-block:: json
 
     {
       "SettingsVersion": 1.2,
@@ -297,7 +301,7 @@ Current `settings.json` file for launching ArduCopter with Lidar
 
 Launch Copter with Lidar using
 
-::
+.. code-block:: bash
 
     sim_vehicle.py -v ArduCopter -f airsim-copter --add-param-file=libraries/SITL/examples/Airsim/lidar.parm --console --map
 
@@ -315,7 +319,7 @@ Rangefinders in ArduPilot are called Distance Sensors in AirSim. See `AirSim's S
 
 Some example settings and parameters are shown below, to create a forward and downward-facing rangefinder. Note that only sensor settings are present, which can be easily inserted inplace of the ``Sensors`` element in the Lidar example above.
 
-::
+.. code-block:: json
 
     "Sensors": {
         "Imu": {
@@ -383,7 +387,7 @@ For simulating 2 copters, an example script has been added which will create 2 c
 
 ``settings.json`` for 2 copters
 
-::
+.. code-block:: json
 
     {
       "SettingsVersion": 1.2,
@@ -423,7 +427,7 @@ You can optionally specify the IP address of the computer with the GCS as the fi
 
 To attach MAVProxy -
 
-::
+.. code-block:: bash
 
     mavproxy.py --master=127.0.0.1:14550 --source-system 1 --console --map
 
@@ -450,14 +454,15 @@ Using ROS for multi-vehicle tasks is a common usecase and Mavros is used for wor
 
 First is the `multi_vehicle.sh script <https://github.com/ArduPilot/ardupilot/tree/master/libraries/SITL/examples/Airsim/multi_vehicle.sh>`__ which launches multiple ArduCopter binaries with different SYSIDs and ports for each vehicle. Usage is similar to the above script -
 
-::
+.. code-block:: bash
 
     libraries/SITL/examples/Airsim/multi_vehicle.sh <IP>
 
 
 The `multi_uav_ros_sitl.launch file <https://github.com/ArduPilot/ardupilot/tree/master/libraries/SITL/examples/Airsim/multi_uav_ros_sitl.launch>`__ demonstrates how to write a launch file controlling multiple vehicles with Mavros. It creates a different namespace for each drone and each drone has a separate SYSID and ports according to how the script sets the variables.
 Launching the file -
-::
+
+.. code-block:: bash
 
     roslaunch libraries/SITL/examples/Airsim/multi_uav_ros_sitl.launch
 
@@ -511,7 +516,7 @@ A ROS wrapper has also been added. See `airsim_ros_pkgs <https://github.com/micr
 Run on different machines
 +++++++++++++++++++++++++
 
-#. Change the following in the ``settings.json`` file-
+#. Change the following in the ``settings.json`` file:
 
     #. ``UdpIp`` to the IP address of the machine running ArduPilot (Can be found using ``ipconfig`` on Windows, ``ifconfig`` on Linux.)
     #. ``LocalHostIp`` to the IP address of the current machine which is running AirSim, specific to the network adapter being used such as Ethernet or WiFi. Can be set to ``0.0.0.0`` to receive messages on all networks
@@ -519,9 +524,9 @@ Run on different machines
 
 #. Use ``-A`` argument in ``sim_vehicle.py`` (passes the arguments following it to the SITL instance), followed by ``--sim-address`` to specify Airsim's IP address
 
-An example-
+An example:
 
-::
+.. code-block:: bash
 
     sim_vehicle.py -v ArduCopter -f airsim-copter --console --map -A --sim-address=127.0.0.1
 
@@ -541,9 +546,9 @@ Using different ports
 - ``--sim-port-in`` should be equal to sensor port i.e. port specified in ``UdpPort``
 - ``--sim-port-out`` should be equal to motor control port i.e. port specified in ``ControlPort``
 
-Similar to changing the IP address as mentioned above, use ``-A`` to pass the arguments to the SITL instance. Example-
+Similar to changing the IP address as mentioned above, use ``-A`` to pass the arguments to the SITL instance. Example:
 
-::
+.. code-block:: bash
 
     sim_vehicle.py -v ArduCopter -f airsim-copter --console --map -A "--sim-port-in=9003 --sim-port-out=9002"
 

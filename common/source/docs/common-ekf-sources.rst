@@ -41,12 +41,14 @@ Ground stations or companion computers may set the source by sending a `MAV_CMD_
 
 This feature is especially helpful when using :ref:`common-non-gps-to-gps`.
 
+Alternatively, setting :ref:`EK3_OPTIONS<EK3_OPTIONS>` bit 3 will force each SRC set to be used by each IMU lane, ie EKF3 primary IMU lane will use the _SRC1 set, _SRC2 for the next, etc.) at initialization. Note that using the ``RCx_OPTIONS`` auxiliary function "90" (EKF Source Set) will NOT override this behavior.
+
 Velocity Source Fusing
 ======================
 
 There is an option to fuse all sources of velocity into the EKF.  This will take velocity information from the XY and Z sources defined by :``EK3_SRCx_VELXY`` and ``EK3_SRCx_VELZ``, where 'x' is the source number (1-3).  To enable this option set the first bit in the :ref:`EK3_SRC_OPTIONS<EK3_SRC_OPTIONS>` bitmask.
 
-.. warning:: When using this option, users should ensure that the velocity measurements being provided to the EKF are both in the same reference frame/co-ordinate system.
+.. warning:: When using this option, users should ensure that the velocity measurements being provided to the EKF are both in the same reference frame/coordinate system.
 
 .. _extnav-optiflow-transitions:
 

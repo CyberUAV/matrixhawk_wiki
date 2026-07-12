@@ -1,0 +1,1260 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Rover package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rover \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:39+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-lua-scripts.rst:123
+#: 
+msgid "Accessing/Adding Parameters via Scripts"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:575
+#: 
+msgid "Bindings"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:7
+#: 08a28693385348eebd0c616ed9b797fb
+msgid "Lua Scripts"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:9
+#: 7713cfe98150485781ef43733adf4494
+msgid "ArduPilot has introduced support for `Lua <https://www.lua.org/>`_ scripting. Scripting provides a safe, \"sandboxed\" environment for new behaviors to be added to the autopilot without modifying the core flight code. Scripts are stored on the SD card and run in parallel with the flight code."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:13
+#: 2169b879d224442a9bf22d0b9086e229
+msgid "This page describes how to setup scripts on your autopilot, the scripting API, scripting applets,and some examples to help get started."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:15
+#: 846c9d6510ca4716b6e7b41e05018a02
+msgid "While scripting normally requires at least some LUA programming and editing, there are some `Applets <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/applets>`__  available which require no user editing and are ready to use. See links below."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:19
+#: b32c410f11934f43b04acd09805fa7c4
+msgid "Getting Started"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:21
+#: 7679909245a74e9488b255eec68c89fa
+msgid "Ensure your autopilot has at least 2 MB of flash and 80 kB of memory.  Higher end 3MB autopilots with redundant IMUs will certainly work well but verify the specifications needed for your :ref:`autopilot <common-autopilots>` since even less expensive units with 2MB of flash will work also. Scripting is not available in F4 based autopilots."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:22
+#: 6a96ffbf3f5a4eebb5e42182a2004c8e
+msgid "Autopilots must have an SD card to store the script unless the user builds his own firmware and embeds it directly in the firmware (see :ref:`common-oem-customizations`), or certain dataflash logging chips are included on the board. Check the autopilot's firmware limitation list to be sure int includes ``AP_SCRIPTING_ENABLED`` (see :ref:`common-limited_firmware` for directions on how to do this)"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:23
+#: de581174f04941ee9089174f41bfb118
+msgid "Set :ref:`SCR_ENABLE <SCR_ENABLE>` to 1 to enable scripting (refresh or reboot to see all ``SCR_`` parameters)."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:24
+#: 50cb6293d75746d7a555138e3173387d
+msgid "Upload scripts (files with extension .lua) to the autopilot's SD card's ``APM/scripts`` folder."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:26
+#: f3753f4683d0418cba1d6cd24c4fd2c8
+msgid "If this folder does not exist, you can create it by setting :ref:`SCR_ENABLE<SCR_ENABLE>` to 1 and rebooting. This folder can also be created manually on the SD card."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:27
+#: e5c8cb891de74cd98be8f40a21d0d7fd
+msgid "If using Mission Planner, this can be done using MAVFTP."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:28
+#: ddb619356216460395c0e54bc8a07d6f
+msgid "If using a simulator, the ``scripts`` folder is in the directory the simulator was started from. MAVFTP will work in this case as well."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:34
+#: 369084f2f73440a5b58c39fff76e197d
+msgid "**Sample/Example Scripts** can be found `here for stable Plane <https://github.com/ArduPilot/ardupilot/tree/ArduPlane-stable/libraries/AP_Scripting/examples>`__, `Copter <https://github.com/ArduPilot/ardupilot/tree/ArduCopter-stable/libraries/AP_Scripting/examples>`__ and `Rover <https://github.com/ArduPilot/ardupilot/tree/APMrover2-stable/libraries/AP_Scripting/examples>`__.  The latest development scripts can be found `here <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/examples>`__."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:36
+#: ab3cf475dfdc400bbbcb67e97249c4da
+msgid "**Applets** which are scripts that require no user editing before use, can be found `here <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/applets>`_ for the \"latest\" firmware branch, and may require code extensions included in that branch to function properly. Each of these has a .md file of the same name detailing its capabilities, use, and setup. For example, there is a script to allow a user to change a SmartAudio capable video transmitter's output power level from a transmitter channel and set its power-up value via parameter. See :ref:`common-scripting-applets`."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:38
+#: 93bc089e2c094bdd9be0fd06f20a17db
+msgid "**Drivers** Lua scripts can actually provide hardware drivers for new peripheral hardware that is not directly supported in the ArduPilot firmware, such a new EFIs or Gimbals. Examples of these can be found `here <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/drivers>`__ for the \"latest\" firmware branch, and may require code extensions included in that branch to function properly."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:40
+#: 2c453448d54b404a98bb2d61bcac7c09
+msgid "To download from the github locations, first click the script name, then select \"raw\" in upper right corner, then right mouse click to \"Save Page as\" a text file with the \".lua\" file extension"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:42
+#: 0ac323d9ccd14303a95efef1e829ab50
+msgid "Up to 8 RC channels can be assigned as scripting inputs/controls using the ``RCX_OPTION`` = \"300-307\" options to be used by scripts. In addition, six dedicated script parameters are available: :ref:`SCR_USER1<SCR_USER1>` thru :ref:`SCR_USER6<SCR_USER6>` and are accessed with the same method as any other parameter, but these are reserved for script use. Scripts can also generate their own parameters (see :ref:`common-scripting-parameters`)to be used within the scripts."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:43
+#: 0a40343249ef46618f9c97c5dddc49b3
+msgid "When the autopilot is powered on it will load and start all scripts. By default it will look in the ROMFS file system for scripts included in the firmware image by a manufacturer, and the APM/scripts directory on the SD Card (or if a SITL simulation, the base directory where the simulation was started.) This can be modified by used the :ref:`SCR_DIR_DISABLE<SCR_DIR_DISABLE>` parameter."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:44
+#: cfd841b281694458a98bf77a8ce8be27
+msgid "Messages and errors are sent to the ground station and, if using Mission Planner, can be viewed in the Data screen's \"Messages\" tab."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:45
+#: 5bd1131f028a4579bd9c68b31b44932d
+msgid ":ref:`SCR_HEAP_SIZE <SCR_HEAP_SIZE>` can be adjusted to increase or decrease the amount of memory available for scripts. The default , which varies from 43K to 204.8K depending on cpu being used, is sufficient at its smallest (43K) for small scripts, but many will require more (some applets now need 300K). The autopilot's free memory depends highly upon which features and peripherals are enabled. If this parameter is set too low, scripts may fail to run and give an out of memory pre-arm error. If set too high other autopilot features such as Terrain Following or even the EKF may fail to initialize. On autopilots with a STM32F4 microcontroller, Smart RTL (Rover, Copter) and Terrain Following (Plane, Copter) need to be nearly always disabled. These features are usually enabled by default, set :ref:`SRTL_POINTS <SRTL_POINTS>` = 0, :ref:`TERRAIN_ENABLE <TERRAIN_ENABLE>` = 0). See also :ref:`RAM Limitations<ram_limitations>` section."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:47
+#: 297b49ed9d4845ca90333423f380bdb4
+msgid "upon script load, if insufficient memory has been allocated, an error message will be sent to the GCS. Unfortunately, eliminating this by changing the :ref:`SCR_HEAP_SIZE <SCR_HEAP_SIZE>` does not guarantee that while running after aming, the LUA script could require even more and fail. In order to mitigate this, ArduPilot in versions 4.7 and later, will automatically try to increase the allocated memory and print a warning message to the GCS to allow the user to resize before the next arm, but if the additional memory is NOT available, the script will still fail."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:50
+#: 6524232bfd4d4b84a664671bb8c539c0
+msgid "Step by Step Setup and Use Examples"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:59
+#: 8bbf17854b1d4a86800baef06377b58e
+msgid "What Scripts Can Do"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:61
+#: 5da4036f832a4202a4bb4a96479118bf
+msgid "Multiple scripts can be run at once"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:62
+#: e3a5e658c7034d33be35892813d99bbd
+msgid "Monitor the vehicle state"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:63
+#: 9b6d0488de034ba8b4f7d9959ae8e160
+msgid "Start to manipulate vehicle state"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:64
+#: 28db26a8199e458bbcc6d724d6058aeb
+msgid "Execute MAVLink commands"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:65
+#: 6317a32c70874bb59e9455eb0f1401cd
+msgid "Communicate with DroneCAN peripherals (see `DroneCAN example <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/examples/DroneCAN_test.lua>`__)"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:67
+#: a97ce2cb02bc4887b957204093b55d34
+msgid "Lua is a garbage collected, imperative programming language. Scripts are run at a low priority on the system, which ensures that the core flight code will continue to execute even if a script is taking a long time to process. In order to allow multiple scripts to be run, each script is allocated a fixed time chunk (measured in VM instructions) in which it is expected to complete it’s processing. The script is allowed to specify a new callback function and time at which it should be called, which allows it to be run continuously. While this serves to bound the worst-case execution time safely, scripts are not guaranteed to be run on a reliable schedule."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:73
+#: 386b96c198594370bfdb88ee5cf2279e
+msgid "Each script is run in its own \"sandboxed\" environment. This allows each script to manipulate any global variables it wants to without causing other scripts problems, and allows the script to persist state between calls to its callback. A side effect of this however is that heavy memory usage in a script can cause other scripts to be short on memory."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:78
+#: ef1af1deb60f4b29b0911b076eddb2eb
+msgid "A Sample Script"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:80
+#: db038a9fdf854691ac5843e4d8e62dd4
+msgid "The following script is used to change a servo output based on the aircraft's distance from the home position."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:101
+#: 69c43c883c734ee7a06bb5de7dc9746e
+msgid "This script begins by defining the update function, which will be called periodically. This function fetches the vehicles current position and home position, and stores them within the local variables current_pos and home. Both of these variables now either hold a Location userdata, or are nil, if the information was not currently available from the vehicle. The variables are then checked to ensure that they were actually provided, before calculating the distance between the locations. After a check to ensure that the distance is never measured as more then 1 kilometer away, the distance is used to set the servo position. The final line in the function is used to reschedule this function to be run again in 1000 milliseconds from the current time. The last line of the script is also used to schedule the function to be run for the first time in 1000 milliseconds from the time at which it's loaded."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:110
+#: 7f857b1c207147f6aba9b051c785971b
+msgid "Script Crashes and Errors"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:111
+#: 24c028158554401999fd9fb1c2858148
+msgid "If scripts run out of memory (or panic for any reason) all currently running scripts are terminated. If an individual script has an error, it will terminate. If either occurs before arming, a pre-arm failure will be generated. A scripting restart command or reboot would be needed to restart the script or scripting as a whole."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:113
+#: a0be75dbf64e4fb9b17ae1ac3af1219b
+msgid "In order to prevent arming if a script is missing (ie. SD card ejected or file corrupted) or if a script that is supposed to run once before arming and then terminate, but does not, then either, or both, of two checksum pre-arm checks can be enabled:"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:115
+#: 700fb318b1164df5b601afd095396fb4
+msgid ":ref:`SCR_LD_CHECKSUM<SCR_LD_CHECKSUM>` which checks that the checksum of all loaded scripts matches this value"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:116
+#: 9697b73e051f4f86a95028017c432e54
+msgid ":ref:`SCR_RUN_CHECKSUM<SCR_RUN_CHECKSUM>` which checks that the checksum of all running scripts matches this value"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:118
+#: fef0a83b5f1b4e4ba10f0084106b1e37
+msgid "These can be set automatically when the scripts have been loaded and the desired ones running before arming, by setting the :ref:`SCR_DEBUG_OPTS<SCR_DEBUG_OPTS>` bit 5 which will compute and set these parameter's values, and then reset bit 5 automatically."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:121
+#: 0217c781fda1422a9ed5ab6e43a6611d
+msgid "Scripting and Parameters"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:128
+#: f3c38b279bf6401b85f54572c2f12241
+msgid "In addition to creating accessing ArduPilot parameter values, and creating new parameters dedicated to a script's operation, up to 16 :ref:`Auxiliary switches <common-auxiliary-functions>` state can be read from a script. And auxiliary switch function \"316\" can be used to stop or restart scripting from the RC transmitter or GCS."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:131
+#: 161ff5727a2449c3aca67c1486678bd0
+msgid "MAVLink commands"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:133
+#: cc6257a8f6b44809b6f57c00e04dc13b
+msgid "The full set of MAVLink commands can be executed from within a LUA script. An `example is shown here <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/examples/command_int.lua>`_."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:136
+#: 39c956c6e2e843ec91060aced747f751
+msgid "API Documentation"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:138
+#: 4c55c4c7be5a4b76bcad0d7e1249f905
+msgid "The API documentation described here is not a complete list, but rather some examples.  For a full list of the methods currently available, the LUA auto-generated document file is a complete list. `It can be found here <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/docs/docs.lua>`__  and lists all the available bindings and their parameters."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:141
+#: d13a1b5dbfa94b07b5459c7c961c66c1
+msgid "If you use VScode for your editor, by installing `this <https://marketplace.visualstudio.com/items?itemName=sumneko.lua>`__ lua extension (version 2.4.1 only as of now), you can get this information integrated as suggestions and autocomplete in the editor."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:143
+#: ab70ec3851294fd4921eb717714d316f
+msgid "If you are still getting \"Undefined global\" errors and no completions, you may need to set path in your local copy of ``ardupilot`` repository in the `settings <https://code.visualstudio.com/docs/getstarted/settings>`_, for example:"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:144
+#: 748d7c86c8c54e57b10cc9494d2e98bc
+msgid "``\"Lua.workspace.library\": [ \"~/repos/ardupilot/libraries/AP_Scripting/docs\" ]``"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:146
+#: 9f6d610a8d354470b50f0a6f06bcdc9e
+msgid "For complete information on how a binding works the source can be found in the `binding generator descriptions <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/generator/description/bindings.desc>`_ ."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:148
+#: 220d15c2347247efa05277b77ad51c7d
+msgid "See :ref:`Binding Description Method Syntax<common-lua-binding-syntax>` for more information on how to decode the methods shown there. ArduPilot uses Lua version 5.3.5."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:151
+#: 81431151c465426686a27abd7824080a
+msgid "Location"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:153
+#: 217ed4740d654955afc2938562e949d8
+msgid "Location is a userdata object that holds locations expressed as latitude, longitude, altitude. The altitude can be in several different frames, relative to home, absolute altitude above mean sea level, or relative to terrain. To create a new Location userdata you can call Location() to allocate an empty location object, or call a method that returns one to you."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:155
+#: a132f6cd4f9341dba70e804bbfdd9e1d
+msgid "A Location userdata object supports the following calls:"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:157
+#: acce27df39824b31aece3169771d2715
+msgid ":code:`lat( [new_lat] )` - If called with no arguments, returns the current latitude in degrees * 1e7 as an integer. If called with one argument, it will assign the value to the latitude."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:159
+#: 989f6ab2b7624735bddacd361147a154
+msgid ":code:`lng( [new_lng] )` - If called with no arguments, returns the current longitude in degrees * 1e7 as an integer. If called with one argument, it will assign the value to the longitude."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:161
+#: 20e6fe320a7647b4932b3a4712ec03cb
+msgid ":code:`alt( [new_alt] )` - If called with no arguments, returns the current altitude in cm as an integer. If called with one argument, it will assign the value to the altitude."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:163
+#: e13112a88dff41c693896fb3beb86a4d
+msgid ":code:`relative_alt( [is_relative] )` - If called with no arguments returns true if the location is planned as relative to home. If called with a boolean value this will set the relative altitude."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:165
+#: e0d214f4007a47b68375a00ba7df310b
+msgid ":code:`terrain_alt( [is_terrain] )` - If called with no arguments returns true if the location is planned as relative to terrain. If called with a boolean value this will flag if the altitude should be relative to terrain."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:167
+#: aa38032c1d0a4a109ef9266e9e5363c2
+msgid ":code:`origin_alt( [is_origin] )` - If called with no arguments returns true if the location is planned in absolute altitude relative to mean sea level. If called with a boolean value this will set the altitude to be relative to mean sea level."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:169
+#: d17d73daa2bc4220afa339af66ab57b0
+msgid ":code:`loiter_xtrack( [should_xtrack] )` - If the location is used for a loiter location this flags if the aircraft should track from the center point, or from the exit location of the loiter."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:171
+#: 387e8d6ce8484468ae63157cab1e0ce3
+msgid ":code:`get_distance( other_Location )` - Given a Location this calculates the horizontal distance between the two locations in meters."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:173
+#: 84e8dbcfd3ce4e7e8cefbeb773459ece
+msgid ":code:`offset( offset_north ,  offset_east )` - Translates this Location by the specified number of meters."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:175
+#: 86185c15c9db4101843d57cba7089685
+msgid ":code:`get_vector_from_origin_NEU()` - Returns nil or Vector3f that contains the offset from the EKF origin to this location. This will return nil if the EKF origin wasn’t available at the time this was called."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:177
+#: f76eb76349cc4afda78165d2bc279645
+msgid ":code:`get_bearing( other_Location )` - Given a Location this calculates the relative bearing to the location in radians"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:179
+#: 42289e226be04f26b990e381a8248d89
+msgid ":code:`get_distance_NED( other_Location )` - Returns nil or Vector3f that contains the 3D vector in meters to the other Location."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:181
+#: 47726a8ec968446fb93e495a49e84f58
+msgid ":code:`get_distance_NE( other_Location )` - Returns nil or Vector2f that contains the 2D vector in meters to the other Location."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:184
+#: b3ac92997b5e400f9eae18626611eb6d
+msgid "Vector2f"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:186
+#: 2c6eeaa944e5493aa5a2baea1f5f06bb
+msgid "Vector2f is a userdata object that holds a 2D vector. The components are stored as floating point numbers. To create a new Vector2f you can call Vector2f() to allocate a new one, or call a method that returns one to you."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:188
+#: 3b1f87a4d23141fab43c09d01e898a61
+msgid "A Vector2f object supports the following calls:"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:190
+#: ../../source/docs/common-lua-scripts.rst:217
+#: 358e5cbc6de84f31a49f80b0788f39ef
+#: 05b08a1a130a48bd817d98ab448d8e4e
+msgid ":code:`x( [new_x] )` - If called with no arguments, return the currently set X component as a floating point number. If called with one argument it will assign the value to the X component."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:192
+#: ../../source/docs/common-lua-scripts.rst:219
+#: 5b3e90ea03c74d0e8fc15f1da3e5500c
+#: a8e55baf2daa4ed39cbab3a4102b8415
+msgid ":code:`y( [new_y] )` - If called with no arguments, return the currently set Y component as a floating point number. If called with one argument it will assign the value to the Y component."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:194
+#: ../../source/docs/common-lua-scripts.rst:223
+#: 2cb253f228a04f50b14b2d7b42df10c0
+#: 27ec8df28161494285c9e5445cf7ac6e
+msgid ":code:`length()` - Returns the length of the vector as a floating point number."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:196
+#: ../../source/docs/common-lua-scripts.rst:225
+#: 5df8d0a5c4cb4182b7d0459fd5622a08
+#: fc3a053baf38407f929ddccf3b297ea9
+msgid ":code:`normalize()` - Normalizes the vector to be a unit vector."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:198
+#: ../../source/docs/common-lua-scripts.rst:227
+#: 87a079a7498b4b408e26ce3fb360ee62
+#: 2850a85ff0ca40af85118e4ea9ea0011
+msgid ":code:`is_nan()` - Returns true if the vector contains any NaN members."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:200
+#: ../../source/docs/common-lua-scripts.rst:229
+#: b79ec15ec4c64feaa45dc1f634c8398c
+#: f6839bbd1f964a9cb2e135618c371a7a
+msgid ":code:`is_inf()` - Returns true if the vector contains any infinity members."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:202
+#: ../../source/docs/common-lua-scripts.rst:231
+#: 9fd6554a982547a6b5edfc61050f5d39
+#: 32ccb584b94b4f998b9130f279045baf
+msgid ":code:`is_zero()` - Returns true if all the vector fields are 0."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:204
+#: 4f229dba13fd406182426cd77164ad5c
+msgid "The following operators are supported on a Vector2f:"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:206
+#: ../../source/docs/common-lua-scripts.rst:235
+#: 7e7da5600d7540ce9fe574ca4841193f
+#: c39a9d21e24747048f60e2c11034c561
+msgid ":code:`+` - Adds the two vectors by components."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:208
+#: ../../source/docs/common-lua-scripts.rst:237
+#: 72a285ffe25e4dedbabf6be9d985e5ea
+#: f5782c23e9864c049330deb0e8684cb4
+msgid ":code:`-` - Subtracts the two vectors by components."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:211
+#: db2ff75fe4fc4f8084b5dfcedeae49ae
+msgid "Vector3f"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:213
+#: ae589afc955b474db2f27dbc89c9b14e
+msgid "Vector3f is a userdata object that holds a 3D vector. The components are stored as floating point numbers. To create a new Vector3f you can call Vector3f() to allocate a new one, or call a method that returns one to you."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:215
+#: 0b1c66fb40ca46c2beae055a942eb61d
+msgid "A Vector3f object supports the following calls:"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:221
+#: f0467f25f8ac40c0bacb6b4f1ac6c701
+msgid ":code:`z( [new_z] )` - If called with no arguments, return the currently set Z component as a floating point number. If called with one argument it will assign the value to the Z component."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:233
+#: 3f3e29f2016744eab678e728517b848e
+msgid "The following operators are supported on a Vector3f:"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:240
+#: 3bb22a09901e4c3f8192d3bb68211637
+msgid "AHRS (ahrs:)"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:242
+#: fc0d57e4dc884518854398efa8b92ad4
+msgid "The ahrs library represents the Attitude Heading Reference System computed by the autopilot. It provides estimates for the vehicles attitude, and position."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:244
+#: 36fe0095369f4a00b950a02c47399e91
+msgid ":code:`get_roll()` - Returns the current vehicle roll angle in radians."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:246
+#: 41993becc3d848c8bfdc485c987c5e9f
+msgid ":code:`get_pitch()` - Returns the current vehicle pitch angle in radians."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:248
+#: 4e44d52ea39b4885a26481894061ad82
+msgid ":code:`get_yaw()` - Returns the current vehicle yaw angle in radians."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:250
+#: eacde2df8d994b5abf361498671acb6c
+msgid ":code:`get_position()` - Returns nil or Location userdata that contains the vehicles current position. Note: This will only return a Location if the system considers the current estimate to be reasonable."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:252
+#: 3bbf835f1bf145b4847733ce5aa5fbe6
+msgid ":code:`get_home()` - Returns a Location that contains the vehicles current home waypoint."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:254
+#: ad5763f99c3f4f0ea41e630fc2db468e
+msgid ":code:`get_gyro()` - Returns a Vector3f containing the current smoothed and filtered gyro rates (in radians/second)"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:256
+#: 79ad5335014e4df18b92336bbfc4375d
+msgid ":code:`get_hagl()` - Returns nil, or the latest altitude estimate above ground level in meters"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:258
+#: 7dc10d8054584e399e6e0a43954b3750
+msgid ":code:`wind_estimate()` - Returns a Vector3f containing the current wind estimate for the vehicle."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:260
+#: f735618dd9a74a9696f2b6c02c5850b0
+msgid ":code:`groundspeed_vector()` - Returns a Vector2f containing the vehicles velocity in meters/second in north and east components."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:262
+#: 5aa5ec70ff834d39a0837a4289073b5c
+msgid ":code:`get_velocity_NED()` - Returns nil, or a Vector3f containing the current NED vehicle velocity in meters/second in north, east, and down components."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:264
+#: 02577882dc7941a98e324358fccee645
+msgid ":code:`get_velocity_NE()` - Returns nil, or a Vector2f containing the current NE vehicle velocity in meters/second in north and east components."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:266
+#: ee93c9d17f284e4aa8f2f7a86d71e5f1
+msgid ":code:`home_is_set()` - Returns a true if home position has been set."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:268
+#: d461665ec9394717b5c38224f3858582
+msgid ":code:`prearm_healthy()` - Returns a true if current pre-arm checks are passing."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:270
+#: 4b0948eb33f542db9bb02e12bc3aac6e
+msgid ":code:`airspeed_estimate()` - Returns current airspeed estimate in meters/second or nil."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:274
+#: 5c57740d46f1469bb592cbf8a3a4e75f
+msgid "Arming (arming:)"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:276
+#: 91e8607296734f8da1f7294225ae9198
+msgid "The Arming library provides access to arming status and commands."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:278
+#: 12af74230f70436cbbc51823ffbe0fb7
+msgid ":code:`disarm()` - Disarms the vehicle in all cases. Returns false only if already disarmed."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:280
+#: 1f1d734d06524d32a4a7174637e2ca33
+msgid ":code:`is_armed()` -Returns a true if vehicle is currently armed."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:282
+#: 1bed32fd01e84e2c839ca49579e05634
+msgid ":code:`arm()` - Attempts to arm the vehicle. Returns true if successful."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:286
+#: 591fab2ebc194f939dd9f044862d302b
+msgid "Battery (battery:)"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:288
+#: 38f3d6d4d0b14df4827d9bbb7e52fd59
+msgid "The battery library provides access to information about the currently connected batteries on the vehicle."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:290
+#: 149aafc43f9e40589079837216350bf0
+msgid ":code:`num_instances()` - Returns the number of battery instances currently available."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:292
+#: 446206a0b3914d15998605b6743efdae
+msgid ":code:`healthy( instance )` - Returns true if the requested battery instance is healthy. Healthy is considered to be ArduPilot is currently able to monitor the battery."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:294
+#: 4bb39cf50a73455d9df55e2d973e7221
+msgid ":code:`voltage( instance )` - Returns the voltage of the selected battery instance."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:296
+#: 6965b572306c4220a159355f37cc0f06
+msgid ":code:`voltage_resting( instance )` - Returns the estimated battery voltage if it was not under load."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:298
+#: 6822bb6f3d1c402b92432a4b505afa6d
+msgid ":code:`current_amps( instance )` - Returns the current (in Amps) that is currently being consumed by the battery, or nil if current monitoring is not available."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:300
+#: c99800e5fe8241d29ffbd7a2e0233db5
+msgid ":code:`consumed_mah( instance )` - Returns the capacity (in milliamp hours) used from the battery, or nil if current monitoring is not available."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:302
+#: 66a6b277a8e5430ebafbc68cd0f30170
+msgid ":code:`consumed_wh( instance )` - Returns the used watt hours from the battery, or nil if energy monitoring is not available."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:304
+#: 01b4962656534352a1d434a21a2c6498
+msgid ":code:`capacity_remaining_pct( instance )` - Returns the remaining percentage of battery (from 0 to 100)"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:306
+#: b59faf6d3434499bbc2f18164e9b1533
+msgid ":code:`pack_capacity_mah( instance )` - Returns the full pack capacity (in milliamp hours) from the battery."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:308
+#: 18bcfacf8cc4402fb8e09a4a151d024b
+msgid ":code:`has_failsafed()` - Returns true if any of the batteries being monitored have triggered a failsafe."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:310
+#: 4a18991bead0415b818676ef17ab9f34
+msgid ":code:`overpower_detected( instance )` - Returns true if too much power is being drawn from the battery being monitored."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:312
+#: 3f25fef77bb245ba935cc9b769915460
+msgid ":code:`get_temperature( instance )` - Returns the temperature of the battery in degrees Celsius if the battery supports temperature monitoring."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:314
+#: e9446216faeb45bc9b5e3311b2ee9f11
+msgid ":code:`get_cycle_count( instance )` - Returns cycle count of the battery or nil if not available."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:318
+#: 2b57cf4030fb49979cfee490897ec972
+msgid "GPS (gps:)"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:320
+#: 56965d5f70c745869ec8b52eca23e21d
+msgid "The GPS library provides access to information about the GPS's on the vehicle."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:322
+#: 523e97e63b014808b4336cb634e113c3
+msgid ":code:`num_sensors()` - Returns the number of connected GPS devices. If GPS blending is turned on that will show up as the third sensor, and be reported here."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:324
+#: 0f7db24286ae4123a2ea1fa57b8ffbfc
+msgid ":code:`primary_sensor()` - Returns which GPS is currently being used as the primary GPS device."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:326
+#: 1e965a12cea741e5a058aa52531c3261
+msgid ":code:`status(instance)` - Returns the GPS fix status. Compare this to one of the GPS fix types (GPS.NO_GPS, GPS.GPS_OK_FIX_2D, GPS.GPS_OK_FIX_3D GPS.GPS_OK_FIX_3D_DGPS GPS.GPS_OK_FIX_3D_RTK_FLOAT GPS.GPS_OK_FIX_3D_RTK_FIXED"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:328
+#: e9bd42cf7e794bb7bef2d7c44b067ead
+msgid ":code:`location( instance )` - Returns a Location userdata for the last GPS position. You must check the status to know if the location is still current, if it is NO_GPS, or NO_FIX then it will be returning old data."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:330
+#: 1c36ee9bc0364505a0ec86617ea09379
+msgid ":code:`speed_accuracy( instance )` - Returns nil, or the speed accuracy of the GPS in meters per second, if the information is available for the GPS instance."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:332
+#: 28e53f1ded3944fc872dd3562a5a2049
+msgid ":code:`horizontal_accuracy( instance )` - Returns nil, or the horizontal accuracy of the GPS in meters, if the information is available for the GPS instance."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:334
+#: f27dd2256cde472291dc2edca6751a54
+msgid ":code:`vertical_accuracy( instance )` - Returns nil, or the vertical accuracy of the GPS in meters, if the information is available for the GPS instance."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:336
+#: 2ff0910cffde4347b3e23f5731ff85bb
+msgid ":code:`velocity( instance )` - Returns a Vector3f that contains the velocity as observed by the GPS. You must check the status to know if the velocity is still current."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:338
+#: c78fb5030e80477aa00e5bd3fc7815c2
+msgid ":code:`ground_speed( instance )` - Returns the ground speed of the vehicle in meters per second. You must check the status to know if the ground speed is still current."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:340
+#: 1f26ce5030e84d518e8ffa35fb56709d
+msgid ":code:`ground_course( instance )` - Returns the ground course of the vehicle in degrees. You must check the status to know if the ground course is still current."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:342
+#: f91928298e5044e9b311dd3af94316a5
+msgid ":code:`num_sats( instance )` - Returns the number of satellites that the GPS is currently tracking."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:344
+#: aca1c0a1df564fae9b9d21cffe8dbbf0
+msgid ":code:`time_week( instance )` - Returns the GPS week number."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:346
+#: 8c449f02788b4fb69e05a73f35f062a5
+msgid ":code:`time_week_ms( instance )` - Returns the number of milliseconds into the current week."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:348
+#: 0cea01cf80834536811a75932f20a018
+msgid ":code:`get_hdop( instance )` - Returns the horizontal dilution of precision of the GPS instance."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:350
+#: bb4734fba0be46f5b786ce5331b3c840
+msgid ":code:`get_vdop( instance )` - Returns the vertical dilution of precision of the GPS instance."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:352
+#: e0501f9242b5409c833c1264e54b2838
+msgid ":code:`last_fix_time_ms( instance )` - Returns the time of the last fix in system milliseconds."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:354
+#: 17f4fd364eac4b8093e2fc8e0c211505
+msgid ":code:`have_vertical_velocity( instance )` - Returns true if the GPS instance can report the vertical velocity."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:356
+#: 1e3c3ab604c0458da53d18f24f1a18a8
+msgid ":code:`get_antenna_offset( instance )` - Returns a Vector3f that contains the offsets of the GPS in meters in the body frame."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:358
+#: aab9622cfa844add876ab6d96aaeb124
+msgid ":code:`first_unconfigured_gps()` - Returns nil or the instance number of the first GPS that has not been fully configured. If all GPS's have been configured this returns 255 if all the GPS's have been configured."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:362
+#: a08462fa5b2e4de6ab94f1a2ee1b9d80
+msgid "GCS (gcs:)"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:364
+#: cf3a6a6db3964e8c96186ecafcf257e0
+msgid ":code:`send_text( severity ,  text )` - Will send the text  string with message severity level . Severity level is :"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:367
+#: 142794431eb24bc692228a441576c43c
+msgid "Severity Level"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:367
+#: c23e5be5c6fa41a3aa36c90601ee60f9
+msgid "Type"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:369
+#: b623a34442f840d88e65a71f2446c024
+msgid "0"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:369
+#: 9da34cd6b16b4b00aad14f23b5b6be04
+msgid "Emergency"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:371
+#: b93815794ad3477691d31539d86c8270
+msgid "1"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:371
+#: f089439488e24b1b9845434ec13b020e
+msgid "Alert"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:373
+#: e9975ef55bba4ac68f888267453d236a
+msgid "2"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:373
+#: 1c7654e7e90c4f44979336e1bc6c369e
+msgid "Critical"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:375
+#: 6ac3a760fc334804abdc0396ba12993f
+msgid "3"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:375
+#: 31d480ae17fc48dbabfc744c28caa6ef
+msgid "Error"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:377
+#: 2a1b1715b669485b8309c9dc8a94df60
+msgid "4"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:377
+#: 7b7ecdd79ac846f8bf6b1b903a7ba149
+msgid "Warning"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:379
+#: fa65736b1e7a48b28f53535f868282ec
+msgid "5"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:379
+#: af89f570e8424c2b9ab05650d6e1d632
+msgid "Notice"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:381
+#: 5b4d926b551d46888862e75a673e451b
+msgid "6"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:381
+#: 339d2450cf91448c90d18dfb955644c7
+msgid "Info"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:383
+#: 76d27ca9aa9c407899819a5c2e028ae8
+msgid "7"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:383
+#: 7d35b38bf8544b2c8cff941762fa24fc
+msgid "Debug"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:387
+#: 4970d4dbe76e42e9be36d3042a8f8740
+msgid ":code:`set_message_interval( serial_channel ,  message_type ,  rate )` - Sets the message_type's update rate on SERIAL(serial_channel). For example, gcs:set_message_interval(0, 30, 500000) sets SERIAL0 rate for ATTITUDE message stream (30) to 2.0 Hz (500,000 microseconds)"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:390
+#: 6b6a793f82574757a18689bff813e0f0
+msgid "Serial LED (serialLED:)"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:392
+#: 60a8244ef8094fdf8079907d49335cbc
+msgid "This library allows the control of WS8212B RGB LED strings via an output reserved for scripting and  selected by SERVOx_FUNCTION = 94 thru 109 (Script Out 1 thru 16)"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:394
+#: 9bcb2ef4baf44be7888db51ec82d29c8
+msgid ":code:`set_num_LEDs( output_number ,  number_of_LEDs )` - Sets the number_of_LEDs in the string on a servo output. output_number is servo output number 1-16 that the string is attached to with a string having <number_of_LEDs>."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:396
+#: f48f0ca6f872498c94399bec5b8c5def
+msgid ":code:`set_RGB( output_number ,  LED_number ,  r , g , b )` - Set the data for LED_number (1-32) on the string attached servo output_number (1-16) output to the r,g,b values (0-255)"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:398
+#: 54a7c6af3a3646bcbab22186ec3c97d0
+msgid ":code:`send()` - Sends the data to the LED strings"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:402
+#: e70fe9579e2f4ea18ed43112101b8c5b
+msgid "Notify (notify:)"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:404
+#: a3858097b7fa453090a270d6ccdabc08
+msgid ":code:`play_tune( tune )` - Plays a MML tune through the buzzer on the vehicle. The tune is provided as a string."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:406
+#: 60f1f6e1b621402a96a006851c57d387
+msgid "An online `tune tester can be found here <https://firmware.ardupilot.org/Tools/ToneTester/>`__"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:410
+#: 75e2f84f8a1a4f048bde7dcc53b8f891
+msgid "Vehicle (vehicle:)"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:412
+#: d81a8ed9015145588621db4e261b9b1c
+msgid ":code:`set_mode(mode_number)` - Attempts to change vehicle (in this example Plane) mode to mode_number. Returns true if successful, false if mode change is not successful."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:414
+#: e33ec3b7a5da4e28b445ce46913ca7d8
+msgid ":code:`get_mode()` - Returns current vehicle mode by mode_number."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:416
+#: ba2457fcf229468ebe53f7e8dbaad495
+msgid "Mode numbers for each vehicle type can be `found here <https://mavlink.io/en/messages/ardupilotmega.html#PLANE_MODE>`__"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:418
+#: 9b31eb3a23aa4d1591f52db654bd963d
+msgid ":code:`get_likely_flying()` - Returns true if the autopilot thinks it is flying. Not guaranteed to be accurate."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:420
+#: 88a29da12c7a4cb786ee3029ff69bb2f
+msgid ":code:`get_flying_time_ms()` - Returns time in milliseconds since the autopilot thinks it started flying, or zero if not currently flying."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:422
+#: 1e3cbdf3a0004ab595da3b44fab21c0f
+msgid ":code:`start_takeoff(altitude)` - Begins auto takeoff to given altitude above home in meters. Returns false if not available."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:424
+#: 3fb877af864b4d7cbba185e5e15bae81
+msgid ":code:`set_target_location(Location)` - Sets target location using a Location object. Returns false if not successful."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:426
+#: 62e867b8adc84949a9a76ab089899f3c
+msgid ":code:`get_target_location()` - Returns Location object of the current target location. Returns false if not available."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:428
+#: d411c5b132b44672980b6fe5dd216f91
+msgid ":code:`set_target_velocity_NED()` - Sets the target velocity using a Vector3f object. Returns false if not available."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:432
+#: 2ed8a2c87f75469eb15fe5901c0173d9
+msgid "Terrain (terrain:)"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:435
+#: a1a87e5a3d8e4a17a35d524db1a1683e
+msgid "The terrain library provides access to checking heights against a terrain database."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:437
+#: e004c658a0d847199834c5a72e00b078
+msgid ":code:`enabled()` - Returns true if terrain is enabled."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:439
+#: 32af2a6075ce466a8914ef22e6f4fb7d
+msgid ":code:`status()` - Returns the current status of the rangefinder. Compare this to one of the terrain statuses (terrain.TerrainStatusDisabled, terrain.TerrainStatusUnhealthy, terrain.TerrainStatusOK)."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:441
+#: 531f9d1881a944e3bd9acfe5be6dcb11
+msgid ":code:`height_amsl( Location )` - Returns the height (in meters) above mean sea level at the provided Location userdata, or returns nil if that is not available."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:443
+#: fb4ae6a093ac45d7973597d01fbd9869
+msgid ":code:`height_terrain_difference_home( difference, extrapolate)` -  find the difference between home terrain height and the terrain"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:444
+#: faa17257fe2a4ab7bb27615be004672f
+msgid "height at the current location in meters. Returns false if not available. If extrapolate is true, will return based on last valid terrain data."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:446
+#: 86f1fcedfcf248afa1a336668d6c3243
+msgid ":code:`height_above_terrain()` - Returns the height (in meters) that the vehicle is currently above the terrain, or returns nil if that is not available."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:450
+#: 87565bd7ffdd416a8f6e7d99aae17647
+msgid "Relay (relay:)"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:452
+#: 69535d79dcc8497d8939f6c64bf1eef7
+msgid "The relay library provides access to controlling relay outputs."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:454
+#: 4aa9f21dfec64f1690d8a4ed071cea1b
+msgid ":code:`on(relay_num)` - Turns the requested relay on."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:456
+#: 9a5968aa7fa14e38b4e529758bf1ec99
+msgid ":code:`off(relay_num)` - Turns the requested relay off."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:458
+#: f0e0de8f53d04199a168b94db9826b00
+msgid ":code:`enabled(relay_num)` - Returns true if the requested relay is enabled."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:460
+#: 57a2cc6b7e55482aa61eb07ce65b95d0
+msgid ":code:`toggle(relay_num)` - Toggles the requested relay on or off."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:464
+#: c6b7aa47da34404a975e2e2350f7af3a
+msgid "Servo Channels (SRV_Channels:)"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:466
+#: c873db5794cf49cdad32e4ce3161f5b1
+msgid ":code:`find_channel(output_function)` - Returns first servo output number -1 of an output assigned output_function (See ``SERVOx_FUNCTION`` parameters ). False if none is assigned."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:468
+#: a8a1e7b965d744f682c648888ed216ed
+msgid ":code:`get_output_pwm(output_function)` - Returns first servo output PWM value an output assigned output_function (See ``SERVOx_FUNCTION`` parameters ). False if none is assigned."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:470
+#: 61168316daf8433e80171de4fdf6f756
+msgid ":code:`set_output_pwm_chan_timeout(channel, pwm, timeout)` - Sets servo channel to specified PWM for a time in ms. This overrides any commands from the autopilot until the timeout expires."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:473
+#: e31d7ee877ea427b851cb8037dbc2fce
+msgid "RC Channels (rc:)"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:475
+#: 0adf491e16f649ac9e980622a9099bee
+msgid ":code:`get_pwm()` - Returns the RC input PWM value given a channel number. Note that channel here is indexed from 1. Returns false if channel is not available."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:479
+#: cbbd12ff38cf458385faf4e1171c8839
+msgid "Serial (serial:)"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:481
+#: 4c89a940c20f447283efdac36f98e414
+msgid "The serial library provides access to ArduPilot's serial port infrastructure and associated devices and drivers. The script can communicate with a device attached to the autopilot using the ``find_serial(instance)`` function. The script can also itself simulate being a device attached to the autopilot using the ``find_simulated_device(protocol, instance)`` function and ``SCR_SDEV*`` parameters."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:483
+#: bc649764496f4163b0f0a33f8ef99900
+msgid "``find_serial(instance)`` - Returns a serial access object that allows a script to interface with a device over a port set to protocol 28 (Scripting) (e.g. ``SERIALx_PROTOCOL``, though CAN/NET/etc ports work as well). Instance 0 is the first such port, instance 1 the second, and so on. If the requested instance is not found, returns ``nil``."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:485
+#: 760275f64c784069b9c86c6ad8967caf
+msgid "``find_simulated_device(protocol, instance)`` - Returns a serial access object that allows a script to simulate a device attached via a specific protocol. The device protocol is configured by the parameter ``SCR_SDEVx_PROTO``. Instance 0 is the first such protocol, instance 1 the second, and so on. If the requested instance is not found, or the parameter ``SCR_SDEV_EN`` is disabled, returns ``nil``."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:487
+#: 619e6d701a624ff9baef66d3746579f9
+msgid "The objects returned by the above functions support the following methods:"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:489
+#: c3dc397e01ba4b29ad8b4c1e477905a5
+msgid "``port:begin(baud_rate)`` - Start communication at the given baud rate. Must be called to initialize scripting protocol ports (those from ``find_serial``). No effect for device simulation ports (those from ``find_simulated_device``)."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:491
+#: 6d78c383a8104d9c991c4ff3f7d04682
+msgid "``port:write(value)`` - Write a single byte. Returns 1 if successful, or 0 if failed (i.e. buffer space full)."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:493
+#: ca415405f4f7436995cbe5ccdeba3f8f
+msgid "``port:writestring(data)`` - Write a string. The number of bytes actually written, i.e. the length of the written prefix of the string, is returned. It may be 0 up to the length of the string."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:495
+#: 1cc790342545495f8b82445fbce2d99f
+msgid "``port:read()`` - Read a single byte. Returns the byte if successful, or -1 if failed (i.e. none available or some other error)."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:497
+#: 6be477d7b64a45bbafa4faeb2c6a0f16
+msgid "``port:readstring(count)`` - Read up to ``count`` bytes and return the bytes read as a string. No bytes may be read, in which case a 0-length string is returned. If there is an error, ``nil`` is returned."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:499
+#: ea9c9171c7044fda8adcaa90ed69d81e
+msgid "``port:available()`` - Returns the number of bytes available to read. A read of the given number of bytes may fail on certain errors or if there is another reader (e.g. mavlink passthrough), though these are extremely unlikely occurrences."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:501
+#: 7e9abb5cf1d44b75a0ae0ecbdae759de
+msgid "``port:set_flow_control(fcs)`` - Set flow control setting for scripting protocol ports (those from ``find_serial``). No effect for device simulation ports (those from ``find_simulated_device``). ``fcs`` can be 0 to disable, 1 to enable, or 2 for automatic mode."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:503
+#: a2ee621cd1914607a54c4c069ae2d2da
+msgid "``port:configure_parity(mode)`` - Configure the UART parity mode for scripting protocol ports (those from ``find_serial``). No effect for device simulation ports (those from ``find_simulated_device``). A value of 0 disables parity (default), 1 enables odd parity, and 2 enables even parity. An internal UART restart may occur when this setting is applied."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:505
+#: 40e669ad13394d0ab638428864124514
+msgid "``port:set_stop_bits(count)`` - Set the UART stop bit configuration for scripting protocol ports. No effect for device simulation ports. A value of 1 selects one stop bit (default), and a value of 2 selects two stop bits. Invalid values are ignored."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:508
+#: 59452d35ed8341ba86e7b7fe0e369245
+msgid "Barometer (baro:)"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:510
+#: 3cbf84ac11c3458ca7ab4441ed57b3ca
+msgid ":code:`get_pressure()` - Returns pressure in Pascal."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:512
+#: 6aaa47a3150c4d3590b2459314fd4406
+msgid ":code:`get_temperature()` - Returns temperature in degrees C."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:514
+#: 63461280e2844466bb39002a68703e5e
+msgid ":code:`get_external_temperature()` - Returns external temperature in degrees C."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:518
+#: 937a096fc109425289547480c35bf7ba
+msgid "ESC Telemetry (esc_telem:)"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:520
+#: 814a7a274c55454bb168e286a3c3f65e
+msgid ":code:`get_usage_seconds(channel)` - Returns an individual ESC's usage time in seconds, or false if not available."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:524
+#: ce543b3f22974ca4a9945b74f75b7653
+msgid "Parameters (param:)"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:526
+#: 4183ba66179d43a79d83e6601a457957
+msgid ":code:`get(parameter_name)` - Returns parameter value if available, or nil if not found."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:528
+#: f18731a5e96547f5b4bab815a395cd99
+msgid ":code:`set(parameter_name)` - Sets a parameter by name if available. Returns true if the parameter is found."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:530
+#: 53274258238245978b23d1525562d5cf
+msgid ":code:`set_and_save(parameter_name)` Sets and saves a parameter by name if available. Returns true if the parameter is found."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:534
+#: d795c1fb7ac14b098df3a1a2afcd157a
+msgid "RPM (RPM:)"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:536
+#: 2ee3c3226f1a4bc4b646aa9a55fbdee0
+msgid ":code:`get_rpm(instance)` - Returns RPM of given instance, or nil if not available."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:540
+#: a09e91f4610c4f5b8e3e876d17d76742
+msgid "Button (button:)"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:542
+#: 6aee8f66104443628b51c4372a6ea278
+msgid ":code:`get_button_state(button_number)` - Returns button state if available. Buttons are 1 indexed."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:545
+#: 8f72a3ff4e5347acb55f47ddd687c724
+msgid "Servo Output"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:547
+#: 1ef61b72fa524357a513286a60883189
+msgid "This method stands alone and is called directly as shown below."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:549
+#: 6f34a0aa4672474286bc61abcaafdc80
+msgid ":code:`servo.set_output (function_number, PWM)` -Sets servo outputs of type function_number to a PWM value (typically between 1000 and 2000)"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:553
+#: 0eb4ed5f3c4b4c5fb10f262da64a5927
+msgid "Examples"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:555
+#: 063fc10cb74d42068c73e9da17726287
+msgid "See the `code examples folder  <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Scripting/examples>`__"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:558
+#: 55e5f7cb2d55493c9b55d3a497a1b876
+msgid "How to Add New Bindings"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:560
+#: 01721c1682fb49979acc6ceb46ec6a99
+msgid "To give Lua scripts access to more features of ArduPilot the API can be extended by creating new bindings. The process is as follows:"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:562
+#: 685bd7f645a5445180da73c4bfdf5d15
+msgid "Find the method or function you would like to expose to Lua. For example if you wanted to expose an additional feature of AHRS you would first find the method within `libraries/AP_AHRS/AP_AHRS.h <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_AHRS/AP_AHRS.h>`__. This can be an already existing method (function) or a method (function) newly added to the code."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:563
+#: 36267ad192d84fa58d334c8223ea6926
+msgid "Edit the `libraries/AP_Scripting/generator/description/bindings.desc <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/generator/description/bindings.desc>`__ and add a new line in the appropriate section for the method, or add a new section if a new class shall be added by following the examples of the other sections."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:564
+#: 4828ec15762b4fb39a6535ec1fe8fcd4
+msgid "Add the method or function to `libraries/AP_Scripting/docs/docs.lua <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Scripting/docs/docs.lua>`__."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:565
+#: 4ed36ffe0a3f47da8c233f9f6e833871
+msgid "Clean the distribution (./waf distclean) and restart compilation from there as usual."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:568
+#: 0be8436e795d4a158071e874ca773ee6
+msgid "Include Lua scripts in firmware directly"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:570
+#: b1c2aaa61f2b43bfaf8a6550632a4dc3
+msgid "Lua scripts may be directly embedded in firmware binaries, rather than being placed on an external SD card. This is useful for manufacturer's to provide the scripts for included peripherals or when the autopilot does not support an SD card. Instructions to do so are on `this link <https://ardupilot.org/dev/docs/common-oem-customizations.html#>`__."
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:574
+#: cf3cb3a31efd4983b06ed05ebe4f0439
+msgid "Further Information"
+msgstr ""
+
+#: ../../source/docs/common-lua-scripts.rst:581
+#: 59f4d85f04d7483e9d4370ad48c3576c
+msgid "For more background on technical decisions made before this point you can reference the presentation from the 2019 ArduPilot Unconference."
+msgstr ""

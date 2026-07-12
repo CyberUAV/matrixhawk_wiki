@@ -1,0 +1,442 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/copter-adding-custom-controller.rst:5
+#: c2eb64176d3d47d290a426f76115f42c
+msgid "Adding Custom Attitude Controller to Copter"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:7
+#: aca66e90644643ccbc3747c3f139ba6b
+msgid "Custom controller library allows you to implement and easily run your controller inside ArduPilot in a systematic way. Original-primary-mains means existing controller and custom-secondary means new controller. This library aimed to not interfere with other parts of the main controller or vehicle level code. The controller output is sent to the control allocation library, known as the mixer, the same way the main controller does. The custom controller library has the following features:"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:11
+#: 77afa6b4af244a628eb2da2e8c111a04
+msgid "Features"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:13
+#: 60671c5eda9f4f20b5f89c135ac9dee2
+msgid "In-flight switching between main and custom controller with RC switch, option 109."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:14
+#: 3473e3a2894d4192ac947f717a959099
+msgid "Bitmask to choose which axis to use the custom controller output"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:15
+#: 4b6ded90555848b98239822a6a34317c
+msgid "Filter, integrator reset mechanism when switching between controller - Bumpless transfer when switching from custom to the main controller"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:17
+#: f06bcf5d166047a694f7cc0223bb3c86
+msgid "Ground and in-flight spool state separation to avoid build-up during arming and take-off with the custom controller"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:18
+#: c3d5b788b6f54b6a9fe387f4799cd1d3
+msgid "Frontend-backend separation that allows adding a new controller with very little overhead"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:19
+#: aaf723c20f724b6380463ee50a7bf971
+msgid "Flag to compile out custom controller-related code on hardware, --enable-custom-controller"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:20
+#: c96d95ba467448b19ef290bd8ab44ef1
+msgid "Proper parameter table implementation that allows adding new custom controller parameter table without corruption"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:21
+#: f9405c7889fb4c6d876fcd5178352df3
+msgid "Single parameter to switch between different custom controllers, reboot required"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:22
+#: 60e2c1cd67194ce69f4cbc694c0b8dd2
+msgid "Multiple checks to avoid accidentally running miss-configured, or unconfigured, custom controller with RC switch"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:23
+#: e4639abd390c4079ab35a019e09d2f76
+msgid "Custom controller parameters start with ``CC_`` in the GCS."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:26
+#: 6c81d9edfcd24cc095356343c048d2c7
+msgid "Parameters"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:27
+#: c346dd6a928042f0a7b6346e1e6c0eaf
+msgid "The frontend library has the following parameters"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:29
+#: d5d994b6753e4b7a89d84893bf4726a8
+msgid ":ref:`CC_TYPE<CC_TYPE>`: choose which custom controller backend to use, reboot required. - Setting it to 0 will turn this feature off, GCS will not display parameters related to the custom controller"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:31
+#: 5a85fc1ec430447b83a3ba4ab4a9f94d
+msgid ":ref:`CC_AXIS_MASK<CC_AXIS_MASK>`: choose which axis to use custom controller output - This is a bitmask type parameter. Set 7 to use all output"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:34
+#: 5aaf83cb57b6414f8d455a6b5f236c6f
+msgid "The custom controller requires the user to set up the build environment (:ref:`building-the-code`) and cloned the ArduPilot GitHub repo locally (:ref:`where-to-get-the-code`). The example controller is for experimental purposes only and it has been tested only lightly. The user is advised to use caution while testing it on a real vehicle."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:37
+#: d1178771bb514188b762d48827854304
+msgid "Interaction With Main Controller"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:38
+#: d00902642f364009847fb7316c7be728
+msgid "The custom controller update function is called after the main rate controller is run and before the motor output library is called. This placement allows overriding motor library mixer input, namely ``_roll_in``, ``_pitch_in``, and ``_yaw_in`` values, without causing functional change inside the motor library. This is the same way the main controller sends its output to the control allocation library, known as a mixer. This reduces latency to the minimum level."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:40
+#: c30076a3a5144833968ea8534817db34
+msgid "The custom controller library uses the same target attitude as the main controller. Most of the code inside the ``AC_AttitudeControl`` library is related to input shapings such as how to interpret pilot commands depending on the flight mode or high-level position controller output. For example, in STABILIZE mode pilot RC commands are scaled based on maximum lean angle and yaw rate parameters, these values are passed to ``input_euler_angle_roll_pitch_euler_rate_yaw`` function. The pilot command is fed into a first-order input shaping algorithm to smooth out any jitter due to the RC link and to generate an acceleration-limited attitude target. Later, attitude controller ``attitude_controller_run_quat`` is called, an attitude error is calculated based on acceleration limited ``_attitude_target`` value, and target rate is generated. Even if acceleration limiting is turned off by setting ``ATC_RATE_FF_ENAB`` to 0, the target attitude is still presented with an ``_attitude_target`` variable."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:42
+#: fec7ac89cd6c49a3a0692a3bc3e88054
+msgid "Every input shaping function inside ``AC_AttitudeControl`` calls ``attitude_controller_run_quat`` at the end to run the attitude controller, except when flying in ACRO mode with the acro option set to rate only. Even in this case ``_attitude_target`` is updated properly and the pilot command can be accessed via the ``rate_bf_targets`` function."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:44
+#: 07a8174f9fb34d2b81fbd22ea424be6e
+msgid "By default, the input shaping algorithm is turned on. This produces kinematically consistent attitude target and rate feed-forward values. Take a look at the custom PID backend to see how rate feed-forward is added to the attitude controller output. It is advised to use the rate feed-forward value if ATC_RATE_FF_ENAB is enabled, otherwise the pilot might feel significant lag between RC commands and vehicle responses."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:46
+#: f99518b5db8d446ab6d0c6cc8c9be674
+msgid "After running the custom controller, mixer input is sent to the motor library via ``set_roll``, ``set_pitch``, ``set_yaw`` functions."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:50
+#: b37b8d2bebfc443d8c6632e2474578ce
+msgid "Bumpless Transfer"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:52
+#: 1608d17a33dd42519ab622fb68e71b6e
+msgid "When switching from the custom controller to the main controller it is important to reset the main controller target, error, d-term filters, and set each axis integrator properly. Otherwise, a sudden jump in the controller error signal or motor output will be observed, which could result in a jerky motion. To allow a smooth transition between controllers, the main controller reset function is called when switching out of the custom controller which reset all three axes of the main controller. The reset is performed inside ``reset_main_atti_controller`` function."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:54
+#: 96d6549ab91a45b19eb2b9122f4a0938
+msgid "The attitude target and rate target are also made equal to the current attitude and gyro rate to make the error signal grow from zero in the ``relax_attitude_controllers`` function. To avoid impulse input to the controller, the target resetting is not performed when the feedforward is disabled by setting :ref:`ATC_RATE_FF_ENAB<ATC_RATE_FF_ENAB>` parameter to 0."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:72
+#: a40040cb7fb242e1a0a06ec838720cc8
+msgid "Backend Type"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:74
+#: 4b0551879fbd415487e990617d123344
+msgid "Currently, there 2 custom controller backends available. These are"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:76
+#: 90cce7b208f04e68a989028346e586be
+msgid "Empty backend set :ref:`CC_TYPE<CC_TYPE>` = 1"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:77
+#: 89b04bb998964ddcadc4a654e90c14d6
+msgid "PID backend set :ref:`CC_TYPE<CC_TYPE>` = 2"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:81
+#: 65ea238a4b2d4607a357d9090b903044
+msgid "Empty Controller - :ref:`CC_TYPE<CC_TYPE>` = 1"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:83
+#: 535f0d6ea99f435b88513eb8b610aa69
+msgid "The empty controller does not do any calculations. It is created to make it easier to copy and implement your new controller. The main controller is not reset when switching from an empty controller."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:88
+#: 9c8268f703774cb287c9e242b96825a7
+msgid "PID Controller - :ref:`CC_TYPE<CC_TYPE>` = 2"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:90
+#: 78b2d6db30a54c528ca7e2a33f561017
+msgid "The PID controller backend has the same controller architecture as the main controller. It doesn't have any safeguarding mechanism such as acceleration limiting or rate limiting. The default gains are scaled 0.9 times to differentiate the custom controller response from the main one. Since this controller does not have acceleration limiting, specifically a square root controller, it would be safer to give a gentle command while flying with it. Although it has the same architecture as the main one, a proper reset functionality is not implemented intentionally to make it easier to detect the effect of improper resetting."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:93
+#: e6c00cb465ca4d0282d1ed07dc96b13c
+msgid "How To Use It"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:95
+#: ffb022ef7dea4ad5afcb699ba38d2cea
+msgid "The custom controller is enabled by default in SITL. You can test it using the PID backend."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:97
+#: 5638d61a85d84ca884fd5dde23ed013d
+msgid "**Step #1:**  Compile and run the default SITL model. In the GCS, choose the custom controller type, assign an axis mask and set which RC switch to activate the custom controller. Reboot autopilot. For example in MAVProxy, using RC channel 6 as the enable/disable switch for the custom controller:"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:106
+#: 2b00fc3f366e4311943e767bafea8a44
+msgid "**Step #2:** Run the following command to display backend parameters. These would be under ``CC2_`` for the PID backend."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:112
+#: 723a7e443ee84a0e8cceed09099b1ab5
+msgid "**Step #3:** Arm and take off. While hovering, switch RC6 to high. In MAVProxy, you can do this with"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:118
+#: 138f036cc7304e798e0d47fdfb478f8f
+msgid "**Step #4:** You should be prompted with ``Custom controller is ON`` message on GCS to indicate that the custom controller is running."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:120
+#: ac9183e507ba4aaa8a3f11ed5b716729
+msgid "**Step #5:** Set RC6 to low to switch back to the main controller. You should be prompted with ``Custom controller is OFF`` message on GCS."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:124
+#: f26727808b014db09032ac7cd68a8504
+msgid "Real Flight Testing"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:126
+#: ea2f856740974d5d869a91d07ab85973
+msgid "It is recommended that you always arm, take-off, land, and disarm while the main controller is running. You should switch to the custom controller while the vehicle is hovering steadily. This will reduce the effect of improper filter resetting. You should arm and take off with the custom controller only if proper ground idling is implemented."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:128
+#: d67f51765f7e489682c9c71ee2b6450a
+msgid "To test it on hardware compile with the ``--enable-custom-controller`` flag."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:135
+#: 037acb1328164a048c1f82ea90565f3b
+msgid "Post Flight Logs"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:137
+#: 546306949fb844d38cfae620396b8820
+msgid "Switching in and out of the custom controller is logged under the \"CC\" in the log tree. You can see the time and duration the custom controller is activated under \"CC.Act\""
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:140
+#: 1cc31cc31ae34a57b1d5a03668440d7a
+msgid "How To Add New Custom Controller"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:142
+#: e223b2b5e1f34046b39807fe7c639b68
+msgid "You can add your custom controller backend with the following steps which are demonstrated in this video. Let's assume we are adding the 3rd custom controller."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:147
+#: 69c3098ab47d415d93285ba62fe5f1ad
+msgid "**Step #1:** Generate a copy of ``AC_CustomControl_Empty.cpp`` and ``AC_CustomControl_Empty.h`` within ``AC_CustomControl`` folder. The folder tree would look like this,"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:162
+#: 89e27603142c42bea01ba4b9ea2cd602
+msgid "PID and README files are omitted to keep it simple."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:164
+#: 4c9576917ae44165b0bf82d53c24e8da
+msgid "**Step #2:** Change ``Empty - Copy`` suffix with your own choice, let's called it ``XYZ``, which would look like"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:179
+#: 8ea019ab7de14276b361f3581b8ad6a5
+msgid "**Step #3:** Change every class name, function definition etc. from ``AC_CustomControl_Empty`` to ``AC_CustomControl_XYZ`` inside ``AC_CustomControl_XYZ.cpp`` and ``AC_CustomControl_XYZ.h`` files. This would look like this for the header file"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:206
+#: bbff5de60afb46e6996b27b0994a9202
+msgid "**Step #4:** Increase the maximum number of custom control variables by one and update the custom control type enum"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:208
+#: 18b6aab188ed4b5eb78fb2a81e34b8e4
+msgid "from"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:214
+#: 7933f7bc71534276857fe8aa0cbfa380
+msgid "to"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:229
+#: 71727495abb9498cb0903ee3dbb3b732
+msgid "**Step #5:** Add a new backend header in ``AC_CustomControl.cpp`` file. Place it under other backend includes."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:238
+#: b45f5db70a754f19afff4326108ae1fe
+msgid "**Step #6:** Add new backend parameter in ``AC_CustomControl.cpp`` file. Increment ``_backend_var_info`` array index, backend parameter prefix and parameter table index by one. Place it under the other backend's parameters."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:257
+#: cf795608a3c64817b1806508315fd38b
+msgid "**Step #7:** Allow creating new backend class in ``AC_CustomControl.cpp`` file inside init function."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:276
+#: c2f20c5f9a5048e6a4f8e9214ca65d3f
+msgid "**Step #8:** Add the custom controller in ``AC_CustomControl_config.h`` file."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:284
+#: 76bd5f2b90b24a579d07179571e14b97
+msgid "**Step #9:** This is the bare minimum to compile and run your custom controller. You can add controller-related code to the ``AC_CustomControl_XYZ`` file without changing anything else."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:286
+#: 419cb4153cd84390b0895a8bce73ae0c
+msgid "**Step #10:** You can add new parameters by following the instructions in the `Adding a parameter to a library <https://ardupilot.org/dev/docs/code-overview-adding-a-new-parameter.html#adding-a-parameter-to-a-library>`__ wiki page."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:290
+#: 75478c319f1542f3a3afac8b85240424
+msgid "**Step #11:** Initialize the class object in the backend's constructor. For example in PID backend"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:306
+#: ad4f4edd123a4eeeb52d964e5c6867c8
+msgid "above P or PID classes are initialized in the backend's constructors,"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:322
+#: b972c7aa010a448c8daa688510d465c7
+msgid "**Step #12:** Add your controller inside update function of ``AC_CustomControl_XYZ.cpp`` file. This function returns a 3-dimensional vector consisting of roll, pitch, yaw, and mixer input, respectively."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:324
+#: fb3d418efe0d4d6f9f809d76b4836b37
+msgid "**Step #13:** Add reset functionality inside reset function of ``AC_CustomControl_XYZ.cpp`` file. It is the user's responsibility to add proper controller resetting functionality. This highly depends on the controller and it should not be copy-pasted from another backend without testing it in SITL."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:326
+#: b8e4669b34954afcb81e888150c5a8bc
+msgid "**Step #14:** You can access target attitude and target rate values using ``atti_control->get_attitude_target_quat()`` and ``atti_control->rate_bf_targets()`` functions, respectively. You can also access latest gyro measurement using ``_ahrs->get_gyro_latest()`` function."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:330
+#: 1e0f192333a248a88144f09ef62da7e8
+msgid "Preparing Your Simulink Model For Code Generation"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:332
+#: 582fc85c915e4ab48c99bda3ef98a53c
+msgid "Simulink model of the controller needs to be configured before the code generation. These steps are demonstrated in the following video."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:337
+#: 2a4a180c8dc743b2a210c192a2c055f9
+msgid "**Step #1:** In Solver tab in Configuration, change solver type to Fixed-Type. This is mandatory for code generation to work. Change Solver to discrete(no continuous state) this will reduce generated code's flash cost and run-time load. Change Fixed-step size to one over the :ref:`SCHED_LOOP_RATE<SCHED_LOOP_RATE>`. The code generation needs to be repeated each time this parameter is changed."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:339
+#: 5bc33970d9724b9c8a6fca05152e3f63
+msgid "**Step #2:** In the Hardware Implementation tab, change Device vendor to ARM Compatible and Device type to ARM Cortex-M. This determines which data types are available and what is their size."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:341
+#: c53a0148b6584b3ea1c83e31e9e360b4
+msgid "**Step #3:** In the Code Generation tab, change the System target file to ert.tlc Embedded Coder and language to C++. Since we don't want Simulink to compile the generated code click Generate code only. Click Package code and artifacts to get only relevant generated code files in a single folder."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:343
+#: d1952ffc86e44e8faa0045b7960cb9da
+msgid "**Step #4:** In Code Generation->Optimization tab, change Default parameter behavior to Tunable. This will create a variable inside the generated code with the same name as they are defined in Matlab or Simulink workspace."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:345
+#: cbca158799e640bebc71de84532a8806
+msgid "**Step #5:** To force generated code to be strictly single precision, change Import and Outport block data type to single. Since mathematical operation in ArduPilot runs in single precision."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:347
+#: 71507fed82924ad99db36a7e94300f52
+msgid "**Step #6:** In Code Mapping->Data, change Import and Outport data visibility to public, and member access method to none. This will allow passing input and output as an argument."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:349
+#: 3e8687c5129c40d48fd8cdd92c9006b9
+msgid "**Step #7:** In Code Mappings->Data, change Model parameters data visibility to public. This will allow accessing model parameters inside the custom controller backend."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:351
+#: b387084db41442b59f6e7beafc665cff
+msgid "**Step #8:** In Code Mappings->Functions, change step function input and output argument type. If these are changed to pointer as shown in the video, step 6 is mandatory. The choice of how to pass input and output depends on the user's preference. Inputs are passed by pointer and outputs passed by reference for simplicity."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:353
+#: 558fda44a29a4458961892771ad1fc84
+msgid "**Step #9:** The last step is to click on generate code button to start code generation. If a problem arises during this process, Simulink will throw an error message to explain the problem and how to fix it."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:355
+#: 72d02c191d2f4aa59b422b03780a5c3d
+msgid "There are a lot of options in Simulink code generation in terms of class, function, variable naming, code generation optimization level, parameters access and storage method, etc. It is up to the user to change these depending on their project needs."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:358
+#: 164cbf39f2d74888af56356dcc3653c9
+msgid "Please watch the following video to understand what each generated header and cpp files contain."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:365
+#: 7078730ff41a4dbc9703292ec61b917c
+msgid "Integration Generated Code Into ArduPilot"
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:367
+#: 539af02b5f594cc48d1b950b3452e4eb
+msgid "The generated source code needs to be copied inside the ArduPilot and called inside the newly created custom controller backend. The steps to achieve this is demonstrated in the following video."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:372
+#: a30382a84b1641f28af7ec883eb12719
+msgid "**Step #1:** Copy content of zip file into a new folder inside ardupilot/libraries. Call AC_Simulink as in the example. **Step #2:** Tell waf to build this folder if the custom controller is enabled. **Step #3:** Create an object of simulink code generated class. **Step #4:** Call initialize function of this object inside backend constructor. **Step #5:** Call step function of this object inside backend update function. Arrange input and output arguments by following the similar pattern as in ert_main.cpp. **Step #6:** Once these steps are completed we can compile ArduPilot."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:379
+#: d430ed0cacc74751825eb412fdaa8931
+msgid "As long as the input and output type and how they are passed to the step function remain the same, the steps given in here and in the previous section do not need to be repeated each time we do code generation. Even if we change the controller type for example from P+PID to PID+PID, we just need to click on the generate code button and copy and paste the zip file content to the AC_Simulink folder."
+msgstr ""
+
+#: ../../source/docs/copter-adding-custom-controller.rst:381
+#: 94e3da27146a4631ac26a6c4b5db2000
+msgid "An example of this implementation is given in this PR https://github.com/ArduPilot/ardupilot/pull/21700."
+msgstr ""

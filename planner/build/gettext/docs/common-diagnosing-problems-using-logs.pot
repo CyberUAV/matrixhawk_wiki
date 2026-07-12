@@ -1,0 +1,458 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Mission Planner package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Mission Planner \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:48+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:5
+#: 03e2d33447c8433eb88d51f8fd2d73c5
+msgid "Diagnosing some common problems using Logs"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:7
+#: 3785cab21766490ab6b3a8897cf49639
+msgid "This page show how to diagnose the six most common problems affecting Copter in particular but to some extent Plane and Rover as well."
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:14
+#: 2a3227bd549c42618a4833f46fc65e38
+msgid "Mechanical Failures"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:16
+#: fcf2ef23e85043ae88507c01c2c1c77f
+msgid "Common mechanical failures include a motor or ESC failure (`including ESC sync failures <https://www.youtube.com/watch?v=hBUBbeyLe0Q>`__), the propeller breaking or coming off, etc.  These appear in the log as a sudden divergence in the desired roll and pitch vs the vehicle's actual roll and pitch.  This divergence is visible by graphing the ATT message's DesRoll vs Roll, DesPitch vs Pitch and to a lesser extent DesYaw vs Yaw."
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:21
+#: 71b7bb1466144a76befecdbe78d232ae
+msgid "In the example above the vehicle's actual roll (\"Roll\") closely follows the desired roll (\"DesRoll\") for the first part of the log but then suddenly diverges.  The autopilot wanted the roll to remain level (\"Roll\" = 0) but it was unable to likely meaning there was a mechanical failure.  This is very different from a software failure in which the autopilot freaked out and for some strange reason suddenly wanted the copter up-side-down because in such cases the DesRoll would be also be crazy and actual Roll would follow."
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:23
+#: d3c5c18281f9419fafd8dbfa6c84785d
+msgid "Tlogs contain the same data.  Compare NAV_CONTROLLER_OUTPUT's nav_roll (desired roll) and nav_pitch (desired pitch) to ATTITUDE.roll (actual roll) and pitch (actual pitch)."
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:28
+#: 57264bbb022f4dc3876d69c2e395a62f
+msgid "Vibrations"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:30
+#: 334575ccb9694948b03f1e33ebd66f7b
+msgid "High vibrations can cause the Copter's accelerometer based altitude and horizontal position estimates to drift far off from reality which leads to problems with altitude hold (the vehicle may rocket into the sky) or position control in modes like Loiter, PosHold, Auto, etc."
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:32
+#: 2dae46f496b7409ab4e211062777b590
+msgid "As covered on the :ref:`Measuring Vibration <common-measuring-vibration>` page, vibrations are best viewed by graphing the **VIBE** message's **VibeX**, **VibeY** and **VibeZ** values.  Vibration levels below 30m/s/s are normally acceptable. Levels above 30m/s/s may have problems and levels above 60m/s/s nearly always have problems with position or altitude hold."
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:34
+#: 079c95cbb6e84aad9b6f3b012c971866
+msgid "The below graph shows acceptable vibration levels which are consistently below 30m/s/s"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:39
+#: 01f655d6bf7b440fb046a991b87d4e81
+msgid "The graph below is from a vehicle that had position estimation problems due to high vibrations"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:44
+#: 60d20dd9d0d04e7bac467fe9f62d25bd
+msgid "Tlog's VIBRATION **vibration_x**, **vibration_y** and **vibration_z** can also be used and show the same information as is stored to the dataflash log"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:52
+#: ab20252da81947d2a559883bf58c53c3
+msgid "Compass interference"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:54
+#: 05c46344f4264f12a69934b2a1b307ec
+msgid "Interference from the power distribution board, motors, battery, ESCs and other electrical devices near the autopilot can throw off the compass heading which can lead to circling (aka \"toilet bowling\") or even the copter flying off in completely the wrong direction.  Graphing the tlog's mag_field (found under \"CUSTOM\") and throttle (found under VFR_HUD) is the easiest way to quickly see the amount of interference."
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:56
+#: cb619878c2344d6799c557bb105b636b
+msgid "The graph below shows an acceptable amount of magnetic interference with mag_field fluctuations of only 10% to 20% when the throttle is raised.  Below 30% interference is acceptable.  Between 30% ~ 60% is in the grey zone where it might be OK (some users are OK, some are not) and really bad magnetic interference will show up as jumps of over 60% when the throttle is raised."
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:61
+#: 0053c24701584cdcb176616df50ced2c
+msgid "Extra Notes:"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:63
+#: 5153fcd08d5445919c74e42e85977779
+msgid "The length of the mag_field can be anywhere from 120 ~ 550 depending upon where in the world the vehicle is but it is normally around 330"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:64
+#: bd4dc909010445b892f546247baa0dd4
+msgid "The magnetic interference as a percentage of the total mag field is also displayed at the end of the compassmot set-up procedure.  Search for \"CompassMot\" on the :ref:`Advanced Compass Setup page <common-compass-setup-advanced>` page to learn more about compassmot"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:65
+#: 970f997f4e6d4431b71007623dbd4ea2
+msgid "Dataflash log's COMPASS message hold the compass's raw x, y and z axis values (called MagX, MagY, MagZ) which are equivalent to the tlog's RAW_IMU xmag, ymag and zmag fields.  It is possible to calculate the mag-field length by first loading the dataflash log file into excel, filtering by the COMPASS message and then calculating the mag-field using the formula mag_field = sqrt(MagX^2, MagY^2, MagZ^2).  Note that the COMPASS message is not enabled by default in the dataflash logs because it runs at 50hz and does affect CPU performance a bit."
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:66
+#: b9b1bc1d8724425daa56b1ba046120da
+msgid "The image above it shows a short spike at the beginning of the graph but this can be ignored because it is before the throttle is raised so it is probably just as the user plugged in some other electrical device"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:71
+#: 6330511439a64c648bb744125129350e
+msgid "GPS glitches"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:73
+#: a323821c677a4752aff04768be06d7e7
+msgid "When in autonomous modes (Loiter, RTL, Auto, etc) position errors from the GPS can cause the vehicle to think that it is suddenly in the wrong place and lead to aggressive flying to correct the perceived error.  These \"glitches\" show up in both the tlogs and dataflash logs as a decrease in the number of satellites visible and an increase in the `hdop <https://en.wikipedia.org/wiki/Dilution_of_precision_%28GPS%29>`__."
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:75
+#: dc4279d644d14162813fcecc8560d00d
+msgid "Graph the Dataflash log's GPS message's \"HDop\" and \"NSats\" values.  Hdop values below 1.5 are very good, values over 2.0 could indicate the GPS positions are not good.  The number of satellites falling below 12 is also bad.  A significant change in these two values often accompanies a GPS position change."
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:80
+#: dfc50774e179496da1df4921c818411e
+msgid "If using tlogs graph the GPS_RAW_IT group's \"eph\" and \"satellites_visible\" values.  Hdop values below 150 are good, values over 200 could indicate a bad position."
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:85
+#: 089de2a5c0a0415283a729b8d15104dc
+msgid "See the :ref:`EKF failsafe <copter:ekf-inav-failsafe>` wiki page for more details on how the vehicle may switch to non-autonomous modes in the case of very bad GPS glitches"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:88
+#: 29dec657c2264978b452bb209f2fc47f
+msgid "Power Problems (BrownOuts, etc)"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:90
+#: 2c9bdaf16edf449b9a85a8ad37ebfff0
+msgid ":ref:`Power Modules <common-powermodule-landingpage>` provide a reliable power supply to the autopilot but brown-outs do still occasionally occur.  They can normally be recognised by the logs suddenly ending while the vehicle is still in the air (i.e. barometer or EKF altitude is still reporting the vehicle's altitude is well above zero)."
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:92
+#: f7fc7a9b6d134d309b3086c710ba4635
+msgid "Try graphing the:"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:94
+#: 5b9d1baab3744e7bb8d894a8d989e1ce
+msgid "Dataflash log's CTUN Alt (altitude above home) or BAlt (Barometer altitude)"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:95
+#: d6fac0504415478f82f7894f66bcdf78
+msgid "Dataflash log's GPS Alt (altitude above sea level)"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:96
+#: 58c308fff88e4de097b318558e01b594
+msgid "Tlog's VFR_HUD alt (the combined accelerometer + barometer altitude estimate)"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:97
+#: 47f98419bbfc4c8a8c1003cc1b4d8065
+msgid "Tlog's GLOBAL_POSITION relative_alt (altitude above home)"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:102
+#: dbb95c6bcfa54607b42666d052f7f533
+msgid "Changes in the board voltage can also be a sign of a power problem.  Variations of 0.10 to 0.15 volts are normal.  Beyond that could be a sign that other devices sharing the power source with the autopilot are causing ripples in the power supply that could lead to a brown-out.  The board voltage can be graphed using:"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:104
+#: fd336782b6c9477c80716120524fa7b3
+msgid "Dataflash POWR message's VCC"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:105
+#: 9128f3f085b640dfafb5a656e5376317
+msgid "Tlog HWSTATUS's Vcc"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:107
+#: 5c730c1c2c1446858579460464d6eedb
+msgid "In the image directly below shows the board voltage sinking by 0.15V when the throttle is raised.  This is generally not a good thing but because it's only 0.15V it's probably OK. The 2nd graph below (a dataflash graph from a different user's log) shows a very stable voltage with ripples less than 0.1V."
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:116
+#: f5f32f0046c940249f6baea73bb1f64f
+msgid "Unexpected ERRORS including Failsafes"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:118
+#: 378e37d4747246b0b0f8207500150c26
+msgid "When unexpected behaviour from the autopilot occurs (especially when the user complains that the copter no longer responded to their input) it is often caused by one of the :ref:`failsafes <copter:failsafe-landing-page>` being triggered."
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:120
+#: 21a76e96c16c48f08ba0bc570ba47eb9
+msgid "The easiest way to find these is to look in the dataflash logs and filter the first column by \"ERR\".  If using the Mission Planner, the errors will also appear in red markers at the top of the graphing area."
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:125
+#: 9ff20f9c4f184604a12aadce51506053
+msgid "The Subsys (aka Sub-system) gives the area that generated the error and the ECode (aka Error Code) tells you what the error was specifically.  The list of subsystems and error codes can be found in the AP_Logger library `AP_Logger.h file <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Logger/AP_Logger.h#L33>`__."
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:139
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:150
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:291
+#: e5b56f80e2c24c3f8b4bb319b61629a2
+#: 5c72b29c037443ba96ac17a7ce727e36
+#: 59d44f0089404dd286c434dba37f5c80
+msgid "0 = Errors Resolved"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:140
+#: 26a8310ddff844d0858415f8c1ae8f14
+msgid "2 = Late Frame : no updates received from receiver for two seconds"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:151
+#: d5c310db31394088a3e972164268637b
+msgid "1 = Failed to initialise (probably a hardware issue)"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:152
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:292
+#: 77f7e5151e6f4be4846ab4ef22e61abc
+#: 5f4a66449e16477bbfd94c59cd9324a1
+msgid "4 = Unhealthy : failed to read from the sensor"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:163
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:175
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:187
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:199
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:279
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:303
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:315
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:350
+#: 9fe5bb8b06f14f6ea7a72163dd80fde1
+#: 04b05a1f86f945e98da50d8cb5cf5504
+#: 25a5a99db1524afc80da209f093843da
+#: 66fa89a07e0749abad48a6b2b43452d2
+#: bf91246f5c70429aa5273177ada776a4
+#: 886bdce7cb5a4c1992bf9ac9be48726f
+#: 24816118ddc34eae92696eabb5b097bc
+#: c461d9d96d1445cbae7761bfd497013f
+msgid "0 = Failsafe Resolved"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:164
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:176
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:188
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:280
+#: 94e23e08d3c240efb2a634914028d450
+#: cfa011e7d5a14576ac98c4f0f6f92274
+#: 3086dd1eacf043189fca0b4084714721
+#: 292b1bbc77044c0688fe994b7a782a81
+msgid "1 = Failsafe Triggered"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:200
+#: ac67ce5c2755450caaa6bb95cfa19d91
+msgid "1 = Altitude fence breach, Failsafe Triggered"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:201
+#: dc19ba5fbc6d44788535d2593d8210f9
+msgid "2 = Circular fence breach, Failsafe Triggered"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:202
+#: 6c4a432a6ef6428d9c95d45e6d12cbb5
+msgid "3 = Both Alt and Circular fence breached, Failsafe Triggered"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:203
+#: beb4e2bb53934cb2ac4f9800cac53180
+msgid "4 = Polygon fence breached, Failsafe Triggered"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:214
+#: b5f52cc9639b4ac7b43026b13077529b
+msgid "Vehicle was unable to enter the desired flight mode normally because of a bad position estimate"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:216
+#: c400857aa8964dd8864bb4fe38e23c54
+msgid "See `flight mode numbers here <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/mode.h#L14>`__ for Copter, `Plane modes here <https://github.com/ArduPilot/ardupilot/blob/master/ArduPlane/mode.h#L15>`__, and `Rover modes here <https://github.com/ArduPilot/ardupilot/blob/master/Rover/mode.h#L19>`__"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:227
+#: aff9752e2b104532869a4ca83c227a87
+msgid "0 = Glitch cleared"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:228
+#: 8b1be0d99dd74aaab0ebc1dea6276101
+msgid "2 = GPS Glitch occurred"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:239
+#: 8b498df1d8c6442ba2b3cde38af4f5ad
+msgid "1 = Crash into ground detected.  Normally vehicle is disarmed soon after"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:240
+#: a7c3b8b058f041198070e2d7f5ad640a
+msgid "2 = Loss of control detected.  Normally parachute is released soon after"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:255
+#: 3f1120257f4849b8ae31d7349fc16559
+msgid "2 = Not Deployed, vehicle too low"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:256
+#: a775eee3c08a4345b2e85a3e5002e73c
+msgid "3 = Not Deployed, vehicle landed"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:267
+#: 8fc821c35ec54306824b74c1d39ef899
+msgid "0 = Variance cleared (position estimate OK)"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:268
+#: 7f26eccf871145069be24b258e966731
+msgid "2 = Bad Variance (position estimate bad)"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:304
+#: 9b756606a0a0476d866dda822f12d608
+msgid "1 = Failsafe Triggered (normally vehicle disarms)"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:316
+#: ee451705892743369ab54517ba49ab6b
+msgid "1 = No action just report to Pilot"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:317
+#: 8c2a3641fe8a48519ffb2dea32ec4017
+msgid "2 = Vehicle avoids by climbing or descending"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:318
+#: 4be329cc96be4e04b757bc0c00474ad6
+msgid "3 = Vehicle avoids by moving horizontally"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:319
+#: d887d20d858c4bb8be28a6c9f03a819c
+msgid "4 = Vehicle avoids by moving perpendicular to other vehicle"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:320
+#: bb5675bab54e4372a4fd4ad08a9127f5
+msgid "5 = RTL invoked"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:336
+#: 33c0e27213594d5a911f8865af074b02
+msgid "2 = Failed to set destination"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:337
+#: 84ae5433e1454c04b091368ef6f2a277
+msgid "3 = RTL restarted"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:338
+#: d8b715bbf2f64f57900dc79ed5918c08
+msgid "4 = Circle initialisation failed"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:339
+#: f5d9f1bb32404bf6aecd2110d3ee07a6
+msgid "5 = Destination outside fence"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:351
+#: 2991a2b786df4ab696ffa975e0bcef87
+msgid "1 = Failsafe Triggered (normally vehicle RTLs)"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:362
+#: deea5b1df62749beab44c6de265fabd0
+msgid "0 = 1st EKF has become primary"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:363
+#: 60b0b4b48e18427db9eb57105da13c19
+msgid "1 = 2nd EKF has become primary"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:374
+#: 567b97325d5b408f8d8fef872407f0e7
+msgid "0 = Thrust Restored"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:375
+#: f13b4234ea1a4ecf81904cc2a1ec11d7
+msgid "1 = Thrust Loss Detected (altitude may be prioritised over yaw control)"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:386
+#: df034d4b9c72468299f1649dd1d3bcb0
+msgid "0 = Sensor Failsafe Cleared"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:387
+#: 481f404a81f5436d92a8e9dc61bb3209
+msgid "1 = Sensor Failsafe Triggered"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:398
+#: 6799da1a76b64a139746afa7bffc98f9
+msgid "0 = Leak Failsafe Cleared"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:399
+#: 12c72a28574344fba158d891e4565974
+msgid "1 = Leak Detector Failsafe Triggered"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:410
+#: 86e12d24329f43359f365b6641d313af
+msgid "0 = Pilot Input Failsafe Cleared"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:411
+#: ad2f04bc178c4060a28b6dd972639414
+msgid "1 = Pilot Input Failsafe Triggered"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:422
+#: 8346d73ea0464c42b99345c34571ea66
+msgid "0 = Excessive Vibration Compensation De-activated"
+msgstr ""
+
+#: ../../source/docs/common-diagnosing-problems-using-logs.rst:423
+#: 04f71b00b1ec4d1485e0bb32845b9b6d
+msgid "1 = Excessive Vibration Compenstaion Activated"
+msgstr ""

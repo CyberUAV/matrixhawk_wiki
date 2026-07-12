@@ -7,6 +7,8 @@ Submitting Patches Back to Master
    .. image:: ../images/PullRequest_TopImage.png
        :width: 70%
 
+.. warning:: *Before* working on a new patch search for existing related pull requests, and check for linked pull requests in the issue you're planning to fix. If someone is already working on the problem you can review/test their submission and join the discussion thread instead of creating your own submission.
+
 Once you have a bug fix or new feature you would like to have included in the ArduPilot project
 you should submit a `Pull Request <https://help.github.com/articles/about-pull-requests/>`__.
 The main developers will see your changes in the `Pulls list, <https://github.com/ArduPilot/ardupilot/pulls>`__ 
@@ -24,7 +26,29 @@ Preparing commits
 - **Commits should be small and do just one thing.** If a change touches
   multiple libraries then there should be a separate commit per library,
   and a separate commit per vehicle directory. This is true even if it
-  means that intermediate commits break the build.
+  means that intermediate commits break the build. This also implies that
+  moving code from one library to another happens in two commits: one that
+  "deletes" it from the old spot, and a separate one that "creates" it at
+  the new spot. It's better for unrelated changes in a single library
+  to be separate commits in the pull request.
+
+- Do not create 'only fix formatting' commits. The disruption they cause
+  to git history is more significant than their improvement to the code.
+
+- Only add "high value" comments to existing code. Comments disrupt the
+  git history, and the code should already be written clearly enough to
+  describe what it does. Be prepared to explain/defend the importance of
+  any new comments to reviewers, and defer to their judgement to resolve
+  any disagreement over a comment's value. Comments should not explain
+  "what" code does, they explain "why" (or perhaps "how" in a
+  clever-but-difficult implementation).
+
+- Resist moving code within files/libraries. Preserving the in-file
+  location of code is preferred over rearranging the file(s) to improve
+  organization. Defer to a reviewer's judgement to resolve any
+  disagreements regarding this.
+
+- Do not clean up whitespace, unless you are already changing the lines.
 
 - **Well-written, concise comments** are encouraged.
 
@@ -44,6 +68,8 @@ Preparing commits
 
         do not save a parameter unless it has changed by 0.1%
 
+- The brief description (summary) line should be less than 72 characters so it renders correctly in Github.
+
 - **clean up your local commit history** :ref:`using interactive rebase <git-interactive-rebase>`
   (i.e. ``git rebase -i "HEAD~10"``) to re-arrange patches and fold things together. The idea is to present
   a logical set of patches for review. It can take a bit of effort to get
@@ -60,7 +86,9 @@ Preparing commits
 - Do not include any git ``fixup!`` commits in your PR; these are only ever supposed to be a temporary part of a git workflow
 
 - Try to follow the :ref:`style guide <style-guide>` so your code fits in with the existing code.
-  In particular, ensure your editor uses 4 spaces intead of tabs.
+  In particular, ensure your editor uses 4 spaces instead of tabs.
+
+- For Python changes follow the :ref:`style guide <python-style-guide>` so your code fits in with the existing code.
 
 - Unix line endings (LF) are used. Git should take care of this
   automatically, but if you notice that you have a lot of files that show
@@ -115,8 +143,9 @@ You can track the state of your PR from the `Pull Requests list <https://github.
 PRs are more likely to be merged quickly if:
 
 - The PR clearly states what changes in behaviour are expected
-- Good testing evidence is provided.  This could be graphs of logs recorded before and after the change
+- Good testing evidence is provided.  This could be graphs of logs recorded before and after the change, possibly from a :ref:`simulation <simulation-2>`. Check for existing :ref:`autotests <the-ardupilot-autotest-framework>`, and update them if they get broken by the change. Add new ones to cover new functionality you're introducing, or bug fixes presently not tested, if you are capable.
 - Code follows the :ref:`style guide <style-guide>`
+- Python code follows the :ref:`python style guide <python-style-guide>`
 - Each commit in the PR affects only one subsystem and the commit title is prefixed with the subsystem name (e.g. "AP_GPS: correct uBlox logging parameter descriptions").  The `Tools/gittools/git-subsystems-split <https://github.com/ArduPilot/ardupilot/blob/master/Tools/gittools/git-subsystems-split>`__ script may be useful for this
 - PR passes all automated CI tests.  CI tests sometimes fail for reason unrelated to your PR (e.g. dependency failures, "flapping tests").  Please force push the PR to re-run the tests
 - The PR is discussed on one of the :ref:`weekly dev calls <ardupilot-discord-server>`.  To get the PR discussed add the "DevCallTopic" or "DevCallEU" label.  If you are unable to add the label ping one of the core developers on `ArduPilot Discord <https://ardupilot.org/discord>`__ (see the "code-review" channel).  "Core developers" can be identified by the "dev-team" badge in Discord and some also appear as `top contributors in Github <https://github.com/ArduPilot/ardupilot/graphs/contributors>`__

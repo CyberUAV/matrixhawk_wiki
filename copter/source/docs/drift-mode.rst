@@ -17,7 +17,6 @@ Overview
    intuitively with a single control stick if using a Mode 2 transmitter
 -  The user has completely manual control over the throttle as in
    :ref:`Stabilize mode <stabilize-mode>`.
--  **Drift Mode is available as of release 3.1 of the Copter firmware.**
 
 ..  youtube:: 0mdk2-sNXmg
     :width: 100%
@@ -46,17 +45,17 @@ How Drift Mode works
 -  Pilot’s throttle input controls the average motor speed meaning that
    constant adjustment of the throttle is required to maintain
    altitude.  If the pilot puts the throttle completely down the motors
-   will go to their minimum rate (MOT_SPIN_ARMED) and if the vehicle
+   will go to their minimum rate (:ref:`MOT_SPIN_MIN <MOT_SPIN_MIN>`) and if the vehicle
    is flying it will lose attitude control and tumble.
--  Drift Mode relies on your GPS for control.
+-  Drift Mode relies on a valid position estimate, such as GPS, for control.
 -  If you lose your GPS signal in flight while in Drift Mode, your
    copter will either land or enter altitude hold based on your
-   failsafe_gps_enabled setting.
+   :ref:`FS_EKF_ACTION <FS_EKF_ACTION>` setting.
 -  You should also be prepared to switch back to Stabilize Mode for
    manual recovery if necessary.
 
-Whats it Useful For
-===================
+What's it Useful For
+====================
 
 -  FPV flyers who are looking for a dynamic, plane like flight as well
    as loiter-like position hold.

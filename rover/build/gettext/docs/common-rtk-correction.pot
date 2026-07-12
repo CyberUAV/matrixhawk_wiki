@@ -1,0 +1,211 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Rover package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rover \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:39+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-rtk-correction.rst:5
+#: 7ea0d73c43df485bb8ef6b2f47c18821
+msgid "RTK GPS Correction (Fixed Baseline)"
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:7
+#: 2ee533b7c54447c8a8a99f377028b00b
+msgid "It is possible to increase the normal position reporting accuracy of the GPS using RTK (Real Time Kinematics). Normal GPS accuracy is 3-5 meters using the Ublox M8N generation of GPS. If your global region has SBAS (Satellite Based Augmentation Service) with geo-synchronous satellites reporting the general propagation conditions and corrections to the GPS, then accuracy can improve to the 1 meter range. But centimeter accuracy ranges can be obtained by using Real Time Kinematics correctional data with the newer F9P generation of GPSes."
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:11
+#: 5484851f1f7a44328190a34cafc861ed
+msgid "Propagation and timing corrections (RTCM data) for each satellite can be fed to the vehicle's RTK GPS in several ways:"
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:13
+#: f680738026ec449e86e0496da9096354
+msgid "from a local RTK base station connected to the GCS, which is also connected to the vehicle (via MAVLink)"
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:14
+#: 7b0e8091d75a4c28889a31f1545fdb34
+msgid "by forwarding RTCM correction data from an NTRIP server via the internet-connected GCS, which is also connected to the vehicle (via MAVLink)"
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:15
+#: 7f1fca0f04dc449a8303f7fe839f0ad6
+msgid "wirelessly from a local RTK base station directly to the vehicle GPS's secondary UART port"
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:20
+#: db846f436ea043058b4a9faa69a91464
+msgid "Method 1"
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:25
+#: c8f0fc29211e49c1aebad9bd3c943f63
+msgid "Both Mission Planner and QGC allow the connection of an external RTK Base GPS via USB. The correction data is passed from the Base unit through the GCS program to the vehicle's MAVLink connection to the GCS, providing the vehicle's RTK GPS with correction data to enable its position reporting to become more accurate."
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:27
+#: 70aec3d087df4e3c97ae3764a64d6a33
+msgid "Key to the success of this method requires that the RTK Base station's position be precisely known or determined. Usually, this requires that the GCS command the RTK Base GPS to \"survey-in\" itself. The GPS takes many measurements determining its mean location, applying interim corrections, and continues to refine its location deviations until the measurements are within a set threshold of error (usually a few meters) for a given time period (usually 60 seconds). The GPS then uses that as its location and start outputting the correction data to the GCS for forwarding to the vehicle's GPS."
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:29
+#: 6690718e218d49afb4269f3a19a419ec
+msgid "It is possible to program the RTK Base's exact location directly into it if it is known using the UBlox programming tool or Mission Planner if that location has been previously \"surveyed-in\"."
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:32
+#: ../../source/docs/common-rtk-correction.rst:64
+#: ../../source/docs/common-rtk-correction.rst:92
+#: 2701b2d170cd434ebe30eb2b61b7798f
+#: 231783d0749649ffa2ec3eae51364fff
+#: 9a9831dd534e4a50a49eab8952ff53e2
+msgid "Setup"
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:34
+#: 6509e74c2b6348e995d568d7da52f02c
+msgid "Vehicle: normal setup for serial GPS (:ref:`GPS1_TYPE<GPS1_TYPE>` = 1) or DroneCAN GPS (:ref:`GPS1_TYPE<GPS1_TYPE>` = 9)"
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:36
+#: 9a0c8442e9874810a27d0e0617f892ff
+msgid "Attach RTK GPS via USB to PC running Mission Planner or QGC."
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:38
+#: a8b6c3f6ed8a44bfb60ba4e1f4ad3f8f
+msgid "You first must \"survey-in\" the GPS, in Mission Planner."
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:42
+#: 50ac28ec45a8472e84761136ebe43f1d
+msgid "After the GPS is attached to the PC, start Mission Planner, enter the COM port to which it is attached and press \"Connect\". The \"Link Status\" should start showing data being input and the satellite constellations locked will be shown with green indicators."
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:46
+#: e2abf533f31e491898c7a2401aca8fe1
+msgid "Then press the \"RESTART\" button (#1 in the picture) to start the \"survey-in\" process using the SurveyIn Acc(m) and Time(s). Ublox recommends a SurveyIn ACC of 5m or less. 2m is commonly used. In #2. in the picture the survey status progress can be monitored until a \"Position is Valid\" is obtained."
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:48
+#: 789ededecd894bf684bfa3cc453936a0
+msgid "Once the position is obtained, you can save it in a list for future use, if the Base is placed at that exact location in the future, to avoid another survey procedure. To use an existing position, first ensure that the GPS attached to the Mission Planner PC is indeed in that exact location, then press the \"USE\" button for that location in the list. RTK updates to the vehicle will begin immediately."
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:50
+#: 91fa06bc8a5546febe9a395ab75e8a73
+msgid "Once RTK data is being processed by the vehicle's GPS, its status will change to \"RTK float\" and then to \"RTK fixed\" in the GCS HUD indicating that it is ready for use. \"RTK float\" means that it is using correction data, but has not moved to the highest precision mode yet."
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:53
+#: 9bbfb61e105a4887a08005dd61bc92a4
+msgid "Method 2"
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:57
+#: 37e480703fc0455dabfab88f68249883
+msgid "There are internet-based services that can provide correction data from bases linked to that service. They provide the correction data over the internet via the NTRIP protocol. Mission Planner and QGC can connect to these servers and forward the data via MAVLink connection to the vehicle."
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:59
+#: 7dc9996694ff443c8f2f0d0501190aa0
+msgid "If the service has a Base station providing real-time correction data within 100 Km or so of the vehicle's location, then it will usually be satisfactory. For every 10 Km away from the vehicle that the source is located, the inaccuracy limits will increase ~ 1-1.5cm. Some services provide interpolated data for any location within their network of stations and this can sometimes be successfully used if a station is further than 100km away from the vehicle location."
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:61
+#: 597a1586f1b54954a4c452b25ff24710
+msgid "Some of these services are free and some are fee-based."
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:66
+#: d5f0745661fc470ca560170200bcfe8b
+msgid "First, be sure that the vehicle is connected to the GCS and has a *GPS 3D lock*. Then on the GCS:"
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:70
+#: 38d8cee721644f61b776d5ab4c462dc1
+msgid "Select \"NTRIP\" from the dropdown box and press \"Connect\". A dialog box (#2.) will appear to enter the login information for an NTRIP server."
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:71
+#: ef07ac9208fa4cfd99821520246a7843
+msgid "The login is usually of the form:"
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:78
+#: 0558f87a0ac94d2d8ff127ec8b013e65
+msgid "where the \"host\" is the NTRIP server URL, the port as designated by the service (usually 2101 for RTCM3.1 data streams), and the mount point will be the service's designation of the station that you want to use (the closest one to your location), usually something like \"P807_RTCM\" or \"Evermount234\", whatever the service names them."
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:80
+#: abd249127efb4a0faecc089aaec0eafd
+msgid "If the connection occurs, data will start appearing in the Link Status box at the top and be sent to the connected vehicle's RTK GPS."
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:83
+#: cd35bbef5b1c4ecdb82cfc0c56fa4cf3
+msgid "Method 3"
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:87
+#: 7151b46a48424e468f752e79357008fc
+msgid "It is possible to program the GPS used as a Fixed Base, to automatically begin to *survey-in* itself upon power up and start sending RTCM correction data out its UART2 port once completed. By attaching a transparent RF modem, either radio-based or WIFI, you can directly transmit the correction data to the vehicle's UART2 port."
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:89
+#: 8d121e96a3674a1088af12de6b6098dc
+msgid "This requires configuring the Base RTK GPS with the UBlox configuration tool. See `Sparkfun's tutorial <https://learn.sparkfun.com/tutorials/setting-up-a-rover-base-rtk-system>`__ for more information."
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:94
+#: da92e537c8584f84b427948eba7bade6
+msgid "See `blog post on setup <https://discuss.ardupilot.org/t/simple-portable-rtk-base-station>`__"
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:96
+#: 70b01b605ae744659f9d8976d1e70446
+msgid "some RTK GPSes are already configured for dedicated BASE operation with automatic \"survey-in\" being done every power up. The base model of the `Blicube GRTK <https://wiki.blicube.com/grtk/>`__ system is an example."
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:99
+#: 70903dfc5e5840149cf05466b67f279d
+msgid "RTCM Message Parsing"
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:101
+#: 578d4a73f639492e8225828222428ee7
+msgid "these options are needed only in very special situations. They are not needed for normal use cases."
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:103
+#: 59cda2cc02614e77b480d0abc66b7be1
+msgid "Normally, only a single source of RTCM messages is provided to the autopilot and the RTCM messages are NOT fully parsed, only extracting the normally required information to be forwarded to the GPS for RTK corrections.If multiple sources of correction data are received by the autopilot, full parsing of the RTCM messages is done automatically and all RTCN message data sent to the GPS to provide multiple correction sources to be applied to the GPS position. This \"full parsing\" of RTCM messages also provides additional logged data which may be helpful in diagnosing RTK problems even with a single RTCM data source. Setting :ref:`GPS_DRV_OPTIONS<GPS_DRV_OPTIONS>` bit 6 high, will enable this extended parsing and logging for diagnosing RTK issues by a skilled development team member from the log."
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:105
+#: d41f8124356f49d98992ccfebde7d9ee
+msgid "In some cases, specialized custom GPS commands using the RTCM message framework may be used in some systems and full parsing may result in problems with the GPS. Setting bit 7 of :ref:`GPS_DRV_OPTIONS<GPS_DRV_OPTIONS>` disables the automatic full parsing with multiple RTCM data sources being sent to the autopilot if this is causing a problem"
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:108
+#: 1ecc7c377b3641dc80db23e3b696f139
+msgid "Acknowledgment"
+msgstr ""
+
+#: ../../source/docs/common-rtk-correction.rst:110
+#: 1dc0fcdc3ff64a97aefc0b444c3d45e3
+msgid "Thanks to `Qiotek <https://www.qio-tek.com>`__ for providing the autopilot and GPSes used for this article."
+msgstr ""

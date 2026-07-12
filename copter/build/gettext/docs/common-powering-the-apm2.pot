@@ -1,0 +1,711 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:30+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-powering-the-apm2.rst:5
+#: 70cae96a70584052a1eb321a9ada1d0f
+msgid "Archived:Powering the APM2"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:9
+#: db7b089668f44449b83f177cf5f22ec1
+msgid "**ARCHIVED**"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:11
+#: 1dc84006d379434a82c5c043e31ebb24
+msgid "The APM2.x is end of life for use with ArduPilot. This article is made available for existing users."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:14
+#: 2fc043465fe64abea98e79a240de587c
+msgid "This article demonstrates the options for powering the APM2.x board along with information about the requirements for connecting the power rail."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:19
+#: 4ec4bcea895a4510bcae69a7e830851d
+msgid "Overview"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:21
+#: 6a71571adc054f86b9e134c98e013df3
+msgid "Like any computer, the APM needs a power supply with a steady clean voltage and sufficient current."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:24
+#: 41f0acb24ea940b2a2cab034e811f09b
+msgid "3DR provides an :ref:`3DR Power Module <common-3dr-power-module>` that supplies 2.25A at 5.37V. The module is designed to convert power from the main flight battery (18 Volt maximum).  That module will supply sufficient power for your APM, and low power radios including your RC receiver (without servos). Your RC receiver can be powered from any APM Input (+5V and ground). This is normally done by connecting a 2 or 3 wire cable between an APM Input and one of the output channels on the RC radio."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:33
+#: 5d995e8670874988a727a1a899c006e1
+msgid "If you are using any servos such as are required with a traditional helicopter or a camera gimbal, you will need to provide an additional dedicated power supply for the servos. The APM is intended to **control** servos, not power them."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:38
+#: f2cfc2f1d8514b19b12d7308ea16874e
+msgid "The following sections describe the APM power circuit (you will need to understand this in order to design a power supply for your APM, or provide additional power), and your options for powering the APM and connected components."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:44
+#: 4d128fb57c5d46e0b1e8ee99e7d4ea41
+msgid "APM power circuit"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:49
+#: 249f179c3b404391b9d8cc590695ef27
+msgid "There are two \"sides\" to the positive circuit in the board. Each side has positive-rails available for inputing power or distributing it to peripheral devices. The center row of pins in the three groups of pins (Outputs, Inputs, Analog) labeled \"+\" are referred to as a \"positive-rail\". This means that the base of all the + pins are connected so they represent a single electrical path. The positive-rails of the Input and Analog group are connected together. So we have two separate positive circuits, one in the Outputs and the other made up of the Input/Analog."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:59
+#: b95112c65b2c4670a1fd5ad157941511
+msgid "All of the components on the board take power from various points on these rails, so it is necessary for both \"sides\" to be receiving +5V (within the specs below) for the board to function."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:63
+#: 658ed69a1755445ebb647f48a0e4b742
+msgid "These positive-rails can be joined together by placing JP1 in its position on the board. This connects all the positive-rails ands provides power to both sides of the board, so that low-level power can be distributed to peripheral sensors and devices: 3DR Radios, sonar, RC Rx, etc. via the power-rails."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:69
+#: bccb29f2f84d4917ab978991560f6a2e
+msgid "When using the power module, the circuit path is as follows:"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:71
+#: 0e69e75ce0414dd381c92d0c728ec695
+msgid "From the power module connection the negative wire is connected to a negative-rail shared by the entire board regardless of JP1."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:74
+#: aad12a59a1bd4584931801b96eded472
+msgid "Positive voltage comes in to a T-junction. to the left is a path through the JP1 to the positive-rail of the Outputs. To the right it flows through an over-voltage, over-current, reverse-polarity protection(500mA fuse and 6V Zener diode). A side effect of passing through the Zener diode is a .37V loss, therefore input voltage should be bumped up by .37V to account for this. From here the positive voltage runs to the positive-rails of the Inputs and Analog. Inputs should not be used to power anything except your RC receiver."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:83
+#: a2f4af4b7437429d9e7e5303cbb7615b
+msgid "Higher current loads such as servos should be powered from the power-rails (positive-negative) of the Output side. You must use an adequate voltage-regulator to provide power directly to the Output power-rails, all servo power leads will attach to these same rails (the signal wires can connect on the Analog \"S\" pins in the case of a camera gimbal). Since JP1 is removed in this scenario, the other \"side\" of the board will need power provided to its power-rails directly."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:92
+#: 2ef19170f5474be6b5eccd1ad66a8a11
+msgid "Alternative ways to power your board"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:94
+#: dc544742f7fc43a2887384cdd6a0a125
+msgid "If you are using the 3DR Power Module please find instructions here: \\ :ref:`Using the 3DR Power Module <common-3dr-power-module>`"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:99
+#: de0d7b341126476f8a3189cbc63b77e5
+msgid "Under no circumstances should you ever attempt to draw servo power from the analog input connector."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:104
+#: a6e933a7bed64228be31a15de7477957
+msgid "You may \"control\" servos from A9, A10 and A11 from the A0 - A11 I/O connector, but you must run servo power separately."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:107
+#: 68f64ac690894dcab7b29d8d2aeeaabd
+msgid "The A0 - A11 I/O connector cannot supply sufficient power for servos."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:108
+#: fc46e94dfe92443e97ac4ec31efeeff7
+msgid "A9, A10 and A11 of the I/O connector come pre-wired to correct digital out for use as servo control lines."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:110
+#: 65262dd354e045339e8ffbcf575566c9
+msgid "For servo use, it is imperative that they have not been reassigned to analog use with the pads on the back of the APM board."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:114
+#: d87483b71b0b4462907b2ea30b7f037a
+msgid "Non-technical description of the power supply requirements"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:116
+#: 7516248a7b884d67a6f7ad94cfcd66f5
+msgid "The description below simply supplements and provides an alternate view of the information above."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:119
+#: b7259e97fffc4e2e9169d038872302cd
+msgid "The APM 2.5/2.6 board has two separate power circuits which make it very easy to power by a variety of methods."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:122
+#: 1261869f946e4ca5897638283886e1d8
+msgid "A fused power circuit provides primary board and general I/O power: (It cannot provide power for servos)."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:124
+#: d7294c8d9bca4c228f806ed8512239c5
+msgid "The Other power circuit is for the OUTPUT connector power rail: (it can provide power for servos)."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:127
+#: 03c9dec1c2704ef3a6245dce32e27d5b
+msgid "The jumper JP 1 determines whether the two power circuits are connected or separate."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:130
+#: e2789a26230649288efd062f15a01b81
+msgid "If JP1 is removed, the power rail on the OUTPUT connector \"Floats\" and may be used to distribute power."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:132
+#: 401188e8ea544504b76f44e9d6ca6f59
+msgid "Although if JP1 is removed the OUTPUT connector cannot be used to supply power to the APM board."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:135
+#: 6e4927fe6b0944b78f7f18ff5fc0aeae
+msgid "It is possible to power the APM board from the Power Module connector or the OUTPUT or INPUT connectors."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:137
+#: 44d9869d06404b399944e2bb2c570885
+msgid "Normally the APM 2.5/2.6 \"Power Module\" is used to provide primary APM 2.5 board and general I/O power."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:139
+#: 42d54aaf91cc4311a159d171bf329da8
+msgid "Alternatively primary board power can be supplied by a BEC either from one of the ESCs or from an external BEC."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:141
+#: ba50f179bd0e429998cad82c68c04eac
+msgid "If servos are used, supplementary power is required."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:143
+#: 60a442fddb7c47e080c4377a19a7fb48
+msgid "Generally one power supply is provided for the board and one or more additional power supplies for the servos."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:145
+#: 95cd1f2cbae649fdb21ce78b49ed3d46
+msgid "But if a sufficiently large external BEC is used it can supply power for both via the OUTPUT connector."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:148
+#: 15283b7bd0344be1b986f4aa733a0325
+msgid "Only the OUTPUT connector can provide power for servos as the other circuit is fused."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:151
+#: e2d92d180079462f8f79bd1a6a90d1cc
+msgid "The address connector is sometimes used provide servo signals, but the servos power must come from elsewhere."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:154
+#: e5ad30b36b374a87823ecac204d70751
+msgid "How you are powering your APM board and or servos determines whether JP1 is  installed or not."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:157
+#: 26c724140b06463e9c2060678aff16a3
+msgid "(Whether the two power circuits are separated or connected)."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:158
+#: 260439e015c64eb58cf29483f3dac963
+msgid "All possible configurations are detailed Below."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:160
+#: 9174527a00a54a2393c1289e3e48f60e
+msgid "The type of use will determine which options are available."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:162
+#: ed414ab8ab4a428bb65987c507ce7100
+msgid "Copter can power the APM from a power module or a UBEC or a BEC from one of the ESCs and can power servos from a UBEC or from the other ESC's BECs."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:165
+#: 9a727a5c20434f22892f5bc4871b4984
+msgid "Plane can power the APM from the power module,  the BEC from the flight motors ESC or a  separate UBEC and can power servos from a separate UBEC or the flight motors BEC if it is large enough."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:168
+#: b74d68bd8b334d22a4212e649efeda10
+msgid "Rover  can power the APM from the power module,  the BEC from the drive motor's ESC or a  separate UBEC and can power the steering servo from a separate UBEC or the drive motors BEC if it is large enough."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:174
+#: 43e8f56721a24a60a5fd4c35c0f9fe7c
+msgid "Power supply rails connected requirements (JP1 Installed)"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:178
+#: ../../source/docs/common-powering-the-apm2.rst:270
+#: 24ed6e93bbbb4c4f9abd314a1f92eda8
+#: 4cda0c6d9c3d46a19d1084a2eacfceec
+msgid "Do not exceed Abs MAX input voltages when connecting the power supply or you will damage your board."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:183
+#: ../../source/docs/common-powering-the-apm2.rst:275
+#: ../../source/docs/common-powering-the-apm2.rst:355
+#: e6318371581e4b33a0babd9c8affbffb
+#: 9413258c456e4bd49a0bde64e27e4c77
+#: 611bc69ce19b4130ac709be4afa81fd1
+msgid "Connecting USB when you have input voltages at the high end of the range (near Abs Max) can damage the board. Disconnect battery before connecting USB or test input voltages so they are within the specified range."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:189
+#: ../../source/docs/common-powering-the-apm2.rst:281
+#: a0ca6e2d72fe4aba8f13c68877471411
+#: 36cca5391e364e93bbb595f465074f3b
+msgid "Power Options"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:189
+#: ../../source/docs/common-powering-the-apm2.rst:281
+#: 45704ac81f2c4a8ead8627d10bd0edae
+#: 99187c4b7967483294bae4cc7ed598b9
+msgid "Nominal"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:189
+#: ../../source/docs/common-powering-the-apm2.rst:281
+#: 84db4caf9e7a4c088d8ebf7555174966
+#: 09b28225c17049e38127902dbf29b0d2
+msgid "Abs MAX"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:189
+#: ../../source/docs/common-powering-the-apm2.rst:281
+#: 76d1c190f7584df8b2778e32809969c7
+#: 7381f210f0dc4210ac1e620de22896e0
+msgid "JP1 status"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:191
+#: ../../source/docs/common-powering-the-apm2.rst:283
+#: 64e61f5415f14fe78ec6e45b47d1ed70
+#: 6407a5f75b884504aa623dcff580a8bd
+msgid "Power on Output PWM connector"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:191
+#: 2687c95a83ce4469b986bbb080f8d6b1
+msgid "5.37V +-0.5"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:191
+#: ../../source/docs/common-powering-the-apm2.rst:283
+#: 7c58536c8a9e4054804c8095b7b1dc34
+#: 7811151c252047c5b8649a8b94977ec9
+msgid "6V"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:191
+#: ../../source/docs/common-powering-the-apm2.rst:193
+#: e746f725777048a4a0c7ff9ae76f1967
+#: 108689d379264694bf1ddf97b571e26e
+msgid "JP1 connected"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:193
+#: ../../source/docs/common-powering-the-apm2.rst:285
+#: 63b1e365681d4d0999272015955b0d15
+#: 4c8a540b40ea4a03ad0059a159dd74a1
+msgid "Power on Input PWM connector"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:193
+#: ../../source/docs/common-powering-the-apm2.rst:285
+#: 2f49fdb849f6483a97ebcff073b966ee
+#: 79418e4d9a6d4701ac50264204086b35
+msgid "5.00V +-0.25"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:193
+#: ../../source/docs/common-powering-the-apm2.rst:285
+#: a45042bfb2f34b319c2fedb2adb94627
+#: f28b2c0d7063409ead23642e9315402d
+msgid "5.5V"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:197
+#: 11e7d69a9952447aa7ee87dce8b4f5e4
+msgid "No Power Module and no servos and power provided by BEC from ESC"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:199
+#: 31b3214eab2b4100ba829574d43d6d6d
+msgid "If you do not have a power module and you are not using servos."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:200
+#: c8f085cedcb04112809419cc6313fba6
+msgid "Ensure JP1 is installed and provide the necessary power via the BEC from one of your ESC's."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:202
+#: b3161f6a5f4d4f2b986c51fc35c2b973
+msgid "Connect one ESC's BEC power and ground wires to one pair of the APM OUTPUT connectors power and ground pins."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:204
+#: bee0b731c17743bd82247c70ac2084bc
+msgid "Clip the BEC power leads on the remaining 3 wire connectors."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:205
+#: 7f0a3a4db84d42f28c372c37fff46802
+msgid "Ensure that the ESC's signal wires are connected to the appropriate APM OUTPUT connector signal pins."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:207
+#: dcff200623b94c61980569a94d247aa5
+msgid "You must ensure that your ESC's BEC has a sufficient power capability (at least 2 amps)."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:210
+#: 0935e25821d9426780c93df094af930e
+msgid "Most 20 amp or higher ESCs have 2 amp BECs."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:213
+#: a53b916a18f94c7cb517a33844a1b869
+msgid "No Power Module but using servos and a high power External BEC"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:215
+#: cc756e041bc74782840b87b6a7628ded
+msgid "If you do not have a power module and are using servos you can use a high power external BEC."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:217
+#: 032d2cf403b6449caab0c2ad8b1a2b3a
+msgid "Ensure JP1 is installed and provide the necessary power via a high power external BEC (5 to 10 amps or more)."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:219
+#: 5f7a587792974321a94156c06205940e
+msgid "The BEC power **must** be provided to one pair of the APM OUTPUT connector pins."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:224
+#: d4cb0ee36a4444c7b1955f23654875f7
+msgid "Clip all power leads on the ESC's BECs (they would conflict"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:225
+#: 449ea4b067f647129ef86d7dac065fae
+msgid "with the external BEC)."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:227
+#: 5d98ca90e4c84701859d07502faf9890
+msgid "Your servos will determine the size of the BEC required."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:228
+#: 2f448e60d15a488d98caec34226189f1
+msgid "You should allow at least 2 or 3 amps extra to power the APM, receiver and to prevent (brown outs)."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:230
+#: c7e00cc3d16642a6a72f6bf78de54c1e
+msgid "All of the positive power for driving each servo must come from the OUTPUT connector."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:233
+#: 6fa470a94b6c46478755b57cf937d7d2
+msgid "This is true even if the servo(s) signal wires are connected to the ADDRESS connector."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:236
+#: 08c16f3777d64af9b3ebfdb8b274198d
+msgid "This option requires you to take responsibility for providing sufficient power to prevent brownout."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:240
+#: e7b3d9cbced94212a72d61b6e549ac67
+msgid "No Power Module but using servos and multiple BECs from ESC's (A BEC for each servo)"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:242
+#: f1ae17cd28a34149b57e2a2f95ab49a5
+msgid "If you do not have a power module and are using servos you can use multiple BECs from your ESC's."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:244
+#: c0dc8d16e24443e5a8242a4ef7a562ce
+msgid "Ensure JP1 is installed and plug one of your ESC's signal cables with power leads into the OUTPUT connector."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:246
+#: 878867dfb633471cb1ca8ee6efb3b3cb
+msgid "Remove the power and ground leads from the remaining ESCs signal cable connectors."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:248
+#: 7e17e03a1ba54f3e845e6786431696cb
+msgid "Plug the signal wire connector from each ESC onto the appropriate pin on the OUTPUT connector."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:251
+#: 52ed173a405b4d7ba04b2d6472465d7f
+msgid "You can heat shrink these or plug them into a multi-wire connector appropriate for your copter."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:254
+#: a2d8b84064f846779110da7550d88a89
+msgid "Connect one pair of each of the remaining BEC power and ground lines to the power and ground of each individual servo."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:256
+#: c3d9e84a6f604914b39137f75d64c507
+msgid "Clip or heat shrink any remaining excess BEC power and ground leads."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:257
+#: b710ae2af47d44d680bd9b9f46444903
+msgid "The BEC power from one ESC \\ **must** be provided to one pair of the APM output connector pins."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:259
+#: fc3613c66c6d4005a271299645ddb8ee
+msgid "Plug only the signal input wire from your servos into the appropriate OUTPUT or ADDRESS connector pin."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:261
+#: 1464999e42bb48bbb98c4b209d896368
+msgid "Your ESC's BECs should be at least 2 amps."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:262
+#: 2610bdc020eb4c34af2686d092b4340a
+msgid "The ESC's BEC grounds are in common with battery and internal signal ground so grounding the servos this way is OK."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:266
+#: 2577fd86cab6430390c147e075f954af
+msgid "Power supply rails not connected requirements (JP1 Not Installed)"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:283
+#: 85c449d709404387ae88f0a4ee66b2ff
+msgid "5.00V +-0.5"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:283
+#: ../../source/docs/common-powering-the-apm2.rst:285
+#: 00b71881adc74062a36e48b095f6b314
+#: 2d0ffdd8d6084efcb558c797a50d1014
+msgid "JP1 open"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:289
+#: 67df1656c90c4878bb2e9c2a02316fdb
+msgid "Power Module and no servos"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:291
+#: b3a03731cf694f0bbde8ac7e082213aa
+msgid "If you have a power module and you are not using servos."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:292
+#: f9d6f2c3257d4174922918d38ba3d2e7
+msgid "Ensure JP1 is not installed."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:293
+#: b8c3402ed8b040299cd3f87b36bdd9f9
+msgid "Provide the necessary power via the power module connected to the APM's power module connector."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:295
+#: ../../source/docs/common-powering-the-apm2.rst:310
+#: 1cb3b2a547334976bae2fae084a9afaa
+#: 976fde990dd3413ebf15203b24d92935
+msgid "When connecting your ESCs to the OUTPUT connector clip the BEC power leads on each ESC's 3 wire connector."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:298
+#: 3f3e228940ae4e189c579e222f061557
+msgid "Or connect only the ESC's signal wires to the OUTPUT connector."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:301
+#: 5e007908621c4411966a6587a0fa38bc
+msgid "Power Module and using servos with external BEC power"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:303
+#: 1b339a239cf64388bc58f6c3f08b959d
+msgid "If you have a power module and an external BEC and you are using servos."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:305
+#: 48d8e61a1cf4488f8fba9b74d7a88f42
+msgid "Ensure JP1 is Not installed"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:306
+#: 93482db585194aa2926b1282d8ee8e91
+msgid "Provide APM board and receiver power via the power module connected to the power module connector."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:308
+#: 553809ec7ed34aec8515461d295482de
+msgid "Connect an external BEC with sufficient power for your servos to one pair of the OUTPUT connector power pins."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:313
+#: 9314111b985d4dd2934acec2072bba4c
+msgid "Or connect only the ESC signal wires to the OUTPUT connector."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:316
+#: 96eb811c750d40d29c1ce476c9d7d750
+msgid "Power Module and using servos with BEC power from one ESC"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:318
+#: 3ba37dedefbb43669ae528e82bc50e5e
+msgid "If you have a power module and you are using servos Remove JP1."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:319
+#: 231e80e8b5f3458899945ed67f4b3370
+msgid "Provide APM and receiver power via the power module connected to the APM's power module connector."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:321
+#: ../../source/docs/common-powering-the-apm2.rst:339
+#: 92a462bdcc214a71aa2116a1a050e9f8
+#: a3d4073377524afdb6c65a8f0e25a96e
+msgid "The BEC of a single ESC must provide sufficient power for all your servos."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:323
+#: eb7ceef9a1d545f2a25064307874dfe4
+msgid "When connecting your ESCs to the OUTPUT connector clip the BEC power leads on all but one of the ESC's connectors."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:325
+#: 0e0368c74a134d6c8e3dc7acbefa8f6f
+msgid "Or connect only the ESC signal wires to the OUTPUT connector for all except one ESC."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:328
+#: 2b3898e37c554ee1bd2240ec4528eb15
+msgid "And on that ESC connect all 3 wires to the OUTPUT connector."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:331
+#: 73fbd0090462464e8493941a98dc3923
+msgid "No Power Module and using Servos with BEC power from two ESCs"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:333
+#: 68c0245fbe6e4f1d81f3a34ab0201914
+msgid "If you do not have a power module and you are using servos remove JP1."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:335
+#: 89e297f9a3bd432dbbc36ecc9813ab84
+msgid "Provide APM and receiver power via 1 pair of ESC-BEC power wires connected to the APM INPUT connector power pins."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:337
+#: 49367bebd0824c92b8706a056aacb37d
+msgid "Also connect another of the ESCs power wire pair to the OUTPUT connector."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:341
+#: bc1af0c9c49f40c795cff1ed3701e040
+msgid "Clip the signal power leads on your remaining ESC's."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:342
+#: bab9b42f4e1c4330985f83d7e217da51
+msgid "Connect all ESC signal wires to the appropriate OUTPUT connector pins."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:346
+#: 000ba9e632c84ae88ab300813842f516
+msgid "APM Power Wiring Example"
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:350
+#: ../../source/docs/common-powering-the-apm2.rst:394
+#: 916d7cd67d964fdb848d1b66eec666b6
+#: bf2218178b3f432aa7eb6ace677e2b95
+msgid "Do not exceed Abs MAX input voltages when connecting power supply or you will damage your board."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:360
+#: 14ff490cc4374c2db745454f4ecd83d6
+msgid "On the bench, you'll probably be powering the board via your USB cable while you set it up and test it. But in your aircraft, you'll need to power it with your on board power system, which is usually your LiPo battery going through an ESC or the Power Module. In the case of a multicopter, this can come through your Power Distribution Board (PDB), which will break out the 5V output from the one of the electronic speed controls (ESCs) or the Power module which is wored directly to the battery."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:369
+#: 0c9c43ca86eb403baf623eeb807d0f4f
+msgid "In the picture below, the red and black wires are the 5b    m hV power cable coming from a PDB. You can plug them into any two pins along the 5V and Ground (middle and outer) rows of pins on APM 2.5's Output side. The other cable, which in this case is a four-wire cable with orange and white wires for a quadcopter, is the signal cable to the PDB, which are the wires that APM 2.5 will use to command each of the ESCs."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:376
+#: a03beb1b5d36462296e400bb21ff1a1b
+msgid "The picture below is of APM 2; but the concept is applicable to APM 2.5."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:381
+#: 02957e4692a04619be7ae4de1570ece9
+msgid "It's also possible to power APM 2.5 from two separate sources, one powering the RC system on the input side, and the other powering the output side (servos or ESCs). This is determined by a jumper on the JP1 pins (see below). If the jumper is on, which is the factory default, the board is powered from the OUTPUT rail or the USB. If the jumper is off, the board is powered from the INPUT rail, but the OUTPUT rail will need its own power source. This configuration is used if you want to have two separate power sources in your aircraft, one powering the servos and the other powering the electronics. The ideal input voltage is 5.37v +/-0.0v and may not be provided by a typical ESC."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:397
+#: cb6c114eb86448a798a383c2a0cf9e32
+msgid "In some cases it may be a good idea to set the input voltage slightly above the median (but below the maximum) to account for possible voltage drops during momentary high current events."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:401
+#: e692e07962994b249b853c5a22d71592
+msgid "The APM2.5 by itself draws relatively little current (200ma range) and a power source capable of providing 300 - 500ma will provide plenty of margin. However, if servos or other power consuming devices are being driven by the same power source you must consider the power requirements for those devices as well and provide plenty of margin to prevent disastrous \"brown-outs\". For instance, a single digital servo can easily draw 1-5 amps depending on its size and performance. (Note: ESCs do not consume power from the APM) If you experience spurious resets or other odd behavior it is most likely due to noisy or insufficient power to the APM. As with all logic boards, electrical noise from the motors, servos, or other high current devices on the power source can cause unpredictable behavior."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:414
+#: ddecb73da2b541bdb7b780cdd1f71784
+msgid "It is recommend that a \\ `power filter <http://www.dpcav.com/xcart/Power-Supply-Filter-L-C-Type.html>`__ be used in such conditions."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:417
+#: 145aca46355249018847da59da1370eb
+msgid "Too short or long power wires, bad or old connectors, or insufficient current capability of the APM power source can result in a \"brown-out\" situation resulting in unpredictable operation. This is particularly true in traditional helicopters where the collective servos can draw 3-20 amps in short bursts. The power source must be able to accommodate this without voltage droop or voltage spikes. A quality switching type BEC (e.g one of `these <http://www.castlecreations.com/products-search?qs=bec>`__ or one of `these <http://www.western-robotics.com/WRL-HBECM2>`__) can be a solution depending on overall current requirements. Many of these type of regulators are programmable so remember to program them with in the safe operating range of the APM2. Linear voltage regulators are not recommended as they are inefficient and prone to overheating and heat induced failures. APM2 should never be connected directly to a battery of any type."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:433
+#: 225ee592a57744a2a055a0bd3b7e3ae3
+msgid "Power source problems are common and can be insidious and frustrating. Be meticulous. Any autopilot or autopilot is useless and potentially dangerous without good clean power source."
+msgstr ""
+
+#: ../../source/docs/common-powering-the-apm2.rst:437
+#: 61c5810ee9b647a48c0bb5cd757a00ce
+msgid "The picture below is of APM 2; but the concept is applicable to APM 2.5/2.6."
+msgstr ""

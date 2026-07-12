@@ -1,0 +1,202 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/quicktune.rst:5
+#: 8e82ef830c4f438c9ee23ef7e3a36e54
+msgid "VTOL QUICKTUNE"
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:9
+#: e3137f9fb59d402c8421ef0cfb8720bf
+msgid "ArduPlane provides a quick means of obtaining a good tune for Quadplanes in VTOL modes. The process slowly increases the relevant gains until it detects an oscillation.  It then reduces the gains by 60% and moves onto the next gain. Once all the gains have been tuned the tune completes and the user can decide to save or discard the new gains."
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:11
+#: 91c52c856d8c4e07a28aa1f15aa16cad
+msgid "be sure that you have prepared the vehicle for tuning by setting up parameters discussed here: :ref:`quadplane-vtol-tuning-process` Steps 1 to 11 and then use this mechanism in Step 12. Also to assure the best tune, setup the noise notch filtering, see :ref:`common-imu-notch-filtering`. You may run QUICKTUNE without this step to obtain initial fine tune, see :ref:`ac_rollpitchtuning` if the vehicle can't do an initial hover stably. Then setup the filters and retune for best results."
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:13
+#: 04b3f685553745b39d6bd526fc5ab891
+msgid "The script attempts to automatically tune the P/I and D gain of each axis enabled for tuning when an two or three position RC switch, whose ``RCx_OPTION`` is \"181\", is moved to the \"tune\" position. It will, by default, also adjust some PID loop filter values based on the :ref:`INS_GYRO_FILTER<INS_GYRO_FILTER>` setting."
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:15
+#: 2b890b1e022f43d0be0029c07ad41353
+msgid "The advantage over QAUTOTUNE is that QUICKTUNE is safer because the vehicle does not need to move or twitch and QAUTOTUNE can occasionally result in instablity. Therefore QAUTOTUNE is not longer recommended for use, except by experts."
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:17
+#: 4ef90cd1d6194f4ca665eb0b1e3b7896
+msgid "The disadvantage is that QUICKTUNE cannot find the vehicle's maximum rotational accelerations or tune the attitude angle outer loops from their default or pre-tune adjusted (:ref:`quadplane-vtol-tuning-process`) values. However, tuning only the inner rate loops usually will yield a stable, safe flying vehicle."
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:20
+#: 99e01e2f7964490398131d6c0fe2bdbd
+msgid "Setup"
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:21
+#: 70c278ade551492480b71fdd5f6dca04
+msgid "Set :ref:`QWIK_ENABLE<QWIK_ENABLE>` = \"1\" to enable QUICKTUNE."
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:22
+#: f46d06a82ab14e4ebb06921cbbc1c352
+msgid "Set :ref:`QWIK_AXES<QWIK_AXES>` to which axes (Roll/Pitch/Yaw)."
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:25
+#: 23a135e828d14ae79d9acb51c96f0531
+msgid "Activation RC Switch"
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:26
+#: a690759ae31e4a0ebe75de32bcb9c250
+msgid "Set up a two or three position RC switch with ``RCx_OPTION`` = \"181\". If it is a two position switch set :ref:`QWIK_OPTIONS<QWIK_OPTIONS>` bit 0 to \"1\", and you probably want to set the :ref:`QWIK_AUTO_SAVE<QWIK_AUTO_SAVE>` parameter to autosave the tune once completed."
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:28
+#: ad79b23363d7475ea57b757d283f32c1
+msgid "With a three position switch, moving the switch to \"high\" (>1800us) is the \"save\" position which will save the current tune parameters, even if the tune is not completed yet. Moving the switch to the middle position activates the tuning process (\"tune\"). Moving the switch to the \"low\" position (<1200us), stops the tuning and reverts the parameters to their values before tuning began."
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:30
+#: 58ea2ecf109e438cbeacc48600977ca1
+msgid "RC AUX switches only operate on transitions of the switch. Their position at boot does nothing, so if a switch is \"high\" at boot, in order to get the \"high\" function, it must be moved to another position and then back \"high\"."
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:32
+#: 52fee9d2b0524b5ebd578c306fbbd548
+msgid "With a two position switch, \"high\" is the \"tune\" position, and \"low\" stops/reverts tuning. In order to save parameters, you must have set the :ref:`QWIK_AUTO_SAVE<QWIK_AUTO_SAVE>` parameter or use a GCS AUX switch facility."
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:35
+#: c7ac3208b0cb46dfbba8c790a4aacda1
+msgid "Tuning Flight"
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:36
+#: d70a39e80d04436595e0ae5202fef64d
+msgid "Wait for a calm day and go to an open area with good GPS reception"
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:37
+#: 424375c233794b05ad05a60bd43022a2
+msgid "Use an OSD, TX OSD (using :ref:`Yaapu <common-frsky-yaapu>`), or GCS. This is where output from the tune will appear"
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:38
+#: 424e3dd9f7c1434eb0dad6d72dbc472d
+msgid "Move the RC switch to the low position OR push MP's Aux Function's \"Low\" button"
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:39
+#: 28c883e797e84a47a0b83fbb70aa1ac3
+msgid "Arm and takeoff in QLOITER mode and climb to a height of about 3m"
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:40
+#: d5ee41aff8a34a338f482fc2b33da8eb
+msgid "Begin the tune by moving the RC switch to the \"tune\" position OR push MP's Aux Function's \"Mid\" button"
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:41
+#: c765b83493014d8197c4818cc5b31414
+msgid "Monitor the progress of the tune using the GCS's Messages tab"
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:42
+#: 6a07b771dc254398becd668244116c39
+msgid "If necessary reposition the vehicle using the RC transmitter.  This will temporarily pause tuning.  Tuning will resume a few seconds after the RC sticks are returned to their center position"
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:43
+#: 4e6497cb57434568b554687f9bb985f9
+msgid "If the vehicle begins oscillating violently you can cancel the tune by moving the RC switch to the low position OR push MP's Aux Function's \"Low\" button. If the vehicle rocks or pitches more than :ref:`QWIK_ANGLE_MAX<QWIK_ANGLE_MAX>` the tune will automatically abort."
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:44
+#: 519b61539ba840f699c26438d77d7bf9
+msgid "Once the tune has completed accept the new gains by moving the RC aux switch to the \"save\" position, wait for the :ref:`QWIK_AUTO_SAVE<QWIK_AUTO_SAVE>` timeout, OR push MP's Aux Function's \"High\" button"
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:45
+#: 78322fb187d440dea083c953dbc6532a
+msgid "Land and disarm the vehicle"
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:48
+#: d664d7f5d305407db242fb4bee29c7d6
+msgid "Advanced Configuration"
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:49
+#: af974246a4e1479090a7bbe4a3311a3e
+msgid "Additional advanced parameters are shown below, but normally do not need to be changed and, then only by experienced users:"
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:51
+#: de7f087bf5944244bbce4593b2879882
+msgid ":ref:`QWIK_AUTO_FILTER<QWIK_AUTO_FILTER>`"
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:52
+#: ac18c20caea94696a0fc63adfde4144e
+msgid ":ref:`QWIK_DOUBLE_TIME<QWIK_DOUBLE_TIME>`"
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:53
+#: 9911853898c0479a892f589bd9c996f4
+msgid ":ref:`QWIK_GAIN_MARGIN<QWIK_GAIN_MARGIN>`"
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:54
+#: 8e65b77d97e14ed78262e8661d2b9f86
+msgid ":ref:`QWIK_OSC_SMAX<QWIK_OSC_SMAX>`"
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:55
+#: ef5543bb405845d4a7a490ec39d08a1a
+msgid ":ref:`QWIK_YAW_P_MAX<QWIK_YAW_P_MAX>`"
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:56
+#: 27cb6373b9f64402acb8dd90d7f2f1d6
+msgid ":ref:`QWIK_YAW_D_MAX<QWIK_YAW_D_MAX>`"
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:57
+#: 15c3a44bce474ef085ea6762746594dc
+msgid ":ref:`QWIK_RP_PI_RATIO<QWIK_RP_PI_RATIO>`"
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:58
+#: c229205e6f6443698947c48dbbcf5e42
+msgid ":ref:`QWIK_Y_PI_RATIO<QWIK_Y_PI_RATIO>`"
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:59
+#: 04c421fa5bc3422488fd1561ebaf4d69
+msgid ":ref:`QWIK_REDUCE_MAX<QWIK_REDUCE_MAX>`"
+msgstr ""
+
+#: ../../source/docs/quicktune.rst:60
+#: 68e98671fa304656841918b73fa3b190
+msgid ":ref:`QWIK_ANGLE_MAX<QWIK_ANGLE_MAX>`"
+msgstr ""

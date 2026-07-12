@@ -1,0 +1,412 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Sub package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Sub \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:43+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-ethernet-vehicle.rst:5
+#: 342a17caf42948d8828be86eaba6d0ca
+msgid "Ethernet Connected Vehicle Example"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:11
+#: 8d321b46f7b543869a50b4294d14a6d4
+msgid "This is to illustrate an actual ArduPilot Ethernet-based Vehicle and its setup. The example vehicle will include an HD Video Stabilized Gimbal with video transmission to the ground controller and a long-range radio control system with a ground controller that displays the HD video, provides vehicle control, displays vehicle telemetry, and controls the gimbal and camera, as well as rebroadcasts to other ground control stations like a laptop. An Ethernet-capable autopilot running ArduPilot 4.5 is used."
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:14
+#: 61bc082361454fa3be0614b618a8c45b
+msgid "System Configuration"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:17
+#: b3531f52dacf4093939a07ab5292fcc5
+msgid "Equipment Used"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:19
+#: 69ec57934e2146f0a69df683339623d0
+msgid "(donated by CUAV , SIYI, CubePilot, and BotBlox for this article)"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:21
+#: 91f7c69737124206a448120128558664
+msgid "Hexsoon EDU650 Multicopter from CubePilot"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:22
+#: a62ea2de7153486db5479730bd25b30b
+msgid ":ref:`CUAV Pixhawk V6X <common-cuav-pixhawkv6X>`"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:23
+#: 719f5adfaf334fc3a63d4cd02771e7cf
+msgid ":ref:`SIYI A8 Mini Gimbal/HD Camera <common-siyi-zr10-gimbal>`"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:24
+#: ec86047b21884e1689695de9201e8940
+msgid ":ref:`CubePilot Herelink Telemetry System <common-herelink>`"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:25
+#: 4f717700ac1445ceaf2e479678b5701a
+msgid "`BotBlox ArduPilot Ethernet Switch <https://botblox.io/switchblox-for-ardupilot/>`__"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:27
+#: c76dcd12eae04e87a1ed81a971ca44a0
+msgid "Note: many other brands of gimbals/cameras/radio control systems/autopilots are Ethernet capable and can be used in similar configurations"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:30
+#: 7b9ad88c34c2442fb214276d5486be75
+msgid "Ethernet Switch"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:32
+#: d56d0bc1d6704cb9a7ee95f0545ed608
+msgid "Since there are more than 2 Ethernet devices in the system, it is truly a network and to provide interconnectivity an Ethernet Switch is used. It forms the \"heart\" of the system. In this case, it's a small BotBlox switch specifically designed for ArduPilot applications with convenient JST_GH 1.25mm connectors:"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:38
+#: ee5417781f2e438785a7927f2dd3d4d1
+msgid "The gimbal, autopilot, and wireless air unit all plug into this and the Ethernet traffic between them is automatically routed."
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:41
+#: 4a99b0854cbf44bdbb04b1fc17c74257
+msgid "AutoPilot Basic Setup"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:42
+#: 59a400b3a943408392cb34dcf02733fe
+msgid "To enable Ethernet on the autopilot the following parameters are set (other NET params stay at default) and reboot the autopilot"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:44
+#: 2db4c0941309444eacfebf2b018628b0
+msgid ":ref:`NET_ENABLE<NET_ENABLE>` = 1"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:46
+#: 508a0109a2b4426aa5e592d18c5fbe93
+msgid "then set the autopilot's IP address, it must be in the 192.168.144.x to be in the Herelink's listening range..this will drive other addresses to be set later also:"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:48
+#: abe77e7b2d7c4ad1983451bdc7e6d5ae
+msgid ":ref:`NET_IPADDR0<NET_IPADDR0>` = 192"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:49
+#: 77c38daa624e45f085a565fe70266e7c
+msgid ":ref:`NET_IPADDR1<NET_IPADDR1>` = 168"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:50
+#: 50accb51f5654533aaa5749c8003f327
+msgid ":ref:`NET_IPADDR2<NET_IPADDR2>` = 144"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:51
+#: 1b76a33ee52b4f6b81958c3841fb8acc
+msgid ":ref:`NET_IPADDR3<NET_IPADDR3>` = 26 <- arbitrarily chosen but must not be 11 (Herelink fixed address)"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:52
+#: cccb9956dbcb4ba08cc14b556ec80a6a
+msgid ":ref:`NET_NETMASK<NET_NETMASK>` = 24 <- this says we are in a subnet with addresses 192.168.144.1 to 192.168.144.254"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:54
+#: b7e0cc28b2814b51b841f1b26b2b63d7
+msgid "if the autopilot needs to communicate with IP addresses outside this range it will use a \"gateway\" in the subnet...we won't be doing this but it still needs to be set:"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:56
+#: bbb7199b3828471b957d105c171014a2
+msgid ":ref:`NET_GWADDR0<NET_GWADDR0>` = 192"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:57
+#: e49069d221bd4798bd9064bcac95b6c4
+msgid ":ref:`NET_GWADDR1<NET_GWADDR1>` = 168"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:58
+#: 139983d0ac2a4b4d8f023aa86b4faf58
+msgid ":ref:`NET_GWADDR2<NET_GWADDR2>` = 144"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:59
+#: f612238d0b1a4dbba8f12bb9ab846047
+msgid ":ref:`NET_GWADDR3<NET_GWADDR3>` = 1 <- typical address of subnet gateway"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:61
+#: c0eeaa79705b44b7ac5ef59a4d9bf41b
+msgid "Now basic Ethernet for the autopilot is enabled"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:64
+#: 3c030780c6a04d3aa54571a31cbace11
+msgid "Gimbal Camera Setup"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:65
+#: d746d9f37ac945729b7b28738a1ce7f2
+msgid "Set :ref:`CAM1_TYPE<CAM1_TYPE>` = 4 to allow camera control of shutter, etc."
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:67
+#: cdf34b174042490986edfcfcd9e57937
+msgid "The gimbal/camera must be set up to use the Ethernet for video streaming and its IP param setup. To do this download the `SIYI Assistant <https://siyi.biz/en/index.php?id=downloads&asd=22>`__ and use it to set the following:"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:72
+#: a2073fa6cdf5482b80e1aaaa748775a9
+msgid "save and power cycle the gimbal."
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:74
+#: 6e27f1fd67524238b723545875ecb47d
+msgid "This sets the gimbal's IP address within the Herelink's listening range for passthru to the ground controller to display video and sets its video output to Ethernet with an H.264 encoded stream that the ground station can decode. Now the camera will be streaming video over Ethernet, through the switch, and the Herelink air unit will transmit it down to the ground controller."
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:76
+#: e2617b6b29b14d578101b2393e9f56cc
+msgid "As of this writing, the SIYI A8 camera has about 1 second image latency over Ethernet which makes its use for realtime FPV guidance not viable. I also have a mini HDMI cable attached from the SIYI HDMI port to the Herelink's HDMI1 input and switch the source in the SIYI Assistant to HDMI rather than Ethernet (source = \"Close\") when I actually fly. Other gimbals from SIYI or others may or may not have this issue. Also the Herelink Air Unit uses better bandwidth management if the HDMI input is used. But the setup illustrates the method for use in other device combinations."
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:79
+#: aa36bef028454f898a54794559b5ea03
+msgid "Gimbal Control"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:81
+#: 837caa853ade44448a95b3a9135e3d61
+msgid "Control of the gimbal (pan/tilt/camera start/stop,etc.) over Ethernet is obtained from the autopilot which interprets MAVLink commands (also AUX switch inputs) and sends them to the gimbal. First, we must set up ArduPilot to control the Mount/Camera:"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:83
+#: 7dafae2373e4490480df56e57024ecf0
+msgid ":ref:`MNT1_TYPE<MNT1_TYPE>` = 8 This selects the SIYI mount type"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:85
+#: 156772afc2fd4648ac7022636334a36e
+msgid "then reboot to see all the MNT params and set:"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:87
+#: 1aecbe97c1744463abc9b6492e30fd08
+msgid ":ref:`MNT1_YAW_MAX<MNT1_YAW_MAX>` = 135"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:88
+#: e93f34b41fd9465caebcc75be81ba8d1
+msgid ":ref:`MNT1_YAW_MIN<MNT1_YAW_MIN>` = -135"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:90
+#: e1ccff13c6ce4e81b5d93b2dbde03136
+msgid "which is the limit of the yaw that SIYI can accommodate."
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:92
+#: a82ad16e2eeb43759c8a2d355a982645
+msgid "Then we need to set up an Ethernet mechanism to communicate. Using the NET_P1 params we will create a \"virtual\" serial port to talk to the mount/camera, just as if we were using a UART (which the SIYI could also use instead of Ethernet control, but why add wires?). Set:"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:94
+#: 4fdd9344ab0e4ea8b20736e882a5ead4
+msgid ":ref:`NET_P1_TYPE<NET_P1_TYPE>` = 1 <- UDP Client type of port"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:96
+#: e6e7bf3ceca2456aad4a10fde4dac57f
+msgid "reboot for the params to show:"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:98
+#: a33318fed15e4a70b17d098df94407fc
+msgid ":ref:`NET_P1_IP0<NET_P1_IP0>` = 192"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:99
+#: 4789a9fbf30345caba7e0a0a69b0732e
+msgid ":ref:`NET_P1_IP1<NET_P1_IP1>` = 168"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:100
+#: 31b2dc666d4c408ca3921304be8e2ebd
+msgid ":ref:`NET_P1_IP2<NET_P1_IP2>` = 144"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:101
+#: b5d177facd3647ffa49dedb38e2065f0
+msgid ":ref:`NET_P1_IP3<NET_P1_IP3>` = 25   <- the IP address we set for the Gimbal previously"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:102
+#: 39e06d9e6e564c6a8a3c271bdaa9d1d5
+msgid ":ref:`NET_P1_PORT<NET_P1_PORT>` = 37260 <- this is the port that Gimbal listens for commands"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:103
+#: 29ad686a92d04546964f5a006a573383
+msgid ":ref:`NET_P1_PROTOCOL<NET_P1_PROTOCOL>` = 8 <- Gimbal serial protocol"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:105
+#: e3c67afae98844669078a6a1c6c3f1ad
+msgid "Now gimbal/camera commands from the autopilot (MAVLink or AUX functions translated to SIYI commands) will be sent to the SIYI gimbal"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:108
+#: a2cf4bd3e57b4a8a827e1e0934c30908
+msgid "Telemetry Setup"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:109
+#: 8c6bf55fbabe4a26ae2ae110cd38f32c
+msgid "In order to display telemetry and communicate MAVLink commands to/from the GCS app running on the Herelink ground controller, we must set up a MAVLink path from the autopilot to Herelink air unit. We will use another \"virtual\" serial port (NET_P2) on Ethernet to talk from/to the autopilot to/from the Herelink air unit:"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:111
+#: ed2ffe973ba646a1a9c46a28a13b69d9
+msgid ":ref:`NET_P2_TYPE<NET_P2_TYPE>` = 1 <-UDP Client"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:113
+#: 49a2470f38554dd28a4443b0322f6ada
+msgid "rebooot for the params to show:"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:115
+#: ddece6495d3e4d2390891e028a4f2347
+msgid ":ref:`NET_P2_IP0<NET_P2_IP0>` = 192"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:116
+#: 9526d0be49564892acadfefc1b8dd05c
+msgid ":ref:`NET_P2_IP1<NET_P2_IP1>` = 168"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:117
+#: feae9e0b68944f068b8488c5eca98ef9
+msgid ":ref:`NET_P2_IP2<NET_P2_IP2>` = 144"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:118
+#: dfbf3c4189f544f3ad37c7e62ff938ea
+msgid ":ref:`NET_P2_IP3<NET_P2_IP3>` = 11 <- this is the IP address of the Herelink air unit"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:119
+#: 6ede7d127aa54a4a84e7b94015ea704d
+msgid ":ref:`NET_P2_PORT<NET_P2_PORT>` = 14550 <- on this port"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:120
+#: 7e4d1e23800b48eaa5c829c130025beb
+msgid ":ref:`NET_P2_PROTOCOL<NET_P2_PROTOCOL>` = 2 <- using MAVLink2 protocol"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:122
+#: 8b0fc9e2cae34687bd174ca9f7d604c6
+msgid "now telemetry will be sent to/from the Herelink ground unit. Opening the GCS app on the ground controller should automatically connect to the UDP telemetry stream."
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:125
+#: ac075ad1083c4a81a5e33f8dfb5ac965
+msgid "Herelink Ground Controller"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:127
+#: 09952f2563dc4dcea93320a3bfe0347c
+msgid "Setup the ground unit according to the OEM instructions, in this case, see the `Herelink User Guide <https://docs.cubepilot.org/user-guides/herelink/herelink-user-guides>`__"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:130
+#: 5e33dbce3cef4e70a4835a0766bca3e7
+msgid "QGC Video Setup"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:132
+#: eea5091771014deebf17744582ba9ce1
+msgid "To see the video stream on the Herelink ground controller when using the QGC app, go to Application Settings/Video settings and select the RSTP source and enter this URL: \"**rstp://192.168.144.25:8554/main.264**\" video should now appear in QGC. Likewise, this source can be used in other GCS apps to display the video."
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:135
+#: 27aa98ad7c8f4b948cd74b8e5f72f56f
+msgid "if you decide to use HDMI (recommended), then leave the setting in QGC at its default setting of \"Autoconnect Video Streams\""
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:138
+#: 9ec02d493637434b83e1ec038fc88a94
+msgid "The Tower of Babel: Physical wiring"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:139
+#: 4f204020ea8249ff924d5bab1680101a
+msgid "The physical interconnects between the devices is a challenge.  Most device suppliers provide some way to cable out the Ethernet from their device. Unfortunately, this usually involves providing a cable with either a large RJ-45 male or female plug/jack, requiring bulky CAT5 cabling for interconnects. And the device end that uses smaller gauge wires to that RJ-45 termination have non-standarized connectors, sometimes 5 pin, sometimes 4 pin JST-GH."
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:141
+#: 56674e5d06dd4c8685516f392637fec4
+msgid "With the aid of something like this BotBlox adapter which has many of the connector that are used wired in parallel, you can usually rig up a bulky set up on the bench for testing:"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:148
+#: a405c7e873e745ebabee9741da2e0b22
+msgid "But this is not viable for actual vehicle use. In this case, I created small 6\" cables with JST-GH connectors. This can be done by obtaining either the appropriate pre-made cables for each pin count and cutting and soldering them together or making them directly with jst-gh connector kits like this:"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:150
+#: f9134dffabd1481db3588737ba8843f7
+msgid "`JST-GH Connector Kit <https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChcSEwjPoYSiv5KGAxV2OtQBHT4YBoMYABAJGgJvYQ&gclid=Cj0KCQjw3ZayBhDRARIsAPWzx8rMSj_O3MBoFRAwBQPcSkhUk40Ecxhq1TsyhpLlm3aw2LPAiYhM5DwaAqAGEALw_wcB&ohost=www.google.com&cid=CAESVuD2zyxxWXp3hmt37m65lY3k6qnCH239PE4QZeVhoKJWIadtox7IVEIC3RJSCOk0yXfyOjujljkmD7qTvIDzK0ZcCqsRF7nQOGf7mrwj4Gz1lA2gdeh-&sig=AOD64_07KlOigavZZp94-roQz78iW0ZSkg&ctype=5&q=&ved=2ahUKEwjct_yhv5KGAxUK5MkDHdzvBnAQ9aACKAB6BAgFEBY&adurl=>`__"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:152
+#: 5ef383c4c027484090eaa84b97407886
+msgid "Here are the ones I made:"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:167
+#: 44579bebfb8a4124b1d78a387d6e93a4
+msgid "Notes on cabling"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:169
+#: 53690d46a8c64ea88e88104b7113b08d
+msgid "You do not have to use twisted pairs for TX and RX if the cables are short (~<12 inches)"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:170
+#: 19d35ebd4246471da619bb9eb28f597b
+msgid "28 gauge wire is sufficient"
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:171
+#: aa1aa8a5853042dc86f24b8f3aedcc17
+msgid "When you interconnect Ethernet devices, hosts(in our case the autopilot, gimbal, and Herelink) connect to switches with \"crossover cabling\" , ie device TX pairs go to RX pairs on the switch, and vice versa. In the above cables you will note that the SIYI cable does this, but the others do not. That is because the CUAV autopilot and Herelink have an advanced Ethernet IC that autodetects if the cabling is not \"crossover\" and internally accommodates this (\"Auto MDX\"). The SIYI gimbal does not."
+msgstr ""
+
+#: ../../source/docs/common-ethernet-vehicle.rst:174
+#: 36ecb0e50610483b9c780e995d8263bb
+msgid "The Finished Vehicle"
+msgstr ""

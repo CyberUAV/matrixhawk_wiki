@@ -1,0 +1,205 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:10
+#: be1f951f08e54eabab4d9e2dc9da7391
+msgid "Soaring SITL with Silent Wings"
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:12
+#: 09f5ed48caa84097aa79f6d8a1465e85
+msgid "Silent Wings is a simulator that focuses specifically on sailplanes. In spite of being somewhat dated by now, as of April 2019 it still provides some of the most accurate simulations of sailplane flight and details of atmospheric phenomena that matter for it, such as thermal lifecycles, distribution of thermal and ridge lift over terrain, their dependence on weather, etc. This makes it a great tool for testing various aspects of autonomous soaring."
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:14
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:23
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:82
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:94
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:114
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:121
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:130
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:137
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:144
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:151
+#: 3d409f53cd16434a9a3bdbd3af40ea75
+#: d0c6cb1cc85f40f9a39ea01596a933b7
+#: caa16c29719d402d9ec9ee9049325ba0
+#: 95520d9ce2094912992a8bf1ee45a20c
+#: 6a664873966b4268bce62410c0546e2a
+#: 79a36ef1c9354d3ca40915cd71a96911
+#: 709dee7d266a4f95abd46dff6e7f3a86
+#: 977d0c800f41446fbb86256ad422fab5
+#: daf560fbebb744a0ae443508d6a79972
+#: 2c17676fbc8b4445912e4435e3f22286
+msgid "|br|"
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:17
+#: d984f582618a431e8ce9557cc31d4d09
+msgid "Overview"
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:19
+#: 4577f8bf3dd84babb55eda43223c116f
+msgid "This document describes how to run ArduPlane software-in-the-loop (SITL) simulation with Silent Wings. Whether you are working on a soaring controller for a specific type of lift (e.g., thermal lift) or a cross-country sailplane navigation strategy, you may find it useful to test your approach in simulation. This is especially true for long-range navigation, whose evaluation in the open world is logistically difficult and expensive. SITL testing allows you to do exactly that by compiling ArduPlane code into a special binary that can run on your regular computer, receive sensor data from a simulator running on the same or different machine, and send inputs back to the simulator in order to control a simulated sailplane."
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:21
+#: 2e669f849fe4456a9aec33b4f3578aea
+msgid "The following instructions have been tested on Windows 10."
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:26
+#: 68eccc05cfba4a2db151d6725e6ded65
+msgid "Prerequisites"
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:28
+#: 71dde3e9cc914e4782b1f3088c08085a
+msgid "**Install** `Silent Wings <https://www.silentwings.no/a/download/downloadPage/simulator>`_ **and at least one** `scenery package for it <https://www.silentwings.no/download/scenery/>`_ **.** The 2-week demo version can be used to try out these instructions. We suggest starting with Norway scenery packages; our example mission uses the Frya-Lillehammer-Starmoen map."
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:31
+#: 023db7180986447eb9ae07119f576c59
+msgid "**Configure Silent Wings to send sensor data and receive control inputs remotely.** To do so, open ``%USERPROFILE%\\AppData\\Local\\VirtualStore\\Program Files (x86)\\Silent Wings\\Silent Wings\\data\\options.dat`` and replace the \"UDP Output protocol\" and \"Remote control protocol\" sections in it with ::"
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:49
+#: 677b5755f9fa4d698a53296f5c95ad9e
+msgid "Also, set ::"
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:53
+#: 27a787c000394e5d91bee254d9a75d9a
+msgid "Note that there is another options.dat file, in ``C:\\Program Files (x86)\\Silent Wings\\Silent Wings\\data``. It is not the one we need."
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:55
+#: 382c86304efa4b8280da10d33ac269b3
+msgid "The output_udp_rate = 90 value works well for screen_refresh = 60. When adjusting the latter, you will probably want to adjust the former as well for smoother control."
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:58
+#: 7d7f91c830ae4bb792d0d0680b1b943c
+msgid "**Install** `Mission Planner <https://ardupilot.org/planner/docs/mission-planner-installation.html>`_, **a ground control station (GCS) software.** Other ArduPilot GCS software may work as well."
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:61
+#: b751d21a7a4147158ce16a6f07f87604
+msgid "**Build the SITL flavor of ArduPlane.** To do so, first `install and configure Cygwin as described here <https://ardupilot.org/dev/docs/building-setup-windows-cygwin.html#building-setup-windows-cygwin>`_. For the purposes of the soaring SITL, you don’t need to perform the steps in the *Set up directories/paths in Cygwin* and *Install Required Python Packages* sections of that wiki, but doing them won’t hurt. Then:"
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:63
+#: 60a09afe014342758e8f1c30c8d578c5
+msgid "Open a Cygwin terminal (or reopen it if you have one already open)."
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:65
+#: c162521eabb84063824af4f3a48109e4
+msgid "If you already have ArduPilot’s source code, in the Cygwin terminal simply switch to the root of your local ArduPilot repo. These instructions assume it is the *ArduPilot* directory."
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:67
+#: a0dde95834e54ef29450909732345898
+msgid "If you don’t have ArduPilot’s source code yet, get it, e.g., by running the following command sequence in Cygwin:"
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:74
+#: f5a016617e8040298ad25145e37045c8
+msgid "Run"
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:85
+#: 2b37a63a69cc491386d3caac42a4af92
+msgid "Running Silent Wings SITL"
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:87
+#: dba1594404d14066b5dbb3bd8db02d92
+msgid "**Launch Silent Wings.** In Silent Wings' *Flight Planner* section, on the *Aircraft* tab choose a sailplane. Note that each sailplane model has distinct characteristics, and ArduPlane needs a parameter (.param) file for that model in order to be aware of them. We provide a `parameter file for Rolladen-Schneider LS-8b <https://github.com/ArduPilot/ardupilot/tree/master/libraries/SITL/examples/SilentWings/Params/Rolladen-Schneider-LS8b.param>`_, and this is the sailplane we recommend as a start."
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:89
+#: c380808623e64ec8ba51ace8f1df0c17
+msgid "Set weather and air traffic conditions on the *Weather* and *Traffic* tabs respectively. On the *Location* tab, choose the map and starting location, and note its GPS coordinates, altitude, and heading. You will need this information when launching SITL. Then click the *Fly Now!* button on the bottom right. The game is going to start in a paused state. Keep it paused for now."
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:96
+#: 925dc5a31d744ec2a8da7d11f08b4484
+msgid "**Launch ArduPlane SITL.** To do so, open a Cygwin64 terminal, switch to your ArduPilot repository's root directory, and run ::"
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:100
+#: 6c3bed3eda9140eaa489c2c8f21d6726
+msgid "e.g., ::"
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:104
+#: c075be2dc9344b779a77d8cbe5a83e6f
+msgid "Here, `<lat>` and `<lon>` are the start location's latitude and longitude that you noted down when launching Silent Wings, with a \"-\" sign if latitude is S or longitude is W. **However, `<alt>` should be the elevation of the start location's terrain above sea level, even if you chose to start in the air.** To determine it, subtract the starting altitude you noted down earlier (it is AGL) from the altitde you see in the top left corner of the Silent Wings window (it is MSL) when the mission starts. The result is the `<alt>` that you need to pass to the SITL. Thus, note that for the mission in the above screenshot, `<alt>` =216, not 800. `<yaw>` is the initial heading you picked for the Silent Wings mission."
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:107
+#: fce69e1a3e0b45ef9ea83da249515510
+msgid "We recommend start locations with near-zero terrain elevation above the sea level, because the SITL flavor of ArduPlane occasionally behaves quirky if the simulated aircraft descends below the home location's `<alt>`."
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:109
+#: f7f2570901084ef6b85b53ab2ef9b5e1
+msgid "At this point, the SITL should be waiting for a connection to the ground control station (Mission Planner):"
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:116
+#: 160c31617e324b07978bb0ec2d449e6c
+msgid "**Launch Mission Planner, connect a joystick, and** `set up the joystick in Mission Planner <https://ardupilot.org/copter/docs/common-joystick.html>`_ to configure its roll, pitch, and yaw axes (other axes will be ignored by Silent Wings)."
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:119
+#: 07b69daeb138498895e1979dc89a50c5
+msgid "Unfortunately, Mission Planner appears to forget joystick settings when it is shut down, so this step has to be redone every time Mission Planner is restarted or the joystick is reconnected. Alternatively, you can try controlling the plane using your keyboard."
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:123
+#: 0d79cbe94c4e4f9a99c6698e4c76f8eb
+msgid "**Have Mission Planner establish connections to Silent Wings and ArduPlane SITL.** To do so, in Mission Planner's top right corner choose TCP, click *Connect*, enter the IP address where Silent Wings is running (127.0.0.1 if it is on the same machine) in the window that pops up, and enter 5760 as the port number in the next window. Wait until the *Connect Mavlink* window disappears, all parameters are copied over, and all calibration messages in Mission Planner's HUD disappear. You should see Mission Planner's HUD report that the GPS has lock and the airspeed sensor reads a value around 0."
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:125
+#: 6009c8a5a72b422ca02326bfc0b3cff0
+msgid "Now ArduPlane is ready to control the plane in Silent Wings."
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:132
+#: c45ddf6015d644efb2d6b1b1409ba301
+msgid "**Load the parameter file for the chosen Silent Wings sailplane into ArduPlane via Mission Planner.** *(This step needs to be done only the first time you fly a given sailplane model in Silent Wings.)* To do so, go to Mission Planner's *CONFIG/TUNING* tab, choose *Full Parameter List* on the left, click *Load from file* on the right, locate the parameter file, and click *Write Params* on the right. After doing this, terminate ArduPlane SITL in the Cygwin64 terminal, close Mission Planner, and repeat steps 2 and 4."
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:139
+#: 8d5683b1e4e842a7a004a78c3e26d817
+msgid "**If desired, load a mission in Mission Planner.** To do so, go to Mission Planner's *FLIGHT PLAN* tab, click *Load WP File* on the right, locate the mission file, and click *Write WPs*. We provide a file for a `test mission near Starmoen, Norway <https://github.com/ArduPilot/ardupilot/tree/master/libraries/SITL/examples/SilentWings/Missions/Starmoen.waypoints>`_."
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:146
+#: 3e108827c9d74a5db9012f1c0befa80b
+msgid "**Start flying!** By now, everything is ready to commence the flight. In the Silent Wings window, hit the \"p\" key to unpause the simulation. You should see airspeed, altitude, and AHRS readings in Mission Planner's HUD closely match those in Silent Wings' top right and left corners. To have Silent Wings' sailplane follow the loaded mission, switch the flight mode to *Auto* in Mission Planner."
+msgstr ""
+
+#: ../../source/docs/soaring-sitl-with-silentwings.rst:153
+#: 0477ca358e6c4c568e8541421034339f
+msgid "A big thanks goes to `Sam Tabor <https://github.com/samuelctabor/>`_ and Thomas Sevaldrud of Silent Wings for their help with the development of this functionality, and to `Jack Langelaan <https://www.aero.psu.edu/department/directory-detail-g.aspx?q=JWL16>`_ of Penn State University for providing valuable insights."
+msgstr ""

@@ -1,0 +1,82 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/code-overview-scheduling-your-new-code-to-run-intermittently.rst:5
+#: c3e2255ffa7141bcb9a7101c4ed4eb0f
+msgid "Scheduling Code to Run Intermittently"
+msgstr ""
+
+#: ../../source/docs/code-overview-scheduling-your-new-code-to-run-intermittently.rst:7
+#: 43c731d0bd4947fd866e9d777540f490
+msgid "This page describes how you can schedule some new piece of code you have written to run intermittently."
+msgstr ""
+
+#: ../../source/docs/code-overview-scheduling-your-new-code-to-run-intermittently.rst:11
+#: 1092aebe50fb4bb39a24a8de4852f6b3
+msgid "Running your code with the scheduler"
+msgstr ""
+
+#: ../../source/docs/code-overview-scheduling-your-new-code-to-run-intermittently.rst:13
+#: 1fd129bb11b54728922033ba7c5fc78c
+msgid "The most flexible way to run your code at a given interval is to use the scheduler.  This can be done by adding your new function to the `scheduler_tasks <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L91>`__ array in `Copter.cpp <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp>`__. Note that there are actually two task lists, `the upper list <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L788>`__ is for high speed CPUs (i.e. Pixhawk) and the `lower list <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L856>`__ is for slow CPUs (i.e. APM2)."
+msgstr ""
+
+#: ../../source/docs/code-overview-scheduling-your-new-code-to-run-intermittently.rst:22
+#: 2ed8a29102ef4237843b3fae6b75ebf0
+msgid "Adding a task is fairly simple, just create a new row in the list (higher in the list means high priority).  The first column holds the function name, the 2nd is a number of 2.5ms units (or 10ms units in case of APM2).  So if you wanted the function executed at 400Hz this column would contain \"1\", if you wanted 50Hz it would contain \"8\".  The final column holds the number of microseconds (i.e. millions of a second) the function is expected to take.  This helps the scheduler guess whether or not there is enough time to run your function before the main loop starts the next iteration."
+msgstr ""
+
+#: ../../source/docs/code-overview-scheduling-your-new-code-to-run-intermittently.rst:60
+#: 0de738b50c2649be862635f4f7a50f6b
+msgid "Running your code as part of one of the loops"
+msgstr ""
+
+#: ../../source/docs/code-overview-scheduling-your-new-code-to-run-intermittently.rst:62
+#: c1261306a2314edcb09375d8dd960d63
+msgid "Instead of creating a new entry in the scheduler task list, you can add your function to one of the existing timed loops.  There is no real advantage to this approach over the above approach except in the case of the fast-loop.  Adding your function to the fast-loop will mean that it runs at the highest possible priority (i.e. it is nearly 100% guaranteed to run at 400Hz)."
+msgstr ""
+
+#: ../../source/docs/code-overview-scheduling-your-new-code-to-run-intermittently.rst:69
+#: 54c4b13a1ff54a779be730215e6dc14b
+msgid "`fast_loop <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L229>`__ : runs at 100Hz on APM2, 400Hz on Pixhawk"
+msgstr ""
+
+#: ../../source/docs/code-overview-scheduling-your-new-code-to-run-intermittently.rst:71
+#: 11c68e77037645eab856e604057f7d71
+msgid "`fifty_hz_loop <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L370>`__ : runs at 50Hz"
+msgstr ""
+
+#: ../../source/docs/code-overview-scheduling-your-new-code-to-run-intermittently.rst:73
+#: 4fc93ca4dea34c888f7c1f527bdfc740
+msgid "`ten_hz_logging_loop <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L333>`__: runs at 10Hz"
+msgstr ""
+
+#: ../../source/docs/code-overview-scheduling-your-new-code-to-run-intermittently.rst:75
+#: d8267187bbb94f5c9a93a762df624085
+msgid "`three_hz_loop <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L398>`__: runs at 3.3Hz"
+msgstr ""
+
+#: ../../source/docs/code-overview-scheduling-your-new-code-to-run-intermittently.rst:77
+#: c1c83dc3c7684f318d4174ed5c8da8f4
+msgid "`one_hz_loop <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L417>`__ : runs at 1Hz"
+msgstr ""
+
+#: ../../source/docs/code-overview-scheduling-your-new-code-to-run-intermittently.rst:80
+#: fde50bca2f014864b0538859c76f4b0b
+msgid "So for example if you want your new code to run at 10Hz you could add it to one of the case statements in the `ten_hz_logging_loop() <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L333>`__ function found in `Copter.cpp <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp>`__."
+msgstr ""

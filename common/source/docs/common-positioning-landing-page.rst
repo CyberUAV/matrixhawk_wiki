@@ -15,9 +15,11 @@ GPS/Compass
 ===========
 .. toctree::
     :maxdepth: 1
-
+    
     ARK GPS <common-ark-gps>
+    ARK DAN GPS <common-ark-dan-gps>
     ARK SAM GPS <common-ark-sam-gps>
+    ARK SAM GPS MINI <common-ark-sam-gps-mini>
     ARK TESEO GPS <common-ark-teseo-gps>
     Avionics Anonymous GNSS + Compass<common-avanon-gnss-mag>
     Avionics Anonymous Compass<common-avanon-mag>
@@ -36,8 +38,10 @@ GPS/Compass
     Holybro M9N GPS Module (DroneCAN) <https://holybro.com/collections/gps/products/dronecan-m9n-gps>
     Holybro M10 GPS Module <https://holybro.com/collections/gps/products/m10-gps>
     Holybro DroneCAN RM3100 Professional Grade Compass <https://holybro.com/products/dronecan-rm3100-compass>
+    MakeFlyEasy POS3 DroneCAN GPS/Compass <common-mfe-pos3>
     Matek DroneCAN GNSS M10-L4-3100 <http://www.mateksys.com/?portfolio=m10-l4-3100>
     Matek DroneCAN GNSS M9N-G4-3100 <https://www.mateksys.com/?portfolio=m9n-g4-3100>
+    Matek DroneCAN AP_Periph GNSS M10-L4-3100 <http://www.mateksys.com/?portfolio=m10-l4-3100>
     Matek SAM-M8Q <http://www.mateksys.com/?portfolio=sam-m8q>
     Matek M8Q-CAN/DroneCAN GPS+Compass+Baro+Airspeed I2C port <common-matek-m8q>
     mRo GPS, GPS+Compass,RTK, and DroneCAN modules <https://store.mrobotics.io/category-s/109.htm>
@@ -45,6 +49,7 @@ GPS/Compass
     Qiotek DroneCAN GNSS M10 QMC5883  <https://www.qio-tek.com/index.php/product/qiotek-m10s-gnss-module/>
     Qiotek GNSS M10 QMC5883 <https://www.qio-tek.com/index.php/product/qiotek-m10s-gnss-module/>
     Qiotek DroneCAN RM3100 Compass <https://www.qio-tek.com/index.php/product/qiotek-rm3100-dronecan-module/>
+    Teravolt AeroNav-1 GPS <common-AeroNav-1>
     Zubax GNSS 2: GNSS + Compass + Barometer <common-zubax-gnss-positioning-module-gps-compass-and-barometer>
 
 RTK GPS
@@ -61,6 +66,8 @@ These GPS can incorporate real time kinematic data, either internally generated 
     ARK MOSAIC-X5 RTK GPS <common-ark-mosaic-rtk-gps>
     ARK RTK Base <common-ark-rtk-base>
     ARK RTK F9P <common-ark-rtk-f9p-gps>
+    ARK RTK GPS L1 L5 <common-ark-rtk-l1l5-gps>
+    ARK X20 RTK GPS <common-ark-x20-rtk-gps>
     Blicube RTK GPS (Single Unit Moving Baseline NMEA) <https://wiki.blicube.com/grtk/>
     CUAV C-RTK 9P RTK Receiver <common-cuav-c-rtk-9p-gps>
     CUAV C-RTK 9Ps RTK Receiver <https://store.cuav.net/shop/c-rtk-9ps/>
@@ -76,6 +83,10 @@ These GPS can incorporate real time kinematic data, either internally generated 
     CubePilot HEREPRO DroneCAN F9P RTK GPS/Compass <https://docs.cubepilot.org/user-guides/herepro/herepro-manual>
     Freefly RTK GPS Ground Station <https://store.freeflysystems.com/products/rtk-gps-ground-station>
     Foxteck AEROFOX F9P-RTK <https://www.foxtechfpv.com/aerofox-f9p-rtk-unit.html>
+    GNSS.Store UM980 ultraLight RTK GNSS Smart Antenna <https://gnss.store/products/elt0237>
+    GNSS.Store ZED-X20P ultraLight RTK GNSS Smart Antenna <https://gnss.store/products/elt0437>
+    GNSS.Store mosaic-X5 ultraLight RTK GNSS Smart Antenna <https://gnss.store/products/elt0737>
+    GNSS.Store mosaic-g5 ultraLight RTK GNSS Smart Antenna <https://gnss.store/products/elt0757>
     Hitec PositionPro GNSS <https://www.hiteccs.com/drones/peripheral-details/positionpro-gnss-receiver/>
     Holybro DroneCAN H-RTK F9P Rover <https://holybro.com/collections/gps-rtk-systems/products/dronecan-h-rtk-f9p-rover>
     Holybro DroneCAN H-RTK F9P Helical <https://holybro.com/collections/gps-rtk-systems/products/dronecan-h-rtk-f9p-helical>
@@ -97,7 +108,7 @@ These GPS can incorporate real time kinematic data, either internally generated 
 
 .. note:: a version of firmware for the CubePilot HERE 4 DroneCAN RTK GPS is available `here <https://firmware.ardupilot.org/AP_Periph/latest/Here4AP/>`__ that includes evolving ArduPilot improvements.
 
-.. warning:: It is important that a GPS be connected to the first SERIALx port that has its ``SERIALx_PROTOCOL`` parameter set to "5" (GPS) since it will stop searching for GPS during bootup if not found on the first port configured for GPS protocol.
+.. warning:: It is important that a GPS be connected to the first SERIALx port that has its ``SERIALx_PROTOCOL`` parameter set to "5" (GPS) since it will stop searching for GPS during boot-up if not found on the first port configured for GPS protocol.
 
 
 Moving Baseline (GPS for Yaw) Capable
@@ -125,6 +136,25 @@ Moving Baseline (GPS for Yaw) Capable
     Holybro RTK mosaic-H GPS (Dual Antenna Heading) <https://holybro.com/collections/h-rtk-gps/products/h-rtk-mosaic>
     Qiotek DroneCAN RTK-F9P GPS <https://www.qio-tek.com/index.php/product/qiotek-zed-f9p-rtk-and-compass-dronecan-module>
     Synerx MDU-2000 RTK + LTE GPS <common-synerex-mdu-2000>
+    
+GPS Auto Configuration
+======================
+
+The :ref:`GPS_AUTO_CONFIG<GPS_AUTO_CONFIG>` parameter provides several automatic configuration options.
+
+- 0: Disable automatic configuration
+    Not recommended when using supported hardware.
+    
+- 1: Enable automatic configuration for Serial GPSes only
+    Default value; supports many common modules.
+    
+- 2: Enable automatic configuration for DroneCAN as well
+    Intended for use when configuring DroneCAN GPS modules for :ref:`common-gps-for-yaw` operation. 
+    
+.. note:: After selecting option 2 for :ref:`common-gps-for-yaw` configuration, reverting to default (non-moving-baseline) operation requires connecting to the DroneCAN peripheral(s) and manually restoring the internal GPSx_TYPE parameters to their default values.
+
+- 3: Clear all configurations not set by ArduPilot (u-Blox only)
+    On next boot, resets u-Blox GPS modules to default before applying ArduPilot configuration values (u-Blox Generation 9 and newer).
 
 GPS Driver Options
 ==================
@@ -136,6 +166,10 @@ Several GPS operating options are provided by the :ref:`GPS_DRV_OPTIONS<GPS_DRV_
 - bit 2: if set, use 115.2Kbaud for max serial data rate for those GPSes not capable of higher rates.
 - bit 3: if set, routes RTK data between two CAN GPSes via CAN instead of via the autopilot.
 - bit 4: if set, GPS reports altitude in ellipsoid height instead of height AMSL.
+- bit 5: if set, GPS satellite health is reported solely from L1 band (overriding L5 band health).
+- bit 6: if set, always enable RTCM decoding (even for single channel RTCM).
+- bit 7: if set, always disable RTCM decoding (even when RTCM is seen on more than one channel).
+- bit 8: if set, force u-Blox Config Get/Set (serial connected u-Blox Generation 9 and newer).
 
 GPS Auto Switch
 ===============

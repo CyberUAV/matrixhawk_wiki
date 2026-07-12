@@ -16,7 +16,7 @@ When QRTL mode is selected, the QuadPlane will return to the home location. By d
 
 If a pure VTOL QRTL is desired, then you must disable the fixed wing RTL and approach feature by setting :ref:`Q_OPTIONS<Q_OPTIONS>` bit 16. Then the following actions will then occur on a QRTL:
 
-The QuadPlane will immediately navigate towards the home location at :ref:`Q_WP_SPEED<Q_WP_SPEED>`, climbing or descending towards the :ref:`Q_RTL_ALT<Q_RTL_ALT>` altitude. Once arriving within :ref:`Q_WP_RADIUS<Q_WP_RADIUS>` distance of home, it will begin descending at :ref:`Q_WP_SPEED_DN<Q_WP_SPEED_DN>` rate, until it reaches :ref:`Q_LAND_FINAL_ALT<Q_LAND_FINAL_ALT>` at which point it will descend at :ref:`Q_LAND_FINAL_SPD<Q_LAND_FINAL_SPD>` until landing.
+The QuadPlane will immediately navigate towards the home location at :ref:`Q_WP_SPD<Q_WP_SPD>`, climbing or descending towards the :ref:`Q_RTL_ALT<Q_RTL_ALT>` altitude. Once arriving within :ref:`Q_WP_RADIUS_M<Q_WP_RADIUS_M>` distance of home, it will begin descending at :ref:`Q_WP_SPD_DN<Q_WP_SPD_DN>` rate, until it reaches :ref:`Q_LAND_FINAL_ALT<Q_LAND_FINAL_ALT>` at which point it will descend at :ref:`Q_LAND_FINAL_SPD<Q_LAND_FINAL_SPD>` until landing.
 
 .. image:: ../images/QRTL.jpg
     :target: ../_images/QRTL.jpg
@@ -42,11 +42,8 @@ Alternatively, you may :ref:`configure the plane to return to a Rally Point <com
       plane acquires its GPS lock. It is then continuously updated as long as
       the autopilot is disarmed.
 
-      - This means if you execute an QRTL in QuadPlane, it will return to the
-	location where it was when it was armed - assuming it had
-	acquired GPS lock.
-      - Consider the use of :ref:`Rally Points <common-rally-points>` to
-	avoid returning directly to your arming point on QRTL
+      - This means if you execute an QRTL in QuadPlane, it will return to the location where it was when it was armed - assuming it had acquired GPS lock.
+      - Consider the use of :ref:`Rally Points <common-rally-points>` to avoid returning directly to your arming point on QRTL.
 
 
 .. warning::

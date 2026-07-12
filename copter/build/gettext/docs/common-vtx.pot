@@ -1,0 +1,272 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Copter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Copter \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:30+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-vtx.rst:5
+#: 8393083ca6494572a8e2cf1b6b4832ed
+msgid "Video Transmitter Support"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:7
+#: ba48ddacbad649d398c17e0b92d2c79a
+msgid "Video transmitter (VTX) support allows the autopilot to control an attached video transmitter. Depending on the VTX and protocol used, components that can be controlled include video band, video channel, transmitter power and pit mode. Supported protocols are SmartAudio, IRC Tramp, and TBS Crossfire (CRSF)."
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:9
+#: db334f91cc714d4695e090435dde43bc
+msgid "Not all video transmitters claiming SmartAudio support fully support the specification and some functions may not be provided in that transmitter, or implemented in a non-standard way. Consult the manufacturer's documentation if questions arise."
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:12
+#: 5ed204b7e74b4e7b98acd39a64a99e26
+msgid "How to setup video transmitter support"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:14
+#: 7de6b50e39c94f95b5b3003de9750b25
+msgid "To enable video transmitter support you need to set the following parameters and reboot your autopilot:"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:16
+#: 2b91ab844f83451eabe478fde30ca4c7
+msgid "Set :ref:`VTX_ENABLE <VTX_ENABLE>` to 1 to enable video transmitter support. Although this enables support it will not achieve anything without an appropriate video transmitter protocol enabled, as described below."
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:19
+#: 3ff5be4050b64c62bbca6f0dd0146210
+msgid "SmartAudio"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:21
+#: bc514e62c9004bd2972a5e50331fd0f8
+msgid "SmartAudio is a one-wire protocol so you will need to connect the SmartAudio pin of your VTX to the TX pin of the serial port you want to use. You will also need to make sure your VTX is configured for SmartAudio control. For example if attached to SERIAL port 5:"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:23
+#: 4245d270728b47cf8dd7f12c4888a519
+msgid "Set :ref:`SERIAL5_PROTOCOL <SERIAL5_PROTOCOL>` to 37 to enable SmartAudio."
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:24
+#: dcfb9cb5dfc34996a4d2061a2b141d4c
+msgid "Set :ref:`SERIAL5_OPTIONS <SERIAL5_OPTIONS>` to 4 to enable half-duplex which SmartAudio requires. Depending on your video transmitter it might be required to enable the TX_PullDown option, so 68 would be the correct value."
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:25
+#: c06ee705027f4868a9b3c7c349d5c3f4
+msgid "Set :ref:`SERIAL5_BAUD <SERIAL5_BAUD>` to 4800 to set the SmartAudio baud rate"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:31
+#: 69cb2100f8884b849f2b831da9c225de
+msgid "CRSF (Crossfire)"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:33
+#: d2d679720d4f487991d3cc66b5f0fbad
+msgid "CRSF is a bi-directional protocol that requires both TX and RX of a serial port to be connected. Follow the instructions for CRSF telemetry to setup CRSF support (See :ref:`common-tbs-rc`). If you only wish to use CRSF for VTX support, then (again using SERIAL5 as an example) :ref:`SERIAL5_PROTOCOL <SERIAL5_PROTOCOL>` should be set to 29 rather than 23. You will also need to make sure your VTX is configured for CRSF control."
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:35
+#: edb145daebbc4d4a8439afd54d16c640
+msgid "When using CRSF for both RC/Telem and VTX control it is important to disable \"my VTX\" support on Open TX transmitters. Follow your transmitters' instructions. In this scenario, you must connect your autopilot's UART to your CRSF receiver, and then connect your CRSF receiver to the VTX to forward CRSF commands, you cannot connect to the FC using CRSF directly for both the Receiver and VTX using two UARTs."
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:37
+#: d769a7e47cda4cee89543064d1811215
+msgid "Reboot your autopilot and power your video transmitter. At startup you should see a video message indicating the current video settings. All the video settings are stored in the ``VTX_x`` parameters and by default these will be changed to reflect the currently configured VTX settings. Once booted you can modify these settings and they will be reflected in the VTX configuration."
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:48
+#: 7c492602d0e34043b37cdca9945cdd7a
+msgid "ImmersionRC Tramp"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:50
+#: 506e80177f364c7283f0c9f720253ee1
+msgid "Connect the telemetry pin of the video transmitter to the TX pin of the autopilot's UART used to control it."
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:51
+#: 6fed135d51aa4bcba065a225e2d613d1
+msgid "Set :ref:`SERIAL5_PROTOCOL <SERIAL5_PROTOCOL>` = 44 if using SERIAL5 for connection to VTX"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:54
+#: 151642ff0ebc44f588dfcadcf3573b8d
+msgid "Video transmitter settings"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:56
+#: 56edecd020324358abc3ae9ff38e15be
+msgid "Set :ref:`VTX_BAND <VTX_BAND>` to modify the VTX band."
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:57
+#: ac698fab9770479895f09ceac9f0590d
+msgid "Set :ref:`VTX_CHANNEL <VTX_CHANNEL>` to modify the VTX channel."
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:58
+#: b1e783f763e140d98b4a9f3e7b0f7c90
+msgid "Set :ref:`VTX_FREQ <VTX_FREQ>` to modify the VTX frequency. Band/channel and frequency are mutually exclusive, if you set band and/or channel then the frequency will be automatically updated. If you set the frequency then the band/channel will be automatically updated. Not all frequencies, channels and bands are supported unless the transmitter is unlocked. Please consult local regulations before doing this. If you select an unsupported frequency then the current frequency will not be changed."
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:59
+#: 9f16ed63563a47a89e38f02eb532beb9
+msgid "Set :ref:`VTX_POWER <VTX_POWER>` to modify the VTX power in mw. Not all transmitters support all power values. In particular in Europe only 25mw is allowed by default. To allow other values the transmitter must be unlocked. If you select a power level that is unsupported by the transmitter then the actual power value will not be changed."
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:60
+#: 659f1a16f34a4ea081c797245a51f2e0
+msgid "Set :ref:`VTX_MAX_POWER <VTX_MAX_POWER>` to set the maximum VTX power allowed in mw. This is used by ``RCx_OPTION`` = 94 which allows the VTX power to be changed via a switch or dial."
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:61
+#: d0f8dcf3867a4239a152cd65618547ab
+msgid "Set :ref:`VTX_OPTIONS <VTX_OPTIONS>` to set options on the VTX. The most common option is setting bit 0 which puts the VTX into pit mode, if supported. Other options can be used to reset pitmode upon arming and/or set it upon disarming (bits 1 and 2). The option bits and their actions are shown below:"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:64
+#: e861a362b3644a3a89ecc93f7335e421
+msgid ":ref:`VTX_OPTIONS<VTX_OPTIONS>` bit"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:64
+#: f75cd98d3dd94a89af698563dcbdd6c1
+msgid "Function"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:66
+#: 21b9b1fd238345c5ac0a7f5e27f2aee1
+msgid "0"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:66
+#: 211d5192492940ebb135f65083329478
+msgid "Directly sets VTX into PIT MODE, if available"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:67
+#: d3e78d321a024c58918153a2d2332e68
+msgid "1"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:67
+#: 339a056dc24446ec8b56c35c74320d32
+msgid "Resets bit 0 above upon arming"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:68
+#: 7317d96ee06142feb1cf685eccbd97f6
+msgid "2"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:68
+#: 411f542afc5d47fa90dd74bbc04b797e
+msgid "Sets bit 0 above upon disarming"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:69
+#: 9abd0cb1ac4c4285a736c66769d1aa9b
+msgid "3"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:69
+#: d03bb9eeb15a4f3e9e9735053ff5190c
+msgid "Unlock: unlocks frequencies and bands on some transmitters"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:70
+#: e096b6b7fce44d7fac0cabb56fe51719
+msgid "4"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:70
+#: 4e476b80535944609f6f42d94104e3c8
+msgid "Add leading zero byte to requests (needed on some transmitters)"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:71
+#: 3501a57698ea494cacac9f48b1676e33
+msgid "5"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:71
+#: a599f87f4fd74ec3b01d02bb0ce5475e
+msgid "Use 1 stop bit. Needed for some transmitters using non-compliant(iNAV) messaging"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:72
+#: e7a05fac5f9044619b7d11533d6f8f1e
+msgid "6"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:72
+#: 5f4ce2f33c644e248e2fbe91c29825e3
+msgid "Ignore CRC checks. Needed for some transmitters using non-compliant messaging"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:73
+#: b392aa2cbe6341f69d2d265ec9b9004e
+msgid "7"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:73
+#: e108b16d967241db9bfca58991872941
+msgid "Future (not presently working)"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:76
+#: 7b31e0f26c3b4c3bb03790482b4c1a4f
+msgid "\"unlocking\" can be done differently, depending on transmitter brand. Also, using unlocked frequencies/power levels may violate local laws and restrictions."
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:79
+#: b521449ea5654b2da9a492e543f37e05
+msgid "Setting video transmitter settings"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:81
+#: 681a9de5c03e47f6af9fb0049189590a
+msgid "Video transmitter settings can be changed in multiple ways but always go via the ``VTX_x`` parameters. So any option which advertises VTX control will be setting a ``VTX_x`` parameter which in turn will interface with the protocol backends. Here are the current ways that video transmitter settings can be modified:"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:83
+#: a6813a40e9e748e7969728d1c8b6ec4e
+msgid "Parameter modification through your ground station"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:84
+#: 5923f60c93894415bdfedae7b9431a15
+msgid "Transmitter power via RC switch (``RCx_OPTION`` = 94). With this setting, the RC channel is interpreted as a 6-position switch (dividing the PWM range 1200 to 1800), and then this is assigned to power values based on the ``VTX_MAX_POWER``. For example if max power is 200-499mW, switch positions 0 results in 0mw (pit mode), 1 and 2 result in 25mw, 3 and 4 result in 100mw, and 5 results in 200mw."
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:85
+#: 3655aad99bd6467da4dab6d41de3e1ab
+msgid "Parameter modification via the OSD (See :ref:`common-paramosd`)"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:86
+#: bc274cbdae2043fab127ee96b533326c
+msgid "Parameter modification via CRSF OpenTX lua scripts (or OpenTX AgentX lua scripts) - CRSF only"
+msgstr ""
+
+#: ../../source/docs/common-vtx.rst:87
+#: e42f7e35c16e417e96798efeaaaed20d
+msgid "Spektrum VTX support. VTX settings on your Spektrum transmitter will be translated by either the DSMX or SRXL2 drivers and the appropriate VTX settings updated"
+msgstr ""

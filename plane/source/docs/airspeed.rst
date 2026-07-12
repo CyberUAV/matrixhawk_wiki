@@ -84,7 +84,7 @@ If you are using Plane in an aircraft with the propeller in the nose,
 the pitot tube must be mounted out on one wing, at least a foot from the
 fuselage to be outside the prop flow.
 
-See :ref:`common-pitot-considerations` for more infomation on pitot tubes and placement considerations.
+See :ref:`common-pitot-considerations` for more information on pitot tubes and placement considerations.
 
 Checking operation
 ==================
@@ -162,37 +162,46 @@ I2C
     - `Holybro <https://shop.holybro.com/digital-air-speed-sensor_p1029.html>`_
     - `Matek 4525DO <http://www.mateksys.com/?portfolio=aspd-4525>`_
     - `mRobotics <https://store.mrobotics.io/mRo-I2C-Airspeed-Sensor-JST-GH-p/m10030a.htm>`_
+    - `TBS <https://www.team-blacksheep.com/products/prod:lucid_dcass>`__
 
 - ASP5033
     - `Qiotek ASP5033 <https://www.qio-tek.com/index.php/product/qiotek-asp5033-airspeed-sensor-and-pitot-tube>`_
 
 - DLVR
     - `Matek DLVR <http://www.mateksys.com/?portfolio=aspd-dlvr>`_
+    - `TBS <https://www.team-blacksheep.com/products/prod:lucid_dcassp>`__
 
 
 DroneCAN
 --------
 
+- 3DR ASUAV
+    - `3DR ASUAV DroneCAN Airspeed/Barometer <https://store.3dr.com/slim-auav-can-airspeed-sensor/>`__
+
+- 6897
+    - `Foxtech AEROFOX Airspeed/Compass <https://www.foxtechfpv.com/foxtech-aerofox-can-airspeed-compass.html>`__
+
 - Amphenol AUAV (static and dynamic pressure)
     - `Beyond Robotix Air Data Module <https://www.beyondrobotix.com/products/air-data-module>`_
     - `Matek DroneCAN AUAV Airspeed/Baro <https://www.mateksys.com/?portfolio=aspd-auav>`__
+    - `UAV-DEV GmbH DroneCAN Airspeed and Barometer Sensor - AUAV <https://wiki.uav-dev.com/en/product/airspeed/auav>`__
+
+- ASP5033
+    - `Qiotek DroneCAN 5033 <https://www.qio-tek.com/index.php/product/qiotek-asp5033-dronecan-airspeed-and-compass-module>`_
 
 - DLVR
     - `Foxtech AEROFOX Airspeed/Compass <https://www.foxtechfpv.com/foxtech-aerofox-can-airspeed-compass.html>`__
     - `Holybro DroneCAN DLVR <https://holybro.com/products/high-precision-dronecan-airspeed-sensor-dlvr>`__
     - :ref:`Matek DroneCAN DLVR <common-matek-uavcan-dlvr>`
+    - `TBS <https://www.team-blacksheep.com/products/prod:lucid_dcassp>`__
 
-- ASP5033
-    - `Qiotek DroneCAN 5033 <https://www.qio-tek.com/index.php/product/qiotek-asp5033-dronecan-airspeed-and-compass-module>`_
-
-- 6897
-    - `Foxtech AEROFOX Airspeed/Compass <https://www.foxtechfpv.com/foxtech-aerofox-can-airspeed-compass.html>`__
+- MS4525
+    - `MakeFlyEasy DroneCAN Airspeed <https://en.makeflyeasy.com/index.php/mfe-can-airspeed-meter/>`__
+    - `TBS <https://www.team-blacksheep.com/products/prod:lucid_dcass>`__
 
 - MS5611
     -  :ref:`Avionics Anonymous Airspeed + Temp <common-avanon-adc>`
 
-- MS4525
-    -  `MakeFlyEasy DroneCAN Airspeed <https://en.makeflyeasy.com/index.php/mfe-can-airspeed-meter/>`__
 
 Other Topics
 ============

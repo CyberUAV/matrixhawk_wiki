@@ -1,0 +1,477 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-ship-landing.rst:6
+#: fcc62ad691cb4a90b6725fb978bdb9de
+msgid "Moving Platform Takeoff and Landing (Ships, Trucks, etc.)"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:8
+#: 6952e014208c41f5ac68e404f8db2124
+msgid "The Plane 4.2 firmware supports VTOL taking off and landing on a moving platform with QuadPlanes. VTOL Takeoffs and Landings will track the platform's motion to remain vertically above the takeoff/landing pad and landings will provide a tracking hold-off loitering point and controlled angular approach to avoid vehicle superstructures or other obstructions. This article describes how to setup and use this functionality."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:11
+#: 8b4c3931c2594f80a7ac8dddbcfb90ad
+msgid "Equipment Needed"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:13
+#: dcc40b267c12417dba2d755ac545ab92
+msgid "To use this feature you need a beacon setup on the landing platform. This beacon should be based on an ArduPilot autopilot running the ArduPilot Rover firmware. You can set the ``FRAME_CLASS`` parameter on the beacon autopilot to \"2\" to make it a “boat” or \"1\" to make it a truck, so that the right icon shows in the ground station. The beacon will be broadcasting its position to allow the QuadPlane to track its moving HOME position, similar to :ref:`Copter's Follow Mode<copter:follow-mode>`."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:17
+#: 5c51acee35464b46aff4a136d0957f0e
+msgid "The beacon system needs the following:"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:19
+#: 3a7173a8eef14f769fe34b5e44997e35
+msgid "a reliable yaw source. Using dual-F9P GPS with :ref:`moving baseline yaw<common-gps-for-yaw>` is recommended if the moving platform will cause problems with compasses."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:20
+#: c81b0bdca1ce4cdf8ca41c1f36257667
+msgid "a telemetry radio setup so that the aircraft can see GLOBAL_POSITION_INT mavlink messages from the beacon autopilot. There are multiple methods of achieving that, see the section below on radio setup"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:21
+#: ced37bc2c68249c3b9284e8d601b21a9
+msgid "the beacon needs a different mavlink system ID to the aircraft and the GCS. You set this with the :ref:`MAV_SYSID<MAV_SYSID>` parameter. In the example below, :ref:`MAV_SYSID<MAV_SYSID>` = 17, has been set."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:22
+#: 3ca9488a4ba84a9bb2a720fd6518574f
+msgid "the beacon can be offset from the actual landing location. The beacon should be placed for optimal radio performance, then the instructions below can be used to setup the actual landing location relative to the beacon."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:24
+#: 2b454100384d4d648aedfea81d6feafd
+msgid "Here are examples a nice setups for the beacon (courtesy of FreeSpace Operations and Offshore Aviation):"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:31
+#: 55854b830015495693f59992b3a898ea
+msgid "Telemetry"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:32
+#: daac719d714847f2a1f16fd3c8b417a7
+msgid "The telemetry system needs to be capable of:"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:34
+#: a710fb52f3724c348b3b1940c43a76c3
+msgid "allowing the ground station to see MAVLink packets from both the beacon and the aircraft"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:35
+#: 7f06ae276d5a4ba1967efa661a499baf
+msgid "allowing the aircraft see MAVLink packets that originate from the beacon (the only packet the aircraft needs from the beacon is the GLOBAL_POSITION_INT message)"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:37
+#: 5ee88c404d1640279b6e4b239ab1f342
+msgid "There are several ways to setup this type :ref:`Telemetry<common-telemetry-landingpage>`:"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:39
+#: 91b5ff493d2841b7964ffc7c3d14fb07
+msgid "WiFi, with a multicast network"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:40
+#: 05c840d475af4ae78a08112bab8bc19c
+msgid "a mesh-capable telemetry radio"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:41
+#: 1e22f71c0fa04ad0880957fff058d62e
+msgid "using any kind of telemetry for GCS <-> vehicle and GCS <-> beacon, setup the GCS to forward GLOBAL_POSITION_INT packets from the beacon to the aircraft (for example, MAVProxy GCS can do this by setting the fwdpos to TRUE (ie type 'set fwdpos true' from the command line)"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:43
+#: d49df9eb97fe43909f088ec9e7033cf3
+msgid "For mesh capable radios, you could use three RFD900x radios, with the radios setup for broadcast.(see :ref:`common-rfd900`)"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:45
+#: ddc8d02e36e54031a6f0dea57f161dc0
+msgid "Alternatively you could use the RFD900x relay firmware from `here <https://firmware.ardupilot.org/SiK/RFD900x-relay/>`__  with the GCS set as NODE=1, the beacon set as NODE=0 and the aircraft set as NODE=2."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:48
+#: e8a2be8d8ba24312885fc5aef5b58639
+msgid "Firmware"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:49
+#: c0f5e5f65b234f97be8e2eab9d62a7e5
+msgid "You will need ArduPilot plane 4.2 or later"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:52
+#: 22e72baae6a84f03aff3d3ec63b620e2
+msgid "Lua Script"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:54
+#: 51beb11561e748f6ac17d2b748e401a5
+msgid "The ship landing functionality is in a :ref:`LUA script<common-lua-scripts>`. You will need the plane_ship_landing.lua script from `here <https://github.com/ardupilot/ardupilot/blob/master/libraries/AP_Scripting/applets/plane_ship_landing.lua>`__"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:56
+#: acb6481464ab425d9fef33967cc42d15
+msgid "This script needs to be put in the APM/scripts directory on your microSD card on the aircraft."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:58
+#: 78191659152b42dcb8d379b9f125d6bc
+msgid "This script also creates several new ``SHIP_`` parameters that will need to be setup (see below)."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:61
+#: a2b630a4fb614598849f6e9206d284d6
+msgid "Parameter Setup"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:64
+#: bff386fd88bb45deb5420de6d082bbee
+msgid "Aircraft"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:66
+#: 97cc9beeabb74e95ac506663efb78647
+msgid ":ref:`SCR_ENABLE<SCR_ENABLE>` = 1"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:67
+#: 326aac71ae9845fdb74ec124d5672784
+msgid ":ref:`SCR_HEAP_SIZE<SCR_HEAP_SIZE>` = 100000 (perhaps more if other scripts are running)"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:68
+#: 3747d78592ec4040aea7d510ccf0ee80
+msgid "``SHIP_ENABLE`` = 1"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:69
+#: 2b0343e8edfc42288ece5d83238b1f3d
+msgid ":ref:`FOLL_ENABLE<FOLL_ENABLE>` = 1"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:70
+#: f324877b071743bf80b0455394dcfee8
+msgid ":ref:`FOLL_SYSID<FOLL_SYSID>` = 17 (this needs to be the SYSID of the beacon set above)"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:71
+#: 154022d883914390a78b0988b1a7f1f6
+msgid ":ref:`Q_RTL_MODE<Q_RTL_MODE>` = 0 (execute a normal RTL)"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:72
+#: ad7a61e96edb4a1091fe5528c76477e6
+msgid ":ref:`FS_LONG_ACTN<FS_LONG_ACTN>` either 0 or 1 (Continue if in AUTO or RTL always)"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:73
+#: 50d395d814e94d088b76d7b3e81c69c0
+msgid ":ref:`RTL_AUTOLAND<RTL_AUTOLAND>` = 0"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:74
+#: 984ed034cd0640bf9553b6f5345d9f6f
+msgid ":ref:`Q_OPTIONS<Q_OPTIONS>` bit 5 set (QRTL return in RC failsafes while in a VTOL mode)"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:76
+#: da0cc006767d40d79422defe6d4026f2
+msgid "Note that you will need to refresh parameters and reboot for these to all take effect. The ``SHIP_ENABLE``, ``SHIP_LAND_ANGLE`` and ``SHIP_AUTO_OFS_n`` parameters will appear when the script is running correctly."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:79
+#: 28a32a0b6b9b40418cd0e56b8f9fe81a
+msgid "Beacon"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:81
+#: 3607780a91734f4c80638271b7d43673
+msgid ":ref:`Moving baseline setup<common-gps-for-yaw>`"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:82
+#: 7f9b69d90e854dc2a184c203d4766de7
+msgid ":ref:`EK3_SRC1_POSZ<EK3_SRC1_POSZ>` = 3 (GPS altitude as altitude source)"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:85
+#: 26bf070e4ebc4af791b77a53de825950
+msgid "Land Angle"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:86
+#: a586c00aadcd48078214d28bb0057e80
+msgid "You can choose the approach angle of the aircraft to the ship. The default is ``SHIP_LAND_ANGLE`` = 0 which means land from behind the ship. A value of 90 will mean that the aircraft approaches the ship from the left-hand side. A value of -90 means it approaches from the right-hand side. A value of 180 means the aircraft will approach the landing from the front of the ship."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:88
+#: 4530a9425b804373ab8368ed7665321a
+msgid "You should choose a ``SHIP_LAND_ANGLE`` value to avoid obstructions on the ship, for example masts. The angle should also be chosen such that if you need to abort the landing, flying straight ahead will leave plenty of clearance to obstacles."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:91
+#: 2b8f4313b95349d9805725ff94c8c626
+msgid "Beacon Messages"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:92
+#: 28189c9f77de47deb2281cb5480f4254
+msgid "When the aircraft can see the beacon position it will print a GCS message like this: “Have beacon”."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:95
+#: ac151d4ed852445c8508e06f5043b06a
+msgid "If you lose the connection to the beacon (after 3 seconds) you will see a GCS message “Lost Beacon”."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:98
+#: 993322b0acbf4384823f3d6cb9710a0f
+msgid "You will also get an arming failure if you try to arm without the beacon working."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:101
+#: b2f682d3d4fb4ac8a0508289646e1e6d
+msgid "Landing Offset"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:102
+#: 38402a41b5534154a30c155ca837e17b
+msgid "It is important to set the correct values for :ref:`FOLL_OFS_X<FOLL_OFS_X>`, :ref:`FOLL_OFS_Y<FOLL_OFS_Y>` and :ref:`FOLL_OFS_Z<FOLL_OFS_Z>` on the aircraft for the landing point relative to the beacon. These values are in meters, in front-right-down format. The easiest way to set these is to place the aircraft in the correct landing location with the beacon working and then set the parameter ``SHIP_AUTO_OFS`` to 1. When this parameter is set to 1 then the ship landing lua script will calculate the right offset values and set them in the :ref:`FOLL_OFS_X<FOLL_OFS_X>`, :ref:`FOLL_OFS_Y<FOLL_OFS_Y>` and :ref:`FOLL_OFS_Z<FOLL_OFS_Z>` values."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:105
+#: 02c5c5bdab744b438c127834bea5d30c
+msgid "The values are:"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:107
+#: 790c3b70235542e6a5f924e5d5bc1ba7
+msgid ":ref:`FOLL_OFS_X<FOLL_OFS_X>` distance in front of the beacon to land (use a negative value for landing behind the beacon)"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:108
+#: 3d1b73400d104050975e01cec0ecdb92
+msgid ":ref:`FOLL_OFS_Y<FOLL_OFS_Y>` distance to the right of the beacon to land (use a negative value for left)"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:109
+#: 9d90bbb487be4d54b7d6c84b0fa425a6
+msgid ":ref:`FOLL_OFS_Z<FOLL_OFS_Z>` distance below the beacon to land (use a negative value to land above the beacon)"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:111
+#: 871dc0efb75f4e0592af533c73d690be
+msgid "When the beacon is active you should see the HOME icon on the GCS move to match the landing position. The HOME position is continuously updated while you are flying which gives you a good way to ensure that the beacon is working properly before you land."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:113
+#: 7fc6d9d9cc0244b7808b9a8e3ddc5748
+msgid "It is recommended that the method of setting ``SHIP_AUTO_OFS`` = 1 is used to get the location before each flight. Look carefully at the message it gives when this parameter is set(use the Messages tab in MissionPlanner):"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:115
+#: 6879fe39d06f4aa1978e82fc6565220c
+msgid "Set follow offset (-10.82,3.29,0.46)"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:117
+#: 9c128fec2559481796206d0677add9ae
+msgid "That message confirms that the X, Y and Z offset has calculated. Check that they are reasonable, paying close attention to the Z offset. If you get a bad Z offset (ie. a long way off from the actual height difference between the beacon and the aircraft) then you may need to reboot the beacon and/or aircraft to cope with GPS altitude drift."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:120
+#: 37ecd52c18da4c1eaa2fdaf5d51b9d9c
+msgid "Takeoff Procedure"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:121
+#: 742a247fe43242f0907ecab8a6d6a68d
+msgid "When ``SHIP_ENABLE`` = 1 and the beacon is visible to the aircraft then an AUTO VTOL takeoff will use velocity matching, so the aircraft will hold its velocity relative to the beacon while ascending. This velocity matching is only done for VTOL takeoff as a mission item in AUTO mode."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:124
+#: 49f1017eb76f4f719eeb2be0a8f47dae
+msgid "Hold-off Position"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:125
+#: d908b7a4095f49fda9a4f2e6bf6be9df
+msgid "A key part of ship landing is the “hold-off position”. The hold-off position is where the aircraft will loiter while waiting for the pilot to command the landing via the movement of the throttle stick (see throttle stick information below)."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:127
+#: 88690b131fef4a61997efed05559d278
+msgid "The holdoff position is based on a few criteria:"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:129
+#: 8c878aea197245efb5f8da5368aea521
+msgid ":ref:`RTL_RADIUS<RTL_RADIUS>` in meters (negative for counter-clockwise loiter, positive for clockwise loiter). If :ref:`RTL_RADIUS<RTL_RADIUS>` is zero, then the :ref:`WP_LOITER_RAD<WP_LOITER_RAD>` parameter is used."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:130
+#: 6b8bf9b12db7480cac1bf08c3728de04
+msgid "``SHIP_LAND_ANGLE`` parameter, which controls the angle that the aircraft will approach the ship for landing. A value of zero means to approach from behind the ship. The hold-off loiter position will be setup so that the tangent of the circle intercepts the beacon landing point."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:131
+#: c088c1b71e1445f9be0c20b76fe0810d
+msgid ":ref:`Q_TRANS_DECEL<Q_TRANS_DECEL>` parameter, which determines how fast the aircraft can slow down"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:132
+#: 0c05c7e42bbe4a88b5a91c7bff3b9bc6
+msgid "The speed of the ship, the wind speed and the speed of the aircraft"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:134
+#: 63eebef8bed742c4ab522de495234ea2
+msgid "Here is an example where ``SHIP_LAND_ANGLE`` is -45 and :ref:`RTL_RADIUS<RTL_RADIUS>` is -100:"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:138
+#: 2f3b9bf67f47431c9abe8ac74071b417
+msgid "and here is an example with ``SHIP_LAND_ANGLE`` at 0 and :ref:`RTL_RADIUS<RTL_RADIUS>` at 100:"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:143
+#: 94c7f885d4d649eda2c10b64ed7a3450
+msgid "Landing Procedure"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:144
+#: b621a4e373c847a0aade74c3fc0c0acd
+msgid "When you are ready to land you can switch the vehicle to RTL mode. When in RTL mode the aircraft will fly towards the landing location (you can see this location before you land from the HOME icon on the GCS, which moves with the beacon)."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:146
+#: f55dfca6c4ef4be2871225ed2275d981
+msgid "The aircraft will initially approach the “hold-off” position. The altitude of the holdoff position is set by the :ref:`RTL_ALTITUDE<RTL_ALTITUDE>` parameter (in centimeters above the landing location). A good value of this is around 9000, which is 90 meters above the landing location."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:148
+#: e5dc341ce67a479bacfc2c4eddaf6801
+msgid "The description below will assume that ``SHIP_LAND_ANGLE`` = 0 which means landing happens from behind the beacon. The approach and landing is rotated by the value of this parameter in degrees. With ``SHIP_LAND_ANGLE`` = 0, the hold-off position will be behind and above the beacon. The distance depends on the beacon speed, wind speed and the :ref:`Q_TRANS_DECEL<Q_TRANS_DECEL>` parameter (which controls the deceleration of the aircraft)."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:151
+#: b295d632ed524db9a16ebbc51a71ab7e
+msgid "Once the aircraft arrives at the hold-off position it will circle until the throttle stick is lowered below 40%. The throttle stick on the transmitter is used to control the landing sequence and also to abort the landing."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:153
+#: 059616f5d9334430931e44cc38c45e68
+msgid "Throttle stick controls are:"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:155
+#: 0e452737858e4e75b0508223599255bb
+msgid "Throttle at 40% or above means to hold at the hold-off position (at :ref:`RTL_ALTITUDE<RTL_ALTITUDE>` height above beacon in centimeters)"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:156
+#: b0fca4b26722487b89c97d98fdcf61fc
+msgid "Throttle below 40% and above 10% means to descend while loitering to the approach altitude. The approach altitude is giving by :ref:`Q_RTL_ALT<Q_RTL_ALT>` in meters above the beacon. A good value for testing may be 40 meters."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:157
+#: d908d230841b433ab40f41ccdf920e41
+msgid "Throttle below 10% means to start landing approach once the aircraft is at the :ref:`Q_RTL_ALT<Q_RTL_ALT>` and lined up with the ``SHIP_LAND_ANGLE`` to move toward the vehicle."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:159
+#: 8fdfdafd66394f74890a9bed6c6acf76
+msgid "Once the landing descent has started can still abort the landing. To do this, the :ref:`Q_OPTIONS<Q_OPTIONS>` bit 15 must be set to enable ThrLandControl. When that option is set you can raise the throttle momentarily above 70% to enable throttle control for climb and descent rate. You can use this to slow the descent or climb back up. If you climb up past the :ref:`Q_RTL_ALT<Q_RTL_ALT>` approach altitude then the aircraft will go back to loitering at the hold-off location at :ref:`Q_RTL_ALT<Q_RTL_ALT>`."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:161
+#: b2df1c9767e14688b67567a226fc280d
+msgid "You may also want to enable horizontal repositioning with the :ref:`Q_OPTIONS<Q_OPTIONS>` bit 17(EnableLandResponsition). If that is enabled then you can manually reposition the aircraft horizontally while landing to account for any GPS position errors."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:164
+#: 122be5e369114e57b439e66975e70f70
+msgid "Simple Mission"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:165
+#: 1f151c20b12b4cfd87f30438e64f1c71
+msgid "The simplest mission would be a single VTOL_TAKEOFF waypoint. Once the takeoff is complete the aircraft will immediately switch to RTL mode and go to the hold-off location. You should have the throttle stick above 40% to keep the aircraft circling at the hold-off location. This very simple mission is good for ship operations as it does not have specific latitude/longitude, so will work wherever the ship is."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:167
+#: 8679be29de94489da6b2e7f1a482f7ae
+msgid "You could also switch to a fixed wing mode just before reaching the takeoff altitude you set, then fly under pilot control and when ready to land, simply switch back into AUTO to RTL and land."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:170
+#: a598b08ab25141cc99efe549d0aa4b91
+msgid "Simulation"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:172
+#: f564a37eb5c34eb99fe66a7155b52675
+msgid "To simulate a QuadPlane ship landing:"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:174
+#: e0ec70b45b3341cbb4a7af4e2395b3fe
+msgid "Copy the plane_ship_landing.lua LUA script, into the /scripts directory where you will run the simulation"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:175
+#: 35b6f91f9007476cb434f67df4edef35
+msgid "Run the following commands for Linux SITL:"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:187
+#: 956616375e744a3facbdefb62054f00f
+msgid "Then setup a mission item: VTOL_TAKEOFF to the desired altitude"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:188
+#: 9e884ee517e04904bbc7057f6bc10ae4
+msgid "Enter:"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:196
+#: e3284397dbcc4108a579d1dbb129b0c5
+msgid "The QuadPlane will takeoff and then execute an RTL to the hold-off point and wait until the throttle is lowered (rc 3 1000) to start the landing."
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:199
+#: f852ea64800f45678e353a278fed2f57
+msgid "Credit:"
+msgstr ""
+
+#: ../../source/docs/common-ship-landing.rst:201
+#: 63e1aa0150f94a9c8394a631d19718f2
+msgid "Many thanks to SpektreWorks for funding a lot of the work on ship landing support!"
+msgstr ""

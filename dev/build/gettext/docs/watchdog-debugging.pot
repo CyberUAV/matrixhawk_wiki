@@ -1,0 +1,82 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/watchdog-debugging.rst:5
+#: 073f3eb7285446969de14e249aa56f07
+msgid "Debugging Watchdog Reset Events"
+msgstr ""
+
+#: ../../source/docs/watchdog-debugging.rst:7
+#: aabdb9f14968491b904d5717a1f11ea8
+msgid "We attempt to provide as much information as we can about watchdog reset events in the onboard logs and via our telemetry streams.  This document outlines ways in which you can use that information to root-cause the issue causing the watchdog."
+msgstr ""
+
+#: ../../source/docs/watchdog-debugging.rst:13
+#: 09d5ad19352f451694ee283c22290ce0
+msgid "The ``decode_watchdog.py`` Utility"
+msgstr ""
+
+#: ../../source/docs/watchdog-debugging.rst:15
+#: 095ac89d75594012890c4fc35c51af7e
+msgid "A Python script is provided in ArduPilot's Tools directory.  A string from either a telemetry log or an onboard log can be passed in to this script and it spits human-readable information out on stdout."
+msgstr ""
+
+#: ../../source/docs/watchdog-debugging.rst:26
+#: b1561f3d1a5f4f8ca809faf894b10f7f
+msgid "Understanding the T (thread) field"
+msgstr ""
+
+#: ../../source/docs/watchdog-debugging.rst:28
+#: 953067537ee04985b3e45d254a6309b5
+msgid "This is an offset into the scheduler table, which is a combination of vehicle-specific tasks and general system tasks.   It can be found in the @SYS/tasks.txt file which can be retrieved from the vehicle, and found in dataflash logs."
+msgstr ""
+
+#: ../../source/docs/watchdog-debugging.rst:30
+#: 64ec65b69d67466ca3c3944e14697e13
+msgid "There are three magic tasks:"
+msgstr ""
+
+#: ../../source/docs/watchdog-debugging.rst:38
+#: b3f9cf89cf6b4cd4aed84b501595f32e
+msgid "If in state -3 then the code was almost certainly in an interrupt handler when the fault occurred."
+msgstr ""
+
+#: ../../source/docs/watchdog-debugging.rst:41
+#: c51f1aacf5cc4e188dedc697867da436
+msgid "Converting the LR field into a line of code"
+msgstr ""
+
+#: ../../source/docs/watchdog-debugging.rst:43
+#: 1290e9e6195e49f393adb37ab12b2e19
+msgid "Certain faults will fill the Function Level Reset (FLR) register with the address of an instruction which caused the processor to fault.  That address can be turned into a line of code."
+msgstr ""
+
+#: ../../source/docs/watchdog-debugging.rst:45
+#: ab897cc580a64da886228fe8b3bc36e0
+msgid "Ensure you can identically reproduce the binary running on the board."
+msgstr ""
+
+#: ../../source/docs/watchdog-debugging.rst:46
+#: 4ab855690be1489cb2233659562e64bb
+msgid "Try addr2line"
+msgstr ""
+
+#: ../../source/docs/watchdog-debugging.rst:47
+#: 988f58cdc5874b7890ad43ae5ebd1969
+msgid "disassemble the binary: arm-none-eabi-objdump --demangle --disassemble-all --full-contents --all-headers"
+msgstr ""

@@ -36,8 +36,17 @@ The sections below provide information about ArduPilot autopilot hardware option
 
 [/site]
 
+[site wiki="sub"]
+
+.. note::
+
+    The `mRo Pixhawk <common-pixhawk-overview>` and `Blue Robotics Navigator <https://bluerobotics.com/store/comm-control-power/control/navigator/>`__ ** (Linux) are known to have been used in popular commercial underwater vehicles, so have had substantial testing, and *may* require less configuration or have more detailed documentation available.
+
+[/site]
+
 .. note:: Not all of these autopilots have been directly tested by ArduPilot development team members and while firmware  is provided by ArduPilot, it does not constitute an endorsement by ArduPilot.  However, most boards developed by ArduPilot Partners have been provided to the ArduPilot development team to aid in any possible support issues that might arise. 
 
+.. note:: Due to flash memory limitations, most F4 based, and some other boards, do not include all ArduPilot features. See :ref:`Firmware Limitations <common-limited_firmware>` for details.
 
 Open Hardware
 =============
@@ -47,14 +56,13 @@ Open Hardware
 
     AcctonGodwit GA1 <common-acctongodwit-ga1>
     ARKV6X DS-10 Pixhawk6 <common-ark-v6x-overview>
-    ARK FPV <common-ark-fpv-overview>
     CUAV V5 Plus <common-cuav-v5plus-overview>
     CUAV V5 Nano <common-cuav-v5nano-overview>
     CUAV Nora <common-cuav-nora-overview>
     CUAV Pixhawk v6X <common-cuav-pixhawkv6X>
+    CUAV Pixhawk v6X V2 <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_HAL_ChibiOS/hwdef/CUAV-V6X-v2>
     CUAV X7/X7Pro/X7+/X7+ Pro <common-cuav-x7-family-overview>
     CUAV-7-Nano <common-CUAV-7-Nano>
-    Drotek Pixhawk3 <https://drotek.gitbook.io/pixhawk-3-pro/>
     F4BY <common-f4by>
     CubePilot Cube Black <common-thecube-overview>
     CubePilot Cube Orange/+ <common-thecubeorange-overview>
@@ -72,10 +80,10 @@ Open Hardware
     mRo X2.1 <https://store.mrobotics.io/mRo-X2-1-Rev-2-p/m10021a.htm>
     mRo X2.1-777 <https://store.mrobotics.io/mRo-X2-1-777-p/m10022a.htm>
     OpenPilot Revolution <common-openpilot-revo-mini>
+    SULIGH7 <common-suligh7>
     TauLabs Sparky2 <common-taulabs-sparky2>
     ZeroOneX6/X6 Pro <common-zeroonex6>
-
-\* due to flash memory limitations, these boards do not include all ArduPilot features. See :ref:`Firmware Limitations <common-limited_firmware>` for details.
+    ZeroOneX6-Air/Air+ <common-zeroonex6-air>
 
 Closed Hardware
 ===============
@@ -84,25 +92,40 @@ Closed Hardware
     :maxdepth: 1
 
     3DR Control Zero H7 OEM <common-3DR_Control_Zero_OEM_G>
+    Aeromind6X <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_ChibiOS/hwdef/Aeromind6X/README.md>
+    ACNS-CM4Pilot <common-acns-cm4pilot>
     AEDROX H7 <common-aedroxh7>
+    AeroCogito H7Digital <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_ChibiOS/hwdef/AeroCogito-H7Digital/README.md>
+    AeroFox H7 <common-aerofox-h7>
     Aerotenna Ocpoc-Zynq <https://aerotenna.com/shop/ocpoc-zynq-mini/>
+    AIRBRAINH743 <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_ChibiOS/hwdef/AIRBRAINH743/README.md>
     Airvolute DroneCore <common-airvolute-DroneCore-Suite>
     AET-H743-Basic <common-AET-H743-Basic>
     AnyleafH7 <common-anyleafh7>
     AocodaRC H743Dual <common-aocoda-h743dual>
+    ARK FPV <common-ark-fpv>
     ARK_PI6X <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_ChibiOS/hwdef/ARK_PI6X/README.md>
+    Atlas-Control <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_ChibiOS/hwdef/Atlas-Control/README.md>
     AtomRC F405-NAVI <common-atomrcf405-navi>
+    AtomRC F405-NAVI-Deluxe <common-atomrcf405-navi-deluxe>
     BetaFPV F405 family <common-betafpvf405>
     BrahmaF4 <common-brahmaf4>
     BOTWINGF405 <common-botwingf405>
     brainFPV RADIX2 HD <common-radix2hd>
     Brother Hobby F405v3 <common-brotherhobbyf405v3>
     Brother Hobby H743 <common-brotherhobbyh743>
+    CORVON743V1 <common-corvon743v1>
     CBUnmanned H743 Stamp <common-StampH743>
+    CORVONF405V2.1 <common-corvonf405v2_1>
+    CrazyF405 <common-crazyf405>
     CSKY405 <common-CSKYF405>
     DAKEFPVH743Pro <common-dakefpvh743pro>
+    DAKEFPVH743-SLIM <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_ChibiOS/hwdef/DAKEFPVH743_SLIM/README.md>
     CUAV-X25-EVO <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_HAL_ChibiOS/hwdef/CUAV-X25-EVO>
+    DAKEFPVF405 <common-dakefpvf405>
+    DroneerF405 <common-DroneerF405>
     Emlid NAVIO2 (Linux) <common-navio2-overview>
+    F4BY_H743 <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_ChibiOS/hwdef/F4BY_H743/README.md>
     Flywoo F405 Pro <common-flywoof405pro>
     Flywoo F405HD 1-2S <common-flywoof405hd>
     Flywoo F745 AIO BL_32/ Nano <common-flywoo-f745>
@@ -113,6 +136,7 @@ Closed Hardware
     Furious FPV F-35 Lightning and Wing FC-10 <common-furiousfpv-f35>
     GEPRC Taker F745 <common-geprc-takerf745>
     GEPRC Taker H743 BT <common-geprc-taker-h743-bt>
+    GreenSightUltraBlue <common-greensightultrablue>
     HeeWing F405/F405V2 <common-heewingf405>
     Holybro Kakute F4 <common-holybro-kakutef4>
     Holybro Kakute F4 Mini <common-holybro-kakutef4-mini>
@@ -125,6 +149,7 @@ Closed Hardware
     Holybro Pixhawk 4 Mini <common-holybro-ph4mini>
     Holybro Pixhawk5X <common-holybro-ph5x>
     Horizon31 PixC4-Jetson <common-horizon31-pixc4-jetson>
+    HWH7 <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_ChibiOS/hwdef/HWH7/README.md>
     iFlight Beast F7 45A AIO <common-iflight-beastf7AIO>
     iFlight BeastH7 AIO <common-iflight-beasth7AIO>
     iFlight Blitz F745/F745 Mini <common-blitz-f745>
@@ -133,9 +158,15 @@ Closed Hardware
     iFlight Blitz Wing H743 <common-blitzh743wing>
     iFlight Thunder H7 <common-iflight-thunder-H7>
     JAE JFB-110 <common-jae-jfb110>
+    JFB-100 <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_ChibiOS/hwdef/JFB100/README.md>
+    JFB-110 <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_ChibiOS/hwdef/JFB110/README.md>
+    JFB-200 <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_ChibiOS/hwdef/JFB200/README.md>
+    JHEMCU F405Pro <common-jhemcuf405pro>
     JHEMCU F405WING <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_HAL_ChibiOS/hwdef/JHEMCUF405WING>
     JHEMCU H743HD <common-jhemcu-h743hd>
+    KT-FMU-F1 <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_ChibiOS/hwdef/KT-FMU-F1/README.md>
     LongBowF405WING <common-longbowf405wing>
+    Lumineer LUXF765-NDAA <common-luxf765-ndaa>
     Mamba F405 MK2 <common-mamba405-mk2>
     Mamba MK4 F405Mini <common-mambaf405-mini>
     Mamba Basic F405 mk3 <common-mamba-basic-mk3>
@@ -148,12 +179,16 @@ Closed Hardware
     MakeFlyEasy PixPilot-V6PRO <common-makeflyeasy-PixPilot-V6PRO>
     Mateksys F405 TE Family <common-matekf405-te>
     Mateksys H743-Wing/MINI/SLIM/WLITE <common-matekh743-wing>
+    Mateksys H7A3-Slim <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_ChibiOS/hwdef/MatekH7A3/Readme.md>
+    Mateksys H7A3-Wing <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_HAL_ChibiOS/hwdef/MatekH7A3-Wing>
     MFT-SEMA100 <common-mft-sema100>
     MicoAir405v2/Mini <common-MicoAir405v2>
     MicoAir743 <common-MicoAir743>
     MicoAir743-AIO <common-MicoAir743-AIO>
+    MicoAir743-Lite <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_ChibiOS/hwdef/MicoAir743-Lite/README.md>
     MicoAir743v2 <common-MicoAir743v2>
     ModalAI Flight core <https://www.modalai.com/products/flight-core>
+    Morakot <common-morakot>
 [site wiki="copter,rover,blimp"]
     ModalAI VOXL2 <common-modalai-voxl2>
 [/site]
@@ -164,22 +199,25 @@ Closed Hardware
     mRo Pixracer Pro (H7) <common-pixracer-pro>
     mRo Nexus <common-mro-nexus>
     MUPilot <common-MUPilot>
-    NarinFC-H7 <common-NarinFC-H7>
-    NarinFC-X3 <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_HAL_ChibiOS/hwdef/NarinFC-X3/README.md>
+    NarinFC-H7/H5 <common-NarinFC-H7>
+    NarinFC-X3 <common-NarinFC-X3>
     NxtPX4v2 <common-NxtPX4v2>
     Omnibus F4 AIO/Pro <common-omnibusf4pro>
     OmnibusNanoV6 <common-omnibusnanov6>
     Omnibus F7V2 <common-omnibusf7>
+    OrbitH743 <common-orbith743>
     OrqaF405 <common-OrqaF405>
-    OrqaH743Pro <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_HAL_ChibiOS/hwdef/OrqaH743Pro>
+    Orqa H7 QuadCore <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_HAL_ChibiOS/hwdef/OrqaH7QuadCore>
 [site wiki="copter"]
     Parrot Bebop Autopilot <parrot-bebop-autopilot>
 [/site]
     Parrot C.H.U.C.K <common-CHUCK-overview>
     PixFlamingo- F767 <common-pixflamingo-f767>
+    PixSurveyA2-IND <common-pixsurveya2-ind>
     RadioLink MiniPix <common-radiolink-minipix>
     RadioLinkF405 <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_ChibiOS/hwdef/RadiolinkF405/README.md>
     RadioLinkPIX6 <common-radiolinkpix6>
+    ResoluteH7 <common-resoluteh7>
     QioTek Zealot F427 <common-qiotek-zealot>
     QioTek Zealot H743 <common-qiotek-zealoth7>
     SDMODEL SDH7V1 <https://www.sdmodel.com.tw/content.php?cn=item&tid=1320&start=0>
@@ -187,6 +225,7 @@ Closed Hardware
     SequreH743 <common-sequreh743>
     SIYI N7 <https://siyi.biz/siyi_file/N7/N7%20Autopilot%20User%20Manual%20(ArduPilot)%20v1.0.pdf>
     Sky-Drones AIRLink <common-skydrones-airlink>
+    SkyRukh Surge H7 <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_ChibiOS/hwdef/SkyRukh_Surge_H7/README.md>
     SkystarsF405 V2 <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_HAL_ChibiOS/hwdef/SkystarsF405v2>
     SkySakuraH743 <common-SkySakuraH743>
     SkystarsH7HD <common-skystarsH7>
@@ -199,8 +238,12 @@ Closed Hardware
     SpeedyBee F4 (this board currently is non-verified) <common-speedybeef4>
     SpeedyBee F405 AIO <common-speedybeef405aio>
     SpeedyBee F4 V3/V4 <common-speedybeef4-v3>
+    SpeedyBee F4 V5 <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_HAL_ChibiOS/hwdef/speedybeef4v5>
     SpeedyBee F405 Mini <common-speedybeef405-mini>
     SpeedyBeeF405WING/WING Mini <common-speedybeef405wing>
+    StellarF4 <common-stellarf4>
+    StellarF4V2 <common-stellarf4v2>
+    StellarH7V2 <common-stellarh7v2>
     SVehicle E2 <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_ChibiOS/hwdef/SVehicle-E2/README.md>
     TBS Lucid H7 <common-tbs-lucidh7>
     TBS Lucid H7 Wing <common-tbs-lucid-h7-wing>
@@ -208,15 +251,16 @@ Closed Hardware
     ThePeach FCC-K1 <common-thepeach-k1>
     ThePeach FCC-R1 <common-thepeach-r1>
     TmotorH7Mini <common-tmotor-h7-mini>
+    UAV-DEV H7 UM982 <common-uav-dev-fc-um982>
     VR Brain 5 <http://www.virtualrobotix.it/index.php/en/shop/autopilot/vrbrain5-detail>
     VR uBrain 5.1 <http://www.virtualrobotix.it/index.php/en/shop/autopilot/vrbrainmicro51-detail>
     X-MAV-AP-H743v2 <common-X_MAV_H743v2>
+    X-MAV-AP-H743r1 <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_ChibiOS/hwdef/X-MAV-AP-H743r1/README.md>
     YARIV6X <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_HAL_ChibiOS/hwdef/YARIV6X>
     YJUAV A6SE <common-yjuav-a6se>
     YJUAV A6SE H743<common-yjuav-a6se-h743>
     YJUAV-A6Ultra <common-yjuav-a6ultra>
-
-.. note:: due to flash memory limitations, most F4 based, and some other boards, do not include all ArduPilot features. See :ref:`Firmware Limitations <common-limited_firmware>` for details.
+    VUAV-TINYV7 <common-vuav-tinyv7>
 
 Linux Based Autopilots
 ======================
@@ -230,7 +274,10 @@ These autopilots use an underlying Linux OS. Linux boards usually have more CPU 
     Beagle Bone Blue (Linux) <common-beagle-bone-blue>
     Blue Robotics Navigator** (Linux) <https://bluerobotics.com/store/comm-control-power/control/navigator/>
     Obal Board (Linux) <common-obal-overview>
+    Pi PilotPi <https://docs.px4.io/main/uk/flight_controller/raspberry_pi_pilotpi.html>
+    PocketBeagle 2 DIY Cape** (Linux) <common-pocketbeagle-2.rst>
     PocketPilot** (Linux) <https://github.com/PocketPilot/PocketPilot>
+    T3 Gemstone O1 (Linux) <common-t3-gem-o1-overview>
 
 \** these devices are sensor add-on boards for a Linux-based microcomputer. See board links for details.
 
@@ -267,6 +314,8 @@ The following boards are no longer produced, however, documentation is still ava
     Mateksys F405-Wing <common-matekf405-wing>
     Mateksys F765-Wing <common-matekf765-wing>
     Mateksys F765-WSE <common-matekf765-wse>
+    Drotek Pixhawk3 <https://drotek.gitbook.io/pixhawk-3-pro/>
+
 
 The following boards are no longer supported. The documentation is :ref:`archived<common-archived-topics>`, but
 available if you're still working on those platforms:

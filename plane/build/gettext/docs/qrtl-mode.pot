@@ -1,0 +1,102 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/qrtl-mode.rst:5
+#: 2a9906a7bb9343c895e7c630c2ce5271
+msgid "QRTL Mode"
+msgstr ""
+
+#: ../../source/docs/qrtl-mode.rst:7
+#: fef853185d994b2c9d51e93254ef8081
+msgid "QRTL mode (QuadPlane Return To Launch mode) navigates QuadPlane from its current position to hover above the home position and then land. The behavior of QRTL mode can be controlled by several adjustable parameters. This page describes how to use and customize QRTL mode."
+msgstr ""
+
+#: ../../source/docs/qrtl-mode.rst:13
+#: d7e4c44b1823423f9549dc05994953a7
+msgid "Overview"
+msgstr ""
+
+#: ../../source/docs/qrtl-mode.rst:15
+#: eff0635372dc47b290b5ef08a383f39f
+msgid "When QRTL mode is selected, the QuadPlane will return to the home location. By default, it will transition to fixed wing mode (if in a VTOL mode before entering, it will climb to :ref:`Q_RTL_ALT<Q_RTL_ALT>` if below that altitude, before transitioning), executing the first part of a normal RTL, and then make an approach  as it nears the landing point and switch to VTOL mode and proceed to the landing point, then descend to a landing. See the description of this under the :ref:`Hybrid RTL<hybrid_rtl>` section for :ref:`Q_RTL_MODE<Q_RTL_MODE>` = 3."
+msgstr ""
+
+#: ../../source/docs/qrtl-mode.rst:17
+#: 390cc3b96e2a4f2ebff3b36b6dd5e112
+msgid "If a pure VTOL QRTL is desired, then you must disable the fixed wing RTL and approach feature by setting :ref:`Q_OPTIONS<Q_OPTIONS>` bit 16. Then the following actions will then occur on a QRTL:"
+msgstr ""
+
+#: ../../source/docs/qrtl-mode.rst:19
+#: 054d5b38fc414ab9aea4e06da7b0d8eb
+msgid "The QuadPlane will immediately navigate towards the home location at :ref:`Q_WP_SPD<Q_WP_SPD>`, climbing or descending towards the :ref:`Q_RTL_ALT<Q_RTL_ALT>` altitude. Once arriving within :ref:`Q_WP_RADIUS_M<Q_WP_RADIUS_M>` distance of home, it will begin descending at :ref:`Q_WP_SPD_DN<Q_WP_SPD_DN>` rate, until it reaches :ref:`Q_LAND_FINAL_ALT<Q_LAND_FINAL_ALT>` at which point it will descend at :ref:`Q_LAND_FINAL_SPD<Q_LAND_FINAL_SPD>` until landing."
+msgstr ""
+
+#: ../../source/docs/qrtl-mode.rst:26
+#: 1b3ebc890bb84c80b9bef47b557ac8c5
+msgid "QuadPlane will recognize that it has landed if the motors are at minimum for 5 seconds and its altitude has not changed more than 0.2m for 4 seconds.  It does not use the altitude itself to decide whether to shut off the motors except that the QuadPlane must also be below :ref:`Q_LAND_FINAL_ALT<Q_LAND_FINAL_ALT>` above home(ie in the LAND FINAL phase). The altitude change for the decision can be increased, in case the altitude determination from the EKF is excessively noisy by increasing the :ref:`Q_LAND_ALTCHG<Q_LAND_ALTCHG>` value from its default value of 0.2m."
+msgstr ""
+
+#: ../../source/docs/qrtl-mode.rst:32
+#: 7877930aa1814f3396816559419cef0a
+msgid "Alternatively, you may :ref:`configure the plane to return to a Rally Point <common-rally-points>`, rather than the home location."
+msgstr ""
+
+#: ../../source/docs/qrtl-mode.rst:36
+#: 882fd5c374a94e70b39c220d07bf690d
+msgid "\"Home\" position is always supposed to be your Plane's actual GPS takeoff location:"
+msgstr ""
+
+#: ../../source/docs/qrtl-mode.rst:39
+#: 8ea7e08f2af144c6b80f5f88b1e6442f
+msgid "It is very important to acquire GPS lock before arming in order for QRTL, QLOITER, AUTO or any GPS dependent mode to work properly. This requirement is provided in  the default arming checks. It is highly recommended that this check is not disabled."
+msgstr ""
+
+#: ../../source/docs/qrtl-mode.rst:41
+#: c1f982478a8b42ac8b16c2d204e82a1b
+msgid "For QuadPlane the home position is initially established at the time the plane acquires its GPS lock. It is then continuously updated as long as the autopilot is disarmed."
+msgstr ""
+
+#: ../../source/docs/qrtl-mode.rst:45
+#: 5da47ae4077f4061a76acfe387771320
+msgid "This means if you execute an QRTL in QuadPlane, it will return to the location where it was when it was armed - assuming it had acquired GPS lock."
+msgstr ""
+
+#: ../../source/docs/qrtl-mode.rst:46
+#: 60c643dc2a9a4299b84647bd8dbe9092
+msgid "Consider the use of :ref:`Rally Points <common-rally-points>` to avoid returning directly to your arming point on QRTL."
+msgstr ""
+
+#: ../../source/docs/qrtl-mode.rst:51
+#: afb0b6f94e334c1e87fc36eb269ea6bb
+msgid "In QRTL mode the autopilot uses a barometer which measures air pressure as the primary means for determining altitude (\"Pressure Altitude\") and if the air pressure is changing in your flight area, the copter will follow the air pressure change rather than actual altitude."
+msgstr ""
+
+#: ../../source/docs/qrtl-mode.rst:59
+#: 06c483dcc3f74458a6a453a54c38d39b
+msgid "Notes"
+msgstr ""
+
+#: ../../source/docs/qrtl-mode.rst:62
+#: 7ef0248891b8421b8d5097feac7ae6e2
+msgid "Landing and re-arming the QuadPlane will reset home, which is a great feature for flying at airfields."
+msgstr ""
+
+#: ../../source/docs/qrtl-mode.rst:64
+#: 8e15b9de0feb4c91b1082b2c2ecb1af4
+msgid "If you get lock for the first time while flying, your home will be set at the location of lock."
+msgstr ""

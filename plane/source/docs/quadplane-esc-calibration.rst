@@ -3,12 +3,13 @@
 ESC calibration
 ===============
 
-Most models of PWM based ESC need to be calibrated to ensure that all
+Most models of PWM based ESC (not DShot ESCs) need to be calibrated to ensure that all
 the ESCs respond to the same input with the same speed. To calibrate
 them they need to receive maximum PWM input when initially powered on,
 then receive minimum PWM input when they have beeped to indicate that
 the maximum has registered.
 
+.. note:: if ESC RPM telemetry is being used, the :ref:`TKOFF_RPM_MIN <TKOFF_RPM_MIN>` parameter could be set slightly below the :ref:`Q_M_SPIN_ARM <Q_M_SPIN_ARM>` parameter to prevent takeoff attempts, and subsequent flips on takeoff, if one or more motors are not spinning.
 
 .. warning::
    You must remove all propellers from your vehicle before doing any

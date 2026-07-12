@@ -1,0 +1,788 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Mission Planner package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Mission Planner \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:48+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:5
+#: 7a9d713054be4f8690511f61711209f7
+msgid "Mission Commands"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:6
+#: 76dd8b796dc64bc28589baecf87619a1
+msgid "This article describes the mission commands that are supported by Copter, Plane, Sub and Rover when switched into Auto mode."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:8
+#: 47881ee9c02849fcb6b788781e5a6826
+msgid "there are many other MAVLink commands that a GCS or other device can send to the autopilot. See the ArduPilot/navlink repository, or the documentation for your GCS."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:13
+#: 7a44ba73da9540da85423a5cffada7ab
+msgid "Overview"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:15
+#: 917467e87eb7473ba72619d65de98063
+msgid "The MAVLink protocol defines a large number of `MAV_CMD <https://github.com/ArduPilot/mavlink/blob/master/message_definitions/v1.0/common.xml#L1008>`__ waypoint command types (sent in a ``MAVLink_mission_item_message``). ArduPilot implements handling for the subset of these commands and command parameters that are *most relevant* and meaningful for each of the vehicles. Unsupported commands that are sent to a particular autopilot will simply be dropped."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:23
+#: 8e0669b039354ac5853145290c9512f2
+msgid "This article lists and describes the commands and command-parameters that are supported on each of the vehicle types. Any parameter that is \"grey\" is not supported by the autopilot and will be ignored. They are still documented to make it clear which properties are supported by the `MAV_CMD protocol <https://github.com/ArduPilot/mavlink/blob/master/message_definitions/v1.0/common.xml#L1008>`__ are not implemented by the vehicle."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:30
+#: 99297f33270d42e9b1ed5e1d4ca3fee2
+msgid "Some commands and command parameters are not implemented because they are not relevant for particular vehicle types (for example \"MAV_CMD_NAV_TAKEOFF\" command makes sense for Plane and Copter but not Rover and the pitch parameter only makes sense for Plane). There are also some potentially useful command parameters that are not handled because there is a limit to the message size, and a decision has been made to prioritize some parameters over others."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:40
+#: 93182f1bda5540f68fc936ee6cf25429
+msgid "There is additional information about the supported commands on Copter (from a Mission Planner perspective) in the :ref:`Copter Mission Command List <copter:mission-command-list>`."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:44
+#: bac8996f5efd4a919a29ff944d332193
+msgid "Types of commands"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:46
+#: 84bf930d51e1465eaded8dc2279b6b28
+msgid "There are several different types of commands that can be used within missions:"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:49
+#: d960ff9d987f409fbd1640cfcfb2ca5f
+msgid "Navigation commands are used to control the movement of the vehicle, including takeoff, moving to and around waypoints, changing altitude, and landing."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:52
+#: 9bf923b0d9d1491984f7b955781d002c
+msgid "DO commands are for auxiliary functions and do not affect the vehicle’s position (for example, setting the camera trigger distance, or setting a servo value)."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:55
+#: 9abdecc499524a5d8eab5a31a7efad29
+msgid "Condition commands are used to delay DO commands until some condition is met, for example, the UAV reaches a certain altitude or distance from the waypoint."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:59
+#: 01719934e7264b7ea6d2e28f8e07877b
+msgid "During a mission at most one “Navigation” command and one “Do” or \"Condition\" command can be running at one time. A typical mission might set a waypoint (NAV command), add a CONDITION command that doesn't complete until a certain distance from the destination (:ref:`MAV_CMD_CONDITION_DISTANCE <mav_cmd_condition_distance>`), and then add a number of DO commands that are executed sequentially (for example :ref:`MAV_CMD_DO_SET_CAM_TRIGG_DIST <mav_cmd_do_set_cam_trigg_dist>` to take pictures at regular intervals) when the condition completes."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:71
+#: 8509c324b0ac43e0afc5f259925abfe8
+msgid "CONDITION and DO commands are associated with the preceding NAV command: if the UAV reaches the next waypoint before these commands are executed, the next NAV command is loaded and they will be skipped."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:80
+#: 753fd3c8fbf64c9fbdafbb689279440a
+msgid "Frames of reference"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:82
+#: 0f61b1f44fdf4c0e951e6d219cd1022a
+msgid "Many of the commands (in particular the :ref:`NAV\\_ commands <common-mavlink-mission-command-messages-mav_cmd_navigation_commands>`) include position/location information. The information is provided relative to a particular \"frame of reference\", which is specified in the message's :ref:`common-mavlink-mission-command-messages-mav_cmd_navigation_commands_frames` field. Copter and Rover Mission use :ref:`MAV_CMD_DO_SET_HOME <mav_cmd_do_set_home>` command to set the \"home position\" in the global coordinate frame (MAV_FRAME_GLOBAL), `WGS84 coordinate system <https://en.wikipedia.org/wiki/World_Geodetic_System>`__, where the altitude is relative to mean sea level. All other commands use the MAV_FRAME_GLOBAL_RELATIVE_ALT frame, which uses the same latitude and longitude, but sets altitude as relative to the *home position* (home altitude = 0)."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:92
+#: 273ca92353dd4e678879ff0950aab868
+msgid "Plane commands can additionally use MAV_FRAME_GLOBAL_TERRAIN_ALT frame of reference. This again has the same WGS84 frame of reference for latitude/longitude, but specifies altitude relative to ground height (as defined in a terrain database)."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:99
+#: cd8b7992f5ca4c5488834fed045da913
+msgid "The other frame types are defined in the MAVLink protocol (see `MAV_FRAME <https://github.com/ArduPilot/mavlink/blob/master/message_definitions/v1.0/common.xml#L795>`__) are not supported for mission commands."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:104
+#: 1011c801d4294b46af9aa1f99124bd52
+msgid "How accurate is the information?"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:106
+#: 99644d91c6df408bb3b948e5aeb31079
+msgid "If a command or parameter is marked as supported then it is likely (but not guaranteed) that it will behave as indicated. If a command or parameter is not listed (or marked as not supported) then it is extremely likely that it is not supported on ArduPilot."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:111
+#: 212b5afd2cfd4a5599b6daf34ab0785a
+msgid "The reason for this is that the information was predominantly inferred by inspecting the command handlers for messages:"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:114
+#: 080db69ed2674ad7b174afb0808ef357
+msgid "The switch statement in `AP_Mission::mavlink_to_mission_cmd <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Mission/AP_Mission.cpp#L466>`__ was inspected to determine which commands are handled by *all* vehicle platforms, and which parameters from the message are stored."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:117
+#: 4bb231039aa24d089313e5c657bf7a23
+msgid "The command handler switch for each vehicle type (`Plane <https://github.com/ArduPilot/ardupilot/blob/master/ArduPlane/commands_logic.cpp#L33>`__, `Copter <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/commands_logic.cpp#L49>`__, `Rover <https://github.com/ArduPilot/ardupilot/blob/master/Rover/commands_logic.cpp#L25>`__) tells us which commands are likely to be supported in each vehicle and which parameters are passed to the handler."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:124
+#: 1d01b3081e2d4b8a85cfe093c17c160e
+msgid "The above checks give a very accurate picture of what commands and parameters are not supported. They give a fairly accurate picture of what commands/parameters are *likely to be supported*. However, this indication is not guaranteed to be accurate because a command handler could just throw away all the information (and we have not fully checked all of these)."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:131
+#: b78d879671da474eb770f19e49c42e8e
+msgid "In addition to the above checks, we have also merged information from the :ref:`Copter Mission Command List <copter:mission-command-list>`."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:135
+#: 1b9486f8382047ce934bf4be664bf7a2
+msgid "How to interpret the command parameters"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:137
+#: 6fb51567b19a47d5b7f2fb964fdfabe5
+msgid "The parameters for each command are listed in a table. The parameters that are \"greyed out\" are not supported. The command field column (param name) uses \"bold\" text to indicate those parameters that are defined in the protocol (normal text is used for \"empty\" parameters)."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:142
+#: b9ea459ede674dab8bf61437341e9137
+msgid "This allows users/developers to see both what is supported, and what protocol fields are not supported in ArduPilot."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:146
+#: 7ffb62fc8b344cd486cc38f57cfa9835
+msgid "Using this information with a GCS"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:148
+#: c38aad23a6864fcd852aba21e323c859
+msgid "*Mission Planner* (MP) exposes the full subset of commands and parameters supported by ArduPilot, filtered to display just those relevant to the currently connected vehicle. Mapping the MP commands to this documentation is easy, because it simply names commands using a cut-down version of the full command name (e.g. ``DO_SET_SERVO`` rather than the full command name: ``MAV_CMD_DO_SET_SERVO``). In addition, this document conveniently lists the column label used by Mission Planner alongside each of the parameters."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:157
+#: 36c1dd1c8128479dba4ef76a6cd4a15a
+msgid "Other GCSs (APM Planner 2, Tower etc.) may support some other subset of commands/parameters and use alternative names/labels for them. In most cases, the mapping should be obvious."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:173
+#: 48d648141963498cafec4760f3d505f2
+msgid "Navigation commands"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:175
+#: 71474434388c4f2a890e62cb9f75a643
+msgid "Navigation commands are used to control the movement of the vehicle, including takeoff, moving to and around waypoints, and landing."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:178
+#: 30fc3256c8aa4d0fb3c80d9353c20662
+msgid "NAV commands have the highest priority. Any DO\\_ and CONDITION\\_ commands that have not executed when a NAV command is loaded are skipped (for example, if a waypoint completes and the NAV command for another waypoint is loaded, and unexecuted DO/CONDITION commands associated with the first waypoint are dropped."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:187
+#: c569778e6a1d42a4b693701df90567e6
+msgid "MAV_CMD_NAV_WAYPOINT"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:189
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:211
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:242
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:356
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:601
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:679
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:780
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:861
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:933
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1003
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1074
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1170
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1246
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1324
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1394
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1464
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1538
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1597
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1672
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1730
+#: f78019c9f89347bd8b7cfb6a96d64c9c
+#: 41a38e881ca94d869167f641df130feb
+#: 50edad7a9e4d4952b9022299f5882012
+#: d3faf7650fa045ddac9bbb5d835c6df2
+#: 26a97700bd5d4dfca2c9cad2dfcd6739
+#: 0243df0525e1475cbc14d13bd292840a
+#: a142b96110bb4724ab7fbcb917fbe084
+#: 1320c2fb99a1453485691b4330ebeeb8
+#: 2fe32e89a5674c9a8a6e1eed03bb6adf
+#: c59979e20389435798264c597d1c2827
+#: d2c6f1660dbf468d9fe3e9c74d84eda3
+#: 7560c4355a90461c9814b3a40f8012d9
+#: 53971faa36364b16aadec4e7942cc611
+#: 53864cad95534021a273bca7686939ee
+#: 7c64eeb6d4a346a7ac986e9226d87eff
+#: f426fc53fd164832878c996db32f03a2
+#: 8c740e30c402436da53f96bb23703ed0
+#: db2dae2ad34c41a8886f298749410df9
+#: bdf6901ab2c04a8e9a8f3a3539130af9
+#: ff32d7454bc64f44b45c0718711544e9
+msgid "Supported by: All vehicles."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:191
+#: 2c49142a74e74de89c4b129e9b57bc13
+msgid "Navigate to the specified position."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:209
+#: 6f72b2bfef5e49ed9f32cdb6c940b63b
+msgid "MAV_CMD_NAV_LOITER_UNLIM"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:213
+#: a4d670855528455789f0730cc0f34dab
+msgid "Loiter at the specified location for an unlimited amount of time."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:230
+#: 2c9725dd10b34ad2bce0e26e6f90d8ad
+msgid "MAV_CMD_NAV_LOITER_TIME"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:232
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:443
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:503
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:767
+#: 3691a63e9a2d4d67acb73878a83cf98b
+#: df9c624ac76b44779c9337bc805c70b5
+#: be3a31078f3444489e8025a3c233030a
+#: a0f04a946d5b46eeae6d775c4c41ee1c
+msgid "Supported by: Copter, Plane, Rover."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:240
+#: 86ccffd2ec5e4b6a80cc6c44a0508190
+msgid "MAV_CMD_NAV_RETURN_TO_LAUNCH"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:244
+#: e629832990a54c2997e9e583bba56301
+msgid "Return to the *home location* or the nearest `Rally Point <common-rally-points>`__, if closer. The home location is where the vehicle was last armed (or when it first gets GPS lock after arming if the vehicle configuration allows this)."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:282
+#: c24522f43ed441678d2403e87dc58f7f
+msgid "MAV_CMD_NAV_DELAY"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:284
+#: 8d0df29f0f044d94add9b8bbb3876cc8
+msgid "Supported by: Copter, Rover, Plane."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:292
+#: 16949439ad354ae9b50564fb3d0e0a8a
+msgid "MAV_CMD_NAV_PAYLOAD_PLACE"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:294
+#: 2aa9e221f2c3405796dc6477eb4aa229
+msgid "Supported by: Copter and Plane."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:298
+#: db4015e5262e4e88ad453d1070d5ab8f
+msgid "[wiki site=\"copter,plane\"] **Command parameters**"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:349
+#: 30a4f87efa1a49619cd5e87cb68ec5d9
+msgid "[/site]"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:354
+#: 58276a185d604639a4f9d30ea767a4de
+msgid "MAV_CMD_DO_JUMP"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:358
+#: 5df4adc53afe4b669fa9cc6257baab07
+msgid "Jump to the specified command in the mission list. The jump command can be repeated either a specified number of times before continuing the mission, or it can be repeated indefinitely."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:364
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:511
+#: a0903d17e0824e88856fb4acff3a310f
+#: 87521ce1f24c4c8393469e03fd6a51e2
+msgid "Despite the name, this command is really a \"NAV\\_\" command rather than a \"DO\\_\" command. Conditional commands like CONDITION_DELAY don't affect DO_JUMP (it will always perform the jump as soon as it reaches the command)."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:371
+#: c4ec3d9d33d3404caf2bfd592118002c
+msgid "There can be a maximum of 15 jump commands in a mission after which new DO_JUMP commands are ignored."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:373
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:447
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:520
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:613
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:689
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:795
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:866
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:939
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1007
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1084
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1178
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1250
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1333
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1403
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1474
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1543
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1602
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1676
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1734
+#: 88d2b1a18be54ce68bb359bba0af00f8
+#: c4a1c256928a4e159f5b07378df7c068
+#: 8094999167294a2086c3ae278160b493
+#: bc970d478c1b423385e1a682ceb56784
+#: 9fb9acc8b1a9436c86668cc2732ecb2a
+#: a661ee8723b34d97bca6ae63917800ff
+#: 79e1f542c68f4442beb3632270da6855
+#: ec5e529470624e50b94f3b4aeb0ac596
+#: 7f3ac9a502194517b8c802d65d44e303
+#: 3ec286bdc2ef435886a4556f2dbff5be
+#: 009d588b81214b43ae55dacb8118b47c
+#: 54d33020ff25400f851f5cd9b238190c
+#: 186f7771358b440caf663e5c2f1ac1fa
+#: 89e96c5b081143cb8aa61b19a9933e60
+#: b5245980e49a4d0d8e5978303afc4cb6
+#: 5eccae6900ec4857955f9f97af2ec76d
+#: 7e1e2abe099049258124941cd6f5b80f
+#: 541ea58137de45de8b0cd84fe305a28f
+#: fbb90d7c64e1443aae0af9f2934807c8
+msgid "**Command parameters**"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:428
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:575
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:663
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:738
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:849
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:921
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:988
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1056
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1133
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1312
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1382
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1452
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1522
+#: 942c48e0f4aa49c5a128daed86fe213e
+#: dfe94f4736964a2d9e07d6f27fafc764
+#: e6d24a4fa1004a1a8da8a8460bde9b49
+#: 87fd3f9ea1fb49088494dfefcb4c1df9
+#: ddf6c6f227f84f28a75e51697252b212
+#: b6fbb3f0f7ee404288f1938cd5f8a676
+#: e27ec799d9d74c54be449f391a18a9af
+#: f84a09664af840528f06a9f95041e9c3
+#: cf0dad48488a465e8ef635c0d98000a3
+#: 8b6ca62caba34e4f87d7f89d5b2679fa
+#: bfeedc5bc763488289b3a851dc64a835
+#: 7e9f0114f8e04c599ee0f2ec4f61c472
+#: 8cab81440b7e45f8959dda328b3fd6ee
+msgid "**Mission planner screenshots**"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:433
+#: e72b831b5a934564ad654c69d6f45186
+msgid "Mission Planner Settings for DO_JUMP command"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:435
+#: 24d29d029d6c4e2ab7063923df6037ad
+msgid "In the example above the vehicle would fly back-and-forth between waypoints #1 and #2 a total of 3 times before flying on to waypoint #4."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:441
+#: 8867cfc55f49461ba90ecd45fc6f479a
+msgid "MAV_CMD_JUMP_TAG"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:445
+#: bd1ab6d4c9f04f759206dbbc3e8f4ca4
+msgid "This is a location marker in the mission command sequence that can be used as a \"jump to\" location for the :ref:`MAV_CMD_DO_JUMP_TAG<MAV_CMD_DO_JUMP_TAG>` command. The tag id in its parameter field can be any arbitrary number between 1 and 65535."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:501
+#: c494aa9f2e0a4559b262cd951d55a10a
+msgid "MAV_CMD_DO_JUMP_TAG"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:505
+#: 3dffa47fe3df4771b9c3b6c58a5e5516
+msgid "Jump to the specified :ref:`MAV_CMD_JUMP_TAG<MAV_CMD_JUMP_TAG>` item in the mission list. The jump tag command can be repeated, either a specified number of times before continuing the mission, or it can be repeated indefinitely."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:518
+#: 505f19946fb64e70b16d9cb9eaac003a
+msgid "There can be a maximum of 15 jump_tag commands in a mission after which new DO_JUMP_TAG commands are ignored."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:580
+#: 4732e8f2b3cf407c9f0c57d70a7f58c6
+msgid "Mission Planner Settings for DO_JUMP_TAG command"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:582
+#: 4c7a807fa2294f719f098e7d30fefd79
+msgid "In the example above, the vehicle would fly back-and-forth between waypoints #3 and #4 a total of 3 times before completing the mission. This is because the DO_JUMP_TAG redirects the vehicle to JUMP_TAG #565 twice."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:585
+#: 8a97da2caa04488db6597a12fb95dc97
+msgid "Conditional commands"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:587
+#: 8fc15a01f30a49c188b0ff85329b7531
+msgid "Conditional commands control the execution of \\_DO\\_ commands. For example, a conditional command can prevent DO commands from executing based on a time delay, until the vehicle is at a certain altitude, or at a specified distance from the next target position."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:592
+#: 97777cccedea4c8bbc287072c5073c64
+msgid "A conditional command may not be complete before reaching the next waypoint. In this case, any unexecuted \\_DO\\_ commands associated with the last waypoint will be skipped."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:599
+#: 68dcc5c73e58422ab15a5ae0f19f530f
+msgid "MAV_CMD_CONDITION_DELAY"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:603
+#: 06f953246e074699abee045f064b913b
+msgid "After reaching a waypoint, delay the execution of the next conditional \"_DO_\" command for the specified number of seconds (e.g. :ref:`MAV_CMD_DO_SET_ROI <mav_cmd_do_set_roi>`)."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:609
+#: e7ee427c22df4fefa83a504a7902d069
+msgid "This command does not stop the vehicle. If the vehicle reaches the next waypoint before the delay timer completes, the delayed \"_DO_\" commands will never trigger."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:668
+#: 078de7b9e2a74c228340484a211f66b0
+msgid "Mission Planner Settings for CONDITION_DELAY command"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:670
+#: 36aed14f81e6436aa8062e502d529a1f
+msgid "In the example above, Command #4 (``DO_SET_ROI``) is delayed so that it starts 5 seconds after the vehicle has passed Waypoint #2."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:677
+#: b0a0d1a3715c4ad883b99c98725e44fb
+msgid "MAV_CMD_CONDITION_DISTANCE"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:681
+#: 17aec08a1f2d4a6d9a3e73c8cf4e25b5
+msgid "Delays the start of the next \"``_DO_``\\ \" command until the vehicle is within the specified number of meters of the next waypoint."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:686
+#: bcc88f4194b44016865be8e486cdfac1
+msgid "This command does not stop the vehicle: it only affects DO commands."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:743
+#: 4de43c9744004f569a2d165c0e936cc7
+msgid "Mission PlannerSettings for CONDITION_DISTANCE command"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:745
+#: a929b6c6009f46b89a9c38549e8bf7bc
+msgid "In the example above, Command #4 (``DO_SET_ROI``) is delayed so that it only starts once the vehicle is within 50m of waypoint #5."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:755
+#: f6ac3953844e49038396e3126adc075c
+msgid "DO commands"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:757
+#: 1b62f90a371847ccadb1bf4c84b2e801
+msgid "The \"DO\" or \"Now\" commands are executed once to perform some action. All the DO commands associated with a waypoint are executed immediately."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:765
+#: 0c82eba671e7423597d16a14877761a3
+msgid "MAV_CMD_DO_CHANGE_SPEED"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:778
+#: 4103edec986f449b8276205fc67d72c1
+msgid "MAV_CMD_DO_SET_HOME"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:782
+#: ba683725533a4e32b9f31a7f3ed64c7a
+msgid "Sets the home location either as the current location or at the location specified in the command. For SITL work, altitude input here needs to be with reference to absolute altitude, taking into account SRTM elevation."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:787
+#: df8ff5e9463a479e89bc14b18f86ff14
+msgid "For Plane and Rover, if a good GPS fix cannot be obtained the location specified in the command is used."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:789
+#: 0ff0cb39d3474aa2ba509f72ae4e3158
+msgid "For Copter, the command will also try to use the current position if all the location parameters are set to 0. The location information in the command is only used if it is close to the EKF origin."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:854
+#: 4b3db10e3afe40e0b7163594b892f1b9
+msgid "Mission Planner Settings for DO_SET_HOME command"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:859
+#: 407ac226cf784cfab249425904b7303b
+msgid "MAV_CMD_DO_SET_RELAY"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:863
+#: 911fbcf9704b44268539bb3cc225599d
+msgid "Set a `Relay <common-relay>`__ pin's voltage high (on) or low (off)."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:926
+#: d97b156c2f93405da40503b602d9b9b4
+msgid "MissionPlanner Settings for DO_SET_RELAY command"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:931
+#: f9693669da3540b399f18b8407a65c48
+msgid "MAV_CMD_DO_REPEAT_RELAY"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:935
+#: 496ca966409c48a79fe9dbcc1d73d7f9
+msgid "Toggle the :ref:`Relay <common-relay>` pin's voltage/state a specified number of times with a given period. Toggling the Relay will turn an off relay on and vice versa"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:993
+#: 065a889c69e14e62915b0979276806c3
+msgid "Mission Planner Settings for DO_RELAY_REPEAT command"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:995
+#: 5560fff649f040aabd7e9a55ae62bc0a
+msgid "In the example above, assuming the relay was off to begin with, it would be set high and then after 3 seconds, it would be toggled low again."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1001
+#: cc7cd5df6eaa420e85c099cc7a37109b
+msgid "MAV_CMD_DO_SET_SERVO"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1005
+#: 2871f1552d134456a2ddfb234155bd93
+msgid "Set a given :ref:`servo pin <common-servo>` output to a specific PWM value."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1061
+#: c5eb35c622594f42bd165701d01afe8f
+msgid "Mission Planner Settingsfor DO_SET_SERVO command"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1063
+#: ddb554d6fe7b4091b726ee8525551b3c
+msgid "In the example above, the servo attached to output channel 8 would be moved to PWM 1700 (servos generally accept PWM values between 1000 and 2000)."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1067
+#: 533e65af32684410846b458f5bfe003a
+msgid "as of firmware versions 4.0 and later, this command can be used on any output configured by its ``SERVOx_FUNCTION`` command as 0,1, or 51-66  (disabled or RC pass-throughs)"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1072
+#: 3296c2d01cdd4ff2b0d18fe12aff476a
+msgid "MAV_CMD_DO_REPEAT_SERVO"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1076
+#: 3b14a517473a4b978f40eeb62d3715c0
+msgid "Cycle a :ref:`servo <common-servo>` PWM output pin between its mid-position value and a specified PWM value, for a given number of cycles and with a set period."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1080
+#: f1526a88e7f14d3aabb7a6788cb8f1c1
+msgid "The mid-position value is specified in the ``RCn_TRIM`` parameter for the channel (``RC8_TRIM`` in the screenshot below). The default value is 1500.."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1138
+#: 47c0c667eb94431d97927e10d9ab457a
+msgid "Mission Planner Settingsfor DO_REPEAT_SERVO command"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1140
+#: 03cbca8dd85a4d2a87b2f3babb06a3b4
+msgid "In the example above, the servo attached to output channel 8 would be moved to PWM 1700, then after 4 second, back to mid, after another 4 seconds it would be moved to 1700 again, then finally after 4 more seconds it would be moved back to mid."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1154
+#: 314a5453916843b0a6b04940b41f8e1c
+msgid "MAV_CMD_DO_SET_ROI, MAV_CMD_DOE_SET_ROI_LOOCATION, MAV_CMD_DO_SET_ROI_NONE"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1156
+#: b17fc58ae3f346feafa761dc7a82ec31
+msgid "Supported by: Copter, Plane, Rover,Sub. Currently, the DO_SET_ROI,DO_SET_ROI_LOCATION, and DO_SET_ROI_NONE commands all behave the same with DO_SET_ROI_NONE removing the ROI target, the same as setting the location to 0,0 in the other commands."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1168
+#: 35b9b53ce21948c788297e736a14a1d4
+msgid "MAV_CMD_DO_DIGICAM_CONFIGURE"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1172
+#: d0f1061f8f1343ed9a04cba79e894bd8
+msgid "Configure an on-board camera controller system."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1174
+#: aea38f1f46f04c1e97dd9cdcf6517ade
+msgid "The parameters are forwarded to an on-board camera controller system (like the `3DR Camera Control Board <common-camera-control-board>`__), if one is present."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1244
+#: f433a32bd57a4af1823ccda6fca4fc94
+msgid "MAV_CMD_DO_DIGICAM_CONTROL"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1248
+#: 5008b91a61844785a926692a536d55ad
+msgid "Trigger the :ref:`camera shutter <common-camera-shutter-with-servo>` once. This command takes no additional arguments."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1252
+#: 33f8eedc616e47b0a40e116a5129bb19
+msgid "In general, if a command field is set to 0 it is ignored."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1317
+#: 38d8c7265eef4ffa83c6d28e83b5f0bf
+msgid "Mission PlannerSettings for DO_DIGICAM_CONTROL command."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1322
+#: 6dd3f9fff70a4e6681487924dde87ba9
+msgid "MAV_CMD_DO_MOUNT_CONTROL"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1326
+#: 2f98b9a6fdf64ae0afca7e622a929761
+msgid "Mission command to control a camera or antenna mount."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1328
+#: 605538c7b31145589e3e39bd230c2354
+msgid "This command allows you to specify a roll, pitch and yaw angle which will be sent to the :ref:`camera gimbal <common-cameras-and-gimbals>`. This can be used to point the camera in specific directions at various times in the mission."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1387
+#: ff9d079f4d6c44b689a30d54019bd3fd
+msgid "Mission Planner Settings for DO_MOUNT_CONTROL command"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1392
+#: 014f72d9375c4f3e8b20f4f6b2d538a7
+msgid "MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1396
+#: 74cebe79d4cb47458bb15b470e23b8c9
+msgid "Mission command to move the gimbal to the desired pitch and yaw angles (in degrees)."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1398
+#: 0ef096b3ae114cd0be6652b1c49dfd73
+msgid "This command allows you to specify a pitch and yaw angle which will be sent to the :ref:`camera gimbal <common-cameras-and-gimbals>`. This can be used to point the camera in specific directions at various times in the mission. Positive pitch angles are up, Negative are down.  Positive yaw angles are clockwise, negative are counter clockwise."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1457
+#: e0bd1ce42bd14a30988c1ff23d4a6cfa
+msgid "Mission PlannerSettings for DO_GIMBAL_MANAGE_PITCHYAW command"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1462
+#: 69fcfe8c2a5e41dea772916aedddcbc2
+msgid "MAV_CMD_DO_SET_CAM_TRIGG_DIST"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1466
+#: ee5478e15bea471989b2219f142c2bef
+msgid "Trigger the :ref:`camera shutter <common-camera-shutter-with-servo>` at regular distance intervals. This command is useful in :ref:`camera survey missions <common-camera-control-and-auto-missions-in-mission-planner>`. To trigger the camera once, immediately after passing the DO command, set param3 to 1."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1472
+#: c53ec0ac5dee487589fa65847b68c1ec
+msgid "Providing a distance of zero will stop the camera shutter from being triggered."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1527
+#: 7aeeadf0cee74f26a5b02bf8d8233c95
+msgid "Mission PlannerSettings for DO_SET_CAM_TRIGG_DIST command"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1529
+#: aa0cd72522ae4f94909042eb3dd8bd15
+msgid "The above configuration will cause the camera shutter to trigger after every 5m that the vehicle travels."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1536
+#: f4f4746f51a2470f9ca59a15708b2062
+msgid "MAV_CMD_DO_FENCE_ENABLE"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1540
+#: 9c9cb36f4197411c8fcdbc33a87053ce
+msgid "Mission commands to enable the Plane :ref:`GeoFence <geofencing>`, Copter/Rover :ref:`common-ac2_simple_geofence` and/or :ref:`common-polygon_fence`."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1595
+#: fdc4efd36e554f50a0e86fb3cf81412a
+msgid "MAV_CMD_DO_AUX_FUNCTION"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1599
+#: 06e9aa73c136413d9a559f40ab8f6f79
+msgid "Mission command to control an :ref:`Auxiliary Function<common-auxiliary-functions>` in the same manner as an RC channel switch."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1670
+#: 28c740b4a41044aebccbaf9aabc04e55
+msgid "MAV_CMD_DO_SET_RESUME_REPEAT_DIST"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1674
+#: 6a8d8e796d3944978fcff259f0c1bcfa
+msgid "Set the distance that the mission will be rewound when resuming after an interrupt (switching modes).  A full explanation of this feature can be found on the :ref:`Mission Rewind on Resume Page <common-mission-rewind>`.  After setting a rewind distance in a mission, setting the distance to zero will switch off the rewind feature from that point on the mission."
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1728
+#: 298366c9e52145a6976da61925a2a309
+msgid "MAV_CMD_STORAGE_FORMAT"
+msgstr ""
+
+#: ../../source/docs/common-mavlink-mission-command-messages-mav_cmd.rst:1732
+#: 750e8b31dd0f470ca918ea0169209da1
+msgid "Format SD Card. Useful for vehicles where SD card is inaccessible. Param1 and Param2 must be set to 1."
+msgstr ""

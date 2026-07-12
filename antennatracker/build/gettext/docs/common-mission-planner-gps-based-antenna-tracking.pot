@@ -1,0 +1,374 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the AntennaTracker package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: AntennaTracker \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:5
+#: 7e96ee9eca094f0d9a0b1f85d96907fa
+msgid "Mission Planner GPS-based Antenna Tracking"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:7
+#: 52865a81f44549ca8b503ebd5d7ad062
+msgid "This article explains how to build a GPS-based :ref:`Antenna Tracker <common-antenna-tracking>` that uses the :ref:`Mission Planner <planner:install-mission-planner>` GCS to provide directional/tracking information for a servo-driven directional antenna."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:11
+#: 52573f839b60499fa5759e8a3598e25d
+msgid "This approach requires that the GCS is running on a PC that has access to GPS information. See :ref:`Antenna Tracking <common-antenna-tracking>` for other options."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:15
+#: dbd4148375e44d488c60ebd6d5fe9785
+msgid "Overview"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:17
+#: ca4ecf463dc84824a6cd955d05fce9f9
+msgid "An *Antenna Tracker* is a system that tracks the location of a vehicle and uses this information to aim a directional antenna."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:20
+#: 6b2e8810606e418aa819b3df43a79aed
+msgid "The tracker described in this article uses the Mission Planner to determine the direction to aim the tracker using the position of the GCS and the current position information from the vehicle. The tracker requires that your vehicle is providing GPS telemetry, and you will also need a Servo Controller card in order to drive the servos from Mission Planner."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:31
+#: 223b27fa0b2940c687286867b99654a9
+msgid "Parts"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:33
+#: cb057ead0d484d068f618285e6eb3b5a
+msgid "This is a list of the main components needed to build this tracking system (it is not all inclusive with things like screws, glue etc.)"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:36
+#: 9e4cd198db0e4450b76dde000a934966
+msgid "Body frame, custom built or off the shelf"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:37
+#: 94568889481d4a23a199e7fa3c977d08
+msgid "Antenna(s)"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:38
+#: e15bf35f4af04220ab5347ce30f4d844
+msgid "Two servos"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:39
+#: 7ffe03224fac405c8f09492503e1c54e
+msgid "Servo controller card, like the `Maestro <https://www.pololu.com/product/1350>`__"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:41
+#: d3c722a36a044de59ede8d1ea5df7671
+msgid "Tripod (or other mounting device)"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:42
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:181
+#: e23b0dd2abe24fb89c3f86173b7ffbe5
+#: 31835ccb7ed943df8c0e29abb187d532
+msgid "Battery"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:43
+#: 4113cc79138a4c33b0411fb614d5a94a
+msgid ":ref:`Telemetry Radios <common-telemetry-landingpage>`"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:44
+#: 67eea0ee878947c19c75b2e007cb3990
+msgid "(Optional, recommended:) BEC, cooling fan, battery low voltage device."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:47
+#: d237ef7c10fe4acc90d943c76aa5dcca
+msgid "The function of the parts is described in the following sub-sections:"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:50
+#: a0822ec0b7a74bf69415f7c03d777d51
+msgid "Body"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:52
+#: ba5e77faffb449109fc9d559a3c46e92
+msgid "You will need a body that can support the tremendous weight of your antennas. 4 lbs is a \"tremendous\" amount of weight to throw around depending on what torque and what materials your servos are sporting. `This is the one I chose to use for this guide. <http://www.readymaderc.com/store/index.php?main_page=product_info&cPath=11_27&products_id=96>`__ It currently is holding two patch antennas each weighing about 12oz. You can design your own body, but you should have a `CNC machine <https://en.wikipedia.org/wiki/Numerical_control>`__ as part of the solution as any inaccuracies could make it not track correctly and there goes your aircraft. All wood construction is fine for two antennas while metal bodies could be used to make minimal structures or to increase durability."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:63
+#: 773531ca6d1a485b9362524ddd7cc2c5
+msgid "A special mention of gears needs to be addressed. The body I used has gears. Gears do a couple of things that you might find useful. First they can \"convert\" torque into distance (even change the angle the force acts through) and second they can increase or decrease the speed of rotation. Sometimes you can use them to make your body semi detachable from the servo like the example one I gave above, which is very very useful. You can also get by without having one at all."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:71
+#: b8d9bc3f3d6a465eb3c17f25938470c0
+msgid "When choosing a gear, keep in mind a few things. First, the further out you go from the center of your servo to the center axis of rotation of your AT the less torque will reach it. All servos have a rating like 10 kg-cm or 100 oz-in, that means that that particular servo has 10kg of force when you measure that force at exactly 1 cm from the center of the servo, likewise for 100 oz-in, 100 ounces of pressure measured at 1 inch from the center of the servo shaft. So, the further out you go, say, 2 inches you drop the torque felt at that distance by half (because you doubled the distance through which the force acts) which would be 5 kg or 50 oz for our example."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:82
+#: c02c5ea2993146a68f86c5b5825ab142
+msgid "The speed changes based on the diameter and number of teeth your gearing has. A rule of thumb is the bigger the gear the slower it will turn and the number of teeth it has is related to the size of the gear. So, a big gear with 44 teeth meshing with a gear half its diameter and having 22 teeth with make the smaller gear rotate at twice the speed that the big gear is rotating. You just converted torque into speed."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:90
+#: d2e0c68852ec463a9a3661d5413804f9
+msgid "Antenna"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:92
+#: 5b24a457c54b4df6925c1876486a8bfa
+msgid "You need to decide which antennas you are going to use. Frequency is **HUGE** on this. In fact, frequency selection is a guide in and of itself. Some antennas claim usability in a range of frequencies but that is NOT always legit. 915Mhz (aka 900Mhz) is very specific and your antenna could be \"tuned\" by the factory to \"best\" receive at 912Mhz and your screwed. Read READ READ the description on the antenna you are looking at. For this guide I choose 1280Mhz (aka 1.2 or 1.3 Ghz) and 915Mhz patch antennas from `L-COM <http://www.l-com.com/home.aspx>`__. You might be thinking \"what about frequency hopping\"? Your radio MIGHT try to go outside the \"effective\" bandwidth (frequency spread your antenna can use well) but if it does it notes the signal drop (aka `RSSI <https://en.wikipedia.org/wiki/Received_signal_strength_indication>`__, Received Signal Strength Indicator) and will compensate for it. Don't worry about this, just make sure your antenna is within the correct frequency range you will be using."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:109
+#: 9d276b6aaffd4280a9bc27989c0c5557
+msgid "Servo"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:111
+#: a89596d8f3ed4065a1c8fa6cf1781d10
+msgid "You will need two servos. One for the tilting action and one for the pan action. Tilt is the moving of the antennas only and the pan could move the whole AT or just the antennas depending on how you have yours designed. Servos are actually complicated little devices. I'll try to be precise as you can use the internet to find more details on servos if you wish. You want a servo that can do at least 110 oz-in of torque for two patch antennas, I'd recommend at least the `karbonite materials <https://en.wikipedia.org/wiki/Karbonite_gears>`__ to ensure it never strips out, but you can get by on the nylon versions."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:120
+#: 2334263494c640f08e457c17dfbda734
+msgid "For the tilt servo get a servo that does 90deg of rotation TOTAL. Different manufacturers explain the total amount of rotation a servo can do in different ways so you must really do your homework. 90deg rotation total is a \"standard\" servo."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:125
+#: b23bc52ca79b4c8abaf1a3b02b958d7f
+msgid "For the pan (this AT in particular, your requirements will vary) I'd recommend at least 150+ oz-in of torque for two antennas and karbonite or better, as in all metal gears. If you can get one, go digital (highly recommend it) as the AT here is capable of small corrective actions and an analogue servo will probably not be able to keep up like a digital servo will. The reason for this overall beefiness is that when your panning range is at the limit of travel your AT will rapidly spin itself around 360deg in order to keep the antennas on target `(1:50 second mark as an example). <https://www.youtube.com/watch?feature=endscreen&v=_lxUd96-1tw&NR=1>`__ The faster it does this the less time you are out of communication with your aircraft. You can not avoid this behavior if you use the APM Mission Planner as the behavior is embedded in the software. Building an AT that does not care about the pan range is very expensive to do as it starts to involve what are known as slip rings. The military uses them and they are very nice, but very expensive due to the quality of slip ring involved. If you can do this then you avoid cable tangling issues and possibly servo range selection gets easier. For this build the pan action you want is a servo that can do 360deg of rotation. You really don't need more than that."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:147
+#: 7699d03ee4344cb4be2a2d8a4e4d559e
+msgid "Servo Control"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:149
+#: d303449d829e4a819c99db4ee9a0c3f5
+msgid "You will need something to take the information from your computer (again this build used the APM Mission Planner to drive the AT) and turn those into a signal (numbers really) that your servo can use. The APM MP has two options currently, one for `Maestro <https://www.pololu.com/product/1350>`__ and one for `ArduPilot <https://www.sparkfun.com/products/retired/8785>`__. The Maestro link is to a SERVO CONTROLLER card and the ArduPilot is both a servo controller and a stripped down autopilot (it is actually the original APM being used as a servo controller card). To be more clear, in some articles the ArduPilot is referred to as the ArduTracker. The Maestro can run up to 6 servos with the input provided by the micro USB cable but you will only use 2 of them plus the power pins. The ArduPilot version uses one of the early versions of the APM called ArduPilot. It is stripped down and cheap, you might have one from years ago, I don't know much about it, but `this is a build <https://code.google.com/archive/p/happykillmore-gcs/wikis/Tracking.wiki>`__ that HappyKilmore's GCS uses and `they <https://www.diydrones.com/profiles/blogs/antenna-tracking-in?xg_source=activity>`__ did a write up on both of them. I used it a lot and you can't go wrong reading it yourself either! No matter which controller type you use to drive your servos you WILL need to download and install the firmware for them. Maestro came preloaded and it looks like you need to find the firmware for the ArduPilot card from their website or this website's software library."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:173
+#: 75c05a0ae9214cf2aefa3692c0b7e401
+msgid "Getting the right numbers for your servo controller is vital, `use this as a guide <http://vps.oborne.me/gcs/Tracker.html>`__. Basically you will find two numbers that bookend the total rotation your servo will do which could be less than what it can do but not more, then you will find the center of those bookends and then you will tell Maestro the \"8-bit\" range that it should use as commands to send to the servos. It's way critical to get these right, I lost hair doing it."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:183
+#: 6d5e52134ac1474ba5bea760899d5d99
+msgid "Ok, servos run off of 4.8, 6 or sometimes 7.2V or more. Most of them default to the RC standby voltage of \"5V\". This one is running off of 6V. This battery puts out 12.5V when charged fully. If you do not find a way to step down the voltage from your battery to the CORRECT usable voltage for your servo you will fry your servo. Your servo motor might smoke or the little tiny tiny circuit board in it might smoke, either way the reliability of it is gone and you should get a NEW SERVO. If you don't and it fails in flight, you could lose connection because your AT can not point properly! A BEC (Battery Eliminating Circuit) is what you are looking for here. This project used `this one <https://hobbyking.com/en_us/turnigy-3a-ubec-w-noise-reduction.html?___store=en_us>`__. If you do your homework, you can look up the idle and full load current consumption of your chosen servos and pick a BEC that will handle that load. If you fail to get a BEC that can handle the spontaneous most highest ever load your servo could possibly generate then it will fry and your power to point your AT will be gone, bye bye aircraft."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:200
+#: 015ba448843242219534af9dcd34d5f6
+msgid "Battery low-voltage warning device"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:202
+#: 2be21c568bee4a85bfefd91a011825c9
+msgid "You don't have to use this, but I would. It is cheap and could save not only your battery but it will tell you when your AT is about to quit. It is about as loud as a smoke detector going off! Buy a few of these and use them, don't be cheap like that, seriously."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:208
+#: f37395b95d09490c95fdf67795c3b638
+msgid "Video Rx and Tx"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:210
+#: 26937a61c6074aa7b9ed3455efe8a8e7
+msgid "Rx and Tx is shorthand for Receiver and Transmitter respectively. It is not in the scope of the AT build guide here to tell you about these but instead it is just to tell you that whichever system you use make sure it can fit to your AT. Your AT is going to get crowded and messy and therefore it can bind on the smallest of things. Binding is bad, ok?"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:217
+#: d549611c8ec144c593cec3a7495e8b80
+msgid "Tripod"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:219
+#: ffb9e03821c647ca8267553d35d8d2e4
+msgid "You could come up with another thing to use, but that would be tantamount to reinventing the wheel. The higher your AT is the further it can spread its signal. Try to get one that does not have a lot of protrusions like this one has. They will eventually entangle your wires. Pay attention to which type of connector the tripod uses so you can design your AT to link to it. Get one that is sturdy as a nice bit of wind could knock it over and your aircraft goes link dead. Your AT should weigh around 7 lbs max, probably less depending on what you use."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:229
+#: 3f882524219843d185025328b3dac4a4
+msgid "Picture gallery"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:253
+#: 58d2b1c2de284a54acc3367847a228fe
+msgid "Connecting the parts"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:255
+#: 9b236c46c2b5492f80518b3d78c9c32e
+msgid "**VELCRO AND ZIP-TIES, you can use them to a very large degree here!**"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:257
+#: b4bd332b037649ac820ed857f1dc1286
+msgid "1) Connect your servo controller board to your laptop, micro USB to USB for Maestro."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:260
+#: 8979d7c09e6f460084f365b62e7e2e6c
+msgid "2) Servos connect to the servo controller board. For Maestro it will be servo 0 pin set for pan and servo 1 pin set for tilt."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:263
+#: 3df5ee7d02ee476caf6da934b41dad90
+msgid "3) Connect your battery to your BEC which is set at 5V or 6V or whatever your servos can handle (max it out). Connect the BEC to the servo controller board. For Maestro the pin set on the outermost is for the BATTERY power that will drive your servos (the USB cable powers the board). DON'T REVERSE THE POLARITY, buy new stuff if you did."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:269
+#: 6975fb963ff04d2292952e48580b9519
+msgid "4) Connect your battery (assuming Li-Po here) to the Low Voltage detection device, pay attention to it."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:272
+#: 9cb5a9e02b1845c7addbf64391d9c52c
+msgid "5) Connect your antennas to your SiK Radio (NEVER TURN ON RADIOS WITHOUT ANTENNA ATTACHED, buy new stuff if you did). Connect antenna to the Video Rx."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:276
+#: 4a5625e04bb84eb08410c460259f2c0b
+msgid "6) You will need to splice off the power from the 12V side of the battery connection to feed 12V of power to your Video Rx, get some solder and a wet sponge, do a good job on the connection. Connect the power to your Video Rx."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:281
+#: b610d5b29347405b814c35b03c7101e8
+msgid "7) Connect your 3DR 900Mhz radio to the laptop (after you have antenna connected)."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:284
+#: ceac4dfe7749428497bde0f923a103ad
+msgid "8) Use a bunch of zip-ties to secure and bundle all the wires. This is important. If you do a bad job here your AT will bind while its tracking and down goes aircraft."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:288
+#: f426125b92e4404da8637dd4fe672719
+msgid "add VELCRO AND ZIP-TIES to hold everything together"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:290
+#: f0e1ca530ff041bba7171259fb5b322a
+msgid "10) Remember to set your end points manually in the Mission Planner for the channels you will use to control pan and tilt, use a PWM value like 1100µs and 1900µs with a midpoint of 1500µs to start. Some 180 degree servo's can take 600-2400µs but you can damage some servo's so start conservatively."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:297
+#: 91ba45eb43e5422b9062d0ce79a053d3
+msgid "Basic use"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:299
+#: 7b0b811cb7f24c09bb09b84f91e90ee5
+msgid "1) When you get to the airfield you point your AT north, get as close as you can with your eyeball."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:302
+#: dfb6aa3dde774f41948dc099fed0e441
+msgid "2) Normal acceptable calibration for an AT is that you should be within 10deg of North when you point it."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:305
+#: 8aa7a01ab9094206a04e442fe94e12eb
+msgid "3) This particular body is able to be lifted, which separates the gear of the servo from the smaller gear of the body. This allows it to be oriented very easily. If you don't have that feature, just pick the thing up after it finishes booting (and therefore is pointing at the default PWM number YOU ASSIGNED when programming the servo controller)."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:311
+#: 7ff32598a834426ca324363c511b2dbc
+msgid "4) You want the tilt to default to the middle of the tilting servo's travel range, so for a 90deg servo, make it default to 45deg. When you actually USE the antenna for the first time pay attention to the behavior of the tilting and manually adjust it via the sliding bars in Mission Planner. If you're confident about where it should be you can manually tweak the servo horn. Either method will work but if you use the slider bar you will not overstress the servo when it tries to go PAST it naturally allowed traveling range."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:323
+#: 004782dc5f634e76b24998f5577a10c4
+msgid "While in flight you can use the slider bars to fine tune the direction the antenna tracker is pointing."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:326
+#: a47c02e7afa34531ad0704f53c30da74
+msgid "5) If the servos are going in the wrong direction. Try clicking the Rev checkbox to reverse travel direction. You may need to check off Rev before connecting to the servo controller."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:334
+#: 3b5afce086ce4fdaaeaa2e7e9b8ffca1
+msgid "Advanced use"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:338
+#: 0d46f0764bcc4851869319476c7b90cc
+msgid "This section is an excerpt from a post by Scott Fuller. The original post is here: `The expensive but attention grabbing Antenna Tracker <https://diydrones.com/profiles/blogs/the-expensive-but-attention-grabbing-antenna-tracker>`__)"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:341
+#: 8e0b11d7f7c2453a885b3cca3148743b
+msgid "Usually the first thing I do is power up everything and get a solid GPS lock on the APM. After that I'll set my plane in front of the antenna tracker and zoom in REALLY tightly in Mission Planner under the Flight Planner window. I'll then right click and say Tracker Home -> Set here."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:349
+#: be0b99d5a31a4c69a5300093117e60c4
+msgid "*Then I'll drag the antenna tracker pin right on top of home and drop it. That should get me pretty close to where my antenna tracker is placed.*"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:356
+#: aa97132c82f446b4bee142598a796bfc
+msgid "*After that I'll flip over to the Initial Setup tab under Antenna Tracker and pull down the COM port for the Pololu servo controller and go with 9600 baud. When that's set I hit connect. At that point the tracker should go into motion.*"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:364
+#: 451057bce19a453fae391a60f3515aa0
+msgid "*You should be able to move the plane a few meters in front of the antenna tracker should move with it. If you need to reverse the direction it's pretty self explanatory. The sliders allow you to trim where the antenna needs to be facing. When you start up the system will think you're facing north. If you're facing East or West you have to aim accordingly.*"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:371
+#: a2628c00af404648ba3ab3badf9ca3ca
+msgid "*You can use Pololu Maestro Control Center to figure out your PWM settings and how far your servos an travel. Usually the PWM setting is (Large Number - Small Number) = PWM. In my case 2000 - 960 = 1040 for pan and 1904 - 1456 = 448 for my tilt. That'll give me a 45 degree angle for tilt and 360 for pan. You can get these numbers on the status tab in Maestro CC. Be careful NOT to go beyond the recommended travel! On the Servo City gear boxes you'll hear the POT start to click and the servo will just spin. At that point you get to play the servo centering game.*"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:383
+#: d7290aaa2de745c88b11b6ebcdf5c880
+msgid "*One thing to note with the Pololu board is you may have to set it into USB Dual Port under Serial Settings. This allows you to connect to the COM port.*"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:388
+#: 70fd913b8ac340fb90ff22cb7be66aad
+msgid "Miscellaneous notes"
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:390
+#: 87fcd6db52904aa3b731b0d1fc6661dc
+msgid "I have included pictures from all angles of my AT (version 2). A few pointers here. Build your AT as light as you can. Get as beefy of servos as you can afford and fit. You can make a wireless version of this AT if you have telemetry radios like the :ref:`3DR or the Xbee <common-telemetry-landingpage>` kits. I don't know how to do that but it is not going to be anymore complicated than what I have shown here, just more expensive."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:397
+#: 679e69f1315640d885620472d30294c2
+msgid "Testing is done in two ways, first you setup your AT outside and point it north before you fire it up. Then walk around the AT with your plane with everything linked up as if it was in flight. You need to get at LEAST 60 feet away, try 100ft to make sure. Another way is to load a previously recorded flight from the APM2 logs, set your home position and watch your AT go at it as if it was there."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:404
+#: e889a14dcf4f40d383e48bdd3265b56c
+msgid "Test this thing out as best as you can, it is now a critical point of failure for your entire system. I don't recommend attaching your RC signal (typically your 2.4Ghz) radio that you use to manually control your aircraft. Keep that one unmodified so you have a backup that you can rely on."
+msgstr ""
+
+#: ../../source/docs/common-mission-planner-gps-based-antenna-tracking.rst:410
+#: 5883629281324f6f85e3848cabb72c6b
+msgid "Other bells and whistles might include weather vanes, barometers, anemometers, beer can holders, cameras etc. go wild!"
+msgstr ""

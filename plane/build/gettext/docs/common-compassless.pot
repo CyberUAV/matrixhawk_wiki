@@ -1,0 +1,142 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Plane package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Plane \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-compassless.rst:5
+#: 75075bbef6934c1799c2335ffcd8f12f
+msgid "Compass-less Operation"
+msgstr ""
+
+#: ../../source/docs/common-compassless.rst:7
+#: 972f8d24049e4f47bea06826edbe4d0e
+msgid "Operation without a compass has been possible for Plane for a long time. However, recent additions of alternative yaw sources has opened the possibility of compass-less operation of multicopters, quadplanes and rovers.  The available mechanism are:"
+msgstr ""
+
+#: ../../source/docs/common-compassless.rst:9
+#: 0cfd49c97c6b40b886272f60e5c18809
+msgid "Align yaw to GPS after takeoff (Plane only)"
+msgstr ""
+
+#: ../../source/docs/common-compassless.rst:10
+#: b7901d2fe253427e984350ccb792ee1b
+msgid "GSF (Gaussian Sum Filter) estimates the heading by comparing a single GPS's outputs to the IMU movements"
+msgstr ""
+
+#: ../../source/docs/common-compassless.rst:11
+#: a6a31f1ba9064d1a9b45ce6ab426de7a
+msgid ":ref:`GPS-for-Yaw <common-gps-for-yaw>` uses the position of two UBlox F9 GPSs to calculate yaw"
+msgstr ""
+
+#: ../../source/docs/common-compassless.rst:12
+#: 6d60786006cc40f689b4111e28d935ff
+msgid ":ref:`Intel RealSense T265 <common-vio-tracking-camera>` can provide yaw relative to its startup yaw"
+msgstr ""
+
+#: ../../source/docs/common-compassless.rst:15
+#: 918892a749a4415bae6d7440535414bd
+msgid "Align Yaw to GPS (Plane only)"
+msgstr ""
+
+#: ../../source/docs/common-compassless.rst:17
+#: a74ed8bfd2634606abbf1d3833af1887
+msgid "On Plane, a steady GPS heading is used after takeoff to align the /attitude/velocity/position/heading estimation filters (EKFs) for yaw. This usually occurs a few seconds after takeoff on Planes without compass. However, this approach cannot be used for Quadplane's VTOL navigation, since it needs to be accurate very shortly after takeoffs with no GPS velocity or heading inputs."
+msgstr ""
+
+#: ../../source/docs/common-compassless.rst:21
+#: f274d670db7b4387a6f17de38408b695
+msgid "GSF"
+msgstr ""
+
+#: ../../source/docs/common-compassless.rst:23
+#: 5403cdf7adf046409609c204f143a4fb
+msgid "ArduPilot supports a Gaussian Sum Filter (GSF) which takes IMU and GPS inputs to compute a probable heading, if a yaw source (like a compass) is unavailable, or unhealthy."
+msgstr ""
+
+#: ../../source/docs/common-compassless.rst:25
+#: 2810b58670ff44b0841c941abf03532e
+msgid "Currently, it does not function well for QuadPlane VTOL tailsitters, since their nose is pointed vertically in VTOL flight. Compasses are still recommended for Tailsitters. Also, for this to work well at all, vibration should be low and the GPS velocity accurate, see below."
+msgstr ""
+
+#: ../../source/docs/common-compassless.rst:27
+#: def9fc4fa210408c867e8c1ad52264a8
+msgid "GSF depends on good velocity reports from the GPS. Do not attempt with older generation GPSes, and use at least UBlox M8 or equivalent performance GPSes. Also, be sure GPS view of the sky is unobstructed throughout the flight. Otherwise, poor heading estimation will result. On Plane, if the GPS accuracy is impaired by interference from other nearby vehicle devices (like cameras, etc.), GSF can result in poorer performance than relying solely on Align Yaw to GPS heading, above. In those cases, it may be better to disable GSF use by setting the :ref:`EK3_GSF_USE_MASK<EK3_GSF_USE_MASK>` = 0."
+msgstr ""
+
+#: ../../source/docs/common-compassless.rst:30
+#: a8ae4c360c074cc9b64f6c19d6ac598d
+msgid "Setup"
+msgstr ""
+
+#: ../../source/docs/common-compassless.rst:32
+#: 3e36981416854e5680fb5a31ec8de9ea
+msgid "Simply, set :ref:`COMPASS_ENABLE<COMPASS_ENABLE>` = 0. Fallback to the GSF will be automatic if normal default values are being used for EKF parameters."
+msgstr ""
+
+#: ../../source/docs/common-compassless.rst:34
+#: 23045613a5144703898b914f49388577
+msgid "For configure EKF3 to always use GSF set :ref:`EK3_SRC1_YAW <EK3_SRC1_YAW>` = 8 (GSF)."
+msgstr ""
+
+#: ../../source/docs/common-compassless.rst:37
+#: 6573094324174d0b886983b59c6643d7
+msgid "Operation"
+msgstr ""
+
+#: ../../source/docs/common-compassless.rst:39
+#: 15c19639e19240699bb1b79565adb3ee
+msgid "Currently, only Plane will arm if the :ref:`ARMING_SKIPCHK<ARMING_SKIPCHK>` for compass isn't skipped, when no compasses are enabled. Copter and QuadPlane will give an pre-arming failure. Three possible methods to arm Copter and QuadPlane are:"
+msgstr ""
+
+#: ../../source/docs/common-compassless.rst:41
+#: f6a2e3be8d33452e83fd2c27b60f7b7d
+msgid "Enable :ref:`ARMING_SKIPCHK<ARMING_SKIPCHK>` for Compass (don't skip any others!)."
+msgstr ""
+
+#: ../../source/docs/common-compassless.rst:42
+#: a24e69aeba954a35980c339baf747f8a
+msgid "Force arming from ground station."
+msgstr ""
+
+#: ../../source/docs/common-compassless.rst:43
+#: b53f7c773e1e4cab996d44af5e4888e4
+msgid "Before arming, but after GPS lock has been obtained and EKF origin has been set and is \"using GPS\", pick up the vehicle and walk around in a circle a few meters in diameter. This should allow the GSF to acquire yaw alignment and the message \"EKF yaw alignment complete\" would be sent to the ground station."
+msgstr ""
+
+#: ../../source/docs/common-compassless.rst:45
+#: c58b6772f71d49e0a7b4cd4d2b4cc978
+msgid "If either of the first two methods are used, then the first movements of the vehicle in VTOL position controlled modes may be initially in the wrong direction, but should quickly stop once yaw alignment of the GSF has been obtained. Either fly the vehicle a bit in a non-position controller mode (like STABILIZE or QHOVER), or give the vehicle sufficient clearance for the unknown initial movement direction."
+msgstr ""
+
+#: ../../source/docs/common-compassless.rst:47
+#: 791b31343866464989516474ce4f7700
+msgid "Afterwards, flight and navigation should be acceptable."
+msgstr ""
+
+#: ../../source/docs/common-compassless.rst:49
+#: 81228585ab3547acb5a369b0a9ad2a25
+msgid "on Plane, without compass, after arming the vehicle will fall back to DCM (\"DCM Active\"  message over MAVLinK) from EKF3 since it has no yaw sensor yet. This will be flagged in MP HUD as \"Unhealthy AHRS\" or on RC telemetry systems (like CRSF) with a \"AHRS Bad\" message. Ignore this, once the plane starts moving EKF3 will obtain yaw information and align, and operation will switch back to it (\"EKF3 active\")."
+msgstr ""
+
+#: ../../source/docs/common-compassless.rst:51
+#: 3d3284dd3f7944798017b15f28fddb85
+msgid "If any problems are experienced, please post logs on the https://discuss.ardupilot.org forum."
+msgstr ""
+
+#: ../../source/docs/common-compassless.rst:54
+#: 338c91d8253e468b939500fafe7a366b
+msgid "Video"
+msgstr ""

@@ -1,0 +1,207 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Sub package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Sub \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:43+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-measuring-vibration.rst:5
+#: 7ba826babe7a455a8528f28edae0afa0
+msgid "Measuring Vibration"
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:9
+#: 4e74a36b6df14d46b881ac1cb009a138
+msgid "Autopilots have accelerometers that are sensitive to vibrations. These accelerometer values are combined with barometer and GPS data to estimate the vehicle's position. With excessive vibrations, the estimate can be thrown off and lead to very bad performance in modes that rely on accurate positioning (e.g. on Copter: AltHold, Loiter, RTL, Guided, Position and Auto flight modes)."
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:16
+#: 981030d8ec044802a98b8c322bd6128d
+msgid "These instructions explain how to measure the vibration levels. If you find they are out-of-tolerance then follow the advice found on the :ref:`Vibration Damping <common-vibration-damping>` page."
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:20
+#: 304e4e6c34d64cd195822b6f521f1384
+msgid "Real-Time view in Ground Station"
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:22
+#: f0706a338ec84212b99ae7c1169d587c
+msgid "Ground Stations can display a real-time view of vibration and clipping.  If using the Mission Planner click on \"Vibe\" on the HUD to display the current vibration levels."
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:28
+#: f58506be19154d07b4bf300f4b2999b9
+msgid "Vibration levels below 30m/s/s are normally acceptable.  Levels above 30m/s/s *may* have problems and levels above 60m/s/s nearly always have problems with position or altitude hold."
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:31
+#: a649939efb8647a7b92c7e8f9f4b67c8
+msgid "Vibe Dataflash Log message"
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:33
+#: c1a1e0c3a83c4fcca89a06007c4363aa
+msgid "Check the recorded Vibe levels are mostly below 30m/s/s"
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:35
+#: 3660c0ba24414f099de44c627b17c0c2
+msgid "Perform a regular flight (i.e. not just a gentle hover) of at least a few minutes and :ref:`download the dataflash logs <common-downloading-and-analyzing-data-logs-in-mission-planner_downloading_logs_via_mavlink>`."
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:37
+#: 2893dc49b037461fb056db93ee3be9cb
+msgid "Using the Mission Planner or other ground station graph the VIBE message's VibeX, VibeY and VibeZ values.  These show the standard deviation of the primary accelerometer's output in m/s/s.  The image below, taken from a 3DR IRIS, shows normal levels which are below 15m/s/s but occasionally peak to 30m/s/s.  Maximum acceptable values appear to be below 30m/s/s (see second picture below)."
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:43
+#: f39756bec91a44f2938d474724f8ee3d
+msgid "Graph the Clip0, Clip1 and Clip2 values which increase each time one of the accelerometers reaches its maximum limit (16G).  Ideally these should be zero for the whole flight but low numbers (<100) are likely ok especially if they occur during hard landings.  A regularly increasing number through the log indicates a serious vibration problem that :ref:`should be fixed <common-vibration-damping>`."
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:54
+#: d9eb6cb131b849a0a00793ff2326410e
+msgid "This is an example of a vehicle that had position estimate problems due to high vibrations."
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:61
+#: e4323ee2c3074f608b02b73a3367fbbd
+msgid "The algorithm for calculating the vibration levels can be seen in the `AP_InertialSensor.cpp's calc_vibration_and_clipping() <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_InertialSensor/AP_InertialSensor.cpp#L1609>`__ method but in short it involves calculating the standard deviation of the accelerometer readings like this:"
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:66
+#: 0499ccaa9f424ea0946fba4c59d299a4
+msgid "Capture the raw x, y and z accelerometer values from the primary IMU"
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:67
+#: b98d906166a2456bafe0fe2be299f087
+msgid "High-pass filter the raw values at 5hz to remove the vehicle's movement and create a \"accel_vibe_floor\" for x,y and z axis."
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:69
+#: e30b9f957b3149748d96c5eb2a170bd1
+msgid "Calculate the difference between the latest accel values and the accel_vibe_floor."
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:71
+#: b0fce4ac11ae4cc1b1bdda42b1060e29
+msgid "Square the above differences, filter at 2hz and then calculate the square root (for x, y and z).  These final three values are what appear in the VIBE msg's VibeX, Y and Z fields."
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:75
+#: 5a9ee4c12670452680d48748bc76f815
+msgid "When looking at vibrations in a log the first thing to look at is the clipping. If the clipping is 0 that’s good. That means the vibrations that are being detected aren’t overwhelming the IMU."
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:77
+#: 36328b9eb8ba4574ad8dcc16174b0930
+msgid "When troubleshooting the vibration, consider the axis of the vibration as a staring point to find the problem:"
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:79
+#: c125702dd2d84329aeabfc6f5977511b
+msgid "If X AND Y are both high, then you may have an issue with a motor bearing or prop balance. Or you may need more/better overall vibration damping for your FC. If X OR Y is high then you may have an issue with your FC mounting. Maybe a wire is bouncing on the FC or restraining it. Or maybe your vibration damping works better in one axis than the other. If you have a Z vibration then you may have a track issue with propeller (bent blade) or vertical play in a motor."
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:83
+#: 17b16a05da654940b281887a8985c4ad
+msgid "Also consider that some flight conditions/airframes will have different natural vibrations. If the vibrations look good in a hover, but they increase with speed, perhaps there is an aerodynamic issue with the airframe, or in wind,"
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:86
+#: cadc1de4b7bb4416bc689b631b2cbbf3
+msgid "Looking for \"The Leans\""
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:88
+#: d338c3a7608543568b4d25b0094eaf89
+msgid "**The Leans** occurs when the vehicle's attitude estimate becomes incorrect causing it to lean significantly even though the pilot is commanding level flight.  The cause of the problem is often accelerometer aliasing which can be confirmed by comparing the Roll and Pitch attitude estimates from each of the estimation systems (i.e. each AHRSs or EKFs).  The attitude estimates should be within a few degrees of each other"
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:90
+#: 17bf1d49c4394c3ca966b1628e11fd76
+msgid "Download the dataflash log and open in the ground station's log viewer"
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:91
+#: 4f1dae52fb38464a828cbc618ddfcba7
+msgid "Compare the AHRS2.Roll, NKF1[0].Roll and NKF1[1].Roll if using EKF2, or AHRS2.Roll, XKF1[0].Roll and XKF1[1].Roll, if using EKF3"
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:93
+#: 77acf23a5a0d465c84bd42cae8e1c18f
+msgid "The image below shows a typical log in which the attitudes match well"
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:100
+#: 8e5b5b94f57d46b8b8afea37d8e96b83
+msgid "Advanced Analysis with FFT"
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:102
+#: 364513b416474754931d1fe504e96ef6
+msgid "Refer to the :ref:`Measuring Vibration with \"Raw IMU Logging\" <common-raw-imu-logging>` page for instructions on how to collect large amounts of IMU data and perform an FFT analysis to determine the frequencies with the most vibration."
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:105
+#: 8d51485ec74848c1b0af5e8420944324
+msgid "IMU Dataflash Log message"
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:107
+#: d10ac09f16ca4f8d8ebd5de33183960c
+msgid "For very old versions of ArduPilot that do not include the Vibe message the IMU values can be checked directly"
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:109
+#: 4ddccbcac5274eb0ac1be36de186d671
+msgid "Ensure the :ref:`LOG_BITMASK <LOG_BITMASK>` parameter is set to include IMU data so accelerometer values are recorded to the dataflash logs"
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:110
+#: 6545690faac94f75b8e2953db3b9c618
+msgid "Fly your copter in Stabilize mode and try to maintain a level hover (it doesn't need to be perfectly stable or level)"
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:111
+#: aa9485a7d3a94e208b256a8448b0a971
+msgid ":ref:`Download the dataflash logs and <common-downloading-and-analyzing-data-logs-in-mission-planner_downloading_logs_via_mavlink>` after the download has completed, use the Mission Planner's \"Review a Log\" button to open the latest file in the log directory (it's last digit will be the Log number you downloaded so in the example above we downloaded Log #1 so the filename will end in 1.log)"
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:116
+#: 6adec561b9774c4ab2d60269a8c7846e
+msgid "When the Log Browser appears, scroll down until you find any IMU message.  Click on the row's AccX and push **Graph this data** Left button.  Repeat for the AccY and AccZ columns to produce a graph like below."
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:121
+#: abb2918c87e94c75b7cccb5618be2b52
+msgid "|DiagnosingWithLogs_Vibes|"
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:133
+#: 83e801ee5eda4371849e014c1b3e9dfb
+msgid "DiagnosingWithLogs_Vibes"
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:123
+#: 17d62ffcfb834edfa49b2731025d6640
+msgid "Check the scale on the left and ensure that your vibration levels for the AccX and AccY are between -3 and +3.  For AccZ the acceptable range is -15 to -5.  If it is very close or over these limits you should refer back to the :ref:`Vibration Damping <common-vibration-damping>` page for possible solutions."
+msgstr ""
+
+#: ../../source/docs/common-measuring-vibration.rst:127
+#: 195db36f25d442be8b41025e05409693
+msgid "After all the above is complete, go to the Mission Planner's standard parameters page (you may need to press the **Connect** button again) and set the Log Bitmask back to \"Default\".  This is important because especially on the APM logging requires significant CPU resources and it's a waste to log these if they're not really needed."
+msgstr ""

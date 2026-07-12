@@ -1,0 +1,813 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Dev package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Dev \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/mavlink-requesting-data.rst:5
+#: 3f35c085a7af4830b223ef05713bd8cf
+msgid "Requesting Data From The Autopilot"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:7
+#: 30cde6affc9a4883abf94f8ea967c40b
+msgid "The ground station or companion computer can request the data it wants (and the rate) using one of the following methods:"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:9
+#: 6652ce1d4cb54e2d924e0162ece84032
+msgid "Set the ``SRx_`` parameters to cause the autopilot to pro-actively send groups of messages on start-up.  This method is easy to set-up for a small number of drones but is not recommended for most applications"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:10
+#: b5b2c19d8b574f3cb213a5be1851cfa5
+msgid "Send `REQUEST_DATA_STREAM <https://mavlink.io/en/messages/common.html#REQUEST_DATA_STREAM>`__ messages to set the rate for groups of messages"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:11
+#: 6739cf5da5144e81a4712d7b6f4eff44
+msgid "Send a `SET_MESSAGE_INTERVAL <https://mavlink.io/en/messages/common.html#MAV_CMD_SET_MESSAGE_INTERVAL>`__ command (within a `COMMAND_LONG <https://mavlink.io/en/messages/common.html#COMMAND_LONG>`__ message) to precisely control the rate of an individual message.  Note this is only supported on ArduPilot 4.0 and higher"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:12
+#: 07e9318aae7f4277b1b8a45d05e157a7
+msgid "Send a `REQUEST_MESSAGE <https://mavlink.io/en/messages/common.html#MAV_CMD_REQUEST_MESSAGE>`__ command (within a `COMMAND_LONG <https://mavlink.io/en/messages/common.html#COMMAND_LONG>`__ message) to request a single instance of a message.  Note this is only supported on ArduPilot 4.0 and higher"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:13
+#: 4952ecd157b74aed9e826901de7d9e8d
+msgid "Create configuration files stored on the SD card or in ROMFS specifying message stream rates on a per-channel basis"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:14
+#: 5fe81995d4ac4379aa1bd0bb6beaf611
+msgid "Install a Lua script to set individual messages rates (e.g. Set Message Interval via a Lua script).  See \"Using a LUA Script\" section below."
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:16
+#: 7dac30b65d1c4b9e841510054178ee93
+msgid "Note that the stream rates will temporarily be 4 or more times slower than requested while parameters and waypoints are being sent."
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:18
+#: a499c3d438284cbe808354e7fc94aa9c
+msgid "More details on the above methods can be found below."
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:22
+#: fb6ee9d38eca4724a7efffc037d5eaa9
+msgid "If you find your message rates are reverting to some fixed value after you set them, see the \"Rates Reverting to some Fixed value\" section at the bottom of this page"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:25
+#: ddfc7f8010bd49c78806db77b6027d4d
+msgid "Using SRx Parameters"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:27
+#: 2bf659cb36044194ad9cb47297f10946
+msgid "Setting the ``SRx_`` parameters (and then rebooting the autopilot) will cause the autopilot to pro-actively send groups of messages to the ground station.  This is not the recommended method because the ground station has no way to determine what \"x\" should be."
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:29
+#: d0232385350f4dca8a96668a71ac4c03
+msgid "Connect to the autopilot with a ground station"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:30
+#: 776938e93537465e8baf3159004dc4b7
+msgid "Determine which telemetry connection is being used.  For example if the ground station is connected to the autopilot's \"Telem1\" port (perhaps using a wifi or telemetry radio) then the ``SR1_`` parameters should be modified"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:31
+#: 5956da5cd33a4aff98fdd2898b2ac458
+msgid "Set the ``SRx_`` parameter to the rate (in Hz) you wish the group of messages to be sent.  The exact messages contained in each group can be determined by inspecting the STREAM_xxx arrays in each vehicle's GCS_Mavlink.cpp file (see here for `Copter <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/GCS_Mavlink.cpp#L393>`__, `Plane <https://github.com/ArduPilot/ardupilot/blob/master/ArduPlane/GCS_Mavlink.cpp#L547>`__, `Rover <https://github.com/ArduPilot/ardupilot/blob/master/Rover/GCS_Mavlink.cpp#L457>`__, `Sub <https://github.com/ArduPilot/ardupilot/blob/master/ArduSub/GCS_Mavlink.cpp#L318>`__ and `AntennaTracker <https://github.com/ArduPilot/ardupilot/blob/master/AntennaTracker/GCS_Mavlink.cpp#L232>`__).  Below is the list of messages by group for Copter-4.0:"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:33
+#: df6b24a9fafd4db899e3a561c68383b6
+msgid "SRx_ADSB"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:35
+#: 3ecae687ddae4676a90ba6a570f92412
+msgid "`ADSB_VEHICLE <https://mavlink.io/en/messages/common.html#ADSB_VEHICLE>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:37
+#: b023e347abf24311b26d759b3c846735
+msgid "SRx_EXT_STAT"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:39
+#: 7e702dd3c44a4b1690b6e6bec9335694
+msgid "`SYS_STATUS <https://mavlink.io/en/messages/common.html#SYS_STATUS>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:40
+#: 886b752cb80d415eb812a71c55e4d2c5
+msgid "`POWER_STATUS <https://mavlink.io/en/messages/common.html#POWER_STATUS>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:41
+#: 08b6f072c5ba4a049cd0b3cbbf87d90e
+msgid "`MEMINFO <https://mavlink.io/en/messages/ardupilotmega.html#MEMINFO>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:42
+#: 337ad2f75eb5429384d5950ee496201a
+msgid "`MISSION_CURRENT <https://mavlink.io/en/messages/common.html#MISSION_CURRENT>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:43
+#: 6d23070719a94e9398690bb7dc72ec00
+msgid "`GPS_RAW_INT <https://mavlink.io/en/messages/common.html#GPS_RAW_INT>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:44
+#: a66d2bc6788f41bca3291ee84a61a379
+msgid "`GPS_RTK <https://mavlink.io/en/messages/common.html#GPS_RTK>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:45
+#: c1e1c50a8e0d4ce0b026aa8b726090d2
+msgid "`GPS2_RAW <https://mavlink.io/en/messages/common.html#GPS2_RAW>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:46
+#: b027987d5fcc4958a86e9efd60996e66
+msgid "`GPS2_RTK <https://mavlink.io/en/messages/common.html#GPS2_RTK>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:47
+#: 3f2057c85518477db826787c07a376ed
+msgid "`NAV_CONTROLLER_OUTPUT <https://mavlink.io/en/messages/common.html#NAV_CONTROLLER_OUTPUT>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:48
+#: 56438598155a44718a571fea0f3e476f
+msgid "`FENCE_STATUS <https://mavlink.io/en/messages/common.html#FENCE_STATUS>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:49
+#: df0e19920e9b4ed0b4d29e1702f7553f
+msgid "`POSITION_TARGET_GLOBAL_INT <https://mavlink.io/en/messages/common.html#POSITION_TARGET_GLOBAL_INT>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:51
+#: cf6187bde2d2497b9987d6bd81d34415
+msgid "SRx_EXTRA1"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:53
+#: 067fc90b21624e2bba9f45814fa2b6ce
+msgid "`ATTITUDE <https://mavlink.io/en/messages/common.html#ATTITUDE>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:54
+#: 019ef63de3314ca98214c7a550dd250e
+msgid "`SIMSTATE <https://mavlink.io/en/messages/common.html#SIMSTATE>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:55
+#: 51289c2609eb4403a075d4817ac6951f
+msgid "`AHRS2 <https://mavlink.io/en/messages/common.html#AHRS2>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:56
+#: 8f0aae0097d146da87a170e72d887731
+msgid "`AHRS3 <https://mavlink.io/en/messages/common.html#AHRS3>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:57
+#: a61b69c7887149caa2317065db3a9f44
+msgid "`PID_TUNING <https://mavlink.io/en/messages/common.html#PID_TUNING>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:59
+#: 86bc162cafac459db8ef4d5da2dbd0b5
+msgid "SRx_EXTRA2"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:61
+#: f2b15cb737ce4a37b9939a0259660086
+msgid "`VFR_HUD <https://mavlink.io/en/messages/common.html#VFR_HUD>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:63
+#: eb4b0ffdaffa477391dd6370efb89b62
+msgid "SRx_EXTRA3"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:65
+#: ad1b32e9ad29421e8aa73050ece86274
+msgid "`AHRS <https://mavlink.io/en/messages/common.html#AHRS>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:66
+#: 728e137d7ce54c12a224ba4699c0c0ba
+msgid "`HWSTATUS <https://mavlink.io/en/messages/ardupilotmega.html#HWSTATUS>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:67
+#: b5f98f7a325f430caed7a1715ac2e32e
+msgid "`SYSTEM_TIME <https://mavlink.io/en/messages/common.html#SYSTEM_TIME>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:68
+#: 1b36268da55e4a2cb78636094e12c8a2
+msgid "`RANGEFINDER <https://mavlink.io/en/messages/ardupilotmega.html#RANGEFINDER>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:69
+#: 00649a74418c46699b87c7d7e8a7f388
+msgid "`DISTANCE_SENSOR <https://mavlink.io/en/messages/common.html#DISTANCE_SENSOR>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:70
+#: 4d982bfabc084992b256d25080817b0a
+msgid "`TERRAIN_REQUEST <https://mavlink.io/en/messages/common.html#TERRAIN>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:71
+#: eb481d394802443ca6ffdf0657ec8be7
+msgid "`BATTERY2 <https://mavlink.io/en/messages/ardupilotmega.html#BATTERY2>`__ (deprecated, use BATTERY_STATUS)"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:72
+#: f4adb66d78394f609f3c9d1cc7e1ea16
+msgid "`BATTERY_STATUS <https://mavlink.io/en/messages/common.html#BATTERY_STATUS>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:73
+#: f6fd790313ca474a88fa653bf19880bc
+msgid "`MOUNT_STATUS <https://mavlink.io/en/messages/ardupilotmega.html#MOUNT_STATUS>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:74
+#: 299cd21892f44d60ba3d5a2d5b0a6dc0
+msgid "`OPTICAL_FLOW <https://mavlink.io/en/messages/common.html#OPTICAL_FLOW>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:75
+#: 2d60c80398f048e3bc85bc9fe2f780a3
+msgid "`GIMBAL_REPORT <https://mavlink.io/en/messages/ardupilotmega.html#GIMBAL_REPORT>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:76
+#: c4ab4ccbc1244c059f3c698d4eed6ed0
+msgid "`MAG_CAL_REPORT <https://mavlink.io/en/messages/ardupilotmega.html#MAG_CAL_REPORT>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:77
+#: abf027399c894022876e56c70d01321e
+msgid "`MAG_CAL_PROGRESS <https://mavlink.io/en/messages/ardupilotmega.html#MAG_CAL_PROGRESS>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:78
+#: 369e32e76ee84b758e0d6d7203451973
+msgid "`EKF_STATUS_REPORT <https://mavlink.io/en/messages/ardupilotmega.html#EKF_STATUS_REPORT>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:79
+#: dcfb9f0a202e40d2a16e6e6e100ab669
+msgid "`VIBRATION <https://mavlink.io/en/messages/ardupilotmega.html#VIBRATION>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:80
+#: 0c8a44860ce24dc1b2c6a88d42ccc2fc
+msgid "`RPM <https://mavlink.io/en/messages/ardupilotmega.html#RPM>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:81
+#: 3c33cd00df6c4ac2b3223b6561296f6a
+msgid "`ESC_TELEMETRY_1_TO_4 <https://mavlink.io/en/messages/ardupilotmega.html#ESC_TELEMETRY_1_TO_4>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:82
+#: 45b79300374c43f6b5ad731df4c22204
+msgid "`ESC_TELEMETRY_5_TO_8 <https://mavlink.io/en/messages/ardupilotmega.html#ESC_TELEMETRY_5_TO_8>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:83
+#: 01e5c9545a2c4ef89604b3a506d24fe5
+msgid "`ESC_TELEMETRY_9_TO_12 <https://mavlink.io/en/messages/ardupilotmega.html#ESC_TELEMETRY_9_TO_12>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:85
+#: 779428e6f4494373b3c9357f06c00757
+msgid "SRx_PARAMS - should not be changed"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:87
+#: 40dc6c4075ec4eb5b82129a221fad14b
+msgid "SRx_POSITION"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:89
+#: adba285871024153a7c5b1cd959a1070
+msgid "`GLOBAL_POSITION_INT <https://mavlink.io/en/messages/common.html#GLOBAL_POSITION_INT>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:90
+#: e01e0b8b841a4560a75c9317a4870052
+msgid "`LOCAL_POSITION_NED <https://mavlink.io/en/messages/common.html#LOCAL_POSITION_NED>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:92
+#: 7b96554466a747259c8d873ecfb1fef6
+msgid "SRx_RAW_CTRL (Not Used)"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:94
+#: cd9ff341670e4b58958c0e314b8ef51e
+msgid "SRx_RAW_SENS"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:96
+#: 60f6abd217514491b68c56c09b815a74
+msgid "`RAW_IMU <https://mavlink.io/en/messages/common.html#RAW_IMU>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:97
+#: c89757fec94c454ba7a956ea15a434db
+msgid "`SCALED_IMU2 <https://mavlink.io/en/messages/common.html#SCALED_IMU2>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:98
+#: ddd027c599a14610884ec07d74015439
+msgid "`SCALED_IMU3 <https://mavlink.io/en/messages/common.html#SCALED_IMU3>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:99
+#: a22cb46826c94018b359c35b0cabfaf4
+msgid "`SCALED_PRESSURE <https://mavlink.io/en/messages/common.html#SCALED_PRESSURE>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:100
+#: 4d3e2b648e1f4cb9a98edcaffdfd4988
+msgid "`SCALED_PRESSURE2 <https://mavlink.io/en/messages/common.html#SCALED_PRESSURE2>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:101
+#: 055a5c37b9bb4a11af48a9c66f15311e
+msgid "`SCALED_PRESSURE3 <https://mavlink.io/en/messages/common.html#SCALED_PRESSURE3>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:102
+#: 642102dcd7214254aa2abbbb4c00d48b
+msgid "`SENSOR_OFFSETS <https://mavlink.io/en/messages/ardupilotmega.html#SENSOR_OFFSETS>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:104
+#: 5f8be87308b74ff4b1f64c7de745fe66
+msgid "SRx_RC_CHAN"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:106
+#: 3e0646253684427dace416016e7dbd75
+msgid "`SERVO_OUTPUT_RAW <https://mavlink.io/en/messages/common.html#SERVO_OUTPUT_RAW>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:107
+#: 590b6e04f3944a40a9434b86efdf5ed1
+msgid "`RC_CHANNELS <https://mavlink.io/en/messages/common.html#RC_CHANNELS>`__"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:108
+#: 5711252db2f640f8ab37b96378129d4a
+msgid "`RC_CHANNELS_RAW  <https://mavlink.io/en/messages/common.html#RC_CHANNELS_RAW>`__ (only sent on mavlink1 links)"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:111
+#: c707f9d7aba84274ab0b56c1e21f98bd
+msgid "Using REQUEST_DATA_STREAM"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:113
+#: e84635db26494b5e95814ac45cf90bd4
+msgid "Most ground stations including the Mission Planner use this method.  See :ref:`Setting the Datarate <planner:mission-planner-telemetry-logs-setting-the-datarate>` in the Mission Planner wiki."
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:115
+#: e5fec3d9c470443687e4972ab14da1a8
+msgid "Send a `REQUEST_DATA_STREAM <https://mavlink.io/en/messages/common.html#REQUEST_DATA_STREAM>`__ message with the following fields"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:117
+#: ../../source/docs/mavlink-requesting-data.rst:148
+#: ../../source/docs/mavlink-requesting-data.rst:185
+#: 94c4dfc968ae4e76ae7f015582d42dd8
+#: 4939561db2a44010bf4698ce8db1915e
+#: 6ba907178d8c4dc6908a1065c3bf564b
+msgid "target_system : the MAVLink system id of the vehicle (normally \"1\")"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:118
+#: ../../source/docs/mavlink-requesting-data.rst:149
+#: ../../source/docs/mavlink-requesting-data.rst:186
+#: 5cff2b569b2f49b290611d3aa6278e94
+#: 9b93be19132a4fbe97339f8833266fec
+#: 743a030c8940454ba5a4cd791210a131
+msgid "target_components : normally \"0\""
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:119
+#: ea000db9e20e421c9ec3db7b588fbb55
+msgid "req_stream_id : 0 to 12 corresponding to the group of messages (see `MAV_DATA_STREAM <https://mavlink.io/en/messages/common.html#MAV_DATA_STREAM>`__).  See the \"Using SRx Parameters\" section above to determine exactly which messages are in each group"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:120
+#: b0f113bb02e54d7a9e42de9a8e6129e1
+msgid "req_message_rate : the rate (in hz) of the message"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:121
+#: 57e51d4223704441b3623b92db39fa18
+msgid "start_stop : \"1\" to start sending, \"0\" to stop"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:123
+#: ../../source/docs/mavlink-requesting-data.rst:156
+#: ../../source/docs/mavlink-requesting-data.rst:193
+#: 750dc58ae64c468096c3ca2a364cdf76
+#: 18ac494efe264d6ca84e8139500bf02c
+#: 6be514e7245b43f394662ee99bd2e5ce
+msgid "**Examples**"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:125
+#: ../../source/docs/mavlink-requesting-data.rst:158
+#: ../../source/docs/mavlink-requesting-data.rst:195
+#: 123de2335c0e4c85b33c999bfd6dca99
+#: 26d4204167d040359ebd16a190346935
+#: e2dc992e83f84c5cb3a243cb4f49db42
+msgid "Here are some example commands that can be copy-pasted into MAVProxy (aka SITL) to test this command.  Before running these commands enter the following"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:127
+#: ../../source/docs/mavlink-requesting-data.rst:160
+#: ../../source/docs/mavlink-requesting-data.rst:197
+#: 81c4348e5515459b9ccf33f2bbcd0c8e
+#: 3be4052fd4f64b88abdaad5ec08e753f
+#: d371859bfd284c7c94849dcaa2e6d2d3
+msgid "module load message"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:130
+#: ../../source/docs/mavlink-requesting-data.rst:163
+#: ../../source/docs/mavlink-requesting-data.rst:200
+#: 11e1ad485fb4481596aa085bc5a37691
+#: ac1dcef86de1489b8aa354316b435733
+#: f9cb7ecfd36248e6babd570873464bac
+msgid "Example MAVProxy/SITL Command"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:130
+#: ../../source/docs/mavlink-requesting-data.rst:163
+#: ../../source/docs/mavlink-requesting-data.rst:200
+#: 55ac5ad3adfd490db3888560ff3c41d4
+#: bada99ea3f674de193c01b7baf39ecc8
+#: 46adf45ff8df4ff8b8d9850bb6080e48
+msgid "Description"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:132
+#: 9b820752707844faa91ea2334c1e8793
+msgid "``message REQUEST_DATA_STREAM 1 0 1 5 1``"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:132
+#: 2dcf66f0e66f4c12b396bab663f8951d
+msgid "Request sysid:1, compid:0 send sensor data at 5hz"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:134
+#: 706c8a9a72ac4cb2901eeae62d79d135
+msgid "``message REQUEST_DATA_STREAM 1 0 1 0 0``"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:134
+#: 9d10fa48ed5c423fafd28d24ac623da0
+msgid "Request sysid:1, compid:0 stop sending sensor data"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:136
+#: 1324f0f9459d4bc585bd28902d527576
+msgid "``message REQUEST_DATA_STREAM 1 0 6 5 1``"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:136
+#: be47bdc4c10b4c37aa3a8ff95f92871c
+msgid "Request sysid:1, compid:0 send position data at 5hz"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:138
+#: 1fcc3b734150441c9b406ad3f6c555c0
+msgid "``message REQUEST_DATA_STREAM 1 0 6 0 0``"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:138
+#: 212f16d21a5b4b148fc15bddb74955fb
+msgid "Request sysid:1, compid:0 stop sending position data"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:142
+#: 6703b0357e6f44b5902d7334211f2571
+msgid "Using SET_MESSAGE_INTERVAL"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:144
+#: 750ac3c3c4f54c5e9533ea694f29c5d2
+msgid "This method provides the most precise control and reduces bandwidth requirements (because unnecessary messages are not sent) but requires knowing exactly which messages you require"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:146
+#: ../../source/docs/mavlink-requesting-data.rst:183
+#: 7be75b5351e6454a9eace071681285db
+#: 7c53c1e1f9674715bde23b16e43d392c
+msgid "Send a `COMMAND_LONG <https://mavlink.io/en/messages/common.html#COMMAND_LONG>`__ with the following fields"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:150
+#: 21ed53c3540c4e119f1d98bf2a93a062
+msgid "command: 511 (for `MAV_CMD_SET_MESSAGE_INTERVAL <https://mavlink.io/en/messages/common.html#MAV_CMD_SET_MESSAGE_INTERVAL>`__)"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:151
+#: ../../source/docs/mavlink-requesting-data.rst:188
+#: 02653259045f41049ea7fd0ff2b85721
+#: 0b3c8af46ef64e51aeb88f8652bfc038
+msgid "confirmation: 0"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:152
+#: ../../source/docs/mavlink-requesting-data.rst:189
+#: 32c77e0ad7de4c1e939693c4da0e1786
+#: d3ede9e841f84d9fb08798be962feb71
+msgid "param1: desired MAVLink message's id (i.e. 33 for `GLOBAL_POSITION_INT <https://mavlink.io/en/messages/common.html#GLOBAL_POSITION_INT>`__)"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:153
+#: e02a335d4688466283f86bb13d57fed3
+msgid "param2: time interval between messages in microseconds (i.e. 100000 for 10hz, 1000000 for 1hz)"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:154
+#: ../../source/docs/mavlink-requesting-data.rst:191
+#: b9226547771447dd8675a23cd07b449c
+#: 8f6379c20f89428f9e3dde122d2ca992
+msgid "param3 to param7: 0 (not used)"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:165
+#: b63719ea8ea4440dab1387fb90003113
+msgid "``message COMMAND_LONG 1 0 511 0 33 100000 0 0 0 0 0``"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:165
+#: 61193aa05804455fb69a1a29a860f356
+msgid "Request GLOBAL_POSITION_INT at 10hz"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:167
+#: bc9721abd53d4738881b3eb784555703
+msgid "``message COMMAND_LONG 1 0 511 0 33 1000000 0 0 0 0 0``"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:167
+#: 9a5e1d0806334cedb3b8fb2412596436
+msgid "Request GLOBAL_POSITION_INT at 1hz"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:169
+#: 5396639e11ce4987b2cf156a53acfcb5
+msgid "``message COMMAND_LONG 1 0 511 0 33 0 0 0 0 0 0``"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:169
+#: ba15380498d944d6bac7bef8ff0d5f2d
+msgid "Request GLOBAL_POSITION_INT at default rate"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:171
+#: 87a64a75864e4798946b3e36a1bc6a06
+msgid "``message COMMAND_LONG 1 0 511 0 33 -1 0 0 0 0 0``"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:171
+#: 32cae232c02c4f968881fc8c9fb641a7
+msgid "Request GLOBAL_POSITION_INT not be sent"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:176
+#: 9d75dd298c5844e1be644ce4527acec3
+msgid "If the telemetry link is shared (i.e. multiple GCSs or a GCS and a companion computer) there can be conflicting requests.  The most common example is the Mission Planner using the REQUEST_DATA_STREAM method while a companion computer uses SET_MESSAGE_INTERVAL method.  Mission Planner at least allows turning off the REQUEST_DATA_STREAM requests by setting the rates to \"-1\" (see :ref:`Setting the Datarate <planner:mission-planner-telemetry-logs-setting-the-datarate>`).  MAVProxy users can ``set streamrate -1``."
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:179
+#: a0c1386a2df3410dae30bc7a6a3afc5a
+msgid "Using REQUEST_MESSAGE"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:181
+#: 8c5a239f5aca4c8a87ee8b93e0aaee0b
+msgid "A GCS can poll for a single instance of a message from the autopilot."
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:187
+#: 871bc5414ea948d9ae9ad3985bad6217
+msgid "command: 512 (for `MAV_CMD_REQUEST_MESSAGE <https://mavlink.io/en/messages/common.html#MAV_CMD_REQUEST_MESSAGE>`__)"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:190
+#: 88328ae2eef94789a7bbf029eb95ad5a
+msgid "param2: depends on message requested; see that message's definition for details."
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:202
+#: 19f7c26c5ee74fd398d1234832e65b91
+msgid "``message COMMAND_LONG 1 0 512 0 33 0 0 0 0 0 0``"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:202
+#: e23069c2de57436d99eacd71ce208cea
+msgid "Request GLOBAL_POSITION_INT be sent once"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:206
+#: 90caaf0b74944bf9a7dff27afe0f2b3c
+msgid "Specifying Message Rates in a File"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:208
+#: ec49989ce0c443b080150143cebfce4a
+msgid "At boot ArduPilot will populate the initial message intervals from files found in either ROMFS or in the filesystem."
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:210
+#: 00820f10c8874bb5ba2d5fcf1b25a0b2
+msgid "On ChibiOS-based boards (with more than 1MB of flash) the SD card will be searched for specially-named files in the root directory."
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:212
+#: 3dac84e4b3694fda979325beb6fef9c5
+msgid "Each mavlink channel is configured in a separate configuration file.  The first serial port configured as mavlink is channel 0, the second serial port channel 1 etc."
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:214
+#: bd7aa94786e841a38fda8740b25de75c
+msgid "An example filename is ``message-intervals-chan0.txt``"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:216
+#: fc85bd31b1614ef685cc974b786033d0
+msgid "The format is simple but strict.  There are two columns, separated by a single space and both containing numbers.  The first number is a mavlink message ID.  The second is the message interval, in milliseconds.  Each line must be terminated by either carriage-return *or* a line-feed."
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:224
+#: 1fd7bd240bf540918587d75bdb8e05ec
+msgid "This sample file content will stream `ATTITUDE <https://mavlink.io/en/messages/common.html#ATTITUDE>`__ (ID=30) at 20Hz and `SCALED_PRESSURE <https://mavlink.io/en/messages/common.html#SCALED_PRESSURE>`__ (ID=29) at 5Hz.  Message ID 28 is RAW_PRESSURE which ArduPilot does not send - this line will be ignored."
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:226
+#: 4a7523dc868740ecb05664e63f0fc763
+msgid "Configuration files can be included in ROMFS (i.e. compiled into the image) by specifying their path in the relevant board's hwdef file:"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:232
+#: 5a3ed005e23c40518d027612da897342
+msgid "The second parameter is a path relative to the ArduPilot checkout's root directory."
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:234
+#: a8076ad97ca74a129633956a60b9494c
+msgid "Example use cases of this include locking telemetry rates on boards that can't run scripting, or before scripting can be run."
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:237
+#: 8ca656c73afb4bfab925399fc0956def
+msgid "Using a Lua Script"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:239
+#: 7e5507e134eb49e4b666312b3a05b9e7
+msgid "Download the `message_interval.lua <https://raw.githubusercontent.com/ArduPilot/ardupilot/refs/heads/master/libraries/AP_Scripting/examples/message_interval.lua>`__ Lua script"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:240
+#: 4fdc095964684f1bbacb3d15d734cdac
+msgid "Open the script in an editor (like Notepad)"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:241
+#: 40ed0db3843a438f85d7dd0727fcd8e0
+msgid "Ensure each mavlink message you wish to enable or disable is listed in the \"mavlink message ids\" (around line 13) and \"intervals\" array (around line 36)"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:242
+#: 31cec86751af4d5caa3f60870fbdc872
+msgid "Upload the script to the autopilot by following :ref:`these instructions <copter:common-lua-scripts>`"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:243
+#: 4efc8cdda68d41ca9c79d1022d312c92
+msgid "Restart the autopilot and confirm no errors appear on the ground stations's Messages tab"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:244
+#: 714738d5ac9d4b8fad2f29dc7bbda661
+msgid "Follow the instructions below to ensure the messages are appearing at the desired rate.  If the rates are variable, this may be because of a conflict between the Lua script and a GCS, please see the \"Rates Reverting to some Fixed value\" section below"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:247
+#: 5934a4d61a1f4291977a9a9dabb5cd38
+msgid "Checking The Message Rates"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:249
+#: d27fc4d6c77347908d4b19c5c0850d36
+msgid "Some ground stations including Mission Planner and QGC include a \"MAVLink Inspector\" which is useful when checking the update rate of specific messages."
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:251
+#: 013777489d5147a085ff1004e3f37349
+msgid "If using Mission Planner:"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:253
+#: 78132f410aab4f6abc574a7c8e1879e0
+msgid "Press Ctrl-F"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:254
+#: 6498fe4d19b546838aeee3b8dc6600f2
+msgid "Push the \"MAVLink Inspector\" button"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:255
+#: 76dfa77efa914ca0b87cdb8d74231efa
+msgid "Expand the vehicle and component IDs to see individual messages and their update rate"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:261
+#: 3c6c2f188759413994b71d1c0f552ddd
+msgid "If using MAVProxy:"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:263
+#: 13602b77812c46aabba8d3915e495225
+msgid "module load messagerate"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:264
+#: 27fe2879dc3d4c49b68110e46dd436d6
+msgid "messagerate status"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:267
+#: c1a1fc091d9444699e850c42087d633d
+msgid "Rates Reverting to some Fixed value"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:269
+#: fa32c5fce50040afb29d71a3191c17de
+msgid "If you find the message rates are reverting to some fixed rate (often 4hz) after you set them, it is probably a Ground Control station adjusting the rates."
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:271
+#: 60305502f08b4eefa760946ed9f2b697
+msgid "Most Ground Control Stations have a control to disable this behaviour.  For example:"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:273
+#: 461b953388c94aadb091c9d90f4aad4e
+msgid "If using MAVProxy type ``set streamrate -1`` into the console"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:274
+#: 94f21f00bb284153a37e9b503738ff7c
+msgid "If using Mission Planner, open the Config, Planner screen and set the \"Telemetry Rates\" dropdowns to -1"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:275
+#: 77889ea0214e4350ae8880433527c32d
+msgid "If using QGroundControl, open Application Settings, Telemetry and move the \"Controlled By vehicle\" slider to the right"
+msgstr ""
+
+#: ../../source/docs/mavlink-requesting-data.rst:277
+#: dfe5e71e3fa84eb7bf85018f381c3568
+msgid "If adjusting the GCS behaviour is impossible, set the appropriate ``SERIALn_OPTIONS`` parameter's bit 12 (\"Ignore Streamrate\") to ignore attempts by the GCS to set message rates via streamrate commands.  For example if Serial1/Telem1's rates are being inconveniently adjusted by the GCS, set the :ref:`SERIAL1_OPTIONS <SERIAL1_OPTIONS>` parameter value"
+msgstr ""

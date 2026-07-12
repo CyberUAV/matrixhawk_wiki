@@ -1,0 +1,335 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024, ArduPilot Dev Team. Modifications and New Content © 2025, BZUAV Devteam
+# This file is distributed under the same license as the Sub package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Sub \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 01:43+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:5
+#: dacfafab144b49b9a0054e5f24c8dab0
+msgid "Kebni SensAItion External AHRS"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:7
+#: 4b93ca7909614b5c8c67d476d0d01b76
+msgid "The Kebni SensAItion range includes three sensor models:"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:9
+#: be19e26d9291450ea4c88b1f30ed4982
+msgid "**IMU**: Measures acceleration, rotation (gyro rates), magnetic field and air pressure"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:10
+#: c8653d33ad37438eaf23f2cb4dff0ec0
+msgid "**AHRS**: As above, but also estimates the orientation (roll, pitch and yaw/heading) of the sensor"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:11
+#: 86f664124ea3451e978c01780fda2133
+msgid "**INS**: As above, but with two built-in satellite navigation receivers to get position (using Fixed Base RTK for higher precision if provided with correction data), UTC time and heading (if using two antennas with a sufficient baseline between them)"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:13
+#: 073e496fc8d846db947d4d3a9727eab6
+msgid "The SensAItion range of sensors contain high-performance gyros and accelerometers that are individually calibrated and temperature compensated for the interval -40 to +70 :math:`^\\circ\\text{C}` and thus do not need any warm-up period to provide precise measurements. The built-in sensor fusion engine also uses a barometer and magnetometer to improve the estimation of altitude and heading, respectively. The INS version of the sensor further includes satellite positioning in the sensor fusion, with precise internal synchronization between the satellite position fixes and the IMU measurements to get the best performance."
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:20
+#: f122eae8729c46b08ab3a04135b94768
+msgid "For easier integration into various customer applications, each model exists in two hardware versions: a rugged version in an IP67 aluminium housing or a low-profile OEM version that can easily be mounted on an application-specific circuit board. Details and specifications for each model can be found on `Kebni's product homepage <https://www.kebni.com/products/inertial-sensing/sensaition-imu-ins/>`__."
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:25
+#: 5dabf213f85f49d29d5a34b02bb8c61e
+msgid "The SensAItion External AHRS driver can work in two modes:"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:27
+#: 7cb8340d2799482f831e3697894e4d96
+msgid "**IMU**: It should be connected to the IMU or AHRS model of SensAItion and will feed raw sensor data to the ArduPilot EKF3 estimator, which will fuse it with GPS positions from another source and compute a navigation solution."
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:28
+#: 353463bc01cc47ac8ef121cc929fcff1
+msgid "**Interleaved INS**: It should be connected to the INS model of SensAItion, which will run sensor fusion and provide a full navigation solution, replacing the EKF3 estimator. In order not to overload the serial port, the high-rate IMU messages are interleaved with lower-rate positions and orientations. This interleaving requires the sensor to have firmware version 2.69 or newer."
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:31
+#: 8a909e556b434d8e8a8d053804c2647b
+msgid "Hardware setup"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:32
+#: e999fb6dbd9e499ea7b01db1971760b5
+msgid "Connect the SensAItion Data UART pins (TX, RX and ground) to an available serial port on the ArduPilot platform, such as GPS or TELEM. Power the sensor as described in the User Manual. Both the rugged and OEM version of the sensor have the required serial port connections available. Please note that the rugged sensor version has output voltage levels +/-5 V, while the OEM sensor version has output voltage levels of 0 and +3.3 V."
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:38
+#: 6111dc2333f7413db32280aa95fea0fe
+msgid "The SensAItion sensor can be mounted in any orientation and the output can be rotated to match the local coordinate system if needed - see the configuration section below. As with any IMU, it is important to avoid excessive vibration levels and it is beneficial to use a mechanical damper between the sensor and the platform frame."
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:44
+#: 767d49d0a46242a387c460cd0b29a4eb
+msgid "Configuration of the sensor"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:45
+#: 634615f7270a45a1ba95b701aff02eb4
+msgid "The SensAItion sensor has a number of configuration registers that control the baudrate, output data format, coordinate system rotation and much more. The configuration registers can be read and written using a text-based protocol via the User UART port as described in the User Manual. But Kebni also provides, on request, the Kebni INSight graphical user interface that helps the user set all configuration registers and can also be used to read and plot sensor data and perform a magnetometer calibration. For complete control of the sensor configuration, it is recommended to use INSight."
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:52
+#: e3a63d8f15414230acd5841fda7e5ce2
+msgid "Contact `Kebni <https://www.kebni.com/contact/>`__ for access to the User Manual or Kebni INSight."
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:54
+#: 0fae89f824484e0484fb7ebe1b52a4d6
+msgid "To get started with the default configuration, it is sufficient to connect to the User UART port of the sensor with a terminal program."
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:56
+#: 2429a30cd2f64e8098fc846bf3c3602b
+msgid "Start by doing a factory reset of all configuration registers, saving to flash and doing a reboot:"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:64
+#: 2f0456b03f864ec2a0e14c0fe1f5d5c8
+msgid "After getting a reboot message from the sensor, send the following commands to enable Data UART output and set the baudrate to 460800:"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:71
+#: f92a9cc7d5a24d5ab59f14af49a7931c
+msgid "For an IMU or AHRS sensor, send the following command that sets an output rate of 1000 Hz and determines the contents of each message (acceleration, gyro rates, temperature, magnetic field and air pressure):"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:78
+#: edd87603a3d346a8aa2c1c60210316ac
+msgid "For an INS sensor, send the following command that interleaves IMU data at 500 Hz with AHRS and INS data at 100 Hz:"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:84
+#: 78ffa24924df4e76867196adf0375333
+msgid "Then save the updated register values to flash and reboot to make them active:"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:93
+#: 5cdd1698114947c9b7764eced01d85f5
+msgid "Configuration of ArduPilot"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:94
+#: b5aa1402c9ae49358701909eee57cb49
+msgid "The following parameters must be set in IMU mode:"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:97
+#: ../../source/docs/common-external-ahrs-sensaition.rst:112
+#: 38c1bc10a6bb4935a7b4804b4b3cc82c
+#: e4e3bb3fd4fd4a7b9effb117843fff0d
+msgid "Parameter"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:97
+#: ../../source/docs/common-external-ahrs-sensaition.rst:112
+#: 8588ccc93c0344b4a69c2662a8500a93
+#: f145a047bbc44448a79c5d6d8a75e076
+msgid "Value"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:97
+#: ../../source/docs/common-external-ahrs-sensaition.rst:112
+#: fb28a03e917e453a9eb936cd5c79dfb3
+#: a7a66f0e02864ca5a98c26cfa1a242b7
+msgid "Comment"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:99
+#: ../../source/docs/common-external-ahrs-sensaition.rst:114
+#: bbb85ae74724449bb976f20933f34e20
+#: d2873e4d778f49beab92ea106c3c92f1
+msgid ":ref:`EAHRS_TYPE<EAHRS_TYPE>`"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:99
+#: ../../source/docs/common-external-ahrs-sensaition.rst:114
+#: ../../source/docs/common-external-ahrs-sensaition.rst:118
+#: 8306a76f1bb648a19106aeb1a1c53cd5
+#: ab8e6ca430ad4b5ca7fc97aff2c53064
+#: 80c2663b6e56406fa4331c76866f6b9e
+msgid "11"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:99
+#: ../../source/docs/common-external-ahrs-sensaition.rst:114
+#: fe7464b0560d40ce82b587161ba7c4d3
+#: ff887d4dd05c455ba367c017b0bfcd3c
+msgid "Use SensAItion as external AHRS"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:100
+#: ../../source/docs/common-external-ahrs-sensaition.rst:115
+#: 92199321e95f489baf2f2412f5468ab4
+#: d3edcd0523e24fac93a84865bcec45b2
+msgid ":ref:`EAHRS_SENSORS<EAHRS_SENSORS>`"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:100
+#: fc9b1b126e614ac684874fc976add0d2
+msgid "14"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:100
+#: 8b8d6acfe244475caf85c38097d6d572
+msgid "Use IMU, barometer and compass"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:101
+#: ../../source/docs/common-external-ahrs-sensaition.rst:116
+#: 415994fbc1254c46b935b63297447ab5
+#: 06b5620f234044c39f1ce7b169b4b45a
+msgid ":ref:`EAHRS_RATE<EAHRS_RATE>`"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:101
+#: 8275a77eee8b4daf9aada3e759d3cda3
+msgid "1000"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:101
+#: ../../source/docs/common-external-ahrs-sensaition.rst:116
+#: 7914c93c118b4e238f2b3df4f83d3486
+#: 359f080d64674b8c97ad28adb37f37a1
+msgid "Requested rate for AHRS device"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:102
+#: ../../source/docs/common-external-ahrs-sensaition.rst:117
+#: 4871874980544834a49b9b4cb6389f4b
+#: 95cb758e11274437bb86c23a74865f44
+msgid ":ref:`EAHRS_OPTIONS<EAHRS_OPTIONS>`"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:102
+#: c7cd3d3576944d5b964c1b797a776129
+msgid "0"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:102
+#: ../../source/docs/common-external-ahrs-sensaition.rst:117
+#: 1fd2fef9e1f049b6b68d31599dee52c8
+#: 3da49025dcdc45718007c6827c0be21a
+msgid "0: IMU mode  4: INS mode"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:103
+#: ../../source/docs/common-external-ahrs-sensaition.rst:118
+#: 263e1dc34ec24307b5e5bece049fcad5
+#: 244a33b557f144548b9ffe83f0be475b
+msgid ":ref:`AHRS_EKF_TYPE<AHRS_EKF_TYPE>`"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:103
+#: a245077207094da8bb1580de17348371
+msgid "3"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:103
+#: 8f95d49020bd412fad08e6d55c143bbc
+msgid "Use EKF3 for sensor fusion"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:104
+#: ../../source/docs/common-external-ahrs-sensaition.rst:119
+#: 658b7445a07a4bf2867e05f92f6388c3
+#: 01bbf160108745ed9b9c2714039d0c09
+msgid ":ref:`SERIAL2_PROTOCOL<SERIAL2_PROTOCOL>`"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:104
+#: ../../source/docs/common-external-ahrs-sensaition.rst:119
+#: d1af4b1c7fd3418aa808b02f02226c17
+#: 5603c7a48126434595358d20a50d9575
+msgid "36"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:104
+#: ../../source/docs/common-external-ahrs-sensaition.rst:119
+#: 649f74a43e4b42e0872b76d9360369f1
+#: 64279d0f8f4642c2b7c61e2fdb8f6688
+msgid "External AHRS on TELEM 2 (change as needed)"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:105
+#: ../../source/docs/common-external-ahrs-sensaition.rst:120
+#: 51c6f2deb7ff4c52bec8cac75bcf698c
+#: a5ce14408ded48c3bdccd720fb93d2aa
+msgid ":ref:`SERIAL2_BAUD<SERIAL2_BAUD>`"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:105
+#: ../../source/docs/common-external-ahrs-sensaition.rst:120
+#: 6b7ef4bb46c446bb8660bc882c76db90
+#: db8c0a5f73334710a5d63412b06d9aaf
+msgid "460"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:105
+#: ../../source/docs/common-external-ahrs-sensaition.rst:120
+#: f2d9483a62f2496d9b9f6b9a57a40515
+#: eae388eb6fcc48df9783ab94e173034c
+msgid "460800 baud (change as needed)"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:109
+#: f31f6bb305b34be2a9020235aae7f2af
+msgid "The following parameters must be set in INS mode:"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:115
+#: 3be3655e074a4ae98c871344ea9bdc42
+msgid "15"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:115
+#: da22678c02d14de4b5056f9d9b55e142
+msgid "Use GPS, IMU, barometer and compass"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:116
+#: 1416028d231f47c380bb6c686d08ed26
+msgid "500"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:117
+#: 08aa1c6247044b988505ccc9e23dd538
+msgid "4"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:118
+#: 9afbb91a2714499f95b83be2c8ad8efb
+msgid "Use External AHRS for sensor fusion"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:123
+#: b174df05954e4d69af312c887b073f12
+msgid "Also remember to build the ArduPilot binary with these flags:"
+msgstr ""
+
+#: ../../source/docs/common-external-ahrs-sensaition.rst:125
+#: 2a79140f7e824043a12a5f990d0b7d1b
+msgid "``--enable-AHRS_EXT --enable-EXTERNALAHRS_COMPASS --enable-EXTERNALAHRS_BARO``."
+msgstr ""
