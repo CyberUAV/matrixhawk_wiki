@@ -7,17 +7,17 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version:  Dev\n"
+"Project-Id-Version: Dev\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-07 01:47+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.18.0\n"
 
 #: ../../source/docs/watchdog-debugging.rst:5 073f3eb7285446969de14e249aa56f07
@@ -28,72 +28,81 @@ msgstr "调试看门狗复位事件"
 msgid ""
 "We attempt to provide as much information as we can about watchdog reset "
 "events in the onboard logs and via our telemetry streams.  This document "
-"outlines ways in which you can use that information to root-cause the "
-"issue causing the watchdog."
+"outlines ways in which you can use that information to root-cause the issue "
+"causing the watchdog."
 msgstr "我们尝试在板载日志和数传流中提供尽可能多的关于看门狗复位事件的信息。本文档概述了您可以如何使用这些信息来找出导致看门狗触发的根本原因。"
 
-#: ../../source/docs/watchdog-debugging.rst:13 09d5ad19352f451694ee283c22290ce0
+#: ../../source/docs/watchdog-debugging.rst:13
+#: 09d5ad19352f451694ee283c22290ce0
 msgid "The ``decode_watchdog.py`` Utility"
 msgstr "``decode_watchdog.py`` 工具"
 
-#: ../../source/docs/watchdog-debugging.rst:15 095ac89d75594012890c4fc35c51af7e
+#: ../../source/docs/watchdog-debugging.rst:15
+#: 095ac89d75594012890c4fc35c51af7e
 msgid ""
-"A Python script is provided in ArduPilot's Tools directory.  A string "
-"from either a telemetry log or an onboard log can be passed in to this "
-"script and it spits human-readable information out on stdout."
+"A Python script is provided in ArduPilot's Tools directory.  A string from "
+"either a telemetry log or an onboard log can be passed in to this script and"
+" it spits human-readable information out on stdout."
 msgstr ""
 "ArduPilot 的 Tools 目录中提供了一个 Python "
 "脚本。来自数传日志或板载日志的字符串可以传递给此脚本，它会在标准输出上输出人类可读的信息。"
 
-#: ../../source/docs/watchdog-debugging.rst:26 b1561f3d1a5f4f8ca809faf894b10f7f
+#: ../../source/docs/watchdog-debugging.rst:26
+#: b1561f3d1a5f4f8ca809faf894b10f7f
 msgid "Understanding the T (thread) field"
 msgstr "理解 T（线程）字段"
 
-#: ../../source/docs/watchdog-debugging.rst:28 953067537ee04985b3e45d254a6309b5
+#: ../../source/docs/watchdog-debugging.rst:28
+#: 953067537ee04985b3e45d254a6309b5
 msgid ""
 "This is an offset into the scheduler table, which is a combination of "
-"vehicle-specific tasks and general system tasks.   It can be found in the"
-" @SYS/tasks.txt file which can be retrieved from the vehicle, and found "
-"in dataflash logs."
+"vehicle-specific tasks and general system tasks.   It can be found in the "
+"@SYS/tasks.txt file which can be retrieved from the vehicle, and found in "
+"dataflash logs."
 msgstr ""
 "这是调度器表中的偏移量，调度器表是飞行器特定任务和通用系统任务的组合。它可以在可从飞行器获取的 @SYS/tasks.txt 文件中找到，也可在 "
 "dataflash 日志中找到。"
 
-#: ../../source/docs/watchdog-debugging.rst:30 64ec65b69d67466ca3c3944e14697e13
+#: ../../source/docs/watchdog-debugging.rst:30
+#: 64ec65b69d67466ca3c3944e14697e13
 msgid "There are three magic tasks:"
 msgstr "有三个特殊任务："
 
-#: ../../source/docs/watchdog-debugging.rst:38 b3f9cf89cf6b4cd4aed84b501595f32e
-#, fuzzy
+#: ../../source/docs/watchdog-debugging.rst:38
+#: b3f9cf89cf6b4cd4aed84b501595f32e
 msgid ""
-"If in state -3 then the code was almost certainly in an interrupt handler"
-" when the fault occurred."
+"If in state -3 then the code was almost certainly in an interrupt handler "
+"when the fault occurred."
 msgstr "如果状态为 -3，则代码在发生故障时几乎可以肯定处于中断处理程序中。"
 
-#: ../../source/docs/watchdog-debugging.rst:41 c51f1aacf5cc4e188dedc697867da436
+#: ../../source/docs/watchdog-debugging.rst:41
+#: c51f1aacf5cc4e188dedc697867da436
 msgid "Converting the LR field into a line of code"
 msgstr "将 LR 字段转换为代码行"
 
-#: ../../source/docs/watchdog-debugging.rst:43 1290e9e6195e49f393adb37ab12b2e19
+#: ../../source/docs/watchdog-debugging.rst:43
+#: 1290e9e6195e49f393adb37ab12b2e19
 msgid ""
-"Certain faults will fill the Function Level Reset (FLR) register with the"
-" address of an instruction which caused the processor to fault.  That "
-"address can be turned into a line of code."
+"Certain faults will fill the Function Level Reset (FLR) register with the "
+"address of an instruction which caused the processor to fault.  That address"
+" can be turned into a line of code."
 msgstr "某些故障会将函数级复位（FLR）寄存器填充为导致处理器故障的指令地址。该地址可以转换为代码行。"
 
-#: ../../source/docs/watchdog-debugging.rst:45 ab897cc580a64da886228fe8b3bc36e0
+#: ../../source/docs/watchdog-debugging.rst:45
+#: ab897cc580a64da886228fe8b3bc36e0
 msgid "Ensure you can identically reproduce the binary running on the board."
 msgstr "确保您可以完全相同地重现板上运行的二进制文件。"
 
-#: ../../source/docs/watchdog-debugging.rst:46 4ab855690be1489cb2233659562e64bb
+#: ../../source/docs/watchdog-debugging.rst:46
+#: 4ab855690be1489cb2233659562e64bb
 msgid "Try addr2line"
 msgstr "尝试 addr2line"
 
-#: ../../source/docs/watchdog-debugging.rst:47 988f58cdc5874b7890ad43ae5ebd1969
+#: ../../source/docs/watchdog-debugging.rst:47
+#: 988f58cdc5874b7890ad43ae5ebd1969
 msgid ""
-"disassemble the binary: arm-none-eabi-objdump --demangle --disassemble-"
-"all --full-contents --all-headers"
+"disassemble the binary: arm-none-eabi-objdump --demangle --disassemble-all "
+"--full-contents --all-headers"
 msgstr ""
-"反汇编二进制文件：arm-none-eabi-objdump --demangle --disassemble-all --full-"
-"contents --all-headers"
-
+"反汇编二进制文件：arm-none-eabi-objdump --demangle --disassemble-all --full-contents "
+"--all-headers"
