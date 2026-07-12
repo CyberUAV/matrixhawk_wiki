@@ -88,10 +88,28 @@ NAMEDLINK_NOSPACE_RE = re.compile(r"`[^`<\s][^`<]*?[^`\s<]<(?:https?|ftp)[^`>]*>
 
 
 def glued_spans(text: str) -> list[str]:
-    """Return markup spans docutils will not recognise in this context."""
+    """Return markup spans docutils will not recognise in this context.
+
+    Spans nested inside a role or literal body (e.g. the ``**bold**`` in
+    upstream's ``:ref:`**SERIAL0_BAUD** <SERIAL0_BAUD>```) are skipped:
+    docutils takes role/literal bodies verbatim, so top-level inline
+    recognition rules do not apply there — flagging them is a false
+    positive that rejects byte-faithful translations of upstream markup.
+    """
+    containers = []
+    for rx in (re.compile(r":[a-zA-Z][a-zA-Z0-9:._+-]*:`[^`]+`"),
+               re.compile(r"``[^`]+``")):
+        for m in rx.finditer(text):
+            containers.append((m.start(), m.end()))
+
+    def inside_container(s, e):
+        return any(cs < s and e <= ce for cs, ce in containers)
+
     out = []
     for rx in INLINE_SPAN_RES:
         for m in rx.finditer(text):
+            if inside_container(m.start(), m.end()):
+                continue
             before = text[m.start() - 1: m.start()]
             after = text[m.end(): m.end() + 1]
             if (before and not OK_BEFORE_RE.fullmatch(before)) or \
@@ -205,7 +223,11 @@ def check_entry(msgid: str, msgstr: str) -> list[dict]:
     if looks_misaligned(msgid, msgstr):
         defects.append({"cls": "H", "detail": ["suspect batch misalignment"]})
 
-    glued = glued_spans(msgstr)
+    # Class I fires only for glued spans the TRANSLATION introduced: a span
+    # that is equally glued in the English msgid is upstream-broken markup,
+    # and a byte-faithful translation of it must not be rejected.
+    source_glued = set(glued_spans(msgid))
+    glued = [s for s in glued_spans(msgstr) if s not in source_glued]
     if glued:
         defects.append({"cls": "I", "detail": glued[:5]})
 

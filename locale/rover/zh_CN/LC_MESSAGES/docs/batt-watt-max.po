@@ -32,6 +32,8 @@ msgid ""
 "other reasons. This topic discusses ways to limit the maximum power draw "
 "from batteries."
 msgstr ""
+"有时需要限制功率，以防止电池电压跌落或过热等问题。其原因可能是使用了 C "
+"数较低的电池、大功率电机、环境温度过高、发动机或电调缺乏散热等。本主题讨论限制电池最大功率消耗的方法。"
 
 #: ../../source/docs/batt-watt-max.rst:10 6d524a366a554f23ac1ecbb269f8ede9
 msgid "Methods to Limit Maximum Power Draw"
@@ -44,12 +46,14 @@ msgid ""
 "Unfortunately, this will not set an exact power limit and might require some"
 " trial and error to find the right setting."
 msgstr ""
+"第一种也是最简单的方法是将 :ref:`MOT_THR_MAX<MOT_THR_MAX>` "
+"限制为较低的值。这会限制允许的最大油门。遗憾的是，这无法设定精确的功率限制，可能需要反复试验才能找到合适的设置。"
 
 #: ../../source/docs/batt-watt-max.rst:14 412d2708440f4c56b80e4d7828b906e6
 msgid ""
 "A better way is to use a power limiting parameter (shown for first battery "
 "monitor):"
-msgstr ""
+msgstr "更好的方法是使用功率限制参数（以第一个电池监测为例）："
 
 #: ../../source/docs/batt-watt-max.rst:16 35cc898c54eb4d7788299dddbef2ae94
 msgid ":ref:`BATT_WATT_MAX<BATT_WATT_MAX>`"
@@ -64,6 +68,9 @@ msgid ""
 "is reduced, the max throttle will slowly grow back to "
 ":ref:`MOT_THR_MAX<MOT_THR_MAX>`. Use 0 (default) to disable this feature."
 msgstr ""
+":ref:`BATT_WATT_MAX<BATT_WATT_MAX>` "
+"参数可用于限制从电池汲取的总功率（瓦数）。如果电池功率超过该值，系统将降低最大油门（:ref:`MOT_THR_MAX<MOT_THR_MAX>`）以降低功率消耗。若功率需求降低，最大油门将缓慢恢复到"
+" :ref:`MOT_THR_MAX<MOT_THR_MAX>`。设置为 0（默认值）可禁用此功能。"
 
 #: ../../source/docs/batt-watt-max.rst:20 71e370ae2e5c4ccab0e336245b0bc01f
 msgid ""
@@ -74,6 +81,8 @@ msgid ""
 " the time constant of this filter and improve the responsiveness of the "
 "power limiter. The default value is 2."
 msgstr ""
+"功率限制功能使用低通滤波器来平滑功率读数，防止油门快速波动。在某些情况下，这可能导致功率限制器的启用或退出出现延迟。可调整 "
+":ref:`MOT_BAT_WATT_TC <MOT_BAT_WATT_TC>` 参数来改变该滤波器的时间常数，以改善功率限制器的响应性。默认值为 2。"
 
 #: ../../source/docs/batt-watt-max.rst:22 657aca37cb854d3fb8958c5c2ef72e4b
 msgid ""
@@ -84,44 +93,46 @@ msgid ""
 "much the max throttle is reduced per second at different power ratios for "
 "different time constants."
 msgstr ""
+"下表显示了不同 :ref:`MOT_BAT_WATT_TC <MOT_BAT_WATT_TC>` 值对功率限制器响应性的影响。功率比是实际功率消耗与 "
+":ref:`BATT_WATT_MAX<BATT_WATT_MAX>` 限制值之比。百分比数值表示在不同功率比和不同时间常数下，最大油门每秒降低的幅度。"
 
 #: ../../source/docs/batt-watt-max.rst:25 5a28d8bf7118423cbb79e99e0c1a718a
 msgid "Power Ratio"
-msgstr ""
+msgstr "功率比"
 
 #: ../../source/docs/batt-watt-max.rst:25 a204e42fa32f49f5971925b1ce8cdda0
 msgid "``MOT_BAT_WATT_TC=1``"
-msgstr ""
+msgstr "``MOT_BAT_WATT_TC=1``"
 
 #: ../../source/docs/batt-watt-max.rst:25 3f16ab9a99df4a8d8923f2270b5a1a6b
 msgid "``MOT_BAT_WATT_TC=2``"
-msgstr ""
+msgstr "``MOT_BAT_WATT_TC=2``"
 
 #: ../../source/docs/batt-watt-max.rst:25 61c83f234c9249f48e0e9a05b1540553
 msgid "``MOT_BAT_WATT_TC=5``"
-msgstr ""
+msgstr "``MOT_BAT_WATT_TC=5``"
 
 #: ../../source/docs/batt-watt-max.rst:27 4fe42836069b4c86860c5bb82265a1a0
 msgid "1.1 1.5 2 5 10"
-msgstr ""
+msgstr "1.1 1.5 2 5 10"
 
 #: ../../source/docs/batt-watt-max.rst:27 c1320806cee846df8cf3cf6ec6041bf1
 msgid ""
 "reduced 9%/sec reduced 49%/sec reduced 98%/sec reduced 392%/sec reduced "
 "882%/sec"
-msgstr ""
+msgstr "每秒降低 9% 每秒降低 49% 每秒降低 98% 每秒降低 392% 每秒降低 882%"
 
 #: ../../source/docs/batt-watt-max.rst:27 db8c2b1300564253a34ad035ade850fb
 msgid ""
 "reduced 4%/sec reduced 24%/sec reduced 49%/sec reduced 198%/sec reduced "
 "445%/sec"
-msgstr ""
+msgstr "每秒降低 4% 每秒降低 24% 每秒降低 49% 每秒降低 198% 每秒降低 445%"
 
 #: ../../source/docs/batt-watt-max.rst:27 77e3349b96054ea995016cc883e941fe
 msgid ""
 "reduced 1%/sec reduced 9%/sec reduced 19%/sec reduced 79%/sec reduced "
 "179%/sec"
-msgstr ""
+msgstr "每秒降低 1% 每秒降低 9% 每秒降低 19% 每秒降低 79% 每秒降低 179%"
 
 #: ../../source/docs/batt-watt-max.rst:34 6d83f6380aa3481fb59c1f98946fa970
 msgid ""
@@ -132,3 +143,7 @@ msgid ""
 "limit (power ratio of 10) and :ref:`MOT_BAT_WATT_TC <MOT_BAT_WATT_TC>` is "
 "set to 5, then the max throttle will be reduced by 179% per second."
 msgstr ""
+"例如，如果功率消耗超出 :ref:`BATT_WATT_MAX<BATT_WATT_MAX>` 限制值 50%（功率比为 1.5），且 "
+":ref:`MOT_BAT_WATT_TC <MOT_BAT_WATT_TC>` 设置为 2，则最大油门将以每秒 24% "
+"的速度降低。如果功率消耗达到限制值的 10 倍（功率比为 10），且 :ref:`MOT_BAT_WATT_TC <MOT_BAT_WATT_TC>` "
+"设置为 5，则最大油门将以每秒 179% 的速度降低。"
