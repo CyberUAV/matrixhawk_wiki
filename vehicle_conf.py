@@ -76,7 +76,9 @@ def apply(g, project, shorttitle, favicon='favicon_default.ico',
     # DO NOT CHANGE shorttitle semantics: the theme's Edit-on-GitHub links
     # and the /<lang>/<wiki>/ deploy layout key off it.
     g['html_short_title'] = shorttitle
-    g['html_logo'] = '../../images/matrixhawk_logo.svg'
+    # wordmark-only variant: the tagline is illegible at sidebar size and
+    # the top bar already carries it
+    g['html_logo'] = '../../images/matrixhawk_logo_mark.svg'
     g['html_favicon'] = '../../images/%s' % favicon
     g['html_static_path'] = ['_static']
 
