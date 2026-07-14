@@ -20,6 +20,9 @@ SSH_CMD="ssh -p 68 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
  -o IdentityAgent=$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh \
  -o IdentitiesOnly=yes -i $HOME/.ssh/mt6000_secretive.pub"
 
-exec rsync -rlt --no-perms --no-owner --no-group --delete \
-  --exclude='.claude' --info=stats1,progress2 \
-  -e "$SSH_CMD" "$SITE/" "$DEST"
+# NOTE: macOS ships openrsync as /usr/bin/rsync — no --info support,
+# keep flags to the portable set.
+rsync -rlt --no-perms --no-owner --no-group --delete -v \
+  --exclude='.claude' \
+  -e "$SSH_CMD" "$SITE/" "$DEST" | tail -3
+echo "== deployed: http://192.168.8.1:8642/zh/ =="
